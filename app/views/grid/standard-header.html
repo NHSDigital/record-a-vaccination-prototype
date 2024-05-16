@@ -1,0 +1,27 @@
+{% extends 'layout-header-nav.html' %}
+
+{% block pageTitle %}
+  Standard grid
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {{ backLink({
+        "href": "/",
+        "text": "Back"
+      }) }}
+
+      <h1>Regular grid, nav below header</h1>
+      <p>Maximum width: 960 pixels.</p>
+
+
+      <p>Main content - two thirds</p>
+    </div>
+
+    <div class="nhsuk-grid-column-one-third">
+      <p>Right hand nav - one third</p>
+    </div>
+  </div>
+{% endblock %}
