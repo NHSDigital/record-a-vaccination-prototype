@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {{ backLink({ href: "/regions/v1", text: "Back" }) }}
+
+      <h1 class="nhsuk-heading-xl">Invite an organisation</h1>
+
+      <p>Possibly some guidance here if needed?</p>
+
+      <form action="/regions/v1/organisation-details" method="post">
+        {{ input({
+          "label": {
+            "text": "NHS trust or community pharmacy",
+            classes: "nhsuk-label--m nhsuk-u-margin-bottom-1"
+          },
+          hint: {
+            text: "Search by name or ODS code"
+          },
+          "id": "organisationName",
+          "name": "organisationName"
+        }) }}
+
+        {{ button({
+          "text": "Continue"
+        }) }}
+      </form>
+
+
+    </div>
+  </div>
+{% endblock %}

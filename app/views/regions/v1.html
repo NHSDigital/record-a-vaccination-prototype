@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-xl">East of England</h1>
+
+      <p class="nhsuk-body-l">You can now invite NHS trusts and community pharmacies in your region to start using the <a href="#">NHS Record a vaccination</a> service.</p>
+
+      {{ button({
+        "text": "Invite an organisation",
+        "href": "/regions/v1/add-organisation"
+      }) }}
+
+    </div>
+  </div>
+{% endblock %}
