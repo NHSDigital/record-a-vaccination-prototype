@@ -21,6 +21,7 @@
 <!-- Header code examples can be found at https://service-manual.nhs.uk/design-system/components/header -->
 {% block header %}
   {{ header({
+    classes: "nhsuk-header--left",
     "service": {
         "name": "Record a vaccination",
         "href": "/"
@@ -34,27 +35,7 @@
       },
       {
         'url' : '#',
-        'label' : 'Records'
-      },
-      {
-        'url' : '#',
         'label' : 'Settings'
-      },
-      {
-        'url' : '#',
-        'label' : 'Help'
-      },
-      {
-        'url' : '#',
-        'label' : 'Dashboard'
-      },
-      {
-        'url' : '#',
-        'label' : 'Reports'
-      },
-      {
-        'url' : '#',
-        'label' : 'Workflows'
       }
     ]
     })
