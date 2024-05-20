@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {{ backLink({ href: "/regions/v1/add-organisation", text: "Back" }) }}
+
+      <h1 class="nhsuk-heading-xl">Check and confirm</h1>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Organisation name"
+            },
+            value: {
+              text: data.nhsTrusts[data.organisationCode]
+            }
+          },
+          {
+            key: {
+              text: "Type"
+            },
+            value: {
+              html: 'NHS trust'
+            }
+          },
+          {
+            key: {
+              text: "ODS code"
+            },
+            value: {
+              text: data.organisationCode
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: "73 Roman Rd<br>Leeds<br> LS2 5ZN"
+            }
+          }
+        ]
+      }) }}
+
+
+      {{ button({
+        "text": "Continue",
+        href: "/regions/v1/add-email"
+      }) }}
+
+
+    </div>
+  </div>
+{% endblock %}

@@ -10,6 +10,7 @@
 <!-- Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 {% block headCSS %}
   <link href="/css/main.css" rel="stylesheet">
+
 {% endblock %}
 
 <!-- Set the page title -->
@@ -42,6 +43,11 @@
   {% block scripts %}
     <!-- Custom JavaScript files can be added to this file -->
     {% include "includes/scripts.html" %}
+
+    <script src="/js/x-govuk.js"></script>
+    <script>
+      window.GOVUKPrototypeComponents.initAll()
+    </script>
     <!-- For adding page specific JavsScript -->
     {% block pageScripts %}{% endblock %}
   {% endblock %}

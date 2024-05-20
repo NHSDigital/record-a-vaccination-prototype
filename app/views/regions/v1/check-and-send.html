@@ -1,0 +1,82 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {{ backLink({ href: "/regions/v1/add-email", text: "Back" }) }}
+
+      <h1 class="nhsuk-heading-xl">Check and send</h1>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Organisation name"
+            },
+            value: {
+              text: data.nhsTrusts[data.organisationCode]
+            },
+            actions: {
+              items: [
+                {
+                  href: "/regions/v1/add-organisation",
+                  text: "Change",
+                  visuallyHiddenText: "organisation name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Lead user"
+            },
+            value: {
+              html: data["email"]
+            },
+            actions: {
+              items: [
+                {
+                  href: "/regions/v1/add-email",
+                  text: "Change",
+                  visuallyHiddenText: "lead user email address"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <p>This is the email that will be sent to {{ data["email"] }}:</p>
+
+      <div class="app-email-preview">
+        <p>Dear {{ data.nhsTrusts[data.organisationCode] }},</p>
+
+        <p>You are invited by your NHS region to begin the process of enrolling onto the new NHS Record a vaccination service.</p>
+
+        <p>This service will allow you to record covid and flu vaccinations, as well as other vaccinations in future.</p>
+
+        <p>The first step is to follow this link and set up your account: <a href="#">https://ravs.england.nhs.uk/start?code=573895789375</a></p>
+
+        <p>Once you have set up your account, you will be able to invite any colleagues.</p>
+
+        <p>Thanks,</p>
+
+        <p>NHS Record a vaccination</p>
+
+      </div>
+
+      <form action="/regions/v1/add" method="post">
+        {{ button({
+          "text": "Send invitation"
+        }) }}
+      </form>
+
+
+    </div>
+  </div>
+{% endblock %}

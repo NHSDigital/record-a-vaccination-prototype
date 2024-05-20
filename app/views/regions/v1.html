@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-xl">East of England</h1>
+
+      <p class="nhsuk-body-l">You can now invite NHS trusts in your region to start using the <a href="#">NHS Record a vaccination</a> service.</p>
+
+      {{ button({
+        "text": "Invite an organisation",
+        "href": "/regions/v1/add-organisation"
+      }) }}
+
+    </div>
+  </div>
+
+  {% if (data.organisationsAdded | length) > 0 %}
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-three-quarters">
+
+          <table class="nhsuk-table">
+            <caption class="nhsuk-table__caption">NHS organisations added</caption>
+            <thead role="rowgroup" class="nhsuk-table__head">
+              <tr role="row">
+                <th role="columnheader" class="" scope="col">
+                  Organisation
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  ODS code
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody class="nhsuk-table__body">
+              {% for organisation in data.organisationsAdded %}
+                <tr role="row" class="nhsuk-table__row">
+                  <td class="nhsuk-table__cell">
+                    <a href="/regions/v1/organisations/{{ organisation.code }}">{{ organisation.name }}</a>
+                  </td>
+                  <td class="nhsuk-table__cell ">
+                    {{ organisation.code }}
+                  </td>
+                  <td class="nhsuk-table__cell ">
+                    Invited
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      </div>
+    </div>
+  {% endif %}
+
+{% endblock %}
