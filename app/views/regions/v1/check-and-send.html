@@ -19,7 +19,7 @@
               text: "Organisation name"
             },
             value: {
-              text: data["organisationName"] or "NHS Local University Name Trust"
+              text: data.nhsTrusts[data.organisationCode]
             },
             actions: {
               items: [
@@ -36,14 +36,14 @@
               text: "Lead user"
             },
             value: {
-              html: data["email"] or "test.user@test.nhs.net"
+              html: data["email"]
             },
             actions: {
               items: [
                 {
-                  href: "/regions/v1/add-organisation",
+                  href: "/regions/v1/add-email",
                   text: "Change",
-                  visuallyHiddenText: "organisation name"
+                  visuallyHiddenText: "lead user email address"
                 }
               ]
             }
@@ -51,10 +51,10 @@
         ]
       }) }}
 
-      <p>This is the email that will be sent to {{ data["email"] or "test.user@test.nhs.net" }}:</p>
+      <p>This is the email that will be sent to {{ data["email"] }}:</p>
 
       <div class="app-email-preview">
-        <p>Dear {{ data["organisationName"] or "NHS Local University Name Trust" }},</p>
+        <p>Dear {{ data.nhsTrusts[data.organisationCode] }},</p>
 
         <p>You are invited by your NHS region to begin the process of enrolling onto the new NHS Record a vaccination service.</p>
 
@@ -70,10 +70,11 @@
 
       </div>
 
-
-      {{ button({
-        "text": "Send invitation"
-      }) }}
+      <form action="/regions/v1/add" method="post">
+        {{ button({
+          "text": "Send invitation"
+        }) }}
+      </form>
 
 
     </div>

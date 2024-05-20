@@ -5,6 +5,25 @@
 @import 'components/list-border';
 @import 'components/related-nav';
 
+// Import GOVUK-frontend
+//
+// This is so we can use a few components within the GOV.UK Design System
+// which aren’t yet part of the NHS Design System
+@import "node_modules/govuk-frontend/dist/govuk/all";
+
+// Reset some GOV.UK variables to be NHS-branded
+$govuk-font-family: 'Frutiger W01';
+$govuk-error-colour: $nhsuk-error-color;
+$govuk-input-border-colour: $nhsuk-form-border-color;
+$govuk-brand-colour: $nhsuk-link-color;
+
+// Import X-GOVUK prototype components
+@import "node_modules/@x-govuk/govuk-prototype-components/x-govuk/all";
+
+.autocomplete__wrapper ul > li {
+  margin-bottom: 0;
+}
+
 ///////////////////////////////////////////
 // Add your custom CSS/Sass styles below...
 ///////////////////////////////////////////

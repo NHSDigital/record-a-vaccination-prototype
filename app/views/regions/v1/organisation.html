@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  {{ organisation.name }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {{ backLink({ href: "/regions/v1", text: "Back" }) }}
+
+      <h1 class="nhsuk-heading-l">{{ organisation.name }}</h1>
+
+      <p>You have invited this organisation to begin the process of using NHS Record a vaccination.</p>
+
+      <p>They will be able to set up users and vaccination sites.</p>
+
+      <p>They cannot start recording vaccinations until you activate them. You should do this once all relevant checks and contracts have been agreed.</p>
+    </div>
+  </div>
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-three-quarters">
+
+      {% if (organisation.leadUsers | length) > 0 %}
+        <table class="nhsuk-table">
+          <caption class="nhsuk-table__caption">Lead users</caption>
+          <thead role="rowgroup" class="nhsuk-table__head">
+            <tr role="row">
+              <th role="columnheader" class="" scope="col">
+                Email address
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Status
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Status
+              </th>
+            </tr>
+          </thead>
+          <tbody class="nhsuk-table__body">
+            {% for leadUser in organisation.leadUsers %}
+              <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                  {{ leadUser.email }}
+                </td>
+                <td class="nhsuk-table__cell ">
+                  Invited
+                </td>
+                <td class="nhsuk-table__cell ">
+                  <a href="#">Resend invitation</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+
+      {% set buttonText = "Add another lead user" if (organisation.leadUsers | length) > 0  else "Add a lead user" %}
+
+      {{ button({ text: buttonText, href: "#"}) }}
+    </div>
+  </div>
+
+{% endblock %}

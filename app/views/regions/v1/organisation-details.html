@@ -19,7 +19,7 @@
               text: "Organisation name"
             },
             value: {
-              text: data["organisationName"] or "NHS Local University Name Trust"
+              text: data.nhsTrusts[data.organisationCode]
             }
           },
           {
@@ -35,7 +35,7 @@
               text: "ODS code"
             },
             value: {
-              text: "Y56"
+              text: data.organisationCode
             }
           },
           {

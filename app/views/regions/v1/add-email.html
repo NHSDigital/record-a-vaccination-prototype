@@ -10,21 +10,22 @@
 
       {{ backLink({ href: "/regions/v1/organisation-details", text: "Back" }) }}
 
-      <h1 class="nhsuk-heading-l">Lead user for {{ data["organisationName"] or "NHS Local University Name Trust" }}</h1>
+      <h1 class="nhsuk-heading-l">Lead user for {{ data.nhsTrusts[data.organisationCode] }}</h1>
 
-      <p>Nominate a lead user from {{ data["organisationName"] or "NHS Local University Name Trust" }}.</p>
+      <p>Nominate a lead user from {{ data.nhsTrusts[data.organisationCode] }}.</p>
 
       <p>They will receive further instructions on how to begin using NHS Record a vaccination.</p>
 
-      <form action="/regions/v1/check-and-send" method="post">
+      <form action="/regions/v1/check-and-send" method="post" novalidate>
         {{ input({
           "label": {
             "text": "Email address",
             classes: "nhsuk-label--m"
           },
+          value: data.email,
           type: "email",
-          "id": "organisationName",
-          "name": "organisationName"
+          "id": "email",
+          "name": "email"
         }) }}
 
         {{ button({

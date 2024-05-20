@@ -53,6 +53,7 @@ const nunjucksConfig = {
   autoescape: true,
 };
 
+
 nunjucksConfig.express = app;
 
 let nunjucksAppEnv = nunjucks.configure(appViews, nunjucksConfig);
