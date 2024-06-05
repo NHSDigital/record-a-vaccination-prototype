@@ -1,0 +1,105 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Add user
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {{ backLink({ href: "/regions/v1/organisation-details", text: "Back" }) }}
+
+      <h1 class="nhsuks-heading-xl">Add user</h1>
+
+      <form action="" method="post">
+
+        {{ input({
+          "label": {
+            "text": "First name"
+          },
+          "id": "first-name",
+          "name": "firstName",
+          classes: "nhsuk-input--width-20"
+        }) }}
+
+        {{ input({
+          "label": {
+            "text": "Last name"
+          },
+          "id": "last-name",
+          "name": "lastName",
+          classes: "nhsuk-input--width-20"
+        }) }}
+
+        {{ input({
+          "label": {
+            "text": "Email address"
+          },
+          "id": "email",
+          "name": "email",
+          type: "email"
+        }) }}
+
+        <!-- {{ checkboxes({
+          "name": "permissionLevel",
+          "fieldset": {
+            "legend": {
+              "text": "Permissions",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          "items": [
+            {
+              "value": "record-vaccinations",
+              "text": "Record vaccinations"
+            },
+            {
+              "value": "manage-vaccines",
+              "text": "Add and update vaccine batches"
+            },
+            {
+              "value": "manage-users",
+              "text": "Manage users"
+            }
+          ]
+        }) }} -->
+
+        {{ radios({
+          "name": "permissionLevel",
+          "fieldset": {
+            "legend": {
+              "text": "Permission level"
+            }
+          },
+          "items": [
+            {
+              "value": "vaccinator",
+              "text": "Vaccinator",
+              "hint": {
+                "text": "Can record vaccinations"
+              }
+            },
+            {
+              "value": "admin",
+              "text": "Administrator",
+              "hint": {
+                "text": "Can record vaccinations, manage vaccine batches and manage users"
+              }
+            }
+          ]
+        }) }}
+
+
+        {{ button({
+          "text": "Continue",
+          "href": "#"
+      }) }}
+      </form>
+
+
+    </div>
+  </div>
+
+
+{% endblock %}
