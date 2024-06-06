@@ -4,11 +4,14 @@
   East of England
 {% endblock %}
 
+{% set organisation = {name: data.nhsTrusts[data.organisationCode]} %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
       {{ backLink({ href: "/regions/v1/add-email", text: "Back" }) }}
+
 
       <h1 class="nhsuk-heading-xl">Check and send</h1>
 
@@ -19,7 +22,7 @@
               text: "Organisation name"
             },
             value: {
-              text: data.nhsTrusts[data.organisationCode]
+              text: organisation.name
             },
             actions: {
               items: [
@@ -53,24 +56,7 @@
 
       <p>This email will be sent to {{ data["email"] }}:</p>
 
-      <div class="app-email-preview">
-        <p>Dear {{ data.nhsTrusts[data.organisationCode] }},</p>
-
-        <p>Your NHS region has invited you to start using the new NHS Record a vaccination service.</p>
-
-        <p>The service allows you to safely and quickly record COVID-19 and flu vaccinations, and others in future.</p>
-
-        <p>Please set up your account now: <a href="#">https://ravs.england.nhs.uk/start?code=573895789375</a></p>
-
-        <p>Delaying this may not give you enough time to add your sites, vaccines and service users before your next vaccination campaign.</p>
-
-        <p>Once we activate your account, you'll be able to record vaccinations.</p>
-
-        <p>Many thanks,</p>
-
-        <p>NHS Record a vaccination</p>
-
-      </div>
+      {% include "regions/v1/_email-preview.html" %}
 
       <form action="/regions/v1/add" method="post">
         {{ button({

@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {{ backLink({ href: "/regions/v1/organisations/" + organisation.code + "/add-email", text: "Back" }) }}
+
+      <h1 class="nhsuk-heading-xl">Check and send</h1>
+
+      <p>This email will be sent to {{ data["email"] }}:</p>
+
+      {% include "regions/v1/_email-preview.html" %}
+
+      <form action="/regions/v1/organisations/{{ organisation.code }}/add" method="post">
+        {{ button({
+          "text": "Send invitation"
+        }) }}
+      </form>
+
+
+    </div>
+  </div>
+{% endblock %}

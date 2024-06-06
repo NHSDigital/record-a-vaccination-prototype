@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Add another lead user
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {{ backLink({ href: "/regions/v1/organisations/" + organisation.code, text: "Back" }) }}
+
+      <h1 class="nhsuk-heading-l">Add another lead user</h1>
+
+      <p>Choose another lead user for {{ data.nhsTrusts[organisation.code] }}.</p>
+
+      <p>They will receive further instructions on setting up their NHS Record a vaccination account.</p>
+
+      <form action="/regions/v1/organisations/{{ organisation.code }}/add-email-check" method="post" novalidate>
+        {{ input({
+          "label": {
+            "text": "Email address",
+            classes: "nhsuk-label--m"
+          },
+          value: data.email,
+          type: "email",
+          "id": "email",
+          "name": "email"
+        }) }}
+
+        {{ button({
+          "text": "Continue"
+        }) }}
+      </form>
+
+
+    </div>
+  </div>
+{% endblock %}
