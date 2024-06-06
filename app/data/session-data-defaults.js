@@ -1,4 +1,13 @@
 module.exports = {
+  "users": [
+    {
+      "email": "jane.smith@nhs.net",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "role": "Administrator",
+      "status": "Active"
+    }
+  ],
   "nhsTrusts": {
     "R0A": "Manchester University NHS Foundation Trust",
     "R0B": "South Tyneside and Sunderland NHS Foundation Trust",

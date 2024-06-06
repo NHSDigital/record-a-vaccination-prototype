@@ -8,11 +8,11 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {{ backLink({ href: "/regions/v1/organisation-details", text: "Back" }) }}
+      {{ backLink({ href: "/user-admin/v1", text: "Back" }) }}
 
       <h1 class="nhsuks-heading-xl">Add user</h1>
 
-      <form action="" method="post">
+      <form action="/user-admin/v1/check" method="post">
 
         {{ input({
           "label": {
@@ -20,7 +20,8 @@
           },
           "id": "first-name",
           "name": "firstName",
-          classes: "nhsuk-input--width-20"
+          classes: "nhsuk-input--width-20",
+          value: data.firstName
         }) }}
 
         {{ input({
@@ -29,7 +30,8 @@
           },
           "id": "last-name",
           "name": "lastName",
-          classes: "nhsuk-input--width-20"
+          classes: "nhsuk-input--width-20",
+          value: data.lastName
         }) }}
 
         {{ input({
@@ -38,7 +40,8 @@
           },
           "id": "email",
           "name": "email",
-          type: "email"
+          type: "email",
+          value: data.email
         }) }}
 
         <!-- {{ checkboxes({
@@ -66,7 +69,7 @@
         }) }} -->
 
         {{ radios({
-          "name": "permissionLevel",
+          "name": "role",
           "fieldset": {
             "legend": {
               "text": "Permission level"
@@ -74,15 +77,17 @@
           },
           "items": [
             {
-              "value": "vaccinator",
+              "value": "Vaccinator",
               "text": "Vaccinator",
+              checked: (data.role == "Vaccinator"),
               "hint": {
                 "text": "Can record vaccinations"
               }
             },
             {
-              "value": "admin",
+              "value": "Administrator",
               "text": "Administrator",
+              checked: (data.role == "Administrator"),
               "hint": {
                 "text": "Can record vaccinations, manage vaccine batches and manage users"
               }
@@ -92,8 +97,7 @@
 
 
         {{ button({
-          "text": "Continue",
-          "href": "#"
+          "text": "Continue"
       }) }}
       </form>
 

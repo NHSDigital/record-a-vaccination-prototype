@@ -78,4 +78,30 @@ router.get('/regions/v1/organisations/:code/add-email-check', (req, res) => {
 
 });
 
+
+// USER ADMINF
+
+// Adding a user
+router.post('/user-admin/v1/add', (req, res) => {
+
+
+  req.session.data.users.push({
+    firstName: req.session.data.firstName,
+    lastName: req.session.data.lastName,
+    email: req.session.data.email,
+    role: req.session.data.role,
+    status: 'Invited'
+  })
+
+  // Reset data
+  req.session.data.email = '';
+  req.session.data.firstName = '';
+  req.session.data.lastName = '';
+  req.session.data.role = '';
+
+  res.redirect('/user-admin/v1');
+
+});
+
+
 module.exports = router;
