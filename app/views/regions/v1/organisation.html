@@ -59,7 +59,7 @@
 
       {% set buttonText = "Add another lead user" if (organisation.leadUsers | length) > 0  else "Add a lead user" %}
 
-      {{ button({ text: buttonText, href: "#"}) }}
+      {{ button({ text: buttonText, href: "/regions/v1/organisations/" + organisation.code + "/add-email"}) }}
     </div>
   </div>
 
