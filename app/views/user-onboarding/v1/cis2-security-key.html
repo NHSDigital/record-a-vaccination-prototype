@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Care Identity Authentication
+{% endblock %}
+
+{% block header %}
+  {% include "includes/cis2_header.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Authenticating</h1>
+
+      <div style="border: 4px solid grey; padding: 20px;">
+
+        <h2 class="nhsuk-heading-s">Insert security key</h2>
+
+        <p>[This is a mockup]</p>
+
+        {{ button({
+          text: "Done",
+          classes: "nhsuk-button--secondary",
+          href: "/user-onboarding/v1/cis2-created"
+
+        }) }}
+
+
+      </div>
+
+
+
+    </div>
+  </div>
+
+
+{% endblock %}

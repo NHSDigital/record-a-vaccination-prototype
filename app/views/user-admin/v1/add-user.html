@@ -44,7 +44,7 @@
           value: data.email
         }) }}
 
-        <!-- {{ checkboxes({
+         <!-- {{ checkboxes({
           "name": "permissionLevel",
           "fieldset": {
             "legend": {
@@ -78,10 +78,18 @@
           "items": [
             {
               "value": "Vaccinator",
-              "text": "Vaccinator",
+              "text": "Vaccine recorder",
               checked: (data.role == "Vaccinator"),
               "hint": {
                 "text": "Can record vaccinations"
+              }
+            },
+            {
+              "value": "Administrator",
+              "text": "Vaccine manager",
+              checked: (data.role == "Administrator"),
+              "hint": {
+                "text": "Can record vaccinations and manage vaccine batches"
               }
             },
             {

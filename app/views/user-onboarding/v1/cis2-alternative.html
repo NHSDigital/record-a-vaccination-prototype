@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Manage users and permissions
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {{ backLink({ href: "/user-onboarding/v1/setup", text: "Back" }) }}
+
+      <h1 class="nhsuk-heading-l">Account options</h1>
+
+      <p>If you do not have a Care Identity account, you can get one if your organisation </p>
+
+      <p>[Instructions on how to get one...]</p>
+
+      <p>Or, <a href="#">use Okta as an alternative</a></p>
+
+    </div>
+  </div>
+
+
+{% endblock %}

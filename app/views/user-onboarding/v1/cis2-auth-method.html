@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Care Identity Authentication
+{% endblock %}
+
+{% block header %}
+  {% include "includes/cis2_header.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/user-onboarding/v1/cis2-method-answer" method="post">
+        {{ radios({
+          classes: "nhsuk-u-margin-bottom-5",
+          "name": "cis2Method",
+          "fieldset": {
+            "legend": {
+              "text": "Select your login method",
+              "classes": "nhsuk-fieldset__legend--l",
+              "isPageHeading": true
+            }
+          },
+          "items": [
+            {
+              "value": "smartcard",
+              "text": "Smartcard"
+            },
+            {
+              "value": "windowsHello",
+              "text": "Windows Hello"
+            },
+            {
+              "value": "securityKey",
+              "text": "Security key"
+            },
+            {
+              "value": "ipadapp",
+              "text": "iPad app"
+            }
+          ]
+        }) }}
+
+        {{ button({ text: "Continue" }) }}
+
+        {{ checkboxes({
+          name: "rememberMe",
+          items: [
+            {
+              value: "yes",
+              text: "Remember my selection",
+              hint: {
+                html: "<p>Check this box to use this selection automatically next time you log in.</p><p>Do not check this box if using a shared machine.</p>"
+              }
+            }
+          ]
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+
+{% endblock %}
