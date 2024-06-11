@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Manage users and permissions
+{% endblock %}
+
+{% block outerContent %}
+  {{ backLink({
+    href: "/user-onboarding/v1/cis2-alternative",
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4 nhsuk-u-margin-bottom-0"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Use an Okta account</h1>
+
+      <p>Setup your account for NHS Record a vaccination using an Okta account.</p>
+
+      <p>You will need to set a password and security question.</p>
+
+      {{ button({
+        text: "Set up Okta account",
+        href: "/user-onboarding/v1/okta-check-email"
+      }) }}
+
+
+    </div>
+  </div>
+{% endblock %}
