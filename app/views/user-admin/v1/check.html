@@ -4,6 +4,10 @@
   East of England
 {% endblock %}
 
+{% block header %}
+  {% include "user-admin/v1/_header.html" %}
+{% endblock %}
+
 {% set organisation = {name: data.nhsTrusts[data.organisationCode]} %}
 
 {% block content %}

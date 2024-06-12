@@ -21,6 +21,11 @@ $govuk-brand-colour: $nhsuk-link-color;
 // Import X-GOVUK prototype components
 @import "node_modules/@x-govuk/govuk-prototype-components/x-govuk/all";
 
+
+// Local components or modifiers
+@import 'components/header';
+
+
 .autocomplete__wrapper ul > li {
   margin-bottom: 0;
 }

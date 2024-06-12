@@ -4,10 +4,14 @@
   Manage users and permissions
 {% endblock %}
 
+{% block header %}
+  {% include "user-admin/v1/_header.html" %}
+{% endblock %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
-      <h1 class="nhsuk-heading-xl">Manage users and permissions</h1>
+      <h1 class="nhsuk-heading-xl">Manage users</h1>
 
       {{ button({
         "text": "Add user",
