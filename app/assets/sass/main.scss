@@ -4,6 +4,7 @@
 // Components that are not in the NHS.UK frontend library
 @import 'components/list-border';
 @import 'components/related-nav';
+@import 'components/indent-list';
 
 // Import GOVUK-frontend
 //
@@ -19,6 +20,11 @@ $govuk-brand-colour: $nhsuk-link-color;
 
 // Import X-GOVUK prototype components
 @import "node_modules/@x-govuk/govuk-prototype-components/x-govuk/all";
+
+
+// Local components or modifiers
+@import 'components/header';
+
 
 .autocomplete__wrapper ul > li {
   margin-bottom: 0;
@@ -40,4 +46,97 @@ $govuk-brand-colour: $nhsuk-link-color;
   border: 5px solid #b1b4b6;
   padding: 20px;
   margin-bottom: 30px;
+}
+
+.app-email-preview--okta p {
+  font-size: 14px;
+  color: #5e5e5e;
+}
+
+.app-button--okta {
+  background-color: #1662dd;
+  font-weight: normal;
+  box-shadow: none;
+  display: block;
+  width: 200px;
+  font-size: 14px;
+  margin: 0 auto 30px auto;
+}
+
+// Okta gubbins
+
+.auth-container {
+  background-color: #fff;
+  border-color: #ddd #ddd #d8d8d8;
+  box-shadow: 0 2px 0 hsla(0,0%,69%,.12);
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+font-size: 14px;
+font-weight: 400;
+height: auto;
+line-height: 1.4;
+margin: 100px auto 8px;
+min-width: 300px;
+overflow: auto;
+position: relative;
+width: 400px;
+}
+
+.auth-header {
+  padding: 30px 90px 0px;
+  position: relative;
+  border-bottom: 1px solid #ddd;
+  z-index: 10;
+
+  -moz-transition: padding-bottom 0.4s;
+  -webkit-transition: padding-bottom 0.4s;
+  transition: padding-bottom 0.4s;
+}
+
+#okta-sign-in .auth-org-logo {
+  display: block;
+  margin: 0 auto;
+  max-height: 40px;
+  max-width: 200px;
+}
+
+.auth-content {
+  padding: 60px 42px 20px;
+}
+
+.auth-container p,
+.auth-container ul {
+  font-size: 14px;
+}
+
+.auth-container li {
+  margin: 0;
+}
+
+.auth-container h2 {
+  font-size: 15px;
+  text-align: center;
+}
+
+#okta-sign-in .siw-main-view .siw-main-body .identifier-container {
+margin-bottom: 15px;
+overflow: hidden;
+position: relative;
+text-align: center;
+text-overflow: ellipsis;
+top: -5px;
+white-space: nowrap;
+}
+
+#okta-sign-in .o-form .input-fix input[type=password], #okta-sign-in .o-form .input-fix input[type=tel], #okta-sign-in .o-form .input-fix input[type=text], #okta-sign-in .o-form .input-fix input[type=textbox] {
+background: transparent;
+border: 1px solid grey;
+box-sizing: border-box;
+height: 100%;
+line-height: 18px;
+margin: 0;
+padding: 10px 8px;
+width: 100%;
+border-radius: 3px;
 }

@@ -1,0 +1,80 @@
+
+ol.NhsOrderedList {
+    padding-left: 0;
+    list-style-type:none
+}
+
+li.NhsOrderedListItem {
+    counter-increment: step-counter;
+    border-left: 3px solid #768692;
+    margin-top: 0;
+    margin-bottom:0
+}
+
+ol.NhsOrderedList li.NhsOrderedListItem:before {
+    content: counter(step-counter);
+    background-color: #fff;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    left: -1rem;
+    top: -2px;
+    text-align: center;
+    position: relative;
+    font-weight: 700;
+    border-width: 3px;
+    border-style: solid;
+    border-color:#768692
+}
+
+ol.NhsOrderedList li.NhsOrderedListItem:last-child:before {
+    top:0
+}
+
+li.NhsOrderedListItem h4.nhsuk-heading-s {
+    margin-left: 1%;
+    display:inline
+}
+
+li.NhsOrderedListItem div.nhsuk-card {
+    margin-bottom: 0;
+    margin-left:5.5%
+}
+
+@media screen and (max-width: 768px) {
+    li.NhsOrderedListItem div.nhsuk-card {
+        width:90%
+    }
+}
+
+.NhsTextAndImage[data-v-060d0c23] {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content:space-between
+}
+
+.NhsTextAndImage__text[data-v-060d0c23] {
+    padding-right:20px
+}
+
+div.indent-list[data-v-30e115c8] {
+    padding-left:2.5%
+}
+
+#share-button[data-v-30e115c8] {
+    vertical-align: middle;
+    width: 18.5%;
+    height:18.5%
+}
+
+#extension_button[data-v-30e115c8], #touchId_button[data-v-30e115c8] {
+    width: 18.5%;
+    height: 18.5%;
+    border-radius:25px
+}

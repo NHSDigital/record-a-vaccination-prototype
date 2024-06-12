@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Manage users and permissions
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Setup your account</h1>
+
+      <p>If you have an NHS Care Identity account, you can use this to:</p>
+
+      <ul>
+        <li>set up your account</li>
+        <li>sign in to the service</li>
+        <li>search for patients more easily</li>
+      </ul>
+
+      <form action="/user-onboarding/v1/cis2-answer" method="post">
+        {{ radios({
+          "name": "existingCareIdentityAccount",
+          "fieldset": {
+            "legend": {
+              "text": "Do you have an NHS Care Identity account?",
+              "classes": "nhsuk-fieldset__legend--m",
+              "isPageHeading": true
+            }
+          },
+          "items": [
+            {
+              "value": "yes",
+              "text": "Yes"
+            },
+            {
+              "value": "no",
+              "text": "No"
+            },
+            {
+              "value": "not-sure",
+              "text": "I’m not sure"
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+
+{% endblock %}

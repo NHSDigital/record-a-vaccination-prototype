@@ -1,0 +1,14 @@
+
+// Makes all navigation items from this one on right-aligned
+//
+// A bit of a hack - possibly they should be in 2 separate lists?
+.app-header__navigation-item--right-aligned {
+  margin-left: auto;
+}
+
+
+// A style to highlight the current section the user is in
+.app-header__navigation-link--current {
+  text-decoration: none;
+  border-bottom: 6px solid $nhsuk-border-color;
+}

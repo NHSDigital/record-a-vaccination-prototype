@@ -22,7 +22,7 @@
 
   {% if (data.organisationsAdded | length) > 0 %}
     <div class="nhsuk-grid-row">
-      <div class="nhsuk-grid-column-three-quarters">
+      <div class="nhsuk-grid-column-full">
 
           <table class="nhsuk-table">
             <caption class="nhsuk-table__caption">NHS organisations added</caption>
@@ -37,6 +37,9 @@
                 <th role="columnheader" class="" scope="col">
                   Status
                 </th>
+                <th role="columnheader" class="" scope="col">
+                  Vaccine programme
+                </th>
               </tr>
             </thead>
             <tbody class="nhsuk-table__body">
@@ -50,6 +53,9 @@
                   </td>
                   <td class="nhsuk-table__cell ">
                     Invited
+                  </td>
+                  <td class="nhsuk-table__cell ">
+                    RSV
                   </td>
                 </tr>
               {% endfor %}
