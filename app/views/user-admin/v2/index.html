@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Manage users and permissions
+{% endblock %}
+
+{% block header %}
+  {% include "user-admin/v2/_header.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+      <h1 class="nhsuk-heading-xl">Manage users</h1>
+
+      {{ button({
+        "text": "Add user",
+        "href": "/user-admin/v2/add-user"
+      }) }}
+
+      <table class="nhsuk-table">
+        <caption class="nhsuk-table__caption">Users</caption>
+        <thead role="rowgroup" class="nhsuk-table__head">
+          <tr role="row">
+            <th role="columnheader" class="" scope="col">
+              Name
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Email address
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Permissions
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Status
+            </th>
+            <th role="columnheader" class="" scope="col">
+
+            </th>
+          </tr>
+        </thead>
+        <tbody class="nhsuk-table__body">
+          {% for user in data.users %}
+            <tr class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">
+                {{ user.firstName }} {{ user.lastName }}
+              </td>
+              <td class="nhsuk-table__cell ">{{ user.email }}</td>
+              <td class="nhsuk-table__cell ">{{ user.role }}</td>
+              <td class="nhsuk-table__cell ">{{ user.status }}</td>
+              <td class="nhsuk-table__cell ">
+                <a href="#" class="nhsuk-link">Change permissions</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+
+
+
+    </div>
+  </div>
+
+
+{% endblock %}
