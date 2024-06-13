@@ -103,6 +103,28 @@ router.post('/user-admin/v1/add', (req, res) => {
 
 });
 
+// Adding a user - v2
+router.post('/user-admin/v2/add', (req, res) => {
+
+
+  req.session.data.users.push({
+    firstName: req.session.data.firstName,
+    lastName: req.session.data.lastName,
+    email: req.session.data.email,
+    role: req.session.data.role,
+    status: 'Invited'
+  })
+
+  // Reset data
+  req.session.data.email = '';
+  req.session.data.firstName = '';
+  req.session.data.lastName = '';
+  req.session.data.role = '';
+
+  res.redirect('/user-admin/v2');
+
+});
+
 
 // Answering whether the user has a Care Identity account or not
 router.post('/user-onboarding/v1/cis2-answer', (req, res) => {

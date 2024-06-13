@@ -10,5 +10,6 @@
 // A style to highlight the current section the user is in
 .app-header__navigation-link--current {
   text-decoration: none;
-  border-bottom: 6px solid $nhsuk-border-color;
+  background-color: #064a8c;
+  border-bottom: 6px solid $color_nhsuk-grey-5;
 }
