@@ -79,7 +79,7 @@ router.get('/regions/v1/organisations/:code/add-email-check', (req, res) => {
 });
 
 
-// USER ADMINF
+// USER ADMIN
 
 // Adding a user
 router.post('/user-admin/v1/add', (req, res) => {

@@ -19,7 +19,7 @@
       <div class="nhsuk-form-group">
         <h1 class="nhsuk-label-wrapper">
           <label class="nhsuk-label nhsuk-label--m nhsuk-u-margin-bottom-1" for="organisationCode">
-            NHS trust
+            NHS trust or community pharmacy
           </label>
         </h1>
         <div class="nhsuk-hint" id="organisationName-hint">
@@ -31,6 +31,9 @@
 
           {% for code, name in data.nhsTrusts %}
             <option value="{{ code }}">{{ name }} ({{code }})</option>
+          {% endfor %}
+          {% for code, data in data.nhsPharmacies %}
+            <option value="{{ code }}">{{ data.name }}, {{ data.address }}, {{ data.postcode | upper }} ({{code }})</option>
           {% endfor %}
         </select>
       </div>
