@@ -12,11 +12,26 @@
 
       <h1 class="nhsuk-heading-l">{{ organisation.name }}</h1>
 
-      <p>You have invited this organisation to begin the process of using NHS Record a vaccination.</p>
+      {% if organisation.status == 'Invited' %}
+        <p>You have invited this organisation to begin the process of using NHS Record a vaccination.</p>
 
-      <p>They will be able to set up users and vaccination sites.</p>
+        <p>They will be able to set up users and vaccination sites.</p>
 
-      <p>They cannot start recording vaccinations until you activate them. You should do this once all relevant checks and contracts have been agreed.</p>
+        <p>They cannot start recording vaccinations until you activate them. You should do this once all relevant checks and contracts have been agreed.</p>
+
+      {% elseif organisation.status == 'Awaiting contract'  %}
+        <p>This organisation has set up their users and is ready to use the service.</p>
+
+        <p>They cannot record vaccinations until you activate them. You should do this once all relevant checks and contracts have been agreed. </p>
+
+        {{ button({
+          text: "Activate organisation",
+          href: "/regions/v1/organisations/" + organisation.code + '/activate'
+        }) }}
+
+      {% elseif organisation.status == 'Active'  %}
+        <p>The organisation is able to record vaccinations.</p>
+      {% endif %}
     </div>
   </div>
 
@@ -35,7 +50,7 @@
                 Status
               </th>
               <th role="columnheader" class="" scope="col">
-                Status
+
               </th>
             </tr>
           </thead>
@@ -46,10 +61,12 @@
                   {{ leadUser.email }}
                 </td>
                 <td class="nhsuk-table__cell ">
-                  Invited
+                  {{ leadUser.status }}
                 </td>
                 <td class="nhsuk-table__cell ">
-                  <a href="#">Resend invitation</a>
+                  {% if leadUser.status == 'Invite' %}
+                    <a href="#">Resend invitation</a>
+                  {% endif %}
                 </td>
               </tr>
             {% endfor %}
@@ -59,7 +76,9 @@
 
       {% set buttonText = "Add another lead user" if (organisation.leadUsers | length) > 0  else "Add a lead user" %}
 
-      {{ button({ text: buttonText, href: "/regions/v1/organisations/" + organisation.code + "/add-email"}) }}
+      {% if organisation.status == 'Invited' %}
+        {{ button({ text: buttonText, href: "/regions/v1/organisations/" + organisation.code + "/add-email"}) }}
+      {% endif %}
     </div>
   </div>
 

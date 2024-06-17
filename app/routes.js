@@ -39,8 +39,9 @@ router.post('/regions/v1/add', (req, res) => {
     },
     type: organisationType,
     leadUsers: [
-      {email: req.session.data.email}
-    ]
+      {email: req.session.data.email, status: 'Invited' }
+    ],
+    status: 'Invited'
   })
 
   // Remove data from adding organisation flow
@@ -164,7 +165,7 @@ router.post('/regions/v1/organisations/:code/add', (req, res) => {
   const organisationsAdded = req.session.data.organisationsAdded || []
   const organisation = organisationsAdded.find((org) => org.code === req.params.code)
 
-  organisation.leadUsers.push({ email: req.session.data.email })
+  organisation.leadUsers.push({ email: req.session.data.email, status: 'Invited' })
 
   // Remove data from adding organisation flow
   req.session.data.email = '';
@@ -204,6 +205,91 @@ router.get('/regions/v1/organisations/:code/add-email-check', (req, res) => {
   const organisation = organisationsAdded.find((org) => org.code === req.params.code)
 
   res.render('regions/v1/add-another-email-check', {
+    organisation
+  });
+
+});
+
+// Mock up more organisations having been added
+router.get('/regions/v1/setup-test', (req, res) => {
+
+  req.session.data.organisationsAdded ||= [];
+
+  // Add an NHS Trust
+  req.session.data.organisationsAdded.push({
+    code: 'RD8',
+    name: 'Milton Keynes University Hospital NHS Foundation Trust',
+    address: {
+      line1: 'Standing Way, Eaglestone',
+      town: 'Milton Keynes',
+      postcode: 'MK6 5LD'
+    },
+    type: 'NHS Trust',
+    status: 'Awaiting contract',
+    leadUsers: [
+      {email: 'sarah.jane@mk.nhs.net', status: 'Active'}
+    ]
+  })
+
+  // Add another NHS Trust
+  req.session.data.organisationsAdded.push({
+    code: 'RAJ',
+    name: 'Mid and South Essex NHS Foundation Trust',
+    address: {
+      line1: 'Prittlewell Chase',
+      town: 'Westcliffe-on-Sea',
+      postcode: 'SS0 0RY'
+    },
+    type: 'NHS Trust',
+    status: 'Awaiting contract',
+    leadUsers: [
+      {email: 'richard.jones@mid-essex.nhs.net', status: 'Active'}
+    ]
+  })
+
+  // Add another NHS Trust
+  req.session.data.organisationsAdded.push({
+    code: 'FA424',
+    name: 'Pickfords Pharmacy',
+    address: {
+      line1: '8 Spencer Court',
+      town: 'Corby',
+      postcode: 'NN17 1NU'
+    },
+    type: 'Community Pharmacy',
+    status: 'Awaiting contract',
+    leadUsers: [
+      {email: 'sara.pickford@pickford-pharmacy.com', status: 'Active'}
+    ]
+  })
+
+  res.redirect('/regions/v1');
+});
+
+
+// Check a second lead user for an organisation
+router.post('/regions/v1/organisations/:code/answer-activate', (req, res) => {
+
+  const organisationsAdded = req.session.data.organisationsAdded || []
+  const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+
+  if (req.body.activate == 'yes') {
+    organisation.status = 'Active'
+    res.redirect('/regions/v1/organisations/' + organisation.code + '?justactivated=yes')
+
+  } else {
+    res.redirect('/regions/v1/organisations/' + organisation.code)
+  }
+
+});
+
+// Check a second lead user for an organisation
+router.get('/regions/v1/organisations/:code/activate', (req, res) => {
+
+  const organisationsAdded = req.session.data.organisationsAdded || []
+  const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+
+  res.render('regions/v1/activate', {
     organisation
   });
 
