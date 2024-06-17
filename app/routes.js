@@ -7,13 +7,37 @@ const router = express.Router();
 // Inviting an organisation
 router.post('/regions/v1/add', (req, res) => {
 
+
+
   req.session.data.organisationsAdded ||= [];
 
   const organisationCode = req.session.data.organisationCode
+
+  if (organisationCode.startsWith('FA')) {
+    organisationName = req.session.data.nhsPharmacies[organisationCode].name;
+    organisationLine1 = req.session.data.nhsPharmacies[organisationCode].address;
+    organisationTown = req.session.data.nhsPharmacies[organisationCode].town;
+    organisationPostcode = req.session.data.nhsPharmacies[organisationCode].postcode;
+    organisationType = 'Community Pharmacy';
+  } else {
+    organisationName = req.session.data.nhsTrusts[organisationCode];
+    organisationLine1 = '73 Roman Rd';
+    organisationTown = 'Leeds';
+    organisationPostcode = 'LS2 5ZN';
+    organisationType = 'NHS Trust';
+
+  }
+
   // Add organisation to `organisationsAdded` array
   req.session.data.organisationsAdded.push({
     code: req.session.data.organisationCode,
-    name: req.session.data.nhsTrusts[req.session.data.organisationCode],
+    name: organisationName,
+    address: {
+      line1: organisationLine1,
+      town: organisationTown,
+      postcode: organisationPostcode
+    },
+    type: organisationType,
     leadUsers: [
       {email: req.session.data.email}
     ]
@@ -26,6 +50,113 @@ router.post('/regions/v1/add', (req, res) => {
   res.redirect('/regions/v1/organisations/' + organisationCode);
 
 });
+
+router.get('/regions/v1/organisation-details', (req, res) => {
+
+  const organisationCode = req.session.data.organisationCode;
+
+  if (organisationCode.startsWith('FA')) {
+    organisationName = req.session.data.nhsPharmacies[organisationCode].name;
+    organisationLine1 = req.session.data.nhsPharmacies[organisationCode].address;
+    organisationTown = req.session.data.nhsPharmacies[organisationCode].town;
+    organisationPostcode = req.session.data.nhsPharmacies[organisationCode].postcode;
+    organisationType = 'Community Pharmacy';
+  } else {
+    organisationName = req.session.data.nhsTrusts[organisationCode];
+    organisationLine1 = '73 Roman Rd';
+    organisationTown = 'Leeds';
+    organisationPostcode = 'LS2 5ZN';
+    organisationType = 'NHS Trust';
+
+  }
+
+  const organisation = {
+    code: organisationCode,
+    name: organisationName,
+    type: organisationType,
+    address: {
+      line1: organisationLine1,
+      town: organisationTown,
+      postcode: organisationPostcode
+    }
+  }
+
+  res.render('regions/v1/organisation-details', {
+    organisation
+  });
+})
+
+
+router.get('/regions/v1/add-email', (req, res) => {
+
+  const organisationCode = req.session.data.organisationCode;
+
+  if (organisationCode.startsWith('FA')) {
+    organisationName = req.session.data.nhsPharmacies[organisationCode].name;
+    organisationLine1 = req.session.data.nhsPharmacies[organisationCode].address;
+    organisationTown = req.session.data.nhsPharmacies[organisationCode].town;
+    organisationPostcode = req.session.data.nhsPharmacies[organisationCode].postcode;
+    organisationType = 'Community Pharmacy';
+  } else {
+    organisationName = req.session.data.nhsTrusts[organisationCode];
+    organisationLine1 = '73 Roman Rd';
+    organisationTown = 'Leeds';
+    organisationPostcode = 'LS2 5ZN';
+    organisationType = 'NHS Trust';
+
+  }
+
+  const organisation = {
+    code: organisationCode,
+    name: organisationName,
+    type: organisationType,
+    address: {
+      line1: organisationLine1,
+      town: organisationTown,
+      postcode: organisationPostcode
+    }
+  }
+
+  res.render('regions/v1/add-email', {
+    organisation
+  });
+})
+
+router.get('/regions/v1/check-and-send', (req, res) => {
+
+  const organisationCode = req.session.data.organisationCode;
+
+  if (organisationCode.startsWith('FA')) {
+    organisationName = req.session.data.nhsPharmacies[organisationCode].name;
+    organisationLine1 = req.session.data.nhsPharmacies[organisationCode].address;
+    organisationTown = req.session.data.nhsPharmacies[organisationCode].town;
+    organisationPostcode = req.session.data.nhsPharmacies[organisationCode].postcode;
+    organisationType = 'Community Pharmacy';
+  } else {
+    organisationName = req.session.data.nhsTrusts[organisationCode];
+    organisationLine1 = '73 Roman Rd';
+    organisationTown = 'Leeds';
+    organisationPostcode = 'LS2 5ZN';
+    organisationType = 'NHS Trust';
+
+  }
+
+  const organisation = {
+    code: organisationCode,
+    name: organisationName,
+    type: organisationType,
+    address: {
+      line1: organisationLine1,
+      town: organisationTown,
+      postcode: organisationPostcode
+    }
+  }
+
+  res.render('regions/v1/check-and-send', {
+    organisation
+  });
+})
+
 
 // Inviting a second lead user for an organisation
 router.post('/regions/v1/organisations/:code/add', (req, res) => {

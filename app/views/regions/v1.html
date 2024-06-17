@@ -10,7 +10,7 @@
 
       <h1 class="nhsuk-heading-xl">East of England</h1>
 
-      <p class="nhsuk-body-l">Invite your East of England NHS trusts to start using <a href="#">NHS Record a vaccination</a>.</p>
+      <p class="nhsuk-body-l">Invite NHS trusts and community pharmacies in your region to start using <a href="#">NHS Record a vaccination</a>.</p>
 
       {{ button({
         "text": "Invite an organisation",
@@ -25,7 +25,7 @@
       <div class="nhsuk-grid-column-full">
 
           <table class="nhsuk-table">
-            <caption class="nhsuk-table__caption">NHS organisations added</caption>
+            <caption class="nhsuk-table__caption">Organisations added</caption>
             <thead role="rowgroup" class="nhsuk-table__head">
               <tr role="row">
                 <th role="columnheader" class="" scope="col">
@@ -33,6 +33,9 @@
                 </th>
                 <th role="columnheader" class="" scope="col">
                   ODS code
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Type
                 </th>
                 <th role="columnheader" class="" scope="col">
                   Status
@@ -47,6 +50,9 @@
                   </td>
                   <td class="nhsuk-table__cell ">
                     {{ organisation.code }}
+                  </td>
+                  <td class="nhsuk-table__cell ">
+                    {{ organisation.type }}
                   </td>
                   <td class="nhsuk-table__cell ">
                     Invited

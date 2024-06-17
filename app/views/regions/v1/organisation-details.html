@@ -19,7 +19,7 @@
               text: "Organisation name"
             },
             value: {
-              text: data.nhsTrusts[data.organisationCode]
+              text: organisation.name
             }
           },
           {
@@ -27,7 +27,7 @@
               text: "Type"
             },
             value: {
-              html: 'NHS trust'
+              html: organisation.type
             }
           },
           {
@@ -35,7 +35,7 @@
               text: "ODS code"
             },
             value: {
-              text: data.organisationCode
+              text: organisation.code
             }
           },
           {
@@ -43,7 +43,7 @@
               text: "Address"
             },
             value: {
-              html: "73 Roman Rd<br>Leeds<br> LS2 5ZN"
+              html: (organisation.address.line1 + "<br>" + organisation.address.town + "<br>" + organisation.address.postcode)
             }
           }
         ]
