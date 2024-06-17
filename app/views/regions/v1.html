@@ -4,13 +4,24 @@
   East of England
 {% endblock %}
 
+{% block footer %}
+  {{ footer({
+    links: [
+      {
+        "URL": "/regions/v1/setup-test",
+        "label": "Jump forward in time"
+      }
+    ]
+  })}}
+{% endblock %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
       <h1 class="nhsuk-heading-xl">East of England</h1>
 
-      <p class="nhsuk-body-l">Invite your East of England NHS trusts to start using <a href="#">NHS Record a vaccination</a>.</p>
+      <p class="nhsuk-body-l">Invite NHS trusts and community pharmacies in your region to start using <a href="#">NHS Record a vaccination</a>.</p>
 
       {{ button({
         "text": "Invite an organisation",
@@ -25,7 +36,7 @@
       <div class="nhsuk-grid-column-full">
 
           <table class="nhsuk-table">
-            <caption class="nhsuk-table__caption">NHS organisations added</caption>
+            <caption class="nhsuk-table__caption">Organisations added</caption>
             <thead role="rowgroup" class="nhsuk-table__head">
               <tr role="row">
                 <th role="columnheader" class="" scope="col">
@@ -35,10 +46,10 @@
                   ODS code
                 </th>
                 <th role="columnheader" class="" scope="col">
-                  Status
+                  Type
                 </th>
                 <th role="columnheader" class="" scope="col">
-                  Vaccine programme
+                  Status
                 </th>
               </tr>
             </thead>
@@ -52,10 +63,10 @@
                     {{ organisation.code }}
                   </td>
                   <td class="nhsuk-table__cell ">
-                    Invited
+                    {{ organisation.type }}
                   </td>
                   <td class="nhsuk-table__cell ">
-                    RSV
+                    {{ organisation.status }}
                   </td>
                 </tr>
               {% endfor %}

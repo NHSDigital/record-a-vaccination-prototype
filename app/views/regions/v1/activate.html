@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {{ backLink({ href: "/regions/v1/organisations/" + organisation.code + "/add-email", text: "Back" }) }}
+
+      <h1 class="govuk-heading-l">Activate {{ organisation.name }}</h1>
+
+      <p>When you activate them, they will be able to start recording vaccinations.</p>
+
+      <p>Do this when:</p>
+
+      <ul>
+        <li>contracts have been agreed and signed</li>
+        <li>all relevant assurance processes have taken place</li>
+      </ul>
+
+      <form action="/regions/v1/organisations/{{ organisation.code }}/answer-activate" method="post">
+        {{ radios({
+          "name": "activate",
+          "fieldset": {
+            "legend": {
+              "text": "Are you sure you want to activate them?",
+              "classes": "nhsuk-fieldset__legend--m"
+            }
+          },
+          "items": [
+            {
+              "value": "yes",
+              "text": "Yes, activate them now"
+            },
+            {
+              "value": "no",
+              "text": "No"
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+      </form>
+
+
+    </div>
+  </div>
+{% endblock %}
