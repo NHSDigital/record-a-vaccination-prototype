@@ -1,3 +1,6 @@
+
+const prototypeFilters = require('@x-govuk/govuk-prototype-filters');
+
 module.exports = function (env) { /* eslint-disable-line no-unused-vars */
   /**
    * Instantiate object used to store the methods registered as a
@@ -5,7 +8,7 @@ module.exports = function (env) { /* eslint-disable-line no-unused-vars */
    * gov.uk core filters by creating filter methods of the same name.
    * @type {Object}
    */
-  const filters = {};
+  const filters = prototypeFilters;
 
   /* ------------------------------------------------------------------
     add your methods to the filters obj below this comment block:

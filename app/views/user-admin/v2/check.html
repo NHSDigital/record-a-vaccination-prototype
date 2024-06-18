@@ -16,7 +16,6 @@
 
       {{ backLink({ href: "/user-admin/v2/add-email", text: "Back" }) }}
 
-
       <h1 class="nhsuk-heading-xl">Check and add user</h1>
 
       {{ summaryList({
@@ -57,10 +56,10 @@
           },
           {
             key: {
-              text: "Role"
+              text: "Permissions"
             },
             value: {
-              html: data["role"]
+              html: (data["permissions"] | join(', ') | capitalize)
             },
             actions: {
               items: [

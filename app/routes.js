@@ -39,7 +39,7 @@ router.post('/regions/v1/add', (req, res) => {
     },
     type: organisationType,
     leadUsers: [
-      {email: req.session.data.email, status: 'Invited' }
+      { email: req.session.data.email, status: 'Invited' }
     ],
     status: 'Invited'
   })
@@ -301,8 +301,8 @@ router.get('/regions/v1/organisations/:code/activate', (req, res) => {
 // Adding a user
 router.post('/user-admin/v1/add', (req, res) => {
 
-
   req.session.data.users.push({
+    id: Math.floor(Math.random() * 10000000).toString(),
     firstName: req.session.data.firstName,
     lastName: req.session.data.lastName,
     email: req.session.data.email,
@@ -320,15 +320,46 @@ router.post('/user-admin/v1/add', (req, res) => {
 
 });
 
+// Editing a user’s role
+router.get('/user-admin/v1/users/:id/change-role', (req, res) => {
+
+  const id = req.params.id
+
+  const user = req.session.data.users.find((user) => user.id === id )
+
+  res.render('user-admin/v1/change-role', {
+    user
+  });
+
+});
+
+// Updating a user’s role
+router.post('/user-admin/v1/users/:id/update', (req, res) => {
+
+  const id = req.params.id
+
+  const user = req.session.data.users.find((user) => user.id === id )
+
+  user.role = req.body.role;
+
+  // Reset session data
+  req.session.data.role = ""
+
+  res.redirect('/user-admin/v1');
+
+});
+
 // Adding a user - v2
 router.post('/user-admin/v2/add', (req, res) => {
 
+  console.log(req.session.data)
 
   req.session.data.users.push({
+    id: Math.floor(Math.random() * 10000000),
     firstName: req.session.data.firstName,
     lastName: req.session.data.lastName,
     email: req.session.data.email,
-    role: req.session.data.role,
+    permissions: req.session.data.permissions,
     status: 'Invited'
   })
 
@@ -336,7 +367,37 @@ router.post('/user-admin/v2/add', (req, res) => {
   req.session.data.email = '';
   req.session.data.firstName = '';
   req.session.data.lastName = '';
-  req.session.data.role = '';
+  req.session.data.permissions = [];
+
+  res.redirect('/user-admin/v2');
+
+});
+
+
+// Editing a user’s role
+router.get('/user-admin/v2/users/:id/change-permissions', (req, res) => {
+
+  const id = req.params.id
+
+  const user = req.session.data.users.find((user) => user.id === id )
+
+  res.render('user-admin/v2/change-permissions', {
+    user
+  });
+
+});
+
+// Updating a user’s role
+router.post('/user-admin/v2/users/:id/update', (req, res) => {
+
+  const id = req.params.id
+
+  const user = req.session.data.users.find((user) => user.id === id )
+
+  user.permissions = req.session.data.permissions;
+
+  // Reset session data
+  req.session.data.permissions = [];
 
   res.redirect('/user-admin/v2');
 

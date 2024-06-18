@@ -1,10 +1,14 @@
 module.exports = {
   "users": [
     {
+      id: "12345",
       "email": "jane.smith@nhs.net",
       "firstName": "Jane",
       "lastName": "Smith",
-      "role": "Administrator",
+      "role": "Lead administrator",
+      "permissions": [
+        "record vaccinations", "manage vaccines", "manage users"
+      ],
       "status": "Active"
     }
   ],

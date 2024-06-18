@@ -40,16 +40,23 @@
           </tr>
         </thead>
         <tbody class="nhsuk-table__body">
-          {% for user in data.users %}
+          {% for user in (data.users | sort(false, true, "firstName")) %}
             <tr class="nhsuk-table__row">
               <td class="nhsuk-table__cell">
                 {{ user.firstName }} {{ user.lastName }}
               </td>
               <td class="nhsuk-table__cell ">{{ user.email }}</td>
-              <td class="nhsuk-table__cell ">{{ user.role }}</td>
+              <td class="nhsuk-table__cell ">
+                {% if user.permissions %}
+                  {{ user.permissions | join(", ") | capitalize }}
+                {% else %}
+                  None
+                {% endif %}
+              </td>
               <td class="nhsuk-table__cell ">{{ user.status }}</td>
               <td class="nhsuk-table__cell ">
-                <a href="#" class="nhsuk-link">Change permissions</a>
+                <a href="/user-admin/v2/users/{{ user.id }}/change-permissions" class="nhsuk-link">Change permissions</a>
+              </td>
               </td>
             </tr>
           {% endfor %}
