@@ -20,8 +20,6 @@
 
       <form action="/user-admin/v1/users/{{ user.id }}/update" method="post" novalidate="true">
 
-      {{ data.users | dump }}
-
         {{ radios({
           "name": "role",
           "fieldset": {
