@@ -29,7 +29,7 @@
               Email address
             </th>
             <th role="columnheader" class="" scope="col">
-              Role
+              Permission level
             </th>
             <th role="columnheader" class="" scope="col">
               Status
@@ -40,7 +40,7 @@
           </tr>
         </thead>
         <tbody class="nhsuk-table__body">
-          {% for user in data.users %}
+          {% for user in (data.users | sort(false, true, "firstName")) %}
             <tr class="nhsuk-table__row">
               <td class="nhsuk-table__cell">
                 {{ user.firstName }} {{ user.lastName }}
@@ -49,7 +49,7 @@
               <td class="nhsuk-table__cell ">{{ user.role }}</td>
               <td class="nhsuk-table__cell ">{{ user.status }}</td>
               <td class="nhsuk-table__cell ">
-                <a href="#" class="nhsuk-link">Change role</a>
+                <a href="/user-admin/v1/users/{{ user.id }}/change-role" class="nhsuk-link">Change permission level</a>
               </td>
             </tr>
           {% endfor %}

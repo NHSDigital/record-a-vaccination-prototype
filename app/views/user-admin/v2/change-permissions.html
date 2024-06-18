@@ -8,59 +8,31 @@
   {% include "user-admin/v2/_header.html" %}
 {% endblock %}
 
+{% block outerContent %}
+  {{ backLink({ href: "/user-admin/v2", text: "Back", classes: "nhsuk-u-margin-top-4 nhsuk-u-margin-bottom-0" }) }}
+{% endblock %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {{ backLink({ href: "/user-admin/v2", text: "Back" }) }}
+      <h1 class="nhsuks-heading-l">{{ user.firstName }} {{ user.lastName }}</h1>
 
-      <h1 class="nhsuks-heading-xl">Add user</h1>
-
-      <form action="/user-admin/v2/check" method="post" novalidate="true">
-
-        {{ input({
-          "label": {
-            "text": "First name"
-          },
-          "id": "first-name",
-          "name": "firstName",
-          classes: "nhsuk-input--width-20",
-          value: data.firstName
-        }) }}
-
-        {{ input({
-          "label": {
-            "text": "Last name"
-          },
-          "id": "last-name",
-          "name": "lastName",
-          classes: "nhsuk-input--width-20",
-          value: data.lastName
-        }) }}
-
-        {{ input({
-          "label": {
-            "text": "Email address"
-          },
-          "id": "email",
-          "name": "email",
-          type: "email",
-          value: data.email
-        }) }}
+      <form action="/user-admin/v2/users/{{ user.id }}/update" method="post" novalidate="true">
 
         {{ checkboxes({
           "name": "permissions",
           "fieldset": {
             "legend": {
               "text": "Permissions",
-              classes: "nhsuk-fieldset__legend--s"
+              classes: "nhsuk-fieldset__legend--m"
             }
           },
           "items": [
             {
               "value": "record vaccinations",
               "text": "Record vaccinations",
-              checked: (data.permissions | arrayOrStringIncludes('record vaccinations')),
+              checked: (user.permissions | arrayOrStringIncludes('record vaccinations')),
               hint: {
                 text: "Search for patients and add, edit or delete vaccinations"
               }
@@ -68,7 +40,7 @@
             {
               "value": "manage vaccines",
               "text": "Manage vaccines",
-              checked: (data.permissions | arrayOrStringIncludes('manage vaccines')),
+              checked: (user.permissions | arrayOrStringIncludes('manage vaccines')),
               hint: {
                 text: "Add vaccine products and batches. Mark batches as depleted."
               }
@@ -76,13 +48,14 @@
             {
               "value": "manage users",
               "text": "Manage users",
-              checked: (data.permissions | arrayOrStringIncludes('manage users')),
+              checked: (user.permissions | arrayOrStringIncludes('manage users')),
               hint: {
                 text: "Add or delete users and manage permissions"
               }
             }
           ]
         }) }}
+
 
         {{ button({
           "text": "Continue"

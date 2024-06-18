@@ -8,58 +8,31 @@
   {% include "user-admin/v1/_header.html" %}
 {% endblock %}
 
+{% block outerContent %}
+  {{ backLink({ href: "/user-admin/v1", text: "Back", classes: "nhsuk-u-margin-top-4 nhsuk-u-margin-bottom-0" }) }}
+{% endblock %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {{ backLink({ href: "/user-admin/v1", text: "Back" }) }}
+      <h1 class="nhsuks-heading-l">{{ user.firstName }} {{ user.lastName }}</h1>
 
-      <h1 class="nhsuks-heading-xl">Add user</h1>
-
-      <form action="/user-admin/v1/check" method="post" novalidate="true">
-
-        {{ input({
-          "label": {
-            "text": "First name"
-          },
-          "id": "first-name",
-          "name": "firstName",
-          classes: "nhsuk-input--width-20",
-          value: data.firstName
-        }) }}
-
-        {{ input({
-          "label": {
-            "text": "Last name"
-          },
-          "id": "last-name",
-          "name": "lastName",
-          classes: "nhsuk-input--width-20",
-          value: data.lastName
-        }) }}
-
-        {{ input({
-          "label": {
-            "text": "Email address"
-          },
-          "id": "email",
-          "name": "email",
-          type: "email",
-          value: data.email
-        }) }}
+      <form action="/user-admin/v1/users/{{ user.id }}/update" method="post" novalidate="true">
 
         {{ radios({
           "name": "role",
           "fieldset": {
             "legend": {
-              "text": "Permission level"
+              "text": "Permission level",
+              classes: "nhsuk-fieldset__legend--m"
             }
           },
           "items": [
             {
               "value": "Recorder",
               "text": "Recorder",
-              checked: (data.role == "Recorder"),
+              checked: (user.role == "Recorder"),
               "hint": {
                 "text": "Record vaccinations only"
               }
@@ -67,7 +40,7 @@
             {
               "value": "Administrator",
               "text": "Administrator",
-              checked: (data.role == "Administrator"),
+              checked: (user.role == "Administrator"),
               "hint": {
                 "text": "Record vaccinations and manage vaccine products and batches"
               }
@@ -75,7 +48,7 @@
             {
               "value": "Lead administrator",
               "text": "Lead administrator",
-              checked: (data.role == "Lead administrator"),
+              checked: (user.role == "Lead administrator"),
               "hint": {
                 "text": "Record vaccinations, manage vaccine products and batches, and users"
               }

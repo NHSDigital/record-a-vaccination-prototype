@@ -6,9 +6,15 @@
   margin-left: auto;
 }
 
+// Bump the border-bottom size up from 4px to 6px
+// - this gives the 'current' item more visual weight
+.nhsuk-header__navigation-link,
+.nhsuk-header__navigation-link:active {
+  border-bottom-width: 6px;
+}
 
 // A style to highlight the current section the user is in
 .app-header__navigation-link--current {
   text-decoration: none;
-  border-bottom: 6px solid $nhsuk-border-color;
+  border-bottom-color: $nhsuk-border-color;
 }
