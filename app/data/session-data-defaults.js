@@ -1,4 +1,5 @@
 module.exports = {
+  currentUserId: "12345",
   "users": [
     {
       id: "12345",
@@ -9,7 +10,9 @@ module.exports = {
       "permissions": [
         "record vaccinations", "manage vaccines", "manage users"
       ],
-      "status": "Active"
+      "status": "Active",
+      professionalBody: "nurseOrMidwife",
+      professionalBodyNumber: "PH9375895"
     }
   ],
   "nhsTrusts": {
