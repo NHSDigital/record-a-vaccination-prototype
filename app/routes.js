@@ -441,4 +441,40 @@ router.post('/user-onboarding/v1/cis2-method-answer', (req, res) => {
 });
 
 
+
+// Updating user profile
+router.post('/user-profile/v1/update', (req, res) => {
+
+  let currentUser = req.session.data.users.find((user) => user.id === req.session.data.currentUserId);
+
+  if (req.body.firstName) {
+    currentUser.firstName = req.body.firstName;
+  }
+
+  if (req.body.lastName) {
+    currentUser.lastName = req.body.lastName;
+  }
+
+  if (req.body.email) {
+    currentUser.lastName = req.body.email;
+  }
+
+  if (req.body.professionalBody) {
+    currentUser.professionalBody = req.body.professionalBody;
+  }
+
+  if (req.body.doctorNumber) {
+    currentUser.professionalBodyNumber = req.body.doctorNumber;
+  }
+
+  if (req.body.nurseNumber) {
+    currentUser.professionalBodyNumber = req.body.nurseNumber;
+  }
+
+
+  res.redirect('/user-profile/v1');
+
+});
+
+
 module.exports = router;
