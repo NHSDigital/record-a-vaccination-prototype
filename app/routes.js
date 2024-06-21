@@ -64,9 +64,9 @@ router.get('/regions/v1/organisation-details', (req, res) => {
     organisationType = 'Community Pharmacy';
   } else {
     organisationName = req.session.data.nhsTrusts[organisationCode];
-    organisationLine1 = '73 Roman Rd';
-    organisationTown = 'Leeds';
-    organisationPostcode = 'LS2 5ZN';
+    organisationLine1 = 'Cobbett House, Oxford Road';
+    organisationTown = 'Manchester';
+    organisationPostcode = 'M13 9WL';
     organisationType = 'NHS Trust';
 
   }
@@ -100,9 +100,9 @@ router.get('/regions/v1/add-email', (req, res) => {
     organisationType = 'Community Pharmacy';
   } else {
     organisationName = req.session.data.nhsTrusts[organisationCode];
-    organisationLine1 = '73 Roman Rd';
-    organisationTown = 'Leeds';
-    organisationPostcode = 'LS2 5ZN';
+    organisationLine1 = 'Cobbett House, Oxford Road';
+    organisationTown = 'Manchester';
+    organisationPostcode = 'M13 9WL';
     organisationType = 'NHS Trust';
 
   }
