@@ -21,9 +21,9 @@ router.post('/regions/v1/add', (req, res) => {
     organisationType = 'Community Pharmacy';
   } else {
     organisationName = req.session.data.nhsTrusts[organisationCode];
-    organisationLine1 = '73 Roman Rd';
-    organisationTown = 'Leeds';
-    organisationPostcode = 'LS2 5ZN';
+    organisationLine1 = 'Cobbett House, Oxford Road';
+    organisationTown = 'Manchester';
+    organisationPostcode = 'M13 9WL';
     organisationType = 'NHS Trust';
 
   }
