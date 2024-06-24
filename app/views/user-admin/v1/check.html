@@ -76,7 +76,7 @@
       }) }}
 
 
-      <p>{{ data.firstName }} will be sent this welcome email:</p>
+      <p>{{ data.firstName }} will be sent this welcome email with information about activating an account:</p>
 
       <div class="app-email-preview">
         <p>From: ravs@england.nhs.uk<br>
@@ -111,7 +111,6 @@
 
       </div>
 
-      <p>They will also receive an email from Okta to activate their account.</p>
 
       <form action="/user-admin/v1/add" method="post">
         {{ button({
