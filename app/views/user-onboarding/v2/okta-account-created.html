@@ -1,0 +1,101 @@
+{% extends 'layout.html' %}
+
+{% set signedIn = true %}
+
+{% block pageTitle %}
+  Account created
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Account created</h1>
+
+      <p>Your account for NHS Record a vaccination has been set up using Okta.</p>
+
+      <p>We need some additional information before you continue.</p>
+
+      {% set nurseNumberHtml %}
+        {{ input({
+          "label": {
+            "text": "Nursing and Midwifery Council (NMC) registration number",
+            classes: "nhsuk-label--s nhsuk-u-margin-bottom-1 nhsuk-u-margin-top-3"
+          },
+          "name": "nurseNumber"
+        }) }}
+      {% endset %}
+
+      {% set doctorNumberHtml %}
+        {{ input({
+          "label": {
+            "text": "General Medical Council (NMC) registration number",
+            classes: "nhsuk-label--s nhsuk-u-margin-bottom-1 nhsuk-u-margin-top-3"
+          },
+          "name": "doctorNumber"
+        }) }}
+      {% endset %}
+
+      {% set pharmacistNumberHtml %}
+        {{ input({
+          "label": {
+            "text": "General Pharmaceutical Council, registration number",
+            classes: "nhsuk-label--s nhsuk-u-margin-bottom-1 nhsuk-u-margin-top-3"
+          },
+          "name": "doctorNumber"
+        }) }}
+      {% endset %}
+
+      {{ radios({
+        "name": "professionalRole",
+        "fieldset": {
+          "legend": {
+            "text": "Are you a registered health professional?",
+            "classes": "nhsuk-fieldset__legend--m"
+          }
+        },
+        "items": [
+          {
+            "value": "nurseOrMidwife",
+            "text": "Nurse or midwife",
+            conditional: {
+              html: nurseNumberHtml
+            }
+          },
+          {
+            "value": "doctor",
+            "text": "Doctor",
+            conditional: {
+              html: doctorNumberHtml
+            }
+          },
+          {
+            "value": "doctor",
+            "text": "Pharmacist",
+            conditional: {
+              html: pharmacistNumberHtml
+            }
+          },
+          {
+            "divider": "or"
+          },
+          {
+            "value": "nonClinical",
+            "text": "Not a registered clinician",
+            hint: {
+              text: "You can still use the service, but will have to select a registered clinician responsible for each vaccination"
+            }
+          }
+        ]
+      }) }}
+
+      {{ button({
+        text: "Continue",
+        href: "/user-profile/v1"
+      }) }}
+
+    </div>
+  </div>
+
+
+{% endblock %}
