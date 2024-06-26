@@ -1,0 +1,95 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Add user
+{% endblock %}
+
+{% block header %}
+  {% include "user-admin/v4/_header.html" %}
+{% endblock %}
+
+{% block outerContent %}
+  {{ backLink({ href: "/user-admin/v4", text: "Back", classes: "nhsuk-u-margin-top-4 nhsuk-u-margin-bottom-0" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuks-heading-l">{{ user.firstName }} {{ user.lastName }}</h1>
+
+      <form action="/user-admin/v4/users/{{ user.id }}/update" method="post" novalidate="true">
+
+        {{ radios({
+          "name": "clinician",
+          "fieldset": {
+            "legend": {
+              "text": "Are they a clinician?"
+            }
+          },
+          hint: {
+            text: "Only a registered clinician can assess patients for vaccines"
+          },
+          "items": [
+            {
+              "value": "yes",
+              "text": "Yes",
+              checked: (user.clinician == "yes")
+            },
+            {
+              "value": "no",
+              "text": "No",
+              checked: (user.clinician == "no")
+            }
+          ]
+        }) }}        
+              
+
+        {{ radios({
+          "name": "role",
+          "fieldset": {
+            "legend": {
+              "text": "Permission level",
+              classes: "nhsuk-fieldset__legend--m"
+            }
+          },
+          "items": [
+            {
+              "value": "Recorder",
+              "text": "Recorder",
+              checked: (user.role == "Recorder"),
+              "hint": {
+                "text": "Record vaccinations only"
+              }
+            },
+            {
+              "value": "Administrator",
+              "text": "Administrator",
+              checked: (user.role == "Administrator"),
+              "hint": {
+                "text": "Record vaccinations and manage vaccine products and batches"
+              }
+            },
+            {
+              "value": "Lead administrator",
+              "text": "Lead administrator",
+              checked: (user.role == "Lead administrator"),
+              "hint": {
+                "text": "Record vaccinations, manage vaccine products and batches, and users"
+              }
+            }
+          ]
+        }) }}
+
+
+        {{ button({
+          "text": "Continue"
+      }) }}
+      </form>
+
+
+    </div>
+  </div>
+
+
+{% endblock %}

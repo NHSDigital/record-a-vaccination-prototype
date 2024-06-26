@@ -5,18 +5,18 @@
 {% endblock %}
 
 {% block header %}
-  {% include "user-admin/v3/_header.html" %}
+  {% include "user-admin/v4/_header.html" %}
 {% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {{ backLink({ href: "/user-admin/v3", text: "Back" }) }}
+      {{ backLink({ href: "/user-admin/v4", text: "Back" }) }}
 
       <h1 class="nhsuks-heading-xl">Add user</h1>
 
-      <form action="/user-admin/v3/check" method="post" novalidate="true">
+      <form action="/user-admin/v4/check" method="post" novalidate="true">
 
         {{ input({
           "label": {
@@ -47,73 +47,31 @@
           type: "email",
           value: data.email
         }) }}
-        
-        
-        {% set otherClincianTypes = ["chiropodist", "podiatrist", "dietician", "occupational therapist", "operating department practitioner", "orthoptist", "orthotist", "prosthetist", "paramedic", "physiotherapist", "radiographer", "speech and language therapist", "dental hygienist", "dental therapist","optometrists"]  %}
-        
-        {% set otherItems = [] %}
-        
-        {% for otherType in (otherClincianTypes | sort) %}
-          {% set otherItems = (otherItems.push({
-          "value": otherType, text: otherType
-          }), otherItems) %}
-        {% endfor %}
-        
-      {% set otherTypeHtml %}
-        {{ select({
-          label: {
-            text: "Clinician type"
-          },
-          "items": otherItems
-        }) }}
-      {% endset %}
-        
-      {{ radios({
-        "name": "professionalBody",
-        "fieldset": {
-          "legend": {
-            "text": "Clinical role"
-          }
-        },
-        hint: {
-          text: "Only registered clinicians can assess patients"
-        },
-        "items": [
-          {
-            "value": "doctor",
-            "text": "Doctor"
-          },
-          {
-            "value": "midwife",
-            "text": "Midwife"
-          },      
-          {
-            "value": "nurse",
-            "text": "Nurse"
-          },
-          {
-            "value": "pharmacist",
-            "text": "Pharmacist"
-          },
-          {
-            "value": "podiatrist",
-            "text": "Another type of clinician",
-            conditional: {
-              html: otherTypeHtml
+
+        {{ radios({
+          "name": "clinician",
+          "fieldset": {
+            "legend": {
+              "text": "Are they a clinician?"
             }
           },
-          {
-            "divider": "or"
+          hint: {
+            text: "Only a registered clinician can assess patients for vaccines"
           },
-          {
-            "value": "nonClinical",
-            "text": "Not a registered clinician",
-            hint: {
-              text: "They will have to select a registered clinician responsible for assessing each vaccination"
+          "items": [
+            {
+              "value": "yes",
+              "text": "Yes",
+              checked: (data.clinician == "yes")
+            },
+            {
+              "value": "no",
+              "text": "No",
+              checked: (data.clinician == "no")
             }
-          }
-        ]
-      }) }}        
+          ]
+        }) }}        
+              
 
         {{ radios({
           "name": "role",

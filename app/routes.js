@@ -461,6 +461,64 @@ router.post('/user-admin/v3/users/:id/update', (req, res) => {
 });
 
 
+// Adding a user - V4
+router.post('/user-admin/v4/add', (req, res) => {
+
+
+  req.session.data.users.push({
+    id: Math.floor(Math.random() * 10000000).toString(),
+    firstName: req.session.data.firstName,
+    lastName: req.session.data.lastName,
+    email: req.session.data.email,
+    role: req.session.data.role,
+    clinical: req.session.data.clinical,
+    status: 'Invited'
+  })
+
+  // Reset data
+  req.session.data.email = '';
+  req.session.data.firstName = '';
+  req.session.data.lastName = '';
+  req.session.data.role = '';
+  req.session.data.clinical = '';
+
+  res.redirect('/user-admin/v4');
+});
+
+
+// Editing a user’s role
+router.get('/user-admin/v4/users/:id/change-role', (req, res) => {
+
+  const id = req.params.id
+
+  const user = req.session.data.users.find((user) => user.id === id )
+
+  res.render('user-admin/v4/change', {
+    user
+  });
+
+});
+
+// Updating a user’s role
+router.post('/user-admin/v4/users/:id/update', (req, res) => {
+
+  const id = req.params.id
+
+  const user = req.session.data.users.find((user) => user.id === id )
+
+  user.role = req.body.role;
+  user.clinician = req.body.clinician;
+
+  // Reset session data
+  req.session.data.role = ""
+  req.session.data.clinician = ""
+
+  res.redirect('/user-admin/v4');
+
+});
+
+
+
 
 // Answering whether the user has a Care Identity account or not
 router.post('/user-onboarding/v1/cis2-answer', (req, res) => {
