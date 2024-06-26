@@ -14,9 +14,37 @@
 
       {{ backLink({ href: "/user-admin/v4", text: "Back" }) }}
 
+      {% if data.showErrors == "true" %}
+        {{ errorSummary({
+          "titleText": "There is a problem",
+          "errorList": [
+            {
+              "text": "Enter first name",
+              "href": "#first-name"
+            } if (data.firstName == ''),
+            {
+              "text": "Enter last name",
+              "href": "#last-name"
+            } if (data.lastName == ''),
+            {
+              "text": "Enter email address",
+              "href": "#email"
+            } if (data.email == ''),
+            {
+              "text": "Select if they are a clinician",
+              "href": "#clinician"
+            } if (data.clinician == ''),
+            {
+              "text": "Select permission level",
+              "href": "#role"
+            } if (data.role == '')
+          ]
+        }) }}      
+      {% endif %}
+
       <h1 class="nhsuks-heading-xl">Add user</h1>
 
-      <form action="/user-admin/v4/check" method="post" novalidate="true">
+      <form action="/user-admin/v4/check-answers" method="post" novalidate="true">
 
         {{ input({
           "label": {
@@ -25,7 +53,10 @@
           "id": "first-name",
           "name": "firstName",
           classes: "nhsuk-input--width-20",
-          value: data.firstName
+          value: data.firstName,
+          "errorMessage": {
+            "text": "Enter first name"
+          } if (data.showErrors == "true" and data.firstName == '')
         }) }}
 
         {{ input({
@@ -35,7 +66,10 @@
           "id": "last-name",
           "name": "lastName",
           classes: "nhsuk-input--width-20",
-          value: data.lastName
+          value: data.lastName,
+          "errorMessage": {
+            "text": "Enter last name"
+          } if (data.showErrors == "true" and data.lastName == '')
         }) }}
 
         {{ input({
@@ -45,7 +79,10 @@
           "id": "email",
           "name": "email",
           type: "email",
-          value: data.email
+          value: data.email,
+          "errorMessage": {
+            "text": "Enter email address"
+          } if (data.showErrors == "true" and data.email == '')
         }) }}
 
         {{ radios({
@@ -62,6 +99,7 @@
             {
               "value": "yes",
               "text": "Yes",
+              id: "clinician",
               checked: (data.clinician == "yes")
             },
             {
@@ -69,7 +107,10 @@
               "text": "No",
               checked: (data.clinician == "no")
             }
-          ]
+          ],
+          "errorMessage": {
+            "text": "Select if they are a clinician"
+          } if (data.showErrors == "true" and data.clinician == '')
         }) }}        
               
 
@@ -85,6 +126,7 @@
               "value": "Recorder",
               "text": "Recorder",
               checked: (data.role == "Recorder"),
+              id: "role",
               "hint": {
                 "text": "Record vaccinations only"
               }
@@ -105,7 +147,10 @@
                 "text": "Record vaccinations, manage vaccine products and batches, and users"
               }
             }
-          ]
+          ],
+          "errorMessage": {
+            "text": "Select permission level"
+          } if (data.showErrors == "true" and data.role == '')
         }) }}
 
 

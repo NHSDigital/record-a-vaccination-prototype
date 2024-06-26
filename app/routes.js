@@ -460,10 +460,28 @@ router.post('/user-admin/v3/users/:id/update', (req, res) => {
 
 });
 
+router.post('/user-admin/v4/check-answers', (req, res) => {
+  
+  const firstName = req.session.data.firstName;
+  const lastName = req.session.data.lastName;
+  const email = req.session.data.email;
+  const role = req.session.data.role;
+  const clinician = req.session.data.clinician;
+
+
+  if (firstName && firstName != '' && lastName && lastName != '' && email && email != '' && role && role != '' && clinician && clinician != '') {
+    res.redirect('/user-admin/v4/check');  
+    req.session.data.showErrors = '';      
+  } else {
+    res.redirect('/user-admin/v4/add-user?showErrors=true');        
+  }  
+  
+});
+
+
 
 // Adding a user - V4
 router.post('/user-admin/v4/add', (req, res) => {
-
 
   req.session.data.users.push({
     id: Math.floor(Math.random() * 10000000).toString(),
@@ -471,7 +489,7 @@ router.post('/user-admin/v4/add', (req, res) => {
     lastName: req.session.data.lastName,
     email: req.session.data.email,
     role: req.session.data.role,
-    clinical: req.session.data.clinical,
+    clinician: req.session.data.clinician,
     status: 'Invited'
   })
 
@@ -480,9 +498,11 @@ router.post('/user-admin/v4/add', (req, res) => {
   req.session.data.firstName = '';
   req.session.data.lastName = '';
   req.session.data.role = '';
-  req.session.data.clinical = '';
+  req.session.data.clinician = '';
+  req.session.data.showErrors = '';
 
-  res.redirect('/user-admin/v4');
+  res.redirect('/user-admin/v4');      
+
 });
 
 
