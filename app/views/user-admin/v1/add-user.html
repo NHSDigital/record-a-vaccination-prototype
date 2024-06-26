@@ -47,78 +47,7 @@
           type: "email",
           value: data.email
         }) }}
-        
-<!-- chiropodists/podiatrists, dieticians, occupational therapists, operating department practitioners, orthoptists, orthotists/prosthetists, paramedics, physiotherapists, radiographers and speech and language therapists         -->
-        
-      {% set otherTypeHtml %}
-        {{ select({
-          label: {
-            text: "Clinician type"
-          },
-          "items": [
-            {
-              "value": 1,
-              "text": "Chiropodist"
-            },
-            {
-              "value": 2,
-              "text": "Podiatrist"
-            },
-            {
-              "value": 3,
-              "text": "Dieticians"
-            }
-          ]
-        }) }}
-      {% endset %}
-        
-      {{ radios({
-        "name": "professionalRole",
-        "fieldset": {
-          "legend": {
-            "text": "Clinical role"
-          }
-        },
-        hint: {
-          text: "Only registered clinicians can assess patients"
-        },
-        "items": [
-          {
-            "value": "doctor",
-            "text": "Doctor"
-          },
-          {
-            "value": "midwife",
-            "text": "Midwife"
-          },      
-          {
-            "value": "nurseOrMidwife",
-            "text": "Nurse"
-          },
-          {
-            "value": "pharmacist",
-            "text": "Pharmacist"
-          },
-          {
-            "value": "podiatrist",
-            "text": "Another type of clinican",
-            conditional: {
-              html: otherTypeHtml
-            }
-          },
-          {
-            "divider": "or"
-          },
-          {
-            "value": "nonClinical",
-            "text": "Not a registered clinician",
-            hint: {
-              text: "They will have to select a registered clinician responsible for each vaccination"
-            }
-          }
-        ]
-      }) }}        
-
+       
         {{ radios({
           "name": "role",
           "fieldset": {
