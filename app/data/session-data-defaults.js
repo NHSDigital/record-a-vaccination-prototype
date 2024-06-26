@@ -11,6 +11,7 @@ module.exports = {
         "record vaccinations", "manage vaccines", "manage users"
       ],
       "status": "Active",
+      clinician: "yes",
       professionalBody: "nurse",
       professionalBodyNumber: "PH9375895"
     }
