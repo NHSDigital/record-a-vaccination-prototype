@@ -5,18 +5,18 @@
 {% endblock %}
 
 {% block header %}
-  {% include "user-admin/v1/_header.html" %}
+  {% include "user-admin/v3/_header.html" %}
 {% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {{ backLink({ href: "/user-admin/v1", text: "Back" }) }}
+      {{ backLink({ href: "/user-admin/v3", text: "Back" }) }}
 
       <h1 class="nhsuks-heading-xl">Add user</h1>
 
-      <form action="/user-admin/v1/check" method="post" novalidate="true">
+      <form action="/user-admin/v3/check" method="post" novalidate="true">
 
         {{ input({
           "label": {
@@ -48,32 +48,28 @@
           value: data.email
         }) }}
         
-<!-- chiropodists/podiatrists, dieticians, occupational therapists, operating department practitioners, orthoptists, orthotists/prosthetists, paramedics, physiotherapists, radiographers and speech and language therapists         -->
+        
+        {% set otherClincianTypes = ["chiropodist", "podiatrist", "dietician", "occupational therapist", "operating department practitioner", "orthoptist", "orthotist", "prosthetist", "paramedic", "physiotherapist", "radiographer", "speech and language therapist", "dental hygienist", "dental therapist","optometrists"]  %}
+        
+        {% set otherItems = [] %}
+        
+        {% for otherType in (otherClincianTypes | sort) %}
+          {% set otherItems = (otherItems.push({
+          "value": otherType, text: otherType
+          }), otherItems) %}
+        {% endfor %}
         
       {% set otherTypeHtml %}
         {{ select({
           label: {
             text: "Clinician type"
           },
-          "items": [
-            {
-              "value": 1,
-              "text": "Chiropodist"
-            },
-            {
-              "value": 2,
-              "text": "Podiatrist"
-            },
-            {
-              "value": 3,
-              "text": "Dieticians"
-            }
-          ]
+          "items": otherItems
         }) }}
       {% endset %}
         
       {{ radios({
-        "name": "professionalRole",
+        "name": "professionalBody",
         "fieldset": {
           "legend": {
             "text": "Clinical role"
@@ -92,7 +88,7 @@
             "text": "Midwife"
           },      
           {
-            "value": "nurseOrMidwife",
+            "value": "nurse",
             "text": "Nurse"
           },
           {
@@ -113,7 +109,7 @@
             "value": "nonClinical",
             "text": "Not a registered clinician",
             hint: {
-              text: "They will have to select a registered clinician responsible for each vaccination"
+              text: "They will have to select a registered clinician responsible for assessing each vaccination"
             }
           }
         ]

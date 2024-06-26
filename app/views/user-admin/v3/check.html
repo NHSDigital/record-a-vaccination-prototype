@@ -1,0 +1,141 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block header %}
+  {% include "user-admin/v3/_header.html" %}
+{% endblock %}
+
+{% set organisation = {name: data.nhsTrusts[data.organisationCode]} %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {{ backLink({ href: "/user-admin/v3/add-email", text: "Back" }) }}
+
+
+      <h1 class="nhsuk-heading-xl">Check and add user</h1>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              text: data.firstName + " " + data.lastName
+            },
+            actions: {
+              items: [
+                {
+                  href: "/user-admin/v3/add-user",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Email address"
+            },
+            value: {
+              html: data["email"]
+            },
+            actions: {
+              items: [
+                {
+                  href: "/user-admin/v3/add-user",
+                  text: "Change",
+                  visuallyHiddenText: "email address"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Clinical role"
+            },
+            value: {
+              html: (data["professionalBody"] | capitalize)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/user-admin/v3/add-user",
+                  text: "Change",
+                  visuallyHiddenText: "clinical role"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Permission level"
+            },
+            value: {
+              html: data["role"]
+            },
+            actions: {
+              items: [
+                {
+                  href: "/user-admin/v3/add-user",
+                  text: "Change",
+                  visuallyHiddenText: "role"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+
+      <p>{{ data.firstName }} will be sent this welcome email with information about activating an account:</p>
+
+      <div class="app-email-preview">
+        <p>From: ravs@england.nhs.uk<br>
+        Subject: RAVS (Record a vaccination service) Get started
+        </p>
+        <hr>
+
+        <p>Dear RAVS users,</p>
+
+        <p><b>Get started</b></p>
+
+        <p>To sign into the NHS Record a Vaccination Service (RAVS), we’ve created an OKTA account for you. Please follow the steps below to securely sign into the service and start recording vaccinations. </p>
+
+        <p><b>Activate your OKTA account</b></p>
+        <p>You’ll shortly receive a ‘Welcome to OKTA’ email (from noreply@okta.com) to confirm your identity. Please follow the link within the email, to activate your account. Once you do so, you’ll be automatically signed into RAVS. If you cannot find the activation email, please check your spam or junk.</p>
+
+        <p><b>Access the service</b></p>
+        <p>You can log into RAVS using the link: www.ravs.england.nhs.uk. We recommend bookmarking this link so it’s easily accessible. You can also access it through your OKTA account by clicking on the RAVS (PROD) app.</p>
+
+        <p><b>Get help and guidance</b></p>
+        <p>If you need help or want to use a live demo of our service, visit guide.ravs.england.nhs.uk. We recommend bookmarking this link so it’s easily accessible.</p>
+
+        <p><b>Contact our service desk</b></p>
+
+        <p>Email: ravs.support@england.nhs.uk</p>
+        <p>Telephone: 0121 611 0187 (select option 3 for the RAVS service desk)<br>Monday to Friday: 8am to 6pm. Weekends 8am to 4pm</p>
+
+        <p>Kind Regards,</p>
+
+        <p>The RAVS support team</p>
+
+
+      </div>
+
+
+      <form action="/user-admin/v3/add" method="post">
+        {{ button({
+          "text": "Confirm and send"
+        }) }}
+      </form>
+
+
+    </div>
+  </div>
+{% endblock %}
