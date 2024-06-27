@@ -8,12 +8,17 @@
   {% include "user-admin/v4/_header.html" %}
 {% endblock %}
 
+{% block outerContent %}
+  {{ backLink({ 
+    href: "/user-admin/v4", 
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
+{% endblock %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-
-      {{ backLink({ href: "/user-admin/v4", text: "Back" }) }}
-
       {% if data.showErrors == "true" %}
         {{ errorSummary({
           "titleText": "There is a problem",
@@ -27,7 +32,7 @@
               "href": "#last-name"
             } if (data.lastName == ''),
             {
-              "text": "Enter email address",
+              "text": "Enter NHS email address",
               "href": "#email"
             } if (data.email == ''),
             {
@@ -74,7 +79,7 @@
 
         {{ input({
           "label": {
-            "text": "Email address"
+            "text": "NHS email address"
           },
           "id": "email",
           "name": "email",

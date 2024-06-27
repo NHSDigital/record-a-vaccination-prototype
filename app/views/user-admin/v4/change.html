@@ -9,7 +9,11 @@
 {% endblock %}
 
 {% block outerContent %}
-  {{ backLink({ href: "/user-admin/v4", text: "Back", classes: "nhsuk-u-margin-top-4 nhsuk-u-margin-bottom-0" }) }}
+  {{ backLink({
+    href: "/user-admin/v4", 
+    text: "Back", 
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
 {% endblock %}
 
 {% block content %}

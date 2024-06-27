@@ -10,11 +10,18 @@
 
 {% set organisation = {name: data.nhsTrusts[data.organisationCode]} %}
 
+{% block outerContent %}
+  {{ backLink({
+    href: "/user-admin/v4/add-user", 
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
+{% endblock %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {{ backLink({ href: "/user-admin/v4/add-email", text: "Back" }) }}
 
 
       <h1 class="nhsuk-heading-xl">Check and add user</h1>

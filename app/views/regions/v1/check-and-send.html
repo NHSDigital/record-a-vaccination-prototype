@@ -6,11 +6,18 @@
 
 {% set organisation = {name: organisation.name } %}
 
+{% block outerContent %}
+  {{ backLink({
+    href: "/regions/v1/add-email",
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
+{% endblock %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {{ backLink({ href: "/regions/v1/add-email", text: "Back" }) }}
 
 
       <h1 class="nhsuk-heading-xl">Check and send</h1>
