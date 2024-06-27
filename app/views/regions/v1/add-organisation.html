@@ -4,11 +4,18 @@
   East of England
 {% endblock %}
 
+{% block outerContent %}
+  {{ backLink({ 
+    href: "/regions/v1", 
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
+{% endblock %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {{ backLink({ href: "/regions/v1", text: "Back" }) }}
 
       <h1 class="nhsuk-heading-xl">Find an organisation to invite</h1>
 
@@ -17,7 +24,7 @@
       <div class="nhsuk-form-group">
         <h1 class="nhsuk-label-wrapper">
           <label class="nhsuk-label nhsuk-label--m nhsuk-u-margin-bottom-1" for="organisationCode">
-            NHS organisation
+            NHS organisation or community pharmacy
           </label>
         </h1>
         <div class="nhsuk-hint" id="organisationName-hint">
