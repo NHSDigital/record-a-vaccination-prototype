@@ -612,5 +612,22 @@ router.post('/user-profile/v1/update', (req, res) => {
 
 });
 
+// Updating user profile v2
+router.post('/user-profile/v2/update', (req, res) => {
+
+  let currentUser = req.session.data.users.find((user) => user.id === req.session.data.currentUserId);
+
+  if (req.body.firstName) {
+    currentUser.firstName = req.body.firstName;
+  }
+
+  if (req.body.lastName) {
+    currentUser.lastName = req.body.lastName;
+  }
+
+  res.redirect('/user-profile/v2');
+
+});
+
 
 module.exports = router;

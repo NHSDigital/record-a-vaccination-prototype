@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Manage users and permissions
+{% endblock %}
+
+{% block header %}
+  {% include "user-profile/v2/_header.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-xl">Your profile</h1>
+      
+        {% set permissionLevelHtml %}
+          <div>{{ currentUser.role }}</div>
+          <p class="app-summary__explanation">Can record vaccinations, manage vaccine products and batches, and users</p>
+        {% endset %}
+
+        {{ summaryList({
+          rows: [
+            {
+              key: {
+                text: "Name"
+              },
+              value: {
+                text: currentUser.firstName + " " + currentUser.lastName
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/user-profile/v2/name",
+                    text: "Change",
+                    visuallyHiddenText: "name"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Email address"
+              },
+              value: {
+                text: currentUser.email
+              },
+              actions: {
+                items: [
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Permission level"
+              },
+              value: {
+                html: permissionLevelHtml
+              },
+              actions: {
+                items: [
+                  {
+                  }
+                ]
+              }
+            }
+          ]
+        }) }}
+
+      <p>If you need change your email address, please <a href="#">contact support</a>.</p>
+
+
+    </div>
+  </div>
+
+
+{% endblock %}
