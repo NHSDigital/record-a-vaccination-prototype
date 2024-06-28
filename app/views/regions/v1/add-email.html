@@ -24,10 +24,30 @@
       <p>A lead user is responsible for adding their organisation’s users and vaccination sites.</p>
 
       <form action="/regions/v1/check-and-send" method="post" novalidate>
+        
         {{ input({
           "label": {
-            "text": "Email address",
-            classes: "nhsuk-label--m"
+            "text": "First name"
+          },
+          "id": "first-name",
+          "name": "firstName",
+          classes: "nhsuk-input--width-20",
+          value: data.firstName
+        }) }}
+
+        {{ input({
+          "label": {
+            "text": "Last name"
+          },
+          "id": "last-name",
+          "name": "lastName",
+          classes: "nhsuk-input--width-20",
+          value: data.lastName
+        }) }}        
+        
+        {{ input({
+          "label": {
+            "text": "NHS email address"
           },
           value: data.email,
           type: "email",

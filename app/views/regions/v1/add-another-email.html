@@ -23,10 +23,30 @@
       <p>They will receive further instructions on setting up their NHS Record a vaccination account.</p>
 
       <form action="/regions/v1/organisations/{{ organisation.code }}/add-email-check" method="post" novalidate>
+        
         {{ input({
           "label": {
-            "text": "Email address",
-            classes: "nhsuk-label--m"
+            "text": "First name"
+          },
+          "id": "first-name",
+          "name": "firstName",
+          classes: "nhsuk-input--width-20",
+          value: data.firstName
+        }) }}
+
+        {{ input({
+          "label": {
+            "text": "Last name"
+          },
+          "id": "last-name",
+          "name": "lastName",
+          classes: "nhsuk-input--width-20",
+          value: data.lastName
+        }) }}
+        
+        {{ input({
+          "label": {
+            "text": "NHS email address"
           },
           value: data.email,
           type: "email",
