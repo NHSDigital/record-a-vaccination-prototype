@@ -47,6 +47,9 @@
           <thead role="rowgroup" class="nhsuk-table__head">
             <tr role="row">
               <th role="columnheader" class="" scope="col">
+                Name
+              </th>
+              <th role="columnheader" class="" scope="col">
                 Email address
               </th>
               <th role="columnheader" class="" scope="col">
@@ -60,6 +63,9 @@
           <tbody class="nhsuk-table__body">
             {% for leadUser in organisation.leadUsers %}
               <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                  {{ leadUser.firstName }} {{ leadUser.lastName }}
+                </td>
                 <td class="nhsuk-table__cell">
                   {{ leadUser.email }}
                 </td>

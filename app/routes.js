@@ -39,7 +39,12 @@ router.post('/regions/v1/add', (req, res) => {
     },
     type: organisationType,
     leadUsers: [
-      { email: req.session.data.email, status: 'Invited' }
+      { 
+        email: req.session.data.email, 
+        status: 'Invited',
+        firstName: req.session.data.firstName,
+        lastName: req.session.data.lastName
+      }
     ],
     status: 'Invited'
   })
@@ -47,6 +52,8 @@ router.post('/regions/v1/add', (req, res) => {
   // Remove data from adding organisation flow
   req.session.data.email = '';
   req.session.data.organisationCode = '';
+  req.session.data.firstName = '';
+  req.session.data.lastName = '';
 
   res.redirect('/regions/v1/organisations/' + organisationCode);
 
@@ -165,10 +172,18 @@ router.post('/regions/v1/organisations/:code/add', (req, res) => {
   const organisationsAdded = req.session.data.organisationsAdded || []
   const organisation = organisationsAdded.find((org) => org.code === req.params.code)
 
-  organisation.leadUsers.push({ email: req.session.data.email, status: 'Invited' })
+  organisation.leadUsers.push({ 
+    email: req.session.data.email, 
+    status: 'Invited',
+    firstName: req.session.data.firstName,
+    lastName: req.session.data.lastName
+  })
 
-  // Remove data from adding organisation flow
+  // Reset data
   req.session.data.email = '';
+  req.session.data.firstName = '';
+  req.session.data.lastName = '';
+  
 
   res.redirect('/regions/v1/organisations/' + organisation.code);
 
@@ -227,7 +242,12 @@ router.get('/regions/v1/setup-test', (req, res) => {
     type: 'NHS Trust',
     status: 'Awaiting contract',
     leadUsers: [
-      {email: 'sarah.jane@mk.nhs.net', status: 'Active'}
+      {
+        email: 'sarah.jane@mk.nhs.net', 
+        status: 'Active',
+        firstName: 'Sarah',
+        lastName: 'Jane'
+      }
     ]
   })
 
@@ -243,7 +263,12 @@ router.get('/regions/v1/setup-test', (req, res) => {
     type: 'NHS Trust',
     status: 'Awaiting contract',
     leadUsers: [
-      {email: 'richard.jones@mid-essex.nhs.net', status: 'Active'}
+      {
+        firstName: 'Richard',
+        lastName: 'Jones',
+        email: 'richard.jones@mid-essex.nhs.net', 
+        status: 'Active'
+      }
     ]
   })
 
@@ -259,7 +284,12 @@ router.get('/regions/v1/setup-test', (req, res) => {
     type: 'Community Pharmacy',
     status: 'Awaiting contract',
     leadUsers: [
-      {email: 'sara.pickford@pickford-pharmacy.com', status: 'Active'}
+      {
+        firstName: 'Sara',
+        lastName: 'Pickford',
+        email: 'sara.pickford@pickford-pharmacy.com', 
+        status: 'Active'
+      }
     ]
   })
 
