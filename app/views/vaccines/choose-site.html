@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Choose site
+{% endblock %}
+
+
+{% block header %}
+  {% include "vaccines/_header.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+
+{{ backLink({ href: "/vaccines/index", text: "Back" }) }}
+
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+    
+    
+          <h1 class="nhsuk-heading-xl">Choose site</h1>
+    
+          <form action="/regions/v1/organisation-details" method="post">
+    
+          <div class="nhsuk-form-group">
+            <h1 class="nhsuk-label-wrapper">
+              <label class="nhsuk-label nhsuk-label--m nhsuk-u-margin-bottom-1" for="organisationCode">
+            Select a site where you’d like to add a vaccine
+              </label>
+            </h1>
+            <div class="nhsuk-hint" id="organisationName-hint">
+              Search by name or ODS code
+            </div>
+            <select class="nhsuk-select" id="organisationCode" name="organisationCode"
+              data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+              <option selected value=""></option>
+    
+              {% for code, name in data.nhsTrusts %}
+                <option value="{{ code }}">{{ name }} ({{code }})</option>
+              {% endfor %}
+              {% for code, data in data.nhsPharmacies %}
+                <option value="{{ code }}">{{ data.name }}, {{ data.address }}, {{ data.postcode | upper }} ({{code }})</option>
+              {% endfor %}
+            </select>
+          </div>
+    
+            {{ button({
+              "text": "Continue"
+            }) }}
+          </form>
+    
+    
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+{% endblock %}
+

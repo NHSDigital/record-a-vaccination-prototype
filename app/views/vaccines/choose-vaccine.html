@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Choose vaccine
+{% endblock %}
+
+
+{% block header %}
+  {% include "vaccines/_header.html" %}
+{% endblock %}
+
+
+
+
+
+{% block content %}
+   
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+    
+          {{ backLink({ href: "/vaccines/choose-site", text: "Back" }) }}
+    
+          <h1 class="nhsuks-heading-xl">Choose vaccine</h1>
+          <p class="nhsuk-body-l">Add and edit your vaccines.</p>
+    
+          <form action="/user-admin/v1/check" method="post" novalidate="true">
+    
+        
+            <div class="nhsuk-form-group">
+
+                <fieldset class="nhsuk-fieldset">
+                  <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+                  </legend>
+              
+                  <div class="nhsuk-radios">
+              
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="example-1" name="example" type="radio" value="yes">
+                      <label class="nhsuk-label nhsuk-radios__label" for="example-1">
+                        COVID-19
+                      </label>
+                    </div>
+              
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="example-2" name="example" type="radio" value="no">
+                      <label class="nhsuk-label nhsuk-radios__label" for="example-2">
+                        Flu
+                      </label>
+                    </div>
+              
+                  </div>
+                </fieldset>
+              
+              </div>
+    
+    
+            {{ button({
+              "text": "Continue"
+          }) }}
+          </form>
+    
+    
+        </div>
+      </div>
+    
+
+
+
+    </div>
+  </div>
+{% endblock %}
+
