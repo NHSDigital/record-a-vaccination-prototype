@@ -14,9 +14,21 @@
 
       <h1 class="nhsuk-heading-xl">Reports</h1>
 
-      <p class="nhsuk-body-l">Create and run reports from your organisation.</p>
+    
 
       {% from 'date-input/macro.njk' import dateInput %}
+
+      
+      <p>Download a spreadsheet of the vaccinations you have recorded.</p>
+
+      {% from 'warning-callout/macro.njk' import warningCallout %}
+
+      {{ warningCallout({
+        "heading": "Important",
+        "HTML": "<p>These files will contain the personal details of patients and so should be stored securely or processed to anonymise them.</p>"
+      }) }}
+
+      <h2 class="nhsuk-heading-m">Select date range</h2>
 
       {{ dateInput({
         "id": "example",
@@ -24,12 +36,8 @@
         "fieldset": {
           "legend": {
             "text": "From",
-            "classes": "nhsuk-label--m",
-            "isPageHeading": true
+            "classes": "nhsuk-label--s"
           }
-        },
-        "hint": {
-          "text": "For example, 15 3 1984"
         },
         "items": [
           {
@@ -47,21 +55,14 @@
         ]
       }) }}
 
-
-      {% from 'date-input/macro.njk' import dateInput %}
-
       {{ dateInput({
         "id": "example",
         "namePrefix": "example",
         "fieldset": {
           "legend": {
             "text": "To",
-            "classes": "nhsuk-label--m",
-            "isPageHeading": true
+            "classes": "nhsuk-label--s"
           }
-        },
-        "hint": {
-          "text": "For example, 15 3 1984"
         },
         "items": [
           {
@@ -87,7 +88,7 @@
           "name": "example",
           "fieldset": {
             "legend": {
-              "text": "Vaccines",
+              "text": "Select vaccines",
               "classes": "nhsuk-fieldset__legend--m",
               isPageHeading: true
             }
