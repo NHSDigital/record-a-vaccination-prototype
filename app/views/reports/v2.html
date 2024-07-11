@@ -4,15 +4,8 @@
   Reports
 {% endblock %}
 
-{% block footer %}
-  {{ footer({
-    links: [
-      {
-        "URL": "/regions/v1/setup-test",
-        "label": "Jump forward in time"
-      }
-    ]
-  })}}
+{% block header %}
+  {% include "reports/_header.html" %}
 {% endblock %}
 
 {% block content %}
@@ -21,7 +14,7 @@
 
       <h1 class="nhsuk-heading-xl">Reports</h1>
 
-      <p class="nhsuk-body-l">Create and run reports from you organisation.</p>
+      <p class="nhsuk-body-l">Create and run reports from your organisation.</p>
 
       {% from 'date-input/macro.njk' import dateInput %}
 
@@ -99,7 +92,7 @@
               isPageHeading: true
             }
           },
-        
+
           "items": [
             {
               "value": "covid-19",
@@ -123,7 +116,7 @@
 
       {{ button({
         "text": "Download",
-        "href": "/regions/v1/add-organisation"
+        "href": "#"
       }) }}
 
     </div>
