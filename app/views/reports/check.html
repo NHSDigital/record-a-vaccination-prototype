@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block outerContent %}
+  {{ backLink({
+    href: "/reports/choose-site",
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      <h1 class="nhsuk-heading-xl">Check and confirm</h1>
+      {% from "summary-list/macro.njk" import summaryList %}
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "From"
+            },
+            value: {
+              text: "1 Jan 2024"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "To"
+            },
+            value: {
+              text: "1 Feb 2024"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "date of birth"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Vaccines"
+            },
+            value: {
+              html: "COVID-19, Flu"
+            }
+          }, 
+          {
+            key: {
+              text: "Site"
+            },
+            value: {
+              html: "Manchester Royal Infirmary"
+            }
+          }
+        ]
+      }) }}
+    
+
+      {{ button({
+        "text": "Download",
+        href: "/reports/v5"
+      }) }}
+
+
+    </div>
+  </div>
+{% endblock %}

@@ -15,45 +15,48 @@
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
     
-          {{ backLink({ href: "/reports/v4", text: "Back" }) }}
+          {{ backLink({ href: "/reports/choose-dates", text: "Back" }) }}
     
           <h1 class="nhsuks-heading-xl">Choose vaccine</h1>
           <p class="nhsuk-body-l">Add and edit your vaccines.</p>
-    
-          <form action="/user-admin/v1/check" method="post" novalidate="true">
-    
+  
         
-            <div class="nhsuk-form-group">
-
-                <fieldset class="nhsuk-fieldset">
-                  <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
-                  </legend>
+            <form>
+              {{ checkboxes({
+                "idPrefix": "example",
+                "name": "example",
+                "fieldset": {
+                  "legend": {
+                    "text": "Vaccines",
+                    "classes": "nhsuk-fieldset__legend--m",
+                    isPageHeading: true
+                  }
+                },
               
-                  <div class="nhsuk-radios">
-              
-                    <div class="nhsuk-radios__item">
-                      <input class="nhsuk-radios__input" id="example-1" name="example" type="radio" value="yes">
-                      <label class="nhsuk-label nhsuk-radios__label" for="example-1">
-                        COVID-19
-                      </label>
-                    </div>
-              
-                    <div class="nhsuk-radios__item">
-                      <input class="nhsuk-radios__input" id="example-2" name="example" type="radio" value="no">
-                      <label class="nhsuk-label nhsuk-radios__label" for="example-2">
-                        Flu
-                      </label>
-                    </div>
-              
-                  </div>
-                </fieldset>
-              
-              </div>
-    
-    
+                "items": [
+                  {
+                    "value": "covid-19",
+                    "text": "COVID-19"
+                  },
+                  {
+                    "value": "Flu",
+                    "text": "Flu"
+                  },
+                  {
+                    "value": "Pertussis",
+                    "text": "Pertussis"
+                  },
+                  {
+                    "value": "RSV",
+                    "text": "RSV"
+                  }
+                  ]
+              }) }}
+            </form>
             {{ button({
-              "text": "Continue"
-          }) }}
+              "text": "Continue",
+              "href": "/reports/choose-site"
+            }) }}
           </form>
     
     

@@ -19,6 +19,8 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+        {{ backLink({ href: "/reports/v5", text: "Back" }) }}
+
       <h1 class="nhsuk-heading-xl">Choose dates</h1>
 
       <p class="nhsuk-body-l">Select the date range for your report.</p>
@@ -89,8 +91,8 @@
 
 
       {{ button({
-        "text": "Download",
-        "href": "/regions/v1/add-organisation"
+        "text": "Continue",
+        "href": "/reports/choose-vaccines"
       }) }}
 
     </div>
