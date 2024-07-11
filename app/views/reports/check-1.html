@@ -4,6 +4,10 @@
   East of England
 {% endblock %}
 
+{% block header %}
+  {% include "reports/_header.html" %}
+{% endblock %}
+
 {% block outerContent %}
   {{ backLink({
     href: "/reports/choose-site",
@@ -73,8 +77,8 @@
               ]
             }
           },
-          
-         
+
+
           {
             key: {
               text: "Site"
@@ -111,10 +115,10 @@
               ]
             }
           }
-          
+
         ]
       }) }}
-    
+
 
       {{ button({
         "text": "Download file (CSV)",
