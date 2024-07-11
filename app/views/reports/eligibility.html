@@ -11,44 +11,73 @@
 
 
 {% block content %}
-   
+
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
-    
+
           {{ backLink({ href: "/reports/choose-dates", text: "Back" }) }}
-    
-          <h1 class="nhsuks-heading-xl">Select eligibility</h1>
-          <p class="nhsuk-body-l">Select eligibility criteria.</p>
-  
-        
-            <form>
+
+
+            <form class="nhsuk-u-margin-top-8">
               {{ checkboxes({
                 "idPrefix": "example",
                 "name": "example",
                 "fieldset": {
                   "legend": {
-                    "text": "",
-                    "classes": "nhsuk-fieldset__legend--m",
+                    "text": "Eligibility",
+                    "classes": "nhsuk-fieldset__legend--xl",
                     isPageHeading: true
                   }
                 },
-              
+
                 "items": [
                   {
                     "value": "covid-19",
-                    "text": "Example"
+                    "text": "Residents in care home"
                   },
                   {
                     "value": "Flu",
-                    "text": "Example"
+                    "text": "Staff working in care homes"
                   },
                   {
                     "value": "Pertussis",
-                    "text": "Example"
+                    "text": "Healthcare workers"
                   },
                   {
                     "value": "RSV",
-                    "text": "Example"
+                    "text": "Social care workers"
+                  },
+                  {
+                    "value": "covid-19",
+                    "text": "Age-based eligibility"
+                  },
+                  {
+                    "value": "Flu",
+                    "text": "Pregnancy"
+                  },
+                  {
+                    "value": "Pertussis",
+                    "text": "People with immunosuppression"
+                  },
+                  {
+                    "value": "RSV",
+                    "text": "People in other clinical risk groups"
+                  },
+                  {
+                    "value": "RSV",
+                    "text": "People who are homeless or live in closed settings like supported living accommodation"
+                  },
+                  {
+                    "value": "covid-19",
+                    "text": "Household contacts of people with immunosuppression"
+                  },
+                  {
+                    "value": "Flu",
+                    "text": "Carer"
+                  },
+                  {
+                    "value": "Pertussis",
+                    "text": "People that have had CAR-T therapy or stem cell transplantation since receiving their last"
                   }
                   ]
               }) }}
@@ -58,11 +87,11 @@
               "href": "/reports/check-1"
             }) }}
           </form>
-    
-    
+
+
         </div>
       </div>
-    
+
 
 
 
