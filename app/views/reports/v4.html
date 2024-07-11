@@ -4,15 +4,8 @@
   Reports
 {% endblock %}
 
-{% block footer %}
-  {{ footer({
-    links: [
-      {
-        "URL": "/regions/v1/setup-test",
-        "label": "Jump forward in time"
-      }
-    ]
-  })}}
+{% block header %}
+  {% include "reports/_header.html" %}
 {% endblock %}
 
 {% block content %}
