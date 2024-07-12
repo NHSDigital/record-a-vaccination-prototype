@@ -61,9 +61,9 @@ function compileAssets() {
 function startNodemon(done) {
   const server = nodemon({
     script: 'app.js',
-    stdout: false,
+    stdout: true,
     ext: 'js',
-    quiet: true,
+    quiet: false,
   });
   let starting = false;
 
