@@ -16,31 +16,41 @@
         <div class="nhsuk-grid-column-two-thirds">
 
 
-          <h1 class="nhsuk-heading-xl">Choose site</h1>
+          <h1 class="nhsuk-heading-xl">Locations</h1>
 
           <form action="/regions/v1/organisation-details" method="post">
 
-          <div class="nhsuk-form-group">
-            <h1 class="nhsuk-label-wrapper">
-              <label class="nhsuk-label nhsuk-label--m nhsuk-u-margin-bottom-1" for="organisationCode">
-            Select a site for your report
-              </label>
-            </h1>
-            <div class="nhsuk-hint" id="organisationName-hint">
-              Search by name or ODS code
-            </div>
-            <select class="nhsuk-select" id="organisationCode" name="organisationCode"
-              data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
-              <option selected value=""></option>
+            {{ checkboxes({
+                "idPrefix": "example",
+                "name": "example",
+                "fieldset": {
+                  "legend": {
+                    "text": "",
+                    "classes": "nhsuk-fieldset__legend--m",
+                    isPageHeading: true
+                  }
+                },
 
-              {% for code, name in data.nhsTrusts %}
-                <option value="{{ code }}">{{ name }} ({{code }})</option>
-              {% endfor %}
-              {% for code, data in data.nhsPharmacies %}
-                <option value="{{ code }}">{{ data.name }}, {{ data.address }}, {{ data.postcode | upper }} ({{code }})</option>
-              {% endfor %}
-            </select>
-          </div>
+                "items": [
+                  {
+                    "value": "covid-19",
+                    "text": "Verington (RH63S)"
+                  },
+                  {
+                    "value": "Flu",
+                    "text": "Tower (S204X)"
+                  },
+                  {
+                    "value": "Pertussis",
+                    "text": "The Exchange (RH5S9)"
+                  },
+                  {
+                    "value": "RSV",
+                    "text": "Willowbank Day Hospital (RH5C4)"
+                  }
+                  ]
+              }) }}
+
 
           {{ button({
             "text": "Continue",
