@@ -1,0 +1,198 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Reports
+{% endblock %}
+
+{% block header %}
+  {% include "reports/_header.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      <h1 class="nhsuk-heading-xl">Reports</h1>
+
+      <p class="nhsuk-body-l">Create and run reports from your organisation.</p>
+
+      {% from 'date-input/macro.njk' import dateInput %}
+
+      {{ dateInput({
+        "id": "example",
+        "namePrefix": "example",
+        "fieldset": {
+          "legend": {
+            "text": "From",
+            "classes": "nhsuk-label--m",
+            "isPageHeading": true
+          }
+        },
+        "hint": {
+          "text": "For example, 15 3 1984"
+        },
+        "items": [
+          {
+            "name": "day",
+            "classes": "nhsuk-input--width-2"
+          },
+          {
+            "name": "month",
+            "classes": "nhsuk-input--width-2"
+          },
+          {
+            "name": "year",
+            "classes": "nhsuk-input--width-4"
+          }
+        ]
+      }) }}
+
+
+      {% from 'date-input/macro.njk' import dateInput %}
+
+      {{ dateInput({
+        "id": "example",
+        "namePrefix": "example",
+        "fieldset": {
+          "legend": {
+            "text": "To",
+            "classes": "nhsuk-label--m",
+            "isPageHeading": true
+          }
+        },
+        "hint": {
+          "text": "For example, 15 3 1984"
+        },
+        "items": [
+          {
+            "name": "day",
+            "classes": "nhsuk-input--width-2"
+          },
+          {
+            "name": "month",
+            "classes": "nhsuk-input--width-2"
+          },
+          {
+            "name": "year",
+            "classes": "nhsuk-input--width-4"
+          }
+        ]
+      }) }}
+
+      {% from 'checkboxes/macro.njk' import checkboxes %}
+
+      <form>
+        {{ checkboxes({
+          "idPrefix": "example",
+          "name": "example",
+          "fieldset": {
+            "legend": {
+              "text": "Vaccines",
+              "classes": "nhsuk-fieldset__legend--m",
+              isPageHeading: true
+            }
+          },
+
+          "items": [
+            {
+              "value": "covid-19",
+              "text": "COVID-19"
+            },
+            {
+              "value": "Flu",
+              "text": "Flu"
+            },
+            {
+              "value": "Pertussis",
+              "text": "Pertussis"
+            },
+            {
+              "value": "RSV",
+              "text": "RSV"
+            }
+            ]
+        }) }}
+      </form>
+
+      {{ button({
+        "text": "Download file (CSV)",
+        "href": "/regions/v1/add-organisation"
+      }) }}
+
+      {% from 'tables/macro.njk' import table %}
+
+      {{ table({
+        panel: false,
+        caption: "Previous reports",
+        firstCellIsHeader: false,
+        head: [
+          {
+            text: "From"
+          },
+          {
+            text: "To"
+          },
+          {
+            text: "Vaccines"
+          },
+          {
+          text: ""
+        }
+
+        ],
+        rows: [
+          [
+            {
+              text: "1 Jan 2024"
+            },
+            {
+              text: "1 Feb 2024"
+            },
+            {
+              text:"COVID-19"
+            },
+            {
+              html:"<a href='#'> Download (200 kbs)</a>"
+            }
+            ],
+            [
+            {
+              text: "4 Apr 2024"
+            },
+            {
+              text: "4 May 2024"
+            },
+            {
+              text:"COVID-19, Flu"
+            },
+            {
+              html:"<a href='#'> Download (600 kbs)</a>"
+            }
+            ],
+            [
+            {
+              text: "16 Jun 2024"
+            },
+            {
+              text: "21 Jul 2024"
+            },
+            {
+              text:"COVID-19, Flu, Pertussis, RSV"
+            },
+            {
+              html:"<a href='#'> Download (1.2 mbs)</a>"
+            }
+            ]
+
+        ]
+      }) }}
+
+
+    </div>
+  </div>
+
+
+
+
+
+{% endblock %}

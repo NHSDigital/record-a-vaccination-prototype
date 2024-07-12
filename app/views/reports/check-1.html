@@ -1,0 +1,131 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Check and confirm
+{% endblock %}
+
+{% block header %}
+  {% include "reports/_header.html" %}
+{% endblock %}
+
+{% block outerContent %}
+  {{ backLink({
+    href: "/reports/eligibility",
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      <h1 class="nhsuk-heading-xl">Check and confirm</h1>
+      {% from "summary-list/macro.njk" import summaryList %}
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "From"
+            },
+            value: {
+              text: "1 Jan 2024"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "To"
+            },
+            value: {
+              text: "2 Feb 2024"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Vaccines"
+            },
+            value: {
+              text: "COVID-19, Flu"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+
+
+          {
+            key: {
+              text: "Site"
+            },
+            value: {
+              text: "Manchester Royal Infirmary"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "date of birth"
+                }
+              ]
+            }
+          },
+
+
+          {
+            key: {
+              text: "Eligibility"
+            },
+            value: {
+              text: "Example"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "date of birth"
+                }
+              ]
+            }
+          }
+
+        ]
+      }) }}
+
+
+      {{ button({
+        "text": "Download file (CSV)",
+        href: "/reports/v6"
+      }) }}
+
+
+    </div>
+  </div>
+{% endblock %}

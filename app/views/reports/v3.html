@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Page title
+{% endblock %}
+
+{% block header %}
+  {% include "reports/_header.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Reports</h1>
+
+      <p>Download a spreadsheet of all the vaccinations you have ever recorded.</p>
+
+      <div class="nhsuk-u-margin-top-8">
+        {{ button({
+          "text": "Download file (CSV)"
+        }) }}
+      </div>
+
+    </div>
+  </div>
+{% endblock %}

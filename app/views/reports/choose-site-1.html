@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Choose site
+{% endblock %}
+
+{% block header %}
+  {% include "reports/_header.html" %}
+{% endblock %}
+
+{% block content %}
+
+{{ backLink({ href: "/reports/choose-vaccines", text: "Back" }) }}
+
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+
+          <h1 class="nhsuk-heading-xl">Choose sites</h1>
+
+          <form action="/regions/v1/organisation-details" method="post">
+
+            {{ checkboxes({
+                "idPrefix": "example",
+                "name": "example",
+                "fieldset": {
+                  "legend": {
+                    "text": "",
+                    "classes": "nhsuk-fieldset__legend--m",
+                    isPageHeading: true
+                  }
+                },
+
+                "items": [
+                  {
+                    "value": "covid-19",
+                    "text": "Verington (RH63S)"
+                  },
+                  {
+                    "value": "Flu",
+                    "text": "Tower (S204X)"
+                  },
+                  {
+                    "value": "Pertussis",
+                    "text": "The Exchange (RH5S9)"
+                  },
+                  {
+                    "value": "RSV",
+                    "text": "Willowbank Day Hospital (RH5C4)"
+                  }
+                  ]
+              }) }}
+
+
+          {{ button({
+            "text": "Continue",
+            "href": "/reports/eligibility"
+          }) }}
+
+        </form>
+
+
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+{% endblock %}
+
