@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  Add another lead user
+  Add another user
 {% endblock %}
 
 {% block outerContent %}
@@ -16,11 +16,11 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Add another lead user</h1>
+      <h1 class="nhsuk-heading-l">Add another user</h1>
 
-      <p>Choose another lead user for {{ data.nhsTrusts[organisation.code] }}.</p>
+      <p>Choose another user for {{ data.nhsTrusts[organisation.code] }}.</p>
 
-      <p>They will receive further instructions on setting up their NHS Record a vaccination account.</p>
+      <p>They will receive instructions on setting up their account.</p>
 
       <form action="/regions/v1/organisations/{{ organisation.code }}/add-email-check" method="post" novalidate>
         
