@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block outerContent %}
-  {{ backLink({ 
-    href: "/regions/v1", 
+  {{ backLink({
+    href: "/regions/v1",
     text: "Back",
     classes: "nhsuk-u-margin-top-4"
   }) }}
@@ -34,11 +34,24 @@
           data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
           <option selected value=""></option>
 
+          {% set options = [] %}
+
           {% for code, name in data.nhsTrusts %}
-            <option value="{{ code }}">{{ name }} ({{code }})</option>
+            {% set options = (options.push({
+              label: name + " (" + code + ")",
+              value: code
+            }), options) %}
           {% endfor %}
+
           {% for code, data in data.nhsPharmacies %}
-            <option value="{{ code }}">{{ data.name }}, {{ data.address }}, {{ data.postcode | upper }} ({{code }})</option>
+            {% set options = (options.push({
+              label: data.name + ", " + data.address + ", " + (data.postcode | upper) + " (" + code + ")",
+              value: code
+            }), options) %}
+          {% endfor %}
+
+          {% for option in (options | sort(false, true, "label")) %}
+            <option value="{{ option.value }}">{{ option.label }}</option>
           {% endfor %}
         </select>
       </div>
