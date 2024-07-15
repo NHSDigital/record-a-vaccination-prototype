@@ -83,7 +83,7 @@
         </table>
       {% endif %}
 
-      {% set buttonText = "Add another lead user" if (organisation.leadUsers | length) > 0  else "Add a lead user" %}
+      {% set buttonText = "Add another user" if (organisation.leadUsers | length) > 0  else "Add a lead user" %}
 
       {% if organisation.status == 'Invited' %}
         {{ button({ text: buttonText, href: "/regions/v1/organisations/" + organisation.code + "/add-email"}) }}
