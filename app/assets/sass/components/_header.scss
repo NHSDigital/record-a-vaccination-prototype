@@ -9,7 +9,8 @@
 // Bump the border-bottom size up from 4px to 6px
 // - this gives the 'current' item more visual weight
 .nhsuk-header__navigation-link,
-.nhsuk-header__navigation-link:active {
+.nhsuk-header__navigation-link:active,
+.nhsuk-header__navigation-link:focus {
   border-bottom-width: 6px;
 }
 

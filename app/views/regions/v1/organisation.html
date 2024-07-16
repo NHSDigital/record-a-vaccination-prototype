@@ -43,7 +43,7 @@
 
       {% if (organisation.leadUsers | length) > 0 %}
         <table class="nhsuk-table">
-          <caption class="nhsuk-table__caption">Lead users</caption>
+          <caption class="nhsuk-table__caption">Users</caption>
           <thead role="rowgroup" class="nhsuk-table__head">
             <tr role="row">
               <th role="columnheader" class="" scope="col">
@@ -83,7 +83,7 @@
         </table>
       {% endif %}
 
-      {% set buttonText = "Add another lead user" if (organisation.leadUsers | length) > 0  else "Add a lead user" %}
+      {% set buttonText = "Add another user" if (organisation.leadUsers | length) > 0  else "Add user" %}
 
       {% if organisation.status == 'Invited' %}
         {{ button({ text: buttonText, href: "/regions/v1/organisations/" + organisation.code + "/add-email"}) }}
