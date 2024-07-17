@@ -14,8 +14,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {{ backLink({ href: "/user-admin/v1/add-email", text: "Back" }) }}
-
+      {{ backLink({ href: "/vaccines/add-batch", text: "Back" }) }}
 
       <h1 class="nhsuk-heading-xl">Check and add batch</h1>
 
@@ -23,7 +22,7 @@
         rows: [
           {
             key: {
-              text: "Name"
+              text: "Site"
             },
             value: {
               text: data.firstName + " " + data.lastName
@@ -40,7 +39,7 @@
           },
           {
             key: {
-              text: "Email address"
+              text: "Vaccine"
             },
             value: {
               html: data["email"]
@@ -57,7 +56,7 @@
           },
           {
             key: {
-              text: "Role"
+              text: "Batch details"
             },
             value: {
               html: data["role"]
@@ -80,8 +79,10 @@
 
 
       <form action="/user-admin/v1/add" method="post">
+       
         {{ button({
-          "text": "Confirm and send"
+          "text": "Continue",
+          "href": "/vaccines/index"
         }) }}
       </form>
 
