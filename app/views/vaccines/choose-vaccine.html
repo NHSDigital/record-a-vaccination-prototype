@@ -11,59 +11,218 @@
 
 
 
-
+{% block outerContent %}
+  {{ backLink({
+    href: "/vaccines/choose-site",
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
+{% endblock %}
 
 {% block content %}
-   
+
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
-    
-          {{ backLink({ href: "/vaccines/choose-site", text: "Back" }) }}
-    
-          <h1 class="nhsuks-heading-xl">Choose vaccine</h1>
-          <p class="nhsuk-body-l">Add and edit your vaccines.</p>
-    
-          <form action="/user-admin/v1/check" method="post" novalidate="true">
-    
-        
-            <div class="nhsuk-form-group">
 
-                <fieldset class="nhsuk-fieldset">
-                  <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
-                  </legend>
-              
-                  <div class="nhsuk-radios">
-              
-                    <div class="nhsuk-radios__item">
-                      <input class="nhsuk-radios__input" id="example-1" name="example" type="radio" value="yes">
-                      <label class="nhsuk-label nhsuk-radios__label" for="example-1">
-                        COVID-19
-                      </label>
-                    </div>
-              
-                    <div class="nhsuk-radios__item">
-                      <input class="nhsuk-radios__input" id="example-2" name="example" type="radio" value="no">
-                      <label class="nhsuk-label nhsuk-radios__label" for="example-2">
-                        Flu
-                      </label>
-                    </div>
-              
-                  </div>
-                </fieldset>
-              
-              </div>
-    
-    
-              {{ button({
-                "text": "Continue",
-                "href": "/vaccines/add-batch"
+
+          <form action="/vaccines/add-batch" method="post" novalidate="true">
+
+            {% set covid19Product %}
+              {{ radios({
+                "idPrefix": "vaccineProductCovid",
+                "name": "vaccineProduct",
+                "fieldset": {
+                  "legend": {
+                    "text": "Vaccine product"
+                  }
+                },
+                "items": [
+                  {
+                    "value": "Comirnaty Original/Omicron BA.4-5",
+                    "text": "Comirnaty Original/Omicron BA.4-5",
+                    checked: (data.vaccineProduct == "Comirnaty Original/Omicron BA.4-5")
+                  },
+                  {
+                    "value": "Comirnaty 30 Omicron XBB.1.5",
+                    "text": "Comirnaty 30 Omicron XBB.1.5",
+                    checked: (data.vaccineProduct == "Comirnaty 30 Omicron XBB.1.5")
+                  },
+                  {
+                    "value": "Comirnaty 3 Omicron XBB.1.5",
+                    "text": "Comirnaty 3 Omicron XBB.1.5",
+                    checked: (data.vaccineProduct == "Comirnaty 3 Omicron XBB.1.5")
+                  },
+                  {
+                    "value": "Comirnaty 10 Omicron XBB.1.5",
+                    "text": "Comirnaty 10 Omicron XBB.1.5",
+                    checked: (data.vaccineProduct == "Comirnaty 10 Omicron XBB.1.5")
+                  },
+                  {
+                    "value": "Spikevax XBB.1.5",
+                    "text": "Spikevax XBB.1.5",
+                    checked: (data.vaccineProduct == "Spikevax XBB.1.5")
+                  }
+                ]
               }) }}
+            {% endset %}
+
+            {% set fluProduct %}
+              {{ radios({
+                "idPrefix": "vaccineProductFlu",
+                "name": "vaccineProduct",
+                "fieldset": {
+                  "legend": {
+                    "text": "Vaccine product"
+                  }
+                },
+                "items": [
+                  {
+                    "value": "Fluenz Tetra - LAIV",
+                    "text": "Fluenz Tetra - LAIV",
+                    checked: (data.vaccineProduct == "Fluenz Tetra - LAIV")
+                  },
+                  {
+                    "value": "Quadrivalent Influenza vaccine - QIVe",
+                    "text": "Quadrivalent Influenza vaccine - QIVe",
+                    checked: (data.vaccineProduct == "Quadrivalent Influenza vaccine - QIVe")
+                  },
+                  {
+                    "value": "Quadrivalent Influvac sub - unit Tetra - QIVe",
+                    "text": "Quadrivalent Influvac sub - unit Tetra - QIVe",
+                    checked: (data.vaccineProduct == "Quadrivalent Influvac sub - unit Tetra - QIVe")
+                  },
+                  {
+                    "value": "Flucelvax Tetra - QIVc",
+                    "text": "Flucelvax Tetra - QIVc",
+                    checked: (data.vaccineProduct == "Flucelvax Tetra - QIVc")
+                  },
+                  {
+                    "value": "Supemtek - QIVr",
+                    "text": "Supemtek - QIVr",
+                    checked: (data.vaccineProduct == "Supemtek - QIVr")
+                  },
+                  {
+                    "value": "Fluad Tetra - aQIV",
+                    "text": "Fluad Tetra - aQIV",
+                    checked: (data.vaccineProduct == "Fluad Tetra - aQIV")
+                  },
+                  {
+                    "value": "Cell-based Quadrivalent - QIVc",
+                    "text": "Cell-based Quadrivalent - QIVc",
+                    checked: (data.vaccineProduct == "Cell-based Quadrivalent - QIVc")
+                  },
+                  {
+                    "value": "Adjuvanted Quadrivalent - aQIV",
+                    "text": "Adjuvanted Quadrivalent - aQIV",
+                    checked: (data.vaccineProduct == "Adjuvanted Quadrivalent - aQIV")
+                  }
+                ]
+              }) }}
+            {% endset %}
+
+            {% set rsvProduct %}
+              {{ radios({
+                "idPrefix": "vaccineProductRsv",
+                "name": "vaccineProduct",
+                "fieldset": {
+                  "legend": {
+                    "text": "Vaccine product"
+                  }
+                },
+                "items": [
+                  {
+                    "value": "RSV product A",
+                    "text": "RSV product A",
+                    checked: (data.vaccineProduct == "RSV product A")
+                  },
+                  {
+                    "value": "RSV product B",
+                    "text": "RSV product B",
+                    checked: (data.vaccineProduct == "RSV product B")
+                  }
+                ]
+              }) }}
+            {% endset %}
+
+            {% set pertussisProduct %}
+              {{ radios({
+                "idPrefix": "vaccineProductPertussis",
+                "name": "vaccineProduct",
+                "fieldset": {
+                  "legend": {
+                    "text": "Vaccine product"
+                  }
+                },
+                "items": [
+                  {
+                    "value": "Pertussis product A",
+                    "text": "Pertussis product A",
+                    checked: (data.vaccineProduct == "Pertussis product A")
+                  },
+                  {
+                    "value": "Pertussis product B",
+                    "text": "Pertussis product B",
+                    checked: (data.vaccineProduct == "Pertussis product B")
+                  }
+                ]
+              }) }}
+            {% endset %}
+
+            {{ radios({
+              "idPrefix": "vaccine",
+              "name": "vaccine",
+              "fieldset": {
+                "legend": {
+                  "text": "Choose vaccine",
+                  "classes": "nhsuk-fieldset__legend--xl",
+                  "isPageHeading": true
+                }
+              },
+              "items": [
+                {
+                  "value": "COVID-19",
+                  "text": "COVID-19",
+                  checked: (data.vaccine == "COVID-19"),
+                  conditional: {
+                    html: covid19Product
+                  }
+                },
+                {
+                  "value": "Flu",
+                  "text": "Flu",
+                  checked: (data.vaccine == "Flu"),
+                  conditional: {
+                    html: fluProduct
+                  }
+                },
+                {
+                  "value": "RSV",
+                  "text": "RSV",
+                  checked: (data.vaccine == "RSV"),
+                  conditional: {
+                    html: rsvProduct
+                  }
+                },
+                {
+                  "value": "Pertussis",
+                  "text": "Pertussis",
+                  checked: (data.vaccine == "Pertussis"),
+                  conditional: {
+                    html: pertussisProduct
+                  }
+                }
+              ]
+            }) }}
+
+
+            {{ button({
+              "text": "Continue"
+            }) }}
           </form>
-    
-    
+
         </div>
       </div>
-    
+
 
 
 

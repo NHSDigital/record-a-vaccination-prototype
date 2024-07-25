@@ -1,5 +1,6 @@
 module.exports = {
   currentUserId: "12345",
+  vaccines: [],
   "users": [
     {
       id: "12345",
@@ -505,5 +506,2019 @@ module.exports = {
     "FAH9": {"name": "Whittington Pharmacy", "address": "13B Main Street,Whittington", "postcode": "Lichfield", "postcode": "Ws14 9Ju"},
     "FAH94": {"name": "Lo'S Pharmacy,Outwood Park Medical Centre,Potovens Lane,Outwood,Wakefield", "postcode": "Wf1 2Pe"},
     "FAJ00": {"name": "Jades Chemist", "address": "19 The Parade", "town": "Crawley", "postcode": "Rh10 8Dt"}
+  },
+  "sites": {
+  "RWX15": {
+    "name": "93-95 PAPIST WAY",
+    "address": "CHOLSEY"
+  },
+  "RWX29": {
+    "name": "ABELL GARDENS",
+    "address": "3 ABELL GARDENS"
+  },
+  "RWXNW": {
+    "name": "ABINGDON HOSPITAL OUT-PATIENTS DEPARTMENT",
+    "address": "MARCHAM ROAD"
+  },
+  "RWXJT": {
+    "name": "ADDINGTON SCHOOL",
+    "address": "WOODLANDS AVENUE"
+  },
+  "B2X1J": {
+    "name": "ADLAM VILLAS",
+    "address": "3 ADLAM VILLAS"
+  },
+  "RWXRA": {
+    "name": "ADULT EIP1",
+    "address": "WOKINGHAM HOSPITAL"
+  },
+  "W9I9H": {
+    "name": "AGEING WELL CONS 1",
+    "address": "ARC"
+  },
+  "RWXQM": {
+    "name": "ALDERS - COLLEGE TOWN INFANT AND NURSERY SCHOOL",
+    "address": "BRANKSOME HILL ROAD"
+  },
+  "RWXHT": {
+    "name": "ALL SAINTS ANNEXE",
+    "address": "ALL SAINTS CHURCH PARISH OFFICE"
+  },
+  "T0Z4T": {
+    "name": "ALLENBY ROAD OPTALIS",
+    "address": "9 ALLENBY ROAD"
+  },
+  "B9I6A": {
+    "name": "ALTERNATIVES TO ADMISSION",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXNC": {
+    "name": "AMBER HOUSE",
+    "address": "MARKET STREET"
+  },
+  "RWXHM": {
+    "name": "AMERSHAM ROAD COMMUNITY CENTRE",
+    "address": "AMERSHAM ROAD"
+  },
+  "RWXD1": {
+    "name": "AMH BRACKNELL C1",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXD2": {
+    "name": "AMH BRACKNELL C2",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXG2": {
+    "name": "AMH NEWBURY CONSULTANT 2",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXG3": {
+    "name": "AMH NEWBURY CONSULTANT 3",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWX0J": {
+    "name": "AMH NEWBURY CRHTT",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXE1": {
+    "name": "AMH READING CONSULTANT 1",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXE2": {
+    "name": "AMH READING CONSULTANT 2",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXE3": {
+    "name": "AMH READING CONSULTANT 3",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXE5": {
+    "name": "AMH READING CONSULTANT 5",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXE6": {
+    "name": "AMH READING CONSULTANT 6",
+    "address": "ADULT M/HEALTH-READING"
+  },
+  "S6R6L": {
+    "name": "AMH READING CRHTT",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXA1": {
+    "name": "AMH SLOUGH CONSULTANT 1",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXA2": {
+    "name": "AMH SLOUGH CONSULTANT 2",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXA3": {
+    "name": "AMH SLOUGH CONSULTANT 3",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXA4": {
+    "name": "AMH SLOUGH CONSULTANT 4",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXA5": {
+    "name": "AMH SLOUGH CONSULTANT 5",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXC1": {
+    "name": "AMH WAM CONSULTANT 1",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXC2": {
+    "name": "AMH WAM CONSULTANT 2",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXC3": {
+    "name": "AMH WAM CONSULTANT 3",
+    "address": "CMHT - WAM"
+  },
+  "RWXG1": {
+    "name": "AMH WEST CRHTT",
+    "address": "HILLCROFT HOUSE"
+  },
+  "RWXF1": {
+    "name": "AMH WOKINGHAM C1",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXF2": {
+    "name": "AMH WOKINGHAM C2",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXF3": {
+    "name": "AMH WOKINGHAM C3",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXGG": {
+    "name": "ARBORFIELD GARRISON COMMUNITY CENTRE",
+    "address": "SHEERLANDS ROAD"
+  },
+  "RWXGH": {
+    "name": "ARBORFIELD SURGERY",
+    "address": "EVERSLEY ROAD"
+  },
+  "RWXME": {
+    "name": "ARBOUR VALE SCHOOL",
+    "address": "FARNHAM ROAD"
+  },
+  "J1E7I": {
+    "name": "ARC CONS 2",
+    "address": "UPTON HOSPITAL"
+  },
+  "H0Z7V": {
+    "name": "ARC CONS 3",
+    "address": "UPTON HOSPITAL"
+  },
+  "RWXLP": {
+    "name": "ASCOT DAY CENTRE",
+    "address": "BAGSHOT ROAD"
+  },
+  "RWXNL": {
+    "name": "ASPEN HOUSE",
+    "address": "300 KINGS"
+  },
+  "RWXFW": {
+    "name": "AVENUE SCHOOL",
+    "address": "33 BASINGSTOKE ROAD"
+  },
+  "RWXAL": {
+    "name": "AVONBANK HOUSE",
+    "address": "WEST STREET HOUSE"
+  },
+  "RWXEJ": {
+    "name": "BAKER STREET CLINIC",
+    "address": "22A BAKER STREET"
+  },
+  "RWXDF": {
+    "name": "BALMORE PARK SURGERY",
+    "address": "59A HEMDEAN ROAD"
+  },
+  "RWXQG": {
+    "name": "BASINGSTOKE AND NORTH HAMPSHIRE HOSPITAL",
+    "address": "ALDERMASTON ROAD"
+  },
+  "RWXAT": {
+    "name": "BATH ROAD",
+    "address": "57-59 BATH ROAD"
+  },
+  "RWX98": {
+    "name": "BATH ROAD DAY HOSPITAL",
+    "address": "5 BATH ROAD"
+  },
+  "RWX77": {
+    "name": "BATTLE HOSPITAL",
+    "address": "344 OXFORD ROAD"
+  },
+  "RWXGN": {
+    "name": "BATTLE LIBRARY",
+    "address": "420 OXFORD ROAD"
+  },
+  "R1K8S": {
+    "name": "BEDS CONS 1",
+    "address": "1ST FLOOR"
+  },
+  "Y9O6Q": {
+    "name": "BEDS CONS 2",
+    "address": "1ST FLOOR"
+  },
+  "RWXQD": {
+    "name": "BEECHCROFT",
+    "address": "ROOKES WAY"
+  },
+  "C3D2A": {
+    "name": "BERKSHIRE HEALTHCARE COMMUNITY SERVICES",
+    "address": "7-9 CREMYLL ROAD"
+  },
+  "RWXHQ": {
+    "name": "BERKSHIRE HEALTHCARE NHS TRUST HEADQUARTERS",
+    "address": "SKIMPED HILL LANE"
+  },
+  "RWXNK": {
+    "name": "BERKSHIRE MENTAL HEALTH URGENT CARE SERVICE",
+    "address": "COMFORT CARE PROGRESS BUSINESS PARK"
+  },
+  "B2W7P": {
+    "name": "BHFT - BOB - WOKINGHAM HOSPITAL - SAIS COVID VACCINATION SERVICE",
+    "address": "WOKINGHAM HOSPITAL"
+  },
+  "B5G3H": {
+    "name": "BHFT - FRIMLEY - WOKINGHAM HOSPITAL - SAIS COVID VACCINATION SERVICE",
+    "address": "WOKINGHAM HOSPITAL"
+  },
+  "RWXQN": {
+    "name": "BHFT SLOUGH",
+    "address": "25 WINDSOR ROAD"
+  },
+  "RWXDL": {
+    "name": "BOATHOUSE SURGERY",
+    "address": "WHITCHURCH ROAD"
+  },
+  "RWXPM": {
+    "name": "BOUNDARY HOUSE SURGERY",
+    "address": "MOUNT LANE"
+  },
+  "V1M5O": {
+    "name": "BRACKNELL CMHT CONS 5",
+    "address": "51-52 TURING DRIVE"
+  },
+  "P4V0F": {
+    "name": "BRACKNELL CMHT CONS 7",
+    "address": "CHURCH HILL HOUSE"
+  },
+  "RWXMS": {
+    "name": "BRACKNELL FOREST DAY SERVICES",
+    "address": "EASTERN ROAD"
+  },
+  "RWXQL": {
+    "name": "BRACKNELL OPEN LEARNING CENTRE",
+    "address": "RECTORY LANE"
+  },
+  "H3Z3O": {
+    "name": "BRAMERTON",
+    "address": "UPPER BRAY ROAD"
+  },
+  "RWXNT": {
+    "name": "BRANTS BRIDGE",
+    "address": "EASTERN GATE"
+  },
+  "RWXAG": {
+    "name": "BRIDGE STREET",
+    "address": "2-10 BRIDGE STREET"
+  },
+  "RWXET": {
+    "name": "BRIDGEWELL CENTRE",
+    "address": "10A LADYBANK"
+  },
+  "RWXLJ": {
+    "name": "BRITWELL CLINIC",
+    "address": "WENTWORTH AVENUE"
+  },
+  "RWXPH": {
+    "name": "BROAD STREET MALL",
+    "address": "103-105 BROAD STREET MALL"
+  },
+  "RWXJP": {
+    "name": "BROADMOOR HOSPITAL",
+    "address": "BROADMOOR HOSPITAL"
+  },
+  "RWXFM": {
+    "name": "BROCKHAMPTON ROAD SURGERY",
+    "address": "BOCKHAMPTON ROAD"
+  },
+  "RWXQ1": {
+    "name": "BROCKLESS",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXHK": {
+    "name": "BROOKFIELDS SCHOOL",
+    "address": "SAGE ROAD"
+  },
+  "RWXKH": {
+    "name": "BROOKSIDE SURGERY",
+    "address": "BROOKSIDE CLOSE"
+  },
+  "RWX96": {
+    "name": "BRUNEL CENTRE",
+    "address": "BRUNEL ROAD"
+  },
+  "RWXKY": {
+    "name": "BUCKLEBURY MEMORIAL HALL",
+    "address": "BUCKLEBURY"
+  },
+  "RWXJQ": {
+    "name": "BULMERSHE HEALTH CENTRE",
+    "address": "WOODLANDS AVENUE"
+  },
+  "RWXFV": {
+    "name": "BURDWOOD SURGERY",
+    "address": "WHEELERS GREEN WAY"
+  },
+  "RWXKR": {
+    "name": "BURGHFIELD SURGERY",
+    "address": "READING ROAD"
+  },
+  "RWXGT": {
+    "name": "BURGHFIELD VILLAGE HALL",
+    "address": "FARINGDON WALK"
+  },
+  "RWXHR": {
+    "name": "BURMA HILLS SURGERY",
+    "address": "ASHRIDGE ROAD"
+  },
+  "RWXMH": {
+    "name": "BUTRITION & DIETETICS AT WOKINGHAM HOSPITAL",
+    "address": "WOKINGHAM COMMUNITY HOSPITAL"
+  },
+  "RWXHG": {
+    "name": "CALCOT BRANCH",
+    "address": "72A ROYAL AVENUE"
+  },
+  "RWXHL": {
+    "name": "CALCOT CENTRE",
+    "address": "CALCOT"
+  },
+  "RWXL1": {
+    "name": "CAMH BRACKNELL C1",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXL2": {
+    "name": "CAMH BRACKNELL C2",
+    "address": "CAMHS - BRACKNELL"
+  },
+  "RWXL3": {
+    "name": "CAMH BRACKNELL C3",
+    "address": "CAMHS - BRACKNELL"
+  },
+  "RWXP1": {
+    "name": "CAMH NEWBURY CONSULTANT 1",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXP2": {
+    "name": "CAMH NEWBURY CONSULTANT 2",
+    "address": "CAMHS - WEST BERKSHIRE"
+  },
+  "RWXM1": {
+    "name": "CAMH READING CONSULTANT 1",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXM2": {
+    "name": "CAMH READING CONSULTANT 2",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXM3": {
+    "name": "CAMH READING CONSULTANT 3",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXJ1": {
+    "name": "CAMH SLOUGH CONSULTANT 1",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXJ2": {
+    "name": "CAMH SLOUGH CONSULTANT 2",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXJ3": {
+    "name": "CAMH SLOUGH CONSULTANT 3",
+    "address": "CAMHS - SLOUGH"
+  },
+  "RWXK1": {
+    "name": "CAMH WAM CONSULTANT 1",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXN3": {
+    "name": "CAMH WOKINGHAM C3",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXN4": {
+    "name": "CAMH WOKINGHAM C4",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "R1Q7V": {
+    "name": "CAMHS ADHD 2",
+    "address": "UPTON HOSPITAL"
+  },
+  "RWXL4": {
+    "name": "CAMHS BRACKNELL",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXX4": {
+    "name": "CAMHS CENTRAL WOKINGHAM",
+    "address": "41 BARKHAM ROAD"
+  },
+  "RWXY3": {
+    "name": "CAMHS CONSULTANT WOKINGHAM 2",
+    "address": "COMMUNITY MENTAL HEALTH TEAM"
+  },
+  "T0B2A": {
+    "name": "CAMHS EATING DISORDER CONS 1",
+    "address": "NICHOLSONS HOUSE"
+  },
+  "N5K4P": {
+    "name": "CAMHS EATING DISORDERS CONS 5",
+    "address": "NICHOLSONS HOUSE"
+  },
+  "RWXRC": {
+    "name": "CAMHS EIP1",
+    "address": "WOKINGHAM HOSPITAL"
+  },
+  "J6D9S": {
+    "name": "CAMHS LD CONS6",
+    "address": "ERLEGH HOUSE"
+  },
+  "P4S8V": {
+    "name": "CAMHS PHOENIX",
+    "address": "WOKINGHAM HOSPITAL"
+  },
+  "B1G9M": {
+    "name": "CAMHS RAPID RESPONCE",
+    "address": "WILLOW HOUSE"
+  },
+  "S1U6S": {
+    "name": "CAMHS RR CONS 1",
+    "address": "WILLOW HOUSE"
+  },
+  "Y9B0O": {
+    "name": "CAMHS RR CONS 2",
+    "address": "41 BARKHAM ROAD"
+  },
+  "Z7U6I": {
+    "name": "CAMHS RR CONS 6",
+    "address": "WILLOW HOUSE"
+  },
+  "RWXJ4": {
+    "name": "CAMHS SLOUGH NMP 4",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXJ5": {
+    "name": "CAMHS STH BUCKS C5",
+    "address": "UPTON HOSPITAL"
+  },
+  "Z0F2T": {
+    "name": "CARE PATHWAYS WOKINGHAM CONS 7",
+    "address": "THE OLD FORGE"
+  },
+  "D6Z2D": {
+    "name": "CARE PATHWAYS WOKINGHAM CONS 9",
+    "address": "45-47 PEACH STREET"
+  },
+  "RWXLY": {
+    "name": "CASTLE GATE RESPITE CENTRE",
+    "address": "LOVE LANE"
+  },
+  "RWXLX": {
+    "name": "CASTLE SCHOOL",
+    "address": "LOVE LANE"
+  },
+  "E0I0I": {
+    "name": "CAVERSHAM PODS",
+    "address": "57 CAVERSHAM ROAD"
+  },
+  "RWXJA": {
+    "name": "CEDAR HOUSE SURGERY",
+    "address": "269A NINE MILE RIDE"
+  },
+  "RWXKD": {
+    "name": "CHALFONT SURGERY",
+    "address": "CHALFONT CLOSE"
+  },
+  "RWXCW": {
+    "name": "CHANCELLOR HOUSE",
+    "address": "6 SHINFIELD ROAD"
+  },
+  "RWXKX": {
+    "name": "CHAPEL ROW SURGERY",
+    "address": "THE AVENUE"
+  },
+  "RWXEN": {
+    "name": "CHARVIL VILLAGE HALL",
+    "address": "PARK LANE"
+  },
+  "RWXCG": {
+    "name": "CHATHAM STREET SURGERY",
+    "address": "121 CHATHAM STREET"
+  },
+  "RWXCJ": {
+    "name": "CHRISTCHURCH ROAD",
+    "address": "1 CHRISTCHURCH ROAD"
+  },
+  "RWXDN": {
+    "name": "CHRISTCHURCH ROAD SURGERY",
+    "address": "81 CHRISTCHURCH ROAD"
+  },
+  "RWX58": {
+    "name": "CHURCH HILL HOUSE HOSPITAL",
+    "address": "51-52 TURING DRIVE"
+  },
+  "RWXPG": {
+    "name": "CHURCHILL HOSPITAL",
+    "address": "OLD ROAD"
+  },
+  "RWXNV": {
+    "name": "CHURCHILL HOSPITAL OXFORD",
+    "address": "THE ALEC TURNBULL CENTRE"
+  },
+  "RWX94": {
+    "name": "CHURCHILL HOUSE",
+    "address": "51-52 TURING DRIVE"
+  },
+  "RWXCT": {
+    "name": "CIRCUIT LANE SURGERY",
+    "address": "53 CIRCUIT LANE"
+  },
+  "T9Y9F": {
+    "name": "CIRDIC",
+    "address": "ST SAVIOURS CHURCH HALL"
+  },
+  "RWXQH": {
+    "name": "CIVIC OFFICES",
+    "address": "SHUTE END"
+  },
+  "RWXPR": {
+    "name": "CLAREMONT SURGERY",
+    "address": "2 COOKHAM ROAD"
+  },
+  "RWXH1": {
+    "name": "CLIFFORD",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXKW": {
+    "name": "COCK LANE BRANCH",
+    "address": "COCK LANE"
+  },
+  "RWX04": {
+    "name": "COLEY CLINIC",
+    "address": "CARSDALE CLOSE"
+  },
+  "RWXCM": {
+    "name": "COLEY PARK SURGERY",
+    "address": "80 WENSLEY ROAD"
+  },
+  "RWXHJ": {
+    "name": "COLONNADE - OVERDOWN ROAD",
+    "address": "6 THE COLONNADE"
+  },
+  "L4T2E": {
+    "name": "COMMON ROAD",
+    "address": "131 COMMON ROAD"
+  },
+  "RWXGY": {
+    "name": "COMMUNITY HALL",
+    "address": "LYON SQUARE"
+  },
+  "RWX7C": {
+    "name": "COMMUNITY PAEDIATRIC - P7C",
+    "address": "CHILDREN'S SERVICES"
+  },
+  "RWX9A": {
+    "name": "COMMUNITY PAEDIATRIC -P9A",
+    "address": "CHILDREN'S SERVICE"
+  },
+  "N6P6O": {
+    "name": "COMMUNITY PAEDIATRICS CONS 5",
+    "address": "UPTON HOSPITAL"
+  },
+  "RWXMN": {
+    "name": "COMMUNITY SPINAL SERVICE",
+    "address": "474 FINCHAMPSTEAD ROAD"
+  },
+  "RWXGJ": {
+    "name": "COMPTON SURGERY",
+    "address": "HIGH STREET"
+  },
+  "RWX0O": {
+    "name": "CONSULTANT 3",
+    "address": "41 BARKHAM ROAD"
+  },
+  "RWX0N": {
+    "name": "CONSULTANT 4",
+    "address": "41 BARKHAM ROAD"
+  },
+  "RWXPT": {
+    "name": "COOKHAM MEDICAL CENTRE",
+    "address": "LOWER ROAD"
+  },
+  "RWXAY": {
+    "name": "COOPERS HILL YOUTH AND COMMUNITY CENTRE",
+    "address": "CROWTHORNE ROAD NORTH"
+  },
+  "RWXLQ": {
+    "name": "COX GREEN SCHOOL",
+    "address": "CANNON LANE"
+  },
+  "RWX72": {
+    "name": "CRAVEN ROAD",
+    "address": "3-5 CRAVEN ROAD"
+  },
+  "RWXD3": {
+    "name": "CRHTT BRACKNELL CONS 1",
+    "address": "ADULT PSYCHIATRY-BRACKNEL"
+  },
+  "Q4N1J": {
+    "name": "CRHTT EAST CON 2",
+    "address": "WENTWORTH AVENUE"
+  },
+  "E6Y7K": {
+    "name": "CRHTT EAST CONS 3",
+    "address": "BRITWELL HEALTH CLINIC"
+  },
+  "N9L8I": {
+    "name": "CRHTT EAST CONS 7",
+    "address": "WENTWORTH AVENUE"
+  },
+  "I3F1R": {
+    "name": "CRHTT EAST CONS 9",
+    "address": "BRITWELL HEALTH CLINIC"
+  },
+  "F7O6T": {
+    "name": "CRHTT EAST NMP 2",
+    "address": "WENTWORTH AVENUE"
+  },
+  "Y8K8I": {
+    "name": "CRHTT EAST NMP 3",
+    "address": "WENTWORTH AVENUE"
+  },
+  "RWX0B": {
+    "name": "CTPLD BRACKNELL",
+    "address": "112 ST. MARKS ROAD"
+  },
+  "RWX0F": {
+    "name": "CTPLD READING",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWX0C": {
+    "name": "CTPLD SLOUGH",
+    "address": "112 ST. MARKS ROAD"
+  },
+  "RWX0A": {
+    "name": "CTPLD WAM",
+    "address": "112 ST. MARKS ROAD"
+  },
+  "RWX0E": {
+    "name": "CTPLD WEST BERKS",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWX0D": {
+    "name": "CTPLD WOKINGHAM",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "T5S4Z": {
+    "name": "CYPF CONS 2",
+    "address": "UPTON HOSPITAL"
+  },
+  "F2H6Q": {
+    "name": "CYPF CONS 3",
+    "address": "UPTON HOSPITAL"
+  },
+  "H6S5J": {
+    "name": "CYPF CONS 4",
+    "address": "UPTON HOSPITAL"
+  },
+  "A8P2W": {
+    "name": "CYPF CONS 5",
+    "address": "UPTON HOSPITAL"
+  },
+  "U8U0T": {
+    "name": "CYPF CONS 6",
+    "address": "FIR TREE HOUSE"
+  },
+  "E8Z7N": {
+    "name": "CYPF CONS 7",
+    "address": "FIR TREE HOUSE"
+  },
+  "F7L7L": {
+    "name": "CYPF CONS 8",
+    "address": "FIR TREE HOUSE"
+  },
+  "Z5U4I": {
+    "name": "CYPF CONS 9",
+    "address": "FIR TREE HOUSE"
+  },
+  "B3U2W": {
+    "name": "CYPF REG 1",
+    "address": "UPTON HOSPITAL"
+  },
+  "RWXPV": {
+    "name": "DATCHET HEALTH CENTRE",
+    "address": "GREEN LANE"
+  },
+  "RWX7D": {
+    "name": "DAY HOSPITAL - P7D",
+    "address": "GENERAL MEDICINE"
+  },
+  "RWXLN": {
+    "name": "DEDWORTH CLINIC",
+    "address": "SMITHS LANE"
+  },
+  "RWXPX": {
+    "name": "DEDWORTH MEDICAL CENTRE",
+    "address": "80 VALE ROAD"
+  },
+  "RWXMQ": {
+    "name": "DELLWOOD HOSPITAL",
+    "address": "22 LIEBENROOD ROAD"
+  },
+  "RWX5G": {
+    "name": "DIABETES CENTRE - WAM NMP5G",
+    "address": "KING EDWARD VII HOSPITAL"
+  },
+  "RWX5A": {
+    "name": "DIABETES CENTRE - WAM P5A",
+    "address": "KING EDWARD VII HOSPITAL"
+  },
+  "RWX5C": {
+    "name": "DIABETES CENTRE - WAM P5C",
+    "address": "KING EDWARD VII HOSPITAL"
+  },
+  "RWX5E": {
+    "name": "DIABETES CENTRE - WAM P5E",
+    "address": "KING EDWARD VII HOSPITAL"
+  },
+  "RWX5F": {
+    "name": "DIABETES CENTRE - WAM P5F",
+    "address": "KING EDWARD VII HOSPITAL"
+  },
+  "RWX5H": {
+    "name": "DIABETES CTR - WAM P5H",
+    "address": "KING EDWARD VII HOSPITAL"
+  },
+  "Q4F7G": {
+    "name": "DIABETES SERVICE",
+    "address": "ST. LEONARDS ROAD"
+  },
+  "RWXFJ": {
+    "name": "DINGLEY FAMILY AND PLAY THERAPY GROUP",
+    "address": "NEWBURY RACECOURSE"
+  },
+  "RWXGK": {
+    "name": "DOWNLAND PRACTICE",
+    "address": "EAST LANE"
+  },
+  "RWXV3": {
+    "name": "DR P MITTER",
+    "address": "O/AGE PSYCHIATRY-READING"
+  },
+  "RWXK2": {
+    "name": "DR S FORSTER",
+    "address": "CAMHS WINDSOR AND MAIDENHEAD"
+  },
+  "RWX1A": {
+    "name": "DR UMAR BEDI",
+    "address": "HEATHERWOOD HOSPITAL"
+  },
+  "RWXDM": {
+    "name": "DUCHESS OF KENT HOUSE",
+    "address": "22 LIEBENROOD ROAD"
+  },
+  "RWXFH": {
+    "name": "EASTFIELD HOUSE SURGERY",
+    "address": "6 ST. JOHNS ROAD"
+  },
+  "RWXY1": {
+    "name": "EASTWOOD",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "D8O0O": {
+    "name": "EATING DISORDERS SERVICES",
+    "address": "112 ST. MARKS ROAD"
+  },
+  "H2C4W": {
+    "name": "EDITH ROAD (TREGONA)",
+    "address": "3 EDITH ROAD"
+  },
+  "RWXEQ": {
+    "name": "EDWARD ELGAR HOUSE",
+    "address": "SKIMPED HILL"
+  },
+  "I4L3I": {
+    "name": "EDWINA PLACE",
+    "address": "LONDON ROAD"
+  },
+  "RWXX9": {
+    "name": "EIP CAMHS CONSULTANT 1",
+    "address": "WOKINGHAM HOSPITAL"
+  },
+  "T2Y2M": {
+    "name": "EIP CONS 2",
+    "address": "WOKINGHAM HOSPITAL"
+  },
+  "X1N2M": {
+    "name": "EIP CONS 3",
+    "address": "41 BARKHAM ROAD"
+  },
+  "RWXY2": {
+    "name": "EIP CONSULTANT 2",
+    "address": "WOKINGHAM HOSPITAL"
+  },
+  "RWXCF": {
+    "name": "ELDON ROAD SURGERY",
+    "address": "10 ELDON ROAD"
+  },
+  "RWXED": {
+    "name": "ELDON SQUARE SURGERY",
+    "address": "9 ELDON SQUARE"
+  },
+  "L8L4L": {
+    "name": "ELIZABETH FRY APPROVED PREMISES",
+    "address": "6 COLEY AVENUE"
+  },
+  "RWXKE": {
+    "name": "ELM LANE SURGERY",
+    "address": "ELM LANE"
+  },
+  "RWXJD": {
+    "name": "EMMBROOK VILLAGE HALL",
+    "address": "EMMBROOK ROAD"
+  },
+  "RWX37": {
+    "name": "EMMER GREEN CLINIC",
+    "address": "85 GROVE ROAD"
+  },
+  "RWXDE": {
+    "name": "EMMER GREEN SURGERY",
+    "address": "4 ST. BARNABAS ROAD"
+  },
+  "RWX95": {
+    "name": "ERLEIGH ROAD",
+    "address": "25 ERLEIGH ROAD"
+  },
+  "RWXHV": {
+    "name": "EVANGELICAL CHURCH HALL",
+    "address": "NORREYS AVENUE"
+  },
+  "X5T1X": {
+    "name": "FAIRACRES",
+    "address": "UNIT B1"
+  },
+  "RWX78": {
+    "name": "FALKLAND SURGERY",
+    "address": "MONKS LANE"
+  },
+  "F9X0U": {
+    "name": "FEARNLEY HOUSE",
+    "address": "86 STRAIGHT ROAD"
+  },
+  "RWXJC": {
+    "name": "FINCHAMPSTEAD CLINIC",
+    "address": "474 FINCHAMPSTEAD ROAD"
+  },
+  "RWXJG": {
+    "name": "FIRST WOOSEHILL SCOUT HUT",
+    "address": "RUBY CLOSE"
+  },
+  "RWXPJ": {
+    "name": "FOCUS HOUSE",
+    "address": "14-16 CASTLE CRESCENT"
+  },
+  "RWXAJ": {
+    "name": "FOUNDATION",
+    "address": "79A LONDON STREET"
+  },
+  "RWXAN": {
+    "name": "FOUNTAIN HOUSE",
+    "address": "2 QUEENS WALK"
+  },
+  "RWXQ2": {
+    "name": "FRIEND",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWX97": {
+    "name": "FRIMLEY PARK HOSPITAL",
+    "address": "PORTSMOUTH ROAD"
+  },
+  "Q7G2R": {
+    "name": "GARRISON COMMUNITY HUB",
+    "address": "CONNAUGHT CENTRE"
+  },
+  "RWX73": {
+    "name": "GEORGE HOUSE",
+    "address": "NEWBURY COMMUNITY MENTAL HEALTH"
+  },
+  "RWX99": {
+    "name": "GLENFIELD HOUSE",
+    "address": "RECTORY CLOSE"
+  },
+  "RWXLE": {
+    "name": "GORING SURGERY",
+    "address": "RED CROSS ROAD"
+  },
+  "RWXEX": {
+    "name": "GREAT HOLLANDS HEALTH CENTRE",
+    "address": "GREAT HOLLANDS SQUARE"
+  },
+  "RWXFL": {
+    "name": "GREAT SHEFFORD VILLAGE HALL",
+    "address": "GREAT SHEFFORD"
+  },
+  "RWXPK": {
+    "name": "GREEN MEADOWS SURGERY",
+    "address": "WINKFIELD ROAD"
+  },
+  "RWXKC": {
+    "name": "GREEN ROAD SURGERY",
+    "address": "224 WOKINGHAM ROAD"
+  },
+  "RWXMT": {
+    "name": "GREYFRIARS HOUSE",
+    "address": "GREYFRIARS ROAD"
+  },
+  "RWXCE": {
+    "name": "GROVELANDS MEDICAL CENTRE",
+    "address": "701 OXFORD ROAD"
+  },
+  "RWXND": {
+    "name": "HAMILTON ROAD CHILDRENS CENTRE",
+    "address": "135 BULMERSHE ROAD"
+  },
+  "P5W3I": {
+    "name": "HAMPSHIRE RECONNECT",
+    "address": "NUTFIELD PLACE"
+  },
+  "T8U2W": {
+    "name": "HEALTHBUS THE LAMBOURN CENTRE",
+    "address": "CLOSE END"
+  },
+  "RWX79": {
+    "name": "HEATHERWOOD HOSPITAL",
+    "address": "LONDON ROAD"
+  },
+  "RWXAE": {
+    "name": "HEATHLANDS",
+    "address": "HEATHLANDS DAY CENTRE"
+  },
+  "RWX6C": {
+    "name": "HENRY TUDOR - P6C",
+    "address": "HENRY TUDOR WARD"
+  },
+  "Y9S0U": {
+    "name": "HERONSMEDE",
+    "address": "88-90 STRAIGHT ROAD"
+  },
+  "RWX88": {
+    "name": "HILLCROFT HOUSE",
+    "address": "ROOKES WAY"
+  },
+  "J9Z1U": {
+    "name": "HOMESIDE CLOSE OPTALIS",
+    "address": "16 HOMESIDE CLOSE"
+  },
+  "RWXMA": {
+    "name": "HUNGERFORD CLINIC",
+    "address": "2A THE CROFT"
+  },
+  "RWXGR": {
+    "name": "HUNGERFORD HOUSE",
+    "address": "BEXLEY COURT"
+  },
+  "RWXV2": {
+    "name": "HUSSEY",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWX2D": {
+    "name": "INTERMEDIATE CARE - P2D",
+    "address": "OAKWOOD"
+  },
+  "RWXAR": {
+    "name": "KARDELTON HOUSE",
+    "address": "EAST OF BERKSHIRE CRISIS TEAM"
+  },
+  "RWXMD": {
+    "name": "KENNEL LANE SCHOOL",
+    "address": "KENNEL LANE"
+  },
+  "RWXFR": {
+    "name": "KENNET SCHOOL",
+    "address": "STONEY LANE"
+  },
+  "RWXDH": {
+    "name": "KENNET SURGERY",
+    "address": "30 CHOLMELEY ROAD"
+  },
+  "RWX80": {
+    "name": "KING EDWARD VII",
+    "address": "ST. LEONARDS ROAD"
+  },
+  "RWXFN": {
+    "name": "KINTBURY AND WOOLTON HILL SURGERIES",
+    "address": "NEWBURY STREET"
+  },
+  "RWXEP": {
+    "name": "KNOWL HILL SURGERY",
+    "address": "THE TERRACE"
+  },
+  "RWXKL": {
+    "name": "LAMBS LANE SCHOOL",
+    "address": "LAMBS LANE"
+  },
+  "RWXLK": {
+    "name": "LANGLEY HEALTH CENTRE",
+    "address": "COMMON ROAD"
+  },
+  "K7Y2E": {
+    "name": "LD CONSULTANT 2",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXPW": {
+    "name": "LINDEN MEDICAL CENTRE",
+    "address": "9A LINDEN AVENUE"
+  },
+  "RWXJX": {
+    "name": "LODDON VALE PRACTICE",
+    "address": "HURRICANE WAY"
+  },
+  "RWXMR": {
+    "name": "LONDON ROAD CAMPUS'",
+    "address": "BUILDING L19, LONDON ROAD CAMPUS"
+  },
+  "RWXDJ": {
+    "name": "LONDON ROAD SURGERY",
+    "address": "172 LONDON ROAD"
+  },
+  "RWXCY": {
+    "name": "LONDON STREET SURGERY",
+    "address": "72 LONDON STREET"
+  },
+  "RWXDC": {
+    "name": "LONG BARN LANE SURGERY",
+    "address": "22 LONG BARN LANE"
+  },
+  "RWXLR": {
+    "name": "MAGNET LEISURE CENTRE",
+    "address": "HOLMANLEAZE"
+  },
+  "RWXPN": {
+    "name": "MAGNOLIA HOUSE SURGERY",
+    "address": "STATION ROAD"
+  },
+  "RWXQE": {
+    "name": "MANOR GREEN RESPITE UNIT",
+    "address": "ELIZABETH HAWKES WAY"
+  },
+  "RWXEW": {
+    "name": "MARGARET WELLS-FURBY CHILDRENS RESOURCE CENTRE",
+    "address": "GREAT HOLLANDS SQUARE"
+  },
+  "RWXCR": {
+    "name": "MELROSE SURGERY",
+    "address": "73 LONDON ROAD"
+  },
+  "N1B7T": {
+    "name": "MEMORIAL HALL",
+    "address": "STRAIGHT ROAD"
+  },
+  "O3L0O": {
+    "name": "MHICS CONS3",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXCK": {
+    "name": "MILMAN ROAD SURGERY",
+    "address": "MILMAN ROAD"
+  },
+  "RWXER": {
+    "name": "MOBILITY SERVICE",
+    "address": "UNIT 10"
+  },
+  "RWXLH": {
+    "name": "MONTEM SPORTS CENTRE",
+    "address": "MONTEM LANE"
+  },
+  "RWXKP": {
+    "name": "MORTIMER METHODIST CHURCH HALL",
+    "address": "MORTIMER WEST END"
+  },
+  "RWXKQ": {
+    "name": "MORTIMER SURGERY",
+    "address": "72 VICTORIA ROAD"
+  },
+  "RWXE8": {
+    "name": "NEURO SPECIALIST AMH C8",
+    "address": "25 ERLEIGH ROAD"
+  },
+  "RWXAF": {
+    "name": "NEW HOPE",
+    "address": "92 BROADWAY"
+  },
+  "RWX75": {
+    "name": "NEW HORIZONS",
+    "address": "PURSERS COURT"
+  },
+  "S8Y8T": {
+    "name": "NEW WINDSOR COMMUNITY ASSOCIATION",
+    "address": "HANOVER WAY"
+  },
+  "RWXJN": {
+    "name": "NEW WOKINGHAM ROAD SURGERY",
+    "address": "18 NEW WOKINGHAM ROAD"
+  },
+  "RWX81": {
+    "name": "NEWBURY ALCOHOL CLINIC",
+    "address": "91A BARTHOLOMEW STREET"
+  },
+  "RWXFF": {
+    "name": "NEWBURY BAPTIST CHURCH",
+    "address": "MORETON HALL"
+  },
+  "RWX0P": {
+    "name": "NEWBURY CAMHS CONS 2",
+    "address": "LOWER HENWICK FARM"
+  },
+  "K5W1C": {
+    "name": "NEWBURY CAMHS CONS 3",
+    "address": "LOWER HENWICK FARM"
+  },
+  "RWX90": {
+    "name": "NEWBURY CAMHS TEAM",
+    "address": "LOWER HENWICK FARMHOUSE"
+  },
+  "RWXCA": {
+    "name": "NEWBURY FRIENDS MEETING HOUSE",
+    "address": "1 HIGHFIELD AVENUE"
+  },
+  "W7W2E": {
+    "name": "NEWDALE COURT ROCKWOOD",
+    "address": "NEWDALE COURT"
+  },
+  "RWXEA": {
+    "name": "NEWTOWN YOUTH & COMMUNITY CLINIC",
+    "address": "SUN STREET"
+  },
+  "RWXDX": {
+    "name": "NICHOLSONS HOUSE",
+    "address": "NICHOLSONS WALK"
+  },
+  "RWX0I": {
+    "name": "NMP 1 WOKINGHAM MEMORY CLINIC",
+    "address": "41 BARKHAM ROAD"
+  },
+  "RWXHF": {
+    "name": "NORCOT CLINIC",
+    "address": "LYNDHURST ROAD"
+  },
+  "RWXFA": {
+    "name": "NORTHCROFT HOUSE",
+    "address": "AVONBANK HOUSE"
+  },
+  "RWXEY": {
+    "name": "NORTHCROFT SURGERY",
+    "address": "NORTHCROFT LANE"
+  },
+  "RWXMG": {
+    "name": "NUTRITION & DIETETICS AT WEST BERKS HOSPITAL",
+    "address": "WEST BERKSHIRE COMMUNITY HOSPITAL"
+  },
+  "RWXMJ": {
+    "name": "NUTRITION & DIETETICS SUPPORT & LD AT WOKINGHAM HOSPITAL",
+    "address": "WOKINGHAM COMMUNITY HOSPITAL"
+  },
+  "RWX92": {
+    "name": "OAKBRIDGE DAY CENTRE",
+    "address": "IMPERIAL ROAD"
+  },
+  "RWXNX": {
+    "name": "ORCHARD HEALTH CENTRE",
+    "address": "COPE ROAD"
+  },
+  "M2A6S": {
+    "name": "ORCHARD MANOR",
+    "address": "CHERTSEY ROAD"
+  },
+  "RWXMK": {
+    "name": "ORTHOPAEDIC CLINICAL ASSESSMENT SERVICE",
+    "address": "474 FINCHAMPSTEAD ROAD"
+  },
+  "RWXGP": {
+    "name": "OXFORD ROAD",
+    "address": "689 OXFORD ROAD"
+  },
+  "RWXML": {
+    "name": "PAIN MANAGEMENT CLINICAL ASSESSMENT SERVICE",
+    "address": "474 FINCHAMPSTEAD ROAD"
+  },
+  "RWXHX": {
+    "name": "PALMER SCHOOL",
+    "address": "NORREYS AVENUE"
+  },
+  "RWXKA": {
+    "name": "PARKSIDE UNITED REFORM CHURCH HALL",
+    "address": "PALMER PARK AVENUE"
+  },
+  "RWXCQ": {
+    "name": "PEMBROKE SURGERY",
+    "address": "31 ALEXANDRA ROAD"
+  },
+  "RWXDG": {
+    "name": "PEPPARD ROAD SURGERY",
+    "address": "45 PEPPARD ROAD"
+  },
+  "RWXX8": {
+    "name": "PERINATAL - CPE",
+    "address": "2ND FLOOR"
+  },
+  "RWXRD": {
+    "name": "PERINATAL MENTAL HEALTH",
+    "address": "1ST FLOOR, THE OLD FORGE,"
+  },
+  "I0I0A": {
+    "name": "PINKNEYS ROAD",
+    "address": "87 PINKNEYS ROAD"
+  },
+  "RWXT1": {
+    "name": "POA BRACKNELL C1",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXX1": {
+    "name": "POA NEWBURY CONSULTANT 1",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXX2": {
+    "name": "POA NEWBURY CONSULTANT 2",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWX0K": {
+    "name": "POA NEWBURY CONSULTANT 3",
+    "address": "BEECHCROFT"
+  },
+  "RWX0L": {
+    "name": "POA NEWBURY CONSULTANT 4",
+    "address": "BEECHCROFT"
+  },
+  "RWXV1": {
+    "name": "POA READING CONSULTANT 1",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXR1": {
+    "name": "POA SLOUGH CONSULTANT 1",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXS1": {
+    "name": "POA WAM CONSULTANT 1",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXQC": {
+    "name": "PREMIER HOUSE",
+    "address": "CAVERSHAM ROAD"
+  },
+  "RWXNJ": {
+    "name": "PRINCES HOUSE",
+    "address": "73A LONDON ROAD"
+  },
+  "RWXCN": {
+    "name": "PRIORY AVENUE SURGERY",
+    "address": "2 PRIORY AVENUE"
+  },
+  "RWX51": {
+    "name": "PROSPECT PARK HOSPITAL",
+    "address": "HONEY END LANE"
+  },
+  "RWXX3": {
+    "name": "PSYCHIATRY OLDER AGED NEWBURY CONS3",
+    "address": "OLD AGE PSYCHIATRY"
+  },
+  "RWXJM": {
+    "name": "RAINBOW PARK CENTRE",
+    "address": "RAINBOW PARK"
+  },
+  "RWXLT": {
+    "name": "RAMSBURY SURGERY",
+    "address": "HIGH STREET"
+  },
+  "RWXHA": {
+    "name": "RANIKHET SCHOOL",
+    "address": "SPEY ROAD"
+  },
+  "RWX6D": {
+    "name": "RAPID ASSESSMENT - WAMP6D",
+    "address": "COMMUNITY CLINIC"
+  },
+  "RWX82": {
+    "name": "RAVENSWOOD VILLAGE",
+    "address": "NINE MILE RIDE"
+  },
+  "H6X6Y": {
+    "name": "REACH",
+    "address": "1 YEW TREE ROAD"
+  },
+  "S6W1Y": {
+    "name": "REACH LOWER CIPPENHAM LANE",
+    "address": "178 LOWER CIPPENHAM LANE"
+  },
+  "O0O0D": {
+    "name": "REACH UPTON COURT ROAD",
+    "address": "2A UPTON COURT ROAD"
+  },
+  "RWXEE": {
+    "name": "READING ACTIVITIES CENTRE",
+    "address": "69 BULMERSHE ROAD"
+  },
+  "RWXEF": {
+    "name": "READING EAPMS CENTRE",
+    "address": "103-105 BROAD STREET MALL"
+  },
+  "RWXDY": {
+    "name": "READING EAPMS CENTRE -CORPORATE",
+    "address": "105 BROAD STREET"
+  },
+  "RWXAX": {
+    "name": "READING FRIENDS MEETING HOUSE",
+    "address": "2 CHURCH STREET"
+  },
+  "RWX0G": {
+    "name": "READING OPMH CONS 2",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWX0H": {
+    "name": "READING OPMH CONS 3",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXKF": {
+    "name": "READING UNIVERSITY HEALTH CENTRE",
+    "address": "141 WHITEKNIGHTS ROAD"
+  },
+  "RWXH0": {
+    "name": "RECTORY ROAD SURGERY",
+    "address": "14A RECTORY ROAD"
+  },
+  "K5C2A": {
+    "name": "RESOURCE HOUSE",
+    "address": "20 DENMARK STREET"
+  },
+  "U3L1F": {
+    "name": "RESPOND-ADULT RESPITE SERVICE",
+    "address": "3 PRIORS CLOSE"
+  },
+  "RWXMM": {
+    "name": "RHEUMATOLOGY CLINICAL ASSESSMENT SERVICE",
+    "address": "474 FINCHAMPSTEAD ROAD"
+  },
+  "RWX89": {
+    "name": "ROSEBANK HOUSE",
+    "address": "LOWER HENLEY ROAD"
+  },
+  "RWXHC": {
+    "name": "ROUTH LANE BRANCH",
+    "address": "ROUTH LANE"
+  },
+  "RWXMY": {
+    "name": "ROWANS CHILDREN'S CENTRE",
+    "address": "PONDMOOR ROAD"
+  },
+  "RWX83": {
+    "name": "ROYAL BERKSHIRE HOSPITAL",
+    "address": "LONDON ROAD"
+  },
+  "RWXX5": {
+    "name": "RRAT - NEWBURY",
+    "address": "WEST BERKSHIRE HOSPITAL"
+  },
+  "RWXX7": {
+    "name": "RRAT - READING",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXX6": {
+    "name": "RRAT - WOKINGHAM",
+    "address": "WOKINGHAM HOSPITAL"
+  },
+  "RWXPL": {
+    "name": "RUNNYMEDE MEDICAL PRACTICE",
+    "address": "THE HEALTH CENTRE"
+  },
+  "RWXEH": {
+    "name": "RUSSELL STREET SURGERY",
+    "address": "41 RUSSELL STREET"
+  },
+  "RWXCL": {
+    "name": "RUSSELL STREET SURGERY",
+    "address": "79 RUSSELL STREET"
+  },
+  "RWX74": {
+    "name": "RYEISH GREEN BUNGALOW",
+    "address": "HYDE END LANE"
+  },
+  "RWXKK": {
+    "name": "RYEISH GREEN SCHOOL",
+    "address": "RYEISH GREEN"
+  },
+  "W8P8T": {
+    "name": "SALVATION ARMY HALL(NEWBURY)",
+    "address": "NORTHCROFT LANE"
+  },
+  "K6I0G": {
+    "name": "SALVATION ARMY WILLOW HOUSE",
+    "address": "WILLOW STREET"
+  },
+  "RWXPP": {
+    "name": "SANDHURST GROUP PRACTICE",
+    "address": "72 YORKTOWN ROAD"
+  },
+  "RWXQF": {
+    "name": "SCIENCE AND TECHNOLOGY CENTRE",
+    "address": "UNIVERSITY OF READING"
+  },
+  "X5X6S": {
+    "name": "SEYMOUR HOUSE",
+    "address": "21- 25 SEYMOUR ROAD"
+  },
+  "RWXLW": {
+    "name": "SHINFIELD HEALTH CENTRE",
+    "address": "SCHOOL GREEN"
+  },
+  "RWXLV": {
+    "name": "SHINFIELD PARISH HALL",
+    "address": "SCHOOL GREEN"
+  },
+  "RWXGF": {
+    "name": "SHINFIELD SURGERY",
+    "address": "MILLWORTH LANE"
+  },
+  "RWXCH": {
+    "name": "SHINFIELD SURGERY",
+    "address": "5 WHITLEY WOOD ROAD"
+  },
+  "RWX64": {
+    "name": "SIX OAKS",
+    "address": "EASTHAMPSTEAD ROAD"
+  },
+  "RWX93": {
+    "name": "SKIMPED HILL HEALTH CENTRE",
+    "address": "1ST FLOOR"
+  },
+  "Q9G4N": {
+    "name": "SLOUGH CMHT CONS 2",
+    "address": "NEW HORIZONS"
+  },
+  "K0R9N": {
+    "name": "SLOUGH CMHT CONS 3",
+    "address": "NEW HORIZONS"
+  },
+  "RWXQJ": {
+    "name": "SLOUGH COUNCIL OFFICES",
+    "address": "25 WINDSOR ROAD"
+  },
+  "RWXAH": {
+    "name": "SLOUGH HOMELESS - OUR CONCERN",
+    "address": "SERENA MEMORIAL HALL"
+  },
+  "RWXNH": {
+    "name": "SLOUGH PROBATION SERVICE",
+    "address": "REVELSTOKE HOUSE"
+  },
+  "RWXAA": {
+    "name": "SLOUGH TOWN HALL",
+    "address": "ST. MARTINS PLACE"
+  },
+  "RWXMF": {
+    "name": "SLT AT WOKINGHAM HOSPITAL",
+    "address": "WOKINGHAM HOSPITAL"
+  },
+  "RWXMP": {
+    "name": "SLT LD AT GROVE ROAD",
+    "address": "85 GROVE ROAD"
+  },
+  "RWXHN": {
+    "name": "SONNING COMMON HEALTH CENTRE",
+    "address": "WOOD LANE"
+  },
+  "RWXDA": {
+    "name": "SOUTH READING SURGERY",
+    "address": "257 WHITLEY WOOD ROAD"
+  },
+  "RWXGW": {
+    "name": "SOUTHCOTE CLINIC",
+    "address": "CORONATION SQUARE"
+  },
+  "RWXQA": {
+    "name": "SOUTHFIELD SCHOOL",
+    "address": "GIPSY LANE"
+  },
+  "RWXAP": {
+    "name": "SPACE",
+    "address": "81 - 83 WINDSOR ROAD"
+  },
+  "T8V3W": {
+    "name": "SPEEN VILLAGE HALL",
+    "address": "SPEEN LANE"
+  },
+  "RWXFE": {
+    "name": "SPEENHAMLAND SCHOOL",
+    "address": "PELICAN LANE"
+  },
+  "RWXGC": {
+    "name": "ST AGNES CHURCH HALL",
+    "address": "NORTHUMBERLAND AVENUE"
+  },
+  "RWXLA": {
+    "name": "ST BERNADETTE CHURCH HALL",
+    "address": "HORSESHOE ROAD"
+  },
+  "RWXFK": {
+    "name": "ST JOHNS ROAD",
+    "address": "10 ST. JOHNS ROAD"
+  },
+  "N4J0B": {
+    "name": "ST LEONARDS APPROVED PREMISES",
+    "address": "2 SOUTHCOTE ROAD"
+  },
+  "RWXKV": {
+    "name": "ST LUKES CHURCH HALL",
+    "address": "ENGLEFIELD ROAD"
+  },
+  "RWX84": {
+    "name": "ST MARKS HOSPITAL",
+    "address": "ST. MARKS ROAD"
+  },
+  "RWXLC": {
+    "name": "ST MARY THE VIRGIN HALL (READING)",
+    "address": "PURLEY RISE"
+  },
+  "RWXJL": {
+    "name": "ST MARY THE VIRGIN HALL (WOKINGHAM)",
+    "address": "WINNERSH"
+  },
+  "RWXJK": {
+    "name": "ST MARY'S CHURCH HALL",
+    "address": "CHURCH CLOSE"
+  },
+  "RWXFD": {
+    "name": "ST MARY'S HOUSE",
+    "address": "40 LONDON ROAD"
+  },
+  "RWXFC": {
+    "name": "ST MARY'S ROAD SURGERY",
+    "address": "ST. MARYS ROAD"
+  },
+  "L6J4Z": {
+    "name": "ST MICHAEL & ST MARY MAGDALENE CHURCH",
+    "address": "CROWTHORNE ROAD"
+  },
+  "RWXGD": {
+    "name": "ST PAULS CHURCH HALL",
+    "address": "WHITLEY WOOD LANE"
+  },
+  "RWXAV": {
+    "name": "ST PETERS HOSPITAL",
+    "address": "GUILDFORD ROAD"
+  },
+  "RWXLD": {
+    "name": "ST STEPHENS CHURCH",
+    "address": "UPPER BASILDON"
+  },
+  "L7C8L": {
+    "name": "STATION ROAD VOYAGE1",
+    "address": "45 STATION ROAD"
+  },
+  "K2T7A": {
+    "name": "STOKE HOUSE",
+    "address": "6 STOKE POGES LANE"
+  },
+  "RWXKN": {
+    "name": "SWALLOWFIELD PARISH HALL",
+    "address": "CHURCH ROAD"
+  },
+  "RWXKM": {
+    "name": "SWALLOWFIELD SURGERY",
+    "address": "THE STREET"
+  },
+  "RWXAW": {
+    "name": "T2, MAIDENHEAD",
+    "address": "SANDS COURT"
+  },
+  "RWXGA": {
+    "name": "TANFIELD",
+    "address": "2 HEXHAM ROAD"
+  },
+  "RWXQK": {
+    "name": "TECHNOLOGY HOUSE",
+    "address": "10 PINEHILL ROAD"
+  },
+  "L6K1B": {
+    "name": "THAME BARNS CENTRE",
+    "address": "CHURCH ROAD"
+  },
+  "RWXCV": {
+    "name": "THAMES VALLEY CANCER NETWORK",
+    "address": "NUFFIELD ORTHOPAEDIC CENTRE"
+  },
+  "RWXNR": {
+    "name": "THAMES VALLEY HOSPICE",
+    "address": "HATCH LANE"
+  },
+  "E9C9M": {
+    "name": "THAMES VALLEY RECONNECT",
+    "address": "7-9 CREMYLL ROAD"
+  },
+  "RWXFT": {
+    "name": "THATCHAM BAPTIST CHURCH",
+    "address": "THE BURDWOOD CENTRE"
+  },
+  "RWXFQ": {
+    "name": "THATCHAM CATHOLIC HALL",
+    "address": "7 BATH ROAD"
+  },
+  "RWXFP": {
+    "name": "THATCHAM HEALTH CENTRE",
+    "address": "BATH ROAD"
+  },
+  "RWXDV": {
+    "name": "THE ALDERS CHILDREN'S CENTRE",
+    "address": "BRANKSOME HILL ROAD"
+  },
+  "RWXNN": {
+    "name": "THE AMBLESIDE CHILDREN CENTRE",
+    "address": "AMBLESIDE CLOSE"
+  },
+  "RWXGX": {
+    "name": "THE AVENUE CENTRE",
+    "address": "CONWY CLOSE"
+  },
+  "RWXPQ": {
+    "name": "THE CEDARS SURGERY",
+    "address": "8 COOKHAM ROAD"
+  },
+  "RWXMC": {
+    "name": "THE CROFT SURGERY",
+    "address": "THE CROFT"
+  },
+  "RWX8A": {
+    "name": "THE GARDEN CLINIC - P8A",
+    "address": "UPTON HOSPITAL"
+  },
+  "RWXNY": {
+    "name": "THE HEALTH CENTRE (BICESTER)",
+    "address": "COKER CLOSE"
+  },
+  "RWXPA": {
+    "name": "THE HEALTH CENTRE (DIDCOT)",
+    "address": "BRITWELL ROAD"
+  },
+  "RWXPC": {
+    "name": "THE HEALTH CENTRE (KIDINGTON)",
+    "address": "EXETER CLOSE"
+  },
+  "RWXPD": {
+    "name": "THE HEALTH CENTRE (WANTAGE)",
+    "address": "MABLY WAY"
+  },
+  "RWX54": {
+    "name": "THE LITTLE HOUSE",
+    "address": "BAGSHOT ROAD"
+  },
+  "N6F6J": {
+    "name": "THE LODGE",
+    "address": "21 ROUNDSHEAD DRIVE"
+  },
+  "RWXNA": {
+    "name": "THE OAKS CHILDRENS CENTRE",
+    "address": "GREAT HOLLANDS SCHOOL"
+  },
+  "RWXDP": {
+    "name": "THE OAKS FAMILY CENTRE",
+    "address": "83-86 FINCHAMPSTEAD ROAD"
+  },
+  "RWXDT": {
+    "name": "THE OLD FORGE",
+    "address": "45-47 PEACH STREET"
+  },
+  "RWXFG": {
+    "name": "THE PHOENIX CENTRE",
+    "address": "212 NEWTOWN ROAD"
+  },
+  "RWXEV": {
+    "name": "THE PINES PRIMARY PROFESSIONAL CENTRE",
+    "address": "HANWORTH ROAD"
+  },
+  "RWXCD": {
+    "name": "THE THERAPY CENTRE",
+    "address": "6B CHURCH STREET"
+  },
+  "RWXEC": {
+    "name": "THE WAREHOUSE",
+    "address": "1A CUMBERLAND ROAD"
+  },
+  "RWXDR": {
+    "name": "THEALE",
+    "address": "UNIT 7"
+  },
+  "RWXKT": {
+    "name": "THEALE MEDICAL PRACTICE",
+    "address": "ENGLEFIELD ROAD"
+  },
+  "RWXHH": {
+    "name": "TILEHURST CLINIC",
+    "address": "SCHOOL ROAD"
+  },
+  "RWXHD": {
+    "name": "TILEHURST CLINIC",
+    "address": "CORWEN ROAD"
+  },
+  "RWXHE": {
+    "name": "TILEHURST MEDICAL CENTRE",
+    "address": "5-7 NORCOT ROAD"
+  },
+  "RWXDK": {
+    "name": "TILEHURST SURGERY",
+    "address": "TYLERS PLACE"
+  },
+  "RWXCX": {
+    "name": "TILEHURST VILLAGE SURGERY",
+    "address": "92 WESTWOOD ROAD"
+  },
+  "RWXAC": {
+    "name": "TIME SQUARE",
+    "address": "BRACKNELL CMHT"
+  },
+  "RWXLF": {
+    "name": "TOWNLANDS HOSPITAL",
+    "address": "YORK ROAD"
+  },
+  "W6J9Z": {
+    "name": "TRUST HEADQUARTERS",
+    "address": "LONDON ROAD"
+  },
+  "RWXHP": {
+    "name": "TUDOR HOUSE SURGERY",
+    "address": "43 BROAD STREET"
+  },
+  "RWXAK": {
+    "name": "TURNING POINT, NEWBURY",
+    "address": "THE GATEHOUSE"
+  },
+  "RWXNP": {
+    "name": "TWYFORD SURGERY",
+    "address": "6 LODDON HALL ROAD"
+  },
+  "RWXFX": {
+    "name": "TYNEDALE BAPTIST CHURCH",
+    "address": "CRESSINGHAM ROAD"
+  },
+  "S0O0Z": {
+    "name": "UCR CONS1",
+    "address": "41 BARKHAM ROAD"
+  },
+  "T2E3O": {
+    "name": "UCR CONS2",
+    "address": "BARKHAM ROAD"
+  },
+  "D2W0J": {
+    "name": "UCR CONS3",
+    "address": "ST. MARKS HOSPITAL"
+  },
+  "G8S4X": {
+    "name": "UCR CONS4",
+    "address": "ST. MARKS HOSPITAL"
+  },
+  "S1Y6F": {
+    "name": "UCR GP1",
+    "address": "WOKINGHAM HOSPITAL"
+  },
+  "S8S0O": {
+    "name": "UCR GP2",
+    "address": "7-9 CREMYLL ROAD"
+  },
+  "RWXGV": {
+    "name": "UNDERWOOD SURGERY",
+    "address": "1A UNDERWOOD ROAD"
+  },
+  "RWXAQ": {
+    "name": "UNIT 2, ALBURY CLOSE",
+    "address": "STRUCTURED OCCUPATIONAL SERVICE"
+  },
+  "RWXDQ": {
+    "name": "UNIVERSITY MEDICAL CENTRE",
+    "address": "9 NORTHCOURT AVENUE"
+  },
+  "RWXKG": {
+    "name": "UNIVERSITY OF READING",
+    "address": "141 WHITEKNIGHTS ROAD"
+  },
+  "RWX7A": {
+    "name": "UPTON ELDERLY - P7A",
+    "address": "UPTON DAY HOSPITAL"
+  },
+  "RWX85": {
+    "name": "UPTON HOSPITAL",
+    "address": "ALBERT STREET"
+  },
+  "RWX7E": {
+    "name": "UPTON PAEDIATRIC - P7E",
+    "address": "UPTON HOSPITAL"
+  },
+  "RWXN2": {
+    "name": "VAN BOXEL",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "H5P2Q": {
+    "name": "VICKERS BUSINESS CENTRE",
+    "address": "UNIT 1"
+  },
+  "RWX71": {
+    "name": "WALLIS HOUSE",
+    "address": "27 BROAD STREET"
+  },
+  "RWXEL": {
+    "name": "WALTHAM ST LAWRENCE SURGERY",
+    "address": "NEVILLE HALL"
+  },
+  "T6T7Z": {
+    "name": "WAM CMHT",
+    "address": "NICHOLSONS HOUSE"
+  },
+  "RWXEM": {
+    "name": "WARGRAVE SURGERY",
+    "address": "VICTORIA ROAD"
+  },
+  "RWXEG": {
+    "name": "WAYLEN DROP IN CENTRE",
+    "address": "WAYLEN STREET"
+  },
+  "RWXAD": {
+    "name": "WAYMEAD",
+    "address": "BRACKNELL CTPLD"
+  },
+  "O8W1Q": {
+    "name": "WELBY CLOSE DISABILITIES TRUST",
+    "address": "25 WELBY CLOSE"
+  },
+  "RWXN1": {
+    "name": "WEST",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "X1F2B": {
+    "name": "WEST BERKS CMHT HT1",
+    "address": "HILLCROFT HOUSE"
+  },
+  "RWX86": {
+    "name": "WEST BERKSHIRE COMMUNITY HOSPITAL",
+    "address": "ROOKES WAY"
+  },
+  "O4I2S": {
+    "name": "WEST BERKSHIRE COMMUNITY HOSPITAL CDC",
+    "address": "ROOKES WAY"
+  },
+  "RWXGM": {
+    "name": "WEST READING METHODIST CHURCH",
+    "address": "380 OXFORD ROAD"
+  },
+  "RWX17": {
+    "name": "WEST STREET (HENLEY-ON-THAMES)",
+    "address": "132 WEST STREET"
+  },
+  "RWXNE": {
+    "name": "WESTCALL & 111 SERVICE",
+    "address": "UNIT 130"
+  },
+  "RWXGQ": {
+    "name": "WESTERN ELMS AVENUE SITE",
+    "address": "WESTERN ELMS AVENUE"
+  },
+  "RWXCP": {
+    "name": "WESTERN ELMS SURGERY",
+    "address": "WESTERN ELMS LODGE"
+  },
+  "RWXJJ": {
+    "name": "WESTFIELD ROAD SITE",
+    "address": "3 WESTFIELD ROAD"
+  },
+  "RWXDD": {
+    "name": "WESTWOOD ROAD SURGERY",
+    "address": "66 WESTWOOD ROAD"
+  },
+  "RWX87": {
+    "name": "WEXHAM PARK HOSPITAL",
+    "address": "WEXHAM STREET"
+  },
+  "I6Z3Z": {
+    "name": "WHITE HOUSE",
+    "address": "334 HORTON ROAD"
+  },
+  "RWXHW": {
+    "name": "WHITELOCKE SCHOOL",
+    "address": "NORREYS AVENUE"
+  },
+  "RWXFY": {
+    "name": "WHITLEY CLINIC (READING)",
+    "address": "268 NORTHUMBERLAND AVENUE"
+  },
+  "RWXGE": {
+    "name": "WHITLEY WOOD SURGERY",
+    "address": "96 WHITLEY WOOD LANE"
+  },
+  "RWXKJ": {
+    "name": "WILDERNESS ROAD SURGERY",
+    "address": "1 WILDERNESS ROAD"
+  },
+  "RWXNM": {
+    "name": "WINCHCOMBE SCHOOL",
+    "address": "MAPLE CRESCENT"
+  },
+  "RWX76": {
+    "name": "WINDSOR AND MAIDENHEAD CMHT",
+    "address": "REFORM ROAD"
+  },
+  "RWXLL": {
+    "name": "WINDSOR DIALYSIS UNIT",
+    "address": "1 MAIDENHEAD ROAD"
+  },
+  "RWXLM": {
+    "name": "WINDSOR LEISURE CENTRE",
+    "address": "STOVELL ROAD"
+  },
+  "RWXJH": {
+    "name": "WINNERSH SURGERY",
+    "address": "10 MELBOURNE AVENUE"
+  },
+  "V4L1Y": {
+    "name": "WINSTON COURT OPTALIS",
+    "address": "5 WINSTON COURT"
+  },
+  "RWX05": {
+    "name": "WINTERBOURNE HOUSE",
+    "address": "53-55 ARGYLE ROAD"
+  },
+  "RWXPE": {
+    "name": "WITNEY COMMUNITY HOSPITAL",
+    "address": "WELCH WAY"
+  },
+  "RWX70": {
+    "name": "WOKINGHAM COMMUNITY HOSPITAL",
+    "address": "WOKINGHAM HOSPITAL"
+  },
+  "RWXCC": {
+    "name": "WOKINGHAM FRIENDS MEETING HOUSE",
+    "address": "28 DENTON ROAD"
+  },
+  "RWXW1": {
+    "name": "WOKINGHAM OPMH C1",
+    "address": "PROSPECT PARK HOSPITAL"
+  },
+  "RWXW2": {
+    "name": "WOKINGHAM OPMH C2",
+    "address": "POA - WOKINGHAM"
+  },
+  "RWXW3": {
+    "name": "WOKINGHAM OPMH C3",
+    "address": "BARKHAM DAY HOSPITAL"
+  },
+  "RWXW4": {
+    "name": "WOKINGHAM OPMH C4",
+    "address": "BARKHAM DAY HOSPITAL"
+  },
+  "RWXJR": {
+    "name": "WOODLEY CENTRE SURGERY",
+    "address": "106 CROCKHAMWELL ROAD"
+  },
+  "RWXJV": {
+    "name": "WOODLEY PARK SURGERY",
+    "address": "7 HEADLEY ROAD"
+  },
+  "RWXJW": {
+    "name": "WOODLEY TOWN HALL",
+    "address": "THE OAKWOOD CENTRE"
+  },
+  "RWXGL": {
+    "name": "WOOLTON HILL SURGERY",
+    "address": "TRADE LANE"
+  },
+  "RWXJF": {
+    "name": "WOOSEHILL COMMUNITY HALL",
+    "address": "FERNLEA DRIVE"
+  },
+  "RWXJE": {
+    "name": "WOOSEHILL SURGERY",
+    "address": "FERNLEA DRIVE"
+  },
+  "RWX91": {
+    "name": "YEW TREE LODGE",
+    "address": "17-19 REDLANDS ROAD"
+  },
+  "RWXDW": {
+    "name": "YORK HOUSE",
+    "address": "41 SHEET STREET"
+  },
+  "RWXJY": {
+    "name": "YOUTH & COMMUNITY HALL",
+    "address": "HURRICANE WAY"
   }
+}
 }
