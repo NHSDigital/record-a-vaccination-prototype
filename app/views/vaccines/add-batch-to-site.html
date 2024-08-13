@@ -8,25 +8,36 @@
   {% include "vaccines/_header.html" %}
 {% endblock %}
 
+{% block outerContent %}
+  {{ backLink({
+    href: "/vaccines/" + vaccine.id,
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
+{% endblock %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {{ backLink({ href: "/vaccines/" + vaccine.id, text: "Back" }) }}
+      <h1 class="nhsuks-heading-xl">Add batch</h1>
 
-      <h1 class="nhsuks-heading-xl">Edit batch</h1>
-
-      <form action="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/update" method="post" novalidate="true">
+      <form action="/vaccines/{{ vaccine.id }}/add-batch-check" method="post" novalidate="true">
 
         {{ input({
           "label": {
-            "text": "Batch number"
+            "text": "Batch number",
+            classes: "nhsuk-label--s"
+          },
+          hint: {
+            text: "For example, XX123456"
           },
           "id": "batch-number",
           "name": "batchNumber",
           classes: "nhsuk-input--width-20",
-          value: batch.batchNumber
+          value: data.batchNumber
         }) }}
+
 
         {{ dateInput({
           "id": "batchExpiryDate",
@@ -41,26 +52,25 @@
             {
               "name": "day",
               "classes": "nhsuk-input--width-2",
-              value: day
+              value: data["batchExpiryDate-day"]
             },
             {
               "name": "month",
               "classes": "nhsuk-input--width-2",
-              value: month
+              value: data["batchExpiryDate-month"]
             },
             {
               "name": "year",
               "classes": "nhsuk-input--width-4",
-              value: year
+              value: data["batchExpiryDate-year"]
             }
           ]
         }) }}
 
-        {{ button({
-          "text": "Continue"
-      }) }}
+          {{ button({
+            "text": "Continue"
+          }) }}
       </form>
-
 
     </div>
   </div>

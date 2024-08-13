@@ -16,10 +16,10 @@
 
       <h1 class="nhsuk-heading-xl">Vaccines</h1>
 
-      <p class="nhsuk-body-l">Add and edit your vaccines.</p>
+      <p class="nhsuk-body-l">Add and edit your vaccines for your organisation.</p>
 
       {{ button({
-        "text": "Add vaccines",
+        "text": "Add vaccine",
         "href": "/vaccines/choose-site"
       }) }}
 
@@ -42,7 +42,7 @@
 
         {% set vaccinesAtSite = [] %}
         {% for vaccine in (data.vaccines) %}
-          {% if not (vaccinesAtSite | arrayOrStringIncludes(vaccine.vaccine)) %}
+          {% if vaccine.siteCode == site and not (vaccinesAtSite | arrayOrStringIncludes(vaccine.vaccine)) %}
             {% set vaccinesAtSite = (vaccinesAtSite.push(vaccine.vaccine), vaccinesAtSite) %}
           {% endif %}
         {% endfor %}
@@ -80,17 +80,17 @@
                   </td>
                   <td class="nhsuk-table__cell ">
                     {% set count = 0 %}
+                    {% set thisVaccine = {} %}
                     {% for vaccine in data.vaccines %}
                       {% if (vaccine.siteCode == site) and (vaccine.vaccine == vaccineAtSite) and (vaccine.vaccineProduct == vaccineProduct) %}
-                        {% set count = count + 1 %}
+                        {% set thisVaccine = vaccine %}
                       {% endif %}
                     {% endfor %}
-                    {{ count }}
-
+                    {{ thisVaccine.batches | length }}
                   </td>
                   <td class="nhsuk-table__cell ">
-                    <div class="nhsuk-u-margin-bottom-2"><a href="#" class="nhsuk-link">View product</a></div>
-                    <div><a href="#" class="nhsuk-link">Add batch</a></div>
+                    <div class="nhsuk-u-margin-bottom-2"><a href="/vaccines/{{ thisVaccine.id }}" class="nhsuk-link">View product</a></div>
+                    <div><a href="/vaccines/{{ thisVaccine.id }}/add" class="nhsuk-link">Add batch</a></div>
                   </td>
                 </tr>
               {% endfor %}
@@ -98,6 +98,7 @@
           </table>
         {% endfor %}
       {% endfor %}
+
 
     </div>
   </div>

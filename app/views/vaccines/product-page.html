@@ -1,0 +1,125 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% block header %}
+  {% include "vaccines/_header.html" %}
+{% endblock %}
+
+{% block outerContent %}
+  {{ backLink({
+    href: "/vaccines/",
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-xl">{{ vaccine.vaccineProduct }}</h1>
+
+      {{ summaryList({
+        classes: "nhsuk-u-margin-bottom-6",
+        rows: [
+          {
+            key: {
+              text: "Vaccine"
+            },
+            value: {
+              text: "RSV"
+            }
+          },
+          {
+            key: {
+              text: "Dose"
+            },
+            value: {
+              html: "0.3ml/mg"
+            }
+          },
+          {
+            key: {
+              text: "Site"
+            },
+            value: {
+              html: site.name
+            }
+          }
+        ]
+      }) }}
+
+      {{ button({
+        text: "Add batch",
+        href: "/vaccines/" + vaccine.id + "/add"
+      }) }}
+
+    </div>
+  </div>
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+
+      <table class="nhsuk-table nhsuk-u-margin-top-7">
+        <caption class="nhsuk-table__caption nhsuk-u-font-size-32">Batches</caption>
+        <thead role="rowgroup" class="nhsuk-table__head">
+          <tr role="row">
+            <th role="columnheader" scope="col">
+              Batch number
+            </th>
+            <th role="columnheader" scope="col">
+              Expiry date
+            </th>
+            <th role="columnheader" scope="col">
+              Status
+            </th>
+            <th role="columnheader" scope="col">
+              Depleted date
+            </th>
+            <th role="columnheader" scope="col">
+            </th>
+
+          </tr>
+        </thead>
+        <tbody class="nhsuk-table__body">
+          {% for batch in vaccine.batches %}
+            <tr class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">
+                {{ batch.batchNumber }}
+              </td>
+              <td class="nhsuk-table__cell">
+                {{ batch.expiryDate | govukDate }}
+              </td>
+              <td class="nhsuk-table__cell">
+                {% if batch.depletedDate %}
+                  {{ tag({text: "Depleted", classes: "nhsuk-tag--grey" }) }}
+                {% elif (batch.expiryDate | daysAgo) > 0 %}
+                  {{ tag({text: "Expired", classes: "nhsuk-tag--grey" }) }}
+                {% else %}
+                  {{ tag({text: "Active" }) }}
+                {% endif %}
+              </td>
+              <td class="nhsuk-table__cell">
+                {% if batch.depletedDate %}
+                  {{ batch.depletedDate | govukDate }}
+                {% endif %}
+              </td>
+              <td class="nhsuk-table__cell">
+                <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}">Edit batch <span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
+
+                {% if not batch.depletedDate %}
+                  <br><a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/deplete">Deplete batch <span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
+                {% endif %}
+              </td>
+
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+{% endblock %}

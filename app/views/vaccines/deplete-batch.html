@@ -14,26 +14,18 @@
 
       {{ backLink({ href: "/vaccines/" + vaccine.id, text: "Back" }) }}
 
-      <h1 class="nhsuks-heading-xl">Edit batch</h1>
+      <h1 class="nhsuks-heading-l">Deplete batch</h1>
 
-      <form action="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/update" method="post" novalidate="true">
+      <p>This batch will be marked as pending until midnight of your depletion date.</p>
 
-        {{ input({
-          "label": {
-            "text": "Batch number"
-          },
-          "id": "batch-number",
-          "name": "batchNumber",
-          classes: "nhsuk-input--width-20",
-          value: batch.batchNumber
-        }) }}
+      <form action="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/depleted" method="post" novalidate="true">
 
         {{ dateInput({
-          "id": "batchExpiryDate",
-          "namePrefix": "batchExpiryDate",
+          "id": "batchDepletedDate",
+          "namePrefix": "batchDepletedDate",
           "fieldset": {
             "legend": {
-              "text": "Expiry date",
+              "text": "Depleted date",
               "classes": "nhsuk-label--s"
             }
           },
@@ -41,24 +33,25 @@
             {
               "name": "day",
               "classes": "nhsuk-input--width-2",
-              value: day
+              value: ""
             },
             {
               "name": "month",
               "classes": "nhsuk-input--width-2",
-              value: month
+              value: ""
             },
             {
               "name": "year",
               "classes": "nhsuk-input--width-4",
-              value: year
+              value: ""
             }
           ]
         }) }}
 
         {{ button({
-          "text": "Continue"
-      }) }}
+          text: "Confirm"
+        })}}
+
       </form>
 
 
