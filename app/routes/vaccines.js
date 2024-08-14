@@ -1,6 +1,5 @@
 module.exports = (router) => {
 
-
   // Adding a vaccine
   router.post('/vaccines/add', (req, res) => {
 
@@ -63,10 +62,9 @@ module.exports = (router) => {
 
   // Adding a batch to an existing vaccine at a site
   router.post('/vaccines/:id/added', (req, res) => {
-
     const data = req.session.data
-
     const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.id)
+    if (!vaccine) { res.redirect('/vaccines'); return }
 
     const generatedId = Math.floor(Math.random() * 10000000).toString()
 
@@ -89,65 +87,51 @@ module.exports = (router) => {
 
   // Viewing a vaccine product at a site
   router.get('/vaccines/:id', (req, res) => {
-
     const data = req.session.data
-
     const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.id)
-
+    if (!vaccine) { res.redirect('/vaccines'); return }
     const site = data.sites[vaccine.siteCode]
 
     res.render('vaccines/product-page', {
       vaccine,
       site,
     })
-
   })
 
   // Adding a batch to a vaccine product at a site
   router.get('/vaccines/:id/add', (req, res) => {
-
     const data = req.session.data
-
     const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.id)
-    vaccine.id = req.params.id
-
+    if (!vaccine) { res.redirect('/vaccines'); return }
     const site = data.sites[vaccine.siteCode]
 
     res.render('vaccines/add-batch-to-site', {
       vaccine,
       site,
     })
-
   })
 
   // Adding a batch check answers page
   router.get('/vaccines/:id/add-batch-check', (req, res) => {
-
     const data = req.session.data
-
     const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.id)
-    vaccine.id = req.params.id
-
+    if (!vaccine) { res.redirect('/vaccines'); return }
     const site = data.sites[vaccine.siteCode]
 
     res.render('vaccines/add-batch-to-site-check', {
       vaccine,
       site,
     })
-
   })
 
   // Editing a batch
   router.get('/vaccines/:vaccineId/:batchNumber', (req, res) => {
-
     const data = req.session.data
-
     const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.vaccineId)
-
-
+    if (!vaccine) { res.redirect('/vaccines'); return }
     const site = data.sites[vaccine.siteCode]
-
     const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
+    if (!batch) { res.redirect(`/vaccines/${vaccine.id}`); return }
 
     const expiryDate = new Date(batch.expiryDate)
     const day = expiryDate.getDate()
@@ -162,7 +146,6 @@ module.exports = (router) => {
       month,
       year
     })
-
   })
 
   // Updating a batch
@@ -170,7 +153,9 @@ module.exports = (router) => {
 
     const data = req.session.data
     const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.vaccineId)
+    if (!vaccine) { res.redirect('/vaccines'); return }
     const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
+    if (!batch) { res.redirect(`/vaccines/${vaccine.id}`); return }
 
     const expiryDate = new Date(data['batchExpiryDate-year'], (data['batchExpiryDate-month'] - 1), data['batchExpiryDate-day']).toISOString().substring(0,10)
 
@@ -178,36 +163,30 @@ module.exports = (router) => {
     batch.expiryDate = expiryDate;
 
     res.redirect('/vaccines/' + vaccine.id)
-
   })
 
   // View page to deplete a batch
   router.get('/vaccines/:vaccineId/:batchNumber/deplete', (req, res) => {
-
     const data = req.session.data
-
     const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.vaccineId)
-
-
+    if (!vaccine) { res.redirect('/vaccines'); return }
     const site = data.sites[vaccine.siteCode]
-
     const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
+    if (!batch) { res.redirect(`/vaccines/${vaccine.id}`); return }
 
     res.render('vaccines/deplete-batch', {
       vaccine,
       site,
       batch
     })
-
   })
 
   // Mark batch as depleted
   router.post('/vaccines/:vaccineId/:batchNumber/depleted', (req, res) => {
-
     const data = req.session.data
-
     const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.vaccineId)
-
+    if (!vaccine) { res.redirect('/vaccines'); return }
+    const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
     const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
 
     const depletedDate = new Date(data['batchDepletedDate-year'], (data['batchDepletedDate-month'] - 1), data['batchDepletedDate-day']).toISOString().substring(0,10)
@@ -215,8 +194,5 @@ module.exports = (router) => {
     batch.depletedDate = depletedDate
 
     res.redirect('/vaccines/' + vaccine.id)
-
   })
-
-
 }
