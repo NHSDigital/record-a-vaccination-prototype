@@ -12,78 +12,76 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-        {{ backLink({ href: "/reports/v7", text: "Back" }) }}
+      {{ backLink({ href: "/reports/v7", text: "Back" }) }}
 
-      <h1 class="nhsuk-heading-xl">Choose dates</h1>
+      <form action="/reports/choose-vaccines-2" method="post">
 
-      <p class="nhsuk-body-l">Select a date range for your report</p>
+        {% from 'radios/macro.njk' import radios %}
 
-      {% from 'radios/macro.njk' import radios %}
-
-      {{ radios({
-        "idPrefix": "vaccine",
-        "name": "vaccine",
-        "fieldset": {
-          "legend": {
-
-            "classes": "nhsuk-fieldset__legend--xl",
-            "isPageHeading": true
-          }
-        },
-        "items": [
-          {
-            "value": "Today",
-            "text": "Today",
-            checked: (data.date == "Today"),
-            conditional: {
-              html: Today
+        {{ radios({
+          "idPrefix": "dateRange",
+          "name": "dateRange",
+          "fieldset": {
+            "legend": {
+              text: "Choose dates",
+              "classes": "nhsuk-fieldset__legend--xl",
+              "isPageHeading": true
             }
           },
-          {
-            "value": "Yestday",
-            "text": "Yestday",
-            checked: (data.date == "Yestday"),
-            conditional: {
-              html: Yestday
-            }
+          hint: {
+            text: "Select a date range for the report"
           },
-          {
-            "value": "Last7days",
-            "text": "Last 7 days",
-            checked: (data.date == "Last7days"),
-            conditional: {
-              html: Last7days
+          "items": [
+            {
+              "value": "Today",
+              "text": "Today",
+              checked: (data.dateRange == "Today"),
+              conditional: {
+                html: Today
+              }
+            },
+            {
+              "value": "Yesterday",
+              "text": "Yesterday",
+              checked: (data.dateRange == "Yestday"),
+              conditional: {
+                html: Yestday
+              }
+            },
+            {
+              "value": "Last7days",
+              "text": "Last 7 days",
+              checked: (data.dateRange == "Last7days"),
+              conditional: {
+                html: Last7days
+              }
+            },
+            {
+              "value": "Last14days",
+              "text": "Last 14 days",
+              checked: (data.dateRange == "Last14days"),
+              conditional: {
+                html: Last14days
+              }
+            },
+            {
+              divider: "or"
+            },
+            {
+              "value": "custom_date_range",
+              "text": "Choose a custom date range",
+              checked: (data.dateRange == "custom_date_range"),
+              conditional: {
+                html: custom_date_range
+              }
             }
-          },
-          {
-            "value": "Last14days",
-            "text": "Last 14 days",
-            checked: (data.date == "Last14days"),
-            conditional: {
-              html: Last14days
-            }
-          },
-          {
-            divider: "or"
-          },
-          {
-            "value": "custom_date_range",
-            "text": "Choose a custom date range",
-            checked: (data.vaccine == "custom_date_range"),
-            conditional: {
-              html: custom_date_range
-            }
-          }
-        ]
-      }) }}
+          ]
+        }) }}
 
-    
-
-
-      {{ button({
-        "text": "Continue",
-        "href": "/reports/choose-vaccines-2"
-      }) }}
+        {{ button({
+          "text": "Continue"
+        }) }}
+      </form>
 
     </div>
   </div>
