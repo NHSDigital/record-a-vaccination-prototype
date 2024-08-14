@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Reports
+{% endblock %}
+
+{% block footer %}
+  {{ footer({
+    links: [
+      {
+        "URL": "/regions/v1/setup-test",
+        "label": "Jump forward in time"
+      }
+    ]
+  })}}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      <h1 class="nhsuk-heading-xl">Reports</h1>
+
+      <p class="nhsuk-body-l">Create and downlaod reports</p>
+
+      {{ button({
+        "text": "Create report",
+        "href": "/reports/choose-dates-2"
+      }) }}
+
+
+    </div>
+  </div>
+
+
+
+
+
+{% endblock %}
