@@ -18,74 +18,71 @@
 
       <p class="nhsuk-body-l">Select a date range for your report</p>
 
-      {% from 'date-input/macro.njk' import dateInput %}
+      {% from 'radios/macro.njk' import radios %}
 
-      {{ dateInput({
-        "id": "example",
-        "namePrefix": "example",
+      {{ radios({
+        "idPrefix": "vaccine",
+        "name": "vaccine",
         "fieldset": {
           "legend": {
-            "text": "From",
-            "classes": "nhsuk-label--l",
+
+            "classes": "nhsuk-fieldset__legend--xl",
             "isPageHeading": true
           }
         },
-        "hint": {
-          "text": "For example, 15 3 1984"
-        },
         "items": [
           {
-            "name": "day",
-            "classes": "nhsuk-input--width-2"
+            "value": "Today",
+            "text": "Today",
+            checked: (data.date == "Today"),
+            conditional: {
+              html: Today
+            }
           },
           {
-            "name": "month",
-            "classes": "nhsuk-input--width-2"
+            "value": "Yestday",
+            "text": "Yestday",
+            checked: (data.date == "Yestday"),
+            conditional: {
+              html: Yestday
+            }
           },
           {
-            "name": "year",
-            "classes": "nhsuk-input--width-4"
+            "value": "Last7days",
+            "text": "Last 7 days",
+            checked: (data.date == "Last7days"),
+            conditional: {
+              html: Last7days
+            }
+          },
+          {
+            "value": "Last14days",
+            "text": "Last 14 days",
+            checked: (data.date == "Last14days"),
+            conditional: {
+              html: Last14days
+            }
+          },
+          {
+            divider: "or"
+          },
+          {
+            "value": "custom_date_range",
+            "text": "Choose a custom date range",
+            checked: (data.vaccine == "custom_date_range"),
+            conditional: {
+              html: custom_date_range
+            }
           }
         ]
       }) }}
 
-
-      {% from 'date-input/macro.njk' import dateInput %}
-
-      {{ dateInput({
-        "id": "example",
-        "namePrefix": "example",
-        "fieldset": {
-          "legend": {
-            "text": "To",
-            "classes": "nhsuk-label--l",
-            "isPageHeading": true
-          }
-        },
-        "hint": {
-          "text": "For example, 15 3 1984"
-        },
-        "items": [
-          {
-            "name": "day",
-            "classes": "nhsuk-input--width-2"
-          },
-          {
-            "name": "month",
-            "classes": "nhsuk-input--width-2"
-          },
-          {
-            "name": "year",
-            "classes": "nhsuk-input--width-4"
-          }
-        ]
-      }) }}
-
+    
 
 
       {{ button({
         "text": "Continue",
-        "href": "/reports/choose-vaccines-1"
+        "href": "/reports/choose-vaccines-2"
       }) }}
 
     </div>

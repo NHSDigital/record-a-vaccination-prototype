@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  Choose vaccine
+  Choose site
 {% endblock %}
 
 {% block header %}
@@ -10,17 +10,17 @@
 
 {% block content %}
 
+{{ backLink({ href: "/reports/choose-vaccines-2", text: "Back" }) }}
+
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
 
-          {{ backLink({ href: "/reports/choose-dates-1", text: "Back" }) }}
 
-          <h1 class="nhsuks-heading-xl">Choose vaccine</h1>
-          <p class="nhsuk-body-l">Select the vaccines your organisation gives</p>
+          <h1 class="nhsuk-heading-xl">Choose sites</h1>
 
+          <form action="/regions/v1/organisation-details" method="post">
 
-            <form>
-              {{ checkboxes({
+            {{ checkboxes({
                 "idPrefix": "example",
                 "name": "example",
                 "fieldset": {
@@ -34,28 +34,30 @@
                 "items": [
                   {
                     "value": "covid-19",
-                    "text": "COVID-19"
+                    "text": "Verington (RH63S)"
                   },
                   {
                     "value": "Flu",
-                    "text": "Flu"
+                    "text": "Tower (S204X)"
                   },
                   {
                     "value": "Pertussis",
-                    "text": "Pertussis"
+                    "text": "The Exchange (RH5S9)"
                   },
                   {
                     "value": "RSV",
-                    "text": "RSV"
+                    "text": "Willowbank Day Hospital (RH5C4)"
                   }
                   ]
               }) }}
-            </form>
-            {{ button({
-              "text": "Continue",
-              "href": "/reports/choose-site-1"
-            }) }}
-          </form>
+
+
+          {{ button({
+            "text": "Continue",
+            "href": "/reports/check-2"
+          }) }}
+
+        </form>
 
 
         </div>
