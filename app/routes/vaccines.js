@@ -187,7 +187,6 @@ module.exports = (router) => {
     const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.vaccineId)
     if (!vaccine) { res.redirect('/vaccines'); return }
     const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
-    const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
 
     const depletedDate = new Date(data['batchDepletedDate-year'], (data['batchDepletedDate-month'] - 1), data['batchDepletedDate-day']).toISOString().substring(0,10)
 
