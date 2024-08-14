@@ -10,6 +10,14 @@
 
 {% set organisation = {name: data.nhsTrusts[data.organisationCode]} %}
 
+{% block outerContent %}
+  {{ backLink({
+    href: "/vaccines/" + vaccine.id + "/add",
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
+{% endblock %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
@@ -25,7 +33,7 @@
               text: "Site name"
             },
             value: {
-              text: data.sites[data.siteCode].name
+              text: site.name
             }
           },
           {
@@ -33,7 +41,7 @@
               text: "ODS Code"
             },
             value: {
-              html: data["siteCode"]
+              html: vaccine.siteCode
             }
           },
           {
@@ -41,13 +49,11 @@
               text: "Address"
             },
             value: {
-              html: data.sites[data.siteCode].address
+              html: site.address
             }
           }
         ]
       }) }}
-
-      <p class="nhsuk-u-margin-top-0"><a class="nhsuk-link nhsuk-link--no-visited-state" href="/vaccines/choose-site">Change site</a></p>
 
       {{ summaryList({
         classes: "nhsuk-u-margin-bottom-2 nhsuk-u-margin-top-6",
@@ -57,7 +63,7 @@
               text: "Vaccine"
             },
             value: {
-              html: data["vaccine"]
+              html: vaccine.vaccine
             }
           },
           {
@@ -65,13 +71,11 @@
               text: "Product"
             },
             value: {
-              html: data["vaccineProduct"]
+              html: vaccine.vaccineProduct
             }
           }
         ]
       }) }}
-
-      <p class="nhsuk-u-margin-top-0"><a class="nhsuk-link nhsuk-link--no-visited-state" href="/vaccines/choose-vaccine">Change vaccine</a></p>
 
       {{ summaryList({
         classes: "nhsuk-u-margin-bottom-2 nhsuk-u-margin-top-6",
@@ -95,11 +99,11 @@
         ]
       }) }}
 
-      <p class="nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-8"><a class="nhsuk-link nhsuk-link--no-visited-state" href="/vaccines/add-batch">Edit batch</a></p>
+      <p class="nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-8"><a class="nhsuk-link nhsuk-link--no-visited-state" href="/vaccines/{{ vaccine.id }}/add">Edit batch</a></p>
 
 
 
-      <form action="/vaccines/add" method="post">
+      <form action="/vaccines/{{ vaccine.id }}/added" method="post">
         {{ button({
           "text": "Confirm"
         }) }}
