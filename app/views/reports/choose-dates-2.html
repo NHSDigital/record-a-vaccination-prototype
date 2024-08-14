@@ -12,13 +12,11 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-        {{ backLink({ href: "/reports/v7", text: "Back" }) }}
+      {{ backLink({ href: "/reports/v7", text: "Back" }) }}
 
-      <h1 class="nhsuk-heading-xl">Choose dates</h1>
+      <form action="/reports/choose-vaccines-2" method="post">
 
-      <p class="nhsuk-body-l">Select a date range for your report</p>
-
-      {% from 'radios/macro.njk' import radios %}
+        {% from 'radios/macro.njk' import radios %}
 
       {{ radios({
         "idPrefix": "vaccine",
@@ -77,15 +75,13 @@
         ]
       }) }}
 
-      {% set customDateHTML %}
-      content goes here
-     {% endset %}
+    
 
 
-      {{ button({
-        "text": "Continue",
-        "href": "/reports/choose-vaccines-2"
-      }) }}
+        {{ button({
+          "text": "Continue"
+        }) }}
+      </form>
 
     </div>
   </div>
