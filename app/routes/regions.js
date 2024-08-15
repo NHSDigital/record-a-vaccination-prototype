@@ -275,3 +275,4 @@ module.exports = router => {
 
     res.redirect('/regions/v1')
   })
+}
