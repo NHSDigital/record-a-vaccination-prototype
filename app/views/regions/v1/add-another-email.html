@@ -6,7 +6,7 @@
 
 {% block outerContent %}
   {{ backLink({
-    href: "/regions/v1/organisations/" + organisation.code, 
+    href: "/regions/v1/organisations/" + organisation.code,
     text: "Back",
     classes: "nhsuk-u-margin-top-4"
   }) }}
@@ -18,12 +18,12 @@
 
       <h1 class="nhsuk-heading-l">Add another user</h1>
 
-      <p>Choose another user for {{ data.nhsTrusts[organisation.code] }}.</p>
+      <p>Choose a user at {{ data.nhsTrusts[organisation.code] }} to receive instructions about creating an account.</p>
 
-      <p>They will receive instructions on setting up their account.</p>
+      <p>They will also be able to set up and add their organisation’s users and vaccination sites.</p>
 
       <form action="/regions/v1/organisations/{{ organisation.code }}/add-email-check" method="post" novalidate>
-        
+
         {{ input({
           "label": {
             "text": "First name"
@@ -43,7 +43,7 @@
           classes: "nhsuk-input--width-20",
           value: data.lastName
         }) }}
-        
+
         {{ input({
           "label": {
             "text": "NHS email address"
