@@ -21,18 +21,7 @@
 
       {% if organisation.status == 'Invited' %}
         <p>You have invited this organisation to create an NHS Record a vaccination service account.</p>
-
-      {% elseif organisation.status == 'Awaiting contract'  %}
-        <p>This organisation has set up their users and is ready to use the service.</p>
-
-        <p>They cannot record vaccinations until you activate the organisation’s account. You should do this once all relevant checks and contracts have been agreed. </p>
-
-        {{ button({
-          text: "Activate organisation",
-          href: "/regions/v1/organisations/" + organisation.code + '/activate'
-        }) }}
-
-      {% elseif organisation.status == 'Active'  %}
+      {% else  %}
         <p>The organisation can record vaccinations.</p>
       {% endif %}
     </div>
