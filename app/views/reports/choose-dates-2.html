@@ -16,9 +16,66 @@
 
       <form action="/reports/choose-vaccines-2" method="post">
 
-        {% from 'radios/macro.njk' import radios %}
 
-      {{ radios({
+      {% set custom_date_range %}
+      {% from 'date-input/macro.njk' import dateInput %}
+{{ dateInput({
+  id: "example",
+  namePrefix: "example",
+  fieldset: {
+    legend: {
+      text: "From",
+      classes: "nhsuk-label--s"
+    }
+  },
+  hint: {
+    text: "For example, 15 3 1984"
+  },
+  items: [
+    {
+      name: "day",
+      classes: "nhsuk-input--width-2"
+    },
+    {
+      name: "month",
+      classes: "nhsuk-input--width-2"
+    },
+    {
+      name: "year",
+      classes: "nhsuk-input--width-4"
+    }
+  ]
+}) }}
+{{ dateInput({
+    id: "example",
+    namePrefix: "example",
+    fieldset: {
+      legend: {
+        text: "To",
+        classes: "nhsuk-label--s"
+      }
+    },
+    hint: {
+      text: "For example, 15 3 1984"
+    },
+    items: [
+      {
+        name: "day",
+        classes: "nhsuk-input--width-2"
+      },
+      {
+        name: "month",
+        classes: "nhsuk-input--width-2"
+      },
+      {
+        name: "year",
+        classes: "nhsuk-input--width-4"
+      }
+    ]
+  }) }}
+     {% endset %}
+     
+     {{ radios({
         "idPrefix": "date",
         "name": "date",
         "fieldset": {
@@ -75,65 +132,54 @@
         ]
       }) }}
 
-      {% set custom_date_rangeHTML %}
-      {% from 'date-input/macro.njk' import dateInput %}
-{{ dateInput({
-  id: "example",
-  namePrefix: "example",
-  fieldset: {
-    legend: {
-      text: "From",
-      classes: "nhsuk-label--m",
-      isPageHeading: true
-    }
-  },
-  hint: {
-    text: "For example, 15 3 1984"
-  },
-  items: [
-    {
-      name: "day",
-      classes: "nhsuk-input--width-2"
-    },
-    {
-      name: "month",
-      classes: "nhsuk-input--width-2"
-    },
-    {
-      name: "year",
-      classes: "nhsuk-input--width-4"
-    }
-  ]
-}) }}
-{{ dateInput({
-    id: "example",
-    namePrefix: "example",
-    fieldset: {
-      legend: {
-        text: "To",
-        classes: "nhsuk-label--m",
-        isPageHeading: true
-      }
-    },
-    hint: {
-      text: "For example, 15 3 1984"
-    },
-    items: [
-      {
-        name: "day",
-        classes: "nhsuk-input--width-2"
-      },
-      {
-        name: "month",
-        classes: "nhsuk-input--width-2"
-      },
-      {
-        name: "year",
-        classes: "nhsuk-input--width-4"
-      }
-    ]
-  }) }}
-     {% endset %}
+
+
+
+
+
+      {% set covid19Product %}
+      {{ radios({
+        "idPrefix": "vaccineProductCovid",
+        "name": "vaccineProduct",
+        "fieldset": {
+          "legend": {
+            "text": "Vaccine product"
+          }
+        },
+        "items": [
+          {
+            "value": "Comirnaty Original/Omicron BA.4-5",
+            "text": "Comirnaty Original/Omicron BA.4-5",
+            checked: (data.vaccineProduct == "Comirnaty Original/Omicron BA.4-5")
+          }
+        ]
+      }) }}
+    {% endset %}
+
+    {% set fluProduct %}
+      {{ radios({
+        "idPrefix": "vaccineProductFlu",
+        "name": "vaccineProduct",
+        "fieldset": {
+          "legend": {
+            "text": "Vaccine product"
+          }
+        },
+        "items": [
+          {
+            "value": "Fluenz Tetra - LAIV",
+            "text": "Fluenz Tetra - LAIV",
+            checked: (data.vaccineProduct == "Fluenz Tetra - LAIV")
+          },
+          {
+            "value": "Quadrivalent Influenza vaccine - QIVe",
+            "text": "Quadrivalent Influenza vaccine - QIVe",
+            checked: (data.vaccineProduct == "Quadrivalent Influenza vaccine - QIVe")
+          }
+        
+        ]
+      }) }}
+    {% endset %}
 
 
         {{ button({
