@@ -19,11 +19,11 @@
         {% from 'radios/macro.njk' import radios %}
 
       {{ radios({
-        "idPrefix": "vaccine",
-        "name": "vaccine",
+        "idPrefix": "date",
+        "name": "date",
         "fieldset": {
           "legend": {
-
+            "text": "Choose dates",
             "classes": "nhsuk-fieldset__legend--xl",
             "isPageHeading": true
           }
@@ -75,7 +75,65 @@
         ]
       }) }}
 
-    
+      {% set custom_date_rangeHTML %}
+      {% from 'date-input/macro.njk' import dateInput %}
+{{ dateInput({
+  id: "example",
+  namePrefix: "example",
+  fieldset: {
+    legend: {
+      text: "From",
+      classes: "nhsuk-label--m",
+      isPageHeading: true
+    }
+  },
+  hint: {
+    text: "For example, 15 3 1984"
+  },
+  items: [
+    {
+      name: "day",
+      classes: "nhsuk-input--width-2"
+    },
+    {
+      name: "month",
+      classes: "nhsuk-input--width-2"
+    },
+    {
+      name: "year",
+      classes: "nhsuk-input--width-4"
+    }
+  ]
+}) }}
+{{ dateInput({
+    id: "example",
+    namePrefix: "example",
+    fieldset: {
+      legend: {
+        text: "To",
+        classes: "nhsuk-label--m",
+        isPageHeading: true
+      }
+    },
+    hint: {
+      text: "For example, 15 3 1984"
+    },
+    items: [
+      {
+        name: "day",
+        classes: "nhsuk-input--width-2"
+      },
+      {
+        name: "month",
+        classes: "nhsuk-input--width-2"
+      },
+      {
+        name: "year",
+        classes: "nhsuk-input--width-4"
+      }
+    ]
+  }) }}
+     {% endset %}
 
 
         {{ button({
