@@ -220,7 +220,7 @@ module.exports = router => {
         postcode: 'MK6 5LD'
       },
       type: 'NHS Trust',
-      status: 'Awaiting contract',
+      status: 'Active',
       leadUsers: [
         {
           email: 'sarah.jane@mk.nhs.net',
@@ -241,7 +241,7 @@ module.exports = router => {
         postcode: 'SS0 0RY'
       },
       type: 'NHS Trust',
-      status: 'Awaiting contract',
+      status: 'Active',
       leadUsers: [
         {
           firstName: 'Richard',
@@ -262,7 +262,7 @@ module.exports = router => {
         postcode: 'NN17 1NU'
       },
       type: 'Community Pharmacy',
-      status: 'Awaiting contract',
+      status: 'Active',
       leadUsers: [
         {
           firstName: 'Sara',
@@ -274,28 +274,5 @@ module.exports = router => {
     })
 
     res.redirect('/regions/v1')
-  })
-
-  // Check a second lead user for an organisation
-  router.post('/regions/v1/organisations/:code/answer-activate', (req, res) => {
-    const organisationsAdded = req.session.data.organisationsAdded || []
-    const organisation = organisationsAdded.find((org) => org.code === req.params.code)
-
-    if (req.body.activate === 'yes') {
-      organisation.status = 'Active'
-      res.redirect('/regions/v1/organisations/' + organisation.code + '?justactivated=yes')
-    } else {
-      res.redirect('/regions/v1/organisations/' + organisation.code)
-    }
-  })
-
-  // Check a second lead user for an organisation
-  router.get('/regions/v1/organisations/:code/activate', (req, res) => {
-    const organisationsAdded = req.session.data.organisationsAdded || []
-    const organisation = organisationsAdded.find((org) => org.code === req.params.code)
-
-    res.render('regions/v1/activate', {
-      organisation
-    })
   })
 }
