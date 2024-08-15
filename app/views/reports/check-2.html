@@ -22,7 +22,6 @@
 
 
       <h1 class="nhsuk-heading-xl">Check and confirm</h1>
-      {% from "summary-list/macro.njk" import summaryList %}
 
       {{ summaryList({
         rows: [
@@ -65,12 +64,12 @@
               text: "Vaccines"
             },
             value: {
-              text: "COVID-19, Flu"
+              text: (data.vaccines | join(", "))
             },
             actions: {
               items: [
                 {
-                  href: "#",
+                  href: "/reports/choose-vaccines-2",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
