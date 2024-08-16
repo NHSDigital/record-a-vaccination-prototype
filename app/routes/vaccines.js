@@ -92,9 +92,12 @@ module.exports = (router) => {
     if (!vaccine) { res.redirect('/vaccines'); return }
     const site = data.sites[vaccine.siteCode]
 
+    const today = new Date().toISOString().substring(0,10)
+
     res.render('vaccines/product-page', {
       vaccine,
       site,
+      today
     })
   })
 
@@ -188,9 +191,12 @@ module.exports = (router) => {
     if (!vaccine) { res.redirect('/vaccines'); return }
     const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
 
-    const depletedDate = new Date(data['batchDepletedDate-year'], (data['batchDepletedDate-month'] - 1), data['batchDepletedDate-day']).toISOString().substring(0,10)
+    let depletedDate = new Date()
+    depletedDate.setUTCDate(data['batchDepletedDate-day'])
+    depletedDate.setUTCMonth(data['batchDepletedDate-month'] - 1)
+    depletedDate.setUTCFullYear(data['batchDepletedDate-year'])
 
-    batch.depletedDate = depletedDate
+    batch.depletedDate = depletedDate.toISOString().substring(0,10)
 
     res.redirect('/vaccines/' + vaccine.id)
   })
