@@ -200,4 +200,33 @@ module.exports = (router) => {
 
     res.redirect('/vaccines/' + vaccine.id)
   })
+
+
+  // View page to reactivate a batch
+  router.get('/vaccines/:vaccineId/:batchNumber/reactivate', (req, res) => {
+    const data = req.session.data
+    const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.vaccineId)
+    if (!vaccine) { res.redirect('/vaccines'); return }
+    const site = data.sites[vaccine.siteCode]
+    const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
+    if (!batch) { res.redirect(`/vaccines/${vaccine.id}`); return }
+
+    res.render('vaccines/reactivate', {
+      vaccine,
+      site,
+      batch
+    })
+  })
+
+  // Mark batch as active again
+  router.post('/vaccines/:vaccineId/:batchNumber/reactivated', (req, res) => {
+    const data = req.session.data
+    const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.vaccineId)
+    if (!vaccine) { res.redirect('/vaccines'); return }
+    const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
+
+    batch.depletedDate = null
+
+    res.redirect('/vaccines/' + vaccine.id)
+  })
 }
