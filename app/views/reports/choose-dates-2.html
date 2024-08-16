@@ -16,171 +16,124 @@
 
       <form action="/reports/choose-vaccines-2" method="post">
 
+        {% set custom_date_range %}
+          {{ dateInput({
+            id: "example",
+            fieldset: {
+              legend: {
+                text: "From",
+                classes: "nhsuk-label--s"
+              }
+            },
+            hint: {
+              text: "For example, 1 3 2024"
+            },
+            items: [
+              {
+                label: "Day",
+                name: "from[day]",
+                classes: "nhsuk-input--width-2"
+              },
+              {
+                label: "Month",
+                name: "from[month]",
+                classes: "nhsuk-input--width-2"
+              },
+              {
+                label: "Year",
+                name: "from[year]",
+                classes: "nhsuk-input--width-4"
+              }
+            ]
+          }) }}
 
-      {% set custom_date_range %}
-      {% from 'date-input/macro.njk' import dateInput %}
-{{ dateInput({
-  id: "example",
-  namePrefix: "example",
-  fieldset: {
-    legend: {
-      text: "From",
-      classes: "nhsuk-label--s"
-    }
-  },
-  hint: {
-    text: "For example, 1 3 2024"
-  },
-  items: [
-    {
-      name: "day",
-      classes: "nhsuk-input--width-2"
-    },
-    {
-      name: "month",
-      classes: "nhsuk-input--width-2"
-    },
-    {
-      name: "year",
-      classes: "nhsuk-input--width-4"
-    }
-  ]
-}) }}
-{{ dateInput({
-    id: "example",
-    namePrefix: "example",
-    fieldset: {
-      legend: {
-        text: "To",
-        classes: "nhsuk-label--s"
-      }
-    },
-    hint: {
-      text: "For example, 14 3 2024"
-    },
-    items: [
-      {
-        name: "day",
-        classes: "nhsuk-input--width-2"
-      },
-      {
-        name: "month",
-        classes: "nhsuk-input--width-2"
-      },
-      {
-        name: "year",
-        classes: "nhsuk-input--width-4"
-      }
-    ]
-  }) }}
-     {% endset %}
-     
-     {{ radios({
-        "idPrefix": "date",
-        "name": "date",
-        "fieldset": {
-          "legend": {
-            "text": "Choose dates",
-            "classes": "nhsuk-fieldset__legend--xl",
-            "isPageHeading": true
-          }
-        },
-        "items": [
-          {
-            "value": "Today",
-            "text": "Today",
-            checked: (data.date == "Today"),
-            conditional: {
-              html: Today
+          {{ dateInput({
+              id: "example",
+              fieldset: {
+                legend: {
+                  text: "To",
+                  classes: "nhsuk-label--s"
+                }
+              },
+              hint: {
+                text: "For example, 14 3 2024"
+              },
+              items: [
+                {
+                  label: "Day",
+                  name: "to[day]",
+                  classes: "nhsuk-input--width-2"
+                },
+                {
+                  label: "Month",
+                  name: "to[month]",
+                  classes: "nhsuk-input--width-2"
+                },
+                {
+                  label: "Year",
+                  name: "to[year]",
+                  classes: "nhsuk-input--width-4"
+                }
+              ]
+            }) }}
+       {% endset %}
+
+       {{ radios({
+          "idPrefix": "date",
+          "name": "date",
+          "fieldset": {
+            "legend": {
+              "text": "Choose dates",
+              "classes": "nhsuk-fieldset__legend--xl",
+              "isPageHeading": true
             }
           },
-          {
-            "value": "Yesterday",
-            "text": "Yesterday",
-            checked: (data.date == "Yesterday"),
-            conditional: {
-              html: Yesterday
+          "items": [
+            {
+              "value": "Today",
+              "text": "Today",
+              checked: (data.date == "Today"),
+              conditional: {
+                html: Today
+              }
+            },
+            {
+              "value": "Yesterday",
+              "text": "Yesterday",
+              checked: (data.date == "Yesterday"),
+              conditional: {
+                html: Yesterday
+              }
+            },
+            {
+              "value": "Last7days",
+              "text": "Last 7 days",
+              checked: (data.date == "Last7days"),
+              conditional: {
+                html: Last7days
+              }
+            },
+            {
+              "value": "Last14days",
+              "text": "Last 14 days",
+              checked: (data.date == "Last14days"),
+              conditional: {
+                html: Last14days
+              }
+            },
+            {
+              divider: "or"
+            },
+            {
+              "value": "custom_date_range",
+              "text": "Enter a past date range within a 2 week period",
+              checked: (data.vaccine == "custom_date_range"),
+              conditional: {
+                html: custom_date_range
+              }
             }
-          },
-          {
-            "value": "Last7days",
-            "text": "Last 7 days",
-            checked: (data.date == "Last7days"),
-            conditional: {
-              html: Last7days
-            }
-          },
-          {
-            "value": "Last14days",
-            "text": "Last 14 days",
-            checked: (data.date == "Last14days"),
-            conditional: {
-              html: Last14days
-            }
-          },
-          {
-            divider: "or"
-          },
-          {
-            "value": "custom_date_range",
-            "text": "Choose a custom date range",
-            checked: (data.vaccine == "custom_date_range"),
-            conditional: {
-              html: custom_date_range
-            }
-          }
-        ]
-      }) }}
-
-
-
-
-
-
-      {% set covid19Product %}
-      {{ radios({
-        "idPrefix": "vaccineProductCovid",
-        "name": "vaccineProduct",
-        "fieldset": {
-          "legend": {
-            "text": "Vaccine product"
-          }
-        },
-        "items": [
-          {
-            "value": "Comirnaty Original/Omicron BA.4-5",
-            "text": "Comirnaty Original/Omicron BA.4-5",
-            checked: (data.vaccineProduct == "Comirnaty Original/Omicron BA.4-5")
-          }
-        ]
-      }) }}
-    {% endset %}
-
-    {% set fluProduct %}
-      {{ radios({
-        "idPrefix": "vaccineProductFlu",
-        "name": "vaccineProduct",
-        "fieldset": {
-          "legend": {
-            "text": "Vaccine product"
-          }
-        },
-        "items": [
-          {
-            "value": "Fluenz Tetra - LAIV",
-            "text": "Fluenz Tetra - LAIV",
-            checked: (data.vaccineProduct == "Fluenz Tetra - LAIV")
-          },
-          {
-            "value": "Quadrivalent Influenza vaccine - QIVe",
-            "text": "Quadrivalent Influenza vaccine - QIVe",
-            checked: (data.vaccineProduct == "Quadrivalent Influenza vaccine - QIVe")
-          }
-        
-        ]
-      }) }}
-    {% endset %}
-
+          ]
+        }) }}
 
         {{ button({
           "text": "Continue"
