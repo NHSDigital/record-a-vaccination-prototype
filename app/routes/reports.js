@@ -6,11 +6,11 @@ module.exports = (router) => {
     let dateError, dateFromError, dateToError
     let fromDate, toDate, daysApart
 
-    if (data.from.year && data.from.month && data.from.day) {
+    if (data.from?.year && data.from?.month && data.from?.day) {
       fromDate = new Date(data.from.year, data.from.month, data.from.day, 12)
     }
 
-    if (data.to.year && data.to.month && data.to.day) {
+    if (data.to?.year && data.to?.month && data.to?.day) {
       toDate = new Date(data.to.year, data.to.month, data.to.day, 12)
     }
 
@@ -56,11 +56,11 @@ module.exports = (router) => {
     const date = data.date
     let fromDate, toDate, daysApart
 
-    if (data.from.year && data.from.month && data.from.day) {
+    if (data.from?.year && data.from?.month && data.from?.day) {
       fromDate = new Date(data.from.year, data.from.month, data.from.day, 12)
     }
 
-    if (data.to.year && data.to.month && data.to.day) {
+    if (data.to?.year && data.to?.month && data.to?.day) {
       toDate = new Date(data.to.year, data.to.month, data.to.day, 12)
     }
 
