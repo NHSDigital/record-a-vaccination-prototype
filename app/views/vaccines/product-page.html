@@ -94,7 +94,9 @@
                 {{ batch.expiryDate | govukDate }}
               </td>
               <td class="nhsuk-table__cell">
-                {% if batch.depletedDate %}
+                {% if batch.depletedDate == "2024-08-16" %}
+                  {{ tag({text: "Pending", classes: "nhsuk-tag--grey" }) }}
+                {% elif batch.depletedDate %}
                   {{ tag({text: "Depleted", classes: "nhsuk-tag--grey" }) }}
                 {% elif (batch.expiryDate | daysAgo) > 0 %}
                   {{ tag({text: "Expired", classes: "nhsuk-tag--grey" }) }}
