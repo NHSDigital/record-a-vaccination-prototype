@@ -14,11 +14,36 @@
 
       {{ backLink({ href: "/reports/v7", text: "Back" }) }}
 
-      <form action="/reports/choose-vaccines-2" method="post">
+
+      {% if dateError %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [{
+            text: dateError,
+            href: "#date-1"
+          }]
+        }) }}
+      {% endif %}
+
+      {% if dateFromError or dateToError %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [{
+            text: dateFromError,
+            href: "#from-from[day]"
+          } if dateFromError,
+          {
+            text: dateToError,
+            href: "#to-to[day]"
+          } if dateToError]
+        }) }}
+      {% endif %}
+
+      <form action="/reports/set-dates" method="post">
 
         {% set custom_date_range %}
           {{ dateInput({
-            id: "example",
+            id: "from",
             fieldset: {
               legend: {
                 text: "From",
@@ -28,27 +53,33 @@
             hint: {
               text: "For example, 1 3 2024"
             },
+            errorMessage: {
+              text: dateFromError
+            } if dateFromError,
             items: [
               {
                 label: "Day",
                 name: "from[day]",
+                value: data.from.day,
                 classes: "nhsuk-input--width-2"
               },
               {
                 label: "Month",
                 name: "from[month]",
+                value: data.from.month,
                 classes: "nhsuk-input--width-2"
               },
               {
                 label: "Year",
                 name: "from[year]",
+                value: data.from.year,
                 classes: "nhsuk-input--width-4"
               }
             ]
           }) }}
 
           {{ dateInput({
-              id: "example",
+              id: "to",
               fieldset: {
                 legend: {
                   text: "To",
@@ -58,25 +89,32 @@
               hint: {
                 text: "For example, 14 3 2024"
               },
+              errorMessage: {
+                text: dateToError
+              } if dateToError,
               items: [
                 {
                   label: "Day",
                   name: "to[day]",
+                  value: data.to.day,
                   classes: "nhsuk-input--width-2"
                 },
                 {
                   label: "Month",
                   name: "to[month]",
+                  value: data.to.month,
                   classes: "nhsuk-input--width-2"
                 },
                 {
                   label: "Year",
                   name: "to[year]",
+                  value: data.to.year,
                   classes: "nhsuk-input--width-4"
                 }
               ]
             }) }}
        {% endset %}
+
 
        {{ radios({
           "idPrefix": "date",
@@ -88,6 +126,9 @@
               "isPageHeading": true
             }
           },
+          errorMessage: {
+            text: dateError
+          } if dateError,
           "items": [
             {
               "value": "Today",
@@ -127,7 +168,7 @@
             {
               "value": "custom_date_range",
               "text": "Enter a past date range within a 2 week period",
-              checked: (data.vaccine == "custom_date_range"),
+              checked: (data.date == "custom_date_range"),
               conditional: {
                 html: custom_date_range
               }
