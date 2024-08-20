@@ -7,7 +7,7 @@ module.exports = {
       "email": "jane.smith@nhs.net",
       "firstName": "Jane",
       "lastName": "Smith",
-      "role": "Lead administrator",
+      "role": "Administrator",
       "permissions": [
         "record vaccinations", "manage vaccines", "manage users"
       ],
