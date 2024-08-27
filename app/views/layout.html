@@ -36,6 +36,12 @@
 <!-- Footer code examples can be found at https://service-manual.nhs.uk/design-system/components/footer -->
 {% block footer %}
   {{ footer({
+    links: [
+      {
+        URL: "/contact-us",
+        label: "Contact us"
+      }
+    ]
   })}}
 {% endblock %}
 
