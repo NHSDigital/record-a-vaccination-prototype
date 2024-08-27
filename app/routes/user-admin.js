@@ -140,6 +140,68 @@ module.exports = (router) => {
     res.redirect('/user-admin/v3')
   })
 
+  router.get('/user-admin/v4', (req, res) => {
+
+    const data = req.session.data;
+    const statusesToInclude = ['Invited', 'Active'];
+    const users = data.users.filter((user) => statusesToInclude.includes(user.status))
+
+    const deactivatedUsers = data.users.filter((user) => user.status === 'Deactivated')
+
+    res.render('user-admin/v4/index',{
+      users,
+      deactivatedUsers
+    })
+  })
+
+  router.get('/user-admin/v4/deactivated', (req, res) => {
+
+    const data = req.session.data;
+    const deactivatedUsers = data.users.filter((user) => user.status === 'Deactivated')
+
+    res.render('user-admin/v4/deactivated',{
+      deactivatedUsers
+    })
+  })
+
+  router.get('/user-admin/v4/:id/deactivate', (req, res) => {
+
+    const data = req.session.data;
+    const user = req.session.data.users.find((user) => user.id === req.params.id)
+
+    res.render('user-admin/v4/deactivate',{
+      user
+    })
+  })
+
+  router.post('/user-admin/v4/:id/deactivate', (req, res) => {
+
+    const data = req.session.data;
+    const user = req.session.data.users.find((user) => user.id === req.params.id)
+    user.status = 'Deactivated'
+
+    res.redirect('/user-admin/v4')
+  })
+
+  router.get('/user-admin/v4/:id/reactivate', (req, res) => {
+
+    const data = req.session.data;
+    const user = req.session.data.users.find((user) => user.id === req.params.id)
+
+    res.render('user-admin/v4/reactivate',{
+      user
+    })
+  })
+
+  router.post('/user-admin/v4/:id/reactivate', (req, res) => {
+
+    const data = req.session.data;
+    const user = req.session.data.users.find((user) => user.id === req.params.id)
+    user.status = 'Active'
+
+    res.redirect('/user-admin/v4')
+  })
+
   router.post('/user-admin/v4/check-answers', (req, res) => {
     const { firstName } = req.session.data
     const { lastName } = req.session.data

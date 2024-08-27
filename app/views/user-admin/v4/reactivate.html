@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Add user
+{% endblock %}
+
+{% block header %}
+  {% include "user-admin/v4/_header.html" %}
+{% endblock %}
+
+{% block outerContent %}
+  {{ backLink({
+    href: "/user-admin/v4/deactivated",
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Reactivate {{ user.firstName }} {{ user.lastName }}</h1>
+
+      <p>{{ user.firstName }} {{ user.lastName }} ({{ user.email}}) will be able to sign in and use NHS Record a vaccination again, using their Okta account.</p>
+
+      <p class="nhsuk-u-margin-bottom-8">If they need to reset their Okta account password, they should <a href="/contact-us">contact&nbsp;the&nbsp;helpdesk</a>.</p>
+
+      <form action="/user-admin/v4/{{ user.id }}/reactivate" method="post" novalidate="true">
+        {{ button({
+          "text": "Confirm, reactivate " + user.firstName
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+
+{% endblock %}

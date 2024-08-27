@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Add user
+{% endblock %}
+
+{% block header %}
+  {% include "user-admin/v4/_header.html" %}
+{% endblock %}
+
+{% block outerContent %}
+  {{ backLink({
+    href: "/user-admin/v4/users/" + user.id + "/change-role",
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Deactivate {{ user.firstName }} {{ user.lastName }}</h1>
+
+      <p>{{ user.firstName }} {{ user.lastName }} ({{ user.email}}) will no longer be able to sign in and use NHS Record a vaccination.</p>
+
+      <p>Their Okta account will remain active. Any other services they use Okta to sign in to will be unaffected.</p>
+
+      <p>You can reactivate their account again later.</p>
+
+      <p>They will receive an email to let them know their account has been deactivated.</p>
+
+      <form action="/user-admin/v4/{{ user.id }}/deactivate" method="post" novalidate="true">
+        {{ button({
+          "text": "Confirm, deactivate " + user.firstName,
+          classes: "nhsuk-button--warning"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+
+{% endblock %}

@@ -8,15 +8,19 @@
   {% include "user-admin/v4/_header.html" %}
 {% endblock %}
 
+{% block outerContent %}
+  {{ backLink({
+    href: "/user-admin/v4",
+    text: "Back to Manage users",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
+{% endblock %}
+
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
-      <h1 class="nhsuk-heading-xl">Manage users</h1>
-
-      {{ button({
-        "text": "Add user",
-        "href": "/user-admin/v4/add-user"
-      }) }}
+      <h1 class="nhsuk-heading-xl">Deactivated users</h1>
 
       <table class="nhsuk-table">
         <caption class="nhsuk-table__caption">Users</caption>
@@ -40,7 +44,7 @@
           </tr>
         </thead>
         <tbody class="nhsuk-table__body">
-          {% for user in (users | sort(false, true, "firstName")) %}
+          {% for user in (deactivatedUsers | sort(false, true, "firstName")) %}
             <tr class="nhsuk-table__row">
               <td class="nhsuk-table__cell">
                 {{ user.firstName }} {{ user.lastName }}
@@ -52,18 +56,13 @@
               <td class="nhsuk-table__cell ">{{ user.email }}</td>
               <td class="nhsuk-table__cell ">{{ user.role }}</td>
               <td class="nhsuk-table__cell ">{{ user.status }}</td>
-              <td class="nhsuk-table__cell">
-                <a href="/user-admin/v4/users/{{ user.id }}/change-role" class="nhsuk-link">Change</a>
+              <td class="nhsuk-table__cell ">
+                <a href="/user-admin/v4/{{ user.id }}/reactivate" class="nhsuk-link">Reactivate</a>
               </td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
-
-      {% if deactivatedUsers | length > 0 %}
-        <p><a href="/user-admin/v4/deactivated">View {{ deactivatedUsers | length | plural ("deactivated user") }}</a> </p>
-      {% endif %}
-
 
     </div>
   </div>
