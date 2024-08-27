@@ -9,5 +9,6 @@ require('./routes/user-onboarding')(router)
 require('./routes/user-profile')(router)
 require('./routes/vaccines')(router)
 require('./routes/reports')(router)
+require('./routes/prototype-admin')(router)
 
 module.exports = router;
