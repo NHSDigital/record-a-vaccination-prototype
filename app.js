@@ -4,6 +4,7 @@ const fs = require('fs');
 
 // External dependencies
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 const express = require('express');
 const nunjucks = require('nunjucks');
@@ -22,6 +23,8 @@ const locals = require('./app/locals');
 const routes = require('./app/routes');
 const documentationRoutes = require('./docs/documentation_routes');
 const utils = require('./lib/utils');
+
+const prototypeAdminRoutes = require('./middleware/prototype-admin-routes');
 
 // Set configuration variables
 const port = process.env.PORT || config.port;
@@ -42,18 +45,21 @@ app.locals.useAutoStoreData = (useAutoStoreData === 'true');
 app.locals.useCookieSessionStore = (useCookieSessionStore === 'true');
 app.locals.serviceName = config.serviceName;
 
+// Use cookie middleware to parse cookies
+app.use(cookieParser());
+
 // Nunjucks configuration for application
 const appViews = [
   path.join(__dirname, 'app/views/'),
   path.join(__dirname, 'node_modules/nhsuk-frontend/packages/components'),
   path.join(__dirname, 'docs/views/'),
+  path.join(__dirname, 'lib/prototype-admin/'),
 ];
 
 const nunjucksConfig = {
   autoescape: true,
-  noCache: true
+  noCache: true,
 };
-
 
 nunjucksConfig.express = app;
 
@@ -71,6 +77,9 @@ const sessionOptions = {
     maxAge: 1000 * 60 * 60 * 4, // 4 hours
   },
 };
+
+// Authentication
+app.use(authentication);
 
 // Support session data in cookie or memory
 if (useCookieSessionStore === 'true' && !onlyDocumentation) {
@@ -103,7 +112,7 @@ if (useAutoStoreData === 'true') {
 function checkFiles() {
   const nodeModulesExists = fs.existsSync(path.join(__dirname, '/node_modules'));
   if (!nodeModulesExists) {
-    console.error('ERROR: Node module folder missing. Try running `npm install`');
+    console.error('ERROR: Node module folder missing. Try running `npm install`'); // eslint-disable-line no-console
     process.exit(0);
   }
 
@@ -124,19 +133,13 @@ const sessionDataDefaultsFile = path.join(dataDirectory, '/session-data-defaults
 const sessionDataDefaultsFileExists = fs.existsSync(sessionDataDefaultsFile);
 
 if (!sessionDataDefaultsFileExists) {
-  console.log('Creating session data defaults file');
+  console.log('Creating session data defaults file'); // eslint-disable-line no-console
   if (!fs.existsSync(dataDirectory)) {
     fs.mkdirSync(dataDirectory);
   }
 
   fs.createReadStream(path.join(__dirname, '/lib/template.session-data-defaults.js'))
     .pipe(fs.createWriteStream(sessionDataDefaultsFile));
-}
-
-// Check if the app is documentation only
-if (onlyDocumentation !== 'true') {
-  // Require authentication if not
-  app.use(authentication);
 }
 
 // Local variables
@@ -214,6 +217,8 @@ app.post('/examples/passing-data/clear-data', (req, res) => {
   res.render('examples/passing-data/clear-data-success');
 });
 
+app.use('/prototype-admin', prototypeAdminRoutes);
+
 // Redirect all POSTs to GETs - this allows users to use POST for autoStoreData
 app.post(/^\/([^.]+)$/, (req, res) => {
   res.redirect(`/${req.params[0]}`);
@@ -221,14 +226,14 @@ app.post(/^\/([^.]+)$/, (req, res) => {
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {
-  const err = new Error(`Page not found: ${req.path}`);
+  const err = new Error(`Page not found: ${req.path}`); // eslint-disable-line no-console
   err.status = 404;
   next(err);
 });
 
 // Display error
 app.use((err, req, res) => {
-  console.error(err.message);
+  console.error(err.message); // eslint-disable-line no-console
   res.status(err.status || 500);
   res.send(err.message);
 });

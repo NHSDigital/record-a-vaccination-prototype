@@ -1,12 +1,35 @@
 # NHS.UK prototype kit Changelog
 
+## 4.12.0 - 15 August 2024
+
+:wrench:
+
+- Enable console logging for nodemon
+- Replace basic auth with a custom authentication process
+- Update NHS.UK frontend to [v8.3.0](https://github.com/nhsuk/nhsuk-frontend/releases/tag/v8.3.0)
+
+## 4.11.0 - 27 June 2024
+
+:wrench: **Fixes**
+
+- Disable nunjucks caching so changes to templates show immediately
+- Stop watching .html and .scss files and restarting the server whenever they are changed
+- Ignore eslint warnings
+
+:pencil2: **Content**
+
+- Update README with start script
+- Fix a typo in setup docs
+- Update NHS website page template to be closer to live
+- Remove Covid banner from 'Health A-Z', 'Live Well', 'Mental Health' and 'Pregnancy' templates
+
 ## 4.10.0 - 22 February 2024
 
 :wrench: Fixes
 
 - Add aria-labels to coronavirus hub page and mental health pagenavigation links
 - Removed the duplicate selector in '\_related-nav.scss'
-- Removed Covid banner from 'Social care and support guide' and 'NHS Services' templates 
+- Removed Covid banner from 'Social care and support guide' and 'NHS Services' templates
 - Use 'String#startsWith' method instead of getting the index of a substring in utils.js
 - Change unexpected var for const in gulpfile.js
 - Update 'Social care and support guide' template to use primary cards with chevrons
