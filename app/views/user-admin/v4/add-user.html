@@ -9,8 +9,8 @@
 {% endblock %}
 
 {% block outerContent %}
-  {{ backLink({ 
-    href: "/user-admin/v4", 
+  {{ backLink({
+    href: "/user-admin/v4",
     text: "Back",
     classes: "nhsuk-u-margin-top-4"
   }) }}
@@ -19,32 +19,32 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-      {% if data.showErrors == "true" %}
+      {% if (firstNameError or lastNameError or emailError or roleError or clinicianError) %}
         {{ errorSummary({
           "titleText": "There is a problem",
           "errorList": [
             {
-              "text": "Enter first name",
+              "text": firstNameError,
               "href": "#first-name"
-            } if (data.firstName == ''),
+            } if firstNameError,
             {
-              "text": "Enter last name",
+              "text": lastNameError,
               "href": "#last-name"
-            } if (data.lastName == ''),
+            } if lastNameError,
             {
-              "text": "Enter NHS email address",
+              "text": emailError,
               "href": "#email"
-            } if (data.email == ''),
+            } if emailError,
             {
-              "text": "Select if they are a clinician",
+              "text": clinicianError,
               "href": "#clinician"
-            } if (data.clinician == ''),
+            } if clinicianError,
             {
-              "text": "Select permission level",
+              "text": roleError,
               "href": "#role"
-            } if (data.role == '')
+            } if roleError
           ]
-        }) }}      
+        }) }}
       {% endif %}
 
       <h1 class="nhsuks-heading-xl">Add user</h1>
@@ -60,8 +60,8 @@
           classes: "nhsuk-input--width-20",
           value: data.firstName,
           "errorMessage": {
-            "text": "Enter first name"
-          } if (data.showErrors == "true" and data.firstName == '')
+            "text": firstNameError
+          } if firstNameError
         }) }}
 
         {{ input({
@@ -73,8 +73,8 @@
           classes: "nhsuk-input--width-20",
           value: data.lastName,
           "errorMessage": {
-            "text": "Enter last name"
-          } if (data.showErrors == "true" and data.lastName == '')
+            "text": lastNameError
+          } if lastNameError
         }) }}
 
         {{ input({
@@ -86,8 +86,8 @@
           type: "email",
           value: data.email,
           "errorMessage": {
-            "text": "Enter email address"
-          } if (data.showErrors == "true" and data.email == '')
+            "text": emailError
+          } if emailError
         }) }}
 
         {{ radios({
@@ -114,10 +114,10 @@
             }
           ],
           "errorMessage": {
-            "text": "Select if they are a clinician"
-          } if (data.showErrors == "true" and data.clinician == '')
-        }) }}        
-              
+            "text": clinicianError
+          } if clinicianError
+        }) }}
+
 
         {{ radios({
           "name": "role",
@@ -154,8 +154,8 @@
             }
           ],
           "errorMessage": {
-            "text": "Select permission level"
-          } if (data.showErrors == "true" and data.role == '')
+            "text": roleError
+          } if roleError
         }) }}
 
 

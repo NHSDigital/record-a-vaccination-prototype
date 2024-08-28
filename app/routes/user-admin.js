@@ -211,11 +211,38 @@ module.exports = (router) => {
     const { role } = req.session.data
     const { clinician } = req.session.data
 
-    if (firstName && firstName !== '' && lastName && lastName !== '' && email && email !== '' && role && role !== '' && clinician && clinician !== '') {
-      res.redirect('/user-admin/v4/check')
-      req.session.data.showErrors = ''
+    let firstNameError, lastNameError, emailError, roleError, clinicianError
+
+    if (!firstName || firstName === '') {
+      firstNameError = 'Enter first name'
+    }
+
+    if (!lastName || lastName === '') {
+      lastNameError = 'Enter last name'
+    }
+
+    if (!email || email === '') {
+      emailError = 'Enter NHS email address'
+    }
+
+    if (!role || role === '') {
+      roleError = 'Select permission level'
+    }
+
+    if (!clinician || clinician === '') {
+      clinicianError = 'Select if they are a clinician'
+    }
+
+    if (firstNameError || lastNameError || emailError || roleError || clinicianError) {
+      res.render('user-admin/v4/add-user', {
+        firstNameError,
+        lastNameError,
+        emailError,
+        roleError,
+        clinicianError
+      })
     } else {
-      res.redirect('/user-admin/v4/add-user?showErrors=true')
+      res.redirect('/user-admin/v4/check')
     }
   })
 
