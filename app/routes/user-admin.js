@@ -205,11 +205,17 @@ module.exports = (router) => {
   })
 
   router.post('/user-admin/v4/check-answers', (req, res) => {
+    const data = req.session.data
     const { firstName } = req.session.data
     const { lastName } = req.session.data
     const { email } = req.session.data
     const { role } = req.session.data
     const { clinician } = req.session.data
+
+    let existingUserWithSameEmail = false
+    if (email) {
+      existingUserWithSameEmail = data.users.find((user) => user.email === email)
+    }
 
     let firstNameError, lastNameError, emailError, roleError, clinicianError
 
@@ -223,6 +229,15 @@ module.exports = (router) => {
 
     if (!email || email === '') {
       emailError = 'Enter NHS email address'
+    } else if (!(email.endsWith('nhs.net') || email.endsWith('.nhs.uk'))) {
+      emailError = 'Email address must be an NHS email'
+    } else if (existingUserWithSameEmail) {
+      if (existingUserWithSameEmail.status == 'Deactivated') {
+        emailError = 'Email address belongs to a deactivated user, you can reactivate them instead'
+      } else {
+        emailError = 'Email address already added as a user'
+      }
+
     }
 
     if (!role || role === '') {
