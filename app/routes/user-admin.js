@@ -157,7 +157,8 @@ module.exports = (router) => {
   router.get('/user-admin/v4/deactivated', (req, res) => {
 
     const data = req.session.data;
-    const deactivatedUsers = data.users.filter((user) => user.status === 'Deactivated')
+    const deactivatedUsers = data.users
+      .filter((user) => user.status === 'Deactivated')
 
     res.render('user-admin/v4/deactivated',{
       deactivatedUsers
@@ -179,8 +180,9 @@ module.exports = (router) => {
     const data = req.session.data;
     const user = req.session.data.users.find((user) => user.id === req.params.id)
     user.status = 'Deactivated'
+    user.deactivatedDate = new Date().toISOString().substring(0,10)
 
-    res.redirect('/user-admin/v4')
+    res.redirect('/user-admin/v4/deactivated')
   })
 
   router.get('/user-admin/v4/:id/reactivate', (req, res) => {
