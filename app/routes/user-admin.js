@@ -233,9 +233,9 @@ module.exports = (router) => {
       emailError = 'Email address must be an NHS email'
     } else if (existingUserWithSameEmail) {
       if (existingUserWithSameEmail.status == 'Deactivated') {
-        emailError = 'Email address belongs to a deactivated user, you can reactivate them instead'
+        emailError = 'NHS email address belongs to a deactivated user. Reactivate this account. '
       } else {
-        emailError = 'Email address already added as a user'
+        emailError = 'NHS email address already added as a user'
       }
 
     }

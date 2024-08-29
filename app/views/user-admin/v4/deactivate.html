@@ -22,17 +22,15 @@
 
       <h1 class="nhsuk-heading-l">Deactivate {{ user.firstName }} {{ user.lastName }}</h1>
 
-      <p>{{ user.firstName }} {{ user.lastName }} ({{ user.email}}) will no longer be able to sign in and use NHS Record a vaccination.</p>
+      <p>{{ user.firstName }} {{ user.lastName }} ({{ user.email}}) can no longer sign in and use NHS Record a vaccination. They’ll receive an email to confirm their account has been deactivated.</p>
 
-      <p>Their Okta account will remain active. Any other services they use Okta to sign in to will be unaffected.</p>
+      <p>Their Okta account will remain active, so they can continue to access other services.</p>
 
-      <p>You can reactivate their account again later.</p>
-
-      <p>They will receive an email to let them know their account has been deactivated.</p>
+      <p>You can reactivate their account anytime.</p>
 
       <form action="/user-admin/v4/{{ user.id }}/deactivate" method="post" novalidate="true">
         {{ button({
-          "text": "Confirm, deactivate " + user.firstName,
+          "text": "Deactivate",
           classes: "nhsuk-button--warning"
         }) }}
       </form>
