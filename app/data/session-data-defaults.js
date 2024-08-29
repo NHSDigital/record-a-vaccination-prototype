@@ -4,17 +4,94 @@ module.exports = {
   "users": [
     {
       id: "12345",
-      "email": "jane.smith@nhs.net",
-      "firstName": "Jane",
-      "lastName": "Smith",
-      "role": "Lead administrator",
-      "permissions": [
-        "record vaccinations", "manage vaccines", "manage users"
-      ],
-      "status": "Active",
-      clinician: "yes",
-      professionalBody: "nurse",
-      professionalBodyNumber: "PH9375895"
+      email: "jane.smith@nhs.net",
+      firstName: "Jane",
+      lastName: "Smith",
+      role: "Lead administrator",
+      status: "Active",
+      clinician: "yes"
+    },
+    {
+      id: "46436",
+      email: "eileen.seth@nhs.net",
+      firstName: "Eileen",
+      lastName: "Seth",
+      role: "Administrator",
+      status: "Active",
+      clinician: "yes"
+    },
+    {
+      id: "84645",
+      email: "eric.kellen@nhs.net",
+      firstName: "Eric",
+      lastName: "Kellen",
+      role: "Recorder",
+      status: "Active",
+      clinician: "yes"
+    },
+    {
+      id: "74525",
+      email: "mavis.patricia@nhs.net",
+      firstName: "Mavis",
+      lastName: "Patricia",
+      role: "Recorder",
+      status: "Active",
+      clinician: "yes"
+    },
+    {
+      id: "92452",
+      email: "courteney.september@nhs.net",
+      firstName: "Courteney",
+      lastName: "September",
+      role: "Recorder",
+      status: "Active",
+      clinician: "no"
+    },
+    {
+      id: "37596",
+      email: "marylu.ariyah@nhs.net",
+      firstName: "Marylu",
+      lastName: "Ariyah",
+      role: "Recorder",
+      status: "Active",
+      clinician: "no"
+    },
+    {
+      id: "97453",
+      email: "lucy.drake@nhs.net",
+      firstName: "Lucy",
+      lastName: "Drake",
+      role: "Recorder",
+      status: "Invited",
+      clinician: "no"
+    },
+    {
+      id: "36346",
+      email: "magdalena.jilly@nhs.net",
+      firstName: "Magdalena",
+      lastName: "Jilly",
+      role: "Recorder",
+      status: "Active",
+      clinician: "no"
+    },
+    {
+      id: "36346",
+      email: "magdalena.jilly@nhs.net",
+      firstName: "Sharleen",
+      lastName: "Maxine",
+      role: "Recorder",
+      status: "Active",
+      clinician: "no"
+    },
+    {
+      id: "64633",
+      email: "haleigh.devyn@nhs.net",
+      firstName: "Haleigh",
+      lastName: "Devyn",
+      role: "Recorder",
+      status: "Deactivated",
+      deactivatedDate: "2024-03-09",
+      clinician: "no"
     }
   ],
   "nhsTrusts": {

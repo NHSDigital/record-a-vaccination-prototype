@@ -12,13 +12,14 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
       <h1 class="nhsuk-heading-xl">Your profile</h1>
-      
+
         {% set permissionLevelHtml %}
           <div>{{ currentUser.role }}</div>
-          <p class="app-summary__explanation">Can record vaccinations, manage vaccine products and batches, and users</p>
+          <p class="app-summary__explanation">Can record vaccinations, and manage vaccine products and batches</p>
         {% endset %}
 
         {{ summaryList({
+          classes: "nhsuk-u-margin-bottom-4",
           rows: [
             {
               key: {
@@ -66,8 +67,18 @@
           ]
         }) }}
 
-      <p>If you need change your email address, please <a href="#">contact support</a>.</p>
+      {% if currentUser.role != 'Lead administrator' %}
 
+        <p>Only lead administrators can change permission levels. The lead administrators for Southampton NHS Trust are:</p>
+
+        <ul class="nhsuk-list">
+          <li>Jane Smith (jane.smith@trustname.nhs.uk)</li>
+          <li>John Jones (john.jones4@trustname.nhs.uk)</li>
+        </ul>
+
+      {% endif %}
+
+      <p>If you need change your email address, <a href="#">contact support</a>.</p>
 
     </div>
   </div>

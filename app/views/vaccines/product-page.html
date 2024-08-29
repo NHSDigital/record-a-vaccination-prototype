@@ -94,7 +94,9 @@
                 {{ batch.expiryDate | govukDate }}
               </td>
               <td class="nhsuk-table__cell">
-                {% if batch.depletedDate %}
+                {% if batch.depletedDate == today %}
+                  {{ tag({text: "Pending", classes: "nhsuk-tag--grey" }) }}
+                {% elif batch.depletedDate %}
                   {{ tag({text: "Depleted", classes: "nhsuk-tag--grey" }) }}
                 {% elif (batch.expiryDate | daysAgo) > 0 %}
                   {{ tag({text: "Expired", classes: "nhsuk-tag--grey" }) }}
@@ -109,9 +111,11 @@
               </td>
               <td class="nhsuk-table__cell">
                 <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}">Edit batch <span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
-
-                {% if not batch.depletedDate %}
-                  <br><a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/deplete">Deplete batch <span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
+                <br>
+                {% if batch.depletedDate %}
+                  <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/reactivate">Reactivate batch <span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
+                {% else %}
+                  <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/deplete">Deplete batch <span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
                 {% endif %}
               </td>
 

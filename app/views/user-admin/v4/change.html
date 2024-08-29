@@ -10,8 +10,8 @@
 
 {% block outerContent %}
   {{ backLink({
-    href: "/user-admin/v4", 
-    text: "Back", 
+    href: "/user-admin/v4",
+    text: "Back",
     classes: "nhsuk-u-margin-top-4"
   }) }}
 {% endblock %}
@@ -20,7 +20,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuks-heading-l">{{ user.firstName }} {{ user.lastName }}</h1>
+      <h1 class="nhsuk-heading-l">{{ user.firstName }} {{ user.lastName }}</h1>
 
       <form action="/user-admin/v4/users/{{ user.id }}/update" method="post" novalidate="true">
 
@@ -46,8 +46,8 @@
               checked: (user.clinician == "no")
             }
           ]
-        }) }}        
-              
+        }) }}
+
 
         {{ radios({
           "name": "role",
@@ -90,6 +90,8 @@
           "text": "Continue"
       }) }}
       </form>
+
+      <p>Are they no longer working here? <a href="/user-admin/v4/{{ user.id }}/deactivate">Deactivate this account</a></p>
 
 
     </div>

@@ -140,18 +140,124 @@ module.exports = (router) => {
     res.redirect('/user-admin/v3')
   })
 
+  router.get('/user-admin/v4', (req, res) => {
+
+    const data = req.session.data;
+    const statusesToInclude = ['Invited', 'Active'];
+    const users = data.users.filter((user) => statusesToInclude.includes(user.status))
+
+    const deactivatedUsers = data.users.filter((user) => user.status === 'Deactivated')
+
+    res.render('user-admin/v4/index',{
+      users,
+      deactivatedUsers
+    })
+  })
+
+  router.get('/user-admin/v4/deactivated', (req, res) => {
+
+    const data = req.session.data;
+    const deactivatedUsers = data.users
+      .filter((user) => user.status === 'Deactivated')
+
+    res.render('user-admin/v4/deactivated',{
+      deactivatedUsers
+    })
+  })
+
+  router.get('/user-admin/v4/:id/deactivate', (req, res) => {
+
+    const data = req.session.data;
+    const user = req.session.data.users.find((user) => user.id === req.params.id)
+
+    res.render('user-admin/v4/deactivate',{
+      user
+    })
+  })
+
+  router.post('/user-admin/v4/:id/deactivate', (req, res) => {
+
+    const data = req.session.data;
+    const user = req.session.data.users.find((user) => user.id === req.params.id)
+    user.status = 'Deactivated'
+    user.deactivatedDate = new Date().toISOString().substring(0,10)
+
+    res.redirect('/user-admin/v4/deactivated')
+  })
+
+  router.get('/user-admin/v4/:id/reactivate', (req, res) => {
+
+    const data = req.session.data;
+    const user = req.session.data.users.find((user) => user.id === req.params.id)
+
+    res.render('user-admin/v4/reactivate',{
+      user
+    })
+  })
+
+  router.post('/user-admin/v4/:id/reactivate', (req, res) => {
+
+    const data = req.session.data;
+    const user = req.session.data.users.find((user) => user.id === req.params.id)
+    user.status = 'Active'
+
+    res.redirect('/user-admin/v4')
+  })
+
   router.post('/user-admin/v4/check-answers', (req, res) => {
+    const data = req.session.data
     const { firstName } = req.session.data
     const { lastName } = req.session.data
     const { email } = req.session.data
     const { role } = req.session.data
     const { clinician } = req.session.data
 
-    if (firstName && firstName !== '' && lastName && lastName !== '' && email && email !== '' && role && role !== '' && clinician && clinician !== '') {
-      res.redirect('/user-admin/v4/check')
-      req.session.data.showErrors = ''
+    let existingUserWithSameEmail = false
+    if (email) {
+      existingUserWithSameEmail = data.users.find((user) => user.email === email)
+    }
+
+    let firstNameError, lastNameError, emailError, roleError, clinicianError
+
+    if (!firstName || firstName === '') {
+      firstNameError = 'Enter first name'
+    }
+
+    if (!lastName || lastName === '') {
+      lastNameError = 'Enter last name'
+    }
+
+    if (!email || email === '') {
+      emailError = 'Enter NHS email address'
+    } else if (!(email.endsWith('nhs.net') || email.endsWith('.nhs.uk'))) {
+      emailError = 'Email address must be an NHS email'
+    } else if (existingUserWithSameEmail) {
+      if (existingUserWithSameEmail.status == 'Deactivated') {
+        emailError = 'NHS email address belongs to a deactivated user. Reactivate this account. '
+      } else {
+        emailError = 'NHS email address already added as a user'
+      }
+
+    }
+
+    if (!role || role === '') {
+      roleError = 'Select permission level'
+    }
+
+    if (!clinician || clinician === '') {
+      clinicianError = 'Select if they’re a clinician'
+    }
+
+    if (firstNameError || lastNameError || emailError || roleError || clinicianError) {
+      res.render('user-admin/v4/add-user', {
+        firstNameError,
+        lastNameError,
+        emailError,
+        roleError,
+        clinicianError
+      })
     } else {
-      res.redirect('/user-admin/v4/add-user?showErrors=true')
+      res.redirect('/user-admin/v4/check')
     }
   })
 

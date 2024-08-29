@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Stats
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      <h1 class="nhsuk-heading-xl">User stats</h1>
+
+      {% set regions = ["East of England", "London", "Midlands", "North East and Yorkshire", "North West", "South East", "South West"] %}
+
+      <table class="nhsuk-table">
+        <caption class="nhsuk-table__caption">Users by region</caption>
+        <thead role="rowgroup" class="nhsuk-table__head">
+          <tr role="row">
+            <th rowspan="2" class="app-table__header--border-right app-table__header--align-bottom">
+              Region
+            </th>
+            <th colspan="2" class="app-table__header--border-right app-table__header--padding-left nhsuk-table__header--centred">
+              Organisations
+            </th>
+            <th colspan="3" class="app-table__header--padding-left nhsuk-table__header--centred">
+              Users
+            </th>
+          </tr>
+          <tr role="row">
+            <th class="app-table__header--padding-left nhsuk-table__header--numeric">
+              Added
+            </th>
+            <th class="app-table__header--border-right nhsuk-table__header--numeric">
+              Active
+            </th>
+            <th class="app-table__header--padding-left nhsuk-table__header--numeric">
+              Lead admins
+            </th>
+            <th class="nhsuk-table__header--numeric">
+              Admins
+            </th>
+            <th class="nhsuk-table__header--numeric">
+              Recorders
+            </th>
+          </tr>
+        </thead>
+        <tbody class="nhsuk-table__body">
+          {% for region in regions %}
+            <tr role="row" class="nhsuk-table__row">
+              <th class="nhsuk-table__cell app-table__cell--border-right ">{{ region }}</th>
+              <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">150</td>
+              <td class="nhsuk-table__cell app-table__cell--border-right nhsuk-table__cell--numeric">87</td>
+              <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">103</td>
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">150</td>
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">501</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+

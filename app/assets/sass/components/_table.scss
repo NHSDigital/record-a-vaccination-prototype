@@ -1,0 +1,26 @@
+
+
+.app-table__cell--border-right,
+.app-table__header--border-right {
+  border-right: 2px solid $color_nhsuk-grey-4;
+}
+
+.app-table__cell--padding-left,
+.app-table__header--padding-left {
+  @include nhsuk-responsive-padding(2, "left");
+}
+
+.app-table__header--align-bottom {
+  vertical-align: bottom;
+}
+
+.nhsuk-table__header--centred {
+  text-align: center;
+  @include nhsuk-responsive-padding(2, "left");
+  @include nhsuk-responsive-padding(2, "right");
+}
+
+.app-table__cell--right-aligned,
+.app-table__header--right-aligned {
+  text-align: right;
+}

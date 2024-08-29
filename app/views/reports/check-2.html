@@ -20,22 +20,24 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-
       <h1 class="nhsuk-heading-xl">Check and confirm</h1>
+
+      {% set from = data.from %}
+      {% set to = data.to %}
 
       {{ summaryList({
         rows: [
           {
             key: {
-              text: "From"
+              text: ("Date" if from == to else "From")
             },
             value: {
-              text: "1 Jan 2024"
+              text: (from | isoDateFromDateInput | govukDate)
             },
             actions: {
               items: [
                 {
-                  href: "#",
+                  href: "/reports/choose-dates-2",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -47,12 +49,12 @@
               text: "To"
             },
             value: {
-              text: "2 Feb 2024"
+              text: (to | isoDateFromDateInput | govukDate)
             },
             actions: {
               items: [
                 {
-                  href: "#",
+                  href: "/reports/choose-dates-2",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
