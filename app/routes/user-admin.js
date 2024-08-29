@@ -231,13 +231,8 @@ module.exports = (router) => {
       emailError = 'Enter NHS email address'
     } else if (!(email.endsWith('nhs.net') || email.endsWith('.nhs.uk'))) {
       emailError = 'Email address must be an NHS email'
-    } else if (existingUserWithSameEmail) {
-      if (existingUserWithSameEmail.status == 'Deactivated') {
-        emailError = 'NHS email address belongs to a deactivated user. Reactivate this account. '
-      } else {
-        emailError = 'NHS email address already added as a user'
-      }
-
+    } else if (existingUserWithSameEmail && existingUserWithSameEmail.status !== 'Deactivated') {
+      emailError = 'NHS email address already added as a user'
     }
 
     if (!role || role === '') {
@@ -248,7 +243,26 @@ module.exports = (router) => {
       clinicianError = 'Select if they’re a clinician'
     }
 
-    if (firstNameError || lastNameError || emailError || roleError || clinicianError) {
+    if (existingUserWithSameEmail && existingUserWithSameEmail.status == 'Deactivated') {
+
+      // Update existing user instead, and make them active
+      existingUserWithSameEmail.firstName = firstName
+      existingUserWithSameEmail.lastName = lastName
+      existingUserWithSameEmail.status = 'Active'
+      existingUserWithSameEmail.role = role
+      existingUserWithSameEmail.clinician = clinician
+
+      // Reset data
+      req.session.data.email = ''
+      req.session.data.firstName = ''
+      req.session.data.lastName = ''
+      req.session.data.role = ''
+      req.session.data.clinician = ''
+      req.session.data.showErrors = ''
+
+      res.redirect('/user-admin/v4/')
+
+    } else if (firstNameError || lastNameError || emailError || roleError || clinicianError) {
       res.render('user-admin/v4/add-user', {
         firstNameError,
         lastNameError,
