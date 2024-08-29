@@ -245,7 +245,7 @@ module.exports = (router) => {
     }
 
     if (!clinician || clinician === '') {
-      clinicianError = 'Select if they are a clinician'
+      clinicianError = 'Select if they’re a clinician'
     }
 
     if (firstNameError || lastNameError || emailError || roleError || clinicianError) {
