@@ -165,6 +165,22 @@ module.exports = (router) => {
     })
   })
 
+  router.get('/user-admin/v4/check', (req, res) => {
+
+    const data = req.session.data;
+    const {email, firstName, lastName} = data;
+    let existingUserWithSameEmail = false
+    if (email) {
+      existingUserWithSameEmail = data.users.find((user) => user.email === email)
+    }
+
+    res.render('user-admin/v4/check', {
+      firstName,
+      lastName,
+      existingUserWithSameEmail
+    })
+  })
+
   router.get('/user-admin/v4/:id/deactivate', (req, res) => {
 
     const data = req.session.data;
@@ -231,13 +247,8 @@ module.exports = (router) => {
       emailError = 'Enter NHS email address'
     } else if (!(email.endsWith('nhs.net') || email.endsWith('.nhs.uk'))) {
       emailError = 'Email address must be an NHS email'
-    } else if (existingUserWithSameEmail) {
-      if (existingUserWithSameEmail.status == 'Deactivated') {
-        emailError = 'NHS email address belongs to a deactivated user. Reactivate this account. '
-      } else {
-        emailError = 'NHS email address already added as a user'
-      }
-
+    } else if (existingUserWithSameEmail && existingUserWithSameEmail.status !== 'Deactivated') {
+      emailError = 'NHS email address already added as a user'
     }
 
     if (!role || role === '') {
@@ -263,15 +274,33 @@ module.exports = (router) => {
 
   // Adding a user - V4
   router.post('/user-admin/v4/add', (req, res) => {
-    req.session.data.users.push({
-      id: Math.floor(Math.random() * 10000000).toString(),
-      firstName: req.session.data.firstName,
-      lastName: req.session.data.lastName,
-      email: req.session.data.email,
-      role: req.session.data.role,
-      clinician: req.session.data.clinician,
-      status: 'Invited'
-    })
+
+    const data = req.session.data
+    const {firstName, lastName, email, role, clinician} = data
+
+    const existingUserWithSameEmail = data.users.find((user) => user.email === email)
+
+
+    if (existingUserWithSameEmail) {
+
+      // Update existing user instead
+      existingUserWithSameEmail.firstName = firstName
+      existingUserWithSameEmail.lastName = lastName
+      existingUserWithSameEmail.role = role
+      existingUserWithSameEmail.clinician = clinician
+      existingUserWithSameEmail.status = 'Active'
+
+    } else {
+      req.session.data.users.push({
+        id: Math.floor(Math.random() * 10000000).toString(),
+        firstName: req.session.data.firstName,
+        lastName: req.session.data.lastName,
+        email: req.session.data.email,
+        role: req.session.data.role,
+        clinician: req.session.data.clinician,
+        status: 'Invited'
+      })
+    }
 
     // Reset data
     req.session.data.email = ''
