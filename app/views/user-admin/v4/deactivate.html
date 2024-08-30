@@ -20,13 +20,26 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Deactivate {{ user.firstName }} {{ user.lastName }}</h1>
+      {% if user.id === currentUser.id %}
 
-      <p>Once you deactivate {{ user.firstName }} {{ user.lastName }} ({{ user.email}}), they can no longer sign in and use NHS Record a vaccination. They’ll receive an email to confirm their account has been deactivated.</p>
+        <h1 class="nhsuk-heading-l">Deactivate your account</h1>
 
-      <p>Their Okta account will remain active, so they can continue to access other services.</p>
+        <p>Once you deactivate your account, you will be signed out and can no longer sign in and use NHS Record a vaccination.</p>
 
-      <p>You can reactivate their account anytime.</p>
+        <p>Your Okta account will remain active, so you can continue to access other services.</p>
+
+        <p>Another lead admin can reactivate your account anytime.</p>
+
+      {% else %}
+
+        <h1 class="nhsuk-heading-l">Deactivate {{ user.firstName }} {{ user.lastName }}</h1>
+
+        <p>Once you deactivate {{ user.firstName }} {{ user.lastName }} ({{ user.email}}), they can no longer sign in and use NHS Record a vaccination. They’ll receive an email to confirm their account has been deactivated.</p>
+
+        <p>Their Okta account will remain active, so they can continue to access other services.</p>
+
+        <p>You can reactivate their account anytime.</p>
+      {% endif %}
 
       <form action="/user-admin/v4/{{ user.id }}/deactivate" method="post" novalidate="true">
         {{ button({
