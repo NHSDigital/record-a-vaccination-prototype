@@ -22,8 +22,6 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-
-
       <h1 class="nhsuk-heading-xl">Check and add user</h1>
 
       {{ summaryList({
@@ -100,46 +98,18 @@
       }) }}
 
 
-      <p>{{ data.firstName }} will be sent this welcome email with information about activating an account:</p>
+      {% if existingUserWithSameEmail %}
+        <p>{{ data.firstName }} will be re-activated and sent this email:</p>
+      {% else %}
+        <p>{{ data.firstName }} will be sent this welcome email with information about activating an account:</p>
+      {% endif %}
 
       <div class="app-email-preview">
-        <p>From: ravs@england.nhs.uk<br>
-        Subject: RAVS (Record a vaccination service) Get started
-        </p>
-        <hr>
-
-        <p>Dear RAVS users,</p>
-
-        <p><b>Get started</b></p>
-
-        <p>We’ve created an Okta account for you to securely access the NHS Record a vaccination service (RAVS).</p>
-
-        <p>Here’s what you need to do:</p>
-
-        <p><b>1. Activate your Okta account</b></p>
-        <p>You’ll receive a ‘Welcome to Okta’ email (from noreply@okta.com). Please activate the link within 7 days.</p>
-
-        <p>If you cannot find the email, please check your spam or junk.</p>
-
-        <p><b>2. Log in to RAVS</b></p>
-
-        <p>Once you’ve activated your Okta account, log in to <a href="#">www.ravs.england.nhs.uk</a> using your Okta username and password.</p>
-
-        <p>You can also access RAVS through your Okta account by clicking ‘RAVS (PROD) app’.</p>
-
-        <p>Many thanks,<br>
-        NHS Record a vaccination</p>
-
-        <p><b>Guidance</b></p>
-        <p>Visit: <a href="#">www.guide.ravs.england.nhs.uk</a>.</p>
-
-        <p><b>Helpdesk</b></p>
-
-        <p>Email: <a href="#">ravs.support@england.nhs.uk</a><br>
-        Telephone: 0121 611 0187 (select option 3)<br>
-        Monday to Friday: 8am to 6pm. Weekends: 8am to 4pm</p>
-
-
+        {% if existingUserWithSameEmail %}
+          {% include "user-admin/v4/_reactivation-email.html" %}
+        {% else %}
+          {% include "user-admin/v4/_welcome-email.html" %}
+        {% endif %}
       </div>
 
 
