@@ -168,13 +168,15 @@ module.exports = (router) => {
   router.get('/user-admin/v4/check', (req, res) => {
 
     const data = req.session.data;
-    const {email} = data;
+    const {email, firstName, lastName} = data;
     let existingUserWithSameEmail = false
     if (email) {
       existingUserWithSameEmail = data.users.find((user) => user.email === email)
     }
 
     res.render('user-admin/v4/check', {
+      firstName,
+      lastName,
       existingUserWithSameEmail
     })
   })
