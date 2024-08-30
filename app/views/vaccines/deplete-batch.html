@@ -16,40 +16,22 @@
 
       <h1 class="nhsuks-heading-l">Deplete batch</h1>
 
-      <p>This batch will be marked as pending until midnight of your depletion date.</p>
+      <p>Batch number</p>
+
+      <h4 class="nhsuks-heading-l">XX123456 / Y7890 (Example)</h4>
+
+      <p>Expiry date</p>
+
+      <h4 class="nhsuks-heading-l"> 12 October 2024 (Example)</h4>
+
+      <p>Depleted batches will be made unavailable</p>
 
       <form action="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/depleted" method="post" novalidate="true">
 
-        {{ dateInput({
-          "id": "batchDepletedDate",
-          "namePrefix": "batchDepletedDate",
-          "fieldset": {
-            "legend": {
-              "text": "Depleted date",
-              "classes": "nhsuk-label--s"
-            }
-          },
-          "items": [
-            {
-              "name": "day",
-              "classes": "nhsuk-input--width-2",
-              value: ""
-            },
-            {
-              "name": "month",
-              "classes": "nhsuk-input--width-2",
-              value: ""
-            },
-            {
-              "name": "year",
-              "classes": "nhsuk-input--width-4",
-              value: ""
-            }
-          ]
-        }) }}
+    
 
         {{ button({
-          text: "Confirm"
+          text: "Confirm deplete batch"
         })}}
 
       </form>
