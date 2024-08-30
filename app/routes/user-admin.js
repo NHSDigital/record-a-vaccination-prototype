@@ -22,7 +22,6 @@ module.exports = (router) => {
   // Editing a user’s role
   router.get('/user-admin/v1/users/:id/change-role', (req, res) => {
     const { id } = req.params
-
     const user = req.session.data.users.find((user) => user.id === id)
 
     res.render('user-admin/v1/change-role', {
@@ -198,7 +197,12 @@ module.exports = (router) => {
     user.status = 'Deactivated'
     user.deactivatedDate = new Date().toISOString().substring(0,10)
 
-    res.redirect('/user-admin/v4/deactivated')
+    if (data.currentUserId === user.id) {
+      // User deactivated themself
+      res.redirect('/')
+    } else {
+      res.redirect('/user-admin/v4/deactivated')
+    }
   })
 
   router.get('/user-admin/v4/:id/reactivate', (req, res) => {
@@ -317,10 +321,13 @@ module.exports = (router) => {
   router.get('/user-admin/v4/users/:id/change-role', (req, res) => {
     const { id } = req.params
 
+    const numberOfLeadAdmins = req.session.data.users.filter((user) => (user.role === 'Lead administrator') && (user.status !== 'Deactivated')).length
+
     const user = req.session.data.users.find((user) => user.id === id)
 
     res.render('user-admin/v4/change', {
-      user
+      user,
+      numberOfLeadAdmins
     })
   })
 

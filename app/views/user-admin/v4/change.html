@@ -91,8 +91,16 @@
       }) }}
       </form>
 
-      <p>Do they still need an account? <a href="/user-admin/v4/{{ user.id }}/deactivate">Deactivate this account</a></p>
 
+      {% if user.id === currentUser.id %}
+        {% if numberOfLeadAdmins > 1 %}
+          <p>Do you still need this account? <a href="/user-admin/v4/{{ user.id }}/deactivate">Deactivate your account</a></p>
+        {% else %}
+          <p>You cannot deactivate your account as you are the only active lead administrator.</p>
+        {% endif %}
+      {% else %}
+        <p>Do they still need an account? <a href="/user-admin/v4/{{ user.id }}/deactivate">Deactivate this account</a></p>
+      {% endif %}
 
     </div>
   </div>

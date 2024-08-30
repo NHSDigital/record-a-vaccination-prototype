@@ -34,7 +34,7 @@ module.exports = {
       email: "mavis.patricia@nhs.net",
       firstName: "Mavis",
       lastName: "Patricia",
-      role: "Recorder",
+      role: "Lead administrator",
       status: "Active",
       clinician: "yes"
     },
