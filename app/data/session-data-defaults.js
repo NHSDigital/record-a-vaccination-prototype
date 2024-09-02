@@ -163,6 +163,15 @@ module.exports = {
       ]
     }
   ],
+  regions: [
+    {name: "North East and Yorkshire", code: "NE1"},
+    {name: "North West", code: "NW1"},
+    {name: "Midlands", code: "MM1"},
+    {name: "East of England", code: "EE1"},
+    {name: "South West", code: "SW1"},
+    {name: "South East", code: "SE1"},
+    {name: "London", code: "LO1"},
+  ],
   "nhsTrusts": {
     "R0A": "Manchester University NHS Foundation Trust",
     "R0B": "South Tyneside and Sunderland NHS Foundation Trust",

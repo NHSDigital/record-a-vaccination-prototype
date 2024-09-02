@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  North West
+  {{ region.name }}
 {% endblock %}
 
 {% block outerContent %}
@@ -16,21 +16,21 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      <h1 class="nhsuk-heading-xl">South East</h1>
+      <h1 class="nhsuk-heading-xl">{{ region.name }}</h1>
 
       {% set organisations = ["Southampton NHS Trust", "Portsmouth NHS Trust", "Oxford NHS Trust", "Chichester NHS Trust", "Canterbury NHS Trust"] %}
 
       <table class="nhsuk-table nhsuk-table--padding-2">
-        <caption class="nhsuk-table__caption">By organisation</caption>
+        <caption class="nhsuk-table__caption nhsuk-u-margin-bottom-2 nhsuk-u-font-size-24">By organisation</caption>
         <thead role="rowgroup" class="nhsuk-table__head">
           <tr role="row">
-            <th rowspan="2" class="app-table__header--border-right app-table__header--align-bottom">
+            <th rowspan="2" class="app-table__header--border-right app-table__header--align-bottom app-table__header--border-top">
               Organisation
             </th>
-            <th colspan="3" class="app-table__header--padding-left nhsuk-table__header--centred app-table__header--border-right">
+            <th colspan="3" class="app-table__header--padding-left nhsuk-table__header--centred app-table__header--border-right app-table__header--border-top">
               Users
             </th>
-            <th colspan="4" class="app-table__header--padding-left nhsuk-table__header--centred">
+            <th colspan="4" class="app-table__header--padding-left nhsuk-table__header--centred app-table__header--border-top">
               Vaccinations
             </th>
           </tr>
@@ -60,7 +60,7 @@
           </tr>
         </thead>
         <tbody class="nhsuk-table__body">
-          {% for organisation in organisations %}
+          {% for organisation in (organisations | sort(false, true)) %}
             <tr role="row" class="nhsuk-table__row">
               <th class="nhsuk-table__cell app-table__cell--border-right nhsuk-u-font-weight-normal">{{ organisation }}</th>
               <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">103</td>

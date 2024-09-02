@@ -5,6 +5,10 @@
   border-right: 2px solid $color_nhsuk-grey-4;
 }
 
+.app-table__header--border-top {
+  border-top: 2px solid $color_nhsuk-grey-4;
+}
+
 .app-table__cell--padding-left,
 .app-table__header--padding-left {
   @include nhsuk-responsive-padding(2, "left");
