@@ -1,26 +1,31 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  Stats
+  North West
+{% endblock %}
+
+{% block outerContent %}
+  {{ backLink({
+    href: "/support",
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
 {% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      <h1 class="nhsuk-heading-xl">Stats</h1>
+      <h1 class="nhsuk-heading-xl">South East</h1>
 
-      {% set regions = ["East of England", "London", "Midlands", "North East and Yorkshire", "North West", "South East", "South West"] %}
+      {% set organisations = ["Southampton NHS Trust", "Portsmouth NHS Trust", "Oxford NHS Trust", "Chichester NHS Trust", "Canterbury NHS Trust"] %}
 
       <table class="nhsuk-table nhsuk-table--padding-2">
-        <caption class="nhsuk-table__caption">By region</caption>
+        <caption class="nhsuk-table__caption">By organisation</caption>
         <thead role="rowgroup" class="nhsuk-table__head">
           <tr role="row">
             <th rowspan="2" class="app-table__header--border-right app-table__header--align-bottom">
-              Region
-            </th>
-            <th colspan="1" rowspan="2" class="app-table__header--align-bottom app-table__header--border-right app-table__header--padding-left">
-              Organisations
+              Organisation
             </th>
             <th colspan="3" class="app-table__header--padding-left nhsuk-table__header--centred app-table__header--border-right">
               Users
@@ -55,10 +60,9 @@
           </tr>
         </thead>
         <tbody class="nhsuk-table__body">
-          {% for region in regions %}
+          {% for organisation in organisations %}
             <tr role="row" class="nhsuk-table__row">
-              <th class="nhsuk-table__cell app-table__cell--border-right nhsuk-u-font-weight-normal"><a href="/support/region">{{ region }}</a></th>
-              <td class="nhsuk-table__cell app-table__cell--padding-left app-table__cell--border-right nhsuk-table__cell--numeric">150</td>
+              <th class="nhsuk-table__cell app-table__cell--border-right nhsuk-u-font-weight-normal">{{ organisation }}</th>
               <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">103</td>
               <td class="nhsuk-table__cell nhsuk-table__cell--numeric">150</td>
               <td class="nhsuk-table__cell nhsuk-table__cell--numeric  app-table__cell--border-right">501</td>
@@ -72,7 +76,6 @@
         <tfoot>
           <tr role="row" class="nhsuk-table__row nhsuk-table__row--bold">
               <th class="nhsuk-table__cell app-table__cell--border-right ">Total</th>
-              <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric nhsuk-table__cell app-table__cell--border-right">1,050</td>
               <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">721</td>
               <td class="nhsuk-table__cell nhsuk-table__cell--numeric">1,050</td>
               <td class="nhsuk-table__cell nhsuk-table__cell nhsuk-table__cell--numeric  app-table__cell--border-right">3,507</td>

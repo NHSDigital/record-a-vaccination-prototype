@@ -24,3 +24,18 @@
 .app-table__header--right-aligned {
   text-align: right;
 }
+
+.nhsuk-table--padding-2 td,
+.nhsuk-table--padding-2 th {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.nhsuk-table tbody tr:last-child td,
+.nhsuk-table tbody tr:last-child th {
+  border-bottom-width: 3px;
+}
+
+.nhsuk-table__row--bold td {
+  font-weight: bold;
+}
