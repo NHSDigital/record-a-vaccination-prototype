@@ -4,9 +4,7 @@
   Add user
 {% endblock %}
 
-{% block header %}
-  {% include "user-admin/v1/_header.html" %}
-{% endblock %}
+{% set currentSection = "manage-users" %}
 
 {% block outerContent %}
   {{ backLink({ href: "/user-admin/v1", text: "Back", classes: "nhsuk-u-margin-top-4 nhsuk-u-margin-bottom-0" }) }}

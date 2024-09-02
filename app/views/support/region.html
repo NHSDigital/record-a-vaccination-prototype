@@ -12,6 +12,12 @@
   }) }}
 {% endblock %}
 
+{% set currentSection = "dashboard" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">

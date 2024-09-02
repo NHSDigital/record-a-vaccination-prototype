@@ -4,6 +4,10 @@
   East of England
 {% endblock %}
 
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
 {% set organisation = {name: organisation.name } %}
 
 {% block outerContent %}

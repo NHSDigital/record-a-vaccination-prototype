@@ -4,9 +4,7 @@
   Manage users and permissions
 {% endblock %}
 
-{% block header %}
-  {% include "user-admin/v3/_header.html" %}
-{% endblock %}
+{% set currentSection = "manage-users" %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -44,7 +42,7 @@
             <tr class="nhsuk-table__row">
               <td class="nhsuk-table__cell">
                 {{ user.firstName }} {{ user.lastName }}
-                
+
                 ({{ user.professionalBody | capitalize }})
               </td>
               <td class="nhsuk-table__cell ">{{ user.email }}</td>

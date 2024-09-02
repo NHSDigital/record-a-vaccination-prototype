@@ -4,23 +4,19 @@
   Choose vaccine
 {% endblock %}
 
-{% block header %}
-  {% include "reports/_header.html" %}
-{% endblock %}
-
-
+{% set currentSection = "reports" %}
 
 {% block content %}
-   
+
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
-    
+
           {{ backLink({ href: "/reports/choose-dates", text: "Back" }) }}
-    
+
           <h1 class="nhsuks-heading-xl">Choose vaccine</h1>
           <p class="nhsuk-body-l">Add and edit your vaccines.</p>
-  
-        
+
+
             <form>
               {{ checkboxes({
                 "idPrefix": "example",
@@ -32,7 +28,7 @@
                     isPageHeading: true
                   }
                 },
-              
+
                 "items": [
                   {
                     "value": "covid-19",
@@ -58,11 +54,11 @@
               "href": "/reports/choose-site"
             }) }}
           </form>
-    
-    
+
+
         </div>
       </div>
-    
+
 
 
 

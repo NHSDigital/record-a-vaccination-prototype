@@ -4,9 +4,7 @@
   Add user
 {% endblock %}
 
-{% block header %}
-  {% include "user-admin/v3/_header.html" %}
-{% endblock %}
+{% set currentSection = "manage-users" %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -47,18 +45,18 @@
           type: "email",
           value: data.email
         }) }}
-        
-        
+
+
         {% set otherClincianTypes = ["chiropodist", "podiatrist", "dietician", "occupational therapist", "operating department practitioner", "orthoptist", "orthotist", "prosthetist", "paramedic", "physiotherapist", "radiographer", "speech and language therapist", "dental hygienist", "dental therapist","optometrists"]  %}
-        
+
         {% set otherItems = [] %}
-        
+
         {% for otherType in (otherClincianTypes | sort) %}
           {% set otherItems = (otherItems.push({
           "value": otherType, text: otherType
           }), otherItems) %}
         {% endfor %}
-        
+
       {% set otherTypeHtml %}
         {{ select({
           label: {
@@ -67,7 +65,7 @@
           "items": otherItems
         }) }}
       {% endset %}
-        
+
       {{ radios({
         "name": "professionalBody",
         "fieldset": {
@@ -86,7 +84,7 @@
           {
             "value": "midwife",
             "text": "Midwife"
-          },      
+          },
           {
             "value": "nurse",
             "text": "Nurse"
@@ -113,7 +111,7 @@
             }
           }
         ]
-      }) }}        
+      }) }}
 
         {{ radios({
           "name": "role",

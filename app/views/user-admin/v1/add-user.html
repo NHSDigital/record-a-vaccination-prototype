@@ -4,9 +4,7 @@
   Add user
 {% endblock %}
 
-{% block header %}
-  {% include "user-admin/v1/_header.html" %}
-{% endblock %}
+{% set currentSection = "manage-users" %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -47,7 +45,7 @@
           type: "email",
           value: data.email
         }) }}
-       
+
         {{ radios({
           "name": "role",
           "fieldset": {

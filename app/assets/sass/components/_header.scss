@@ -15,7 +15,8 @@
 }
 
 // A style to highlight the current section the user is in
-.app-header__navigation-link--current {
+.app-header__navigation-link--current,
+.app-header__navigation-item--current a {
   text-decoration: none;
   border-bottom-color: $nhsuk-border-color;
 }

@@ -4,9 +4,13 @@
   East of England
 {% endblock %}
 
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
 {% block outerContent %}
   {{ backLink({
-    href: "/regions/v1/organisation-details", 
+    href: "/regions/v1/organisation-details",
     text: "Back",
     classes: "nhsuk-u-margin-top-4"
   }) }}
@@ -24,7 +28,7 @@
       <p>It’s their responsibility to set up and add their organisation’s users and vaccination sites.</p>
 
       <form action="/regions/v1/check-and-send" method="post" novalidate>
-        
+
         {{ input({
           "label": {
             "text": "First name"
@@ -43,8 +47,8 @@
           "name": "lastName",
           classes: "nhsuk-input--width-20",
           value: data.lastName
-        }) }}        
-        
+        }) }}
+
         {{ input({
           "label": {
             "text": "NHS email address"

@@ -4,9 +4,7 @@
   Manage users and permissions
 {% endblock %}
 
-{% block header %}
-  {% include "user-admin/v4/_header.html" %}
-{% endblock %}
+{% set currentSection = "manage-users" %}
 
 {% block outerContent %}
   {{ backLink({
