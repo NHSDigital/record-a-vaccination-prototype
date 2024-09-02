@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Choose data
+{% endblock %}
+
+{% block header %}
+  {% include "user-admin/v1/_header.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {{ backLink({ href: "/reports/choose-site-2", text: "Back" }) }}
+
+      <h1 class="nhsuks-heading-xl">Choose data</h1>
+
+      <form action="/reports/check" method="post" novalidate="true">
+
+        {{ radios({
+          "name": "role",
+          "fieldset": {
+            "legend": {
+              "text": "Select the data set for your report"
+            }
+          },
+          "items": [
+            {
+              "value": "all-data",
+              "text": "All data",
+              checked: (data.role == "all-data"),
+              "hint": {
+                "text": "Includes all data collected for each record such as patient, site, eligibility, consent and clinician details"
+              }
+            },
+            {
+              "value": "non-personal-data",
+              "text": "Non personal data",
+              checked: (data.role == "non-personal-data"),
+              "hint": {
+                "text": "Excludes personal patient data"
+              }
+            },
+            {
+              "value": "vaccination-data-only",
+              "text": "Vaccination data only",
+              checked: (data.role == "vaccination-data-only"),
+              "hint": {
+                "text": "Includes vaccination data only"
+              }
+            },
+            {
+                "value": "site-vaccination-clinician-data",
+                "text": "Site, vaccination and clinician data",
+                checked: (data.role == "site-vaccination-clinician-data"),
+                "hint": {
+                  "text": "Includes site, vaccination and clinician data only (excludes patient, eligibility and consent data)"
+                }
+              }
+          ]
+        }) }}
+
+
+        {{ button({
+          "text": "Continue"
+      }) }}
+      </form>
+
+
+    </div>
+  </div>
+
+
+{% endblock %}

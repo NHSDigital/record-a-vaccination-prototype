@@ -8,9 +8,11 @@
   {% include "reports/_header.html" %}
 {% endblock %}
 
+{% set organisation = {name: data.nhsTrusts[data.organisationCode]} %}
+
 {% block outerContent %}
   {{ backLink({
-    href: "/reports/choose-site",
+    href: "/reports/choose-data",
     text: "Back",
     classes: "nhsuk-u-margin-top-4"
   }) }}
@@ -20,9 +22,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-
       <h1 class="nhsuk-heading-xl">Check and confirm</h1>
-      {% from "summary-list/macro.njk" import summaryList %}
 
       {{ summaryList({
         rows: [
@@ -31,12 +31,12 @@
               text: "From"
             },
             value: {
-              text: "1 Jan 2024"
+              text: data.firstName + " " + data.lastName
             },
             actions: {
               items: [
                 {
-                  href: "#",
+                  href: "/user-admin/v4/add-user",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -48,14 +48,14 @@
               text: "To"
             },
             value: {
-              text: "2 Feb 2024"
+              html: data["email"]
             },
             actions: {
               items: [
                 {
-                  href: "#",
+                  href: "/user-admin/v4/add-user",
                   text: "Change",
-                  visuallyHiddenText: "name"
+                  visuallyHiddenText: "email address"
                 }
               ]
             }
@@ -65,46 +65,62 @@
               text: "Vaccines"
             },
             value: {
-              text: "COVID-19, Flu"
+              html: (data["clinician"] | capitalize)
             },
             actions: {
               items: [
                 {
-                  href: "#",
+                  href: "/user-admin/v4/add-user",
                   text: "Change",
-                  visuallyHiddenText: "name"
+                  visuallyHiddenText: "clinical role"
                 }
               ]
             }
           },
-
-
           {
             key: {
-              text: "Site"
+              text: "Sites"
             },
             value: {
-              text: "Manchester Royal Infirmary"
+              html: data["role"]
             },
             actions: {
               items: [
                 {
-                  href: "#",
+                  href: "/user-admin/v4/add-user",
                   text: "Change",
-                  visuallyHiddenText: "date of birth"
+                  visuallyHiddenText: "role"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Data"
+            },
+            value: {
+              html: data["role"]
+            },
+            actions: {
+              items: [
+                {
+                  href: "/user-admin/v4/add-user",
+                  text: "Change",
+                  visuallyHiddenText: "role"
                 }
               ]
             }
           }
-
         ]
       }) }}
 
 
-      {{ button({
-        "text": "Download file (CSV)",
-        href: "/reports/v5"
-      }) }}
+
+      <form action="/reports/v8" method="post">
+        {{ button({
+          "text": "Confirm and create report"
+        }) }}
+      </form>
 
 
     </div>
