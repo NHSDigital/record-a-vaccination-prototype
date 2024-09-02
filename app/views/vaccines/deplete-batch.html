@@ -16,23 +16,34 @@
 
       <h1 class="nhsuks-heading-l">Deplete batch</h1>
 
-      <p>Batch number</p>
-
-      <h4 class="nhsuks-heading-l">XX123456 / Y7890 (Example)</h4>
-
-      <p>Expiry date</p>
-
-      <h4 class="nhsuks-heading-l"> 12 October 2024 (Example)</h4>
-
-      <p>Depleted batches will be made unavailable</p>
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Batch number"
+            },
+            value: {
+              text: batch.batchNumber
+            }
+          },
+          {
+            key: {
+              text: "Expiry date"
+            },
+            value: {
+              text: batch.expiryDate | govukDate
+            }
+          }
+          ]
+        }) }}
+      <p>Depleted batches will be made unavailable.</p>
 
       <form action="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/depleted" method="post" novalidate="true">
 
     
-
         {{ button({
-          text: "Confirm deplete batch"
-        })}}
+          "text": "Confirm deplete batch"
+        }) }}
 
       </form>
 

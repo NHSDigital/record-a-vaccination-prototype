@@ -81,6 +81,9 @@
             </th>
             <th role="columnheader" scope="col">
             </th>
+             </th>
+            <th role="columnheader" scope="col">
+            </th>
 
           </tr>
         </thead>
@@ -94,9 +97,7 @@
                 {{ batch.expiryDate | govukDate }}
               </td>
               <td class="nhsuk-table__cell">
-                {% if batch.depletedDate == today %}
-                  {{ tag({text: "Pending", classes: "nhsuk-tag--grey" }) }}
-                {% elif batch.depletedDate %}
+                {% if batch.depletedDate %}
                   {{ tag({text: "Depleted", classes: "nhsuk-tag--grey" }) }}
                 {% elif (batch.expiryDate | daysAgo) > 0 %}
                   {{ tag({text: "Expired", classes: "nhsuk-tag--grey" }) }}
@@ -109,13 +110,14 @@
                   {{ batch.depletedDate | govukDate }}
                 {% endif %}
               </td>
-              <td class="nhsuk-table__cell">
-                <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}">Edit batch <span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
-                <br>
+              <td class="nhsuk-table__cell">{% if (batch.expiryDate | daysAgo) > 0 %}  {% else %}
+                <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}">Edit<span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
+                &nbsp;
                 {% if batch.depletedDate %}
-                  <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/reactivate">Reactivate batch <span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
+                  <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/reactivate">Reactivate<span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
                 {% else %}
-                  <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/deplete">Deplete batch <span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
+                  <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/deplete">Deplete<span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
+                {% endif %}
                 {% endif %}
               </td>
 
