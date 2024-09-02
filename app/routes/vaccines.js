@@ -192,9 +192,6 @@ module.exports = (router) => {
     const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
 
     let depletedDate = new Date()
-    depletedDate.setUTCDate(data['batchDepletedDate-day'])
-    depletedDate.setUTCMonth(data['batchDepletedDate-month'] - 1)
-    depletedDate.setUTCFullYear(data['batchDepletedDate-year'])
 
     batch.depletedDate = depletedDate.toISOString().substring(0,10)
 

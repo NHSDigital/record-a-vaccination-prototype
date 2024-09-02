@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Add user
+{% endblock %}
+
+{% block header %}
+  {% include "user-admin/v4/_header.html" %}
+{% endblock %}
+
+{% block outerContent %}
+  {{ backLink({
+    href: "/user-admin/v4/users/" + user.id + "/change-role",
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Uninvite {{ user.firstName }} {{ user.lastName }}</h1>
+
+      <p>Once you uninvite {{ user.firstName }} {{ user.lastName }} ({{ user.email}}), they can no longer sign in and use NHS Record a vaccination. They’ll receive an email to confirm their account has been deactivated.</p>
+
+      <p>You can reinvite this person anytime.</p>
+
+      <form action="/user-admin/v4/{{ user.id }}/deactivate" method="post" novalidate="true">
+        {{ button({
+          "text": "Deactivate",
+          classes: "nhsuk-button--warning"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+
+{% endblock %}
