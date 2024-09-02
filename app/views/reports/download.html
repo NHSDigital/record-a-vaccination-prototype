@@ -4,17 +4,6 @@
   Reports
 {% endblock %}
 
-{% block footer %}
-  {{ footer({
-    links: [
-      {
-        "URL": "/regions/v1/setup-test",
-        "label": "Jump forward in time"
-      }
-    ]
-  })}}
-{% endblock %}
-
 {% block content %}
 
 {{ backLink({ href: "/reports/check-2", text: "Back" }) }}

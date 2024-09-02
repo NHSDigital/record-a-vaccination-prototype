@@ -1,16 +1,12 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  Add user
-{% endblock %}
-
-{% block header %}
-  {% include "user-admin/v4/_header.html" %}
+  Uninvite {{ user.firstName }} {{ user.lastName }}
 {% endblock %}
 
 {% block outerContent %}
   {{ backLink({
-    href: "/user-admin/v4/users/" + user.id + "/change-role",
+    href: "/regions/v1/organisations/" + organisation.code,
     text: "Back",
     classes: "nhsuk-u-margin-top-4"
   }) }}
@@ -22,13 +18,23 @@
 
       <h1 class="nhsuk-heading-l">Uninvite {{ user.firstName }} {{ user.lastName }}</h1>
 
-      <p>Once you uninvite {{ user.firstName }} {{ user.lastName }} ({{ user.email}}), they can no longer sign in and use NHS Record a vaccination. They’ll receive an email to confirm their account has been deactivated.</p>
+
+      {% if numberOfActiveUsers === 0 %}
+        <p><strong>{{ organisation.name }} will be removed</strong></p>
+
+        <p>{{ user.firstName }} {{ user.lastName }} ({{ user.email}}) is the only user for their organisation. Once you uninvite them, they cannot sign in and use NHS Record a vaccination.</p>
+      {% else %}
+
+        <p>Once you uninvite {{ user.firstName }} {{ user.lastName }} ({{ user.email}}), they cannot sign in and use NHS Record a vaccination.</p>
+
+      {% endif %}
+
 
       <p>You can reinvite this person anytime.</p>
 
-      <form action="/user-admin/v4/{{ user.id }}/deactivate" method="post" novalidate="true">
+      <form action="/regions/v1/organisations/{{ organisation.code }}/users/{{ user.id }}/uninvited" method="post" novalidate="true">
         {{ button({
-          "text": "Deactivate",
+          "text": "Confirm, uninvite user",
           classes: "nhsuk-button--warning"
         }) }}
       </form>
