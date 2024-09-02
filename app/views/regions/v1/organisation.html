@@ -28,7 +28,7 @@
   </div>
 
   <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-three-quarters">
+    <div class="nhsuk-grid-column-full">
 
       {% if (organisation.leadUsers | length) > 0 %}
         <table class="nhsuk-table">
@@ -61,9 +61,9 @@
                 <td class="nhsuk-table__cell ">
                   {{ leadUser.status }}
                 </td>
-                <td class="nhsuk-table__cell ">
-                  {% if leadUser.status == 'Invite' %}
-                    <a href="#">Resend invitation</a>
+                <td class="nhsuk-table__cell app-table__cell--right-aligned">
+                  {% if leadUser.status == 'Invited' %}
+                    <a href="/regions/v1/organisations/{{ organisation.code }}/users/{{ leadUser.id }}/uninvite">Uninvite</a>
                   {% endif %}
                 </td>
               </tr>
