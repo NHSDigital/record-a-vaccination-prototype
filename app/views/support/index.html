@@ -8,30 +8,28 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      <h1 class="nhsuk-heading-xl">Stats</h1>
-
-      {% set regions = ["East of England", "London", "Midlands", "North East and Yorkshire", "North West", "South East", "South West"] %}
+      <h1 class="nhsuk-heading-xl">Dashboard</h1>
 
       <table class="nhsuk-table nhsuk-table--padding-2">
-        <caption class="nhsuk-table__caption">By region</caption>
+        <caption class="nhsuk-table__caption nhsuk-u-margin-bottom-2 nhsuk-u-font-size-24">By region</caption>
         <thead role="rowgroup" class="nhsuk-table__head">
           <tr role="row">
-            <th rowspan="2" class="app-table__header--border-right app-table__header--align-bottom">
+            <th rowspan="2" class="app-table__header--border-right app-table__header--align-bottom app-table__header--border-top">
               Region
             </th>
-            <th colspan="1" rowspan="2" class="app-table__header--align-bottom app-table__header--border-right app-table__header--padding-left">
+            <th colspan="1" rowspan="2" class="app-table__header--align-bottom app-table__header--border-right app-table__header--padding-left app-table__header--border-top">
               Organisations
             </th>
-            <th colspan="3" class="app-table__header--padding-left nhsuk-table__header--centred app-table__header--border-right">
+            <th colspan="3" class="app-table__header--padding-left nhsuk-table__header--centred app-table__header--border-right app-table__header--border-top">
               Users
             </th>
-            <th colspan="4" class="app-table__header--padding-left nhsuk-table__header--centred">
+            <th colspan="4" class="app-table__header--padding-left nhsuk-table__header--centred app-table__header--border-top">
               Vaccinations
             </th>
           </tr>
           <tr role="row">
 
-            <th class="app-table__header--padding-left nhsuk-table__header--numeric">
+            <th class="app-table__header--padding-left nhsuk-table__header--numeric ">
               Lead
             </th>
             <th class="nhsuk-table__header--numeric app-table__header--align-bottom">
@@ -55,9 +53,9 @@
           </tr>
         </thead>
         <tbody class="nhsuk-table__body">
-          {% for region in regions %}
+          {% for region in (data.regions | sort(false, true, "name")) %}
             <tr role="row" class="nhsuk-table__row">
-              <th class="nhsuk-table__cell app-table__cell--border-right nhsuk-u-font-weight-normal"><a href="/support/region">{{ region }}</a></th>
+              <th class="nhsuk-table__cell app-table__cell--border-right nhsuk-u-font-weight-normal"><a href="/support/regions/{{ region.code }}">{{ region.name }}</a></th>
               <td class="nhsuk-table__cell app-table__cell--padding-left app-table__cell--border-right nhsuk-table__cell--numeric">150</td>
               <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">103</td>
               <td class="nhsuk-table__cell nhsuk-table__cell--numeric">150</td>
