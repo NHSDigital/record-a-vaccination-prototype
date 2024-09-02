@@ -1,12 +1,10 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  Manage users and permissions
+  Update your name
 {% endblock %}
 
-{% block header %}
-  {% include "user-profile/v2/_header.html" %}
-{% endblock %}
+{% set currentSection = "user-profile" %}
 
 {% block outerContent %}
   {{ backLink({

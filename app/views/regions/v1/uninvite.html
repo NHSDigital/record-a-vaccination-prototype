@@ -4,6 +4,10 @@
   Uninvite {{ user.firstName }} {{ user.lastName }}
 {% endblock %}
 
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
 {% block outerContent %}
   {{ backLink({
     href: "/regions/v1/organisations/" + organisation.code,

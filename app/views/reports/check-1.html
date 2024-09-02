@@ -4,9 +4,7 @@
   Check and confirm
 {% endblock %}
 
-{% block header %}
-  {% include "reports/_header.html" %}
-{% endblock %}
+{% set currentSection = "reports" %}
 
 {% block outerContent %}
   {{ backLink({

@@ -4,9 +4,13 @@
   East of England
 {% endblock %}
 
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
 {% block outerContent %}
-  {{ backLink({ 
-    href: "/regions/v1/organisations/" + organisation.code + "/add-email", 
+  {{ backLink({
+    href: "/regions/v1/organisations/" + organisation.code + "/add-email",
     text: "Back",
     classes: "nhsuk-u-margin-top-4"
   }) }}

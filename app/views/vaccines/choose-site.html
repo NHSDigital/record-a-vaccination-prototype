@@ -4,12 +4,7 @@
   Choose site
 {% endblock %}
 
-
-{% block header %}
-  {% include "vaccines/_header.html" %}
-{% endblock %}
-
-
+{% set currentSection = "vaccines" %}
 
 {% block outerContent %}
   {{ backLink({
