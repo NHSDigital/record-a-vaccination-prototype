@@ -21,9 +21,14 @@
 
       {% if numberOfActiveUsers === 0 %}
         <p><strong>{{ organisation.name }} will be removed</strong></p>
+
+        <p>{{ user.firstName }} {{ user.lastName }} ({{ user.email}}) is the only user for their organisation. Once you uninvite them, they cannot sign in and use NHS Record a vaccination.</p>
+      {% else %}
+
+        <p>Once you uninvite {{ user.firstName }} {{ user.lastName }} ({{ user.email}}), they cannot sign in and use NHS Record a vaccination.</p>
+
       {% endif %}
 
-      <p>Once you uninvite {{ user.firstName }} {{ user.lastName }} ({{ user.email}}), they cannot sign in and use NHS Record a vaccination.</p>
 
       <p>You can reinvite this person anytime.</p>
 
