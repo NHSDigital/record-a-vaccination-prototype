@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  Choose site
+  Choose sites
 {% endblock %}
 
 {% set currentSection = "reports" %}
@@ -15,12 +15,13 @@
 
 
           <h1 class="nhsuk-heading-xl">Choose sites</h1>
+          <p class="nhsuk-body-l">Select your site or delivery team</p>
 
-          <form action="/regions/v1/organisation-details" method="post">
+          <form action="/reports/choose-data" method="post">
 
             {{ checkboxes({
                 "idPrefix": "example",
-                "name": "example",
+                "name": "reportSites",
                 "fieldset": {
                   "legend": {
                     "text": "",
@@ -31,19 +32,19 @@
 
                 "items": [
                   {
-                    "value": "covid-19",
+                    "value": "Verington (RH63S)",
                     "text": "Verington (RH63S)"
                   },
                   {
-                    "value": "Flu",
+                    "value": "Tower (S204X)",
                     "text": "Tower (S204X)"
                   },
                   {
-                    "value": "Pertussis",
+                    "value": "The Exchange (RH5S9)",
                     "text": "The Exchange (RH5S9)"
                   },
                   {
-                    "value": "RSV",
+                    "value": "Willowbank Day Hospital (RH5C4)",
                     "text": "Willowbank Day Hospital (RH5C4)"
                   }
                   ]
@@ -51,8 +52,7 @@
 
 
           {{ button({
-            "text": "Continue",
-            "href": "/reports/check-2"
+            "text": "Continue"
           }) }}
 
         </form>

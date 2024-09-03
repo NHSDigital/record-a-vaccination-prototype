@@ -6,9 +6,11 @@
 
 {% set currentSection = "reports" %}
 
+{% set organisation = {name: data.nhsTrusts[data.organisationCode]} %}
+
 {% block outerContent %}
   {{ backLink({
-    href: "/reports/choose-site",
+    href: "/reports/choose-data",
     text: "Back",
     classes: "nhsuk-u-margin-top-4"
   }) }}
@@ -18,23 +20,25 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-
       <h1 class="nhsuk-heading-xl">Check and confirm</h1>
-      {% from "summary-list/macro.njk" import summaryList %}
+
+
+      {% set from = data.from %}
+      {% set to = data.to %}
 
       {{ summaryList({
         rows: [
           {
             key: {
-              text: "From"
+              text: ("Date" if from == to else "From")
             },
             value: {
-              text: "1 Jan 2024"
+              text: (from | isoDateFromDateInput | govukDate)
             },
             actions: {
               items: [
                 {
-                  href: "#",
+                  href: "/reports/choose-dates-2",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -46,12 +50,12 @@
               text: "To"
             },
             value: {
-              text: "2 Feb 2024"
+              text: (to | isoDateFromDateInput | govukDate)
             },
             actions: {
               items: [
                 {
-                  href: "#",
+                  href: "/reports/choose-dates-2",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -63,14 +67,14 @@
               text: "Vaccines"
             },
             value: {
-              text: "COVID-19, Flu"
+              text: (data.vaccines | join(", "))
             },
             actions: {
               items: [
                 {
-                  href: "#",
+                  href: "/reports/choose-vaccines-2",
                   text: "Change",
-                  visuallyHiddenText: "name"
+                  visuallyHiddenText: "change vaccines"
                 }
               ]
             }
@@ -79,32 +83,54 @@
 
           {
             key: {
-              text: "Site"
+              text: "Sites"
             },
             value: {
-              text: "Manchester Royal Infirmary"
+              text: (data.reportSites | join(",  "))
+            },
+            actions: {
+              items: [
+              {
+                href: "/reports/choose-site-2",
+                text: "Change",
+                visuallyHiddenText: "change sites"
+              }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Data"
+            },
+            value: {
+              text: (data.data)
             },
             actions: {
               items: [
                 {
-                  href: "#",
+                  href: "/reports/choose-data",
                   text: "Change",
-                  visuallyHiddenText: "date of birth"
+                  visuallyHiddenText: "change data"
                 }
               ]
             }
           }
 
+
         ]
       }) }}
 
 
-      {{ button({
-        "text": "Download file (CSV)",
-        href: "/reports/v5"
-      }) }}
+
+      <form action="/reports/v8" method="post">
+        {{ button({
+          "text": "Confirm and create report"
+        }) }}
+      </form>
 
 
     </div>
   </div>
 {% endblock %}
+
+
