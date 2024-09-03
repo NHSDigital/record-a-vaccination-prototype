@@ -8,7 +8,7 @@
 
 {% block outerContent %}
   {{ backLink({
-    href: "/user-admin/v4/users/" + user.id + "/change-role",
+    href: "/user-admin/users/" + user.id + "/change-role",
     text: "Back",
     classes: "nhsuk-u-margin-top-4"
   }) }}
@@ -39,7 +39,7 @@
         <p>You can reactivate their account anytime.</p>
       {% endif %}
 
-      <form action="/user-admin/v4/{{ user.id }}/deactivate" method="post" novalidate="true">
+      <form action="/user-admin/{{ user.id }}/deactivate" method="post" novalidate="true">
         {{ button({
           "text": "Deactivate",
           classes: "nhsuk-button--warning"

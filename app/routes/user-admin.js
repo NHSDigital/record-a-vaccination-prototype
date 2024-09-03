@@ -1,145 +1,6 @@
 module.exports = (router) => {
-  // Adding a user
-  router.post('/user-admin/v1/add', (req, res) => {
-    req.session.data.users.push({
-      id: Math.floor(Math.random() * 10000000).toString(),
-      firstName: req.session.data.firstName,
-      lastName: req.session.data.lastName,
-      email: req.session.data.email,
-      role: req.session.data.role,
-      status: 'Invited'
-    })
 
-    // Reset data
-    req.session.data.email = ''
-    req.session.data.firstName = ''
-    req.session.data.lastName = ''
-    req.session.data.role = ''
-
-    res.redirect('/user-admin/v1')
-  })
-
-  // Editing a user’s role
-  router.get('/user-admin/v1/users/:id/change-role', (req, res) => {
-    const { id } = req.params
-    const user = req.session.data.users.find((user) => user.id === id)
-
-    res.render('user-admin/v1/change-role', {
-      user
-    })
-  })
-
-  // Updating a user’s role
-  router.post('/user-admin/v1/users/:id/update', (req, res) => {
-    const { id } = req.params
-
-    const user = req.session.data.users.find((user) => user.id === id)
-
-    user.role = req.body.role
-
-    // Reset session data
-    req.session.data.role = ''
-
-    res.redirect('/user-admin/v1')
-  })
-
-  // Adding a user - v2
-  router.post('/user-admin/v2/add', (req, res) => {
-    console.log(req.session.data)
-
-    req.session.data.users.push({
-      id: Math.floor(Math.random() * 10000000),
-      firstName: req.session.data.firstName,
-      lastName: req.session.data.lastName,
-      email: req.session.data.email,
-      permissions: req.session.data.permissions,
-      status: 'Invited'
-    })
-
-    // Reset data
-    req.session.data.email = ''
-    req.session.data.firstName = ''
-    req.session.data.lastName = ''
-    req.session.data.permissions = []
-
-    res.redirect('/user-admin/v2')
-  })
-
-  // Editing a user’s role
-  router.get('/user-admin/v2/users/:id/change-permissions', (req, res) => {
-    const { id } = req.params
-
-    const user = req.session.data.users.find((user) => user.id === id)
-
-    res.render('user-admin/v2/change-permissions', {
-      user
-    })
-  })
-
-  // Updating a user’s role
-  router.post('/user-admin/v2/users/:id/update', (req, res) => {
-    const { id } = req.params
-
-    const user = req.session.data.users.find((user) => user.id === id)
-
-    user.permissions = req.session.data.permissions
-
-    // Reset session data
-    req.session.data.permissions = []
-
-    res.redirect('/user-admin/v2')
-  })
-
-  // Adding a user - V3
-  router.post('/user-admin/v3/add', (req, res) => {
-    const { professionalBody } = req.session.data
-
-    req.session.data.users.push({
-      id: Math.floor(Math.random() * 10000000).toString(),
-      firstName: req.session.data.firstName,
-      lastName: req.session.data.lastName,
-      email: req.session.data.email,
-      role: req.session.data.role,
-      professionalBody,
-      status: 'Invited'
-    })
-
-    // Reset data
-    req.session.data.email = ''
-    req.session.data.firstName = ''
-    req.session.data.lastName = ''
-    req.session.data.role = ''
-    req.session.data.professionalBody = ''
-
-    res.redirect('/user-admin/v3')
-  })
-
-  // Editing a user’s role
-  router.get('/user-admin/v3/users/:id/change-role', (req, res) => {
-    const { id } = req.params
-
-    const user = req.session.data.users.find((user) => user.id === id)
-
-    res.render('user-admin/v3/change-role', {
-      user
-    })
-  })
-
-  // Updating a user’s role
-  router.post('/user-admin/v3/users/:id/update', (req, res) => {
-    const { id } = req.params
-
-    const user = req.session.data.users.find((user) => user.id === id)
-
-    user.role = req.body.role
-
-    // Reset session data
-    req.session.data.role = ''
-
-    res.redirect('/user-admin/v3')
-  })
-
-  router.get('/user-admin/v4', (req, res) => {
+  router.get('/user-admin', (req, res) => {
 
     const data = req.session.data;
     const statusesToInclude = ['Invited', 'Active'];
@@ -147,24 +8,24 @@ module.exports = (router) => {
 
     const deactivatedUsers = data.users.filter((user) => user.status === 'Deactivated')
 
-    res.render('user-admin/v4/index',{
+    res.render('user-admin/index',{
       users,
       deactivatedUsers
     })
   })
 
-  router.get('/user-admin/v4/deactivated', (req, res) => {
+  router.get('/user-admin/deactivated', (req, res) => {
 
     const data = req.session.data;
     const deactivatedUsers = data.users
       .filter((user) => user.status === 'Deactivated')
 
-    res.render('user-admin/v4/deactivated',{
+    res.render('user-admin/deactivated',{
       deactivatedUsers
     })
   })
 
-  router.get('/user-admin/v4/check', (req, res) => {
+  router.get('/user-admin/check', (req, res) => {
 
     const data = req.session.data;
     const {email, firstName, lastName} = data;
@@ -173,24 +34,24 @@ module.exports = (router) => {
       existingUserWithSameEmail = data.users.find((user) => user.email === email)
     }
 
-    res.render('user-admin/v4/check', {
+    res.render('user-admin/check', {
       firstName,
       lastName,
       existingUserWithSameEmail
     })
   })
 
-  router.get('/user-admin/v4/:id/deactivate', (req, res) => {
+  router.get('/user-admin/:id/deactivate', (req, res) => {
 
     const data = req.session.data;
     const user = req.session.data.users.find((user) => user.id === req.params.id)
 
-    res.render('user-admin/v4/deactivate',{
+    res.render('user-admin/deactivate',{
       user
     })
   })
 
-  router.post('/user-admin/v4/:id/deactivate', (req, res) => {
+  router.post('/user-admin/:id/deactivate', (req, res) => {
 
     const data = req.session.data;
     const user = req.session.data.users.find((user) => user.id === req.params.id)
@@ -201,30 +62,30 @@ module.exports = (router) => {
       // User deactivated themself
       res.redirect('/')
     } else {
-      res.redirect('/user-admin/v4/deactivated')
+      res.redirect('/user-admin/deactivated')
     }
   })
 
-  router.get('/user-admin/v4/:id/reactivate', (req, res) => {
+  router.get('/user-admin/:id/reactivate', (req, res) => {
 
     const data = req.session.data;
     const user = req.session.data.users.find((user) => user.id === req.params.id)
 
-    res.render('user-admin/v4/reactivate',{
+    res.render('user-admin/reactivate',{
       user
     })
   })
 
-  router.post('/user-admin/v4/:id/reactivate', (req, res) => {
+  router.post('/user-admin/:id/reactivate', (req, res) => {
 
     const data = req.session.data;
     const user = req.session.data.users.find((user) => user.id === req.params.id)
     user.status = 'Active'
 
-    res.redirect('/user-admin/v4')
+    res.redirect('/user-admin')
   })
 
-  router.post('/user-admin/v4/check-answers', (req, res) => {
+  router.post('/user-admin/check-answers', (req, res) => {
     const data = req.session.data
     const { firstName } = req.session.data
     const { lastName } = req.session.data
@@ -264,7 +125,7 @@ module.exports = (router) => {
     }
 
     if (firstNameError || lastNameError || emailError || roleError || clinicianError) {
-      res.render('user-admin/v4/add-user', {
+      res.render('user-admin/add-user', {
         firstNameError,
         lastNameError,
         emailError,
@@ -272,12 +133,12 @@ module.exports = (router) => {
         clinicianError
       })
     } else {
-      res.redirect('/user-admin/v4/check')
+      res.redirect('/user-admin/check')
     }
   })
 
-  // Adding a user - V4
-  router.post('/user-admin/v4/add', (req, res) => {
+  // Adding a user
+  router.post('/user-admin/add', (req, res) => {
 
     const data = req.session.data
     const {firstName, lastName, email, role, clinician} = data
@@ -314,25 +175,25 @@ module.exports = (router) => {
     req.session.data.clinician = ''
     req.session.data.showErrors = ''
 
-    res.redirect('/user-admin/v4')
+    res.redirect('/user-admin')
   })
 
   // Editing a user’s role
-  router.get('/user-admin/v4/users/:id/change-role', (req, res) => {
+  router.get('/user-admin/users/:id/change-role', (req, res) => {
     const { id } = req.params
 
     const numberOfLeadAdmins = req.session.data.users.filter((user) => (user.role === 'Lead administrator') && (user.status !== 'Deactivated')).length
 
     const user = req.session.data.users.find((user) => user.id === id)
 
-    res.render('user-admin/v4/change', {
+    res.render('user-admin/change', {
       user,
       numberOfLeadAdmins
     })
   })
 
   // Updating a user’s role
-  router.post('/user-admin/v4/users/:id/update', (req, res) => {
+  router.post('/user-admin/users/:id/update', (req, res) => {
     const { id } = req.params
 
     const user = req.session.data.users.find((user) => user.id === id)
@@ -344,6 +205,17 @@ module.exports = (router) => {
     req.session.data.role = ''
     req.session.data.clinician = ''
 
-    res.redirect('/user-admin/v4')
+    res.redirect('/user-admin')
+  })
+
+
+  // Redirect the old versioned routes. These can be removed
+  // at some point in the future.
+  router.get('/user-admin/v4', (req, res) => {
+    res.redirect('/user-admin')
+  })
+
+  router.get('/user-admin/v4/:page*', (req, res) => {
+    res.redirect('/user-admin')
   })
 }

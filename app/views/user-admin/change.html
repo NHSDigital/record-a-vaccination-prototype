@@ -8,7 +8,7 @@
 
 {% block outerContent %}
   {{ backLink({
-    href: "/user-admin/v4",
+    href: "/user-admin",
     text: "Back",
     classes: "nhsuk-u-margin-top-4"
   }) }}
@@ -20,7 +20,7 @@
 
       <h1 class="nhsuk-heading-l">{{ user.firstName }} {{ user.lastName }}</h1>
 
-      <form action="/user-admin/v4/users/{{ user.id }}/update" method="post" novalidate="true">
+      <form action="/user-admin/users/{{ user.id }}/update" method="post" novalidate="true">
 
         {{ radios({
           "name": "clinician",
@@ -92,12 +92,12 @@
 
       {% if user.id === currentUser.id %}
         {% if numberOfLeadAdmins > 1 %}
-          <p>Do you still need this account? <a href="/user-admin/v4/{{ user.id }}/deactivate">Deactivate your account</a></p>
+          <p>Do you still need this account? <a href="/user-admin/{{ user.id }}/deactivate">Deactivate your account</a></p>
         {% else %}
           <p>You cannot deactivate your account as you are the only active lead administrator.</p>
         {% endif %}
       {% else %}
-        <p>Do they still need an account? <a href="/user-admin/v4/{{ user.id }}/deactivate">Deactivate this account</a></p>
+        <p>Do they still need an account? <a href="/user-admin/{{ user.id }}/deactivate">Deactivate this account</a></p>
       {% endif %}
 
     </div>

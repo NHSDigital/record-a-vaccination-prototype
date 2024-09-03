@@ -8,7 +8,7 @@
 
 {% block outerContent %}
   {{ backLink({
-    href: "/user-admin/v4/deactivated",
+    href: "/user-admin/deactivated",
     text: "Back",
     classes: "nhsuk-u-margin-top-4"
   }) }}
@@ -22,7 +22,7 @@
 
       <p>Once you have reactivated {{ user.firstName }} {{ user.lastName }} ({{ user.email}}), they can sign in to NHS Record a vaccination again using their Okta account.</p>
 
-      <form action="/user-admin/v4/{{ user.id }}/reactivate" method="post" novalidate="true">
+      <form action="/user-admin/{{ user.id }}/reactivate" method="post" novalidate="true">
         {{ button({
           "text": "Reactivate"
         }) }}
