@@ -94,6 +94,84 @@ module.exports = {
       clinician: "no"
     }
   ],
+  organisationsAdded: [
+    {
+      code: 'RD8',
+      name: 'Milton Keynes University Hospital NHS Foundation Trust',
+      address: {
+        line1: 'Standing Way, Eaglestone',
+        town: 'Milton Keynes',
+        postcode: 'MK6 5LD'
+      },
+      type: 'NHS Trust',
+      status: 'Active',
+      leadUsers: [
+        {
+          id: "36479285",
+          email: 'sarah.jane@mk.nhs.net',
+          status: 'Active',
+          firstName: 'Sarah',
+          lastName: 'Jane'
+        },
+        {
+          id: "6363462",
+          email: 'joseph.darling@mk.nhs.net',
+          status: 'Invited',
+          firstName: 'Joseph',
+          lastName: 'Darling'
+        }
+      ]
+    },
+    {
+      code: 'RAJ',
+      name: 'Mid and South Essex NHS Foundation Trust',
+      address: {
+        line1: 'Prittlewell Chase',
+        town: 'Westcliffe-on-Sea',
+        postcode: 'SS0 0RY'
+      },
+      type: 'NHS Trust',
+      status: 'Active',
+      leadUsers: [
+        {
+          id: "9476731",
+          firstName: 'Richard',
+          lastName: 'Jones',
+          email: 'richard.jones@mid-essex.nhs.net',
+          status: 'Active'
+        }
+      ]
+    },
+    {
+      code: 'FA424',
+      name: 'Pickfords Pharmacy',
+      address: {
+        line1: '8 Spencer Court',
+        town: 'Corby',
+        postcode: 'NN17 1NU'
+      },
+      type: 'Community Pharmacy',
+      status: 'Invited',
+      leadUsers: [
+        {
+          id: "634636",
+          firstName: 'Sara',
+          lastName: 'Pickford',
+          email: 'sara.pickford@pickford-pharmacy.com',
+          status: 'Invited'
+        }
+      ]
+    }
+  ],
+  regions: [
+    {name: "North East and Yorkshire", code: "NE1"},
+    {name: "North West", code: "NW1"},
+    {name: "Midlands", code: "MM1"},
+    {name: "East of England", code: "EE1"},
+    {name: "South West", code: "SW1"},
+    {name: "South East", code: "SE1"},
+    {name: "London", code: "LO1"},
+  ],
   "nhsTrusts": {
     "R0A": "Manchester University NHS Foundation Trust",
     "R0B": "South Tyneside and Sunderland NHS Foundation Trust",

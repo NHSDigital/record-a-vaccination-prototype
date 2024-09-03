@@ -4,6 +4,7 @@ module.exports = router => {
     req.session.data.organisationsAdded ||= []
 
     const organisationCode = req.session.data.organisationCode
+    const addedUserId = Math.floor(Math.random() * 10000000).toString()
 
     let organisationName, organisationLine1, organisationTown, organisationPostcode, organisationType
 
@@ -33,6 +34,7 @@ module.exports = router => {
       type: organisationType,
       leadUsers: [
         {
+          id: addedUserId,
           email: req.session.data.email,
           status: 'Invited',
           firstName: req.session.data.firstName,
@@ -160,8 +162,12 @@ module.exports = router => {
   router.post('/regions/v1/organisations/:code/add', (req, res) => {
     const organisationsAdded = req.session.data.organisationsAdded || []
     const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+    if (!organisation) { res.redirect('/regions/v1/'); return }
+
+    const addedUserId = Math.floor(Math.random() * 10000000).toString()
 
     organisation.leadUsers.push({
+      id: addedUserId,
       email: req.session.data.email,
       status: 'Invited',
       firstName: req.session.data.firstName,
@@ -180,6 +186,7 @@ module.exports = router => {
   router.get('/regions/v1/organisations/:code', (req, res) => {
     const organisationsAdded = req.session.data.organisationsAdded || []
     const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+    if (!organisation) { res.redirect('/regions/v1/'); return }
 
     res.render('regions/v1/organisation', {
       organisation
@@ -190,6 +197,7 @@ module.exports = router => {
   router.get('/regions/v1/organisations/:code/add-email', (req, res) => {
     const organisationsAdded = req.session.data.organisationsAdded || []
     const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+    if (!organisation) { res.redirect('/regions/v1/'); return }
 
     res.render('regions/v1/add-another-email', {
       organisation
@@ -200,79 +208,49 @@ module.exports = router => {
   router.get('/regions/v1/organisations/:code/add-email-check', (req, res) => {
     const organisationsAdded = req.session.data.organisationsAdded || []
     const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+    if (!organisation) { res.redirect('/regions/v1/'); return }
 
     res.render('regions/v1/add-another-email-check', {
       organisation
     })
   })
 
-  // Mock up more organisations having been added
-  router.get('/regions/v1/setup-test', (req, res) => {
-    req.session.data.organisationsAdded ||= []
+  // Uninvite page for a user
+  router.get('/regions/v1/organisations/:code/users/:id/uninvite', (req, res) => {
+    const organisationsAdded = req.session.data.organisationsAdded || []
+    const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+    if (!organisation) { res.redirect('/regions/v1/'); return }
 
-    // Add an NHS Trust
-    req.session.data.organisationsAdded.push({
-      code: 'RD8',
-      name: 'Milton Keynes University Hospital NHS Foundation Trust',
-      address: {
-        line1: 'Standing Way, Eaglestone',
-        town: 'Milton Keynes',
-        postcode: 'MK6 5LD'
-      },
-      type: 'NHS Trust',
-      status: 'Active',
-      leadUsers: [
-        {
-          email: 'sarah.jane@mk.nhs.net',
-          status: 'Active',
-          firstName: 'Sarah',
-          lastName: 'Jane'
-        }
-      ]
+    const user = organisation.leadUsers.find((user) => user.id === req.params.id)
+    if (!user || user.status == 'Active') { res.redirect(`/regions/v1/organisations/${organisation.code}`); return }
+
+    const numberOfActiveUsers =  organisation.leadUsers.filter((user) => user.status === "Active").length
+
+    res.render('regions/v1/uninvite', {
+      organisation,
+      user,
+      numberOfActiveUsers
     })
+  })
 
-    // Add another NHS Trust
-    req.session.data.organisationsAdded.push({
-      code: 'RAJ',
-      name: 'Mid and South Essex NHS Foundation Trust',
-      address: {
-        line1: 'Prittlewell Chase',
-        town: 'Westcliffe-on-Sea',
-        postcode: 'SS0 0RY'
-      },
-      type: 'NHS Trust',
-      status: 'Active',
-      leadUsers: [
-        {
-          firstName: 'Richard',
-          lastName: 'Jones',
-          email: 'richard.jones@mid-essex.nhs.net',
-          status: 'Active'
-        }
-      ]
-    })
+  // Uninvite a user
+  router.post('/regions/v1/organisations/:code/users/:id/uninvited', (req, res) => {
+    const organisationsAdded = req.session.data.organisationsAdded || []
+    const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+    if (!organisation) { res.redirect('/regions/v1/'); return }
 
-    // Add another NHS Trust
-    req.session.data.organisationsAdded.push({
-      code: 'FA424',
-      name: 'Pickfords Pharmacy',
-      address: {
-        line1: '8 Spencer Court',
-        town: 'Corby',
-        postcode: 'NN17 1NU'
-      },
-      type: 'Community Pharmacy',
-      status: 'Active',
-      leadUsers: [
-        {
-          firstName: 'Sara',
-          lastName: 'Pickford',
-          email: 'sara.pickford@pickford-pharmacy.com',
-          status: 'Active'
-        }
-      ]
-    })
+    const user = organisation.leadUsers.find((user) => user.id === req.params.id)
+    if (!user) { res.redirect(`/regions/v1/organisations/${organisation.code}`); return }
 
-    res.redirect('/regions/v1')
+    organisation.leadUsers.splice(organisation.leadUsers.indexOf(user), 1)
+
+    // Remove the organisation if no lead users are left
+    if (organisation.leadUsers.filter((user) => user.status === "Active").length === 0) {
+      organisationsAdded.splice(organisationsAdded.indexOf(organisation), 1)
+      res.redirect('/regions/v1/')
+    } else {
+      res.redirect('/regions/v1/organisations/' + organisation.code)
+    }
+
   })
 }

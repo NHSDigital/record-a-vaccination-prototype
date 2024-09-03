@@ -18,18 +18,8 @@
   NHS.UK prototype kit
 {% endblock %}
 
-<!-- Edit the header -->
-<!-- Header code examples can be found at https://service-manual.nhs.uk/design-system/components/header -->
 {% block header %}
-  {{ header({
-    "service": {
-        "name": "Record a vaccination",
-        "href": "/"
-      },
-      "showNav": "false",
-      "showSearch": "false"
-    })
-  }}
+  {% include "includes/header-logged-in-organisation.html" %}
 {% endblock %}
 
 <!-- Edit the footer -->

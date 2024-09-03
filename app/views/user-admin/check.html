@@ -4,15 +4,13 @@
   East of England
 {% endblock %}
 
-{% block header %}
-  {% include "user-admin/v4/_header.html" %}
-{% endblock %}
+{% set currentSection = "manage-users" %}
 
 {% set organisation = {name: data.nhsTrusts[data.organisationCode]} %}
 
 {% block outerContent %}
   {{ backLink({
-    href: "/user-admin/v4/add-user",
+    href: "/user-admin/add-user",
     text: "Back",
     classes: "nhsuk-u-margin-top-4"
   }) }}
@@ -36,7 +34,7 @@
             actions: {
               items: [
                 {
-                  href: "/user-admin/v4/add-user",
+                  href: "/user-admin/add-user",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -53,7 +51,7 @@
             actions: {
               items: [
                 {
-                  href: "/user-admin/v4/add-user",
+                  href: "/user-admin/add-user",
                   text: "Change",
                   visuallyHiddenText: "email address"
                 }
@@ -70,7 +68,7 @@
             actions: {
               items: [
                 {
-                  href: "/user-admin/v4/add-user",
+                  href: "/user-admin/add-user",
                   text: "Change",
                   visuallyHiddenText: "clinical role"
                 }
@@ -87,7 +85,7 @@
             actions: {
               items: [
                 {
-                  href: "/user-admin/v4/add-user",
+                  href: "/user-admin/add-user",
                   text: "Change",
                   visuallyHiddenText: "role"
                 }
@@ -106,14 +104,14 @@
 
       <div class="app-email-preview">
         {% if existingUserWithSameEmail %}
-          {% include "user-admin/v4/_reactivation-email.html" %}
+          {% include "user-admin/_reactivation-email.html" %}
         {% else %}
-          {% include "user-admin/v4/_welcome-email.html" %}
+          {% include "user-admin/_welcome-email.html" %}
         {% endif %}
       </div>
 
 
-      <form action="/user-admin/v4/add" method="post">
+      <form action="/user-admin/add" method="post">
         {{ button({
           "text": "Confirm and send"
         }) }}

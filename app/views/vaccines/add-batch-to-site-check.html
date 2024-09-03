@@ -4,10 +4,7 @@
   Vaccines
 {% endblock %}
 
-{% block header %}
-  {% include "vaccines/_header.html" %}
-{% endblock %}
-
+{% set currentSection = "vaccines" %}
 {% set organisation = {name: data.nhsTrusts[data.organisationCode]} %}
 
 {% block outerContent %}

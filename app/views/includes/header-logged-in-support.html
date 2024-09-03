@@ -1,0 +1,26 @@
+{{ header({
+  classes: "nhsuk-header--left",
+  "service": {
+      "name": "Record a vaccination",
+      "href": "/"
+    },
+    "showNav": "true",
+    "showSearch": "false",
+    "primaryLinks": [
+      {
+        url  : "/support",
+        label : "Dashboard",
+        classes: ("app-header__navigation-item--current" if currentSection == "dashboard")
+      },
+      {
+        url: "#",
+        label: currentUser.email,
+        classes: "app-header__navigation-item--right-aligned " + ("app-header__navigation-item--current" if currentSection == "user-profile")
+      },
+      {
+        url: '/',
+        label: 'Log out'
+      }
+    ]
+  })
+}}

@@ -1,0 +1,41 @@
+{{ header({
+    classes: "nhsuk-header--left",
+    "service": {
+        "name": "Record a vaccination",
+        "href": "/"
+      },
+      "showNav": "true",
+      "showSearch": "false",
+      "primaryLinks": [
+        {
+          url  : "/find-a-patient",
+          label : "Find a patient",
+          classes: ("app-header__navigation-item--current" if currentSection == "find-a-patient")
+        },
+        {
+          url: "/vaccines",
+          label: "Vaccines",
+          classes: ("app-header__navigation-item--current" if currentSection == "vaccines")
+        } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(currentUser.role))),
+        {
+          url: "/reports/v7",
+          label: "Reports",
+          classes: ("app-header__navigation-item--current" if currentSection == "reports")
+        } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(currentUser.role))),
+        {
+          url: '/user-admin',
+          label: 'Manage users',
+          classes: ("app-header__navigation-item--current" if currentSection == "manage-users")
+        } if (currentUser and currentUser.role === "Lead administrator"),
+        {
+          url: "/user-profile/v2",
+          label: currentUser.email,
+          classes: "app-header__navigation-item--right-aligned " + ("app-header__navigation-item--current" if currentSection == "user-profile")
+        },
+        {
+          url: '/',
+          label: 'Log out'
+        }
+      ]
+    })
+  }}

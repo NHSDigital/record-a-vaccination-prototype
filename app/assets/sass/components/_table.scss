@@ -5,6 +5,10 @@
   border-right: 2px solid $color_nhsuk-grey-4;
 }
 
+.app-table__header--border-top {
+  border-top: 2px solid $color_nhsuk-grey-4;
+}
+
 .app-table__cell--padding-left,
 .app-table__header--padding-left {
   @include nhsuk-responsive-padding(2, "left");
@@ -23,4 +27,19 @@
 .app-table__cell--right-aligned,
 .app-table__header--right-aligned {
   text-align: right;
+}
+
+.nhsuk-table--padding-2 td,
+.nhsuk-table--padding-2 th {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.nhsuk-table tbody tr:last-child td,
+.nhsuk-table tbody tr:last-child th {
+  border-bottom-width: 3px;
+}
+
+.nhsuk-table__row--bold td {
+  font-weight: bold;
 }

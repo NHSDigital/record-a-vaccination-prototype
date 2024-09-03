@@ -4,9 +4,7 @@
   Reports
 {% endblock %}
 
-{% block header %}
-  {% include "reports/_header.html" %}
-{% endblock %}
+{% set currentSection = "reports" %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -14,11 +12,11 @@
 
       <h1 class="nhsuk-heading-xl">Reports</h1>
 
-    
+
 
       {% from 'date-input/macro.njk' import dateInput %}
 
-      
+
       <p>Download a spreadsheet of the vaccinations you have recorded.</p>
 
       {% from 'warning-callout/macro.njk' import warningCallout %}

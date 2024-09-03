@@ -4,9 +4,7 @@
   Manage users and permissions
 {% endblock %}
 
-{% block header %}
-  {% include "user-profile/v1/_header.html" %}
-{% endblock %}
+{% set currentSection = "user-profile" %}
 
 {% block outerContent %}
   {{ backLink({

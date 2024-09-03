@@ -4,19 +4,21 @@
   Manage users and permissions
 {% endblock %}
 
-{% block header %}
-  {% include "user-admin/v2/_header.html" %}
+{% set currentSection = "manage-users" %}
+
+{% block outerContent %}
+  {{ backLink({
+    href: "/user-admin",
+    text: "Back to Manage users",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
 {% endblock %}
+
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
-      <h1 class="nhsuk-heading-xl">Manage users</h1>
-
-      {{ button({
-        "text": "Add user",
-        "href": "/user-admin/v2/add-user"
-      }) }}
+      <h1 class="nhsuk-heading-xl">Deactivated users</h1>
 
       <table class="nhsuk-table">
         <caption class="nhsuk-table__caption">Users</caption>
@@ -29,42 +31,27 @@
               Email address
             </th>
             <th role="columnheader" class="" scope="col">
-              Permissions
+              Date
             </th>
             <th role="columnheader" class="" scope="col">
-              Status
-            </th>
-            <th role="columnheader" class="" scope="col">
-
             </th>
           </tr>
         </thead>
         <tbody class="nhsuk-table__body">
-          {% for user in (data.users | sort(false, true, "firstName")) %}
+          {% for user in (deactivatedUsers | sort(true, true, "deactivatedDate")) %}
             <tr class="nhsuk-table__row">
               <td class="nhsuk-table__cell">
                 {{ user.firstName }} {{ user.lastName }}
               </td>
               <td class="nhsuk-table__cell ">{{ user.email }}</td>
+              <td class="nhsuk-table__cell ">{% if user.deactivatedDate%}{{ user.deactivatedDate | govukDate }}{% endif %}</td>
               <td class="nhsuk-table__cell ">
-                {% if user.permissions %}
-                  {{ user.permissions | join(", ") | capitalize }}
-                {% else %}
-                  None
-                {% endif %}
-              </td>
-              <td class="nhsuk-table__cell ">{{ user.status }}</td>
-              <td class="nhsuk-table__cell ">
-                <a href="/user-admin/v2/users/{{ user.id }}/change-permissions" class="nhsuk-link">Change permissions</a>
-              </td>
+                <a href="/user-admin/{{ user.id }}/reactivate" class="nhsuk-link">Reactivate</a>
               </td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
-
-
-
 
     </div>
   </div>
