@@ -24,19 +24,23 @@
 
       <h1 class="nhsuk-heading-xl">Check and confirm</h1>
 
+
+      {% set from = data.from %}
+      {% set to = data.to %}
+
       {{ summaryList({
         rows: [
           {
             key: {
-              text: "From"
+              text: ("Date" if from == to else "From")
             },
             value: {
-              text: data.firstName + " " + data.lastName
+              text: (from | isoDateFromDateInput | govukDate)
             },
             actions: {
               items: [
                 {
-                  href: "/user-admin/v4/add-user",
+                  href: "/reports/choose-dates-2",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -48,14 +52,14 @@
               text: "To"
             },
             value: {
-              html: data["email"]
+              text: (to | isoDateFromDateInput | govukDate)
             },
             actions: {
               items: [
                 {
-                  href: "/user-admin/v4/add-user",
+                  href: "/reports/choose-dates-2",
                   text: "Change",
-                  visuallyHiddenText: "email address"
+                  visuallyHiddenText: "name"
                 }
               ]
             }
@@ -65,32 +69,34 @@
               text: "Vaccines"
             },
             value: {
-              html: (data["clinician"] | capitalize)
+              text: (data.vaccines | join(", "))
             },
             actions: {
               items: [
                 {
-                  href: "/user-admin/v4/add-user",
+                  href: "/reports/choose-vaccines-2",
                   text: "Change",
-                  visuallyHiddenText: "clinical role"
+                  visuallyHiddenText: "change vaccines"
                 }
               ]
             }
           },
+
+
           {
             key: {
               text: "Sites"
             },
             value: {
-              html: data["role"]
+              text: (data.reportSites | join(",  "))
             },
             actions: {
               items: [
-                {
-                  href: "/user-admin/v4/add-user",
-                  text: "Change",
-                  visuallyHiddenText: "role"
-                }
+              {
+                href: "/reports/choose-site-2",
+                text: "Change",
+                visuallyHiddenText: "change sites"
+              }
               ]
             }
           },
@@ -99,18 +105,20 @@
               text: "Data"
             },
             value: {
-              html: data["role"]
+              text: (data.data)
             },
             actions: {
               items: [
                 {
-                  href: "/user-admin/v4/add-user",
+                  href: "/reports/choose-data",
                   text: "Change",
-                  visuallyHiddenText: "role"
+                  visuallyHiddenText: "change data"
                 }
               ]
             }
           }
+
+
         ]
       }) }}
 
@@ -126,3 +134,5 @@
     </div>
   </div>
 {% endblock %}
+
+

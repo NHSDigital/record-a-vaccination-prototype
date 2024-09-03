@@ -4,8 +4,9 @@
   Choose data
 {% endblock %}
 
+
 {% block header %}
-  {% include "user-admin/v1/_header.html" %}
+  {% include "reports/_header.html" %}
 {% endblock %}
 
 {% block content %}
@@ -18,44 +19,45 @@
 
       <form action="/reports/check" method="post" novalidate="true">
 
-        {{ radios({
-          "name": "role",
-          "fieldset": {
-            "legend": {
-              "text": "Select the data set for your report"
-            }
-          },
-          "items": [
+
+            {{ radios({
+                "name": "data",
+                "fieldset": {
+                  "legend": {
+                    "text": "Select the data set for your report"
+                  }
+                },
+            items: [
             {
-              "value": "all-data",
+              "value": "All data",
               "text": "All data",
               checked: (data.role == "all-data"),
               "hint": {
-                "text": "Includes all data collected for each record such as patient, site, eligibility, consent and clinician details"
+                "text": "Includes all data collected for each record such as patient, site, eligibility, consent and clinician details."
               }
             },
             {
-              "value": "non-personal-data",
-              "text": "Non personal data",
+              "value": "Non-personal data",
+              "text": "Non-personal data",
               checked: (data.role == "non-personal-data"),
               "hint": {
-                "text": "Excludes personal patient data"
+                "text": "Excludes personal patient data."
               }
             },
             {
-              "value": "vaccination-data-only",
+              "value": "Vaccination data only",
               "text": "Vaccination data only",
               checked: (data.role == "vaccination-data-only"),
               "hint": {
-                "text": "Includes vaccination data only"
+                "text": "Includes vaccination data only."
               }
             },
             {
-                "value": "site-vaccination-clinician-data",
-                "text": "Site, vaccination and clinician data",
+                "value": "Site, vaccine and clinician data",
+                "text": "Site, vaccine and clinician data",
                 checked: (data.role == "site-vaccination-clinician-data"),
                 "hint": {
-                  "text": "Includes site, vaccination and clinician data only (excludes patient, eligibility and consent data)"
+                  "text": "Includes site, vaccination and clinician data only (excludes patient, eligibility and consent data)."
                 }
               }
           ]
