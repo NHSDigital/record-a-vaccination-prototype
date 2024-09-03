@@ -8,7 +8,7 @@
 
 {% block outerContent %}
   {{ backLink({
-    href: "/user-admin/v4",
+    href: "/user-admin",
     text: "Back",
     classes: "nhsuk-u-margin-top-4"
   }) }}
@@ -47,7 +47,7 @@
 
       <h1 class="nhsuks-heading-xl">Add user</h1>
 
-      <form action="/user-admin/v4/check-answers" method="post" novalidate="true">
+      <form action="/user-admin/check-answers" method="post" novalidate="true">
 
         {{ input({
           "label": {

@@ -23,7 +23,7 @@
           classes: ("app-header__navigation-item--current" if currentSection == "reports")
         } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(currentUser.role))),
         {
-          url: '/user-admin/v4',
+          url: '/user-admin',
           label: 'Manage users',
           classes: ("app-header__navigation-item--current" if currentSection == "manage-users")
         } if (currentUser and currentUser.role === "Lead administrator"),
