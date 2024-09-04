@@ -13,7 +13,15 @@
 
         {% set permissionLevelHtml %}
           <div>{{ currentUser.role }}</div>
-          <p class="app-summary__explanation">Can record vaccinations, and manage vaccine products and batches</p>
+          <p class="app-summary__explanation">
+            {% if currentUser.role == "Lead administrator" %}
+              Can record vaccinations, create reports, manage vaccines and users
+            {% elseif currentUser.role == "Administrator" %}
+              Can record vaccinations, create reports and manage vaccines
+            {% elseif currentUser.role == "Recorder" %}
+              Can record vaccinations only
+            {% endif %}
+          </p>
         {% endset %}
 
         {{ summaryList({
@@ -69,9 +77,12 @@
 
         <p>Only lead administrators can change permission levels. The lead administrators for Southampton NHS Trust are:</p>
 
-        <ul class="nhsuk-list">
-          <li>Jane Smith (jane.smith@trustname.nhs.uk)</li>
-          <li>John Jones (john.jones4@trustname.nhs.uk)</li>
+        <ul class="nhsuk-list nhsuk-list--bullet">
+          {% for user in data.users %}
+            {% if user.role == "Lead administrator" and user.status == "Active" %}
+              <li>{{ user.firstName }} {{ user.lastName }} ({{ user.email }})</li>
+            {% endif %}
+          {% endfor %}
         </ul>
 
       {% endif %}
