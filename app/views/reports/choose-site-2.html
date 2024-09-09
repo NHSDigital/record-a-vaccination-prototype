@@ -13,10 +13,6 @@
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
 
-
-          <h1 class="nhsuk-heading-xl">Choose sites</h1>
-          <p class="nhsuk-body-l">Select your site or delivery team</p>
-
           <form action="/reports/choose-data" method="post">
 
             {{ checkboxes({
@@ -24,8 +20,8 @@
                 "name": "reportSites",
                 "fieldset": {
                   "legend": {
-                    "text": "",
-                    "classes": "nhsuk-fieldset__legend--m",
+                    "text": "Choose sites",
+                    "classes": "nhsuk-fieldset__legend--xl",
                     isPageHeading: true
                   }
                 },
@@ -33,19 +29,23 @@
                 "items": [
                   {
                     "value": "Verington (RH63S)",
-                    "text": "Verington (RH63S)"
+                    "text": "Verington (RH63S)",
+                    checked: (data.reportSites | arrayOrStringIncludes("Verington (RH63S)"))
                   },
                   {
                     "value": "Tower (S204X)",
-                    "text": "Tower (S204X)"
+                    "text": "Tower (S204X)",
+                    checked: (data.reportSites | arrayOrStringIncludes("Tower (S204X)"))
                   },
                   {
                     "value": "The Exchange (RH5S9)",
-                    "text": "The Exchange (RH5S9)"
+                    "text": "The Exchange (RH5S9)",
+                    checked: (data.reportSites | arrayOrStringIncludes("The Exchange (RH5S9)"))
                   },
                   {
                     "value": "Willowbank Day Hospital (RH5C4)",
-                    "text": "Willowbank Day Hospital (RH5C4)"
+                    "text": "Willowbank Day Hospital (RH5C4)",
+                    checked: (data.reportSites | arrayOrStringIncludes("Willowbank Day Hospital (RH5C4)"))
                   }
                   ]
               }) }}
