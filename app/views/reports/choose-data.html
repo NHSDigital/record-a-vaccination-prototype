@@ -18,56 +18,59 @@
       <h1 class="nhsuks-heading-xl">Choose data</h1>
 
       <form action="/reports/check" method="post" novalidate="true">
+       
+        {% from 'checkboxes/macro.njk' import checkboxes %}
 
-
-            {{ radios({
-                "name": "data",
-                "fieldset": {
-                  "legend": {
-                    "text": "Select the data set for your report"
-                  }
-                },
+        <form>
+          {{ checkboxes({
+            idPrefix: "data",
+            name: "data",
+            fieldset: {
+              legend: {                isPageHeading: true,
+                classes: "nhsuk-fieldset__legend--l"
+              }
+            },
             items: [
-            {
-              "value": "All data",
-              "text": "All data",
-              checked: (data.role == "all-data"),
-              "hint": {
-                "text": "Includes all data collected for each record such as patient, site, eligibility, consent and clinician details."
-              }
-            },
-            {
-              "value": "Non-personal data",
-              "text": "Non-personal data",
-              checked: (data.role == "non-personal-data"),
-              "hint": {
-                "text": "Excludes personal patient data."
-              }
-            },
-            {
-              "value": "Vaccination data only",
-              "text": "Vaccination data only",
-              checked: (data.role == "vaccination-data-only"),
-              "hint": {
-                "text": "Includes vaccination data only."
-              }
-            },
-            {
-                "value": "Site, vaccine and clinician data",
-                "text": "Site, vaccine and clinician data",
-                checked: (data.role == "site-vaccination-clinician-data"),
-                "hint": {
-                  "text": "Includes site, vaccination and clinician data only (excludes patient, eligibility and consent data)."
+              {
+                value: "Patients",
+                text: "Patients",
+                hint: {
+                  text: "NHS number, name, date of birth, gender, address"
+                }
+              },
+              {
+                value: "Staff",
+                text: "Staff",
+                hint: {
+                  text: "Recorder, vaccinator, assessing and consenting clinician names and email addresses"
+                }
+              },
+              {
+                value: "Site or delivery team",
+                text: "Site or delivery team",
+                hint: {
+                  text: "Names and ODS codess"
+                }
+              },{
+                value: "Assessment and consent",
+                text: "Assessment and consent",
+                hint: {
+                  text: "Vaccinated and not givens, date, consent and eligibility details, and comments"
+                }
+              },{
+                value: "Vaccination",
+                text: "Vaccination",
+                hint: {
+                  text: "Date, vaccine details and dose given, site of body, legal mechanism and comments"
                 }
               }
-          ]
-        }) }}
+            ]
+          }) }}
 
-
-        {{ button({
-          "text": "Continue"
-      }) }}
-      </form>
+          {{ button({
+            "text": "Continue"
+          }) }}
+        </form>
 
 
     </div>
