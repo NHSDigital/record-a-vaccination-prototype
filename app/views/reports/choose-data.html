@@ -16,7 +16,7 @@
       <h1 class="nhsuks-heading-xl">Choose data</h1>
 
       <form action="/reports/check" method="post" novalidate="true">
-       
+
         {% from 'checkboxes/macro.njk' import checkboxes %}
 
         <form>
@@ -32,6 +32,7 @@
               {
                 value: "Patients",
                 text: "Patients",
+                checked: (data.data | arrayOrStringIncludes("Patients")),
                 hint: {
                   text: "NHS number, name, date of birth, gender, address"
                 }
@@ -39,6 +40,7 @@
               {
                 value: "Staff",
                 text: "Staff",
+                checked: (data.data | arrayOrStringIncludes("Staff")),
                 hint: {
                   text: "Recorder, vaccinator, assessing and consenting clinician names and email addresses"
                 }
@@ -46,18 +48,21 @@
               {
                 value: "Site or delivery team",
                 text: "Site or delivery team",
+                checked: (data.data | arrayOrStringIncludes("Site or delivery team")),
                 hint: {
                   text: "Names and ODS codess"
                 }
               },{
                 value: "Assessment and consent",
                 text: "Assessment and consent",
+                checked: (data.data | arrayOrStringIncludes("Assessment and consent")),
                 hint: {
                   text: "Vaccinated and not givens, date, consent and eligibility details, and comments"
                 }
               },{
                 value: "Vaccination",
                 text: "Vaccination",
+                checked: (data.data | arrayOrStringIncludes("Vaccination")),
                 hint: {
                   text: "Date, vaccine details and dose given, site of body, legal mechanism and comments"
                 }
