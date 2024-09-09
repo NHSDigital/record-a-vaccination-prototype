@@ -13,10 +13,6 @@
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
 
-
-          <h1 class="nhsuk-heading-xl">Choose sites</h1>
-          <p class="nhsuk-body-l">Select your site or delivery team</p>
-
           <form action="/reports/choose-data" method="post">
 
             {{ checkboxes({
@@ -24,8 +20,8 @@
                 "name": "reportSites",
                 "fieldset": {
                   "legend": {
-                    "text": "",
-                    "classes": "nhsuk-fieldset__legend--m",
+                    "text": "Choose sites",
+                    "classes": "nhsuk-fieldset__legend--xl",
                     isPageHeading: true
                   }
                 },

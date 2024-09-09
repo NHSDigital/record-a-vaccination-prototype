@@ -13,8 +13,6 @@
 
       {{ backLink({ href: "/reports/choose-site-2", text: "Back" }) }}
 
-      <h1 class="nhsuks-heading-xl">Choose data</h1>
-
       <form action="/reports/check" method="post" novalidate="true">
 
         {% from 'checkboxes/macro.njk' import checkboxes %}
@@ -24,8 +22,10 @@
             idPrefix: "data",
             name: "data",
             fieldset: {
-              legend: {                isPageHeading: true,
-                classes: "nhsuk-fieldset__legend--l"
+              legend: {
+                text: "Choose data",
+                isPageHeading: true,
+                classes: "nhsuk-fieldset__legend--xl"
               }
             },
             items: [
