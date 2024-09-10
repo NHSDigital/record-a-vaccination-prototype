@@ -86,6 +86,26 @@ module.exports = (router) => {
 
   })
 
+  router.post('/reports/update-data', (req, res) => {
+
+    const dataSelected = req.session.data.data || []
+
+    if (dataSelected.length > 0) {
+      res.redirect('/reports/check')
+    } else {
+
+      const error = {
+        text: "Select data for report",
+        href: "#data-1"
+      }
+
+      res.render('reports/choose-data', {
+        error
+      })
+    }
+
+  })
+
 
   router.get('/reports/check', (req, res) => {
 
