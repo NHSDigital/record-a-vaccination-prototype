@@ -2,7 +2,7 @@ const filters = require('.././filters.js')()
 
 module.exports = (router) => {
 
-  router.get('/reports/choose-dates-2', (req, res) => {
+  router.get('/reports/choose-dates', (req, res) => {
     const data = req.session.data
 
     let dateError, dateFromError, dateToError
@@ -43,7 +43,7 @@ module.exports = (router) => {
       }
     }
 
-    res.render('reports/choose-dates-2', {
+    res.render('reports/choose-dates', {
       dateError,
       dateFromError,
       dateToError
@@ -73,15 +73,15 @@ module.exports = (router) => {
     if (date === "custom_date_range") {
 
       if (fromDate && toDate && daysApart < 15) {
-        res.redirect('/reports/choose-vaccines-2')
+        res.redirect('/reports/choose-vaccines')
       } else {
-        res.redirect('/reports/choose-dates-2?showErrors=true')
+        res.redirect('/reports/choose-dates?showErrors=true')
       }
 
     } else if (date) {
-      res.redirect('/reports/choose-vaccines-2')
+      res.redirect('/reports/choose-vaccines')
     } else {
-      res.redirect('/reports/choose-dates-2?showErrors=true')
+      res.redirect('/reports/choose-dates?showErrors=true')
     }
 
   })
