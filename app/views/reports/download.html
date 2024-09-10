@@ -1,17 +1,23 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  Reports
+  Report is ready
 {% endblock %}
 
 {% set currentSection = "reports" %}
 
+
+{% block outerContent %}
+  {{ backLink({
+    href: "/reports/check-2",
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
+{% endblock %}
+
 {% block content %}
-
-{{ backLink({ href: "/reports/check-2", text: "Back" }) }}
-
   <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-full">
+    <div class="nhsuk-grid-column-two-thirds">
 
       <h1 class="nhsuk-heading-xl">Report is ready</h1>
 
