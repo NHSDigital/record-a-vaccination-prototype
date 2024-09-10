@@ -8,7 +8,7 @@
 
 {% block outerContent %}
   {{ backLink({
-    href: "/reports/v7",
+    href: "/reports",
     text: "Back",
     classes: "nhsuk-u-margin-top-4"
   }) }}
@@ -42,7 +42,7 @@
         }) }}
       {% endif %}
 
-      <form action="/reports/choose-vaccines-2" method="post">
+      <form action="/reports/choose-vaccines" method="post">
 
         {% set custom_date_range %}
           {{ dateInput({

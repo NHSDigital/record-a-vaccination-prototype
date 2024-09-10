@@ -9,7 +9,7 @@
 
 {% block outerContent %}
   {{ backLink({
-    href: "/reports/choose-dates-2",
+    href: "/reports/choose-dates",
     text: "Back",
     classes: "nhsuk-u-margin-top-4"
   }) }}
@@ -22,7 +22,7 @@
 
 
 
-            <form action="/reports/choose-site-2" method="post">
+            <form action="/reports/choose-site" method="post">
               {{ checkboxes({
                 "idPrefix": "vaccines",
                 "name": "vaccines",
