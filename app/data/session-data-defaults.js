@@ -172,6 +172,9 @@ module.exports = {
     {name: "South East", code: "SE1"},
     {name: "London", code: "LO1"},
   ],
+  data: [
+    "Patients", "Staff", "Site or delivery team", "Assessment and consent", "Vaccination"
+  ],
   "nhsTrusts": {
     "R0A": "Manchester University NHS Foundation Trust",
     "R0B": "South Tyneside and Sunderland NHS Foundation Trust",

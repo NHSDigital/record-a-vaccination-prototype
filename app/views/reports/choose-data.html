@@ -19,67 +19,74 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/reports/check" method="post" novalidate="true">
+      {% if error %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [error]
+        }) }}
+      {% endif %}
 
-        {% from 'checkboxes/macro.njk' import checkboxes %}
+      <form action="/reports/update-data" method="post" novalidate="true">
 
-        <form>
-          {{ checkboxes({
-            idPrefix: "data",
-            name: "data",
-            fieldset: {
-              legend: {
-                text: "Choose data",
-                isPageHeading: true,
-                classes: "nhsuk-fieldset__legend--xl"
+        {{ checkboxes({
+          idPrefix: "data",
+          name: "data",
+          errorMessage: {
+            text: error.text
+          } if error,
+          fieldset: {
+            legend: {
+              text: "Choose data",
+              isPageHeading: true,
+              classes: "nhsuk-fieldset__legend--xl"
+            }
+          },
+          items: [
+            {
+              value: "Patients",
+              text: "Patients",
+              checked: (data.data | arrayOrStringIncludes("Patients")),
+              hint: {
+                text: "NHS number, name, date of birth, gender, address"
               }
             },
-            items: [
-              {
-                value: "Patients",
-                text: "Patients",
-                checked: (data.data | arrayOrStringIncludes("Patients")),
-                hint: {
-                  text: "NHS number, name, date of birth, gender, address"
-                }
-              },
-              {
-                value: "Staff",
-                text: "Staff",
-                checked: (data.data | arrayOrStringIncludes("Staff")),
-                hint: {
-                  text: "Recorder, vaccinator, assessing and consenting clinician names and email addresses"
-                }
-              },
-              {
-                value: "Site or delivery team",
-                text: "Site or delivery team",
-                checked: (data.data | arrayOrStringIncludes("Site or delivery team")),
-                hint: {
-                  text: "Names and ODS codes"
-                }
-              },{
-                value: "Assessment and consent",
-                text: "Assessment and consent",
-                checked: (data.data | arrayOrStringIncludes("Assessment and consent")),
-                hint: {
-                  text: "Vaccinated and not givens, date, consent and eligibility details, and comments"
-                }
-              },{
-                value: "Vaccination",
-                text: "Vaccination",
-                checked: (data.data | arrayOrStringIncludes("Vaccination")),
-                hint: {
-                  text: "Date, vaccine details and dose given, site of body, legal mechanism and comments"
-                }
+            {
+              value: "Staff",
+              text: "Staff",
+              checked: (data.data | arrayOrStringIncludes("Staff")),
+              hint: {
+                text: "Recorder, vaccinator, assessing and consenting clinician names and email addresses"
               }
-            ]
-          }) }}
+            },
+            {
+              value: "Site or delivery team",
+              text: "Site or delivery team",
+              checked: (data.data | arrayOrStringIncludes("Site or delivery team")),
+              hint: {
+                text: "Names and ODS codes"
+              }
+            },{
+              value: "Assessment and consent",
+              text: "Assessment and consent",
+              checked: (data.data | arrayOrStringIncludes("Assessment and consent")),
+              hint: {
+                text: "Vaccinated and not givens, date, consent and eligibility details, and comments"
+              }
+            },{
+              value: "Vaccination",
+              text: "Vaccination",
+              checked: (data.data | arrayOrStringIncludes("Vaccination")),
+              hint: {
+                text: "Date, vaccine details and dose given, site of body, legal mechanism and comments"
+              }
+            }
+          ]
+        }) }}
 
-          {{ button({
-            "text": "Continue"
-          }) }}
-        </form>
+        {{ button({
+          "text": "Continue"
+        }) }}
+      </form>
 
 
     </div>
