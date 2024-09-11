@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Sign in
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-out.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      {{ radios({
+        idPrefix: "example",
+        name: "example",
+        fieldset: {
+          legend: {
+            text: "Which organisation do you want to use?",
+            classes: "nhsuk-fieldset__legend--l",
+            isPageHeading: true
+          }
+        },
+        items: [
+          {
+            value: "yes",
+            text: "Health+ Pharmacy",
+            hint: {
+              text: "100 Chancery Lane, London, N6 1LD"
+            }
+          },
+          {
+            value: "no",
+            text: "ABC1 Pharmacy",
+            hint: {
+              text: "73 Milton Street, London, N4 0PE"
+            }
+          }
+        ]
+      }) }}
+
+      {{ button({
+        text: "Continue"
+      }) }}
+
+
+    </div>
+  </div>
+
+{% endblock %}
