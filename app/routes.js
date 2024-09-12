@@ -11,5 +11,6 @@ require('./routes/vaccines')(router)
 require('./routes/reports')(router)
 require('./routes/prototype-admin')(router)
 require('./routes/support')(router)
+require('./routes/auth')(router)
 
 module.exports = router;

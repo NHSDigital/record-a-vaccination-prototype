@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Sign in
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block content %}
+
+<div id="signin-container"><main data-se="auth-container" tabindex="-1" id="okta-sign-in" class="auth-container main-container" style=""><div class="okta-sign-in-header auth-header"><h1><img src="https://op1static.oktacdn.com/assets/img/logos/okta-logo.1e146cad5713da744492be95eb0f7793.png" class="auth-org-logo" alt="NHS Improvement 2 logo logo" aria-label="NHS Improvement 2 logo logo"></h1><div data-type="beacon-container" class="beacon-container"></div></div><div class="auth-content"><div class="auth-content-inner"><div class="siw-main-view reset-authenticator--okta_password forgot-password"><div class="siw-main-header"><div><div><div data-type="beacon-container" class="beacon-container" style="transform: scale(1, 1); text-indent: 1px;"><div class="beacon-blank auth-beacon"><div class="beacon-blank js-blank-beacon-border auth-beacon-border"></div></div><div class="bg-helper auth-beacon auth-beacon-factor mfa-okta-password" data-se="factor-beacon"><div class="okta-sign-in-beacon-border auth-beacon-border"></div></div></div></div></div></div><div class="siw-main-body"><form autocomplete="off" novalidate data-se="o-form" slot="content" id="form45" class="password-authenticator o-form o-form-edit-mode"><div data-se="o-form-content" class="o-form-content o-form-theme clearfix">
+
+<div data-se="o-form-content" class="o-form-content o-form-theme clearfix"><h2 data-se="o-form-head" class="okta-form-title o-form-head">NHS Sign In</h2><div class="o-form-info-container"></div><div class="o-form-error-container" data-se="o-form-error-container" role="alert"></div><div class="o-form-fieldset-container" data-se="o-form-fieldset-container"><div data-se="o-form-fieldset-identifier" class="o-form-fieldset o-form-label-top" style="margin-bottom: 20px;">
+
+  <div data-se="o-form-label" class="okta-form-label o-form-label"><label for="input28">Email&nbsp;</label></div>
+
+  <div data-se="o-form-input-container" class="o-form-input"><span data-se="o-form-input-identifier" class="o-form-input-name-identifier o-form-control okta-form-input-field input-fix"><input type="text" placeholder="" name="identifier" id="input28" value="" aria-label="" autocomplete="username"></span></div></div><div data-se="o-form-fieldset-credentials.passcode" class="o-form-fieldset o-form-label-top"><div data-se="o-form-label" class="okta-form-label o-form-label"><label for="input36">Password&nbsp;</label></div><div data-se="o-form-input-container" class="o-form-input"><span data-se="o-form-input-credentials.passcode" class="o-form-input-name-credentials.passcode o-form-control okta-form-input-field input-fix"><input type="password" placeholder="" name="credentials.passcode" id="input36" value="" aria-label="" autocomplete="current-password" class="password-with-toggle" style="margin-bottom: 20px;"><span class="password-toggle"><span class="eyeicon visibility-16 button-show"></span><span class="eyeicon visibility-off-16 button-hide"></span></span></span></div></div><div data-se="o-form-fieldset-rememberMe" class="o-form-fieldset o-form-label-top"><div data-se="o-form-input-container" class="o-form-input"><span data-se="o-form-input-rememberMe" class="o-form-input-name-rememberMe"><div class="custom-checkbox"><input type="checkbox" name="rememberMe" id="input44"><label for="input44" data-se-for-name="rememberMe">Keep me signed in</label></div></span></div></div></div></div>
+
+    {{ button({
+      classes: "app-button--okta nhsuk-u-margin-top-5",
+      text: "Sign in",
+      href: ("/select-organisation" if data.multiOrganisation == "yes" else "/find-a-patient")
+    }) }}
+
+  </div></form></div><div class="siw-main-footer"><div class="auth-footer"></div></div></div></div></div></main></div>
+
+{% endblock %}

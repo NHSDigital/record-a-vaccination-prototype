@@ -12,10 +12,17 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+    {% if error %}
+      {{ errorSummary({
+        titleText: "There is a problem",
+        errorList: [error]
+      }) }}
+    {% endif %}
+
+    <form action="/select-organisation" method="post">
 
       {{ radios({
-        idPrefix: "example",
-        name: "example",
+        name: "organisationId",
         fieldset: {
           legend: {
             text: "Choose your organisation",
@@ -23,19 +30,22 @@
             isPageHeading: true
           }
         },
+        errorMessage: {
+          text: error.text
+        } if error,
         items: [
           {
-            value: "yes",
-            text: "Health+ Pharmacy",
+            value: "FA424",
+            text: "Pickfords Pharmacy",
             hint: {
-              text: "100 Chancery Lane, London, N6 1LD"
+              text: "8 Spencer Court, Corby, NN17 1NU"
             }
           },
           {
-            value: "no",
-            text: "ABC1 Pharmacy",
+            value: "FAH83",
+            text: "Claygate Pharmacy",
             hint: {
-              text: "73 Milton Street, London, N4 0PE"
+              text: "35 The Parade, Claygate, Esher, KT10 0PD"
             }
           }
         ]
@@ -44,6 +54,7 @@
       {{ button({
         text: "Continue"
       }) }}
+    </form>
 
 
     </div>
