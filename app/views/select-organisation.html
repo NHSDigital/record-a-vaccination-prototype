@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Sign in
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-out.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+    {% if error %}
+      {{ errorSummary({
+        titleText: "There is a problem",
+        errorList: [error]
+      }) }}
+    {% endif %}
+
+    <form action="/select-organisation" method="post">
+
+      {{ radios({
+        name: "organisationId",
+        fieldset: {
+          legend: {
+            text: "Choose your organisation",
+            classes: "nhsuk-fieldset__legend--l nhsuk-u-margin-bottom-5",
+            isPageHeading: true
+          }
+        },
+        errorMessage: {
+          text: error.text
+        } if error,
+        items: [
+          {
+            value: "FA424",
+            text: "Pickfords Pharmacy",
+            hint: {
+              text: "8 Spencer Court, Corby, NN17 1NU"
+            }
+          },
+          {
+            value: "FAH83",
+            text: "Claygate Pharmacy",
+            hint: {
+              text: "35 The Parade, Claygate, Esher, KT10 0PD"
+            }
+          }
+        ]
+      }) }}
+
+      {{ button({
+        text: "Continue"
+      }) }}
+    </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

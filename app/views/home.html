@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Record a vaccination
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-out.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Welcome to Record a vaccination service (RAVS)</h1>
+
+      <p>You are not signed in.</p>
+
+      {{ button({
+        text: "Log in",
+        href: "/okta-sign-in"
+      }) }}
+
+    </div>
+  </div>
+
+{% endblock %}
