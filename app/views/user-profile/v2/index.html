@@ -24,6 +24,14 @@
           </p>
         {% endset %}
 
+        {% set organisationHtml %}
+          <div>{{ currentOrganisation.name }}</div>
+          <p class="app-summary__explanation">
+            {{ currentOrganisation.address.line1 }}, {{ currentOrganisation.address.postcode }}
+          </p>
+
+        {% endset %}
+
         {{ summaryList({
           classes: "nhsuk-u-margin-bottom-4",
           rows: [
@@ -53,6 +61,20 @@
               },
               actions: {
                 items: [
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Organisation"
+              },
+              value: {
+                html: organisationHtml
+              },
+              actions: {
+                items: [
+                  {
+                  }
                 ]
               }
             },

@@ -21,6 +21,20 @@
 
     <form action="/select-organisation" method="post">
 
+      {% set items = [] %}
+      {% for organisation in organisations %}
+
+        {% set items = (items.push({
+          value: organisation.id,
+          text: organisation.name,
+          hint: {
+            text: organisation.address.line1
+          }
+        }), items) %}
+      {% endfor %}
+
+
+
       {{ radios({
         name: "organisationId",
         fieldset: {
@@ -33,22 +47,7 @@
         errorMessage: {
           text: error.text
         } if error,
-        items: [
-          {
-            value: "FA424",
-            text: "Pickfords Pharmacy",
-            hint: {
-              text: "8 Spencer Court, Corby, NN17 1NU"
-            }
-          },
-          {
-            value: "FAH83",
-            text: "Claygate Pharmacy",
-            hint: {
-              text: "35 The Parade, Claygate, Esher, KT10 0PD"
-            }
-          }
-        ]
+        items: items
       }) }}
 
       {{ button({

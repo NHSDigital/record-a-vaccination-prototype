@@ -1,5 +1,6 @@
 module.exports = {
   currentUserId: "12345",
+  currentOrganisationId: "R0A",
   vaccines: [],
   "users": [
     {
@@ -174,6 +175,38 @@ module.exports = {
   ],
   data: [
     "Patients", "Staff", "Site or delivery team", "Assessment and consent", "Vaccination"
+  ],
+  organisations: [
+    {
+      id: "FAC81",
+      name: "Hambro Pharmacy",
+      type: "Community pharmacy",
+      address: {
+        line1: "53A Hullbridge Road",
+        town: "Rayleigh",
+        postcode: "SS6 9NL"
+      }
+    },
+    {
+      id: "FA464",
+      name: "Cohens Chemists",
+      type: "Community pharmacy",
+      address: {
+        line1: "151-151A Accrington Road",
+        town: "Burnley",
+        postcode: "BB11 5AL"
+      }
+    },
+    {
+      id: "R0A",
+      name: "Manchester University NHS Foundation Trust",
+      type: "NHS Trust",
+      address: {
+        line1: "Cobbett House, Oxford Road",
+        town: "Manchester",
+        postcode: "M13 9WL"
+      }
+    }
   ],
   "nhsTrusts": {
     "R0A": "Manchester University NHS Foundation Trust",
