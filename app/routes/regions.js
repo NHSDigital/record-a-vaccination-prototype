@@ -56,16 +56,18 @@ module.exports = router => {
   router.get('/regions/v1/organisation-details', (req, res) => {
     const organisationCode = req.session.data.organisationCode
 
-    let organisationName, organisationLine1, organisationTown, organisationPostcode, organisationType
+    let organisationName, organisationLine1, organisationTown, organisationPostcode, organisationType, legallyClosed
 
     if (organisationCode.startsWith('FA')) {
       organisationName = req.session.data.nhsPharmacies[organisationCode].name
       organisationLine1 = req.session.data.nhsPharmacies[organisationCode].address
       organisationTown = req.session.data.nhsPharmacies[organisationCode].town
       organisationPostcode = req.session.data.nhsPharmacies[organisationCode].postcode
+      legallyClosed = req.session.data.nhsPharmacies[organisationCode].legallyClosed
       organisationType = 'Community Pharmacy'
     } else {
       organisationName = req.session.data.nhsTrusts[organisationCode]
+      legallyClosed = false
       organisationLine1 = 'Cobbett House, Oxford Road'
       organisationTown = 'Manchester'
       organisationPostcode = 'M13 9WL'
@@ -80,7 +82,8 @@ module.exports = router => {
         line1: organisationLine1,
         town: organisationTown,
         postcode: organisationPostcode
-      }
+      },
+      legallyClosed: legallyClosed
     }
 
     res.render('regions/v1/organisation-details', {
