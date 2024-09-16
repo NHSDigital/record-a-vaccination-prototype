@@ -696,7 +696,8 @@ module.exports = {
     "FAH85": {"name": "Boots", "address": "77 High Street", "town": "Bromley", "postcode": "Br1 1Jy"},
     "FAH9": {"name": "Whittington Pharmacy", "address": "13B Main Street,Whittington", "postcode": "Lichfield", "postcode": "Ws14 9Ju"},
     "FAH94": {"name": "Lo'S Pharmacy,Outwood Park Medical Centre,Potovens Lane,Outwood,Wakefield", "postcode": "Wf1 2Pe"},
-    "FAJ00": {"name": "Jades Chemist", "address": "19 The Parade", "town": "Crawley", "postcode": "Rh10 8Dt"}
+    "FAJ00": {"name": "Jades Chemist", "address": "19 The Parade", "town": "Crawley", "postcode": "Rh10 8Dt"},
+    "FAZZZ": {"name": "Legally Closed Pharamcy", "address": "30 Legal Close", "town": "London", "postcode": "CL0 5ED", legallyClosed: "2001-02-04"}
   },
   "sites": {
   "RWX15": {

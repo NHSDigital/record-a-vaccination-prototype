@@ -23,6 +23,18 @@
 
       <h1 class="nhsuk-heading-xl">Organisation</h1>
 
+      {% if organisation.legallyClosed %}
+
+        {% set warningHtml %}
+          <p>This organisation was legally closed on {{ organisation.legallyClosed | govukDate }} and cannot be added.</p>
+        {% endset %}
+
+        {{ warningCallout({
+          heading: "Important",
+          HTML: warningHtml
+        }) }}
+      {% endif %}
+
       {{ summaryList({
         rows: [
           {
@@ -60,12 +72,14 @@
         ]
       }) }}
 
+      {% if not organisation.legallyClosed %}
 
-      {{ button({
-        "text": "Continue",
-        href: "/regions/v1/add-email"
-      }) }}
+        {{ button({
+          "text": "Continue",
+          href: "/regions/v1/add-email"
+        }) }}
 
+      {% endif %}
 
     </div>
   </div>
