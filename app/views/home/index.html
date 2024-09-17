@@ -1,0 +1,89 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Manage users and permissions
+{% endblock %}
+
+{% from '../../components/pagination/macro.njk' import appPagination %}
+
+
+{% set currentSection = "home" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-xl nhsuk-u-margin-bottom-6">{{ currentOrganisation.name }}</h1>
+
+      <h2 class="nhsuk-heading-m">Vaccinations today</h2>
+
+    </div>
+  </div>
+
+
+<ul class="nhsuk-grid-row nhsuk-card-group">
+
+  {% for vaccineStat in stats %}
+
+    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+      {% set cardHtml %}
+        <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">{{ (vaccineStat.days | first).count }}</p>
+        {{ vaccineStat.vaccine }}
+      {% endset %}
+
+      {{ card({
+        headingHtml: cardHtml
+      }) }}
+    </li>
+  {% endfor %}
+</ul>
+
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-three-quarters">
+
+      <table class="nhsuk-table">
+        <caption class="nhsuk-table__caption">Vaccinations in the past 7 days</caption>
+        <thead role="rowgroup" class="nhsuk-table__head">
+          <tr role="row">
+            <th role="columnheader" class="" scope="col">
+              Date
+            </th>
+            {% for vaccineStat in stats %}
+              <th role="columnheader" class=" nhsuk-table__header--numeric" scope="col">
+                {{ vaccineStat.vaccine }}
+              </th>
+            {% endfor %}
+            <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
+              Total
+            </th>
+          </tr>
+        </thead>
+        <tbody class="nhsuk-table__body">
+
+          {% set firstStat = (stats | first ) %}
+
+          {% for date in firstStat.days %}
+            {% set total = 0 %}
+            <tr role="row" class="nhsuk-table__row">
+              <th class="nhsuk-table__header" scope="row">{{ date.date | govukDate("truncate") }}
+
+                {% if loop.index0 == 0 %}(today){% endif %}
+                {% if loop.index0 == 1 %}(yesterday){% endif %}
+              </th>
+
+              {% set dayIndex = loop.index0 %}
+              {% for vaccineStat in stats %}
+                {% set total = total + vaccineStat.days[dayIndex].count %}
+                <td class="nhsuk-table__cell nhsuk-table__cell--numeric">{{ vaccineStat.days[dayIndex].count }}</td>
+              {% endfor %}
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">{{ total }}</td>
+            </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+{% endblock %}
