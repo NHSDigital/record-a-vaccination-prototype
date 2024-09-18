@@ -60,21 +60,22 @@
           {% set firstStat = (stats | first ) %}
 
           {% for date in firstStat.days %}
-            {% set total = 0 %}
-            <tr role="row" class="nhsuk-table__row">
-              <th class="nhsuk-table__header" scope="row">{{ date.date | govukDate("truncate") }}
+            {% if not loop.index0 == 0 %}
+              {% set total = 0 %}
+              <tr role="row" class="nhsuk-table__row">
+                <th class="nhsuk-table__header" scope="row">{{ date.date | govukDate("truncate") }}
 
-                {% if loop.index0 == 0 %}(today){% endif %}
-                {% if loop.index0 == 1 %}(yesterday){% endif %}
-              </th>
+                  {% if loop.index0 == 1 %}(yesterday){% endif %}
+                </th>
 
-              {% set dayIndex = loop.index0 %}
-              {% for vaccineStat in stats %}
-                {% set total = total + vaccineStat.days[dayIndex].count %}
-                <td class="nhsuk-table__cell nhsuk-table__cell--numeric">{{ vaccineStat.days[dayIndex].count }}</td>
-              {% endfor %}
-              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">{{ total }}</td>
-            </tr>
+                {% set dayIndex = loop.index0 %}
+                {% for vaccineStat in stats %}
+                  {% set total = total + vaccineStat.days[dayIndex].count %}
+                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">{{ vaccineStat.days[dayIndex].count }}</td>
+                {% endfor %}
+                <td class="nhsuk-table__cell nhsuk-table__cell--numeric">{{ total }}</td>
+              </tr>
+            {% endif %}
           {% endfor %}
 
         </tbody>
