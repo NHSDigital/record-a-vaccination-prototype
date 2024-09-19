@@ -180,6 +180,7 @@ if (useDocumentation || onlyDocumentation === 'true') {
   const docViews = [
     path.join(__dirname, 'docs/views/'),
     path.join(__dirname, 'node_modules/nhsuk-frontend/packages/components'),
+    path.join(__dirname, 'node_modules/nhsuk-frontend/packages/macros'),
   ];
 
   nunjucksAppEnv = nunjucks.configure(docViews, {
