@@ -36,6 +36,26 @@
 
         <h2 class="nhsuk-heading-m">{{ data.sites[site].name }}</h2>
 
+        <table class="nhsuk-table">
+          <thead role="rowgroup" class="nhsuk-table__head">
+            <tr role="row">
+              <th role="columnheader" class="" scope="col">
+                Vaccine
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Product
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Active
+              </th>
+              <th role="columnheader" class="" scope="col">
+              <th role="columnheader" class="" scope="col">
+
+              </th>
+            </tr>
+          </thead>
+          <tbody class="nhsuk-table__body">
+
         {% set vaccinesAtSite = [] %}
         {% for vaccine in (data.vaccines) %}
           {% if vaccine.siteCode == site and not (vaccinesAtSite | arrayOrStringIncludes(vaccine.vaccine)) %}
@@ -53,25 +73,7 @@
             {% endfor %}
 
 
-          <table class="nhsuk-table">
-            <thead role="rowgroup" class="nhsuk-table__head">
-              <tr role="row">
-                <th role="columnheader" class="" scope="col">
-                  Vaccine
-                </th>
-                <th role="columnheader" class="" scope="col">
-                  Product
-                </th>
-                <th role="columnheader" class="" scope="col">
-                  Active
-                </th>
-                <th role="columnheader" class="" scope="col">
-                <th role="columnheader" class="" scope="col">
 
-                </th>
-              </tr>
-            </thead>
-            <tbody class="nhsuk-table__body">
               {% for vaccineProduct in vaccineProductsAtSite %}
                 <tr class="nhsuk-table__row">
                   <td class="nhsuk-table__cell">
@@ -98,9 +100,9 @@
                   </td>
                 </tr>
               {% endfor %}
-            </tbody>
-          </table>
-        {% endfor %}
+            {% endfor %}
+          </tbody>
+        </table>
       {% endfor %}
 
 
