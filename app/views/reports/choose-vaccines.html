@@ -1,29 +1,35 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  Choose vaccine
+  Choose vaccines
 {% endblock %}
 
 {% set currentSection = "reports" %}
+
+
+{% block outerContent %}
+  {{ backLink({
+    href: "/reports/choose-dates",
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
+{% endblock %}
 
 {% block content %}
 
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
 
-          {{ backLink({ href: "/reports/choose-dates-2", text: "Back" }) }}
 
-          <h1 class="nhsuks-heading-xl">Choose vaccines</h1>
-          <p class="nhsuk-body-l">Select the vaccines your organisation gives</p>
 
-            <form action="/reports/choose-site-2" method="post">
+            <form action="/reports/choose-site" method="post">
               {{ checkboxes({
                 "idPrefix": "vaccines",
                 "name": "vaccines",
                 "fieldset": {
                   "legend": {
-                    "text": "",
-                    "classes": "nhsuk-fieldset__legend--m",
+                    "text": "Choose vaccines",
+                    "classes": "nhsuk-fieldset__legend--xl",
                     isPageHeading: true
                   }
                 },

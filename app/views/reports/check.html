@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  East of England
+  Check and confirm
 {% endblock %}
 
 {% set currentSection = "reports" %}
@@ -22,10 +22,6 @@
 
       <h1 class="nhsuk-heading-xl">Check and confirm</h1>
 
-
-      {% set from = data.from %}
-      {% set to = data.to %}
-
       {{ summaryList({
         rows: [
           {
@@ -33,7 +29,7 @@
               text: ("Date" if from == to else "From")
             },
             value: {
-              text: (from | isoDateFromDateInput | govukDate)
+              text: (from | govukDate) if from
             },
             actions: {
               items: [
@@ -47,12 +43,15 @@
           },
           {
             key: {
+              classes: "nhsuk-u-visually-hidden" if from == to,
               text: "To"
             },
             value: {
-              text: (to | isoDateFromDateInput | govukDate)
+              classes: "nhsuk-u-visually-hidden"  if from == to,
+              text: (to | govukDate) if to
             },
             actions: {
+              classes: "nhsuk-u-visually-hidden" if from == to,
               items: [
                 {
                   href: "/reports/choose-dates-2",
@@ -64,10 +63,12 @@
           },
           {
             key: {
-              text: "Vaccines"
+              text: ("Vaccines" if (data.vaccines | length) > 1 else "Vaccine"),
+              classes: "xnhsuk-u-font-weight-bold"
             },
             value: {
-              text: (data.vaccines | join(", "))
+              text: (data.vaccines | join(", ")) if data.vaccines,
+              classes: "xnhsuk-u-font-weight-bold"
             },
             actions: {
               items: [
@@ -79,14 +80,12 @@
               ]
             }
           },
-
-
           {
             key: {
-              text: "Sites"
+              text: ("Sites" if (data.reportSites | length) > 1 else "Site")
             },
             value: {
-              text: (data.reportSites | join(",  "))
+              text: (data.reportSites | join(",  ")) if data.reportSites
             },
             actions: {
               items: [
@@ -103,7 +102,7 @@
               text: "Data"
             },
             value: {
-              text: (data.data | join(",  "))
+              text: (data.data | join(",  ")) if data.data
             },
             actions: {
               items: [

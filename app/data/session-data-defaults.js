@@ -1,5 +1,6 @@
 module.exports = {
   currentUserId: "12345",
+  currentOrganisationId: "R0A",
   vaccines: [],
   "users": [
     {
@@ -171,6 +172,41 @@ module.exports = {
     {name: "South West", code: "SW1"},
     {name: "South East", code: "SE1"},
     {name: "London", code: "LO1"},
+  ],
+  data: [
+    "Patients", "Staff", "Site or delivery team", "Assessment and consent", "Vaccination"
+  ],
+  organisations: [
+    {
+      id: "FAC81",
+      name: "Hambro Pharmacy",
+      type: "Community pharmacy",
+      address: {
+        line1: "53A Hullbridge Road",
+        town: "Rayleigh",
+        postcode: "SS6 9NL"
+      }
+    },
+    {
+      id: "FA464",
+      name: "Cohens Chemists",
+      type: "Community pharmacy",
+      address: {
+        line1: "151-151A Accrington Road",
+        town: "Burnley",
+        postcode: "BB11 5AL"
+      }
+    },
+    {
+      id: "R0A",
+      name: "Manchester University NHS Foundation Trust",
+      type: "NHS Trust",
+      address: {
+        line1: "Cobbett House, Oxford Road",
+        town: "Manchester",
+        postcode: "M13 9WL"
+      }
+    }
   ],
   "nhsTrusts": {
     "R0A": "Manchester University NHS Foundation Trust",
@@ -660,7 +696,8 @@ module.exports = {
     "FAH85": {"name": "Boots", "address": "77 High Street", "town": "Bromley", "postcode": "Br1 1Jy"},
     "FAH9": {"name": "Whittington Pharmacy", "address": "13B Main Street,Whittington", "postcode": "Lichfield", "postcode": "Ws14 9Ju"},
     "FAH94": {"name": "Lo'S Pharmacy,Outwood Park Medical Centre,Potovens Lane,Outwood,Wakefield", "postcode": "Wf1 2Pe"},
-    "FAJ00": {"name": "Jades Chemist", "address": "19 The Parade", "town": "Crawley", "postcode": "Rh10 8Dt"}
+    "FAJ00": {"name": "Jades Chemist", "address": "19 The Parade", "town": "Crawley", "postcode": "Rh10 8Dt"},
+    "FAZZZ": {"name": "Legally Closed Pharamcy", "address": "30 Legal Close", "town": "London", "postcode": "CL0 5ED", legallyClosed: "2001-02-04"}
   },
   "sites": {
   "RWX15": {

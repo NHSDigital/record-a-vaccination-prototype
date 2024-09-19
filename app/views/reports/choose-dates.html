@@ -6,12 +6,17 @@
 
 {% set currentSection = "reports" %}
 
+{% block outerContent %}
+  {{ backLink({
+    href: "/reports",
+    text: "Back",
+    classes: "nhsuk-u-margin-top-4"
+  }) }}
+{% endblock %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-
-      {{ backLink({ href: "/reports/v7", text: "Back" }) }}
-
 
       {% if dateError %}
         {{ errorSummary({
@@ -37,7 +42,7 @@
         }) }}
       {% endif %}
 
-      <form action="/reports/choose-vaccines-2" method="post">
+      <form action="/reports/choose-vaccines" method="post">
 
         {% set custom_date_range %}
           {{ dateInput({
