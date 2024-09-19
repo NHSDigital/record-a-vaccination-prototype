@@ -54,15 +54,18 @@
 
 
           <table class="nhsuk-table">
-            <caption class="nhsuk-table__caption">{{ vaccineAtSite }}</caption>
             <thead role="rowgroup" class="nhsuk-table__head">
               <tr role="row">
                 <th role="columnheader" class="" scope="col">
-                  Vaccine product
+                  Vaccine
                 </th>
                 <th role="columnheader" class="" scope="col">
-                  Active batches
+                  Product
                 </th>
+                <th role="columnheader" class="" scope="col">
+                  Active
+                </th>
+                <th role="columnheader" class="" scope="col">
                 <th role="columnheader" class="" scope="col">
 
                 </th>
@@ -71,6 +74,9 @@
             <tbody class="nhsuk-table__body">
               {% for vaccineProduct in vaccineProductsAtSite %}
                 <tr class="nhsuk-table__row">
+                  <td class="nhsuk-table__cell">
+                    {{ vaccineAtSite }}
+                  </td>
                   <td class="nhsuk-table__cell">
                     {{ vaccineProduct }}
                   </td>
@@ -85,7 +91,7 @@
                     {{ thisVaccine.batches | length }}
                   </td>
                   <td class="nhsuk-table__cell ">
-                    <div class="nhsuk-u-margin-bottom-2"><a href="/vaccines/{{ thisVaccine.id }}" class="nhsuk-link">View product</a></div>
+                    <div class="nhsuk-u-margin-bottom-1"><a href="/vaccines/{{ thisVaccine.id }}" class="nhsuk-link">View product</a></div>
                   </td>
                   <td class="nhsuk-table__cell ">
                     <div><a href="/vaccines/{{ thisVaccine.id }}/add" class="nhsuk-link">Add batch</a></div>
