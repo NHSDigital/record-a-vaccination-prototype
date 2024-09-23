@@ -2,13 +2,40 @@ module.exports = (router) => {
 
   router.get('/user-admin', (req, res) => {
 
+    const perPage = 20; // Max number of users to show per page
+    const page = parseInt(req.query.page) || 1  ;  // Current page, default to 1
+
     const data = req.session.data;
     const statusesToInclude = ['Invited', 'Active'];
-    const users = data.users.filter((user) => statusesToInclude.includes(user.status))
+    const allUsers = data.users
+      .filter((user) => statusesToInclude.includes(user.status))
+      .sort((a, b) => {
+        const nameA = a.firstName.toUpperCase(); // ignore upper and lowercase
+        const nameB = b.firstName.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      })
+
+
+    const totalUsers = allUsers.length
+
+    const indexStartFrom = (page - 1) * perPage
+
+    const users = allUsers.slice(indexStartFrom, indexStartFrom + perPage)
+    const totalPages = Math.ceil(totalUsers / perPage)
+
 
     const deactivatedUsers = data.users.filter((user) => user.status === 'Deactivated')
 
     res.render('user-admin/index',{
+      totalUsers,
+      totalPages,
+      page,
       users,
       deactivatedUsers
     })
