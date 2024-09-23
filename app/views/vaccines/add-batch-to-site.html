@@ -6,11 +6,10 @@
 
 {% set currentSection = "vaccines" %}
 
-{% block outerContent %}
+{% block beforeContent %}
   {{ backLink({
     href: "/vaccines/" + vaccine.id,
-    text: "Back",
-    classes: "nhsuk-u-margin-top-4"
+    text: "Back"
   }) }}
 {% endblock %}
 
