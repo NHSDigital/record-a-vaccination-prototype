@@ -8,11 +8,10 @@
 
 {% set organisation = {name: data.nhsTrusts[data.organisationCode]} %}
 
-{% block outerContent %}
+{% block beforeContent %}
   {{ backLink({
     href: "/user-admin/add-user",
-    text: "Back",
-    classes: "nhsuk-u-margin-top-4"
+    text: "Back"
   }) }}
 {% endblock %}
 
