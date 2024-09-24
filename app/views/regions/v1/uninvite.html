@@ -8,11 +8,10 @@
   {% include "includes/header-logged-in-region.html" %}
 {% endblock %}
 
-{% block outerContent %}
+{% block beforeContent %}
   {{ backLink({
     href: "/regions/v1/organisations/" + organisation.code,
-    text: "Back",
-    classes: "nhsuk-u-margin-top-4"
+    text: "Back"
   }) }}
 {% endblock %}
 

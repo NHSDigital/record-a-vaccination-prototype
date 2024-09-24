@@ -6,11 +6,10 @@
 
 {% set currentSection = "manage-users" %}
 
-{% block outerContent %}
+{% block beforeContent %}
   {{ backLink({
     href: "/user-admin/users/" + user.id + "/change-role",
-    text: "Back",
-    classes: "nhsuk-u-margin-top-4"
+    text: "Back"
   }) }}
 {% endblock %}
 

@@ -10,11 +10,10 @@
 
 {% set organisation = {name: organisation.name } %}
 
-{% block outerContent %}
+{% block beforeContent %}
   {{ backLink({
     href: "/regions/v1/add-email",
-    text: "Back",
-    classes: "nhsuk-u-margin-top-4"
+    text: "Back"
   }) }}
 {% endblock %}
 

@@ -7,11 +7,10 @@
 {% set currentSection = "reports" %}
 
 
-{% block outerContent %}
+{% block beforeContent %}
   {{ backLink({
     href: "/reports/choose-site",
-    text: "Back",
-    classes: "nhsuk-u-margin-top-4"
+    text: "Back"
   }) }}
 {% endblock %}
 
@@ -27,6 +26,7 @@
       {% endif %}
 
       <form action="/reports/update-data" method="post" novalidate="true">
+
 
         {{ checkboxes({
           idPrefix: "data",
