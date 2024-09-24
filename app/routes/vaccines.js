@@ -7,7 +7,7 @@ module.exports = (router) => {
 
     const generatedId = Math.floor(Math.random() * 10000000).toString()
 
-    const expiryDate = new Date(data['batchExpiryDate-year'], (data['batchExpiryDate-month'] - 1), data['batchExpiryDate-day'], 12).toISOString().substring(0,10)
+    const expiryDate = new Date(data.batchExpiryDate.year, (parseInt(data.batchExpiryDate.month) - 1), data.batchExpiryDate.day, 12).toISOString().substring(0,10)
 
     req.session.data.vaccines.push({
       id: generatedId,
@@ -28,9 +28,9 @@ module.exports = (router) => {
     req.session.data.vaccineProduct = ''
     req.session.data.siteCode = ''
     req.session.data.batchNumber = ''
-    req.session.data['batchExpiryDate-day'] = ''
-    req.session.data['batchExpiryDate-month'] = ''
-    req.session.data['batchExpiryDate-year'] = ''
+    req.session.data.batchExpiryDate.day = ''
+    req.session.data.batchExpiryDate.month = ''
+    req.session.data.batchExpiryDate.year = ''
 
     res.redirect('/vaccines/' + generatedId)
   })
@@ -68,7 +68,7 @@ module.exports = (router) => {
 
     const generatedId = Math.floor(Math.random() * 10000000).toString()
 
-    const expiryDate = new Date(data['batchExpiryDate-year'], (data['batchExpiryDate-month'] - 1), data['batchExpiryDate-day'], 12).toISOString().substring(0,10)
+    const expiryDate = new Date(data.batchExpiryDate.year, (parseInt(data.batchExpiryDate.month) - 1), data.batchExpiryDate.day, 12).toISOString().substring(0,10)
 
     vaccine.batches.push({
       id: generatedId,
@@ -78,9 +78,9 @@ module.exports = (router) => {
 
     // Reset data
     req.session.data.batchNumber = ''
-    req.session.data['batchExpiryDate-day'] = ''
-    req.session.data['batchExpiryDate-month'] = ''
-    req.session.data['batchExpiryDate-year'] = ''
+    req.session.data.batchExpiryDate.day = ''
+    req.session.data.batchExpiryDate.month = ''
+    req.session.data.batchExpiryDate.year = ''
 
     res.redirect('/vaccines/' + vaccine.id)
   })
@@ -160,7 +160,7 @@ module.exports = (router) => {
     const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
     if (!batch) { res.redirect(`/vaccines/${vaccine.id}`); return }
 
-    const expiryDate = new Date(data['batchExpiryDate-year'], (data['batchExpiryDate-month'] - 1), data['batchExpiryDate-day']).toISOString().substring(0,10)
+    const expiryDate = new Date(data.batchExpiryDate.year, (parseInt(data.batchExpiryDate.month) - 1), data.batchExpiryDate.day, 12).toISOString().substring(0,10)
 
     batch.batchNumber = data.batchNumber;
     batch.expiryDate = expiryDate;
