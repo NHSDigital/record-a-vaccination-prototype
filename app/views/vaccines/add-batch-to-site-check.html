@@ -89,7 +89,7 @@
               text: "Expiry date"
             },
             value: {
-              html: (data | isoDateFromDateInput("batchExpiryDate") | govukDate )
+              html: (data.batchExpiryDate | isoDateFromDateInput | govukDate )
             }
           }
         ]
