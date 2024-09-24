@@ -22,6 +22,33 @@
     </div>
   </div>
 
+  {% from 'select/macro.njk' import select %}
+
+  {{ select({
+    id: "select-1",
+    name: "select-1",
+    label: {
+      text: "Select site"
+    },
+    items: [
+      {
+        value: 1,
+        text: "NHS.UK frontend option 1"
+      },
+      {
+        value: 2,
+        text: "NHS.UK frontend option 2",
+        selected: true
+      },
+      {
+        value: 3,
+        text: "NHS.UK frontend option 3",
+        disabled: true
+      }
+    ]
+  }) }}
+
+
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
@@ -35,6 +62,26 @@
       {% for site in sites %}
 
         <h2 class="nhsuk-heading-m">{{ data.sites[site].name }}</h2>
+
+        <table class="nhsuk-table">
+          <thead role="rowgroup" class="nhsuk-table__head">
+            <tr role="row">
+              <th role="columnheader" class="" scope="col">
+                Vaccine
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Product
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Active
+              </th>
+              <th role="columnheader" class="" scope="col">
+              <th role="columnheader" class="" scope="col">
+
+              </th>
+            </tr>
+          </thead>
+          <tbody class="nhsuk-table__body">
 
         {% set vaccinesAtSite = [] %}
         {% for vaccine in (data.vaccines) %}
@@ -53,24 +100,12 @@
             {% endfor %}
 
 
-          <table class="nhsuk-table">
-            <caption class="nhsuk-table__caption">{{ vaccineAtSite }}</caption>
-            <thead role="rowgroup" class="nhsuk-table__head">
-              <tr role="row">
-                <th role="columnheader" class="" scope="col">
-                  Vaccine product
-                </th>
-                <th role="columnheader" class="" scope="col">
-                  Active batches
-                </th>
-                <th role="columnheader" class="" scope="col" colspan="2">
 
-                </th>
-              </tr>
-            </thead>
-            <tbody class="nhsuk-table__body">
               {% for vaccineProduct in vaccineProductsAtSite %}
                 <tr class="nhsuk-table__row">
+                  <td class="nhsuk-table__cell">
+                    {{ vaccineAtSite }}
+                  </td>
                   <td class="nhsuk-table__cell">
                     {{ vaccineProduct }}
                   </td>
@@ -85,16 +120,16 @@
                     {{ thisVaccine.batches | length }}
                   </td>
                   <td class="nhsuk-table__cell ">
-                    <a href="/vaccines/{{ thisVaccine.id }}" class="nhsuk-link">View product</a>
+                    <div class="nhsuk-u-margin-bottom-1"><a href="/vaccines/{{ thisVaccine.id }}" class="nhsuk-link">View product</a></div>
                   </td>
                   <td class="nhsuk-table__cell ">
                     <div><a href="/vaccines/{{ thisVaccine.id }}/add" class="nhsuk-link">Add batch</a></div>
                   </td>
                 </tr>
               {% endfor %}
-            </tbody>
-          </table>
-        {% endfor %}
+            {% endfor %}
+          </tbody>
+        </table>
       {% endfor %}
 
 

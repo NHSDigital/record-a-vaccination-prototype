@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+
+{% block pageTitle %}
+  License agreement
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-out.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-xl">License agreement</h1>
+
+
+      <h2 class="nhsuk-heading-l">Example section</h2>
+
+      <p class="nhsuk-body-m">Example text.</p>
+
+      <h2 class="nhsuk-heading-l">Data services</h2>
+
+      <p class="nhsuk-body-m">I acknowledge and accept the use of the service is set up by my provider organisation, so I can securely record vaccination event data and automatically send it to NHS systems.</p>
+
+
+<br>
+
+      {{ button({
+        "text": "I agree to the RAVS licensing agreement",
+        "href": "/find-a-patient"
+      }) }}
+   
+      {% from 'button/macro.njk' import button %}
+
+      {{ button({
+        text: "No, I don't agree",
+        classes: "nhsuk-button--secondary"
+      }) }}
+
+
+    </div>
+  </div>
+
+
+{% endblock %}
+
