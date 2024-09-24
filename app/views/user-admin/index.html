@@ -72,11 +72,13 @@
       {%- endfor %}
 
 
-      {{ appPagination({
-        previousUrl:  "/user-admin?page=" + (page - 1) if page != 1,
-        nextUrl: "/user-admin?page=" + (page + 1)  if page != totalPages,
-        items: items
-      }) }}
+      {% if totalPages > 0 %}
+        {{ appPagination({
+          previousUrl:  "/user-admin?page=" + (page - 1) if page != 1,
+          nextUrl: "/user-admin?page=" + (page + 1)  if page != totalPages,
+          items: items
+        }) }}
+      {% endif %}
 
 
       {% if deactivatedUsers | length > 0 %}

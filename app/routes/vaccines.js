@@ -88,16 +88,42 @@ module.exports = (router) => {
   // Viewing a vaccine product at a site
   router.get('/vaccines/:id', (req, res) => {
     const data = req.session.data
+    const perPage = 20; // Max number of users to show per page
+    const page = parseInt(req.query.page) || 1  ;  // Current page, default to 1
+
     const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.id)
     if (!vaccine) { res.redirect('/vaccines'); return }
     const site = data.sites[vaccine.siteCode]
 
     const today = new Date().toISOString().substring(0,10)
 
+    const allBatches = vaccine.batches.sort((a, b) => {
+        const expiryA = a.expiryDate
+        const expiryB = b.expiryDate
+        if (expiryA > expiryB) {
+          return -1;
+        }
+        if (expiryA < expiryB) {
+          return 1;
+        }
+        return 0;
+      })
+
+    const totalBatches = allBatches.length
+    const indexStartFrom = (page - 1) * perPage
+    const totalPages = Math.ceil(totalBatches / perPage)
+
+    const batches = allBatches.slice(indexStartFrom, indexStartFrom + perPage)
+
+
     res.render('vaccines/product-page', {
       vaccine,
+      batches,
       site,
-      today
+      today,
+      totalPages,
+      totalBatches,
+      page
     })
   })
 
