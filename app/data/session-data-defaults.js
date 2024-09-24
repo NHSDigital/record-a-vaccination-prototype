@@ -933,15 +933,15 @@ module.exports = {
     "address": "Comfort Care Progress Business Park"
   },
   "B2W7P": {
-    "name": "Bhft - Bob - Wokingham Hospital - Sais Covid VaccinATION SERVICE",
+    "name": "BHFT - Bob - Wokingham Hospital - SAIS COVID Vaccination service",
     "address": "Wokingham Hospital"
   },
   "B5G3H": {
-    "name": "Bhft - Frimley - Wokingham Hospital - Sais Covid VaCCINATION SERVICE",
+    "name": "BHFT - Frimley - Wokingham Hospital - SAIS COVID Vaccination service",
     "address": "Wokingham Hospital"
   },
   "RWXQN": {
-    "name": "Bhft Slough",
+    "name": "BHFT Slough",
     "address": "25 Windsor Road"
   },
   "RWXDL": {
@@ -1861,7 +1861,7 @@ module.exports = {
     "address": "Nicholsons Walk"
   },
   "RWX0I": {
-    "name": "Nmp 1 Wokingham Memory Clinic",
+    "name": "NMP 1 Wokingham Memory Clinic",
     "address": "41 Barkham Road"
   },
   "RWXHF": {
@@ -2501,7 +2501,7 @@ module.exports = {
     "address": "9 Northcourt Avenue"
   },
   "RWXKG": {
-    "name": "University Of Reading",
+    "name": "University of Reading",
     "address": "141 Whiteknights Road"
   },
   "RWX7A": {
@@ -2533,7 +2533,7 @@ module.exports = {
     "address": "Neville Hall"
   },
   "T6T7Z": {
-    "name": "Wam Cmht",
+    "name": "Wam CMHT",
     "address": "Nicholsons House"
   },
   "RWXEM": {
@@ -2565,7 +2565,7 @@ module.exports = {
     "address": "Rookes Way"
   },
   "O4I2S": {
-    "name": "West Berkshire Community Hospital Cdc",
+    "name": "West Berkshire Community Hospital CDC",
     "address": "Rookes Way"
   },
   "RWXGM": {
