@@ -1,7 +1,88 @@
 module.exports = {
   currentUserId: "12345",
   currentOrganisationId: "R0A",
-  vaccines: [],
+  vaccines: [
+    {
+      id: "123456",
+      vaccine: "COVID-19",
+      vaccineProduct: "Comirnaty Original/Omicron BA.4-5",
+      siteCode: "RWX37",
+      batches: [
+        {
+          id: "2208294",
+          batchNumber: "3634747",
+          expiryDate: "2024-12-17"
+        },
+        {
+          id: "457554",
+          batchNumber: "7473857",
+          expiryDate: "2025-01-02"
+        }
+      ]
+    },
+    {
+      id: "958375",
+      vaccine: "COVID-19",
+      vaccineProduct: "Comirnaty 30 Omicron XBB.1.5",
+      siteCode: "RWX37",
+      batches: [
+        {
+          id: "363363",
+          batchNumber: "747547",
+          expiryDate: "2024-12-19"
+        }
+      ]
+    },
+    {
+      id: "5838757",
+      vaccine: "Flu",
+      vaccineProduct: "Fluenz Tetra - LAIV",
+      siteCode: "RWX37",
+      batches: [
+        {
+          id: "366629",
+          batchNumber: "83/336",
+          expiryDate: "2024-12-23"
+        },
+        {
+          id: "263474",
+          batchNumber: "92/6334",
+          expiryDate: "2024-11-13"
+        },
+        {
+          id: "1367231",
+          batchNumber: "9282/4457",
+          expiryDate: "2023-10-13"
+        }
+      ]
+    },
+    {
+      id: "2634",
+      vaccine: "RSV",
+      vaccineProduct: "Abrysvo",
+      siteCode: "RWX37",
+      batches: [
+        {
+          id: "94755",
+          batchNumber: "825266",
+          expiryDate: "2025-03-21"
+        }
+      ]
+    },
+    {
+      id: "252525",
+      vaccine: "COVID-19",
+      vaccineProduct: "Comirnaty Original/Omicron BA.4-5",
+      siteCode: "RWXJE",
+      batches: [
+        {
+          id: "226661",
+          batchNumber: "114241",
+          expiryDate: "2024-12-12"
+        }
+      ]
+    }
+  ],
   "users": [
     {
       id: "12345",
