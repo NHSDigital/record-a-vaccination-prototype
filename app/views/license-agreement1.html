@@ -6,8 +6,9 @@
 {% endblock %}
 
 {% block header %}
-  {% include "includes/header-logged-out.html" %}
+  {% include "includes/header-logged-in-organisation.html" %}
 {% endblock %}
+
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -15,34 +16,28 @@
 
       <h1 class="nhsuk-heading-xl">License agreement</h1>
 
+      <h2 class="nhsuk-heading-m">You must ensure</h2>
 
-      <h2 class="nhsuk-heading-l">Example section</h2>
+      <ul class="nhsuk-body-m">
+        <li>Access to the service and the recording of vaccination events is kept up to date</li>
+        <li>Individuals have the appropriate access based on their contract and training</li>
+        <li>Access is immediately removed for individuals who have left your organisation</li>
+      </ul>        
 
-      <p class="nhsuk-body-m">Example text.</p>
-
-      <h2 class="nhsuk-heading-l">Data services</h2>
-
-      <p class="nhsuk-body-m">I acknowledge and accept the use of the service is set up by my provider organisation, so I can securely record vaccination event data and automatically send it to NHS systems.</p>
-
-
-<br>
-
-      {{ button({
-        "text": "I agree to the RAVS licensing agreement",
-        "href": "/find-a-patient"
-      }) }}
-   
-      {% from 'button/macro.njk' import button %}
-
-      {{ button({
-        text: "No, I don't agree",
-        classes: "nhsuk-button--secondary"
-      }) }}
-
+      <a href="#" class="nhsuk-link">Read the full terms of the RAVS license agreement here</a>
 
     </div>
   </div>
 
+  <div class="spacing-example">
+    <div class="nhsuk-u-padding-bottom-6"></div>
+  </div>
+
+  {% from 'button/macro.njk' import button %}
+
+{{ button({
+  text: "I agree to the RAVS licensing agreement"
+}) }}
 
 {% endblock %}
 
