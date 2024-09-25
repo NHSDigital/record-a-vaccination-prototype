@@ -6,9 +6,16 @@
 
 {% set currentSection = "vaccines" %}
 
+{% set sites = [] %}
+{% for vaccine in (data.vaccines) %}
+  {% if not (sites | arrayOrStringIncludes(vaccine.siteCode)) %}
+    {% set sites = (sites.push(vaccine.siteCode), sites) %}
+  {% endif %}
+{% endfor %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-two-thirds">
+    <div class="nhsuk-grid-column-two-thirds nhsuk-u-margin-bottom-5">
 
       <h1 class="nhsuk-heading-xl">Vaccines</h1>
 
@@ -24,46 +31,37 @@
 
   {% from 'select/macro.njk' import select %}
 
-  {{ select({
-    id: "select-1",
-    name: "select-1",
-    label: {
-      text: "Select site"
-    },
-    items: [
-      {
-        value: 1,
-        text: "NHS.UK frontend option 1"
-      },
-      {
-        value: 2,
-        text: "NHS.UK frontend option 2",
-        selected: true
-      },
-      {
-        value: 3,
-        text: "NHS.UK frontend option 3",
-        disabled: true
-      }
-    ]
-  }) }}
+  {% if (sites | length) > 4 %}
+    {% set filterItems = [{
+      text: "All sites",
+      value: "",
+      selected: true
+    }] %}
+
+    {% for site in sites %}
+      {% set filterItems = (filterItems.push({text: data.sites[site].name, value: site}), filterItems) %}
+    {% endfor %}
+
+
+      {{ select({
+        label: {
+          text: "Show"
+        },
+        id: "select-1",
+        name: "select-1",
+        items: filterItems,
+        classes: "nhsuk-u-margin-bottom-3"
+      }) }}
+  {% endif %}
 
 
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      {% set sites = [] %}
-      {% for vaccine in (data.vaccines) %}
-        {% if not (sites | arrayOrStringIncludes(vaccine.siteCode)) %}
-          {% set sites = (sites.push(vaccine.siteCode), sites) %}
-        {% endif %}
-      {% endfor %}
-
       {% for site in sites %}
 
-        <h2 class="nhsuk-heading-m">{{ data.sites[site].name }}</h2>
-
         <table class="nhsuk-table">
+          <caption class="nhsuk-table__caption nhsuk-table__caption--m nhsuk-u-margin-bottom-2">{{ data.sites[site].name }}</caption>
           <thead role="rowgroup" class="nhsuk-table__head">
             <tr role="row">
               <th role="columnheader" class="" scope="col">
