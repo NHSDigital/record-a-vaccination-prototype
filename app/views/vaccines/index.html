@@ -58,9 +58,8 @@
 
       {% for site in sites %}
 
-        <h2 class="nhsuk-heading-m">{{ data.sites[site].name }}</h2>
-
         <table class="nhsuk-table">
+          <caption class="nhsuk-table__caption nhsuk-table__caption--m">{{ data.sites[site].name }}</caption>
           <thead role="rowgroup" class="nhsuk-table__head">
             <tr role="row">
               <th role="columnheader" class="" scope="col">
