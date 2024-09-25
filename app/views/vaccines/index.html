@@ -31,7 +31,7 @@
 
   {% from 'select/macro.njk' import select %}
 
-  {% if (sites | length) > 1 %}
+  {% if (sites | length) > 4 %}
     {% set filterItems = [{
       text: "All",
       value: "",
@@ -42,14 +42,16 @@
       {% set filterItems = (filterItems.push({text: data.sites[site].name, value: site}), filterItems) %}
     {% endfor %}
 
-    {{ select({
-      id: "select-1",
-      name: "select-1",
-      label: {
-        text: "Show"
-      },
-      items: filterItems
-    }) }}
+
+      {{ select({
+        label: {
+          text: "Show"
+        },
+        id: "select-1",
+        name: "select-1",
+        items: filterItems,
+        classes: "nhsuk-u-margin-bottom-3"
+      }) }}
   {% endif %}
 
 
