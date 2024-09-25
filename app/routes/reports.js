@@ -142,8 +142,8 @@ module.exports = (router) => {
         from = new Date(today.getTime() - (14 * days)).toISOString().substring(0,10)
         to = today.toISOString().substring(0,10)
         break
-      case 'Last30days':
-        from = new Date(today.getTime() - (14 * days)).toISOString().substring(0,10)
+      case 'Last31days':
+        from = new Date(today.getTime() - (31 * days)).toISOString().substring(0,10)
         to = today.toISOString().substring(0,10)
         break
     }

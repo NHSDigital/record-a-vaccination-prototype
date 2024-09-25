@@ -53,7 +53,7 @@
               }
             },
             hint: {
-              text: "For example, 1 6 2024"
+              text: "For example, 1 7 2024"
             },
             errorMessage: {
               text: dateFromError
@@ -89,7 +89,7 @@
                 }
               },
               hint: {
-                text: "For example, 30 6 2024"
+                text: "For example, 31 7 2024"
               },
               errorMessage: {
                 text: dateToError
@@ -165,19 +165,16 @@
               }
             },
             {
-                "value": "Last30days",
-                "text": "Last 30 days",
-                checked: (data.date == "Last30days"),
-                conditional: {
-                  html: Last30days
-                }
+                "value": "Last31days",
+                "text": "Last 31 days",
+                checked: (data.date == "Last31days")
               },
             {
               divider: "or"
             },
             {
               "value": "custom_date_range",
-              "text": "Select custom date range up to 30 days",
+              "text": "Select custom date range up to 31 days",
               checked: (data.date == "custom_date_range"),
               conditional: {
                 html: custom_date_range
