@@ -7,11 +7,10 @@
 {% set currentSection = "vaccines" %}
 {% set organisation = {name: data.nhsTrusts[data.organisationCode]} %}
 
-{% block outerContent %}
+{% block beforeContent %}
   {{ backLink({
     href: "/vaccines/" + vaccine.id + "/add",
-    text: "Back",
-    classes: "nhsuk-u-margin-top-4"
+    text: "Back"
   }) }}
 {% endblock %}
 
@@ -90,7 +89,7 @@
               text: "Expiry date"
             },
             value: {
-              html: (data | isoDateFromDateInput("batchExpiryDate") | govukDate )
+              html: (data.batchExpiryDate | isoDateFromDateInput | govukDate )
             }
           }
         ]

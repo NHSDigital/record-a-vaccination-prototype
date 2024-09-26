@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+
+{% block pageTitle %}
+  License agreement
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-in-organisation.html" %}
+{% endblock %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-xl">License agreement</h1>
+
+      <h2 class="nhsuk-heading-m">You must ensure</h2>
+
+      <ul class="nhsuk-body-m">
+        <li>Access to the service and the recording of vaccination events is kept up to date</li>
+        <li>Individuals have the appropriate access based on their contract and training</li>
+        <li>Access is immediately removed for individuals who have left your organisation</li>
+      </ul>        
+
+      <a href="#" class="nhsuk-link">Read the full RAVS license agreement here</a>
+
+    </div>
+  </div>
+
+
+{% endblock %}
+

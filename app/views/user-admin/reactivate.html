@@ -6,11 +6,10 @@
 
 {% set currentSection = "manage-users" %}
 
-{% block outerContent %}
+{% block beforeContent %}
   {{ backLink({
     href: "/user-admin/deactivated",
-    text: "Back",
-    classes: "nhsuk-u-margin-top-4"
+    text: "Back"
   }) }}
 {% endblock %}
 

@@ -6,11 +6,10 @@
 
 {% set currentSection = "vaccines" %}
 
-{% block outerContent %}
+{% block beforeContent %}
   {{ backLink({
     href: "/vaccines/" + vaccine.id,
-    text: "Back",
-    classes: "nhsuk-u-margin-top-4"
+    text: "Back"
   }) }}
 {% endblock %}
 
@@ -46,23 +45,7 @@
               "classes": "nhsuk-label--s"
             }
           },
-          "items": [
-            {
-              "name": "day",
-              "classes": "nhsuk-input--width-2",
-              value: data["batchExpiryDate-day"]
-            },
-            {
-              "name": "month",
-              "classes": "nhsuk-input--width-2",
-              value: data["batchExpiryDate-month"]
-            },
-            {
-              "name": "year",
-              "classes": "nhsuk-input--width-4",
-              value: data["batchExpiryDate-year"]
-            }
-          ]
+          values: data.batchExpiryDate
         }) }}
 
           {{ button({
