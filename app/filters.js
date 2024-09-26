@@ -10,6 +10,15 @@ module.exports = function (env) { /* eslint-disable-line no-unused-vars */
    */
   const filters = prototypeFilters;
 
+
+  filters.dayName = function(isoDate) {
+
+    const date = new Date(Date.parse(isoDate))
+    const dateFormatter = new Intl.DateTimeFormat('en-GB', {weekday: 'short'});
+
+    return dateFormatter.format(date)
+  }
+
   /* ------------------------------------------------------------------
     add your methods to the filters obj below this comment block:
     @example:

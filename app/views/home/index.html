@@ -70,7 +70,7 @@
             {% if not loop.index0 == 0 %}
               {% set total = 0 %}
               <tr role="row" class="nhsuk-table__row">
-                <th class="nhsuk-table__header" scope="row">{{ date.date | govukDate("truncate") }}
+                <th class="nhsuk-table__header  nhsuk-u-font-weight-normal" scope="row">{{ date.date | dayName }} {{ date.date | govukDate("truncate") }}
 
                   {% if loop.index0 == 1 %}(yesterday){% endif %}
                 </th>
