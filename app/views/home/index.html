@@ -18,7 +18,7 @@
     <div class="nhsuk-grid-column-two-thirds">
       <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-6">{{ currentOrganisation.name }}</h1>
 
-      <h2 class="nhsuk-heading-m">Vaccinations today</h2>
+      <h2 class="nhsuk-heading-m">Total vaccinations</h2>
 
     </div>
   </div>
@@ -26,20 +26,51 @@
 
 <ul class="nhsuk-grid-row nhsuk-card-group">
 
-  {% for vaccineStat in stats %}
-
     <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
       {% set cardHtml %}
-        <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">{{ (vaccineStat.days | first).count }}</p>
-        {{ vaccineStat.vaccine }}
+        <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">38</p>
+        Today
       {% endset %}
 
       {{ card({
         headingHtml: cardHtml
       }) }}
     </li>
-  {% endfor %}
+
+    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+      {% set cardHtml %}
+        <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">134</p>
+        Past 7 days
+      {% endset %}
+
+      {{ card({
+        headingHtml: cardHtml
+      }) }}
+    </li>
+
+    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+      {% set cardHtml %}
+        <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">301</p>
+        Past 14 days
+      {% endset %}
+
+      {{ card({
+        headingHtml: cardHtml
+      }) }}
+    </li>
+
+    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+      {% set cardHtml %}
+        <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">715</p>
+        Past 31 days
+      {% endset %}
+
+      {{ card({
+        headingHtml: cardHtml
+      }) }}
+    </li>
 </ul>
+
 
 
   <div class="nhsuk-grid-row">
@@ -70,9 +101,14 @@
             {% if not loop.index0 == 0 %}
               {% set total = 0 %}
               <tr role="row" class="nhsuk-table__row">
-                <th class="nhsuk-table__header  nhsuk-u-font-weight-normal" scope="row">{{ date.date | dayName }} {{ date.date | govukDate("truncate") }}
+                <th class="nhsuk-table__header  nhsuk-u-font-weight-normal" scope="row">
+                  {% if loop.index0 == 1 %}
+                    Today
+                  {% else %}
+                    {{ date.date | dayName }} {{ date.date | govukDate("truncate") }}
 
-                  {% if loop.index0 == 1 %}(yesterday){% endif %}
+                    {% if loop.index0 == 2 %}(yesterday){% endif %}
+                  {% endif %}
                 </th>
 
                 {% set dayIndex = loop.index0 %}

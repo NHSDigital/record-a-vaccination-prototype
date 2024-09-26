@@ -19,7 +19,7 @@ module.exports = router => {
         days: []
       }
 
-      for (let i = 0; i < 8; i++) {
+      for (let i = -1; i < 8; i++) {
 
         let day = new Date(dateToday)
         day.setDate(day.getDate() - i)
@@ -63,7 +63,7 @@ module.exports = router => {
         days: []
       }
 
-      for (let i = 0; i < 8; i++) {
+      for (let i = -1; i < 8; i++) {
 
         let day = new Date(dateToday)
         day.setDate(day.getDate() - i)
