@@ -8,6 +8,11 @@
       "showSearch": "false",
       "primaryLinks": [
         {
+          url  : "/home/",
+          label : "Home",
+          classes: ("app-header__navigation-item--current" if currentSection == "home")
+        },
+        {
           url  : "/find-a-patient",
           label : "Find a patient",
           classes: ("app-header__navigation-item--current" if currentSection == "find-a-patient")
