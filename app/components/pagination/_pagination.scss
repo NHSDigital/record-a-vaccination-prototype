@@ -1,0 +1,240 @@
+/* ==========================================================================
+   COMPONENTS / #PAGINATION
+   ========================================================================== */
+
+/**
+ * 1. Padding to give the icon spacing.
+ * 2. Append the word 'page' after next and
+ *    previous on print stylesheets to make it easier
+ *    to understand in print context.
+ */
+
+// Previous and next pages variant
+.nhsuk-pagination {
+  @include nhsuk-responsive-margin(7, "top");
+  @include nhsuk-responsive-margin(7, "bottom");
+}
+
+.nhsuk-pagination__list {
+  @include clearfix();
+}
+
+.nhsuk-pagination-item--previous {
+  float: left;
+  text-align: left;
+  width: 50%;
+
+  .nhsuk-icon {
+    left: -6px;
+  }
+
+  .nhsuk-pagination__title {
+    padding-left: nhsuk-spacing(5); /* [1] */
+  }
+}
+
+.nhsuk-pagination-item--next {
+  float: right;
+  text-align: right;
+  width: 50%;
+
+  .nhsuk-icon {
+    right: -6px;
+  }
+
+  .nhsuk-pagination__title {
+    padding-right: nhsuk-spacing(5); /* [1] */
+  }
+}
+
+.nhsuk-pagination__link {
+  display: block;
+  position: relative;
+  text-decoration: none;
+  width: 100%;
+
+  @include mq($media-type: print) {
+    color: $color_nhsuk-black;
+  }
+
+  .nhsuk-icon {
+    position: absolute;
+    top: -2px;
+
+    @include mq($media-type: print) {
+      color: $color_nhsuk-black;
+      margin-top: 0;
+    }
+  }
+
+  &:hover {
+    color: $nhsuk-link-hover-color;
+
+    .nhsuk-icon {
+      fill: $nhsuk-link-hover-color;
+    }
+
+    .nhsuk-pagination__page {
+      text-decoration: none;
+    }
+  }
+
+  &:focus {
+    @include nhsuk-focused-text;
+
+    .nhsuk-pagination__page {
+      text-decoration: none;
+    }
+
+    &:visited,
+    &:hover,
+    &:active {
+      .nhsuk-icon {
+        fill: $nhsuk-focus-text-color;
+      }
+    }
+  }
+
+  &:visited {
+    .nhsuk-icon {
+      fill: $nhsuk-link-visited-color;
+    }
+
+    &:hover {
+      .nhsuk-icon {
+        fill: $nhsuk-link-hover-color;
+      }
+    }
+
+    &:focus {
+      .nhsuk-icon {
+        fill: $nhsuk-focus-text-color;
+      }
+    }
+  }
+}
+
+.nhsuk-pagination__title {
+  @include nhsuk-typography-responsive(24);
+
+  display: block;
+
+  @include mq($media-type: print) {
+    &:after {
+      content: " page"; /* [2] */
+    }
+  }
+}
+
+.nhsuk-pagination__page {
+  @include nhsuk-typography-responsive(16);
+
+  display: block;
+  text-decoration: underline;
+}
+
+// Numbered pages variant
+.nhsuk-pagination--numbered {
+  @include clearfix();
+}
+
+// In a numbered list, the previous link, numbered page links,
+// and next link should all line up
+.nhsuk-pagination--numbered__prev,
+.nhsuk-pagination--numbered__next,
+.nhsuk-pagination--numbered__item {
+  @include nhsuk-font(19);
+  box-sizing: border-box;
+  position: relative;
+  min-width: 45px;
+  min-height: 45px;
+  padding: nhsuk-spacing(2) nhsuk-spacing(2);
+  text-align: center;
+  margin: 0;
+  float: left;
+}
+
+.nhsuk-pagination--numbered__link:visited:hover,
+.nhsuk-pagination--numbered__item a:hover {
+  color: $nhsuk-link-hover-color;
+}
+
+.nhsuk-pagination--numbered__prev:hover,
+.nhsuk-pagination--numbered__next:hover,
+.nhsuk-pagination--numbered__item:hover {
+  background-color: $color_nhsuk-grey-4;
+  color: $color_nhsuk-blue;
+}
+
+// Container for the list of numbered items
+.nhsuk-pagination__list--numbered {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// Current number
+.nhsuk-pagination--numbered__item--current,
+.nhsuk-pagination--numbered__item--current:hover {
+  background-color: $color_nhsuk-blue;
+  font-weight: $nhsuk-font-bold;
+
+  .nhsuk-pagination--numbered__link {
+    color: $color_nhsuk-white;
+  }
+
+  .nhsuk-pagination--numbered__link:focus {
+    color: $color_nhsuk-black;
+  }
+}
+
+.nhsuk-pagination--numbered__item--ellipses {
+  font-weight: $nhsuk-font-bold;
+  color: $nhsuk-secondary-text-color;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.nhsuk-pagination--numbered__link {
+  min-width: nhsuk-spacing(3);
+  vertical-align: middle;
+  color: $color_nhsuk-blue;
+
+  // Increase the touch area for the link to the parent element.
+  @media screen {
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  }
+}
+
+.nhsuk-pagination--numbered .nhsuk-icon {
+  margin-top: 0;
+  margin-bottom: -12px;
+  fill: $color_nhsuk-blue;
+}
+
+.nhsuk-pagination--numbered__link:visited .nhsuk-icon {
+  fill: $nhsuk-link-visited-color;
+}
+
+.nhsuk-pagination--numbered__link:hover .nhsuk-icon {
+  fill: $nhsuk-link-hover-color;
+}
+
+.nhsuk-pagination--numbered .nhsuk-icon__arrow-left {
+  margin-left: -13px;
+  margin-right: nhsuk-spacing(2);
+}
+
+.nhsuk-pagination--numbered .nhsuk-icon__arrow-right {
+  margin-left: nhsuk-spacing(2);
+  margin-right: -13px;
+}

@@ -28,6 +28,8 @@ $govuk-brand-colour: $nhsuk-link-color;
 @import 'components/table';
 
 
+@import '../../components/pagination/_pagination';
+
 .autocomplete__wrapper ul > li {
   margin-bottom: 0;
 }
