@@ -2,9 +2,7 @@ module.exports = router => {
 
   router.get('/select-organisation', (req, res) => {
 
-    // Set organisation and user Id
-    req.session.data.currentOrganisationId = req.session.data.organisations[1].id
-    req.session.data.currentUserId = "12345";
+    const organisations = req.session.data.organisations.filter((organisation) =>  ["FAC81", "FA464"].includes(organisation.id))
 
     res.render('select-organisation', {
       organisations
@@ -14,7 +12,9 @@ module.exports = router => {
 
   router.get('/sign-in-as-single-org-user', (req ,res) => {
 
-    const organisationId = req.session.data.organisationId
+    // Set organisation and user Id
+    req.session.data.currentOrganisationId = req.session.data.organisations[1].id
+    req.session.data.currentUserId = "12345";
 
     res.redirect('/home')
   })
