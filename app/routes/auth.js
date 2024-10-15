@@ -10,6 +10,15 @@ module.exports = router => {
 
   })
 
+  router.get('/sign-in-as-single-org-user', (req ,res) => {
+
+    // Set organisation and user Id
+    req.session.data.currentOrganisationId = req.session.data.organisations[1].id
+    req.session.data.currentUserId = "12345";
+
+    res.redirect('/home')
+  })
+
   router.post('/select-organisation', (req, res) => {
     const organisationId = req.session.data.organisationId
 
@@ -21,7 +30,7 @@ module.exports = router => {
       delete req.session.data.organisationId
       req.session.data.multiOrganisation = "no"
 
-      res.redirect('/find-a-patient')
+      res.redirect('/home')
     } else {
 
       const error = {
@@ -41,7 +50,7 @@ module.exports = router => {
   router.get('/sign-out', (req, res) => {
     req.session.data.currentUserId = null
 
-    res.redirect('/home')
+    res.redirect('/signed-out')
   })
 
 }
