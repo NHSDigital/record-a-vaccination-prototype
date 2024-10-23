@@ -1,19 +1,144 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  Vaccines
+  Manage users and permissions
 {% endblock %}
 
-{% set currentSection = "find-a-patient" %}
+{% set currentSection = "Find a patient" %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-two-thirds">
+    <div class="nhsuk-grid-column-full">
+      <h1 class="nhsuk-heading-xl">Find a patient</h1>
 
-      <p>This section not built in prototype yet.</p>
+
+      {% from 'tabs/macro.njk' import tabs %} 
+      {% from 'tables/macro.njk' import table %}
+      
+      
+      {% set pastDayContent %}  
+      {{ input({
+        label: {
+          text: "Full name"
+        },
+        id: "example",
+        name: "example"
+      }) }}
+
+      {% endset -%} {% set demographicsContent %}
+      {% from 'input/macro.njk' import input %}
+
+      {{ input({
+        label: {
+          text: "Full name"
+        },
+        id: "example",
+        name: "example"
+      }) }}
+      
+      {% endset -%} {% set pastMonthContent %}
+        {{ table({
+          responsive: false,
+          panel: false,
+          caption: "Past month",
+          firstCellIsHeader: false,
+          head: [
+            {
+              text: "Case manager"
+            },
+            {
+              text: "Cases opened",
+              format: "numeric"
+            },
+            {
+              text: "Cases closed",
+              format: "numeric"
+            }
+          ],
+          rows: [
+            [
+              {
+                text: "David Francis"
+              },
+              {
+                text: "98",
+                format: "numeric"
+              },
+              {
+                text: "95",
+                format: "numeric"
+              }
+            ],
+            [
+              {
+                text: "Paul Farmer"
+              },
+              {
+                text: "122",
+                format: "numeric"
+              },
+              {
+                text: "131",
+                format: "numeric"
+              }
+            ],
+            [
+              {
+                text: "Rita Patel"
+              },
+              {
+                text: "126",
+                format: "numeric"
+              },
+              {
+                text: "142",
+                format: "numeric"
+              }
+            ]
+          ]
+        }) }} 
+      {% endset -%} 
+      {{ tabs({ 
+        items: [ 
+        { 
+          label: "By NHS number", 
+          id: "past-day", 
+          panel: { 
+            html: nhs-number
+            } 
+          }, 
+          { 
+            label: "By demographics", 
+            id: "demographics", 
+            panel: { 
+              html: demographics 
+            } 
+          }, 
+          { 
+            label: "By local records", 
+            id: "local-records", 
+            panel: { 
+              html: local-records
+            } 
+          }
+        ] 
+      }) }}
+
+
+
+      {{ button({
+        "text": "Search",
+        "href": "/find-a-patient/patient-details"
+      }) }}
+
+
+      {% if deactivatedUsers | length > 0 %}
+        <p><a href="/user-admin/deactivated">View {{ deactivatedUsers | length | plural ("deactivated user") }}</a> </p>
+      {% endif %}
+
 
     </div>
   </div>
 
-{% endblock %}
 
+{% endblock %}
