@@ -24,7 +24,7 @@ sass.compiler = require('sass');
 // Compile SASS to CSS
 function compileStyles() {
   return gulp
-    .src(['app/assets/sass/**/*.scss', 'docs/assets/sass/**/*.scss'])
+    .src(['app/assets/sass/**/*.scss', 'docs/assets/sass/**/*.scss', 'app/components/**/*.scss'])
     .pipe(sass())
     .pipe(gulp.dest('public/css'))
     .on('error', (err) => {
@@ -92,7 +92,7 @@ function startBrowserSync(done) {
       proxy: 'localhost:' + port,
       port: port + 1000,
       ui: false,
-      files: ['app/views/**/*.*', 'docs/views/**/*.*'],
+      files: ['app/views/**/*.*', 'docs/views/**/*.*', 'app/components/**/*.*'],
       ghostMode: false,
       open: false,
       notify: true,

@@ -4,6 +4,9 @@
   Manage users and permissions
 {% endblock %}
 
+{% from '../../components/pagination/macro.njk' import appPagination %}
+
+
 {% set currentSection = "manage-users" %}
 
 {% block content %}
@@ -17,7 +20,7 @@
       }) }}
 
       <table class="nhsuk-table">
-        <caption class="nhsuk-table__caption">Users</caption>
+        <caption class="nhsuk-table__caption nhsuk-table__caption--m">Users</caption>
         <thead role="rowgroup" class="nhsuk-table__head">
           <tr role="row">
             <th role="columnheader" class="" scope="col">
@@ -57,6 +60,26 @@
           {% endfor %}
         </tbody>
       </table>
+
+      {% set items = [] %}
+
+      {% for i in range(1, totalPages + 1) -%}
+         {% set items = (items.push({
+          number: i,
+          href: "/user-admin?page=" + i,
+          current: (i === page)
+        }), items) %}
+      {%- endfor %}
+
+
+      {% if totalPages > 0 %}
+        {{ appPagination({
+          previousUrl:  "/user-admin?page=" + (page - 1) if page != 1,
+          nextUrl: "/user-admin?page=" + (page + 1)  if page != totalPages,
+          items: items
+        }) }}
+      {% endif %}
+
 
       {% if deactivatedUsers | length > 0 %}
         <p><a href="/user-admin/deactivated">View {{ deactivatedUsers | length | plural ("deactivated user") }}</a> </p>
