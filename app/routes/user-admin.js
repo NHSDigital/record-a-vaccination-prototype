@@ -5,9 +5,10 @@ module.exports = (router) => {
     const perPage = 20; // Max number of users to show per page
     const page = parseInt(req.query.page) || 1  ;  // Current page, default to 1
 
+    const q = req.query.q;
     const data = req.session.data;
     const statusesToInclude = ['Invited', 'Active'];
-    const allUsers = data.users
+    let allUsers = data.users
       .filter((user) => statusesToInclude.includes(user.status))
       .sort((a, b) => {
         const nameA = a.firstName.toUpperCase(); // ignore upper and lowercase
@@ -20,6 +21,13 @@ module.exports = (router) => {
         }
         return 0;
       })
+
+    if (q) {
+      allUsers = allUsers.filter((user) => (user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()).includes(q.toLowerCase())
+      ||
+      user.email.toLowerCase().includes(q.toLowerCase())
+      )
+    }
 
 
     const totalUsers = allUsers.length
@@ -37,7 +45,8 @@ module.exports = (router) => {
       totalPages,
       page,
       users,
-      deactivatedUsers
+      deactivatedUsers,
+      q
     })
   })
 

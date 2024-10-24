@@ -26,6 +26,7 @@ $govuk-brand-colour: $nhsuk-link-color;
 @import 'components/header';
 @import 'components/summary-list';
 @import 'components/table';
+@import 'components/button';
 
 
 @import '../../components/pagination/_pagination';
@@ -143,4 +144,12 @@ margin: 0;
 padding: 10px 8px;
 width: 100%;
 border-radius: 3px;
+}
+
+
+.app-search-and-sort {
+  padding: nhsuk-spacing(3) nhsuk-spacing(3) nhsuk-spacing(4) nhsuk-spacing(3);
+  background-color: $nhsuk-border-color;
+  // border-bottom: 2px solid $nhsuk-form-border-color;
+  // border-top: 2px solid $nhsuk-form-border-color;
 }
