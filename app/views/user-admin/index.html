@@ -44,12 +44,12 @@
           {% if q %}
             Showing {{ totalUsers | plural("user") }} matching “{{ q }}”
           {% else %}
-            Users
+            All active users
           {% endif %}
         </caption>
         <thead role="rowgroup" class="nhsuk-table__head">
           <tr role="row">
-            <th role="columnheader" class="" scope="col">
+            <th role="columnheader" class="app-table__header--min-width-200" scope="col">
               Name
             </th>
             <th role="columnheader" class="" scope="col">
@@ -61,7 +61,7 @@
             <th role="columnheader" class="" scope="col">
               Status
             </th>
-            <th role="columnheader" class="" scope="col">
+            <th role="columnheader" class="app-table__header--min-width-100" scope="col">
 
             </th>
           </tr>
