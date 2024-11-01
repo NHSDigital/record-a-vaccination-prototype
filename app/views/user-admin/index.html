@@ -115,7 +115,7 @@
       {% endif %}
 
 
-      {% if deactivatedUsers | length > 0 %}
+      {% if (not q and q != "") and (deactivatedUsers | length > 0) %}
         <p><a href="/user-admin/deactivated">View {{ deactivatedUsers | length | plural ("deactivated user") }}</a> </p>
       {% endif %}
 
