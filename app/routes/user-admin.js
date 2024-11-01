@@ -23,10 +23,14 @@ module.exports = (router) => {
       })
 
     if (q) {
-      allUsers = allUsers.filter((user) => (user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()).includes(q.toLowerCase())
-      ||
-      user.email.toLowerCase().includes(q.toLowerCase())
-      )
+      allUsers = allUsers.filter(function(user) {
+        return (
+          user.firstName.toLowerCase().startsWith(q.toLowerCase()) ||
+          user.lastName.toLowerCase().startsWith(q.toLowerCase()) ||
+          (user.firstName + " " + user.lastName).toLowerCase().startsWith(q.toLowerCase()) ||
+          user.email.toLowerCase().startsWith(q.toLowerCase())
+        )
+      })
     }
 
 
