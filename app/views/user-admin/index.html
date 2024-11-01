@@ -42,7 +42,7 @@
       <table class="nhsuk-table nhsuk-u-margin-top-4">
         <caption class="nhsuk-table__caption nhsuk-table__caption--m">
           {% if q %}
-            Showing {{ totalUsers | plural("active user") }} matching “{{ q }}”
+            Showing {{ totalUsers | plural("active user") }} matching {{ q }}
           {% else %}
             All active users
           {% endif %}
@@ -90,7 +90,7 @@
       {% else %}
 
         <div class="nhsuk-u-margin-top-6 nhsuk-u-margin-bottom-6">
-          <p>No users matching “{{ q }}”.</p>
+          <p>No users matching {{ q }}.</p>
         </div>
 
       {% endif %}
