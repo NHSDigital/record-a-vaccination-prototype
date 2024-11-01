@@ -100,7 +100,7 @@
       {% for i in range(1, totalPages + 1) -%}
          {% set items = (items.push({
           number: i,
-          href: "/user-admin?page=" + i + "&q=" + q,
+          href: "/user-admin?page=" + i + "&q=" + (q if q else ""),
           current: (i === page)
         }), items) %}
       {%- endfor %}
@@ -108,8 +108,8 @@
 
       {% if totalPages > 1 %}
         {{ appPagination({
-          previousUrl:  "/user-admin?page=" + (page - 1) + "&q=" + q if page != 1,
-          nextUrl: "/user-admin?page=" + (page + 1) + "&q=" + q  if page != totalPages,
+          previousUrl:  "/user-admin?page=" + (page - 1) + "&q=" + (q if q else "") if page != 1,
+          nextUrl: "/user-admin?page=" + (page + 1) + "&q=" + (q if q else "")  if page != totalPages,
           items: items
         }) }}
       {% endif %}
