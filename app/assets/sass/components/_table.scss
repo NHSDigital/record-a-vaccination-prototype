@@ -1,4 +1,23 @@
 
+table {
+  max-width: 100%;
+}
+
+table td {
+  word-break: break-all;
+}
+
+
+.app-table__header--min-width-100 {
+  min-width: 100px;
+}
+
+.app-table__header--min-width-200 {
+  min-width: 100px;
+  @include mq($from: desktop) {
+    min-width: 200px;
+  }
+}
 
 .app-table__cell--border-right,
 .app-table__header--border-right {

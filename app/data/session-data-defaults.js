@@ -425,6 +425,15 @@ module.exports = {
       clinician: "no"
     },
     {
+      id: "34643643",
+      email: "sam.jones@nhs.net",
+      firstName: "Sam",
+      lastName: "Jones",
+      role: "Recorder",
+      status: "Active",
+      clinician: "no"
+    },
+    {
       id: "1006456",
       email: "thomas.lucero@nhs.net",
       firstName: "Thomas",
@@ -547,7 +556,7 @@ module.exports = {
       firstName: "Jaelynn",
       lastName: "Chase",
       role: "Recorder",
-      status: "Active",
+      status: "Deactivated",
       clinician: "no"
     },
     {
@@ -930,7 +939,7 @@ module.exports = {
     },
     {
       id: "7199138",
-      email: "aaden.shah@nhs.net",
+      email: "aadenaadenaadenaadenaadenaadenaadenaadenaadenaadenaadenaadenaadenaadenaadenaadenaadenaadenaaden.shah@nhs.net",
       firstName: "Aaden",
       lastName: "Shah",
       role: "Recorder",

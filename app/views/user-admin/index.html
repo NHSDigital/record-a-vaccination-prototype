@@ -19,11 +19,37 @@
         "href": "/user-admin/add-user"
       }) }}
 
-      <table class="nhsuk-table">
-        <caption class="nhsuk-table__caption nhsuk-table__caption--m">Users</caption>
+
+      <div class="app-filters nhsuk-u-margin-top-5">
+        <form action="/user-admin" method="get" novalidate>
+          <div class="nhsuk-form-group nhsuk-u-margin-bottom-0">
+            <label class="nhsuk-label" for="q">
+              Search active users by name or email
+            </label>
+            <input class="nhsuk-input nhsuk-input--width-20" id="q" name="q" type="search" value="{{ q }}">
+
+            {{ button({
+              text: "Search",
+              classes: "nhsuk-button--secondary nhsuk-u-margin-left-2 app-button--small nhsuk-u-margin-bottom-0"
+            })}}
+          </div>
+        </form>
+      </div>
+
+
+      {% if totalUsers > 0 %}
+
+      <table class="nhsuk-table nhsuk-u-margin-top-4">
+        <caption class="nhsuk-table__caption nhsuk-table__caption--m">
+          {% if q %}
+            Showing {{ totalUsers | plural("active user") }} matching {{ q }}
+          {% else %}
+            All active users
+          {% endif %}
+        </caption>
         <thead role="rowgroup" class="nhsuk-table__head">
           <tr role="row">
-            <th role="columnheader" class="" scope="col">
+            <th role="columnheader" class="app-table__header--min-width-200" scope="col">
               Name
             </th>
             <th role="columnheader" class="" scope="col">
@@ -35,7 +61,7 @@
             <th role="columnheader" class="" scope="col">
               Status
             </th>
-            <th role="columnheader" class="" scope="col">
+            <th role="columnheader" class="app-table__header--min-width-100" scope="col">
 
             </th>
           </tr>
@@ -53,7 +79,7 @@
               <td class="nhsuk-table__cell ">{{ user.email }}</td>
               <td class="nhsuk-table__cell ">{{ user.role }}</td>
               <td class="nhsuk-table__cell ">{{ user.status }}</td>
-              <td class="nhsuk-table__cell">
+              <td class="nhsuk-table__cell app-table__cell--right-aligned">
                 <a href="/user-admin/users/{{ user.id }}/change-role" class="nhsuk-link">Change <span class="nhsuk-u-visually-hidden">details for {{ user.firstName }} </span></a>
               </td>
             </tr>
@@ -61,27 +87,35 @@
         </tbody>
       </table>
 
+      {% else %}
+
+        <div class="nhsuk-u-margin-top-6 nhsuk-u-margin-bottom-6">
+          <p>No users matching {{ q }}.</p>
+        </div>
+
+      {% endif %}
+
       {% set items = [] %}
 
       {% for i in range(1, totalPages + 1) -%}
          {% set items = (items.push({
           number: i,
-          href: "/user-admin?page=" + i,
+          href: "/user-admin?page=" + i + "&q=" + (q if q else ""),
           current: (i === page)
         }), items) %}
       {%- endfor %}
 
 
-      {% if totalPages > 0 %}
+      {% if totalPages > 1 %}
         {{ appPagination({
-          previousUrl:  "/user-admin?page=" + (page - 1) if page != 1,
-          nextUrl: "/user-admin?page=" + (page + 1)  if page != totalPages,
+          previousUrl:  "/user-admin?page=" + (page - 1) + "&q=" + (q if q else "") if page != 1,
+          nextUrl: "/user-admin?page=" + (page + 1) + "&q=" + (q if q else "")  if page != totalPages,
           items: items
         }) }}
       {% endif %}
 
 
-      {% if deactivatedUsers | length > 0 %}
+      {% if (not q and q != "") and (deactivatedUsers | length > 0) %}
         <p><a href="/user-admin/deactivated">View {{ deactivatedUsers | length | plural ("deactivated user") }}</a> </p>
       {% endif %}
 

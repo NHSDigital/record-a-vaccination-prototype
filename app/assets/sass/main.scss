@@ -26,6 +26,8 @@ $govuk-brand-colour: $nhsuk-link-color;
 @import 'components/header';
 @import 'components/summary-list';
 @import 'components/table';
+@import 'components/button';
+@import 'components/filters';
 
 
 @import '../../components/pagination/_pagination';
