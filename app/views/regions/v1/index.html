@@ -18,6 +18,12 @@
 
       <p class="nhsuk-body-l">Once they’re set up, they can add other users and vaccination sites.</p>
 
+      {% from 'inset-text/macro.njk' import insetText %}
+
+      {{ insetText({
+        html: "<p>You can only delete an organisation if they have not recorded any vaccinations.</p>"
+      }) }}
+
       {{ button({
         "text": "Invite an organisation",
         "href": "/regions/v1/add-organisation"
@@ -46,6 +52,8 @@
                 <th role="columnheader" class="" scope="col">
                   Status
                 </th>
+                <th role="columnheader" class="" scope="col"></th>
+
               </tr>
             </thead>
             <tbody class="nhsuk-table__body">
@@ -62,6 +70,12 @@
                   </td>
                   <td class="nhsuk-table__cell ">
                     {{ organisation.status }}
+                  </td>
+                  <td class="nhsuk-table__cell app-table__cell--right-aligned">
+                    <a href="#" class="nhsuk-link">Delete</a>
+                  </td>
+
+                  
                   </td>
                 </tr>
               {% endfor %}
