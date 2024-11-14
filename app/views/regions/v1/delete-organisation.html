@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Delete organisation
+{% endblock %}
+
+{% set currentSection = "delete-organisation" %}
+
+{% block beforeContent %}
+<br>
+  {{ backLink({
+    href: "/regions/v1",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+        <h1 class="nhsuk-heading-l">Delete {{ organisation.name }}</h1>
+        
+        <p>Once you delete this organisation, no one at {{ organisation.name }} will be able to record vaccinations.</p>
+
+        <p>You can add this organisation back at any time..</p>
+
+
+        <form action="/user-admin/{{ user.id }}/deactivate" method="post" novalidate="true">
+        {{ button({
+          "text": "Delete organisation",
+          classes: "nhsuk-button--warning"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+
+{% endblock %}
