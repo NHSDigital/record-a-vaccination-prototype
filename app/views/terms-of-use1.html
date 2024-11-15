@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+
+{% block pageTitle %}
+  Terms of use
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-in-organisation.html" %}
+{% endblock %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-xl">Terms of use</h1>
+
+      <h2 class="nhsuk-heading-s">To use this service, you must accept the licence agreement</h2>
+
+      <ul class="nhsuk-body-m">
+        <li>Only use the service to record NHS vaccinations</li>
+        <li>Always use your own log in details to access the service</li>
+        <li>Do not share your log in details with anyone</li>
+      </ul>        
+
+      <a href="#" class="nhsuk-link">Read terms of use in full</a>
+
+    </div>
+  </div>
+
+</br>
+</br>
+
+  {% from 'button/macro.njk' import button %}
+
+{{ button({
+  text: "Accept and continue"
+}) }}
+
+{% endblock %}
+
