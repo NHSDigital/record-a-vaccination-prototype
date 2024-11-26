@@ -196,6 +196,29 @@ module.exports = router => {
     })
   })
 
+  // Delete an organisation confirmation page
+  router.get('/regions/v1/organisations/:code/delete', (req, res) => {
+    const organisationsAdded = req.session.data.organisationsAdded || []
+    const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+    if (!organisation) { res.redirect('/regions/v1/'); return }
+
+    res.render('regions/v1/delete-organisation', {
+      organisation
+    })
+  })
+
+  // Deleting an organisation
+  router.post('/regions/v1/organisations/:code/deleted', (req, res) => {
+    const organisationsAdded = req.session.data.organisationsAdded || []
+    const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+    if (!organisation) { res.redirect('/regions/v1/'); return }
+
+    // Remove organisation from the array of organisations added
+    req.session.data.organisationsAdded.splice(req.session.data.organisationsAdded.indexOf(organisation), 1)
+
+    res.redirect('/regions/v1')
+  })
+
   // Add another lead user to an organisation form
   router.get('/regions/v1/organisations/:code/add-email', (req, res) => {
     const organisationsAdded = req.session.data.organisationsAdded || []

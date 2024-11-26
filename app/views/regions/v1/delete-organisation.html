@@ -21,17 +21,16 @@
     <div class="nhsuk-grid-column-two-thirds">
 
         <h1 class="nhsuk-heading-l">Delete {{ organisation.name }}</h1>
-        
+
         <p>Once you delete this organisation, no one at {{ organisation.name }} will be able to record vaccinations.</p>
 
-        <p>You can add this organisation back at any time..</p>
+        <p>You can add this organisation back at any time.</p>
 
-
-        <form action="/user-admin/{{ user.id }}/deactivate" method="post" novalidate="true">
-        {{ button({
-          "text": "Delete organisation",
-          classes: "nhsuk-button--warning"
-        }) }}
+        <form action="/regions/v1/organisations/{{ organisation.code }}/deleted" method="post" novalidate="true">
+          {{ button({
+            "text": "Delete organisation",
+            classes: "nhsuk-button--warning"
+          }) }}
       </form>
 
     </div>
