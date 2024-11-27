@@ -3,10 +3,9 @@ table {
   max-width: 100%;
 }
 
-table td {
+.app-table__cell--break-all {
   word-break: break-all;
 }
-
 
 .app-table__header--min-width-100 {
   min-width: 100px;
