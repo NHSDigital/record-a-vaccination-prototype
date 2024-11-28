@@ -1,6 +1,11 @@
 module.exports = router => {
 
   // Dashboard
+  
+  router.get('/home/no-records', (req, res) => {
+    res.render('home/no-records')
+  })
+
   router.get('/home', (req, res) => {
 
     const dateToday = new Date()
