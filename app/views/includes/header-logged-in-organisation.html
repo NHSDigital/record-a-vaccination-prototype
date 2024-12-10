@@ -1,7 +1,7 @@
 {{ header({
     classes: "nhsuk-header--left",
     "service": {
-        "name": "Record a vaccination",
+        "name": "Manage vaccinations",
         "href": "/"
       },
       "showNav": "true",
@@ -13,9 +13,9 @@
           classes: ("app-header__navigation-item--current" if currentSection == "home")
         },
         {
-          url  : "/find-a-patient",
-          label : "Find a patient",
-          classes: ("app-header__navigation-item--current" if currentSection == "find-a-patient")
+          url  : "/vaccinate",
+          label : "Vaccinate",
+          classes: ("app-header__navigation-item--current" if currentSection == "vaccinate")
         },
         {
           url: "/vaccines",

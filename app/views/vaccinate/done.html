@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <div class="nhsuk-panel nhsuk-u-margin-bottom-8">
+        <h1 class="nhsuk-panel__title">Vaccination saved</h1>
+        <div class="nhsuk-panel__body">
+          The record will be sent to {{ data.patientName }}’s GP.
+        </div>
+      </div>
+
+      <form action="/vaccinate/vaccine" method="post" novalidate>
+
+        {{ radios({
+          idPrefix: "nextStep",
+          name: "nextStep",
+          fieldset: {
+            legend: {
+              text: "What would you like to do next?",
+              classes: "nhsuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "no",
+              text: "Record a " + data.vaccine + " vaccination for another patient"
+            },
+            {
+              value: "yes",
+              text: "Record another vaccination for " + data.patientName
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "yes",
+              text: "I’m finished vaccinating for now"
+            }
+
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

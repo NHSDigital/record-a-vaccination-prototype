@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/vaccinator" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/vaccinate/patient-history" method="post" novalidate>
+
+        {% set nhsNumberHtml %}
+
+          {{ input({
+            id: "nhsNumber",
+            name: "nhsNumber",
+            classes: "nhsuk-input--width-10",
+            inputmode: "numeric",
+            label: {
+              text: "NHS number",
+              classes: "nhsuk-label--s"
+            },
+            value: data.nhsNumber,
+            hint: {
+              text: "For example, 485 777 3456"
+            }
+          }) }}
+        {% endset %}
+
+
+        {{ radios({
+          idPrefix: "nhsNumberKnown",
+          name: "nhsNumberKnown",
+          fieldset: {
+            legend: {
+              html: "Do you have the patient’s NHS&nbsp;number?",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: "true"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes",
+              checked: (data.nhsNumberKnown == 'yes'),
+              conditional: {
+                html: nhsNumberHtml
+              }
+            },
+            {
+              value: "no",
+              text: "No",
+              checked: (data.nhsNumberKnown == 'no')
+            }
+          ]
+        }) }}
+
+        <input type="hidden" name="patientName" value="Jodie Brown">
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
