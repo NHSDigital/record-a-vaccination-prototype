@@ -14,7 +14,13 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/vaccinate/patient" method="post" novalidate>
+      {% if data.patientName and data.repeatPatient == "yes" %}
+        {% set nextAction = "/vaccinate/injection-site" %}
+      {% else %}
+        {% set nextAction = "/vaccinate/patient" %}
+      {% endif %}
+
+      <form action="{{ nextAction }}" method="post" novalidate>
 
         {% set otherVaccinatorHtml %}
           <div class="nhsuk-form-group">
