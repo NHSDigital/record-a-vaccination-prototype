@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/patient-estimated-due-date" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if data.patientName and data.repeatPatient == "yes" %}
+        {% set nextAction = "/vaccinate/injection-site" %}
+      {% else %}
+        {% set nextAction = "/vaccinate/patient" %}
+      {% endif %}
+
+      <form action="{{ nextAction }}" method="post" novalidate>
+
+        {{ radios({
+          idPrefix: "eligibility",
+          name: "eligibility",
+          fieldset: {
+            legend: {
+              text: "Why are you giving " + data.patientName + " the vaccine?",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          items: [
+            {
+              value: "pregnant",
+              text: "Pregnant"
+            },
+            {
+              value: "Aged 75 to 80",
+              text: "Aged 75 to 80"
+            },
+            {
+              value: "Healthcare worker",
+              text: "Healthcare worker"
+            },
+            {
+              value: "Care home resident",
+              text: "Care home resident"
+            },
+            {
+              value: "Etc",
+              text: "Etc"
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
