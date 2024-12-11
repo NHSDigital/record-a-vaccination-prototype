@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/patient-estimated-due-date" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/vaccinate/vaccinator" method="post" novalidate>
+
+
+        {{ radios({
+          idPrefix: "deliveryTeam",
+          name: "deliveryTeam",
+          fieldset: {
+            legend: {
+              text: "Which team are you working with?",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          items: [
+            {
+              value: "pregnant",
+              text: "Anne Ward Maternity Unit"
+            },
+            {
+              value: "Aged 75 to 80",
+              text: "St Mary’s Hospital"
+            },
+            {
+              value: "Healthcare worker",
+              text: "Josephine Clinic"
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
