@@ -154,7 +154,7 @@
 
       {% if data.repeatPatient == 'yes' and data.patientName %}
 
-        {% set question = ("Which vaccine are you giving " + data.patientName + "?" if data.vaccinationToday == 'yes' else "Which vaccine did you give" + data.patientName + "?") %}
+        {% set question = ("Which vaccine are you giving " + data.patientName + "?" if data.vaccinationToday == 'yes' else "Which vaccine did you give " + data.patientName + "?") %}
       {% else %}
         {% set question = ("Which vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which vaccine did you give?") %}
       {% endif %}
