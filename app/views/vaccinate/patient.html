@@ -14,6 +14,104 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+      {% if data.repeatVaccination == "yes" %}
+
+        <h1 class="nhsuk-heading-l">Give a {{ data.vaccine }} vaccine to another patient</h1>
+
+
+        {{ summaryList({
+            rows: [
+              {
+                key: {
+                  text: "Date"
+                },
+                value: {
+                  text: ("Today" if data.vaccinationToday == "yes" else (data.vaccinationDate | isoDateFromDateInput | govukDate))
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/vaccinate",
+                      text: "Change",
+                      visuallyHiddenText: "vaccination date"
+                    }
+                  ]
+                }
+              },
+              {
+                key: {
+                  text: "Vaccine"
+                },
+                value: {
+                  text: data.vaccine
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/vaccinate/vaccine",
+                      text: "Change",
+                      visuallyHiddenText: "vaccine"
+                    }
+                  ]
+                }
+              },
+              {
+                key: {
+                  text: "Product"
+                },
+                value: {
+                  text: data.vaccineProduct
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/vaccinate/vaccine",
+                      text: "Change",
+                      visuallyHiddenText: "vaccine product"
+                    }
+                  ]
+                }
+              },
+              {
+                key: {
+                  text: "Batch"
+                },
+                value: {
+                  html: data.vaccineBatch + "<br>Expires 4 January 2025"
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/vaccinate/batch",
+                      text: "Change",
+                      visuallyHiddenText: "vaccine batch"
+                    }
+                  ]
+                }
+              },
+              {
+                key: {
+                  text: "Vaccinator"
+                },
+                value: {
+                  html: data.vaccinator
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/vaccinate/vaccinator",
+                      text: "Change",
+                      visuallyHiddenText: "contact information"
+                    }
+                  ]
+                }
+              }
+            ]
+          }) }}
+
+
+      {% endif %}
+
       <form action="/vaccinate/patient-history" method="post" novalidate>
 
         {% set nhsNumberHtml %}
@@ -41,8 +139,8 @@
           fieldset: {
             legend: {
               html: "Do you have the patient’s NHS&nbsp;number?",
-              classes: "nhsuk-fieldset__legend--l",
-              isPageHeading: "true"
+              classes: ("nhsuk-fieldset__legend--m" if data.repeatVaccination == "yes" else "nhsuk-fieldset__legend--l"),
+              isPageHeading: ("false" if data.repeatVaccination == "yes" else "true")
             }
           },
           items: [

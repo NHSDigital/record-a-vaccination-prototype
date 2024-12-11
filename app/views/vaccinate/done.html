@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <form action="/vaccinate/vaccine" method="post" novalidate>
+      <form action="/vaccinate/what-next" method="post" novalidate>
 
         {{ radios({
           idPrefix: "nextStep",
@@ -30,18 +30,18 @@
           },
           items: [
             {
-              value: "no",
+              value: "same-vaccination-another-patient",
               text: "Record a " + data.vaccine + " vaccination for another patient"
             },
             {
-              value: "yes",
+              value: "same-patient-another-vaccination",
               text: "Record another vaccination for " + data.patientName
             },
             {
               divider: "or"
             },
             {
-              value: "yes",
+              value: "done",
               text: "I’m finished vaccinating for now"
             }
 

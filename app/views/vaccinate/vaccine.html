@@ -152,12 +152,19 @@
         }) }}
       {% endset %}
 
+      {% if data.repeatPatient == 'yes' and data.patientName %}
+
+        {% set question = ("Which vaccine are you giving " + data.patientName + "?" if data.vaccinationToday == 'yes' else "Which vaccine did you give" + data.patientName + "?") %}
+      {% else %}
+        {% set question = ("Which vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which vaccine did you give?") %}
+      {% endif %}
+
       {{ radios({
         "idPrefix": "vaccine",
         "name": "vaccine",
         "fieldset": {
           "legend": {
-            "text": ("Which vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which vaccine did you give?"),
+            "text": question,
             "classes": "nhsuk-fieldset__legend--l",
             "isPageHeading": true
           }
