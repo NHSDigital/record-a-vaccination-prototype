@@ -7,7 +7,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/patient-estimated-due-date" }) }}
+  {{ backLink({ href: "/vaccinate/" }) }}
 {% endblock %}
 
 {% block content %}
@@ -29,16 +29,19 @@
           },
           items: [
             {
-              value: "pregnant",
-              text: "Anne Ward Maternity Unit"
+              value: "Anne Ward Maternity Unit",
+              text: "Anne Ward Maternity Unit",
+              checked: (data.deliveryTeam === "Anne Ward Maternity Unit")
             },
             {
-              value: "Aged 75 to 80",
-              text: "St Mary’s Hospital"
+              value: "St Mary’s Hospital",
+              text: "St Mary’s Hospital",
+              checked: (data.deliveryTeam === "St Mary’s Hospital")
             },
             {
-              value: "Healthcare worker",
-              text: "Josephine Clinic"
+              value: "Josephine Clinic",
+              text: "Josephine Clinic",
+              checked: (data.deliveryTeam === "Josephine Clinic")
             }
           ]
         }) }}

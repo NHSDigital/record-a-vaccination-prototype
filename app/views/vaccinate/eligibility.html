@@ -7,7 +7,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/patient-estimated-due-date" }) }}
+  {{ backLink({ href: "/vaccinate/batch" }) }}
 {% endblock %}
 
 {% block content %}
@@ -35,23 +35,36 @@
           items: [
             {
               value: "pregnant",
-              text: "Pregnant"
+              text: "Pregnant",
+              checked: (data.eligibility === "Pregnant")
             },
             {
               value: "Aged 75 to 80",
-              text: "Aged 75 to 80"
+              text: "Aged 75 to 80",
+              checked: (data.eligibility === "Aged 75 to 80")
             },
             {
               value: "Healthcare worker",
-              text: "Healthcare worker"
+              text: "Healthcare worker",
+              checked: (data.eligibility === "Healthcare worker")
             },
             {
               value: "Care home resident",
-              text: "Care home resident"
+              text: "Care home resident",
+              checked: (data.eligibility === "Care home resident")
             },
             {
               value: "Etc",
-              text: "Etc"
+              text: "Etc",
+              checked: (data.eligibility === "Etc")
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "Another reason",
+              text: "Another reason",
+              checked: (data.eligibility === "Another reason")
             }
           ]
         }) }}
