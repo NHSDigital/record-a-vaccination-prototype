@@ -1,5 +1,20 @@
 module.exports = router => {
 
+  router.post('/vaccinate/answer-patient-nhs-number-known', (req, res) => {
+
+    const nhsNumberKnown = req.session.data.nhsNumberKnown;
+
+    if (nhsNumberKnown === "yes") {
+      res.redirect('/vaccinate/patient-history')
+    } else if (nhsNumberKnown === "no") {
+      res.redirect('/vaccinate/patient-search')
+    } else {
+      res.redirect('/vaccinate/patient?showError=yes')
+    }
+
+  })
+
+
   // Routing page after DONE
   router.post('/vaccinate/what-next', (req, res) => {
 
