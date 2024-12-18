@@ -58,9 +58,11 @@
         classes: "nhsuk-input--width-10"
       }) }}
 
-      {{ button({
-        text: "Search"
-      }) }}
+      <form action="/vaccinate/search-result" method="post">
+        {{ button({
+          text: "Search"
+        }) }}
+      </form>
 
 
     </div>
