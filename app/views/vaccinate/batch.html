@@ -14,8 +14,13 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/vaccinate/eligibility" method="post" novalidate>
+      {% if data.vaccine == "Pertussis" %}
+        {% set nextPage = "/vaccinate/patient" %}
+      {% else %}
+        {% set nextPage = "/vaccinate/eligibility" %}
+      {% endif %}
 
+      <form action="{{ nextPage }}" method="post" novalidate>
 
           {{ radios({
             "idPrefix": "vaccineBatch",

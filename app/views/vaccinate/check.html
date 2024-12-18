@@ -55,6 +55,23 @@
           },
           {
             key: {
+              text: "Eligibility"
+            },
+            value: {
+              html: (data.eligibility | join("<br>"))
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/eligibility",
+                  text: "Change",
+                  visuallyHiddenText: "eligibility"
+                }
+              ]
+            }
+          },
+          {
+            key: {
               text: "Pregnancy due date"
             },
             value: {

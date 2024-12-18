@@ -22,6 +22,54 @@
 
       <form action="{{ nextAction }}" method="post" novalidate>
 
+      {% if data.vaccine == "COVID-19" %}
+        {% set eligibilityOptions = [
+          "Resident in a care home",
+          "Staff in a care home",
+          "Healthcare worker",
+          "Social worker",
+          "Based on age",
+          "Pregnant",
+          "Immunosuppressed",
+          "In a clinical risk group",
+          "Homeless or living in a closed setting",
+          "Household contact of someone immunosuppressed",
+          "Carer",
+          "Has had CAR-T therapy or a stem cell transplant since their last vaccination"
+        ] %}
+      {% elif data.vaccine == "Flu" %}
+        {% set eligibilityOptions = [
+          "Resident in a care home",
+          "Staff in a care home",
+          "Healthcare worker",
+          "Social worker",
+          "Based on age",
+          "Pregnant",
+          "Immunosuppressed",
+          "In a clinical risk group",
+          "Household contact of someone immunosuppressed",
+          "Carer",
+          "Has had CAR-T therapy or a stem cell transplant since their last vaccination"
+        ] %}
+      {% elif data.vaccine == "RSV" %}
+        {% set eligibilityOptions = [
+          "Aged 75 to 80",
+          "Pregnant"
+        ] %}
+      {% else %}
+        {% set eligibilityOptions = [] %}
+      {% endif %}
+
+      {% set items = [] %}
+      {% for option in eligibilityOptions %}
+        {% set items = (items.push({
+          text: option,
+          value: option,
+          checked: (data.eligibility | arrayOrStringIncludes(option))
+          }), items) %}
+      {% endfor %}
+
+      {% if data.vaccine == "RSV" %}
         {{ radios({
           idPrefix: "eligibility",
           name: "eligibility",
@@ -32,42 +80,22 @@
               isPageHeading: true
             }
           },
-          items: [
-            {
-              value: "pregnant",
-              text: "Pregnant",
-              checked: (data.eligibility === "Pregnant")
-            },
-            {
-              value: "Aged 75 to 80",
-              text: "Aged 75 to 80",
-              checked: (data.eligibility === "Aged 75 to 80")
-            },
-            {
-              value: "Healthcare worker",
-              text: "Healthcare worker",
-              checked: (data.eligibility === "Healthcare worker")
-            },
-            {
-              value: "Care home resident",
-              text: "Care home resident",
-              checked: (data.eligibility === "Care home resident")
-            },
-            {
-              value: "Etc",
-              text: "Etc",
-              checked: (data.eligibility === "Etc")
-            },
-            {
-              divider: "or"
-            },
-            {
-              value: "Another reason",
-              text: "Another reason",
-              checked: (data.eligibility === "Another reason")
-            }
-          ]
+          items: items
         }) }}
+      {% else %}
+          {{ checkboxes({
+            idPrefix: "eligibility",
+            name: "eligibility",
+            fieldset: {
+              legend: {
+                text: "Why are you giving them the vaccine?",
+                classes: "nhsuk-fieldset__legend--l",
+                isPageHeading: true
+              }
+            },
+            items: items
+          }) }}
+        {% endif %}
 
         {{ button({
           text: "Continue"
