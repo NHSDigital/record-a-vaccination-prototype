@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/vaccinate/vaccinator" method="post" novalidate>
+
+
+        {{ radios({
+          idPrefix: "deliveryTeam",
+          name: "deliveryTeam",
+          fieldset: {
+            legend: {
+              text: "Which team are you working with?",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          items: [
+            {
+              value: "Anne Ward Maternity Unit",
+              text: "Anne Ward Maternity Unit",
+              checked: (data.deliveryTeam === "Anne Ward Maternity Unit")
+            },
+            {
+              value: "St Mary’s Hospital",
+              text: "St Mary’s Hospital",
+              checked: (data.deliveryTeam === "St Mary’s Hospital")
+            },
+            {
+              value: "Josephine Clinic",
+              text: "Josephine Clinic",
+              checked: (data.deliveryTeam === "Josephine Clinic")
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
