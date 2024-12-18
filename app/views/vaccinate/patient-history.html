@@ -6,6 +6,12 @@
 
 {% set currentSection = "vaccinate" %}
 
+{% if (data.eligibility | arrayOrStringIncludes("Pregnant")) or (data.vaccine == "Pertussis") %}
+  {% set nextPage = "/vaccinate/patient-estimated-due-date" %}
+{% else %}
+  {% set nextPage = "/vaccinate/injection-site" %}
+{% endif %}
+
 {% block beforeContent %}
   {{ backLink({ href: "/vaccinate/patient" }) }}
 {% endblock %}
@@ -137,7 +143,7 @@
         }) }}
 
 
-      <form action="/vaccinate/patient-estimated-due-date" method="post" novalidate>
+      <form action="{{ nextPage }}" method="post" novalidate>
         {{ button({
           text: "Continue"
         })}}

@@ -29,7 +29,7 @@
             actions: {
               items: [
                 {
-                  href: "/patient",
+                  href: "/vaccinate/patient",
                   text: "Change",
                   visuallyHiddenText: "patient"
                 }
@@ -45,11 +45,6 @@
             },
             actions: {
               items: [
-                {
-                  href: "/vaccinate/patient",
-                  text: "Change",
-                  visuallyHiddenText: "patient"
-                }
               ]
             }
           },
@@ -58,7 +53,7 @@
               text: "Eligibility"
             },
             value: {
-              html: (data.eligibility | join("<br>"))
+              html: ((data.eligibility | join("<br>")) if (data.eligibility | isArray) else data.eligibility)
             },
             actions: {
               items: [
@@ -69,7 +64,7 @@
                 }
               ]
             }
-          },
+          } if (data.vaccine != "Pertussis"),
           {
             key: {
               text: "Pregnancy due date"
@@ -86,7 +81,7 @@
                 }
               ]
             }
-          }
+          } if ((data.vaccine == "Pertussis") or (data.eligibility | arrayOrStringIncludes("Pregnant")))
         ]
       }) }}
 
