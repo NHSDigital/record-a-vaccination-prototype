@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/delivery-team" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+
+      <form action="/vaccinate/vaccine" method="post" novalidate>
+
+        {% set otherVaccinatorHtml %}
+          <div class="nhsuk-form-group">
+            <h1 class="nhsuk-label-wrapper">
+              <label class="nhsuk-label nhsuk-label--s nhsuk-u-margin-bottom-1" for="organisationCode">
+                Vaccinator
+              </label>
+            </h1>
+            <div class="nhsuk-hint" id="organisationName-hint">
+              Search by name
+            </div>
+            <select class="nhsuk-select" id="siteCode" name="siteCode"
+              data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+              <option selected value=""></option>
+
+                <option value="James Bloggs">James Bloggs (james.bloggs@nhs.net)</option>
+                <option value="James Smith">James Smith (james.smith@nhs.net)</option>
+                <option value="Joan Jacobs">Joan Jacobs (joan.jacobs@nhs.net)</option>
+            </select>
+          </div>
+        {% endset %}
+
+
+        {{ radios({
+          idPrefix: "vaccinator",
+          name: "vaccinator",
+          fieldset: {
+            legend: {
+              text: ("Who is the vaccinator?" if data.vaccinationToday == 'yes' else "Who was the vaccinator?"),
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: "true"
+            }
+          },
+          items: [
+            {
+              value: "Jane Smith",
+              text: "Me (Jane Smith)",
+              checked: (data.vaccinator === "Jane Smith")
+            },
+            {
+              value: "Anna Brown",
+              text: "Anna Brown (anna.brown@nhs.net)",
+              checked: (data.vaccinator === "Anna Brown")
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "no",
+              text: "Someone else",
+              checked: (data.vaccinator === "Someone else"),
+              conditional: {
+                html: otherVaccinatorHtml
+              }
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
