@@ -1,0 +1,240 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/injection-site" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Check and confirm</h1>
+
+      <h2 class="nhsuk-heading-m">Patient</h2>
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              text: data.patientName
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/patient",
+                  text: "Change",
+                  visuallyHiddenText: "patient"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Date of birth"
+            },
+            value: {
+              text: (data.dateOfBirth | isoDateFromDateInput | govukDate)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/no-search-result",
+                  text: "Change",
+                  visuallyHiddenText: "date of birth"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Postcode"
+            },
+            value: {
+              text: data.postcode
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/no-search-result",
+                  text: "Change",
+                  visuallyHiddenText: "postcode"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "NHS number"
+            },
+            value: {
+              text: data.nhsNumber
+            },
+            actions: {
+              items: [
+              ]
+            }
+          } if data.nhsNumber,
+          {
+            key: {
+              text: "Eligibility"
+            },
+            value: {
+              html: ((data.eligibility | join("<br>")) if (data.eligibility | isArray) else data.eligibility)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/eligibility",
+                  text: "Change",
+                  visuallyHiddenText: "eligibility"
+                }
+              ]
+            }
+          } if (data.vaccine != "Pertussis"),
+          {
+            key: {
+              text: "Pregnancy due date"
+            },
+            value: {
+              text: (data.pregnancyDueDate | isoDateFromDateInput | govukDate)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/patient-estimated-due-date",
+                  text: "Change",
+                  visuallyHiddenText: "pregnancy due date"
+                }
+              ]
+            }
+          } if ((data.vaccine == "Pertussis") or (data.eligibility | arrayOrStringIncludes("Pregnant")))
+        ]
+      }) }}
+
+      <h2 class="nhsuk-heading-m">Vaccination</h2>
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Date"
+            },
+            value: {
+              text: ("Today" if data.vaccinationToday == "yes" else (data.vaccinationDate | isoDateFromDateInput | govukDate))
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate",
+                  text: "Change",
+                  visuallyHiddenText: "vaccination date"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Vaccine"
+            },
+            value: {
+              text: data.vaccine
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/vaccine",
+                  text: "Change",
+                  visuallyHiddenText: "vaccine"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Product"
+            },
+            value: {
+              text: data.vaccineProduct
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/vaccine",
+                  text: "Change",
+                  visuallyHiddenText: "vaccine product"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Batch"
+            },
+            value: {
+              html: data.vaccineBatch + "<br>Expires 4 January 2025"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/batch",
+                  text: "Change",
+                  visuallyHiddenText: "vaccine batch"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Vaccinator"
+            },
+            value: {
+              html: data.vaccinator
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/vaccinator",
+                  text: "Change",
+                  visuallyHiddenText: "contact information"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Injection site"
+            },
+            value: {
+              html: data.injectionSite
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/injection-site",
+                  text: "Change",
+                  visuallyHiddenText: "contact details"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <form action="/vaccinate/done" method="post" novalidate>
+        {{ button({
+          text: "Confirm and save"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/patient-estimated-due-date" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/vaccinate/check" method="post" novalidate>
+
+        {% set somewhereElseHtml %}
+
+        {{ radios({
+          idPrefix: "otherInjectionSite",
+          name: "otherInjectionSite",
+          fieldset: {
+            legend: {
+              text: "Injection site",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "Left buttock",
+              text: "Left buttock"
+            },
+            {
+              value: "Right buttock",
+              text: "Right buttock"
+            },
+            {
+              value: "Left thigh",
+              text: "Left thigh"
+            },
+            {
+              value: "Right thigh",
+              text: "Right thigh"
+            }
+          ]
+        }) }}
+        {% endset %}
+
+
+        {{ radios({
+          idPrefix: "injectionSite",
+          name: "injectionSite",
+          fieldset: {
+            legend: {
+              text: "Where did you give the injection?",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          items: [
+            {
+              value: "Left arm",
+              text: "Left arm",
+              checked: (data.injectionSite == 'Left arm')
+            },
+            {
+              value: "Right arm",
+              text: "Right arm",
+              checked: (data.injectionSite == 'Right arm')
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "other",
+              text: "Somewhere else",
+              checked: (data.injectionSite == 'other'),
+              conditional: {
+                html: somewhereElseHtml
+              }
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
