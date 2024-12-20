@@ -21,7 +21,9 @@
         }) }}
       {% endif %}
 
-      <h1 class="nhsuk-heading-l">Search for the patient</h1>
+      <h1 class="nhsuk-heading-l">No results found</h1>
+
+      <p>Check with the patient that these details match those registered with their GP. And try searching again.</p>
 
       <form action="/vaccinate/patient-search" method="post">
         {{ input({
@@ -102,6 +104,19 @@
         }) }}
       </form>
 
+      <p>You can continue and record a vaccination without an NHS number, however the record will not be sent to a GP.</p>
+
+      <form action="/vaccinate/injection-site" method="post">
+
+        <input type="hidden" name="patientName" value="{{ data.firstName }} {{ data.lastName }}">
+        <input type="hidden" name="nhsNumber" value="">
+        {{
+          button({
+            text: "Continue with no NHS number",
+            classes: "nhsuk-button--secondary"
+          })
+        }}
+      </form>
 
     </div>
   </div>

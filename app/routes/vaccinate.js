@@ -20,6 +20,66 @@ module.exports = router => {
   })
 
 
+ router.post('/vaccinate/patient-search', (req, res) => {
+
+    const firstName = req.session.data.firstName;
+    const lastName = req.session.data.lastName;
+    const dateOfBirth = req.session.data.dateOfBirth;
+    const postcode = req.session.data.postcode;
+    let errors = []
+    let firstNameError, lastNameError, dateOfBirthError, postcodeError
+
+    if (firstName === "") {
+      firstNameError = "Enter first name"
+      errors.push({
+        text: firstNameError,
+        href: "#firstName"
+      })
+    }
+
+    if (lastName === "") {
+      lastNameError = "Enter last name"
+      errors.push({
+        text: lastNameError,
+        href: "#lastName"
+      })
+    }
+
+    if (dateOfBirth.day === "" || dateOfBirth.month  === "" || dateOfBirth.year === "") {
+      dateOfBirthError = "Enter date of birth"
+      errors.push({
+        text: dateOfBirthError,
+        href: "#dateOfBirth"
+      })
+    }
+
+    if (postcode === "") {
+      postcodeError = "Enter postcode"
+      errors.push({
+        text: postcodeError,
+        href: "#postcode"
+      })
+    }
+
+    if (errors.length === 0) {
+
+      if (Number(dateOfBirth.day) %2) {
+        res.redirect('/vaccinate/no-search-result')
+      } else {
+        res.redirect('/vaccinate/search-result')
+      }
+    } else {
+      res.render('vaccinate/patient-search', {
+        errors,
+        firstNameError,
+        lastNameError,
+        dateOfBirthError,
+        postcodeError
+      })
+    }
+
+  })
+
   // Routing page after DONE
   router.post('/vaccinate/what-next', (req, res) => {
 

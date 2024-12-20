@@ -38,6 +38,40 @@
           },
           {
             key: {
+              text: "Date of birth"
+            },
+            value: {
+              text: (data.dateOfBirth | isoDateFromDateInput | govukDate)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/no-search-result",
+                  text: "Change",
+                  visuallyHiddenText: "date of birth"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Postcode"
+            },
+            value: {
+              text: data.postcode
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/no-search-result",
+                  text: "Change",
+                  visuallyHiddenText: "postcode"
+                }
+              ]
+            }
+          },
+          {
+            key: {
               text: "NHS number"
             },
             value: {
@@ -47,7 +81,7 @@
               items: [
               ]
             }
-          },
+          } if data.nhsNumber,
           {
             key: {
               text: "Eligibility"
