@@ -1,0 +1,113 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Button states
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Button states</h1>
+
+
+      <h2 class="nhsuk-heading-m">Not yet pressed</h2>
+
+      {{ button({
+        text: "Confirm details and save"
+      }) }}
+
+      <h2 class="nhsuk-heading-m">Pressed and being sent</h2>
+
+      {{ button({
+        text: "Saving",
+        classes: "app-button--loading",
+        attributes: {
+          disabled: true,
+          "aria-live": "assertive",
+          "aria-label": "Saving"
+        }
+      }) }}
+
+      <h2 class="nhsuk-heading-m">Example showing internet connection failing or timing out</h2>
+
+      <div class="app-button-group">
+        {{ button({
+          text: "Confirm details and save",
+          attributes: {
+            id: "button-timeout-example"
+          }
+        }) }}
+      </div>
+
+      <h2 class="nhsuk-heading-m">Example showing server error (500)</h2>
+
+      <div class="app-button-group">
+        {{ button({
+          text: "Confirm details and save",
+          attributes: {
+            id: "button-server-error-example"
+          }
+        }) }}
+      </div>
+
+      <h2 class="nhsuk-heading-m">Example showing server down (503)</h2>
+
+      <div class="app-button-group">
+        {{ button({
+          text: "Confirm details and save",
+          attributes: {
+            id: "button-server-down-example"
+          }
+        }) }}
+      </div>
+
+      <script>
+
+        function setButtonAsSaving(button, errorMessage) {
+
+          button.disabled = true
+          button.classList.add('app-button--loading')
+          button.textContent = 'Saving'
+          button.setAttribute('aria-live', 'assertive')
+          button.setAttribute('aria-label', 'Saving')
+
+          let errorMessageElement = button.parentElement.querySelector('.app-body--error')
+
+          if (errorMessageElement) {
+            errorMessageElement.remove()
+          }
+
+          const randomTimeOut = ((1 + (5 * Math.random())) * 1000)
+
+          setTimeout(function() {
+            this.textContent = 'Confirm details and save'
+            this.disabled = false
+            this.classList.remove('app-button--loading')
+            this.removeAttribute('aria-live')
+            this.removeAttribute('aria-label')
+            this.insertAdjacentHTML("beforebegin", '<p class="app-body--error" aria-live="polite">' + errorMessage + '</p>')
+          }.bind(event.target), randomTimeOut)
+
+        }
+
+        document.getElementById('button-server-error-example').addEventListener('click', function(event) {
+          setButtonAsSaving(event.target, "Save failed due to server error. Try again.")
+        })
+
+        document.getElementById('button-timeout-example').addEventListener('click', function(event) {
+          setButtonAsSaving(event.target, "Save failed. Check your internet connection and try again.")
+        })
+
+        document.getElementById('button-server-down-example').addEventListener('click', function(event) {
+          setButtonAsSaving(event.target, "Save failed because of server error. Try again.")
+        })
+
+      </script>
+
+
+    </div>
+  </div>
+
+
+{% endblock %}
