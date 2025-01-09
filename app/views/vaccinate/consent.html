@@ -20,15 +20,16 @@
 
         {% set otherConsentHtml %}
 
-        <div class="nhsuk-form-group">
-            <label class="nhsuk-label" for="example">
-              Name
-            </label>
-            <input class="nhsuk-input" id="example" name="example" type="text">
-          </div>
+          {{ input({
+            label: {
+              text: "Name"
+            },
+            id: "consentName",
+            name: "consentName",
+            value: data.consentName
+          }) }}
 
         {% endset %}
-
 
         {{ radios({
           idPrefix: "consent",
@@ -42,49 +43,49 @@
           },
           items: [
             {
-              value: "John Smith",
-              text: "John Smith",
-              checked: (data.vaccinator === "John Smith")
+              value: data.patientName,
+              text: data.patientName,
+              checked: (data.consent === data.patientName)
             },
             {
               divider: "or"
             },
             {
-              value: "no",
+              value: "Clinician following the Mental Capacity Act",
               text: "Clinician following the Mental Capacity Act",
-              checked: (data.vaccinator === "Clinician"),
+              checked: (data.consent === "Clinician following the Mental Capacity Act"),
               conditional: {
                 html: otherConsentHtml
               }
             },
             {
-                value: "no",
+                value: "Person with power of attorney for personal welfare",
                 text: "Person with power of attorney for personal welfare",
-                checked: (data.vaccinator === "Clinician"),
+                checked: (data.consent === "Person with power of attorney for personal welfare"),
                 conditional: {
                   html: otherConsentHtml
                 }
               },
               {
-                value: "no",
+                value: "Parent or guardian",
                 text: "Parent or guardian",
-                checked: (data.vaccinator === "Clinician"),
+                checked: (data.consent === "Parent or guardian"),
                 conditional: {
                   html: otherConsentHtml
                 }
               },
               {
-                value: "no",
+                value: "Mental capacity advocate",
                 text: "Mental capacity advocate",
-                checked: (data.vaccinator === "Clinician"),
+                checked: (data.consent === "Mental capacity advocate"),
                 conditional: {
                   html: otherConsentHtml
                 }
               },
               {
-                value: "no",
+                value: "Court appointed deputy",
                 text: "Court appointed deputy",
-                checked: (data.vaccinator === "Clinician"),
+                checked: (data.consent === "Court appointed deputy"),
                 conditional: {
                   html: otherConsentHtml
                 }
