@@ -1,0 +1,104 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "consent" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/patient-history" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+
+      <form action="/vaccinate/injection-site" method="post" novalidate>
+
+        {% set otherConsentHtml %}
+
+        <div class="nhsuk-form-group">
+            <label class="nhsuk-label" for="example">
+              Name
+            </label>
+            <input class="nhsuk-input" id="example" name="example" type="text">
+          </div>
+
+        {% endset %}
+
+
+        {{ radios({
+          idPrefix: "consent",
+          name: "consent",
+          fieldset: {
+            legend: {
+              text: ("Who is giving consent?" if data.vaccinationToday == 'yes' else "Who gave consent?"),
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: "true"
+            }
+          },
+          items: [
+            {
+              value: "John Smith",
+              text: "John Smith",
+              checked: (data.vaccinator === "John Smith")
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "no",
+              text: "Clinician following the Mental Capacity Act",
+              checked: (data.vaccinator === "Clinician"),
+              conditional: {
+                html: otherConsentHtml
+              }
+            },
+            {
+                value: "no",
+                text: "Person with power of attorney for personal welfare",
+                checked: (data.vaccinator === "Clinician"),
+                conditional: {
+                  html: otherConsentHtml
+                }
+              },
+              {
+                value: "no",
+                text: "Parent or guardian",
+                checked: (data.vaccinator === "Clinician"),
+                conditional: {
+                  html: otherConsentHtml
+                }
+              },
+              {
+                value: "no",
+                text: "Mental capacity advocate",
+                checked: (data.vaccinator === "Clinician"),
+                conditional: {
+                  html: otherConsentHtml
+                }
+              },
+              {
+                value: "no",
+                text: "Court appointed deputy",
+                checked: (data.vaccinator === "Clinician"),
+                conditional: {
+                  html: otherConsentHtml
+                }
+              }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

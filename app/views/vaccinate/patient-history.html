@@ -9,7 +9,7 @@
 {% if (data.eligibility | arrayOrStringIncludes("Pregnant")) or (data.vaccine == "Pertussis") %}
   {% set nextPage = "/vaccinate/patient-estimated-due-date" %}
 {% else %}
-  {% set nextPage = "/vaccinate/injection-site" %}
+  {% set nextPage = "/vaccinate/consent" %}
 {% endif %}
 
 {% block beforeContent %}
