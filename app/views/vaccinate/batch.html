@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/vaccine" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if data.vaccine == "Pertussis" %}
+        {% set nextPage = "/vaccinate/patient" %}
+      {% else %}
+        {% set nextPage = "/vaccinate/eligibility" %}
+      {% endif %}
+
+      <form action="{{ nextPage }}" method="post" novalidate>
+
+          {{ radios({
+            "idPrefix": "vaccineBatch",
+            "name": "vaccineBatch",
+            "fieldset": {
+              "legend": {
+                "text": ("Which batch are you using?" if data.vaccinationToday == 'yes' else "Which batch was it?"),
+                "classes": "nhsuk-fieldset__legend--l",
+                "isPageHeading": true
+              }
+            },
+            "items": [
+              {
+                "value": "AB2345",
+                "text": "AB2345",
+                hint: {
+                  text: "Expires 14 December 2024"
+                },
+                checked: (data.vaccineBatch == "AB2345")
+              },
+              {
+                "value": "DE8342",
+                "text": "DE8342",
+                hint: {
+                  text: "Expires 19 December 2024"
+                },
+                checked: (data.vaccineBatch == "DE8342")
+              },
+              {
+                "value": "LF842",
+                "text": "LF842",
+                hint: {
+                  text: "Expires 28 December 2024"
+                },
+                checked: (data.vaccineBatch == "LF842")
+              },
+              {
+                "value": "JD8352",
+                "text": "JD8352",
+                hint: {
+                  text: "Expires 3 January 2025"
+                },
+                checked: (data.vaccineBatch == "JD8352")
+              }
+            ]
+          }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

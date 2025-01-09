@@ -1,0 +1,109 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/batch" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if data.patientName and data.repeatPatient == "yes" %}
+        {% set nextAction = "/vaccinate/injection-site" %}
+      {% else %}
+        {% set nextAction = "/vaccinate/patient" %}
+      {% endif %}
+
+      <form action="{{ nextAction }}" method="post" novalidate>
+
+      {% if data.vaccine == "COVID-19" %}
+        {% set eligibilityOptions = [
+          "Resident in a care home",
+          "Staff in a care home",
+          "Healthcare worker",
+          "Social worker",
+          "Based on age",
+          "Pregnant",
+          "Immunosuppressed",
+          "In a clinical risk group",
+          "Homeless or living in a closed setting",
+          "Household contact of someone immunosuppressed",
+          "Carer",
+          "Has had CAR-T therapy or a stem cell transplant since their last vaccination"
+        ] %}
+      {% elif data.vaccine == "Flu" %}
+        {% set eligibilityOptions = [
+          "Resident in a care home",
+          "Staff in a care home",
+          "Healthcare worker",
+          "Social worker",
+          "Based on age",
+          "Pregnant",
+          "Immunosuppressed",
+          "In a clinical risk group",
+          "Household contact of someone immunosuppressed",
+          "Carer",
+          "Has had CAR-T therapy or a stem cell transplant since their last vaccination"
+        ] %}
+      {% elif data.vaccine == "RSV" %}
+        {% set eligibilityOptions = [
+          "Aged 75 to 80",
+          "Pregnant"
+        ] %}
+      {% else %}
+        {% set eligibilityOptions = [] %}
+      {% endif %}
+
+      {% set items = [] %}
+      {% for option in eligibilityOptions %}
+        {% set items = (items.push({
+          text: option,
+          value: option,
+          checked: (data.eligibility | arrayOrStringIncludes(option))
+          }), items) %}
+      {% endfor %}
+
+      {% if data.vaccine == "RSV" %}
+        {{ radios({
+          idPrefix: "eligibility",
+          name: "eligibility",
+          fieldset: {
+            legend: {
+              text: "Why are you giving them the vaccine?",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          items: items
+        }) }}
+      {% else %}
+          {{ checkboxes({
+            idPrefix: "eligibility",
+            name: "eligibility",
+            fieldset: {
+              legend: {
+                text: "Why are you giving them the vaccine?",
+                classes: "nhsuk-fieldset__legend--l",
+                isPageHeading: true
+              }
+            },
+            items: items
+          }) }}
+        {% endif %}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

@@ -1,0 +1,156 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "vaccinate" %}
+
+{% if (data.eligibility | arrayOrStringIncludes("Pregnant")) or (data.vaccine == "Pertussis") %}
+  {% set nextPage = "/vaccinate/patient-estimated-due-date" %}
+{% else %}
+  {% set nextPage = "/vaccinate/injection-site" %}
+{% endif %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/patient" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Check {{ data.patientName }}’s details and vaccination history</h1>
+
+      {{ summaryList({
+        classes: 'xnhsuk-summary-list--no-border',
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              text: data.patientName
+            }
+          },
+          {
+            key: {
+              text: "Date of birth"
+            },
+            value: {
+              text: ((data.dateOfBirth | isoDateFromDateInput | govukDate) if data.dateOfBirth else "")
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: "73 Roman Rd<br>Leeds<br> LS2 5ZN"
+            }
+          },
+          {
+            key: {
+              text: "NHS number"
+            },
+            value: {
+              text: data.nhsNumber
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="nhsuk-heading-m">Vaccination history</h2>
+
+      <p>Only COVID-19, Flu, RSV and Pertussis vaccination records are currently included. Vaccinations done privately or outside of England may be missing.</p>
+    </div>
+  </div>
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+        {{ table({
+          panel: false,
+          caption: "",
+          firstCellIsHeader: false,
+          head: [
+            {
+              text: "Date"
+            },
+            {
+              text: "Vaccine"
+            },
+            {
+              text: "Product"
+            }
+          ],
+          rows: [
+            [
+              {
+                text: "11 November 2024"
+              },
+              {
+                text: "RSV"
+              },
+              {
+                text: "Abrysvo"
+              }
+            ],
+            [
+              {
+                text: "2 March 2024"
+              },
+              {
+                text: "Flu"
+              },
+              {
+                text: "Flucelvax Tetra - QIVc"
+              }
+            ],
+            [
+              {
+                text: "4 December 2023"
+              },
+              {
+                text: "COVID-19"
+              },
+              {
+                text: "Comirnaty 30 Omicron XBB.1.5"
+              }
+            ],
+            [
+              {
+                text: "14 August 2022"
+              },
+              {
+                text: "COVID-19"
+              },
+              {
+                text: "Comirnaty 30 Omicron XBB.1.5"
+              }
+            ],
+            [
+              {
+                text: "11 March 2022"
+              },
+              {
+                text: "COVID-19"
+              },
+              {
+                text: "Comirnaty 30 Omicron XBB.1.5"
+              }
+            ]
+          ]
+        }) }}
+
+
+      <form action="{{ nextPage }}" method="post" novalidate>
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
