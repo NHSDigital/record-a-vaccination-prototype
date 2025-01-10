@@ -180,6 +180,23 @@
           },
           {
             key: {
+              text: "Location"
+            },
+            value: {
+              html: data.locationType
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/location",
+                  text: "Change",
+                  visuallyHiddenText: "contact information"
+                }
+              ]
+            }
+          } if (data.vaccine === "Flu" or data.vaccine == "COVID-19"),
+          {
+            key: {
               text: "Eligibility"
             },
             value: {
