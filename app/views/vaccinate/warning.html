@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/patient-history" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+<H1>
+Are you sure you want to give the vaccine?
+
+</H1>
+
+    <p>
+        Jodie Brown had a COVID-19 vaccine less than 3 months ago, on 1 December 2024. 
+    <p>
+    For most people, the minimum recommended gap between COVID-19 vaccine doses is 3 months. See the section ‘Doses and schedules’ in the<a href=> UKHSA guidance on COVID-19 vaccination (opens in new tab).
+        </a>  
+    </p>
+
+
+  
+    </div>
+  </div>
+
+  {{ button({
+    "text": "Continue",
+    "href": "/vaccines/consent"
+  }) }}
+
+{% endblock %}
+
