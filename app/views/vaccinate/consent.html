@@ -14,8 +14,6 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-
-
       <form action="/vaccinate/injection-site" method="post" novalidate>
 
         {% set otherConsentHtml %}
@@ -26,7 +24,7 @@
             },
             id: "consentName",
             name: "consentName",
-            value: data.consentName
+            value: (data.consentName | first)
           }) }}
 
         {% endset %}

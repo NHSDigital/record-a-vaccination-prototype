@@ -10,6 +10,14 @@
   {{ backLink({ href: "/vaccinate/injection-site" }) }}
 {% endblock %}
 
+{% set consentHtml %}
+  {% if data.consent == data.patientName %}
+    Patient
+  {% else %}
+    {{ data.consentName | first }}, {{ data.consent }}
+  {% endif %}
+{% endset %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
@@ -204,6 +212,23 @@
               ]
             }
           } if ((data.vaccine == "Pertussis") or (data.eligibility | arrayOrStringIncludes("Pregnant"))),
+          {
+            key: {
+              text: "Consent given by"
+            },
+            value: {
+              text: consentHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/consent",
+                  text: "Change",
+                  visuallyHiddenText: "consnet"
+                }
+              ]
+            }
+          },
           {
             key: {
               text: "Injection site"
