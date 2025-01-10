@@ -10,6 +10,14 @@
   {{ backLink({ href: "/vaccinate/injection-site" }) }}
 {% endblock %}
 
+{% set consentHtml %}
+  {% if data.consent == data.patientName %}
+    Patient
+  {% else %}
+    {{ data.consentName | first }}, {{ data.consent }}
+  {% endif %}
+{% endset %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
@@ -28,11 +36,6 @@
             },
             actions: {
               items: [
-                {
-                  href: "/vaccinate/patient",
-                  text: "Change",
-                  visuallyHiddenText: "patient"
-                }
               ]
             }
           },
@@ -45,14 +48,21 @@
             },
             actions: {
               items: [
-                {
-                  href: "/vaccinate/no-search-result",
-                  text: "Change",
-                  visuallyHiddenText: "date of birth"
-                }
               ]
             }
           },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: "73 Roman Rd<br>Leeds<br> LS2 5ZN"
+            },
+            actions: {
+              items: [
+              ]
+            }
+          } if data.nhsNumber,
           {
             key: {
               text: "Postcode"
@@ -62,14 +72,9 @@
             },
             actions: {
               items: [
-                {
-                  href: "/vaccinate/no-search-result",
-                  text: "Change",
-                  visuallyHiddenText: "postcode"
-                }
               ]
             }
-          },
+          } if not data.nhsNumber,
           {
             key: {
               text: "NHS number"
@@ -81,41 +86,7 @@
               items: [
               ]
             }
-          } if data.nhsNumber,
-          {
-            key: {
-              text: "Eligibility"
-            },
-            value: {
-              html: ((data.eligibility | join("<br>")) if (data.eligibility | isArray) else data.eligibility)
-            },
-            actions: {
-              items: [
-                {
-                  href: "/vaccinate/eligibility",
-                  text: "Change",
-                  visuallyHiddenText: "eligibility"
-                }
-              ]
-            }
-          } if (data.vaccine != "Pertussis"),
-          {
-            key: {
-              text: "Pregnancy due date"
-            },
-            value: {
-              text: (data.pregnancyDueDate | isoDateFromDateInput | govukDate)
-            },
-            actions: {
-              items: [
-                {
-                  href: "/vaccinate/patient-estimated-due-date",
-                  text: "Change",
-                  visuallyHiddenText: "pregnancy due date"
-                }
-              ]
-            }
-          } if ((data.vaccine == "Pertussis") or (data.eligibility | arrayOrStringIncludes("Pregnant")))
+          } if data.nhsNumber
         ]
       }) }}
 
@@ -203,6 +174,57 @@
                   href: "/vaccinate/vaccinator",
                   text: "Change",
                   visuallyHiddenText: "contact information"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Eligibility"
+            },
+            value: {
+              html: ((data.eligibility | join("<br>")) if (data.eligibility | isArray) else data.eligibility)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/eligibility",
+                  text: "Change",
+                  visuallyHiddenText: "eligibility"
+                }
+              ]
+            }
+          } if (data.vaccine != "Pertussis"),
+          {
+            key: {
+              text: "Pregnancy due date"
+            },
+            value: {
+              text: (data.pregnancyDueDate | isoDateFromDateInput | govukDate)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/patient-estimated-due-date",
+                  text: "Change",
+                  visuallyHiddenText: "pregnancy due date"
+                }
+              ]
+            }
+          } if ((data.vaccine == "Pertussis") or (data.eligibility | arrayOrStringIncludes("Pregnant"))),
+          {
+            key: {
+              text: "Consent given by"
+            },
+            value: {
+              text: consentHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/consent",
+                  text: "Change",
+                  visuallyHiddenText: "consnet"
                 }
               ]
             }

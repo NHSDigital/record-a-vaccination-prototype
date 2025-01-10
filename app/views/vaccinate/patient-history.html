@@ -60,9 +60,28 @@
         ]
       }) }}
 
+      {% if data.vaccine == "COVID-19" %}
+
+        {% set screeningConsiderations %}
+          <ul>
+            <li>Does the patient have a history of anaphylaxis or significant allergic reactions to any vaccines or their ingredients?</li>
+            <li>Has the patient had a serious adverse reaction after the COVID-19 vaccine?</li>
+            <li>Is the patient pregnant or could they be?</li>
+          </ul>
+        {% endset %}
+
+        {{ details({
+          text: "Screening considerations",
+          HTML: screeningConsiderations
+        }) }}
+
+      {% endif %}
+
       <h2 class="nhsuk-heading-m">Vaccination history</h2>
 
-      <p>Only COVID-19, Flu, RSV and Pertussis vaccination records are currently included. Vaccinations done privately or outside of England may be missing.</p>
+      <p>This is not a complete vaccination history. It only includes records of COVID-19, flu, pertussis and RSV vaccinations given on the NHS.</p>
+
+      <p>Note that if an RSV or pertussis vaccination was given at a GP practice, the record will not appear here.</p>
     </div>
   </div>
   <div class="nhsuk-grid-row">
