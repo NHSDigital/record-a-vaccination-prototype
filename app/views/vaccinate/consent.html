@@ -7,7 +7,12 @@
 {% set currentSection = "consent" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/patient-history" }) }}
+  {% if data.vaccine === "COVID-19" %}
+    {% set backLinkHref = "/vaccinate/warning" %}
+  {% else %}
+    {% set backLinkHref = "/vaccinate/patient-history" %}
+  {% endif %}
+  {{ backLink({ href: backLinkHref }) }}
 {% endblock %}
 
 {% block content %}

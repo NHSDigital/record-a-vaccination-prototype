@@ -6,7 +6,9 @@
 
 {% set currentSection = "vaccinate" %}
 
-{% if (data.eligibility | arrayOrStringIncludes("Pregnant")) or (data.vaccine == "Pertussis") %}
+{% if (data.vaccine === "COVID-19") %}
+  {% set nextPage = "/vaccinate/warning" %}
+{% elseif (data.eligibility | arrayOrStringIncludes("Pregnant")) or (data.vaccine == "Pertussis") %}
   {% set nextPage = "/vaccinate/patient-estimated-due-date" %}
 {% else %}
   {% set nextPage = "/vaccinate/consent" %}
