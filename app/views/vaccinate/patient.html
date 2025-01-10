@@ -7,7 +7,12 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/eligibility" }) }}
+  {% if (data.vaccine === "Flu" or data.vaccine == "COVID-19") %}
+    {% set backLinkHref = "/vaccinate/location" %}
+  {% else %}
+    {% set backLinkHref = "/vaccinate/eligibility" %}
+  {% endif %}
+  {{ backLink({ href: backLinkHref }) }}
 {% endblock %}
 
 {% block content %}
@@ -105,7 +110,41 @@
                     }
                   ]
                 }
-              }
+              },
+              {
+                key: {
+                  text: "Location"
+                },
+                value: {
+                  html: data.locationType
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/vaccinate/location",
+                      text: "Change",
+                      visuallyHiddenText: "contact information"
+                    }
+                  ]
+                }
+              } if (data.vaccine === "Flu" or data.vaccine == "COVID-19"),
+              {
+                key: {
+                  text: "Eligibility"
+                },
+                value: {
+                  html: ((data.eligibility | join("<br>")) if (data.eligibility | isArray) else data.eligibility)
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/vaccinate/eligibility",
+                      text: "Change",
+                      visuallyHiddenText: "eligibility"
+                    }
+                  ]
+                }
+              } if (data.vaccine != "Pertussis")
             ]
           }) }}
 

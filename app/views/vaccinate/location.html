@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/batch" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/vaccinate/patient" method="post" novalidate>
+
+        {{ radios({
+          idPrefix: "locationType",
+          name: "locationType",
+          fieldset: {
+            legend: {
+              text: ("Where is the vaccination taking place?" if data.vaccinationToday == 'yes' else "Where did the vaccination take place?"),
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          hint: {
+            text: "This is needed for payment and reporting."
+          },
+          items: [
+            {
+              text: "Hospital hub for staff and patients",
+              value: "Hospital hub for staff and patients",
+              checked: (data.locationType === "Hospital Hub for staff and patients")
+            },
+            {
+              text: "Vaccination centre open to the public",
+              value: "Vaccination centre open to the public",
+              checked: (data.locationType === "Vaccination centre open to the public")
+            },
+            {
+              text: "Community pharmacy",
+              value: "Community pharmacy",
+              checked: (data.locationType === "Community pharmacy")
+            },
+            {
+              text: "Care home",
+              value: "Care home",
+              checked: (data.locationType === "Care home")
+            },
+            {
+              text: "Housebound patient’s home",
+              value: "Housebound patient’s home",
+              checked: (data.locationType === "Housebound patient’s home")
+            },
+            {
+              text: "Off-site outreach event",
+              value: "Off-site outreach event",
+              checked: (data.locationType === "Off-site outreach event")
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
