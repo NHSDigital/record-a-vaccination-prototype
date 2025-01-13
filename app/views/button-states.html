@@ -69,7 +69,7 @@
           button.disabled = true
           button.classList.add('app-button--loading')
           button.textContent = 'Saving'
-          button.setAttribute('aria-live', 'assertive')
+          button.setAttribute('aria-live', 'polite')
           button.setAttribute('aria-label', 'Saving')
 
           let errorMessageElement = button.parentElement.querySelector('.app-body--error')
@@ -86,7 +86,7 @@
             this.classList.remove('app-button--loading')
             this.removeAttribute('aria-live')
             this.removeAttribute('aria-label')
-            this.insertAdjacentHTML("beforebegin", '<p class="app-body--error" aria-live="polite">' + errorMessage + '</p>')
+            this.insertAdjacentHTML("beforebegin", '<p class="app-body--error" aria-live="assertive">' + errorMessage + '</p>')
           }.bind(event.target), randomTimeOut)
 
         }
