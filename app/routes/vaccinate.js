@@ -1,3 +1,33 @@
+// Returns a date object from a valid year, month, and day.
+// Note: inputs can be strings, and month is based on 1 = Jan
+// rather than 0 = Jan
+// Time is set to midday
+function dateFromYearMonthDay(year, month, day) {
+  const yearInt = parseInt(year)
+  const monthInt = parseInt(month)
+  const dayInt = parseInt(day)
+
+  if (yearInt > 0 && monthInt > 0 && dayInt > 0) {
+    return new Date(yearInt, (monthInt - 1), dayInt, 12)
+  } else {
+    return null
+  }
+}
+
+// If date2 is after date1 return positive number of days,
+// if it’s before then negative, if it’s the same then 0.
+function daysBetweenDates(date1, date2) {
+  if (!date1 || !date2) {
+    return null
+  }
+  const millisecondsInADay = (24 * 3600 * 1000)
+  const differenceInMilliseconds = date2.getTime() - date1.getTime()
+  const differenceInDays = differenceInMilliseconds / millisecondsInADay
+
+  return Math.floor(differenceInDays)
+}
+
+
 module.exports = router => {
 
   router.post('/vaccinate/answer-patient-nhs-number-known', (req, res) => {
@@ -16,7 +46,6 @@ module.exports = router => {
     } else {
       res.redirect('/vaccinate/patient?showError=yes')
     }
-
   })
 
 
@@ -77,6 +106,126 @@ module.exports = router => {
         postcodeError
       })
     }
+
+  })
+
+  router.get('/vaccinate/patient-estimated-due-date', (req, res) => {
+
+    const showError = req.query.showError
+    const data = req.session.data
+    const pregnancyDueDate = dateFromYearMonthDay(data.pregnancyDueDate?.year, data.pregnancyDueDate?.month, data.pregnancyDueDate?.day);
+
+    let dateErrorMessage = false
+
+    if (showError === 'yes') {
+
+      if (!pregnancyDueDate) {
+        dateErrorMessage = "Enter estimated due date"
+      } else if (data.vaccinationToday === "yes") {
+
+        const vaccinationDate = new Date()
+
+        // Estimated due date is based on 40 weeks (280 days) since last period
+        const numberOfDaysPregnant = 280 - daysBetweenDates(vaccinationDate, pregnancyDueDate)
+
+        if (numberOfDaysPregnant < 0) {
+          dateErrorMessage = "Estimated due date cannot be more than 40 weeks after vaccination date"
+        } else if (numberOfDaysPregnant < 28) {
+          dateErrorMessage = "Patient must be at least 28 days pregnant"
+        } else if (numberOfDaysPregnant > 308) {
+          dateErrorMessage = "Patient cannot be more than 44 weeks pregnant"
+        }
+
+      }
+    }
+
+    res.render('vaccinate/patient-estimated-due-date', {
+      dateErrorMessage
+    })
+  })
+
+
+  // Routing page after setting pregnancy estimated due date
+  router.post('/vaccinate/save-estimated-due-date', (req, res) => {
+
+    const data = req.session.data
+    const pregnancyDueDate = dateFromYearMonthDay(data.pregnancyDueDate?.year, data.pregnancyDueDate?.month, data.pregnancyDueDate?.day)
+
+    // Re-render with error if date is not set
+    if (!pregnancyDueDate) {
+      return res.redirect('/vaccinate/patient-estimated-due-date?showError=yes')
+    }
+
+    // Skip to consent page if the vaccination happened in the past
+    // as it’s then too late for any warnings
+    if (data.vaccinationToday != "yes") {
+      return res.redirect('/vaccinate/consent')
+    }
+
+    // Vaccination date is today
+    const vaccinationDate = new Date()
+
+    // Estimated due date is based on 40 weeks (280 days) since last period
+    const numberOfDaysPregnant = 280 - daysBetweenDates(vaccinationDate, pregnancyDueDate)
+
+    // Being less than 4 weeks or more than 44 weeks (308 days) pregnant
+    // results in an error
+    if (numberOfDaysPregnant < 28 || numberOfDaysPregnant > 308) {
+      return res.redirect('/vaccinate/patient-estimated-due-date?showError=yes')
+    }
+
+    // RSV is recommended from 28+ weeks (196 days)
+    if (data.vaccine === "RSV" && numberOfDaysPregnant < 196) {
+      res.redirect('/vaccinate/patient-estimated-due-date-rsv-warning')
+
+    // Pertussis is recommended between 16 weeks (112 days) and 32 weeks
+    } else if (data.vaccine === "Pertussis" && numberOfDaysPregnant < 112) {
+      res.redirect('/vaccinate/patient-estimated-due-date-pertussis-warning')
+    } else {
+      res.redirect('/vaccinate/consent')
+    }
+
+  });
+
+  router.get('/vaccinate/patient-estimated-due-date-rsv-warning', (req, res) => {
+
+    const data = req.session.data
+    const pregnancyDueDate = dateFromYearMonthDay(data.pregnancyDueDate?.year, data.pregnancyDueDate?.month, data.pregnancyDueDate?.day)
+
+    // Vaccination date is today
+    const vaccinationDate = new Date()
+
+    // Estimated due date is based on 40 weeks (280 days) since last period
+    const numberOfDaysPregnant = 280 - daysBetweenDates(vaccinationDate, pregnancyDueDate)
+
+    const fullWeeksPregnant = Math.floor(numberOfDaysPregnant / 7)
+    const remainderDaysPregnant = (numberOfDaysPregnant % 7)
+
+    res.render('vaccinate/patient-estimated-due-date-rsv-warning', {
+      fullWeeksPregnant,
+      remainderDaysPregnant
+    })
+
+  })
+
+  router.get('/vaccinate/patient-estimated-due-date-pertussis-warning', (req, res) => {
+
+    const data = req.session.data
+    const pregnancyDueDate = dateFromYearMonthDay(data.pregnancyDueDate?.year, data.pregnancyDueDate?.month, data.pregnancyDueDate?.day)
+
+    // Vaccination date is today
+    const vaccinationDate = new Date()
+
+    // Estimated due date is based on 40 weeks (280 days) since last period
+    const numberOfDaysPregnant = 280 - daysBetweenDates(vaccinationDate, pregnancyDueDate)
+
+    const fullWeeksPregnant = Math.floor(numberOfDaysPregnant / 7)
+    const remainderDaysPregnant = (numberOfDaysPregnant % 7)
+
+    res.render('vaccinate/patient-estimated-due-date-pertussis-warning', {
+      fullWeeksPregnant,
+      remainderDaysPregnant
+    })
 
   })
 
