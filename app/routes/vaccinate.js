@@ -109,4 +109,26 @@ module.exports = router => {
 
   })
 
+
+
+  router.post('/vaccinate/answer-patient-nhs-number-known', (req, res) => {
+
+    const nhsNumberKnown = req.session.data.nhsNumberKnown;
+
+    if (nhsNumberKnown === "yes") {
+
+      req.session.data.patientName = "Jodie Brown"
+      req.session.data.dateOfBirth = {day: "4", month: "7", year: "1964"}
+      req.session.data.postcode = "GD3 I83"
+
+      res.redirect('/vaccinate/patient-history')
+    } else if (nhsNumberKnown === "no") {
+      res.redirect('/vaccinate/patient-search')
+    } else {
+      res.redirect('/vaccinate/patient?showError=yes')
+    }
+
+  })
+
+
 }
