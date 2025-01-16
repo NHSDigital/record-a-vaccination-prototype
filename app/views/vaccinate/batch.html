@@ -14,15 +14,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if data.vaccine == "Pertussis" %}
-        {% set nextPage = "/vaccinate/patient" %}
-      {% elseif data.vaccine == "RSV" %}
-        {% set nextPage = "/vaccinate/eligibility" %}
-      {% else %}
-        {% set nextPage = "/vaccinate/location" %}
-      {% endif %}
-
-      <form action="{{ nextPage }}" method="post" novalidate>
+      <form action="/vaccinate/answer-batch" method="post" novalidate>
 
           {{ radios({
             "idPrefix": "vaccineBatch",
@@ -72,7 +64,8 @@
               },
               {
                 "value": "add-new",
-                "text": "Add a batch"
+                "text": "Add a batch",
+                checked: (data.vaccineBatch == "add-new")
               }
             ]
           }) }}

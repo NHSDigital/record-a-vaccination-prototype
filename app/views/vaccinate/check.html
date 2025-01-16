@@ -18,6 +18,17 @@
   {% endif %}
 {% endset %}
 
+{% set batchHtml %}
+  {% if data.vaccineBatch == "add-new" %}
+    {{ data.newBatchNumber }}
+    <br>Expires {{ (data.newBatchExpiryDate | isoDateFromDateInput | govukDate)  }}
+  {% else %}
+    {{ data.vaccineBatch }}
+    <br>Expires 4 January 2025
+  {% endif %}
+
+{% endset %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
@@ -149,12 +160,12 @@
               text: "Batch"
             },
             value: {
-              html: data.vaccineBatch + "<br>Expires 4 January 2025"
+              html: batchHtml
             },
             actions: {
               items: [
                 {
-                  href: "/vaccinate/batch",
+                  href: ("/vaccinate/add-batch" if data.vaccineBatch == "add-new" else "/vaccinate/batch"),
                   text: "Change",
                   visuallyHiddenText: "vaccine batch"
                 }
