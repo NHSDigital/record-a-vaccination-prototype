@@ -173,11 +173,11 @@ module.exports = router => {
     }
 
     // RSV is recommended from 28+ weeks (196 days)
-    if (data.vaccine === "RSV" && numberOfDaysPregnant < 196) {
+    if (data.vaccinationToday == 'yes' && data.vaccine === "RSV" && numberOfDaysPregnant < 196) {
       res.redirect('/vaccinate/patient-estimated-due-date-rsv-warning')
 
     // Pertussis is recommended between 16 weeks (112 days) and 32 weeks
-    } else if (data.vaccine === "Pertussis" && numberOfDaysPregnant < 112) {
+    } else if (data.vaccinationToday == 'yes' && data.vaccine === "Pertussis" && numberOfDaysPregnant < 112) {
       res.redirect('/vaccinate/patient-estimated-due-date-pertussis-warning')
     } else {
       res.redirect('/vaccinate/consent')
