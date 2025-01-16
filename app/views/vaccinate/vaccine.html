@@ -14,7 +14,32 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/vaccinate/batch" method="post" novalidate>
+      {% if vaccineError %}
+        {% set error = {text: vaccineError, href: "#vaccine-1"} %}
+      {% elseif vaccineProductError %}
+        {% if data.vaccine == "RSV" %}
+          {% set errorHref = "#vaccineProductRsv-1" %}
+        {% elseif data.vaccine == "COVID-19" %}
+          {% set errorHref = "#vaccineProductCovid-1" %}
+        {% elseif data.vaccine == "Pertussis" %}
+          {% set errorHref = "#vaccineProductPertussis-1" %}
+        {% elseif data.vaccine == "Flu" %}
+          {% set errorHref = "#vaccineProductFlu-1" %}
+        {% endif %}
+
+        {% set error = {text: vaccineProductError, href: errorHref} %}
+      {% endif %}
+
+      {% if error %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            error
+          ]
+        }) }}
+      {% endif %}
+
+      <form action="/vaccinate/answer-vaccine" method="post" novalidate>
 
       {% set covid19Product %}
         {{ radios({
@@ -25,6 +50,9 @@
               "text": "Vaccine product"
             }
           },
+          errorMessage: {
+            text: vaccineProductError
+          } if vaccineProductError and data.vaccine == "COVID-19",
           "items": [
             {
               "value": "Comirnaty 30 JN.1",
@@ -59,6 +87,9 @@
               "text": "Vaccine product"
             }
           },
+          errorMessage: {
+            text: vaccineProductError
+          } if vaccineProductError and data.vaccine == "Flu",
           "items": [
             {
               "value": "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)",
@@ -69,7 +100,7 @@
               "value": "Cell-based Quadrivalent Influenza Vaccine (QIVc)",
               "text": "Cell-based Quadrivalent Influenza Vaccine (QIVc)",
               checked: (data.vaccineProduct == "Cell-based Quadrivalent Influenza Vaccine (QIVc)")
-            },       
+            },
             {
               "value": "Fluenz (LAIV)",
               "text": "Fluenz (LAIV)",
@@ -92,7 +123,7 @@
             }
           ]
         }) }}
-      
+
       {% endset %}
 
       {% set pertussisProduct %}
@@ -104,6 +135,9 @@
               "text": "Vaccine product"
             }
           },
+          errorMessage: {
+            text: vaccineProductError
+          } if vaccineProductError and data.vaccine == "Pertussis",
           "items": [
             {
               "value": "Adacel vaccine supsension",
@@ -133,6 +167,9 @@
               "text": "Vaccine product"
             }
           },
+          errorMessage: {
+            text: vaccineProductError
+          } if vaccineProductError and data.vaccine == "RSV",
           "items": [
             {
               "value": "Abrysvo",
@@ -140,7 +177,7 @@
               checked: (data.vaccineProduct == "Abrysvo")
             }
           ]
-        }) }} 
+        }) }}
     {% endset %}
 
       {% if data.repeatPatient == 'yes' and data.patientName %}
@@ -160,6 +197,9 @@
             "isPageHeading": true
           }
         },
+        errorMessage: {
+          text: vaccineError
+        } if vaccineError,
         "items": [
           {
             "value": "COVID-19",
