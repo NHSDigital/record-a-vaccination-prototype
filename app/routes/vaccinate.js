@@ -83,14 +83,25 @@ module.exports = router => {
   // Routing page after DONE
   router.post('/vaccinate/what-next', (req, res) => {
 
-    const answer = req.session.data.nextStep;
+    const data = req.session.data
+    const answer = data.nextStep
 
-    req.session.data.injectionSite = ""
+    // Reset these value regardless of next step
+    data.injectionSite = ""
+    data.consent = ""
+    data.consentName = ""
 
     if (answer === 'same-vaccination-another-patient') {
 
       req.session.data.patientName = ""
       req.session.data.nhsNumber = ""
+
+      // newly added batch becomes the default
+      if (data.vaccineBatch == 'add-new') {
+        data.vaccineBatch = data.newBatchNumber
+        data.vaccineExpiryDate = data.newBatchExpiryDate
+        data.newBatchNumber = ""
+      }
 
       res.redirect('/vaccinate/patient?repeatVaccination=yes&repeatPatient=no')
 
@@ -109,25 +120,24 @@ module.exports = router => {
 
   })
 
+  router.post('/vaccinate/answer-batch', (req, res) => {
 
+    const data = req.session.data
+    const vaccineBatch = data.vaccineBatch
+    const vaccine = data.vaccine
 
-  router.post('/vaccinate/answer-patient-nhs-number-known', (req, res) => {
+    let redirectPath
 
-    const nhsNumberKnown = req.session.data.nhsNumberKnown;
-
-    if (nhsNumberKnown === "yes") {
-
-      req.session.data.patientName = "Jodie Brown"
-      req.session.data.dateOfBirth = {day: "4", month: "7", year: "1964"}
-      req.session.data.postcode = "GD3 I83"
-
-      res.redirect('/vaccinate/patient-history')
-    } else if (nhsNumberKnown === "no") {
-      res.redirect('/vaccinate/patient-search')
+    if (vaccineBatch === "add-new") {
+      redirectPath = "/vaccinate/add-batch"
+    } else if (vaccine === "Pertussis") {
+      redirectPath = "/vaccinate/patient"
+    } else if (vaccine === "RSV") {
+      redirectPath = "/vaccinate/eligibility"
     } else {
-      res.redirect('/vaccinate/patient?showError=yes')
+      redirectPath = "/vaccinate/location"
     }
-
+    res.redirect(redirectPath)
   })
 
 
