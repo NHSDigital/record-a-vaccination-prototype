@@ -10,7 +10,19 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/vaccinate/delivery-team" method="post" novalidate>
+      {% if vaccinationTodayError %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: vaccinationTodayError,
+              href: "#vaccinationToday-1"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <form action="/vaccinate/answer-date" method="post" novalidate>
         {% set previousDateHtml %}
 
           {{ dateInput({
@@ -52,6 +64,9 @@
               isPageHeading: "true"
             }
           },
+          errorMessage: {
+            text: vaccinationTodayError
+          } if vaccinationTodayError,
           items: [
             {
               value: "yes",

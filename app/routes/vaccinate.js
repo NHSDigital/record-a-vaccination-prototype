@@ -1,5 +1,81 @@
 module.exports = router => {
 
+  router.get('/vaccinate', (req, res) => {
+    let vaccinationTodayError
+
+    if (req.query.showErrors === 'yes') {
+      if (!req.session.data.vaccinationToday) {
+        vaccinationTodayError = 'Select if vaccination was today'
+      }
+    }
+
+    res.render('vaccinate/index', {
+      vaccinationTodayError
+    })
+  })
+
+  router.post('/vaccinate/answer-date', (req, res) => {
+    const data = req.session.data
+
+    if (!data.vaccinationToday) {
+      return res.redirect('/vaccinate/?showErrors=yes')
+    }
+    res.redirect('/vaccinate/delivery-team')
+  })
+
+  router.get('/vaccinate/vaccinator', (req, res) => {
+    let vaccinatorError
+
+    if (req.query.showErrors === 'yes') {
+      if (!req.session.data.vaccinator) {
+        vaccinatorError = 'Select the vaccinator'
+      }
+    }
+
+    res.render('vaccinate/vaccinator', {
+      vaccinatorError
+    })
+  })
+
+  router.post('/vaccinate/answer-vaccinator', (req, res) => {
+    const data = req.session.data
+
+    if (!data.vaccinator) {
+      return res.redirect('/vaccinate/vaccinator?showErrors=yes')
+    }
+    res.redirect('/vaccinate/vaccine')
+  })
+
+  router.get('/vaccinate/vaccine', (req, res) => {
+    let vaccineError, vaccineProductError
+    const data = req.session.data
+
+    if (req.query.showErrors === 'yes') {
+      if (!data.vaccine) {
+        vaccineError = 'Select the vaccine'
+      }
+
+      if (data.vaccine && !req.session.data.vaccineProduct) {
+        vaccineProductError = 'Select the vaccine product'
+      }
+    }
+
+    res.render('vaccinate/vaccine', {
+      vaccineError,
+      vaccineProductError
+    })
+  })
+
+  router.post('/vaccinate/answer-vaccine', (req, res) => {
+    const data = req.session.data
+
+    if (!data.vaccine || !data.vaccineProduct) {
+      return res.redirect('/vaccinate/vaccine?showErrors=yes')
+    }
+    res.redirect('/vaccinate/batch')
+  })
+
+
   router.post('/vaccinate/answer-patient-nhs-number-known', (req, res) => {
 
     const nhsNumberKnown = req.session.data.nhsNumberKnown;

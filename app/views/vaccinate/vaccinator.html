@@ -14,9 +14,19 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+      {% if vaccinatorError %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: vaccinatorError,
+              href: "#vaccinator-1"
+            }
+          ]
+        }) }}
+      {% endif %}
 
-
-      <form action="/vaccinate/vaccine" method="post" novalidate>
+      <form action="/vaccinate/answer-vaccinator" method="post" novalidate>
 
         {% set otherVaccinatorHtml %}
           <div class="nhsuk-form-group">
@@ -39,7 +49,6 @@
           </div>
         {% endset %}
 
-
         {{ radios({
           idPrefix: "vaccinator",
           name: "vaccinator",
@@ -50,6 +59,9 @@
               isPageHeading: "true"
             }
           },
+          errorMessage: {
+            text: vaccinatorError
+          } if vaccinatorError,
           items: [
             {
               value: "Jane Smith",
