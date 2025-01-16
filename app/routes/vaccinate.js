@@ -128,10 +128,8 @@ module.exports = router => {
         // Estimated due date is based on 40 weeks (280 days) since last period
         const numberOfDaysPregnant = 280 - daysBetweenDates(vaccinationDate, pregnancyDueDate)
 
-        if (numberOfDaysPregnant < 0) {
-          dateErrorMessage = "Estimated due date cannot be more than 40 weeks after vaccination date"
-        } else if (numberOfDaysPregnant < 28) {
-          dateErrorMessage = "Patient must be at least 28 days pregnant"
+        if (numberOfDaysPregnant < 21) {
+          dateErrorMessage = "Estimated due date is too far in the future. Patient must be at least 21 days pregnant."
         } else if (numberOfDaysPregnant > 308) {
           dateErrorMessage = "Patient cannot be more than 44 weeks pregnant"
         }
@@ -168,9 +166,9 @@ module.exports = router => {
     // Estimated due date is based on 40 weeks (280 days) since last period
     const numberOfDaysPregnant = 280 - daysBetweenDates(vaccinationDate, pregnancyDueDate)
 
-    // Being less than 4 weeks or more than 44 weeks (308 days) pregnant
+    // Being less than 3 weeks or more than 44 weeks (308 days) pregnant
     // results in an error
-    if (numberOfDaysPregnant < 28 || numberOfDaysPregnant > 308) {
+    if (numberOfDaysPregnant < 21 || numberOfDaysPregnant > 308) {
       return res.redirect('/vaccinate/patient-estimated-due-date?showError=yes')
     }
 
