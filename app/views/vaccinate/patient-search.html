@@ -23,7 +23,7 @@
 
       <h1 class="nhsuk-heading-l">Search for the patient</h1>
 
-      <p class="nhsuk-body">Make sure the details you enter match those registered with the patient’s GP.</p>
+      <p class="nhsuk-body">Make sure the details you enter are the same as those registered with the patient’s GP. Postcode is optional but including it will increase the chances of finding a match.</p>
 
       <form action="/vaccinate/patient-search" method="post">
         {{ input({
@@ -88,7 +88,7 @@
 
         {{ input({
           label: {
-            text: "Postcode"
+            text: "Postcode (optional)"
           },
           id: "postcode",
           name: "postcode",
