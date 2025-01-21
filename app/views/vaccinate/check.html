@@ -262,7 +262,7 @@
               text: "Injection site"
             },
             value: {
-              html: data.injectionSite
+              html: (data.otherInjectionSite if data.injectionSite == "other" else data.injectionSite)
             },
             actions: {
               items: [

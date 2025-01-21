@@ -311,6 +311,7 @@ module.exports = router => {
 
     // Reset these value regardless of next step
     data.injectionSite = ""
+    data.otherInjectionSite = ""
     data.consent = ""
     data.consentName = ""
 
