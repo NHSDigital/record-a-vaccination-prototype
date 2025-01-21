@@ -16,6 +16,8 @@
 
       {% if data.patientName and data.repeatPatient == "yes" %}
         {% set nextAction = "/vaccinate/injection-site" %}
+      {% elseif data.vaccine == "COVID-19" or data.vaccine == "Flu" %}
+        {% set nextAction = "/vaccinate/location" %}
       {% else %}
         {% set nextAction = "/vaccinate/patient" %}
       {% endif %}

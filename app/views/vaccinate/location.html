@@ -7,7 +7,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/batch" }) }}
+  {{ backLink({ href: "/vaccinate/eligibility" }) }}
 {% endblock %}
 
 {% block content %}
@@ -33,7 +33,7 @@
             {
               text: "Hospital hub for staff and patients",
               value: "Hospital hub for staff and patients",
-              checked: (data.locationType === "Hospital Hub for staff and patients")
+              checked: (data.locationType === "Hospital hub for staff and patients")
             },
             {
               text: "Vaccination centre open to the public",
