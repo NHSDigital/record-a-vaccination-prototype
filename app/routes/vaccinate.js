@@ -355,10 +355,9 @@ module.exports = router => {
       redirectPath = "/vaccinate/add-batch"
     } else if (vaccine === "Pertussis") {
       redirectPath = "/vaccinate/patient"
-    } else if (vaccine === "RSV") {
-      redirectPath = "/vaccinate/eligibility"
     } else {
-      redirectPath = "/vaccinate/location"
+      // RSV, Covid or Flu
+      redirectPath = "/vaccinate/eligibility"
     }
     res.redirect(redirectPath)
   })

@@ -21,10 +21,8 @@
 
       {% if data.vaccine == "Pertussis" %}
         {% set nextPage = "/vaccinate/patient" %}
-      {% elseif data.vaccine == "RSV" %}
-        {% set nextPage = "/vaccinate/eligibility" %}
       {% else %}
-        {% set nextPage = "/vaccinate/location" %}
+        {% set nextPage = "/vaccinate/eligibility" %}
       {% endif %}
 
       <form action="{{ nextPage }}" method="post" novalidate>
