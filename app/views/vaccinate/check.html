@@ -177,7 +177,7 @@
               text: "Vaccinator"
             },
             value: {
-              html: data.vaccinator
+              html: (data.otherVaccinator if data.vaccinator == "Someone else" else data.vaccinator)
             },
             actions: {
               items: [

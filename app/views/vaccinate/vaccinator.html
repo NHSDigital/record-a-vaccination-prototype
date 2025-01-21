@@ -28,23 +28,31 @@
 
       <form action="/vaccinate/answer-vaccinator" method="post" novalidate>
 
+        {% set otherVaccinators = [
+          {name: "James Bloggs", email: "james.bloggs@nhs.net" },
+          {name: "James Smith", email: "james.smith@nhs.net" },
+          {name: "Joan Jacobs", email: "joan.jacobs@nhs.net" }
+        ] %}
+
         {% set otherVaccinatorHtml %}
           <div class="nhsuk-form-group">
             <h1 class="nhsuk-label-wrapper">
-              <label class="nhsuk-label nhsuk-label--s nhsuk-u-margin-bottom-1" for="organisationCode">
+              <label class="nhsuk-label nhsuk-label--s nhsuk-u-margin-bottom-1" for="otherVaccinator">
                 Vaccinator
               </label>
             </h1>
             <div class="nhsuk-hint" id="organisationName-hint">
               Search by name
             </div>
-            <select class="nhsuk-select" id="siteCode" name="siteCode"
-              data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
-              <option selected value=""></option>
 
-                <option value="James Bloggs">James Bloggs (james.bloggs@nhs.net)</option>
-                <option value="James Smith">James Smith (james.smith@nhs.net)</option>
-                <option value="Joan Jacobs">Joan Jacobs (joan.jacobs@nhs.net)</option>
+            <select class="nhsuk-select" id="otherVaccinator" name="otherVaccinator"
+              data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+                <option {{ "selected" if data.otherVaccinator == "" }} value=""></option>
+
+                {% for otherVaccinator in otherVaccinators %}
+                  <option {{ "selected" if data.otherVaccinator == otherVaccinator.name }}
+                  value="{{ otherVaccinator.name }}">{{ otherVaccinator.name }} ({{ otherVaccinator.email}})</option>
+                {% endfor %}
             </select>
           </div>
         {% endset %}
@@ -77,7 +85,7 @@
               divider: "or"
             },
             {
-              value: "no",
+              value: "Someone else",
               text: "Someone else",
               checked: (data.vaccinator === "Someone else"),
               conditional: {
