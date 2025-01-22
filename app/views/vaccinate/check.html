@@ -239,7 +239,7 @@
                 }
               ]
             }
-          } if ((data.vaccine == "Pertussis") or (data.eligibility | arrayOrStringIncludes("Pregnant"))),
+          } if ((data.vaccine == "Pertussis") or ((data.eligibility | arrayOrStringIncludes("Pregnant"))) and (data.vaccine == "RSV")),
           {
             key: {
               text: "Consent given by"
