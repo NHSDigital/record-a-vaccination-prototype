@@ -303,6 +303,31 @@ module.exports = router => {
 
   })
 
+  router.post('/vaccinate/answer-eligibility', (req, res) => {
+    const data = req.session.data
+
+    let nextPage;
+
+    if (data.patientName && data.patientName != "" && data.repeatPatient === "yes") {
+
+      if (data.vaccine === "Pertussis" || ((data.vaccine == "RSV") && (data.eligibility === "Pregnant"))) {
+        nextPage = "/vaccinate/patient-estimated-due-date"
+      } else {
+        nextPage = "/vaccinate/consent"
+      }
+
+    } else {
+
+      if ((data.vaccine === "COVID-19") || (data.vaccine == "Flu")) {
+        nextPage = "/vaccinate/location"
+      } else {
+        nextPage = "/vaccinate/patient"
+      }
+    }
+
+    res.redirect(nextPage)
+  })
+
   // Routing page after DONE
   router.post('/vaccinate/what-next', (req, res) => {
 
@@ -334,6 +359,7 @@ module.exports = router => {
       req.session.data.vaccine = ""
       req.session.data.vaccineProduct = ""
       req.session.data.vaccineBatch = ""
+      req.session.data.eligibility = ""
 
       res.redirect('/vaccinate/vaccine?repeatPatient=yes&repeatVaccination=no')
 
@@ -354,11 +380,12 @@ module.exports = router => {
 
     if (vaccineBatch === "add-new") {
       redirectPath = "/vaccinate/add-batch"
-    } else if (vaccine === "Pertussis") {
-      redirectPath = "/vaccinate/patient"
-    } else {
-      // RSV, Covid or Flu
+    } else if (["COVID-19", "Flu", "RSV"].includes(data.vaccine)) {
       redirectPath = "/vaccinate/eligibility"
+    } else if (data.repeatPatient === "yes") {
+      redirectPath = "/vaccinate/patient-estimated-due-date"
+    } else {
+      redirectPath = "/vaccinate/patient"
     }
     res.redirect(redirectPath)
   })
