@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  Reports
+Find a record
 {% endblock %}
 
 {% set currentSection = "reports" %}
@@ -10,22 +10,59 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      <h1 class="nhsuk-heading-xl">Records</h1>
+      <h1 class="nhsuk-heading-xl">Find a record</h1>
+      <p class="nhsuk-body-l">Search for a record you want to view, edit or delete.</p>
+  
+      <form action="/reports/patient-search" method="post" novalidate>
 
-      <h2>Find and edit records</h2>
+        {% set nhsNumberHtml %}
 
-      <p>Last 10 records listed with view links?</p>
+          {{ input({
+            id: "nhsNumber",
+            name: "nhsNumber",
+            classes: "nhsuk-input--width-10",
+            inputmode: "numeric",
+        
+            value: data.nhsNumber,
+            hint: {
+              text: "For example, 485 777 3456"
+            }
+          }) }}
+        {% endset %}
 
-      <p>Or find by patient or date?</p>
 
-      <h2>Export records</h2>
+        {{ radios({
+          idPrefix: "nhsNumberKnown",
+          name: "nhsNumberKnown",
+          fieldset: {
+            legend: {
+              html: "How do you want to search for a record?",
+              classes: ("nhsuk-fieldset__legend--m" if data.repeatVaccination == "yes" else "nhsuk-fieldset__legend--l"),
+              isPageHeading: ("false" if data.repeatVaccination == "yes" else "true")
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "NHS number",
+              checked: (data.nhsNumberKnown == 'yes'),
+              conditional: {
+                html: nhsNumberHtml
+              }
+            },
+            {
+              value: "no",
+              text: "Patient details",
+              checked: (data.nhsNumberKnown == 'no')
+            }
+          ]
+        }) }}
 
-      <p class="nhsuk-body-l">Create and download extracts of records</p>
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
 
-      {{ button({
-        "text": "Create extract",
-        "href": "/reports/choose-dates"
-      }) }}
 
 
     </div>
