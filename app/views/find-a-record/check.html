@@ -1,0 +1,246 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Check and confirm
+{% endblock %}
+
+{% set currentSection = "find-a-record" %}
+
+{% set organisation = {name: data.nhsTrusts[data.organisationCode]} %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/find-a-record/patient-history",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Jodie Brown’s RSV vaccination record</h1>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: ("Date" if from == to else "From")
+            },
+            value: {
+              text: "11 November 2024"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/reports/choose-dates-2",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: ("Vaccine" if from == to else "From")
+            },
+            value: {
+              text: "RSV"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/reports/choose-dates-2",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: ("Product" if from == to else "From")
+            },
+            value: {
+              text: "Abrysvo"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/reports/choose-dates-2",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: ("  Batch" if from == to else "From")
+            },
+            value: {
+              text: "A1234567"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/reports/choose-dates-2",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },     
+          {
+            key: {
+              text: ("  Batch" if from == to else "From")
+            },
+            value: {
+              text: "A1234567"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/reports/choose-dates-2",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          }
+
+
+
+
+        ]
+      }) }}
+
+      <br>
+
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: ("Delivery team" if from == to else "From")
+            },
+            value: {
+              text: "Albert House"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/reports/choose-dates-2",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: ("Vaccinator" if from == to else "From")
+            },
+            value: {
+              text: "Jane Smith"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/reports/choose-dates-2",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: ("Eligibility" if from == to else "From")
+            },
+            value: {
+              text: "Pregnant"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/reports/choose-dates-2",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: ("  Pregnancy due date" if from == to else "From")
+            },
+            value: {
+              text: "15 May 2025"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/reports/choose-dates-2",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },     
+          {
+            key: {
+              text: ("Consent given by" if from == to else "From")
+            },
+            value: {
+              text: "Patient"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/reports/choose-dates-2",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: ("Injection site" if from == to else "From")
+            },
+            value: {
+              text: "Left arm"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/reports/choose-dates-2",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          }
+
+
+
+
+        ]
+      }) }}
+
+
+      <form action="/find-a-record/done" method="post">
+        {{ button({
+          "text": "Confirm changes"
+        }) }}
+      </form>
+
+
+      <a href="/find-a-record/delete">Delete this record</a>
+
+    </div>
+  </div>
+{% endblock %}
+
+

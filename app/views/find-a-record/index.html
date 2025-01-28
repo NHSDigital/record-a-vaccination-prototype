@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+Find a record
+{% endblock %}
+
+{% set currentSection = "find-a-record" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      <h1 class="nhsuk-heading-xl">Find a record</h1>
+      <p class="nhsuk-body-l">Search for a record you want to view, edit or delete.</p>
+  
+      <form action="/find-a-record/patient-search" method="post" novalidate>
+
+        {% set nhsNumberHtml %}
+
+          {{ input({
+            id: "nhsNumber",
+            name: "nhsNumber",
+            classes: "nhsuk-input--width-10",
+            inputmode: "numeric",
+        
+            value: data.nhsNumber,
+            hint: {
+              text: "For example, 485 777 3456"
+            }
+          }) }}
+        {% endset %}
+
+
+        {{ radios({
+          idPrefix: "nhsNumberKnown",
+          name: "nhsNumberKnown",
+          fieldset: {
+            legend: {
+              html: "How do you want to search for a record?",
+              classes: ("nhsuk-fieldset__legend--m" if data.repeatVaccination == "yes" else "nhsuk-fieldset__legend--l"),
+              isPageHeading: ("false" if data.repeatVaccination == "yes" else "true")
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "NHS number",
+              checked: (data.nhsNumberKnown == 'yes'),
+              conditional: {
+                html: nhsNumberHtml
+              }
+            },
+            {
+              value: "no",
+              text: "Patient details",
+              checked: (data.nhsNumberKnown == 'no')
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+
+
+    </div>
+  </div>
+
+
+
+
+
+{% endblock %}

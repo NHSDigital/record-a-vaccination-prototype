@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "find-a-record" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <div class="nhsuk-panel nhsuk-u-margin-bottom-8">
+        <h1 class="nhsuk-panel__title">Changes saved</h1>
+        <div class="nhsuk-panel__body">
+        Jodie Brown's record has been updated.
+        </div>
+      </div>
+
+      <form action="/vaccinate/what-next" method="post" novalidate>
+
+        {% set nhsNumberHtml %}
+
+        {{ input({
+          id: "nhsNumber",
+          name: "nhsNumber",
+          classes: "nhsuk-input--width-10",
+          inputmode: "numeric",
+      
+          value: data.nhsNumber,
+          hint: {
+            text: "For example, 485 777 3456"
+          }
+        }) }}
+      {% endset %}
+
+
+      {{ radios({
+        idPrefix: "nhsNumberKnown",
+        name: "nhsNumberKnown",
+        fieldset: {
+          legend: {
+            html: "How do you want to search for a record?",
+            classes: ("nhsuk-fieldset__legend--m" if data.repeatVaccination == "yes" else "nhsuk-fieldset__legend--l"),
+            isPageHeading: ("false" if data.repeatVaccination == "yes" else "true")
+          }
+        },
+        items: [
+          {
+            value: "yes",
+            text: "NHS number",
+            checked: (data.nhsNumberKnown == 'yes'),
+            conditional: {
+              html: nhsNumberHtml
+            }
+          },
+          {
+            value: "no",
+            text: "Patient details",
+            checked: (data.nhsNumberKnown == 'no')
+          },
+          {
+            divider: "or"
+          },
+          {
+            value: "Someone else",
+            text: "Go to Jodie Brown’s records",
+            checked: (data.vaccinator === "Someone else"),
+            conditional: {
+              html: otherVaccinatorHtml
+            }
+          }
+        ]
+      }) }}
+
+      {{ button({
+        text: "Continue"
+      })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

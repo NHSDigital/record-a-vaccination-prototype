@@ -1,0 +1,182 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Choose dates
+{% endblock %}
+
+{% set currentSection = "find-a-record" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/reports",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if dateError %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [{
+            text: dateError,
+            href: "#date-1"
+          }]
+        }) }}
+      {% endif %}
+
+      {% if dateFromError or dateToError %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [{
+            text: dateFromError,
+            href: "#from-from[day]"
+          } if dateFromError,
+          {
+            text: dateToError,
+            href: "#to-to[day]"
+          } if dateToError]
+        }) }}
+      {% endif %}
+
+      <form action="/reports/choose-vaccines" method="post">
+
+        {% set custom_date_range %}
+          {{ dateInput({
+            id: "from",
+            fieldset: {
+              legend: {
+                text: "From",
+                classes: "nhsuk-label--s"
+              }
+            },
+            hint: {
+              text: "For example, 1 7 2024"
+            },
+            errorMessage: {
+              text: dateFromError
+            } if dateFromError,
+            items: [
+              {
+                label: "Day",
+                name: "from[day]",
+                value: data.from.day,
+                classes: "nhsuk-input--width-2"
+              },
+              {
+                label: "Month",
+                name: "from[month]",
+                value: data.from.month,
+                classes: "nhsuk-input--width-2"
+              },
+              {
+                label: "Year",
+                name: "from[year]",
+                value: data.from.year,
+                classes: "nhsuk-input--width-4"
+              }
+            ]
+          }) }}
+
+          {{ dateInput({
+              id: "to",
+              fieldset: {
+                legend: {
+                  text: "To",
+                  classes: "nhsuk-label--s"
+                }
+              },
+              hint: {
+                text: "For example, 31 7 2024"
+              },
+              errorMessage: {
+                text: dateToError
+              } if dateToError,
+              items: [
+                {
+                  label: "Day",
+                  name: "to[day]",
+                  value: data.to.day,
+                  classes: "nhsuk-input--width-2"
+                },
+                {
+                  label: "Month",
+                  name: "to[month]",
+                  value: data.to.month,
+                  classes: "nhsuk-input--width-2"
+                },
+                {
+                  label: "Year",
+                  name: "to[year]",
+                  value: data.to.year,
+                  classes: "nhsuk-input--width-4"
+                }
+              ]
+            }) }}
+       {% endset %}
+
+
+       {{ radios({
+          "idPrefix": "date",
+          "name": "date",
+          "fieldset": {
+            "legend": {
+              "text": "Choose dates",
+              "classes": "nhsuk-fieldset__legend--xl",
+              "isPageHeading": true
+            }
+          },
+          errorMessage: {
+            text: dateError
+          } if dateError,
+          "items": [
+            {
+              "value": "Today",
+              "text": "Today",
+              checked: (data.date == "Today")
+            },
+            {
+              "value": "Yesterday",
+              "text": "Yesterday",
+              checked: (data.date == "Yesterday")
+            },
+            {
+              "value": "Last7days",
+              "text": "Last 7 days",
+              checked: (data.date == "Last7days")
+            },
+            {
+              "value": "Last14days",
+              "text": "Last 14 days",
+              checked: (data.date == "Last14days")
+            },
+            {
+                "value": "Last31days",
+                "text": "Last 31 days",
+                checked: (data.date == "Last31days")
+              },
+            {
+              divider: "or"
+            },
+            {
+              "value": "custom_date_range",
+              "text": "Select custom date range up to 31 days",
+              checked: (data.date == "custom_date_range"),
+              conditional: {
+                html: custom_date_range
+              }
+            }
+          ]
+        }) }}
+
+        {{ button({
+          "text": "Continue"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
