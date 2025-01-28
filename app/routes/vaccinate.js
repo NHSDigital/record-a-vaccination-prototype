@@ -113,7 +113,7 @@ module.exports = router => {
     if (nhsNumberKnown === "yes") {
 
       req.session.data.patientName = "Jodie Brown"
-      req.session.data.dateOfBirth = {day: "4", month: "7", year: "1964"}
+      req.session.data.dateOfBirth = {day: "15", month: "8", year: "1949"}
       req.session.data.postcode = "GD3 I83"
 
       res.redirect('/vaccinate/patient-history')
