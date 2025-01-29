@@ -6,13 +6,6 @@
 
 {% set currentSection = "find-a-record" %}
 
-{% if (data.vaccine === "COVID-19") %}
-  {% set nextPage = "/vaccinate/warning" %}
-{% elseif ((data.vaccine == "RSV") and (data.eligibility | arrayOrStringIncludes("Pregnant"))) or (data.vaccine == "Pertussis") %}
-  {% set nextPage = "/vaccinate/patient-estimated-due-date" %}
-{% else %}
-  {% set nextPage = "/vaccinate/consent" %}
-{% endif %}
 
 {% block beforeContent %}
   {{ backLink({ href: "/find-a-record/search-result" }) }}
