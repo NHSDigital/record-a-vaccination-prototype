@@ -1,0 +1,100 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "consent" %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+        <form action="/find-a-record/check" method="get">
+
+        {% set otherConsentHtml %}
+
+          {{ input({
+            label: {
+              text: "Name"
+            },
+            id: "consentName",
+            name: "consentName",
+            value: ((data.consentName | first) if data.cosentName else "")
+          }) }}
+
+        {% endset %}
+
+        {{ radios({
+          idPrefix: "consent",
+          name: "consent",
+          fieldset: {
+            legend: {
+              text: ("Who gave consent?" if data.vaccinationToday == 'yes' else "Who gave consent?"),
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: "true"
+            }
+          },
+          items: [
+            {
+              value: data.patientName,
+              text: data.patientName,
+              checked: (data.consent === data.patientName)
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "Clinician following the Mental Capacity Act",
+              text: "Clinician following the Mental Capacity Act",
+              checked: (data.consent === "Clinician following the Mental Capacity Act"),
+              conditional: {
+                html: otherConsentHtml
+              }
+            },
+            {
+                value: "Person with power of attorney for personal welfare",
+                text: "Person with power of attorney for personal welfare",
+                checked: (data.consent === "Person with power of attorney for personal welfare"),
+                conditional: {
+                  html: otherConsentHtml
+                }
+              },
+              {
+                value: "Parent or guardian",
+                text: "Parent or guardian",
+                checked: (data.consent === "Parent or guardian"),
+                conditional: {
+                  html: otherConsentHtml
+                }
+              },
+              {
+                value: "Mental capacity advocate",
+                text: "Mental capacity advocate",
+                checked: (data.consent === "Mental capacity advocate"),
+                conditional: {
+                  html: otherConsentHtml
+                }
+              },
+              {
+                value: "Court appointed deputy",
+                text: "Court appointed deputy",
+                checked: (data.consent === "Court appointed deputy"),
+                conditional: {
+                  html: otherConsentHtml
+                }
+              }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

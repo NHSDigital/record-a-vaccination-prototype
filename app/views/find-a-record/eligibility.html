@@ -1,0 +1,99 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "find-a-record" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/batch" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/find-a-record/check">
+
+
+        {% from 'checkboxes/macro.njk' import checkboxes %}
+
+        <form>
+          {{ checkboxes({
+            idPrefix: "example",
+            name: "example",
+            fieldset: {
+              legend: {
+                text: "Why was [patient name] eligible for the vaccine?",
+                classes: "nhsuk-fieldset__legend--l",
+                isPageHeading: true
+              }
+            },
+          
+            items: [
+              {
+                value: "email",
+                text: "Resident in a care home"
+              },
+              {
+                value: "phone",
+                text: "Staff in a care home"
+              },
+              {
+                value: "text message",
+                text: "Healthcare worker"
+              },
+              {
+                value: "phone",
+                text: "Social workere"
+              },
+              {
+                value: "phone",
+                text: "Based on age"
+              },
+              {
+                value: "phone",
+                text: "Pregnant"
+              },
+              {
+                value: "email",
+                text: "Immunosuppressed"
+              },
+              {
+                value: "phone",
+                text: "In a clinical risk group"
+              },
+              {
+                value: "text message",
+                text: "Homeless or living in a closed setting"
+              },
+              {
+                value: "phone",
+                text: "Household contact of someone immunosuppressed"
+              },
+              {
+                value: "phone",
+                text: "Carer"
+              },
+              {
+                value: "phone",
+                text: "Has had CAR-T therapy or a stem cell transplant since their last vaccination"
+              }
+            ]
+          }) }}
+        </form>
+
+
+
+
+        {{ button({
+          text: "Confirm"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

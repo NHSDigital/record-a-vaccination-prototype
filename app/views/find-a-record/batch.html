@@ -1,0 +1,91 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Find a record
+{% endblock %}
+
+{% set currentSection = "find-a-record" %}
+
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+        
+        <form action="/find-a-record/check" method="get">
+
+          {{ radios({
+            "idPrefix": "vaccineBatch",
+            "name": "vaccineBatch",
+            "fieldset": {
+              "legend": {
+                "text": ("Which batch was used?" if data.vaccinationToday == 'yes' else "Which batch was it?"),
+                "classes": "nhsuk-fieldset__legend--l",
+                "isPageHeading": true
+              }
+            },
+            "items": [
+              {
+                "value": "AB2345",
+                "text": "AB2345",
+                hint: {
+                  text: "Expires 14 February 2025"
+                },
+                checked: (data.vaccineBatch == "AB2345")
+              },
+              {
+                "value": "DE8342",
+                "text": "DE8342",
+                hint: {
+                  text: "Expires 19 February 2025"
+                },
+                checked: (data.vaccineBatch == "DE8342")
+              },
+              {
+                "value": "LF842",
+                "text": "LF842",
+                hint: {
+                  text: "Expires 28 February 2025"
+                },
+                checked: (data.vaccineBatch == "LF842")
+              },
+
+
+
+              {
+                "value": "LF842",
+                "text": "XT1234",
+                hint: {
+                  text: "Expired 3 March 2024"
+                },
+                checked: (data.vaccineBatch == "LF842")
+              },
+              {
+                "value": "LF842",
+                "text": "PU1234",
+                hint: {
+                  text: "Expired 28 February 2024"
+                },
+                checked: (data.vaccineBatch == "LF842")
+              },
+              {
+                "value": "JD8352",
+                "text": "HN6543",
+                hint: {
+                  text: "Expired 22 January 2024"
+                },
+                checked: (data.vaccineBatch == "JD8352")
+              }
+            ]
+          }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

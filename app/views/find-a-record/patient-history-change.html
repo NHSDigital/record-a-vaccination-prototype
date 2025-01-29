@@ -1,0 +1,164 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "find-a-record" %}
+
+
+{% block beforeContent %}
+  {{ backLink({ href: "/find-a-record/search-result" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+        <div class="nhsuk-panel nhsuk-u-margin-bottom-8">
+            <h1 class="nhsuk-panel__title">Changes saved</h1>
+            <div class="nhsuk-panel__body">
+                Jodie Brown's record has been updated..
+            </div>
+          </div>
+        
+                <div class="nhsuk-grid-row">
+                <div class="nhsuk-grid-column-three-thirds">
+                <h1 class="nhsuk-heading-l">Jodie Brown's records</h1>
+
+              {{ summaryList({
+        classes: 'xnhsuk-summary-list--no-border',
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              text: data.patientName
+            }
+          },
+          {
+            key: {
+              text: "Date of birth"
+            },
+            value: {
+              text: ((data.dateOfBirth | isoDateFromDateInput | govukDate) if data.dateOfBirth else "")
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: "73 Roman Rd<br>Leeds<br> LS2 5ZN"
+            }
+          },
+          {
+            key: {
+              text: "NHS number"
+            },
+            value: {
+              text: data.nhsNumber
+            }
+          }
+        ]
+      }) }}
+
+
+      <p>You can only view, change or delete records your organisation has saved in the Record a vaccination service.</p>
+   
+
+
+
+      {% from 'tables/macro.njk' import table %}
+
+      {{ table({
+        responsive: true,
+        panel: false,
+        firstCellIsHeader: true,
+        head: [
+          {
+            text: "Date"
+          },
+          {
+            text: "Vaccine"
+          },
+          {
+            text: "Product"
+          },
+          {
+
+          }
+        ],
+        rows: [
+          [
+            {
+              header: "Date",
+              text: "11 November 2024"
+            },
+            {
+              header: "Vaccine",
+              text: "RSV"
+            },
+            {
+              header: "Product",
+              text: "Abrysvo"
+            },
+            {
+                header: "Product",
+        
+                html: "<a href='/find-a-record/check'>View</a>"
+              }
+
+          ],
+          [
+            {
+              header: "Date",
+              text: "8 September 2024"
+            },
+            {
+              header: "Vaccine",
+              text: "Flu"
+            },
+            {
+              header: "Product",
+              text: "Flucelvax Tetra - QIVc"
+            },
+            {
+                header: "Product",
+        
+                html: "<a href='/find-a-record/check'>View</a>"
+              }
+
+          ],
+          [
+            {
+              header: "Date",
+              text: "24 July 2021"
+            },
+            {
+              header: "Vaccine",
+              text: "COVID-19"
+            },
+            {
+              header: "Product",
+              text: "Corminarty 30 Omicron XBB.1.5"
+            },
+            {
+                header: "Product",
+        
+                html: "<a href='/find-a-record/check'>View</a>"
+              }
+
+          ]
+
+        ]
+      }) }}
+
+
+    </div>
+ 
+
+
+{% endblock %}
+

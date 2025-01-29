@@ -33,7 +33,7 @@
             actions: {
               items: [
                 {
-                  href: "/reports/choose-dates-2",
+                  href: "/find-a-record/choose-dates",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -50,7 +50,7 @@
             actions: {
               items: [
                 {
-                  href: "/reports/choose-dates-2",
+                  href: "/find-a-record/choose-vaccines",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -67,7 +67,7 @@
             actions: {
               items: [
                 {
-                  href: "/reports/choose-dates-2",
+                  href: "/find-a-record/choose-vaccines",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -84,30 +84,14 @@
             actions: {
               items: [
                 {
-                  href: "/reports/choose-dates-2",
+                  href: "/find-a-record/batch",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
               ]
             }
-          },     
-          {
-            key: {
-              text: ("  Batch" if from == to else "From")
-            },
-            value: {
-              text: "A1234567"
-            },
-            actions: {
-              items: [
-                {
-                  href: "/reports/choose-dates-2",
-                  text: "Change",
-                  visuallyHiddenText: "name"
-                }
-              ]
-            }
-          }
+          }   
+          
 
 
 
@@ -130,7 +114,7 @@
             actions: {
               items: [
                 {
-                  href: "/reports/choose-dates-2",
+                  href: "/find-a-record/delivery-team",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -147,7 +131,7 @@
             actions: {
               items: [
                 {
-                  href: "/reports/choose-dates-2",
+                  href: "/find-a-record/vaccinator",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -164,7 +148,7 @@
             actions: {
               items: [
                 {
-                  href: "/reports/choose-dates-2",
+                  href: "/find-a-record/eligibility",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -181,7 +165,7 @@
             actions: {
               items: [
                 {
-                  href: "/reports/choose-dates-2",
+                  href: "/find-a-record/patient-estimated-due-date",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -198,7 +182,7 @@
             actions: {
               items: [
                 {
-                  href: "/reports/choose-dates-2",
+                  href: "/find-a-record/consent",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -215,7 +199,7 @@
             actions: {
               items: [
                 {
-                  href: "/reports/choose-dates-2",
+                  href: "/find-a-record/injection-site",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -230,14 +214,15 @@
       }) }}
 
 
-      <form action="/find-a-record/done" method="post">
+      <form action="/find-a-record/patient-history-change" method="get">
         {{ button({
           "text": "Confirm changes"
         }) }}
       </form>
 
 
-      <a href="/find-a-record/delete">Delete this record</a>
+      <a class=nhsuk-body-m
+      href="/find-a-record/delete">Delete this record</a>
 
     </div>
   </div>
