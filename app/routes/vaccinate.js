@@ -109,8 +109,10 @@ module.exports = router => {
   router.post('/vaccinate/answer-patient-nhs-number-known', (req, res) => {
 
     const nhsNumberKnown = req.session.data.nhsNumberKnown;
+    req.session.data.nhsNumber = req.session.data.nhsNumber.trim()
+    const nhsNumber = req.session.data.nhsNumber.replaceAll(' ', '')
 
-    if (nhsNumberKnown === "yes") {
+    if (nhsNumberKnown === "yes" && nhsNumber.match(/^\d{10}$/) &&  nhsNumber.startsWith('9')) {
 
       req.session.data.patientName = "Jodie Brown"
       req.session.data.dateOfBirth = {day: "15", month: "8", year: "1949"}
@@ -122,6 +124,66 @@ module.exports = router => {
     } else {
       res.redirect('/vaccinate/patient?showError=yes')
     }
+  })
+
+  router.get('/vaccinate/patient', (req, res) => {
+
+    const data = req.session.data
+    const showError = data.showError
+    const nhsNumberKnown = data.nhsNumberKnown
+    const nhsNumber = String(data.nhsNumber).replaceAll(' ', '')
+
+    let nhsNumberKnownError, nhsNumberError
+    let errorList = []
+
+    if (req.query.showError == 'yes') {
+
+      if (!nhsNumberKnown) {
+        nhsNumberKnownError = {
+          text: "Select if you have the patient’s NHS number",
+          href: "#nhs-number-known-1"
+        }
+        errorList.push(nhsNumberKnownError)
+      }
+
+      if (nhsNumberKnown === 'yes') {
+
+        if (nhsNumber == '') {
+          nhsNumberError = {
+            text: "Enter NHS number",
+            href: "#nhs-number"
+          }
+          errorList.push(nhsNumberError)
+        } else if (nhsNumber.match(/[^\d]/)) {
+          nhsNumberError = {
+            text: "NHS number must only contain digits",
+            href: "#nhs-number"
+          }
+          errorList.push(nhsNumberError)
+        } else if (nhsNumber.length != 10) {
+          nhsNumberError = {
+            text: "NHS number must contain 10 digits",
+            href: "#nhs-number"
+          }
+          errorList.push(nhsNumberError)
+        } else if (!nhsNumber.startsWith('9')) {
+
+          nhsNumberError = {
+            text: "NHS number not found",
+            href: "#nhs-number"
+          }
+          errorList.push(nhsNumberError)
+        }
+
+      }
+    }
+
+
+    res.render('vaccinate/patient', {
+      nhsNumberKnownError,
+      nhsNumberError,
+      errorList
+    })
   })
 
 
