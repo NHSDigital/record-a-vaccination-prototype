@@ -370,6 +370,24 @@ module.exports = router => {
 
   })
 
+  router.get('/vaccinate/batch', (req, res) => {
+    let error
+    const data = req.session.data
+    if (req.query.showError === 'yes') {
+
+      if (!data.batchNumber) {
+        error = {
+          text: "Select a batch or add a batch",
+          href: "#batch-number-1"
+        }
+      }
+    }
+
+    res.render('vaccinate/batch', {
+      error
+    })
+  })
+
   router.post('/vaccinate/answer-batch', (req, res) => {
 
     const data = req.session.data
@@ -380,6 +398,8 @@ module.exports = router => {
 
     if (vaccineBatch === "add-new") {
       redirectPath = "/vaccinate/add-batch"
+    } else if (!vaccineBatch) {
+      redirectPath = "/vaccinate/batch?showError=yes"
     } else if (["COVID-19", "Flu", "RSV"].includes(data.vaccine)) {
       redirectPath = "/vaccinate/eligibility"
     } else if (data.repeatPatient === "yes") {
