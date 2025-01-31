@@ -487,8 +487,6 @@ module.exports = router => {
     const consentAdvocateName = data.consentAdvocateName
     const consentDeputyName = data.consentDeputyName
 
-    console.log(consent)
-
     if (req.query.showErrors === 'yes') {
       if (!consent) {
         consentError = {
