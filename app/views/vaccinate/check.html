@@ -11,10 +11,18 @@
 {% endblock %}
 
 {% set consentHtml %}
-  {% if data.consent == data.patientName %}
+  {% if data.consent == "patient" %}
     Patient
-  {% else %}
-    {{ data.consentName | first }}, {{ data.consent }}
+  {% elseif data.consent == "Clinician following the Mental Capacity Act" %}
+    {{ data.consentClinicianName }}
+  {% elseif data.consent == "Person with power of attorney for personal welfare" %}
+    {{ data.consentAttorneyName }}
+  {% elseif data.consent == "Parent or guardian" %}
+    {{ data.consentParentName }}
+  {% elseif data.consent == "Mental capacity advocate" %}
+    {{ data.consentAdvocateName }}
+  {% elseif data.consent == "Court appointed deputy" %}
+    {{ data.consentDeputyName }}
   {% endif %}
 {% endset %}
 
