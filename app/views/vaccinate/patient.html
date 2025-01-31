@@ -19,6 +19,13 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+      {% if (errorList | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errorList
+        }) }}
+      {% endif %}
+
       {% if data.repeatVaccination == "yes" %}
 
         <h1 class="nhsuk-heading-l">Give a {{ data.vaccine }} vaccine to another patient</h1>
@@ -156,10 +163,11 @@
         {% set nhsNumberHtml %}
 
           {{ input({
-            id: "nhsNumber",
+            id: "nhs-number",
             name: "nhsNumber",
             classes: "nhsuk-input--width-10",
             inputmode: "numeric",
+            errorMessage: nhsNumberError,
             label: {
               text: "NHS number",
               classes: "nhsuk-label--s"
@@ -173,7 +181,7 @@
 
 
         {{ radios({
-          idPrefix: "nhsNumberKnown",
+          idPrefix: "nhs-number-known",
           name: "nhsNumberKnown",
           fieldset: {
             legend: {
@@ -182,6 +190,7 @@
               isPageHeading: ("false" if data.repeatVaccination == "yes" else "true")
             }
           },
+          errorMessage: nhsNumberKnownError if nhsNumberKnownError,
           items: [
             {
               value: "yes",
