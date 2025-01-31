@@ -140,7 +140,7 @@ module.exports = router => {
 
       if (!nhsNumberKnown) {
         nhsNumberKnownError = {
-          text: "Select if you have the patient’s NHS number",
+          text: "Select yes if you have the patient's NHS number",
           href: "#nhs-number-known-1"
         }
         errorList.push(nhsNumberKnownError)
