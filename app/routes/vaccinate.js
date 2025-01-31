@@ -156,20 +156,20 @@ module.exports = router => {
           errorList.push(nhsNumberError)
         } else if (nhsNumber.match(/[^\d]/)) {
           nhsNumberError = {
-            text: "NHS number must only contain digits",
+            text: "Enter a 10-digit number",
             href: "#nhs-number"
           }
           errorList.push(nhsNumberError)
         } else if (nhsNumber.length != 10) {
           nhsNumberError = {
-            text: "NHS number must contain 10 digits",
+            text: "Enter a 10-digit number",
             href: "#nhs-number"
           }
           errorList.push(nhsNumberError)
         } else if (!nhsNumber.startsWith('9')) {
 
           nhsNumberError = {
-            text: "NHS number not found",
+            text: "Enter a valid NHS number",
             href: "#nhs-number"
           }
           errorList.push(nhsNumberError)
