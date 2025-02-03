@@ -618,4 +618,50 @@ module.exports = router => {
 
   })
 
+  router.get('/vaccinate/injection-site', (req, res) => {
+    const data = req.session.data
+    const injectionSite = data.injectionSite
+    const otherInjectionSite = data.otherInjectionSite
+
+    let errors = []
+    let injectionSiteError, otherInjectionSiteError
+
+    if (req.query.showErrors === "yes") {
+
+      if (!injectionSite) {
+        injectionSiteError = {
+          text: "Select injection site",
+          href: "#injection-site-1"
+        }
+        errors.push(injectionSiteError)
+      } else if (injectionSite === "other" && !otherInjectionSite) {
+        otherInjectionSiteError = {
+          text: "Select injection site",
+          href: "#other-injection-site-1"
+        }
+        errors.push(otherInjectionSiteError)
+      }
+
+    }
+
+    res.render('vaccinate/injection-site', {
+      errors,
+      injectionSiteError,
+      otherInjectionSiteError
+    })
+  })
+
+  router.post('/vaccinate/answer-injection-site', (req, res) => {
+    const data = req.session.data
+    const injectionSite = data.injectionSite
+    const otherInjectionSite = data.otherInjectionSite
+    let redirectPath = "/vaccinate/check"
+
+    if (!injectionSite || (injectionSite === "other" && !otherInjectionSite)) {
+      redirectPath = "/vaccinate/injection-site?showErrors=yes"
+    }
+
+    res.redirect(redirectPath)
+  })
+
 }
