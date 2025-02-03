@@ -560,6 +560,51 @@ module.exports = router => {
     res.redirect(redirectPath)
   })
 
+  router.get('/vaccinate/add-batch', (req, res) => {
+    const data = req.session.data
+    let errors = []
+    let batchNumberError, expiryDateError
+
+    if (req.query.showErrors === 'yes') {
+
+      if (data.newBatchNumber === '') {
+        batchNumberError = {
+          text: "Enter batch number",
+          href: "#batch-number"
+        }
+        errors.push(batchNumberError)
+      }
+      if (data.newBatchExpiryDate?.day === '' || data.newBatchExpiryDate?.month === '' || data.newBatchExpiryDate?.year === '') {
+        expiryDateError = {
+          text: "Enter expiry date",
+          href: "#batch-expiry-date-day"
+        }
+        errors.push(expiryDateError)
+      }
+    }
+
+    res.render('vaccinate/add-batch', {
+      errors,
+      batchNumberError,
+      expiryDateError
+    })
+  })
+
+  router.get('/vaccinate/answer-add-batch', (req, res) => {
+    const data = req.session.data
+    let nextPage
+
+    if (data.newBatchNumber === '' || data.newBatchExpiryDate?.day === '' || data.newBatchExpiryDate?.month === '' || data.newBatchExpiryDate?.year === '') {
+      nextPage = "/vaccinate/add-batch?showErrors=yes"
+    } else if (data.vaccine === "Pertussis") {
+      nextPage = "/vaccinate/patient"
+    } else {
+      nextPage = "/vaccinate/eligibility"
+    }
+
+    res.redirect(nextPage)
+  })
+
   router.get('/vaccinate/consent', (req, res) => {
     let errors = []
     let consentError, consentClinicianError, consentAttorneyError, consentParentError, consentAdvocateError, consentDeputyError
