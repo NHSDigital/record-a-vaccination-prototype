@@ -53,6 +53,33 @@ module.exports = router => {
     res.redirect('/vaccinate/delivery-team')
   })
 
+  router.get('/vaccinate/delivery-team', (req, res) => {
+    let errors = []
+
+    if (req.query.showErrors === "yes") {
+      if (!req.session.data.deliveryTeam) {
+        errors.push({
+          text: "Select a team",
+          href: "#delivery-team-1"
+        })
+      }
+    }
+
+    res.render('vaccinate/delivery-team', {
+      errors
+    })
+  })
+
+  router.post('/vaccinate/answer-delivery-team', (req, res) => {
+    const data = req.session.data
+
+    if (!data.deliveryTeam) {
+      return res.redirect('/vaccinate/delivery-team?showErrors=yes')
+    } else {
+      res.redirect('/vaccinate/vaccinator')
+    }
+  })
+
   router.get('/vaccinate/vaccinator', (req, res) => {
     let vaccinatorError
 
