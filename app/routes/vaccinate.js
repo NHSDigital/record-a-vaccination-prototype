@@ -551,7 +551,7 @@ module.exports = router => {
           href: "#consent-1"
         }
         errors.push(consentError)
-      } else if (consent === "Clinician following the Mental Capacity Act" && consentClinicianName === '') {
+      } else if (consent === "Clinician acting in the patient’s best interests" && consentClinicianName === '') {
 
         consentClinicianError = {
           text: "Enter a name",
@@ -605,7 +605,7 @@ module.exports = router => {
 
     if (
       (consent === "patient") ||
-      (consent === "Clinician following the Mental Capacity Act" && consentClinicianName != '') ||
+      (consent === "Clinician acting in the patient’s best interests" && consentClinicianName != '') ||
       (consent === "Person with power of attorney for personal welfare" && consentAttorneyName != '') ||
       (consent === "Parent or guardian" && consentParentName != '') ||
       (consent === "Mental capacity advocate" && consentAdvocateName != '') ||
