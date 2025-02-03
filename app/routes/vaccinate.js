@@ -569,14 +569,14 @@ module.exports = router => {
 
       if (data.newBatchNumber === '') {
         batchNumberError = {
-          text: "Enter batch number",
+          text: "Enter the batch number",
           href: "#batch-number"
         }
         errors.push(batchNumberError)
       }
       if (data.newBatchExpiryDate?.day === '' || data.newBatchExpiryDate?.month === '' || data.newBatchExpiryDate?.year === '') {
         expiryDateError = {
-          text: "Enter expiry date",
+          text: "Enter the expiry date",
           href: "#batch-expiry-date-day"
         }
         errors.push(expiryDateError)
