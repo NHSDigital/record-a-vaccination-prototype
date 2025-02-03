@@ -106,7 +106,7 @@
 
       <p>You can continue and record a vaccination without an NHS number, however the record will not be sent to a GP.</p>
 
-      <form action="/vaccinate/injection-site" method="post">
+      <form action="/vaccinate/consent" method="post">
 
         <input type="hidden" name="patientName" value="{{ data.firstName }} {{ data.lastName }}">
         <input type="hidden" name="nhsNumber" value="">
