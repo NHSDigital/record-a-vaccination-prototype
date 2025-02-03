@@ -8,16 +8,27 @@
 
 {% set organisation = {name: data.nhsTrusts[data.organisationCode]} %}
 
+
 {% block beforeContent %}
-  {{ backLink({
-    href: "/find-a-record/patient-history",
-    text: "Back"
-  }) }}
+{{ backLink({
+  href: "/find-a-record/patient-history",
+  text: "Back"
+}) }}
 {% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
+
+
+<div class="nhsuk-panel nhsuk-u-margin-bottom-8">
+    <h1 class="nhsuk-panel__title">Changes saved</h1>
+    <div class="nhsuk-panel__body">
+    "Name of edit" has been updated.
+    </div>
+  </div>
+
+
 
       <h1 class="nhsuk-heading-l">Jodie Brown’s RSV vaccination record</h1>
 
@@ -200,9 +211,16 @@
         ]
       }) }}
 
-
       <a class=nhsuk-body-m
       href="/find-a-record/delete">Delete this record</a>
+
+<br>
+
+      <form action="/find-a-record" method="get">
+        {{ button({
+          "text": "Find another record"
+        }) }}
+      </form>
 
     </div>
   </div>
