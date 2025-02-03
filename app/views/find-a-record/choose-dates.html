@@ -6,6 +6,13 @@
 
 {% set currentSection = "find-a-record" %}
 
+{% block beforeContent %}
+  {{ backLink({
+    href: "/find-a-record/check",
+    text: "Back"
+  }) }}
+{% endblock %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
@@ -22,7 +29,7 @@
         }) }}
       {% endif %}
 
-      <form action="/find-a-record/check" method="get">
+      <form action="/find-a-record/check-confirm" method="get">
         {% set previousDateHtml %}
 
           {{ dateInput({
@@ -85,7 +92,7 @@
         }) }}
 
         {{ button({
-          text: "Continue"
+          text: "Save"
         })}}
       </form>
 

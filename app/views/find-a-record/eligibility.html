@@ -7,25 +7,25 @@
 {% set currentSection = "find-a-record" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/batch" }) }}
+  {{ backLink({ href: "/find-a-record/check" }) }}
 {% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/find-a-record/check">
+      <form action="/find-a-record/check-confirm">
 
 
         {% from 'checkboxes/macro.njk' import checkboxes %}
 
-        <form>
+       
           {{ checkboxes({
             idPrefix: "example",
             name: "example",
             fieldset: {
               legend: {
-                text: "Why was [patient name] eligible for the vaccine?",
+                text: "Why was Jodie Brown eligible for the vaccine?",
                 classes: "nhsuk-fieldset__legend--l",
                 isPageHeading: true
               }
@@ -82,13 +82,10 @@
               }
             ]
           }) }}
-        </form>
-
-
 
 
         {{ button({
-          text: "Confirm"
+          text: "Save"
         })}}
       </form>
 

@@ -15,7 +15,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Jodie Brown's vaccination history</h1>
+      <h1 class="nhsuk-heading-l">Jodie Brown's vaccination records</h1>
 
       {{ summaryList({
         classes: 'xnhsuk-summary-list--no-border',
@@ -25,7 +25,7 @@
               text: "Name"
             },
             value: {
-              text: data.patientName
+              text: "Jodie Brown"
             }
           },
           {
@@ -33,7 +33,7 @@
               text: "Date of birth"
             },
             value: {
-              text: ((data.dateOfBirth | isoDateFromDateInput | govukDate) if data.dateOfBirth else "")
+              text: "10 March 2000"
             }
           },
           {
@@ -56,10 +56,12 @@
       }) }}
 
 
-      <p>You can only view, change or delete records your organisation has saved in the Record a vaccination service.</p>
    
+<br>
 
       <h2 class="nhsuk-heading-m">Vaccination history</h2>
+
+      <p>You can only view, change or delete records your organisation has created.</p>
 
       {% from 'tables/macro.njk' import table %}
 
@@ -118,7 +120,7 @@
             {
                 header: "Product",
         
-                html: "<a href='/find-a-record/check'>View</a>"
+                text: ""
               }
 
           ],

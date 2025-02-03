@@ -20,13 +20,17 @@
       <h1 class="nhsuks-heading-l">Delete Jodie Brown’s RSV record</h1>
 
  
-      <p>Once deleted you will no longer be able to view or edit the record.</p>
+      <p>Once deleted no one will no longer be able to view or edit the record.</p>
 
       <form action="/find-a-record/patient-history-change">
 
 
+        {% from 'button/macro.njk' import button %}
+
+        {% from 'button/macro.njk' import button %}
+
         {{ button({
-          "text": "Delete record"
+          text: "Yes, delete this record"
         }) }}
 
       </form>

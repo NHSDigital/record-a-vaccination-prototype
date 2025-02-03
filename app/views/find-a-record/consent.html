@@ -6,12 +6,20 @@
 
 {% set currentSection = "consent" %}
 
+{% block beforeContent %}
+  {{ backLink({
+    href: "/find-a-record/check",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-        <form action="/find-a-record/check" method="get">
+        <form action="/find-a-record/check-confirm" method="get">
 
         {% set otherConsentHtml %}
 
@@ -89,7 +97,7 @@
         }) }}
 
         {{ button({
-          text: "Continue"
+          text: "Save"
         })}}
       </form>
 

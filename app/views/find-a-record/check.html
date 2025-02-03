@@ -40,6 +40,24 @@
               ]
             }
           },
+
+          {
+            key: {
+              text: "Delivery team"
+            },
+            value: {
+              text: "Albert House"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/find-a-record/delivery-team",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
           {
             key: {
               text: ("Vaccine" if from == to else "From")
@@ -90,24 +108,12 @@
                 }
               ]
             }
-          },   
-          {
-            key: {
-              text: ("Delivery team" if from == to else "From")
-            },
-            value: {
-              text: "Albert House"
-            },
-            actions: {
-              items: [
-                {
-                  href: "/find-a-record/delivery-team",
-                  text: "Change",
-                  visuallyHiddenText: "name"
-                }
-              ]
-            }
           },
+          
+         
+
+
+    
           {
             key: {
               text: ("Vaccinator" if from == to else "From")
@@ -199,6 +205,7 @@
 
         ]
       }) }}
+
 
 
       <a class=nhsuk-body-m
