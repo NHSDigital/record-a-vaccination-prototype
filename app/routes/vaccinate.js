@@ -365,14 +365,39 @@ module.exports = router => {
 
   })
 
+
+  router.get('/vaccinate/eligibility', (req, res) => {
+    const data = req.session.data
+    const eligibility = data.eligibility
+    let errors = []
+
+    if (req.query.showErrors === "yes") {
+      if (!eligibility || eligibility === "" || eligibility == []) {
+        errors.push({
+          text: "Select why you are giving them the vaccine",
+          href: "#eligibility-1"
+        })
+      }
+    }
+
+    res.render('vaccinate/eligibility', {
+      errors
+    })
+  })
+
   router.post('/vaccinate/answer-eligibility', (req, res) => {
     const data = req.session.data
+    const eligibility = data.eligibility
 
     let nextPage;
 
-    if (data.patientName && data.patientName != "" && data.repeatPatient === "yes") {
+    if (!eligibility || eligibility === "" || eligibility == []) {
 
-      if (data.vaccine === "Pertussis" || ((data.vaccine == "RSV") && (data.eligibility === "Pregnant"))) {
+      nextPage = "/vaccinate/eligibility?showErrors=yes"
+
+    } else if (data.patientName && data.patientName != "" && data.repeatPatient === "yes") {
+
+      if (data.vaccine === "Pertussis" || ((data.vaccine == "RSV") && (eligibility === "Pregnant"))) {
         nextPage = "/vaccinate/patient-estimated-due-date"
       } else {
         nextPage = "/vaccinate/consent"
@@ -452,6 +477,38 @@ module.exports = router => {
     res.render('vaccinate/batch', {
       error
     })
+  })
+
+  router.get('/vaccinate/location', (req, res) => {
+    let errors = []
+    let locationType = req.session.data.locationType
+
+    if (req.query.showErrors === "yes") {
+      if (!locationType) {
+        errors.push({
+          text: "Select where the vaccination is taking place",
+          href: "#location-type-1"
+        })
+      }
+    }
+
+    res.render('vaccinate/location', {
+      errors
+    })
+  })
+
+  router.post('/vaccinate/answer-location', (req, res) => {
+
+    const data = req.session.data
+    let redirectPath
+
+    if (!data.locationType) {
+      redirectPath = "/vaccinate/location?showErrors=yes"
+    } else {
+      redirectPath = "/vaccinate/patient"
+    }
+
+    res.redirect(redirectPath)
   })
 
   router.post('/vaccinate/answer-batch', (req, res) => {
