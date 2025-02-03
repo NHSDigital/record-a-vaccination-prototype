@@ -19,19 +19,84 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/vaccinate/injection-site" method="post" novalidate>
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
 
-        {% set otherConsentHtml %}
 
+      <form action="/vaccinate/answer-consent" method="post" novalidate>
+
+        {% set consentClinicianHtml %}
           {{ input({
             label: {
               text: "Name"
             },
-            id: "consentName",
-            name: "consentName",
-            value: ((data.consentName | first) if data.cosentName else "")
+            errorMessage: {
+              text: consentClinicianError.text
+            } if consentClinicianError,
+            id: "consent-clinician-name",
+            name: "consentClinicianName",
+            value: data.consentClinicianName
           }) }}
+        {% endset %}
 
+        {% set consentAttorneyHtml %}
+          {{ input({
+            label: {
+              text: "Name"
+            },
+            errorMessage: {
+              text: consentAttorneyError.text
+            } if consentAttorneyError,
+            id: "consent-attorney-name",
+            name: "consentAttorneyName",
+            value: data.consentAttorneyName
+          }) }}
+        {% endset %}
+
+        {% set consentParentHtml %}
+          {{ input({
+            label: {
+              text: "Name"
+            },
+            errorMessage: {
+              text: consentParentError.text
+            } if consentParentError,
+            id: "consent-parent-name",
+            name: "consentParentName",
+            value: data.consentParentName
+          }) }}
+        {% endset %}
+
+        {% set consentAdvocateHtml %}
+          {{ input({
+            label: {
+              text: "Name"
+            },
+            errorMessage: {
+              text: consentAdvocateError.text
+            } if consentAdvocateError,
+            id: "consent-advocate-name",
+            name: "consentAdvocateName",
+            value: data.consentAdvocateName
+          }) }}
+        {% endset %}
+
+        {% set consentDeputyHtml %}
+          {{ input({
+            label: {
+              text: "Name"
+            },
+            errorMessage: {
+              text: consentDeputyError.text
+            } if consentDeputyError,
+            id: "consent-deputy-name",
+            name: "consentDeputyName",
+            value: data.consentDeputyName
+          }) }}
         {% endset %}
 
         {{ radios({
@@ -44,21 +109,24 @@
               isPageHeading: "true"
             }
           },
+          errorMessage: {
+            text: consentError.text
+          } if consentError,
           items: [
             {
-              value: data.patientName,
-              text: data.patientName,
-              checked: (data.consent === data.patientName)
+              value: 'patient',
+              text: (data.patientName or "Jodie Brown"),
+              checked: (data.consent === 'patient')
             },
             {
               divider: "or"
             },
             {
-              value: "Clinician following the Mental Capacity Act",
-              text: "Clinician following the Mental Capacity Act",
-              checked: (data.consent === "Clinician following the Mental Capacity Act"),
+              value: "Clinician acting in the patient’s best interests",
+              text: "Clinician acting in the patient’s best interests",
+              checked: (data.consent === "Clinician acting in the patient’s best interests"),
               conditional: {
-                html: otherConsentHtml
+                html: consentClinicianHtml
               }
             },
             {
@@ -66,7 +134,7 @@
                 text: "Person with power of attorney for personal welfare",
                 checked: (data.consent === "Person with power of attorney for personal welfare"),
                 conditional: {
-                  html: otherConsentHtml
+                  html: consentAttorneyHtml
                 }
               },
               {
@@ -74,7 +142,7 @@
                 text: "Parent or guardian",
                 checked: (data.consent === "Parent or guardian"),
                 conditional: {
-                  html: otherConsentHtml
+                  html: consentParentHtml
                 }
               },
               {
@@ -82,7 +150,7 @@
                 text: "Mental capacity advocate",
                 checked: (data.consent === "Mental capacity advocate"),
                 conditional: {
-                  html: otherConsentHtml
+                  html: consentAdvocateHtml
                 }
               },
               {
@@ -90,7 +158,7 @@
                 text: "Court appointed deputy",
                 checked: (data.consent === "Court appointed deputy"),
                 conditional: {
-                  html: otherConsentHtml
+                  html: consentDeputyHtml
                 }
               }
           ]
