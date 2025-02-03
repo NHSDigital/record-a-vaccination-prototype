@@ -15,7 +15,7 @@
     Patient
   {% elseif data.consent == "Clinician following the Mental Capacity Act" %}
     {{ data.consentClinicianName }}
-    <br>Clinician
+    <br>Clinician (best interests)
   {% elseif data.consent == "Person with power of attorney for personal welfare" %}
     {{ data.consentAttorneyName }}
     <br>Power of attorney
