@@ -34,29 +34,50 @@
 
       {{ summaryList({
         rows: [
-          {
-            key: {
-              text: ("Date" if from == to else "From")
-            },
-            value: {
-              text: "11 November 2024"
-            },
-            actions: {
-              items: [
-                {
-                  href: "/find-a-record/choose-dates",
-                  text: "Change",
-                  visuallyHiddenText: "name"
-                }
-              ]
-            }
+        
+        
+        {
+          key: {
+            text: "Recorder"
           },
+          value: {
+            text: "John Smith"
+          },
+          actions: {
+            items: [
+              {
+                href: "/find-a-record/choose-dates",
+                text: "",
+                visuallyHiddenText: "vaccination date"
+              }
+            ]
+          }
+        },
+        
+        
+        {
+          key: {
+            text: "Date"
+          },
+          value: {
+            text: ("11 November 2024" if data.vaccinationToday == "yes" else (data.vaccinationDate | isoDateFromDateInput | govukDate))
+          },
+          actions: {
+            items: [
+              {
+                href: "/find-a-record/choose-dates",
+                text: "Change",
+                visuallyHiddenText: "vaccination date"
+              }
+            ]
+          }
+        },
           {
             key: {
               text: "Delivery team"
             },
             value: {
-              text: "Albert House"
+              text: data.deliveryTeam
             },
             actions: {
               items: [
@@ -74,7 +95,7 @@
               text: ("Vaccine" if from == to else "From")
             },
             value: {
-              text: "RSV"
+              text: data.vaccine
             },
             actions: {
               items: [
@@ -91,7 +112,7 @@
               text: ("Product" if from == to else "From")
             },
             value: {
-              text: "Abrysvo"
+              text: data.vaccineProduct
             },
             actions: {
               items: [

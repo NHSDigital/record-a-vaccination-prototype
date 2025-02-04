@@ -23,25 +23,46 @@
 
       {{ summaryList({
         rows: [
-          {
+          
+        
+        {
+          key: {
+            text: "Recorder"
+          },
+          value: {
+            text: "John Smith"
+          },
+          actions: {
+            items: [
+              {
+                href: "/find-a-record/choose-dates",
+                text: "",
+                visuallyHiddenText: "vaccination date"
+              }
+            ]
+          }
+        },
+        
+        
+        {
             key: {
-              text: ("Date" if from == to else "From")
+              text: "Date"
             },
             value: {
-              text: "11 November 2024"
+              text: ("11 November 2024" if data.vaccinationToday == "yes" else (data.vaccinationDate | isoDateFromDateInput | govukDate))
             },
             actions: {
               items: [
                 {
                   href: "/find-a-record/choose-dates",
                   text: "Change",
-                  visuallyHiddenText: "name"
+                  visuallyHiddenText: "vaccination date"
                 }
               ]
             }
           },
 
-          {
+ {
             key: {
               text: "Delivery team"
             },
@@ -58,151 +79,161 @@
               ]
             }
           },
-          {
-            key: {
-              text: ("Vaccine" if from == to else "From")
-            },
-            value: {
-              text: "RSV"
-            },
-            actions: {
-              items: [
-                {
-                  href: "/find-a-record/choose-vaccines",
-                  text: "Change",
-                  visuallyHiddenText: "name"
-                }
-              ]
-            }
-          },
-          {
-            key: {
-              text: ("Product" if from == to else "From")
-            },
-            value: {
-              text: "Abrysvo"
-            },
-            actions: {
-              items: [
-                {
-                  href: "/find-a-record/choose-vaccines",
-                  text: "Change",
-                  visuallyHiddenText: "name"
-                }
-              ]
-            }
-          },
-          {
-            key: {
-              text: ("  Batch" if from == to else "From")
-            },
-            value: {
-              text: "A1234567"
-            },
-            actions: {
-              items: [
-                {
-                  href: "/find-a-record/batch",
-                  text: "Change",
-                  visuallyHiddenText: "name"
-                }
-              ]
-            }
-          },
-          
-         
 
 
-    
           {
             key: {
-              text: ("Vaccinator" if from == to else "From")
+              text: "Vaccine"
             },
             value: {
-              text: "Jane Smith"
+              text: data.vaccine
             },
             actions: {
               items: [
                 {
-                  href: "/find-a-record/vaccinator",
+                  href: "/vaccinate/vaccine",
                   text: "Change",
-                  visuallyHiddenText: "name"
+                  visuallyHiddenText: "vaccine"
                 }
               ]
             }
           },
           {
             key: {
-              text: ("Eligibility" if from == to else "From")
+              text: "Product"
             },
             value: {
-              text: "Pregnant"
+              text: data.vaccineProduct
             },
             actions: {
               items: [
                 {
-                  href: "/find-a-record/eligibility",
+                  href: "/vaccinate/vaccine",
                   text: "Change",
-                  visuallyHiddenText: "name"
+                  visuallyHiddenText: "vaccine product"
                 }
               ]
             }
           },
           {
             key: {
-              text: ("  Pregnancy due date" if from == to else "From")
+              text: "Batch"
             },
             value: {
-              text: "15 May 2025"
+              html: batchHtml
             },
             actions: {
               items: [
                 {
-                  href: "/find-a-record/patient-estimated-due-date",
+                  href: ("/vaccinate/add-batch" if data.vaccineBatch == "add-new" else "/vaccinate/batch"),
                   text: "Change",
-                  visuallyHiddenText: "name"
-                }
-              ]
-            }
-          },     
-          {
-            key: {
-              text: ("Consent given by" if from == to else "From")
-            },
-            value: {
-              text: "Patient"
-            },
-            actions: {
-              items: [
-                {
-                  href: "/find-a-record/consent",
-                  text: "Change",
-                  visuallyHiddenText: "name"
+                  visuallyHiddenText: "vaccine batch"
                 }
               ]
             }
           },
           {
             key: {
-              text: ("Injection site" if from == to else "From")
+              text: "Vaccinator"
             },
             value: {
-              text: "Left arm"
+              html: (data.otherVaccinator if data.vaccinator == "Someone else" else data.vaccinator)
             },
             actions: {
               items: [
                 {
-                  href: "/find-a-record/injection-site",
+                  href: "/vaccinate/vaccinator",
                   text: "Change",
-                  visuallyHiddenText: "name"
+                  visuallyHiddenText: "contact information"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Location"
+            },
+            value: {
+              html: data.locationType
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/location",
+                  text: "Change",
+                  visuallyHiddenText: "contact information"
+                }
+              ]
+            }
+          } if (data.vaccine === "Flu" or data.vaccine == "COVID-19"),
+          {
+            key: {
+              text: "Eligibility"
+            },
+            value: {
+              html: ((data.eligibility | join("<br>")) if (data.eligibility | isArray) else data.eligibility)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/eligibility",
+                  text: "Change",
+                  visuallyHiddenText: "eligibility"
+                }
+              ]
+            }
+          } if (data.vaccine != "Pertussis"),
+          {
+            key: {
+              text: "Pregnancy due date"
+            },
+            value: {
+              text: (data.pregnancyDueDate | isoDateFromDateInput | govukDate)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/patient-estimated-due-date",
+                  text: "Change",
+                  visuallyHiddenText: "pregnancy due date"
+                }
+              ]
+            }
+          } if ((data.vaccine == "Pertussis") or ((data.eligibility | arrayOrStringIncludes("Pregnant"))) and (data.vaccine == "RSV")),
+          {
+            key: {
+              text: "Consent given by"
+            },
+            value: {
+              text: consentHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/consent",
+                  text: "Change",
+                  visuallyHiddenText: "consnet"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Injection site"
+            },
+            value: {
+              html: (data.otherInjectionSite if data.injectionSite == "other" else data.injectionSite)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/injection-site",
+                  text: "Change",
+                  visuallyHiddenText: "contact details"
                 }
               ]
             }
           }
-
-
-
-
         ]
       }) }}
 
