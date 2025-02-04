@@ -31,7 +31,7 @@
         }) }}
       {% endif %}
 
-      <form action="/find-a-record/check-confirm" method="get">
+      <form action="/find-a-record/check-confirm?changedField=Vaccinator" method="post">
 
         {% set otherVaccinators = [
           {name: "James Bloggs", email: "james.bloggs@nhs.net" },

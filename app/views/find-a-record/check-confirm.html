@@ -24,13 +24,13 @@
 <div class="nhsuk-panel nhsuk-u-margin-bottom-8">
     <h1 class="nhsuk-panel__title">Changes saved</h1>
     <div class="nhsuk-panel__body">
-    "Name of edit" has been updated.
+    {{data.changedField}} has been updated.
     </div>
   </div>
 
 
 
-      <h1 class="nhsuk-heading-l">Jodie Brown’s RSV vaccination record</h1>
+  <h1 class="nhsuk-heading-l">{{ data.patientName }}’s {{data.vaccine}} vaccination record</h1>
 
       {{ summaryList({
         rows: [
@@ -41,7 +41,7 @@
             text: "Recorder"
           },
           value: {
-            text: "John Smith"
+            text: "Jane Smith"
           },
           actions: {
             items: [
@@ -129,7 +129,7 @@
               text: ("  Batch" if from == to else "From")
             },
             value: {
-              text: "A1234567"
+              text: data.vaccineBatch
             },
             actions: {
               items: [
@@ -159,9 +159,10 @@
               ]
             }
           },
+
           {
             key: {
-              text: ("Eligibility" if from == to else "From")
+              text: "Eligibility"
             },
             value: {
               text: "Pregnant"
@@ -171,28 +172,13 @@
                 {
                   href: "/find-a-record/eligibility",
                   text: "Change",
-                  visuallyHiddenText: "name"
+                  visuallyHiddenText: "contact information"
                 }
               ]
             }
           },
-          {
-            key: {
-              text: ("  Pregnancy due date" if from == to else "From")
-            },
-            value: {
-              text: "15 May 2025"
-            },
-            actions: {
-              items: [
-                {
-                  href: "/find-a-record/patient-estimated-due-date",
-                  text: "Change",
-                  visuallyHiddenText: "name"
-                }
-              ]
-            }
-          },     
+          
+          
           {
             key: {
               text: ("Consent given by" if from == to else "From")
@@ -212,17 +198,17 @@
           },
           {
             key: {
-              text: ("Injection site" if from == to else "From")
+              text: "Injection site"
             },
             value: {
-              text: "Left arm"
+              html: (data.otherInjectionSite if data.injectionSite == "other" else data.injectionSite)
             },
             actions: {
               items: [
                 {
                   href: "/find-a-record/injection-site",
                   text: "Change",
-                  visuallyHiddenText: "name"
+                  visuallyHiddenText: "contact details"
                 }
               ]
             }

@@ -33,7 +33,7 @@
               text: "Date of birth"
             },
             value: {
-              text: "10 March 2000"
+              text: (data.dateOfBirth | isoDateFromDateInput | govukDate) if data.dateOfBirth 
             }
           },
           {

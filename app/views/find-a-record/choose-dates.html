@@ -29,7 +29,8 @@
         }) }}
       {% endif %}
 
-      <form action="/find-a-record/check-confirm" method="get">
+      <form action="/find-a-record/check-confirm?changedField=Date" method="post">
+       
         {% set previousDateHtml %}
 
           {{ dateInput({
