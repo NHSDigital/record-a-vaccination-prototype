@@ -1,0 +1,105 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Find a record
+{% endblock %}
+
+{% set currentSection = "find-a-record" %}
+
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/find-a-record/check",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/find-a-record/check-confirm?changedField=Injection site" method="post">
+
+        {% set somewhereElseHtml %}
+
+        {{ radios({
+          idPrefix: "otherInjectionSite",
+          name: "otherInjectionSite",
+          fieldset: {
+            legend: {
+              text: "Injection site",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "Left buttock",
+              text: "Left buttock",
+              checked: (data.otherInjectionSite == "Left buttock")
+            },
+            {
+              value: "Right buttock",
+              text: "Right buttock",
+              checked: (data.otherInjectionSite == "Right buttock")
+            },
+            {
+              value: "Left thigh",
+              text: "Left thigh",
+              checked: (data.otherInjectionSite == "Left thigh")
+            },
+            {
+              value: "Right thigh",
+              text: "Right thigh",
+              checked: (data.otherInjectionSite == "Right thigh")
+            }
+          ]
+        }) }}
+        {% endset %}
+
+
+        {{ radios({
+          idPrefix: "injectionSite",
+          name: "injectionSite",
+          fieldset: {
+            legend: {
+              text: "Where did you give the injection?",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          items: [
+            {
+              value: "Left arm",
+              text: "Left arm",
+              checked: (data.injectionSite == 'Left arm')
+            },
+            {
+              value: "Right arm",
+              text: "Right arm",
+              checked: (data.injectionSite == 'Right arm')
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "other",
+              text: "Somewhere else",
+              checked: (data.injectionSite == 'other'),
+              conditional: {
+                html: somewhereElseHtml
+              }
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Save"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

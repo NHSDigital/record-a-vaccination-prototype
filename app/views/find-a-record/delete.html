@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Add batch
+{% endblock %}
+
+{% set currentSection = "find-a-record" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/find-a-record/check" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+       
+       
+    
+
+      <h1 class="nhsuks-heading-l">Delete Jodie Brown’s RSV record</h1>
+
+ 
+      <p>Once deleted no one will no longer be able to view or edit the record.</p>
+
+      <form action="/find-a-record/patient-history-change">
+
+
+        {% from 'button/macro.njk' import button %}
+
+        {% from 'button/macro.njk' import button %}
+
+        {{ button({
+          text: "Yes, delete this record"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+
+{% endblock %}

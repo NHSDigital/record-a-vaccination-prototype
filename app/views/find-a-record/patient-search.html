@@ -1,0 +1,112 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Find a record
+{% endblock %}
+
+{% set currentSection = "find-a-record" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/find-a-record" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if errors and ((errors | length) > 0) %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      <h1 class="nhsuk-heading-l">Search for a patient</h1>
+
+      <p class="nhsuk-body">Make sure the details you enter match those registered with the patient’s GP.</p>
+
+      <form action="/find-a-record/search-result" method="post">
+        {{ input({
+          label: {
+            text: "First name"
+          },
+          id: "firstName",
+          name: "firstName",
+          value: data.firstName,
+          classes: "nhsuk-input--width-20",
+          errorMessage: {
+            text: firstNameError
+          } if firstNameError
+        }) }}
+
+        {{ input({
+          label: {
+            text: "Last name"
+          },
+          id: "lastName",
+          name: "lastName",
+          value: data.lastName,
+          classes: "nhsuk-input--width-20",
+          errorMessage: {
+            text: lastNameError
+          } if lastNameError
+        }) }}
+
+        {{ dateInput({
+          id: "dateOfBirth",
+          namePrefix: "dateOfBirth",
+          fieldset: {
+            legend: {
+              text: "Date of birth",
+              classes: ""
+            }
+          },
+          hint: {
+            text: "For example, 15 3 1984"
+          },
+          errorMessage: {
+            text: dateOfBirthError
+          } if dateOfBirthError,
+          items: [
+            {
+              name: "day",
+              classes: "nhsuk-input--width-2 " + ("nhsuk-input--error" if dateOfBirthError else ""),
+              value: data.dateOfBirth.day
+            },
+            {
+              name: "month",
+              classes: "nhsuk-input--width-2 " + ("nhsuk-input--error" if dateOfBirthError else ""),
+              value: data.dateOfBirth.month
+            },
+            {
+              name: "year",
+              classes: "nhsuk-input--width-4 " + ("nhsuk-input--error" if dateOfBirthError else ""),
+              value: data.dateOfBirth.year
+            }
+          ]
+        }) }}
+
+        {{ input({
+          label: {
+            text: "Postcode"
+          },
+          id: "postcode",
+          name: "postcode",
+          value: data.postcode,
+          classes: "nhsuk-input--width-10",
+          errorMessage: {
+            text: postcodeError
+          } if postcodeError
+        }) }}
+
+        {{ button({
+          text: "Search"
+        }) }}
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}
+

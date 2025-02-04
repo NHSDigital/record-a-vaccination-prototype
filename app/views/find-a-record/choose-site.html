@@ -1,0 +1,77 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Choose sites
+{% endblock %}
+
+{% set currentSection = "find-a-record" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/reports/choose-vaccines",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+
+
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+          <form action="/reports/choose-data" method="post">
+
+            {{ checkboxes({
+                "idPrefix": "example",
+                "name": "reportSites",
+                "fieldset": {
+                  "legend": {
+                    "text": "Choose sites",
+                    "classes": "nhsuk-fieldset__legend--xl",
+                    isPageHeading: true
+                  }
+                },
+
+                "items": [
+                  {
+                    "value": "Verington (RH63S)",
+                    "text": "Verington (RH63S)",
+                    checked: (data.reportSites | arrayOrStringIncludes("Verington (RH63S)"))
+                  },
+                  {
+                    "value": "Tower (S204X)",
+                    "text": "Tower (S204X)",
+                    checked: (data.reportSites | arrayOrStringIncludes("Tower (S204X)"))
+                  },
+                  {
+                    "value": "The Exchange (RH5S9)",
+                    "text": "The Exchange (RH5S9)",
+                    checked: (data.reportSites | arrayOrStringIncludes("The Exchange (RH5S9)"))
+                  },
+                  {
+                    "value": "Willowbank Day Hospital (RH5C4)",
+                    "text": "Willowbank Day Hospital (RH5C4)",
+                    checked: (data.reportSites | arrayOrStringIncludes("Willowbank Day Hospital (RH5C4)"))
+                  }
+                  ]
+              }) }}
+
+
+          {{ button({
+            "text": "Continue"
+          }) }}
+
+        </form>
+
+
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+{% endblock %}
+

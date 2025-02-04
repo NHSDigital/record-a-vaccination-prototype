@@ -1,0 +1,112 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Find a record
+{% endblock %}
+
+{% set currentSection = "find-a-record" %}
+
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/find-a-record/check",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if vaccinatorError %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: vaccinatorError,
+              href: "#vaccinator-1"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <form action="/find-a-record/check-confirm?changedField=Vaccinator" method="post">
+
+        {% set otherVaccinators = [
+          {name: "James Bloggs", email: "james.bloggs@nhs.net" },
+          {name: "James Smith", email: "james.smith@nhs.net" },
+          {name: "Joan Jacobs", email: "joan.jacobs@nhs.net" }
+        ] %}
+
+        {% set otherVaccinatorHtml %}
+          <div class="nhsuk-form-group">
+            <h1 class="nhsuk-label-wrapper">
+              <label class="nhsuk-label nhsuk-label--s nhsuk-u-margin-bottom-1" for="otherVaccinator">
+                Vaccinator
+              </label>
+            </h1>
+            <div class="nhsuk-hint" id="organisationName-hint">
+              Search by name
+            </div>
+
+            <select class="nhsuk-select" id="otherVaccinator" name="otherVaccinator"
+              data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+                <option {{ "selected" if data.otherVaccinator == "" }} value=""></option>
+
+                {% for otherVaccinator in otherVaccinators %}
+                  <option {{ "selected" if data.otherVaccinator == otherVaccinator.name }}
+                  value="{{ otherVaccinator.name }}">{{ otherVaccinator.name }} ({{ otherVaccinator.email}})</option>
+                {% endfor %}
+            </select>
+          </div>
+        {% endset %}
+
+        {{ radios({
+          idPrefix: "vaccinator",
+          name: "vaccinator",
+          fieldset: {
+            legend: {
+              text: ("Who was the vaccinator?" if data.vaccinationToday == 'yes' else "Who was the vaccinator?"),
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: "true"
+            }
+          },
+          errorMessage: {
+            text: vaccinatorError
+          } if vaccinatorError,
+          items: [
+            {
+              value: "Jane Smith",
+              text: "Me (Jane Smith)",
+              checked: (data.vaccinator === "Jane Smith")
+            },
+            {
+              value: "Anna Brown",
+              text: "Anna Brown (anna.brown@nhs.net)",
+              checked: (data.vaccinator === "Anna Brown")
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "Someone else",
+              text: "Someone else",
+              checked: (data.vaccinator === "Someone else"),
+              conditional: {
+                html: otherVaccinatorHtml
+              }
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Save"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
