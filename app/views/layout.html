@@ -15,7 +15,7 @@
 
 <!-- Set the page title -->
 {% block pageTitle %}
-  NHS.UK prototype kit
+  {% if pageName %}{{ pageName }} - {% endif %}NHS {{ serviceName }}
 {% endblock %}
 
 {% block header %}
