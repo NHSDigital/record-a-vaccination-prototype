@@ -139,7 +139,7 @@
               text: "Vaccine"
             },
             value: {
-              text: data.vaccine
+              html: data.vaccine + "<br>" + data.vaccineProduct
             },
             actions: {
               items: [
@@ -147,23 +147,6 @@
                   href: "/vaccinate/vaccine",
                   text: "Change",
                   visuallyHiddenText: "vaccine"
-                }
-              ]
-            }
-          },
-          {
-            key: {
-              text: "Product"
-            },
-            value: {
-              text: data.vaccineProduct
-            },
-            actions: {
-              items: [
-                {
-                  href: "/vaccinate/vaccine",
-                  text: "Change",
-                  visuallyHiddenText: "vaccine product"
                 }
               ]
             }
