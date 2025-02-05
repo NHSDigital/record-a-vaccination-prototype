@@ -1,0 +1,172 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Do you have the patient’s NHS number?" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {% if (data.vaccine === "Flu" or data.vaccine == "COVID-19") %}
+    {% set backLinkHref = "/vaccinate/location" %}
+  {% else %}
+    {% set backLinkHref = "/vaccinate/eligibility" %}
+  {% endif %}
+  {{ backLink({ href: backLinkHref }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errorList | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errorList
+        }) }}
+      {% endif %}
+
+      {% if data.repeatVaccination == "yes" %}
+
+        <h1 class="nhsuk-heading-l">Check these details still apply</h1>
+
+        <p class="nhsuk-body-l">You can change them for your next {{ data.vaccine | lower }} vaccination.</p>
+
+
+        {{ summaryList({
+            rows: [
+              {
+                key: {
+                  text: "Date"
+                },
+                value: {
+                  text: ("Today" if data.vaccinationToday == "yes" else (data.vaccinationDate | isoDateFromDateInput | govukDate))
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/vaccinate",
+                      text: "Change",
+                      visuallyHiddenText: "vaccination date"
+                    }
+                  ]
+                }
+              },
+              {
+                key: {
+                  text: "Team"
+                },
+                value: {
+                  text: data.deliveryTeam
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/vaccinate/delivery-team",
+                      text: "Change",
+                      visuallyHiddenText: "team"
+                    }
+                  ]
+                }
+              },
+              {
+                key: {
+                  text: "Vaccinator"
+                },
+                value: {
+                  html: data.vaccinator
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/vaccinate/vaccinator",
+                      text: "Change",
+                      visuallyHiddenText: "contact information"
+                    }
+                  ]
+                }
+              },
+              {
+                key: {
+                  text: "Vaccine"
+                },
+                value: {
+                  html: data.vaccine + "<br>" + data.vaccineProduct
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/vaccinate/vaccine",
+                      text: "Change",
+                      visuallyHiddenText: "vaccine"
+                    }
+                  ]
+                }
+              },
+              {
+                key: {
+                  text: "Batch"
+                },
+                value: {
+                  html: data.vaccineBatch + "<br>Expires 4 January 2025"
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/vaccinate/batch",
+                      text: "Change",
+                      visuallyHiddenText: "vaccine batch"
+                    }
+                  ]
+                }
+              },
+              {
+                key: {
+                  text: "Location type"
+                },
+                value: {
+                  html: data.locationType
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/vaccinate/location",
+                      text: "Change",
+                      visuallyHiddenText: "contact information"
+                    }
+                  ]
+                }
+              } if (data.vaccine === "Flu" or data.vaccine == "COVID-19"),
+              {
+                key: {
+                  text: "Eligibility"
+                },
+                value: {
+                  html: ((data.eligibility | join("<br>")) if (data.eligibility | isArray) else data.eligibility)
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/vaccinate/eligibility",
+                      text: "Change",
+                      visuallyHiddenText: "eligibility"
+                    }
+                  ]
+                }
+              } if (data.vaccine != "Pertussis")
+            ]
+          }) }}
+
+
+      {% endif %}
+
+      <form action="/vaccinate/patient" method="post" novalidate>
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

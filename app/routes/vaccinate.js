@@ -479,7 +479,7 @@ module.exports = router => {
       req.session.data.vaccineBatch = ""
       req.session.data.eligibility = ""
 
-      res.redirect('/vaccinate/vaccine?repeatPatient=yes&repeatVaccination=no')
+      res.redirect('/vaccinate/repeat-vaccination')
 
     } else {
 
