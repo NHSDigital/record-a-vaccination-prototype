@@ -35,7 +35,7 @@ module.exports = router => {
 
     if (req.query.showErrors === 'yes') {
       if (!req.session.data.vaccinationToday) {
-        vaccinationTodayError = 'Select if vaccination was today'
+        vaccinationTodayError = 'Select if the vaccination was today'
       }
     }
 
@@ -224,7 +224,7 @@ module.exports = router => {
     let firstNameError, lastNameError, dateOfBirthError, postcodeError
 
     if (firstName === "") {
-      firstNameError = "Enter first name"
+      firstNameError = "Enter a first name"
       errors.push({
         text: firstNameError,
         href: "#firstName"
@@ -232,7 +232,7 @@ module.exports = router => {
     }
 
     if (lastName === "") {
-      lastNameError = "Enter last name"
+      lastNameError = "Enter a last name"
       errors.push({
         text: lastNameError,
         href: "#lastName"
@@ -240,7 +240,7 @@ module.exports = router => {
     }
 
     if (dateOfBirth.day === "" || dateOfBirth.month  === "" || dateOfBirth.year === "") {
-      dateOfBirthError = "Enter date of birth"
+      dateOfBirthError = "Enter a date of birth"
       errors.push({
         text: dateOfBirthError,
         href: "#dateOfBirth"
@@ -248,7 +248,7 @@ module.exports = router => {
     }
 
     if (postcode === "") {
-      postcodeError = "Enter postcode"
+      postcodeError = "Enter a postcode"
       errors.push({
         text: postcodeError,
         href: "#postcode"
@@ -285,7 +285,7 @@ module.exports = router => {
     if (showError === 'yes') {
 
       if (!pregnancyDueDate) {
-        dateErrorMessage = "Enter estimated due date"
+        dateErrorMessage = "Enter an estimated due date"
       } else if (data.vaccinationToday === "yes") {
 
         const vaccinationDate = new Date()
@@ -702,7 +702,7 @@ module.exports = router => {
 
       if (!injectionSite) {
         injectionSiteError = {
-          text: "Select injection site",
+          text: "Select the injection site",
           href: "#injection-site-1"
         }
         errors.push(injectionSiteError)
