@@ -59,11 +59,11 @@
               text: "Relationship to the patient"
             },
             errorMessage: {
-              text: consentClinicianRelationshipError.text
-            } if consentClinicianRelationshipError,
-            id: "consent-clinician-relationship-name",
-            name: "consentClinicianRelationship",
-            value: data.consentClinicianRelationship
+              text: consentAttorneyRelationshipError.text
+            } if consentAttorneyRelationshipError,
+            id: "consent-attorney-relationship",
+            name: "consentAttorneyRelationship",
+            value: data.consentAttorneyRelationship
           }) }}
         {% endset %}
 
@@ -115,7 +115,7 @@
             errorMessage: {
               text: consentDeputyRelationshipError.text
             } if consentDeputyRelationshipError,
-            id: "consent-deputy-relationship-name",
+            id: "consent-deputy-relationship",
             name: "consentDeputyRelationship",
             value: data.consentDeputyRelationship
           }) }}

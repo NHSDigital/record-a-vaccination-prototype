@@ -16,6 +16,7 @@
     <br>Clinician
   {% elseif data.consent == "Person with lasting power of attorney for health and welfare" %}
     {{ data.consentAttorneyName }}
+    <br>{{ data.consentAttorneyRelationship }}
     <br>Power of attorney
   {% elseif data.consent == "Parent or guardian" %}
     {{ data.consentParentName }}
@@ -25,6 +26,7 @@
     <br>Independent mental capacity advocate
   {% elseif data.consent == "Court appointed deputy" %}
     {{ data.consentDeputyName }}
+    <br>{{ data.consentDeputyRelationship }}
     <br>Court appointed deputy
   {% endif %}
 {% endset %}
