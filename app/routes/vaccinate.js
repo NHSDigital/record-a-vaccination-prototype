@@ -607,7 +607,7 @@ module.exports = router => {
 
   router.get('/vaccinate/consent', (req, res) => {
     let errors = []
-    let consentError, consentClinicianError, consentAttorneyError, consentParentError, consentAdvocateError, consentDeputyError, consentAttorneyRelationshipError
+    let consentError, consentClinicianError, consentAttorneyError, consentParentError, consentAdvocateError, consentDeputyError, consentAttorneyRelationshipError, consentDeputyRelationshipError
     const data = req.session.data
     const consent = data.consent
     const consentClinicianName = data.consentClinicianName
