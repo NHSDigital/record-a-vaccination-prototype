@@ -33,7 +33,7 @@
             },
             {
               value: "same-vaccination-another-patient",
-              text: "A " + (data.vaccine | lower) + " vaccination for another patient"
+              text: ("An RSV" if data.vaccine == "RSV" else ("A " + data.vaccine | lower)) + " vaccination for another patient"
             },
             {
               divider: "or"
