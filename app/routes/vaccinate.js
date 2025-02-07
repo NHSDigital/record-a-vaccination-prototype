@@ -644,7 +644,7 @@ module.exports = router => {
 
         if (consentAttorneyRelationship === '') {
           consentAttorneyRelationshipError = {
-            text: "Enter relationship to the patient",
+            text: "Enter the relationship to the patient",
             href: "#consent-attorney-relationship"
           }
           errors.push(consentAttorneyRelationshipError)
