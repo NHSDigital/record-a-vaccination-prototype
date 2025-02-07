@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Additional information" %}
+{% set pageName = "Extra information" %}
 
 {% set currentSection = "find-a-record" %}
 
@@ -16,18 +16,18 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/find-a-record/check-confirm?changedField=Additional information" method="post">
+      <form action="/find-a-record/check-confirm?changedField=Extra information" method="post">
 
         {{ textarea({
           name: "additionalInformation",
           id: "additional-information",
           label: {
-            text: "Additional information (optional)",
+            text: "Extra information (optional)",
             classes: "nhsuk-label--l",
             isPageHeading: true
           },
           hint: {
-            text: "This will not be sent to the patient’s GP and only your own organisation will be able to access it."
+            text: "This will not be sent to the patient's GP. Only your organisation will be able to access it."
           },
           value: data.additionalInformation,
           rows: 3,
