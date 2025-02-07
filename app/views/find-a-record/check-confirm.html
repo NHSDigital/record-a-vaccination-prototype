@@ -34,8 +34,8 @@
 
       {{ summaryList({
         rows: [
-        
-        
+
+
         {
           key: {
             text: "Recorder"
@@ -53,8 +53,8 @@
             ]
           }
         },
-        
-        
+
+
         {
           key: {
             text: "Date"
@@ -140,8 +140,8 @@
                 }
               ]
             }
-          },   
-          
+          },
+
           {
             key: {
               text: ("Vaccinator" if from == to else "From")
@@ -177,8 +177,8 @@
               ]
             }
           },
-          
-          
+
+
           {
             key: {
               text: ("Consent given by" if from == to else "From")
@@ -209,6 +209,23 @@
                   href: "/find-a-record/injection-site",
                   text: "Change",
                   visuallyHiddenText: "contact details"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Additional information"
+            },
+            value: {
+              text: data.additionalInformation
+            },
+            actions: {
+              items: [
+                {
+                  href: "/find-a-record/additional-information",
+                  text: "Change",
+                  visuallyHiddenText: "additional information"
                 }
               ]
             }

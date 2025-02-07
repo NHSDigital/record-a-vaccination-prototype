@@ -289,6 +289,21 @@
       }) }}
 
       <form action="/vaccinate/done" method="post" novalidate>
+
+        {{ textarea({
+          name: "additionalInformation",
+          id: "additional-information",
+          label: {
+            text: "Additional information (optional)"
+          },
+          hint: {
+            text: "This will not be sent to the patient’s GP and only your own organisation will be able to access it."
+          },
+          rows: 3,
+          classes: "nhsuk-u-margin-bottom-7"
+        }) }}
+
+
         {{ button({
           text: "Confirm and save"
         })}}
