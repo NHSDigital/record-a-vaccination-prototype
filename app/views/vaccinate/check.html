@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Vaccines
-{% endblock %}
+{% set pageName = "Check and confirm" %}
 
 {% set currentSection = "vaccinate" %}
 
@@ -11,10 +9,25 @@
 {% endblock %}
 
 {% set consentHtml %}
-  {% if data.consent == data.patientName %}
+  {% if data.consent == "patient" %}
     Patient
-  {% else %}
-    {{ data.consentName | first }}, {{ data.consent }}
+  {% elseif data.consent == "Clinician acting in the patient’s best interests" %}
+    {{ data.consentClinicianName }}
+    <br>Clinician
+  {% elseif data.consent == "Person with lasting power of attorney for health and welfare" %}
+    {{ data.consentAttorneyName }}
+    <br>{{ data.consentAttorneyRelationship }}
+    <br>Power of attorney
+  {% elseif data.consent == "Parent or guardian" %}
+    {{ data.consentParentName }}
+    <br>Parent or guardian
+  {% elseif data.consent == "Independent mental capacity advocate" %}
+    {{ data.consentAdvocateName }}
+    <br>Independent mental capacity advocate
+  {% elseif data.consent == "Court appointed deputy" %}
+    {{ data.consentDeputyName }}
+    <br>{{ data.consentDeputyRelationship }}
+    <br>Court appointed deputy
   {% endif %}
 {% endset %}
 
@@ -126,7 +139,7 @@
               text: "Vaccine"
             },
             value: {
-              text: data.vaccine
+              html: data.vaccine + "<br>" + data.vaccineProduct
             },
             actions: {
               items: [
@@ -134,23 +147,6 @@
                   href: "/vaccinate/vaccine",
                   text: "Change",
                   visuallyHiddenText: "vaccine"
-                }
-              ]
-            }
-          },
-          {
-            key: {
-              text: "Product"
-            },
-            value: {
-              text: data.vaccineProduct
-            },
-            actions: {
-              items: [
-                {
-                  href: "/vaccinate/vaccine",
-                  text: "Change",
-                  visuallyHiddenText: "vaccine product"
                 }
               ]
             }
@@ -174,6 +170,23 @@
           },
           {
             key: {
+              text: "Team"
+            },
+            value: {
+              text: data.deliveryTeam
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/delivery-team",
+                  text: "Change",
+                  visuallyHiddenText: "team"
+                }
+              ]
+            }
+          },
+          {
+            key: {
               text: "Vaccinator"
             },
             value: {
@@ -191,7 +204,7 @@
           },
           {
             key: {
-              text: "Location"
+              text: "Location type"
             },
             value: {
               html: data.locationType
@@ -245,7 +258,7 @@
               text: "Consent given by"
             },
             value: {
-              text: consentHtml
+              html: consentHtml
             },
             actions: {
               items: [

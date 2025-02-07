@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Vaccines
-{% endblock %}
+{% set pageName = "Team" %}
 
 {% set currentSection = "vaccinate" %}
 
@@ -14,11 +12,18 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/vaccinate/vaccinator" method="post" novalidate>
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      <form action="/vaccinate/answer-delivery-team" method="post" novalidate>
 
 
         {{ radios({
-          idPrefix: "deliveryTeam",
+          idPrefix: "delivery-team",
           name: "deliveryTeam",
           fieldset: {
             legend: {
@@ -27,6 +32,9 @@
               isPageHeading: true
             }
           },
+          errorMessage: {
+            text: (errors | first).text
+          } if (errors | length) > 0,
           items: [
             {
               value: "Anne Ward Maternity Unit",

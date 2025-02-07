@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Vaccines
-{% endblock %}
+{% set pageName = "Eligibility" %}
 
 {% set currentSection = "vaccinate" %}
 
@@ -13,6 +11,13 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
 
       <form action="/vaccinate/answer-eligibility" method="post" novalidate>
 
@@ -80,6 +85,9 @@
           {{ checkboxes({
             idPrefix: "eligibility",
             name: "eligibility",
+            errorMessage: {
+              text: (errors | first).text
+            } if (errors | length) > 0,
             fieldset: {
               legend: {
                 text: "Why are you giving them the vaccine?",

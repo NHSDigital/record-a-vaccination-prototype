@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Vaccines
-{% endblock %}
+{% set pageName = "Batch" %}
 
 {% set currentSection = "vaccinate" %}
 
@@ -13,6 +11,15 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
+
+    {% if error %}
+      {{ errorSummary({
+        titleText: "There is a problem",
+        errorList: [
+          error
+        ]
+      }) }}
+    {% endif %}
 
       <form action="/vaccinate/answer-batch" method="post" novalidate>
 
@@ -26,6 +33,9 @@
                 "isPageHeading": true
               }
             },
+            errorMessage: {
+              text: error.text
+            } if error,
             "items": [
               {
                 "value": "AB2345",

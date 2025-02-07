@@ -10,20 +10,15 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      <h1 class="nhsuk-heading-xl">Records</h1>
+      <h1 class="nhsuk-heading-xl nhsuk-u-margin-bottom-2">Reports</h1>
+      <p class="nhsuk-caption-m">Create and download reports</p>
 
-      <h2>Find and edit records</h2>
-
-      <p>Last 10 records listed with view links?</p>
-
-      <p>Or find by patient or date?</p>
-
-      <h2>Export records</h2>
-
-      <p class="nhsuk-body-l">Create and download extracts of records</p>
+      {{ insetText({
+        html: "<p>Reports may take longer to process if you choose more data or a wider date range.</p>"
+      })}}
 
       {{ button({
-        "text": "Create extract",
+        "text": "Create report",
         "href": "/reports/choose-dates"
       }) }}
 

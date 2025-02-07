@@ -1,4 +1,5 @@
 module.exports = {
+  nhsNumberKnown: "yes",
   currentUserId: "12345",
   currentOrganisationId: "R0A",
   vaccines: [

@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Vaccines
-{% endblock %}
+{% set pageName = "Injection site" %}
 
 {% set currentSection = "vaccinate" %}
 
@@ -14,12 +12,19 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/vaccinate/check" method="post" novalidate>
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      <form action="/vaccinate/answer-injection-site" method="post" novalidate>
 
         {% set somewhereElseHtml %}
 
         {{ radios({
-          idPrefix: "otherInjectionSite",
+          idPrefix: "other-injection-site",
           name: "otherInjectionSite",
           fieldset: {
             legend: {
@@ -27,6 +32,9 @@
               classes: "nhsuk-fieldset__legend--s"
             }
           },
+          errorMessage: {
+            text: otherInjectionSiteError.text
+          } if otherInjectionSiteError,
           items: [
             {
               value: "Left buttock",
@@ -54,7 +62,7 @@
 
 
         {{ radios({
-          idPrefix: "injectionSite",
+          idPrefix: "injection-site",
           name: "injectionSite",
           fieldset: {
             legend: {
@@ -63,6 +71,9 @@
               isPageHeading: true
             }
           },
+          errorMessage: {
+            text: injectionSiteError.text
+          } if injectionSiteError,
           items: [
             {
               value: "Left arm",
