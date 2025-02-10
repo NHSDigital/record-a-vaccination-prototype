@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Consent" %}
+{% set pageName = "Who is giving consent?" %}
 
 {% set currentSection = "consent" %}
 
@@ -53,6 +53,18 @@
             name: "consentAttorneyName",
             value: data.consentAttorneyName
           }) }}
+
+          {{ input({
+            label: {
+              text: "Relationship to the patient"
+            },
+            errorMessage: {
+              text: consentAttorneyRelationshipError.text
+            } if consentAttorneyRelationshipError,
+            id: "consent-attorney-relationship",
+            name: "consentAttorneyRelationship",
+            value: data.consentAttorneyRelationship
+          }) }}
         {% endset %}
 
         {% set consentParentHtml %}
@@ -95,6 +107,18 @@
             name: "consentDeputyName",
             value: data.consentDeputyName
           }) }}
+
+          {{ input({
+            label: {
+              text: "Relationship to the patient"
+            },
+            errorMessage: {
+              text: consentDeputyRelationshipError.text
+            } if consentDeputyRelationshipError,
+            id: "consent-deputy-relationship",
+            name: "consentDeputyRelationship",
+            value: data.consentDeputyRelationship
+          }) }}
         {% endset %}
 
         {{ radios({
@@ -128,9 +152,9 @@
               }
             },
             {
-                value: "Person with power of attorney for health and welfare",
-                text: "Person with power of attorney for health and welfare",
-                checked: (data.consent === "Person with power of attorney for health and welfare"),
+                value: "Person with lasting power of attorney for health and welfare",
+                text: "Person with lasting power of attorney for health and welfare",
+                checked: (data.consent === "Person with lasting power of attorney for health and welfare"),
                 conditional: {
                   html: consentAttorneyHtml
                 }
@@ -144,9 +168,9 @@
                 }
               },
               {
-                value: "Mental capacity advocate",
-                text: "Mental capacity advocate",
-                checked: (data.consent === "Mental capacity advocate"),
+                value: "Independent mental capacity advocate",
+                text: "Independent mental capacity advocate",
+                checked: (data.consent === "Independent mental capacity advocate"),
                 conditional: {
                   html: consentAdvocateHtml
                 }
