@@ -23,31 +23,27 @@
 
         {% from 'radios/macro.njk' import radios %}
         {% from 'input/macro.njk' import input %}
-        
+
         {% set careHtml %}
 
-        <div class="nhsuk-body-m">Care home details</div>
 
-        <div class="nhsuk-hint" id="organisationName-hint">
-          Search by name or ODS code
-        </div>
-        <select class="nhsuk-select" id="organisationCode" name="organisationCode"
-          data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
-          <option selected value=""></option>
+        <div class="nhsuk-form-group">
+          <label class="nhsuk-label nhsuk-label--s" for="care-home">
+            Care home
+          </label>
+          <div class="nhsuk-hint" id="care-home-hint">
+            Search by name or ODS code
+          </div>
+          <select class="nhsuk-select" id="care-home" name="careHome"
+            aria-describedby="care-home-hint" data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+            <option selected value=""></option>
 
           {% set options = [] %}
 
-          {% for code, name in data.nhsTrusts %}
+          {% for careHome in data.careHomes %}
             {% set options = (options.push({
-              label: name + " (" + code + ")",
-              value: code
-            }), options) %}
-          {% endfor %}
-
-          {% for code, data in data.nhsPharmacies %}
-            {% set options = (options.push({
-              label: data.name + ", " + data.address + ", " + (data.postcode | upper) + " (" + code + ")",
-              value: code
+              label: careHome.name + " (" + careHome.code + ")",
+              value: careHome.name
             }), options) %}
           {% endfor %}
 
@@ -55,11 +51,12 @@
             <option value="{{ option.value }}">{{ option.label }}</option>
           {% endfor %}
 
-        </select>
+          </select>
+        </div>
 
-        
+
       {% endset -%}
-        
+
         {{ radios({
           idPrefix: "location-type",
           name: "locationType",
@@ -115,15 +112,15 @@
 
           }) }}
 
-          
+
           {{ button({
             text: "Continue"
           })}}
-      
-  
+
+
       </form>
 
-      
+
     </div>
   </div>
 
