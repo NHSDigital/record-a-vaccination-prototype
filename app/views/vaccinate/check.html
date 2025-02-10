@@ -204,10 +204,10 @@
           },
           {
             key: {
-              text: "Location type"
+              text: ("Location" if data.locationType == "Care home" else "Location type")
             },
             value: {
-              html: data.locationType
+              html: ("Care home <br>" +data.careHome if data.locationType == "Care home" else data.locationType)
             },
             actions: {
               items: [
