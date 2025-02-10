@@ -21,6 +21,45 @@
 
       <form action="/vaccinate/answer-location" method="post" novalidate>
 
+        {% from 'radios/macro.njk' import radios %}
+        {% from 'input/macro.njk' import input %}
+        
+        {% set careHtml %}
+
+        <div class="nhsuk-body-m">Care home details</div>
+
+        <div class="nhsuk-hint" id="organisationName-hint">
+          Search by name or ODS code
+        </div>
+        <select class="nhsuk-select" id="organisationCode" name="organisationCode"
+          data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+          <option selected value=""></option>
+
+          {% set options = [] %}
+
+          {% for code, name in data.nhsTrusts %}
+            {% set options = (options.push({
+              label: name + " (" + code + ")",
+              value: code
+            }), options) %}
+          {% endfor %}
+
+          {% for code, data in data.nhsPharmacies %}
+            {% set options = (options.push({
+              label: data.name + ", " + data.address + ", " + (data.postcode | upper) + " (" + code + ")",
+              value: code
+            }), options) %}
+          {% endfor %}
+
+          {% for option in (options | sort(false, true, "label")) %}
+            <option value="{{ option.value }}">{{ option.label }}</option>
+          {% endfor %}
+
+        </select>
+
+        
+      {% endset -%}
+        
         {{ radios({
           idPrefix: "location-type",
           name: "locationType",
@@ -31,13 +70,15 @@
               isPageHeading: true
             }
           },
-          errorMessage: {
-            text: (errors | first).text
-          } if (errors | length) > 0,
           hint: {
             text: "This is needed for payment and reporting."
           },
           items: [
+            {
+              text: "Hospital hub for staff and patients",
+              value: "Hospital hub for staff and patients",
+              checked: (data.locationType === "Hospital hub for staff and patients")
+            },
             {
               text: "Hospital hub for staff and patients",
               value: "Hospital hub for staff and patients",
@@ -54,9 +95,11 @@
               checked: (data.locationType === "Community pharmacy")
             },
             {
+              value: "care",
               text: "Care home",
-              value: "Care home",
-              checked: (data.locationType === "Care home")
+              conditional: {
+                html: careHtml
+              }
             },
             {
               text: "Housebound patient’s home",
@@ -69,13 +112,17 @@
               checked: (data.locationType === "Off-site outreach event")
             }
           ]
-        }) }}
 
-        {{ button({
-          text: "Continue"
-        })}}
+          }) }}
+
+          {{ button({
+            text: "Continue"
+          })}}
+      
+  
       </form>
 
+      
     </div>
   </div>
 
