@@ -16,7 +16,7 @@
 
       
       <p>{{ data.patientName }} is {{ fullWeeksPregnant | plural("week") }}{% if remainderDaysPregnant > 0 %} and {{ remainderDaysPregnant | plural("day") }}{% endif %} pregnant.</p> 
-      <p>>The pertussis vaccine is recommended between 16 and 32 weeks of pregnancy.</p>
+      <p>The pertussis vaccine is recommended between 16 and 32 weeks of pregnancy.</p>
 
       <p><a href="https://www.gov.uk/government/publications/vaccination-against-pertussis-whooping-cough-for-pregnant-women/pertussis-whooping-cough-vaccination-programme-for-pregnant-women" target="_blank">UKHSA guidance on pertussis vaccination of pregnant women (opens in new tab)</a>.
 
@@ -25,7 +25,7 @@
   </div>
 
   {{ button({
-    "text": "Continue to vaccinate",
+    "text": "Continue anyway",
     "href": "/vaccinate/consent"
   }) }}
 
