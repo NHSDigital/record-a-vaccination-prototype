@@ -20,13 +20,15 @@
       {% endif %}
 
       <form action="/vaccinate/answer-eligibility" method="post" novalidate>
-
+hint: {
+            text: "You can select more than 1 option. But only the first option selected is sent to NHS England."
+          }
       {% if data.vaccine == "COVID-19" %}
         {% set eligibilityOptions = [
           "Resident in a care home",
           "Staff in a care home",
           "Healthcare worker",
-          "Social worker",
+          "Social care worker",
           "Based on age",
           "Pregnant",
           "Immunosuppressed",
