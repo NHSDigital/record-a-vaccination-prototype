@@ -7,6 +7,12 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
 
       <div class="nhsuk-panel nhsuk-u-margin-bottom-8">
         <h1 class="nhsuk-panel__title">Vaccination saved</h1>
@@ -17,8 +23,20 @@
 
       <form action="/vaccinate/what-next" method="post" novalidate>
 
+      {% set lowercaseVaccineName %}
+        {% if (data.vaccine == "RSV") %}
+          An RSV
+        {% elseif (data.vaccine == "COVID-19") %}
+          A COVID-19
+        {% elseif (data.vaccine == "Flu") %}
+          A flu
+        {% elseif (data.vaccine == "Pertussis") %}
+          A pertussis
+        {% endif %}
+      {% endset %}
+
         {{ radios({
-          idPrefix: "nextStep",
+          idPrefix: "next-step",
           name: "nextStep",
           fieldset: {
             legend: {
@@ -26,6 +44,9 @@
               classes: "nhsuk-fieldset__legend--m"
             }
           },
+          errorMessage: {
+            text: error.text
+          } if error,
           items: [
             {
               value: "same-patient-another-vaccination",
@@ -33,16 +54,15 @@
             },
             {
               value: "same-vaccination-another-patient",
-              text: ("An RSV" if data.vaccine == "RSV" else ("A " + data.vaccine | lower)) + " vaccination for another patient"
+              text: lowercaseVaccineName + " vaccination for another patient"
             },
             {
               divider: "or"
             },
             {
-              value: "done",
+              value: "different-vaccination-different-patient",
               text: "A different vaccination for another patient"
             }
-
           ]
         }) }}
 

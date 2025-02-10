@@ -442,21 +442,44 @@ module.exports = router => {
     res.redirect(nextPage)
   })
 
+  router.get('/vaccinate/done', (req, res) => {
+    const data = req.session.data
+    let errors = []
+    let error
+
+    if (req.query.showErrors === 'yes') {
+      if (!data.nextStep) {
+        error = {
+          text: "Select the next vaccination",
+          href: "#next-step-1"
+        }
+        errors.push(error)
+      }
+    }
+
+    res.render('vaccinate/done', {
+      errors,
+      error
+    })
+  })
+
   // Routing page after DONE
   router.post('/vaccinate/what-next', (req, res) => {
 
     const data = req.session.data
     const answer = data.nextStep
 
-    // Reset these value regardless of next step
-    data.injectionSite = ""
-    data.otherInjectionSite = ""
-    data.consent = ""
-    data.consentClinicianName = ""
-    data.consentAttorneyName = ""
-    data.consentParentName = ""
-    data.consentAdvocateName = ""
-    data.consentDeputyName = ""
+    if (answer) {
+      // Reset these value regardless of next step
+      data.injectionSite = ""
+      data.otherInjectionSite = ""
+      data.consent = ""
+      data.consentClinicianName = ""
+      data.consentAttorneyName = ""
+      data.consentParentName = ""
+      data.consentAdvocateName = ""
+      data.consentDeputyName = ""
+    }
 
     if (answer === 'same-vaccination-another-patient') {
 
@@ -470,7 +493,7 @@ module.exports = router => {
         data.newBatchNumber = ""
       }
 
-      res.redirect('/vaccinate/patient?repeatVaccination=yes&repeatPatient=no')
+      res.redirect('/vaccinate/review-previous')
 
     } else if (answer === 'same-patient-another-vaccination') {
 
@@ -481,9 +504,16 @@ module.exports = router => {
 
       res.redirect('/vaccinate/vaccine?repeatPatient=yes&repeatVaccination=no')
 
-    } else {
+    } else if (answer === 'different-vaccination-another-patient') {
 
-      res.redirect('/home')
+      req.session.data.vaccine = ""
+      req.session.data.vaccineProduct = ""
+      req.session.data.vaccineBatch = ""
+      req.session.data.eligibility = ""
+
+      res.redirect('/vaccinate/vaccine')
+    } else {
+      res.redirect('/vaccinate/done?showErrors=yes')
     }
 
   })
