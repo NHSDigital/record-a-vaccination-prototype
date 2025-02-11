@@ -1142,6 +1142,11 @@ module.exports = {
       }
     }
   ],
+  careHomes: [
+    {name: "Colin Care Home", code: "VL025"},
+    {name: "Abacus Care Home", code: "VLA2K"},
+    {name: "Barrington House", code: "VL55M"}
+  ],
   "nhsTrusts": {
     "R0A": "Manchester University NHS Foundation Trust",
     "R0B": "South Tyneside and Sunderland NHS Foundation Trust",
