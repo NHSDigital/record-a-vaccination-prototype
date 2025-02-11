@@ -53,3 +53,7 @@ $nhsuk-border-width-panel: nhsuk-spacing(1);
 .nhsuk-panel__title:last-child {
   margin-bottom: 0;
 }
+
+.nhsuk-panel a {
+  color: $color_nhsuk-white;
+}
