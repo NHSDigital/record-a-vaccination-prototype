@@ -60,7 +60,7 @@
             text: "Date"
           },
           value: {
-            text: ("11 November 2024" if data.vaccinationToday == "yes" else (data.vaccinationDate | isoDateFromDateInput | govukDate))
+            text: ("11 November 2024" if  not data.vaccinationDate else (data.vaccinationDate | isoDateFromDateInput | govukDate))
           },
           actions: {
             items: [
@@ -95,7 +95,7 @@
               text: ("  Batch" if from == to else "From")
             },
             value: {
-              text: data.vaccineBatch
+              html: data.vaccineBatch + "<br> Expires 20 March 2025"
             },
             actions: {
               items: [
@@ -240,7 +240,7 @@
         ]
       }) }}
 
-      <a class=nhsuk-body-m
+      <p class=nhsuk-body><a class=nhsuk-link
       href="/find-a-record/delete">Delete this record</a>
 
 <br>
