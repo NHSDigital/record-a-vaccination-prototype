@@ -29,7 +29,7 @@
 
         <div class="nhsuk-form-group">
           <label class="nhsuk-label nhsuk-label--s" for="care-home">
-            Care home
+            Care home details
           </label>
           <div class="nhsuk-hint" id="care-home-hint">
             Search by name or ODS code
@@ -42,7 +42,7 @@
 
           {% for careHome in data.careHomes %}
             {% set options = (options.push({
-              label: careHome.name + ", " + careHome.address1 + "," + careHome.town + "," + careHome.postcode + " (" + careHome.code + ")",
+              label: careHome.name + ", " + careHome.address1 + ", " + careHome.town + ", " + careHome.postcode + " (" + careHome.code + ")",
               value: careHome.code
             }), options) %}
           {% endfor %}
@@ -71,11 +71,6 @@
             text: "This is needed for payment and reporting."
           },
           items: [
-            {
-              text: "Hospital hub for staff and patients",
-              value: "Hospital hub for staff and patients",
-              checked: (data.locationType === "Hospital hub for staff and patients")
-            },
             {
               text: "Hospital hub for staff and patients",
               value: "Hospital hub for staff and patients",
