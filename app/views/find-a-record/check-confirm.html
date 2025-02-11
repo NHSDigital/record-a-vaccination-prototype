@@ -72,54 +72,20 @@
             ]
           }
         },
-          {
-            key: {
-              text: "Delivery team"
-            },
-            value: {
-              text: data.deliveryTeam
-            },
-            actions: {
-              items: [
-                {
-                  href: "/find-a-record/delivery-team",
-                  text: "Change",
-                  visuallyHiddenText: "name"
-                }
-              ]
-            }
-          },
 
           {
             key: {
-              text: ("Vaccine" if from == to else "From")
+              text: "Vaccine"
             },
             value: {
-              text: data.vaccine
+              html: data.vaccine + "<br>" + data.vaccineProduct
             },
             actions: {
               items: [
                 {
                   href: "/find-a-record/choose-vaccines",
                   text: "Change",
-                  visuallyHiddenText: "name"
-                }
-              ]
-            }
-          },
-          {
-            key: {
-              text: ("Product" if from == to else "From")
-            },
-            value: {
-              text: data.vaccineProduct
-            },
-            actions: {
-              items: [
-                {
-                  href: "/find-a-record/choose-vaccines",
-                  text: "Change",
-                  visuallyHiddenText: "name"
+                  visuallyHiddenText: "vaccine"
                 }
               ]
             }
@@ -141,6 +107,24 @@
               ]
             }
           },   
+
+          {
+            key: {
+              text: "Team"
+            },
+            value: {
+              text: data.deliveryTeam
+            },
+            actions: {
+              items: [
+                {
+                  href: "/find-a-record/delivery-team",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
           
           {
             key: {
@@ -178,7 +162,26 @@
             }
           },
           
-          
+          {
+            key: {
+              text: "Pregnancy due date"
+            },
+            value: {
+              text: (data.pregnancyDueDate | isoDateFromDateInput | govukDate)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/find-a-record/patient-estimated-due-date",
+                  text: "Change",
+                  visuallyHiddenText: "pregnancy due date"
+                }
+              ]
+            }
+          },
+
+
+
           {
             key: {
               text: ("Consent given by" if from == to else "From")
@@ -202,6 +205,23 @@
             },
             value: {
               html: (data.otherInjectionSite if data.injectionSite == "other" else data.injectionSite)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/find-a-record/injection-site",
+                  text: "Change",
+                  visuallyHiddenText: "contact details"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Comments"
+            },
+            value: {
+              text: "The patient has been taking Warfarin for 1 month as presribed by GP. "
             },
             actions: {
               items: [
