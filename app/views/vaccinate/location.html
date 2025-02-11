@@ -21,6 +21,42 @@
 
       <form action="/vaccinate/answer-location" method="post" novalidate>
 
+        {% from 'radios/macro.njk' import radios %}
+        {% from 'input/macro.njk' import input %}
+
+        {% set careHtml %}
+
+
+        <div class="nhsuk-form-group">
+          <label class="nhsuk-label nhsuk-label--s" for="care-home">
+            Care home details
+          </label>
+          <div class="nhsuk-hint" id="care-home-hint">
+            Search by name or ODS code
+          </div>
+          <select class="nhsuk-select" id="care-home" name="careHome"
+            aria-describedby="care-home-hint" data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+            <option {% if not data.caeHome %}selected{% endif %} value=""></option>
+
+          {% set options = [] %}
+
+          {% for careHome in data.careHomes %}
+            {% set options = (options.push({
+              label: careHome.name + ", " + careHome.address1 + ", " + careHome.town + ", " + careHome.postcode + " (" + careHome.code + ")",
+              value: careHome.code
+            }), options) %}
+          {% endfor %}
+
+          {% for option in (options | sort(false, true, "label")) %}
+            <option value="{{ option.value }}" {% if data.careHome == option.value %}selected{%endif %}>{{ option.label }}</option>
+          {% endfor %}
+
+          </select>
+        </div>
+
+
+      {% endset -%}
+
         {{ radios({
           idPrefix: "location-type",
           name: "locationType",
@@ -31,9 +67,6 @@
               isPageHeading: true
             }
           },
-          errorMessage: {
-            text: (errors | first).text
-          } if (errors | length) > 0,
           hint: {
             text: "This is needed for payment and reporting."
           },
@@ -54,9 +87,12 @@
               checked: (data.locationType === "Community pharmacy")
             },
             {
-              text: "Care home",
               value: "Care home",
-              checked: (data.locationType === "Care home")
+              text: "Care home",
+              checked: (data.locationType === "Care home"),
+              conditional: {
+                html: careHtml
+              }
             },
             {
               text: "Housebound patient’s home",
@@ -69,12 +105,17 @@
               checked: (data.locationType === "Off-site outreach event")
             }
           ]
-        }) }}
 
-        {{ button({
-          text: "Continue"
-        })}}
+          }) }}
+
+
+          {{ button({
+            text: "Continue"
+          })}}
+
+
       </form>
+
 
     </div>
   </div>
