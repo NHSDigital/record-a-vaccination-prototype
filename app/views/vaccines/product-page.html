@@ -30,7 +30,7 @@
               text: "Vaccine"
             },
             value: {
-              text: "RSV"
+              text: vaccine.vaccine
             }
           },
           {
@@ -70,6 +70,11 @@
             <th role="columnheader" scope="col">
               Batch number
             </th>
+            {% if vaccine.vaccineProduct == "Spikevax JN.1" %}
+              <th role="columnheader" scope="col">
+                Pack type
+              </th>
+            {% endif %}
             <th role="columnheader" scope="col">
               Expiry date
             </th>
@@ -93,6 +98,11 @@
               <td class="nhsuk-table__cell">
                 {{ batch.batchNumber }}
               </td>
+              {% if vaccine.vaccineProduct == "Spikevax JN.1" %}
+                <td class="nhsuk-table__cell">
+                  {{ batch.packType }}
+                </td>
+              {% endif %}
               <td class="nhsuk-table__cell">
                 {{ batch.expiryDate | govukDate }}
               </td>

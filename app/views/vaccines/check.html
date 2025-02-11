@@ -65,7 +65,15 @@
             value: {
               html: data["vaccineProduct"]
             }
-          }
+          },
+          {
+            key: {
+              text: "Pack type"
+            },
+            value: {
+              html: data.packType
+            }
+          } if data.packType
         ]
       }) }}
 

@@ -6,18 +6,20 @@ module.exports = {
     {
       id: "123456",
       vaccine: "COVID-19",
-      vaccineProduct: "Comirnaty Original/Omicron BA.4-5",
+      vaccineProduct: "Spikevax JN.1",
       siteCode: "RWX37",
       batches: [
         {
           id: "2208294",
           batchNumber: "3634747",
-          expiryDate: "2024-12-17"
+          expiryDate: "2025-12-17",
+          packType: "Single 2.5ml vial"
         },
         {
           id: "457554",
           batchNumber: "7473857",
-          expiryDate: "2025-01-02"
+          expiryDate: "2025-01-02",
+          packType: "10x 2.5ml vials"
         }
       ]
     },
