@@ -12,7 +12,11 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">{{ data.patientName }} had a COVID-19 vaccine less than 3 months ago, on 1&nbsp;December 2024.</h1>
+      <h1 class="nhsuk-heading-l">{{ data.patientName }} had a COVID-19 vaccine less than 3 months ago</h1>
+
+      <p>
+        {{ data.patientName }} had a COVID-19 vaccine on 1&nbsp;December 2024.
+      </p>
 
       <p>
         For most people, the minimum recommended gap between COVID-19 vaccine doses is 3 months.
@@ -25,7 +29,7 @@ UKHSA guidance on COVID-19 vaccination (opens in new tab)</a>.
   </div>
 
   {{ button({
-    "text": "Continue to vaccinate",
+    "text": "Continue anyway",
     "href": "/vaccinate/consent"
   }) }}
 
