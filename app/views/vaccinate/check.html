@@ -39,7 +39,24 @@
     {{ data.vaccineBatch }}
     <br>Expires 4 January 2025
   {% endif %}
+{% endset %}
 
+{% set locationHtml %}
+  {% if  data.locationType == "Care home" %}
+    Care home
+    <br>
+    {% for careHome in data.careHomes %}
+      {% if data.careHome == careHome.code %}
+        {{ careHome.name }}<br>
+        {{ careHome.address1 }}<br>
+        {{ careHome.town }}<br>
+        {{ careHome.postcode }}
+      {% endif %}
+    {% endfor %}
+
+  {% else %}
+    {{ data.locationType }}
+  {% endif %}
 {% endset %}
 
 {% block content %}
@@ -207,7 +224,7 @@
               text: ("Location" if data.locationType == "Care home" else "Location type")
             },
             value: {
-              html: ("Care home <br>" +data.careHome if data.locationType == "Care home" else data.locationType)
+              html: locationHtml
             },
             actions: {
               items: [

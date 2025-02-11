@@ -36,19 +36,19 @@
           </div>
           <select class="nhsuk-select" id="care-home" name="careHome"
             aria-describedby="care-home-hint" data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
-            <option selected value=""></option>
+            <option {% if not data.caeHome %}selected{% endif %} value=""></option>
 
           {% set options = [] %}
 
           {% for careHome in data.careHomes %}
             {% set options = (options.push({
-              label: careHome.name + " (" + careHome.code + ")",
-              value: careHome.name
+              label: careHome.name + ", " + careHome.address1 + "," + careHome.town + "," + careHome.postcode + " (" + careHome.code + ")",
+              value: careHome.code
             }), options) %}
           {% endfor %}
 
           {% for option in (options | sort(false, true, "label")) %}
-            <option value="{{ option.value }}">{{ option.label }}</option>
+            <option value="{{ option.value }}" {% if data.careHome == option.value %}selected{%endif %}>{{ option.label }}</option>
           {% endfor %}
 
           </select>

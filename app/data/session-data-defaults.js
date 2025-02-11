@@ -1143,9 +1143,9 @@ module.exports = {
     }
   ],
   careHomes: [
-    {name: "Colin Care Home", code: "VL025"},
-    {name: "Abacus Care Home", code: "VLA2K"},
-    {name: "Barrington House", code: "VL55M"}
+    {name: "Colin Care Home", code: "VL025", address1: "1 St James Street", town: "Manchester", postcode: "M1 63P"},
+    {name: "Abacus Care Home", code: "VLA2K", address1: "30 Pleasant view gardens", town: "Leeds", postcode: "L8 1PD"},
+    {name: "Barrington House", code: "VL55M", address1: "16 Mount Avon Drive", town: "London", postcode: "SE12 9PR"}
   ],
   "nhsTrusts": {
     "R0A": "Manchester University NHS Foundation Trust",
