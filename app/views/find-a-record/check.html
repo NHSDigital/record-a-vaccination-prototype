@@ -30,7 +30,7 @@
             text: "Recorder"
           },
           value: {
-            text: "Jane Smith"
+            text: "Jane Jones"
           },
           actions: {
             items: [
@@ -61,10 +61,45 @@
               ]
             }
           },
-
- {
+          {
             key: {
-              text: "Delivery team"
+              text: "Vaccine"
+            },
+            value: {
+              html: data.vaccine + "<br>" + data.vaccineProduct
+            },
+            actions: {
+              items: [
+                {
+                  href: "/find-a-record/choose-vaccines",
+                  text: "Change",
+                  visuallyHiddenText: "vaccine"
+                }
+              ]
+            }
+          },
+        
+          {
+            key: {
+              text: ("  Batch" if from == to else "From")
+            },
+            value: {
+              text: data.vaccineBatch
+            },
+            actions: {
+              items: [
+                {
+                  href: "/find-a-record/batch",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },   
+         
+          {
+            key: {
+              text: "Team"
             },
             value: {
               text: "Albert House"
@@ -79,59 +114,6 @@
               ]
             }
           },
-
-
-          {
-            key: {
-              text: "Vaccine"
-            },
-            value: {
-              text: "RSV"
-            },
-            actions: {
-              items: [
-                {
-                  href: "/find-a-record/choose-vaccines",
-                  text: "Change",
-                  visuallyHiddenText: "vaccine"
-                }
-              ]
-            }
-          },
-          {
-            key: {
-              text: "Product"
-            },
-            value: {
-              text: "Abrysvo"
-            },
-            actions: {
-              items: [
-                {
-                  href: "/find-a-record/choose-vaccines",
-                  text: "Change",
-                  visuallyHiddenText: "vaccine product"
-                }
-              ]
-            }
-          },
-          {
-            key: {
-              text: ("  Batch" if from == to else "From")
-            },
-            value: {
-              text: "AB2345"
-            },
-            actions: {
-              items: [
-                {
-                  href: "/find-a-record/batch",
-                  text: "Change",
-                  visuallyHiddenText: "name"
-                }
-              ]
-            }
-          },  
           {
             key: {
               text: "Vaccinator"
@@ -149,6 +131,8 @@
               ]
             }
           },
+
+
           {
             key: {
               text: "Eligibility"
@@ -167,6 +151,7 @@
             }
           },
 
+
           {
             key: {
               text: "Pregnancy due date"
@@ -177,7 +162,26 @@
             actions: {
               items: [
                 {
-                  href: "/vaccinate/patient-estimated-due-date",
+                  href: "/find-a-record/patient-estimated-due-date",
+                  text: "Change",
+                  visuallyHiddenText: "pregnancy due date"
+                }
+              ]
+            }
+          },
+
+
+          {
+            key: {
+              text: "Pregnancy due date"
+            },
+            value: {
+              text: (data.pregnancyDueDate | isoDateFromDateInput | govukDate)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/find-a-record/patient-estimated-due-date",
                   text: "Change",
                   visuallyHiddenText: "pregnancy due date"
                 }
@@ -209,6 +213,23 @@
             },
             value: {
               text: "Left arm"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/find-a-record/injection-site",
+                  text: "Change",
+                  visuallyHiddenText: "contact details"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Comments"
+            },
+            value: {
+              text: "The patient has been taking Warfarin for 1 month as presribed by GP. "
             },
             actions: {
               items: [
