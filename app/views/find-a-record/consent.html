@@ -8,7 +8,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/find-a-record/check",
+    href: "/find-a-record/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
@@ -19,7 +19,8 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/find-a-record/check-confirm?changedField=Consent" method="post">
+      <form action="/find-a-record/records/{{ vaccination.id }}" method="post">
+        <input type="hidden" name="changedField" value="Consent">
 
         {% set otherConsentHtml %}
 

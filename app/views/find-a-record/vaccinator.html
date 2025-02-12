@@ -6,10 +6,9 @@
 
 {% set currentSection = "find-a-record" %}
 
-
 {% block beforeContent %}
   {{ backLink({
-    href: "/find-a-record/check",
+    href: "/find-a-record/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
@@ -31,7 +30,9 @@
         }) }}
       {% endif %}
 
-      <form action="/find-a-record/check-confirm?changedField=Vaccinator" method="post">
+      <form action="/find-a-record/records/{{ vaccination.id }}" method="post">
+        <input type="hidden" name="changedField" value="Vaccinator">
+
 
         {% set otherVaccinators = [
           {name: "James Bloggs", email: "james.bloggs@nhs.net" },
@@ -52,10 +53,10 @@
 
             <select class="nhsuk-select" id="otherVaccinator" name="otherVaccinator"
               data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
-                <option {{ "selected" if data.otherVaccinator == "" }} value=""></option>
+                <option {{ "selected" if vaccination.otherVaccinator == "" }} value=""></option>
 
                 {% for otherVaccinator in otherVaccinators %}
-                  <option {{ "selected" if data.otherVaccinator == otherVaccinator.name }}
+                  <option {{ "selected" if vaccination.otherVaccinator == otherVaccinator.name }}
                   value="{{ otherVaccinator.name }}">{{ otherVaccinator.name }} ({{ otherVaccinator.email}})</option>
                 {% endfor %}
             </select>
@@ -67,7 +68,7 @@
           name: "vaccinator",
           fieldset: {
             legend: {
-              text: ("Who was the vaccinator?" if data.vaccinationToday == 'yes' else "Who was the vaccinator?"),
+              text: ("Who was the vaccinator?" if vaccination.vaccinationToday == 'yes' else "Who was the vaccinator?"),
               classes: "nhsuk-fieldset__legend--l",
               isPageHeading: "true"
             }
@@ -79,12 +80,12 @@
             {
               value: "Jane Smith",
               text: "Me (Jane Smith)",
-              checked: (data.vaccinator === "Jane Smith")
+              checked: (vaccination.vaccinator === "Jane Smith")
             },
             {
               value: "Anna Brown",
               text: "Anna Brown (anna.brown@nhs.net)",
-              checked: (data.vaccinator === "Anna Brown")
+              checked: (vaccination.vaccinator === "Anna Brown")
             },
             {
               divider: "or"
@@ -92,7 +93,7 @@
             {
               value: "Someone else",
               text: "Someone else",
-              checked: (data.vaccinator === "Someone else"),
+              checked: (vaccination.vaccinator === "Someone else"),
               conditional: {
                 html: otherVaccinatorHtml
               }
