@@ -28,7 +28,6 @@
       </div>
     {% endif %}
 
-
       <h1 class="nhsuk-heading-l">{{ vaccination.patient.name }}’s {{vaccination.vaccine}} vaccination record</h1>
 
       {{ summaryList({
@@ -227,6 +226,14 @@
 
       <p class="nhsuk-body"><a class="nhsuk-link"
       href="/find-a-record/records/{{ vaccination.id }}/delete">Delete this record</a></p>
+
+      {% if data.changedField %}
+        <form action="/find-a-record" method="get">
+          {{ button({
+            "text": "Find another record"
+          }) }}
+        </form>
+      {% endif %}
 
     </div>
   </div>
