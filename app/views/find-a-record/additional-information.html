@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Extra information" %}
+{% set pageName = "Optional note" %}
 
 {% set currentSection = "find-a-record" %}
 
@@ -22,12 +22,12 @@
           name: "additionalInformation",
           id: "additional-information",
           label: {
-            text: "Extra information (optional)",
+            text: "Optional note",
             classes: "nhsuk-label--l",
             isPageHeading: true
           },
           hint: {
-            text: "This will not be sent to the patient's GP. Only your organisation will be able to access it."
+            text: "This will not be sent to the patient's GP. Only your organisation will see it."
           },
           value: data.additionalInformation,
           rows: 3,
