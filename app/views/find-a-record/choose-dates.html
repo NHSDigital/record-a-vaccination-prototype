@@ -8,7 +8,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/find-a-record/check",
+    href: "/find-a-record/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
@@ -30,7 +30,7 @@
       {% endif %}
 
       <form action="/find-a-record/check-confirm?changedField=Date" method="post">
-       
+
         {% set previousDateHtml %}
 
           {{ dateInput({
@@ -78,7 +78,7 @@
           items: [
             {
               value: "yes",
-              text: "11 November 2024",
+              text: (vaccination.date | isoDateFromDateInput | govukDate),
               checked: true
             },
             {

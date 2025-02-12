@@ -8,12 +8,10 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/find-a-record/check",
+    href: "/find-a-record/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
-
-
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -30,8 +28,8 @@
       {% endif %}
 
 
-      <form action="/find-a-record/check-confirm" method="get">
-      
+      <form action="/find-a-record/records/{{ vaccination.id }}" method="post">
+        <input type="hidden" name="changedField" value="Pregnancy due date">
 
         {{ dateInput({
           id: "pregnancyDueDate",
@@ -46,7 +44,7 @@
           errorMessage: {
             text: dateErrorMessage
           } if dateErrorMessage,
-          values: data.pregnancyDueDate,
+          values: vaccination.pregnancyDueDate,
           hint: {
             text: "For example, 15 6 2025"
           },

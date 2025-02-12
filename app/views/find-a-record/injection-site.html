@@ -9,17 +9,18 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/find-a-record/check",
+    href: "/find-a-record/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
-
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/find-a-record/check-confirm?changedField=Injection site" method="post">
+      <form action="/find-a-record/records/{{ vaccination.id }}" method="post">
+
+      <input type="hidden" name="changedField" value="Injection site">
 
         {% set somewhereElseHtml %}
 
@@ -36,22 +37,22 @@
             {
               value: "Left buttock",
               text: "Left buttock",
-              checked: (data.otherInjectionSite == "Left buttock")
+              checked: (vaccination.otherInjectionSite == "Left buttock")
             },
             {
               value: "Right buttock",
               text: "Right buttock",
-              checked: (data.otherInjectionSite == "Right buttock")
+              checked: (vaccination.otherInjectionSite == "Right buttock")
             },
             {
               value: "Left thigh",
               text: "Left thigh",
-              checked: (data.otherInjectionSite == "Left thigh")
+              checked: (vaccination.otherInjectionSite == "Left thigh")
             },
             {
               value: "Right thigh",
               text: "Right thigh",
-              checked: (data.otherInjectionSite == "Right thigh")
+              checked: (vaccination.otherInjectionSite == "Right thigh")
             }
           ]
         }) }}
@@ -72,12 +73,12 @@
             {
               value: "Left arm",
               text: "Left arm",
-              checked: (data.injectionSite == 'Left arm')
+              checked: (vaccination.injectionSite == 'Left arm')
             },
             {
               value: "Right arm",
               text: "Right arm",
-              checked: (data.injectionSite == 'Right arm')
+              checked: (vaccination.injectionSite == 'Right arm')
             },
             {
               divider: "or"
@@ -85,7 +86,7 @@
             {
               value: "other",
               text: "Somewhere else",
-              checked: (data.injectionSite == 'other'),
+              checked: (vaccination.injectionSite == 'other'),
               conditional: {
                 html: somewhereElseHtml
               }

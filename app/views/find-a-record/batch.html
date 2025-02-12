@@ -8,7 +8,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/find-a-record/check",
+    href: "/find-a-record/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
@@ -16,7 +16,7 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-        
+
       <form action="/find-a-record/check-confirm?changedField=Batch" method="post">
 
           {{ radios({
@@ -24,7 +24,7 @@
             "name": "vaccineBatch",
             "fieldset": {
               "legend": {
-                "text": ("Which batch was used?" if data.vaccinationToday == 'yes' else "Which batch was used?"),
+                "text": ("Which batch was used?" if vaccination.vaccinationToday == 'yes' else "Which batch was used?"),
                 "classes": "nhsuk-fieldset__legend--l",
                 "isPageHeading": true
               }
@@ -36,7 +36,7 @@
                 hint: {
                   text: "Expires 14 February 2025"
                 },
-                checked: (data.vaccineBatch == "AB2345")
+                checked: (vaccination.batchNumber == "AB2345")
               },
               {
                 "value": "DE8342",
@@ -44,7 +44,7 @@
                 hint: {
                   text: "Expires 19 February 2025"
                 },
-                checked: (data.vaccineBatch == "DE8342")
+                checked: (vaccination.batchNumber == "DE8342")
               },
               {
                 "value": "LF842",
@@ -52,7 +52,7 @@
                 hint: {
                   text: "Expires 28 February 2025"
                 },
-                checked: (data.vaccineBatch == "LF842")
+                checked: (vaccination.batchNumber == "LF842")
               },
 
 
@@ -63,15 +63,15 @@
                 hint: {
                   text: "Expired 3 March 2024"
                 },
-                checked: (data.vaccineBatch == "LF842")
+                checked: (vaccination.batchNumber == "LF842")
               },
               {
-                "value": "LF842",
+                "value": "PU1234",
                 "text": "PU1234",
                 hint: {
                   text: "Expired 28 February 2024"
                 },
-                checked: (data.vaccineBatch == "LF842")
+                checked: (vaccination.batchNumber == "PU1234")
               },
               {
                 "value": "JD8352",
@@ -79,7 +79,7 @@
                 hint: {
                   text: "Expired 22 January 2024"
                 },
-                checked: (data.vaccineBatch == "JD8352")
+                checked: (vaccination.batchNumber == "JD8352")
               }
             ]
           }) }}
