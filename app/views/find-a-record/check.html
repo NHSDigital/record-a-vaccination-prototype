@@ -158,7 +158,7 @@
               text: "Pregnancy due date"
             },
             value: {
-              text: (vaccination.pregnancyDueDate | govukDate)
+              text: (vaccination.pregnancyDueDate | isoDateFromDateInput | govukDate)
             },
             actions: {
               items: [
