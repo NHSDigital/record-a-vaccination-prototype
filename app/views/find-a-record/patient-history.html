@@ -14,6 +14,15 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+      {% if recordDeleted %}
+        <div class="nhsuk-panel nhsuk-u-margin-bottom-8">
+          <h1 class="nhsuk-panel__title">Record deleted</h1>
+          <div class="nhsuk-panel__body">
+              Jodie Brown's {{ recordDeleted }} record has been deleted.
+          </div>
+        </div>
+      {% endif %}
+
       <h1 class="nhsuk-heading-l">{{ data.patientName }}’s vaccination records</h1>
 
       {{ summaryList({
@@ -63,7 +72,7 @@
 
       {% set rows = [] %}
 
-      {% for vaccinationRecorded in data.vaccinationsRecorded %}
+      {% for vaccinationRecorded in vaccinationsRecorded %}
 
         {% set rows = (rows.push([
           {
