@@ -55,6 +55,9 @@ module.exports = router => {
     if (data.consent) {
       vaccination.consent = data.consent
     }
+    if(data.batchNumber) {
+      vaccination.batchNumber = data.batchNumber
+    }
 
     res.redirect(`/find-a-record/records/${id}?changedField=${data.changedField}`)
 

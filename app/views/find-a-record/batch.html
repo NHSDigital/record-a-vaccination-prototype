@@ -17,11 +17,12 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/find-a-record/check-confirm?changedField=Batch" method="post">
+      <form action="/find-a-record/records/{{ vaccination.id }}" method="post">
+        <input type="hidden" name="changedField" value="Batch">
 
           {{ radios({
-            "idPrefix": "vaccineBatch",
-            "name": "vaccineBatch",
+            "idPrefix": "batchNumber",
+            "name": "batchNumber",
             "fieldset": {
               "legend": {
                 "text": ("Which batch was used?" if vaccination.vaccinationToday == 'yes' else "Which batch was used?"),
