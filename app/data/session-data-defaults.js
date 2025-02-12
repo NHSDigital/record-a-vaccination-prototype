@@ -21,7 +21,11 @@ module.exports = {
       deliveryTeam: "Albert House",
       vaccinator: "Anna Brown",
       eligibility: ["Pregnant"],
-      pregnancyDueDate: "2025-02-04",
+      pregnancyDueDate: {
+        day: "04",
+        month: "02",
+        year: "2025"
+      },
       consent: "Patient",
       injectionSite: "Left arm",
       notes: "The patient has been taking Warfarin for 1 month as prescribed by GP.",

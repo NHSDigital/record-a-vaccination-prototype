@@ -30,6 +30,36 @@ module.exports = router => {
 
   })
 
+  router.post('/find-a-record/records/:id', (req, res) => {
+
+    const id = req.params.id
+    const vaccination = req.session.data.vaccinationsRecorded.find((record) => record.id === id)
+    const data = req.session.data
+
+    if (data.injectionSite) {
+      vaccination.injectionSite = data.injectionSite
+    }
+    if (data.vaccine) {
+      vaccination.vaccine = data.vaccine
+      vaccination.vaccineProduct = data.vaccineProduct
+    }
+    if (data.deliveryTeam) {
+      vaccination.deliveryTeam = data.deliveryTeam
+    }
+    if (data.vaccinator) {
+      vaccination.vaccinator = data.vaccinator
+    }
+    if (data.eligibility) {
+      vaccination.eligibility = data.eligibility
+    }
+    if (data.consent) {
+      vaccination.consent = data.consent
+    }
+
+    res.redirect(`/find-a-record/records/${id}?changedField=${data.changedField}`)
+
+  })
+
   router.get('/find-a-record/records/:id/:page', (req, res) => {
 
     const id = req.params.id
