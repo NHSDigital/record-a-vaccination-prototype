@@ -18,6 +18,34 @@ module.exports = router => {
 
 })
 
+  // Show patient history
+  router.get('/find-a-record/patient-history', (req, res) => {
+    const recordDeleted = req.query.recordDeleted
+    const vaccinationsRecorded = req.session.data.vaccinationsRecorded
+
+    res.render('find-a-record/patient-history', {
+      vaccinationsRecorded,
+      recordDeleted
+    })
+  })
+
+  // Delete a vaccination record
+  router.post('/find-a-record/records/:id/confirm-delete', (req, res) => {
+    const id = req.params.id
+    const vaccinationsRecorded = req.session.data.vaccinationsRecorded
+    const vaccination = vaccinationsRecorded.find((record) => record.id === id)
+    const vaccine = vaccination.vaccine
+
+    // Find the 'index' number of the vaccination
+    const index = vaccinationsRecorded.indexOf(vaccination)
+
+    // Remove item from array using 'splice', which takes an index
+    req.session.vaccinationsRecorded = vaccinationsRecorded.splice(index, 1)
+
+    res.redirect('/find-a-record/patient-history?recordDeleted=' + vaccine)
+  })
+
+
   router.get('/find-a-record/records/:id', (req, res) => {
 
     const id = req.params.id
