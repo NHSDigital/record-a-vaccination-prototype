@@ -87,6 +87,11 @@ module.exports = router => {
       vaccination.batchNumber = data.batchNumber
     }
 
+    if (data.vaccinationDateChanged === "yes") {
+      vaccination.date = data.vaccinationDate
+      data.vaccinationDateChanged = "no"
+    }
+
     res.redirect(`/find-a-record/records/${id}?changedField=${data.changedField}`)
 
   })
