@@ -7,42 +7,62 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
 
       <div class="nhsuk-panel nhsuk-u-margin-bottom-8">
         <h1 class="nhsuk-panel__title">Vaccination saved</h1>
         <div class="nhsuk-panel__body">
-          The record will be sent to {{ data.patientName }}’s GP.
+          <a href="#">{{ data.patientName }}’s {{ data.vaccine }} record</a> will be sent to their GP.
         </div>
       </div>
 
       <form action="/vaccinate/what-next" method="post" novalidate>
 
+      {% set lowercaseVaccineName %}
+        {% if (data.vaccine == "RSV") %}
+          An RSV
+        {% elseif (data.vaccine == "COVID-19") %}
+          A COVID-19
+        {% elseif (data.vaccine == "Flu") %}
+          A flu
+        {% elseif (data.vaccine == "Pertussis") %}
+          A pertussis
+        {% endif %}
+      {% endset %}
+
         {{ radios({
-          idPrefix: "nextStep",
+          idPrefix: "next-step",
           name: "nextStep",
           fieldset: {
             legend: {
-              text: "What would you like to do next?",
+              text: "What would you like to record now?",
               classes: "nhsuk-fieldset__legend--m"
             }
           },
+          errorMessage: {
+            text: error.text
+          } if error,
           items: [
             {
-              value: "same-vaccination-another-patient",
-              text: "Record a " + data.vaccine + " vaccination for another patient"
+              value: "same-patient-another-vaccination",
+              text: data.patientName + "’s next vaccination"
             },
             {
-              value: "same-patient-another-vaccination",
-              text: "Record another vaccination for " + data.patientName
+              value: "same-vaccination-another-patient",
+              text: lowercaseVaccineName + " vaccination for another patient"
             },
             {
               divider: "or"
             },
             {
-              value: "done",
-              text: "I’m finished vaccinating for now"
+              value: "different-vaccination-another-patient",
+              text: "A different vaccination for another patient"
             }
-
           ]
         }) }}
 

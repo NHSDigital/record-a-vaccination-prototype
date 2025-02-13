@@ -2,6 +2,82 @@ module.exports = {
   nhsNumberKnown: "yes",
   currentUserId: "12345",
   currentOrganisationId: "R0A",
+  vaccinationsRecorded: [
+    {
+      id: "ABC123",
+      date: {
+        day: "11",
+        month: "11",
+        year: "2024"
+      },
+      vaccine: "RSV",
+      vaccineProduct: "Abrysvo",
+      patient: {
+        name: "Jodie Brown",
+        nhsNumber: "9123123123"
+      },
+      batchNumber: "74725GJ0",
+      batchExpiryDate: "2025-01-05",
+      deliveryTeam: "Albert House",
+      vaccinator: "Anna Brown",
+      eligibility: ["Pregnant"],
+      pregnancyDueDate: {
+        day: "04",
+        month: "02",
+        year: "2025"
+      },
+      consent: "Patient",
+      injectionSite: "Left arm",
+      notes: "The patient has been taking Warfarin for 1 month as prescribed by GP.",
+      editable: true
+    },
+    {
+      id: "74HYD94",
+      date: {
+        day: "08",
+        month: "09",
+        year: "2024"
+      },
+      vaccine: "Flu",
+      vaccineProduct: "Flucelvax Tetra - QIVc",
+      patient: {
+        name: "Jodie Brown",
+        nhsNumber: "9123123123"
+      },
+      batchNumber: "872214",
+      batchExpiryDate: "2024-12-13",
+      deliveryTeam: "Albert House",
+      vaccinator: "Anna Brown",
+      eligibility: ["Based on age"],
+      consent: "Patient",
+      injectionSite: "Left arm",
+      notes: "",
+      editable: false
+    },
+    {
+      id: "8174GSY",
+      date: {
+        day: "09",
+        month: "09",
+        year: "2021"
+      },
+      vaccine: "COVID-19",
+      vaccineProduct: "Spikevax JN.1",
+      patient: {
+        name: "Jodie Brown",
+        nhsNumber: "9123123123"
+      },
+      batchNumber: "PU1234",
+      batchExpiryDate: "2022-02-15",
+      deliveryTeam: "Albert House",
+      vaccinator: "Anna Brown",
+      eligibility: ["Based on age"],
+      consent: "Patient",
+      injectionSite: "Left arm",
+      notes: "",
+      editable: true
+    }
+  ],
   vaccines: [
     {
       id: "123456",
@@ -1141,6 +1217,11 @@ module.exports = {
         postcode: "M13 9WL"
       }
     }
+  ],
+  careHomes: [
+    {name: "Colin Care Home", code: "VL025", address1: "1 St James Street", town: "Manchester", postcode: "M1 63P"},
+    {name: "Abacus Care Home", code: "VLA2K", address1: "30 Pleasant view gardens", town: "Leeds", postcode: "L8 1PD"},
+    {name: "Barrington House", code: "VL55M", address1: "16 Mount Avon Drive", town: "London", postcode: "SE12 9PR"}
   ],
   "nhsTrusts": {
     "R0A": "Manchester University NHS Foundation Trust",

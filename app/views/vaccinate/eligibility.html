@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Eligibility" %}
+{% set pageName = "Why are you giving them the vaccine?" %}
 
 {% set currentSection = "vaccinate" %}
 
@@ -26,7 +26,7 @@
           "Resident in a care home",
           "Staff in a care home",
           "Healthcare worker",
-          "Social worker",
+          "Social care worker",
           "Based on age",
           "Pregnant",
           "Immunosuppressed",
@@ -95,6 +95,9 @@
                 isPageHeading: true
               }
             },
+        hint: {
+            text: "You can select more than 1 option. But only the first option selected is sent to NHS England."
+          },
             items: items
           }) }}
         {% endif %}

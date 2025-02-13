@@ -7,32 +7,26 @@
 {% set currentSection = "find-a-record" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/find-a-record/check" }) }}
+  {{ backLink({
+    href: "/find-a-record/records/" + vaccination.id,
+    text: "Back"
+  }) }}
 {% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-       
-       
-    
-
-      <h1 class="nhsuks-heading-l">Delete Jodie Brown’s RSV record</h1>
-
- 
-      <p>Once deleted no one will no longer be able to view or edit the record.</p>
-
-      <form action="/find-a-record/patient-history-change">
 
 
-        {% from 'button/macro.njk' import button %}
+      <h1 class="nhsuk-heading-l">Are you sure you want to delete {{ vaccination.patient.name }}’s {{vaccination.vaccine}} record</h1>
 
-        {% from 'button/macro.njk' import button %}
 
+      <p>Once deleted you will no longer be able to view or edit the record.</p>
+
+      <form action="/find-a-record/records/{{ vaccination.id }}/confirm-delete" method="post">
         {{ button({
           text: "Yes, delete this record"
         }) }}
-
       </form>
 
 

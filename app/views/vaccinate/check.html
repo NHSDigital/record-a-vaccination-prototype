@@ -14,17 +14,19 @@
   {% elseif data.consent == "Clinician acting in the patient’s best interests" %}
     {{ data.consentClinicianName }}
     <br>Clinician
-  {% elseif data.consent == "Person with power of attorney for health and welfare" %}
+  {% elseif data.consent == "Person with lasting power of attorney for health and welfare" %}
     {{ data.consentAttorneyName }}
+    <br>{{ data.consentAttorneyRelationship }}
     <br>Power of attorney
   {% elseif data.consent == "Parent or guardian" %}
     {{ data.consentParentName }}
     <br>Parent or guardian
-  {% elseif data.consent == "Mental capacity advocate" %}
+  {% elseif data.consent == "Independent mental capacity advocate" %}
     {{ data.consentAdvocateName }}
-    <br>Mental capacity advocate
+    <br>Independent mental capacity advocate
   {% elseif data.consent == "Court appointed deputy" %}
     {{ data.consentDeputyName }}
+    <br>{{ data.consentDeputyRelationship }}
     <br>Court appointed deputy
   {% endif %}
 {% endset %}
@@ -37,7 +39,22 @@
     {{ data.vaccineBatch }}
     <br>Expires 4 January 2025
   {% endif %}
+{% endset %}
 
+{% set locationHtml %}
+  {% if  data.locationType == "Care home" %}
+    {% for careHome in data.careHomes %}
+      {% if data.careHome == careHome.code %}
+        {{ careHome.name }}<br>
+        {{ careHome.address1 }}<br>
+        {{ careHome.town }}<br>
+        {{ careHome.postcode }}
+      {% endif %}
+    {% endfor %}
+
+  {% else %}
+    {{ data.locationType }}
+  {% endif %}
 {% endset %}
 
 {% block content %}
@@ -202,10 +219,10 @@
           },
           {
             key: {
-              text: "Location type"
+              text: "Location"
             },
             value: {
-              html: data.locationType
+              html: locationHtml
             },
             actions: {
               items: [

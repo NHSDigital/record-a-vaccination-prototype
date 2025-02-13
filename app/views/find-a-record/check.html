@@ -19,18 +19,25 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">{{ data.patientName }}’s {{data.vaccine}} vaccination record</h1>
+    {% if data.changedField %}
+      <div class="nhsuk-panel nhsuk-u-margin-bottom-8">
+        <h1 class="nhsuk-panel__title">Changes saved</h1>
+        <div class="nhsuk-panel__body">
+        {{data.changedField}} has been updated.
+        </div>
+      </div>
+    {% endif %}
+
+      <h1 class="nhsuk-heading-l">{{ vaccination.patient.name }}’s {{vaccination.vaccine}} vaccination record</h1>
 
       {{ summaryList({
         rows: [
-
-
         {
           key: {
             text: "Recorder"
           },
           value: {
-            text: "Jane Smith"
+            text: vaccination.patient.name
           },
           actions: {
             items: [
@@ -42,37 +49,52 @@
             ]
           }
         },
-
-
         {
             key: {
               text: "Date"
             },
             value: {
-              text: "11 November 2024"
+              text: (vaccination.date | isoDateFromDateInput | govukDate)
             },
             actions: {
               items: [
                 {
-                  href: "/find-a-record/choose-dates",
+                  href: "/find-a-record/records/" + vaccination.id + "/choose-dates",
                   text: "Change",
                   visuallyHiddenText: "vaccination date"
                 }
               ]
             }
           },
-
- {
+          {
             key: {
-              text: "Delivery team"
+              text: "Vaccine"
             },
             value: {
-              text: "Albert House"
+              html: vaccination.vaccine + "<br>" + vaccination.vaccineProduct
             },
             actions: {
               items: [
                 {
-                  href: "/find-a-record/delivery-team",
+                  href: "/find-a-record/records/" + vaccination.id + "/choose-vaccines",
+                  text: "Change",
+                  visuallyHiddenText: "vaccine"
+                }
+              ]
+            }
+          },
+
+          {
+            key: {
+              text: ("  Batch" if from == to else "From")
+            },
+            value: {
+              html: vaccination.batchNumber + "<br> Expires " + (vaccination.batchExpiryDate | govukDate)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/find-a-record/records/" + vaccination.id + "/batch",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -80,52 +102,17 @@
             }
           },
 
-
           {
             key: {
-              text: "Vaccine"
+              text: "Team"
             },
             value: {
-              text: "RSV"
+              text: vaccination.deliveryTeam
             },
             actions: {
               items: [
                 {
-                  href: "/find-a-record/choose-vaccines",
-                  text: "Change",
-                  visuallyHiddenText: "vaccine"
-                }
-              ]
-            }
-          },
-          {
-            key: {
-              text: "Product"
-            },
-            value: {
-              text: "Abrysvo"
-            },
-            actions: {
-              items: [
-                {
-                  href: "/find-a-record/choose-vaccines",
-                  text: "Change",
-                  visuallyHiddenText: "vaccine product"
-                }
-              ]
-            }
-          },
-          {
-            key: {
-              text: ("  Batch" if from == to else "From")
-            },
-            value: {
-              text: "AB2345"
-            },
-            actions: {
-              items: [
-                {
-                  href: "/find-a-record/batch",
+                  href: "/find-a-record/records/" + vaccination.id + "/delivery-team",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -137,12 +124,12 @@
               text: "Vaccinator"
             },
             value: {
-              text: "Anna Brown"
+              text: vaccination.vaccinator
             },
             actions: {
               items: [
                 {
-                  href: "/find-a-record/vaccinator",
+                  href: "/find-a-record/records/" + vaccination.id + "/vaccinator",
                   text: "Change",
                   visuallyHiddenText: "contact information"
                 }
@@ -154,51 +141,48 @@
               text: "Eligibility"
             },
             value: {
-              text: "Pregnant"
+              text: (vaccination.eligibility | join("br"))
             },
             actions: {
               items: [
                 {
-                  href: "/find-a-record/eligibility",
+                  href: "/find-a-record/records/" + vaccination.id + "/eligibility",
                   text: "Change",
                   visuallyHiddenText: "contact information"
                 }
               ]
             }
           },
-
           {
             key: {
               text: "Pregnancy due date"
             },
             value: {
-              text: (data.pregnancyDueDate | isoDateFromDateInput | govukDate)
+              text: (vaccination.pregnancyDueDate | isoDateFromDateInput | govukDate)
             },
             actions: {
               items: [
                 {
-                  href: "/vaccinate/patient-estimated-due-date",
+                  href: "/find-a-record/records/" + vaccination.id + "/patient-estimated-due-date",
                   text: "Change",
                   visuallyHiddenText: "pregnancy due date"
                 }
               ]
             }
-          } if ((data.vaccine == "Pertussis") or ((data.eligibility | arrayOrStringIncludes("Pregnant"))) and (data.vaccine == "RSV")),
-
-
+          } if vaccination.pregnancyDueDate,
           {
             key: {
               text: "Consent given by"
             },
             value: {
-              text: "Patient"
+              text: vaccination.consent
             },
             actions: {
               items: [
                 {
-                  href: "/find-a-record/consent",
+                  href: "/find-a-record/records/" + vaccination.id + "/consent",
                   text: "Change",
-                  visuallyHiddenText: "consnet"
+                  visuallyHiddenText: "consent"
                 }
               ]
             }
@@ -208,12 +192,29 @@
               text: "Injection site"
             },
             value: {
-              text: "Left arm"
+              text: vaccination.injectionSite
             },
             actions: {
               items: [
                 {
-                  href: "/find-a-record/injection-site",
+                  href: "/find-a-record/records/" + vaccination.id + "/injection-site",
+                  text: "Change",
+                  visuallyHiddenText: "contact details"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Comments"
+            },
+            value: {
+              text: vaccination.notes
+            },
+            actions: {
+              items: [
+                {
+                  href: "/find-a-record/records/" + vaccination.id + "/notes",
                   text: "Change",
                   visuallyHiddenText: "contact details"
                 }
@@ -240,10 +241,16 @@
         ]
       }) }}
 
+      <p class="nhsuk-body"><a class="nhsuk-link"
+      href="/find-a-record/records/{{ vaccination.id }}/delete">Delete this record</a></p>
 
-
-      <a class=nhsuk-body-m
-      href="/find-a-record/delete">Delete this record</a>
+      {% if data.changedField %}
+        <form action="/find-a-record" method="get">
+          {{ button({
+            "text": "Find another record"
+          }) }}
+        </form>
+      {% endif %}
 
     </div>
   </div>

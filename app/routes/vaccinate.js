@@ -442,22 +442,44 @@ module.exports = router => {
     res.redirect(nextPage)
   })
 
+  router.get('/vaccinate/done', (req, res) => {
+    const data = req.session.data
+    let errors = []
+    let error
+
+    if (req.query.showErrors === 'yes') {
+      if (!data.nextStep) {
+        error = {
+          text: "Select the next vaccination",
+          href: "#next-step-1"
+        }
+        errors.push(error)
+      }
+    }
+
+    res.render('vaccinate/done', {
+      errors,
+      error
+    })
+  })
+
   // Routing page after DONE
   router.post('/vaccinate/what-next', (req, res) => {
 
     const data = req.session.data
     const answer = data.nextStep
 
-    // Reset these value regardless of next step
-    data.injectionSite = ""
-    data.otherInjectionSite = ""
-    data.consent = ""
-    data.consentClinicianName = ""
-    data.consentAttorneyName = ""
-    data.consentParentName = ""
-    data.consentAdvocateName = ""
-    data.consentDeputyName = ""
-    data.nhsNumberKnown = "yes"
+    if (answer) {
+      // Reset these value regardless of next step
+      data.injectionSite = ""
+      data.otherInjectionSite = ""
+      data.consent = ""
+      data.consentClinicianName = ""
+      data.consentAttorneyName = ""
+      data.consentParentName = ""
+      data.consentAdvocateName = ""
+      data.consentDeputyName = ""
+    }
 
     if (answer === 'same-vaccination-another-patient') {
 
@@ -471,7 +493,7 @@ module.exports = router => {
         data.newBatchNumber = ""
       }
 
-      res.redirect('/vaccinate/patient?repeatVaccination=yes&repeatPatient=no')
+      res.redirect('/vaccinate/review-previous')
 
     } else if (answer === 'same-patient-another-vaccination') {
 
@@ -482,9 +504,16 @@ module.exports = router => {
 
       res.redirect('/vaccinate/vaccine?repeatPatient=yes&repeatVaccination=no')
 
-    } else {
+    } else if (answer === 'different-vaccination-another-patient') {
 
-      res.redirect('/home')
+      req.session.data.vaccine = ""
+      req.session.data.vaccineProduct = ""
+      req.session.data.vaccineBatch = ""
+      req.session.data.eligibility = ""
+
+      res.redirect('/vaccinate/vaccine')
+    } else {
+      res.redirect('/vaccinate/done?showErrors=yes')
     }
 
   })
@@ -608,7 +637,7 @@ module.exports = router => {
 
   router.get('/vaccinate/consent', (req, res) => {
     let errors = []
-    let consentError, consentClinicianError, consentAttorneyError, consentParentError, consentAdvocateError, consentDeputyError
+    let consentError, consentClinicianError, consentAttorneyError, consentParentError, consentAdvocateError, consentDeputyError, consentAttorneyRelationshipError, consentDeputyRelationshipError
     const data = req.session.data
     const consent = data.consent
     const consentClinicianName = data.consentClinicianName
@@ -616,6 +645,8 @@ module.exports = router => {
     const consentParentName = data.consentParentName
     const consentAdvocateName = data.consentAdvocateName
     const consentDeputyName = data.consentDeputyName
+    const consentDeputyRelationship = data.consentDeputyRelationship
+    const consentAttorneyRelationship = data.consentAttorneyRelationship
 
     if (req.query.showErrors === 'yes') {
       if (!consent) {
@@ -631,13 +662,24 @@ module.exports = router => {
           href: "#consent-clinician-name"
         }
         errors.push(consentClinicianError)
-      } else if (consent === "Person with power of attorney for personal welfare" && consentAttorneyName === '') {
+      } else if (consent === "Person with lasting power of attorney for health and welfare") {
 
-        consentAttorneyError = {
-          text: "Enter a name",
-          href: "#consent-attorney-name"
+        if (consentAttorneyName === '') {
+          consentAttorneyError = {
+            text: "Enter a name",
+            href: "#consent-attorney-name"
+          }
+          errors.push(consentAttorneyError)
         }
-        errors.push(consentAttorneyError)
+
+        if (consentAttorneyRelationship === '') {
+          consentAttorneyRelationshipError = {
+            text: "Enter the relationship to the patient",
+            href: "#consent-attorney-relationship"
+          }
+          errors.push(consentAttorneyRelationshipError)
+        }
+
       } else if (consent === "Parent or guardian" && consentParentName === '') {
 
         consentParentError = {
@@ -652,18 +694,29 @@ module.exports = router => {
           href: "#consent-advocate-name"
         }
         errors.push(consentAdvocateError)
-      } else if (consent === "Court appointed deputy" && consentDeputyName === '') {
+      } else if (consent === "Court appointed deputy") {
 
-        consentDeputyError = {
-          text: "Enter a name",
-          href: "#consent-deputy-name"
+        if (consentDeputyName === '') {
+          consentDeputyError = {
+            text: "Enter a name",
+            href: "#consent-deputy-name"
+          }
+          errors.push(consentDeputyError)
         }
-        errors.push(consentDeputyError)
+
+        if (consentDeputyRelationship === '') {
+          consentDeputyRelationshipError = {
+            text: "Enter the relationship to the patient",
+            href: "#consent-deputy-relationship"
+          }
+          errors.push(consentDeputyRelationshipError)
+        }
+
       }
     }
 
     res.render('vaccinate/consent', {
-      errors, consentError, consentClinicianError, consentAttorneyError, consentParentError, consentAdvocateError, consentDeputyError
+      errors, consentError, consentClinicianError, consentAttorneyError, consentParentError, consentAdvocateError, consentDeputyError, consentAttorneyRelationshipError, consentDeputyRelationshipError
     })
   })
 
@@ -675,14 +728,16 @@ module.exports = router => {
     const consentParentName = data.consentParentName
     const consentAdvocateName = data.consentAdvocateName
     const consentDeputyName = data.consentDeputyName
+    const consentDeputyRelationship = data.consentDeputyRelationship
+    const consentAttorneyRelationship = data.consentAttorneyRelationship
 
     if (
       (consent === "patient") ||
       (consent === "Clinician acting in the patient’s best interests" && consentClinicianName != '') ||
-      (consent === "Person with power of attorney for personal welfare" && consentAttorneyName != '') ||
+      (consent === "Person with lasting power of attorney for health and welfare" && consentAttorneyName != '' && consentAttorneyRelationship != '') ||
       (consent === "Parent or guardian" && consentParentName != '') ||
-      (consent === "Mental capacity advocate" && consentAdvocateName != '') ||
-      (consent === "Court appointed deputy" && consentDeputyName != '')
+      (consent === "Independent mental capacity advocate" && consentAdvocateName != '') ||
+      (consent === "Court appointed deputy" && consentDeputyName != '' && consentDeputyRelationship != "")
     ) {
       res.redirect('/vaccinate/injection-site')
     } else {

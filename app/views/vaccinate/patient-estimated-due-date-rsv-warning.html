@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Are you sure you want to continue?" %}
+{% set pageName = "RSV vaccine warning" %}
 
 {% set currentSection = "vaccinate" %}
 
@@ -12,7 +12,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Are you sure you want to continue?</h1>
+      <h1 class="nhsuk-heading-l">{{ data.patientName }} is not yet 28 weeks pregnant</h1>
 
 
       <p>{{ data.patientName }} is {{ fullWeeksPregnant | plural("week") }}{% if remainderDaysPregnant > 0 %} and {{ remainderDaysPregnant | plural("day") }}{% endif %} pregnant.
@@ -27,7 +27,7 @@
   </div>
 
   {{ button({
-    "text": "Continue",
+    "text": "Continue anyway",
     "href": "/vaccinate/consent"
   }) }}
 
