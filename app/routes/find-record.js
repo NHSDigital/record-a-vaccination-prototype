@@ -83,7 +83,7 @@ module.exports = router => {
     if (data.consent) {
       vaccination.consent = data.consent
     }
-    if(data.batchNumber) {
+    if (data.batchNumber) {
       vaccination.batchNumber = data.batchNumber
     }
 
