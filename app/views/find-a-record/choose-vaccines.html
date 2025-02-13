@@ -42,7 +42,7 @@
         }) }}
       {% endif %}
 
-      <form action="/find-a-record/records/{{ vaccination.id }}" method="post">
+      <form action="/find-a-record/records/{{ vaccination.id }}/batch" method="post">
         <input type="hidden" name="changedField" value="Vaccine">
 
       {% set covid19Product %}
