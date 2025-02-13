@@ -19,8 +19,8 @@
       <form action="/find-a-record/check-confirm?changedField=Extra information" method="post">
 
         {{ textarea({
-          name: "additionalInformation",
-          id: "additional-information",
+          name: "notes",
+          id: "notes",
           label: {
             text: "Optional note",
             classes: "nhsuk-label--l",
@@ -29,7 +29,7 @@
           hint: {
             text: "This will not be sent to the patient's GP. Only your organisation will see it."
           },
-          value: data.additionalInformation,
+          value: data.notes,
           rows: 3,
           classes: "nhsuk-u-margin-bottom-7"
         }) }}
