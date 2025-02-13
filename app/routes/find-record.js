@@ -87,6 +87,10 @@ module.exports = router => {
       vaccination.batchNumber = data.batchNumber
     }
 
+    if (data.notes) {
+      vaccination.notes = data.notes
+    }
+
     if (data.vaccinationDateChanged === "yes") {
       vaccination.date = data.vaccinationDate
       data.vaccinationDateChanged = "no"

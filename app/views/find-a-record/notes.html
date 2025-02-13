@@ -6,17 +6,17 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/find-a-record/check",
+    href: "/find-a-record/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
-
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/find-a-record/check-confirm?changedField=Extra information" method="post">
+      <form action="/find-a-record/records/{{ vaccination.id }}" method="post">
+        <input type="hidden" name="changedField" value="Optional note">
 
         {{ textarea({
           name: "notes",
@@ -29,7 +29,7 @@
           hint: {
             text: "This will not be sent to the patient's GP. Only your organisation will see it."
           },
-          value: data.notes,
+          value: vaccination.notes,
           rows: 3,
           classes: "nhsuk-u-margin-bottom-7"
         }) }}
