@@ -13,7 +13,7 @@
 {% set dateOfBirthHtml %}
   {% if data.dateOfBirth %}
     {{ (data.dateOfBirth | isoDateFromDateInput | govukDate) }}
-    <br>(aged 75)
+    <br>(75 years old)
   {% endif %}
 {% endset %}
 
