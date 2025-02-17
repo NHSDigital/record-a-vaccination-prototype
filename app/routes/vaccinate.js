@@ -278,63 +278,57 @@ module.exports = router => {
   let errors = []
   let firstNameError, lastNameError, dateOfBirthError, postcodeError, genderError
 
-  if (firstName === "") {
-    firstNameError = "Enter a first name"
-    errors.push({
-      text: firstNameError,
-      href: "#firstName"
-    })
-  }
-
-  if (lastName === "") {
-    lastNameError = "Enter a last name"
-    errors.push({
-      text: lastNameError,
-      href: "#lastName"
-    })
-  }
-
-  if (dateOfBirth.day === "" || dateOfBirth.month  === "" || dateOfBirth.year === "") {
-    dateOfBirthError = "Enter a date of birth"
-    errors.push({
-      text: dateOfBirthError,
-      href: "#dateOfBirth"
-    })
-  }
-
-  if (postcode === "") {
-    postcodeError = "Enter a postcode"
-    errors.push({
-      text: postcodeError,
-      href: "#postcode"
-    })
-  }
-
-  if (gender === "") {
-    genderError = "Select an option"
-    errors.push({
-      text: genderError,
-      href: "#gender"
-    })
-  }
-
-  if (errors.length === 0) {
-
-    if (Number(dateOfBirth.day) %2) {
-      res.redirect('/vaccinate/no-search-result')
-    } else {
-      res.redirect('/vaccinate/search-result')
+  if (req.query.showError == 'yes') {
+    if (firstName === "") {
+      firstNameError = "Enter a first name"
+      errors.push({
+        text: firstNameError,
+        href: "#firstName"
+      })
     }
-  } else {
-    res.render('vaccinate/create-a-record', {
-      errors,
-      firstNameError,
-      lastNameError,
-      dateOfBirthError,
-      postcodeError,
-      genderError
-    })
+
+    if (lastName === "") {
+      lastNameError = "Enter a last name"
+      errors.push({
+        text: lastNameError,
+        href: "#lastName"
+      })
+    }
+
+    if (dateOfBirth.day === "" || dateOfBirth.month  === "" || dateOfBirth.year === "") {
+      dateOfBirthError = "Enter a date of birth"
+      errors.push({
+        text: dateOfBirthError,
+        href: "#dateOfBirth"
+      })
+    }
+
+    if (postcode === "") {
+      postcodeError = "Enter a postcode"
+      errors.push({
+        text: postcodeError,
+        href: "#postcode"
+      })
+    }
+
+    if (gender === "") {
+      genderError = "Select an option"
+      errors.push({
+        text: genderError,
+        href: "#gender"
+      })
+    }
   }
+
+  res.render('vaccinate/create-a-record', {
+    errors,
+    firstNameError,
+    lastNameError,
+    dateOfBirthError,
+    postcodeError,
+    genderError
+  })
+
 
 })
 
