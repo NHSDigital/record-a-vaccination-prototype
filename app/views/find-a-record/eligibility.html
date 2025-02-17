@@ -7,19 +7,23 @@
 {% set currentSection = "find-a-record" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/find-a-record/check" }) }}
+  {{ backLink({
+    href: "/find-a-record/records/" + vaccination.id,
+    text: "Back"
+  }) }}
 {% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/find-a-record/check-confirm?changedField=Eligibility" method="post">
+      <form action="/find-a-record/records/{{ vaccination.id }}" method="post">
+        <input type="hidden" name="changedField" value="Eligibility">
 
 
         {% from 'checkboxes/macro.njk' import checkboxes %}
 
-       
+
           {{ checkboxes({
             idPrefix: "example",
             name: "example",
@@ -30,7 +34,7 @@
                 isPageHeading: true
               }
             },
-          
+
             items: [
               {
                 value: "email",

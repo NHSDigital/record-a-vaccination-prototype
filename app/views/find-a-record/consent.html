@@ -8,18 +8,17 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/find-a-record/check",
+    href: "/find-a-record/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
-
-
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/find-a-record/check-confirm?changedField=Consent" method="post">
+      <form action="/find-a-record/records/{{ vaccination.id }}" method="post">
+        <input type="hidden" name="changedField" value="Consent">
 
         {% set otherConsentHtml %}
 
@@ -29,7 +28,7 @@
             },
             id: "consentName",
             name: "consentName",
-            value: ((data.consentName | first) if data.cosentName else "")
+            value: ((vaccination.consentName | first) if vaccination.consentName else "")
           }) }}
 
         {% endset %}
@@ -46,9 +45,9 @@
           },
           items: [
             {
-              value: data.patientName,
-              text: data.patientName,
-              checked: (data.consent === data.patientName)
+              value: "Patient",
+              text: vaccination.patient.name,
+              checked: (vaccination.consent === "Patient")
             },
             {
               divider: "or"
@@ -56,7 +55,7 @@
             {
               value: "Clinician following the Mental Capacity Act",
               text: "Clinician following the Mental Capacity Act",
-              checked: (data.consent === "Clinician following the Mental Capacity Act"),
+              checked: (vaccination.consent === "Clinician following the Mental Capacity Act"),
               conditional: {
                 html: otherConsentHtml
               }
@@ -64,7 +63,7 @@
             {
                 value: "Person with power of attorney for personal welfare",
                 text: "Person with power of attorney for personal welfare",
-                checked: (data.consent === "Person with power of attorney for personal welfare"),
+                checked: (vaccination.consent === "Person with power of attorney for personal welfare"),
                 conditional: {
                   html: otherConsentHtml
                 }
@@ -72,7 +71,7 @@
               {
                 value: "Parent or guardian",
                 text: "Parent or guardian",
-                checked: (data.consent === "Parent or guardian"),
+                checked: (vaccination.consent === "Parent or guardian"),
                 conditional: {
                   html: otherConsentHtml
                 }
@@ -80,7 +79,7 @@
               {
                 value: "Mental capacity advocate",
                 text: "Mental capacity advocate",
-                checked: (data.consent === "Mental capacity advocate"),
+                checked: (vaccination.consent === "Mental capacity advocate"),
                 conditional: {
                   html: otherConsentHtml
                 }
@@ -88,7 +87,7 @@
               {
                 value: "Court appointed deputy",
                 text: "Court appointed deputy",
-                checked: (data.consent === "Court appointed deputy"),
+                checked: (vaccination.consent === "Court appointed deputy"),
                 conditional: {
                   html: otherConsentHtml
                 }

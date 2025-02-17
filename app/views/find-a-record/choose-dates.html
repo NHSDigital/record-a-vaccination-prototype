@@ -8,7 +8,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/find-a-record/check",
+    href: "/find-a-record/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
@@ -29,9 +29,10 @@
         }) }}
       {% endif %}
 
-      <form action="/find-a-record/check-confirm?changedField=Date" method="post">
-       
-        {% set previousDateHtml %}
+      <form action="/find-a-record/records/{{ vaccination.id }}" method="post">
+        <input type="hidden" name="changedField" value="Date">
+
+        {% set otherDateHtml %}
 
           {{ dateInput({
             id: "vaccinationDate",
@@ -63,8 +64,8 @@
         {% endset -%}
 
         {{ radios({
-          idPrefix: "vaccinationToday",
-          name: "vaccinationToday",
+          idPrefix: "vaccination-date-changed",
+          name: "vaccinationDateChanged",
           fieldset: {
             legend: {
               text: "When was the vaccination?",
@@ -77,16 +78,15 @@
           } if vaccinationTodayError,
           items: [
             {
-              value: "yes",
-              text: "11 November 2024",
+              value: "no",
+              text: (vaccination.date | isoDateFromDateInput | govukDate),
               checked: true
             },
             {
-              value: "no",
+              value: "yes",
               text: "Choose another date",
-              checked: (data.vaccinationToday == 'no'),
               conditional: {
-                html: previousDateHtml
+                html: otherDateHtml
               }
             }
           ]
