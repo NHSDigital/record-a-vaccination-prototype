@@ -19,7 +19,7 @@ module.exports = {
           id: "457554",
           batchNumber: "7473857",
           expiryDate: "2025-01-02",
-          packType: "10x 2.5ml vials"
+          packType: "10 vials of 2.5ml"
         }
       ]
     },
