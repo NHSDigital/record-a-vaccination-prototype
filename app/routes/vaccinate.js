@@ -427,7 +427,7 @@ module.exports = router => {
       if (data.vaccine === "Pertussis" || ((data.vaccine == "RSV") && (eligibility === "Pregnant"))) {
         nextPage = "/vaccinate/patient-estimated-due-date"
       } else {
-        nextPage = "/vaccinate/consent"
+        nextPage = "/vaccinate/patient-history"
       }
 
     } else {

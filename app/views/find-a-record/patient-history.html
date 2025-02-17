@@ -10,6 +10,13 @@
   {{ backLink({ href: "/find-a-record/search-result" }) }}
 {% endblock %}
 
+{% set dateOfBirthHtml %}
+  {% if data.dateOfBirth %}
+    {{ (data.dateOfBirth | isoDateFromDateInput | govukDate) }}
+    <br>(75 years old)
+  {% endif %}
+{% endset %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
@@ -40,7 +47,7 @@
               text: "Date of birth"
             },
             value: {
-              text: (data.dateOfBirth | isoDateFromDateInput | govukDate) if data.dateOfBirth
+              html: dateOfBirthHtml
             }
           },
           {
