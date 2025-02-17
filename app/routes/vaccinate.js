@@ -247,14 +247,6 @@ module.exports = router => {
       })
     }
 
-    if (postcode === "") {
-      postcodeError = "Enter a postcode"
-      errors.push({
-        text: postcodeError,
-        href: "#postcode"
-      })
-    }
-
     if (errors.length === 0) {
 
       if (Number(dateOfBirth.day) %2) {
