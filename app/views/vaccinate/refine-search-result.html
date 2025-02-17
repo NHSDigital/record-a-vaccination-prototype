@@ -5,7 +5,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/patient-search" }) }}
+  {{ backLink({ href: "/vaccinate/patient" }) }}
 {% endblock %}
 
 {% block content %}
@@ -19,9 +19,9 @@
         }) }}
       {% endif %}
 
-      <h1 class="nhsuk-heading-l">No result found</h1>
+      <h1 class="nhsuk-heading-l">Refine your search</h1>
 
-      <p>Check with the patient that these details match those registered with their GP. And try searching again.</p>
+      <p>Enter a postcode to refine your search. We need this because there is more than 1 match for the details you entered.</p>
 
       <form action="/vaccinate/patient-search" method="post">
         {{ input({
@@ -86,7 +86,7 @@
 
         {{ input({
           label: {
-            text: "Postcode"
+            text: "Postcode (optional)"
           },
           id: "postcode",
           name: "postcode",
@@ -98,12 +98,12 @@
         }) }}
 
         {{ details({
-          text: "If the patient is homeless",
-          HTML: "
-          <p>Try searching with the postcode ZZ99 3VZ</p>
-           
-          "
-        }) }}
+            text: "If the patient is homeless",
+            HTML: "
+            <p>Try searching with the postcode ZZ99 3VZ</p>
+             
+            "
+          }) }}
 
         {{ button({
           text: "Search"

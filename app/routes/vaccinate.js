@@ -274,6 +274,81 @@ module.exports = router => {
 
   })
 
+
+
+ router.post('/vaccinate/create-a-record', (req, res) => {
+
+  const firstName = req.session.data.firstName;
+  const lastName = req.session.data.lastName;
+  const dateOfBirth = req.session.data.dateOfBirth;
+  const postcode = req.session.data.postcode;
+  const gender = req.session.data.gender;
+  let errors = []
+  let firstNameError, lastNameError, dateOfBirthError, postcodeError, genderError
+
+  if (firstName === "") {
+    firstNameError = "Enter a first name"
+    errors.push({
+      text: firstNameError,
+      href: "#firstName"
+    })
+  }
+
+  if (lastName === "") {
+    lastNameError = "Enter a last name"
+    errors.push({
+      text: lastNameError,
+      href: "#lastName"
+    })
+  }
+
+  if (dateOfBirth.day === "" || dateOfBirth.month  === "" || dateOfBirth.year === "") {
+    dateOfBirthError = "Enter a date of birth"
+    errors.push({
+      text: dateOfBirthError,
+      href: "#dateOfBirth"
+    })
+  }
+
+  if (postcode === "") {
+    postcodeError = "Enter a postcode"
+    errors.push({
+      text: postcodeError,
+      href: "#postcode"
+    })
+  }
+
+  if (gender === "") {
+    genderError = "Select an option"
+    errors.push({
+      text: genderError,
+      href: "#gender"
+    })
+  }
+
+  if (errors.length === 0) {
+
+    if (Number(dateOfBirth.day) %2) {
+      res.redirect('/vaccinate/no-search-result')
+    } else {
+      res.redirect('/vaccinate/search-result')
+    }
+  } else {
+    res.render('vaccinate/create-a-record', {
+      errors,
+      firstNameError,
+      lastNameError,
+      dateOfBirthError,
+      postcodeError,
+      genderError
+    })
+  }
+
+})
+
+
+
+
   router.get('/vaccinate/patient-estimated-due-date', (req, res) => {
 
     const showError = req.query.showError
@@ -427,7 +502,7 @@ module.exports = router => {
       if (data.vaccine === "Pertussis" || ((data.vaccine == "RSV") && (eligibility === "Pregnant"))) {
         nextPage = "/vaccinate/patient-estimated-due-date"
       } else {
-        nextPage = "/vaccinate/consent"
+        nextPage = "/vaccinate/patient-history"
       }
 
     } else {
