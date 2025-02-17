@@ -108,14 +108,13 @@
                 name: "gender",
                 value: data.gender,
                 fieldset: {
-                legend: {
-                    text: "Gender",
-                    isPageHeading: true
-                }
+                  legend: {
+                      text: "Gender"
+                  }
                 },
                 errorMessage: {
-                text: (errors | first).text
-                } if (errors | length) > 0,
+                  text: genderError
+                } if genderError,
                 items: [
                 {
                     value: "male",

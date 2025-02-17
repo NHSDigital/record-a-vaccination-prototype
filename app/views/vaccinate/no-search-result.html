@@ -101,7 +101,7 @@
           text: "If the patient is homeless",
           HTML: "
           <p>Try searching with the postcode ZZ99 3VZ</p>
-           
+
           "
         }) }}
 
@@ -112,17 +112,11 @@
 
       <p>You can continue and record a vaccination without an NHS number, however the record will not be sent to a GP.</p>
 
-      <form action="/vaccinate/create-a-record" method="post">
-
-        <input type="hidden" name="patientName" value="{{ data.firstName }} {{ data.lastName }}">
-        <input type="hidden" name="nhsNumber" value="">
-        {{
-          button({
-            text: "Continue with no NHS number",
-            classes: "nhsuk-button--secondary"
-          })
-        }}
-      </form>
+      {{ button({
+          text: "Continue with no NHS number",
+          href: "/vaccinate/create-a-record",
+          classes: "nhsuk-button--secondary"
+      }) }}
 
     </div>
   </div>

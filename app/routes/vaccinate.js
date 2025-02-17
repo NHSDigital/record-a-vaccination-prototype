@@ -263,12 +263,10 @@ module.exports = router => {
         postcodeError
       })
     }
-
   })
 
 
-
- router.post('/vaccinate/create-a-record', (req, res) => {
+ router.get('/vaccinate/create-a-record', (req, res) => {
 
   const firstName = req.session.data.firstName;
   const lastName = req.session.data.lastName;
@@ -278,7 +276,7 @@ module.exports = router => {
   let errors = []
   let firstNameError, lastNameError, dateOfBirthError, postcodeError, genderError
 
-  if (req.query.showError == 'yes') {
+  if (req.query.showErrors == 'yes') {
     if (firstName === "") {
       firstNameError = "Enter a first name"
       errors.push({
@@ -311,7 +309,7 @@ module.exports = router => {
       })
     }
 
-    if (gender === "") {
+    if (!gender) {
       genderError = "Select an option"
       errors.push({
         text: genderError,
@@ -328,11 +326,25 @@ module.exports = router => {
     postcodeError,
     genderError
   })
-
-
 })
 
 
+  router.post('/vaccinate/create-a-record', (req, res) => {
+    const data = req.session.data
+    const firstName = req.session.data.firstName;
+    const lastName = req.session.data.lastName;
+    const dateOfBirth = req.session.data.dateOfBirth;
+    const postcode = req.session.data.postcode;
+    const gender = req.session.data.gender;
+
+    if (firstName != '' && lastName != '' && dateOfBirth.day != '' && dateOfBirth.month != '' && dateOfBirth.year != '' && postcode != '' && gender != '') {
+
+      res.redirect('/vaccinate/consent')
+    } else {
+      res.redirect('/vaccinate/create-a-record?showErrors=yes')
+    }
+
+  })
 
 
   router.get('/vaccinate/patient-estimated-due-date', (req, res) => {
