@@ -12,6 +12,13 @@
   {% set nextPage = "/vaccinate/consent" %}
 {% endif %}
 
+{% set dateOfBirthHtml %}
+  {% if data.dateOfBirth %}
+    {{ (data.dateOfBirth | isoDateFromDateInput | govukDate) }}
+    <br>(75 years old)
+  {% endif %}
+{% endset %}
+
 {% block beforeContent %}
   {{ backLink({ href: "/vaccinate/patient" }) }}
 {% endblock %}
@@ -38,7 +45,7 @@
               text: "Date of birth"
             },
             value: {
-              text: ((data.dateOfBirth | isoDateFromDateInput | govukDate) if data.dateOfBirth else "")
+              html: dateOfBirthHtml
             }
           },
           {

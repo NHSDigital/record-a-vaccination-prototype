@@ -6,10 +6,9 @@
 
 {% set currentSection = "find-a-record" %}
 
-
 {% block beforeContent %}
   {{ backLink({
-    href: "/find-a-record/check",
+    href: "/find-a-record/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
@@ -21,13 +20,13 @@
       {% if vaccineError %}
         {% set error = {text: vaccineError, href: "#vaccine-1"} %}
       {% elseif vaccineProductError %}
-        {% if data.vaccine == "RSV" %}
+        {% if vaccination.vaccine == "RSV" %}
           {% set errorHref = "#vaccineProductRsv-1" %}
-        {% elseif data.vaccine == "COVID-19" %}
+        {% elseif vaccination.vaccine == "COVID-19" %}
           {% set errorHref = "#vaccineProductCovid-1" %}
-        {% elseif data.vaccine == "Pertussis" %}
+        {% elseif vaccination.vaccine == "Pertussis" %}
           {% set errorHref = "#vaccineProductPertussis-1" %}
-        {% elseif data.vaccine == "Flu" %}
+        {% elseif vaccination.vaccine == "Flu" %}
           {% set errorHref = "#vaccineProductFlu-1" %}
         {% endif %}
 
@@ -43,7 +42,8 @@
         }) }}
       {% endif %}
 
-      <form action="/find-a-record/check-confirm?changedField=Vaccine and Product" method="post">
+      <form action="/find-a-record/records/{{ vaccination.id }}/batch" method="post">
+        <input type="hidden" name="changedField" value="Vaccine">
 
       {% set covid19Product %}
         {{ radios({
@@ -56,27 +56,27 @@
           },
           errorMessage: {
             text: vaccineProductError
-          } if vaccineProductError and data.vaccine == "COVID-19",
+          } if vaccineProductError and vaccination.vaccine == "COVID-19",
           "items": [
             {
               "value": "Comirnaty 30 JN.1",
               "text": "Comirnaty 30 JN.1",
-              checked: (data.vaccineProduct == "Comirnaty 30 JN.1")
+              checked: (vaccination.vaccineProduct == "Comirnaty 30 JN.1")
             },
             {
               "value": "Comirnaty 10 JN.1",
               "text": "Comirnaty 10 JN.1",
-              checked: (data.vaccineProduct == "Comirnaty 10 JN.1")
+              checked: (vaccination.vaccineProduct == "Comirnaty 10 JN.1")
             },
             {
               "value": "Comirnaty 3 JN.1",
               "text": "Comirnaty 3 JN.1",
-              checked: (data.vaccineProduct == "Comirnaty 3 JN.1")
+              checked: (vaccination.vaccineProduct == "Comirnaty 3 JN.1")
             },
             {
               "value": "Spikevax JN.1",
               "text": "Spikevax JN.1",
-              checked: (data.vaccineProduct == "Spikevax JN.1")
+              checked: (vaccination.vaccineProduct == "Spikevax JN.1")
             }
           ]
         }) }}
@@ -93,37 +93,37 @@
           },
           errorMessage: {
             text: vaccineProductError
-          } if vaccineProductError and data.vaccine == "Flu",
+          } if vaccineProductError and vaccination.vaccine == "Flu",
           "items": [
             {
               "value": "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)",
               "text": "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)",
-              checked: (data.vaccineProduct == "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)")
+              checked: (vaccination.vaccineProduct == "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)")
             },
             {
               "value": "Cell-based Quadrivalent Influenza Vaccine (QIVc)",
               "text": "Cell-based Quadrivalent Influenza Vaccine (QIVc)",
-              checked: (data.vaccineProduct == "Cell-based Quadrivalent Influenza Vaccine (QIVc)")
+              checked: (vaccination.vaccineProduct == "Cell-based Quadrivalent Influenza Vaccine (QIVc)")
             },
             {
               "value": "Fluenz (LAIV)",
               "text": "Fluenz (LAIV)",
-              checked: (data.vaccineProduct == "Fluenz (LAIV)")
+              checked: (vaccination.vaccineProduct == "Fluenz (LAIV)")
             },
             {
               "value": "Influenza Tetra MYL (QIVe)",
               "text": "Influenza Tetra MYL (QIVe)",
-              checked: (data.vaccineProduct == "Influenza Tetra MYL (QIVe)")
+              checked: (vaccination.vaccineProduct == "Influenza Tetra MYL (QIVe)")
             },
             {
               "value": "Quadrivalent Influenza Vaccine (QIVe)",
               "text": "Quadrivalent Influenza Vaccine (QIVe)",
-              checked: (data.vaccineProduct == "Quadrivalent Influenza Vaccine (QIVe)")
+              checked: (vaccination.vaccineProduct == "Quadrivalent Influenza Vaccine (QIVe)")
             },
             {
               "value": "Quadrivalent Influenza Vaccine - High Dose (QIV-HD)",
               "text": "Quadrivalent Influenza Vaccine - High Dose (QIV-HD)",
-              checked: (data.vaccineProduct == "Quadrivalent Influenza Vaccine - High Dose (QIV-HD)")
+              checked: (vaccination.vaccineProduct == "Quadrivalent Influenza Vaccine - High Dose (QIV-HD)")
             }
           ]
         }) }}
@@ -141,22 +141,22 @@
           },
           errorMessage: {
             text: vaccineProductError
-          } if vaccineProductError and data.vaccine == "Pertussis",
+          } if vaccineProductError and vaccination.vaccine == "Pertussis",
           "items": [
             {
               "value": "Adacel vaccine supsension",
               "text": "Adacel vaccine supsension",
-              checked: (data.vaccineProduct == "Adacel vaccine supsension")
+              checked: (vaccination.vaccineProduct == "Adacel vaccine supsension")
             },
             {
               "value": "Boostrix-IPV supsension",
               "text": "Boostrix-IPV supsension",
-              checked: (data.vaccineProduct == "Boostrix-IPV supsension")
+              checked: (vaccination.vaccineProduct == "Boostrix-IPV supsension")
             },
             {
               "value": "Repevax vaccine suspension",
               "text": "Repevax vaccine suspension",
-              checked: (data.vaccineProduct == "Repevax vaccine suspension")
+              checked: (vaccination.vaccineProduct == "Repevax vaccine suspension")
             }
           ]
         }) }}
@@ -173,22 +173,22 @@
           },
           errorMessage: {
             text: vaccineProductError
-          } if vaccineProductError and data.vaccine == "RSV",
+          } if vaccineProductError and vaccination.vaccine == "RSV",
           "items": [
             {
               "value": "Abrysvo",
               "text": "Abrysvo",
-              checked: (data.vaccineProduct == "Abrysvo")
+              checked: (vaccination.vaccineProduct == "Abrysvo")
             }
           ]
         }) }}
     {% endset %}
 
-      {% if data.repeatPatient == 'yes' and data.patientName %}
+      {% if vaccination.repeatPatient == 'yes' and vaccination.patientName %}
 
-        {% set question = ("Which vaccine did you give?" + data.patientName + "?" if data.vaccinationToday == 'yes' else "Which vaccine did you give " + data.patientName + "?") %}
+        {% set question = ("Which vaccine did you give?" + vaccination.patientName + "?" if vaccination.vaccinationToday == 'yes' else "Which vaccine did you give " + vaccination.patientName + "?") %}
       {% else %}
-        {% set question = ("Which vaccine did you give?" if data.vaccinationToday == 'yes' else "Which vaccine did you give?") %}
+        {% set question = ("Which vaccine did you give?" if vaccination.vaccinationToday == 'yes' else "Which vaccine did you give?") %}
       {% endif %}
 
       {{ radios({
@@ -208,7 +208,7 @@
           {
             "value": "COVID-19",
             "text": "COVID-19",
-            checked: (data.vaccine == "COVID-19"),
+            checked: (vaccination.vaccine == "COVID-19"),
             conditional: {
               html: covid19Product
             }
@@ -216,7 +216,7 @@
           {
             "value": "Flu",
             "text": "Flu",
-            checked: (data.vaccine == "Flu"),
+            checked: (vaccination.vaccine == "Flu"),
             conditional: {
               html: fluProduct
             }
@@ -224,7 +224,7 @@
           {
             "value": "Pertussis",
             "text": "Pertussis",
-            checked: (data.vaccine == "Pertussis"),
+            checked: (vaccination.vaccine == "Pertussis"),
             conditional: {
               html: pertussisProduct
             }
@@ -232,7 +232,7 @@
           {
             "value": "RSV",
             "text": "RSV",
-            checked: (data.vaccine == "RSV"),
+            checked: (vaccination.vaccine == "RSV"),
             conditional: {
               html: rsvProduct
             }

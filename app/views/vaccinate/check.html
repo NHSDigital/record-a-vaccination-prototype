@@ -306,6 +306,21 @@
       }) }}
 
       <form action="/vaccinate/done" method="post" novalidate>
+
+        {{ textarea({
+          name: "notes",
+          id: "notes",
+          label: {
+            text: "Optional note"
+          },
+          hint: {
+            text: "This will not be sent to the patient's GP. Only your organisation will see it."
+          },
+          rows: 3,
+          classes: "nhsuk-u-margin-bottom-7"
+        }) }}
+
+
         {{ button({
           text: "Confirm and save"
         })}}
