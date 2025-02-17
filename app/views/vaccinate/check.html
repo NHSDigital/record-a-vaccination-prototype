@@ -71,7 +71,7 @@
               text: "Name"
             },
             value: {
-              text: data.patientName
+              text: (data.patientName if data.patientName else data.firstName + " " + data.lastName)
             },
             actions: {
               items: [
