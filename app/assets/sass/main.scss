@@ -5,7 +5,6 @@
 @import 'components/list-border';
 @import 'components/related-nav';
 @import 'components/indent-list';
-@import 'components/panel';
 
 // Import GOVUK-frontend
 //
@@ -29,6 +28,7 @@ $govuk-brand-colour: $nhsuk-link-color;
 @import 'components/table';
 @import 'components/button';
 @import 'components/filters';
+@import 'components/link';
 
 
 @import '../../components/pagination/_pagination';

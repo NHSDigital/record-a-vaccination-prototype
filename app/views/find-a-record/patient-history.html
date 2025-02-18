@@ -22,12 +22,11 @@
     <div class="nhsuk-grid-column-two-thirds">
 
       {% if recordDeleted %}
-        <div class="nhsuk-panel nhsuk-u-margin-bottom-8">
-          <h1 class="nhsuk-panel__title">Record deleted</h1>
-          <div class="nhsuk-panel__body">
-              Jodie Brown's {{ recordDeleted }} record has been deleted.
-          </div>
-        </div>
+        {{ panel({
+          titleText: "Record deleted",
+          text: (data.patientName + "’s " + recordDeleted + " record has been deleted."),
+          classes: "nhsuk-u-margin-bottom-8"
+        }) }}
       {% endif %}
 
       <h1 class="nhsuk-heading-l">{{ data.patientName }}’s vaccination records</h1>
