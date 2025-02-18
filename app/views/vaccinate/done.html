@@ -14,12 +14,14 @@
         }) }}
       {% endif %}
 
-      <div class="nhsuk-panel nhsuk-u-margin-bottom-8">
-        <h1 class="nhsuk-panel__title">Vaccination saved</h1>
-        <div class="nhsuk-panel__body">
-          <a href="#">{{ data.patientName }}’s {{ data.vaccine }} record</a> will be sent to their GP.
-        </div>
-      </div>
+      {% set panelHtml %}
+        <a href="#" class="app-link--reverse">{{ data.patientName }}’s {{ data.vaccine }} record</a> will be sent to their GP.
+      {% endset %}
+
+      {{ panel({
+        titleText: "Vaccination saved",
+        html: panelHtml
+      }) }}
 
       <form action="/vaccinate/what-next" method="post" novalidate>
 

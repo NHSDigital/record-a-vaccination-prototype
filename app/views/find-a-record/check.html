@@ -20,12 +20,11 @@
     <div class="nhsuk-grid-column-two-thirds">
 
     {% if data.changedField %}
-      <div class="nhsuk-panel nhsuk-u-margin-bottom-8">
-        <h1 class="nhsuk-panel__title">Changes saved</h1>
-        <div class="nhsuk-panel__body">
-        {{data.changedField}} has been updated.
-        </div>
-      </div>
+      {{ panel({
+        titleText: "Changes saved",
+        text: (data.changedField + " has been updated."),
+        classes: "nhsuk-u-margin-bottom-8"
+      }) }}
     {% endif %}
 
       <h1 class="nhsuk-heading-l">{{ vaccination.patient.name }}’s {{vaccination.vaccine}} vaccination record</h1>
