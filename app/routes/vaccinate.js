@@ -249,8 +249,15 @@ module.exports = router => {
 
     if (errors.length === 0) {
 
-      if (Number(dateOfBirth.day) %2) {
+      // If day of month is odd, pretend there’s no search result
+      if (Number(dateOfBirth.day) % 2) {
         res.redirect('/vaccinate/no-search-result')
+
+      // If postcode blank, pretend there’s multiple results
+      } else if (postcode === "") {
+        res.redirect('/vaccinate/refine-search-result')
+
+      // Otherwise pretend there is a single result
       } else {
         res.redirect('/vaccinate/search-result')
       }
