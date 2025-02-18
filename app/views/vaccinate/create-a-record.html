@@ -21,7 +21,7 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>The vaccination record will not be sent to a GP unless it matched up with an NHS number later. You need to enter {% if not data.postcode%} postcode and {% endif %} gender.</p>
+      <p> You need to {% if not data.postcode%} enter a postcode and {% endif %} select an option for gender. The vaccination record will only be sent to a GP if it can be matched with an NHS number later.</p>
 
       <form action="/vaccinate/create-a-record" method="post">
         {{ input({
