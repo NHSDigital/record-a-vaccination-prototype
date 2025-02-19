@@ -44,6 +44,33 @@
           }
         }) }}
 
+        {% if vaccine.vaccineProduct == "Spikevax JN.1" %}
+
+          {{ radios({
+            "idPrefix": "pack-type",
+            "name": "packType",
+            "fieldset": {
+              "legend": {
+                "text": "Pack size",
+                classes: "nhsuk-fieldset__legend--s"
+              }
+            },
+            "items": [
+              {
+                "value": "Single vial",
+                "text": "Single vial",
+                checked: (batch.packType == "Single vial")
+              },
+              {
+                "value": "10 vials",
+                "text": "10 vials",
+                checked: (batch.packType == "10 vials")
+              }
+            ]
+          }) }}
+
+        {% endif %}
+
         {{ button({
           "text": "Continue"
       }) }}

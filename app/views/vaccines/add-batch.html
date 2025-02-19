@@ -17,7 +17,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuks-heading-xl">Add batch</h1>
+      <h1 class="nhsuk-heading-l">Add batch</h1>
 
       <form action="/vaccines/check" method="post" novalidate="true">
 
@@ -47,6 +47,33 @@
           },
           values: data.batchExpiryDate
         }) }}
+
+        {% if data.vaccineProduct == "Spikevax JN.1" %}
+
+          {{ radios({
+            "idPrefix": "pack-type",
+            "name": "packType",
+            "fieldset": {
+              "legend": {
+                "text": "Pack size",
+                classes: "nhsuk-fieldset__legend--s"
+              }
+            },
+            "items": [
+              {
+                "value": "Single vial",
+                "text": "Single vial",
+                checked: (data.packType == "Single vial")
+              },
+              {
+                "value": "10 vials",
+                "text": "10 vials",
+                checked: (data.packType == "10 vials")
+              }
+            ]
+          }) }}
+
+        {% endif %}
 
           {{ button({
             "text": "Continue"

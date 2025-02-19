@@ -18,7 +18,8 @@ module.exports = (router) => {
         {
           id: Math.floor(Math.random() * 10000000).toString(),
           batchNumber: data.batchNumber,
-          expiryDate: expiryDate
+          expiryDate: expiryDate,
+          packType: data.packType
         }
       ]
     })
@@ -26,6 +27,7 @@ module.exports = (router) => {
     // Reset data
     req.session.data.vaccine = ''
     req.session.data.vaccineProduct = ''
+    req.session.data.packType = ''
     req.session.data.siteCode = ''
     req.session.data.batchNumber = ''
     req.session.data.batchExpiryDate.day = ''
@@ -73,7 +75,8 @@ module.exports = (router) => {
     vaccine.batches.push({
       id: generatedId,
       batchNumber: data.batchNumber,
-      expiryDate: expiryDate
+      expiryDate: expiryDate,
+      packType: data.packType
     })
 
     // Reset data
