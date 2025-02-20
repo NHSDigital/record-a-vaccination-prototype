@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Which team are you working with?" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      <form action="/vaccinate/answer-delivery-team" method="post" novalidate>
+
+
+        {{ radios({
+          idPrefix: "healthcare-worker",
+          name: "healthcareWorker",
+          fieldset: {
+            legend: {
+              text: "Which role does Jonathan Brown work in?",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          errorMessage: {
+            text: (errors | first).text
+          } if (errors | length) > 0,
+          items: [
+            {
+              value: "Doctor",
+              text: "Doctor",
+              checked: (data.deliveryTeam === "Anne Ward Maternity Unit")
+            },
+            {
+              value: "St Mary’s Hospital",
+              text: "Qualified nurse or midwife",
+              checked: (data.deliveryTeam === "St Mary’s Hospital")
+            },
+            {
+              value: "Josephine Clinic",
+              text: "Another professionally qualified clinical role",
+              checked: (data.deliveryTeam === "Josephine Clinic")
+            },
+            {
+              value: "Josephine Clinic",
+              text: "Clinical support",
+              checked: (data.deliveryTeam === "Josephine Clinic")
+            },
+            {
+              value: "Josephine Clinic",
+              text: "Non clinical",
+              checked: (data.deliveryTeam === "Josephine Clinic")
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
