@@ -247,18 +247,17 @@ module.exports = router => {
       })
     }
 
-    if (postcode === "") {
-      postcodeError = "Enter a postcode"
-      errors.push({
-        text: postcodeError,
-        href: "#postcode"
-      })
-    }
-
     if (errors.length === 0) {
 
-      if (Number(dateOfBirth.day) %2) {
+      // If day of month is odd, pretend there’s no search result
+      if (Number(dateOfBirth.day) % 2) {
         res.redirect('/vaccinate/no-search-result')
+
+      // If postcode blank, pretend there’s multiple results
+      } else if (postcode === "") {
+        res.redirect('/vaccinate/refine-search-result')
+
+      // Otherwise pretend there is a single result
       } else {
         res.redirect('/vaccinate/search-result')
       }
@@ -271,8 +270,89 @@ module.exports = router => {
         postcodeError
       })
     }
+  })
+
+
+ router.get('/vaccinate/create-a-record', (req, res) => {
+
+  const firstName = req.session.data.firstName;
+  const lastName = req.session.data.lastName;
+  const dateOfBirth = req.session.data.dateOfBirth;
+  const postcode = req.session.data.postcode;
+  const gender = req.session.data.gender;
+  let errors = []
+  let firstNameError, lastNameError, dateOfBirthError, postcodeError, genderError
+
+  if (req.query.showErrors == 'yes') {
+    if (firstName === "") {
+      firstNameError = "Enter a first name"
+      errors.push({
+        text: firstNameError,
+        href: "#firstName"
+      })
+    }
+
+    if (lastName === "") {
+      lastNameError = "Enter a last name"
+      errors.push({
+        text: lastNameError,
+        href: "#lastName"
+      })
+    }
+
+    if (dateOfBirth.day === "" || dateOfBirth.month  === "" || dateOfBirth.year === "") {
+      dateOfBirthError = "Enter a date of birth"
+      errors.push({
+        text: dateOfBirthError,
+        href: "#dateOfBirth"
+      })
+    }
+
+    if (postcode === "") {
+      postcodeError = "Enter a postcode"
+      errors.push({
+        text: postcodeError,
+        href: "#postcode"
+      })
+    }
+
+    if (!gender) {
+      genderError = "Select an option"
+      errors.push({
+        text: genderError,
+        href: "#gender"
+      })
+    }
+  }
+
+  res.render('vaccinate/create-a-record', {
+    errors,
+    firstNameError,
+    lastNameError,
+    dateOfBirthError,
+    postcodeError,
+    genderError
+  })
+})
+
+
+  router.post('/vaccinate/create-a-record', (req, res) => {
+    const data = req.session.data
+    const firstName = req.session.data.firstName;
+    const lastName = req.session.data.lastName;
+    const dateOfBirth = req.session.data.dateOfBirth;
+    const postcode = req.session.data.postcode;
+    const gender = req.session.data.gender;
+
+    if (firstName != '' && lastName != '' && dateOfBirth.day != '' && dateOfBirth.month != '' && dateOfBirth.year != '' && postcode != '' && gender != '') {
+
+      res.redirect('/vaccinate/consent')
+    } else {
+      res.redirect('/vaccinate/create-a-record?showErrors=yes')
+    }
 
   })
+
 
   router.get('/vaccinate/patient-estimated-due-date', (req, res) => {
 

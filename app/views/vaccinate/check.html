@@ -71,10 +71,15 @@
               text: "Name"
             },
             value: {
-              text: data.patientName
+              text: (data.patientName if data.patientName else data.firstName + " " + data.lastName)
             },
             actions: {
               items: [
+                {
+                  href: "/vaccinate/create-a-record",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                } if not data.nhsNumber
               ]
             }
           },
@@ -87,6 +92,11 @@
             },
             actions: {
               items: [
+                {
+                  href: "/vaccinate/create-a-record",
+                  text: "Change",
+                  visuallyHiddenText: "date of birth"
+                } if not data.nhsNumber
               ]
             }
           },
@@ -111,6 +121,11 @@
             },
             actions: {
               items: [
+                {
+                  href: "/vaccinate/create-a-record",
+                  text: "Change",
+                  visuallyHiddenText: "postcode"
+                } if not data.nhsNumber
               ]
             }
           } if not data.nhsNumber,
@@ -125,7 +140,24 @@
               items: [
               ]
             }
-          } if data.nhsNumber
+          } if data.nhsNumber,
+          {
+            key: {
+              text: "Gender"
+            },
+            value: {
+              text: data.gender
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/create-a-record",
+                  text: "Change",
+                  visuallyHiddenText: "gender"
+                } if not data.nhsNumber
+              ]
+            }
+          } if not data.nhsNumber
         ]
       }) }}
 
