@@ -1,4 +1,13 @@
+const organisations = require('./organisations')
+const regions = require('./regions')
+const featureFlags = require('./feature-flags')
+const users = require('./users')
+
 module.exports = {
+  organisations: organisations,
+  regions: regions,
+  featureFlags: featureFlags,
+  users: users,
   nhsNumberKnown: "yes",
   currentUserId: "12345",
   currentOrganisationId: "R0A",
@@ -357,7 +366,7 @@ module.exports = {
       ]
     }
   ],
-  "users": [
+  "oldUsers": [
     {
       id: "12345",
       email: "jane.smith@nhs.net",
@@ -1174,51 +1183,30 @@ module.exports = {
           status: 'Invited'
         }
       ]
+    },
+    {
+      code: 'FA424',
+      name: 'Northern Lincolnshire and Goole NHS Foundation Trust',
+      address: {
+        line1: '8 Spencer Court',
+        town: 'Corby',
+        postcode: 'NN17 1NU'
+      },
+      type: 'Community Pharmacy',
+      status: 'Invited',
+      leadUsers: [
+        {
+          id: "634636",
+          firstName: 'Sara',
+          lastName: 'Pickford',
+          email: 'sara.pickford@pickford-pharmacy.com',
+          status: 'Invited'
+        }
+      ]
     }
-  ],
-  regions: [
-    {name: "North East and Yorkshire", code: "NE1"},
-    {name: "North West", code: "NW1"},
-    {name: "Midlands", code: "MM1"},
-    {name: "East of England", code: "EE1"},
-    {name: "South West", code: "SW1"},
-    {name: "South East", code: "SE1"},
-    {name: "London", code: "LO1"},
   ],
   data: [
     "Patients", "Staff", "Site or delivery team", "Assessment and consent", "Vaccination"
-  ],
-  organisations: [
-    {
-      id: "FAC81",
-      name: "Hambro Pharmacy",
-      type: "Community pharmacy",
-      address: {
-        line1: "53A Hullbridge Road",
-        town: "Rayleigh",
-        postcode: "SS6 9NL"
-      }
-    },
-    {
-      id: "FA464",
-      name: "Cohens Chemists",
-      type: "Community pharmacy",
-      address: {
-        line1: "151-151A Accrington Road",
-        town: "Burnley",
-        postcode: "BB11 5AL"
-      }
-    },
-    {
-      id: "R0A",
-      name: "Manchester University NHS Foundation Trust",
-      type: "NHS Trust",
-      address: {
-        line1: "Cobbett House, Oxford Road",
-        town: "Manchester",
-        postcode: "M13 9WL"
-      }
-    }
   ],
   careHomes: [
     {name: "Colin Care Home", code: "VL025", address1: "1 St James Street", town: "Manchester", postcode: "M1 63P"},

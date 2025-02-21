@@ -14,7 +14,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      <h1 class="nhsuk-heading-xl">Dashboard</h1>
+      <h1 class="nhsuk-heading-l">Dashboard</h1>
 
       <table class="nhsuk-table nhsuk-table--padding-2">
         <caption class="nhsuk-table__caption nhsuk-u-margin-bottom-2 nhsuk-u-font-size-24">By region</caption>
@@ -61,7 +61,7 @@
         <tbody class="nhsuk-table__body">
           {% for region in (data.regions | sort(false, true, "name")) %}
             <tr role="row" class="nhsuk-table__row">
-              <th class="nhsuk-table__cell app-table__cell--border-right nhsuk-u-font-weight-normal"><a href="/support/regions/{{ region.code }}">{{ region.name }}</a></th>
+              <th class="nhsuk-table__cell app-table__cell--border-right nhsuk-u-font-weight-normal"><a href="/support/regions/{{ region.id }}">{{ region.name }}</a></th>
               <td class="nhsuk-table__cell app-table__cell--padding-left app-table__cell--border-right nhsuk-table__cell--numeric">150</td>
               <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">103</td>
               <td class="nhsuk-table__cell nhsuk-table__cell--numeric">150</td>

@@ -10,18 +10,6 @@ module.exports = function (env) { /* eslint-disable-line no-unused-vars */
    */
   const filters = prototypeFilters;
 
-  /**
-   * Find an object by ID in an array
-   * @param {Array} array - Array to search
-   * @param {string} id - ID to find
-   * @returns {Object} Found object or undefined
-  */
-  const findById = (array, id) => {
-    if (!array || !Array.isArray(array)) return undefined
-    return array.find(item => item.id === id)
-  }
-
-  filters.findById = findById
 
   filters.dayName = function(isoDate) {
 

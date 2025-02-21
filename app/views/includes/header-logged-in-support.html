@@ -13,6 +13,16 @@
         classes: ("app-header__navigation-item--current" if currentSection == "dashboard")
       },
       {
+        url  : "/support/organisations",
+        label : "Organisations",
+        classes: ("app-header__navigation-item--current" if currentSection == "organisations")
+      },
+      {
+        url  : "/support/users",
+        label : "Users",
+        classes: ("app-header__navigation-item--current" if currentSection == "users")
+      },
+      {
         url: "#",
         label: currentUser.email,
         classes: "app-header__navigation-item--right-aligned " + ("app-header__navigation-item--current" if currentSection == "user-profile")

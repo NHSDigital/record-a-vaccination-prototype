@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Users" %}
+
+{% set currentSection = "users" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <table class="nhsuk-table">
+        <thead role="rowgroup" class="nhsuk-table__head">
+          <tr role="row">
+            <th role="columnheader" class="" scope="col">
+              Name
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Email
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Organisation
+            </th>
+            <th role="columnheader" class="" scope="col"></th>
+          </tr>
+        </thead>
+        <tbody class="nhsuk-table__body">
+          {% for user in (data.users | sort(false, false, "name") ) %}
+            <tr role="row" class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">
+                <a href="/support/users/{{ user.id }}">{{ user.name }}</a>
+              </td>
+              <td class="nhsuk-table__cell ">
+                {{ user.email }}
+              </td>
+              <td class="nhsuk-table__cell " style="min-width: 150px;">
+                {% for organisation in user.organisations %}
+                  {{ (data.organisations | findById(organisation.id)).name }}
+                {% endfor %}
+              </td>
+              <td class="nhsuk-table__cell ">
+
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+{% endblock %}
+
