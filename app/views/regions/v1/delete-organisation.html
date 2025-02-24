@@ -26,7 +26,7 @@
 
         <p>You can add this organisation back at any time.</p>
 
-        <form action="/regions/v1/organisations/{{ organisation.code }}/deleted" method="post" novalidate="true">
+        <form action="/regions/v1/organisations/{{ organisation.id }}/deleted" method="post" novalidate="true">
           {{ button({
             "text": "Delete organisation",
             classes: "nhsuk-button--warning"

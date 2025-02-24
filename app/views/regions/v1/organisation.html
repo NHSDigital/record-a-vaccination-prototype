@@ -69,7 +69,7 @@
                 </td>
                 <td class="nhsuk-table__cell app-table__cell--right-aligned">
                   {% if userOrganisationSettings.status == 'Invited' %}
-                    <a href="/regions/v1/organisations/{{ organisation.code }}/users/{{ leadUser.id }}/uninvite">Uninvite</a>
+                    <a href="/regions/v1/organisations/{{ organisation.id }}/users/{{ leadUser.id }}/uninvite">Uninvite</a>
                   {% endif %}
                 </td>
               </tr>
@@ -80,7 +80,7 @@
 
       {% set buttonText = "Add another user" if (organisation.leadUsers | length) > 0  else "Add user" %}
 
-      {{ button({ text: buttonText, href: "/regions/v1/organisations/" + organisation.code + "/add-email"}) }}
+      {{ button({ text: buttonText, href: "/regions/v1/organisations/" + organisation.id + "/add-email"}) }}
     </div>
   </div>
 
