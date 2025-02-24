@@ -1,4 +1,14 @@
 module.exports = router => {
+
+  router.get('/regions/v1', (req, res) => {
+    const data = req.session.data
+    const organisations = data.organisations.filter((organisation) => organisation.region === "Y61")
+
+    res.render('regions/v1/index', {
+      organisations
+    })
+  })
+
   // Inviting an organisation
   router.post('/regions/v1/add', (req, res) => {
     req.session.data.organisationsAdded ||= []
@@ -23,8 +33,8 @@ module.exports = router => {
     }
 
     // Add organisation to `organisationsAdded` array
-    req.session.data.organisationsAdded.push({
-      code: req.session.data.organisationCode,
+    req.session.data.organisations.push({
+      id: req.session.data.organisationCode,
       name: organisationName,
       address: {
         line1: organisationLine1,
@@ -32,16 +42,23 @@ module.exports = router => {
         postcode: organisationPostcode
       },
       type: organisationType,
-      leadUsers: [
+      status: 'Invited',
+      region: "Y61"
+    })
+
+    req.session.data.users.push({
+      id: addedUserId,
+      email: req.session.data.email,
+      status: 'Invited',
+      firstName: req.session.data.firstName,
+      lastName: req.session.data.lastName,
+      organisations: [
         {
-          id: addedUserId,
-          email: req.session.data.email,
-          status: 'Invited',
-          firstName: req.session.data.firstName,
-          lastName: req.session.data.lastName
+          id: req.session.data.organisationCode,
+          status: "Invited",
+          permissionLevel: "Lead administrator"
         }
-      ],
-      status: 'Invited'
+      ]
     })
 
     // Remove data from adding organisation flow
