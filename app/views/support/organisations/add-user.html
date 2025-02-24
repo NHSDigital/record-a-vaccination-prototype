@@ -86,6 +86,7 @@
             text: "Permission level"
           }
         },
+        value: data.permissionLevel,
         items: [
           {
             value: "Recorder",
@@ -97,7 +98,6 @@
           {
             value: "Administrator",
             text: "Administrator",
-            checked: (data.role == "Administrator"),
             hint: {
               text: "Record vaccinations, create reports and manage vaccines"
             }
@@ -105,7 +105,6 @@
           {
             value: "Lead administrator",
             text: "Lead administrator",
-            checked: (data.role == "Lead administrator"),
             hint: {
               text: "Record vaccinations, create reports, manage vaccines and users"
             }

@@ -154,7 +154,7 @@ module.exports = (router) => {
     const { firstName } = req.session.data
     const { lastName } = req.session.data
     const { email } = req.session.data
-    const { role } = req.session.data
+    const { permissionLevel } = req.session.data
     const { clinician } = req.session.data
 
     let existingUserWithSameEmail = false
@@ -162,7 +162,7 @@ module.exports = (router) => {
       existingUserWithSameEmail = data.users.find((user) => user.email === email)
     }
 
-    let firstNameError, lastNameError, emailError, roleError, clinicianError
+    let firstNameError, lastNameError, emailError, permissionLevelError, clinicianError
 
     if (!firstName || firstName === '') {
       firstNameError = 'Enter first name'
@@ -180,20 +180,20 @@ module.exports = (router) => {
       emailError = 'NHS email address already added as a user'
     }
 
-    if (!role || role === '') {
-      roleError = 'Select permission level'
+    if (!permissionLevel || permissionLevel === '') {
+      permissionLevelError = 'Select permission level'
     }
 
     if (!clinician || clinician === '') {
       clinicianError = 'Select if they’re a clinician'
     }
 
-    if (firstNameError || lastNameError || emailError || roleError || clinicianError) {
+    if (firstNameError || lastNameError || emailError || permissionLevelError || clinicianError) {
       res.render('user-admin/add-user', {
         firstNameError,
         lastNameError,
         emailError,
-        roleError,
+        permissionLevelError,
         clinicianError
       })
     } else {
@@ -205,7 +205,7 @@ module.exports = (router) => {
   router.post('/user-admin/add', (req, res) => {
 
     const data = req.session.data
-    const {firstName, lastName, email, role, clinician} = data
+    const {firstName, lastName, email, permissionLevel, clinician} = data
 
     const existingUserWithSameEmail = data.users.find((user) => user.email === email)
 
@@ -213,11 +213,12 @@ module.exports = (router) => {
     if (existingUserWithSameEmail) {
 
       // Update existing user instead
-      existingUserWithSameEmail.firstName = firstName
-      existingUserWithSameEmail.lastName = lastName
-      existingUserWithSameEmail.role = role
-      existingUserWithSameEmail.clinician = clinician
-      existingUserWithSameEmail.status = 'Active'
+      existingUserWithSameEmail.organisations.push({
+        id: data.currentOrganisationId,
+        status: 'Invited',
+        clinician: (data.clinician === 'yes'),
+        permissionLevel: data.permissionLevel
+      })
 
     } else {
       req.session.data.users.push({
@@ -225,9 +226,14 @@ module.exports = (router) => {
         firstName: req.session.data.firstName,
         lastName: req.session.data.lastName,
         email: req.session.data.email,
-        role: req.session.data.role,
-        clinician: req.session.data.clinician,
-        status: 'Invited'
+        organisations: [
+          {
+            id: data.currentOrganisationId,
+            status: 'Invited',
+            clinician: (data.clinician === 'yes'),
+            permissionLevel: data.permissionLevel
+          }
+        ]
       })
     }
 
@@ -235,18 +241,20 @@ module.exports = (router) => {
     req.session.data.email = ''
     req.session.data.firstName = ''
     req.session.data.lastName = ''
-    req.session.data.role = ''
+    req.session.data.permissionLevel = ''
     req.session.data.clinician = ''
     req.session.data.showErrors = ''
 
     res.redirect('/user-admin')
   })
 
-  // Editing a user’s role
+  // Editing a user’s permission level and clinician status
   router.get('/user-admin/users/:id/change-role', (req, res) => {
     const { id } = req.params
+    const data = req.session.data
 
-    const numberOfLeadAdmins = req.session.data.users.filter((user) => (user.role === 'Lead administrator') && (user.status !== 'Deactivated')).length
+    const numberOfLeadAdmins = data.users.filter((user) => (user.organisations || []).find((organisation) => (organisation.id === data.currentOrganisationId && organisation.permissionLevel == 'Lead administrator'))).length
+
 
     const user = req.session.data.users.find((user) => user.id === id)
 
@@ -256,7 +264,7 @@ module.exports = (router) => {
     })
   })
 
-  // Updating a user’s role
+  // Updating a user’s permission level and clinician status
   router.post('/user-admin/users/:id/update', (req, res) => {
     const { id } = req.params
 
