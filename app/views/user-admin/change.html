@@ -13,6 +13,8 @@
   }) }}
 {% endblock %}
 
+{% set userOrganisationSettings = (user.organisations | findById(data.currentOrganisationId)) %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
@@ -31,16 +33,15 @@
           hint: {
             text: "Only a registered clinician can assess patients for vaccines"
           },
+          value: ("yes" if userOrganisationSettings.clinician else "no"),
           "items": [
             {
               "value": "yes",
-              "text": "Yes",
-              checked: (user.clinician == "yes")
+              "text": "Yes"
             },
             {
               "value": "no",
-              "text": "No",
-              checked: (user.clinician == "no")
+              "text": "No"
             }
           ]
         }) }}
@@ -54,11 +55,11 @@
               classes: "nhsuk-fieldset__legend--m"
             }
           },
+          value: userOrganisationSettings.permissionLevel,
           "items": [
             {
               "value": "Recorder",
               "text": "Recorder",
-              checked: (user.role == "Recorder"),
               "hint": {
                 "text": "Record vaccinations only"
               }
@@ -66,7 +67,6 @@
             {
               "value": "Administrator",
               "text": "Administrator",
-              checked: (user.role == "Administrator"),
               "hint": {
                 "text": "Record vaccinations, create reports and manage vaccines"
               }
@@ -74,7 +74,6 @@
             {
               "value": "Lead administrator",
               "text": "Lead administrator",
-              checked: (user.role == "Lead administrator"),
               "hint": {
                 "text": "Record vaccinations, create reports, manage vaccines and users"
               }

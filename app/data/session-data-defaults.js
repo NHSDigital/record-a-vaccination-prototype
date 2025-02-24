@@ -10,7 +10,7 @@ module.exports = {
   users: users,
   nhsNumberKnown: "yes",
   currentUserId: "12345",
-  currentOrganisationId: "R0A",
+  currentOrganisationId: "RW3",
   vaccinationsRecorded: [
     {
       id: "ABC123",

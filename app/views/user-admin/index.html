@@ -19,8 +19,6 @@
         "href": "/user-admin/add-user"
       }) }}
 
-      {{ users | dump }}
-
 
       <div class="app-filters nhsuk-u-margin-top-5">
         <form action="/user-admin" method="get" novalidate>
@@ -70,6 +68,9 @@
         </thead>
         <tbody class="nhsuk-table__body">
           {% for user in (users | sort(false, true, "firstName")) %}
+
+            {% set userOrganisationSettings = (user.organisations | findById(data.currentOrganisationId)) %}
+
             <tr class="nhsuk-table__row">
               <td class="nhsuk-table__cell">
                 {{ user.firstName }} {{ user.lastName }}
@@ -79,8 +80,8 @@
                 {% endif %}
               </td>
               <td class="nhsuk-table__cell ">{{ user.email }}</td>
-              <td class="nhsuk-table__cell ">{{ user.role }}</td>
-              <td class="nhsuk-table__cell ">{{ user.status }}</td>
+              <td class="nhsuk-table__cell ">{{ userOrganisationSettings.permissionLevel }}</td>
+              <td class="nhsuk-table__cell ">{{ userOrganisationSettings.status }}</td>
               <td class="nhsuk-table__cell app-table__cell--right-aligned">
                 <a href="/user-admin/users/{{ user.id }}/change-role" class="nhsuk-link">Change <span class="nhsuk-u-visually-hidden">details for {{ user.firstName }} </span></a>
               </td>
