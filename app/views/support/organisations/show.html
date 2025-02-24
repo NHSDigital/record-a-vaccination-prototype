@@ -25,15 +25,15 @@
 
       {% set recordInterface %}
         {{ tag({
-          text: ("On" if organisation.featureFlags.newRecordInterface == "On" else "Off"),
-          classes: ("nhsuk-tag--green" if organisation.featureFlags.newRecordInterface == "On" else "nhsuk-tag--red")
+          text: ("On" if organisation.featureFlags.newRecordInterface == "on" else "Off"),
+          classes: ("nhsuk-tag--green" if organisation.featureFlags.newRecordInterface == "on" else "nhsuk-tag--red")
         }) }}
       {% endset %}
 
       {% set paymentIntegration %}
         {{ tag({
-          text: ("On" if organisation.featureFlags.paymentIntegration == "On" else "Off"),
-          classes: ("nhsuk-tag--green" if organisation.featureFlags.paymentIntegration == "On" else "nhsuk-tag--red")
+          text: ("On" if organisation.featureFlags.paymentIntegration == "on" else "Off"),
+          classes: ("nhsuk-tag--green" if organisation.featureFlags.paymentIntegration == "on" else "nhsuk-tag--red")
         }) }}
       {% endset %}
 
@@ -120,7 +120,7 @@
                   <a href="/support/users/{{ user.id }}">{{ user.name }}</a>
                 </td>
                 <td class="nhsuk-table__cell ">
-                  {{ userOrganisationSettings.permissionlevel }}
+                  {{ userOrganisationSettings.permissionLevel }}
                 </td>
                 <td class="nhsuk-table__cell " style="min-width: 150px;">
                   {{ "Yes" if userOrganisationSettings.clinician else "No" }}

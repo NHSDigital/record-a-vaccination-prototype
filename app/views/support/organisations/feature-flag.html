@@ -22,9 +22,10 @@
     <div class="nhsuk-caption-l">{{ organisation.name }}</div>
 
     <form action="/support/organisations/{{ organisation.id }}/set-feature-flag" method="post" novalidate>
+      <input type="hidden" name="featureFlag" value="{{ featureFlag.id }}">
       {{ radios({
         idPrefix: "feature-flag",
-        name: "featureFlag",
+        name: "featureFlagStatus",
         fieldset: {
           legend: {
             text: featureFlag.name,

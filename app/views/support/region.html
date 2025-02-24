@@ -23,8 +23,6 @@
 
       <h1 class="nhsuk-heading-xl">{{ region.name }}</h1>
 
-      {% set organisations = ["Southampton NHS Trust", "Portsmouth NHS Trust", "Oxford NHS Trust", "Chichester NHS Trust", "Canterbury NHS Trust"] %}
-
       <table class="nhsuk-table nhsuk-table--padding-2">
         <caption class="nhsuk-table__caption nhsuk-u-margin-bottom-2 nhsuk-u-font-size-24">By organisation</caption>
         <thead role="rowgroup" class="nhsuk-table__head">
@@ -67,7 +65,11 @@
         <tbody class="nhsuk-table__body">
           {% for organisation in (organisations | sort(false, true)) %}
             <tr role="row" class="nhsuk-table__row">
-              <th class="nhsuk-table__cell app-table__cell--border-right nhsuk-u-font-weight-normal">{{ organisation }}</th>
+              <th class="nhsuk-table__cell app-table__cell--border-right nhsuk-u-font-weight-normal">
+                <a href="/support/organisations/{{ organisation.id }}/">
+                  {{ organisation.name }}
+                </a>
+              </th>
               <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">103</td>
               <td class="nhsuk-table__cell nhsuk-table__cell--numeric">150</td>
               <td class="nhsuk-table__cell nhsuk-table__cell--numeric  app-table__cell--border-right">501</td>

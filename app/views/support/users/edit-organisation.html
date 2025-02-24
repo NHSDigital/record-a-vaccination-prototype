@@ -1,0 +1,120 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Edit user permissions
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/support/users/" + user.id,
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% set currentSection = "users" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <div class="nhsuk-caption-l">{{ user.name }}</div>
+      <h1 class="nhsuk-heading-l">{{ organisation.name }}</h1>
+
+      <form action="/support/users/{{ user.id }}/organisations/{{ organisation.id }}/update" method="post" novalidate="true">
+
+      {% set clinicianStatus = ("yes" if userOrganisationSettings.clinician else "no") %}
+
+        {{ radios({
+          "name": "clinician",
+          "fieldset": {
+            "legend": {
+              "text": "Are they a clinician?"
+            }
+          },
+          hint: {
+            text: "Only a registered clinician can assess patients for vaccines"
+          },
+          value: clinicianStatus,
+          "items": [
+            {
+              "value": "yes",
+              "text": "Yes"
+            },
+            {
+              "value": "no",
+              "text": "No"
+            }
+          ]
+        }) }}
+
+
+        {{ radios({
+          "name": "permissionLevel",
+          "fieldset": {
+            "legend": {
+              "text": "Permission level",
+              classes: "nhsuk-fieldset__legend--m"
+            }
+          },
+          value: userOrganisationSettings.permissionLevel,
+          "items": [
+            {
+              "value": "Recorder",
+              "text": "Recorder",
+              "hint": {
+                "text": "Record vaccinations only"
+              }
+            },
+            {
+              "value": "Administrator",
+              "text": "Administrator",
+              "hint": {
+                "text": "Record vaccinations, create reports and manage vaccines"
+              }
+            },
+            {
+              "value": "Lead administrator",
+              "text": "Lead administrator",
+              "hint": {
+                "text": "Record vaccinations, create reports, manage vaccines and users"
+              }
+            }
+          ]
+        }) }}
+
+        {{ radios({
+          name: "status",
+          fieldset: {
+            legend: {
+              text: "Status",
+              classes: "nhsuk-fieldset__legend--m"
+            }
+          },
+          value: userOrganisationSettings.status,
+          items: [
+            {
+              value: "Active",
+              text: "Active"
+            },
+            {
+              "value": "Deactivated",
+              "text": "Deactivated"
+            }
+          ]
+        }) }}
+
+
+        {{ button({
+          "text": "Save"
+      }) }}
+      </form>
+
+    </div>
+  </div>
+
+
+{% endblock %}

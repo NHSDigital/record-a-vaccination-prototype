@@ -95,7 +95,7 @@
                 <a href="/support/organisations/{{ organisation.id }}">{{ (data.organisations | findById(organisation.id)).name }}</a>
               </td>
               <td class="nhsuk-table__cell ">
-                {{ organisation.permissionlevel }}
+                {{ organisation.permissionLevel }}
               </td>
               <td class="nhsuk-table__cell " style="min-width: 150px;">
                 {{ "Yes" if organisation.clinician else "No" }}
@@ -104,7 +104,7 @@
                 {{ organisation.status }}
               </td>
               <td class="nhsuk-table__cell ">
-                <a href="/support/users/{{ user.id }}/organisations/{{ organisation.id }}">Change
+                <a href="/support/users/{{ user.id }}/organisations/{{ organisation.id }}/change">Change
                   <span class="nhsuk-u-visually-hidden">settings for {{ organisation.name }}</span>
                 </a>
               </td>

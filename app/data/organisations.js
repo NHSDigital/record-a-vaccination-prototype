@@ -1,16 +1,5 @@
 module.exports = [
   {
-    "id": "RYM",
-    "name": "Abertawe Bro Morgannwg University NHS Trust",
-    "address": {
-      "line1": "Baglan energy park",
-      "town": "Port talbot",
-      "postcode": "SA12 7AZ"
-    },
-    "status": "Active",
-    "type": "NHS Trust"
-  },
-  {
     "id": "RCF",
     "name": "Airedale NHS Foundation Trust",
     "address": {
@@ -140,7 +129,8 @@ module.exports = [
       "postcode": "N15 3TH"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y56"
   },
   {
     "id": "RCN",
@@ -173,7 +163,8 @@ module.exports = [
       "postcode": "E1 1BB"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y56"
   },
   {
     "id": "R1H",
@@ -184,7 +175,8 @@ module.exports = [
       "postcode": "E1 2ES"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y56"
   },
   {
     "id": "RDD",
@@ -294,7 +286,8 @@ module.exports = [
       "postcode": "RG12 2UT"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y56"
   },
   {
     "id": "RG6",
@@ -635,7 +628,8 @@ module.exports = [
       "postcode": "NW1 0PE"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y56"
   },
   {
     "id": "RRQ",
@@ -646,7 +640,8 @@ module.exports = [
       "postcode": "NW1 0PE"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y56"
   },
   {
     "id": "RWM",
@@ -679,18 +674,20 @@ module.exports = [
       "postcode": "NW1 3AX"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y56"
   },
   {
     "id": "RYX",
-    "name": "Central london community healthcare NHS trust",
+    "name": "Central London community healthcare NHS trust",
     "address": {
       "line1": "Ground floor",
       "town": "London",
       "postcode": "NW1 5JD"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y56"
   },
   {
     "id": "RBU",
@@ -760,14 +757,15 @@ module.exports = [
   },
   {
     "id": "RQM",
-    "name": "Chelsea and westminster hospital NHS Foundation Trust",
+    "name": "Chelsea and Westminster hospital NHS Foundation Trust",
     "address": {
       "line1": "Chelsea & westminster hospital",
       "town": "London",
       "postcode": "SW10 9NH"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y56"
   },
   {
     "id": "RXA",
@@ -1801,7 +1799,8 @@ module.exports = [
       "postcode": "M45 6AQ"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y62"
   },
   {
     "id": "RXV",
@@ -2659,7 +2658,8 @@ module.exports = [
       "postcode": "M13 9WL"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y62"
   },
   {
     "id": "RPA",
@@ -2956,7 +2956,8 @@ module.exports = [
       "postcode": "NR4 7UY"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y61"
   },
   {
     "id": "RMY",
@@ -3132,7 +3133,8 @@ module.exports = [
       "postcode": "M8 5RB"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y62"
   },
   {
     "id": "RES",
@@ -3143,7 +3145,8 @@ module.exports = [
       "postcode": "L9 7JP"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y62"
   },
   {
     "id": "RAP",
@@ -4056,7 +4059,8 @@ module.exports = [
       "postcode": "CB2 0AY"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y61"
   },
   {
     "id": "RLZ",
@@ -4137,14 +4141,15 @@ module.exports = [
   },
   {
     "id": "RXK",
-    "name": "Sandwell and west birmingham hospitals NHS trust",
+    "name": "Sandwell and West Birmingham hospitals NHS trust",
     "address": {
-      "line1": "Midland metropolitan university hos",
+      "line1": "Midland Metropolitan University",
       "town": "Smethwick",
       "postcode": "B66 2QT"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y60"
   },
   {
     "id": "RNE",
@@ -4159,14 +4164,15 @@ module.exports = [
   },
   {
     "id": "RCC",
-    "name": "Scarborough and north east yorkshire health care NHS trust",
+    "name": "Scarborough and North East Yorkshire Health Care NHS trust",
     "address": {
       "line1": "Scarborough general hospital",
       "town": "Scarborough",
       "postcode": "YO12 6QL"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y63"
   },
   {
     "id": "RF7",
@@ -5156,7 +5162,8 @@ module.exports = [
       "postcode": "B31 2AP"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y60"
   },
   {
     "id": "RCK",
@@ -5336,14 +5343,15 @@ module.exports = [
   },
   {
     "id": "RRK",
-    "name": "University hospitals birmingham NHS Foundation Trust",
+    "name": "University Hospitals Birmingham NHS Foundation Trust",
     "address": {
       "line1": "Queen elizabeth hospital",
       "town": "Birmingham",
       "postcode": "B15 2GW"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y60"
   },
   {
     "id": "RA7",
