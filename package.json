@@ -1,7 +1,7 @@
 {
-  "name": "nhsuk-prototype-kit",
-  "version": "4.12.0",
-  "description": "Rapidly create HTML prototypes of NHS websites and services.",
+  "name": "record-a-vaccination-prototype",
+  "version": "1.0.0",
+  "description": "A prototype of the NHS Record a vaccination service.",
   "main": "app.js",
   "scripts": {
     "build": "gulp build",
@@ -10,7 +10,7 @@
     "prewatch": "gulp build",
     "watch": "gulp"
   },
-  "author": "https://github.com/nhsuk/",
+  "author": "NHS England",
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.26.9",
