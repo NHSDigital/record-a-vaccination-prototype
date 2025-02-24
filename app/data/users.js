@@ -7,6 +7,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -35,6 +36,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -119,6 +121,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -133,6 +136,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2025-01-05",
         "clinician": true
       }
     ],
@@ -161,6 +165,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -203,6 +208,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -245,6 +251,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -259,6 +266,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -309,17 +317,17 @@ module.exports = [
   },
   {
     "id": "2387441662601",
-    "email": "calliope.richard@nhs.net",
+    "email": "jane.smith@nhs.net",
     "organisations": [
       {
         "id": "RW3",
-        "permissionLevel": "Recorder",
+        "permissionLevel": "Lead administrator",
         "status": "Active",
         "clinician": true
       }
     ],
-    "firstName": "Calliope",
-    "lastName": "Richard"
+    "firstName": "Jane",
+    "lastName": "Smith"
   },
   {
     "id": "9524725216001",
@@ -371,6 +379,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -385,6 +394,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -483,6 +493,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-12",
         "clinician": true
       }
     ],
@@ -511,6 +522,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-09",
         "clinician": false
       }
     ],
@@ -553,6 +565,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-11-04",
         "clinician": true
       }
     ],
@@ -609,6 +622,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-23",
         "clinician": true
       }
     ],
@@ -637,6 +651,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-10-08",
         "clinician": true
       }
     ],
@@ -749,6 +764,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-09-10",
         "clinician": true
       }
     ],
@@ -903,6 +919,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-11-24",
         "clinician": true
       }
     ],
@@ -917,6 +934,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-08-01",
         "clinician": true
       }
     ],
@@ -931,6 +949,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-08-18",
         "clinician": true
       }
     ],
@@ -1085,6 +1104,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-06-08",
         "clinician": true
       }
     ],
@@ -1127,6 +1147,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-05-25",
         "clinician": true
       }
     ],
@@ -1169,6 +1190,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -1183,6 +1205,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -1239,6 +1262,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -1267,6 +1291,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -1323,6 +1348,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -1337,6 +1363,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -1365,6 +1392,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -1379,6 +1407,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -1393,6 +1422,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -1421,6 +1451,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -1463,6 +1494,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -1477,6 +1509,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -1547,6 +1580,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -1561,6 +1595,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -1589,6 +1624,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -1617,6 +1653,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -1701,6 +1738,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -1729,6 +1767,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -1757,6 +1796,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -1771,6 +1811,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -1827,6 +1868,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -1841,6 +1883,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -1883,6 +1926,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -1925,6 +1969,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -1953,6 +1998,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -1981,6 +2027,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -2023,6 +2070,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -2121,6 +2169,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -2219,6 +2268,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -2233,6 +2283,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -2331,6 +2382,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -2373,6 +2425,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -2387,6 +2440,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -2429,6 +2483,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -2513,6 +2568,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -2541,6 +2597,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -2583,6 +2640,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -2765,6 +2823,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -2821,6 +2880,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -2835,6 +2895,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -2989,6 +3050,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -3087,6 +3149,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -3129,6 +3192,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -3157,6 +3221,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -3199,6 +3264,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -3255,6 +3321,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -3283,6 +3350,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -3339,6 +3407,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -3353,6 +3422,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -3367,6 +3437,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -3381,6 +3452,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -3465,6 +3537,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -3493,6 +3566,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -3507,6 +3581,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -3521,6 +3596,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -3577,6 +3653,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -3619,6 +3696,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -3647,6 +3725,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -3703,6 +3782,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -3717,6 +3797,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -3857,6 +3938,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -3955,6 +4037,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -4011,6 +4094,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -4067,6 +4151,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -4137,6 +4222,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -4179,6 +4265,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -4193,6 +4280,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -4207,6 +4295,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -4291,6 +4380,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -4333,6 +4423,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -4361,6 +4452,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -4389,6 +4481,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -4417,6 +4510,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -4501,6 +4595,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -4557,6 +4652,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -4711,6 +4807,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -4739,6 +4836,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -4809,6 +4907,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -4823,6 +4922,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -4879,6 +4979,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -4977,6 +5078,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -5047,6 +5149,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -5061,6 +5164,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -5089,6 +5193,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -5187,6 +5292,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -5327,6 +5433,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -5369,6 +5476,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -5383,6 +5491,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -5411,6 +5520,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -5607,6 +5717,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -5649,6 +5760,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -5691,6 +5803,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -5719,6 +5832,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -5747,6 +5861,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -5845,6 +5960,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": true
       }
     ],
@@ -5901,6 +6017,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -5999,6 +6116,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],
@@ -6013,6 +6131,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Administrator",
         "status": "Deactivated",
+        "deactivatedDate": "2024-12-05",
         "clinician": false
       }
     ],

@@ -75,7 +75,7 @@
               <td class="nhsuk-table__cell">
                 {{ user.firstName }} {{ user.lastName }}
 
-                {% if user.clinician == "yes" %}
+                {% if userOrganisationSettings.clinician %}
                   (clinician)
                 {% endif %}
               </td>

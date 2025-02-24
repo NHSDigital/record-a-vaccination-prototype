@@ -9,8 +9,12 @@ module.exports = (router) => {
     const data = req.session.data;
     const statusesToInclude = ['Invited', 'Active'];
     let allUsers = data.users
-      .filter((user)=> (user.organisations || []).find((organisation) => organisation.id === data.currentOrganisationId))
-      // .filter((user) => statusesToInclude.includes(user.status))
+      .filter((user) => {
+
+        const userOrgnisationSetting = (user.organisations || []).find((organisation) => organisation.id === data.currentOrganisationId)
+
+        return userOrgnisationSetting && statusesToInclude.includes(userOrgnisationSetting.status)
+      })
       .sort((a, b) => {
         const nameA = a.firstName.toUpperCase(); // ignore upper and lowercase
         const nameB = b.firstName.toUpperCase(); // ignore upper and lowercase
@@ -59,7 +63,23 @@ module.exports = (router) => {
 
     const data = req.session.data;
     const deactivatedUsers = data.users
-      .filter((user) => user.status === 'Deactivated')
+      .filter((user) => {
+        const userOrganisationSetting = (user.organisations || []).find((organisation) => organisation.id === data.currentOrganisationId)
+
+        return userOrganisationSetting && userOrganisationSetting.status === 'Deactivated'
+      })
+      .sort((a, b) => {
+        const deactivatedA = a.organisations.find((organisation) => organisation.id == data.currentOrganisationId).deactivatedDate
+        const deactivatedB = b.organisations.find((organisation) => organisation.id == data.currentOrganisationId).deactivatedDate
+        if (deactivatedA > deactivatedB) {
+          return -1;
+        }
+        if (deactivatedA < deactivatedB) {
+          return 1;
+        }
+        return 0;
+      })
+
 
     res.render('user-admin/deactivated',{
       deactivatedUsers
@@ -96,8 +116,11 @@ module.exports = (router) => {
 
     const data = req.session.data;
     const user = req.session.data.users.find((user) => user.id === req.params.id)
-    user.status = 'Deactivated'
-    user.deactivatedDate = new Date().toISOString().substring(0,10)
+
+    const organisationSetting = user.organisations.find((organisation) => organisation.id === data.currentOrganisationId)
+
+    organisationSetting.status = 'Deactivated'
+    organisationSetting.deactivatedDate = new Date().toISOString().substring(0,10)
 
     if (data.currentUserId === user.id) {
       // User deactivated themself
@@ -239,11 +262,13 @@ module.exports = (router) => {
 
     const user = req.session.data.users.find((user) => user.id === id)
 
-    user.role = req.body.role
-    user.clinician = req.body.clinician
+    const organisationSetting = user.organisations.find((organisation) => organisation.id === req.session.data.currentOrganisationId)
+
+    organisationSetting.permissionLevel = req.body.permissionLevel
+    organisationSetting.clinician = (req.body.clinician === 'yes')
 
     // Reset session data
-    req.session.data.role = ''
+    req.session.data.permissionLevel = ''
     req.session.data.clinician = ''
 
     res.redirect('/user-admin')
