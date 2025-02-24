@@ -203,13 +203,18 @@ module.exports = router => {
   })
 
   // Viewing an organisation
-  router.get('/regions/v1/organisations/:code', (req, res) => {
-    const organisationsAdded = req.session.data.organisationsAdded || []
-    const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+  router.get('/regions/v1/organisations/:id', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const organisation = data.organisations.find((org) => org.id === id)
     if (!organisation) { res.redirect('/regions/v1/'); return }
 
+    const users = data.users.filter((user) => (user.organisations || []).find((organisation) => organisation.id === id))
+
+
     res.render('regions/v1/organisation', {
-      organisation
+      organisation,
+      users
     })
   })
 
@@ -260,8 +265,7 @@ module.exports = router => {
 
   // Uninvite page for a user
   router.get('/regions/v1/organisations/:code/users/:id/uninvite', (req, res) => {
-    const organisationsAdded = req.session.data.organisationsAdded || []
-    const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+    const organisation = eq.session.data.organisations.find((org) => org.id === req.params.code)
     if (!organisation) { res.redirect('/regions/v1/'); return }
 
     const user = organisation.leadUsers.find((user) => user.id === req.params.id)
