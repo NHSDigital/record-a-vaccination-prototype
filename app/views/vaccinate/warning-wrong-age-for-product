@@ -1,1 +1,31 @@
 
+{% extends 'layout.html' %}
+
+{% set pageName = "The vaccine product may not be recommended for someone this age" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/patient-history" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Fuenz (LAIV) may not be recommended</h1>
+
+      <p>
+        {{ data.patientName }} is 75 years old. Fluenz (LAIV) is not usually recommended for someone this age. Check before going ahead or refer to a prescriber for a Patient Specific Direction.
+      </p>
+
+          </div>
+  </div>
+
+  {{ button({
+    "text": "Continue anyway",
+    "href": "/vaccinate/consent"
+  }) }}
+
+{% endblock %}
+
