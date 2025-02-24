@@ -7,10 +7,46 @@ module.exports = (router) => {
 
     const organisations = req.session.data.organisations.filter((organisation) => organisation.region === id)
 
+    const users = req.session.data.users.filter((user) => (user.regions || []).find((region) => region.id === id))
+
     res.render('support/region', {
       region,
-      organisations
+      organisations,
+      users
     })
+  })
+
+  // Viewing form to add user to a region
+  router.get('/support/regions/:id/add-user', (req, res) => {
+    const { id } = req.params
+    const region = req.session.data.regions.find((region) => region.id === id)
+
+    res.render('support/regions/add-user', {
+      region
+    })
+  })
+
+  // Adding a user to a region
+  router.post('/support/regions/:id/users', (req, res) => {
+    const { id } = req.params
+    const region = req.session.data.regions.find((region) => region.id === id)
+
+const userId = Math.floor(Math.random() * 10000000).toString()
+
+    req.session.data.users.push({
+      id: userId,
+      name: `${req.body.firstName} ${req.body.lastName}`,
+      email: req.body.email,
+      regions: [
+        {
+          id: id,
+          status: "Active"
+        }
+      ]
+    })
+
+    res.redirect(`/support/regions/${id}`)
+
   })
 
   // Viewing an organisation
@@ -18,7 +54,7 @@ module.exports = (router) => {
     const { id } = req.params
     const organisation = req.session.data.organisations.find((organisation) => organisation.id === id)
 
-    const users = req.session.data.users.filter((user) => user.organisations.find((organisation) => organisation.id === id))
+    const users = req.session.data.users.filter((user) => (user.organisations || []).find((organisation) => organisation.id === id))
 
     res.render('support/organisations/show', {
       organisation,
@@ -121,6 +157,34 @@ module.exports = (router) => {
     userOrganisationSettings.clinician = (req.body.clinician === "yes")
     userOrganisationSettings.status = req.body.status
     userOrganisationSettings.permissionLevel = req.body.permissionLevel
+
+    res.redirect(`/support/users/${id}`)
+  })
+
+  // Viewing a user at a region
+  router.get('/support/users/:id/regions/:regionId/change', (req, res) => {
+    const { id, regionId } = req.params
+    const data = req.session.data
+    const user = data.users.find((user) => user.id === id)
+    const region = data.regions.find((region) => region.id === regionId)
+    const userRegionSettings = user.regions.find((region) => region.id === regionId)
+
+    res.render('support/users/edit-region', {
+      user,
+      region,
+      userRegionSettings
+    })
+  })
+
+// Updating a user at a region
+  router.post('/support/users/:id/regions/:regionId/update', (req, res) => {
+    const { id, regionId } = req.params
+    const data = req.session.data
+    const user = data.users.find((user) => user.id === id)
+    const region = data.regions.find((region) => region.id === regionId)
+    const userRegionSettings = user.regions.find((region) => region.id === regionId)
+
+    userRegionSettings.status = req.body.status
 
     res.redirect(`/support/users/${id}`)
   })

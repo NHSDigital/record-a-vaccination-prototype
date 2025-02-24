@@ -934,14 +934,15 @@ module.exports = [
   },
   {
     "id": "RJ8",
-    "name": "Cornwall partnership NHS Foundation Trust",
+    "name": "Cornwall Partnership NHS Foundation Trust",
     "address": {
       "line1": "Carew house",
       "town": "Bodmin",
       "postcode": "PL31 2QN"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y58"
   },
   {
     "id": "RJR",
@@ -1139,7 +1140,8 @@ module.exports = [
       "postcode": "EX2 5AF"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y58"
   },
   {
     "id": "RMW",
@@ -2949,7 +2951,7 @@ module.exports = [
   },
   {
     "id": "RM1",
-    "name": "Norfolk and norwich university hospitals NHS Foundation Trust",
+    "name": "Norfolk and Norwich University Hospitals NHS Foundation Trust",
     "address": {
       "line1": "Colney lane",
       "town": "Norwich",
@@ -3392,14 +3394,15 @@ module.exports = [
   },
   {
     "id": "RBZ",
-    "name": "Northern devon healthcare NHS trust",
+    "name": "Northern Devon Healthcare NHS trust",
     "address": {
-      "line1": "North devon district hospital",
+      "line1": "North Devon district hospital",
       "town": "Barnstaple",
       "postcode": "EX31 4JB"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y58"
   },
   {
     "id": "RAF",
@@ -3942,14 +3945,15 @@ module.exports = [
   },
   {
     "id": "REF",
-    "name": "Royal cornwall hospitals NHS trust",
+    "name": "Royal Cornwall Hospitals NHS trust",
     "address": {
       "line1": "Royal cornwall hospital",
       "town": "Truro",
       "postcode": "TR1 3LJ"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y58"
   },
   {
     "id": "RH8",
@@ -4260,7 +4264,8 @@ module.exports = [
       "postcode": "SO19 8BR"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y59"
   },
   {
     "id": "RH5",
@@ -4539,14 +4544,15 @@ module.exports = [
   },
   {
     "id": "RHS",
-    "name": "Southampton community health services NHS trust",
+    "name": "Southampton Community Health Services NHS trust",
     "address": {
       "line1": "Central health clinic",
       "town": "Southampton",
       "postcode": "SO14 0YL"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y59"
   },
   {
     "id": "RDK",
@@ -5332,14 +5338,15 @@ module.exports = [
   },
   {
     "id": "RHM",
-    "name": "University hospital southampton NHS Foundation Trust",
+    "name": "University Hospital Southampton NHS Foundation Trust",
     "address": {
-      "line1": "Southampton general hospital",
+      "line1": "Southampton General Hospital",
       "town": "Southampton",
       "postcode": "SO16 6YD"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    "region": "Y59"
   },
   {
     "id": "RRK",
@@ -5989,6 +5996,7 @@ module.exports = [
       postcode: 'NN17 1NU'
     },
     type: 'Community Pharmacy',
-    status: 'Active'
+    status: 'Active',
+    "region": "Y61"
   }
 ]
