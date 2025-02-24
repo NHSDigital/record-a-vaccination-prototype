@@ -35,7 +35,8 @@ const userId = Math.floor(Math.random() * 10000000).toString()
 
     req.session.data.users.push({
       id: userId,
-      name: `${req.body.firstName} ${req.body.lastName}`,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       email: req.body.email,
       regions: [
         {
@@ -106,7 +107,8 @@ const userId = Math.floor(Math.random() * 10000000).toString()
 
     req.session.data.users.push({
       id: userId,
-      name: `${req.body.firstName} ${req.body.lastName}`,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       email: req.body.email,
       organisations: [
         {

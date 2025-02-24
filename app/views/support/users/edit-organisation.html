@@ -21,7 +21,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <div class="nhsuk-caption-l">{{ user.name }}</div>
+      <div class="nhsuk-caption-l">{{ user.firstName }} {{ user.lastName }}</div>
       <h1 class="nhsuk-heading-l">{{ organisation.name }}</h1>
 
       <form action="/support/users/{{ user.id }}/organisations/{{ organisation.id }}/update" method="post" novalidate="true">

@@ -51,7 +51,7 @@
               {% set userRegionSettings = (user.regions | findById(region.id)) %}
               <tr role="row" class="nhsuk-table__row">
                 <td class="nhsuk-table__cell">
-                  <a href="/support/users/{{ user.id }}">{{ user.name }}</a>
+                  <a href="/support/users/{{ user.id }}">{{ user.firstName }} {{ user.lastName }}</a>
                 </td>
                 <td class="nhsuk-table__cell">
                   {{ user.email }}

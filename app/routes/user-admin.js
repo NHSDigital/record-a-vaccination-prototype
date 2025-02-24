@@ -9,7 +9,7 @@ module.exports = (router) => {
     const data = req.session.data;
     const statusesToInclude = ['Invited', 'Active'];
     let allUsers = data.users
-      .filter((user) => statusesToInclude.includes(user.status))
+      // .filter((user) => statusesToInclude.includes(user.status))
       .sort((a, b) => {
         const nameA = a.firstName.toUpperCase(); // ignore upper and lowercase
         const nameB = b.firstName.toUpperCase(); // ignore upper and lowercase

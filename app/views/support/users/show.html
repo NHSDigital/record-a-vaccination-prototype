@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = user.name %}
+{% set pageName = user.firstName + " " + user.lastName %}
 
 {% block beforeContent %}
   {{ backLink({
