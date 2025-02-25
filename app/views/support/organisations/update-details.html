@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Update details from ODS" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/support/organisations/" + organisation.id,
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% set currentSection = "organisations" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+    <div class="nhsuk-caption-l">{{ organisation.name }}</div>
+    <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+    <form action="/support/organisations/{{ organisation.id }}" method="post" novalidate>
+
+      <p>Organisations can <a href="https://digital.nhs.uk/services/organisation-data-service/request-a-new-code-or-update-organisation-details">update their details</a> in the NHS Organisation Data Service (ODS).</p>
+
+      <p>If these details have recently been updated, you can sync them back to our service.</p>
+
+      {{ button({
+        text: "Sync organisation details from ODS"
+      }) }}
+    </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

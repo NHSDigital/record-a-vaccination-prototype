@@ -15,11 +15,66 @@
   {% include "includes/header-logged-in-support.html" %}
 {% endblock %}
 
+{% set region = data.regions | findById(organisation.region) %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "ODS code",
+              classes: "nhsuk-u-font-weight-normal"
+            },
+            value: {
+              html: organisation.id
+            },
+            actions: {
+              items: []
+            }
+          },
+{
+            key: {
+              text: "Name",
+              classes: "nhsuk-u-font-weight-normal"
+            },
+            value: {
+              text: organisation.name
+            },
+            actions: {
+              items: [
+                {
+                  href: "/support/organisations/" + organisation.id + "/update-details",
+                  text: "Update",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Region",
+              classes: "nhsuk-u-font-weight-normal"
+            },
+            value: {
+              html: "<a href=\"/support/regions/" + region.id + "\">" + region.name + "</a>"
+            } if region,
+            actions: {
+              items: [
+                {
+                  href: "/support/organisations/" + organisation.id + "/change-region",
+                  text: "Change",
+                  visuallyHiddenText: "region"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
 
       <h2 class="nhsuk-heading-m">Beta features enabled</h2>
 
