@@ -513,7 +513,11 @@ module.exports = router => {
     } else {
 
       if ((data.vaccine === "COVID-19") || (data.vaccine == "Flu")) {
-        nextPage = "/vaccinate/location"
+        if (data.eligibility === "Healthcare worker" || data.eligibility.includes("Healthcare worker")) {
+          nextPage = "/vaccinate/healthcare-worker"
+        } else {
+          nextPage = "/vaccinate/location"
+        }
       } else {
         nextPage = "/vaccinate/patient"
       }

@@ -1,11 +1,11 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Which team are you working with?" %}
+{% set pageName = "What is their role?" %}
 
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/" }) }}
+  {{ backLink({ href: "/vaccinate/eligibility" }) }}
 {% endblock %}
 
 {% block content %}
@@ -19,7 +19,7 @@
         }) }}
       {% endif %}
 
-      <form action="/vaccinate/answer-delivery-team" method="post" novalidate>
+      <form action="/vaccinate/location" method="post" novalidate>
 
 
         {{ radios({
@@ -27,39 +27,32 @@
           name: "healthcareWorker",
           fieldset: {
             legend: {
-              text: "Which role does Jonathan Brown work in?",
+              text: pageName,
               classes: "nhsuk-fieldset__legend--l",
               isPageHeading: true
             }
           },
-          errorMessage: {
-            text: (errors | first).text
-          } if (errors | length) > 0,
+          value: data.healthcareWorker,
           items: [
             {
               value: "Doctor",
-              text: "Doctor",
-              checked: (data.deliveryTeam === "Anne Ward Maternity Unit")
+              text: "Doctor"
             },
             {
-              value: "St Mary’s Hospital",
-              text: "Qualified nurse or midwife",
-              checked: (data.deliveryTeam === "St Mary’s Hospital")
+              value: "Qualified nurse or midwife",
+              text: "Qualified nurse or midwife"
             },
             {
-              value: "Josephine Clinic",
-              text: "Another professionally qualified clinical role",
-              checked: (data.deliveryTeam === "Josephine Clinic")
+              value: "Another professionally qualified clinical role",
+              text: "Another professionally qualified clinical role"
             },
             {
-              value: "Josephine Clinic",
-              text: "Clinical support",
-              checked: (data.deliveryTeam === "Josephine Clinic")
+              value: "Clinical support",
+              text: "Clinical support"
             },
             {
-              value: "Josephine Clinic",
-              text: "Non clinical",
-              checked: (data.deliveryTeam === "Josephine Clinic")
+              value: "Non clinical",
+              text: "Non clinical"
             }
           ]
         }) }}

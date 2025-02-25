@@ -285,6 +285,23 @@
           } if (data.vaccine != "Pertussis"),
           {
             key: {
+              text: "Healthcare worker role"
+            },
+            value: {
+              html: data.healthcareWorker
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccinate/healthcare-worker",
+                  text: "Change",
+                  visuallyHiddenText: "healthcare worker role"
+                }
+              ]
+            }
+          } if (data.healthcareWorker),
+          {
+            key: {
               text: "Pregnancy due date"
             },
             value: {
