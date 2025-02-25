@@ -1,0 +1,69 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout.html' %}
+<!--
+  In /views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title -->
+{% block pageTitle %}
+  NHS Record a vaccination prototypes
+{% endblock %}
+
+<!-- For adding a breadcrumb or back link -->
+-->
+{% block beforeContent %}
+{% endblock %}
+
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">
+        You’ve logged out
+      </h1>
+
+
+      {% set feedbackHtml %}
+
+        <p>How satisfied or dissatisfied are you with using this service today?</p>
+        <div class="app-button-group nhsuk-u-margin-bottom-0">
+
+          {{ button({
+            classes: "app-button--small app-button--secondary",
+            text: ":) Happy"
+          }) }}
+
+          {{ button({
+            classes: "app-button--small app-button--secondary",
+            text: ":| Neutral"
+          }) }}
+          {{ button({
+            classes: "app-button--small app-button--secondary",
+            text: ":( Sad"
+          }) }}
+
+          <!-- <span class="nhsuk-u-font-size-16"><a href="#35436">Give feedback</a></span> -->
+        </div>
+      {% endset %}
+
+      {{ panel({
+        titleText: "Give us some feedback",
+        headingLevel: 3,
+        classes: "app-panel--feedback",
+        html: feedbackHtml
+      }) }}
+
+      <p></p>
+
+    </div>
+  </div>
+{% endblock %}

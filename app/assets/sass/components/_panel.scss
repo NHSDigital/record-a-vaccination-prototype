@@ -1,0 +1,11 @@
+
+.app-panel--feedback {
+  background-color: $color_nhsuk-white;
+  border-color: $color_nhsuk-blue;
+  color: $nhsuk-text-color;
+}
+
+.app-panel--feedback .nhsuk-panel__title {
+  @include nhsuk-typography-responsive(24);
+  margin-bottom: 10px;
+}

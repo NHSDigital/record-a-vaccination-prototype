@@ -23,6 +23,57 @@
         html: panelHtml
       }) }}
 
+      {% set feedbackGivenHtml %}
+
+        {{ textarea({
+          label: {
+            text: "Your feedback (optional)"
+          },
+          rows: 2
+
+        }) }}
+
+        <div class="app-button-group nhsuk-u-margin-bottom-0">
+          {{ button({
+            classes: "app-button--small app-button--secondary",
+            text: "Send"
+          }) }}
+
+          <!-- {{ button({
+            classes: "app-button--small app-button--secondary",
+            text: "Cancel"
+          }) }} -->
+        </div>
+      {% endset %}
+
+      {% set feedbackHtml %}
+        <div class="app-button-group nhsuk-u-margin-bottom-0">
+          {{ button({
+            classes: "app-button--small app-button--secondary",
+            text: "Easy"
+          }) }}
+
+          {{ button({
+            classes: "app-button--small app-button--secondary",
+            text: "Ok"
+          }) }}
+
+          {{ button({
+            classes: "app-button--small app-button--secondary",
+            text: "Hard"
+          }) }}
+
+          <span class="nhsuk-u-font-size-16"><a href="#35436">Give feedback</a></span>
+        </div>
+      {% endset %}
+
+      {{ panel({
+        titleText: "You’ve just recorded your 100th vaccination!",
+        headingLevel: 3,
+        classes: "app-panel--feedback",
+        html: feedbackHtml
+      }) }}
+
       <form action="/vaccinate/what-next" method="post" novalidate>
 
       {% set lowercaseVaccineName %}
