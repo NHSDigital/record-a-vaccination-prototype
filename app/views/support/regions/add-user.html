@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% set pageName = region.name %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/support/regions/" + region.id,
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% set currentSection = "organisations" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+    <div class="nhsuk-caption-l">{{ region.name }}</div>
+    <h1 class="nhsuk-header-l">Add user</h1>
+
+    <form action="/support/regions/{{ region.id }}/users" method="post" novalidate>
+
+      {{ input({
+        label: {
+          text: "First name"
+        },
+        id: "first-name",
+        name: "firstName",
+        classes: "nhsuk-input--width-20"
+      }) }}
+
+      {{ input({
+        label: {
+          text: "Last name"
+        },
+        id: "last-name",
+        name: "lastName",
+        classes: "nhsuk-input--width-20"
+      }) }}
+
+      {{ input({
+        label: {
+          text: "NHS email address"
+        },
+        id: "email",
+        name: "email",
+        type: "email"
+      }) }}
+
+      {{ button({
+        text: "Save"
+      }) }}
+    </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

@@ -37,9 +37,9 @@
               "href": "#clinician"
             } if clinicianError,
             {
-              "text": roleError,
-              "href": "#role"
-            } if roleError
+              "text": permissionLevelError,
+              "href": "#permission-level-1"
+            } if permissionLevelError
           ]
         }) }}
       {% endif %}
@@ -117,18 +117,18 @@
 
 
         {{ radios({
-          "name": "role",
+          "name": "permissionLevel",
+          idPrefix: "permission-level",
           "fieldset": {
             "legend": {
               "text": "Permission level"
             }
           },
+          value: data.permissionLevel,
           "items": [
             {
               "value": "Recorder",
               "text": "Recorder",
-              checked: (data.role == "Recorder"),
-              id: "role",
               "hint": {
                 "text": "Record vaccinations only"
               }
@@ -136,7 +136,6 @@
             {
               "value": "Administrator",
               "text": "Administrator",
-              checked: (data.role == "Administrator"),
               "hint": {
                 "text": "Record vaccinations, create reports and manage vaccines"
               }
@@ -144,15 +143,14 @@
             {
               "value": "Lead administrator",
               "text": "Lead administrator",
-              checked: (data.role == "Lead administrator"),
               "hint": {
                 "text": "Record vaccinations, create reports, manage vaccines and users"
               }
             }
           ],
           "errorMessage": {
-            "text": roleError
-          } if roleError
+            "text": permissionLevelError
+          } if permissionLevelError
         }) }}
 
 

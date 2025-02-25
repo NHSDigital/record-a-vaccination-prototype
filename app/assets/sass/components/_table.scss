@@ -53,6 +53,16 @@ table {
   padding-right: 8px;
 }
 
+.nhsuk-table--padding-2 tr th:first-child,
+.nhsuk-table--padding-2 tr td:first-child {
+  padding-left: 0;
+}
+
+.nhsuk-table--padding-2 tr th:last-child,
+.nhsuk-table--padding-2 tr td:last-child {
+  padding-right: 0;
+}
+
 .nhsuk-table tbody tr:last-child td,
 .nhsuk-table tbody tr:last-child th {
   border-bottom-width: 3px;

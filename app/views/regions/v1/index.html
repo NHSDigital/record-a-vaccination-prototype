@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  {% if (data.organisationsAdded | length) > 0 %}
+  {% if (organisations | length) > 0 %}
     <div class="nhsuk-grid-row">
       <div class="nhsuk-grid-column-full">
 
@@ -57,13 +57,13 @@
               </tr>
             </thead>
             <tbody class="nhsuk-table__body">
-              {% for organisation in data.organisationsAdded %}
+              {% for organisation in organisations %}
                 <tr role="row" class="nhsuk-table__row">
                   <td class="nhsuk-table__cell">
-                    <a href="/regions/v1/organisations/{{ organisation.code }}">{{ organisation.name }}</a>
+                    <a href="/regions/v1/organisations/{{ organisation.id }}">{{ organisation.name }}</a>
                   </td>
                   <td class="nhsuk-table__cell ">
-                    {{ organisation.code }}
+                    {{ organisation.id }}
                   </td>
                   <td class="nhsuk-table__cell ">
                     {{ organisation.type }}
@@ -72,7 +72,7 @@
                     {{ organisation.status }}
                   </td>
                   <td class="nhsuk-table__cell app-table__cell--right-aligned">
-                    <a href="/regions/v1/organisations/{{ organisation.code }}/delete" class="nhsuk-link">Delete</a>
+                    <a href="/regions/v1/organisations/{{ organisation.id }}/delete" class="nhsuk-link">Delete</a>
                   </td>
 
 

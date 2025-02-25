@@ -10,7 +10,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/regions/v1/organisations/" + organisation.code,
+    href: "/regions/v1/organisations/" + organisation.id,
     text: "Back"
   }) }}
 {% endblock %}
@@ -35,7 +35,7 @@
 
       <p>You can reinvite this person anytime.</p>
 
-      <form action="/regions/v1/organisations/{{ organisation.code }}/users/{{ user.id }}/uninvited" method="post" novalidate="true">
+      <form action="/regions/v1/organisations/{{ organisation.id }}/users/{{ user.id }}/uninvited" method="post" novalidate="true">
         {{ button({
           "text": "Confirm, uninvite user",
           classes: "nhsuk-button--warning"

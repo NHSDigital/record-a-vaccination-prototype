@@ -1,10 +1,8 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Stats
-{% endblock %}
+{% set pageName = "Regions" %}
 
-{% set currentSection = "dashboard" %}
+{% set currentSection = "regions" %}
 
 {% block header %}
   {% include "includes/header-logged-in-support.html" %}
@@ -14,14 +12,13 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      <h1 class="nhsuk-heading-l">Dashboard</h1>
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <table class="nhsuk-table nhsuk-table--padding-2">
-        <caption class="nhsuk-table__caption nhsuk-u-margin-bottom-2 nhsuk-u-font-size-24">By region</caption>
+      <table class="nhsuk-table">
         <thead role="rowgroup" class="nhsuk-table__head">
           <tr role="row">
             <th rowspan="2" class="app-table__header--border-right app-table__header--align-bottom app-table__header--border-top">
-              Region
+              Name
             </th>
             <th colspan="1" rowspan="2" class="app-table__header--align-bottom app-table__header--border-right app-table__header--padding-left app-table__header--border-top nhsuk-table__header--numeric">
               Organisations

@@ -38,12 +38,15 @@
         </thead>
         <tbody class="nhsuk-table__body">
           {% for user in (deactivatedUsers | sort(true, true, "deactivatedDate")) %}
+
+            {% set userOrganisationSettings = (user.organisations | findById(data.currentOrganisationId)) %}
+
             <tr class="nhsuk-table__row">
               <td class="nhsuk-table__cell">
                 {{ user.firstName }} {{ user.lastName }}
               </td>
               <td class="nhsuk-table__cell ">{{ user.email }}</td>
-              <td class="nhsuk-table__cell ">{% if user.deactivatedDate%}{{ user.deactivatedDate | govukDate }}{% endif %}</td>
+              <td class="nhsuk-table__cell ">{% if userOrganisationSettings.deactivatedDate%}{{ userOrganisationSettings.deactivatedDate | govukDate }}{% endif %}</td>
               <td class="nhsuk-table__cell ">
                 <a href="/user-admin/{{ user.id }}/reactivate" class="nhsuk-link">Reactivate</a>
               </td>

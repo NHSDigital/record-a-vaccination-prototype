@@ -6,19 +6,21 @@
 
 {% set currentSection = "user-profile" %}
 
+{% set organisationSettings = currentUser.organisations | findById(currentOrganisation.id) %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
       <h1 class="nhsuk-heading-xl">Your profile</h1>
 
         {% set permissionLevelHtml %}
-          <div>{{ currentUser.role }}</div>
+          <div>{{ organisationSettings.permissionLevel }}</div>
           <p class="app-summary__explanation">
-            {% if currentUser.role == "Lead administrator" %}
+            {% if organisationSettings.permissionLevel == "Lead administrator" %}
               Can record vaccinations, create reports, manage vaccines and users
-            {% elseif currentUser.role == "Administrator" %}
+            {% elseif organisationSettings.permissionLevel == "Administrator" %}
               Can record vaccinations, create reports and manage vaccines
-            {% elseif currentUser.role == "Recorder" %}
+            {% elseif organisationSettings.permissionLevel == "Recorder" %}
               Can record vaccinations only
             {% endif %}
           </p>
@@ -95,15 +97,13 @@
           ]
         }) }}
 
-      {% if currentUser.role != 'Lead administrator' %}
+      {% if organisationSettings.permissionLevel != 'Lead administrator' %}
 
         <p>Only lead administrators can change permission levels. The lead administrators for Southampton NHS Trust are:</p>
 
         <ul class="nhsuk-list nhsuk-list--bullet">
-          {% for user in data.users %}
-            {% if user.role == "Lead administrator" and user.status == "Active" %}
-              <li>{{ user.firstName }} {{ user.lastName }} ({{ user.email }})</li>
-            {% endif %}
+          {% for user in leadAdminUsersAtSameOrganisation %}
+            <li>{{ user.firstName }} {{ user.lastName }} ({{ user.email }})</li>
           {% endfor %}
         </ul>
 

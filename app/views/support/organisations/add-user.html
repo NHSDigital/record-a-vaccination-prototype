@@ -1,0 +1,125 @@
+{% extends 'layout.html' %}
+
+{% set pageName = organisation.name %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/support/organisations/" + organisation.id,
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% set currentSection = "organisations" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+    <div class="nhsuk-caption-l">{{ organisation.name }}</div>
+    <h1 class="nhsuk-header-l">Add user</h1>
+
+    {{ insetText({
+      text: "Lead administrators in organisations can self-manage their users."
+    }) }}
+
+    <form action="/support/organisations/{{ organisation.id }}/users" method="post" novalidate>
+
+      {{ input({
+        label: {
+          text: "First name"
+        },
+        id: "first-name",
+        name: "firstName",
+        classes: "nhsuk-input--width-20"
+      }) }}
+
+      {{ input({
+        label: {
+          text: "Last name"
+        },
+        id: "last-name",
+        name: "lastName",
+        classes: "nhsuk-input--width-20"
+      }) }}
+
+      {{ input({
+        label: {
+          text: "NHS email address"
+        },
+        id: "email",
+        name: "email",
+        type: "email"
+      }) }}
+
+      {{ radios({
+        name: "clinician",
+        fieldset: {
+          legend: {
+            text: "Are they a registered clinician?"
+          }
+        },
+        hint: {
+          text: "Only registered clinicians can assess the patient and record their consent"
+        },
+        "items": [
+          {
+            value: "yes",
+            text: "Yes",
+            id: "clinician"
+          },
+          {
+            value: "no",
+            text: "No"
+          }
+        ]
+      }) }}
+
+
+      {{ radios({
+        name: "permissionLevel",
+        fieldset: {
+          legend: {
+            text: "Permission level"
+          }
+        },
+        value: data.permissionLevel,
+        items: [
+          {
+            value: "Recorder",
+            text: "Recorder",
+            hint: {
+              text: "Record vaccinations only"
+            }
+          },
+          {
+            value: "Administrator",
+            text: "Administrator",
+            hint: {
+              text: "Record vaccinations, create reports and manage vaccines"
+            }
+          },
+          {
+            value: "Lead administrator",
+            text: "Lead administrator",
+            hint: {
+              text: "Record vaccinations, create reports, manage vaccines and users"
+            }
+          }
+        ]
+      }) }}
+
+
+      {{ button({
+        text: "Save"
+      }) }}
+    </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

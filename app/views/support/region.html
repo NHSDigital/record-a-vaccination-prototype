@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  {{ region.name }}
-{% endblock %}
+{% set pageName = region.name %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -19,18 +17,68 @@
 
 {% block content %}
   <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-xl">{{ pageName }}</h1>
+
+
+      <h2 class="nhsuk-heading-m">Users</h2>
+
+      {{ button({
+        text: "Add user",
+        href: "/support/regions/" + region.id + "/add-user"
+      }) }}
+
+      {% if (users | length) > 0 %}
+        <table class="nhsuk-table">
+          <thead role="rowgroup" class="nhsuk-table__head">
+            <tr role="row">
+              <th role="columnheader" class="" scope="col">
+                Name
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Email
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Status
+              </th>
+              <th role="columnheader" class="" scope="col"></th>
+            </tr>
+          </thead>
+          <tbody class="nhsuk-table__body">
+            {% for user in (users | sort(false, false, "name") ) %}
+
+              {% set userRegionSettings = (user.regions | findById(region.id)) %}
+              <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                  <a href="/support/users/{{ user.id }}">{{ user.firstName }} {{ user.lastName }}</a>
+                </td>
+                <td class="nhsuk-table__cell">
+                  {{ user.email }}
+                </td>
+                <td class="nhsuk-table__cell ">
+                  {{ userRegionSettings.status }}
+                </td>
+                <td class="nhsuk-table__cell ">
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+
+    </div>
+  </div>
+  <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      <h1 class="nhsuk-heading-xl">{{ region.name }}</h1>
-
-      {% set organisations = ["Southampton NHS Trust", "Portsmouth NHS Trust", "Oxford NHS Trust", "Chichester NHS Trust", "Canterbury NHS Trust"] %}
 
       <table class="nhsuk-table nhsuk-table--padding-2">
-        <caption class="nhsuk-table__caption nhsuk-u-margin-bottom-2 nhsuk-u-font-size-24">By organisation</caption>
+        <caption class="nhsuk-table__caption nhsuk-u-margin-bottom-2 nhsuk-table__caption--m">Organisations</caption>
         <thead role="rowgroup" class="nhsuk-table__head">
           <tr role="row">
             <th rowspan="2" class="app-table__header--border-right app-table__header--align-bottom app-table__header--border-top">
-              Organisation
+              Name
             </th>
             <th colspan="3" class="app-table__header--padding-left nhsuk-table__header--centred app-table__header--border-right app-table__header--border-top">
               Users
@@ -41,7 +89,7 @@
           </tr>
           <tr role="row">
 
-            <th class="app-table__header--padding-left nhsuk-table__header--numeric">
+            <th class="nhsuk-table__header--numeric nhsuk-u-padding-left-2">
               Lead
             </th>
             <th class="nhsuk-table__header--numeric app-table__header--align-bottom">
@@ -67,7 +115,11 @@
         <tbody class="nhsuk-table__body">
           {% for organisation in (organisations | sort(false, true)) %}
             <tr role="row" class="nhsuk-table__row">
-              <th class="nhsuk-table__cell app-table__cell--border-right nhsuk-u-font-weight-normal">{{ organisation }}</th>
+              <th class="nhsuk-table__cell app-table__cell--border-right nhsuk-u-font-weight-normal">
+                <a href="/support/organisations/{{ organisation.id }}/">
+                  {{ organisation.name }}
+                </a>
+              </th>
               <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">103</td>
               <td class="nhsuk-table__cell nhsuk-table__cell--numeric">150</td>
               <td class="nhsuk-table__cell nhsuk-table__cell--numeric  app-table__cell--border-right">501</td>

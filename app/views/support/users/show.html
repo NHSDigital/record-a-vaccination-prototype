@@ -1,0 +1,164 @@
+{% extends 'layout.html' %}
+
+{% set pageName = user.firstName + " " + user.lastName %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/support/users",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% set currentSection = "users" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Name",
+              classes: "nhsuk-u-font-weight-normal"
+            },
+            value: {
+              html: user.name
+            }
+          },
+          {
+            key: {
+              text: "Email",
+              classes: "nhsuk-u-font-weight-normal"
+            },
+            value: {
+              html: user.email
+            }
+          },
+          {
+            key: {
+              text: "Account created",
+              classes: "nhsuk-u-font-weight-normal"
+            },
+            value: {
+              html: "2024-09-13T13:45" | govukDateTime
+            }
+          },
+          {
+            key: {
+              text: "Last signed in",
+              classes: "nhsuk-u-font-weight-normal"
+            },
+            value: {
+              html: "2025-02-18T15:17" | govukDateTime
+            }
+          }
+        ]
+      }) }}
+
+     {% if (user.regions | length) > 0 %}
+
+          <h2 class="nhsuk-heading-m">{{ (user.regions | length) | plural("Region", showNumber = false) }}</h2>
+
+
+          <table class="nhsuk-table">
+            <thead role="rowgroup" class="nhsuk-table__head">
+              <tr role="row">
+                <th role="columnheader" class="" scope="col">
+                  Name
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Status
+                </th>
+                <th role="columnheader" class="" scope="col"></th>
+
+              </tr>
+            </thead>
+            <tbody class="nhsuk-table__body">
+              {% for region in (user.regions | sort(false, false, "name") ) %}
+                <tr role="row" class="nhsuk-table__row">
+                  <td class="nhsuk-table__cell">
+                    <a href="/support/regions/{{ region.id }}">{{ (data.regions | findById(region.id)).name }}</a>
+                  </td>
+                  <td class="nhsuk-table__cell ">
+                    {{ region.status }}
+                  </td>
+                  <td class="nhsuk-table__cell ">
+                    <a href="/support/users/{{ user.id }}/regions/{{ region.id }}/change">Change
+                      <span class="nhsuk-u-visually-hidden">status for {{ region.name }}</span>
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          {% endif %}
+
+
+      {% if (user.organisations | length) > 0 %}
+
+      <h2 class="nhsuk-heading-m">Organisations</h2>
+
+    </div>
+  </div>
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      <table class="nhsuk-table">
+        <thead role="rowgroup" class="nhsuk-table__head">
+          <tr role="row">
+            <th role="columnheader" class="" scope="col">
+              Name
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Permission level
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Clinician
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Status
+            </th>
+            <th role="columnheader" class="" scope="col"></th>
+
+          </tr>
+        </thead>
+        <tbody class="nhsuk-table__body">
+          {% for organisation in (user.organisations | sort(false, false, "name") ) %}
+            <tr role="row" class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">
+                <a href="/support/organisations/{{ organisation.id }}">{{ (data.organisations | findById(organisation.id)).name }}</a>
+              </td>
+              <td class="nhsuk-table__cell ">
+                {{ organisation.permissionLevel }}
+              </td>
+              <td class="nhsuk-table__cell " style="min-width: 150px;">
+                {{ "Yes" if organisation.clinician else "No" }}
+              </td>
+              <td class="nhsuk-table__cell ">
+                {{ organisation.status }}
+              </td>
+              <td class="nhsuk-table__cell ">
+                <a href="/support/users/{{ user.id }}/organisations/{{ organisation.id }}/change">Change
+                  <span class="nhsuk-u-visually-hidden">settings for {{ organisation.name }}</span>
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}
+

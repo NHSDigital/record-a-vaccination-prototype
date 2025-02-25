@@ -1,7 +1,16 @@
 module.exports = router => {
+
+  router.get('/regions/v1', (req, res) => {
+    const data = req.session.data
+    const organisations = data.organisations.filter((organisation) => organisation.region === "Y61")
+
+    res.render('regions/v1/index', {
+      organisations
+    })
+  })
+
   // Inviting an organisation
   router.post('/regions/v1/add', (req, res) => {
-    req.session.data.organisationsAdded ||= []
 
     const organisationCode = req.session.data.organisationCode
     const addedUserId = Math.floor(Math.random() * 10000000).toString()
@@ -22,9 +31,9 @@ module.exports = router => {
       organisationType = 'NHS Trust'
     }
 
-    // Add organisation to `organisationsAdded` array
-    req.session.data.organisationsAdded.push({
-      code: req.session.data.organisationCode,
+    // Add organisation
+    req.session.data.organisations.push({
+      id: req.session.data.organisationCode,
       name: organisationName,
       address: {
         line1: organisationLine1,
@@ -32,16 +41,23 @@ module.exports = router => {
         postcode: organisationPostcode
       },
       type: organisationType,
-      leadUsers: [
+      status: 'Invited',
+      region: "Y61"
+    })
+
+    req.session.data.users.push({
+      id: addedUserId,
+      email: req.session.data.email,
+      status: 'Invited',
+      firstName: req.session.data.firstName,
+      lastName: req.session.data.lastName,
+      organisations: [
         {
-          id: addedUserId,
-          email: req.session.data.email,
-          status: 'Invited',
-          firstName: req.session.data.firstName,
-          lastName: req.session.data.lastName
+          id: req.session.data.organisationCode,
+          status: "Invited",
+          permissionLevel: "Lead administrator"
         }
-      ],
-      status: 'Invited'
+      ]
     })
 
     // Remove data from adding organisation flow
@@ -111,7 +127,7 @@ module.exports = router => {
     }
 
     const organisation = {
-      code: organisationCode,
+      id: organisationCode,
       name: organisationName,
       type: organisationType,
       address: {
@@ -146,7 +162,7 @@ module.exports = router => {
     }
 
     const organisation = {
-      code: organisationCode,
+      id: organisationCode,
       name: organisationName,
       type: organisationType,
       address: {
@@ -162,19 +178,27 @@ module.exports = router => {
   })
 
   // Inviting a second lead user for an organisation
-  router.post('/regions/v1/organisations/:code/add', (req, res) => {
-    const organisationsAdded = req.session.data.organisationsAdded || []
-    const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+  router.post('/regions/v1/organisations/:id/add', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
     if (!organisation) { res.redirect('/regions/v1/'); return }
 
     const addedUserId = Math.floor(Math.random() * 10000000).toString()
 
-    organisation.leadUsers.push({
+    req.session.data.users.push({
       id: addedUserId,
       email: req.session.data.email,
       status: 'Invited',
       firstName: req.session.data.firstName,
-      lastName: req.session.data.lastName
+      lastName: req.session.data.lastName,
+      organisations: [
+        {
+          id: organisation.id,
+          status: 'Invited',
+          permissionLevel: 'Lead administrator',
+          clinician: false
+        }
+      ]
     })
 
     // Reset data
@@ -182,24 +206,28 @@ module.exports = router => {
     req.session.data.firstName = ''
     req.session.data.lastName = ''
 
-    res.redirect('/regions/v1/organisations/' + organisation.code)
+    res.redirect('/regions/v1/organisations/' + organisation.id)
   })
 
   // Viewing an organisation
-  router.get('/regions/v1/organisations/:code', (req, res) => {
-    const organisationsAdded = req.session.data.organisationsAdded || []
-    const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+  router.get('/regions/v1/organisations/:id', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const organisation = data.organisations.find((org) => org.id === id)
     if (!organisation) { res.redirect('/regions/v1/'); return }
 
+    const users = data.users.filter((user) => (user.organisations || []).find((organisation) => organisation.id === id))
+
+
     res.render('regions/v1/organisation', {
-      organisation
+      organisation,
+      users
     })
   })
 
   // Delete an organisation confirmation page
-  router.get('/regions/v1/organisations/:code/delete', (req, res) => {
-    const organisationsAdded = req.session.data.organisationsAdded || []
-    const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+  router.get('/regions/v1/organisations/:id/delete', (req, res) => {
+    const organisation = req.session.data.organisations.find((org) => org.id === req.params.id)
     if (!organisation) { res.redirect('/regions/v1/'); return }
 
     res.render('regions/v1/delete-organisation', {
@@ -208,21 +236,20 @@ module.exports = router => {
   })
 
   // Deleting an organisation
-  router.post('/regions/v1/organisations/:code/deleted', (req, res) => {
-    const organisationsAdded = req.session.data.organisationsAdded || []
-    const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+  router.post('/regions/v1/organisations/:id/deleted', (req, res) => {
+    const organisation = req.session.data.organisations.find((org) => org.id === req.params.id)
     if (!organisation) { res.redirect('/regions/v1/'); return }
 
-    // Remove organisation from the array of organisations added
-    req.session.data.organisationsAdded.splice(req.session.data.organisationsAdded.indexOf(organisation), 1)
+    // Remove organisation
+    req.session.data.organisations.splice(req.session.data.organisations.indexOf(organisation), 1)
 
     res.redirect('/regions/v1')
   })
 
   // Add another lead user to an organisation form
-  router.get('/regions/v1/organisations/:code/add-email', (req, res) => {
-    const organisationsAdded = req.session.data.organisationsAdded || []
-    const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+  router.get('/regions/v1/organisations/:id/add-email', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
     if (!organisation) { res.redirect('/regions/v1/'); return }
 
     res.render('regions/v1/add-another-email', {
@@ -231,9 +258,9 @@ module.exports = router => {
   })
 
   // Check a second lead user for an organisation
-  router.get('/regions/v1/organisations/:code/add-email-check', (req, res) => {
-    const organisationsAdded = req.session.data.organisationsAdded || []
-    const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+  router.get('/regions/v1/organisations/:id/add-email-check', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
     if (!organisation) { res.redirect('/regions/v1/'); return }
 
     res.render('regions/v1/add-another-email-check', {
@@ -242,15 +269,18 @@ module.exports = router => {
   })
 
   // Uninvite page for a user
-  router.get('/regions/v1/organisations/:code/users/:id/uninvite', (req, res) => {
-    const organisationsAdded = req.session.data.organisationsAdded || []
-    const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+  router.get('/regions/v1/organisations/:id/users/:userId/uninvite', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
     if (!organisation) { res.redirect('/regions/v1/'); return }
 
-    const user = organisation.leadUsers.find((user) => user.id === req.params.id)
-    if (!user || user.status == 'Active') { res.redirect(`/regions/v1/organisations/${organisation.code}`); return }
+    const user = data.users.find((user) => user.id === req.params.userId)
 
-    const numberOfActiveUsers =  organisation.leadUsers.filter((user) => user.status === "Active").length
+    const userOrganisationSettings = (user.organisations || []).find((organisation) => organisation.id === organisation.id)
+
+    // if (!user || userOrganisationSettings.status == 'Active') { res.redirect(`/regions/v1/organisations/${organisation.id}`); return }
+
+    const numberOfActiveUsers = data.users.filter((user) => (user.organisations || []).find((orgSetting) => (orgSetting.id === organisation.id ) && (orgSetting.status === 'Active'))).length
 
     res.render('regions/v1/uninvite', {
       organisation,
@@ -260,22 +290,28 @@ module.exports = router => {
   })
 
   // Uninvite a user
-  router.post('/regions/v1/organisations/:code/users/:id/uninvited', (req, res) => {
-    const organisationsAdded = req.session.data.organisationsAdded || []
-    const organisation = organisationsAdded.find((org) => org.code === req.params.code)
+  router.post('/regions/v1/organisations/:id/users/:userId/uninvited', (req, res) => {
+    const data = req.session.data
+    const { id, userId } = req.params;
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
     if (!organisation) { res.redirect('/regions/v1/'); return }
 
-    const user = organisation.leadUsers.find((user) => user.id === req.params.id)
-    if (!user) { res.redirect(`/regions/v1/organisations/${organisation.code}`); return }
+    const user = data.users.find((user) => user.id === userId)
+    if (!user) { res.redirect(`/regions/v1/organisations/${organisation.id}`); return }
 
-    organisation.leadUsers.splice(organisation.leadUsers.indexOf(user), 1)
+    const organisationSetting = user.organisations.find((org) => org.id === id)
+
+    // Remove the organisation from the user
+    user.organisations.splice(user.organisations.indexOf(organisationSetting), 1)
+
+    const numberOfUsersAtOrganisation = data.users.filter((user) => (user.organisations || []).find((org) => org.id === id)).length
 
     // Remove the organisation if no lead users are left
-    if (organisation.leadUsers.filter((user) => user.status === "Active").length === 0) {
-      organisationsAdded.splice(organisationsAdded.indexOf(organisation), 1)
+    if (numberOfUsersAtOrganisation === 0) {
+      data.organisations.splice(data.organisations.indexOf(organisation), 1)
       res.redirect('/regions/v1/')
     } else {
-      res.redirect('/regions/v1/organisations/' + organisation.code)
+      res.redirect('/regions/v1/organisations/' + organisation.id)
     }
 
   })

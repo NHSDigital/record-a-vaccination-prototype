@@ -1,0 +1,143 @@
+{% extends 'layout.html' %}
+
+{% set pageName = organisation.name %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/support/organisations",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% set currentSection = "organisations" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <h2 class="nhsuk-heading-m">Beta features enabled</h2>
+
+      {% set recordInterface %}
+        {{ tag({
+          text: ("On" if organisation.featureFlags.newRecordInterface == "on" else "Off"),
+          classes: ("nhsuk-tag--green" if organisation.featureFlags.newRecordInterface == "on" else "nhsuk-tag--red")
+        }) }}
+      {% endset %}
+
+      {% set paymentIntegration %}
+        {{ tag({
+          text: ("On" if organisation.featureFlags.paymentIntegration == "on" else "Off"),
+          classes: ("nhsuk-tag--green" if organisation.featureFlags.paymentIntegration == "on" else "nhsuk-tag--red")
+        }) }}
+      {% endset %}
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "New streamlined Record interface",
+              classes: "nhsuk-u-font-weight-normal"
+            },
+            value: {
+              html: recordInterface
+            },
+            actions: {
+              items: [
+                {
+                  href: "/support/organisations/" + organisation.id + "/feature-flag?featureFlag=newRecordInterface",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "BSA Payment API integration",
+              classes: "nhsuk-u-font-weight-normal"
+            },
+            value: {
+              html: paymentIntegration
+            },
+            actions: {
+              items: [
+                {
+                  href: "/support/organisations/" + organisation.id + "/feature-flag?flag=paymentIntegration",
+                  text: "Change",
+                  visuallyHiddenText: "date of birth"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="nhsuk-heading-m">Users</h2>
+
+      {{ button({
+        text: "Add user",
+        href: "/support/organisations/" + organisation.id + "/add-user"
+      }) }}
+
+      </div>
+    </div>
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+
+      {% if (users | length) > 0 %}
+        <table class="nhsuk-table">
+          <thead role="rowgroup" class="nhsuk-table__head">
+            <tr role="row">
+              <th role="columnheader" class="" scope="col">
+                Name
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Permission level
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Clinician
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Status
+              </th>
+              <th role="columnheader" class="" scope="col"></th>
+
+            </tr>
+          </thead>
+          <tbody class="nhsuk-table__body">
+            {% for user in (users | sort(false, false, "name") ) %}
+
+              {% set userOrganisationSettings = (user.organisations | findById(organisation.id)) %}
+              <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                  <a href="/support/users/{{ user.id }}">{{ user.firstName }} {{ user.lastName }}</a>
+                </td>
+                <td class="nhsuk-table__cell ">
+                  {{ userOrganisationSettings.permissionLevel }}
+                </td>
+                <td class="nhsuk-table__cell " style="min-width: 150px;">
+                  {{ "Yes" if userOrganisationSettings.clinician else "No" }}
+                </td>
+                <td class="nhsuk-table__cell ">
+                  {{ userOrganisationSettings.status }}
+                </td>
+                <td class="nhsuk-table__cell ">
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}
+

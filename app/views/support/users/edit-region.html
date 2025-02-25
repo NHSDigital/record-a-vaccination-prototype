@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Edit user permissions
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/support/users/" + user.id,
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% set currentSection = "users" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <div class="nhsuk-caption-l">{{ user.name }}</div>
+      <h1 class="nhsuk-heading-l">{{ region.name }}</h1>
+
+      <form action="/support/users/{{ user.id }}/regions/{{ region.id }}/update" method="post" novalidate="true">
+
+        {{ radios({
+          name: "status",
+          fieldset: {
+            legend: {
+              text: "Status",
+              classes: "nhsuk-fieldset__legend--m"
+            }
+          },
+          value: userRegionSettings.status,
+          items: [
+            {
+              value: "Active",
+              text: "Active"
+            },
+            {
+              "value": "Deactivated",
+              "text": "Deactivated"
+            }
+          ]
+        }) }}
+
+
+        {{ button({
+          "text": "Save"
+      }) }}
+      </form>
+
+    </div>
+  </div>
+
+
+{% endblock %}

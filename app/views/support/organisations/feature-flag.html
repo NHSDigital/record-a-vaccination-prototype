@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% set pageName = organisation.name %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/support/organisations/" + organisation.id,
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% set currentSection = "organisations" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+    <div class="nhsuk-caption-l">{{ organisation.name }}</div>
+
+    <form action="/support/organisations/{{ organisation.id }}/set-feature-flag" method="post" novalidate>
+      <input type="hidden" name="featureFlag" value="{{ featureFlag.id }}">
+      {{ radios({
+        idPrefix: "feature-flag",
+        name: "featureFlagStatus",
+        fieldset: {
+          legend: {
+            text: featureFlag.name,
+            classes: "nhsuk-fieldset__legend--l",
+            isPageHeading: true
+          }
+        },
+        value: (organisation.featureFlags[featureFlag.id] if organisation.featureFlags[featureFlag.id] else "off"),
+        items: [
+          {
+            value: "on",
+            text: "On"
+          },
+          {
+            value: "off",
+            text: "Off"
+          }
+        ]
+      }) }}
+
+      {{ button({
+        text: "Save"
+      }) }}
+    </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

@@ -33,7 +33,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      {% if (organisation.leadUsers | length) > 0 %}
+      {% if (users | length) > 0 %}
         <table class="nhsuk-table">
           <caption class="nhsuk-table__caption">Users</caption>
           <thead role="rowgroup" class="nhsuk-table__head">
@@ -53,7 +53,10 @@
             </tr>
           </thead>
           <tbody class="nhsuk-table__body">
-            {% for leadUser in organisation.leadUsers %}
+            {% for leadUser in users %}
+
+              {% set userOrganisationSettings = (leadUser.organisations | findById(organisation.id)) %}
+
               <tr role="row" class="nhsuk-table__row">
                 <td class="nhsuk-table__cell">
                   {{ leadUser.firstName }} {{ leadUser.lastName }}
@@ -62,11 +65,11 @@
                   {{ leadUser.email }}
                 </td>
                 <td class="nhsuk-table__cell ">
-                  {{ leadUser.status }}
+                  {{ userOrganisationSettings.status }}
                 </td>
                 <td class="nhsuk-table__cell app-table__cell--right-aligned">
-                  {% if leadUser.status == 'Invited' %}
-                    <a href="/regions/v1/organisations/{{ organisation.code }}/users/{{ leadUser.id }}/uninvite">Uninvite</a>
+                  {% if userOrganisationSettings.status == 'Invited' %}
+                    <a href="/regions/v1/organisations/{{ organisation.id }}/users/{{ leadUser.id }}/uninvite">Uninvite</a>
                   {% endif %}
                 </td>
               </tr>
@@ -77,7 +80,7 @@
 
       {% set buttonText = "Add another user" if (organisation.leadUsers | length) > 0  else "Add user" %}
 
-      {{ button({ text: buttonText, href: "/regions/v1/organisations/" + organisation.code + "/add-email"}) }}
+      {{ button({ text: buttonText, href: "/regions/v1/organisations/" + organisation.id + "/add-email"}) }}
     </div>
   </div>
 

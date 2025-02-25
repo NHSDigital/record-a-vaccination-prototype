@@ -9,7 +9,12 @@ module.exports = (router) => {
     const data = req.session.data;
     const statusesToInclude = ['Invited', 'Active'];
     let allUsers = data.users
-      .filter((user) => statusesToInclude.includes(user.status))
+      .filter((user) => {
+
+        const userOrgnisationSetting = (user.organisations || []).find((organisation) => organisation.id === data.currentOrganisationId)
+
+        return userOrgnisationSetting && statusesToInclude.includes(userOrgnisationSetting.status)
+      })
       .sort((a, b) => {
         const nameA = a.firstName.toUpperCase(); // ignore upper and lowercase
         const nameB = b.firstName.toUpperCase(); // ignore upper and lowercase
@@ -58,7 +63,23 @@ module.exports = (router) => {
 
     const data = req.session.data;
     const deactivatedUsers = data.users
-      .filter((user) => user.status === 'Deactivated')
+      .filter((user) => {
+        const userOrganisationSetting = (user.organisations || []).find((organisation) => organisation.id === data.currentOrganisationId)
+
+        return userOrganisationSetting && userOrganisationSetting.status === 'Deactivated'
+      })
+      .sort((a, b) => {
+        const deactivatedA = a.organisations.find((organisation) => organisation.id == data.currentOrganisationId).deactivatedDate
+        const deactivatedB = b.organisations.find((organisation) => organisation.id == data.currentOrganisationId).deactivatedDate
+        if (deactivatedA > deactivatedB) {
+          return -1;
+        }
+        if (deactivatedA < deactivatedB) {
+          return 1;
+        }
+        return 0;
+      })
+
 
     res.render('user-admin/deactivated',{
       deactivatedUsers
@@ -95,8 +116,11 @@ module.exports = (router) => {
 
     const data = req.session.data;
     const user = req.session.data.users.find((user) => user.id === req.params.id)
-    user.status = 'Deactivated'
-    user.deactivatedDate = new Date().toISOString().substring(0,10)
+
+    const organisationSetting = user.organisations.find((organisation) => organisation.id === data.currentOrganisationId)
+
+    organisationSetting.status = 'Deactivated'
+    organisationSetting.deactivatedDate = new Date().toISOString().substring(0,10)
 
     if (data.currentUserId === user.id) {
       // User deactivated themself
@@ -130,7 +154,7 @@ module.exports = (router) => {
     const { firstName } = req.session.data
     const { lastName } = req.session.data
     const { email } = req.session.data
-    const { role } = req.session.data
+    const { permissionLevel } = req.session.data
     const { clinician } = req.session.data
 
     let existingUserWithSameEmail = false
@@ -138,7 +162,7 @@ module.exports = (router) => {
       existingUserWithSameEmail = data.users.find((user) => user.email === email)
     }
 
-    let firstNameError, lastNameError, emailError, roleError, clinicianError
+    let firstNameError, lastNameError, emailError, permissionLevelError, clinicianError
 
     if (!firstName || firstName === '') {
       firstNameError = 'Enter first name'
@@ -156,20 +180,20 @@ module.exports = (router) => {
       emailError = 'NHS email address already added as a user'
     }
 
-    if (!role || role === '') {
-      roleError = 'Select permission level'
+    if (!permissionLevel || permissionLevel === '') {
+      permissionLevelError = 'Select permission level'
     }
 
     if (!clinician || clinician === '') {
       clinicianError = 'Select if they’re a clinician'
     }
 
-    if (firstNameError || lastNameError || emailError || roleError || clinicianError) {
+    if (firstNameError || lastNameError || emailError || permissionLevelError || clinicianError) {
       res.render('user-admin/add-user', {
         firstNameError,
         lastNameError,
         emailError,
-        roleError,
+        permissionLevelError,
         clinicianError
       })
     } else {
@@ -181,7 +205,7 @@ module.exports = (router) => {
   router.post('/user-admin/add', (req, res) => {
 
     const data = req.session.data
-    const {firstName, lastName, email, role, clinician} = data
+    const {firstName, lastName, email, permissionLevel, clinician} = data
 
     const existingUserWithSameEmail = data.users.find((user) => user.email === email)
 
@@ -189,11 +213,12 @@ module.exports = (router) => {
     if (existingUserWithSameEmail) {
 
       // Update existing user instead
-      existingUserWithSameEmail.firstName = firstName
-      existingUserWithSameEmail.lastName = lastName
-      existingUserWithSameEmail.role = role
-      existingUserWithSameEmail.clinician = clinician
-      existingUserWithSameEmail.status = 'Active'
+      existingUserWithSameEmail.organisations.push({
+        id: data.currentOrganisationId,
+        status: 'Invited',
+        clinician: (data.clinician === 'yes'),
+        permissionLevel: data.permissionLevel
+      })
 
     } else {
       req.session.data.users.push({
@@ -201,9 +226,14 @@ module.exports = (router) => {
         firstName: req.session.data.firstName,
         lastName: req.session.data.lastName,
         email: req.session.data.email,
-        role: req.session.data.role,
-        clinician: req.session.data.clinician,
-        status: 'Invited'
+        organisations: [
+          {
+            id: data.currentOrganisationId,
+            status: 'Invited',
+            clinician: (data.clinician === 'yes'),
+            permissionLevel: data.permissionLevel
+          }
+        ]
       })
     }
 
@@ -211,18 +241,20 @@ module.exports = (router) => {
     req.session.data.email = ''
     req.session.data.firstName = ''
     req.session.data.lastName = ''
-    req.session.data.role = ''
+    req.session.data.permissionLevel = ''
     req.session.data.clinician = ''
     req.session.data.showErrors = ''
 
     res.redirect('/user-admin')
   })
 
-  // Editing a user’s role
+  // Editing a user’s permission level and clinician status
   router.get('/user-admin/users/:id/change-role', (req, res) => {
     const { id } = req.params
+    const data = req.session.data
 
-    const numberOfLeadAdmins = req.session.data.users.filter((user) => (user.role === 'Lead administrator') && (user.status !== 'Deactivated')).length
+    const numberOfLeadAdmins = data.users.filter((user) => (user.organisations || []).find((organisation) => (organisation.id === data.currentOrganisationId && organisation.permissionLevel == 'Lead administrator'))).length
+
 
     const user = req.session.data.users.find((user) => user.id === id)
 
@@ -232,17 +264,19 @@ module.exports = (router) => {
     })
   })
 
-  // Updating a user’s role
+  // Updating a user’s permission level and clinician status
   router.post('/user-admin/users/:id/update', (req, res) => {
     const { id } = req.params
 
     const user = req.session.data.users.find((user) => user.id === id)
 
-    user.role = req.body.role
-    user.clinician = req.body.clinician
+    const organisationSetting = user.organisations.find((organisation) => organisation.id === req.session.data.currentOrganisationId)
+
+    organisationSetting.permissionLevel = req.body.permissionLevel
+    organisationSetting.clinician = (req.body.clinician === 'yes')
 
     // Reset session data
-    req.session.data.role = ''
+    req.session.data.permissionLevel = ''
     req.session.data.clinician = ''
 
     res.redirect('/user-admin')

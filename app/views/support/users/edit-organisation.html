@@ -1,27 +1,32 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  Add user
+  Edit user permissions
 {% endblock %}
-
-{% set currentSection = "manage-users" %}
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/user-admin",
+    href: "/support/users/" + user.id,
     text: "Back"
   }) }}
 {% endblock %}
 
-{% set userOrganisationSettings = (user.organisations | findById(data.currentOrganisationId)) %}
+{% set currentSection = "users" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">{{ user.firstName }} {{ user.lastName }}</h1>
+      <div class="nhsuk-caption-l">{{ user.firstName }} {{ user.lastName }}</div>
+      <h1 class="nhsuk-heading-l">{{ organisation.name }}</h1>
 
-      <form action="/user-admin/users/{{ user.id }}/update" method="post" novalidate="true">
+      <form action="/support/users/{{ user.id }}/organisations/{{ organisation.id }}/update" method="post" novalidate="true">
+
+      {% set clinicianStatus = ("yes" if userOrganisationSettings.clinician else "no") %}
 
         {{ radios({
           "name": "clinician",
@@ -33,7 +38,7 @@
           hint: {
             text: "Only a registered clinician can assess patients for vaccines"
           },
-          value: ("yes" if userOrganisationSettings.clinician else "no"),
+          value: clinicianStatus,
           "items": [
             {
               "value": "yes",
@@ -81,22 +86,32 @@
           ]
         }) }}
 
+        {{ radios({
+          name: "status",
+          fieldset: {
+            legend: {
+              text: "Status",
+              classes: "nhsuk-fieldset__legend--m"
+            }
+          },
+          value: userOrganisationSettings.status,
+          items: [
+            {
+              value: "Active",
+              text: "Active"
+            },
+            {
+              "value": "Deactivated",
+              "text": "Deactivated"
+            }
+          ]
+        }) }}
+
 
         {{ button({
-          "text": "Continue"
+          "text": "Save"
       }) }}
       </form>
-
-
-      {% if user.id === currentUser.id %}
-        {% if numberOfLeadAdmins > 1 %}
-          <p>Do you still need this account? <a href="/user-admin/{{ user.id }}/deactivate">Deactivate your account</a></p>
-        {% else %}
-          <p>You cannot deactivate your account as you are the only active lead administrator.</p>
-        {% endif %}
-      {% else %}
-        <p>Do they still need an account? <a href="/user-admin/{{ user.id }}/deactivate">Deactivate this account</a></p>
-      {% endif %}
 
     </div>
   </div>
