@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Change region" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/support/organisations/" + organisation.id,
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% set currentSection = "organisations" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+    <div class="nhsuk-caption-l">{{ organisation.name }}</div>
+
+    <form action="/support/organisations/{{ organisation.id }}/update-region" method="post" novalidate>
+
+      {% set items = [] %}
+
+      {% for region in data.regions %}
+        {% set items = (items.push({
+          text: region.name,
+          value: region.id
+        }), items) %}
+      {% endfor %}
+
+      {{ radios({
+        idPrefix: "region",
+        name: "region",
+        fieldset: {
+          legend: {
+            text: pageName,
+            classes: "nhsuk-fieldset__legend--l",
+            isPageHeading: true
+          }
+        },
+        value: organisation.region,
+        items: items
+      }) }}
+
+
+      {{ button({
+        text: "Save"
+      }) }}
+    </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

@@ -76,6 +76,36 @@ const userId = Math.floor(Math.random() * 10000000).toString()
     })
   })
 
+  // Update details from PDS
+  router.get('/support/organisations/:id/update-details', (req, res) => {
+    const { id } = req.params
+    const organisation = req.session.data.organisations.find((organisation) => organisation.id === id)
+
+    res.render('support/organisations/update-details', {
+      organisation
+    })
+  })
+
+  // Change an organisation’s region
+  router.get('/support/organisations/:id/change-region', (req, res) => {
+    const { id } = req.params
+    const organisation = req.session.data.organisations.find((organisation) => organisation.id === id)
+
+    res.render('support/organisations/change-region', {
+      organisation
+    })
+  })
+
+  // Change an organisation’s region
+  router.get('/support/organisations/:id/update-region', (req, res) => {
+    const { id } = req.params
+    const organisation = req.session.data.organisations.find((organisation) => organisation.id === id)
+
+    organisation.region = req.session.data.region
+
+    res.redirect(`/support/organisations/${id}`)
+  })
+
   // Updating a feature flag
   router.post('/support/organisations/:id/set-feature-flag', (req, res) => {
     const { id } = req.params
