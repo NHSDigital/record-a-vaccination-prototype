@@ -563,6 +563,7 @@ module.exports = router => {
       data.consentParentName = ""
       data.consentAdvocateName = ""
       data.consentDeputyName = ""
+      data.healthcareWorker = ""
     }
 
     if (answer === 'same-vaccination-another-patient') {
