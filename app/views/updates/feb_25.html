@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+Updates
+{% endblock %}
+
+{% set currentSection = "updates" %}
+
+{% block content %}
+
+{% from 'breadcrumb/macro.njk' import breadcrumb %}
+
+{{ breadcrumb({
+  items: [
+    {
+      href: "/updates",
+      text: "Updates"
+    },
+    {
+      href: "#",
+      text: "February 2025"
+    }
+  ]
+}) }}
+
+<br><br>
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      <h1 class="nhsuk-heading-l">February 2025</h1>
+      <p class="nhsuk-body-l">This pages lists updates made to the Record a vaccination service in February 2025.</p>
+
+           
+     
+
+
+
+    </div>
+  </div>
+
+
+
+
+
+{% endblock %}

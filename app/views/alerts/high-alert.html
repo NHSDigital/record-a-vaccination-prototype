@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "vaccines" %}
+
+{% set sites = [] %}
+{% for vaccine in (data.vaccines) %}
+  {% if not (sites | arrayOrStringIncludes(vaccine.siteCode)) %}
+    {% set sites = (sites.push(vaccine.siteCode), sites) %}
+  {% endif %}
+{% endfor %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full nhsuk-u-margin-bottom-5">
+
+
+          <div class="nhsuk-panel" style="background-color:#005eb8;">
+            <h1 class="nhsuk-panel__title">
+              New section to record vaccinations
+            </h1>
+          
+            <div class="nhsuk-panel__body">
+                We've updated the user journey for recording vaccinations. From now on, select 'Record vaccinations' from the header to start recording a vaccination. 
+            </div>
+
+            <br>
+
+            <a href="/home/{{ site }}" style="color:#FFFFFF;">Read more</a>
+            
+            
+            <br><br>
+
+
+            {% from 'button/macro.njk' import button %}
+
+            {{ button({
+            text: "Continue",
+            classes: "nhsuk-button--reverse"
+            }) }}
+
+          </div>
+
+        
+
+
+
+{% endblock %}
+
