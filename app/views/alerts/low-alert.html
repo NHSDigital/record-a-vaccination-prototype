@@ -50,9 +50,14 @@
 
         {% from 'inset-text/macro.njk' import insetText %}
 
-        {{ insetText({
-          html: "<p>You can now record the pack size for the batch.<a href=\"https://yellowcard.mhra.gov.uk/\" title=\"External website\">Read more</a>.</p>"
-        }) }}
+
+        <div class="nhsuk-inset-text">
+            <span class="nhsuk-u-visually-hidden">Information: </span>
+          
+            <p>You can now record the pack size for the batch. <a href="/updates">Tell me more</a>.</p>
+          </div>
+
+          
 
           {{ radios({
             "idPrefix": "pack-type",
