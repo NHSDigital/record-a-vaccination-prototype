@@ -1,17 +1,12 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  Vaccines
+  Record a vaccination
 {% endblock %}
 
-{% set currentSection = "vaccines" %}
-
-{% set sites = [] %}
-{% for vaccine in (data.vaccines) %}
-  {% if not (sites | arrayOrStringIncludes(vaccine.siteCode)) %}
-    {% set sites = (sites.push(vaccine.siteCode), sites) %}
-  {% endif %}
-{% endfor %}
+{% block header %}
+  {% include "includes/header-logged-out.html" %}
+{% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -40,7 +35,7 @@
             {{ button({
             text: "Continue",
             classes: "nhsuk-button--reverse",
-            href: "/updates"
+            href: "/home"
             }) }}
 
           </div>
