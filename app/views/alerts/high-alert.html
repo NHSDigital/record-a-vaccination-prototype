@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Record a vaccination
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-out.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full nhsuk-u-margin-bottom-5">
+
+
+          <div class="nhsuk-panel" style="background-color:#005eb8;">
+            <h1 class="nhsuk-panel__title">
+              New section to record vaccinations
+            </h1>
+          
+            <div class="nhsuk-panel__body">
+                We've updated the user journey for recording vaccinations. From now on, select 'Record vaccinations' from the header to start recording a vaccination. 
+            </div>
+
+            <br>
+
+            <a href="/updates" style="color:#FFFFFF;">Read more</a>
+            
+            
+            <br><br>
+
+
+            {% from 'button/macro.njk' import button %}
+
+            {{ button({
+            text: "Continue",
+            classes: "nhsuk-button--reverse",
+            href: "/home"
+            }) }}
+
+          </div>
+
+        
+
+
+
+{% endblock %}
+
