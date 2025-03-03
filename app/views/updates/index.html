@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+Updates
+{% endblock %}
+
+{% set currentSection = "updates" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      <h1 class="nhsuk-heading-l">Updates</h1>
+      <p class="nhsuk-body-l">This pages lists updates made to the Record a vaccination service.</p>
+
+            {% from 'contents-list/macro.njk' import contentsList %}
+
+        {{ contentsList({
+        items: [
+            {
+            href: "#",
+            text: "Overview",
+            current: "true"
+            },
+            {
+            href: "/updates/feb_25",
+            text: "February 2025"
+            },
+            {
+            href: "/updates/jan_25",
+            text: "January 2025"
+            }
+            ,
+            {
+            href: "/updates/dec_24",
+            text: "December 2024"
+            }
+            ,
+            {
+            href: "/updates/nov_24",
+            text: "November 2024"
+            }
+        ]
+        }) }}
+
+     
+
+
+
+    </div>
+  </div>
+
+
+
+
+
+{% endblock %}
