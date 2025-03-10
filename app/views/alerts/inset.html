@@ -19,6 +19,19 @@
 
       <h1 class="nhsuk-heading-l">Add batch</h1>
 
+      <div class="nhsuk-inset-text">
+        <span class="nhsuk-u-visually-hidden">Information: </span>
+        <h2 class="nhsuk-heading-m">Example heading</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+            <ul class="nhsuk-list nhsuk-list--bullet">
+              <li>tiredness and lack of energy</li>
+              <li>shortness of breath</li>
+            </ul>
+            <a href="#" class="nhsuk-link">Tell me more</a></p>
+      </div>
+
+      
+
       <form action="/vaccines/check" method="post" novalidate="true">
 
         {{ input({
@@ -50,16 +63,10 @@
 
         {% from 'inset-text/macro.njk' import insetText %}
 
-        <br>
-          {{ tag({
-            text: "New",
-            classes: "nhsuk-tag--blue"
-          })}}
-          <div class="nhsuk-u-padding-bottom-3"></div>
+
 
           {{ radios({
             "idPrefix": "pack-type",
-            
             "name": "packType",
             "fieldset": {
               "legend": {

@@ -6,24 +6,12 @@ Updates
 
 {% set currentSection = "updates" %}
 
+
+{% block beforeContent %}
+  {{ backLink({ href: "/updates" }) }}
+{% endblock %}
+
 {% block content %}
-
-{% from 'breadcrumb/macro.njk' import breadcrumb %}
-
-{{ breadcrumb({
-  items: [
-    {
-      href: "/updates",
-      text: "Updates"
-    },
-    {
-      href: "#",
-      text: "January 2025"
-    }
-  ]
-}) }}
-
-<br><br>
 
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">

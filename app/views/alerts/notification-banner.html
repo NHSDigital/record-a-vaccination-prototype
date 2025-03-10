@@ -6,6 +6,26 @@
 
 {% set currentSection = "vaccines" %}
 
+
+<div class="ds_notification  ds_reversed" data-module="ds-notification">
+    <div class="ds_wrapper">
+        <div class="ds_notification__content  ds_notification__content--has-close">
+            <h2 class="visually-hidden">Information</h2>
+
+            <div class="ds_notification__text">
+                <p>We need to tell you about <a href="#">something</a></p>
+            </div>
+
+            <button class="ds_notification__close  js-close-notification" type="button">
+                <span class="visually-hidden">Close this notification</span>
+                <svg class="ds_icon  ds_icon--fill" aria-hidden="true" role="img"><use href="/assets/images/icons/icons.stack.svg#close"></use></svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
 {% block beforeContent %}
   {{ backLink({
     href: "/vaccines/choose-vaccine",
@@ -13,9 +33,32 @@
   }) }}
 {% endblock %}
 
+
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
+
+
+
+        <div class="ds_notification  ds_reversed" data-module="ds-notification">
+            <div class="ds_wrapper">
+                <div class="ds_notification__content  ds_notification__content--has-close">
+                    <h2 class="visually-hidden">Information</h2>
+        
+                    <div class="ds_notification__text">
+                        <p>We need to tell you about <a href="#">something</a></p>
+                    </div>
+        
+                    <button class="ds_notification__close  js-close-notification" type="button">
+                        <span class="visually-hidden">Close this notification</span>
+                        <svg class="ds_icon  ds_icon--fill" aria-hidden="true" role="img"><use href="/assets/images/icons/icons.stack.svg#close"></use></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        
 
       <h1 class="nhsuk-heading-l">Add batch</h1>
 
@@ -50,13 +93,10 @@
 
         {% from 'inset-text/macro.njk' import insetText %}
 
-        <br>
-          {{ tag({
-            text: "New",
-            classes: "nhsuk-tag--blue"
-          })}}
-          <div class="nhsuk-u-padding-bottom-3"></div>
 
+
+
+    
           {{ radios({
             "idPrefix": "pack-type",
             
