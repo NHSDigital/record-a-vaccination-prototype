@@ -1,0 +1,57 @@
+<div class="app-feedback-panel" data-module="feedback-panel">
+  <h2 class="app-feedback-panel__title" data-module="feedback-panel__title">How easy was it to record your first vaccination?</h2>
+
+  <div data-module="feedback-panel__buttons">
+    <div class="app-button-group nhsuk-u-margin-bottom-0">
+      {{ button({
+        text: "Easy",
+        classes: "app-button--outlined app-button--small",
+        attributes: {
+          "data-thanks": "Thanks. Do you have any feedback to give us?"
+        }
+      }) }}
+
+      {{ button({
+        text: "Ok",
+        classes: "app-button--outlined app-button--small",
+        attributes: {
+          "data-thanks": "Thanks. Do you have any feedback to give us?"
+        }
+      }) }}
+
+      {{ button({
+        text: "Hard",
+        classes: "app-button--outlined app-button--small",
+        attributes: {
+          "data-thanks": "Thanks. What did you find hard?"
+        }
+      }) }}
+    </div>
+  </div>
+
+  <div class="app-feedback-panel__comments"  data-module="feedback-panel__comments" hidden>
+    {{ textarea({
+      name: "example",
+      id: "example",
+      rows: 3,
+      label: {
+        text: "Feedback (optional)"
+      },
+      hint: {
+        text: "Do not include any patient information."
+      }
+    }) }}
+
+
+    <div class="app-button-group nhsuk-u-margin-bottom-0">
+      {{ button({
+        text: "Send feedback",
+        classes: "app-button--outlined app-button--small"
+      }) }}
+
+
+      <a href="#" class="nhsuk-link nhsuk-link--no-visited-state" data-module="feedback-panel__close">Close</a>
+    </div>
+
+  </div>
+</div>
