@@ -215,7 +215,7 @@ module.exports = router => {
 
 
  router.post('/vaccinate/patient-search', (req, res) => {
-
+    const data = req.session.data
     const firstName = req.session.data.firstName;
     const lastName = req.session.data.lastName;
     const dateOfBirth = req.session.data.dateOfBirth;
@@ -257,9 +257,12 @@ module.exports = router => {
       } else if (postcode === "") {
         res.redirect('/vaccinate/refine-search-result')
 
-      // Otherwise pretend there is a single result
+      // Otherwise pretend there is a single result and
+      // go to patient details page
       } else {
-        res.redirect('/vaccinate/search-result')
+        data.patientName = 'Jodie Brown'
+        data.nhsNumber = '9123456788'
+        res.redirect('/vaccinate/patient-history')
       }
     } else {
       res.render('vaccinate/patient-search', {
