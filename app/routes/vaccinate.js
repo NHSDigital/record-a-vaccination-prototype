@@ -215,7 +215,7 @@ module.exports = router => {
 
 
  router.post('/vaccinate/patient-search', (req, res) => {
-
+    const data = req.session.data
     const firstName = req.session.data.firstName;
     const lastName = req.session.data.lastName;
     const dateOfBirth = req.session.data.dateOfBirth;
@@ -257,9 +257,12 @@ module.exports = router => {
       } else if (postcode === "") {
         res.redirect('/vaccinate/refine-search-result')
 
-      // Otherwise pretend there is a single result
+      // Otherwise pretend there is a single result and
+      // go to patient details page
       } else {
-        res.redirect('/vaccinate/search-result')
+        data.patientName = 'Jodie Brown'
+        data.nhsNumber = '9123456788'
+        res.redirect('/vaccinate/patient-history')
       }
     } else {
       res.render('vaccinate/patient-search', {
@@ -513,7 +516,11 @@ module.exports = router => {
     } else {
 
       if ((data.vaccine === "COVID-19") || (data.vaccine == "Flu")) {
-        nextPage = "/vaccinate/location"
+        if (data.eligibility === "Healthcare worker" || data.eligibility.includes("Healthcare worker")) {
+          nextPage = "/vaccinate/healthcare-worker"
+        } else {
+          nextPage = "/vaccinate/location"
+        }
       } else {
         nextPage = "/vaccinate/patient"
       }
@@ -559,6 +566,7 @@ module.exports = router => {
       data.consentParentName = ""
       data.consentAdvocateName = ""
       data.consentDeputyName = ""
+      data.healthcareWorker = ""
     }
 
     if (answer === 'same-vaccination-another-patient') {

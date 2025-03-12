@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "What is their role?" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/eligibility" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      <form action="/vaccinate/location" method="post" novalidate>
+
+
+        {{ radios({
+          idPrefix: "healthcare-worker",
+          name: "healthcareWorker",
+          fieldset: {
+            legend: {
+              text: pageName,
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          value: data.healthcareWorker,
+          items: [
+            {
+              value: "Doctor",
+              text: "Doctor"
+            },
+            {
+              value: "Qualified nurse or midwife",
+              text: "Qualified nurse or midwife"
+            },
+            {
+              value: "Another professionally qualified clinical role",
+              text: "Another professionally qualified clinical role"
+            },
+            {
+              value: "Clinical support",
+              text: "Clinical support"
+            },
+            {
+              value: "Non clinical",
+              text: "Non clinical"
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

@@ -1,0 +1,8 @@
+
+// This is like the nhsuk-tag--blue variant,
+// but without the darker border.
+.app-tag--header {
+  background-color: tint($color_nhsuk-blue, 80%);
+  border-color: tint($color_nhsuk-blue, 80%);
+  color: shade($color_nhsuk-blue, 30%);
+}
