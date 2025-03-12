@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Add batch
+{% endblock %}
+
+{% set currentSection = "vaccines" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/vaccines/choose-vaccine",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Add batch</h1>
+
+      <form action="/vaccines/check" method="post" novalidate="true">
+
+        {{ input({
+          "label": {
+            "text": "Batch number",
+            classes: "nhsuk-label--s"
+          },
+          hint: {
+            text: "For example, XX123456"
+          },
+          "id": "batch-number",
+          "name": "batchNumber",
+          classes: "nhsuk-input--width-20",
+          value: data.batchNumber
+        }) }}
+
+
+        {{ dateInput({
+          "id": "batchExpiryDate",
+          "namePrefix": "batchExpiryDate",
+          "fieldset": {
+            "legend": {
+              "text": "Expiry date",
+              "classes": "nhsuk-label--s"
+            }
+          },
+          values: data.batchExpiryDate
+        }) }}
+
+        {% from 'inset-text/macro.njk' import insetText %}
+
+        <br>
+          {{ tag({
+            text: "New",
+            classes: "nhsuk-tag--blue"
+          })}}
+          <div class="nhsuk-u-padding-bottom-3"></div>
+
+          {{ radios({
+            "idPrefix": "pack-type",
+            
+            "name": "packType",
+            "fieldset": {
+              "legend": {
+                "text": "Pack size",
+                classes: "nhsuk-fieldset__legend--s"
+              }
+            },
+            "items": [
+              {
+                "value": "Single vial",
+                "text": "Single vial",
+                checked: (data.packType == "Single vial")
+              },
+              {
+                "value": "10 vials",
+                "text": "10 vials",
+                checked: (data.packType == "10 vials")
+              }
+            ]
+          }) }}
+
+        
+
+          {{ button({
+            "text": "Continue"
+          }) }}
+      </form>
+
+
+    </div>
+  </div>
+
+
+{% endblock %}

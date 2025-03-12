@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Is the vaccination today?" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+        <h1 class="nhsuk-heading-l">Record vaccinations</h1>
+        <p class="nhsuk-body-l">Before you start, you need to make sure at least one user has 'clinician' status, and you need to add vaccines.</p>
+
+        <p class="nhsuk-body-l"> <a href="/user-admin/add-user" class="nhsuk-link nhsuk-link--no-visited-state">Add a clinician</a></p>
+        <p class="nhsuk-body-l"> <a href="/vaccines/choose-site" class="nhsuk-link nhsuk-link--no-visited-state">Add vaccines</a></p>
+       
+
+    </div>
+  </div>
+
+{% endblock %}
+
