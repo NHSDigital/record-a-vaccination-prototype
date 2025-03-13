@@ -9,11 +9,6 @@
   {% include "includes/header-logged-in-organisation.html" %}
 {% endblock %}
 
-
-{% block beforeContent %}
-  {{ backLink({ href: "/terms-of-use" }) }}
-{% endblock %}
-
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
@@ -195,12 +190,6 @@
   <div class="spacing-example">
     <div class="nhsuk-u-padding-bottom-6"></div>
   </div>
-
-  {% from 'button/macro.njk' import button %}
-
-{{ button({
-  text: "Accept and continue"
-}) }}
 
 {% endblock %}
 
