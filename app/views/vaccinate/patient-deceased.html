@@ -1,0 +1,201 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check the patient details" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% if (data.vaccine === "COVID-19") %}
+  {% set nextPage = "/vaccinate/warning" %}
+{% elseif ((data.vaccine == "RSV") and (data.eligibility | arrayOrStringIncludes("Pregnant"))) or (data.vaccine == "Pertussis") %}
+  {% set nextPage = "/vaccinate/patient-estimated-due-date" %}
+{% else %}
+  {% set nextPage = "/vaccinate/consent" %}
+{% endif %}
+
+{% set dateOfBirthHtml %}
+  {% if data.dateOfBirth %}
+    {{ (data.dateOfBirth | isoDateFromDateInput | govukDate) }}
+    <br>(75 years old)
+  {% endif %}
+{% endset %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccinate/patient" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Check {{ data.patientName }}’s details and vaccination history</h1>
+
+      
+      {{ summaryList({
+        classes: 'xnhsuk-summary-list--no-border',
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              text: data.patientName
+            }
+          },
+          {
+            key: {
+              text: "Date of birth"
+            },
+            value: {
+                html: "15 August 1949"
+            }
+          },
+          {
+            key: {
+              text: "Date of death"
+            },
+            value: {
+                html: "20 February 2024<br>(Aged 74)"
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: "73 Roman Rd<br>Leeds<br> LS2 5ZN"
+            }
+          },
+          {
+            key: {
+              text: "NHS number"
+            },
+            value: {
+              text: data.nhsNumber
+            }
+          }
+        ]
+      }) }}
+
+      {% if data.vaccine == "COVID-19" %}
+
+        {% set screeningConsiderations %}
+          <ul>
+            <li>Does the patient have a history of anaphylaxis or significant allergic reactions to any vaccines or their ingredients?</li>
+            <li>Has the patient had a serious adverse reaction after the COVID-19 vaccine?</li>
+            <li>Is the patient pregnant or could they be?</li>
+          </ul>
+        {% endset %}
+
+        {{ details({
+          text: "Screening considerations",
+          HTML: screeningConsiderations
+        }) }}
+
+      {% endif %}
+
+      <h2 class="nhsuk-heading-m">Vaccination history</h2>
+
+      <p>This shows NHS vaccinations given in England. Currently it includes COVID-19, flu, pertussis and RSV.</p>
+
+      <p>However, pertussis vaccinations given at a GP surgery are not shown.</p>
+    </div>
+  </div>
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+        {{ table({
+          panel: false,
+          caption: "",
+          firstCellIsHeader: false,
+          head: [
+            {
+              text: "Date"
+            },
+            {
+              text: "Vaccine"
+            },
+            {
+              text: "Product"
+            }
+          ],
+          rows: [
+            [
+              {
+                text: "1 December 2024"
+              },
+              {
+                text: "COVID-19"
+              },
+              {
+                text: "Spikevax JN.1"
+              }
+            ],[
+              {
+                text: "11 November 2024"
+              },
+              {
+                text: "RSV"
+              },
+              {
+                text: "Abrysvo"
+              }
+            ],
+            [
+              {
+                text: "25 October 2024"
+              },
+              {
+                text: "Flu"
+              },
+              {
+                text: "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)"
+              }
+            ],
+            [
+              {
+                text: "15 October 2023"
+              },
+              {
+                text: "COVID-19"
+              },
+              {
+                text: "Comirnaty 30 Omicron XBB.1.5"
+              }
+            ],
+            [
+              {
+                text: "10 October 2023"
+              },
+              {
+                text: "Flu"
+              },
+              {
+                text: "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)"
+              }
+            ],
+            [
+              {
+                text: "11 March 2022"
+              },
+              {
+                text: "COVID-19"
+              },
+              {
+                text: "Moderna mRNA (Spikevax) Original"
+              }
+            ]
+          ]
+        }) }}
+
+
+      <form action="{{ nextPage }}" method="post" novalidate>
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

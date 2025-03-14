@@ -1,0 +1,136 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Add batch
+{% endblock %}
+
+{% set currentSection = "vaccines" %}
+
+
+<div class="ds_notification  ds_reversed" data-module="ds-notification">
+    <div class="ds_wrapper">
+        <div class="ds_notification__content  ds_notification__content--has-close">
+            <h2 class="visually-hidden">Information</h2>
+
+            <div class="ds_notification__text">
+                <p>We need to tell you about <a href="#">something</a></p>
+            </div>
+
+            <button class="ds_notification__close  js-close-notification" type="button">
+                <span class="visually-hidden">Close this notification</span>
+                <svg class="ds_icon  ds_icon--fill" aria-hidden="true" role="img"><use href="/assets/images/icons/icons.stack.svg#close"></use></svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/vaccines/choose-vaccine",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+
+        <div class="ds_notification  ds_reversed" data-module="ds-notification">
+            <div class="ds_wrapper">
+                <div class="ds_notification__content  ds_notification__content--has-close">
+                    <h2 class="visually-hidden">Information</h2>
+        
+                    <div class="ds_notification__text">
+                        <p>We need to tell you about <a href="#">something</a></p>
+                    </div>
+        
+                    <button class="ds_notification__close  js-close-notification" type="button">
+                        <span class="visually-hidden">Close this notification</span>
+                        <svg class="ds_icon  ds_icon--fill" aria-hidden="true" role="img"><use href="/assets/images/icons/icons.stack.svg#close"></use></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        
+
+      <h1 class="nhsuk-heading-l">Add batch</h1>
+
+      <form action="/vaccines/check" method="post" novalidate="true">
+
+        {{ input({
+          "label": {
+            "text": "Batch number",
+            classes: "nhsuk-label--s"
+          },
+          hint: {
+            text: "For example, XX123456"
+          },
+          "id": "batch-number",
+          "name": "batchNumber",
+          classes: "nhsuk-input--width-20",
+          value: data.batchNumber
+        }) }}
+
+
+        {{ dateInput({
+          "id": "batchExpiryDate",
+          "namePrefix": "batchExpiryDate",
+          "fieldset": {
+            "legend": {
+              "text": "Expiry date",
+              "classes": "nhsuk-label--s"
+            }
+          },
+          values: data.batchExpiryDate
+        }) }}
+
+        {% from 'inset-text/macro.njk' import insetText %}
+
+
+
+
+    
+          {{ radios({
+            "idPrefix": "pack-type",
+            
+            "name": "packType",
+            "fieldset": {
+              "legend": {
+                "text": "Pack size",
+                classes: "nhsuk-fieldset__legend--s"
+              }
+            },
+            "items": [
+              {
+                "value": "Single vial",
+                "text": "Single vial",
+                checked: (data.packType == "Single vial")
+              },
+              {
+                "value": "10 vials",
+                "text": "10 vials",
+                checked: (data.packType == "10 vials")
+              }
+            ]
+          }) }}
+
+        
+
+          {{ button({
+            "text": "Continue"
+          }) }}
+      </form>
+
+
+    </div>
+  </div>
+
+
+{% endblock %}
