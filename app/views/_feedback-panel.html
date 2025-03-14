@@ -1,3 +1,4 @@
+{% from 'checkboxes/macro.njk' import checkboxes %}
 <div class="app-feedback-panel" data-module="feedback-panel">
   <h2 class="app-feedback-panel__title" data-module="feedback-panel__title">How easy was it to record your first vaccination?</h2>
 
@@ -41,6 +42,15 @@
         text: "Do not include any patient information."
       }
     }) }}
+
+    {{ checkboxes({
+      items: [
+        {
+          value: "contactable",
+          text: "I’m happy to be contacted about my feedback"
+        }
+      ]
+    })}}
 
 
     <div class="app-button-group nhsuk-u-margin-bottom-0">
