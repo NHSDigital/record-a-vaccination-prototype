@@ -2,11 +2,16 @@
 
 {% set pageName = "Vaccination saved" %}
 
+{% set patientName = data.patientName if data.patientName else "Jodies Smith" %}
+
 {% set currentSection = "vaccinate" %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
+
+
+
       {% if (errors | length) > 0 %}
         {{ errorSummary({
           titleText: "There is a problem",
@@ -15,13 +20,15 @@
       {% endif %}
 
       {% set panelHtml %}
-        <a href="#" class="app-link--reverse">{{ data.patientName }}’s {{ data.vaccine }} record</a> will be sent to their GP.
+        <a href="#" class="app-link--reverse">{{ patientName }}’s {{ data.vaccine }} record</a> will be sent to their GP.
       {% endset %}
+      {% include "_feedback-panel.html" %}
 
       {{ panel({
         titleText: "Vaccination saved",
         html: panelHtml
       }) }}
+
 
       <form action="/vaccinate/what-next" method="post" novalidate>
 
@@ -34,6 +41,8 @@
           A flu
         {% elseif (data.vaccine == "Pertussis") %}
           A pertussis
+        {% else %}
+          A COVID-19
         {% endif %}
       {% endset %}
 
@@ -52,7 +61,7 @@
           items: [
             {
               value: "same-patient-another-vaccination",
-              text: data.patientName + "’s next vaccination"
+              text: patientName + "’s next vaccination"
             },
             {
               value: "same-vaccination-another-patient",

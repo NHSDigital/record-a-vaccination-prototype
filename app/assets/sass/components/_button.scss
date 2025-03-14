@@ -76,3 +76,63 @@
   font-weight: bold;
   color: $nhsuk-error-color;
 }
+
+
+// Proposed outlined button style
+// See https://github.com/nhsuk/nhsapp-frontend/issues/12
+// See https://github.com/nhsuk/nhs-app-design-styles-components-patterns
+@mixin app-button-outlined($button-color) {
+  background-color: rgba($button-color, 5%);
+  border-bottom: 0;
+  border-color: $button-color;
+  box-shadow: 0 4px 0 $button-color;
+  color: $button-color;
+  padding-bottom: nhsuk-spacing(2);
+  padding-top: nhsuk-spacing(2);
+
+  &:link,
+  &:visited {
+    color: $button-color;
+  }
+
+  &:hover {
+    background-color: rgba($button-color, 10%);
+    color: $button-color;
+  }
+
+  &:focus {
+    background-color: $nhsuk-focus-color;
+    border-color: $nhsuk-focus-color;
+    color: $nhsuk-focus-text-color;
+  }
+
+  &:focus:visited:active {
+    // Override .nhsuk-button turning colour white
+    color: $button-color;
+  }
+
+  &:active {
+    background-color: rgba($button-color, 15%);
+    border-bottom: $nhsuk-border-width-form-element solid; // Reintroduce 2px bottom border
+    border-color: $button-color;
+    color: $button-color;
+    // Revert padding to account for reintroduction of 2px bottom border
+    padding-bottom: 8px;
+    padding-top: 8px;
+    margin-bottom: -2px;
+  }
+
+  &::before {
+    bottom: #{$button-shadow-size * -1};
+    top: #{$nhsuk-border-width-form-element * -1};
+  }
+
+  &:active::before {
+    bottom: #{($nhsuk-border-width-form-element + $button-shadow-size) * -1};
+    top: #{($nhsuk-border-width-form-element + $button-shadow-size) * -1};
+  }
+}
+
+.app-button--outlined {
+  @include app-button-outlined($nhsuk-link-color);
+}
