@@ -1,12 +1,11 @@
 {% extends 'layout.html' %}
 
-
 {% block pageTitle %}
-  Terms of use
+  Agree to the terms of use
 {% endblock %}
 
 {% block header %}
-  {% include "includes/header-logged-in-organisation.html" %}
+  {% include "includes/header-logged-out.html" %}
 {% endblock %}
 
 
@@ -14,21 +13,24 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-xl">Terms of use</h1>
+      <h1 class="nhsuk-heading-l">Agree to the terms of use</h1>
 
-      <h2 class="nhsuk-heading-m">You must ensure</h2>
+      <ul class="nhsuk-list nhsuk-list--bullet">
+        <li>Only use the service to record NHS vaccinations.</li>
+        <li>Always use your own details to log in.</li>
+        <li>Never allow anyone else to use your details to log in.</li>
+      </ul>
 
-      <ul class="nhsuk-body-m">
-        <li>Access to the service and the recording of vaccination events is kept up to date</li>
-        <li>Individuals have the appropriate access based on their contract and training</li>
-        <li>Access is immediately removed for individuals who have left your organisation</li>
-      </ul>        
+      <p><a href="/terms-of-use1" target="_blank">Read the full terms of use (opens in new tab)</a> </p>
 
-      <a href="#" class="nhsuk-link">Read the full RAVS license agreement here</a>
+      <p>By continuing, you agree to the full terms of use.</p>
+
+      {{ button({
+        text: "Accept and continue",
+        href: "/home",
+        classes: "nhsuk-u-margin-top-5"
+      }) }}
 
     </div>
   </div>
-
-
 {% endblock %}
-

@@ -1,43 +1,205 @@
 {% extends 'layout.html' %}
 
-
 {% block pageTitle %}
   Terms of use
 {% endblock %}
 
 {% block header %}
-  {% include "includes/header-logged-in-organisation.html" %}
+  {% include "includes/header-logged-out.html" %}
 {% endblock %}
-
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-xl">Terms of use</h1>
+      <h1 class="nhsuk-heading-l">Terms of use</h1>
 
-      <h2 class="nhsuk-heading-m">You must ensure</h2>
+      <h2 class="nhsuk-heading-m">1. Introduction</h2>
 
-      <ul class="nhsuk-body-m">
-        <li>Access to the service and the recording of vaccination events is kept up to date</li>
-        <li>Individuals have the appropriate access based on their contract and training</li>
-        <li>Access is immediately removed for individuals who have left your organisation</li>
-      </ul>        
+      <p>1.1 These terms of use relate to your use of the Record a vaccination service, referred to in this document as the "Service".</p>
+      <p>1.2 NHS England makes the Service available free of charge, to be used by staff of organisations that hold a valid ODS code and have been commissioned by NHS England to provide preventative health and/or vaccination services (the "Site").</p>
+      <p>For more information about the Service, see <a href="https://digital.nhs.uk/services/vaccinations-point-of-care/record-a-vaccination-service">NHS Digital: Record a vaccination service.</a></p>
+      <p>1.3 References in these terms to "NHSE" means "NHS England" unless otherwise stated. </p>
+      <p>1.4 References to "we", "our" and "us" are references to NHSE.</p>
+      <p>1.5 All references to "you" or "your" means you as an approved user, who will be making use of the Service as part of your agreed role, operating at an NHSE-approved Site.</p>
+      <p>1.6 To contact NHSE about the Service, email <a href="ravs.support@england.nhs.uk">ravs.support@england.nhs.uk</a>.</p>
 
-      <a href="#" class="nhsuk-link">Read the full terms of the RAVS license agreement here</a>
+      <br>
+      <h2 class="nhsuk-heading-m">2. Purpose of the service </h2>
+      <p>2.1 The Service allows you to:</p>
+      <p>2.1.1 securely record and send vaccination event data directly to NHS systems</p>
+      <p>2.1.2 manage and report on vaccination event data</p>
+      <p>2.2 Data stored in the Service is made securely available to the Site, commissioners and the NHS.</p>
+      <p>2.3 The Service:</p>
+      <p>2.3.1 only records NHS (not private) vaccination events</p>
+      <p>2.3.2 must only be used by authorised users, contracted to provide clinical vaccination services for NHS England or associated organisations</p>
+      <p>2.3.3 must be used to record vaccination data accurately and as close to the time of vaccination as possible</p>
+      <p>2.3.3.1 Please note that if you enter any data more than 14 days after the event, you may forfeit provider service payments.</p>
+
+      <br>
+      <h2 class="nhsuk-heading-m">3. When these terms of use apply</h2>
+      <p>3.1 You should read these terms of use before using the Service.  </p>
+      <p>3.2 Whenever and irrespective of how you use the Service, you agree to operate in accordance with our terms of use. </p>
+      <p>3.3 You may access and use the Service only if you agree to be bound by these terms of use as-is.  If you do not agree, please do not access and/or use the Service. </p>
+      <p>3.4 You should also read:</p>
+      <p>3.4.1 Our <a href="https://guide.ravs.england.nhs.uk/guide/">user guide</a> that explains how to use the Service.</p>
+      <p>3.4.1.1 You can use this guidance as appropriate to train, inform and update colleagues at your Site, but these documents remain at all times the intellectual property of NHSE, and may be updated from time to time and without notification to you.</p>
+      <p>3.4.1.2 Please note that any update or alteration to these documents, may not be or may not remain correct, unless made and published by NHSE and it is your responsibility to ensure that you rely on the correct and most up to date version of any documentation when using the Service. </p>
+
+      <p>3.4.2 The section of NHSE's privacy policy that sets out <a href="https://www.england.nhs.uk/contact-us/privacy-notice/national-flu-vaccination-programme/">how patient data is used in the national vaccination programmes</a>.</p>
+
+      <p>3.4.3 Our <a href="/cookies">cookie policy</a> that sets out information about the cookies we collect and how we use them when you access and use the Service.  This policy may be updated from time to time and without specific notification made to you, and it is your responsibility to ensure that you understand the latest policy in operation.</p>
+
+      <p>3.5 We may, at any time and at our sole discretion, amend these terms of use for any reason, in order to comply with any changes or update to the laws of England and Wales and/or to reflect any change made to the Service.   </p>
+      <p>3.5.1 Any time that these terms of use are updated, you will be notified through the Service and you will be automatically bound by any such amendment to these terms of use from the first time that you use the Service after publication of such amendment.</p>
+      <p>3.6 NHSE aims to make the Service accessible to as many people as possible. For more information, see our <a href="/accessibility-statement">accessibility statement</a>.</p>
+
+      <p>3.7 We have measures in place on the Service to keep your data safe but it is important that you also play your part. For advice on how to stay secure online, see the <a href="https://www.ncsc.gov.uk/cyberaware/home">Cyber Aware website.</a></p>
+
+
+      <br>
+      <h2 class="nhsuk-heading-m">4. Using the Service</h2>
+      <h3 class="nhsuk-heading-s">If you are a Lead Administrator</h3>
+      <p>4.1 Your NHS region will initially set up the credentials for users identified as Lead Administrators. </p>
+      <p>4.1.1 However, it is then the responsibility of the Lead Administrators to manage and administer the user accounts at your Site. </p>
+      <p>4.2 As a Lead Administrator, you must make sure that: </p>
+      <p>4.2.1 access to and availability of the Service is maintained at the Site </p>
+      <p>4.2.2 recording of vaccination events is undertaken in a timely manner and that information is kept up to date </p>
+      <p>4.2.3 users have the appropriate access based on their work engagement and training </p>
+      <p>4.2.4 access is removed for those users who have left the operations at the Site, at least on, if not before, their actual date of departure from the Site </p>
+      <p>4.3 Your Site is responsible for making all arrangements required to access the Service, including but not limited to provision of:</p>
+      <p>4.3.1 a secure internet connection </p>
+      <p>4.3.2 an appropriate operating system and internet browser </p>
+      <p>4.3.3 an appropriate device (such as laptop or tablet); and you should only access the Service from a secure work device</p>
+      <p>4.3.4 your own appropriate virus protection software </p>
+      <p>4.3.5 all documentation, approvals and tests as may be required, and completed, in order to have completed all assurance activities for your Site</p>
+      <p>4.3.6 identification of those users that you need to operate at your Site; noting that there is no limit to how many accounts any Site may have in operation at any one time</p>
+      <p>4.4 Any person designated to be a user of the Service, must: </p>
+      <p>4.4.1 currently be under agreement to operate at your Site, and therefore,</p>
+      <p>4.4.2 have been officially invited by the Lead Administrator or us, to use the Service, and </p>
+      <p>4.3.3 hold a valid, live NHSE-approved email address. See the NHS Digital website for a <a href="https://digital.nhs.uk/services/care-identity-service/applications-and-services/apply-for-care-id/care-identity-email-domain-allow-list">list of allowed email domains</a>.</p>
+
+
+
+      <h3 class="nhsuk-heading-s">As a general user of the Service</h3>
+      <p>You agree that:</p>
+      <p>4.5 Before using the Service you will read all the guidance as noted as available at clause 3.4.1 of this document.</p>
+      <p>4.6 You will only use the Service in the course of performing your role as instructed by your Site. </p>
+      <p>4.7 Your log-in details give you a personal right to access and use the Service. If others in your organisation wish to access and use the Service, they should create their own account using their valid NHSE-approved email account.   </p>
+
+      <p>4.8 In every case, the credentials and details of your NHSE-approved email address will be used to log in to the Service; therefore the password that you use to log in to your NHSE-approved email account must follow the <a href="https://support.nhs.net/knowledge-base/nhsmail-password-policy/">NHS mail password policy</a>.</p>
+
+      <p>4.9 You agree to hold your credentials private and securely at all times and not to share these details, nor allow them to be used by others under any circumstances.</p>
+      <p>4.10 You will not use or attempt to use the Service to search for, view, share or otherwise use, any information or personal data relating to any person, other than as may be required for the performance of your role and solely in the manner as instructed in the training materials and by your Site.  </p>
+      <p>4.10.1 It is important for you to understand and acknowledge, that if you do undertake any actions within the Service that involve you viewing, searching and/or using  any personal data, and which are not actions in direct relation to your role and/or as instructed by your Site, that you may be committing a criminal offence. </p>
+      <p>4.11 You shall not make any communications, public statements, social media or press announcements about the Service without the prior written consent of NHSE.  </p>
+      <p>4.12 Subject to clauses 4.13 and 5.3, you shall not use NHSE's name, logo or brand, or any other NHSE names, logos or branding without the prior written consent of NHSE, and in each case, only as permitted by the NHSE identity guidelines. </p>
+      <p>4.13 You must not, in relation to your use of the Service: </p>
+      <p>4.13.1 copy or distribute any documents or make the Service available to any other parties, at any time, other than as allowed by these terms of use </p>
+      <p>4.13.2 transmit any material that is defamatory, offensive or otherwise objectionable </p>
+      <p>4.13.3 collect any data from our systems, or attempt to decipher any transmissions to or from our servers </p>
+      <p>4.13.4 use the Service in any way that could damage, disable, overburden, impair or compromise our systems or security or interfere with other users, nor attempt to reverse engineer any part of the Service </p>
+      <p>4.13.5 use the Service in any unlawful manner, for any unlawful purpose, or in any manner inconsistent with these terms of use  </p>
+      <p>4.13.6 act fraudulently or maliciously (for example, by hacking into or inserting malicious code, such as viruses or harmful data), or use the Service in any way that constitutes improper use </p>
+      <p>4.13.7 use or attempt to use the Service in any manner, not reasonably contemplated by these terms of use</p>
+      <p>4.13.8 In the event of you undertaking any such actions as non-exclusively defined in this clause 4.13, we will consider this a breach of your agreement to these terms of use and your right to use the Service will cease immediately and your user account will be decommissioned.</p>
+
+      <br>
+      <h2 class="nhsuk-heading-m">5. License</h2>
+      <p>5.1 NHSE England owns and/or has the right to use, all intellectual property rights vested in the Service or as may be used for the provision of the Service. This includes rights in copyright, patents, database rights, trademarks and other intellectual property rights. All such rights are reserved. </p>
+      <p>5.2 These terms of use allow you to use the Service and any intellectual property rights in it for the purposes set out in paragraph 2 herein, and subject always to these terms of use. </p>
+      <p>5.3 The Service is in part built from open-source code, made available under Open Government Licence (OGL).  In the event that you use any such code outside of the Service, you must do so in accordance with the open-source code rules.   </p>
+      <p>5.4 However, whenever you make use of the Service, you shall do so in compliance with the purpose, as defined at section 2 herein, and then may make use of the copyright and database rights in the Service, provided that at all times you follow these terms of use and the terms of the OGL. </p>
+      <p>5.5 The OGL terms do not apply to the following: </p>
+      <p>5.5.1 any logos, visuals, image rights, trademarks, trade names and design styles which are covered by copyright laws, and you may not alter, adapt, edit, modify or use any such material without express authorisation </p>
+      <p>5.5.2 any other intellectual property rights, including but not limited to patents, design rights and trademarks </p>
+      <p>5.5.3 personal data</p>
+      <p>5.5.4 information or components owned by any third parties</p>
+      <p>5.5.5 If you are in any doubt, contact us by using the details provided in clause 1.6 above.</p>
+      <h3 class="nhsuk-heading-s">Restrictions on your use</h3>
+      <p>5.6 In addition to what is stated within these terms or permitted by applicable law, you will not, and will ensure that your users do not and will act to ensure that no third party does:</p>
+      <p>5.6.1 use the Service for anything other than its purpose</p>
+      <p>5.6.2 copy the Service</p>
+      <p>5.6.3 take or fail to take action that burdens the Service unreasonably or disproportionately (as reasonably determined by us)</p>
+      <p>5.6.4 rent, lease, sub-license, assign, sell, transfer, loan, charge or hinder the Service</p>
+      <p>5.6.5 use or access the Service on behalf of a third party or make it available to them</p>
+      <p>5.6.6 translate, merge, adapt, alter or modify the Service or part of it</p>
+      <p>5.6.7 allow the Service or part of it to be merged or become incorporated into other programmes</p>
+      <p>5.6.8 use or attempt to use another user’s details to log in to the Service </p>
+      <p>5.6.9 use robots, spiders, scrapers or automated means to access the Service without written consent from us</p>
+      <p>5.6.10 disassemble, decompile, reverse engineer or create derivative works based on the Service or parts of it, or attempt to do so</p>
+      <p>5.6.11 provide or make available, the Service or parts of it to unauthorised persons (including programme listings, object and source programme listings, object code and source code)</p>
+      <p>5.6.12	use the Service for immoral, fraudulent and illegal purposes, or a purpose which could be determined threatening and abusive or cause us reputational damage</p>
+      <br>
+      <h2 class="nhsuk-heading-m">6. Service updates</h2>
+      <p>6.1 The Service is designed to operate compatibly with the latest versions of Microsoft Edge, Google Chrome, Mozilla Firefox and Apple Safari, and uses coding  standards that should work on the majority of browsers in use. However, please note that: </p>
+      <p>6.1.1 We offer no warranty in respect of the Service working in any particular browser or configuration.  </p>
+      <p>6.1.2 We do not guarantee that the Service will always be available nor that access to it will be error free or uninterrupted.  </p>
+      <p>6.1.3 We may suspend, withdraw, discontinue or change all or any part of the Service without notice.  </p>
+      <p>6.1.4 We do not guarantee that the Service will be secure or free from bugs or viruses. </p>
+      <p>6.1.5 You may see inconsistencies in the presentation of pages if you are using an older or deprecated versions of any browser. </p>
+      <p>6.2 We reserve the right to modify, suspend or discontinue (temporarily or permanently) the Service or other services it is connected to, with or without notice and without liability to you.  </p>
+      <p>6.3 We may enhance or improve service features or functionality with patches, bug fixes, updates and upgrades; and these updates may modify or delete certain features or functionalities of the Service.  </p>
+      <p>6.4 Further, you agree that we have no obligation to: </p>
+      <p>6.4.1 provide updates </p>
+      <p>6.4.2 continue to provide or enable particular service features or functionalities</p>
+      <p>6.5 You agree updates or modifications will be: </p>
+      <p>6.5.1 an integral part of the Service </p>
+      <p>6.5.2 subject to the Service’s terms of use </p>
+
+      <p>6.6 Any issues you have using the Service should be raised with our helpdesk, by emailing <a href="ravs.support@england.nhs.uk">ravs.support@england.nhs.uk</a>.</p>
+
+      <p>6.7 The Service may display, include or provide third-party content (including data, information, applications and other products and services) or links to third-party websites or services, and: </p>
+      <p>6.7.1 You acknowledge and agree that we are not responsible for any such third-party services, information or web content. </p>
+      <p>6.7.2 We are not responsible or liable to you or anyone else for services provided by third parties. This includes the accuracy, completeness, timeliness, validity, copyright compliance, legality, decency or quality of any such third-party services or information.</p>
+      <p>6.7.3 You must comply with any third parties' terms of agreement when using the Service.</p>
+
+
+      <br>
+      <h2 class="nhsuk-heading-m">7. Ending your use of the Service</h2>
+      <p>7.1 You may stop using the Service and/or deactivate your Service account at any time, for any reason. However, as soon as your role at the Site ends, for whatever reason, all authorisation and rights that you have to use the Service will cease. </p>
+      <p>7.2 It is the responsibility of the Lead Administrator to remove exiting users’ access either before or on the actual date that the user is departing your Site.</p>
+      <p>7.3 If you breach, or we suspect that you have breached or intend to breach, any of these terms of use, we may prevent you from accessing the Service and deactivate Your Service account.  </p>
+      <p>7.3.1 If whatever breach action that you have done can be put right, we will tell you and give you a reasonable opportunity to do so.  This rectification may result in your account being reactivated by us. </p>
+      <p>7.3.2 However, if we determine, at our sole discretion that your action cannot be rectified, then we will terminate your account.   </p>
+      <p>7.4 If we terminate your account, and/or suspend your access to the Service, we will notify you.  </p>
+      <p>7.5 If you deactivate your Service account or we end your rights to use the Service: </p>
+      <p>7.5.1 you must stop all activities as authorised under these terms of use, including use of the Service; and </p>
+      <p>7.5.2all rights granted to you under these terms of use shall automatically cease without further notice (although your statutory rights - for example in respect of data protection as described in the privacy policy - are not affected).
+
+      <br>
+      <h2 class="nhsuk-heading-m">8. Liability</h2>
+      <p>8.1 Please read this clause carefully, as it sets out the limits of our liability to you under these terms of use. </p>
+      <p>8.2 Although we shall make reasonable efforts to update the Service, it is provided to you "as is" and therefore, to the extent permitted by law, we make no representations, warranties or guarantees, whether express or implied (including but not limited to the implied warranties of satisfactory quality, fitness for a particular purpose, non-infringement, compatibility, security and accuracy), that:  (a) the Service is accurate, complete or up-to-date; (b) the Service will meet your particular requirements or needs; or (c) access to, or use of, the Service will be uninterrupted or completely secure. </p>
+      <p>8.3 You acknowledge and agree that we will not be responsible for any injury, loss, damage, costs or expenses (whether direct or indirect) that arise or may be raised out of, or relating to the use or misuse of the Service, except to the extent that such liability cannot be excluded by law (i.e. our liability for death or personal injury arising from our negligence, or our fraud or fraudulent misrepresentation or any other liability that cannot be excluded or limited under English law). </p>
+      <p>8.4 This means that we have no liability to you (or anyone else you may allow to use the Service) for any: </p>
+      <p>8.4.1 business loss (including but not limited to loss of profits, revenue, contracts, anticipated savings, data, goodwill or wasted expenditure) </p>
+      <p>8.4.2 loss or damage where this is not caused by our negligence </p>
+      <p>8.4.3 loss or damage arising from an inability to access and/or use the Service in whole or in part </p>
+      <p>8.4.4 loss or damage caused by a virus, distributed denial-of-service attack, or other technologically harmful material that may infect your device, computer equipment, computer programmes, data or other proprietary material due to your use of the Service, or other loss or damage whether arising under tort (including negligence), breach of contract, breach of statutory duty or otherwise </p>
+
+      <br>
+      <h2 class="nhsuk-heading-m">9. General</h2>
+      <p>9.1 You shall link directly to the Service over the internet, and you acknowledge that we reserve the right to move or change the associated website’s URL address at any time, so that any bookmark that you may make of the link to the Service may become outdated.</p>
+      <p>9.2 We are not responsible for the content or reliability of any websites that may be presented by any such internet links in or accessible through the Service and we do not necessarily endorse the views expressed within any website that may be presented through such links. We cannot guarantee that these links will always work as we have no control over the availability of other websites. </p>
+      <p>9.3 If any part of these terms of use is determined to be illegal, invalid or otherwise unenforceable then all the remaining parts of these terms of use shall remain in full force and effect. </p>
+      <p>9.4 If We delay any enforcement of any terms under these terms of use, we can still enforce them later; if we do not insist right away that you follow the requirements within these terms of use, do not acknowledge immediately any breach that you may have done, or we delay in taking steps against you, this will not prevent us from taking steps against you or prevent your need to follow any requirements to rectify any action you may have taken, at a later date. </p>
+      <p>9.5 We may transfer our rights and obligations under these terms of use to another organisation. We will ensure that the transfer will not affect your rights under these terms of use. You may not transfer your rights or your obligations under these terms of use to any other person at any time. </p>
+      <p>9.6 These terms of use set out the entire agreement between you personally and us in respect of your use of the Service.  </p>
+      <p>9.7 These terms of use do not give rise to any rights for any third party to enforce any term under these terms of use. </p>
+      <p>9.8 We do not give permission to suggest that any other alternative application or service, products or website is associated with our Service or endorsed by us. </p>
+      <p>9.9 The laws of England and Wales shall apply to these terms of use and to all matters relating to use of the Service. Any cause of action arising under or in connection with these terms of use or your use of the Service shall be subject to the exclusive jurisdiction of the courts of England.</p>
+
+      <br>
+      <p>Last updated: 1 April 2025</p>
 
     </div>
   </div>
 
-  <div class="spacing-example">
-    <div class="nhsuk-u-padding-bottom-6"></div>
-  </div>
 
-  {% from 'button/macro.njk' import button %}
 
-{{ button({
-  text: "I agree to the RAVS licensing agreement"
-}) }}
+
+
 
 {% endblock %}
 
