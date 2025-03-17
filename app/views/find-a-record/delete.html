@@ -21,7 +21,7 @@
       <h1 class="nhsuk-heading-l">Are you sure you want to delete {{ vaccination.patient.name }}’s {{vaccination.vaccine}} record?</h1>
 
 
-      <p>Once deleted you will no longer be able to view or edit the record.</p>
+      <p>Once deleted, a record cannot be restored. But deleted records will show in reports.</p>
 
       <form action="/find-a-record/records/{{ vaccination.id }}/confirm-delete" method="post">
         {{ button({
