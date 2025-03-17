@@ -14,17 +14,18 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-xl">Terms of use</h1>
+      <h1 class="nhsuk-heading-xl">Agree to the terms of use</h1>
 
-      <h2 class="nhsuk-heading-m">You must ensure</h2>
-
+      
       <ul class="nhsuk-body-m">
-        <li>Access to the service and the recording of vaccination events is kept up to date</li>
-        <li>Individuals have the appropriate access based on their contract and training</li>
-        <li>Access is immediately removed for individuals who have left your organisation</li>
+        <li>Only use the service to record NHS vaccinations.</li>
+        <li>Always use your own details to log in.</li>
+        <li>Never allow anyone else to use your details to log in.</li>
       </ul>        
 
-      <a href="#" class="nhsuk-link">Read the full terms of the RAVS license agreement here</a>
+      <a href="#" class="nhsuk-link">Read the full terms of use (opens in new tab)</a>
+
+      <p>By continuing, you agree to the full terms of use.</p>
 
     </div>
   </div>
@@ -36,7 +37,7 @@
   {% from 'button/macro.njk' import button %}
 
 {{ button({
-  text: "I agree to the RAVS licensing agreement"
+  text: "Accept and continue"
 }) }}
 
 {% endblock %}
