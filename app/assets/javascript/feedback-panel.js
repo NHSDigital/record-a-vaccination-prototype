@@ -2,16 +2,16 @@ class FeedbackPanel {
 
   constructor($module) {
     this.$module = $module
-    this.$feedbackButtons = $module.querySelector('[data-module="feedback-panel__buttons"]')
+    this.$initialQuestion = $module.querySelector('[data-module="feedback-panel__initial-question"]')
     this.$feedbackComments = $module.querySelector('[data-module="feedback-panel__comments"]')
-    this.$title = $module.querySelector('[data-module="feedback-panel__title"]')
     this.$close = $module.querySelector('[data-module="feedback-panel__close"]')
     this.$sendCommentsButton = this.$feedbackComments.querySelector('.nhsuk-button')
+
   }
 
   init() {
     this.$feedbackComments.hidden = true
-    this.$feedbackButtons.querySelectorAll('.nhsuk-button').forEach((button) => {
+    this.$initialQuestion.querySelectorAll('.nhsuk-button').forEach((button) => {
       button.addEventListener('click', this.hideButtons.bind(this))
     })
     this.$close.addEventListener('click', this.hidePanel.bind(this))
@@ -32,13 +32,15 @@ class FeedbackPanel {
   hideButtons(event) {
     const thanksMessage = event.target.getAttribute('data-thanks')
 
+    const $title = this.$feedbackComments.querySelector('.app-feedback-panel__title')
+
     if (thanksMessage) {
-      this.$title.textContent = thanksMessage
+      $title.textContent = thanksMessage
     } else {
-      this.$title.textContent = 'Thanks'
+      $title.textContent = 'Thanks'
     }
 
-    this.$feedbackButtons.hidden = true
+    this.$initialQuestion.hidden = true
     this.$feedbackComments.hidden = false
 
   }

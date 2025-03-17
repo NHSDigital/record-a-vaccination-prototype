@@ -5,9 +5,11 @@
 
 {% from 'checkboxes/macro.njk' import checkboxes %}
 <div class="app-feedback-panel" data-module="feedback-panel">
-  <h2 class="app-feedback-panel__title" data-module="feedback-panel__title">You’ve just recorded your 5th vaccination. How have you found the service?</h2>
+  <div data-module="feedback-panel__initial-question">
+    <h2 class="app-feedback-panel__title">You’ve just recorded your 5th vaccination.</h2>
 
-  <div data-module="feedback-panel__buttons">
+    <p>How have you found using this service?</p>
+
     <div class="app-button-group nhsuk-u-margin-bottom-0">
       {{ button({
         text: "Easy",
@@ -36,6 +38,8 @@
   </div>
 
   <div class="app-feedback-panel__comments"  data-module="feedback-panel__comments" hidden>
+
+    <h2 class="app-feedback-panel__title">Thank you.</h2>
     {{ textarea({
       name: "example",
       id: "example",
