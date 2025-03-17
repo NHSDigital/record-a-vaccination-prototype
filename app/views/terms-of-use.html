@@ -1,8 +1,7 @@
 {% extends 'layout.html' %}
 
-
 {% block pageTitle %}
-  Terms of use
+  Agree to the terms of use
 {% endblock %}
 
 {% block header %}
@@ -16,34 +15,23 @@
 
       <h1 class="nhsuk-heading-xl">Agree to the terms of use</h1>
 
-  
+
       <ul class="nhsuk-body-m">
         <li>Only use the service to record NHS vaccinations.</li>
         <li>Always use your own details to log in.</li>
         <li>Never allow anyone else to use your details to log in.</li>
-      </ul>        
+      </ul>
 
-      <p><a href="/terms-of-use1">Read the full terms of use (opens in new tab)</a> </p>
+      <p><a href="/terms-of-use1" target="_blank">Read the full terms of use (opens in new tab)</a> </p>
 
-  
+      <p>By continuing, you agree to the full terms of use.</p>
+
+      {{ button({
+        text: "Accept and continue",
+        href: "/home",
+        classes: "nhsuk-u-margin-top-5"
+      }) }}
 
     </div>
   </div>
-
-<p>By continuing, you agree to the full terms of use.</p>
-
-  <div class="spacing-example">
-    <div class="nhsuk-u-padding-bottom-6"></div>
-  </div>
-
-
-
-<button class="nhsuk-button"
-  data-module="nhsuk-button"
-   type="submit">
-  Accept and continue
-</button>
-
-
 {% endblock %}
-
