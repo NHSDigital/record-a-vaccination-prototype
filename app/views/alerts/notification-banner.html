@@ -1,136 +1,76 @@
-{% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Add batch
+{% block head %}
+  <script src="/js/alert.js"></script>
 {% endblock %}
 
-{% set currentSection = "vaccines" %}
+{% from 'checkboxes/macro.njk' import checkboxes %}
+<div class="app-feedback-panel" data-module="feedback-panel">
+  <div data-module="feedback-panel__initial-question">
+    <h2 class="app-feedback-panel__title">You’ve just recorded your 5th vaccination.</h2>
 
 
-<div class="ds_notification  ds_reversed" data-module="ds-notification">
-    <div class="ds_wrapper">
-        <div class="ds_notification__content  ds_notification__content--has-close">
-            <h2 class="visually-hidden">Information</h2>
+    <fieldset class="nhsuk-fieldset">
+      <legend class="nhsuk-fieldset__legend nhsuk-u-margin-bottom-4">How have you found using this service?</legend>
 
-            <div class="ds_notification__text">
-                <p>We need to tell you about <a href="#">something</a></p>
-            </div>
-
-            <button class="ds_notification__close  js-close-notification" type="button">
-                <span class="visually-hidden">Close this notification</span>
-                <svg class="ds_icon  ds_icon--fill" aria-hidden="true" role="img"><use href="/assets/images/icons/icons.stack.svg#close"></use></svg>
-            </button>
-        </div>
-    </div>
-</div>
-
-
-
-{% block beforeContent %}
-  {{ backLink({
-    href: "/vaccines/choose-vaccine",
-    text: "Back"
-  }) }}
-{% endblock %}
-
-
-
-{% block content %}
-  <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-two-thirds">
-
-
-
-        <div class="ds_notification  ds_reversed" data-module="ds-notification">
-            <div class="ds_wrapper">
-                <div class="ds_notification__content  ds_notification__content--has-close">
-                    <h2 class="visually-hidden">Information</h2>
-        
-                    <div class="ds_notification__text">
-                        <p>We need to tell you about <a href="#">something</a></p>
-                    </div>
-        
-                    <button class="ds_notification__close  js-close-notification" type="button">
-                        <span class="visually-hidden">Close this notification</span>
-                        <svg class="ds_icon  ds_icon--fill" aria-hidden="true" role="img"><use href="/assets/images/icons/icons.stack.svg#close"></use></svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        
-
-      <h1 class="nhsuk-heading-l">Add batch</h1>
-
-      <form action="/vaccines/check" method="post" novalidate="true">
-
-        {{ input({
-          "label": {
-            "text": "Batch number",
-            classes: "nhsuk-label--s"
-          },
-          hint: {
-            text: "For example, XX123456"
-          },
-          "id": "batch-number",
-          "name": "batchNumber",
-          classes: "nhsuk-input--width-20",
-          value: data.batchNumber
+      <div class="app-button-group nhsuk-u-margin-bottom-0">
+        {{ button({
+          text: "Easy",
+          classes: "app-button--outlined app-button--small",
+          attributes: {
+            "data-thanks": "Thank you. Do you want to tell us more?"
+          }
         }) }}
 
-
-        {{ dateInput({
-          "id": "batchExpiryDate",
-          "namePrefix": "batchExpiryDate",
-          "fieldset": {
-            "legend": {
-              "text": "Expiry date",
-              "classes": "nhsuk-label--s"
-            }
-          },
-          values: data.batchExpiryDate
+        {{ button({
+          text: "Ok",
+          classes: "app-button--outlined app-button--small",
+          attributes: {
+            "data-thanks": "Thank you. Do you want to tell us more?"
+          }
         }) }}
 
-        {% from 'inset-text/macro.njk' import insetText %}
-
-
-
-
-    
-          {{ radios({
-            "idPrefix": "pack-type",
-            
-            "name": "packType",
-            "fieldset": {
-              "legend": {
-                "text": "Pack size",
-                classes: "nhsuk-fieldset__legend--s"
-              }
-            },
-            "items": [
-              {
-                "value": "Single vial",
-                "text": "Single vial",
-                checked: (data.packType == "Single vial")
-              },
-              {
-                "value": "10 vials",
-                "text": "10 vials",
-                checked: (data.packType == "10 vials")
-              }
-            ]
-          }) }}
-
-        
-
-          {{ button({
-            "text": "Continue"
-          }) }}
-      </form>
-
-
-    </div>
+        {{ button({
+          text: "Hard",
+          classes: "app-button--outlined app-button--small",
+          attributes: {
+            "data-thanks": "Thank you. Do you want to tell us more?"
+          }
+        }) }}
+      </div>
+    </fieldset>
   </div>
 
+  <div class="app-feedback-panel__comments"  data-module="feedback-panel__comments" hidden>
 
-{% endblock %}
+    <h2 class="app-feedback-panel__title">Thank you.</h2>
+    {{ textarea({
+      name: "example",
+      id: "example",
+      rows: 3,
+      label: {
+        text: "Feedback (optional)"
+      }
+    }) }}
+
+    {{ checkboxes({
+      items: [
+        {
+          value: "contactable",
+          text: "I’m happy to be contacted about my feedback"
+        }
+      ]
+    })}}
+
+
+    <div class="app-button-group nhsuk-u-margin-bottom-0">
+      {{ button({
+        text: "Send feedback",
+        classes: "app-button--outlined app-button--small"
+      }) }}
+
+
+      <a href="#" class="nhsuk-link nhsuk-link--no-visited-state" data-module="feedback-panel__close">Close</a>
+    </div>
+
+  </div>
+</div>
