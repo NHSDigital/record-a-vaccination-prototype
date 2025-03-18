@@ -8,33 +8,36 @@
   <div data-module="feedback-panel__initial-question">
     <h2 class="app-feedback-panel__title">You’ve just recorded your 5th vaccination.</h2>
 
-    <p>How have you found using this service?</p>
 
-    <div class="app-button-group nhsuk-u-margin-bottom-0">
-      {{ button({
-        text: "Easy",
-        classes: "app-button--outlined app-button--small",
-        attributes: {
-          "data-thanks": "Thank you. Do you want to tell us more?"
-        }
-      }) }}
+    <fieldset class="nhsuk-fieldset">
+      <legend class="nhsuk-fieldset__legend nhsuk-u-margin-bottom-4">How have you found using this service?</legend>
 
-      {{ button({
-        text: "Ok",
-        classes: "app-button--outlined app-button--small",
-        attributes: {
-          "data-thanks": "Thank you. Do you want to tell us more?"
-        }
-      }) }}
+      <div class="app-button-group nhsuk-u-margin-bottom-0">
+        {{ button({
+          text: "Easy",
+          classes: "app-button--outlined app-button--small",
+          attributes: {
+            "data-thanks": "Thank you. Do you want to tell us more?"
+          }
+        }) }}
 
-      {{ button({
-        text: "Hard",
-        classes: "app-button--outlined app-button--small",
-        attributes: {
-          "data-thanks": "Thank you. Do you want to tell us more?"
-        }
-      }) }}
-    </div>
+        {{ button({
+          text: "Ok",
+          classes: "app-button--outlined app-button--small",
+          attributes: {
+            "data-thanks": "Thank you. Do you want to tell us more?"
+          }
+        }) }}
+
+        {{ button({
+          text: "Hard",
+          classes: "app-button--outlined app-button--small",
+          attributes: {
+            "data-thanks": "Thank you. Do you want to tell us more?"
+          }
+        }) }}
+      </div>
+    </fieldset>
   </div>
 
   <div class="app-feedback-panel__comments"  data-module="feedback-panel__comments" hidden>
