@@ -1,41 +1,22 @@
 
 {% block head %}
-  <script src="/js/alert.js"></script>
+  <script src="/js/feedback-panel.js"></script>
 {% endblock %}
 
 {% from 'checkboxes/macro.njk' import checkboxes %}
 <div class="app-feedback-panel" data-module="feedback-panel">
   <div data-module="feedback-panel__initial-question">
-    <h2 class="app-feedback-panel__title">You’ve just recorded your 5th vaccination.</h2>
+    <h2 class="app-feedback-panel__title">New helpdesk phone number</h2>
 
 
     <fieldset class="nhsuk-fieldset">
-      <legend class="nhsuk-fieldset__legend nhsuk-u-margin-bottom-4">How have you found using this service?</legend>
+      <legend class="nhsuk-fieldset__legend nhsuk-u-margin-bottom-4">Our helpdesk phone number has changed to 0333 038 4268 (option 3).</legend>
 
       <div class="app-button-group nhsuk-u-margin-bottom-0">
-        {{ button({
-          text: "Easy",
-          classes: "app-button--outlined app-button--small",
-          attributes: {
-            "data-thanks": "Thank you. Do you want to tell us more?"
-          }
-        }) }}
+       
+        <a href="#" class="nhsuk-link nhsuk-link--no-visited-state" data-module="feedback-panel__close">Close</a>
 
-        {{ button({
-          text: "Ok",
-          classes: "app-button--outlined app-button--small",
-          attributes: {
-            "data-thanks": "Thank you. Do you want to tell us more?"
-          }
-        }) }}
 
-        {{ button({
-          text: "Hard",
-          classes: "app-button--outlined app-button--small",
-          attributes: {
-            "data-thanks": "Thank you. Do you want to tell us more?"
-          }
-        }) }}
       </div>
     </fieldset>
   </div>

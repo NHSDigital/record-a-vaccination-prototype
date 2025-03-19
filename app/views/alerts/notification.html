@@ -1,0 +1,141 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Vaccines
+{% endblock %}
+
+{% set currentSection = "vaccines" %}
+
+{% set sites = [] %}
+{% for vaccine in (data.vaccines) %}
+  {% if not (sites | arrayOrStringIncludes(vaccine.siteCode)) %}
+    {% set sites = (sites.push(vaccine.siteCode), sites) %}
+  {% endif %}
+{% endfor %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% include "_alert.html" %}
+
+      <h1 class="nhsuk-heading-xl">Vaccines</h1>
+
+      <p class="nhsuk-body-l">Add and edit your vaccines for your organisation.</p>
+
+      {{ button({
+        "text": "Add vaccine",
+        "href": "/vaccines/choose-site"
+      }) }}
+
+    </div>
+  </div>
+
+  {% from 'select/macro.njk' import select %}
+
+
+  {% if (sites | length) > 4 %}
+    {% set filterItems = [{
+      text: "All sites",
+      value: "",
+      selected: true
+    }] %}
+
+    {% for site in sites %}
+      {% set filterItems = (filterItems.push({text: data.sites[site].name, value: site}), filterItems) %}
+    {% endfor %}
+
+
+      {{ select({
+        label: {
+          text: "Show"
+        },
+        id: "select-1",
+        name: "select-1",
+        items: filterItems,
+        classes: "nhsuk-u-margin-bottom-3"
+      }) }}
+  {% endif %}
+
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      {% for site in sites %}
+
+        <table class="nhsuk-table">
+          <caption class="nhsuk-table__caption nhsuk-table__caption--m nhsuk-u-margin-bottom-2">{{ data.sites[site].name }}</caption>
+          <thead role="rowgroup" class="nhsuk-table__head">
+            <tr role="row">
+              <th role="columnheader" class="" scope="col">
+                Vaccine
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Product
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Active batches
+              </th>
+              <th role="columnheader" class="" scope="col">
+              <th role="columnheader" class="" scope="col">
+
+              </th>
+            </tr>
+          </thead>
+          <tbody class="nhsuk-table__body">
+
+        {% set vaccinesAtSite = [] %}
+        {% for vaccine in (data.vaccines) %}
+          {% if vaccine.siteCode == site and not (vaccinesAtSite | arrayOrStringIncludes(vaccine.vaccine)) %}
+            {% set vaccinesAtSite = (vaccinesAtSite.push(vaccine.vaccine), vaccinesAtSite) %}
+          {% endif %}
+        {% endfor %}
+
+        {% for vaccineAtSite in vaccinesAtSite %}
+
+          {% set vaccineProductsAtSite = [] %}
+            {% for vaccine in (data.vaccines) %}
+              {% if vaccine.vaccine == vaccineAtSite and vaccine.siteCode == site and not (vaccineProductsAtSite | arrayOrStringIncludes(vaccine.vaccineProduct)) %}
+                {% set vaccineProductsAtSite = (vaccineProductsAtSite.push(vaccine.vaccineProduct), vaccineProductsAtSite) %}
+              {% endif %}
+            {% endfor %}
+
+
+
+              {% for vaccineProduct in vaccineProductsAtSite %}
+                <tr class="nhsuk-table__row">
+                  <td class="nhsuk-table__cell">
+                    {{ vaccineAtSite }}
+                  </td>
+                  <td class="nhsuk-table__cell">
+                    {{ vaccineProduct }}
+                  </td>
+                  <td class="nhsuk-table__cell ">
+                    {% set count = 0 %}
+                    {% set thisVaccine = {} %}
+                    {% for vaccine in data.vaccines %}
+                      {% if (vaccine.siteCode == site) and (vaccine.vaccine == vaccineAtSite) and (vaccine.vaccineProduct == vaccineProduct) %}
+                        {% set thisVaccine = vaccine %}
+                      {% endif %}
+                    {% endfor %}
+                    {{ thisVaccine.batches | length }}
+                  </td>
+                  <td class="nhsuk-table__cell ">
+                    <div class="nhsuk-u-margin-bottom-1"><a href="/vaccines/{{ thisVaccine.id }}" class="nhsuk-link">View</a></div>
+                  </td>
+                  <td class="nhsuk-table__cell ">
+                    <div><a href="/vaccines/{{ thisVaccine.id }}/add" class="nhsuk-link">Add batch</a></div>
+                  </td>
+                </tr>
+              {% endfor %}
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endfor %}
+
+
+    </div>
+  </div>
+
+{% endblock %}
+
