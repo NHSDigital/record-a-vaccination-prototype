@@ -98,6 +98,13 @@
             text: postcodeError
           } if postcodeError
         }) }}
+        {% from 'details/macro.njk' import details %}
+        {{ details({
+          text: "If the patient is homeless",
+          HTML: "
+          <p>Try searching with the postcode ZZ99 3VZ</p>
+          "
+        }) }}
 
         {{ button({
           text: "Search"
