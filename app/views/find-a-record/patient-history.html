@@ -4,10 +4,10 @@
   Patient's vaccination records – Records
 {% endblock %}
 
-{% set currentSection = "records" %}
+{% set currentSection = "find-a-record" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/records/search-result" }) }}
+  {{ backLink({ href: "/find-a-record/search-result" }) }}
 {% endblock %}
 
 {% set dateOfBirthHtml %}
@@ -91,7 +91,7 @@
             text: vaccinationRecorded.vaccineProduct
           },
           {
-            html: '<a href="/records/records/' + vaccinationRecorded.id + '">View<span class="nhsuk-u-visually-hidden"> Y vaccination recorded on X</span></a>'
+            html: '<a href="/find-a-record/records/' + vaccinationRecorded.id + '">View<span class="nhsuk-u-visually-hidden"> Y vaccination recorded on X</span></a>'
           } if vaccinationRecorded.editable
         ]), rows) %}
 
