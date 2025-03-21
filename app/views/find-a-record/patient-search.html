@@ -1,13 +1,13 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  Search for the patient
+  Search for the patient – Records
 {% endblock %}
 
-{% set currentSection = "find-a-record" %}
+{% set currentSection = "records" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/find-a-record" }) }}
+  {{ backLink({ href: "/records" }) }}
 {% endblock %}
 
 {% block content %}
@@ -25,7 +25,7 @@
 
       <p class="nhsuk-body">Make sure the details you enter match those registered with the patient’s GP.</p>
 
-      <form action="/find-a-record/search-result" method="post">
+      <form action="/records/search-result" method="post">
         {{ input({
           label: {
             text: "First name"
