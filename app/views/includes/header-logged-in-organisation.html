@@ -26,7 +26,7 @@
         } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
         {
           url: "/find-a-record",
-          label: "Find a record",
+          label: "Records",
           classes: ("app-header__navigation-item--current" if currentSection == "find-a-record")
         } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
 

@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Find a record
+{% endblock %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/find-a-record/records/" + vaccination.id,
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/find-a-record/records/{{ vaccination.id }}" method="post">
+        <input type="hidden" name="changedField" value="Product">
+
+        {{ radios({
+          idPrefix: "vaccineProduct",
+          name: "vaccineProduct",
+          fieldset: {
+            legend: {
+              text: "Which COVID-19 product did you give?",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          items: [
+            {
+              value: "Comirnaty 30 JN.1",
+              text: "Comirnaty 30 JN.1",
+              checked: (data.vaccineProduct === "Comirnaty 30 JN.1")
+            },
+            {
+              value: "Comirnaty 10 JN.1",
+              text: "Comirnaty 10 JN.1",
+              checked: (data.vaccineProduct === "Comirnaty 10 JN.1")
+            },
+            {
+              value: "Comirnaty 3 JN.1",
+              text: "Comirnaty 3 JN.1",
+              checked: (data.vaccineProduct === "Comirnaty 3 JN.1")
+            },
+            {
+                value: "Spiekvax JN.1",
+                text: "Spiekvax JN.1",
+                checked: (data.dvaccineProduct === "Spiekvax JN.1")
+              }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Save"
+        })}}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

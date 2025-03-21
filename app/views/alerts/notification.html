@@ -14,27 +14,10 @@
 {% endfor %}
 
 {% block content %}
-
-
-<div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
-    <div class="govuk-notification-banner__header">
-      <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
-        MMR now available
-      </h2>
-    </div>
-    <div class="govuk-notification-banner__content">
-      <p class="govuk-notification-banner__heading">
-        You can now record MMR (measles, mumps and rubella) vaccinations.
-        <a class="govuk-notification-banner__link" href="/updates">Read more</a>.
-      </p>
-    </div>
-  </div>
-
   <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-two-thirds nhsuk-u-margin-bottom-5">
+    <div class="nhsuk-grid-column-two-thirds">
 
-
-
+      {% include "_alert.html" %}
 
       <h1 class="nhsuk-heading-xl">Vaccines</h1>
 
@@ -49,6 +32,7 @@
   </div>
 
   {% from 'select/macro.njk' import select %}
+
 
   {% if (sites | length) > 4 %}
     {% set filterItems = [{

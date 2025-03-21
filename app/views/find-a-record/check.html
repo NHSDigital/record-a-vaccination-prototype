@@ -65,23 +65,66 @@
               ]
             }
           },
+
+          {
+            key: {
+              text: "Team"
+            },
+            value: {
+              text: vaccination.deliveryTeam
+            },
+            actions: {
+              items: [
+                {
+                  href: "/find-a-record/records/" + vaccination.id + "/delivery-team",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+
+    
+
           {
             key: {
               text: "Vaccine"
             },
             value: {
-              html: vaccination.vaccine + "<br>" + vaccination.vaccineProduct
+              html: vaccination.vaccine
             },
             actions: {
               items: [
                 {
                   href: "/find-a-record/records/" + vaccination.id + "/choose-vaccines",
-                  text: "Change",
+                  text: "",
                   visuallyHiddenText: "vaccine"
                 }
               ]
             }
           },
+
+
+
+          {
+            key: {
+              text: "Product"
+            },
+            value: {
+              html: data.vaccineProduct
+            },
+            actions: {
+              items: [
+                {
+                  href: "/find-a-record/records/" + vaccination.id + "/choose-product",
+                  text: "Change",
+                  visuallyHiddenText: "product"
+                }
+              ]
+            }
+          },
+
+        
 
           {
             key: {
@@ -101,23 +144,7 @@
             }
           },
 
-          {
-            key: {
-              text: "Team"
-            },
-            value: {
-              text: vaccination.deliveryTeam
-            },
-            actions: {
-              items: [
-                {
-                  href: "/find-a-record/records/" + vaccination.id + "/delivery-team",
-                  text: "Change",
-                  visuallyHiddenText: "name"
-                }
-              ]
-            }
-          },
+         
           {
             key: {
               text: "Vaccinator"
