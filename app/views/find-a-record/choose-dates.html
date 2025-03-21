@@ -8,7 +8,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/find-a-record/records/" + vaccination.id,
+    href: "/records/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
@@ -29,7 +29,7 @@
         }) }}
       {% endif %}
 
-      <form action="/find-a-record/records/{{ vaccination.id }}" method="post">
+      <form action="/records/records/{{ vaccination.id }}" method="post">
         <input type="hidden" name="changedField" value="Date">
 
         {% set otherDateHtml %}
