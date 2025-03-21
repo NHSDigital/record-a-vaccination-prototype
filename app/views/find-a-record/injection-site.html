@@ -1,15 +1,15 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  Where was the injection given?
+  Where was the injection given? – Records
 {% endblock %}
 
-{% set currentSection = "find-a-record" %}
+{% set currentSection = "records" %}
 
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/find-a-record/records/" + vaccination.id,
+    href: "/records/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
@@ -18,7 +18,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/find-a-record/records/{{ vaccination.id }}" method="post">
+      <form action="/records/records/{{ vaccination.id }}" method="post">
 
       <input type="hidden" name="changedField" value="Injection site">
 
