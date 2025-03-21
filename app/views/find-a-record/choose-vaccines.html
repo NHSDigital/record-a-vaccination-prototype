@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  Find a record
+  Which vaccine was it?
 {% endblock %}
 
 {% set currentSection = "find-a-record" %}
@@ -186,9 +186,9 @@
 
       {% if vaccination.repeatPatient == 'yes' and vaccination.patientName %}
 
-        {% set question = ("Which vaccine did you give?" + vaccination.patientName + "?" if vaccination.vaccinationToday == 'yes' else "Which vaccine did you give " + vaccination.patientName + "?") %}
+        {% set question = ("Which vaccine was it?" + vaccination.patientName + "?" if vaccination.vaccinationToday == 'yes' else "Which vaccine was it?" + vaccination.patientName + "?") %}
       {% else %}
-        {% set question = ("Which vaccine did you give?" if vaccination.vaccinationToday == 'yes' else "Which vaccine did you give?") %}
+        {% set question = ("Which vaccine was it?" if vaccination.vaccinationToday == 'yes' else "Which vaccine was it?") %}
       {% endif %}
 
       {{ radios({

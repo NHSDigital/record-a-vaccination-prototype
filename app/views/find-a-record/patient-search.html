@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-  Find a record
+  Search for the patient
 {% endblock %}
 
 {% set currentSection = "find-a-record" %}
@@ -21,7 +21,7 @@
         }) }}
       {% endif %}
 
-      <h1 class="nhsuk-heading-l">Search for a patient</h1>
+      <h1 class="nhsuk-heading-l">Search for the patient</h1>
 
       <p class="nhsuk-body">Make sure the details you enter match those registered with the patient’s GP.</p>
 
@@ -88,7 +88,7 @@
 
         {{ input({
           label: {
-            text: "Postcode"
+            text: "Postcode (optional)"
           },
           id: "postcode",
           name: "postcode",
@@ -97,6 +97,13 @@
           errorMessage: {
             text: postcodeError
           } if postcodeError
+        }) }}
+        {% from 'details/macro.njk' import details %}
+        {{ details({
+          text: "If the patient is homeless",
+          HTML: "
+          <p>Try searching with the postcode ZZ99 3VZ</p>
+          "
         }) }}
 
         {{ button({
