@@ -4,11 +4,11 @@
   Are you sure you want to delete this record? – Records
 {% endblock %}
 
-{% set currentSection = "records" %}
+{% set currentSection = "find-a-record" %}
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/records/records/" + vaccination.id,
+    href: "/find-a-record/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
@@ -23,7 +23,7 @@
 
       <p>Once deleted, a record cannot be restored. But deleted records will show in reports.</p>
 
-      <form action="/records/records/{{ vaccination.id }}/confirm-delete" method="post">
+      <form action="/find-a-record/records/{{ vaccination.id }}/confirm-delete" method="post">
         {{ button({
           text: "Yes, delete this record"
         }) }}
