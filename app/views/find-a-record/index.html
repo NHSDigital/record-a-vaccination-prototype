@@ -4,7 +4,7 @@
 Records
 {% endblock %}
 
-{% set currentSection = "records" %}
+{% set currentSection = "find-a-record" %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -13,7 +13,7 @@ Records
       <h1 class="nhsuk-heading-l">Records</h1>
       <p class="nhsuk-body-l">Search for a vaccination record you want to view, edit or delete.</p>
 
-      <form action="/records/answer-search" method="post" novalidate>
+      <form action="/find-a-record/answer-search" method="post" novalidate>
 
         {% set nhsNumberHtml %}
 
