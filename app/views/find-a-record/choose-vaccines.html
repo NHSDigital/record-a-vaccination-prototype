@@ -4,11 +4,11 @@
   Which vaccine was it? – Records
 {% endblock %}
 
-{% set currentSection = "records" %}
+{% set currentSection = "find-a-record" %}
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/records/records/" + vaccination.id,
+    href: "/find-a-record/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
@@ -42,7 +42,7 @@
         }) }}
       {% endif %}
 
-      <form action="/records/records/{{ vaccination.id }}/batch" method="post">
+      <form action="/find-a-record/records/{{ vaccination.id }}/batch" method="post">
         <input type="hidden" name="changedField" value="Vaccine">
 
       {% set covid19Product %}
