@@ -1,10 +1,8 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Patient's {{vaccination.vaccine}} vaccination record – Records" %}
+{% set pageName = "Patient’s " +  vaccination.vaccine + " vaccination record – Records" %}
 
 {% set currentSection = "records" %}
-
-{% set organisation = {name: data.nhsTrusts[data.organisationCode]} %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -82,7 +80,7 @@
             }
           },
 
-    
+
 
           {
             key: {
@@ -101,15 +99,12 @@
               ]
             }
           },
-
-
-
           {
             key: {
               text: "Product"
             },
             value: {
-              html: data.vaccineProduct
+              html: vaccination.vaccineProduct
             },
             actions: {
               items: [
@@ -121,9 +116,6 @@
               ]
             }
           },
-
-        
-
           {
             key: {
               text: ("  Batch" if from == to else "From")
@@ -141,8 +133,6 @@
               ]
             }
           },
-
-         
           {
             key: {
               text: "Vaccinator"
