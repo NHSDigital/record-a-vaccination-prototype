@@ -1,6 +1,6 @@
 module.exports = router => {
 
- router.post('/find-a-record/answer-search', (req, res) => {
+ router.post('/records/answer-search', (req, res) => {
   const data = req.session.data
 
   if (data.nhsNumberKnown === "yes") {
@@ -9,28 +9,28 @@ module.exports = router => {
     req.session.data.dateOfBirth = {day: "15", month: "8", year: "1949"}
     req.session.data.postcode = "GD3 I83"
 
-    return res.redirect('/find-a-record/patient-history')
+    return res.redirect('/records/patient-history')
   } else if (data.nhsNumberKnown === "no") {
-    res.redirect('/find-a-record/patient-search')
+    res.redirect('/records/patient-search')
   } else {
-    res.redirect('/find-a-record')
+    res.redirect('/records')
   }
 
 })
 
   // Show patient history
-  router.get('/find-a-record/patient-history', (req, res) => {
+  router.get('/records/patient-history', (req, res) => {
     const recordDeleted = req.query.recordDeleted
     const vaccinationsRecorded = req.session.data.vaccinationsRecorded
 
-    res.render('find-a-record/patient-history', {
+    res.render('records/patient-history', {
       vaccinationsRecorded,
       recordDeleted
     })
   })
 
   // Delete a vaccination record
-  router.post('/find-a-record/records/:id/confirm-delete', (req, res) => {
+  router.post('/records/records/:id/confirm-delete', (req, res) => {
     const id = req.params.id
     const vaccinationsRecorded = req.session.data.vaccinationsRecorded
     const vaccination = vaccinationsRecorded.find((record) => record.id === id)
@@ -42,23 +42,23 @@ module.exports = router => {
     // Remove item from array using 'splice', which takes an index
     req.session.vaccinationsRecorded = vaccinationsRecorded.splice(index, 1)
 
-    res.redirect('/find-a-record/patient-history?recordDeleted=' + vaccine)
+    res.redirect('/records/patient-history?recordDeleted=' + vaccine)
   })
 
 
-  router.get('/find-a-record/records/:id', (req, res) => {
+  router.get('/records/records/:id', (req, res) => {
 
     const id = req.params.id
 
     const vaccination = req.session.data.vaccinationsRecorded.find((record) => record.id === id)
 
-    res.render('find-a-record/check', {
+    res.render('records/check', {
       vaccination
     })
 
   })
 
-  router.post('/find-a-record/records/:id', (req, res) => {
+  router.post('/records/records/:id', (req, res) => {
 
     const id = req.params.id
     const vaccination = req.session.data.vaccinationsRecorded.find((record) => record.id === id)
@@ -96,18 +96,18 @@ module.exports = router => {
       data.vaccinationDateChanged = "no"
     }
 
-    res.redirect(`/find-a-record/records/${id}?changedField=${data.changedField}`)
+    res.redirect(`/records/records/${id}?changedField=${data.changedField}`)
 
   })
 
-  router.get('/find-a-record/records/:id/:page', (req, res) => {
+  router.get('/records/records/:id/:page', (req, res) => {
 
     const id = req.params.id
     const page = req.params.page
 
     const vaccination = req.session.data.vaccinationsRecorded.find((record) => record.id === id)
 
-    res.render(`find-a-record/${page}`, {
+    res.render(`records/${page}`, {
       vaccination
     })
 

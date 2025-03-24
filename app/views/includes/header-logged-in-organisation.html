@@ -25,9 +25,9 @@
           classes: ("app-header__navigation-item--current" if currentSection == "vaccines")
         } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
         {
-          url: "/find-a-record",
+          url: "/records",
           label: "Records",
-          classes: ("app-header__navigation-item--current" if currentSection == "find-a-record")
+          classes: ("app-header__navigation-item--current" if currentSection == "records")
         } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
 
         {

@@ -1,14 +1,12 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Which team was it?
-{% endblock %}
+{% set pageName = "Which team was it? – Records" %}
 
-{% set currentSection = "vaccinate" %}
+{% set currentSection = "records" %}
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/find-a-record/records/" + vaccination.id,
+    href: "/records/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
@@ -17,7 +15,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/find-a-record/records/{{ vaccination.id }}" method="post">
+      <form action="/records/records/{{ vaccination.id }}" method="post">
         <input type="hidden" name="changedField" value="Team">
 
         {{ radios({
