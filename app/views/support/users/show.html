@@ -4,12 +4,12 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/support/users",
+    href: "javascript: history.back();",
     text: "Back"
   }) }}
 {% endblock %}
 
-{% set currentSection = "users" %}
+{% set currentSection = "regions" %}
 
 {% block header %}
   {% include "includes/header-logged-in-support.html" %}
@@ -29,7 +29,7 @@
               classes: "nhsuk-u-font-weight-normal"
             },
             value: {
-              html: user.name
+              html: user.firstName + " " + user.lastName
             }
           },
           {
