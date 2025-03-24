@@ -4,12 +4,12 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/support",
+    href: "/support/regions",
     text: "Back"
   }) }}
 {% endblock %}
 
-{% set currentSection = "dashboard" %}
+{% set currentSection = "regions" %}
 
 {% block header %}
   {% include "includes/header-logged-in-support.html" %}
@@ -22,12 +22,7 @@
       <h1 class="nhsuk-heading-xl">{{ pageName }}</h1>
 
 
-      <h2 class="nhsuk-heading-m">Users</h2>
-
-      {{ button({
-        text: "Add user",
-        href: "/support/regions/" + region.id + "/add-user"
-      }) }}
+      <h2 class="nhsuk-heading-m nhsuk-u-margin-bottom-1">Users</h2>
 
       {% if (users | length) > 0 %}
         <table class="nhsuk-table">
@@ -67,12 +62,18 @@
         </table>
       {% endif %}
 
+      {{ button({
+        text: "Add user",
+        href: "/support/regions/" + region.id + "/add-user"
+      }) }}
+
     </div>
   </div>
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
 
+<!--
       <table class="nhsuk-table nhsuk-table--padding-2">
         <caption class="nhsuk-table__caption nhsuk-u-margin-bottom-2 nhsuk-table__caption--m">Organisations</caption>
         <thead role="rowgroup" class="nhsuk-table__head">
@@ -143,7 +144,7 @@
             </tr>
         </tfoot>
       </table>
-
+-->
 
 
     </div>
