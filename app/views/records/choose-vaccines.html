@@ -1,14 +1,12 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Which vaccine was it? – Records
-{% endblock %}
+{% set pageName = "Which vaccine was it? – Records" %}
 
-{% set currentSection = "find-a-record" %}
+{% set currentSection = "records" %}
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/find-a-record/records/" + vaccination.id,
+    href: "/records/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
@@ -42,7 +40,7 @@
         }) }}
       {% endif %}
 
-      <form action="/find-a-record/records/{{ vaccination.id }}/batch" method="post">
+      <form action="/records/records/{{ vaccination.id }}/batch" method="post">
         <input type="hidden" name="changedField" value="Vaccine">
 
       {% set covid19Product %}
