@@ -5,9 +5,17 @@
 {% endblock %}
 
 {% block beforeContent %}
-  {{ backLink({
-    href: "/support/users/" + user.id,
-    text: "Back"
+  {{ breadcrumb({
+    items: [
+      {
+        href: "/support/users",
+        text: "Users"
+      },
+      {
+        href: "/support/users/" + user.id,
+        text: user.firstName + " " + user.lastName
+      }
+    ]
   }) }}
 {% endblock %}
 

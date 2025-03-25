@@ -3,13 +3,21 @@
 {% set pageName = region.name %}
 
 {% block beforeContent %}
-  {{ backLink({
-    href: "/support/regions/" + region.id,
-    text: "Back"
-  }) }}
+{{ breadcrumb({
+  items: [
+    {
+      href: "/support/regions",
+      text: "Regions"
+    },
+    {
+      href: "/support/regions/" + region.id,
+      text: region.name
+    }
+  ]
+}) }}
 {% endblock %}
 
-{% set currentSection = "organisations" %}
+{% set currentSection = "regions" %}
 
 {% block header %}
   {% include "includes/header-logged-in-support.html" %}

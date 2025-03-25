@@ -14,7 +14,7 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <ul>
+      <ul class="nhsuk-list">
         {% for region in (data.regions | sort(false, true, "name")) %}
           <li><a href="/support/regions/{{ region.id }}">{{ region.name }}</a></li>
         {% endfor %}
