@@ -5029,7 +5029,7 @@ module.exports = [
   },
   {
     "id": "RAV",
-    "name": "The guys and lewisham NHS trust",
+    "name": "The Guys and Lewisham NHS trust",
     "address": {
       "line1": "Guys hospital",
       "town": "London",

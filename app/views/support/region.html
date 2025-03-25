@@ -3,9 +3,13 @@
 {% set pageName = region.name %}
 
 {% block beforeContent %}
-  {{ backLink({
-    href: "/support/regions",
-    text: "Back"
+  {{ breadcrumb({
+    items: [
+      {
+        href: "/support/regions",
+        text: "Regions"
+      }
+    ]
   }) }}
 {% endblock %}
 
