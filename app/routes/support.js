@@ -153,6 +153,53 @@ const userId = Math.floor(Math.random() * 10000000).toString()
     res.redirect(`/support/organisations/${id}`)
   })
 
+  // Viewing all users
+  router.get('/support/users', (req, res) => {
+    const data = req.session.data
+    const allUsers = data.users
+    const q = req.query.q;
+    const perPage = 40; // Max number of users to show per page
+    const page = parseInt(req.query.page) || 1  ;  // Current page, default to 1
+
+    let users = allUsers.sort((a, b) => {
+      const nameA = a.firstName.toUpperCase(); // ignore upper and lowercase
+      const nameB = b.firstName.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    })
+
+    if (q) {
+      users = users.filter(function(user) {
+        return (
+          user.firstName.toLowerCase().startsWith(q.toLowerCase()) ||
+          user.lastName.toLowerCase().startsWith(q.toLowerCase()) ||
+          (user.firstName + " " + user.lastName).toLowerCase().startsWith(q.toLowerCase()) ||
+          user.email.toLowerCase().startsWith(q.toLowerCase())
+        )
+      })
+    }
+
+
+    const totalUsers = users.length
+    const indexStartFrom = (page - 1) * perPage
+    const totalPages = Math.ceil(totalUsers / perPage)
+    users = users.slice(indexStartFrom, indexStartFrom + perPage)
+
+
+    res.render('support/users', {
+      users,
+      q,
+      totalUsers,
+      totalPages,
+      page,
+    })
+  })
+
   // Viewing a user
   router.get('/support/users/:id', (req, res) => {
     const { id } = req.params

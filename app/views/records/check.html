@@ -1,16 +1,12 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Check and confirm
-{% endblock %}
+{% set pageName = "Patient’s " +  vaccination.vaccine + " vaccination record – Records" %}
 
-{% set currentSection = "find-a-record" %}
-
-{% set organisation = {name: data.nhsTrusts[data.organisationCode]} %}
+{% set currentSection = "records" %}
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/find-a-record/patient-history",
+    href: "/records/patient-history",
     text: "Back"
   }) }}
 {% endblock %}
@@ -41,7 +37,7 @@
           actions: {
             items: [
               {
-                href: "/find-a-record/choose-dates",
+                href: "/records/choose-dates",
                 text: "",
                 visuallyHiddenText: "vaccination date"
               }
@@ -58,7 +54,7 @@
             actions: {
               items: [
                 {
-                  href: "/find-a-record/records/" + vaccination.id + "/choose-dates",
+                  href: "/records/records/" + vaccination.id + "/choose-dates",
                   text: "Change",
                   visuallyHiddenText: "vaccination date"
                 }
@@ -76,7 +72,7 @@
             actions: {
               items: [
                 {
-                  href: "/find-a-record/records/" + vaccination.id + "/delivery-team",
+                  href: "/records/records/" + vaccination.id + "/delivery-team",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -84,7 +80,7 @@
             }
           },
 
-    
+
 
           {
             key: {
@@ -96,36 +92,30 @@
             actions: {
               items: [
                 {
-                  href: "/find-a-record/records/" + vaccination.id + "/choose-vaccines",
+                  href: "/records/records/" + vaccination.id + "/choose-vaccines",
                   text: "",
                   visuallyHiddenText: "vaccine"
                 }
               ]
             }
           },
-
-
-
           {
             key: {
               text: "Product"
             },
             value: {
-              html: data.vaccineProduct
+              html: vaccination.vaccineProduct
             },
             actions: {
               items: [
                 {
-                  href: "/find-a-record/records/" + vaccination.id + "/choose-product",
+                  href: "/records/records/" + vaccination.id + "/choose-product",
                   text: "Change",
                   visuallyHiddenText: "product"
                 }
               ]
             }
           },
-
-        
-
           {
             key: {
               text: ("  Batch" if from == to else "From")
@@ -136,15 +126,13 @@
             actions: {
               items: [
                 {
-                  href: "/find-a-record/records/" + vaccination.id + "/batch",
+                  href: "/records/records/" + vaccination.id + "/batch",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
               ]
             }
           },
-
-         
           {
             key: {
               text: "Vaccinator"
@@ -155,7 +143,7 @@
             actions: {
               items: [
                 {
-                  href: "/find-a-record/records/" + vaccination.id + "/vaccinator",
+                  href: "/records/records/" + vaccination.id + "/vaccinator",
                   text: "Change",
                   visuallyHiddenText: "contact information"
                 }
@@ -172,7 +160,7 @@
             actions: {
               items: [
                 {
-                  href: "/find-a-record/records/" + vaccination.id + "/eligibility",
+                  href: "/records/records/" + vaccination.id + "/eligibility",
                   text: "Change",
                   visuallyHiddenText: "contact information"
                 }
@@ -189,7 +177,7 @@
             actions: {
               items: [
                 {
-                  href: "/find-a-record/records/" + vaccination.id + "/patient-estimated-due-date",
+                  href: "/records/records/" + vaccination.id + "/patient-estimated-due-date",
                   text: "Change",
                   visuallyHiddenText: "pregnancy due date"
                 }
@@ -206,7 +194,7 @@
             actions: {
               items: [
                 {
-                  href: "/find-a-record/records/" + vaccination.id + "/consent",
+                  href: "/records/records/" + vaccination.id + "/consent",
                   text: "Change",
                   visuallyHiddenText: "consent"
                 }
@@ -223,7 +211,7 @@
             actions: {
               items: [
                 {
-                  href: "/find-a-record/records/" + vaccination.id + "/injection-site",
+                  href: "/records/records/" + vaccination.id + "/injection-site",
                   text: "Change",
                   visuallyHiddenText: "contact details"
                 }
@@ -240,7 +228,7 @@
             actions: {
               items: [
                 {
-                  href: "/find-a-record/records/" + vaccination.id + "/notes",
+                  href: "/records/records/" + vaccination.id + "/notes",
                   text: "Change",
                   visuallyHiddenText: "contact details"
                 }
@@ -251,10 +239,10 @@
       }) }}
 
       <p class="nhsuk-body"><a class="nhsuk-link"
-      href="/find-a-record/records/{{ vaccination.id }}/delete">Delete this record</a></p>
+      href="/records/records/{{ vaccination.id }}/delete">Delete this record</a></p>
 
       {% if data.changedField %}
-        <form action="/find-a-record" method="get">
+        <form action="/records" method="get">
           {{ button({
             "text": "Find another record"
           }) }}

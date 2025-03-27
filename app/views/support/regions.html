@@ -14,78 +14,11 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <table class="nhsuk-table">
-        <thead role="rowgroup" class="nhsuk-table__head">
-          <tr role="row">
-            <th rowspan="2" class="app-table__header--border-right app-table__header--align-bottom app-table__header--border-top">
-              Name
-            </th>
-            <th colspan="1" rowspan="2" class="app-table__header--align-bottom app-table__header--border-right app-table__header--padding-left app-table__header--border-top nhsuk-table__header--numeric">
-              Organisations
-            </th>
-            <th colspan="3" class="app-table__header--padding-left nhsuk-table__header--centred app-table__header--border-right app-table__header--border-top">
-              Users
-            </th>
-            <th colspan="4" class="app-table__header--padding-left nhsuk-table__header--centred app-table__header--border-top">
-              Vaccinations
-            </th>
-          </tr>
-          <tr role="row">
-
-            <th class="app-table__header--padding-left nhsuk-table__header--numeric ">
-              Lead
-            </th>
-            <th class="nhsuk-table__header--numeric app-table__header--align-bottom">
-              Admin
-            </th>
-            <th class="nhsuk-table__header--numeric app-table__header--border-right app-table__header--align-bottom">
-              Recorder
-            </th>
-            <th class="app-table__header--padding-left nhsuk-table__header--numeric app-table__header--align-bottom">
-              COVID
-            </th>
-            <th class="app-table__header--padding-left nhsuk-table__header--numeric app-table__header--align-bottom">
-              Flu
-            </th>
-            <th class="nhsuk-table__header--numeric app-table__header--align-bottom">
-              RSV
-            </th>
-            <th class="nhsuk-table__header--numeric app-table__header--align-bottom">
-              Pertussis
-            </th>
-          </tr>
-        </thead>
-        <tbody class="nhsuk-table__body">
-          {% for region in (data.regions | sort(false, true, "name")) %}
-            <tr role="row" class="nhsuk-table__row">
-              <th class="nhsuk-table__cell app-table__cell--border-right nhsuk-u-font-weight-normal"><a href="/support/regions/{{ region.id }}">{{ region.name }}</a></th>
-              <td class="nhsuk-table__cell app-table__cell--padding-left app-table__cell--border-right nhsuk-table__cell--numeric">150</td>
-              <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">103</td>
-              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">150</td>
-              <td class="nhsuk-table__cell nhsuk-table__cell--numeric  app-table__cell--border-right">501</td>
-              <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">1,014</td>
-              <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">304</td>
-              <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">734</td>
-              <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">16</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-        <tfoot>
-          <tr role="row" class="nhsuk-table__row nhsuk-table__row--bold">
-              <th class="nhsuk-table__cell app-table__cell--border-right ">Total</th>
-              <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric nhsuk-table__cell app-table__cell--border-right">1,050</td>
-              <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">721</td>
-              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">1,050</td>
-              <td class="nhsuk-table__cell nhsuk-table__cell nhsuk-table__cell--numeric  app-table__cell--border-right">3,507</td>
-              <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">7,098</td>
-              <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">2,128</td>
-              <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">5,138</td>
-              <td class="nhsuk-table__cell app-table__cell--padding-left nhsuk-table__cell--numeric">112</td>
-            </tr>
-        </tfoot>
-      </table>
-
-
+      <ul class="nhsuk-list">
+        {% for region in (data.regions | sort(false, true, "name")) %}
+          <li><a href="/support/regions/{{ region.id }}">{{ region.name }}</a></li>
+        {% endfor %}
+      </ul>
 
     </div>
   </div>

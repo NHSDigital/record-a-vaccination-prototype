@@ -1,14 +1,12 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  What is the patient's estimated due date?
-{% endblock %}
+{% set pageName = "What is the patient's estimated due date? – Records" %}
 
-{% set currentSection = "find-a-record" %}
+{% set currentSection = "records" %}
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/find-a-record/records/" + vaccination.id,
+    href: "/records/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
@@ -28,7 +26,7 @@
       {% endif %}
 
 
-      <form action="/find-a-record/records/{{ vaccination.id }}" method="post">
+      <form action="/records/records/{{ vaccination.id }}" method="post">
         <input type="hidden" name="changedField" value="Pregnancy due date">
 
         {{ dateInput({

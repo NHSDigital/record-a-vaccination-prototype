@@ -1,14 +1,12 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Find a record
-{% endblock %}
+{% set pageName = "Which vaccine product was it? – Records" %}
 
-{% set currentSection = "vaccinate" %}
+{% set currentSection = "records" %}
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/find-a-record/records/" + vaccination.id,
+    href: "/records/records/" + vaccination.id,
     text: "Back"
   }) }}
 {% endblock %}
@@ -17,7 +15,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/find-a-record/records/{{ vaccination.id }}" method="post">
+      <form action="/records/records/{{ vaccination.id }}" method="post">
         <input type="hidden" name="changedField" value="Product">
 
         {{ radios({
@@ -25,7 +23,7 @@
           name: "vaccineProduct",
           fieldset: {
             legend: {
-              text: "Which COVID-19 product did you give?",
+              text: "Which " + vaccination.vaccine + " vaccine did you give?",
               classes: "nhsuk-fieldset__legend--l",
               isPageHeading: true
             }

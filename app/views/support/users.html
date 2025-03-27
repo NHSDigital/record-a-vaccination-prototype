@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% from '../../components/pagination/macro.njk' import appPagination %}
 
 {% set pageName = "Users" %}
 
@@ -13,6 +14,22 @@
     <div class="nhsuk-grid-column-full">
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <div class="app-filters nhsuk-u-margin-top-5 nhsuk-u-margin-bottom-3">
+        <form action="/support/users" method="get" novalidate>
+          <div class="nhsuk-form-group nhsuk-u-margin-bottom-0">
+            <label class="nhsuk-label" for="q">
+              Search users by name or email
+            </label>
+            <input class="nhsuk-input nhsuk-input--width-20" id="q" name="q" type="search" value="{{ q }}">
+
+            {{ button({
+              text: "Search",
+              classes: "nhsuk-button--secondary nhsuk-u-margin-left-2 app-button--small nhsuk-u-margin-bottom-0"
+            })}}
+          </div>
+        </form>
+      </div>
 
       <table class="nhsuk-table">
         <thead role="rowgroup" class="nhsuk-table__head">
@@ -30,7 +47,7 @@
           </tr>
         </thead>
         <tbody class="nhsuk-table__body">
-          {% for user in (data.users | sort(false, false, "name") ) %}
+          {% for user in users %}
             <tr role="row" class="nhsuk-table__row">
               <td class="nhsuk-table__cell">
                 <a href="/support/users/{{ user.id }}">{{ user.firstName }} {{ user.lastName }}</a>
@@ -40,7 +57,7 @@
               </td>
               <td class="nhsuk-table__cell " style="min-width: 150px;">
                 {% for organisation in user.organisations %}
-                  {{ (data.organisations | findById(organisation.id)).name }}
+                  {{ (data.organisations | findById(organisation.id)).name }}<br>
                 {% endfor %}
               </td>
               <td class="nhsuk-table__cell ">
@@ -50,6 +67,34 @@
           {% endfor %}
         </tbody>
       </table>
+
+      {% set items = [] %}
+
+      {% set ellipsisAdded = false %}
+      {% for i in range(1, totalPages + 1) -%}
+        {% if i == 1 or i == (page -1) or (i == page) or (i == page + 1) or (i == totalPages) %}
+          {% set items = (items.push({
+            number: i,
+            href: "/support/users?page=" + i + "&q=" + (q if q else ""),
+            current: (i === page)
+          }), items) %}
+          {% set ellipsisAdded = false %}
+        {% elif ellipsisAdded == false %}
+          {% set items = (items.push({
+            ellipsis: true
+          }), items) %}
+          {% set ellipsisAdded = true %}
+        {% endif %}
+      {%- endfor %}
+
+
+      {% if totalPages > 1 %}
+        {{ appPagination({
+          previousUrl:  "/support/users?page=" + (page - 1) + "&q=" + (q if q else "") if page != 1,
+          nextUrl: "/support/users?page=" + (page + 1) + "&q=" + (q if q else "")  if page != totalPages,
+          items: items
+        }) }}
+      {% endif %}
 
     </div>
   </div>

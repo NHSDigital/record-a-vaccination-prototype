@@ -11,7 +11,7 @@
   }) }}
 {% endblock %}
 
-{% set currentSection = "users" %}
+{% set currentSection = "regions" %}
 
 {% block header %}
   {% include "includes/header-logged-in-support.html" %}
@@ -21,7 +21,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <div class="nhsuk-caption-l">{{ user.name }}</div>
+      <div class="nhsuk-caption-l">{{ user.firstName }} {{ user.lastName }}</div>
       <h1 class="nhsuk-heading-l">{{ region.name }}</h1>
 
       <form action="/support/users/{{ user.id }}/regions/{{ region.id }}/update" method="post" novalidate="true">
@@ -31,7 +31,7 @@
           fieldset: {
             legend: {
               text: "Status",
-              classes: "nhsuk-fieldset__legend--m"
+              classes: "nhsuk-fieldset__legend--s"
             }
           },
           value: userRegionSettings.status,

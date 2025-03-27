@@ -3,9 +3,13 @@
 {% set pageName = user.firstName + " " + user.lastName %}
 
 {% block beforeContent %}
-  {{ backLink({
-    href: "/support/users",
-    text: "Back"
+  {{ breadcrumb({
+    items: [
+      {
+        href: "/support/users",
+        text: "Users"
+      }
+    ]
   }) }}
 {% endblock %}
 
@@ -29,7 +33,7 @@
               classes: "nhsuk-u-font-weight-normal"
             },
             value: {
-              html: user.name
+              html: user.firstName + " " + user.lastName
             }
           },
           {
@@ -134,7 +138,7 @@
           {% for organisation in (user.organisations | sort(false, false, "name") ) %}
             <tr role="row" class="nhsuk-table__row">
               <td class="nhsuk-table__cell">
-                <a href="/support/organisations/{{ organisation.id }}">{{ (data.organisations | findById(organisation.id)).name }}</a>
+                {{ (data.organisations | findById(organisation.id)).name }}
               </td>
               <td class="nhsuk-table__cell ">
                 {{ organisation.permissionLevel }}
