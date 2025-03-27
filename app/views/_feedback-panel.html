@@ -10,12 +10,21 @@
 
 
     <fieldset class="nhsuk-fieldset">
-      <legend class="nhsuk-fieldset__legend nhsuk-u-margin-bottom-4">How have you found using this service?</legend>
+      <legend class="nhsuk-fieldset__legend nhsuk-u-margin-bottom-4">How was your experience of recording vaccinations?</legend>
 
       <div class="app-button-group nhsuk-u-margin-bottom-0">
+
+        {{ button({
+          text: "Very easy",
+          classes: "app-button--outlined app-button--small app-button--min-width",
+          attributes: {
+            "data-thanks": "Thank you. Do you want to tell us more?"
+          }
+        }) }}
+
         {{ button({
           text: "Easy",
-          classes: "app-button--outlined app-button--small",
+          classes: "app-button--outlined app-button--small app-button--min-width",
           attributes: {
             "data-thanks": "Thank you. Do you want to tell us more?"
           }
@@ -23,15 +32,23 @@
 
         {{ button({
           text: "Ok",
-          classes: "app-button--outlined app-button--small",
+          classes: "app-button--outlined app-button--small app-button--min-width",
           attributes: {
             "data-thanks": "Thank you. Do you want to tell us more?"
           }
         }) }}
 
         {{ button({
-          text: "Hard",
-          classes: "app-button--outlined app-button--small",
+          text: "Difficult",
+          classes: "app-button--outlined app-button--small app-button--min-width",
+          attributes: {
+            "data-thanks": "Thank you. Do you want to tell us more?"
+          }
+        }) }}
+
+        {{ button({
+          text: "Very difficult",
+          classes: "app-button--outlined app-button--small app-button--min-width",
           attributes: {
             "data-thanks": "Thank you. Do you want to tell us more?"
           }
