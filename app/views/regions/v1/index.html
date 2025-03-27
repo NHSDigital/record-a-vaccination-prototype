@@ -20,9 +20,7 @@
 
       {% from 'inset-text/macro.njk' import insetText %}
 
-      {{ insetText({
-        html: "<p>You can only delete an organisation if they have not recorded any vaccinations.</p>"
-      }) }}
+     
 
       {{ button({
         "text": "Invite an organisation",
@@ -71,9 +69,7 @@
                   <td class="nhsuk-table__cell ">
                     {{ organisation.status }}
                   </td>
-                  <td class="nhsuk-table__cell app-table__cell--right-aligned">
-                    <a href="/regions/v1/organisations/{{ organisation.id }}/delete" class="nhsuk-link">Delete</a>
-                  </td>
+               
 
 
                   </td>

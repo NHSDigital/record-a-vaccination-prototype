@@ -1,0 +1,123 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England region
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-xl">North West</h1>
+
+      <p class="nhsuk-body-l">Invite an organisation to create an NHS Record a vaccination service (RAVS) account.</p>
+
+      <p class="nhsuk-body-l">Once they’re set up, they can add other users and vaccination sites.</p>
+
+      {% from 'inset-text/macro.njk' import insetText %}
+
+     
+
+      {{ button({
+        "text": "Invite an organisation",
+        "href": "/regions/v1/add-organisation"
+      }) }}
+
+    </div>
+  </div>
+
+  
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+                  <table role="table" class="nhsuk-table-responsive">
+                    <caption class="nhsuk-table__caption">Organisations added</caption>
+                    <thead role="rowgroup" class="nhsuk-table__head">
+                      <tr role="row">
+                        <th role="columnheader" class="" scope="col">
+                          Organisation
+                        </th>
+                        <th role="columnheader" class="" scope="col">
+                          ODS code
+                        </th>
+                        <th role="columnheader" class="" scope="col">
+                          Type
+                        </th>
+                        <th role="columnheader" class="" scope="col">
+                            Status
+                          </th>
+                      </tr>
+                    </thead>
+                    <tbody class="nhsuk-table__body">
+                      
+                        <tr role="row" class="nhsuk-table__row">
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading" aria-hidden="true">Organisation </span><a href="/regions/v1/organisation-deactivated">Anderson Road Pharmacy</a>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading" aria-hidden="true">ODS code </span>AN1
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading" aria-hidden="true">Type </span>Community Pharmacy
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading" aria-hidden="true">Status </span>Deactivated
+                              </td>
+                          </tr>
+                        <tr role="row" class="nhsuk-table__row">
+                        <td role="cell" class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading" aria-hidden="true">Organisation </span><a href="/regions/v1/organisation-active">Norfolk and Norwich University Hospitals NHS Foundation Trust</a>
+                        </td>
+                        <td role="cell" class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading" aria-hidden="true">ODS code </span>RM1
+                        </td>
+                        <td role="cell" class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading" aria-hidden="true">Type </span>NHS Trust
+                        </td>
+                        <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Status </span>Active
+                          </td>
+                      </tr>
+                      <tr role="row" class="nhsuk-table__row">
+                        <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Organisation </span><a href="/regions/v1/organisation">Royal papworth hospital NHS Foundation Trust</a>
+                        </td>
+                        <td role="cell" class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading" aria-hidden="true">ODS code </span>RGM
+                        </td>
+                        <td role="cell" class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading" aria-hidden="true">Type </span>NHS Trust
+                        </td>
+                        <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Status </span>Active
+                          </td>
+                      </tr>
+                      <tr role="row" class="nhsuk-table__row">
+                        <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Organisation </span><a href="/regions/v1/organisation">Pickfords pharmacy</a>
+                        </td>
+                        <td role="cell" class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading" aria-hidden="true">ODS code </span>FA424
+                        </td>
+                        <td role="cell" class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading" aria-hidden="true">Type </span>Community Pharmacy
+                        </td>
+                        <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Status </span>Active
+                          </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+
+            </tbody>
+          </table>
+      </div>
+    </div>
+  
+
+{% endblock %}

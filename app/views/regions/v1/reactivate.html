@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+{% set organisation = {name: organisation.name } %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/regions/v1/organisation-deactivated",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+
+      <h1 class="nhsuk-heading-xl">Reactivate Anderson Road Pharmacy</h1>
+
+      <p>Once active the organisation will be able to operate as normal in RAVs. </p>
+
+      <p>This email will be sent to the lead administrator at Anderson Road Pharmacy</p>
+
+      {% include "regions/v1/_email-remove.html" %}
+
+      <form action="/regions/v1/test-home" method="post">
+        {{ button({
+          "text": "Confirm and send"
+        }) }}
+      </form>
+
+
+    </div>
+  </div>
+{% endblock %}

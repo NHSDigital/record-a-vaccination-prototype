@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  {{ organisation.name }}
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/regions/v1/test-home",
+    text: "Back to all organisations"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      <h1 class="nhsuk-heading-l">Anderson Road Pharmacy {{ organisation.name }}</h1>
+
+      
+        <p>This organisation has been deactivated.<br><br>It will be closed in <b>14 days</b>. </p>
+     
+        
+
+        <p><a href="/regions/v1/reactivate">Reactivate organisation</a></p>
+        
+      
+    </div>
+  </div>
+
+
+{% endblock %}
