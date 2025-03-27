@@ -8,25 +8,20 @@
   {% include "includes/header-logged-in-region.html" %}
 {% endblock %}
 
+{% block beforeContent %}
+  {{ backLink({
+    href: "/regions/v1/test-home",
+    text: "Back"
+  }) }}
+{% endblock %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-xl">North West</h1>
+      <h1 class="nhsuk-heading-xl">Closed organisations</h1>
 
-      <p class="nhsuk-body-l">Invite an organisation to create an NHS Record a vaccination service (RAVS) account.</p>
-
-      <p class="nhsuk-body-l">Once they’re set up, they can add other users and vaccination sites.</p>
-
-      {% from 'inset-text/macro.njk' import insetText %}
-
-     
-  <p><a href="/regions/v1/closed-organisations">Closed organisations</a></p>
-
-      {{ button({
-        "text": "Invite an organisation",
-        "href": "/regions/v1/add-organisation"
-      }) }}
+      
 
     </div>
   </div>
@@ -37,7 +32,7 @@
       <div class="nhsuk-grid-column-full">
 
                   <table role="table" class="nhsuk-table-responsive">
-                    <caption class="nhsuk-table__caption">Organisations added</caption>
+                    <caption class="nhsuk-table__caption"></caption>
                     <thead role="rowgroup" class="nhsuk-table__head">
                       <tr role="row">
                         <th role="columnheader" class="" scope="col">
@@ -50,7 +45,7 @@
                           Type
                         </th>
                         <th role="columnheader" class="" scope="col">
-                            Status
+                            Date closed
                           </th>
                       </tr>
                     </thead>
@@ -58,7 +53,7 @@
                       
                         <tr role="row" class="nhsuk-table__row">
                             <td role="cell" class="nhsuk-table__cell">
-                              <span class="nhsuk-table-responsive__heading" aria-hidden="true">Organisation </span><a href="/regions/v1/organisation-deactivated">Anderson Road Pharmacy</a>
+                              <span class="nhsuk-table-responsive__heading" aria-hidden="true">Organisation </span>Anderson Road Pharmacy
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading" aria-hidden="true">ODS code </span>AN1
@@ -67,12 +62,12 @@
                               <span class="nhsuk-table-responsive__heading" aria-hidden="true">Type </span>Community Pharmacy
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading" aria-hidden="true">Status </span>Deactivated
+                                <span class="nhsuk-table-responsive__heading" aria-hidden="true">Date closed </span>10 March 2025
                               </td>
                           </tr>
                         <tr role="row" class="nhsuk-table__row">
                         <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading" aria-hidden="true">Organisation </span><a href="/regions/v1/organisation-active">Norfolk and Norwich University Hospitals NHS Foundation Trust</a>
+                          <span class="nhsuk-table-responsive__heading" aria-hidden="true">Organisation </span>Norfolk and Norwich University Hospitals NHS Foundation Trust
                         </td>
                         <td role="cell" class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading" aria-hidden="true">ODS code </span>RM1
@@ -81,12 +76,12 @@
                           <span class="nhsuk-table-responsive__heading" aria-hidden="true">Type </span>NHS Trust
                         </td>
                         <td role="cell" class="nhsuk-table__cell">
-                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Status </span>Active
+                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Date closed </span>10 January 2025
                           </td>
                       </tr>
                       <tr role="row" class="nhsuk-table__row">
                         <td role="cell" class="nhsuk-table__cell">
-                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Organisation </span><a href="/regions/v1/organisation">Royal papworth hospital NHS Foundation Trust</a>
+                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Organisation </span>Royal papworth hospital NHS Foundation Trust
                         </td>
                         <td role="cell" class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading" aria-hidden="true">ODS code </span>RGM
@@ -95,12 +90,12 @@
                           <span class="nhsuk-table-responsive__heading" aria-hidden="true">Type </span>NHS Trust
                         </td>
                         <td role="cell" class="nhsuk-table__cell">
-                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Status </span>Active
+                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Date closed </span>11 December 2024
                           </td>
                       </tr>
                       <tr role="row" class="nhsuk-table__row">
                         <td role="cell" class="nhsuk-table__cell">
-                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Organisation </span><a href="/regions/v1/organisation">Pickfords pharmacy</a>
+                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Organisation </span>Pickfords pharmacy
                         </td>
                         <td role="cell" class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading" aria-hidden="true">ODS code </span>FA424
@@ -109,7 +104,7 @@
                           <span class="nhsuk-table-responsive__heading" aria-hidden="true">Type </span>Community Pharmacy
                         </td>
                         <td role="cell" class="nhsuk-table__cell">
-                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Status </span>Active
+                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Date closed </span>5 December 2025
                           </td>
                       </tr>
                     </tbody>
