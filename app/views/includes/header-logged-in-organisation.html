@@ -15,8 +15,13 @@
           classes: ("app-header__navigation-item--current" if currentSection == "home")
         },
         {
+          url  : "/appointments/",
+          label : "Appointments",
+          classes: ("app-header__navigation-item--current" if currentSection == "appointments")
+        },
+        {
           url  : "/vaccinate",
-          label : ("Record vaccinations <span class=\"nhsuk-tag app-tag--header nhsuk-u-margin-left-2\">New</span>") | safe,
+          label : ("Record vaccinations") | safe,
           classes: ("app-header__navigation-item--current" if currentSection == "vaccinate")
         },
         {
