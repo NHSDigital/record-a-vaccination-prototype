@@ -616,6 +616,7 @@ module.exports = router => {
   router.get('/vaccinate/batch', (req, res) => {
     let error
     const data = req.session.data
+
     if (req.query.showError === 'yes') {
 
       if (!data.batchNumber) {
@@ -627,8 +628,7 @@ module.exports = router => {
     }
 
     res.render('vaccinate/batch', {
-      error,
-      from
+      error
     })
   })
 
