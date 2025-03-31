@@ -6,11 +6,54 @@
 
 {% block content %}
   <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-full">
+    <div class="nhsuk-grid-column-two-thirds">
 
       <h1 class="nhsuk-heading-l">Appointments</h1>
 
-      <p>Something goes here</p>
+      <p>You can now import appointments to make it quicker and easier to record vaccinations.</p>
+
+      <p>For some appointment systems this can be done automatically. For others you will need to upload a spreadsheet.</p>
+
+      {{ radios({
+        name: "appointmentSystem",
+        fieldset: {
+          legend: {
+            text: "Where would you like to import appointments from?",
+            classes: "nhsuk-fieldset__legend--m"
+          }
+        },
+        items: [
+          {
+            value: "",
+            text: "Manage your appointments (NHS National booking system)"
+          },
+          {
+            value: "",
+            text: "Other supplier 1"
+          },
+          {
+            value: "",
+            text: "Other supplier 2"
+          },
+          {
+            value: "",
+            text: "Other supplier 3"
+          },
+          {
+            divider: "or"
+          },
+          {
+            value: "",
+            text: "Upload a spreadsheet"
+          }
+        ]
+      }) }}
+
+      {{ button({
+        text: "Continue",
+        href: "/appointments/day"
+      }) }}
+
     </div>
   </div>
 

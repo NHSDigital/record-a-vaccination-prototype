@@ -10,8 +10,6 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-
-
       {% if (errors | length) > 0 %}
         {{ errorSummary({
           titleText: "There is a problem",
@@ -29,6 +27,38 @@
         html: panelHtml
       }) }}
 
+      {% if 1==1 %}
+
+        {{ radios({
+          idPrefix: "next-step",
+          name: "nextStep",
+          fieldset: {
+            legend: {
+              text: "What would you like to do next?",
+              classes: "nhsuk-fieldset__legend--m"
+            }
+          },
+          errorMessage: {
+            text: error.text
+          } if error,
+          items: [
+            {
+              value: "same-patient-another-vaccination",
+              text: "Record a second vaccination for " + patientName
+            },
+            {
+              value: "same-vaccination-another-patient",
+              text: "Return to Today’s appointments"
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+
+
+      {% else %}
 
       <form action="/vaccinate/what-next" method="post" novalidate>
 
@@ -81,6 +111,7 @@
           text: "Continue"
         })}}
       </form>
+      {% endif %}
 
     </div>
   </div>

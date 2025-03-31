@@ -522,7 +522,14 @@ module.exports = router => {
           nextPage = "/vaccinate/location"
         }
       } else {
-        nextPage = "/vaccinate/patient"
+
+        // NHS number set from appointment?
+        if (data.nhsNumber) {
+          nextPage = "/vaccinate/patient-history"
+        } else {
+          nextPage = "/vaccinate/patient"
+        }
+
       }
     }
 
@@ -620,7 +627,8 @@ module.exports = router => {
     }
 
     res.render('vaccinate/batch', {
-      error
+      error,
+      from
     })
   })
 
