@@ -165,23 +165,23 @@ module.exports = (router) => {
     let firstNameError, lastNameError, emailError, permissionLevelError, clinicianError
 
     if (!firstName || firstName === '') {
-      firstNameError = 'Enter first name'
+      firstNameError = 'Enter a first name'
     }
 
     if (!lastName || lastName === '') {
-      lastNameError = 'Enter last name'
+      lastNameError = 'Enter a last name'
     }
 
     if (!email || email === '') {
-      emailError = 'Enter NHS email address'
+      emailError = 'Enter an NHS-approved email address'
     } else if (!(email.endsWith('nhs.net') || email.endsWith('.nhs.uk'))) {
-      emailError = 'Email address must be an NHS email'
+      emailError = 'Email address must be an NHS-approved email'
     } else if (existingUserWithSameEmail && existingUserWithSameEmail.status !== 'Deactivated') {
-      emailError = 'NHS email address already added as a user'
+      emailError = 'This email address has already been added'
     }
 
     if (!permissionLevel || permissionLevel === '') {
-      permissionLevelError = 'Select permission level'
+      permissionLevelError = 'Select a permission level'
     }
 
     if (!clinician || clinician === '') {
