@@ -41,7 +41,7 @@
           classes: ("app-header__navigation-item--current" if currentSection == "manage-users")
         } if (currentUser and organisationSetting.permissionLevel === "Lead administrator"),
         {
-          url: "/user-profile/v2",
+          url: "/user-profile",
           label: currentUser.email,
           classes: "app-header__navigation-item--right-aligned " + ("app-header__navigation-item--current" if currentSection == "user-profile")
         },
