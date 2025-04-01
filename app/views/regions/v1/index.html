@@ -20,7 +20,7 @@
 
       {% from 'inset-text/macro.njk' import insetText %}
 
-     
+
 
       {{ button({
         "text": "Invite an organisation",
@@ -35,7 +35,7 @@
       <div class="nhsuk-grid-column-full">
 
           <table class="nhsuk-table">
-            <caption class="nhsuk-table__caption">Organisations added</caption>
+            <caption class="nhsuk-table__caption nhsuk-table__caption--m">Organisations added</caption>
             <thead role="rowgroup" class="nhsuk-table__head">
               <tr role="row">
                 <th role="columnheader" class="" scope="col">
@@ -69,20 +69,22 @@
                   <td class="nhsuk-table__cell ">
                     {{ organisation.status }}
                   </td>
-               
+
 
 
                   </td>
                 </tr>
               {% endfor %}
 
-              
+
             </tbody>
           </table>
       </div>
     </div>
   {% endif %}
 
-  <p><a href="/regions/v1/closed-organisations">View 4 closed organisations</a></p>
+  {% if closedOrganisationsCount > 0 %}
+    <p><a href="/regions/v1/organisations/closed">View {{ closedOrganisationsCount | plural("closed organisation") }}</a></p>
+  {% endif %}
 
 {% endblock %}

@@ -2,9 +2,21 @@ module.exports = router => {
 
   router.get('/regions/v1', (req, res) => {
     const data = req.session.data
-    const organisations = data.organisations.filter((organisation) => organisation.region === "Y61")
+    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61") && (organisation.status != "Closed"))
+
+    const closedOrganisationsCount = data.organisations.filter((organisation) => (organisation.region === "Y61" && organisation.status == "Closed")).length
 
     res.render('regions/v1/index', {
+      organisations,
+      closedOrganisationsCount
+    })
+  })
+
+  router.get('/regions/v1/organisations/closed', (req, res) => {
+    const data = req.session.data
+    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61" && organisation.status == "Closed"))
+
+    res.render('regions/v1/closed-organisations', {
       organisations
     })
   })
@@ -275,8 +287,30 @@ module.exports = router => {
 
     organisation.status = "Deactivated"
 
-    res.redirect('/regions/v1')
+    res.redirect('/regions/v1/organisations/' + organisation.id)
   })
+
+  // Reactivate an organisation
+  router.get('/regions/v1/organisations/:id/reactivate', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
+    if (!organisation) { res.redirect('/regions/v1/'); return }
+
+    res.render('regions/v1/reactivate', {
+      organisation
+    })
+  })
+
+  // Reactivating an organisation
+  router.post('/regions/v1/organisations/:id/reactivated', (req, res) => {
+    const organisation = req.session.data.organisations.find((org) => org.id === req.params.id)
+    if (!organisation) { res.redirect('/regions/v1/'); return }
+
+    organisation.status = "Active"
+
+    res.redirect('/regions/v1/organisations/' + organisation.id)
+  })
+
 
   // Check a second lead user for an organisation
   router.get('/regions/v1/organisations/:id/add-email-check', (req, res) => {

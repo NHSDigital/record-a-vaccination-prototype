@@ -19,102 +19,54 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-xl">Closed organisations</h1>
-
-      
+      <h1 class="nhsuk-heading-l">Closed organisations</h1>
 
     </div>
   </div>
-
-
-  
     <div class="nhsuk-grid-row">
       <div class="nhsuk-grid-column-full">
 
-                  <table role="table" class="nhsuk-table-responsive">
-                    <caption class="nhsuk-table__caption"></caption>
-                    <thead role="rowgroup" class="nhsuk-table__head">
-                      <tr role="row">
-                        <th role="columnheader" class="" scope="col">
-                          Organisation
-                        </th>
-                        <th role="columnheader" class="" scope="col">
-                          ODS code
-                        </th>
-                        <th role="columnheader" class="" scope="col">
-                          Type
-                        </th>
-                        <th role="columnheader" class="" scope="col">
-                            Date closed
-                          </th>
-                      </tr>
-                    </thead>
-                    <tbody class="nhsuk-table__body">
-                      
-                        <tr role="row" class="nhsuk-table__row">
-                            <td role="cell" class="nhsuk-table__cell">
-                              <span class="nhsuk-table-responsive__heading" aria-hidden="true">Organisation </span>Anderson Road Pharmacy
-                            </td>
-                            <td role="cell" class="nhsuk-table__cell">
-                              <span class="nhsuk-table-responsive__heading" aria-hidden="true">ODS code </span>AN1
-                            </td>
-                            <td role="cell" class="nhsuk-table__cell">
-                              <span class="nhsuk-table-responsive__heading" aria-hidden="true">Type </span>Community Pharmacy
-                            </td>
-                            <td role="cell" class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading" aria-hidden="true">Date closed </span>10 March 2025
-                              </td>
-                          </tr>
-                        <tr role="row" class="nhsuk-table__row">
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading" aria-hidden="true">Organisation </span>Norfolk and Norwich University Hospitals NHS Foundation Trust
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading" aria-hidden="true">ODS code </span>RM1
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading" aria-hidden="true">Type </span>NHS Trust
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Date closed </span>10 January 2025
-                          </td>
-                      </tr>
-                      <tr role="row" class="nhsuk-table__row">
-                        <td role="cell" class="nhsuk-table__cell">
-                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Organisation </span>Royal papworth hospital NHS Foundation Trust
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading" aria-hidden="true">ODS code </span>RGM
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading" aria-hidden="true">Type </span>NHS Trust
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Date closed </span>11 December 2024
-                          </td>
-                      </tr>
-                      <tr role="row" class="nhsuk-table__row">
-                        <td role="cell" class="nhsuk-table__cell">
-                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Organisation </span>Pickfords pharmacy
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading" aria-hidden="true">ODS code </span>FA424
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading" aria-hidden="true">Type </span>Community Pharmacy
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                            <span class="nhsuk-table-responsive__heading" aria-hidden="true">Date closed </span>5 December 2025
-                          </td>
-                      </tr>
-                    </tbody>
-                  </table>
+        <table role="table" class="nhsuk-table">
+          <caption class="nhsuk-table__caption"></caption>
+          <thead role="rowgroup" class="nhsuk-table__head">
+            <tr role="row">
+              <th role="columnheader" class="" scope="col">
+                Organisation
+              </th>
+              <th role="columnheader" class="" scope="col">
+                <nobr>ODS code</nobr>
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Type
+              </th>
+              <th role="columnheader" class="" scope="col">
+                  Date closed
+                </th>
+            </tr>
+          </thead>
+          <tbody class="nhsuk-table__body">
 
+            {% for organisation in organisations %}
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  {{ organisation.name }}
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  {{ organisation.id }}
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <nobr>{{ organisation.type }}</nobr>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <nobr>{{ organisation.dateClosed | govukDate }}</nobr>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
 
-            </tbody>
-          </table>
       </div>
     </div>
-  
+
 
 {% endblock %}
