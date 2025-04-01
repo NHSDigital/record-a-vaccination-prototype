@@ -5,7 +5,8 @@ const gulp = require('gulp');
 const babel = require('gulp-babel');
 const browserSync = require('browser-sync');
 const clean = require('gulp-clean');
-const sass = require('gulp-sass')(require('sass'));
+const gulpSass = require('gulp-sass')
+const dartSass = require('sass-embedded')
 const nodemon = require('gulp-nodemon');
 
 // Local dependencies
@@ -19,12 +20,12 @@ function cleanPublic() {
   return gulp.src('public', { allowEmpty: true }).pipe(clean());
 }
 
-sass.compiler = require('sass');
+const sass = gulpSass(dartSass)
 
 // Compile SASS to CSS
 function compileStyles() {
   return gulp
-    .src(['app/assets/sass/**/*.scss', 'docs/assets/sass/**/*.scss', 'app/components/**/*.scss'])
+    .src(['app/assets/sass/**/*.scss'])
     .pipe(sass())
     .pipe(gulp.dest('public/css'))
     .on('error', (err) => {
@@ -36,7 +37,7 @@ function compileStyles() {
 // Compile JavaScript (with ES6 support)
 function compileScripts() {
   return gulp
-    .src(['app/assets/javascript/**/*.js', 'docs/assets/javascript/**/*.js'])
+    .src(['app/assets/javascript/**/*.js'])
     .pipe(babel())
     .pipe(gulp.dest('public/js'));
 }
@@ -46,7 +47,6 @@ function compileAssets() {
   return gulp
     .src([
       'app/assets/**/**/*.*',
-      'docs/assets/**/**/*.*',
       '!**/assets/**/**/*.js', // Don't copy JS files
       '!**/assets/**/**/*.scss', // Don't copy SCSS files
     ], { encoding: false })
@@ -92,7 +92,7 @@ function startBrowserSync(done) {
       proxy: 'localhost:' + port,
       port: port + 1000,
       ui: false,
-      files: ['app/views/**/*.*', 'docs/views/**/*.*', 'app/components/**/*.*'],
+      files: ['app/views/**/*.*', 'lib/example-templates/**/*.*'],
       ghostMode: false,
       open: false,
       notify: true,
@@ -108,18 +108,21 @@ function watch() {
   gulp.watch('app/assets/sass/**/*.scss', compileStyles);
   gulp.watch('app/assets/javascript/**/*.js', compileScripts);
   gulp.watch('app/assets/**/**/*.*', compileAssets);
-  gulp.watch('docs/assets/sass/**/*.scss', compileStyles);
-  gulp.watch('docs/assets/javascript/**/*.js', compileScripts);
-  gulp.watch('docs/assets/**/**/*.*', compileAssets);
+}
+
+function setWatchEnv(done) {
+  process.env.WATCH = 'true';
+  done();
 }
 
 exports.watch = watch;
 exports.compileStyles = compileStyles;
 exports.compileScripts = compileScripts;
 exports.cleanPublic = cleanPublic;
+exports.setWatchEnv = setWatchEnv;
 
 gulp.task(
   'build',
   gulp.series(cleanPublic, compileStyles, compileScripts, compileAssets)
 );
-gulp.task('default', gulp.series(startNodemon, startBrowserSync, watch));
+gulp.task('default', gulp.series(setWatchEnv, startNodemon, startBrowserSync, watch));
