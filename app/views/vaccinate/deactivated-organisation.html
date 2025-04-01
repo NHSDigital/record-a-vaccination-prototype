@@ -8,11 +8,9 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-        <h1 class="nhsuk-heading-l">You cannot record vaccinations</h1>
-       
+      <h1 class="nhsuk-heading-l">You cannot record vaccinations</h1>
 
-        <p>You cannot record vaccinations because ((Organisation-name)) has been deactivated. <br><br>Until [date] you can still access other parts of the Record a vaccination service. After [date] you will no longer have access to the service for ((Organisation-name)). </p>
-             
+      <p>You cannot record vaccinations because {{ currentOrganisation.name }} has been deactivated. <br><br>Until [date] you can still access other parts of the Record a vaccination service. After [date] you will no longer have access to the service for {{ currentOrganisation.name }}. </p>
 
     </div>
   </div>
