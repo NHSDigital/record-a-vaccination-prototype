@@ -19,28 +19,17 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-{{organisation | dump}}
+      <h1 class="nhsuk-heading-l">Deactivate {{organisation.name}}</h1>
 
+      <p>Once this organisation has been deactivated, users will no longer be able to record vaccinations.</p>
 
-        <h1 class="nhsuk-heading-l">Deactivate {{organisation.name}}</h1>
-
-
-        <p>Once this organisation has been deactivated, users will no longer be able to record vaccinations.
-          <br><br>
-          For 90 days they will still be able to edit records and create reports.
-          After 90 days the organisation will be closed and users will no longer have access to the Record a vaccination service.
-
-
-
+      <p>For 90 days they will still be able to edit records and create reports. After 90 days the organisation will be closed and users will no longer have access to the Record a vaccination service.</p>
 
       <p>This email will be sent to the lead administrators at Norfolk and Norwich University Hospitals NHS Foundation Trust.</p>
 
       {% include "regions/v1/_email-deactivate.html" %}
 
-
-
-
-      <form action="/regions/v1/test-home" method="post" novalidate="true">
+      <form action="/regions/v1/organisations/{{ organisation.id}}/deactivated" method="post" novalidate="true">
         {{ button({
           "text": "Confirm and send",
           classes: "nhsuk-button--warning"

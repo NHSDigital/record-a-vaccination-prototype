@@ -268,6 +268,16 @@ module.exports = router => {
     })
   })
 
+  // Deactivating an organisation
+  router.post('/regions/v1/organisations/:id/deactivated', (req, res) => {
+    const organisation = req.session.data.organisations.find((org) => org.id === req.params.id)
+    if (!organisation) { res.redirect('/regions/v1/'); return }
+
+    organisation.status = "Deactivated"
+
+    res.redirect('/regions/v1')
+  })
+
   // Check a second lead user for an organisation
   router.get('/regions/v1/organisations/:id/add-email-check', (req, res) => {
     const data = req.session.data
