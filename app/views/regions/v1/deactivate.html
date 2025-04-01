@@ -12,7 +12,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/regions/v1/organisation-active",
+    href: "/regions/v1/organisations/" + organisation.id,
     text: "Back"
   }) }}
 {% endblock %}
@@ -21,9 +21,10 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+{{organisation | dump}}
 
 
-        <h1 class="nhsuk-heading-l">Deactivate {{organisation.name}} Norfolk and Norwich University Hospitals NHS Foundation Trust</h1>
+        <h1 class="nhsuk-heading-l">Deactivate {{organisation.name}}</h1>
 
      
         <p>Once this organisation has been deactivated, users will no longer be able to record vaccinations. 
