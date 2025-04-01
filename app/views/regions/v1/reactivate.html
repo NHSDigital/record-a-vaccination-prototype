@@ -8,8 +8,6 @@
   {% include "includes/header-logged-in-region.html" %}
 {% endblock %}
 
-{% set organisation = {name: organisation.name } %}
-
 {% block beforeContent %}
   {{ backLink({
     href: "/regions/v1/organisation-deactivated",
