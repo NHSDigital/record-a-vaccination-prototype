@@ -1,6 +1,6 @@
 module.exports = (router) => {
 
-  router.get('/user-profile/v2', (req, res) => {
+  router.get('/user-profile', (req, res) => {
     const data = req.session.data
     const leadAdminUsersAtSameOrganisation = data.users.filter((user) => (user.organisations || []).find((organisation) => (organisation.id === data.currentOrganisationId && organisation.permissionLevel == 'Lead administrator')))
 
