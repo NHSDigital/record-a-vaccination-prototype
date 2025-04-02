@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  NHS Record a vaccination
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-out.html" %}
+{% endblock %}
+
+{% block main %}
+<div class="nhsuk-hero">
+  <div class="nhsuk-width-container nhsuk-hero--border">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-one-half nhsuk-u-one-half-tablet">
+        <div class="nhsuk-hero__wrapper">
+          <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-5">Record vaccinations easily and safely</h1>
+          <p class="nhsuk-body">This service can be used by those working on behalf of the NHS to record COVID-19, flu, RSV and pertussis vaccinations.</p>
+
+          {{ button({
+            text: "Find out more",
+            href: "#",
+            classes: "nhsuk-button--reverse nhsuk-u-margin-bottom-3"
+          }) }}
+
+          <p class="nhsuk-u-margin-bottom-0">Or <a href="#" class="nhsuk-link app-link--reverse">log in</a></p>
+        </div>
+      </div>
+      <div class="nhsuk-grid-column-one-half nhsuk-u-one-half-tablet">
+        <img class="app-homepage-illustration" src="/images/personalised-prevention-services.svg" alt="" role="presentation">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="app-section--white">
+  <div class="nhsuk-width-container">
+    <div class="nhsuk-main-wrapper">
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-one-third">
+          <h2 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Streamlined journey</h2>
+          <p>Capture only the essential information, reducing the time needed to record each vaccination.</p>
+        </div>
+        <div class="nhsuk-grid-column-one-third">
+          <h2 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Enhanced data accuracy</h2>
+          <p>Integrated with centralised data sources to ensure accurate records and reduce data flow issues.</p>
+        </div>
+        <div class="nhsuk-grid-column-one-third">
+          <h2 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Comprehensive reporting</h2>
+          <p>Generate reports filtered by date, vaccine type, or location to support payment reconciliation and operational workflows.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="nhsuk-width-container">
+  <div class="nhsuk-main-wrapper">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-two-thirds">
+        <h2 class="nhsuk-heading-m">Pharmacies</h2>
+        <p>All pharmacies in England commissioned to deliver COVID-19 and flu vaccinations can now use this service for free.</p>
+        <p>If you own or run a pharmacy:</p>
+        {{ actionLink({
+          text: "Sign up to use the service",
+          href: "#"
+        }) }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
