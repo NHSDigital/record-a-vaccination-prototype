@@ -100,6 +100,26 @@ module.exports = router => {
 
   })
 
+  router.post('/records/patient-search', (req, res) => {
+    const data = req.session.data
+    const firstName = data.firstName;
+    const lastName = data.lastName;
+    const dateOfBirth = data.dateOfBirth;
+    const postcode = data.postcode;
+
+    if (firstName && lastName && dateOfBirth) {
+
+      data.patientName = firstName + " " + lastName
+      data.nhsNumber = '9123456788'
+
+      res.redirect('/records/patient-history')
+    } else {
+      res.redirect('/records/patient-search')
+    }
+
+  })
+
+
   router.get('/records/records/:id/:page', (req, res) => {
 
     const id = req.params.id
