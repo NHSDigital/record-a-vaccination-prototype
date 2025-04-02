@@ -8,8 +8,6 @@
   {% include "includes/header-logged-in-region.html" %}
 {% endblock %}
 
-{% set organisation = {name: organisation.name } %}
-
 {% block beforeContent %}
   {{ backLink({
     href: "/regions/v1/add-email",
@@ -20,8 +18,6 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-
-
 
       <h1 class="nhsuk-heading-xl">Check and send</h1>
 
