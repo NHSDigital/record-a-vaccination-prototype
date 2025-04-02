@@ -96,7 +96,7 @@
                   {% if loop.index0 == 1 %}
                     Today
                   {% else %}
-                    {{ date.date | dayName }} {{ date.date | govukDate("truncate") }}
+                    {{ date.date | dayName }} {{ date.date | govukDate(truncate=true) }}
 
                     {% if loop.index0 == 2 %}(yesterday){% endif %}
                   {% endif %}
