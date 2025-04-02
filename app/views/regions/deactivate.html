@@ -10,7 +10,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/regions/v1/organisations/" + organisation.id,
+    href: "/regions/organisations/" + organisation.id,
     text: "Back"
   }) }}
 {% endblock %}
@@ -27,9 +27,9 @@
 
       <p>This email will be sent to the lead administrators at Norfolk and Norwich University Hospitals NHS Foundation Trust.</p>
 
-      {% include "regions/v1/_email-deactivate.html" %}
+      {% include "regions/_email-deactivate.html" %}
 
-      <form action="/regions/v1/organisations/{{ organisation.id}}/deactivated" method="post" novalidate="true">
+      <form action="/regions/organisations/{{ organisation.id}}/deactivated" method="post" novalidate="true">
         {{ button({
           "text": "Confirm and send",
           classes: "nhsuk-button--warning"

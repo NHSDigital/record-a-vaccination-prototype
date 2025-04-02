@@ -10,7 +10,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/regions/v1/organisations/" + organisation.code + "/add-email",
+    href: "/regions/organisations/" + organisation.code + "/add-email",
     text: "Back"
   }) }}
 {% endblock %}
@@ -22,9 +22,9 @@
 
       <p>This email will be sent to {{ data["email"] }}:</p>
 
-      {% include "regions/v1/_email-preview.html" %}
+      {% include "regions/_email-preview.html" %}
 
-      <form action="/regions/v1/organisations/{{ organisation.id }}/add" method="post">
+      <form action="/regions/organisations/{{ organisation.id }}/add" method="post">
         {{ button({
           "text": "Send invitation"
         }) }}
