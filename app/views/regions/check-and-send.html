@@ -10,7 +10,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/regions/v1/add-email",
+    href: "/regions/add-email",
     text: "Back"
   }) }}
 {% endblock %}
@@ -33,7 +33,7 @@
             actions: {
               items: [
                 {
-                  href: "/regions/v1/add-organisation",
+                  href: "/regions/add-organisation",
                   text: "Change",
                   visuallyHiddenText: "organisation name"
                 }
@@ -50,7 +50,7 @@
             actions: {
               items: [
                 {
-                  href: "/regions/v1/add-email",
+                  href: "/regions/add-email",
                   text: "Change",
                   visuallyHiddenText: "lead user email address"
                 }
@@ -62,9 +62,9 @@
 
       <p>This email will be sent to {{ data["email"] }}:</p>
 
-      {% include "regions/v1/_email-preview.html" %}
+      {% include "regions/_email-preview.html" %}
 
-      <form action="/regions/v1/add" method="post">
+      <form action="/regions/add" method="post">
         {{ button({
           "text": "Send invitation"
         }) }}

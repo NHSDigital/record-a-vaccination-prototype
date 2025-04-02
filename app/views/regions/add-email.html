@@ -10,7 +10,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/regions/v1/organisation-details",
+    href: "/regions/organisation-details",
     text: "Back"
   }) }}
 {% endblock %}
@@ -26,7 +26,7 @@
 
       <p>It’s their responsibility to set up and add their organisation’s users and vaccination sites.</p>
 
-      <form action="/regions/v1/check-and-send" method="post" novalidate>
+      <form action="/regions/check-and-send" method="post" novalidate>
 
         {{ input({
           "label": {

@@ -10,7 +10,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/regions/v1",
+    href: "/regions",
     text: "Back to all organisations"
   }) }}
 {% endblock %}
@@ -27,12 +27,12 @@
 
         <p>This organisation has been deactivated.<br><br>It will be closed in <b>90 days</b>. </p>
 
-        <p><a href="/regions/v1/organisations/{{ organisation.id }}/reactivate">Reactivate organisation</a></p>
+        <p><a href="/regions/organisations/{{ organisation.id }}/reactivate">Reactivate organisation</a></p>
 
       {% else  %}
         <p>The organisation can record vaccinations.</p>
 
-        <p><a href="/regions/v1/organisations/{{organisation.id}}/deactivate">Deactivate organisation</a></p>
+        <p><a href="/regions/organisations/{{organisation.id}}/deactivate">Deactivate organisation</a></p>
 
       {% endif %}
     </div>
@@ -79,7 +79,7 @@
                   </td>
                   <td class="nhsuk-table__cell app-table__cell--right-aligned">
                     {% if userOrganisationSettings.status == 'Invited' %}
-                      <a href="/regions/v1/organisations/{{ organisation.id }}/users/{{ leadUser.id }}/uninvite">Uninvite</a>
+                      <a href="/regions/organisations/{{ organisation.id }}/users/{{ leadUser.id }}/uninvite">Uninvite</a>
                     {% endif %}
                   </td>
                 </tr>
@@ -90,7 +90,7 @@
 
         {% set buttonText = "Add another user" if (organisation.leadUsers | length) > 0  else "Add user" %}
 
-        {{ button({ text: buttonText, href: "/regions/v1/organisations/" + organisation.id + "/add-email"}) }}
+        {{ button({ text: buttonText, href: "/regions/organisations/" + organisation.id + "/add-email"}) }}
       </div>
     </div>
   {% endif %}

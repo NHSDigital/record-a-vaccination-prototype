@@ -24,7 +24,7 @@
 
       {{ button({
         "text": "Invite an organisation",
-        "href": "/regions/v1/add-organisation"
+        "href": "/regions/add-organisation"
       }) }}
 
     </div>
@@ -58,7 +58,7 @@
               {% for organisation in organisations %}
                 <tr role="row" class="nhsuk-table__row">
                   <td class="nhsuk-table__cell">
-                    <a href="/regions/v1/organisations/{{ organisation.id }}">{{ organisation.name }}</a>
+                    <a href="/regions/organisations/{{ organisation.id }}">{{ organisation.name }}</a>
                   </td>
                   <td class="nhsuk-table__cell ">
                     {{ organisation.id }}
@@ -84,7 +84,7 @@
   {% endif %}
 
   {% if closedOrganisationsCount > 0 %}
-    <p><a href="/regions/v1/organisations/closed">View {{ closedOrganisationsCount | plural("closed organisation") }}</a></p>
+    <p><a href="/regions/organisations/closed">View {{ closedOrganisationsCount | plural("closed organisation") }}</a></p>
   {% endif %}
 
 {% endblock %}
