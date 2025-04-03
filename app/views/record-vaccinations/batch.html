@@ -5,7 +5,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/vaccine" }) }}
+  {{ backLink({ href: "/record-vaccinations/vaccine" }) }}
 {% endblock %}
 
 {% block content %}
@@ -21,7 +21,7 @@
       }) }}
     {% endif %}
 
-      <form action="/vaccinate/answer-batch" method="post" novalidate>
+      <form action="/record-vaccinations/answer-batch" method="post" novalidate>
 
           {{ radios({
             "idPrefix": "vaccineBatch",

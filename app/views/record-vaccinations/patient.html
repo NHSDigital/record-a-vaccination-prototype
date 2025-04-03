@@ -6,9 +6,9 @@
 
 {% block beforeContent %}
   {% if (data.vaccine === "Flu" or data.vaccine == "COVID-19") %}
-    {% set backLinkHref = "/vaccinate/location" %}
+    {% set backLinkHref = "/record-vaccinations/location" %}
   {% else %}
-    {% set backLinkHref = "/vaccinate/eligibility" %}
+    {% set backLinkHref = "/record-vaccinations/eligibility" %}
   {% endif %}
   {{ backLink({ href: backLinkHref }) }}
 {% endblock %}
@@ -24,7 +24,7 @@
         }) }}
       {% endif %}
 
-      <form action="/vaccinate/answer-patient-nhs-number-known" method="post" novalidate>
+      <form action="/record-vaccinations/answer-patient-nhs-number-known" method="post" novalidate>
 
         {% set nhsNumberHtml %}
 

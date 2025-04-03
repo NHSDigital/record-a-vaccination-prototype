@@ -5,7 +5,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/patient" }) }}
+  {{ backLink({ href: "/record-vaccinations/patient" }) }}
 {% endblock %}
 
 {% block content %}
@@ -23,7 +23,7 @@
 
       <p>Enter a postcode to refine your search. We need this because there is more than 1 match for the details you entered.</p>
 
-      <form action="/vaccinate/patient-search" method="post">
+      <form action="/record-vaccinations/patient-search" method="post">
         {{ input({
           label: {
             text: "First name"

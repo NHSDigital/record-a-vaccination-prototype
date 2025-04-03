@@ -5,7 +5,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/patient-estimated-due-date" }) }}
+  {{ backLink({ href: "/record-vaccinations/patient-estimated-due-date" }) }}
 {% endblock %}
 
 {% block content %}
@@ -26,7 +26,7 @@
 
   {{ button({
     "text": "Continue anyway",
-    "href": "/vaccinate/consent"
+    "href": "/record-vaccinations/consent"
   }) }}
 
 {% endblock %}

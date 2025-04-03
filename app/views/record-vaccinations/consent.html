@@ -6,9 +6,9 @@
 
 {% block beforeContent %}
   {% if data.vaccine === "COVID-19" %}
-    {% set backLinkHref = "/vaccinate/warning" %}
+    {% set backLinkHref = "/record-vaccinations/warning" %}
   {% else %}
-    {% set backLinkHref = "/vaccinate/patient-history" %}
+    {% set backLinkHref = "/record-vaccinations/patient-history" %}
   {% endif %}
   {{ backLink({ href: backLinkHref }) }}
 {% endblock %}
@@ -25,7 +25,7 @@
       {% endif %}
 
 
-      <form action="/vaccinate/answer-consent" method="post" novalidate>
+      <form action="/record-vaccinations/answer-consent" method="post" novalidate>
 
         {% set consentClinicianHtml %}
           {{ input({

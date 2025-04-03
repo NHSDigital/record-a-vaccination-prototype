@@ -5,7 +5,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/patient-history" }) }}
+  {{ backLink({ href: "/record-vaccinations/patient-history" }) }}
 {% endblock %}
 
 {% block content %}
@@ -23,7 +23,7 @@
       {% endif %}
 
 
-      <form action="/vaccinate/save-estimated-due-date" method="post" novalidate>
+      <form action="/record-vaccinations/save-estimated-due-date" method="post" novalidate>
         <!-- reset showError to false -->
         <input type="hidden" name="showError" value="">
 

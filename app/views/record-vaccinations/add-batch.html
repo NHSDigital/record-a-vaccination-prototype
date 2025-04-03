@@ -8,7 +8,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/vaccinate/batch",
+    href: "/record-vaccinations/batch",
     text: "Back"
   }) }}
 {% endblock %}
@@ -26,7 +26,7 @@
 
       <h1 class="nhsuks-heading-l">Add a batch</h1>
 
-      <form action="/vaccinate/answer-add-batch" method="post" novalidate>
+      <form action="/record-vaccinations/answer-add-batch" method="post" novalidate>
 
         {{ input({
           "label": {

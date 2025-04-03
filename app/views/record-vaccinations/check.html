@@ -5,7 +5,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/injection-site" }) }}
+  {{ backLink({ href: "/record-vaccinations/injection-site" }) }}
 {% endblock %}
 
 {% set consentHtml %}
@@ -76,7 +76,7 @@
             actions: {
               items: [
                 {
-                  href: "/vaccinate/create-a-record",
+                  href: "/record-vaccinations/create-a-record",
                   text: "Change",
                   visuallyHiddenText: "name"
                 } if not data.nhsNumber
@@ -93,7 +93,7 @@
             actions: {
               items: [
                 {
-                  href: "/vaccinate/create-a-record",
+                  href: "/record-vaccinations/create-a-record",
                   text: "Change",
                   visuallyHiddenText: "date of birth"
                 } if not data.nhsNumber
@@ -122,7 +122,7 @@
             actions: {
               items: [
                 {
-                  href: "/vaccinate/create-a-record",
+                  href: "/record-vaccinations/create-a-record",
                   text: "Change",
                   visuallyHiddenText: "postcode"
                 } if not data.nhsNumber
@@ -151,7 +151,7 @@
             actions: {
               items: [
                 {
-                  href: "/vaccinate/create-a-record",
+                  href: "/record-vaccinations/create-a-record",
                   text: "Change",
                   visuallyHiddenText: "gender"
                 } if not data.nhsNumber
@@ -174,7 +174,7 @@
             actions: {
               items: [
                 {
-                  href: "/vaccinate",
+                  href: "/record-vaccinations",
                   text: "Change",
                   visuallyHiddenText: "vaccination date"
                 }
@@ -191,7 +191,7 @@
             actions: {
               items: [
                 {
-                  href: "/vaccinate/vaccine",
+                  href: "/record-vaccinations/vaccine",
                   text: "Change",
                   visuallyHiddenText: "vaccine"
                 }
@@ -208,7 +208,7 @@
             actions: {
               items: [
                 {
-                  href: ("/vaccinate/add-batch" if data.vaccineBatch == "add-new" else "/vaccinate/batch"),
+                  href: ("/record-vaccinations/add-batch" if data.vaccineBatch == "add-new" else "/record-vaccinations/batch"),
                   text: "Change",
                   visuallyHiddenText: "vaccine batch"
                 }
@@ -225,7 +225,7 @@
             actions: {
               items: [
                 {
-                  href: "/vaccinate/delivery-team",
+                  href: "/record-vaccinations/delivery-team",
                   text: "Change",
                   visuallyHiddenText: "team"
                 }
@@ -242,7 +242,7 @@
             actions: {
               items: [
                 {
-                  href: "/vaccinate/vaccinator",
+                  href: "/record-vaccinations/vaccinator",
                   text: "Change",
                   visuallyHiddenText: "contact information"
                 }
@@ -259,7 +259,7 @@
             actions: {
               items: [
                 {
-                  href: "/vaccinate/location",
+                  href: "/record-vaccinations/location",
                   text: "Change",
                   visuallyHiddenText: "contact information"
                 }
@@ -276,7 +276,7 @@
             actions: {
               items: [
                 {
-                  href: "/vaccinate/eligibility",
+                  href: "/record-vaccinations/eligibility",
                   text: "Change",
                   visuallyHiddenText: "eligibility"
                 }
@@ -293,7 +293,7 @@
             actions: {
               items: [
                 {
-                  href: "/vaccinate/healthcare-worker",
+                  href: "/record-vaccinations/healthcare-worker",
                   text: "Change",
                   visuallyHiddenText: "healthcare worker role"
                 }
@@ -310,7 +310,7 @@
             actions: {
               items: [
                 {
-                  href: "/vaccinate/patient-estimated-due-date",
+                  href: "/record-vaccinations/patient-estimated-due-date",
                   text: "Change",
                   visuallyHiddenText: "pregnancy due date"
                 }
@@ -327,7 +327,7 @@
             actions: {
               items: [
                 {
-                  href: "/vaccinate/consent",
+                  href: "/record-vaccinations/consent",
                   text: "Change",
                   visuallyHiddenText: "consnet"
                 }
@@ -344,7 +344,7 @@
             actions: {
               items: [
                 {
-                  href: "/vaccinate/injection-site",
+                  href: "/record-vaccinations/injection-site",
                   text: "Change",
                   visuallyHiddenText: "contact details"
                 }
@@ -354,7 +354,7 @@
         ]
       }) }}
 
-      <form action="/vaccinate/done" method="post" novalidate>
+      <form action="/record-vaccinations/done" method="post" novalidate>
 
         {{ textarea({
           name: "notes",
