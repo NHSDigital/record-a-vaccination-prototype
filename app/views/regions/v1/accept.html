@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/regions/v1/awaiting-approval",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Accept Leeds Teaching Hospitals</h1>
+
+      <p>The organisation will be able to record vaccinations using RAVS as part of your region.</p>
+
+
+      <form action="/regions/v1/awaiting-approval" method="post" novalidate="true">
+        {{ button({
+          "text": "Confirm acceptance",
+          classes: "nhsuk-button"
+        }) }}
+    </form>
+
+    </div>
+  </div>
+{% endblock %}

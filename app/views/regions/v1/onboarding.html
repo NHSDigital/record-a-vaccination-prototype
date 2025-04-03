@@ -72,6 +72,19 @@
         }) }}
 
         {{ input({
+            "label": {
+              "text": "Phone"
+            },
+            "id": "Phone",
+            "name": "Phone",
+            classes: "nhsuk-input--width-10",
+            value: data.phone,
+            "errorMessage": {
+              "text": lastNameError
+            } if lastNameError
+          }) }}
+
+        {{ input({
           "label": {
             "text": "NHS-approved email address"
           },

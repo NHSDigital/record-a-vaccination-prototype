@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/regions/v1/awaiting-approval",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Reject Leeds Teaching Hospitals</h1>
+
+      <p>The organisation will not be permitted to use RAVS as their chosen point of care system for vaccinations.</p>
+
+
+      <form action="/regions/v1/awaiting-approval" method="post" novalidate="true">
+        {{ button({
+          "text": "Confirm rejection",
+          classes: "nhsuk-button--warning"
+        }) }}
+    </form>
+
+    </div>
+  </div>
+{% endblock %}
