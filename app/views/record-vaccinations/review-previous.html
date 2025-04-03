@@ -5,7 +5,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/done" }) }}
+  {{ backLink({ href: "/record-vaccinations/done" }) }}
 {% endblock %}
 
 {% block content %}
@@ -26,7 +26,7 @@
               actions: {
                 items: [
                   {
-                    href: "/vaccinate",
+                    href: "/record-vaccinations",
                     text: "Change",
                     visuallyHiddenText: "vaccination date"
                   }
@@ -43,7 +43,7 @@
               actions: {
                 items: [
                   {
-                    href: "/vaccinate/vaccine",
+                    href: "/record-vaccinations/vaccine",
                     text: "Change",
                     visuallyHiddenText: "vaccine"
                   }
@@ -60,7 +60,7 @@
               actions: {
                 items: [
                   {
-                    href: "/vaccinate/vaccine",
+                    href: "/record-vaccinations/vaccine",
                     text: "Change",
                     visuallyHiddenText: "vaccine product"
                   }
@@ -77,7 +77,7 @@
               actions: {
                 items: [
                   {
-                    href: "/vaccinate/batch",
+                    href: "/record-vaccinations/batch",
                     text: "Change",
                     visuallyHiddenText: "vaccine batch"
                   }
@@ -94,7 +94,7 @@
               actions: {
                 items: [
                   {
-                    href: "/vaccinate/vaccinator",
+                    href: "/record-vaccinations/vaccinator",
                     text: "Change",
                     visuallyHiddenText: "contact information"
                   }
@@ -111,7 +111,7 @@
               actions: {
                 items: [
                   {
-                    href: "/vaccinate/location",
+                    href: "/record-vaccinations/location",
                     text: "Change",
                     visuallyHiddenText: "contact information"
                   }
@@ -128,7 +128,7 @@
               actions: {
                 items: [
                   {
-                    href: "/vaccinate/eligibility",
+                    href: "/record-vaccinations/eligibility",
                     text: "Change",
                     visuallyHiddenText: "eligibility"
                   }
@@ -140,7 +140,7 @@
 
       {{ button({
         text: "Continue",
-        href: "/vaccinate/patient"
+        href: "/record-vaccinations/patient"
       })}}
 
     </div>

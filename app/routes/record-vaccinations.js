@@ -30,7 +30,7 @@ function daysBetweenDates(date1, date2) {
 
 module.exports = router => {
 
-  router.get('/vaccinate', (req, res) => {
+  router.get('/record-vaccinations', (req, res) => {
     let vaccinationTodayError
 
     if (req.query.showErrors === 'yes') {
@@ -39,21 +39,21 @@ module.exports = router => {
       }
     }
 
-    res.render('vaccinate/index', {
+    res.render('record-vaccinations/index', {
       vaccinationTodayError
     })
   })
 
-  router.post('/vaccinate/answer-date', (req, res) => {
+  router.post('/record-vaccinations/answer-date', (req, res) => {
     const data = req.session.data
 
     if (!data.vaccinationToday) {
-      return res.redirect('/vaccinate/?showErrors=yes')
+      return res.redirect('/record-vaccinations/?showErrors=yes')
     }
-    res.redirect('/vaccinate/delivery-team')
+    res.redirect('/record-vaccinations/delivery-team')
   })
 
-  router.get('/vaccinate/delivery-team', (req, res) => {
+  router.get('/record-vaccinations/delivery-team', (req, res) => {
     let errors = []
 
     if (req.query.showErrors === "yes") {
@@ -65,22 +65,22 @@ module.exports = router => {
       }
     }
 
-    res.render('vaccinate/delivery-team', {
+    res.render('record-vaccinations/delivery-team', {
       errors
     })
   })
 
-  router.post('/vaccinate/answer-delivery-team', (req, res) => {
+  router.post('/record-vaccinations/answer-delivery-team', (req, res) => {
     const data = req.session.data
 
     if (!data.deliveryTeam) {
-      return res.redirect('/vaccinate/delivery-team?showErrors=yes')
+      return res.redirect('/record-vaccinations/delivery-team?showErrors=yes')
     } else {
-      res.redirect('/vaccinate/vaccinator')
+      res.redirect('/record-vaccinations/vaccinator')
     }
   })
 
-  router.get('/vaccinate/vaccinator', (req, res) => {
+  router.get('/record-vaccinations/vaccinator', (req, res) => {
     let vaccinatorError
 
     if (req.query.showErrors === 'yes') {
@@ -89,21 +89,21 @@ module.exports = router => {
       }
     }
 
-    res.render('vaccinate/vaccinator', {
+    res.render('record-vaccinations/vaccinator', {
       vaccinatorError
     })
   })
 
-  router.post('/vaccinate/answer-vaccinator', (req, res) => {
+  router.post('/record-vaccinations/answer-vaccinator', (req, res) => {
     const data = req.session.data
 
     if (!data.vaccinator) {
-      return res.redirect('/vaccinate/vaccinator?showErrors=yes')
+      return res.redirect('/record-vaccinations/vaccinator?showErrors=yes')
     }
-    res.redirect('/vaccinate/vaccine')
+    res.redirect('/record-vaccinations/vaccine')
   })
 
-  router.get('/vaccinate/vaccine', (req, res) => {
+  router.get('/record-vaccinations/vaccine', (req, res) => {
     let vaccineError, vaccineProductError
     const data = req.session.data
 
@@ -117,23 +117,23 @@ module.exports = router => {
       }
     }
 
-    res.render('vaccinate/vaccine', {
+    res.render('record-vaccinations/vaccine', {
       vaccineError,
       vaccineProductError
     })
   })
 
-  router.post('/vaccinate/answer-vaccine', (req, res) => {
+  router.post('/record-vaccinations/answer-vaccine', (req, res) => {
     const data = req.session.data
 
     if (!data.vaccine || !data.vaccineProduct) {
-      return res.redirect('/vaccinate/vaccine?showErrors=yes')
+      return res.redirect('/record-vaccinations/vaccine?showErrors=yes')
     }
-    res.redirect('/vaccinate/batch')
+    res.redirect('/record-vaccinations/batch')
   })
 
 
-  router.post('/vaccinate/answer-patient-nhs-number-known', (req, res) => {
+  router.post('/record-vaccinations/answer-patient-nhs-number-known', (req, res) => {
 
     const nhsNumberKnown = req.session.data.nhsNumberKnown;
     req.session.data.nhsNumber = req.session.data.nhsNumber.trim()
@@ -145,15 +145,15 @@ module.exports = router => {
       req.session.data.dateOfBirth = {day: "15", month: "8", year: "1949"}
       req.session.data.postcode = "GD3 I83"
 
-      res.redirect('/vaccinate/patient-history')
+      res.redirect('/record-vaccinations/patient-history')
     } else if (nhsNumberKnown === "no") {
-      res.redirect('/vaccinate/patient-search')
+      res.redirect('/record-vaccinations/patient-search')
     } else {
-      res.redirect('/vaccinate/patient?showError=yes')
+      res.redirect('/record-vaccinations/patient?showError=yes')
     }
   })
 
-  router.get('/vaccinate/patient', (req, res) => {
+  router.get('/record-vaccinations/patient', (req, res) => {
 
     const data = req.session.data
     const showError = data.showError
@@ -206,7 +206,7 @@ module.exports = router => {
     }
 
 
-    res.render('vaccinate/patient', {
+    res.render('record-vaccinations/patient', {
       nhsNumberKnownError,
       nhsNumberError,
       errorList
@@ -214,7 +214,7 @@ module.exports = router => {
   })
 
 
- router.post('/vaccinate/patient-search', (req, res) => {
+ router.post('/record-vaccinations/patient-search', (req, res) => {
     const data = req.session.data
     const firstName = req.session.data.firstName;
     const lastName = req.session.data.lastName;
@@ -251,21 +251,21 @@ module.exports = router => {
 
       // If day of month is odd, pretend there’s no search result
       if (Number(dateOfBirth.day) % 2) {
-        res.redirect('/vaccinate/no-search-result')
+        res.redirect('/record-vaccinations/no-search-result')
 
       // If postcode blank, pretend there’s multiple results
       } else if (postcode === "") {
-        res.redirect('/vaccinate/refine-search-result')
+        res.redirect('/record-vaccinations/refine-search-result')
 
       // Otherwise pretend there is a single result and
       // go to patient details page
       } else {
         data.patientName = 'Jodie Brown'
         data.nhsNumber = '9123456788'
-        res.redirect('/vaccinate/patient-history')
+        res.redirect('/record-vaccinations/patient-history')
       }
     } else {
-      res.render('vaccinate/patient-search', {
+      res.render('record-vaccinations/patient-search', {
         errors,
         firstNameError,
         lastNameError,
@@ -276,7 +276,7 @@ module.exports = router => {
   })
 
 
- router.get('/vaccinate/create-a-record', (req, res) => {
+ router.get('/record-vaccinations/create-a-record', (req, res) => {
 
   const firstName = req.session.data.firstName;
   const lastName = req.session.data.lastName;
@@ -328,7 +328,7 @@ module.exports = router => {
     }
   }
 
-  res.render('vaccinate/create-a-record', {
+  res.render('record-vaccinations/create-a-record', {
     errors,
     firstNameError,
     lastNameError,
@@ -339,7 +339,7 @@ module.exports = router => {
 })
 
 
-  router.post('/vaccinate/create-a-record', (req, res) => {
+  router.post('/record-vaccinations/create-a-record', (req, res) => {
     const data = req.session.data
     const firstName = req.session.data.firstName;
     const lastName = req.session.data.lastName;
@@ -349,15 +349,15 @@ module.exports = router => {
 
     if (firstName != '' && lastName != '' && dateOfBirth.day != '' && dateOfBirth.month != '' && dateOfBirth.year != '' && postcode != '' && gender != '') {
 
-      res.redirect('/vaccinate/consent')
+      res.redirect('/record-vaccinations/consent')
     } else {
-      res.redirect('/vaccinate/create-a-record?showErrors=yes')
+      res.redirect('/record-vaccinations/create-a-record?showErrors=yes')
     }
 
   })
 
 
-  router.get('/vaccinate/patient-estimated-due-date', (req, res) => {
+  router.get('/record-vaccinations/patient-estimated-due-date', (req, res) => {
 
     const showError = req.query.showError
     const data = req.session.data
@@ -385,27 +385,27 @@ module.exports = router => {
       }
     }
 
-    res.render('vaccinate/patient-estimated-due-date', {
+    res.render('record-vaccinations/patient-estimated-due-date', {
       dateErrorMessage
     })
   })
 
 
   // Routing page after setting pregnancy estimated due date
-  router.post('/vaccinate/save-estimated-due-date', (req, res) => {
+  router.post('/record-vaccinations/save-estimated-due-date', (req, res) => {
 
     const data = req.session.data
     const pregnancyDueDate = dateFromYearMonthDay(data.pregnancyDueDate?.year, data.pregnancyDueDate?.month, data.pregnancyDueDate?.day)
 
     // Re-render with error if date is not set
     if (!pregnancyDueDate) {
-      return res.redirect('/vaccinate/patient-estimated-due-date?showError=yes')
+      return res.redirect('/record-vaccinations/patient-estimated-due-date?showError=yes')
     }
 
     // Skip to consent page if the vaccination happened in the past
     // as it’s then too late for any warnings
     if (data.vaccinationToday != "yes") {
-      return res.redirect('/vaccinate/consent')
+      return res.redirect('/record-vaccinations/consent')
     }
 
     // Vaccination date is today
@@ -417,23 +417,23 @@ module.exports = router => {
     // Being less than 3 weeks or more than 44 weeks (308 days) pregnant
     // results in an error
     if (numberOfDaysPregnant < 21 || numberOfDaysPregnant > 308) {
-      return res.redirect('/vaccinate/patient-estimated-due-date?showError=yes')
+      return res.redirect('/record-vaccinations/patient-estimated-due-date?showError=yes')
     }
 
     // RSV is recommended from 28+ weeks (196 days)
     if (data.vaccinationToday == 'yes' && data.vaccine === "RSV" && numberOfDaysPregnant < 196) {
-      res.redirect('/vaccinate/patient-estimated-due-date-rsv-warning')
+      res.redirect('/record-vaccinations/patient-estimated-due-date-rsv-warning')
 
     // Pertussis is recommended between 16 weeks (112 days) and 32 weeks
     } else if (data.vaccinationToday == 'yes' && data.vaccine === "Pertussis" && numberOfDaysPregnant < 112) {
-      res.redirect('/vaccinate/patient-estimated-due-date-pertussis-warning')
+      res.redirect('/record-vaccinations/patient-estimated-due-date-pertussis-warning')
     } else {
-      res.redirect('/vaccinate/consent')
+      res.redirect('/record-vaccinations/consent')
     }
 
   });
 
-  router.get('/vaccinate/patient-estimated-due-date-rsv-warning', (req, res) => {
+  router.get('/record-vaccinations/patient-estimated-due-date-rsv-warning', (req, res) => {
 
     const data = req.session.data
     const pregnancyDueDate = dateFromYearMonthDay(data.pregnancyDueDate?.year, data.pregnancyDueDate?.month, data.pregnancyDueDate?.day)
@@ -447,14 +447,14 @@ module.exports = router => {
     const fullWeeksPregnant = Math.floor(numberOfDaysPregnant / 7)
     const remainderDaysPregnant = (numberOfDaysPregnant % 7)
 
-    res.render('vaccinate/patient-estimated-due-date-rsv-warning', {
+    res.render('record-vaccinations/patient-estimated-due-date-rsv-warning', {
       fullWeeksPregnant,
       remainderDaysPregnant
     })
 
   })
 
-  router.get('/vaccinate/patient-estimated-due-date-pertussis-warning', (req, res) => {
+  router.get('/record-vaccinations/patient-estimated-due-date-pertussis-warning', (req, res) => {
 
     const data = req.session.data
     const pregnancyDueDate = dateFromYearMonthDay(data.pregnancyDueDate?.year, data.pregnancyDueDate?.month, data.pregnancyDueDate?.day)
@@ -468,7 +468,7 @@ module.exports = router => {
     const fullWeeksPregnant = Math.floor(numberOfDaysPregnant / 7)
     const remainderDaysPregnant = (numberOfDaysPregnant % 7)
 
-    res.render('vaccinate/patient-estimated-due-date-pertussis-warning', {
+    res.render('record-vaccinations/patient-estimated-due-date-pertussis-warning', {
       fullWeeksPregnant,
       remainderDaysPregnant
     })
@@ -476,7 +476,7 @@ module.exports = router => {
   })
 
 
-  router.get('/vaccinate/eligibility', (req, res) => {
+  router.get('/record-vaccinations/eligibility', (req, res) => {
     const data = req.session.data
     const eligibility = data.eligibility
     let errors = []
@@ -490,12 +490,12 @@ module.exports = router => {
       }
     }
 
-    res.render('vaccinate/eligibility', {
+    res.render('record-vaccinations/eligibility', {
       errors
     })
   })
 
-  router.post('/vaccinate/answer-eligibility', (req, res) => {
+  router.post('/record-vaccinations/answer-eligibility', (req, res) => {
     const data = req.session.data
     const eligibility = data.eligibility
 
@@ -503,33 +503,33 @@ module.exports = router => {
 
     if (!eligibility || eligibility === "" || eligibility == []) {
 
-      nextPage = "/vaccinate/eligibility?showErrors=yes"
+      nextPage = "/record-vaccinations/eligibility?showErrors=yes"
 
     } else if (data.patientName && data.patientName != "" && data.repeatPatient === "yes") {
 
       if (data.vaccine === "Pertussis" || ((data.vaccine == "RSV") && (eligibility === "Pregnant"))) {
-        nextPage = "/vaccinate/patient-estimated-due-date"
+        nextPage = "/record-vaccinations/patient-estimated-due-date"
       } else {
-        nextPage = "/vaccinate/patient-history"
+        nextPage = "/record-vaccinations/patient-history"
       }
 
     } else {
 
       if ((data.vaccine === "COVID-19") || (data.vaccine == "Flu")) {
         if (data.eligibility === "Healthcare worker" || data.eligibility.includes("Healthcare worker")) {
-          nextPage = "/vaccinate/healthcare-worker"
+          nextPage = "/record-vaccinations/healthcare-worker"
         } else {
-          nextPage = "/vaccinate/location"
+          nextPage = "/record-vaccinations/location"
         }
       } else {
-        nextPage = "/vaccinate/patient"
+        nextPage = "/record-vaccinations/patient"
       }
     }
 
     res.redirect(nextPage)
   })
 
-  router.get('/vaccinate/done', (req, res) => {
+  router.get('/record-vaccinations/done', (req, res) => {
     const data = req.session.data
     let errors = []
     let error
@@ -544,14 +544,14 @@ module.exports = router => {
       }
     }
 
-    res.render('vaccinate/done', {
+    res.render('record-vaccinations/done', {
       errors,
       error
     })
   })
 
   // Routing page after DONE
-  router.post('/vaccinate/what-next', (req, res) => {
+  router.post('/record-vaccinations/what-next', (req, res) => {
 
     const data = req.session.data
     const answer = data.nextStep
@@ -581,7 +581,7 @@ module.exports = router => {
         data.newBatchNumber = ""
       }
 
-      res.redirect('/vaccinate/review-previous')
+      res.redirect('/record-vaccinations/review-previous')
 
     } else if (answer === 'same-patient-another-vaccination') {
 
@@ -590,7 +590,7 @@ module.exports = router => {
       req.session.data.vaccineBatch = ""
       req.session.data.eligibility = ""
 
-      res.redirect('/vaccinate/vaccine?repeatPatient=yes&repeatVaccination=no')
+      res.redirect('/record-vaccinations/vaccine?repeatPatient=yes&repeatVaccination=no')
 
     } else if (answer === 'different-vaccination-another-patient') {
 
@@ -599,14 +599,14 @@ module.exports = router => {
       req.session.data.vaccineBatch = ""
       req.session.data.eligibility = ""
 
-      res.redirect('/vaccinate/vaccine')
+      res.redirect('/record-vaccinations/vaccine')
     } else {
-      res.redirect('/vaccinate/done?showErrors=yes')
+      res.redirect('/record-vaccinations/done?showErrors=yes')
     }
 
   })
 
-  router.get('/vaccinate/batch', (req, res) => {
+  router.get('/record-vaccinations/batch', (req, res) => {
     let error
     const data = req.session.data
     if (req.query.showError === 'yes') {
@@ -619,12 +619,12 @@ module.exports = router => {
       }
     }
 
-    res.render('vaccinate/batch', {
+    res.render('record-vaccinations/batch', {
       error
     })
   })
 
-  router.get('/vaccinate/location', (req, res) => {
+  router.get('/record-vaccinations/location', (req, res) => {
     let errors = []
     let locationType = req.session.data.locationType
 
@@ -637,26 +637,26 @@ module.exports = router => {
       }
     }
 
-    res.render('vaccinate/location', {
+    res.render('record-vaccinations/location', {
       errors
     })
   })
 
-  router.post('/vaccinate/answer-location', (req, res) => {
+  router.post('/record-vaccinations/answer-location', (req, res) => {
 
     const data = req.session.data
     let redirectPath
 
     if (!data.locationType) {
-      redirectPath = "/vaccinate/location?showErrors=yes"
+      redirectPath = "/record-vaccinations/location?showErrors=yes"
     } else {
-      redirectPath = "/vaccinate/patient"
+      redirectPath = "/record-vaccinations/patient"
     }
 
     res.redirect(redirectPath)
   })
 
-  router.post('/vaccinate/answer-batch', (req, res) => {
+  router.post('/record-vaccinations/answer-batch', (req, res) => {
 
     const data = req.session.data
     const vaccineBatch = data.vaccineBatch
@@ -665,20 +665,20 @@ module.exports = router => {
     let redirectPath
 
     if (vaccineBatch === "add-new") {
-      redirectPath = "/vaccinate/add-batch"
+      redirectPath = "/record-vaccinations/add-batch"
     } else if (!vaccineBatch) {
-      redirectPath = "/vaccinate/batch?showError=yes"
+      redirectPath = "/record-vaccinations/batch?showError=yes"
     } else if (["COVID-19", "Flu", "RSV"].includes(data.vaccine)) {
-      redirectPath = "/vaccinate/eligibility"
+      redirectPath = "/record-vaccinations/eligibility"
     } else if (data.repeatPatient === "yes") {
-      redirectPath = "/vaccinate/patient-estimated-due-date"
+      redirectPath = "/record-vaccinations/patient-estimated-due-date"
     } else {
-      redirectPath = "/vaccinate/patient"
+      redirectPath = "/record-vaccinations/patient"
     }
     res.redirect(redirectPath)
   })
 
-  router.get('/vaccinate/add-batch', (req, res) => {
+  router.get('/record-vaccinations/add-batch', (req, res) => {
     const data = req.session.data
     let errors = []
     let batchNumberError, expiryDateError
@@ -701,29 +701,29 @@ module.exports = router => {
       }
     }
 
-    res.render('vaccinate/add-batch', {
+    res.render('record-vaccinations/add-batch', {
       errors,
       batchNumberError,
       expiryDateError
     })
   })
 
-  router.get('/vaccinate/answer-add-batch', (req, res) => {
+  router.get('/record-vaccinations/answer-add-batch', (req, res) => {
     const data = req.session.data
     let nextPage
 
     if (data.newBatchNumber === '' || data.newBatchExpiryDate?.day === '' || data.newBatchExpiryDate?.month === '' || data.newBatchExpiryDate?.year === '') {
-      nextPage = "/vaccinate/add-batch?showErrors=yes"
+      nextPage = "/record-vaccinations/add-batch?showErrors=yes"
     } else if (data.vaccine === "Pertussis") {
-      nextPage = "/vaccinate/patient"
+      nextPage = "/record-vaccinations/patient"
     } else {
-      nextPage = "/vaccinate/eligibility"
+      nextPage = "/record-vaccinations/eligibility"
     }
 
     res.redirect(nextPage)
   })
 
-  router.get('/vaccinate/consent', (req, res) => {
+  router.get('/record-vaccinations/consent', (req, res) => {
     let errors = []
     let consentError, consentClinicianError, consentAttorneyError, consentParentError, consentAdvocateError, consentDeputyError, consentAttorneyRelationshipError, consentDeputyRelationshipError
     const data = req.session.data
@@ -803,12 +803,12 @@ module.exports = router => {
       }
     }
 
-    res.render('vaccinate/consent', {
+    res.render('record-vaccinations/consent', {
       errors, consentError, consentClinicianError, consentAttorneyError, consentParentError, consentAdvocateError, consentDeputyError, consentAttorneyRelationshipError, consentDeputyRelationshipError
     })
   })
 
-  router.post('/vaccinate/answer-consent', (req, res) => {
+  router.post('/record-vaccinations/answer-consent', (req, res) => {
     const data = req.session.data
     const consent = data.consent
     const consentClinicianName = data.consentClinicianName
@@ -827,14 +827,14 @@ module.exports = router => {
       (consent === "Independent mental capacity advocate" && consentAdvocateName != '') ||
       (consent === "Court appointed deputy" && consentDeputyName != '' && consentDeputyRelationship != "")
     ) {
-      res.redirect('/vaccinate/injection-site')
+      res.redirect('/record-vaccinations/injection-site')
     } else {
-      res.redirect('/vaccinate/consent?showErrors=yes')
+      res.redirect('/record-vaccinations/consent?showErrors=yes')
     }
 
   })
 
-  router.get('/vaccinate/injection-site', (req, res) => {
+  router.get('/record-vaccinations/injection-site', (req, res) => {
     const data = req.session.data
     const injectionSite = data.injectionSite
     const otherInjectionSite = data.otherInjectionSite
@@ -860,21 +860,21 @@ module.exports = router => {
 
     }
 
-    res.render('vaccinate/injection-site', {
+    res.render('record-vaccinations/injection-site', {
       errors,
       injectionSiteError,
       otherInjectionSiteError
     })
   })
 
-  router.post('/vaccinate/answer-injection-site', (req, res) => {
+  router.post('/record-vaccinations/answer-injection-site', (req, res) => {
     const data = req.session.data
     const injectionSite = data.injectionSite
     const otherInjectionSite = data.otherInjectionSite
-    let redirectPath = "/vaccinate/check"
+    let redirectPath = "/record-vaccinations/check"
 
     if (!injectionSite || (injectionSite === "other" && !otherInjectionSite)) {
-      redirectPath = "/vaccinate/injection-site?showErrors=yes"
+      redirectPath = "/record-vaccinations/injection-site?showErrors=yes"
     }
 
     res.redirect(redirectPath)

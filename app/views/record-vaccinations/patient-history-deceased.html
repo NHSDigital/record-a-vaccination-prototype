@@ -1,15 +1,15 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Check the patient's details" %}
+{% set pageName = "Check the patient details" %}
 
 {% set currentSection = "vaccinate" %}
 
 {% if (data.vaccine === "COVID-19") %}
-  {% set nextPage = "/vaccinate/warning" %}
+  {% set nextPage = "/record-vaccinations/warning" %}
 {% elseif ((data.vaccine == "RSV") and (data.eligibility | arrayOrStringIncludes("Pregnant"))) or (data.vaccine == "Pertussis") %}
-  {% set nextPage = "/vaccinate/patient-estimated-due-date" %}
+  {% set nextPage = "/record-vaccinations/patient-estimated-due-date" %}
 {% else %}
-  {% set nextPage = "/vaccinate/consent" %}
+  {% set nextPage = "/record-vaccinations/consent" %}
 {% endif %}
 
 {% set dateOfBirthHtml %}
@@ -20,7 +20,7 @@
 {% endset %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/patient" }) }}
+  {{ backLink({ href: "/record-vaccinations/patient" }) }}
 {% endblock %}
 
 {% block content %}
@@ -45,7 +45,15 @@
               text: "Date of birth"
             },
             value: {
-              html: dateOfBirthHtml
+                html: "15 January 1954"
+              }
+          },
+          {
+            key: {
+              text: "Date of death"
+            },
+            value: {
+              html: "20 March 2024<br>(70 years old)"
             }
           },
           {
@@ -178,12 +186,6 @@
           ]
         }) }}
 
-
-      <form action="{{ nextPage }}" method="post" novalidate>
-        {{ button({
-          text: "Continue"
-        })}}
-      </form>
 
     </div>
   </div>

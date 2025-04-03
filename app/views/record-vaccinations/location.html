@@ -5,7 +5,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/eligibility" }) }}
+  {{ backLink({ href: "/record-vaccinations/eligibility" }) }}
 {% endblock %}
 
 {% block content %}
@@ -19,7 +19,7 @@
         }) }}
       {% endif %}
 
-      <form action="/vaccinate/answer-location" method="post" novalidate>
+      <form action="/record-vaccinations/answer-location" method="post" novalidate>
 
         {% from 'radios/macro.njk' import radios %}
         {% from 'input/macro.njk' import input %}

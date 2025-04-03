@@ -5,7 +5,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/consent" }) }}
+  {{ backLink({ href: "/record-vaccinations/consent" }) }}
 {% endblock %}
 
 {% block content %}
@@ -19,7 +19,7 @@
         }) }}
       {% endif %}
 
-      <form action="/vaccinate/answer-injection-site" method="post" novalidate>
+      <form action="/record-vaccinations/answer-injection-site" method="post" novalidate>
 
         {% set somewhereElseHtml %}
 

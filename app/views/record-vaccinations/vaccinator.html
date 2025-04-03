@@ -5,7 +5,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/delivery-team" }) }}
+  {{ backLink({ href: "/record-vaccinations/delivery-team" }) }}
 {% endblock %}
 
 {% block content %}
@@ -24,7 +24,7 @@
         }) }}
       {% endif %}
 
-      <form action="/vaccinate/answer-vaccinator" method="post" novalidate>
+      <form action="/record-vaccinations/answer-vaccinator" method="post" novalidate>
 
         {% set otherVaccinators = [
           {name: "James Bloggs", email: "james.bloggs@nhs.net" },

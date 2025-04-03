@@ -5,11 +5,11 @@
 {% set currentSection = "vaccinate" %}
 
 {% if (data.vaccine === "COVID-19") %}
-  {% set nextPage = "/vaccinate/warning" %}
+  {% set nextPage = "/record-vaccinations/warning" %}
 {% elseif ((data.vaccine == "RSV") and (data.eligibility | arrayOrStringIncludes("Pregnant"))) or (data.vaccine == "Pertussis") %}
-  {% set nextPage = "/vaccinate/patient-estimated-due-date" %}
+  {% set nextPage = "/record-vaccinations/patient-estimated-due-date" %}
 {% else %}
-  {% set nextPage = "/vaccinate/consent" %}
+  {% set nextPage = "/record-vaccinations/consent" %}
 {% endif %}
 
 {% set dateOfBirthHtml %}
@@ -20,7 +20,7 @@
 {% endset %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/patient" }) }}
+  {{ backLink({ href: "/record-vaccinations/patient" }) }}
 {% endblock %}
 
 {% block content %}

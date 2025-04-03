@@ -5,7 +5,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/no-search-result" }) }}
+  {{ backLink({ href: "/record-vaccinations/no-search-result" }) }}
 {% endblock %}
 
 {% block content %}
@@ -23,7 +23,7 @@
 
       <p> You need to {% if not data.postcode%} enter a postcode and {% endif %} select an option for gender. The vaccination record will only be sent to a GP if it can be matched with an NHS number later.</p>
 
-      <form action="/vaccinate/create-a-record" method="post">
+      <form action="/record-vaccinations/create-a-record" method="post">
         {{ input({
             label: {
               text: "First name"

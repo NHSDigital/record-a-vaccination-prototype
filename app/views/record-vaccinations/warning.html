@@ -5,7 +5,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/patient-history" }) }}
+  {{ backLink({ href: "/record-vaccinations/patient-history" }) }}
 {% endblock %}
 
 {% block content %}
@@ -30,7 +30,7 @@ UKHSA guidance on COVID-19 vaccination (opens in new tab)</a>.
 
   {{ button({
     "text": "Continue anyway",
-    "href": "/vaccinate/consent"
+    "href": "/record-vaccinations/consent"
   }) }}
 
 {% endblock %}

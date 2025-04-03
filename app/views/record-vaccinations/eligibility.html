@@ -5,7 +5,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/vaccinate/batch" }) }}
+  {{ backLink({ href: "/record-vaccinations/batch" }) }}
 {% endblock %}
 
 {% block content %}
@@ -19,7 +19,7 @@
         }) }}
       {% endif %}
 
-      <form action="/vaccinate/answer-eligibility" method="post" novalidate>
+      <form action="/record-vaccinations/answer-eligibility" method="post" novalidate>
 
       {% if data.vaccine == "COVID-19" %}
         {% set eligibilityOptions = [
