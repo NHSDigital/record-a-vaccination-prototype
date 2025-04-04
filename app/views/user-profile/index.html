@@ -1,0 +1,118 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Your profile
+{% endblock %}
+
+{% set currentSection = "user-profile" %}
+
+{% set organisationSettings = currentUser.organisations | findById(currentOrganisation.id) %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-xl">Your profile</h1>
+
+        {% set permissionLevelHtml %}
+          <div>{{ organisationSettings.permissionLevel }}</div>
+          <p class="app-summary__explanation">
+            {% if organisationSettings.permissionLevel == "Lead administrator" %}
+              Can record vaccinations, create reports, manage vaccines and users
+            {% elseif organisationSettings.permissionLevel == "Administrator" %}
+              Can record vaccinations, create reports and manage vaccines
+            {% elseif organisationSettings.permissionLevel == "Recorder" %}
+              Can record vaccinations only
+            {% endif %}
+          </p>
+        {% endset %}
+
+        {% set organisationHtml %}
+          <div>{{ currentOrganisation.name }}</div>
+          <p class="app-summary__explanation">
+            {{ currentOrganisation.address.line1 }}, {{ currentOrganisation.address.postcode }}
+          </p>
+
+        {% endset %}
+
+        {{ summaryList({
+          classes: "nhsuk-u-margin-bottom-4",
+          rows: [
+            {
+              key: {
+                text: "Name"
+              },
+              value: {
+                text: currentUser.firstName + " " + currentUser.lastName
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/user-profile/name",
+                    text: "Change",
+                    visuallyHiddenText: "name"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Email address"
+              },
+              value: {
+                text: currentUser.email
+              },
+              actions: {
+                items: [
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Organisation"
+              },
+              value: {
+                html: organisationHtml
+              },
+              actions: {
+                items: [
+                  {
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Permission level"
+              },
+              value: {
+                html: permissionLevelHtml
+              },
+              actions: {
+                items: [
+                  {
+                  }
+                ]
+              }
+            }
+          ]
+        }) }}
+
+      {% if organisationSettings.permissionLevel != 'Lead administrator' %}
+
+        <p>Only lead administrators can change permission levels. The lead administrators for Southampton NHS Trust are:</p>
+
+        <ul class="nhsuk-list nhsuk-list--bullet">
+          {% for user in leadAdminUsersAtSameOrganisation %}
+            <li>{{ user.firstName }} {{ user.lastName }} ({{ user.email }})</li>
+          {% endfor %}
+        </ul>
+
+      {% endif %}
+
+      <p>If you need to change your email address, <a href="/contact-us">contact support</a>.</p>
+
+    </div>
+  </div>
+
+
+{% endblock %}

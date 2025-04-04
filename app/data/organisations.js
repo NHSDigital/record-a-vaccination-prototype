@@ -4056,7 +4056,7 @@ module.exports = [
   },
   {
     "id": "RGM",
-    "name": "Royal papworth hospital NHS Foundation Trust",
+    "name": "Royal Papworth Hospital NHS Foundation Trust",
     "address": {
       "line1": "Papworth road",
       "town": "Cambridge",
@@ -4068,7 +4068,7 @@ module.exports = [
   },
   {
     "id": "RLZ",
-    "name": "Royal shrewsbury hospitals NHS trust",
+    "name": "Royal Shrewsbury Hospitals NHS trust",
     "address": {
       "line1": "Royal shrewsbury hospital north",
       "town": "Shrewsbury",
@@ -5934,14 +5934,16 @@ module.exports = [
   },
   {
     "id": "RRF",
-    "name": "Wrightington, wigan and leigh NHS Foundation Trust",
+    "name": "Wrightington, Wigan and Keigh NHS Foundation Trust",
     "address": {
       "line1": "Royal albert edward infirmary",
       "town": "Wigan",
       "postcode": "WN1 2NN"
     },
-    "status": "Active",
-    "type": "NHS Trust"
+    "status": "Closed",
+    dateClosed: "2024-12-04",
+    "type": "NHS Trust",
+    "region": "Y61"
   },
   {
     "id": "RLQ",
@@ -5967,14 +5969,16 @@ module.exports = [
   },
   {
     "id": "RCB",
-    "name": "York and scarborough teaching hospitals NHS Foundation Trust",
+    "name": "York and Scarborough Teaching Hospitals NHS Foundation Trust",
     "address": {
       "line1": "York hospital",
       "town": "York",
       "postcode": "YO31 8HE"
     },
-    "status": "Active",
-    "type": "NHS Trust"
+    "status": "Closed",
+    dateClosed: "2025-02-12",
+    "type": "NHS Trust",
+    "region": "Y61"
   },
   {
     "id": "RX8",

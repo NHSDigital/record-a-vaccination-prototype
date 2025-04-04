@@ -16,24 +16,23 @@ dotenv.config();
 
 // Local dependencies
 const packageInfo = require('./package.json');
-const authentication = require('./middleware/authentication');
-const automaticRouting = require('./middleware/auto-routing');
+const authentication = require('./lib/middleware/authentication');
+const production = require('./lib/middleware/production');
+const automaticRouting = require('./lib/middleware/auto-routing');
 const config = require('./app/config');
 const locals = require('./app/locals');
 const routes = require('./app/routes');
-const documentationRoutes = require('./docs/documentation_routes');
 const utils = require('./lib/utils');
 
-const prototypeAdminRoutes = require('./middleware/prototype-admin-routes');
+const prototypeAdminRoutes = require('./lib/middleware/prototype-admin-routes');
+const exampleTemplatesRoutes = require('./lib/example_templates_routes');
 
 // Set configuration variables
-const port = process.env.PORT || config.port;
-const useDocumentation = process.env.SHOW_DOCS || config.useDocumentation;
-const onlyDocumentation = process.env.DOCS_ONLY;
+const port = parseInt(process.env.PORT, 10) || config.port;
 
 // Initialise applications
 const app = express();
-const documentationApp = express();
+const exampleTemplatesApp = express();
 
 // Set up configuration variables
 const useAutoStoreData = process.env.USE_AUTO_STORE_DATA || config.useAutoStoreData;
@@ -51,11 +50,10 @@ app.use(cookieParser());
 // Nunjucks configuration for application
 const appViews = [
   path.join(__dirname, 'app/views/'),
+  path.join(__dirname, 'lib/example-templates/'),
+  path.join(__dirname, 'lib/prototype-admin/'),
   path.join(__dirname, 'node_modules/nhsuk-frontend/packages/components'),
   path.join(__dirname, 'node_modules/nhsuk-frontend/packages/macros'),
-  path.join(__dirname, 'docs/views/'),
-  path.join(__dirname, 'lib/prototype-admin/'),
-  path.join(__dirname, 'app/components/'),
 ];
 
 const nunjucksConfig = {
@@ -80,11 +78,13 @@ const sessionOptions = {
   },
 };
 
-// Authentication
-app.use(authentication);
+if (process.env.NODE_ENV === 'production') {
+  app.use(production);
+  app.use(authentication);
+}
 
 // Support session data in cookie or memory
-if (useCookieSessionStore === 'true' && !onlyDocumentation) {
+if (useCookieSessionStore === 'true') {
   app.use(sessionInCookie(Object.assign(sessionOptions, {
     cookieName: sessionName,
     proxy: true,
@@ -149,20 +149,18 @@ app.use(locals(config));
 
 // View engine
 app.set('view engine', 'html');
-documentationApp.set('view engine', 'html');
+exampleTemplatesApp.set('view engine', 'html');
+
+// This setting trusts the X-Forwarded headers set by
+// a proxy and uses them to set the standard header in
+// req. This is needed for hosts like Heroku.
+// See https://expressjs.com/en/guide/behind-proxies.html
+app.set('trust proxy', 1);
 
 // Middleware to serve static assets
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/nhsuk-frontend', express.static(path.join(__dirname, 'node_modules/nhsuk-frontend/packages')));
 app.use('/nhsuk-frontend', express.static(path.join(__dirname, 'node_modules/nhsuk-frontend/dist')));
-
-// Check if the app is documentation only
-if (onlyDocumentation === 'true') {
-  app.get('/', (req, res) => {
-    // Redirect to the documentation pages if it is
-    res.redirect('/docs');
-  });
-}
 
 // Use custom application routes
 app.use('/', routes);
@@ -172,52 +170,30 @@ app.get(/^([^.]+)$/, (req, res, next) => {
   automaticRouting.matchRoutes(req, res, next);
 });
 
-// Check if the app is using documentation
-if (useDocumentation || onlyDocumentation === 'true') {
-  // Documentation routes
-  app.use('/docs', documentationApp);
+// Example template routes
+app.use('/example-templates', exampleTemplatesApp);
 
-  // Nunjucks configuration for documentation
-  const docViews = [
-    path.join(__dirname, 'docs/views/'),
-    path.join(__dirname, 'node_modules/nhsuk-frontend/packages/components'),
-    path.join(__dirname, 'node_modules/nhsuk-frontend/packages/macros'),
-  ];
+// Nunjucks configuration for example templates
+const exampleTemplateViews = [
+  path.join(__dirname, 'lib/example-templates/'),
+  path.join(__dirname, 'node_modules/nhsuk-frontend/packages/components'),
+  path.join(__dirname, 'node_modules/nhsuk-frontend/packages/macros'),
+];
 
-  nunjucksAppEnv = nunjucks.configure(docViews, {
-    autoescape: true,
-    express: documentationApp,
-  });
-  nunjucksAppEnv.addGlobal('version', packageInfo.version);
+nunjucksAppEnv = nunjucks.configure(exampleTemplateViews, {
+  autoescape: true,
+  express: exampleTemplatesApp,
+});
+nunjucksAppEnv.addGlobal('version', packageInfo.version);
 
-  // Add Nunjucks filters
-  utils.addNunjucksFilters(nunjucksAppEnv);
+// Add Nunjucks filters
+utils.addNunjucksFilters(nunjucksAppEnv);
 
-  // Automatically store all data users enter
-  if (useAutoStoreData === 'true') {
-    documentationApp.use(utils.autoStoreData);
-    utils.addCheckedFunction(nunjucksAppEnv);
-  }
+exampleTemplatesApp.use('/', exampleTemplatesRoutes);
 
-  // Support for parsing data in POSTs
-  documentationApp.use(bodyParser.json());
-  documentationApp.use(bodyParser.urlencoded({
-    extended: true,
-  }));
-
-  // Custom documentation routes
-  documentationApp.use('/', documentationRoutes);
-
-  // Automatically route documentation pages
-  documentationApp.get(/^([^.]+)$/, (req, res, next) => {
-    automaticRouting.matchRoutes(req, res, next);
-  });
-}
-
-// Clear all data in session if you open /examples/passing-data/clear-data
-app.post('/examples/passing-data/clear-data', (req, res) => {
-  req.session.data = {};
-  res.render('examples/passing-data/clear-data-success');
+// Automatically route example template pages
+exampleTemplatesApp.get(/^([^.]+)$/, (req, res, next) => {
+  automaticRouting.matchRoutes(req, res, next);
 });
 
 app.use('/prototype-admin', prototypeAdminRoutes);
@@ -243,5 +219,17 @@ app.use((err, req, res) => {
 
 // Run the application
 app.listen(port);
+
+if (
+  process.env.WATCH !== 'true' // If the user isn’t running watch
+  && process.env.NODE_ENV !== 'production' // and it’s not in production mode
+) {
+  /* eslint-disable no-console */
+  console.info(`Running at http://localhost:${port}/`);
+  console.info('');
+  console.warn('Warning: It looks like you may have run the command `npm start` locally.');
+  console.warn('Press `Ctrl+C` and then run `npm run watch` instead');
+  /* eslint-enable no-console */
+}
 
 module.exports = app;

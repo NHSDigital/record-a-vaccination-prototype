@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/regions/organisation-details",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      <h1 class="nhsuk-heading-l">Add a user</h1>
+
+      <p>Choose a user at {{ organisation.name }} to receive instructions about creating an account.</p>
+
+      <p>It’s their responsibility to set up and add their organisation’s users and vaccination sites.</p>
+
+      <form action="/regions/check-and-send" method="post" novalidate>
+
+        {{ input({
+          "label": {
+            "text": "First name"
+          },
+          "id": "first-name",
+          "name": "firstName",
+          classes: "nhsuk-input--width-20",
+          value: data.firstName
+        }) }}
+
+        {{ input({
+          "label": {
+            "text": "Last name"
+          },
+          "id": "last-name",
+          "name": "lastName",
+          classes: "nhsuk-input--width-20",
+          value: data.lastName
+        }) }}
+
+        {{ input({
+          "label": {
+            "text": "NHS email address"
+          },
+          value: data.email,
+          type: "email",
+          "id": "email",
+          "name": "email"
+        }) }}
+
+        {{ button({
+          "text": "Continue"
+        }) }}
+      </form>
+
+
+    </div>
+  </div>
+{% endblock %}
