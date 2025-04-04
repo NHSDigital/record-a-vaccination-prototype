@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  On boarding
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+{% set panelHtml %}
+ Your request has been submiutted.
+{% endset %}
+
+
+{{ panel({
+titleText: "Thank you",
+html: panelHtml
+}) }}
+
+    
+      <p>Your regional lead assess you request </p>
+
+      <p>You will recieve an email confirming if you have been accepted or rejected</p>
+
+      <form action="/regions/v1/onboarding0" method="post" novalidate="true">
+
+       
+
+    
+            {{ button({
+              "text": "Submit application"
+            }) }}
+          </form>
+    
+
+    </div>
+  </div>
+
+
+{% endblock %}

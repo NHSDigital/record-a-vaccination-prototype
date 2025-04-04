@@ -9,6 +9,15 @@
 {% endblock %}
 
 
+{% block beforeContent %}
+  {{ backLink({
+    href: "/regions/v1/onboarding1",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
@@ -40,10 +49,13 @@
         }) }}
       {% endif %}
 
-      <h1 class="nhsuks-heading-xl">Apply to use the Record a vaccination service</h1>
+    
+      <h1 class="nhsuk-heading-xl">Contact details</h1>
+
+
       <p>Users must have an NHS-approved email address. See the <a href="https://digital.nhs.uk/services/care-identity-service/applications-and-services/apply-for-care-id/care-identity-email-domain-allow-list" target="_blank">list of approved email domains (opens in new tab)</a>.</p>
 
-      <form action="/regions/v1/onboarding1" method="post" novalidate="true">
+      <form action="/regions/v1/onboarding3" method="post" novalidate="true">
 
         {{ input({
           "label": {
@@ -97,47 +109,10 @@
           } if emailError
         }) }}
 
-
-
-
-        <div class="nhsuk-form-group">
-
-              <label class="nhsuk-body-m nhsuk-u-margin-bottom-1" for="organisationCode">
-                Community pharmacy
-              </label>
-            
-            
-            <div class="nhsuk-hint" id="organisationName-hint">
-              Search by name or ODS code
-            </div>
-            <select class="nhsuk-select" id="organisationCode" name="organisationCode"
-              data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
-              <option selected value=""></option>
-    
-              {% set options = [] %}
-    
-              {% for code, name in data.nhsTrusts %}
-                {% set options = (options.push({
-                  label: name + " (" + code + ")",
-                  value: code
-                }), options) %}
-              {% endfor %}
-    
-              {% for code, data in data.nhsPharmacies %}
-                {% set options = (options.push({
-                  label: data.name + ", " + data.address + ", " + (data.postcode | upper) + " (" + code + ")",
-                  value: code
-                }), options) %}
-              {% endfor %}
-    
-              {% for option in (options | sort(false, true, "label")) %}
-                <option value="{{ option.value }}">{{ option.label }}</option>
-              {% endfor %}
-            </select>
-          </div>
+        <p>Your Regional Lead will consider your request and  </p>
     
             {{ button({
-              "text": "Submit application"
+              "text": "Sumbit your request"
             }) }}
           </form>
     
