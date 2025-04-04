@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Appointments" %}
+
+{% set currentSection = "appointments" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Upload appointments spreadsheet</h1>
+
+      <p>Some instructions go here.</p>
+
+
+      <div class="nhsuk-form-group">
+        <label for="file" class="nhsuk-label nhsuk-label--s">File</label>
+        <input type="file" name="file" id="file" style="font-size: 1rem;">
+      </div>
+
+      {{ button({
+        text: "Upload",
+        href: "/appointments/day"
+      }) }}
+
+    </div>
+  </div>
+
+{% endblock %}

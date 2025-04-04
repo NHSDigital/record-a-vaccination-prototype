@@ -609,6 +609,7 @@ module.exports = router => {
   router.get('/record-vaccinations/batch', (req, res) => {
     let error
     const data = req.session.data
+
     if (req.query.showError === 'yes') {
 
       if (!data.batchNumber) {
