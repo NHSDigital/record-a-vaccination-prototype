@@ -23,10 +23,13 @@
 
       <p>The organisation will not be permitted to use RAVS as their chosen point of care system for vaccinations.</p>
 
+      <p>This email will be sent to the lead administrators at Leeds Teaching Hospitals.</p>
+
+      {% include "regions/v1/_email-reject.html" %}
 
       <form action="/regions/v1/awaiting-approval" method="post" novalidate="true">
         {{ button({
-          "text": "Confirm rejection",
+          "text": "Confirm and send",
           classes: "nhsuk-button--warning"
         }) }}
     </form>

@@ -16,30 +16,23 @@
 
 
 {% set panelHtml %}
- Your request has been submiutted.
+ Your application has been recieved.
 {% endset %}
-
 
 {{ panel({
 titleText: "Thank you",
 html: panelHtml
 }) }}
 
-    
-      <p>Your regional lead assess you request </p>
 
-      <p>You will recieve an email confirming if you have been accepted or rejected</p>
+      <p>You will recieve an email confirming if you have been accepted or rejected from your Regional Lead.</p>
 
       <form action="/regions/v1/onboarding0" method="post" novalidate="true">
 
-       
+    
+        <p><a href="/regions/v1/onboarding0">Make another application</a></p>
+    
 
-    
-            {{ button({
-              "text": "Make another application"
-            }) }}
-          </form>
-    
 
     </div>
   </div>

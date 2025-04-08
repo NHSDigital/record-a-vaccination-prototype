@@ -50,7 +50,7 @@
       {% endif %}
 
     
-      <h1 class="nhsuk-heading-xl">Contact details</h1>
+      <h1 class="nhsuk-heading-l">Add your contact details</h1>
 
 
       <p>Users must have an NHS-approved email address. See the <a href="https://digital.nhs.uk/services/care-identity-service/applications-and-services/apply-for-care-id/care-identity-email-domain-allow-list" target="_blank">list of approved email domains (opens in new tab)</a>.</p>
@@ -82,20 +82,6 @@
             "text": lastNameError
           } if lastNameError
         }) }}
-
-        {{ input({
-            "label": {
-              "text": "Phone"
-            },
-            "id": "Phone",
-            "name": "Phone",
-            classes: "nhsuk-input--width-10",
-            value: data.phone,
-            "errorMessage": {
-              "text": lastNameError
-            } if lastNameError
-          }) }}
-
         {{ input({
           "label": {
             "text": "NHS-approved email address"
@@ -109,7 +95,10 @@
           } if emailError
         }) }}
 
-        <p>Your Regional Lead will consider your request and  </p>
+
+        <p>If your application is accepted, your Regional Lead will contact you via email.</p>
+
+
     
             {{ button({
               "text": "Sumbit application"

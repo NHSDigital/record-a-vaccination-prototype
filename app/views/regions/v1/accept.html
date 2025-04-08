@@ -25,10 +25,14 @@
 
       <p>The organisation will be able to record vaccinations using RAVS as part of your region.</p>
 
+      <p>This email will be sent to the lead administrators at Leeds Teaching Hospitals.</p>
+
+      {% include "regions/v1/_email-accept.html" %}
+   
 
       <form action="/regions/v1/awaiting-approval" method="post" novalidate="true">
         {{ button({
-          "text": "Confirm acceptance",
+          "text": "Confirm and send",
           classes: "nhsuk-button"
         }) }}
     </form>
