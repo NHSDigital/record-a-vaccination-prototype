@@ -16,7 +16,7 @@
 
 
 {% set panelHtml %}
- Your application has been received.
+ Your NHS region will review your application.
 {% endset %}
 
 {{ panel({
@@ -25,7 +25,7 @@ html: panelHtml
 }) }}
 
 
-      <p>You'll receive an email confirming if you're application has been accepted or rejected by your NHS region within 7 working days.</p>
+      <p>You'll get an email within 7 working days confirming if your NHS region has accepted your application or not.</p>
 
       <form action="/regions/v1/onboarding0" method="post" novalidate="true">
 
