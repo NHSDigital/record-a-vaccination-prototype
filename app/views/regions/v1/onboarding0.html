@@ -16,13 +16,47 @@
               <div class="nhsuk-grid-column-two-thirds">
           
                 <h1 class="nhsuk-heading-xl">Apply to use the Record a vaccination service</h1>
-
-                <p>We'll ask you for some contact details, including an NHS-approved email address. See the <a href="https://digital.nhs.uk/services/care-identity-service/applications-and-services/apply-for-care-id/care-identity-email-domain-allow-list" target="_blank">list of approved email domains (opens in new tab)</a>.</p>
-
                        
-                <p>Your NHS region will then review your application. We'll let you know within within 7 working days if it has been approved.</p>
+                <p>Your NHS region will review your application. We'll let you know within 7 working days if it has been approved.</p>
 
                 
+                <div class="nhsuk-form-group">
+                    <h2 class="nhsuk-label-wrapper">
+                      <label class="nhsuk-label nhsuk-label--m nhsuk-u-margin-bottom-1" for="organisationCode">
+                        NHS organisation or community pharmacy
+                      </label>
+                    </h2>
+                    <div class="nhsuk-hint" id="organisationName-hint">
+                      Search by name or ODS code
+                    </div>
+                    <select class="nhsuk-select" id="organisationCode" name="organisationCode"
+                      data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+                      <option selected value=""></option>
+            
+                      {% set options = [] %}
+            
+                      {% for code, name in data.nhsTrusts %}
+                        {% set options = (options.push({
+                          label: name + " (" + code + ")",
+                          value: code
+                        }), options) %}
+                      {% endfor %}
+            
+                      {% for code, data in data.nhsPharmacies %}
+                        {% set options = (options.push({
+                          label: data.name + ", " + data.address + ", " + (data.postcode | upper) + " (" + code + ")",
+                          value: code
+                        }), options) %}
+                      {% endfor %}
+            
+                      {% for option in (options | sort(false, true, "label")) %}
+                        <option value="{{ option.value }}">{{ option.label }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+
+
+
                   <form action="/regions/v1/onboarding1" method="post">
           
                 
