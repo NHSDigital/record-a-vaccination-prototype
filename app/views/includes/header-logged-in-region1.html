@@ -1,0 +1,46 @@
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
+
+{{ header({
+    classes: "nhsuk-header--left",
+    "service": {
+        "name": "Record a vaccination",
+        "href": "/"
+      },
+      "showNav": "true",
+      "showSearch": "false",
+      "primaryLinks": [
+    
+        {
+          url: "/regions/v1/index1",
+          label: "Organisations",
+          classes: ("app-header__navigation-item--current" if currentSection == "organisations")
+        } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
+       
+        {
+            url: '/regions/v1/add-organisation1',
+            label: 'Invite',
+            classes: ("app-header__navigation-item--current" if currentSection == "add-organisation")
+          } if (currentUser and organisationSetting.permissionLevel === "Lead administrator"),
+       
+       
+        {
+          url: "/regions/v1/awaiting-approval1",
+          label: "Awaiting approval (4)",
+          classes: ("app-header__navigation-item--current" if currentSection == "awaiting-approval")
+        } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
+
+      
+       
+       
+        {
+          url: "/user-profile",
+          label: currentUser.email,
+          classes: "app-header__navigation-item--right-aligned " + ("app-header__navigation-item--current" if currentSection == "user-profile")
+        },
+        {
+          url: '/sign-out',
+          label: 'Log out'
+        }
+      ] if data.currentUserId
+    })
+  }}
