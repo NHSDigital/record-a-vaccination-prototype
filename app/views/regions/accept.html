@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/regions/awaiting-approval",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Approve Leeds Teaching Hospitals</h1>
+
+      <p>Confirm that Leeds Teaching Hospitals can use the Record a vaccination service.</p>
+
+      <p>This email will be sent to [applicant's email] at Leeds Teaching Hospitals.</p>
+
+      {% include "regions/_email-preview.html" %}
+
+
+      <form action="/regions/awaiting-approval" method="post" novalidate="true">
+        {{ button({
+          "text": "Confirm and send",
+          classes: "nhsuk-button"
+        }) }}
+    </form>
+
+    </div>
+  </div>
+{% endblock %}

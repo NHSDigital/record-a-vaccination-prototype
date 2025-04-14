@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/regions/onboarding0",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+        <h1 class="nhsuk-heading-l">Check these details</h1>
+
+      {% if organisation.legallyClosed %}
+
+        {% set warningHtml %}
+          <p>This organisation was legally closed on {{ organisation.legallyClosed | govukDate }} and cannot be added.</p>
+        {% endset %}
+
+        {{ warningCallout({
+          heading: "Important",
+          HTML: warningHtml
+        }) }}
+      {% endif %}
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              text: "Addlestone Pharmacy"
+            }
+          },
+          {
+            key: {
+              text: "Type"
+            },
+            value: {
+              html: "Community pharmacy"
+            }
+          },
+          {
+            key: {
+              text: "ODS code"
+            },
+            value: {
+              text: "FAE02S"
+            }
+          },
+          {
+            key: {
+              text: "Region"
+            },
+            value: {
+              text: "South East"
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+                html: "92a station Road<br>Addlestone<br>Kent<br>KT15 2AD"
+              }
+          }
+        ]
+      }) }}
+
+      {% if not organisation.legallyClosed %}
+
+        {{ button({
+          "text": "Continue",
+          href: "/regions/onboarding2"
+        }) }}
+
+      {% endif %}
+
+    </div>
+  </div>
+{% endblock %}

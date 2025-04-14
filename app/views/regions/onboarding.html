@@ -1,0 +1,149 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  On boarding
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      {% if (firstNameError or lastNameError or emailError or roleError or clinicianError) %}
+        {{ errorSummary({
+          "titleText": "There is a problem",
+          "errorList": [
+            {
+              "text": firstNameError,
+              "href": "#first-name"
+            } if firstNameError,
+            {
+              "text": lastNameError,
+              "href": "#last-name"
+            } if lastNameError,
+            {
+              "text": emailError,
+              "href": "#email"
+            } if emailError,
+            {
+              "text": clinicianError,
+              "href": "#clinician"
+            } if clinicianError,
+            {
+              "text": permissionLevelError,
+              "href": "#permission-level-1"
+            } if permissionLevelError
+          ]
+        }) }}
+      {% endif %}
+
+      <h1 class="nhsuks-heading-xl">Apply to use the Record a vaccination service</h1>
+      <p>Users must have an NHS-approved email address. See the <a href="https://digital.nhs.uk/services/care-identity-service/applications-and-services/apply-for-care-id/care-identity-email-domain-allow-list" target="_blank">list of approved email domains (opens in new tab)</a>.</p>
+
+      <form action="/regions/onboarding3" method="post" novalidate="true">
+
+        {{ input({
+          "label": {
+            "text": "First name"
+          },
+          "id": "first-name",
+          "name": "firstName",
+          classes: "nhsuk-input--width-20",
+          value: data.firstName,
+          "errorMessage": {
+            "text": firstNameError
+          } if firstNameError
+        }) }}
+
+        {{ input({
+          "label": {
+            "text": "Last name"
+          },
+          "id": "last-name",
+          "name": "lastName",
+          classes: "nhsuk-input--width-20",
+          value: data.lastName,
+          "errorMessage": {
+            "text": lastNameError
+          } if lastNameError
+        }) }}
+
+        {{ input({
+            "label": {
+              "text": "Phone"
+            },
+            "id": "Phone",
+            "name": "Phone",
+            classes: "nhsuk-input--width-10",
+            value: data.phone,
+            "errorMessage": {
+              "text": lastNameError
+            } if lastNameError
+          }) }}
+
+        {{ input({
+          "label": {
+            "text": "NHS-approved email address"
+          },
+          "id": "email",
+          "name": "email",
+          type: "email",
+          value: data.email,
+          "errorMessage": {
+            "text": emailError
+          } if emailError
+        }) }}
+
+
+
+
+        <div class="nhsuk-form-group">
+
+              <label class="nhsuk-body-m nhsuk-u-margin-bottom-1" for="organisationCode">
+                Community pharmacy
+              </label>
+            
+            
+            <div class="nhsuk-hint" id="organisationName-hint">
+              Search by name or ODS code
+            </div>
+            <select class="nhsuk-select" id="organisationCode" name="organisationCode"
+              data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+              <option selected value=""></option>
+    
+              {% set options = [] %}
+    
+              {% for code, name in data.nhsTrusts %}
+                {% set options = (options.push({
+                  label: name + " (" + code + ")",
+                  value: code
+                }), options) %}
+              {% endfor %}
+    
+              {% for code, data in data.nhsPharmacies %}
+                {% set options = (options.push({
+                  label: data.name + ", " + data.address + ", " + (data.postcode | upper) + " (" + code + ")",
+                  value: code
+                }), options) %}
+              {% endfor %}
+    
+              {% for option in (options | sort(false, true, "label")) %}
+                <option value="{{ option.value }}">{{ option.label }}</option>
+              {% endfor %}
+            </select>
+          </div>
+    
+            {{ button({
+              "text": "Submit application"
+            }) }}
+          </form>
+    
+
+    </div>
+  </div>
+
+
+{% endblock %}

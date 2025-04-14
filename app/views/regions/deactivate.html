@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/regions/organisations/" + organisation.id,
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Deactivate {{organisation.name}}</h1>
+
+      <p>Once this organisation has been deactivated, users will no longer be able to record vaccinations.</p>
+
+      <p>For 90 days they will still be able to edit records and create reports. After 90 days the organisation will be closed and users will no longer have access to the Record a vaccination service.</p>
+
+      <p>This email will be sent to the lead administrators at Norfolk and Norwich University Hospitals NHS Foundation Trust.</p>
+
+      {% include "regions/_email-deactivate.html" %}
+
+      <form action="/regions/organisations/{{ organisation.id}}/deactivated" method="post" novalidate="true">
+        {{ button({
+          "text": "Confirm and send",
+          classes: "nhsuk-button--warning"
+        }) }}
+    </form>
+
+    </div>
+  </div>
+{% endblock %}

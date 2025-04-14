@@ -1,0 +1,150 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Review your previous answers" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/done" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Review your previous answers</h1>
+
+      {{ summaryList({
+          rows: [
+            {
+              key: {
+                text: "Date"
+              },
+              value: {
+                text: ("Today" if data.vaccinationToday == "yes" else (data.vaccinationDate | isoDateFromDateInput | govukDate))
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/record-vaccinations",
+                    text: "Change",
+                    visuallyHiddenText: "vaccination date"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Vaccine"
+              },
+              value: {
+                text: data.vaccine
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/record-vaccinations/vaccine",
+                    text: "Change",
+                    visuallyHiddenText: "vaccine"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Product"
+              },
+              value: {
+                text: data.vaccineProduct
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/record-vaccinations/vaccine",
+                    text: "Change",
+                    visuallyHiddenText: "vaccine product"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Batch"
+              },
+              value: {
+                html: data.vaccineBatch + "<br>Expires 4 January 2025"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/record-vaccinations/batch",
+                    text: "Change",
+                    visuallyHiddenText: "vaccine batch"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Vaccinator"
+              },
+              value: {
+                html: data.vaccinator
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/record-vaccinations/vaccinator",
+                    text: "Change",
+                    visuallyHiddenText: "contact information"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Location"
+              },
+              value: {
+                html: data.locationType
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/record-vaccinations/location",
+                    text: "Change",
+                    visuallyHiddenText: "contact information"
+                  }
+                ]
+              }
+            } if (data.vaccine === "Flu" or data.vaccine == "COVID-19"),
+            {
+              key: {
+                text: "Eligibility"
+              },
+              value: {
+                html: ((data.eligibility | join("<br>")) if (data.eligibility | isArray) else data.eligibility)
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/record-vaccinations/eligibility",
+                    text: "Change",
+                    visuallyHiddenText: "eligibility"
+                  }
+                ]
+              }
+            } if (data.vaccine != "Pertussis")
+          ]
+        }) }}
+
+      {{ button({
+        text: "Continue",
+        href: "/record-vaccinations/patient"
+      })}}
+
+    </div>
+  </div>
+
+{% endblock %}
+
