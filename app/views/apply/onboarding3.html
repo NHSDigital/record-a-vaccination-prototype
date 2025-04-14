@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  On boarding
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-out.html" %}
+{% endblock %}
+
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Check your email</h1>
+
+      <p>We’ve sent you a link to verify your email address.</p>
+
+      <p>It should arrive within a few minutes. Check your junk folder.</p>
+
+
+      <p><a href="#" class="nhsuk-link">
+        Resend verification email
+      </a></p>
+
+    </div>
+  </div>
+
+
+{% endblock %}

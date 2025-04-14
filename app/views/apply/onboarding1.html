@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block header %}
-  {% include "includes/header-logged-in-region.html" %}
+  {% include "includes/header-logged-out.html" %}
 {% endblock %}
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/regions/onboarding0",
+    href: "/apply/onboarding0",
     text: "Back"
   }) }}
 {% endblock %}
@@ -82,7 +82,7 @@
 
         {{ button({
           "text": "Continue",
-          href: "/regions/onboarding2"
+          href: "/apply/onboarding2"
         }) }}
 
       {% endif %}

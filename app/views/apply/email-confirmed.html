@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block header %}
-  {% include "includes/header-logged-in-region.html" %}
+  {% include "includes/header-logged-out.html" %}
 {% endblock %}
 
 
@@ -24,19 +24,9 @@ titleText: "Thank you",
 html: panelHtml
 }) }}
 
-        <p>You should now receive an email to verify your application.</p>
-
       <p>Once verified, you'll then get an email within 7 working days telling you if your NHS region has approved your application or not.</p>
 
-
-      <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
-        Resend verification email
-      </button>
-
-
-      <p>You can <a href="/regions/onboarding0">make another application</a>.</p>
-
-
+      <p>You can <a href="/apply/onboarding0">make another application</a>.</p>
 
 
     </div>
