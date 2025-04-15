@@ -2,13 +2,17 @@ module.exports = router => {
 
   router.get('/regions', (req, res) => {
     const data = req.session.data
-    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61") && (organisation.status != "Closed"))
+    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61") && (["Active", "Deactivated"].includes(organisation.status)))
 
     const closedOrganisationsCount = data.organisations.filter((organisation) => (organisation.region === "Y61" && organisation.status == "Closed")).length
 
+    const awaitingApprovalOrganisationsCount = data.organisations.filter((organisation) => (organisation.region === "Y61" && organisation.status == "Applied")).length
+
+
     res.render('regions/index', {
       organisations,
-      closedOrganisationsCount
+      closedOrganisationsCount,
+      awaitingApprovalOrganisationsCount
     })
   })
 
