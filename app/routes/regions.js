@@ -49,6 +49,25 @@ module.exports = router => {
     })
   })
 
+  // Action to mark organisation as accepted
+  router.post('/regions/accepted/:id', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
+    organisation.status = 'Active'
+
+    res.redirect('/regions/awaiting-approval')
+  })
+
+  // Action to mark organisation as rejected
+  router.post('/regions/rejected/:id', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
+    organisation.status = 'Rejected'
+
+    res.redirect('/regions/awaiting-approval')
+  })
+
+
   router.get('/regions/reject/:id', (req, res) => {
     const data = req.session.data
     const organisation = data.organisations.find((org) => org.id === req.params.id)

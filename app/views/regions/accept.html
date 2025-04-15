@@ -33,7 +33,7 @@
       {% include "regions/_email-preview.html" %}
 
 
-      <form action="/regions/awaiting-approval" method="post" novalidate="true">
+      <form action="/regions/accepted/{{ organisation.id }}" method="post" novalidate="true">
         {{ button({
           "text": "Confirm and send",
           classes: "nhsuk-button"

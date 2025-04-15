@@ -28,7 +28,7 @@
 
       {% include "regions/_email-reject.html" %}
 
-      <form action="/regions/awaiting-approval" method="post" novalidate="true">
+      <form action="/regions/rejected/{{ organisation.id }}" method="post" novalidate="true">
         {{ button({
           "text": "Confirm and send",
           classes: "nhsuk-button--warning"
