@@ -6002,5 +6002,81 @@ module.exports = [
     type: 'Community Pharmacy',
     status: 'Active',
     "region": "Y61"
+  },
+  {
+    id: 'FA02S',
+    name: 'Addlestone Pharmacy',
+    address: {
+      line1: '92a Station Road',
+      town: 'Addlestone',
+      postcode: 'KT15 2AD'
+    },
+    type: 'Community Pharmacy',
+    status: 'Applied',
+    region: "Y61",
+    appliedOn: "2015-04-12",
+    application: {
+      firstName: "Francis",
+      lastName: "Blue",
+      email: "francis.blue@nhs.net",
+      phone: "01234 567890"
+    }
+  },
+  {
+    id: 'FVJ99',
+    name: 'Pharmacy 4U',
+    address: {
+      line1: '7 London Road',
+      town: 'Leeds',
+      postcode: 'LS17 9NP'
+    },
+    type: 'Community Pharmacy',
+    status: 'Applied',
+    region: "Y61",
+    appliedOn: "2015-04-15",
+    application: {
+      firstName: "James",
+      lastName: "Brown",
+      email: "james.brown@nhs.net",
+      phone: "01234 567890"
+    }
+  },
+  {
+    id: 'PDL93',
+    name: 'Silverfields Chemists',
+    address: {
+      line1: '28 High Street',
+      town: 'Bradford',
+      postcode: 'B63 8PX'
+    },
+    type: 'Community Pharmacy',
+    status: 'Applied',
+    region: "Y61",
+    appliedOn: "2015-04-13",
+    application: {
+      firstName: "Jason",
+      lastName: "Green",
+      email: "jason.green@nhs.net",
+      phone: "01234 567890"
+    }
+  },
+  {
+    id: 'JF93',
+    name: 'Village Chemist',
+    address: {
+      line1: 'The Parada',
+      town: 'Greenfield',
+      postcode: 'P35 8NS'
+    },
+    type: 'Community Pharmacy',
+    status: 'Applied',
+    region: "Y61",
+    appliedOn: "2015-04-02",
+    application: {
+      firstName: "Elizabeth",
+      lastName: "Black",
+      email: "elizabeth.black@nhs.net",
+      phone: "01234 567890"
+    }
   }
 ]

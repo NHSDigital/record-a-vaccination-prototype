@@ -12,12 +12,49 @@ module.exports = router => {
     })
   })
 
+
+  router.get('/regions/awaiting-approval', (req, res) => {
+    const data = req.session.data
+    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61") && (organisation.status == "Applied"));
+
+    res.render('regions/awaiting-approval', {
+      organisations
+    })
+  })
+
   router.get('/regions/organisations/closed', (req, res) => {
     const data = req.session.data
     const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61" && organisation.status == "Closed"))
 
     res.render('regions/closed-organisations', {
       organisations
+    })
+  })
+
+  router.get('/regions/review/:id', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
+
+    res.render('regions/organisation-request', {
+      organisation
+    })
+  })
+
+  router.get('/regions/accept/:id', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
+
+    res.render('regions/accept', {
+      organisation
+    })
+  })
+
+  router.get('/regions/reject/:id', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
+
+    res.render('regions/reject', {
+      organisation
     })
   })
 

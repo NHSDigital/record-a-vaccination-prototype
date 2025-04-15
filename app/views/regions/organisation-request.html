@@ -15,14 +15,10 @@
   }) }}
 {% endblock %}
 
-
-
-{% set organisationSettings = currentUser.organisations | findById(currentOrganisation.id) %}
-
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-      <h1 class="nhsuk-heading-xl">	Addlestone Pharmacy</h1>
+      <h1 class="nhsuk-heading-l">{{ organisation.name }}</h1>
       <dl class="nhsuk-summary-list">
 
         <div class="nhsuk-summary-list__row">
@@ -30,29 +26,23 @@
             ODS code
           </dt>
           <dd class="nhsuk-summary-list__value">
-            FAE02S
+            {{ organisation.id }}
           </dd>
         </div>
-
-       
-      
-      
-         
-      
         <div class="nhsuk-summary-list__row">
           <dt class="nhsuk-summary-list__key">
             Address
           </dt>
           <dd class="nhsuk-summary-list__value">
-            92a station Road<br>Addlestone<br>Kent<br> KT15 2AD
+            {{ organisation.address.line1 }}, {{ organisation.address.town }}, {{ organisation.address.postcode }}
           </dd>
-      
+
           <dd class="nhsuk-summary-list__actions">
-      
+
           </dd>
-      
+
         </div>
-      
+
 
 
         <div class="nhsuk-summary-list__row">
@@ -60,7 +50,7 @@
             Email
           </dt>
           <dd class="nhsuk-summary-list__value">
-            karen.francis@nhs.net
+            {{ organisation.application.email }}
           </dd>
         </div>
 
@@ -69,7 +59,7 @@
             Phone
           </dt>
           <dd class="nhsuk-summary-list__value">
-            07712 348902
+            {{ organisation.application.phone }}
           </dd>
         </div>
 
@@ -78,10 +68,10 @@
             Date requested
           </dt>
           <dd class="nhsuk-summary-list__value">
-            4 April 2025
+            {{ organisation.appliedOn | govukDate }}
           </dd>
         </div>
-      
+
 
     </div>
   </div>
