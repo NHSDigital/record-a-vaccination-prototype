@@ -19,60 +19,36 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
       <h1 class="nhsuk-heading-l">{{ organisation.name }}</h1>
-      <dl class="nhsuk-summary-list">
-
-        <div class="nhsuk-summary-list__row">
-          <dt class="nhsuk-summary-list__key">
-            ODS code
-          </dt>
-          <dd class="nhsuk-summary-list__value">
-            {{ organisation.id }}
-          </dd>
-        </div>
-        <div class="nhsuk-summary-list__row">
-          <dt class="nhsuk-summary-list__key">
-            Address
-          </dt>
-          <dd class="nhsuk-summary-list__value">
-            {{ organisation.address.line1 }}, {{ organisation.address.town }}, {{ organisation.address.postcode }}
-          </dd>
-
-          <dd class="nhsuk-summary-list__actions">
-
-          </dd>
-
-        </div>
 
 
-
-        <div class="nhsuk-summary-list__row">
-          <dt class="nhsuk-summary-list__key">
-            Email
-          </dt>
-          <dd class="nhsuk-summary-list__value">
-            {{ organisation.application.email }}
-          </dd>
-        </div>
-
-        <div class="nhsuk-summary-list__row">
-          <dt class="nhsuk-summary-list__key">
-            Phone
-          </dt>
-          <dd class="nhsuk-summary-list__value">
-            {{ organisation.application.phone }}
-          </dd>
-        </div>
-
-        <div class="nhsuk-summary-list__row">
-          <dt class="nhsuk-summary-list__key">
-            Date requested
-          </dt>
-          <dd class="nhsuk-summary-list__value">
-            {{ organisation.appliedOn | govukDate }}
-          </dd>
-        </div>
-
-
+      {{ summaryList({
+        rows: [
+          {
+            key: { text: "ODS code" },
+            value: { text: organisation.id }
+          },
+          {
+            key: { text: "Address" },
+            value: { text: organisation.address.line1 + ", " + organisation.address.town + ", " + organisation.address.postcode }
+          },
+          {
+            key: { text: "Name" },
+            value: { text: organisation.application.firstName + " " + organisation.application.lastName }
+          },
+          {
+            key: { text: "Email" },
+            value: { text: organisation.application.email }
+          },
+          {
+            key: { text: "Phone" },
+            value: { text: organisation.application.phone }
+          },
+          {
+            key: { text: "Date requested" },
+            value: { text: (organisation.appliedOn | govukDate) }
+          }
+        ]
+      }) }}
     </div>
   </div>
 
