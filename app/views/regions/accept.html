@@ -27,6 +27,9 @@
 
       <p>This email will be sent to {{ organisation.application.email }} at {{ organisation.name }}.</p>
 
+      {% set organisationName = organisation.name %}
+      {% set firstName = organisation.application.firstName %}
+      {% set lastName = organisation.application.lastName %}
       {% include "regions/_email-preview.html" %}
 
 
