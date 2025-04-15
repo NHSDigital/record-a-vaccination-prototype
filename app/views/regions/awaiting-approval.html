@@ -26,7 +26,7 @@
     <div class="nhsuk-grid-row">
       <div class="nhsuk-grid-column-full">
 
-
+      {% if (organisations | length) > 0 %}
 
         <table role="table" class="nhsuk-table-responsive">
             <thead role="rowgroup" class="nhsuk-table__head">
@@ -78,6 +78,11 @@
                 {% endfor %}
             </tbody>
           </table>
+
+        {% else %}
+
+          <p>There are no organisations awaiting approval.</p>
+        {% endif %}
 
       </div>
     </div>
