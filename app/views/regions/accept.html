@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  East of England
-{% endblock %}
+{% set pageName = "Approve " + organisation.name %}
 
 {% block header %}
   {% include "includes/header-logged-in-region.html" %}
@@ -21,7 +19,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Approve {{ organisation.name }}</h1>
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       <p>Confirm that {{ organisation.name }} can use the Record a vaccination service.</p>
 

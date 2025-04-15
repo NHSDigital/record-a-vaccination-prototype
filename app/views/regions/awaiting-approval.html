@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  East of England region
-{% endblock %}
+{% set pageName = "Awaiting approval" %}
 
 {% block header %}
   {% include "includes/header-logged-in-region.html" %}
@@ -19,7 +17,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Awaiting approval</h1>
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
     </div>
   </div>

@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  East of England region
-{% endblock %}
+{% set pageName = "North West" %}
 
 {% block header %}
   {% include "includes/header-logged-in-region.html" %}
@@ -12,7 +10,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-xl">North West</h1>
+      <h1 class="nhsuk-heading-xl">{{ pageName }}</h1>
 
       <p class="nhsuk-body-l">Invite an organisation to create an NHS Record a vaccination service (RAVS) account.</p>
 
