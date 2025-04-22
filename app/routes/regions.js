@@ -2,13 +2,27 @@ module.exports = router => {
 
   router.get('/regions', (req, res) => {
     const data = req.session.data
-    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61") && (organisation.status != "Closed"))
+    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61") && (["Active", "Deactivated"].includes(organisation.status)))
 
     const closedOrganisationsCount = data.organisations.filter((organisation) => (organisation.region === "Y61" && organisation.status == "Closed")).length
 
+    const awaitingApprovalOrganisationsCount = data.organisations.filter((organisation) => (organisation.region === "Y61" && organisation.status == "Applied")).length
+
+
     res.render('regions/index', {
       organisations,
-      closedOrganisationsCount
+      closedOrganisationsCount,
+      awaitingApprovalOrganisationsCount
+    })
+  })
+
+
+  router.get('/regions/awaiting-approval', (req, res) => {
+    const data = req.session.data
+    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61") && (organisation.status == "Applied"));
+
+    res.render('regions/awaiting-approval', {
+      organisations
     })
   })
 
@@ -18,6 +32,52 @@ module.exports = router => {
 
     res.render('regions/closed-organisations', {
       organisations
+    })
+  })
+
+  router.get('/regions/review/:id', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
+
+    res.render('regions/organisation-request', {
+      organisation
+    })
+  })
+
+  router.get('/regions/accept/:id', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
+
+    res.render('regions/accept', {
+      organisation
+    })
+  })
+
+  // Action to mark organisation as accepted
+  router.post('/regions/accepted/:id', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
+    organisation.status = 'Active'
+
+    res.redirect('/regions/awaiting-approval')
+  })
+
+  // Action to mark organisation as rejected
+  router.post('/regions/rejected/:id', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
+    organisation.status = 'Rejected'
+
+    res.redirect('/regions/awaiting-approval')
+  })
+
+
+  router.get('/regions/reject/:id', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
+
+    res.render('regions/reject', {
+      organisation
     })
   })
 

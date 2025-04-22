@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% set pageName = organisation.name %}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/regions/awaiting-approval",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-l">{{ organisation.name }}</h1>
+
+
+      {{ summaryList({
+        rows: [
+          {
+            key: { text: "ODS code" },
+            value: { text: organisation.id }
+          },
+          {
+            key: { text: "Address" },
+            value: { text: organisation.address.line1 + ", " + organisation.address.town + ", " + organisation.address.postcode }
+          },
+          {
+            key: { text: "Name" },
+            value: { text: organisation.application.firstName + " " + organisation.application.lastName }
+          },
+          {
+            key: { text: "Email" },
+            value: { text: organisation.application.email }
+          },
+          {
+            key: { text: "Phone" },
+            value: { text: organisation.application.phone }
+          },
+          {
+            key: { text: "Date requested" },
+            value: { text: (organisation.appliedOn | govukDate) }
+          }
+        ]
+      }) }}
+    </div>
+  </div>
+
+
+{% endblock %}

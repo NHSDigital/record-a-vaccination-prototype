@@ -1,23 +1,31 @@
 <div class="app-email-preview">
-  <p>Dear {{ data.firstName }} {{ data.lastName }},</p>
-  <p>Your NHS region has invited you to start using the new NHS Record a vaccination service (RAVS).</p>
-  <p>The service allows you to safely and quickly record vaccinations. For example, COVID-19, Flu, RSV and Pertussis.</p>
-  <h2 class="nhsuk-heading-s">Get started</h2>
-  <p>We've created an Okta account for you to securely access RAVS.</p>
-  <p>Here’s what you need to do:</p>
-  <h2 class="nhsuk-heading-s">Activate your Okta account</h2>
-  <p>You’ll receive a ‘Welcome to Okta’ email (from <a href="mailto:noreply@okta.com">noreply@okta.com</a>). Please activate the link within 7 days.</p>
-  <p>If you cannot find it, please check your spam or junk.</p>
-  <h2 class="nhsuk-heading-s">Log in to RAVS</h2>
+  <p>Dear {{ firstName }} {{ lastName }},</p>
+  <p>Your NHS region has invited you to start using the new NHS Record a vaccination service at {{ organisationName }}.</p>
+  <p>Here's what you need to do next:</p>
+
+  <h2 class="nhsuk-heading-s">1. Activate your Okta account</h2>
+  <p>We've created an Okta account for you to securely access the service.</p>
+  <p>You’ll receive a ‘Welcome to Okta’ email (from <a href="mailto:noreply@okta.com">noreply@okta.com</a>). You need to activate the link within 7 days.</p>
+  <p>If you cannot find the email, check your spam or junk.</p>
+
+  <h2 class="nhsuk-heading-s">2. Log in to the Record a vaccination service</h2>
   <p>Once you’ve activated your Okta account, log in to <a href="https://www.ravs.england.nhs.uk">www.ravs.england.nhs.uk</a> using your Okta username and password.</p>
-  <p>You can also access RAVS through your Okta account by clicking ‘RAVS (PROD) app’.</p>
-  <p>Give yourself time to add your users and vaccines before your next vaccination campaign.</p>
-  <p>Many thanks,
-  NHS Record a vaccination</p>
-  <h2 class="nhsuk-heading-s">Guidance</h2>
-  <p>Visit: <a href="https://guide.ravs.england.nhs.uk/?wt.mc_id=INVITEEMAIL">www.guide.ravs.england.nhs.uk</a></p>
+  <p>You can also access the service through your Okta account by clicking ‘RAVS (PROD) app’.</p>
+
+  <h2 class="nhsuk-heading-s">3. Get ready to record vaccinations</h2>
+  <p>Once you've logged in:</p>
+  <ul class="nhsuk-list nhsuk-list--bullet">
+                    <li>go to the ‘Vaccines’ section and add vaccines for your organisation</li>
+                    <li>go to ‘Manage users’ to add more users to your organisation</li>
+                    <li>if you are a clinician, go to your profile in ‘Manage users’ and select that you are a clinician</li></ul>
+  <p>Kind regards,</p>
+  <p>NHS Record a vaccination</p>
+
+  <h2 class="nhsuk-heading-s">User guide and training webinars</h2>
+  <p>Visit <a href="https://guide.ravs.england.nhs.uk/?wt.mc_id=INVITEEMAIL">www.guide.ravs.england.nhs.uk</a> or <a href="https://outlook.office365.com/book/agemAppsTrainingRAVSTrainingRAVS@nhs.onmicrosoft.com">book a webinar</a></p>
+
   <h2 class="nhsuk-heading-s">Helpdesk</h2>
   <p>Email: <a href="mailto:ravs.support@england.nhs.uk">ravs.support@england.nhs.uk</a>
-  Telephone: 0121 611 0187 (select option 3)
-  Monday to Friday: 8am to 6pm. Weekends: 8am to 4pm</p>
+  <br>Phone: 0333 038 4268 (select option 3)
+  <br>Monday to Friday: 8am to 6pm</p>
 </div>

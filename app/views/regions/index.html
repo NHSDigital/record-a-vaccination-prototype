@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  East of England region
-{% endblock %}
+{% set pageName = "North West" %}
 
 {% block header %}
   {% include "includes/header-logged-in-region.html" %}
@@ -12,11 +10,16 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-xl">North West</h1>
+      <h1 class="nhsuk-heading-xl">{{ pageName }}</h1>
 
       <p class="nhsuk-body-l">Invite an organisation to create an NHS Record a vaccination service (RAVS) account.</p>
 
       <p class="nhsuk-body-l">Once they’re set up, they can add other users and vaccination sites.</p>
+
+      {% if awaitingApprovalOrganisationsCount > 0 %}
+        <p class="nhsuk-body-l">You have <a href="/regions/awaiting-approval">{{ awaitingApprovalOrganisationsCount | plural("organisation") }}</a> waiting for approval.</p>
+      {% endif %}
+
 
       {% from 'inset-text/macro.njk' import insetText %}
 
@@ -35,14 +38,14 @@
       <div class="nhsuk-grid-column-full">
 
           <table class="nhsuk-table">
-            <caption class="nhsuk-table__caption nhsuk-table__caption--m">Organisations added</caption>
+            <caption class="nhsuk-table__caption nhsuk-table__caption--m">Current organisations</caption>
             <thead role="rowgroup" class="nhsuk-table__head">
               <tr role="row">
                 <th role="columnheader" class="" scope="col">
-                  Organisation
+                  Name
                 </th>
                 <th role="columnheader" class="" scope="col">
-                  ODS code
+                  ODS&nbsp;code
                 </th>
                 <th role="columnheader" class="" scope="col">
                   Type
