@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Add another user
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/regions/organisations/" + organisation.id,
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Add another user</h1>
+
+      <p>Choose another user at {{ organisation.name }}.</p>
+        
+      <p>They must have an NHS-approved email address. See the <a href="https://digital.nhs.uk/services/care-identity-service/applications-and-services/apply-for-care-id/care-identity-email-domain-allow-list" target="_blank">list of approved email domains (opens in new tab)</a>.</p>
+      
+      <p>They will receive an email with details of how to access the service.</p>
+      
+      <p>It's their responsibility to add users and set up vaccination sites for their organisation.</p>
+
+      <form action="/regions/organisations/{{ organisation.id }}/add-email-check" method="post" novalidate>
+
+        {{ input({
+          "label": {
+            "text": "First name"
+          },
+          "id": "first-name",
+          "name": "firstName",
+          classes: "nhsuk-input--width-20",
+          value: data.firstName
+        }) }}
+
+        {{ input({
+          "label": {
+            "text": "Last name"
+          },
+          "id": "last-name",
+          "name": "lastName",
+          classes: "nhsuk-input--width-20",
+          value: data.lastName
+        }) }}
+
+        {{ input({
+          "label": {
+            "text": "NHS-approved email address"
+          },
+          value: data.email,
+          type: "email",
+          "id": "email",
+          "name": "email"
+        }) }}
+
+        {{ button({
+          "text": "Continue"
+        }) }}
+      </form>
+
+
+    </div>
+  </div>
+{% endblock %}

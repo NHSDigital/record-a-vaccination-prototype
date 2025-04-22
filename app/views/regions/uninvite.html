@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Uninvite {{ user.firstName }} {{ user.lastName }}
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/regions/organisations/" + organisation.id,
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Uninvite {{ user.firstName }} {{ user.lastName }}</h1>
+
+
+      {% if numberOfActiveUsers === 0 %}
+        <p><strong>{{ organisation.name }} will be removed</strong></p>
+
+        <p>{{ user.firstName }} {{ user.lastName }} ({{ user.email}}) is the only user for their organisation. Once you uninvite them, they cannot sign in and use NHS Record a vaccination.</p>
+      {% else %}
+
+        <p>Once you uninvite {{ user.firstName }} {{ user.lastName }} ({{ user.email}}), they cannot sign in and use NHS Record a vaccination.</p>
+
+      {% endif %}
+
+
+      <p>You can reinvite this person anytime.</p>
+
+      <form action="/regions/organisations/{{ organisation.id }}/users/{{ user.id }}/uninvited" method="post" novalidate="true">
+        {{ button({
+          "text": "Confirm, uninvite user",
+          classes: "nhsuk-button--warning"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+
+{% endblock %}

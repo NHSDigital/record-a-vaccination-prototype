@@ -1,0 +1,156 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Continue with no NHS number" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/no-search-result" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if errors and ((errors | length) > 0) %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p> You need to {% if not data.postcode%} enter a postcode and {% endif %} select an option for gender. The vaccination record will only be sent to a GP if it can be matched with an NHS number later.</p>
+
+      <form action="/record-vaccinations/create-a-record" method="post">
+        {{ input({
+            label: {
+              text: "First name"
+            },
+            id: "firstName",
+            name: "firstName",
+            value: data.firstName,
+            classes: "nhsuk-input--width-20",
+            errorMessage: {
+              text: firstNameError
+            } if firstNameError
+        }) }}
+
+            {{ input({
+            label: {
+                text: "Last name"
+            },
+            id: "lastName",
+            name: "lastName",
+            value: data.lastName,
+            classes: "nhsuk-input--width-20",
+            errorMessage: {
+                text: lastNameError
+            } if lastNameError
+            }) }}
+
+            {{ dateInput({
+            id: "dateOfBirth",
+            namePrefix: "dateOfBirth",
+            fieldset: {
+                legend: {
+                text: "Date of birth",
+                classes: ""
+                }
+            },
+            hint: {
+                text: "For example, 15 3 1984"
+            },
+            errorMessage: {
+                text: dateOfBirthError
+            } if dateOfBirthError,
+            items: [
+                {
+                name: "day",
+                classes: "nhsuk-input--width-2 " + ("nhsuk-input--error" if dateOfBirthError else ""),
+                value: data.dateOfBirth.day
+                },
+                {
+                name: "month",
+                classes: "nhsuk-input--width-2 " + ("nhsuk-input--error" if dateOfBirthError else ""),
+                value: data.dateOfBirth.month
+                },
+                {
+                name: "year",
+                classes: "nhsuk-input--width-4 " + ("nhsuk-input--error" if dateOfBirthError else ""),
+                value: data.dateOfBirth.year
+                }
+            ]
+            }) }}
+
+            {{ input({
+            label: {
+                text: "Postcode"
+            },
+            id: "postcode",
+            name: "postcode",
+            value: data.postcode,
+            classes: "nhsuk-input--width-10",
+            errorMessage: {
+                text: postcodeError
+            } if postcodeError
+            }) }}
+
+            {{ details({
+                text: "If the patient is homeless",
+                HTML: "
+                <p>Enter the postcode ZZ99 3VZ </p>
+
+                "
+              }) }}
+
+            {{ radios({
+                idPrefix: "gender",
+                name: "gender",
+                value: data.gender,
+                fieldset: {
+                  legend: {
+                      text: "Gender"
+                  }
+                },
+                errorMessage: {
+                  text: genderError
+                } if genderError,
+                items: [
+                {
+                    value: "Male",
+                    text: "Male",
+                    checked: (data.gender === "Male")
+                },
+                {
+                    value: "Female",
+                    text: "Female",
+                    checked: (data.gender === "Female")
+                },
+                {
+                    value: "Other",
+                    text: "Other",
+                    checked: (data.gender === "Other")
+                },
+                {
+                    value: "Unknown",
+                    text: "Unknown",
+                    checked: (data.gender === "Unknown")
+                }
+                ]
+            }) }}
+
+
+        {{ button({
+          text: "Continue to vaccinate"
+        }) }}
+      </form>
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+

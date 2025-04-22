@@ -2,13 +2,11 @@
 
 {% set pageName = "No results found" %}
 
-{% set currentSection = "records" %}
+{% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/records" }) }}
+  {{ backLink({ href: "/record-vaccinations/patient-search" }) }}
 {% endblock %}
-
-
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -112,6 +110,13 @@
         }) }}
       </form>
 
+      <p>If you've tried searching several times and cannot find an existing patient record, you can continue and record a vaccination without an NHS number.</p>
+
+      {{ button({
+          text: "Continue with no NHS number",
+          href: "/record-vaccinations/create-a-record",
+          classes: "nhsuk-button--secondary"
+      }) }}
 
     </div>
   </div>

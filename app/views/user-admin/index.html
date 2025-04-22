@@ -56,6 +56,9 @@
               Email address
             </th>
             <th role="columnheader" class="" scope="col">
+              Clinician
+            </th>
+            <th role="columnheader" class="" scope="col">
               Permission level
             </th>
             <th role="columnheader" class="" scope="col">
@@ -80,6 +83,13 @@
                 {% endif %}
               </td>
               <td class="nhsuk-table__cell ">{{ user.email }}</td>
+              <td class="nhsuk-table__cell ">
+                {% if userOrganisationSettings.clinician %}
+                  Yes
+               {% else %}
+                  No
+                {% endif %}
+              </td>
               <td class="nhsuk-table__cell ">{{ userOrganisationSettings.permissionLevel }}</td>
               <td class="nhsuk-table__cell ">{{ userOrganisationSettings.status }}</td>
               <td class="nhsuk-table__cell app-table__cell--right-aligned">

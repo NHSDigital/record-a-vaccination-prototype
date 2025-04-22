@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-out.html" %}
+{% endblock %}
+
+
+
+
+            {% block content %}
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+
+                <h1 class="nhsuk-heading-xl">Apply to use the Record a vaccination service</h1>
+
+                <p>You are applying to your region to use the Record a vaccination service. To apply you must:</p>
+
+                <ul class="nhsuk-list nhsuk-list--bullet">
+                    <li>Have an registered NHS email address</li>
+                    </ul>
+
+
+
+                <p>It should take no longer than 5 minutes to complete. <br><br>Your region will assess your application and reply within 7 working days.</p>
+
+
+            <br>
+
+                  <form action="/regions/onboarding1" method="post">
+
+                <div class="nhsuk-form-group">
+                  <h2 class="nhsuk-label-wrapper">
+                    <label class="nhsuk-label nhsuk-label--l nhsuk-u-margin-bottom-1" for="organisationCode">
+                     Find your community pharmacy
+                    </label>
+                  </h1>
+                  <div class="nhsuk-hint" id="organisationName-hint">
+                    Search by name or ODS code
+                  </div>
+                  <select class="nhsuk-select" id="organisationCode" name="organisationCode"
+                    data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+                    <option selected value=""></option>
+
+                    {% set options = [] %}
+
+                    {% for code, name in data.nhsTrusts %}
+                      {% set options = (options.push({
+                        label: name + " (" + code + ")",
+                        value: code
+                      }), options) %}
+                    {% endfor %}
+
+                    {% for code, data in data.nhsPharmacies %}
+                      {% set options = (options.push({
+                        label: data.name + ", " + data.address + ", " + (data.postcode | upper) + " (" + code + ")",
+                        value: code
+                      }), options) %}
+                    {% endfor %}
+
+                    {% for option in (options | sort(false, true, "label")) %}
+                      <option value="{{ option.value }}">{{ option.label }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+                  {{ button({
+                    "text": "Continue"
+                  }) }}
+                </form>
+
+
+              </div>
+            </div>
+          {% endblock %}
+
+
+
+
+
+
+
+

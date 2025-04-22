@@ -1,28 +1,88 @@
 module.exports = router => {
 
-  router.get('/regions/v1', (req, res) => {
+  router.get('/regions', (req, res) => {
     const data = req.session.data
-    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61") && (organisation.status != "Closed"))
+    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61") && (["Active", "Deactivated"].includes(organisation.status)))
 
     const closedOrganisationsCount = data.organisations.filter((organisation) => (organisation.region === "Y61" && organisation.status == "Closed")).length
 
-    res.render('regions/v1/index', {
+    const awaitingApprovalOrganisationsCount = data.organisations.filter((organisation) => (organisation.region === "Y61" && organisation.status == "Applied")).length
+
+
+    res.render('regions/index', {
       organisations,
-      closedOrganisationsCount
+      closedOrganisationsCount,
+      awaitingApprovalOrganisationsCount
     })
   })
 
-  router.get('/regions/v1/organisations/closed', (req, res) => {
-    const data = req.session.data
-    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61" && organisation.status == "Closed"))
 
-    res.render('regions/v1/closed-organisations', {
+  router.get('/regions/awaiting-approval', (req, res) => {
+    const data = req.session.data
+    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61") && (organisation.status == "Applied"));
+
+    res.render('regions/awaiting-approval', {
       organisations
     })
   })
 
+  router.get('/regions/organisations/closed', (req, res) => {
+    const data = req.session.data
+    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61" && organisation.status == "Closed"))
+
+    res.render('regions/closed-organisations', {
+      organisations
+    })
+  })
+
+  router.get('/regions/review/:id', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
+
+    res.render('regions/organisation-request', {
+      organisation
+    })
+  })
+
+  router.get('/regions/accept/:id', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
+
+    res.render('regions/accept', {
+      organisation
+    })
+  })
+
+  // Action to mark organisation as accepted
+  router.post('/regions/accepted/:id', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
+    organisation.status = 'Active'
+
+    res.redirect('/regions/awaiting-approval')
+  })
+
+  // Action to mark organisation as rejected
+  router.post('/regions/rejected/:id', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
+    organisation.status = 'Rejected'
+
+    res.redirect('/regions/awaiting-approval')
+  })
+
+
+  router.get('/regions/reject/:id', (req, res) => {
+    const data = req.session.data
+    const organisation = data.organisations.find((org) => org.id === req.params.id)
+
+    res.render('regions/reject', {
+      organisation
+    })
+  })
+
   // Inviting an organisation
-  router.post('/regions/v1/add', (req, res) => {
+  router.post('/regions/add', (req, res) => {
 
     const organisationCode = req.session.data.organisationCode
     const addedUserId = Math.floor(Math.random() * 10000000).toString()
@@ -78,10 +138,10 @@ module.exports = router => {
     req.session.data.firstName = ''
     req.session.data.lastName = ''
 
-    res.redirect('/regions/v1/organisations/' + organisationCode)
+    res.redirect('/regions/organisations/' + organisationCode)
   })
 
-  router.get('/regions/v1/organisation-details', (req, res) => {
+  router.get('/regions/organisation-details', (req, res) => {
     const organisationCode = req.session.data.organisationCode
 
     let organisationName, organisationLine1, organisationTown, organisationPostcode, organisationType, legallyClosed
@@ -114,12 +174,12 @@ module.exports = router => {
       legallyClosed: legallyClosed
     }
 
-    res.render('regions/v1/organisation-details', {
+    res.render('regions/organisation-details', {
       organisation
     })
   })
 
-  router.get('/regions/v1/add-email', (req, res) => {
+  router.get('/regions/add-email', (req, res) => {
     const organisationCode = req.session.data.organisationCode
 
     let organisationName, organisationLine1, organisationTown, organisationPostcode, organisationType
@@ -149,12 +209,12 @@ module.exports = router => {
       }
     }
 
-    res.render('regions/v1/add-email', {
+    res.render('regions/add-email', {
       organisation
     })
   })
 
-  router.get('/regions/v1/check-and-send', (req, res) => {
+  router.get('/regions/check-and-send', (req, res) => {
     const organisationCode = req.session.data.organisationCode
 
     let organisationName, organisationLine1, organisationTown, organisationPostcode, organisationType
@@ -184,16 +244,16 @@ module.exports = router => {
       }
     }
 
-    res.render('regions/v1/check-and-send', {
+    res.render('regions/check-and-send', {
       organisation
     })
   })
 
   // Inviting a second lead user for an organisation
-  router.post('/regions/v1/organisations/:id/add', (req, res) => {
+  router.post('/regions/organisations/:id/add', (req, res) => {
     const data = req.session.data
     const organisation = data.organisations.find((org) => org.id === req.params.id)
-    if (!organisation) { res.redirect('/regions/v1/'); return }
+    if (!organisation) { res.redirect('/regions/'); return }
 
     const addedUserId = Math.floor(Math.random() * 10000000).toString()
 
@@ -218,126 +278,126 @@ module.exports = router => {
     req.session.data.firstName = ''
     req.session.data.lastName = ''
 
-    res.redirect('/regions/v1/organisations/' + organisation.id)
+    res.redirect('/regions/organisations/' + organisation.id)
   })
 
   // Viewing an organisation
-  router.get('/regions/v1/organisations/:id', (req, res) => {
+  router.get('/regions/organisations/:id', (req, res) => {
     const data = req.session.data
     const id = req.params.id
     const organisation = data.organisations.find((org) => org.id === id)
-    if (!organisation) { res.redirect('/regions/v1/'); return }
+    if (!organisation) { res.redirect('/regions/'); return }
 
     const users = data.users.filter((user) => (user.organisations || []).find((organisation) => organisation.id === id))
 
 
-    res.render('regions/v1/organisation', {
+    res.render('regions/organisation', {
       organisation,
       users
     })
   })
 
   // Delete an organisation confirmation page
-  router.get('/regions/v1/organisations/:id/delete', (req, res) => {
+  router.get('/regions/organisations/:id/delete', (req, res) => {
     const organisation = req.session.data.organisations.find((org) => org.id === req.params.id)
-    if (!organisation) { res.redirect('/regions/v1/'); return }
+    if (!organisation) { res.redirect('/regions/'); return }
 
-    res.render('regions/v1/delete-organisation', {
+    res.render('regions/delete-organisation', {
       organisation
     })
   })
 
   // Deleting an organisation
-  router.post('/regions/v1/organisations/:id/deleted', (req, res) => {
+  router.post('/regions/organisations/:id/deleted', (req, res) => {
     const organisation = req.session.data.organisations.find((org) => org.id === req.params.id)
-    if (!organisation) { res.redirect('/regions/v1/'); return }
+    if (!organisation) { res.redirect('/regions/'); return }
 
     // Remove organisation
     req.session.data.organisations.splice(req.session.data.organisations.indexOf(organisation), 1)
 
-    res.redirect('/regions/v1')
+    res.redirect('/regions')
   })
 
   // Add another lead user to an organisation form
-  router.get('/regions/v1/organisations/:id/add-email', (req, res) => {
+  router.get('/regions/organisations/:id/add-email', (req, res) => {
     const data = req.session.data
     const organisation = data.organisations.find((org) => org.id === req.params.id)
-    if (!organisation) { res.redirect('/regions/v1/'); return }
+    if (!organisation) { res.redirect('/regions/'); return }
 
-    res.render('regions/v1/add-another-email', {
+    res.render('regions/add-another-email', {
       organisation
     })
   })
 
   // Deactivate an organisation
-  router.get('/regions/v1/organisations/:id/deactivate', (req, res) => {
+  router.get('/regions/organisations/:id/deactivate', (req, res) => {
     const data = req.session.data
     const organisation = data.organisations.find((org) => org.id === req.params.id)
-    if (!organisation) { res.redirect('/regions/v1/'); return }
+    if (!organisation) { res.redirect('/regions/'); return }
 
-    res.render('regions/v1/deactivate', {
+    res.render('regions/deactivate', {
       organisation
     })
   })
 
   // Deactivating an organisation
-  router.post('/regions/v1/organisations/:id/deactivated', (req, res) => {
+  router.post('/regions/organisations/:id/deactivated', (req, res) => {
     const organisation = req.session.data.organisations.find((org) => org.id === req.params.id)
-    if (!organisation) { res.redirect('/regions/v1/'); return }
+    if (!organisation) { res.redirect('/regions/'); return }
 
     organisation.status = "Deactivated"
 
-    res.redirect('/regions/v1/organisations/' + organisation.id)
+    res.redirect('/regions/organisations/' + organisation.id)
   })
 
   // Reactivate an organisation
-  router.get('/regions/v1/organisations/:id/reactivate', (req, res) => {
+  router.get('/regions/organisations/:id/reactivate', (req, res) => {
     const data = req.session.data
     const organisation = data.organisations.find((org) => org.id === req.params.id)
-    if (!organisation) { res.redirect('/regions/v1/'); return }
+    if (!organisation) { res.redirect('/regions/'); return }
 
-    res.render('regions/v1/reactivate', {
+    res.render('regions/reactivate', {
       organisation
     })
   })
 
   // Reactivating an organisation
-  router.post('/regions/v1/organisations/:id/reactivated', (req, res) => {
+  router.post('/regions/organisations/:id/reactivated', (req, res) => {
     const organisation = req.session.data.organisations.find((org) => org.id === req.params.id)
-    if (!organisation) { res.redirect('/regions/v1/'); return }
+    if (!organisation) { res.redirect('/regions/'); return }
 
     organisation.status = "Active"
 
-    res.redirect('/regions/v1/organisations/' + organisation.id)
+    res.redirect('/regions/organisations/' + organisation.id)
   })
 
 
   // Check a second lead user for an organisation
-  router.get('/regions/v1/organisations/:id/add-email-check', (req, res) => {
+  router.get('/regions/organisations/:id/add-email-check', (req, res) => {
     const data = req.session.data
     const organisation = data.organisations.find((org) => org.id === req.params.id)
-    if (!organisation) { res.redirect('/regions/v1/'); return }
+    if (!organisation) { res.redirect('/regions/'); return }
 
-    res.render('regions/v1/add-another-email-check', {
+    res.render('regions/add-another-email-check', {
       organisation
     })
   })
 
   // Uninvite page for a user
-  router.get('/regions/v1/organisations/:id/users/:userId/uninvite', (req, res) => {
+  router.get('/regions/organisations/:id/users/:userId/uninvite', (req, res) => {
     const data = req.session.data
     const organisation = data.organisations.find((org) => org.id === req.params.id)
-    if (!organisation) { res.redirect('/regions/v1/'); return }
+    if (!organisation) { res.redirect('/regions/'); return }
 
     const user = data.users.find((user) => user.id === req.params.userId)
 
     const userOrganisationSettings = (user.organisations || []).find((organisation) => organisation.id === organisation.id)
 
-    // if (!user || userOrganisationSettings.status == 'Active') { res.redirect(`/regions/v1/organisations/${organisation.id}`); return }
+    // if (!user || userOrganisationSettings.status == 'Active') { res.redirect(`/regions/organisations/${organisation.id}`); return }
 
     const numberOfActiveUsers = data.users.filter((user) => (user.organisations || []).find((orgSetting) => (orgSetting.id === organisation.id ) && (orgSetting.status === 'Active'))).length
 
-    res.render('regions/v1/uninvite', {
+    res.render('regions/uninvite', {
       organisation,
       user,
       numberOfActiveUsers
@@ -345,14 +405,14 @@ module.exports = router => {
   })
 
   // Uninvite a user
-  router.post('/regions/v1/organisations/:id/users/:userId/uninvited', (req, res) => {
+  router.post('/regions/organisations/:id/users/:userId/uninvited', (req, res) => {
     const data = req.session.data
     const { id, userId } = req.params;
     const organisation = data.organisations.find((org) => org.id === req.params.id)
-    if (!organisation) { res.redirect('/regions/v1/'); return }
+    if (!organisation) { res.redirect('/regions/'); return }
 
     const user = data.users.find((user) => user.id === userId)
-    if (!user) { res.redirect(`/regions/v1/organisations/${organisation.id}`); return }
+    if (!user) { res.redirect(`/regions/organisations/${organisation.id}`); return }
 
     const organisationSetting = user.organisations.find((org) => org.id === id)
 
@@ -364,9 +424,9 @@ module.exports = router => {
     // Remove the organisation if no lead users are left
     if (numberOfUsersAtOrganisation === 0) {
       data.organisations.splice(data.organisations.indexOf(organisation), 1)
-      res.redirect('/regions/v1/')
+      res.redirect('/regions/')
     } else {
-      res.redirect('/regions/v1/organisations/' + organisation.id)
+      res.redirect('/regions/organisations/' + organisation.id)
     }
 
   })
