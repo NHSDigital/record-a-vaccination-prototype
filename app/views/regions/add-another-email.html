@@ -21,9 +21,13 @@
 
       <h1 class="nhsuk-heading-l">Add another user</h1>
 
-      <p>Choose a user at {{ organisation.name }} to receive instructions about creating an account.</p>
-
-      <p>They will also be able to set up and add their organisation’s users and vaccination sites.</p>
+      <p>Choose another user at {{ organisation.name }}.</p>
+        
+      <p>They must have an NHS-approved email address. See the <a href="https://digital.nhs.uk/services/care-identity-service/applications-and-services/apply-for-care-id/care-identity-email-domain-allow-list" target="_blank">list of approved email domains (opens in new tab)</a>.</p>
+      
+      <p>They will receive an email with details of how to access the service.</p>
+      
+      <p>It's their responsibility to add users and set up vaccination sites for their organisation.</p>
 
       <form action="/regions/organisations/{{ organisation.id }}/add-email-check" method="post" novalidate>
 
@@ -49,7 +53,7 @@
 
         {{ input({
           "label": {
-            "text": "NHS email address"
+            "text": "NHS-approved email address"
           },
           value: data.email,
           type: "email",
