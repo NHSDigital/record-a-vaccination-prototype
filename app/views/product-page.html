@@ -1,0 +1,107 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  NHS Record a vaccination
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-out.html" %}
+{% endblock %}
+
+{% block main %}
+<div class="nhsuk-hero">
+  <div class="nhsuk-width-container nhsuk-hero--border">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-one-half nhsuk-u-one-half-tablet">
+        <div class="nhsuk-hero__wrapper">
+          <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-5">Record NHS vaccinations safely and easily</h1>
+
+          <!-- <p class="nhsuk-body">Some words here</p> -->
+
+          <p class="nhsuk-body">Use this service to record COVID-19, flu, RSV and pertussis vaccinations.</p>
+
+          {{ button({
+            text: "Create an account",
+            href: "#find-out-more",
+            classes: "nhsuk-button--reverse nhsuk-u-margin-bottom-3"
+          }) }}
+
+          <p class="nhsuk-u-margin-bottom-0">Or <a href="/okta-sign-in" class="nhsuk-link app-link--reverse">log in</a></p>
+        </div>
+      </div>
+      <div class="nhsuk-grid-column-one-half nhsuk-u-one-half-tablet">
+        <img class="app-homepage-illustration" src="/images/personalised-prevention-services.svg" alt="" role="presentation">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="app-section--white">
+  <div class="nhsuk-width-container">
+    <div class="nhsuk-main-wrapper">
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-one-third">
+          <h2 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Streamlined journey</h2>
+          <p>Capture only essential information to reduce the time taken to record each vaccination.</p>
+        </div>
+        <div class="nhsuk-grid-column-one-third">
+          <h2 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Timely data sharing</h2>
+          <p>See a patient’s vaccination history. Records sent to the patient’s GP automatically.</p>
+        </div>
+        <div class="nhsuk-grid-column-one-third">
+          <h2 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Comprehensive reporting</h2>
+          <p>Create reports for a time frame of your choice, filtered by vaccine type or location.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nhsuk-width-container" id="find-out-more">
+  <div class="nhsuk-main-wrapper">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-two-thirds">
+
+        <h2 class="nhuk-heading-l nhsuk-u-margin-bottom-5">Get started</h2>
+
+        <h3 class="nhsuk-heading-m">Pharmacies</h3>
+        <p>All pharmacies in England commissioned to deliver COVID-19 and flu vaccinations can now use this service for free.</p>
+
+        <p class="nhsuk-body">The service is integrated with the NHS Business Services Authority (BSA) to make sure you are paid for each vaccination delivered.</p>
+
+        <p>If you own or run a pharmacy:</p>
+        {{ actionLink({
+          text: "Start using the service for COVID-19 and flu vaccinations",
+          href: "/apply/onboarding0"
+        }) }}
+
+        <hr class="nhsuk-section-break nhsuk-section-break--l nhsuk-section-break--visible">
+
+        <h3 class="nhsuk-heading-m">Maternity services</h3>
+        <p>All NHS maternity services are using the service to record vaccinations.</p>
+
+        <p>You can record RSV, pertussis, COVID-19 and flu vaccinations.</p>
+
+        <p><a href="#">Get in contact</a></p>
+
+        <hr class="nhsuk-section-break nhsuk-section-break--l nhsuk-section-break--visible">
+
+        <h3 class="nhsuk-heading-m">NHS Hospital hubs and vaccination centres</h3>
+
+        <p>All NHS Trusts can use the service to record COVID-19 and flu vaccinations for staff and patients.</p>
+
+        <p class="nhsuk-body">Some text</p>
+
+
+        <hr class="nhsuk-section-break nhsuk-section-break--l nhsuk-section-break--visible">
+
+        <h3 class="nhsuk-heading-m">GP groupings (PCNs)</h3>
+        <p>Assurance for vaccinations delivered by GPs is pending.</p>
+
+        <p class="nhsuk-body">Some text</p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
