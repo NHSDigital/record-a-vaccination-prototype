@@ -35,7 +35,7 @@ module.exports = router => {
 
     if (req.query.showErrors === 'yes') {
       if (!req.session.data.vaccinationToday) {
-        vaccinationTodayError = 'Select if the vaccination was today'
+        vaccinationTodayError = 'Select if the vaccination is today'
       }
     }
 
@@ -177,7 +177,7 @@ module.exports = router => {
 
         if (nhsNumber == '') {
           nhsNumberError = {
-            text: "Enter NHS number",
+            text: "Enter an NHS number",
             href: "#nhs-number"
           }
           errorList.push(nhsNumberError)
@@ -739,7 +739,7 @@ module.exports = router => {
     if (req.query.showErrors === 'yes') {
       if (!consent) {
         consentError = {
-          text: "Select who gave consent",
+          text: "Select who is giving consent",
           href: "#consent-1"
         }
         errors.push(consentError)
@@ -846,13 +846,13 @@ module.exports = router => {
 
       if (!injectionSite) {
         injectionSiteError = {
-          text: "Select the injection site",
+          text: "Select where you gave the injection",
           href: "#injection-site-1"
         }
         errors.push(injectionSiteError)
       } else if (injectionSite === "other" && !otherInjectionSite) {
         otherInjectionSiteError = {
-          text: "Select injection site",
+          text: "Select where you gave the injection",
           href: "#other-injection-site-1"
         }
         errors.push(otherInjectionSiteError)
