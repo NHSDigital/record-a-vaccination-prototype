@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Appointments" %}
+
+{% set currentSection = "appointments" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Appointments</h1>
+
+      <p>Create and view appointments for your sites.</p>
+
+      <form action="/appointments/answer-setup" method="post">
+        
+
+        {{ button({
+          text: "Create appointments"
+        }) }}
+       
+        <br><br>
+        <h2 class="nhsuk-heading-m">Sites</h2>
+
+        <p><a href="/appointments/site">Anne Ward Maternity Unit</a></p>
+        <p><a href="/appointments/site">St Mary’s Hospital</a></p>
+        <p><a href="/appointments/site">Josephine Clinic</a></p>
+
+
+    </div>
+  </div>
+
+{% endblock %}

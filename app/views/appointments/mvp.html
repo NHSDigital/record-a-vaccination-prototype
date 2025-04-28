@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Appointments" %}
+
+{% set currentSection = "appointments" %}
+
+{% block content %}
+
+
+  {{ backLink({
+    href: "/appointments/site",
+    text: "Back"
+  }) }}
+<br>
+
+  <style>
+    .jointTopBot {
+      border-top: 4px solid #768692;
+    }
+    .jointMid {
+    border-bottom: 2px solid #d8dde0;
+    }
+
+  </style>
+
+
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+
+      <span class="nhsuk-caption-l">Anne Ward Maternity Unit</span>
+        <h1 class="nhsuk-heading-l">23 April 2025</h1>
+
+      <table role="table" class="nhsuk-table-responsive">
+        <thead role="rowgroup" class="nhsuk-table__head">
+          <tr role="row">
+
+            <th role="columnheader" class="" scope="col">
+              Name
+            </th>
+            <th role="columnheader" class="" scope="col">
+                NHS number
+              </th>
+            <th role="columnheader" class="" scope="col">
+              Date of birth
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Address
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Contact
+            </th>
+            <th role="columnheader" class="" scope="col">
+              </th>
+
+          </tr>
+        </thead>
+        <tbody class="nhsuk-table__body">
+          {% for appointment in data.appointments %}
+            <tr role="row" class="nhsuk-table__row">
+    
+              <td class="nhsuk-table__cell">
+                <a class="nhsuk-link" href="/record-vaccinations/vaccinator?nhsNumber={{ appointment.patient.nhsNumber }}&patientName={{ appointment.patient.firstName }}%20{{ appointment.patient.lastName }}&vaccine={{ appointment.vaccines | first }}&dateOfBirth[day]=1&dateOfBirth[month]=1&dateOfBirth[year]=1954&vaccinationToday=yes&deliveryTeam=St%20Mary’s%20Hospital">{{ appointment.patient.firstName }} {{ appointment.patient.lastName }}</a>
+              </td>
+              <td class="nhsuk-table__cell">
+                {{ appointment.patient.nhsNumber }}
+              </td>
+              <td class="nhsuk-table__cell">
+                {{ appointment.patient.dateOfBirth | govukDate }}
+              </td>
+              <td class="nhsuk-table__cell">
+                73 Roman Rd<br>Leeds<br> LS2 5ZN
+              </td>
+              <td class="nhsuk-table__cell">
+                {{ appointment.patient.phoneNumber }}
+                <br>{{ appointment.patient.email }}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+{% endblock %}
+
+
+
