@@ -29,8 +29,8 @@
     <div class="nhsuk-grid-column-full">
 
 
-
-        <h1 class="nhsuk-heading-l">23 April 2025</h1>
+      <span class="nhsuk-caption-l">Anne Ward Maternity Unit</span>
+        <h1 class="nhsuk-heading-l">24 April 2025</h1>
 
       <table role="table" class="nhsuk-table-responsive">
         <thead role="rowgroup" class="nhsuk-table__head">
@@ -46,10 +46,10 @@
               Date of birth
             </th>
             <th role="columnheader" class="" scope="col">
-              Address
+              Contact
             </th>
             <th role="columnheader" class="" scope="col">
-              Contact
+              Vaccine
             </th>
             <th role="columnheader" class="" scope="col">
               </th>
@@ -70,11 +70,11 @@
                 {{ appointment.patient.dateOfBirth | govukDate }}
               </td>
               <td class="nhsuk-table__cell">
-                73 Roman Rd<br>Leeds<br> LS2 5ZN
-              </td>
-              <td class="nhsuk-table__cell">
                 {{ appointment.patient.phoneNumber }}
                 <br>{{ appointment.patient.email }}
+              </td>
+              <td class="nhsuk-table__cell">
+                RSV
               </td>
             </tr>
           {% endfor %}

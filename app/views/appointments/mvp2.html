@@ -1,0 +1,255 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Appointments" %}
+
+{% set currentSection = "appointments" %}
+
+{% block content %}
+
+
+  {{ backLink({
+    href: "/appointments/site",
+    text: "Back"
+  }) }}
+<br>
+
+  <style>
+    .jointTopBot {
+      border-top: 4px solid #768692;
+    }
+    .jointMid {
+    border-bottom: 2px solid #d8dde0;
+    }
+
+  </style>
+
+<span class="nhsuk-caption-l">Anne Ward Maternity Unit</span>
+        <h1 class="nhsuk-heading-l">24 April 2025</h1>
+
+      
+
+        <div class="nhsuk-form-group">
+            <div class="nhsuk-grid-column-two-thirds"></div>
+            <h1 class="nhsuk-label-wrapper">
+              <label class="nhsuk-label nhsuk-label--m nhsuk-u-margin-bottom-1" for="organisationCode">
+            Find a patient
+              </label>
+            </h1>
+            <div class="nhsuk-hint" id="organisationName-hint">
+              Search by name or NHS number
+            </div>
+            <select class="nhsuk-select" id="siteCode" name="siteCode"
+              data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+              <option selected value=""></option>
+
+              {% for code, data in data.sites %}
+                <option value="{{ code }}">{{ data.name }}, {{ data.address }} ({{code }})</option>
+              {% endfor %}
+            </select>
+          </div>
+       
+
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+
+
+
+
+
+
+
+
+  <div class="nhsuk-tabs" data-module="nhsuk-tabs">
+    <h2 class="nhsuk-tabs__title">
+      Contents
+    </h2>
+    <ul class="nhsuk-tabs__list">
+      <li class="nhsuk-tabs__list-item nhsuk-tabs__list-item--selected">
+        <a class="nhsuk-tabs__tab" href="#past-day">
+            Scheduled (64)
+        </a>
+      </li>
+      <li class="nhsuk-tabs__list-item">
+        <a class="nhsuk-tabs__tab" href="#past-week">
+          Cancelled (1)
+        </a>
+      </li>
+      <li class="nhsuk-tabs__list-item">
+        <a class="nhsuk-tabs__tab" href="#past-month">
+          Recorded (23)
+        </a>
+      </li>
+    </ul>
+    <div class="nhsuk-tabs__panel" id="past-day">
+  
+      <table class="nhsuk-table">
+        <caption class="nhsuk-table__caption">Scheduled</caption>
+        <thead class="nhsuk-table__head">
+          <tr>
+            <th scope="col" class="nhsuk-table__header">Time</th>
+            <th scope="col" class="nhsuk-table__header">Name</th>
+            <th scope="col" class="nhsuk-table__header">NHS number</th>
+            <th scope="col" class="nhsuk-table__header">Date of birth</th>
+            <th scope="col" class="nhsuk-table__header">Vaccine</th>
+            <th scope="col" class="nhsuk-table__header">Eligibility</th>
+          </tr>
+        </thead>
+        <tbody class="nhsuk-table__body">
+          <tr class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">10:30</td>
+            <td class="nhsuk-table__cell">
+                <a class="nhsuk-link" href="/record-vaccinations">David Francis</a>
+              </td>
+            <td class="nhsuk-table__cell">912346789</td>
+            <td class="nhsuk-table__cell">23 May 1952</td>
+            <td class="nhsuk-table__cell">RSV</td>
+            <td class="nhsuk-table__cell">Aged based</td>
+          </tr>
+          <tr class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">11:00</td>
+            <td class="nhsuk-table__cell">
+                <a class="nhsuk-link" href="/record-vaccinations">John Smith</a>
+              </td>
+            <td class="nhsuk-table__cell">1234567896</td>
+            <td class="nhsuk-table__cell">29 Nov 1954</td>
+            <td class="nhsuk-table__cell">RSV</td>
+            <td class="nhsuk-table__cell">Aged based</td>
+          </tr>
+          <tr class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">11:30</td>
+            <td class="nhsuk-table__cell">
+                <a class="nhsuk-link" href="/record-vaccinations">Paul Farmer</a>
+              </td>
+            <td class="nhsuk-table__cell">654789314</td>
+            <td class="nhsuk-table__cell">16 Jun 1952</td>
+            <td class="nhsuk-table__cell">RSV</td>
+            <td class="nhsuk-table__cell">Aged based</td>
+          </tr>
+          <tr class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">12:00</td>
+            <td class="nhsuk-table__cell">
+                <a class="nhsuk-link" href="/record-vaccinations">Rita Paul</a>
+              </td>
+            <td class="nhsuk-table__cell">3216549877</td>
+            <td class="nhsuk-table__cell">11 Dec 1953</td>
+            <td class="nhsuk-table__cell">RSV</td>
+            <td class="nhsuk-table__cell">Aged based</td>
+          </tr>
+          
+          
+        </tbody>
+      </table>
+  
+
+
+
+
+      
+    </div>
+
+
+
+
+    <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="past-week">
+      <table class="nhsuk-table">
+        <caption class="nhsuk-table__caption">Cancelled</caption>
+        <thead class="nhsuk-table__head">
+            <tr>
+              <th scope="col" class="nhsuk-table__header">Time</th>
+              <th scope="col" class="nhsuk-table__header">Name</th>
+              <th scope="col" class="nhsuk-table__header">NHS number</th>
+              <th scope="col" class="nhsuk-table__header">Date of birth</th>
+              <th scope="col" class="nhsuk-table__header">Vaccine</th>
+              <th scope="col" class="nhsuk-table__header">Eligibility</th>
+            </tr>
+          </thead>
+        <tbody class="nhsuk-table__body">
+            <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">10:30</td>
+                <td class="nhsuk-table__cell">
+                    <a class="nhsuk-link" href="/record-vaccinations">David Francis</a>
+                  </td>
+                <td class="nhsuk-table__cell">912346789</td>
+                <td class="nhsuk-table__cell">23 May 1952</td>
+                <td class="nhsuk-table__cell">RSV</td>
+                <td class="nhsuk-table__cell">Aged based</td>
+              </tr>
+         
+        </tbody>
+      </table>
+  
+    </div>
+    <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="past-month">
+      <table class="nhsuk-table">
+        <caption class="nhsuk-table__caption">Recorded</caption>
+        <thead class="nhsuk-table__head">
+            <tr>
+              <th scope="col" class="nhsuk-table__header">Time</th>
+              <th scope="col" class="nhsuk-table__header">Name</th>
+              <th scope="col" class="nhsuk-table__header">NHS number</th>
+              <th scope="col" class="nhsuk-table__header">Date of birth</th>
+              <th scope="col" class="nhsuk-table__header">Vaccine</th>
+              <th scope="col" class="nhsuk-table__header">Eligibility</th>
+            </tr>
+          </thead>
+          <tbody class="nhsuk-table__body">
+            <tr class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">08:00</td>
+              <td class="nhsuk-table__cell">
+                  <a class="nhsuk-link" href="/record-vaccinations">David Francis</a>
+                </td>
+              <td class="nhsuk-table__cell">912346789</td>
+              <td class="nhsuk-table__cell">23 May 1952</td>
+              <td class="nhsuk-table__cell">RSV</td>
+              <td class="nhsuk-table__cell">Aged based</td>
+            </tr>
+            <tr class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">08:30</td>
+              <td class="nhsuk-table__cell">
+                  <a class="nhsuk-link" href="/record-vaccinations">John Smith</a>
+                </td>
+              <td class="nhsuk-table__cell">1234567896</td>
+              <td class="nhsuk-table__cell">29 Nov 1954</td>
+              <td class="nhsuk-table__cell">RSV</td>
+              <td class="nhsuk-table__cell">Aged based</td>
+            </tr>
+            <tr class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">09:00</td>
+              <td class="nhsuk-table__cell">
+                  <a class="nhsuk-link" href="/record-vaccinations">Paul Farmer</a>
+                </td>
+              <td class="nhsuk-table__cell">654789314</td>
+              <td class="nhsuk-table__cell">16 Jun 1952</td>
+              <td class="nhsuk-table__cell">RSV</td>
+              <td class="nhsuk-table__cell">Aged based</td>
+            </tr>
+            <tr class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">09:30</td>
+              <td class="nhsuk-table__cell">
+                  <a class="nhsuk-link" href="/record-vaccinations">Rita Paul</a>
+                </td>
+              <td class="nhsuk-table__cell">3216549877</td>
+              <td class="nhsuk-table__cell">11 Dec 1953</td>
+              <td class="nhsuk-table__cell">RSV</td>
+              <td class="nhsuk-table__cell">Aged based</td>
+            </tr>
+            
+            
+          </tbody>
+      </table>
+  
+    </div>
+   
+      </table>
+  
+    </div>
+  </div>
+
+
+
+{% endblock %}
+
+
+
