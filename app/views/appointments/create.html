@@ -17,18 +17,15 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Create appointments</h1>
+      <h1 class="nhsuk-heading-l">Add appointments</h1>
 
-      <p>You can now import appointments to make it quicker and easier to record vaccinations.</p>
-
-      <p>For some appointment systems this can be done automatically. For others you will need to upload a spreadsheet.</p>
+      <p>You can import appointments automatically from approved booking systems or upload a spreadsheet.</p>
 
       <form action="/appointments/answer-setup" method="post">
         {{ radios({
           name: "appointmentSystem",
           fieldset: {
             legend: {
-              text: "Where would you like to import appointments from?",
               classes: "nhsuk-fieldset__legend--m"
             }
           },
