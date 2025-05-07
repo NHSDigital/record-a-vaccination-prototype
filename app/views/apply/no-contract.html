@@ -1,0 +1,22 @@
+
+{% extends 'layout.html' %}
+
+{% set pageName = "Almost there" %}
+
+{% block header %}
+  {% include "includes/header-logged-out.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+        <h1 class="nhsuk-heading-m">Almostthere</h1>
+
+        <p>Before we can give you access to Record a vaccination, we need to check that your pharmacy has a contract with NHS England to offer COVID-19 vaccinations.</p>
+        <p>We'll email you when we've completed our checks. This can take up to 72 hours.</p>
+        <p>If you do not hear back from us within 72 hours, contact our helpdesk.</p>
+
+    </div>
+  </div>
+{% endblock %}
