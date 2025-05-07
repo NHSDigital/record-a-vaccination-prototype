@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "All done!" %}
+
+{% block header %}
+  {% include "includes/header-logged-out.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+        {{ panel({
+            titleText: pageName,
+            html: ""
+        }) }}
+
+        <h2 class="nhsuk-heading-m">What happens next:</h2>
+
+        <p>You’ll get a welcome email with details of how to access the service.</p>
+
+    </div>
+  </div>
+{% endblock %}
