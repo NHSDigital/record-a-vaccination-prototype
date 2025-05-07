@@ -8,37 +8,12 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-      <h1 class="nhsuk-heading-xl">The service is unavailable</h1>
+      <h1 class="nhsuk-heading-l">Sorry, there is a problem with the service</h1>
 
-      <p>There may be a problem with your internet connection, or a technical problem on our side.</p>
+      <p>Try again later.</p>
 
-      {% set cardHtml %}
+      <p>If you urgently need to record a vaccination, <a href="#">download our paper form</a>.</p>
 
-        <ul>
-          <li>Return to the start</li>
-          <li>Try using a different internet connection if the one you’re using does not work</li>
-        </ul>
-
-        {{ button({
-          text: "Try again"
-        }) }}
-
-        <p>If this does not work, you can see more options in our user guidance.</p>
-
-        <p>If you urgently need to record a vaccination, <a href="https://guide.ravs.england.nhs.uk/files/record-a-vaccination.docx">download our paper form</a>. </p>
-
-        <h3 class="nhsuk-heading-m">More advice in our user guidance</h3>
-
-        <p><a href="https://guide.ravs.england.nhs.uk">Get advice and guidance</a></p>
-      {% endset %}
-
-
-
-      {{ card({
-        "heading": "What you can do",
-        "headingLevel": "2",
-        "descriptionHtml": cardHtml
-      }) }}
 
     </div>
   </div>
