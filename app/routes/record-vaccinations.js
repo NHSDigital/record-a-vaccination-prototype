@@ -529,6 +529,8 @@ module.exports = router => {
     res.redirect(nextPage)
   })
 
+
+
   router.get('/record-vaccinations/done', (req, res) => {
     const data = req.session.data
     let errors = []
@@ -548,6 +550,47 @@ module.exports = router => {
       errors,
       error
     })
+  })
+
+  router.get('/record-vaccinations/healthcare-worker', (req, res) => {
+
+    let healthcareWorkerRoleError
+    let errors = []
+    const data = req.session.data
+    const healthcareWorker = data.healthcareWorker
+
+    if (req.query.showErrors === 'yes') {
+      if (!healthcareWorker || healthcareWorker === '') {
+        healthcareWorkerRoleError = {
+          text: "Select a role",
+          href: "#healthcare-worker-1"
+        }
+        errors.push(healthcareWorkerRoleError)
+      }
+    }
+
+    res.render('record-vaccinations/healthcare-worker', {
+      errors,
+      healthcareWorkerRoleError
+    })
+  })
+
+  // Routing for after healthcare worker question
+  router.post('/record-vaccinations/answer-healthcare-worker', (req, res) => {
+    const data = req.session.data
+    const healthcareWorker = data.healthcareWorker
+    let nextPage
+
+    console.log(healthcareWorker)
+
+    if (healthcareWorker && healthcareWorker != '') {
+      nextPage = '/record-vaccinations/location'
+    } else {
+      nextPage = '/record-vaccinations/healthcare-worker?showErrors=yes'
+    }
+
+    res.redirect(nextPage)
+
   })
 
   // Routing page after DONE
