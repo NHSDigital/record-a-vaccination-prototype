@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  East of England
-{% endblock %}
+{% set pageName = "Check these details" %}
 
 {% block header %}
   {% include "includes/header-logged-out.html" %}
@@ -19,7 +17,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-        <h1 class="nhsuk-heading-l">Check these details</h1>
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       {% if organisation.legallyClosed %}
 

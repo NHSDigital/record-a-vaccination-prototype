@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  On boarding
-{% endblock %}
+{% set pageName = "Thank you" %}
 
 {% block header %}
   {% include "includes/header-logged-out.html" %}
@@ -20,7 +18,7 @@
 {% endset %}
 
 {{ panel({
-titleText: "Thank you",
+titleText: pageName,
 html: panelHtml
 }) }}
 

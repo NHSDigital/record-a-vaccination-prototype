@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  East of England
-{% endblock %}
+{% set pageName = "Which vaccinations do you want to record?" %}
 
 {% block header %}
   {% include "includes/header-logged-out.html" %}
@@ -26,7 +24,7 @@
           name: "example",
           fieldset: {
             legend: {
-              text: "Which vaccinations do you want to record?",
+              text: pageName,
               classes: "nhsuk-fieldset__legend--l",
               isPageHeading: true
             }

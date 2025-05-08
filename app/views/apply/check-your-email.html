@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  On boarding
-{% endblock %}
+{% set pageName = "Check your email" %}
 
 {% block header %}
   {% include "includes/header-logged-out.html" %}
@@ -14,7 +12,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Check your email</h1>
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       <p>We’ve sent a link to your.name@nhs.net so you can verify your email address. You must do this to complete your application.</p>
 
