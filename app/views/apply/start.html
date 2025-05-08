@@ -37,6 +37,10 @@
       </ul>
 
       <br>
+
+      <form action="/apply/check-pharmacy" method="post">
+
+
       <div class="nhsuk-form-group">
           <h2 class="nhsuk-label-wrapper">
             <label class="nhsuk-label nhsuk-label--m nhsuk-u-margin-bottom-1" for="organisationCode">
@@ -52,18 +56,13 @@
 
             {% set options = [] %}
 
-            {% for code, name in data.nhsTrusts %}
-              {% set options = (options.push({
-                label: name + " (" + code + ")",
-                value: code
-              }), options) %}
-            {% endfor %}
-
-            {% for code, data in data.nhsPharmacies %}
-              {% set options = (options.push({
-                label: data.name + ", " + data.address + ", " + (data.postcode | upper) + " (" + code + ")",
-                value: code
-              }), options) %}
+            {% for organisation in data.organisations %}
+              {% if organisation.type == "Community Pharmacy" %}
+                {% set options = (options.push({
+                  label: organisation.name + ", " + organisation.address.line1 + ", " + (organisation.address.postcode | upper) + " (" + organisation.id + ")",
+                  value: organisation.id
+                }), options) %}
+              {% endif %}
             {% endfor %}
 
             {% for option in (options | sort(false, true, "label")) %}
@@ -71,12 +70,6 @@
             {% endfor %}
           </select>
         </div>
-
-
-
-        <form action="/apply/check-pharmacy" method="post">
-
-
 
         {{ button({
           "text": "Continue"

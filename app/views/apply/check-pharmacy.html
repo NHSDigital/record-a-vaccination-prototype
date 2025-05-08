@@ -38,7 +38,7 @@
               text: "Name"
             },
             value: {
-              text: "Addlestone Pharmacy"
+              text: organisation.name
             }
           },
           {
@@ -46,7 +46,7 @@
               text: "Type"
             },
             value: {
-              html: "Community pharmacy"
+              html: organisation.type
             }
           },
           {
@@ -54,15 +54,7 @@
               text: "ODS code"
             },
             value: {
-              text: "FAE02S"
-            }
-          },
-          {
-            key: {
-              text: "Region"
-            },
-            value: {
-              text: "South East"
+              text: organisation.id
             }
           },
           {
@@ -70,7 +62,7 @@
               text: "Address"
             },
             value: {
-                html: "92a station Road<br>Addlestone<br>Kent<br>KT15 2AD"
+                html: organisation.address.line1 + "<br>" + organisation.address.town + "<br>" + organisation.address.postcode
               }
           }
         ]
