@@ -1,8 +1,7 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  East of England region
-{% endblock %}
+{% set pageName = "North West Commissioning Region" %}
+
 
 {% block header %}
   {% include "includes/header-logged-in-region1.html" %}
@@ -14,16 +13,16 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <span class="nhsuk-caption-m">North West Commisioning Region</span>
+      <span class="nhsuk-caption-m">{{ pageName }}</span>
       <h1 class="nhsuk-heading-xl">Organisations</h1>
-      
+
 
     </div>
 </div>
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      
+
 
       <table role="table" class="nhsuk-table-responsive">
           <thead role="rowgroup" class="nhsuk-table__head">
@@ -40,7 +39,7 @@
               <th role="columnheader" class="" scope="col">
                  Status
               </th>
-              
+
               </tr>
             </thead>
             <tbody class="nhsuk-table__body">
@@ -57,7 +56,7 @@
                 <td role="cell" class="nhsuk-table__cell">
                     <span class="nhsuk-table-responsive__heading" aria-hidden="true">Status</span>Active
                   </td>
-            
+
               </tr>
           </thead>
           <tbody class="nhsuk-table__body">
@@ -75,7 +74,7 @@
                 <span class="nhsuk-table-responsive__heading" aria-hidden="true">Status</span>Active
               </td>
 
-                
+
 
             </tr>
             <tr role="row" class="nhsuk-table__row">
@@ -100,12 +99,12 @@
                 <span class="nhsuk-table-responsive__heading" aria-hidden="true">ODS code</span>PP34
               </td>
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading" aria-hidden="true">Type</span>Community Pharmacy 
+                <span class="nhsuk-table-responsive__heading" aria-hidden="true">Type</span>Community Pharmacy
               </td>
               <td role="cell" class="nhsuk-table__cell">
                 <span class="nhsuk-table-responsive__heading" aria-hidden="true">Status</span>Active
               </td>
-            
+
           </tbody>
         </table>
 

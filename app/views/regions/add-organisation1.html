@@ -1,8 +1,7 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  East of England
-{% endblock %}
+{% set pageName = "Find an organisation to invite" %}
+
 
 {% block header %}
   {% include "includes/header-logged-in-region1.html" %}
@@ -15,7 +14,7 @@
     <div class="nhsuk-grid-column-two-thirds">
 
 
-      <h1 class="nhsuk-heading-xl">Find an organisation to invite</h1>
+      <h1 class="nhsuk-heading-xl">{{ pageName }}</h1>
 
       <form action="/regions/organisation-details" method="post">
 
