@@ -1,14 +1,21 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Appointments" %}
+{% set pageName = "Import appointments" %}
 
 {% set currentSection = "appointments" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/appointments/",
+    text: "Back"
+  }) }}
+{% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Appointments</h1>
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       <p>Import appointments to make it quicker and easier to record vaccinations.</p>
 
