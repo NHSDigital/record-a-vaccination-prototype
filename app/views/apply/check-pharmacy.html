@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check this is your pharmacy" %}
+
+{% block header %}
+  {% include "includes/header-logged-out.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/apply/start",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              text: organisation.name
+            }
+          },
+          {
+            key: {
+              text: "Type"
+            },
+            value: {
+              html: organisation.type
+            }
+          },
+          {
+            key: {
+              text: "ODS code"
+            },
+            value: {
+              text: organisation.id
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+                html: organisation.address.line1 + "<br>" + organisation.address.town + "<br>" + organisation.address.postcode
+              }
+          }
+        ]
+      }) }}
+
+      {{ button({
+        "text": "Continue",
+        href: "/apply/vaccine-types"
+      }) }}
+
+    </div>
+  </div>
+{% endblock %}

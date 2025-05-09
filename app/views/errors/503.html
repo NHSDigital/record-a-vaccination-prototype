@@ -1,19 +1,16 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Sorry, there is a problem with the service" %}
+{% set pageName = "Sorry, the service is unavailable" %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>Try again later.</p>
+      <p>You will be able to use the service later.</p>
 
       <p>If you urgently need to record a vaccination, <a href="#">download our paper form</a>.</p>
 
-
     </div>
   </div>
-
-
 {% endblock %}
