@@ -1,0 +1,107 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check your answers" %}
+
+{% block header %}
+  {% include "includes/header-logged-out.html" %}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/apply/contact-details",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Pharmacy"
+            },
+            value: {
+              html: organisation.name
+            },
+            actions: {
+              items: [
+                {
+                  href: "/apply/start",
+                  text: "Change",
+                  visuallyHiddenText: "pharmacy"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Vaccinations"
+            },
+            value: {
+              html: (data.vaccineTypes | join("<br>")) if data.vaccineTypes else ""
+            },
+            actions: {
+              items: [
+                {
+                  href: "/apply/vaccine-types",
+                  text: "Change",
+                  visuallyHiddenText: "vaccinations"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Your name"
+            },
+            value: {
+              html: data.firstName + " " + data.lastName
+            },
+            actions: {
+              items: [
+                {
+                  href: "/apply/contact-details",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Your email"
+            },
+            value: {
+              text: data.email
+            },
+            actions: {
+              items: [
+                {
+                  href: "/apply/contact-details",
+                  text: "Change",
+                  visuallyHiddenText: "email"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <form action="/apply/answer-check" method="post">
+        {{ button({
+          text: "Confirm"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+
+{% endblock %}

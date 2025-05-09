@@ -3,6 +3,7 @@ const express = require('express');
 
 const router = express.Router();
 
+require('./routes/apply')(router)
 require('./routes/record-vaccinations')(router)
 require('./routes/regions')(router)
 require('./routes/user-admin')(router)
