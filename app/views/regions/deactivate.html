@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  East of England
-{% endblock %}
+{% set pageName = "Deactivate " + organisation.name %}
 
 {% block header %}
   {% include "includes/header-logged-in-region.html" %}
@@ -19,7 +17,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Deactivate {{organisation.name}}</h1>
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       <p>Once this organisation has been deactivated, users will no longer be able to record vaccinations.</p>
 

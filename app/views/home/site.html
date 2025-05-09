@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  {{ site.name }} - {{ currentOrganisation.name }} – Home
-{% endblock %}
+{% set pageName = currentOrganisation.name + " - Home" %}
 
 {% set currentSection = "home" %}
 

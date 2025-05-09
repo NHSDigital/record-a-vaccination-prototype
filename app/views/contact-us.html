@@ -1,14 +1,13 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Contact us
-{% endblock %}
+{% set pageName = "Contact us" %}
+
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-xl">Contact us</h1>
+      <h1 class="nhsuk-heading-xl">{{ pageName }}</h1>
 
       <p>Telephone: <b>0121 611 0187</b> (select option 3)<br>
       Email: <a href="#">ravs.support@england.nhs.uk</a></p>

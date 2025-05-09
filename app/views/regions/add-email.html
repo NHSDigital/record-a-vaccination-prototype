@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  East of England
-{% endblock %}
+{% set pageName = "Add a user" %}
 
 {% block header %}
   {% include "includes/header-logged-in-region.html" %}
@@ -20,12 +18,12 @@
     <div class="nhsuk-grid-column-two-thirds">
 
 
-      <h1 class="nhsuk-heading-l">Add a user</h1>
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       <p>Choose a user at {{ organisation.name }}.</p>
-      
+
       <p>They must have an NHS-approved email address. See the <a href="https://digital.nhs.uk/services/care-identity-service/applications-and-services/apply-for-care-id/care-identity-email-domain-allow-list" target="_blank">list of approved email domains (opens in new tab)</a>.</p>
-      
+
       <p>They will receive an email with details of how to access the service.</p>
 
       <p>It’s their responsibility to add users and set up vaccination sites for their organisation.</p>
