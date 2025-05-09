@@ -41,6 +41,7 @@ module.exports = router => {
     data.firstName = null
     data.lastName = null
     data.email = null
+    data.clinician = null
 
     res.redirect(nextPage)
   })
