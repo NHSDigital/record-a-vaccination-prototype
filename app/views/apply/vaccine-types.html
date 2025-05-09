@@ -20,8 +20,8 @@
       <form action="/apply/contact-details" method="post">
 
         {{ checkboxes({
-          idPrefix: "example",
-          name: "example",
+          idPrefix: "vaccine-types",
+          name: "vaccineTypes",
           fieldset: {
             legend: {
               text: pageName,
@@ -34,14 +34,15 @@
           },
           items: [
             {
-              value: "email",
+              value: "COVID-19",
               text: "COVID-19"
             },
             {
-              value: "phone",
+              value: "Flu",
               text: "Flu"
             }
-          ]
+          ],
+          values: data.vaccineTypes
         }) }}
 
         {{ button({

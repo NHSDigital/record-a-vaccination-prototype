@@ -28,14 +28,14 @@
               text: "Pharmacy"
             },
             value: {
-              html: "Abbot Pharmacy"
+              html: organisation.name
             },
             actions: {
               items: [
                 {
                   href: "/apply/start",
                   text: "Change",
-                  visuallyHiddenText: "NHS number"
+                  visuallyHiddenText: "pharmacy"
                 }
               ]
             }
@@ -45,14 +45,14 @@
               text: "Vaccinations"
             },
             value: {
-              html: "COVID-19<br>Flu"
+              html: (data.vaccineTypes | join("<br>")) if data.vaccineTypes else ""
             },
             actions: {
               items: [
                 {
                   href: "/apply/vaccine-types",
                   text: "Change",
-                  visuallyHiddenText: "name"
+                  visuallyHiddenText: "vaccinations"
                 }
               ]
             }
@@ -94,10 +94,11 @@
         ]
       }) }}
 
-      {{ button({
-        text: "Continue",
-        href: "/apply/done"
-      }) }}
+      <form action="/apply/answer-check" method="post">
+        {{ button({
+          text: "Confirm"
+        }) }}
+      </form>
 
     </div>
   </div>

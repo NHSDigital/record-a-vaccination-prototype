@@ -1,34 +1,20 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Check your email" %}
+{% set pageName = "Now check your email" %}
 
 {% block header %}
   {% include "includes/header-logged-out.html" %}
 {% endblock %}
 
-
-
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+      <h2 class="nhsuk-heading-l">{{ pageName }}</h2>
 
-      <p>We’ve sent a link to your.name@nhs.net so you can verify your email address. You must do this to complete your application.</p>
-
-      <p>The link will expire in 1 hour. If you have not received an email, check your junk or spam folder.</p>
-
-
-      <p><a href="#" class="nhsuk-link">
-        Resend verification email
-      </a></p>
-
-      <hr>
-
-      <p><a href="/apply/email">[Go to email inbox]</a></p>
+      <p>We've sent you a welcome email with details of how to access the service.
+      <p>If you cannot find the email, check your spam or junk.</p>
 
     </div>
   </div>
-
-
 {% endblock %}

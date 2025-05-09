@@ -16,37 +16,8 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-      {% if (firstNameError or lastNameError or emailError or roleError or clinicianError) %}
-        {{ errorSummary({
-          "titleText": "There is a problem",
-          "errorList": [
-            {
-              "text": firstNameError,
-              "href": "#first-name"
-            } if firstNameError,
-            {
-              "text": lastNameError,
-              "href": "#last-name"
-            } if lastNameError,
-            {
-              "text": emailError,
-              "href": "#email"
-            } if emailError,
-            {
-              "text": clinicianError,
-              "href": "#clinician"
-            } if clinicianError,
-            {
-              "text": permissionLevelError,
-              "href": "#permission-level-1"
-            } if permissionLevelError
-          ]
-        }) }}
-      {% endif %}
-
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
-
 
       <p>You must use an NHS-approved email address. See the <a href="https://digital.nhs.uk/services/care-identity-service/applications-and-services/apply-for-care-id/care-identity-email-domain-allow-list" target="_blank">list of approved email domains (opens in new tab)</a>.</p>
 
@@ -77,6 +48,7 @@
             "text": lastNameError
           } if lastNameError
         }) }}
+
         {{ input({
           "label": {
             "text": "NHS-approved email address"
@@ -90,19 +62,12 @@
           } if emailError
         }) }}
 
-
-
-
-
-
-            {{ button({
-              "text": "Continue"
-            }) }}
-          </form>
-
+        {{ button({
+          "text": "Continue"
+        }) }}
+      </form>
 
     </div>
   </div>
-
 
 {% endblock %}
