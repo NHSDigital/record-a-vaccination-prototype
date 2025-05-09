@@ -90,6 +90,23 @@
                 }
               ]
             }
+          },
+          {
+            key: {
+              text: "Clinical"
+            },
+            value: {
+              text: ("Yes" if data.clinician == "yes" else "No")
+            },
+            actions: {
+              items: [
+                {
+                  href: "/apply/contact-details",
+                  text: "Change",
+                  visuallyHiddenText: "clinician status"
+                }
+              ]
+            }
           }
         ]
       }) }}

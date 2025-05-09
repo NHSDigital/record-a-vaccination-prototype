@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Your contact details" %}
+{% set pageName = "Your details" %}
 
 {% block header %}
   {% include "includes/header-logged-out.html" %}
@@ -61,6 +61,30 @@
             "text": emailError
           } if emailError
         }) }}
+
+        {{ radios({
+          name: "clinician",
+          fieldset: {
+            legend: {
+              text: "Are you a registered clinician?"
+            }
+          },
+          hint: {
+            text: "Only registered clinicians can be recorded as the vaccinator."
+          },
+          value: data.clinician,
+          items: [
+            {
+              value: "yes",
+              text: "Yes"
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+
 
         {{ button({
           "text": "Continue"
