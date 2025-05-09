@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Add batch
-{% endblock %}
+{% set pageName = "Deplete batch" %}
 
 {% set currentSection = "vaccines" %}
 
@@ -14,7 +12,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuks-heading-l">Deplete batch</h1>
+      <h1 class="nhsuks-heading-l">{{ pageName }}</h1>
 
       {{ summaryList({
         rows: [
