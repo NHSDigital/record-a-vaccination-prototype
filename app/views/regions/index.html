@@ -58,7 +58,7 @@
               </tr>
             </thead>
             <tbody class="nhsuk-table__body">
-              {% for organisation in organisations %}
+              {% for organisation in (organisations | sort(false, false, "name")) %}
                 <tr role="row" class="nhsuk-table__row">
                   <td class="nhsuk-table__cell">
                     <a href="/regions/organisations/{{ organisation.id }}">{{ organisation.name }}</a>
