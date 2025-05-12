@@ -10,7 +10,21 @@
 
       <h1 class="nhsuk-heading-l">Upload appointments spreadsheet</h1>
 
-      <p>Some instructions go here.</p>
+      <p>The spreadsheet can be in Excel (XLS) or comma-seprate-values format (CSV) and must include:</p>
+
+      <ul class="nhsuk-u-margin-bottom-6">
+        <li>NHS number of the patient with column heading "<code>NHS number</code>"</li>
+        <li>Date of the appointment with column heading "<code>Date</code>"</li>
+      </ul>
+
+      <p>You can optionally include:</p>
+
+      <ul>
+        <li>Time of the appointment with column heading "<code>Time</code>"</li>
+        <li>Which vaccine has been booked with the column heading "<code>Vaccine</code>", for example "<code>COVID-19</code>".</li>
+      </ul>
+
+      <p>You can download <a href="#">this template (XLS)</a> if it helps.</p>
 
 
       <div class="nhsuk-form-group">
@@ -20,7 +34,7 @@
 
       {{ button({
         text: "Upload",
-        href: "/appointments/day"
+        href: "/appointments/check-spreadsheet"
       }) }}
 
     </div>

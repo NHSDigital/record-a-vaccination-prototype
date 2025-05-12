@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Which vaccinations do you want to record?" %}
+
+{% block header %}
+  {% include "includes/header-logged-out.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/apply/check-pharmacy",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/apply/contact-details" method="post">
+
+        {{ checkboxes({
+          idPrefix: "vaccine-types",
+          name: "vaccineTypes",
+          fieldset: {
+            legend: {
+              text: pageName,
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          hint: {
+            text: "Select all options that are relevant to you."
+          },
+          items: [
+            {
+              value: "COVID-19",
+              text: "COVID-19"
+            },
+            {
+              value: "Flu",
+              text: "Flu"
+            }
+          ],
+          values: data.vaccineTypes
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+      </form>
+
+
+    </div>
+  </div>
+{% endblock %}

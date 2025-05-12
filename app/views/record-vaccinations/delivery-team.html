@@ -21,6 +21,19 @@
 
       <form action="/record-vaccinations/answer-delivery-team" method="post" novalidate>
 
+        {% set deliveryTeams = [
+          "Anne Ward Maternity Unit",
+          "Josephine Clinic",
+          "St Mary’s Hospital"
+        ] %}
+
+        {% set items = [] %}
+        {% for deliveryTeam in (deliveryTeams | sort) %}
+          {% set items = (items.push({
+            text: deliveryTeam,
+            value: deliveryTeam
+          }), items) %}
+        {% endfor %}
 
         {{ radios({
           idPrefix: "delivery-team",
@@ -35,23 +48,8 @@
           errorMessage: {
             text: (errors | first).text
           } if (errors | length) > 0,
-          items: [
-            {
-              value: "Anne Ward Maternity Unit",
-              text: "Anne Ward Maternity Unit",
-              checked: (data.deliveryTeam === "Anne Ward Maternity Unit")
-            },
-            {
-              value: "St Mary’s Hospital",
-              text: "St Mary’s Hospital",
-              checked: (data.deliveryTeam === "St Mary’s Hospital")
-            },
-            {
-              value: "Josephine Clinic",
-              text: "Josephine Clinic",
-              checked: (data.deliveryTeam === "Josephine Clinic")
-            }
-          ]
+          items: items,
+          value: data.deliveryTeam
         }) }}
 
         {{ button({

@@ -4,15 +4,17 @@
 
 {% set currentSection = "appointments" %}
 
+{% block beforeContent %}
+  {{ backLink({
+  href: "/appointments/index2",
+  text: "Back"
+}) }}
+{% endblock %}
+
 {% block content %}
 
-<p class="nhsuk-body-l">This example shows only the <mark>NHS number</mark>, and <mark>Date</mark> used.</p>
+<!-- <p class="nhsuk-body-l">This example shows only the <mark>NHS number</mark>, and <mark>Date</mark> used.</p> -->
 
-
-  {{ backLink({
-    href: "/appointments/site",
-    text: "Back"
-  }) }}
 <br>
 
   <style>
@@ -30,10 +32,12 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-
-
+      <div class="nhsuk-caption-l">Appointments</div>
         <h1 class="nhsuk-heading-l">23 April 2025</h1>
 
+      <p>Confirm the name and date of birth of your patient, and then record a vaccination.</p>
+
+      <h2 class="nhsuk-heading-m nhsuk-u-margin-bottom-0">Scheduled appointments</h2>
       <table role="table" class="nhsuk-table-responsive">
         <thead role="rowgroup" class="nhsuk-table__head">
           <tr role="row">
@@ -48,12 +52,6 @@
               Date of birth
             </th>
             <th role="columnheader" class="" scope="col">
-              Address
-            </th>
-            <th role="columnheader" class="" scope="col">
-              Contact
-            </th>
-            <th role="columnheader" class="" scope="col">
               </th>
 
           </tr>
@@ -61,9 +59,9 @@
         <tbody class="nhsuk-table__body">
           {% for appointment in data.appointments %}
             <tr role="row" class="nhsuk-table__row">
-    
+
               <td class="nhsuk-table__cell">
-                <a class="nhsuk-link" href="/record-vaccinations/patient-history">{{ appointment.patient.firstName }} {{ appointment.patient.lastName }}</a>
+                {{ appointment.patient.firstName }} {{ appointment.patient.lastName }}
               </td>
               <td class="nhsuk-table__cell">
                 {{ appointment.patient.nhsNumber }}
@@ -71,12 +69,15 @@
               <td class="nhsuk-table__cell">
                 {{ appointment.patient.dateOfBirth | govukDate }}
               </td>
-              <td class="nhsuk-table__cell">
+              <!-- <td class="nhsuk-table__cell">
                 73 Roman Rd<br>Leeds<br> LS2 5ZN
               </td>
               <td class="nhsuk-table__cell">
                 {{ appointment.patient.phoneNumber }}
                 <br>{{ appointment.patient.email }}
+              </td> -->
+              <td class="nhsuk-table__cell">
+                <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
               </td>
             </tr>
           {% endfor %}

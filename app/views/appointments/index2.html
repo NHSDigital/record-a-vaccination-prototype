@@ -10,21 +10,19 @@
 
       <h1 class="nhsuk-heading-l">Appointments</h1>
 
-      <p>Add and view appointments for your sites.</p>
 
-      <form action="/appointments/create" method="post">
-        
 
         {{ button({
-          text: "Add appointments"
+          text: "Import appointments",
+          href: "/appointments/import"
         }) }}
-       
-        <br><br>
-        <h2 class="nhsuk-heading-m">Dates</h2>
 
-        <p><a href="/appointments/mvp">23 April 2025, Wednesday</a></p>
-        <p><a href="/appointments/mvp">24 April 2025, Thursday</a></p>
-        <p><a href="/appointments/mvp">25 April 2025, Friday</a></p>
+        <br><br>
+        <h2 class="nhsuk-heading-m">Imported appointments</h2>
+
+        <p><a href="/appointments/mvp">Wednesday 23 April 2025 (123 appointments)</a></p>
+        <p><a href="/appointments/mvp">Thursday 24 April 2025</a></p>
+        <p><a href="/appointments/mvp">Friday 25 April 2025</a></p>
 
 
     </div>
