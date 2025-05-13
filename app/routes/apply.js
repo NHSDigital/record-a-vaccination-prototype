@@ -35,15 +35,18 @@ module.exports = router => {
       nextPage = '/apply/check-your-email'
     }
 
-    // Reset answers
-    data.organisationCode = null
-    data.vaccineTypes = null
-    data.firstName = null
-    data.lastName = null
-    data.email = null
-    data.clinician = null
-
     res.redirect(nextPage)
+  })
+
+  // Welcome email mockup
+  router.get('/apply/welcome-email', (req, res) => {
+    const data = req.session.data
+    const organisationCode = data.organisationCode
+    const organisation = data.organisations.find((organisation) => organisation.id === organisationCode)
+
+    res.render('apply/welcome-email', {
+      organisation
+    })
   })
 
 }
