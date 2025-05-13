@@ -151,10 +151,3 @@ padding: 10px 8px;
 width: 100%;
 border-radius: 3px;
 }
-
-
-// Temporary fix until this is fixed in NHS frontend
-// See https://github.com/nhsuk/nhsuk-frontend/pull/1292
-.nhsuk-hero a.nhsuk-button {
-  color: $nhsuk-text-color;
-}
