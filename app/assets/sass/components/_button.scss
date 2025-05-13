@@ -5,21 +5,7 @@
 // (eg a search box) it is the same height.
 .app-button--small {
   @include nhsuk-typography-responsive(16);
-  padding: nhsuk-spacing(1) 12px;
-
-  &.app-button--secondary,
-  &.app-button--secondary-warning {
-    // Adjust padding to account for removal of 2px bottom border
-    padding-bottom: #{nhsuk-spacing(1) + 1px};
-    padding-top: #{nhsuk-spacing(1) + 1px};
-
-    &:active {
-      margin-bottom: -1px;
-      // Revert padding to account for reintroduction of 2px bottom border
-      padding-bottom: nhsuk-spacing(1);
-      padding-top: nhsuk-spacing(1);
-    }
-  }
+  padding: nhsuk-spacing(2) 12px;
 }
 
 .app-button--min-width {
