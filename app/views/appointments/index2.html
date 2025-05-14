@@ -11,18 +11,41 @@
       <h1 class="nhsuk-heading-l">Appointments</h1>
 
 
+      <p class="nhsuk-body-l">Upload pre-booked appointments from your booking system to RAVS. </p>
+
 
         {{ button({
-          text: "Import appointments",
-          href: "/appointments/import"
+          text: "Add appointments",
+          href: "/appointments/add"
         }) }}
 
-        <br><br>
-        <h2 class="nhsuk-heading-m">Imported appointments</h2>
 
-        <p><a href="/appointments/mvp">Wednesday 23 April 2025 (123 appointments)</a></p>
-        <p><a href="/appointments/mvp">Thursday 24 April 2025</a></p>
-        <p><a href="/appointments/mvp">Friday 25 April 2025</a></p>
+    
+
+<table class="nhsuk-table-responsive" role="table">
+  <caption class="nhsuk-table__caption">Uploaded appointments</caption>
+  <thead class="nhsuk-table__head" role="rowgroup">
+    <tr role="row">
+      <th scope="col" class="nhsuk-table__header nhsuk-u-width-one-half" role="columnheader">Date</th>
+      <th scope="col" class="nhsuk-table__header nhsuk-u-width-one-quarter" role="columnheader">Appointments</th>
+    </tr>
+  </thead>
+  <tbody class="nhsuk-table__body">
+    <tr class="nhsuk-table__row" role="row">
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p><a href="/appointments/mvp">Wednesday 23 April 2025</a></p></td>
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Appointments </span>123 </td>
+    </tr>
+    <tr class="nhsuk-table__row" role="row">
+     <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p><a href="/appointments/mvp">Thursday 24 April 2025</a></p></td>
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Appointments </span>90 </td>
+    </tr>
+    <tr class="nhsuk-table__row" role="row">
+     <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p><a href="/appointments/mvp">Tuesday 21 June 2025</a></p>
+
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Appointments </span>100 </td>
+    </tr>
+  </tbody>
+</table>
 
 
     </div>

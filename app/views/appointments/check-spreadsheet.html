@@ -6,7 +6,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/appointments/upload-spreadsheet",
+    href: "/appointments/upload-spreadsheet1",
     text: "Back"
   }) }}
 {% endblock %}
@@ -15,18 +15,22 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Check import</h1>
+      <h1 class="nhsuk-heading-l">Check upload</h1>
 
-      <p>Your spreadsheet contains:</p>
-
+      <p>100 available appointments for Tuesday 21 June 2025:</p>
+    
       <ul>
-        <li>123 valid rows for appointments across 3 days</li>
-        <li>0 invalid rows</li>
+        
+        <li>100 valid rows for NHS numbers</li>
+
+        <li>99 valid rows for Time</li>
+
       </ul>
+
 
       {{
         button({
-          text: "Confirm import",
+          text: "Confirm",
           href: "/appointments/index2"
         })
       }}

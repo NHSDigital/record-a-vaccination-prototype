@@ -43,6 +43,9 @@
           <tr role="row">
 
             <th role="columnheader" class="" scope="col">
+              Time
+            </th>
+            <th role="columnheader" class="" scope="col">
               Name
             </th>
             <th role="columnheader" class="" scope="col">
@@ -60,6 +63,9 @@
           {% for appointment in data.appointments %}
             <tr role="row" class="nhsuk-table__row">
 
+              <td class="nhsuk-table__cell">
+                09:00
+              </td>
               <td class="nhsuk-table__cell">
                 {{ appointment.patient.firstName }} {{ appointment.patient.lastName }}
               </td>
