@@ -1,7 +1,7 @@
 
 {% extends 'layout.html' %}
 
-{% set pageName = "Vaccine product suitability warning" %}
+{% set pageName = "Vaccine product age warning" %}
 
 {% set currentSection = "vaccinate" %}
 
@@ -15,7 +15,7 @@
 
       <h1 class="nhsuk-heading-l">Adjuvanted Quadrivalent Influenza Vaccine (aQIV) may not be recommended</h1>
 
-      <p>Jodie Brown is 64 years old. Adjuvanted Quadrivalent Influenza Vaccine (aQIV) is not usually recommended for people under the age of 65.</p> 
+      <p>{{ data.patientName }} is 64 years old. Adjuvanted Quadrivalent Influenza Vaccine (aQIV) is not usually recommended for people under the age of 65.</p> 
       <p>Check before going ahead or refer to a prescriber for a Patient Specific Direction.</p>
       
     </div>
