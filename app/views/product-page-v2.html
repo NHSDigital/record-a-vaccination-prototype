@@ -80,10 +80,12 @@
       <div class="nhsuk-grid-column-one-half">
         <h3 class="nhsuk-heading-m app-numbered-heading">
           <span class="app-numbered-heading__number">1</span>
-          <span class="app-numbered-heading__title">Sign up in minutes</span>
+          <span class="app-numbered-heading__title">Sign up</span>
         </h3>
         <div class="app-numbered-heading__content">
-          <p>Easy to use sign up form, just you NHS approved email and site ODS code needed.</p>
+          <p>Sign up with your NHS email and get an account straight away.</p>
+
+          <!-- <p>Signing up is quick and simple, whether you’re new to vaccinations or switching systems. </p> -->
         </div>
       </div>
       <div class="nhsuk-grid-column-one-half nhsuk-u-padding-left-8">
@@ -96,10 +98,10 @@
 
         <h3 class="nhsuk-heading-m app-numbered-heading">
           <span class="app-numbered-heading__number">2</span>
-          <span class="app-numbered-heading__title">Set up your site</span>
+          <span class="app-numbered-heading__title">Get ready</span>
         </h3>
         <div class="app-numbered-heading__content">
-          <p>Easily add products and staff to begin recording vaccines.</p>
+          <p>Set up accounts for your colleagues and add vaccine products.</p>
         </div>
       </div>
       <div class="nhsuk-grid-column-one-half nhsuk-u-margin-top-4 nhsuk-u-padding-left-8">
@@ -114,7 +116,9 @@
           <span class="app-numbered-heading__title">Record vaccinations</span>
         </h3>
         <div class="app-numbered-heading__content">
-          <p>Simple, quick and clinically approved vaccination recording. </p>
+          <p>Look up patients, check their vaccination history and record the vaccines given.</p>
+
+          <!-- <p>Simple, quick and clinically approved vaccination recording. </p> -->
         </div>
       </div>
       <div class="nhsuk-grid-column-one-half nhsuk-u-margin-top-4 nhsuk-u-padding-left-8">
@@ -126,10 +130,10 @@
       <div class="nhsuk-grid-column-one-half">
         <h3 class="nhsuk-heading-m app-numbered-heading">
           <span class="app-numbered-heading__number">4</span>
-          <span class="app-numbered-heading__title">Report</span>
+          <span class="app-numbered-heading__title">Reports</span>
         </h3>
         <div class="app-numbered-heading__content">
-          <p>Create bespoke reports for up to a month.</p>
+          <p>See how many vaccines you are giving. Download data you need for reporting.</p>
         </div>
       </div>
       <div class="nhsuk-grid-column-one-half nhsuk-u-margin-top-4 nhsuk-u-padding-left-8">
@@ -141,11 +145,14 @@
     <div class="nhsuk-grid-row">
       <div class="nhsuk-grid-column-one-half">
         <h3 class="nhsuk-heading-m app-numbered-heading">
-          <span class="app-numbered-heading__number">4</span>
-          <span class="app-numbered-heading__title">Get paid <span class="nhsuk-tag nhsuk-tag--blue">Pharmacies only</span</span>
+          <span class="app-numbered-heading__number">5</span>
+          <span class="app-numbered-heading__title">Get paid</span>
         </h3>
         <div class="app-numbered-heading__content">
-          <p>Automated payments through integration with the NHS Business Services Authority (BSA).</p>
+          <!-- <p><span class="nhsuk-tag nhsuk-tag--blue">Pharmacies</span></p> -->
+          <p>Pharmacies are paid automatically by the NHS Business Services Authority (BSA).
+          <!-- <span class="nhsuk-tag nhsuk-tag--blue">Pharmacies only</span> -->
+</p>
         </div>
       </div>
       <div class="nhsuk-grid-column-one-half nhsuk-u-margin-top-4 nhsuk-u-padding-left-8">
@@ -163,44 +170,20 @@
     <div class="nhsuk-grid-row">
       <div class="nhsuk-grid-column-two-thirds">
 
-        <h2 class="nhuk-heading-l nhsuk-u-margin-bottom-5">Get started</h2>
+        <h2 class="nhuk-heading-l nhsuk-u-margin-bottom-5">Find out more</h2>
 
-        <h3 class="nhsuk-heading-m">Pharmacies can sign up now</h3>
-        <p>All community pharmacies in England commissioned to deliver COVID-19 and flu vaccinations can use this service for free.</p>
+      <h3 class="nhsuk-heading-m">Pharmacies can sign up now</h3>
+      <p>All community pharmacies in England offering COVID-19 or flu vaccinations can use this service for free.</p>
 
-        <p class="nhsuk-body">The service is fully integrated with NHS Business Services Authority (NHSBSA) to make sure you are paid for each vaccination delivered.</p>
+      <!-- <p>If you own or run a pharmacy:</p> -->
+      {{ actionLink({
+        text: "Sign up",
+        href: "/apply/start"
+      }) }}
 
-        <p>If you own or run a pharmacy:</p>
-        {{ actionLink({
-          text: "Sign up",
-          href: "/apply/start"
-        }) }}
-        <p>or <a href="#">try our demo site</a></p>
+      <p><a href="#">Attend an online webinar</a></p>
 
-        <hr class="nhsuk-section-break nhsuk-section-break--l nhsuk-section-break--visible">
-
-        <h3 class="nhsuk-heading-m">Maternity services</h3>
-        <p>All NHS maternity services are using the service to record vaccinations.</p>
-
-        <p>You can record RSV, pertussis, COVID-19 and flu vaccinations.</p>
-
-        <p><a href="#">Get in contact</a></p>
-
-        <hr class="nhsuk-section-break nhsuk-section-break--l nhsuk-section-break--visible">
-
-        <h3 class="nhsuk-heading-m">NHS Hospital hubs and vaccination centres</h3>
-
-        <p>All NHS Trusts can use the service to record COVID-19 and flu vaccinations for staff and patients.</p>
-
-        <p class="nhsuk-body">Some text</p>
-
-
-        <hr class="nhsuk-section-break nhsuk-section-break--l nhsuk-section-break--visible">
-
-        <h3 class="nhsuk-heading-m">GP groupings (PCNs)</h3>
-        <p>Assurance for vaccinations delivered by GPs is pending.</p>
-
-        <p class="nhsuk-body">Some text</p>
+      <p><a href="#">Contact us if you have questions</a></p>
 
       </div>
     </div>
