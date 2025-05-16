@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check import" %}
+
+{% set currentSection = "appointments" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/appointments/upload-spreadsheet1",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Check upload</h1>
+
+      <p>100 available appointments for Tuesday 21 June 2025:</p>
+    
+      <ul>
+        
+        <li>100 valid rows for NHS numbers</li>
+
+        <li>99 valid rows for Time</li>
+
+      </ul>
+
+
+      {{
+        button({
+          text: "Confirm",
+          href: "/appointments/index2"
+        })
+      }}
+
+    </div>
+  </div>
+
+{% endblock %}

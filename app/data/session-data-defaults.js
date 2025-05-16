@@ -2,11 +2,13 @@ const organisations = require('./organisations')
 const regions = require('./regions')
 const featureFlags = require('./feature-flags')
 const users = require('./users')
+const appointments = require('./appointments')
 
 module.exports = {
   organisations: organisations,
   regions: regions,
   featureFlags: featureFlags,
+  appointments: appointments,
   users: users,
   nhsNumberKnown: "yes",
   currentUserId: "2387441662601",

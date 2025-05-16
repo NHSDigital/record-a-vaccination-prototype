@@ -5,7 +5,14 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/record-vaccinations/delivery-team" }) }}
+  {% if data.nhsNumber %}
+    {{ backLink({
+      href: "/appointments/day",
+      text: "Back to Today’s appointments"
+    }) }}
+  {% else %}
+    {{ backLink({ href: "/record-vaccinations/delivery-team" }) }}
+  {% endif %}
 {% endblock %}
 
 {% block content %}

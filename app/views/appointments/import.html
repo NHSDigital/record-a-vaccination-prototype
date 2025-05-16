@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Import appointments" %}
+
+{% set currentSection = "appointments" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/appointments/",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p>Import appointments to make it quicker and easier to record vaccinations.</p>
+
+      <p>For some appointment systems this can be done automatically. For others you will need to upload a spreadsheet.</p>
+
+      <form action="/appointments/answer-setup" method="post">
+        {{ radios({
+          name: "appointmentSystem",
+          fieldset: {
+            legend: {
+              text: "Where would you like to import appointments from?",
+              classes: "nhsuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "",
+              text: "Manage your appointments (NHS National booking system)"
+            },
+            {
+              value: "",
+              text: "Other supplier 1"
+            },
+            {
+              value: "",
+              text: "Other supplier 2"
+            },
+            {
+              value: "",
+              text: "Other supplier 3"
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "spreadsheet",
+              text: "Upload a spreadsheet"
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
