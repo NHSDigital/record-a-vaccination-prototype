@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Which team are your appointmetns for?" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/appointments/add" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      <form action="/appointments/add-nhs-number" method="post" novalidate>
+
+<h1 class="nhsuk-heading-l">Add NHS numbers for Wednesday 21 June 2025</h1>
+
+
+
+<div class="nhsuk-form-group">
+  <label class="nhsuk-label" for="example-longer">
+    NHS numbers
+  </label>
+  <div class="nhsuk-hint" id="example-longer-hint">
+    Do not include personal or financial information, for example, your National Insurance number or credit card details.
+  </div> <textarea class="nhsuk-textarea" id="example-longer" name="example-longer" rows=" 10 " style="width:200px" aria-describedby="example-longer-hint"></textarea>
+</div>
+
+
+    </div>
+  </div>
+
+
+
+  <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+  Continue
+</button>
+
+{% endblock %}
+

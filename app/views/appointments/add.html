@@ -18,11 +18,46 @@
 
       <div class="nhsuk-form-group">
 
-  <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
-    <legend class="nhsuk-fieldset__legend nhsuk-label--l">
+ 
+</div>
+
+
+<div class="nhsuk-form-group">
+
+  <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
+    <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
       <h1 class="nhsuk-fieldset__heading">
-        When are your appointments scheduled?
+        When are your appointments?
       </h1>
+    </legend>
+   
+    <div class="nhsuk-radios nhsuk-radios--conditional">
+      <div class="nhsuk-radios__item">
+        <input class="nhsuk-radios__input" id="contact-1" name="contact" type="radio" value="email" aria-controls="conditional-contact-1" aria-expanded="false">
+        <label class="nhsuk-label nhsuk-radios__label" for="contact-1">
+          Today
+        </label>
+      </div>
+      
+      <div class="nhsuk-radios__item">
+        <input class="nhsuk-radios__input" id="contact-2" name="contact" type="radio" value="phone" aria-controls="conditional-contact-2" aria-expanded="false">
+        <label class="nhsuk-label nhsuk-radios__label" for="contact-2">
+          Tomorrow
+        </label>
+      </div>
+    
+      <div class="nhsuk-radios__item">
+        <input class="nhsuk-radios__input" id="contact-3" name="contact" type="radio" value="" aria-controls="conditional-contact-3" aria-expanded="false">
+        <label class="nhsuk-label nhsuk-radios__label" for="contact-3">
+          Other
+        </label>
+      </div>
+      <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-contact-3">
+        
+
+         <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
+    <legend class="nhsuk-fieldset__legend nhsuk-label--s">
+        Date
     </legend>
     <div class="nhsuk-hint" id="example-hint">
       For example, 15 3 2025
@@ -51,11 +86,16 @@
       </div>
     </div>
   </fieldset>
+
+      </div>
+    </div>
+  </fieldset>
 </div>
+
 
       {{ button({
         text: "Continue",
-        href: "/appointments/upload-spreadsheet1"
+        href: "/appointments/team"
       }) }}
 
     </div>
