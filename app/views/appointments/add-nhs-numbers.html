@@ -1,11 +1,11 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Which team are your appointmetns for?" %}
+{% set pageName = "Add NHS numbers" %}
 
-{% set currentSection = "vaccinate" %}
+{% set currentSection = "appointments" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/appointments/add" }) }}
+  {{ backLink({ href: "/appointments/team" }) }}
 {% endblock %}
 
 {% block content %}
@@ -19,25 +19,27 @@
         }) }}
       {% endif %}
 
-      <form action="/appointments/add-nhs-number" method="post" novalidate>
+      <form action="/appointments/check1" method="post" novalidate>
 
-<h1 class="nhsuk-heading-l">Add NHS numbers for Wednesday 21 June 2025</h1>
-
+<h1 class="nhsuk-heading-l">Add patient NHS numbers</h1>
 
 
 <div class="nhsuk-form-group">
   <label class="nhsuk-label" for="example-longer">
-    NHS numbers
+    Copy patient NHS numbers from your booked appointments for Wednesday 4 June 2025 at Anne Ward Maternity Unit.
   </label>
+  <div class="nhsuk-hint" id="contact-hint">
+    1 NHS number allowed per line.
+  </div>
   <div class="nhsuk-hint" id="example-longer-hint">
-    Do not include personal or financial information, for example, your National Insurance number or credit card details.
-  </div> <textarea class="nhsuk-textarea" id="example-longer" name="example-longer" rows=" 10 " style="width:200px" aria-describedby="example-longer-hint"></textarea>
+  </div> 
+
+  <textarea class="nhsuk-textarea" id="example-longer" name="example-longer" rows=" 10 " style="width:200px" aria-describedby="example-longer-hint"></textarea>
 </div>
 
 
     </div>
   </div>
-
 
 
   <button class="nhsuk-button" data-module="nhsuk-button" type="submit">

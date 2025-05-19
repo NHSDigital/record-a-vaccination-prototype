@@ -1,8 +1,11 @@
+
 {% extends 'layout.html' %}
 
-{% set pageName = "Which team are your appointmetns for?" %}
+{% set currentSection = "appointments" %}
 
-{% set currentSection = "vaccinate" %}
+{% set pageName = "Which team is vaccinating?" %}
+
+
 
 {% block beforeContent %}
   {{ backLink({ href: "/appointments/add" }) }}
@@ -19,43 +22,51 @@
         }) }}
       {% endif %}
 
-      <form action="/appointments/add-nhs-numbers" method="post" novalidate>
 
-        {% set deliveryTeams = [
-          "Anne Ward Maternity Unit",
-          "Josephine Clinic",
-          "St Mary’s Hospital"
-        ] %}
+      <div class="nhsuk-form-group">
 
-        {% set items = [] %}
-        {% for deliveryTeam in (deliveryTeams | sort) %}
-          {% set items = (items.push({
-            text: deliveryTeam,
-            value: deliveryTeam
-          }), items) %}
-        {% endfor %}
+        <fieldset class="nhsuk-fieldset">
+          <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+            <h1 class="nhsuk-fieldset__heading">
+              Which team is vaccinating?
+            </h1>
+          </legend>
 
-        {{ radios({
-          idPrefix: "delivery-team",
-          name: "deliveryTeam",
-          fieldset: {
-            legend: {
-              text: "Which team is vaccinating?",
-              classes: "nhsuk-fieldset__legend--l",
-              isPageHeading: true
-            }
-          },
-          errorMessage: {
-            text: (errors | first).text
-          } if (errors | length) > 0,
-          items: items,
-          value: data.deliveryTeam
-        }) }}
+          <div class="nhsuk-hint" id="contact-hint">
+            Select one option
+          </div>
 
-        {{ button({
-          text: "Continue"
-        })}}
-      </form>
+          <div class="nhsuk-radios">
+            <div class="nhsuk-radios__item">
+              <input class="nhsuk-radios__input" id="example-1" name="example" type="radio" value="yes">
+              <label class="nhsuk-label nhsuk-radios__label" for="example-1">
+                Anne Ward Maternity Unit
+              </label>
+            </div>
+            <div class="nhsuk-radios__item">
+              <input class="nhsuk-radios__input" id="example-2" name="example" type="radio" value="no">
+              <label class="nhsuk-label nhsuk-radios__label" for="example-2">
+                Josephine Clinic
+              </label>
+            </div>
+            <div class="nhsuk-radios__item">
+              <input class="nhsuk-radios__input" id="example-2" name="example" type="radio" value="no">
+              <label class="nhsuk-label nhsuk-radios__label" for="example-2">
+                St Mary’s Hospital
+              </label>
+            </div>
+
+          </div>
+        </fieldset>
+      </div>
+
+
+      {{ button({
+        text: "Continue",
+        href: "/appointments/add-nhs-numbers"
+      }) }}
+
+
 
     </div>
   </div>

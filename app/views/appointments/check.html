@@ -1,41 +1,110 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Check import" %}
+{% set pageName = "Check appointments" %}
 
-{% set currentSection = "appointments" %}
+{% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({
-    href: "/appointments/add1",
-    text: "Back"
-  }) }}
+  {{ backLink({ href: "/appointments/add-nhs-numbers" }) }}
 {% endblock %}
+
+{% set consentHtml %}
+  {% if data.consent == "patient" %}
+    Patient
+  {% elseif data.consent == "Clinician acting in the patient’s best interests" %}
+    {{ data.consentClinicianName }}
+    <br>Clinician
+  {% elseif data.consent == "Person with lasting power of attorney for health and welfare" %}
+    {{ data.consentAttorneyName }}
+    <br>{{ data.consentAttorneyRelationship }}
+    <br>Power of attorney
+  {% elseif data.consent == "Parent or guardian" %}
+    {{ data.consentParentName }}
+    <br>Parent or guardian
+  {% elseif data.consent == "Independent mental capacity advocate" %}
+    {{ data.consentAdvocateName }}
+    <br>Independent mental capacity advocate
+  {% elseif data.consent == "Court appointed deputy" %}
+    {{ data.consentDeputyName }}
+    <br>{{ data.consentDeputyRelationship }}
+    <br>Court appointed deputy
+  {% endif %}
+{% endset %}
+
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Check upload</h1>
-    
-      <ul>
-        
-        <li>Tuesday 21 June 2025 (100 appointmnets)</li>
+      <h1 class="nhsuk-heading-l">Check appointment details</h1>
 
-        <li>Wednesday 22 June 2025 (110 appointments)</li>
+      <h2 class="nhsuk-heading-m"></h2>
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Date"
+            },
+            value: {
+              text: "Tuesday 20 May 2025"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/appointments/add",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                } if not data.nhsNumber
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Team"
+            },
+            value: {
+              text: "Anne Ward Maternity Unit"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/appointments/team",
+                  text: "Change",
+                  visuallyHiddenText: "date of birth"
+                } if not data.nhsNumber
+              ]
+            }
+          },
+         
+          {
+            key: {
+              text: "Appointments"
+            },
+            value: {
+              text: "110"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/appointments/add-nhs-numbers",
+                  text: "Change",
+                  visuallyHiddenText: "gender"
+                } if not data.nhsNumber
+              ]
+            }
+          } if not data.nhsNumber
+        ]
+      }) }}
 
-        <li>Thursday 23 June 2025 (120 appointments)</li>
+      <form action="/appointments/index2" method="post" novalidate>
 
-      </ul>
-
-
-      {{
-        button({
-          text: "Confirm",
-          href: "/appointments/index2"
-        })
-      }}
+        {{ button({
+          text: "Confirm"
+        })}}
+      </form>
 
     </div>
   </div>
 
 {% endblock %}
+
