@@ -2,12 +2,15 @@ const organisations = require('./organisations')
 const regions = require('./regions')
 const featureFlags = require('./feature-flags')
 const users = require('./users')
+const vaccines = require('./vaccines')
 
 module.exports = {
   organisations: organisations,
   regions: regions,
   featureFlags: featureFlags,
   users: users,
+  vaccines: vaccines,
+  vaccineStock: [],
   nhsNumberKnown: "yes",
   currentUserId: "2387441662601",
   currentOrganisationId: "RW3",
@@ -87,7 +90,7 @@ module.exports = {
       editable: true
     }
   ],
-  vaccines: [
+  xvaccines: [
     {
       id: "123456",
       vaccine: "COVID-19",

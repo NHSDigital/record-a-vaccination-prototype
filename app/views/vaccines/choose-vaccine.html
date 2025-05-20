@@ -19,187 +19,58 @@
 
           <form action="/vaccines/add-batch" method="post" novalidate="true">
 
-            {% set covid19Product %}
-              {{ radios({
-                "idPrefix": "vaccineProductCovid",
-                "name": "vaccineProduct",
-                "fieldset": {
-                  "legend": {
-                    "text": "Vaccine product"
-                  }
-                },
-                "items": [
-                  {
-                    "value": "Comirnaty 30 JN.1",
-                    "text": "Comirnaty 30 JN.1",
-                    checked: (data.vaccineProduct == "Comirnaty 30 JN.1")
-                  },
-                  {
-                    "value": "Comirnaty 10 JN.1",
-                    "text": "Comirnaty 10 JN.1",
-                    checked: (data.vaccineProduct == "Comirnaty 10 JN.1")
-                  },
-                  {
-                    "value": "Comirnaty 3 JN.1",
-                    "text": "Comirnaty 3 JN.1",
-                    checked: (data.vaccineProduct == "Comirnaty 3 JN.1")
-                  },
-                  {
-                    "value": "Spikevax JN.1",
-                    "text": "Spikevax JN.1",
-                    checked: (data.vaccineProduct == "Spikevax JN.1")
-                  }
-                ]
-              }) }}
-            {% endset %}
+      {% set items = [] %}
 
-            {% set fluProduct %}
-              {{ radios({
-                "idPrefix": "vaccineProductFlu",
-                "name": "vaccineProduct",
-                "fieldset": {
-                  "legend": {
-                    "text": "Vaccine product"
-                  }
-                },
-                "items": [
-                  {
-                    "value": "Fluenz Tetra - LAIV",
-                    "text": "Fluenz Tetra - LAIV",
-                    checked: (data.vaccineProduct == "Fluenz Tetra - LAIV")
-                  },
-                  {
-                    "value": "Quadrivalent Influenza vaccine - QIVe",
-                    "text": "Quadrivalent Influenza vaccine - QIVe",
-                    checked: (data.vaccineProduct == "Quadrivalent Influenza vaccine - QIVe")
-                  },
-                  {
-                    "value": "Quadrivalent Influvac sub - unit Tetra - QIVe",
-                    "text": "Quadrivalent Influvac sub - unit Tetra - QIVe",
-                    checked: (data.vaccineProduct == "Quadrivalent Influvac sub - unit Tetra - QIVe")
-                  },
-                  {
-                    "value": "Flucelvax Tetra - QIVc",
-                    "text": "Flucelvax Tetra - QIVc",
-                    checked: (data.vaccineProduct == "Flucelvax Tetra - QIVc")
-                  },
-                  {
-                    "value": "Supemtek - QIVr",
-                    "text": "Supemtek - QIVr",
-                    checked: (data.vaccineProduct == "Supemtek - QIVr")
-                  },
-                  {
-                    "value": "Fluad Tetra - aQIV",
-                    "text": "Fluad Tetra - aQIV",
-                    checked: (data.vaccineProduct == "Fluad Tetra - aQIV")
-                  },
-                  {
-                    "value": "Cell-based Quadrivalent - QIVc",
-                    "text": "Cell-based Quadrivalent - QIVc",
-                    checked: (data.vaccineProduct == "Cell-based Quadrivalent - QIVc")
-                  },
-                  {
-                    "value": "Adjuvanted Quadrivalent - aQIV",
-                    "text": "Adjuvanted Quadrivalent - aQIV",
-                    checked: (data.vaccineProduct == "Adjuvanted Quadrivalent - aQIV")
-                  }
-                ]
-              }) }}
-            {% endset %}
+          {% for vaccine in (data.vaccines) %}
 
-            {% set rsvProduct %}
-              {{ radios({
-                "idPrefix": "vaccineProductRsv",
-                "name": "vaccineProduct",
-                "fieldset": {
-                  "legend": {
-                    "text": "Vaccine product"
-                  }
-                },
-                "items": [
-                  {
-                    "value": "Abrysvo",
-                    "text": "Abrysvo",
-                    checked: (data.vaccineProduct == "Abrysvo")
-                  },
-                  {
-                    "value": "Arexvy",
-                    "text": "Arexvy",
-                    checked: (data.vaccineProduct == "Arexvy")
-                  }
-                ]
-              }) }}
-            {% endset %}
+            {% if vaccine.products %}
 
-            {% set pertussisProduct %}
-              {{ radios({
-                "idPrefix": "vaccineProductPertussis",
-                "name": "vaccineProduct",
-                "fieldset": {
-                  "legend": {
-                    "text": "Vaccine product"
-                  }
-                },
-                "items": [
-                  {
-                    "value": "Pertussis product A",
-                    "text": "Pertussis product A",
-                    checked: (data.vaccineProduct == "Pertussis product A")
-                  },
-                  {
-                    "value": "Pertussis product B",
-                    "text": "Pertussis product B",
-                    checked: (data.vaccineProduct == "Pertussis product B")
-                  }
-                ]
-              }) }}
-            {% endset %}
+              {% set productItems = [] %}
+              {% for vaccineProduct in (vaccine.products) %}
+                {% set productItems = (productItems.push({
+                  value: vaccineProduct.name,
+                  text: vaccineProduct.name
+                }), productItems) %}
+              {% endfor %}
 
-            {{ radios({
-              "idPrefix": "vaccine",
-              "name": "vaccine",
-              "fieldset": {
-                "legend": {
-                  "text": "Choose vaccine",
-                  "classes": "nhsuk-fieldset__legend--xl",
-                  "isPageHeading": true
-                }
-              },
-              "items": [
-                {
-                  "value": "COVID-19",
-                  "text": "COVID-19",
-                  checked: (data.vaccine == "COVID-19"),
-                  conditional: {
-                    html: covid19Product
-                  }
-                },
-                {
-                  "value": "Flu",
-                  "text": "Flu",
-                  checked: (data.vaccine == "Flu"),
-                  conditional: {
-                    html: fluProduct
-                  }
-                },
-                {
-                  "value": "RSV",
-                  "text": "RSV",
-                  checked: (data.vaccine == "RSV"),
-                  conditional: {
-                    html: rsvProduct
-                  }
-                },
-                {
-                  "value": "Pertussis",
-                  "text": "Pertussis",
-                  checked: (data.vaccine == "Pertussis"),
-                  conditional: {
-                    html: pertussisProduct
-                  }
-                }
-              ]
-            }) }}
+              {% set conditionalHtml %}
+                {{ radios({
+                  "idPrefix": "vaccineProduct" + vaccine.name,
+                  "name": "vaccineProduct",
+                  "fieldset": {
+                    "legend": {
+                      "text": "Vaccine product"
+                    }
+                  },
+                  "items": productItems
+                }) }}
+              {% endset %}
+            {% endif %}
+
+            {% set items = (items.push({
+              value: vaccine.name,
+              text: vaccine.name,
+              conditional: {
+                html: conditionalHtml
+              } if vaccine.products
+            }), items) %}
+          {% endfor %}
+
+          {{ radios({
+            "idPrefix": "vaccine",
+            "name": "vaccine",
+            "fieldset": {
+              "legend": {
+                "text": pageName,
+                "classes": "nhsuk-fieldset__legend--l",
+                "isPageHeading": true
+              }
+            },
+            errorMessage: {
+              text: vaccineError
+            } if vaccineError,
+            "items": items
+          }) }}
 
 
             {{ button({
