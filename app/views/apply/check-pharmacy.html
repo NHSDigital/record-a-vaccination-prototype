@@ -34,7 +34,7 @@
               text: "Type"
             },
             value: {
-              html: organisation.type
+              text: organisation.type
             }
           },
           {
@@ -50,7 +50,7 @@
               text: "Address"
             },
             value: {
-                html: organisation.address.line1 + "<br>" + organisation.address.town + "<br>" + organisation.address.postcode
+                html: (organisation.address.line1 + "<br>" + organisation.address.town + "<br>" + organisation.address.postcode) if organisation.address else ""
               }
           }
         ]
