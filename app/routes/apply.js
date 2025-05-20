@@ -6,6 +6,7 @@ module.exports = router => {
     const data = req.session.data
     const organisationCode = data.organisationCode
     const organisation = data.organisations.find((organisation) => organisation.id === organisationCode)
+    if (!organisation) { res.redirect('/apply/start'); return }
 
     res.render('apply/check-pharmacy', {
       organisation
@@ -17,8 +18,22 @@ module.exports = router => {
     const data = req.session.data
     const organisationCode = data.organisationCode
     const organisation = data.organisations.find((organisation) => organisation.id === organisationCode)
+    if (!organisation) { res.redirect('/apply/start'); return }
 
     res.render('apply/check', {
+      organisation
+    })
+  })
+
+  // Check your email page
+  router.get('/apply/check-your-email', (req, res) => {
+    const data = req.session.data
+    const organisationCode = data.organisationCode
+    const organisation = data.organisations.find((organisation) => organisation.id === organisationCode)
+
+    if (!organisation) { res.redirect('/apply/start'); return }
+
+    res.render('apply/check-your-email', {
       organisation
     })
   })
@@ -27,9 +42,10 @@ module.exports = router => {
   // Routing after the final check answers page
   router.post('/apply/answer-check', (req, res) => {
     const data = req.session.data
+    const vaccineTypes = (data.vaccineTypes || [])
     let nextPage
 
-    if (data.vaccineTypes.includes('COVID-19') && data.organisationCode === 'FA02S') {
+    if (vaccineTypes.includes('COVID-19') && data.organisationCode === 'FA02S') {
       nextPage = '/apply/no-contract'
     } else {
       nextPage = '/apply/check-your-email'
@@ -43,6 +59,7 @@ module.exports = router => {
     const data = req.session.data
     const organisationCode = data.organisationCode
     const organisation = data.organisations.find((organisation) => organisation.id === organisationCode)
+    if (!organisation) { res.redirect('/apply/start'); return }
 
     res.render('apply/welcome-email', {
       organisation
