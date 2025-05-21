@@ -21,7 +21,7 @@
               text: "Site name"
             },
             value: {
-              text: data.sites[data.siteCode].name
+              text: site.name
             }
           },
           {
@@ -29,7 +29,7 @@
               text: "ODS Code"
             },
             value: {
-              html: data["siteCode"]
+              html: data.siteId
             }
           },
           {
@@ -37,7 +37,7 @@
               text: "Address"
             },
             value: {
-              html: data.sites[data.siteCode].address
+              html: "100 High Street, Manchester, M4 1LP"
             }
           }
         ]

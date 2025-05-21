@@ -39,7 +39,6 @@
 
       <form action="/record-vaccinations/answer-vaccine" method="post" novalidate>
 
-
       {% if data.repeatPatient == 'yes' and data.patientName %}
 
         {% set question = ("Which vaccine are you giving " + data.patientName + "?" if data.vaccinationToday == 'yes' else "Which vaccine did you give " + data.patientName + "?") %}
@@ -49,7 +48,7 @@
 
       {% set items = [] %}
 
-      {% for vaccine in (data.vaccines) %}
+      {% for vaccine in (vaccinesAvailable) %}
 
         {% if vaccine.products %}
 

@@ -107,6 +107,11 @@ module.exports = router => {
     let vaccineError, vaccineProductError
     const data = req.session.data
 
+    const vaccineStock = data.vaccineStock
+    const vaccinesAdded = [...new Set(vaccineStock.map((vaccineAdded) => vaccineAdded.vaccine))]
+
+    const vaccinesAvailable = data.vaccines.filter((vaccine) => vaccinesAdded.includes(vaccine.name))
+
     if (req.query.showErrors === 'yes') {
       if (!data.vaccine) {
         vaccineError = 'Select the vaccine'
@@ -119,7 +124,8 @@ module.exports = router => {
 
     res.render('record-vaccinations/vaccine', {
       vaccineError,
-      vaccineProductError
+      vaccineProductError,
+      vaccinesAvailable
     })
   })
 

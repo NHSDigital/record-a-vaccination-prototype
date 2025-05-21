@@ -19,6 +19,7 @@
 
           <form action="/vaccines/add-batch" method="post" novalidate="true">
 
+
       {% set items = [] %}
 
           {% for vaccine in (data.vaccines) %}
@@ -42,7 +43,8 @@
                       "text": "Vaccine product"
                     }
                   },
-                  "items": productItems
+                  "items": productItems,
+                  value: data.vaccineProduct
                 }) }}
               {% endset %}
             {% endif %}
@@ -66,6 +68,7 @@
                 "isPageHeading": true
               }
             },
+            value: data.vaccine,
             errorMessage: {
               text: vaccineError
             } if vaccineError,
