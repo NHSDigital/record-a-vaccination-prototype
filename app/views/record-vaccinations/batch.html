@@ -3,6 +3,7 @@
 {% set pageName = "Which batch are you using?" %}
 
 {% set currentSection = "vaccinate" %}
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
 
 {% block beforeContent %}
   {{ backLink({ href: "/record-vaccinations/vaccine" }) }}
@@ -34,13 +35,15 @@
         }), items) %}
       {% endfor %}
 
-      {% set items = (items.push({
-        divider: "or"
-      }), items) %}
-      {% set items = (items.push({
-        value: "add-new",
-        text: "Add a batch"
-      }), items) %}
+      {% if organisationSetting.permissionLevel != "Recorder" %}
+        {% set items = (items.push({
+          divider: "or"
+        }), items) %}
+        {% set items = (items.push({
+          value: "add-new",
+          text: "Add a batch"
+        }), items) %}
+      {% endif %}
 
 
         {{ radios({

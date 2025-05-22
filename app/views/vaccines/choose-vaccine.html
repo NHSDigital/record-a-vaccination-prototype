@@ -12,82 +12,72 @@
 {% endblock %}
 
 {% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <form action="/vaccines/add-batch" method="post" novalidate="true">
 
-      <div class="nhsuk-grid-row">
-        <div class="nhsuk-grid-column-two-thirds">
+        {% set items = [] %}
 
+        {% for vaccine in (data.vaccines) %}
+          {% if vaccine.products %}
+            {% set productItems = [] %}
+            {% for vaccineProduct in (vaccine.products) %}
+              {% set productItems = (productItems.push({
+                value: vaccineProduct.name,
+                text: vaccineProduct.name
+              }), productItems) %}
+            {% endfor %}
 
-          <form action="/vaccines/add-batch" method="post" novalidate="true">
+            {% set conditionalHtml %}
+              {{ radios({
+                "idPrefix": "vaccineProduct" + vaccine.name,
+                "name": "vaccineProduct",
+                "fieldset": {
+                  "legend": {
+                    "text": "Vaccine product"
+                  }
+                },
+                "items": productItems,
+                value: data.vaccineProduct
+              }) }}
+            {% endset %}
+          {% endif %}
 
+          {% set items = (items.push({
+            value: vaccine.name,
+            text: vaccine.name,
+            conditional: {
+              html: conditionalHtml
+            } if vaccine.products
+          }), items) %}
+        {% endfor %}
 
-      {% set items = [] %}
-
-          {% for vaccine in (data.vaccines) %}
-
-            {% if vaccine.products %}
-
-              {% set productItems = [] %}
-              {% for vaccineProduct in (vaccine.products) %}
-                {% set productItems = (productItems.push({
-                  value: vaccineProduct.name,
-                  text: vaccineProduct.name
-                }), productItems) %}
-              {% endfor %}
-
-              {% set conditionalHtml %}
-                {{ radios({
-                  "idPrefix": "vaccineProduct" + vaccine.name,
-                  "name": "vaccineProduct",
-                  "fieldset": {
-                    "legend": {
-                      "text": "Vaccine product"
-                    }
-                  },
-                  "items": productItems,
-                  value: data.vaccineProduct
-                }) }}
-              {% endset %}
-            {% endif %}
-
-            {% set items = (items.push({
-              value: vaccine.name,
-              text: vaccine.name,
-              conditional: {
-                html: conditionalHtml
-              } if vaccine.products
-            }), items) %}
-          {% endfor %}
-
-          {{ radios({
-            "idPrefix": "vaccine",
-            "name": "vaccine",
-            "fieldset": {
-              "legend": {
-                "text": pageName,
-                "classes": "nhsuk-fieldset__legend--l",
-                "isPageHeading": true
-              }
-            },
-            value: data.vaccine,
-            errorMessage: {
-              text: vaccineError
-            } if vaccineError,
-            "items": items
-          }) }}
+        {{ radios({
+          "idPrefix": "vaccine",
+          "name": "vaccine",
+          "fieldset": {
+            "legend": {
+              "text": pageName,
+              "classes": "nhsuk-fieldset__legend--l",
+              "isPageHeading": true
+            }
+          },
+          hint: {
+            text: "You must only add vaccines you are authorised to administer for NHS England."
+          },
+          value: data.vaccine,
+          errorMessage: {
+            text: vaccineError
+          } if vaccineError,
+          "items": items
+        }) }}
 
 
-            {{ button({
-              "text": "Continue"
-            }) }}
-          </form>
-
-        </div>
-      </div>
-
-
-
+        {{ button({
+          "text": "Continue"
+        }) }}
+      </form>
 
     </div>
   </div>
 {% endblock %}
-
