@@ -97,23 +97,44 @@ module.exports = router => {
   })
 
   router.get('/record-vaccinations/vaccinator', (req, res) => {
+    const data = req.session.data
     let vaccinatorError
 
+    let otherVaccinators = data.users
+      .filter((user) => {
+
+        const userOrgnisationSetting = (user.organisations || []).find((organisation) => organisation.id === data.currentOrganisationId)
+
+        return (user.id != data.currentUserId) && userOrgnisationSetting && userOrgnisationSetting.clinician && (userOrgnisationSetting.status === "Active")
+      })
+      .sort((a, b) => {
+        const nameA = a.firstName.toUpperCase(); // ignore upper and lowercase
+        const nameB = b.firstName.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      })
+
     if (req.query.showErrors === 'yes') {
-      if (!req.session.data.vaccinator) {
+      if (!req.session.data.vaccinatorId) {
         vaccinatorError = 'Select the vaccinator'
       }
     }
 
     res.render('record-vaccinations/vaccinator', {
-      vaccinatorError
+      vaccinatorError,
+      otherVaccinators
     })
   })
 
   router.post('/record-vaccinations/answer-vaccinator', (req, res) => {
     const data = req.session.data
 
-    if (!data.vaccinator) {
+    if (!data.vaccinatorId) {
       return res.redirect('/record-vaccinations/vaccinator?showErrors=yes')
     }
     res.redirect('/record-vaccinations/vaccine')
@@ -945,6 +966,15 @@ module.exports = router => {
       errors,
       injectionSiteError,
       otherInjectionSiteError
+    })
+  })
+
+router.get('/record-vaccinations/check', (req, res) => {
+    const data = req.session.data
+    const vaccinator = data.users.find((user) => user.id === data.vaccinatorId)
+
+    res.render('record-vaccinations/check', {
+      vaccinator
     })
   })
 
