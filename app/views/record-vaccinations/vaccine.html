@@ -3,6 +3,7 @@
 {% set pageName = "Which vaccine are you giving?" %}
 
 {% set currentSection = "vaccinate" %}
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
 
 {% block beforeContent %}
   {{ backLink({ href: "/record-vaccinations/vaccinator" }) }}
@@ -99,9 +100,25 @@
         "items": items
       }) }}
 
+
         {{ button({
           text: "Continue"
         })}}
+
+        {% if organisationSetting.permissionLevel == "Recorder" %}
+          {{ details({
+            text: "If you cannot see the vaccine you need",
+            html: "If the vaccine you need is not listed, an administrator needs to add it."
+          }) }}
+        {% else %}
+          {{ details({
+            text: "If you cannot see the vaccine you need",
+            html: "If the vaccine you need is not listed, go to <a href=\"/\">Vaccines</a> to add it."
+          }) }}
+        {% endif %}
+
+
+
       </form>
 
     </div>
