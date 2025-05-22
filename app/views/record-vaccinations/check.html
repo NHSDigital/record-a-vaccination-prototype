@@ -220,7 +220,7 @@
               text: "Team"
             },
             value: {
-              text: data.deliveryTeam
+              text: (currentOrganisation.sites | findById(data.deliveryTeam)).name
             },
             actions: {
               items: [

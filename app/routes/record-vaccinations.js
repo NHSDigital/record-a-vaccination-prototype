@@ -55,6 +55,14 @@ module.exports = router => {
 
   router.get('/record-vaccinations/delivery-team', (req, res) => {
     let errors = []
+    const data = req.session.data
+    const currentOrganisation = res.locals.currentOrganisation
+
+    const vaccineStock = data.vaccineStock
+    const siteIdsWithVaccines = [...new Set(vaccineStock.map((vaccineAdded) => vaccineAdded.siteId))]
+
+    const sitesInUse = currentOrganisation.sites.filter((site) => siteIdsWithVaccines.includes(site.id))
+
 
     if (req.query.showErrors === "yes") {
       if (!req.session.data.deliveryTeam) {
@@ -66,6 +74,7 @@ module.exports = router => {
     }
 
     res.render('record-vaccinations/delivery-team', {
+      sitesInUse,
       errors
     })
   })
@@ -107,8 +116,10 @@ module.exports = router => {
     let vaccineError, vaccineProductError
     const data = req.session.data
 
-    const vaccineStock = data.vaccineStock
+    const vaccineStock = data.vaccineStock.filter((vaccine) => vaccine.siteId === data.deliveryTeam)
     const vaccinesAdded = [...new Set(vaccineStock.map((vaccineAdded) => vaccineAdded.vaccine))]
+
+
 
     const vaccinesAvailable = data.vaccines.filter((vaccine) => vaccinesAdded.includes(vaccine.name))
 
@@ -658,6 +669,13 @@ module.exports = router => {
   router.get('/record-vaccinations/batch', (req, res) => {
     let error
     const data = req.session.data
+    const currentOrganisation = res.locals.currentOrganisation
+
+    const batches = data.vaccineStock.filter(function(batch) {
+      return true
+    })
+
+
     if (req.query.showError === 'yes') {
 
       if (!data.batchNumber) {
@@ -669,6 +687,7 @@ module.exports = router => {
     }
 
     res.render('record-vaccinations/batch', {
+      batches,
       error
     })
   })

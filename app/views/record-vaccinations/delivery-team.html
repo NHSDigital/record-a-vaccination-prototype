@@ -21,17 +21,11 @@
 
       <form action="/record-vaccinations/answer-delivery-team" method="post" novalidate>
 
-        {% set deliveryTeams = [
-          "Anne Ward Maternity Unit",
-          "Josephine Clinic",
-          "St Mary’s Hospital"
-        ] %}
-
         {% set items = [] %}
-        {% for deliveryTeam in (deliveryTeams | sort) %}
+        {% for deliveryTeam in (sitesInUse | sort(false, false, "name")) %}
           {% set items = (items.push({
-            text: deliveryTeam,
-            value: deliveryTeam
+            text: deliveryTeam.name,
+            value: deliveryTeam.id
           }), items) %}
         {% endfor %}
 
