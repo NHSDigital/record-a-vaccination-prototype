@@ -70,8 +70,8 @@
 
       {% if organisationSetting.permissionLevel == "Lead administrator" %}
         {{ details({
-          text: "If you cannot see the vaccinator listed",
-          html: "If the vaccinator is not listed, make sure they are added in <a href=\"/user-admin\">Manage users</a> as a clinician."
+          text: "If the vaccinator is not listed",
+          html: "Make sure they are added in <a href=\"/user-admin\">Manage users</a> as a clinician."
         }) }}
       {% else %}
         {{ details({
