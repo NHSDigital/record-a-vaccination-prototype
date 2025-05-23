@@ -31,7 +31,14 @@ function daysBetweenDates(date1, date2) {
 module.exports = router => {
 
   router.get('/record-vaccinations', (req, res) => {
+    const data = req.session.data
+    const vaccinesAddedCount = data.vaccineStock.length
+
     let vaccinationTodayError
+
+    if (vaccinesAddedCount == 0) {
+      return res.render('record-vaccinations/no-vaccines-added')
+    }
 
     if (req.query.showErrors === 'yes') {
       if (!req.session.data.vaccinationToday) {
@@ -55,6 +62,14 @@ module.exports = router => {
 
   router.get('/record-vaccinations/delivery-team', (req, res) => {
     let errors = []
+    const data = req.session.data
+    const currentOrganisation = res.locals.currentOrganisation
+
+    const vaccineStock = data.vaccineStock
+    const siteIdsWithVaccines = [...new Set(vaccineStock.map((vaccineAdded) => vaccineAdded.siteId))]
+
+    const sitesInUse = currentOrganisation.sites.filter((site) => siteIdsWithVaccines.includes(site.id))
+
 
     if (req.query.showErrors === "yes") {
       if (!req.session.data.deliveryTeam) {
@@ -66,6 +81,7 @@ module.exports = router => {
     }
 
     res.render('record-vaccinations/delivery-team', {
+      sitesInUse,
       errors
     })
   })
@@ -81,23 +97,44 @@ module.exports = router => {
   })
 
   router.get('/record-vaccinations/vaccinator', (req, res) => {
+    const data = req.session.data
     let vaccinatorError
 
+    let otherVaccinators = data.users
+      .filter((user) => {
+
+        const userOrgnisationSetting = (user.organisations || []).find((organisation) => organisation.id === data.currentOrganisationId)
+
+        return (user.id != data.currentUserId) && userOrgnisationSetting && userOrgnisationSetting.clinician && (userOrgnisationSetting.status === "Active")
+      })
+      .sort((a, b) => {
+        const nameA = a.firstName.toUpperCase(); // ignore upper and lowercase
+        const nameB = b.firstName.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      })
+
     if (req.query.showErrors === 'yes') {
-      if (!req.session.data.vaccinator) {
+      if (!req.session.data.vaccinatorId) {
         vaccinatorError = 'Select the vaccinator'
       }
     }
 
     res.render('record-vaccinations/vaccinator', {
-      vaccinatorError
+      vaccinatorError,
+      otherVaccinators
     })
   })
 
   router.post('/record-vaccinations/answer-vaccinator', (req, res) => {
     const data = req.session.data
 
-    if (!data.vaccinator) {
+    if (!data.vaccinatorId) {
       return res.redirect('/record-vaccinations/vaccinator?showErrors=yes')
     }
     res.redirect('/record-vaccinations/vaccine')
@@ -106,6 +143,17 @@ module.exports = router => {
   router.get('/record-vaccinations/vaccine', (req, res) => {
     let vaccineError, vaccineProductError
     const data = req.session.data
+
+    const vaccineStock = data.vaccineStock.filter((vaccine) => vaccine.siteId === data.deliveryTeam)
+    const vaccinesAdded = [...new Set(vaccineStock.map((vaccineAdded) => vaccineAdded.vaccine))]
+    const vaccineProductsAdded = [...new Set(vaccineStock.map((vaccineAdded) => vaccineAdded.vaccineProduct))]
+
+    let vaccinesAvailable = JSON.parse(JSON.stringify(data.vaccines)).filter((vaccine) => vaccinesAdded.includes(vaccine.name))
+
+    // Filter all vaccine products to only show ones with batches added
+    for (vaccineAvailable of vaccinesAvailable) {
+      vaccineAvailable.products = vaccineAvailable.products.filter((vaccineProduct) => vaccineProductsAdded.includes(vaccineProduct.name))
+    }
 
     if (req.query.showErrors === 'yes') {
       if (!data.vaccine) {
@@ -119,7 +167,8 @@ module.exports = router => {
 
     res.render('record-vaccinations/vaccine', {
       vaccineError,
-      vaccineProductError
+      vaccineProductError,
+      vaccinesAvailable
     })
   })
 
@@ -652,6 +701,15 @@ module.exports = router => {
   router.get('/record-vaccinations/batch', (req, res) => {
     let error
     const data = req.session.data
+    const currentOrganisation = res.locals.currentOrganisation
+
+    const vaccine = data.vaccineStock.find(function(batch) {
+      return (batch.vaccineProduct === data.vaccineProduct) &&
+        (batch.vaccine === data.vaccine)
+    }) || {}
+
+    const batches = vaccine.batches
+
     if (req.query.showError === 'yes') {
 
       if (!data.batchNumber) {
@@ -663,6 +721,7 @@ module.exports = router => {
     }
 
     res.render('record-vaccinations/batch', {
+      batches,
       error
     })
   })
@@ -907,6 +966,15 @@ module.exports = router => {
       errors,
       injectionSiteError,
       otherInjectionSiteError
+    })
+  })
+
+router.get('/record-vaccinations/check', (req, res) => {
+    const data = req.session.data
+    const vaccinator = data.users.find((user) => user.id === data.vaccinatorId)
+
+    res.render('record-vaccinations/check', {
+      vaccinator
     })
   })
 

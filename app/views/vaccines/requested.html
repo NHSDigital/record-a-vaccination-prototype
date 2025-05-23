@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Vaccine requested" %}
+
+{% set currentSection = "vaccines" %}
+
+{% set organisation = {name: data.nhsTrusts[data.organisationCode]} %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {{ panel({
+        titleText: data.vaccineRequested + " vaccine requested"
+      } )}}
+
+      <p>We will review your request within 2 working days.</p>
+
+    </div>
+  </div>
+{% endblock %}

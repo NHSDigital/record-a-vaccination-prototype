@@ -3,6 +3,7 @@
 {% set pageName = "Which vaccine are you giving?" %}
 
 {% set currentSection = "vaccinate" %}
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
 
 {% block beforeContent %}
   {{ backLink({ href: "/record-vaccinations/vaccinator" }) }}
@@ -39,151 +40,49 @@
 
       <form action="/record-vaccinations/answer-vaccine" method="post" novalidate>
 
-      {% set covid19Product %}
-        {{ radios({
-          "idPrefix": "vaccineProductCovid",
-          "name": "vaccineProduct",
-          "fieldset": {
-            "legend": {
-              "text": "Vaccine product"
-            }
-          },
-          errorMessage: {
-            text: vaccineProductError
-          } if vaccineProductError and data.vaccine == "COVID-19",
-          "items": [
-            {
-              "value": "Comirnaty 30 JN.1",
-              "text": "Comirnaty 30 JN.1",
-              checked: (data.vaccineProduct == "Comirnaty 30 JN.1")
-            },
-            {
-              "value": "Comirnaty 10 JN.1",
-              "text": "Comirnaty 10 JN.1",
-              checked: (data.vaccineProduct == "Comirnaty 10 JN.1")
-            },
-            {
-              "value": "Comirnaty 3 JN.1",
-              "text": "Comirnaty 3 JN.1",
-              checked: (data.vaccineProduct == "Comirnaty 3 JN.1")
-            },
-            {
-              "value": "Spikevax JN.1",
-              "text": "Spikevax JN.1",
-              checked: (data.vaccineProduct == "Spikevax JN.1")
-            }
-          ]
-        }) }}
-      {% endset %}
-
-      {% set fluProduct %}
-        {{ radios({
-          "idPrefix": "vaccineProductFlu",
-          "name": "vaccineProduct",
-          "fieldset": {
-            "legend": {
-              "text": "Vaccine product"
-            }
-          },
-          errorMessage: {
-            text: vaccineProductError
-          } if vaccineProductError and data.vaccine == "Flu",
-          "items": [
-            {
-              "value": "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)",
-              "text": "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)",
-              checked: (data.vaccineProduct == "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)")
-            },
-            {
-              "value": "Cell-based Quadrivalent Influenza Vaccine (QIVc)",
-              "text": "Cell-based Quadrivalent Influenza Vaccine (QIVc)",
-              checked: (data.vaccineProduct == "Cell-based Quadrivalent Influenza Vaccine (QIVc)")
-            },
-            {
-              "value": "Fluenz (LAIV)",
-              "text": "Fluenz (LAIV)",
-              checked: (data.vaccineProduct == "Fluenz (LAIV)")
-            },
-            {
-              "value": "Influenza Tetra MYL (QIVe)",
-              "text": "Influenza Tetra MYL (QIVe)",
-              checked: (data.vaccineProduct == "Influenza Tetra MYL (QIVe)")
-            },
-            {
-              "value": "Quadrivalent Influenza Vaccine (QIVe)",
-              "text": "Quadrivalent Influenza Vaccine (QIVe)",
-              checked: (data.vaccineProduct == "Quadrivalent Influenza Vaccine (QIVe)")
-            },
-            {
-              "value": "Quadrivalent Influenza Vaccine - High Dose (QIV-HD)",
-              "text": "Quadrivalent Influenza Vaccine - High Dose (QIV-HD)",
-              checked: (data.vaccineProduct == "Quadrivalent Influenza Vaccine - High Dose (QIV-HD)")
-            }
-          ]
-        }) }}
-
-      {% endset %}
-
-      {% set pertussisProduct %}
-        {{ radios({
-          "idPrefix": "vaccineProductPertussis",
-          "name": "vaccineProduct",
-          "fieldset": {
-            "legend": {
-              "text": "Vaccine product"
-            }
-          },
-          errorMessage: {
-            text: vaccineProductError
-          } if vaccineProductError and data.vaccine == "Pertussis",
-          "items": [
-            {
-              "value": "Adacel vaccine supsension",
-              "text": "Adacel vaccine supsension",
-              checked: (data.vaccineProduct == "Adacel vaccine supsension")
-            },
-            {
-              "value": "Boostrix-IPV supsension",
-              "text": "Boostrix-IPV supsension",
-              checked: (data.vaccineProduct == "Boostrix-IPV supsension")
-            },
-            {
-              "value": "Repevax vaccine suspension",
-              "text": "Repevax vaccine suspension",
-              checked: (data.vaccineProduct == "Repevax vaccine suspension")
-            }
-          ]
-        }) }}
-     {% endset %}
-
-      {% set rsvProduct %}
-        {{ radios({
-          "idPrefix": "vaccineProductRsv",
-          "name": "vaccineProduct",
-          "fieldset": {
-            "legend": {
-              "text": "Vaccine product"
-            }
-          },
-          errorMessage: {
-            text: vaccineProductError
-          } if vaccineProductError and data.vaccine == "RSV",
-          "items": [
-            {
-              "value": "Abrysvo",
-              "text": "Abrysvo",
-              checked: (data.vaccineProduct == "Abrysvo")
-            }
-          ]
-        }) }}
-    {% endset %}
-
       {% if data.repeatPatient == 'yes' and data.patientName %}
 
         {% set question = ("Which vaccine are you giving " + data.patientName + "?" if data.vaccinationToday == 'yes' else "Which vaccine did you give " + data.patientName + "?") %}
       {% else %}
         {% set question = ("Which vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which vaccine did you give?") %}
       {% endif %}
+
+      {% set items = [] %}
+
+      {% for vaccine in (vaccinesAvailable) %}
+
+        {% if vaccine.products %}
+
+          {% set productItems = [] %}
+          {% for vaccineProduct in (vaccine.products) %}
+            {% set productItems = (productItems.push({
+              value: vaccineProduct.name,
+              text: vaccineProduct.name
+            }), productItems) %}
+          {% endfor %}
+
+          {% set conditionalHtml %}
+            {{ radios({
+              "idPrefix": "vaccineProduct" + vaccine.name,
+              "name": "vaccineProduct",
+              "fieldset": {
+                "legend": {
+                  "text": "Vaccine product"
+                }
+              },
+              "items": productItems
+            }) }}
+          {% endset %}
+        {% endif %}
+
+        {% set items = (items.push({
+          value: vaccine.name,
+          text: vaccine.name,
+          conditional: {
+            html: conditionalHtml
+          } if vaccine.products
+        }), items) %}
+      {% endfor %}
 
       {{ radios({
         "idPrefix": "vaccine",
@@ -198,45 +97,28 @@
         errorMessage: {
           text: vaccineError
         } if vaccineError,
-        "items": [
-          {
-            "value": "COVID-19",
-            "text": "COVID-19",
-            checked: (data.vaccine == "COVID-19"),
-            conditional: {
-              html: covid19Product
-            }
-          },
-          {
-            "value": "Flu",
-            "text": "Flu",
-            checked: (data.vaccine == "Flu"),
-            conditional: {
-              html: fluProduct
-            }
-          },
-          {
-            "value": "Pertussis",
-            "text": "Pertussis",
-            checked: (data.vaccine == "Pertussis"),
-            conditional: {
-              html: pertussisProduct
-            }
-          },
-          {
-            "value": "RSV",
-            "text": "RSV",
-            checked: (data.vaccine == "RSV"),
-            conditional: {
-              html: rsvProduct
-            }
-          }
-        ]
+        "items": items
       }) }}
+
 
         {{ button({
           text: "Continue"
         })}}
+
+        {% if organisationSetting.permissionLevel == "Recorder" %}
+          {{ details({
+            text: "If the vaccine is not listed",
+            html: "An administrator needs to add it."
+          }) }}
+        {% else %}
+          {{ details({
+            text: "If the vaccine is not listed",
+            html: "You need to go to <a href=\"/vaccines\">Vaccines</a> to add it."
+          }) }}
+        {% endif %}
+
+
+
       </form>
 
     </div>

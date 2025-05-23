@@ -220,7 +220,7 @@
               text: "Team"
             },
             value: {
-              text: data.deliveryTeam
+              text: (currentOrganisation.sites | findById(data.deliveryTeam)).name
             },
             actions: {
               items: [
@@ -237,7 +237,7 @@
               text: "Vaccinator"
             },
             value: {
-              html: (data.otherVaccinator if data.vaccinator == "Someone else" else data.vaccinator)
+              text: vaccinator.firstName + " " + vaccinator.lastName
             },
             actions: {
               items: [

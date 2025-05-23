@@ -19,7 +19,6 @@
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
 
-
           <h1 class="nhsuk-heading-xl">Site</h1>
 
           <p>Vaccines and batch information are added to sites within your Trust.</p>
@@ -37,12 +36,12 @@
             <div class="nhsuk-hint" id="organisationName-hint">
               Search by name or ODS code
             </div>
-            <select class="nhsuk-select" id="siteCode" name="siteCode"
+            <select class="nhsuk-select" id="siteId" name="siteId"
               data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
               <option selected value=""></option>
 
-              {% for code, data in data.sites %}
-                <option value="{{ code }}">{{ data.name }}, {{ data.address }} ({{code }})</option>
+              {% for site in currentOrganisation.sites %}
+                <option value="{{ site.id }}">{{ site.name }} ({{site.id }})</option>
               {% endfor %}
             </select>
           </div>

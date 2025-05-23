@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Record vaccinations" %}
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      {% if organisationSetting.permissionLevel == "Recorder" %}
+        <p>An admin user needs to add a vaccine before you can record a vaccination.</p>
+      {% else %}
+        <p>You need to <a href="/vaccines/">add a vaccine</a> before you can record a vaccination.</p>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}
+

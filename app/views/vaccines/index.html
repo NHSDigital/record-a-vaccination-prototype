@@ -5,9 +5,9 @@
 {% set currentSection = "vaccines" %}
 
 {% set sites = [] %}
-{% for vaccine in (data.vaccines) %}
-  {% if not (sites | arrayOrStringIncludes(vaccine.siteCode)) %}
-    {% set sites = (sites.push(vaccine.siteCode), sites) %}
+{% for vaccine in (data.vaccineStock) %}
+  {% if not (sites | arrayOrStringIncludes(vaccine.siteId)) %}
+    {% set sites = (sites.push(vaccine.siteId), sites) %}
   {% endif %}
 {% endfor %}
 
@@ -37,7 +37,7 @@
     }] %}
 
     {% for site in sites %}
-      {% set filterItems = (filterItems.push({text: data.sites[site].name, value: site}), filterItems) %}
+      {% set filterItems = (filterItems.push({text: currentOrganisation.sites[site].name, value: site}), filterItems) %}
     {% endfor %}
 
 
@@ -56,10 +56,12 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      {% for site in sites %}
+      {% for siteId in sites %}
+
+        {% set site =  currentOrganisation.sites | findById(siteId) %}
 
         <table class="nhsuk-table">
-          <caption class="nhsuk-table__caption nhsuk-table__caption--m nhsuk-u-margin-bottom-2">{{ data.sites[site].name }}</caption>
+          <caption class="nhsuk-table__caption nhsuk-table__caption--m nhsuk-u-margin-bottom-2">{{ site.name }}</caption>
           <thead role="rowgroup" class="nhsuk-table__head">
             <tr role="row">
               <th role="columnheader" class="" scope="col">
@@ -80,8 +82,8 @@
           <tbody class="nhsuk-table__body">
 
         {% set vaccinesAtSite = [] %}
-        {% for vaccine in (data.vaccines) %}
-          {% if vaccine.siteCode == site and not (vaccinesAtSite | arrayOrStringIncludes(vaccine.vaccine)) %}
+        {% for vaccine in (data.vaccineStock) %}
+          {% if vaccine.siteId == siteId and not (vaccinesAtSite | arrayOrStringIncludes(vaccine.vaccine)) %}
             {% set vaccinesAtSite = (vaccinesAtSite.push(vaccine.vaccine), vaccinesAtSite) %}
           {% endif %}
         {% endfor %}
@@ -89,8 +91,8 @@
         {% for vaccineAtSite in vaccinesAtSite %}
 
           {% set vaccineProductsAtSite = [] %}
-            {% for vaccine in (data.vaccines) %}
-              {% if vaccine.vaccine == vaccineAtSite and vaccine.siteCode == site and not (vaccineProductsAtSite | arrayOrStringIncludes(vaccine.vaccineProduct)) %}
+            {% for vaccine in (data.vaccineStock) %}
+              {% if vaccine.vaccine == vaccineAtSite and vaccine.siteId == siteId and not (vaccineProductsAtSite | arrayOrStringIncludes(vaccine.vaccineProduct)) %}
                 {% set vaccineProductsAtSite = (vaccineProductsAtSite.push(vaccine.vaccineProduct), vaccineProductsAtSite) %}
               {% endif %}
             {% endfor %}
@@ -108,8 +110,8 @@
                   <td class="nhsuk-table__cell ">
                     {% set count = 0 %}
                     {% set thisVaccine = {} %}
-                    {% for vaccine in data.vaccines %}
-                      {% if (vaccine.siteCode == site) and (vaccine.vaccine == vaccineAtSite) and (vaccine.vaccineProduct == vaccineProduct) %}
+                    {% for vaccine in data.vaccineStock %}
+                      {% if (vaccine.siteId == siteId) and (vaccine.vaccine == vaccineAtSite) and (vaccine.vaccineProduct == vaccineProduct) %}
                         {% set thisVaccine = vaccine %}
                       {% endif %}
                     {% endfor %}

@@ -709,7 +709,65 @@ module.exports = [
       "postcode": "M13 9WL"
     },
     "status": "Active",
-    "type": "NHS Trust"
+    "type": "NHS Trust",
+    sites: [
+      {
+        id: "RW3NM",
+        name: "North Manchester General Hospital"
+      },
+      {
+        id: "RW3HG",
+        name: "The Hazel Grove Clinic"
+      },
+      {
+        id: "RW3VC",
+        name: "The Vallance Centre"
+      },
+      {
+        id: "RW3R1",
+        name: "Rochale Infirmary"
+      },
+      {
+        id: "RW3T5",
+        name: "Altrincham Hospital"
+      },
+      {
+        id: "RW382",
+        name: "Ear nose and throad RMCH"
+      },
+      {
+        id: "RW391",
+        name: "Galaxy House"
+      },
+      {
+        id: "RW341",
+        name: "Stockport sexual health"
+      },
+      {
+        id: "RW343",
+        name: "Trafford sexual health"
+      },
+      {
+        id: "RW354",
+        name: "Paediatrics Trafford"
+      },
+      {
+        id: "RW3HT",
+        name: "Heaton Moor Health Centre"
+      },
+      {
+        id: "RW3DM",
+        name: "Davyhulme Medical Centre"
+      },
+      {
+        id: "RW3GM",
+        name: "Gorton Medical Centre"
+      },
+      {
+        id: "RW3RC",
+        name: "Royal Manchester Children’s Hospital"
+      }
+    ]
   },
   {
     "id": "RAU",
