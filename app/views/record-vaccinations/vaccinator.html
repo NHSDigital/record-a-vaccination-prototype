@@ -53,6 +53,9 @@
               isPageHeading: "true"
             }
           },
+          xhint: {
+            text: "Only users with clinician status are listed"
+          },
           errorMessage: {
             text: vaccinatorError
           } if vaccinatorError,
@@ -64,6 +67,19 @@
           text: "Continue"
         })}}
       </form>
+
+      {% if organisationSetting.permissionLevel == "Lead administrator" %}
+        {{ details({
+          text: "If you cannot see the vaccinator listed",
+          html: "If the vaccinator is not listed, make sure they are added in <a href=\"/user-admin\">Manage users</a> as a clinician."
+        }) }}
+      {% else %}
+        {{ details({
+          text: "If you cannot see the vaccinator listed",
+          html: ">If the vaccinator is not listed, ask a lead administrator to make sure they are added as a clinician."
+        }) }}
+
+      {% endif %}
 
     </div>
   </div>

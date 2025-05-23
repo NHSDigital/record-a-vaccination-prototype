@@ -3,6 +3,7 @@
 {% set pageName = "Which team are you working with?" %}
 
 {% set currentSection = "vaccinate" %}
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
 
 {% block beforeContent %}
   {{ backLink({ href: "/record-vaccinations/" }) }}
@@ -50,6 +51,18 @@
           text: "Continue"
         })}}
       </form>
+
+      {% if organisationSetting.permissionLevel == "Lead administrator" %}
+        {{ details({
+          text: "If you cannot see the team listed",
+          html: "You need to <a href=\"/user-admin\">add vaccines</a> for the the team."
+        }) }}
+      {% else %}
+        {{ details({
+          text: "If your team is not listed",
+          html: "An administrator will need to add vaccines for that team."
+        }) }}
+      {% endif %}
 
     </div>
   </div>
