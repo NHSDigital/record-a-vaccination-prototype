@@ -49,6 +49,19 @@ module.exports = (router) => {
     res.render('vaccines/choose-vaccine')
   })
 
+  // Viewing select vaccine page - as a pharmacy
+  router.get('/vaccines/choose-vaccine-pharmacy', (req, res) => {
+
+    res.render('vaccines/choose-vaccine-pharmacy')
+  })
+
+  // Confirmation of a vaccine being requested
+  router.get('/vaccines/requested', (req, res) => {
+
+    res.render('vaccines/requested')
+  })
+
+
   // Viewing select vaccine page
   router.get('/vaccines/add-batch', (req, res) => {
 
