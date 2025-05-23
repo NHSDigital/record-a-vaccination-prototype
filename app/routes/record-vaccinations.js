@@ -148,7 +148,7 @@ module.exports = router => {
     const vaccinesAdded = [...new Set(vaccineStock.map((vaccineAdded) => vaccineAdded.vaccine))]
     const vaccineProductsAdded = [...new Set(vaccineStock.map((vaccineAdded) => vaccineAdded.vaccineProduct))]
 
-    let vaccinesAvailable = data.vaccines.filter((vaccine) => vaccinesAdded.includes(vaccine.name))
+    let vaccinesAvailable = JSON.parse(JSON.stringify(data.vaccines)).filter((vaccine) => vaccinesAdded.includes(vaccine.name))
 
     // Filter all vaccine products to only show ones with batches added
     for (vaccineAvailable of vaccinesAvailable) {
