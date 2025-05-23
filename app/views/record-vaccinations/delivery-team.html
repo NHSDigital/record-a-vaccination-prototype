@@ -54,8 +54,8 @@
 
       {% if organisationSetting.permissionLevel == "Lead administrator" %}
         {{ details({
-          text: "If you cannot see the team listed",
-          html: "You need to <a href=\"/vaccines\">add vaccines</a> for the the team."
+          text: "If your team is not listed",
+          html: "You need to <a href=\"/vaccines\">add vaccines</a> for the team."
         }) }}
       {% else %}
         {{ details({
