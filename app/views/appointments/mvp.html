@@ -6,7 +6,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-  href: "/appointments/index2",
+  href: "/appointments/index3",
   text: "Back"
 }) }}
 {% endblock %}
@@ -35,68 +35,354 @@
       <div class="nhsuk-caption-l">Anne Ward Maternity Unit</div>
         <h1 class="nhsuk-heading-l">Wednesday 4 June 2025</h1>
 
-        <p><a href="/record-vaccinations/vaccinator">Record a walk-in</a></p>
 
-        <p><a href="/appointments/add-nhs-numbers">Add NHS numbers</a></p>
+<ul class="nhsuk-grid-row nhsuk-card-group">
+
+  <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+    <div class="nhsuk-card nhsuk-card--clickable">
+      <div class="nhsuk-card__content">
+        <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">50</p>
+
+        <h5 class="nhsuk-card__heading nhsuk-heading-xs"> <a class="nhsuk-card__link" href="#">All appointments</a> </h5>
+      </div>
+    </div>
+  </li>
+
+  <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+    <div class="nhsuk-card nhsuk-card--clickable">
+      <div class="nhsuk-card__content">
+        <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">38</p>
+
+        <h5 class="nhsuk-card__heading nhsuk-heading-xs"> <a class="nhsuk-card__link" href="#">Remaining</a> </h5>
+      </div>
+    </div>
+  </li>
+
+    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+      <div class="nhsuk-card nhsuk-card--clickable">
+        <div class="nhsuk-card__content">
+          <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">12</p>
+  
+          <h5 class="nhsuk-card__heading nhsuk-heading-xs"> <a class="nhsuk-card__link" href="#">Recorded</a> </h5>
+        </div>
+      </div>
+    </li>
+
+  </li>
+</ul>
 
 
-        
+  <p><a href="/record-vaccinations/vaccinator">Record a walk-in</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/appointments/add-nhs-numbers">Add NHS numbers</a></p>
+
+  <br>
 
 
 
-      <table role="table" class="nhsuk-table-responsive">
-        <thead role="rowgroup" class="nhsuk-table__head">
-          <tr role="row">
-
-        
-            <th role="columnheader" class="" scope="col">
-              Name
-            </th>
-            <th role="columnheader" class="" scope="col">
-                NHS number
-              </th>
-            <th role="columnheader" class="" scope="col">
-              Date of birth
-            </th>
-            <th role="columnheader" class="" scope="col">
-              </th>
-              <th role="columnheader" class="" scope="col">
-              </th>
-
-          </tr>
+      <table class="nhsuk-table-responsive" role="table">
+        <caption class="nhsuk-table__caption">Remaing appointments</caption>
+        <thead class="nhsuk-table__head" role="rowgroup">
+            <thead role="rowgroup" class="nhsuk-table__head">
+                <tr role="row">
+      
+                  
+                  <th role="columnheader" class="" scope="col">
+                    Name
+                  </th>
+                  <th role="columnheader" class="" scope="col">
+                    Date of birth
+                  </th>
+                  <th role="columnheader" class="" scope="col">
+                    Postcode
+                  </th>
+                  <th role="columnheader" class="" scope="col">
+                  </th>
+                  <th role="columnheader" class="" scope="col">
+                  </th>
+                  
+                </tr>
         </thead>
+
         <tbody class="nhsuk-table__body">
-          {% for appointment in data.appointments %}
-            <tr role="row" class="nhsuk-table__row">
-
-
-              <td class="nhsuk-table__cell">
-                {{ appointment.patient.firstName }} {{ appointment.patient.lastName }}
-              </td>
-              <td class="nhsuk-table__cell">
-                {{ appointment.patient.nhsNumber }}
-              </td>
-              <td class="nhsuk-table__cell">
-                {{ appointment.patient.dateOfBirth | govukDate }}
-              </td>
-              <!-- <td class="nhsuk-table__cell">
-                73 Roman Rd<br>Leeds<br> LS2 5ZN
-              </td>
-              <td class="nhsuk-table__cell">
-                {{ appointment.patient.phoneNumber }}
-                <br>{{ appointment.patient.email }}
-              </td> -->
               
-              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
-              </td>
-              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-              </td>  
+          <tr role="row" class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">
+                Aarrons, Sam
+          </td>
+          
+            <td class="nhsuk-table__cell">
+              21 April 1954
+          </td>
+          
+          <td class="nhsuk-table__cell">
+              16 Anderson Rd, Beeston
+          </td>
+          <td class="nhsuk-table__cell">
+            <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
+          </td> 
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">
+                  Adamson, Samantha
+            </td>
+            
+              <td class="nhsuk-table__cell">
+                8 December 1959	
+            </td>
+            
+            <td class="nhsuk-table__cell">
+                73 Roman Rd,
+                Leeds
+            </td>
+            <td class="nhsuk-table__cell">
+              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+            </td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
+            </td> 
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                    Davies, Norma
+            </td>
+
+                <td class="nhsuk-table__cell">
+                  23 May 1976 
+            </td>
+
+            <td class="nhsuk-table__cell">
+                92-93 The Calls, Leeds    
+            </td>
+            <td class="nhsuk-table__cell">
+              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+            </td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
+            </td> 
+            </tr>
+
+
+            <tr role="row" class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">
+                  Briggs, Issac
+            </td>
+            
+              <td class="nhsuk-table__cell">
+                9 August 2006
+            </td>
+            
+            <td class="nhsuk-table__cell">
+                 44 Mellor drive, Meanwood
+            </td>
+            <td class="nhsuk-table__cell">
+            <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+            </td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
+            </td> 
+              </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">
+                  Brighouse, Lia
+            </td>
+            
+              <td class="nhsuk-table__cell">
+                16 May 2006
+            </td>
+            
+            <td class="nhsuk-table__cell">
+                124 Moss Lane Overcrescent, Leeds
+            </td>
+            <td class="nhsuk-table__cell">
+              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+            </td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
+            </td> 
+              </tr>
+
+
+            <tr role="row" class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">
+                  Duckett, Ben
+            </td>
+            
+              <td class="nhsuk-table__cell">
+                9856259999
+            </td>
+            
+            <td class="nhsuk-table__cell">
+                24 ACre Drive, Leeds
+            </td>
+            <td class="nhsuk-table__cell">
+              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+            </td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
+            </td> 
+              </tr>
+
+
+
+          <tr role="row" class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">
+                James, Michael
+          </td>
+          
+            <td class="nhsuk-table__cell">
+              20 April 2003
+          </td>
+          
+          <td class="nhsuk-table__cell">
+              2a The Flats, Hedaingley
+          </td>
+          <td class="nhsuk-table__cell">
+            <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
+          </td> 
+            </tr>
+
+          <tr role="row" class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">
+                Jones, Mike
+          </td>
+          
+            <td class="nhsuk-table__cell">
+              98767655431
+          </td>
+          
+          <td class="nhsuk-table__cell">
+              4 November 1954
+          </td>
+          <td class="nhsuk-table__cell">
+            <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
+          </td> 
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">
+                  Lioncoln, Martin
+            </td>
+            
+              <td class="nhsuk-table__cell">
+                91231231231
+            </td>
+            
+            <td class="nhsuk-table__cell">
+              7 June 1958
+            </td>
+            <td class="nhsuk-table__cell">
+              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+            </td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+              <strong class="nhsuk-tag nhsuk-tag--green">
+        Recorded
+      </strong>
+            </td>
+        </tr>
+        <tr role="row" class="nhsuk-table__row">
+          <td class="nhsuk-table__cell">
+              Lochan, Clive
+      </td>
+      
+          <td class="nhsuk-table__cell">
+            9876765222
+      </td>
+      
+      <td class="nhsuk-table__cell">
+          12 September 1971      
+      </td>
+      <td class="nhsuk-table__cell">
+        <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+      </td>
+      <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+        <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
+      </td> 
+  </tr>
+
+        <tr role="row" class="nhsuk-table__row">
+          <td class="nhsuk-table__cell">
+            Smith, John
+        </td>
+        
+          <td class="nhsuk-table__cell">
+            9123456789
+        </td>
+        
+        <td class="nhsuk-table__cell">
+            4 November 1954
+        </td>
+       <td class="nhsuk-table__cell">
+          <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+        </td>
+        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+          <strong class="nhsuk-tag nhsuk-tag--green">
+    Recorded
+  </strong>
+        </td>
+    </tr>
+
+
+
+       
+                <tr role="row" class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">
+                        Smith, Thomas
+                </td>
+                
+                    <td class="nhsuk-table__cell">
+                      91231789548
+                </td>
+                
+                <td class="nhsuk-table__cell">
+                    9 June 2000     
+                </td>
+                <td class="nhsuk-table__cell">
+                  <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+                </td>
+                <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                  <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
+                </td> 
+            </tr>
+            </tr>
+            
+        </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                    William Aanakin
+            </td>
+
+                <td class="nhsuk-table__cell">
+                    91231234445
+            </td>
+
+            <td class="nhsuk-table__cell">
+                13 July 1983    
+            </td>
+            <td class="nhsuk-table__cell">
+              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+            </td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
+            </td> 
+            </tr>
+
+
+         
+
+          </tbody>
+        </table>
 
     </div>
   </div>

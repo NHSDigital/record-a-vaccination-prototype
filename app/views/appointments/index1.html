@@ -9,22 +9,21 @@
     <div class="nhsuk-grid-column-two-thirds">
 
       <h1 class="nhsuk-heading-l">Appointments</h1>
+  
+      <p class="nhsuk-body-m">Add appointments from your booking system to reduce the time it takes to find patients and record vaccinations.</p>
 
-      <p>Add and view appointments for your sites.</p>
+      <p>You will need:</p>
+      <ul class="nhsuk-list nhsuk-list--bullet">
+        <li>to select a date</li>
+        <li>to select a vaccinating team</li>
+        <li>a list of patient NHS numbers from the booking system</li>
+      </ul>
 
-      <form action="/appointments/create" method="post">
-        
 
         {{ button({
-          text: "Add appointments"
+          text: "Add booked appointments",
+          href: "/appointments/add"
         }) }}
-       
-        <br><br>
-        <h2 class="nhsuk-heading-m">Sites</h2>
-
-        <p><a href="/appointments/site">Anne Ward Maternity Unit</a></p>
-        <p><a href="/appointments/site">St Mary’s Hospital</a></p>
-        <p><a href="/appointments/site">Josephine Clinic</a></p>
 
 
     </div>
