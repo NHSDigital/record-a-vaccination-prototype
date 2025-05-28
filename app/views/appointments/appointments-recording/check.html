@@ -122,7 +122,7 @@
               text: "Postcode"
             },
             value: {
-              text: data.postcode
+              text: "LS2 5ZN"
             },
             actions: {
               items: [
@@ -148,10 +148,10 @@
           } if data.nhsNumber,
           {
             key: {
-              text: "Gender"
+              text: "NHS number"
             },
             value: {
-              text: data.gender
+              text: "9123456321"
             },
             actions: {
               items: [
@@ -174,7 +174,7 @@
               text: "Date"
             },
             value: {
-              text: ("Today" if data.vaccinationToday == "yes" else (data.vaccinationDate | isoDateFromDateInput | govukDate))
+              text: "Today"
             },
             actions: {
               items: [
@@ -225,7 +225,7 @@
               text: "Team"
             },
             value: {
-              text: data.deliveryTeam
+              text: 	"Anne Ward Maternity Unit"
             },
             actions: {
               items: [
