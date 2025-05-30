@@ -6,7 +6,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/appointments/add",
+    href: "/appointments/index2",
     text: "Back"
   }) }}
 {% endblock %}
@@ -15,33 +15,45 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Add pre-booked appointments</h1>
 
-    <p>You can use the <a href="#">21 June 2025 template (XLS)</a> spreadsheet to help upload your appointments. The file format must be in (XLS) or (CSV).</p>
+      <div class="nhsuk-form-group">
 
-
-    <p>Data you can include:</p>
-<ul class="nhsuk-list nhsuk-list--bullet">
-  <li><p><b>NHS numbers</b> must be 10 digits, for example, 485 777 3456</p></li>
-  <li> <p><b>Time slots</b> (optional) must be witten as "HH:MM", for example, 09:00</p></li>
-<li><p><b>ODS code</b> Example</p></li>
-
-  <li><p><b>Vaccine type</b> Example</p></li>
-</ul>
-
-    <p>For more help uploading appointments <a href="#">view the guidance</a>.</p>
+ 
+</div>
 
 
+<div class="nhsuk-form-group">
 
- <div class="nhsuk-form-group">
-        <label for="file" class="nhsuk-label nhsuk-label--s">File</label>
-        <input type="file" name="file" id="file" style="font-size: 1rem;">
+  <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
+    <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+      <h1 class="nhsuk-fieldset__heading">
+       Do you have a date for your appointments?
+      </h1>
+    </legend>
+  
+
+    <div class="nhsuk-radios nhsuk-radios--conditional">
+      <div class="nhsuk-radios__item">
+        <input class="nhsuk-radios__input" id="contact-1" name="contact" type="radio" value="email" aria-controls="conditional-contact-1" aria-expanded="false">
+        <label class="nhsuk-label nhsuk-radios__label" for="contact-1">
+          Yes
+        </label>
+      </div>
+      
+      <div class="nhsuk-radios__item">
+        <input class="nhsuk-radios__input" id="contact-2" name="contact" type="radio" value="phone" aria-controls="conditional-contact-2" aria-expanded="false">
+        <label class="nhsuk-label nhsuk-radios__label" for="contact-2">
+          No
+        </label>
       </div>
 
 
+  </fieldset>
+</div>
+
       {{ button({
         text: "Continue",
-        href: "/appointments/check"
+        href: "/appointments/team"
       }) }}
 
     </div>

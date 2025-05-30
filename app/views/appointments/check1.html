@@ -34,15 +34,13 @@
 
         <h1 class="nhsuk-heading-l">Check your appointments</h1>
 
-        <p>Appointments added for Wednesday 4 June 2025 at Anne Ward Maternity Unit:</p>
-            <ul class="nhsuk-list nhsuk-list--bullet">
-            <li><b>35</b> validated NHS numbers</li>
-            <li><a href="/appointments/add-nhs-numbers">3 invalid NHS numbers found</a></p></li>
-            </ul>
+        <p>Appointments added for Wednesday 4 June 2025 at Anne Ward Maternity Unit.</p>
+          
 
+            <p><a href="/appointments/invalid">3 invalid NHS numbers found</a></p>
 
       <table class="nhsuk-table-responsive" role="table">
-        <caption class="nhsuk-table__caption"></caption>
+        <caption class="nhsuk-table__caption">Showing 32 booked appointments</caption>
         <thead class="nhsuk-table__head" role="rowgroup">
             <thead role="rowgroup" class="nhsuk-table__head">
                 <tr role="row">
@@ -126,19 +124,7 @@
                     9 June 2000     
                 </td>
             </tr>
-            </tr>
-            <tr role="row" class="nhsuk-table__row">
-                <td style="color:#d5281b" class="nhsuk-table__cell">
-                    <b>91231789</b>
-            </td>
             
-            <td style="color:#d5281b" class="nhsuk-table__cell">
-                <b>Invalid - Enter a 10 digit number</b>
-        </td>
-        <td class="nhsuk-table__cell">
-        </td>
-        
-        </tr>
         </tr>
 
             <tr role="row" class="nhsuk-table__row">
@@ -153,17 +139,7 @@
             <td class="nhsuk-table__cell">
                 13 July 1983    
             </td>
-            <tr role="row" class="nhsuk-table__row">
-                <td style="color:#d5281b" class="nhsuk-table__cell">
-                    <b>9123336963</b>
-            </td>
-            
-            <td style="color:#d5281b" class="nhsuk-table__cell">
-                <b>Invalid - Enter a valid NHS number</b>
-        </td>
-
-        <td class="nhsuk-table__cell">
-    </td>
+           
         </tr>
         </tr>
             </tr>
@@ -493,15 +469,6 @@ Ubaid Ullah</td>
 </tr>
 
 
-<tr role="row" class="nhsuk-table__row">
-    <td style="color:#d5281b" class="nhsuk-table__cell">
-        <b>9963365254</b>
-</td>
-
-<td style="color:#d5281b" class="nhsuk-table__cell">
-    <b>Invalid - NHS number already in use</b>
-</td>
-
 
 <tr role="row" class="nhsuk-table__row">
     <td class="nhsuk-table__cell">
@@ -554,19 +521,11 @@ Ubaid Ullah</td>
         
             <a href="/appointments/index3">
                 <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
-                    Confirm appointments
+                    Confirm booked appointments
                   </button>
                   </a>
               
-            &nbsp;&nbsp;&nbsp;&nbsp;
-
             
-            <a href="/appointments/add-nhs-numbers">
-                  <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
-              Re-enter NHS numbers
-              </button>
-            </a>
-                
               </div>
               {% from 'button/macro.njk' import button %}
           </div>
