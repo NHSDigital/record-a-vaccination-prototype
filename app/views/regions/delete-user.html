@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/regions/organisation1",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-xl">Delete John Smith</h1>
+
+      <p>Once you delete John Smith (John.smith@nhs.net), they cannot sign in and use NHS Record a vaccination. They'll receive an email to confirm their account has been deleted.</p>
+
+      <p>Their Okta account will remain active, so they can continue to access other services.</p>
+        <p> You can add them again at any time.</p>
+
+      
+
+
+
+      <form action="/regions/index2" method="post" novalidate="true">
+        {{ button({
+          "text": "Delete organisation",
+          classes: "nhsuk-button--warning"
+        }) }}
+    </form>
+
+    </div>
+  </div>
+{% endblock %}

@@ -11,55 +11,58 @@
   {{ backLink({ href: "/appointments/add" }) }}
 {% endblock %}
 
-{% block content %}
-  <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-two-thirds">
-
-      {% if (errors | length) > 0 %}
-        {{ errorSummary({
-          titleText: "There is a problem",
-          errorList: errors
-        }) }}
-      {% endif %}
-
-
-      <div class="nhsuk-form-group">
-
-        <fieldset class="nhsuk-fieldset">
-          <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
-            <h1 class="nhsuk-fieldset__heading">
-              Which site or team is vaccinating?
-            </h1>
-          </legend>
-          <div class="nhsuk-radios">
-            <div class="nhsuk-radios__item">
-              <input class="nhsuk-radios__input" id="example-1" name="example" type="radio" value="yes">
-              <label class="nhsuk-label nhsuk-radios__label" for="example-1">
-                Anne Ward Maternity Unit
-              </label>
-            </div>
-            <div class="nhsuk-radios__item">
-              <input class="nhsuk-radios__input" id="example-2" name="example" type="radio" value="no">
-              <label class="nhsuk-label nhsuk-radios__label" for="example-2">
-                Josephine Clinic
-              </label>
-            </div>
-            <div class="nhsuk-radios__item">
-              <input class="nhsuk-radios__input" id="example-2" name="example" type="radio" value="no">
-              <label class="nhsuk-label nhsuk-radios__label" for="example-2">
-                St Mary’s Hospital
-              </label>
-            </div>
-
-          </div>
-        </fieldset>
+      {% block content %}
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+    
+          {% if (errors | length) > 0 %}
+            {{ errorSummary({
+              titleText: "There is a problem",
+              errorList: errors
+            }) }}
+          {% endif %}
+    
+          <form action="/appointments/add-nhs-numbers" method="post" novalidate>
+    
+            {% set deliveryTeams = [
+              "Anne Ward Maternity Unit",
+              "Josephine Clinic",
+              "St Mary’s Hospital"
+            ] %}
+    
+            {% set items = [] %}
+            {% for deliveryTeam in (deliveryTeams | sort) %}
+              {% set items = (items.push({
+                text: deliveryTeam,
+                value: deliveryTeam
+              }), items) %}
+            {% endfor %}
+    
+            {{ radios({
+              idPrefix: "delivery-team",
+              name: "deliveryTeam",
+              fieldset: {
+                legend: {
+                  text: "Which site or team is vaccinating?",
+                  classes: "nhsuk-fieldset__legend--l",
+                  isPageHeading: true
+                }
+              },
+              errorMessage: {
+                text: (errors | first).text
+              } if (errors | length) > 0,
+              items: items,
+              value: data.deliveryTeam
+            }) }}
+    
+            {{ button({
+              text: "Continue"
+            })}}
+          </form>
+    
+        </div>
       </div>
-
-
-      {{ button({
-        text: "Continue",
-        href: "/appointments/add-nhs-numbers"
-      }) }}
+   
 
 
 

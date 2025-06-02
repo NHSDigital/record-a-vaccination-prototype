@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  East of England
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/regions/index2",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      <h1 class="nhsuk-heading-l">Birches Bridge Pharmacy</h1>
+
+      <p>The organisation can record vaccinations.</p>
+
+      <p><a href="">Deactivate organisation</a></p>
+
+
+  <table class="nhsuk-table-responsive" role="table">
+    <caption class="nhsuk-table__caption">Users </caption>
+    <thead class="nhsuk-table__head" role="rowgroup">
+      <tr role="row">
+        <th scope="col" class="nhsuk-table__header" role="columnheader">Name</th>
+        <th scope="col" class="nhsuk-table__header" role="columnheader">Email address</th>
+        <th scope="col" class="nhsuk-table__header" role="columnheader">Status</th>
+        <th scope="col" class="nhsuk-table__header" role="columnheader"></th>
+    </tr>
+    </thead>
+    <tbody class="nhsuk-table__body">
+      <tr class="nhsuk-table__row" role="row">
+        <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Name </span>John Smith</td>
+        <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Email address</span>john.simth2025@nhs.net</td>
+        <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Status </span>Active</td>
+        <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true"></span><p><a href="/regions/delete-user">Delete</a></p></td>
+    </tr>
+    
+    </tbody>
+  </table>
+
+    </div>
+  </div>
+
+  <br>
+  <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+      Add user
+    </button>
+  
+
+{% endblock %}
