@@ -16,6 +16,13 @@
 
       <p class="nhsuk-body-l">Once they’re set up, they can add other users and vaccination sites.</p>
 
+      <div class="nhsuk-inset-text">
+        <span class="nhsuk-u-visually-hidden">Information: </span>
+      
+        <p>You can only delete an organisation if they have not recorded any vaccinations.</p>
+      </div>
+
+
       {% if awaitingApprovalOrganisationsCount > 0 %}
         <p class="nhsuk-body-l">You have <a href="/regions/awaiting-approval">{{ awaitingApprovalOrganisationsCount | plural("organisation") }}</a> waiting for approval.</p>
       {% endif %}
@@ -112,14 +119,14 @@
         <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true"></span><p><a href="/regions/delete-organisation">Delete</a></p></td>
     </tr>
     <tr class="nhsuk-table__row" role="row">
-        <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Name </span><p><a href="/regions/organisation1">Norfolk and Norwich University Hospitals NHS Foundation Trust</a></p></td>
+        <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Name </span><p><a href="/regions/organisation2">Norfolk and Norwich University Hospitals NHS Foundation Trust</a></p></td>
         <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">ODS code</span>RM1</td>
         <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Type </span>NHS Trust</td>
         <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Status </span>Active</td>
         <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true"></span><p><a href="/regions/delete-organisation"></a></p></td>
     </tr>
     <tr class="nhsuk-table__row" role="row">
-        <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Name </span><p><a href="/regions/organisation1">Addlestone Pharmacy</a></p></td>
+        <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Name </span><p><a href="/regions/organisation2">Addlestone Pharmacy</a></p></td>
         <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">ODS code</span>FAE02</td>
         <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Type </span>Community Pharmacy</td>
         <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Status </span>Active</td>
