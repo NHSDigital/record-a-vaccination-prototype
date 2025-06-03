@@ -13,7 +13,7 @@ table {
 
 .app-table__header--min-width-200 {
   min-width: 100px;
-  @include mq($from: desktop) {
+  @include nhsuk-media-query($from: desktop) {
     min-width: 200px;
   }
 }
