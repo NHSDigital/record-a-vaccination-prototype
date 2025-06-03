@@ -21,7 +21,7 @@
     width: 100%;
   }
 
-  @include mq($from: tablet) {
+  @include nhsuk-media-query($from: tablet) {
     flex-direction: row;
     flex-wrap: wrap;
 
