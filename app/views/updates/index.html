@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-Updates
-{% endblock %}
+{% set pageName = "Updates" %}
 
 {% set currentSection = "updates" %}
 
@@ -11,8 +9,8 @@ Updates
     <div class="nhsuk-grid-column-full">
 
       <h1 class="nhsuk-heading-l">Updates</h1>
-      
-      
+
+
       <br>
       <p class="nhsuk-body-l"><a href="/updates/previous" class="nhsuk-link">Previous updates</a></p>
       <p class="nhsuk-body-l"><a href="/updates/future" class="nhsuk-link">Future updates</a></p>

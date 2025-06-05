@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  {{ organisation.name }}
-{% endblock %}
+{% set pageName = organisation.name %}
 
 {% block header %}
   {% include "includes/header-logged-in-region.html" %}

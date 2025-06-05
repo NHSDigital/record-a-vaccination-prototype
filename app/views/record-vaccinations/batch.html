@@ -3,6 +3,7 @@
 {% set pageName = "Which batch are you using?" %}
 
 {% set currentSection = "vaccinate" %}
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
 
 {% block beforeContent %}
   {{ backLink({ href: "/record-vaccinations/vaccine" }) }}
@@ -23,67 +24,56 @@
 
       <form action="/record-vaccinations/answer-batch" method="post" novalidate>
 
-          {{ radios({
-            "idPrefix": "vaccineBatch",
-            "name": "vaccineBatch",
-            "fieldset": {
-              "legend": {
-                "text": ("Which batch are you using?" if data.vaccinationToday == 'yes' else "Which batch was it?"),
-                "classes": "nhsuk-fieldset__legend--l",
-                "isPageHeading": true
-              }
-            },
-            errorMessage: {
-              text: error.text
-            } if error,
-            "items": [
-              {
-                "value": "AB2345",
-                "text": "AB2345",
-                hint: {
-                  text: "Expires 14 August 2025"
-                },
-                checked: (data.vaccineBatch == "AB2345")
-              },
-              {
-                "value": "DE8342",
-                "text": "DE8342",
-                hint: {
-                  text: "Expires 19 August 2025"
-                },
-                checked: (data.vaccineBatch == "DE8342")
-              },
-              {
-                "value": "LF842",
-                "text": "LF842",
-                hint: {
-                  text: "Expires 28 August 2025"
-                },
-                checked: (data.vaccineBatch == "LF842")
-              },
-              {
-                "value": "JD8352",
-                "text": "JD8352",
-                hint: {
-                  text: "Expires 3 September 2025"
-                },
-                checked: (data.vaccineBatch == "JD8352")
-              },
-              {
-                divider: "or"
-              },
-              {
-                "value": "add-new",
-                "text": "Add a batch",
-                checked: (data.vaccineBatch == "add-new")
-              }
-            ]
-          }) }}
+      {% set items = [] %}
+      {% for batch in (batches) %}
+        {% set items = (items.push({
+          text: batch.batchNumber,
+          hint: {
+            text: "Expires " + (batch.expiryDate | govukDate)
+          },
+          value: batch.id
+        }), items) %}
+      {% endfor %}
+
+      {% if organisationSetting.permissionLevel != "Recorder" %}
+        {% set items = (items.push({
+          divider: "or"
+        }), items) %}
+        {% set items = (items.push({
+          value: "add-new",
+          text: "Add a batch"
+        }), items) %}
+      {% endif %}
+
+
+        {{ radios({
+          "idPrefix": "vaccineBatch",
+          "name": "vaccineBatch",
+          "fieldset": {
+            "legend": {
+              "text": ("Which batch are you using?" if data.vaccinationToday == 'yes' else "Which batch was it?"),
+              "classes": "nhsuk-fieldset__legend--l",
+              "isPageHeading": true
+            }
+          },
+          value: data.vaccineBatch,
+          errorMessage: {
+            text: error.text
+          } if error,
+          "items": items
+        }) }}
 
         {{ button({
           text: "Continue"
         })}}
       </form>
+
+      {% if organisationSetting.permissionLevel == "Recorder" %}
+        {{ details({
+          text: "If the batch is not listed",
+          html: "An administrator needs to add the batch."
+        }) }}
+      {% endif %}
 
     </div>
   </div>

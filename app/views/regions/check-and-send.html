@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  East of England
-{% endblock %}
+{% set pageName = "Check and send" %}
 
 {% block header %}
   {% include "includes/header-logged-in-region.html" %}
@@ -19,7 +17,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-xl">Check and send</h1>
+      <h1 class="nhsuk-heading-xl">{{ pageName }}</h1>
 
       {{ summaryList({
         rows: [
@@ -42,7 +40,7 @@
           },
           {
             key: {
-              text: "Lead user"
+              text: "User"
             },
             value: {
               html: data.firstName + " " + data.lastName + "<br>" + data["email"]
@@ -52,7 +50,7 @@
                 {
                   href: "/regions/add-email",
                   text: "Change",
-                  visuallyHiddenText: "lead user email address"
+                  visuallyHiddenText: "User email address"
                 }
               ]
             }

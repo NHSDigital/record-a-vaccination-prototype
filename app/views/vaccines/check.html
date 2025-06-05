@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Vaccines
-{% endblock %}
+{% set pageName = "Check and confirm" %}
 
 {% set currentSection = "vaccines" %}
 
@@ -12,7 +10,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-xl">Check and confirm</h1>
+      <h1 class="nhsuk-heading-xl">{{ pageName }}</h1>
 
 
       {{ summaryList({
@@ -23,7 +21,7 @@
               text: "Site name"
             },
             value: {
-              text: data.sites[data.siteCode].name
+              text: site.name
             }
           },
           {
@@ -31,7 +29,7 @@
               text: "ODS Code"
             },
             value: {
-              html: data["siteCode"]
+              html: data.siteId
             }
           },
           {
@@ -39,7 +37,7 @@
               text: "Address"
             },
             value: {
-              html: data.sites[data.siteCode].address
+              html: "100 High Street, Manchester, M4 1LP"
             }
           }
         ]

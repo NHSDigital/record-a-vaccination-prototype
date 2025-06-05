@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Add a batch
-{% endblock %}
+{% set pageName = "Add a batch" %}
 
 {% set currentSection = "vaccines" %}
 
@@ -24,7 +22,7 @@
       }) }}
     {% endif %}
 
-      <h1 class="nhsuks-heading-l">Add a batch</h1>
+      <h1 class="nhsuks-heading-l">{{ pageName }}</h1>
 
       <form action="/record-vaccinations/answer-add-batch" method="post" novalidate>
 
