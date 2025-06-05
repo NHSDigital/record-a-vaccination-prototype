@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Appointments" %}
+
+{% set currentSection = "appointments" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/appointments/add",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Add NHS numbers and Time slots (optional) for 21 June 2025</h1>
+
+    <p>You can use the <a href="#">21 June 2025 template (XLS)</a> spreadsheet to help upload your appointments. The file format must be in (XLS) or (CSV).</p>
+
+    <p><b>NHS numbers</b> must be 10 digits, for example, 485 777 3456</p>
+
+    <p><b>Time slots</b> (optional) must be witten as "HH:MM", for example, 09:00</p>
+
+ <div class="nhsuk-form-group">
+        <label for="file" class="nhsuk-label nhsuk-label--s">File</label>
+        <input type="file" name="file" id="file" style="font-size: 1rem;">
+      </div>
+
+    <p>For more help uploading appointments <a href="#">view the guidance</a>.</p>
+
+
+      {{ button({
+        text: "Continue",
+        href: "/appointments/check-spreadsheet"
+      }) }}
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Appointments" %}
+
+{% set currentSection = "appointments" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Appointments</h1>
+  
+      <p class="nhsuk-body-m">Add appointments from your booking system to reduce the time it takes to find patients and record vaccinations.</p>
+
+      <p>You will need:</p>
+      <ul class="nhsuk-list nhsuk-list--bullet">
+        <li>to select a date</li>
+        <li>to select a vaccinating team</li>
+        <li>a list of patient NHS numbers from the booking system</li>
+      </ul>
+
+
+        {{ button({
+          text: "Add booked appointments",
+          href: "/appointments/add"
+        }) }}
+
+
+    </div>
+  </div>
+
+{% endblock %}

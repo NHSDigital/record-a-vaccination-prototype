@@ -2,12 +2,14 @@ const organisations = require('./organisations')
 const regions = require('./regions')
 const featureFlags = require('./feature-flags')
 const users = require('./users')
+const appointments = require('./appointments')
 const vaccines = require('./vaccines')
 
 module.exports = {
   organisations: organisations,
   regions: regions,
   featureFlags: featureFlags,
+  appointments: appointments,
   users: users,
   vaccines: vaccines,
   vaccineStock: [],

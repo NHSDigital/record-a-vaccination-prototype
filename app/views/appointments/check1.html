@@ -1,0 +1,539 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Appointments" %}
+
+{% set currentSection = "appointments" %}
+
+{% block beforeContent %}
+  {{ backLink({
+  href: "/appointments/add-nhs-numbers",
+  text: "Back"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<!-- <p class="nhsuk-body-l">This example shows only the <mark>NHS number</mark>, and <mark>Date</mark> used.</p> -->
+
+<br>
+
+  <style>
+    .jointTopBot {
+      border-top: 4px solid #768692;
+    }
+    .jointMid {
+    border-bottom: 2px solid #d8dde0;
+    }
+
+  </style>
+
+
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+        <h1 class="nhsuk-heading-l">Check your appointments</h1>
+
+        <p>Appointments added for Wednesday 4 June 2025 at Anne Ward Maternity Unit.</p>
+          
+
+            <p><a href="/appointments/invalid">3 invalid NHS numbers found</a></p>
+
+      <table class="nhsuk-table-responsive" role="table">
+        <caption class="nhsuk-table__caption">Showing 32 booked appointments</caption>
+        <thead class="nhsuk-table__head" role="rowgroup">
+            <thead role="rowgroup" class="nhsuk-table__head">
+                <tr role="row">
+      
+                  <th role="columnheader" class="" scope="col">
+                      NHS number
+                    </th>
+                    <th role="columnheader" class="" scope="col">
+                      Name
+                    </th>
+                  <th role="columnheader" class="" scope="col">
+                    Date of birth
+                  </th>
+                </tr>
+        </thead>
+
+        <tbody class="nhsuk-table__body">
+              <tr role="row" class="nhsuk-table__row">
+                  <td class="nhsuk-table__cell">
+                    9123456789
+                </td>
+                
+                  <td class="nhsuk-table__cell">
+                    John Smith
+                </td>
+                
+                <td class="nhsuk-table__cell">
+                    4 November 1954
+                </td>
+            </tr>
+            <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                    91231231231
+              </td>
+              
+                <td class="nhsuk-table__cell">
+                  Martin Lincoln
+              </td>
+              
+              <td class="nhsuk-table__cell">
+                7 June 1958
+              </td>
+          </tr>
+          <tr role="row" class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">
+                98767655431
+          </td>
+          
+            <td class="nhsuk-table__cell">
+              Mike Jones
+          </td>
+          
+          <td class="nhsuk-table__cell">
+              4 November 1954
+          </td>
+            </tr>
+            <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                    9876765222
+            </td>
+            
+                <td class="nhsuk-table__cell">
+                    Clive Lochan
+            </td>
+            
+            <td class="nhsuk-table__cell">
+                12 September 1971      
+            </td>
+        </tr>
+        </tr>
+                <tr role="row" class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">
+                        91231789548
+                </td>
+                
+                    <td class="nhsuk-table__cell">
+                        Thomas Smith
+                </td>
+                
+                <td class="nhsuk-table__cell">
+                    9 June 2000     
+                </td>
+            </tr>
+            
+        </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                    91231234445
+            </td>
+
+                <td class="nhsuk-table__cell">
+                    Anakin William
+            </td>
+
+            <td class="nhsuk-table__cell">
+                13 July 1983    
+            </td>
+           
+        </tr>
+        </tr>
+            </tr>
+            <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                    9875362842
+            </td>
+
+                <td class="nhsuk-table__cell">
+                Norma Davies
+            </td>
+
+            <td class="nhsuk-table__cell">
+                23 May 1976     
+            </td>
+            </tr>
+
+        </tr>
+        <tr role="row" class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">
+                9952365845
+        </td>
+
+            <td class="nhsuk-table__cell">
+                Ivan Grieve        </td>
+
+        <td class="nhsuk-table__cell">
+           4 June 1996    
+        </td>
+        </tr>
+    </tr>
+    <tr role="row" class="nhsuk-table__row">
+        <td class="nhsuk-table__cell">
+            9523256556
+    </td>
+
+        <td class="nhsuk-table__cell">
+            Judith Johnston    </td>
+
+    <td class="nhsuk-table__cell">
+22 July 1972    </td>
+    </tr>
+</tr>
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9558748545
+</td>
+
+    <td class="nhsuk-table__cell">
+        Stephen Lawson
+    </td>
+
+<td class="nhsuk-table__cell">
+1 October 1969</td>
+</tr>
+</tr>
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9636235621
+</td>
+
+    <td class="nhsuk-table__cell">
+        Dianne Sheehy</td>
+
+<td class="nhsuk-table__cell">
+17 August 2002</td>
+</tr>
+</tr>
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9632365236
+</td>
+
+    <td class="nhsuk-table__cell">
+        James Stannard</td>
+
+<td class="nhsuk-table__cell">
+25 April 1989</td>
+</tr>
+</tr>
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9658652365
+</td>
+
+    <td class="nhsuk-table__cell">
+        Graham McLelland</td>
+
+<td class="nhsuk-table__cell">
+29 May 1995</td>
+</tr>
+
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9632587412
+</td>
+
+    <td class="nhsuk-table__cell">
+        Jonathan Everitt</td>
+
+<td class="nhsuk-table__cell">
+30 January 2000</td>
+</tr>
+</tr>
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9874587458
+</td>
+
+    <td class="nhsuk-table__cell">
+        Dennis Clemson</td>
+
+<td class="nhsuk-table__cell">
+8 November 1986</td>
+</tr>
+
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9652358415
+</td>
+
+    <td class="nhsuk-table__cell">
+        Janet Booth</td>
+
+<td class="nhsuk-table__cell">
+18 March 1975 </td>
+</tr>
+</tr>
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9512584568
+</td>
+
+    <td class="nhsuk-table__cell">
+        Eleanor Ayre</td>
+
+<td class="nhsuk-table__cell">
+22 May 2003</td>
+</tr>
+
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9525252636
+</td>
+
+    <td class="nhsuk-table__cell">
+        Ruth Yates</td>
+
+<td class="nhsuk-table__cell">
+11 June 1989</td>
+</tr>
+</tr>
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9858569526
+</td>
+
+    <td class="nhsuk-table__cell">
+        Philip Wood</td>
+
+<td class="nhsuk-table__cell">
+3 December 2001</td>
+</tr>
+
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        999852512
+</td>
+
+    <td class="nhsuk-table__cell">
+        Gary Williams</td>
+
+<td class="nhsuk-table__cell">
+11 September 1975</td>
+</tr>
+</tr>
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9666952365
+</td>
+
+    <td class="nhsuk-table__cell">
+    Norma Davies
+</td>
+
+<td class="nhsuk-table__cell">
+26 April 1991</td>
+</tr>
+
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9987458114
+</td>
+
+    <td class="nhsuk-table__cell">
+        Dorothy Wilford</td>
+
+<td class="nhsuk-table__cell">
+5 May 1962</td>
+</tr>
+</tr>
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9002125458
+</td>
+
+    <td class="nhsuk-table__cell">
+        Susan Whitmore</td>
+
+<td class="nhsuk-table__cell">
+3 March 2006</td>
+</tr>
+
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        985202365
+</td>
+
+    <td class="nhsuk-table__cell">
+        John White</td>
+
+<td class="nhsuk-table__cell">5 April 1984
+</tr>
+</tr>
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9635201478
+</td>
+
+    <td class="nhsuk-table__cell">
+        Matthew Weekley</td>
+    </td>
+
+<td class="nhsuk-table__cell">
+1 October 1949</td>
+</tr>
+
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9852014528
+</td>
+
+    <td class="nhsuk-table__cell">
+Ubaid Ullah</td>
+
+<td class="nhsuk-table__cell">
+20 November 1969</td>
+</tr>
+</tr>
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9854712500
+</td>
+
+    <td class="nhsuk-table__cell">
+        William Vass</td>
+
+<td class="nhsuk-table__cell">
+8 July 1989</td>
+</tr>
+
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9852365241
+</td>
+
+   
+
+    <td class="nhsuk-table__cell">
+    Norma Davies
+</td>
+
+<td class="nhsuk-table__cell">
+1 June 2005</td>
+</tr>
+</tr>
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9112001152
+</td>
+
+    <td class="nhsuk-table__cell">
+        Michael Thompson</td>
+
+<td class="nhsuk-table__cell">
+6 April 1993</td>
+</tr>
+
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9522214524
+</td>
+
+
+    <td class="nhsuk-table__cell">
+        James Stannard</td>
+
+<td class="nhsuk-table__cell">
+    2 March 1976     
+</td>
+</tr>
+</tr>
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9887411452
+</td>
+
+    <td class="nhsuk-table__cell">
+        Dawn Ingram</td>
+
+<td class="nhsuk-table__cell">
+    1 January 1976     
+</td>
+</tr>
+
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9963365254
+</td>
+
+    <td class="nhsuk-table__cell">
+        Patricia Hopps</td>
+
+<td class="nhsuk-table__cell">
+2 October 1999</td>
+
+</tr>
+
+
+
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9522585241
+</td>
+
+    <td class="nhsuk-table__cell">
+        Derek Holmes</td>
+
+<td class="nhsuk-table__cell">
+10 September 2201</td>
+</tr>
+
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9852541585
+</td>
+
+    <td class="nhsuk-table__cell">
+        Gerard Forster</td>
+
+<td class="nhsuk-table__cell">
+14 December 1966</td>
+</tr>
+</tr>
+<tr role="row" class="nhsuk-table__row">
+    <td class="nhsuk-table__cell">
+        9746815247
+</td>
+
+    <td class="nhsuk-table__cell">
+        Belinda Davies</td>
+
+<td class="nhsuk-table__cell">
+    21 June 1997   
+</td>
+</tr>
+
+
+          </tbody>
+        </table>
+
+
+      <br><br>
+
+
+
+
+        <div class="button-container">
+        
+            <a href="/appointments/index3">
+                <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+                    Confirm booked appointments
+                  </button>
+                  </a>
+              
+            
+              </div>
+              {% from 'button/macro.njk' import button %}
+          </div>
+
+
+
+{% endblock %}
+
+
+
+

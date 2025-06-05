@@ -18,9 +18,8 @@
       {% endif %}
 
       {% set panelHtml %}
-        <a href="#" class="nhsuk-link--reverse">{{ patientName }}’s {{ data.vaccine }} record</a> will be sent to their GP.
+        <a href="#" class="nhsuk-link--reverse">Michael James's COVID-19 record</a> will be sent to their GP.
       {% endset %}
-      {% include "_feedback-panel.html" %}
 
       {{ panel({
         titleText: "Vaccination saved",
@@ -44,7 +43,7 @@
           items: [
             {
               value: "same-patient-another-vaccination",
-              text: "Record a second vaccination for " + patientName
+              text: "Record a second vaccination for Michael James"
             },
             {
               value: "same-vaccination-another-patient",
@@ -54,13 +53,17 @@
         }) }}
 
         {{ button({
-          text: "Continue"
-        })}}
-
+          text: "Continue",
+          href: "/appointments/mvp3"
+        }) }}
 
       {% else %}
 
-      <form action="/record-vaccinations/what-next" method="post" novalidate>
+      {{ button({
+        text: "Add booked appointments",
+        href: "/appointments/mvp3"
+      }) }}
+
 
       {% set lowercaseVaccineName %}
         {% if (data.vaccine == "RSV") %}
