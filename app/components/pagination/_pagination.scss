@@ -16,7 +16,7 @@
 }
 
 .nhsuk-pagination__list {
-  @include clearfix();
+  @include nhsuk-clearfix();
 }
 
 .nhsuk-pagination-item--previous {
@@ -135,7 +135,7 @@
 
 // Numbered pages variant
 .nhsuk-pagination--numbered {
-  @include clearfix();
+  @include nhsuk-clearfix();
 }
 
 // In a numbered list, the previous link, numbered page links,
