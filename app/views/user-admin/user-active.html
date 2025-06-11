@@ -1,0 +1,105 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Add user
+{% endblock %}
+
+{% set currentSection = "manage-users" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/user-admin/index1",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% set userOrganisationSettings = (user.organisations | findById(data.currentOrganisationId)) %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">John Smith</h1>
+
+      <form action="/user-admin/users/{{ user.id }}/update" method="post" novalidate="true">
+
+        {{ radios({
+          "name": "clinician",
+          "fieldset": {
+            "legend": {
+              "text": "Are they a clinician?"
+            }
+          },
+          hint: {
+            text: "Only a registered clinician can assess patients for vaccines"
+          },
+          value: ("yes" if userOrganisationSettings.clinician else "no"),
+          "items": [
+            {
+              "value": "yes",
+              "text": "Yes"
+            },
+            {
+              "value": "no",
+              "text": "No"
+            }
+          ]
+        }) }}
+
+
+        {{ radios({
+          "name": "permissionLevel",
+          "fieldset": {
+            "legend": {
+              "text": "Permission level",
+              classes: "nhsuk-fieldset__legend--m"
+            }
+          },
+          value: userOrganisationSettings.permissionLevel,
+          "items": [
+            {
+              "value": "Recorder",
+              "text": "Recorder",
+              "hint": {
+                "text": "Record vaccinations only"
+              }
+            },
+            {
+              "value": "Administrator",
+              "text": "Administrator",
+              "hint": {
+                "text": "Record vaccinations, create reports and manage vaccines"
+              }
+            },
+            {
+              "value": "Lead administrator",
+              "text": "Lead administrator",
+              "hint": {
+                "text": "Record vaccinations, create reports, manage vaccines and users"
+              }
+            }
+          ]
+        }) }}
+
+
+        {{ button({
+          "text": "Continue"
+      }) }}
+      </form>
+
+
+      {% if user.id === currentUser.id %}
+        {% if numberOfLeadAdmins > 1 %}
+          <p>Do you still need this account? <a href="/user-admin/{{ user.id }}/deactivate">Deactivate your account</a></p>
+        {% else %}
+          <p>You cannot deactivate your account as you are the only active lead administrator.</p>
+        {% endif %}
+      {% else %}
+        <p>Do they still need an account? <a href="/user-admin/{{ user.id }}/deactivate">Deactivate this account</a></p>
+      {% endif %}
+
+    </div>
+  </div>
+
+
+{% endblock %}

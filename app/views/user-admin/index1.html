@@ -1,0 +1,255 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Manage users and permissions
+{% endblock %}
+
+{% from '../../components/pagination/macro.njk' import appPagination %}
+
+
+{% set currentSection = "manage-users" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+      <h1 class="nhsuk-heading-xl">Manage users</h1>
+
+      {{ button({
+        "text": "Add user",
+        "href": "/user-admin/add-user"
+      }) }}
+
+
+      <div class="app-filters nhsuk-u-margin-top-5">
+        <form action="/user-admin" method="get" novalidate>
+          <div class="nhsuk-form-group nhsuk-u-margin-bottom-0">
+            <label class="nhsuk-label" for="q">
+              Search active users by name or email
+            </label>
+            <input class="nhsuk-input nhsuk-input--width-20" id="q" name="q" type="search" value="{{ q }}">
+
+            {{ button({
+              text: "Search",
+              classes: "nhsuk-button--secondary nhsuk-u-margin-left-2 app-button--small nhsuk-u-margin-bottom-0"
+            })}}
+          </div>
+        </form>
+      </div>
+
+
+
+
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+<br>
+    
+      <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
+        <ul class="x-govuk-secondary-navigation__list">
+          <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
+            <a class="x-govuk-secondary-navigation__link" href="/user-admin/index1" aria-current=page>
+              Active (102)
+            </a>
+          </li>
+          <li class="x-govuk-secondary-navigation__list-item ">
+            <a class="x-govuk-secondary-navigation__link" href="/user-admin/index2">
+              Deactivated (1)
+            </a>
+          </li>
+        
+          
+        </ul>
+      </nav>
+    
+      <br><br>
+    
+    
+    
+          <table class="nhsuk-table-responsive" role="table">
+            <caption class="nhsuk-table__caption">102 Active users</caption>
+
+            <thead class="nhsuk-table__head" role="rowgroup">
+                <thead role="rowgroup" class="nhsuk-table__head">
+                    <tr role="row">
+          
+                      <th role="columnheader" class="" scope="col">
+                        Name
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Email
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Clinician
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Permission
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Days inactive
+                    </th>
+                      <th role="columnheader" class="" scope="col">
+                      </th>
+                      
+                    </tr>
+            </thead>
+    
+            <tbody class="nhsuk-table__body">
+                  
+            
+
+                <tr role="row" class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">
+                        Benson, Ben
+                  </td>
+                  
+                    <td class="nhsuk-table__cell">
+                      email.example@nhs.net
+                  </td>
+                  
+                  <td class="nhsuk-table__cell">
+                      Yes
+                  </td>
+                  <td class="nhsuk-table__cell">
+                    Administrator
+                </td>
+                  <td class="nhsuk-table__cell">
+                    0
+                </td>
+                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                    <a class="nhsuk-link" href="/record-vaccinations/patient-history">Change</a>
+                  </td> 
+                    </tr>
+
+                    
+
+                        <tr role="row" class="nhsuk-table__row">
+                            <td class="nhsuk-table__cell">
+                                Daniels, Dillon
+                          </td>
+                          
+                            <td class="nhsuk-table__cell">
+                              email.example@nhs.net
+                          </td>
+                          
+                          <td class="nhsuk-table__cell">
+                              Yes
+                          </td>
+                          <td class="nhsuk-table__cell">
+                            Administrator
+                        </td>
+                          <td class="nhsuk-table__cell">
+                            0
+                        </td>
+                          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                            <a class="nhsuk-link" href="/record-vaccinations/patient-history">Change</a>
+                          </td> 
+                            </tr>
+
+                            <tr role="row" class="nhsuk-table__row">
+                                <td class="nhsuk-table__cell">
+                                   Edwards, Elle
+                              </td>
+                              
+                                <td class="nhsuk-table__cell">
+                                  email.example@nhs.net
+                              </td>
+                              
+                              <td class="nhsuk-table__cell">
+                                  Yes
+                              </td>
+                              <td class="nhsuk-table__cell">
+                                Administrator
+                            </td>
+                              <td class="nhsuk-table__cell">
+                                0
+                            </td>
+                              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                                <a class="nhsuk-link" href="/record-vaccinations/patient-history">Change</a>
+                              </td> 
+                                </tr>
+
+
+                                <tr role="row" class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                        Aarrons, Sam
+                                  </td>
+                                  
+                                    <td class="nhsuk-table__cell">
+                                      email.example@nhs.net
+                                  </td>
+                                  
+                                  <td class="nhsuk-table__cell">
+                                      Yes
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    Administrator
+                                </td>
+                                  <td class="nhsuk-table__cell">
+                                    1
+                                </td>
+                                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                                    <a class="nhsuk-link" href="/record-vaccinations/patient-history">Change</a>
+                                  </td> 
+                                    </tr>
+                                    
+
+                                    <tr role="row" class="nhsuk-table__row">
+                                        <td class="nhsuk-table__cell">
+                                            Stephens, Samantha
+                                      </td>
+                                      
+                                        <td class="nhsuk-table__cell">
+                                          email.example@nhs.net
+                                      </td>
+                                      
+                                      <td class="nhsuk-table__cell">
+                                          Yes
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        Administrator
+                                    </td>
+                                      <td class="nhsuk-table__cell">
+                                        16
+                                    </td>
+                                      <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                                        <a class="nhsuk-link" href="/record-vaccinations/patient-history">Change</a>
+                                      </td> 
+                                        </tr>
+
+
+                                <tr role="row" class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                        Craft, Callum
+                                  </td>
+                                  
+                                    <td class="nhsuk-table__cell">
+                                      email.example@nhs.net
+                                  </td>
+                                  
+                                  <td class="nhsuk-table__cell">
+                                      Yes
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    Administrator
+                                </td>
+                                  <td class="nhsuk-table__cell" style="color:#d5281b;">
+                                   86
+                                </td>
+                                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                                    <a class="nhsuk-link" href="/user-admin/user-active">Change</a>
+                                  </td> 
+                                    </tr>
+    
+
+                
+              </tbody>
+            </table>
+    
+            
+        </div>
+      </div>
+
+{% endblock %}
+
+
+
+
