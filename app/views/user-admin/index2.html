@@ -24,7 +24,7 @@
         <form action="/user-admin" method="get" novalidate>
           <div class="nhsuk-form-group nhsuk-u-margin-bottom-0">
             <label class="nhsuk-label" for="q">
-              Search active users by name or email
+              Search deactivated users by name or email
             </label>
             <input class="nhsuk-input nhsuk-input--width-20" id="q" name="q" type="search" value="{{ q }}">
 
@@ -35,7 +35,7 @@
           </div>
         </form>
       </div>
-
+      <br>
 
 
 
@@ -52,7 +52,7 @@
           </li>
           <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
             <a class="x-govuk-secondary-navigation__link" href="/user-admin/deactivated">
-              Deactivated (1)
+              Deactivated (2)
             </a>
           </li>
         
@@ -60,12 +60,15 @@
         </ul>
       </nav>
     
-      <br><br>
+      <br>
     
     
     
           <table class="nhsuk-table-responsive" role="table">
             <caption class="nhsuk-table__caption">1 Deactivated user</caption>
+
+
+            <p><a href="/user-admin/{{ user.id }}/deactivate">Reactivate all (2) 90-days inactive users</a></p>
 
             <thead class="nhsuk-table__head" role="rowgroup">
                 <thead role="rowgroup" class="nhsuk-table__head">
@@ -84,8 +87,10 @@
                         Permission
                       </th>
                       <th role="columnheader" class="" scope="col">
+                        Dectivated by
                     </th>
                       <th role="columnheader" class="" scope="col">
+                        
                       </th>
                       
                     </tr>
@@ -99,7 +104,7 @@
               </td>
               
                 <td class="nhsuk-table__cell">
-                  email.example@nhs.net
+                  jane.doe@nhs.net
               </td>
               
               <td class="nhsuk-table__cell">
@@ -108,12 +113,37 @@
               <td class="nhsuk-table__cell">
                 Administrator
             </td>
-              
+            <td class="nhsuk-table__cell">
+                Lead admin
             </td>
               <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                <a class="nhsuk-link" href="/record-vaccinations/patient-history">Change</a>
-              </td> 
+                <a class="nhsuk-link" href="/user-admin/user-deactivated1">Change</a>
+            </td> 
                 </tr>
+
+
+                <tr role="row" class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">
+                        Phillips, Zack
+                  </td>
+                  
+                    <td class="nhsuk-table__cell">
+                    zach.phillips@nhs.net
+                  </td>
+                  
+                  <td class="nhsuk-table__cell">
+                      Yes
+                  </td>
+                  <td class="nhsuk-table__cell">
+                    Administrator
+                </td>
+                <td class="nhsuk-table__cell">
+                    90-days inactive
+                </td>
+                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                    <a class="nhsuk-link" href="/user-admin/user-deactivated">Change</a>
+                  </td> 
+                    </tr>
 
                 
               </tbody>

@@ -19,7 +19,33 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">John Smith</h1>
+      <h1 class="nhsuk-heading-l">Ben Benson</h1>
+
+      <dl class="nhsuk-summary-list">
+        <div class="nhsuk-summary-list__row">
+          <dt class="nhsuk-summary-list__key">
+            Email
+          </dt>
+          <dd class="nhsuk-summary-list__value">
+            ben.benson@nhs.net
+          </dd>
+        </div>
+        <div class="nhsuk-summary-list__row">
+          <dt class="nhsuk-summary-list__key">
+           Days since last login
+          </dt>
+          <dd class="nhsuk-summary-list__value"> 
+            86
+          </dd>
+        </div>
+      </dl>
+
+        <p><a href="/user-admin/{{ user.id }}/deactivate">Reset activity to 0 days</a></p>
+
+        <p>User no longer needs an account? <a href="/user-admin/{{ user.id }}/deactivate">Deactivate this account</a></p>
+
+
+<br>
 
       <form action="/user-admin/users/{{ user.id }}/update" method="post" novalidate="true">
 
@@ -27,7 +53,9 @@
           "name": "clinician",
           "fieldset": {
             "legend": {
-              "text": "Are they a clinician?"
+              "text": "Are they a clinician?",
+              classes: "nhsuk-fieldset__legend--s"
+              
             }
           },
           hint: {
@@ -52,7 +80,7 @@
           "fieldset": {
             "legend": {
               "text": "Permission level",
-              classes: "nhsuk-fieldset__legend--m"
+              classes: "nhsuk-fieldset__legend--s"
             }
           },
           value: userOrganisationSettings.permissionLevel,
@@ -86,17 +114,6 @@
           "text": "Continue"
       }) }}
       </form>
-
-
-      {% if user.id === currentUser.id %}
-        {% if numberOfLeadAdmins > 1 %}
-          <p>Do you still need this account? <a href="/user-admin/{{ user.id }}/deactivate">Deactivate your account</a></p>
-        {% else %}
-          <p>You cannot deactivate your account as you are the only active lead administrator.</p>
-        {% endif %}
-      {% else %}
-        <p>Do they still need an account? <a href="/user-admin/{{ user.id }}/deactivate">Deactivate this account</a></p>
-      {% endif %}
 
     </div>
   </div>
