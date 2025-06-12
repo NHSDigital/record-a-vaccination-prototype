@@ -40,12 +40,6 @@
         </div>
       </dl>
 
-        <p><a href="/user-admin/{{ user.id }}/deactivate">Reset activity to 0 days</a></p>
-
-        <p>User no longer needs an account? <a href="/user-admin/{{ user.id }}/deactivate">Deactivate this account</a></p>
-
-
-<br>
 
       <form action="/user-admin/users/{{ user.id }}/update" method="post" novalidate="true">
 
@@ -109,11 +103,16 @@
           ]
         }) }}
 
+        <p>Do they still need an account? <a href="/user-admin/{{ user.id }}/deactivate">Deactivate this account</a></p>
+
+
 
         {{ button({
           "text": "Continue"
       }) }}
       </form>
+
+      
 
     </div>
   </div>

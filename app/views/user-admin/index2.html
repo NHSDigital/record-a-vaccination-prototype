@@ -41,7 +41,6 @@
 
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-full">
-<br>
     
       <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
         <ul class="x-govuk-secondary-navigation__list">
@@ -52,23 +51,25 @@
           </li>
           <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
             <a class="x-govuk-secondary-navigation__link" href="/user-admin/deactivated">
-              Deactivated (2)
+              Deactivated (3)
             </a>
           </li>
-        
           
         </ul>
       </nav>
-    
-      <br>
+
     
     
     
           <table class="nhsuk-table-responsive" role="table">
+
+            <br>
+
+            <p>For security, we deactivate users if they have not logged in for 90 days.</p>
+
+            <br>
+
             <caption class="nhsuk-table__caption">1 Deactivated user</caption>
-
-
-            <p><a href="/user-admin/{{ user.id }}/deactivate">Reactivate all (2) 90-days inactive users</a></p>
 
             <thead class="nhsuk-table__head" role="rowgroup">
                 <thead role="rowgroup" class="nhsuk-table__head">
@@ -117,10 +118,33 @@
                 Lead admin
             </td>
               <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                <a class="nhsuk-link" href="/user-admin/user-deactivated1">Change</a>
+                <a class="nhsuk-link" href="/user-admin/reactivate">Reactivate</a>
             </td> 
                 </tr>
 
+
+                <tr role="row" class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">
+                        West, Wallace
+                  </td>
+                  
+                    <td class="nhsuk-table__cell">
+                    wallace.west@nhs.net
+                  </td>
+                  
+                  <td class="nhsuk-table__cell">
+                      Yes
+                  </td>
+                  <td class="nhsuk-table__cell">
+                    Administrator
+                </td>
+                <td class="nhsuk-table__cell">
+                    90-days inactive
+                </td>
+                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                    <a class="nhsuk-link" href="/user-admin/reactivate">Reactivate</a>
+                  </td> 
+                    </tr>
 
                 <tr role="row" class="nhsuk-table__row">
                     <td class="nhsuk-table__cell">
@@ -141,7 +165,7 @@
                     90-days inactive
                 </td>
                   <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                    <a class="nhsuk-link" href="/user-admin/user-deactivated">Change</a>
+                    <a class="nhsuk-link" href="/user-admin/reactivate">Reactivate</a>
                   </td> 
                     </tr>
 
@@ -150,8 +174,14 @@
             </table>
     
             
+            
         </div>
       </div>
+      
+      <br>
+
+      <p><a href="/user-admin/reactivate-all">Reactivate all (2) 90-days inactive users</a></p>
+
 
 {% endblock %}
 

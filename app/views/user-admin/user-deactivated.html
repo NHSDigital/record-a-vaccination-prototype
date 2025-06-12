@@ -45,8 +45,6 @@
 
 
 
-<br>
-
       <form action="/user-admin/users/{{ user.id }}/update" method="post" novalidate="true">
 
         {{ radios({
@@ -109,10 +107,13 @@
           ]
         }) }}
 
-          <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
-            Reactivate user
-          </button>
-   
+    
+          {{ button({
+            text: "Reactivate user",
+            classes: "nhsuk-button--secondary",
+            "href": "/user-admin/reactivate"
+          }) }}
+
       </form>
 
     </div>

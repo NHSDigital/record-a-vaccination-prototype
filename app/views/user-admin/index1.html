@@ -12,6 +12,10 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
+
+    
+
+
       <h1 class="nhsuk-heading-xl">Manage users</h1>
 
       {{ button({
@@ -36,7 +40,7 @@
         </form>
       </div>
 
-      <br><br>
+      <br>
 
 
 
@@ -56,15 +60,19 @@
             </a>
           </li>
         
-          
         </ul>
       </nav>
-    
-      <br><br>
-    
-    
+ 
     
           <table class="nhsuk-table-responsive" role="table">
+
+            <br>
+
+            <p>For security, we deactivate users if they have not logged in for 90 days.</p>
+
+            <br>
+
+
             <caption class="nhsuk-table__caption">102 Active users</caption>
 
 
@@ -232,11 +240,10 @@
                                   <td class="nhsuk-table__cell">
                                     Administrator
                                 </td>
-                                  <td class="nhsuk-table__cell" style="color:#d5281b;">
-                            
-                                   <strong class="nhsuk-tag nhsuk-tag--red">
+                                <td class="nhsuk-table__cell">
                                     86
                                 </td>
+                                 
                                   <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
                                     <a class="nhsuk-link" href="/user-admin/user-active">Change</a>
                                   </td> 
