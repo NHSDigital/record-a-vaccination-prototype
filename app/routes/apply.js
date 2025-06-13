@@ -41,17 +41,8 @@ module.exports = router => {
 
   // Routing after the final check answers page
   router.post('/apply/answer-check', (req, res) => {
-    const data = req.session.data
-    const vaccineTypes = (data.vaccineTypes || [])
-    let nextPage
 
-    if (vaccineTypes.includes('COVID-19') && data.organisationCode === 'FA02S') {
-      nextPage = '/apply/no-contract'
-    } else {
-      nextPage = '/apply/check-your-email'
-    }
-
-    res.redirect(nextPage)
+    res.redirect('/apply/check-your-email')
   })
 
   // Welcome email mockup
