@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Record a vaccination
-{% endblock %}
+{% set pageName = "Organisation name has been deactivated" %}
 
 {% block header %}
   {% include "includes/header-logged-out.html" %}
@@ -20,14 +18,14 @@
             <h1 class="nhsuk-panel__title" style="color:#212b32;">
             Organisation name has been deactivated
             </h1>
-          
+
             <div class="nhsuk-panel__body" style="color:#212b32;">
             <p>This means you can no longer record vaccinations for this organisation.</p>
             <p>Until [date] you will still be able to access other parts of the Record a vaccination service.</p>
             <p>After [date] you will no longer have access to the service for ((Organisation name)).</p>
             </div>
 
-                    
+
             <br><br>
 
 
@@ -41,7 +39,7 @@
 
           </div>
 
-        
+
 
 
 

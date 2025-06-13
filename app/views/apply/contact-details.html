@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Your contact details" %}
+{% set pageName = "Your details" %}
 
 {% block header %}
   {% include "includes/header-logged-out.html" %}
@@ -19,7 +19,7 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>You must use an NHS-approved email address. See the <a href="https://digital.nhs.uk/services/care-identity-service/applications-and-services/apply-for-care-id/care-identity-email-domain-allow-list" target="_blank">list of approved email domains (opens in new tab)</a>.</p>
+      <p>Use your personal nhs.net email or an <a href="https://digital.nhs.uk/services/care-identity-service/applications-and-services/apply-for-care-id/care-identity-email-domain-allow-list" target="_blank">NHS-approved email (opens in new tab)</a>.</p>
 
       <form action="/apply/check" method="post" novalidate="true">
 
@@ -51,7 +51,10 @@
 
         {{ input({
           "label": {
-            "text": "NHS-approved email address"
+            "text": "Email address"
+          },
+          hint: {
+            text:"For example, joe.bloggs1@nhs.net or joe.bloggs1@boots.co.uk"
           },
           "id": "email",
           "name": "email",
@@ -61,6 +64,30 @@
             "text": emailError
           } if emailError
         }) }}
+
+        {{ radios({
+          name: "clinician",
+          fieldset: {
+            legend: {
+              text: "Are you a registered clinician?"
+            }
+          },
+          hint: {
+            text: "We ask this so we can set you up with the right permissions."
+          },
+          value: data.clinician,
+          items: [
+            {
+              value: "yes",
+              text: "Yes"
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+
 
         {{ button({
           "text": "Continue"

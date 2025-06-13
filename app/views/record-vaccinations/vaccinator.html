@@ -3,6 +3,7 @@
 {% set pageName = "Who is the vaccinator?" %}
 
 {% set currentSection = "vaccinate" %}
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
 
 {% block beforeContent %}
   {% if data.nhsNumber %}
@@ -33,38 +34,25 @@
 
       <form action="/record-vaccinations/answer-vaccinator" method="post" novalidate>
 
-        {% set otherVaccinators = [
-          {name: "James Bloggs", email: "james.bloggs@nhs.net" },
-          {name: "James Smith", email: "james.smith@nhs.net" },
-          {name: "Joan Jacobs", email: "joan.jacobs@nhs.net" }
-        ] %}
+        {% set items = [] %}
 
-        {% set otherVaccinatorHtml %}
-          <div class="nhsuk-form-group">
-            <h1 class="nhsuk-label-wrapper">
-              <label class="nhsuk-label nhsuk-label--s nhsuk-u-margin-bottom-1" for="otherVaccinator">
-                Vaccinator
-              </label>
-            </h1>
-            <div class="nhsuk-hint" id="organisationName-hint">
-              Search by name
-            </div>
+        {% if organisationSetting.clinician %}
+          {% set items = (items.push({
+            value: data.currentUserId,
+            text: "Me (" + currentUser.firstName + " " + currentUser.lastName + ")"
+          }), items) %}
+        {% endif %}
 
-            <select class="nhsuk-select" id="otherVaccinator" name="otherVaccinator"
-              data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
-                <option {{ "selected" if data.otherVaccinator == "" }} value=""></option>
-
-                {% for otherVaccinator in otherVaccinators %}
-                  <option {{ "selected" if data.otherVaccinator == otherVaccinator.name }}
-                  value="{{ otherVaccinator.name }}">{{ otherVaccinator.name }} ({{ otherVaccinator.email}})</option>
-                {% endfor %}
-            </select>
-          </div>
-        {% endset %}
+        {% for user in otherVaccinators %}
+          {% set items = (items.push({
+            value: user.id,
+            text: user.firstName + " " + user.lastName + " (" + user.email + ")"
+          }), items) %}
+        {% endfor %}
 
         {{ radios({
           idPrefix: "vaccinator",
-          name: "vaccinator",
+          name: "vaccinatorId",
           fieldset: {
             legend: {
               text: ("Who is the vaccinator?" if data.vaccinationToday == 'yes' else "Who was the vaccinator?"),
@@ -72,38 +60,33 @@
               isPageHeading: "true"
             }
           },
+          xhint: {
+            text: "Only users with clinician status are listed"
+          },
           errorMessage: {
             text: vaccinatorError
           } if vaccinatorError,
-          items: [
-            {
-              value: "Jane Smith",
-              text: "Me (Jane Smith)",
-              checked: (data.vaccinator === "Jane Smith")
-            },
-            {
-              value: "Anna Brown",
-              text: "Anna Brown (anna.brown@nhs.net)",
-              checked: (data.vaccinator === "Anna Brown")
-            },
-            {
-              divider: "or"
-            },
-            {
-              value: "Someone else",
-              text: "Someone else",
-              checked: (data.vaccinator === "Someone else"),
-              conditional: {
-                html: otherVaccinatorHtml
-              }
-            }
-          ]
+          items: items,
+          value: data.vaccinatorId
         }) }}
 
         {{ button({
           text: "Continue"
         })}}
       </form>
+
+      {% if organisationSetting.permissionLevel == "Lead administrator" %}
+        {{ details({
+          text: "If the vaccinator is not listed",
+          html: "Make sure they are added in <a href=\"/user-admin\">Manage users</a> as a clinician."
+        }) }}
+      {% else %}
+        {{ details({
+          text: "If the vaccinator is not listed",
+          html: ">If the vaccinator is not listed, ask a lead administrator to make sure they are added as a clinician."
+        }) }}
+
+      {% endif %}
 
     </div>
   </div>

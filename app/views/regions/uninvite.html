@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Uninvite {{ user.firstName }} {{ user.lastName }}
-{% endblock %}
+{% set pageName = "Uninvite" %}
 
 {% block header %}
   {% include "includes/header-logged-in-region.html" %}

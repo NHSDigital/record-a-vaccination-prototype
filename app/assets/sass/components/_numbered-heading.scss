@@ -1,0 +1,30 @@
+.app-numbered-heading {
+  display: flex;
+  margin-bottom: 0.4rem;
+}
+
+.app-numbered-heading__number {
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  border-radius: 50%;
+  background-color: #005eb8;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.app-numbered-heading__title {
+  width: 85%;
+  padding: 0.3em 0 0 1.5em;
+}
+
+.app-numbered-heading__title .nhsuk-tag {
+  margin-left: 20px;
+  vertical-align: middle;
+}
+
+.app-numbered-heading__content {
+  padding-left: 5.5rem;
+  margin-bottom: 2.5rem;
+}

@@ -3,6 +3,7 @@
 {% set pageName = "Which team are you working with?" %}
 
 {% set currentSection = "vaccinate" %}
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
 
 {% block beforeContent %}
   {{ backLink({ href: "/record-vaccinations/" }) }}
@@ -21,17 +22,11 @@
 
       <form action="/record-vaccinations/answer-delivery-team" method="post" novalidate>
 
-        {% set deliveryTeams = [
-          "Anne Ward Maternity Unit",
-          "Josephine Clinic",
-          "St Mary’s Hospital"
-        ] %}
-
         {% set items = [] %}
-        {% for deliveryTeam in (deliveryTeams | sort) %}
+        {% for deliveryTeam in (sitesInUse | sort(false, false, "name")) %}
           {% set items = (items.push({
-            text: deliveryTeam,
-            value: deliveryTeam
+            text: deliveryTeam.name,
+            value: deliveryTeam.id
           }), items) %}
         {% endfor %}
 
@@ -56,6 +51,18 @@
           text: "Continue"
         })}}
       </form>
+
+      {% if organisationSetting.permissionLevel == "Lead administrator" %}
+        {{ details({
+          text: "If your team is not listed",
+          html: "You need to <a href=\"/vaccines\">add vaccines</a> for the team."
+        }) }}
+      {% else %}
+        {{ details({
+          text: "If your team is not listed",
+          html: "An administrator needs to add vaccines for that team."
+        }) }}
+      {% endif %}
 
     </div>
   </div>

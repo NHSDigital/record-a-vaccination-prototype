@@ -9,11 +9,11 @@ module.exports = (router) => {
 
     const expiryDate = new Date(data.batchExpiryDate.year, (parseInt(data.batchExpiryDate.month) - 1), data.batchExpiryDate.day, 12).toISOString().substring(0,10)
 
-    req.session.data.vaccines.push({
+    data.vaccineStock.push({
       id: generatedId,
       vaccine: data.vaccine,
       vaccineProduct: data.vaccineProduct,
-      siteCode: data.siteCode,
+      siteId: data.siteId,
       batches: [
         {
           id: Math.floor(Math.random() * 10000000).toString(),
@@ -28,7 +28,7 @@ module.exports = (router) => {
     req.session.data.vaccine = ''
     req.session.data.vaccineProduct = ''
     req.session.data.packType = ''
-    req.session.data.siteCode = ''
+    req.session.data.siteId = ''
     req.session.data.batchNumber = ''
     req.session.data.batchExpiryDate.day = ''
     req.session.data.batchExpiryDate.month = ''
@@ -49,6 +49,19 @@ module.exports = (router) => {
     res.render('vaccines/choose-vaccine')
   })
 
+  // Viewing select vaccine page - as a pharmacy
+  router.get('/vaccines/choose-vaccine-pharmacy', (req, res) => {
+
+    res.render('vaccines/choose-vaccine-pharmacy')
+  })
+
+  // Confirmation of a vaccine being requested
+  router.get('/vaccines/requested', (req, res) => {
+
+    res.render('vaccines/requested')
+  })
+
+
   // Viewing select vaccine page
   router.get('/vaccines/add-batch', (req, res) => {
 
@@ -58,14 +71,23 @@ module.exports = (router) => {
   // Viewing check answers page
   router.get('/vaccines/check', (req, res) => {
 
-    res.render('vaccines/check')
+    const data = req.session.data
+    const siteId = data.siteId
+
+    const currentOrganisationSites = res.locals.currentOrganisation.sites || []
+
+    const site = currentOrganisationSites.find((site) => site.id === siteId)
+
+    res.render('vaccines/check', {
+      site
+    })
   })
 
 
   // Adding a batch to an existing vaccine at a site
   router.post('/vaccines/:id/added', (req, res) => {
     const data = req.session.data
-    const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.id)
+    const vaccine = data.vaccineStock.find((vaccine) => vaccine.id === req.params.id)
     if (!vaccine) { res.redirect('/vaccines'); return }
 
     const generatedId = Math.floor(Math.random() * 10000000).toString()
@@ -94,9 +116,12 @@ module.exports = (router) => {
     const perPage = 20; // Max number of users to show per page
     const page = parseInt(req.query.page) || 1  ;  // Current page, default to 1
 
-    const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.id)
+    const vaccine = data.vaccineStock.find((vaccine) => vaccine.id === req.params.id)
     if (!vaccine) { res.redirect('/vaccines'); return }
-    const site = data.sites[vaccine.siteCode]
+
+    const currentOrganisation = res.locals.currentOrganisation
+
+    const site = currentOrganisation.sites.find((site) => site.id === vaccine.siteId)
 
     const today = new Date().toISOString().substring(0,10)
 
@@ -133,9 +158,12 @@ module.exports = (router) => {
   // Adding a batch to a vaccine product at a site
   router.get('/vaccines/:id/add', (req, res) => {
     const data = req.session.data
-    const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.id)
+    const vaccine = data.vaccineStock.find((vaccine) => vaccine.id === req.params.id)
     if (!vaccine) { res.redirect('/vaccines'); return }
-    const site = data.sites[vaccine.siteCode]
+
+    const currentOrganisationSites = res.locals.currentOrganisation.sites || []
+
+    const site = currentOrganisationSites.find((site) => site.id == vaccine.siteId)
 
     res.render('vaccines/add-batch-to-site', {
       vaccine,
@@ -146,9 +174,12 @@ module.exports = (router) => {
   // Adding a batch check answers page
   router.get('/vaccines/:id/add-batch-check', (req, res) => {
     const data = req.session.data
-    const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.id)
+    const vaccine = data.vaccineStock.find((vaccine) => vaccine.id === req.params.id)
     if (!vaccine) { res.redirect('/vaccines'); return }
-    const site = data.sites[vaccine.siteCode]
+
+    const currentOrganisationSites = res.locals.currentOrganisation.sites || []
+
+    const site = currentOrganisationSites.find((site) => site.id == vaccine.siteId)
 
     res.render('vaccines/add-batch-to-site-check', {
       vaccine,
@@ -159,9 +190,12 @@ module.exports = (router) => {
   // Editing a batch
   router.get('/vaccines/:vaccineId/:batchNumber', (req, res) => {
     const data = req.session.data
-    const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.vaccineId)
+    const vaccine = data.vaccineStock.find((vaccine) => vaccine.id === req.params.vaccineId)
     if (!vaccine) { res.redirect('/vaccines'); return }
-    const site = data.sites[vaccine.siteCode]
+
+    const currentOrganisationSites = res.locals.currentOrganisation.sites || []
+    const site = currentOrganisationSites.find((site) => site.id == vaccine.siteId)
+
     const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
     if (!batch) { res.redirect(`/vaccines/${vaccine.id}`); return }
 
@@ -184,7 +218,7 @@ module.exports = (router) => {
   router.post('/vaccines/:vaccineId/:batchNumber/update', (req, res) => {
 
     const data = req.session.data
-    const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.vaccineId)
+    const vaccine = data.vaccineStock.find((vaccine) => vaccine.id === req.params.vaccineId)
     if (!vaccine) { res.redirect('/vaccines'); return }
     const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
     if (!batch) { res.redirect(`/vaccines/${vaccine.id}`); return }
@@ -200,9 +234,12 @@ module.exports = (router) => {
   // View page to deplete a batch
   router.get('/vaccines/:vaccineId/:batchNumber/deplete', (req, res) => {
     const data = req.session.data
-    const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.vaccineId)
+    const vaccine = data.vaccineStock.find((vaccine) => vaccine.id === req.params.vaccineId)
     if (!vaccine) { res.redirect('/vaccines'); return }
-    const site = data.sites[vaccine.siteCode]
+
+    const currentOrganisationSites = res.locals.currentOrganisation.sites || []
+    const site = currentOrganisationSites.find((site) => site.id == vaccine.siteId)
+
     const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
     if (!batch) { res.redirect(`/vaccines/${vaccine.id}`); return }
 
@@ -216,7 +253,7 @@ module.exports = (router) => {
   // Mark batch as depleted
   router.post('/vaccines/:vaccineId/:batchNumber/depleted', (req, res) => {
     const data = req.session.data
-    const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.vaccineId)
+    const vaccine = data.vaccineStock.find((vaccine) => vaccine.id === req.params.vaccineId)
     if (!vaccine) { res.redirect('/vaccines'); return }
     const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
 
@@ -231,9 +268,13 @@ module.exports = (router) => {
   // View page to reactivate a batch
   router.get('/vaccines/:vaccineId/:batchNumber/reactivate', (req, res) => {
     const data = req.session.data
-    const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.vaccineId)
+    const vaccine = data.vaccineStock.find((vaccine) => vaccine.id === req.params.vaccineId)
     if (!vaccine) { res.redirect('/vaccines'); return }
-    const site = data.sites[vaccine.siteCode]
+
+    const currentOrganisationSites = res.locals.currentOrganisation.sites || []
+    const site = currentOrganisationSites.find((site) => site.id == vaccine.siteId)
+
+
     const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
     if (!batch) { res.redirect(`/vaccines/${vaccine.id}`); return }
 
@@ -247,7 +288,7 @@ module.exports = (router) => {
   // Mark batch as active again
   router.post('/vaccines/:vaccineId/:batchNumber/reactivated', (req, res) => {
     const data = req.session.data
-    const vaccine = data.vaccines.find((vaccine) => vaccine.id === req.params.vaccineId)
+    const vaccine = data.vaccineStock.find((vaccine) => vaccine.id === req.params.vaccineId)
     if (!vaccine) { res.redirect('/vaccines'); return }
     const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
 

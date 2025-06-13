@@ -21,7 +21,7 @@ $govuk-input-border-colour: $nhsuk-form-border-color;
 $govuk-brand-colour: $nhsuk-link-color;
 
 // Import X-GOVUK prototype components
-@import "node_modules/@x-govuk/govuk-prototype-components/x-govuk/all";
+@import "node_modules/@x-govuk/govuk-prototype-components/src/x-govuk";
 
 
 // Local components or modifiers
@@ -30,10 +30,9 @@ $govuk-brand-colour: $nhsuk-link-color;
 @import 'components/table';
 @import 'components/button';
 @import 'components/filters';
-@import 'components/link';
 @import 'components/section';
 @import 'components/tag';
-
+@import 'components/numbered-heading';
 
 @import '../../components/pagination/_pagination';
 

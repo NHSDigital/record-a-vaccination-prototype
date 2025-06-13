@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Add user
-{% endblock %}
+{% set pageName = "Deactivate your account" %}
 
 {% set currentSection = "manage-users" %}
 
@@ -19,7 +17,7 @@
 
       {% if user.id === currentUser.id %}
 
-        <h1 class="nhsuk-heading-l">Deactivate your account</h1>
+        <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
         <p>Once you deactivate your account, you’ll be signed out and cannot sign in and use NHS Record a vaccination.</p>
 
