@@ -12,7 +12,7 @@ module.exports = router => {
       })
     } else if (error === "existing-account") {
       errors.push({
-        text: "Pharmacy already has an account",
+        text: "This pharmacy already has access to the service.",
         href: "#organisation-code"
       })
     }
