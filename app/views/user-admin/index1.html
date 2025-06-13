@@ -12,10 +12,6 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
-
-    
-
-
       <h1 class="nhsuk-heading-xl">Manage users</h1>
 
       {{ button({
@@ -28,7 +24,7 @@
         <form action="/user-admin" method="get" novalidate>
           <div class="nhsuk-form-group nhsuk-u-margin-bottom-0">
             <label class="nhsuk-label" for="q">
-              Search active users by name or email
+              Search deactivated users by name or email
             </label>
             <input class="nhsuk-input nhsuk-input--width-20" id="q" name="q" type="search" value="{{ q }}">
 
@@ -39,40 +35,41 @@
           </div>
         </form>
       </div>
-
       <br>
 
-      <p>For security, we deactivate users who have not logged in for 90 days. <br><a href="/user-admin/reactivate-all">Reactivate all (2) users who have been deactivated for this reason</a></p>
+      <p>For security, we deactivate users who have not logged in for 90 days. <br><a href="/user-admin/reactivate-all">Reactivate (2) users who have been deactivated for this reason</a></p>
 
 <br>
+
 
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-full">
     
       <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
         <ul class="x-govuk-secondary-navigation__list">
-          <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
-            <a class="x-govuk-secondary-navigation__link" href="/user-admin/index1" aria-current=page>
+            <li class="x-govuk-secondary-navigation__list-item ">
+            <a class="x-govuk-secondary-navigation__link" href="/user-admin/index" aria-current=page>
               Active (102)
             </a>
           </li>
-          <li class="x-govuk-secondary-navigation__list-item ">
-            <a class="x-govuk-secondary-navigation__link" href="/user-admin/index2">
+          <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
+            <a class="x-govuk-secondary-navigation__link" href="/user-admin/index1">
               Deactivated (3)
             </a>
           </li>
-        
+          
         </ul>
       </nav>
- 
+
+    
+    
     
           <table class="nhsuk-table-responsive" role="table">
 
             <br>
+    
 
-
-            <caption class="nhsuk-table__caption">102 Active users</caption>
-
+            <caption class="nhsuk-table__caption">3 Deactivated users</caption>
 
             <thead class="nhsuk-table__head" role="rowgroup">
                 <thead role="rowgroup" class="nhsuk-table__head">
@@ -91,9 +88,10 @@
                         Permission
                       </th>
                       <th role="columnheader" class="" scope="col">
-                        Last log in
+                        Reason deactivated
                     </th>
                       <th role="columnheader" class="" scope="col">
+                        
                       </th>
                       
                     </tr>
@@ -101,15 +99,37 @@
     
             <tbody class="nhsuk-table__body">
                   
-            
+              <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                    Doe, Jane
+              </td>
+              
+                <td class="nhsuk-table__cell">
+                  jane.doe@nhs.net
+              </td>
+              
+              <td class="nhsuk-table__cell">
+                  Yes
+              </td>
+              <td class="nhsuk-table__cell">
+                Administrator
+            </td>
+            <td class="nhsuk-table__cell">
+               By John Smith
+            </td>
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                <a class="nhsuk-link" href="/user-admin/reactivate">Reactivate</a>
+            </td> 
+                </tr>
+
 
                 <tr role="row" class="nhsuk-table__row">
                     <td class="nhsuk-table__cell">
-                        Benson, Ben
+                        West, Wallace
                   </td>
                   
                     <td class="nhsuk-table__cell">
-                      email.example@nhs.net
+                    wallace.west@nhs.net
                   </td>
                   
                   <td class="nhsuk-table__cell">
@@ -118,143 +138,49 @@
                   <td class="nhsuk-table__cell">
                     Administrator
                 </td>
-                  <td class="nhsuk-table__cell">
-                    Today
+                <td class="nhsuk-table__cell">
+                    90 days since log in
                 </td>
                   <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                    <a class="nhsuk-link" href="/user-admin/user-active">Change</a>
-                </td> 
+                    <a class="nhsuk-link" href="/user-admin/reactivate">Reactivate</a>
+                  </td> 
                     </tr>
 
-                    
-
-                        <tr role="row" class="nhsuk-table__row">
-                            <td class="nhsuk-table__cell">
-                                Daniels, Dillon
-                          </td>
-                          
-                            <td class="nhsuk-table__cell">
-                              email.example@nhs.net
-                          </td>
-                          
-                          <td class="nhsuk-table__cell">
-                              Yes
-                          </td>
-                          <td class="nhsuk-table__cell">
-                            Administrator
-                        </td>
-                          <td class="nhsuk-table__cell">
-                            Today
-                        </td>
-                          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                            <a class="nhsuk-link" href="/user-admin/user-active">Change</a>
-                        </td> 
-                            </tr>
-
-                            <tr role="row" class="nhsuk-table__row">
-                                <td class="nhsuk-table__cell">
-                                   Edwards, Elle
-                              </td>
-                              
-                                <td class="nhsuk-table__cell">
-                                  email.example@nhs.net
-                              </td>
-                              
-                              <td class="nhsuk-table__cell">
-                                  Yes
-                              </td>
-                              <td class="nhsuk-table__cell">
-                                Administrator
-                            </td>
-                              <td class="nhsuk-table__cell">
-                                Today
-                            </td>
-                              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                                <a class="nhsuk-link" href="/user-admin/user-active">Change</a>
-                            </td> 
-                                </tr>
-
-
-                                <tr role="row" class="nhsuk-table__row">
-                                    <td class="nhsuk-table__cell">
-                                        Aarrons, Sam
-                                  </td>
-                                  
-                                    <td class="nhsuk-table__cell">
-                                      email.example@nhs.net
-                                  </td>
-                                  
-                                  <td class="nhsuk-table__cell">
-                                      Yes
-                                  </td>
-                                  <td class="nhsuk-table__cell">
-                                    Administrator
-                                </td>
-                                  <td class="nhsuk-table__cell">
-                                    1 day ago
-                                </td>
-                                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                                    <a class="nhsuk-link" href="/user-admin/user-active">Change</a>
-                                  </td> 
-                                    </tr>
-                                    
-
-                                    <tr role="row" class="nhsuk-table__row">
-                                        <td class="nhsuk-table__cell">
-                                            Stephens, Samantha
-                                      </td>
-                                      
-                                        <td class="nhsuk-table__cell">
-                                          email.example@nhs.net
-                                      </td>
-                                      
-                                      <td class="nhsuk-table__cell">
-                                          Yes
-                                      </td>
-                                      <td class="nhsuk-table__cell">
-                                        Administrator
-                                    </td>
-                                      <td class="nhsuk-table__cell">
-                                        16 days ago
-                                    </td>
-                                      <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                                        <a class="nhsuk-link" href="/user-admin/user-active">Change</a>
-                                    </td> 
-                                        </tr>
-
-
-                                <tr role="row" class="nhsuk-table__row">
-                                    <td class="nhsuk-table__cell">
-                                        Craft, Callum
-                                  </td>
-                                  
-                                    <td class="nhsuk-table__cell">
-                                      email.example@nhs.net
-                                  </td>
-                                  
-                                  <td class="nhsuk-table__cell">
-                                      Yes
-                                  </td>
-                                  <td class="nhsuk-table__cell">
-                                    Administrator
-                                </td>
-                                <td class="nhsuk-table__cell">
-                                    86 days ago
-                                </td>
-                                 
-                                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                                    <a class="nhsuk-link" href="/user-admin/user-active">Change</a>
-                                  </td> 
-                                    </tr>
-    
+                <tr role="row" class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">
+                        Phillips, Zack
+                  </td>
+                  
+                    <td class="nhsuk-table__cell">
+                    zach.phillips@nhs.net
+                  </td>
+                  
+                  <td class="nhsuk-table__cell">
+                      Yes
+                  </td>
+                  <td class="nhsuk-table__cell">
+                    Administrator
+                </td>
+                <td class="nhsuk-table__cell">
+                    90 days since log in
+                </td>
+                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                    <a class="nhsuk-link" href="/user-admin/reactivate">Reactivate</a>
+                  </td> 
+                    </tr>
 
                 
               </tbody>
             </table>
     
             
+            
         </div>
       </div>
+      
+      <br>
+
+
 
 {% endblock %}
 
