@@ -17,9 +17,9 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Check and reactivate Inactive users</h1>
+      <h1 class="nhsuk-heading-l">Check and reactivate users</h1>
 
-      <p>Once you have reactivated all (2) users, they can sign in to NHS Record a vaccination again using their Okta account.</p>
+      <p>Once you reactivate users, they'll be able to access the service again.</p>
 
     </div>
   </div>
@@ -30,7 +30,7 @@
     
   <form action="/user-admin/{{ user.id }}/reactivate" method="post" novalidate="true">
     {{ button({
-      "text": "Reactivate all 2 users"
+      "text": "Reactivate users"
     }) }}
   </form>
 
@@ -52,7 +52,7 @@
   
         <table class="nhsuk-table-responsive" role="table">
 
-          <caption class="nhsuk-table__caption">Showing 2 Inactive users</caption>
+          <caption class="nhsuk-table__caption">Users deactivated because they have not logged in for 90 days</caption>
 
           <thead class="nhsuk-table__head" role="rowgroup">
               <thead role="rowgroup" class="nhsuk-table__head">
