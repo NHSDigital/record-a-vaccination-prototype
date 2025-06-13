@@ -19,7 +19,7 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>Use your personal nhs.net email or an <a href="https://digital.nhs.uk/services/care-identity-service/applications-and-services/apply-for-care-id/care-identity-email-domain-allow-list" target="_blank">NHS-approved email (opens in new tab)</a>.</p>
+      <p>Use your personal nhs.net email, not a pharmacy email.</p>
 
       <form action="/apply/check" method="post" novalidate="true">
 
@@ -54,7 +54,7 @@
             "text": "Email address"
           },
           hint: {
-            text:"For example, joe.bloggs1@nhs.net or joe.bloggs1@boots.co.uk"
+            text:"For example, joe.bloggs1@nhs.net"
           },
           "id": "email",
           "name": "email",
@@ -64,30 +64,6 @@
             "text": emailError
           } if emailError
         }) }}
-
-        {{ radios({
-          name: "clinician",
-          fieldset: {
-            legend: {
-              text: "Are you a registered clinician?"
-            }
-          },
-          hint: {
-            text: "We ask this so we can set you up with the right permissions."
-          },
-          value: data.clinician,
-          items: [
-            {
-              value: "yes",
-              text: "Yes"
-            },
-            {
-              value: "no",
-              text: "No"
-            }
-          ]
-        }) }}
-
 
         {{ button({
           "text": "Continue"
