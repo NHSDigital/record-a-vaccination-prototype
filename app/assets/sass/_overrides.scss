@@ -1,8 +1,6 @@
 
 .app-u-hide-on-mobile {
-  display: none;
-
-  @include nhsuk-media-query($from: tablet) {
-    display: block;
+  @include nhsuk-media-query(until: tablet) {
+    display: none;
   }
 }
