@@ -1,0 +1,138 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Add user
+{% endblock %}
+
+{% set currentSection = "manage-users" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/user-admin/index1",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Check and reactivate users</h1>
+
+      <p>Once you reactivate users, they'll be able to access the service again.</p>
+
+    </div>
+  </div>
+
+
+
+
+    
+  <form action="/user-admin/{{ user.id }}/reactivate" method="post" novalidate="true">
+    {{ button({
+      "text": "Reactivate users"
+    }) }}
+  </form>
+
+
+
+
+
+
+
+
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-full">
+     
+
+
+
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+  
+        <table class="nhsuk-table-responsive" role="table">
+
+          <caption class="nhsuk-table__caption">Users deactivated because they have not logged in for 90 days</caption>
+
+          <thead class="nhsuk-table__head" role="rowgroup">
+              <thead role="rowgroup" class="nhsuk-table__head">
+                  <tr role="row">
+        
+                    <th role="columnheader" class="" scope="col">
+                      Name
+                    </th>
+                    <th role="columnheader" class="" scope="col">
+                      Email
+                    </th>
+                    <th role="columnheader" class="" scope="col">
+                      Clinician
+                    </th>
+                    <th role="columnheader" class="" scope="col">
+                      Permission
+                    </th>
+                    <th role="columnheader" class="" scope="col">
+                      Reason deactivated
+                  </th>            
+                  </tr>
+          </thead>
+  
+          <tbody class="nhsuk-table__body">
+                
+           
+
+              <tr role="row" class="nhsuk-table__row">
+                  <td class="nhsuk-table__cell">
+                      West, Wallace
+                </td>
+                
+                  <td class="nhsuk-table__cell">
+                  wallace.west@nhs.net
+                </td>
+                
+                <td class="nhsuk-table__cell">
+                    Yes
+                </td>
+                <td class="nhsuk-table__cell">
+                  Administrator
+              </td>
+              <td class="nhsuk-table__cell">
+                90 days since log in	
+              </td>
+                  </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                  <td class="nhsuk-table__cell">
+                      Phillips, Zack
+                </td>
+                
+                  <td class="nhsuk-table__cell">
+                  zach.phillips@nhs.net
+                </td>
+                
+                <td class="nhsuk-table__cell">
+                    Yes
+                </td>
+                <td class="nhsuk-table__cell">
+                  Administrator
+              </td>
+              <td class="nhsuk-table__cell">
+                90 days since log in	
+              </td>
+                  </tr>
+
+              
+            </tbody>
+          </table>
+  
+          
+          
+      </div>
+    </div>
+    
+    <br>
+
+
+
+{% endblock %}
+
+
