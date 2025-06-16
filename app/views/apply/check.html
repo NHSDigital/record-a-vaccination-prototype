@@ -59,7 +59,7 @@
           },
           {
             key: {
-              text: "Your name"
+              text: "Name"
             },
             value: {
               html: data.firstName + " " + data.lastName
@@ -76,7 +76,7 @@
           },
           {
             key: {
-              text: "Your email"
+              text: "Email"
             },
             value: {
               text: data.email
@@ -87,23 +87,6 @@
                   href: "/apply/contact-details",
                   text: "Change",
                   visuallyHiddenText: "email"
-                }
-              ]
-            }
-          },
-          {
-            key: {
-              text: "Registered clinician"
-            },
-            value: {
-              text: ("Yes" if data.clinician == "yes" else "No")
-            },
-            actions: {
-              items: [
-                {
-                  href: "/apply/contact-details",
-                  text: "Change",
-                  visuallyHiddenText: "clinician status"
                 }
               ]
             }

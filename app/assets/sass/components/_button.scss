@@ -12,6 +12,16 @@
   min-width: 80px;
 }
 
+// Make buttons full width on mobile
+// This is temporary until https://github.com/nhsuk/nhsuk-frontend/pull/1309 is merged
+.nhsuk-button {
+  width: 100%;
+
+  @include nhsuk-media-query($from: tablet) {
+    width: auto;
+  }
+}
+
 
 .app-button--loading {
   position: relative;
