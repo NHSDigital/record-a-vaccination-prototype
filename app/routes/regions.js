@@ -2,7 +2,7 @@ module.exports = router => {
 
   router.get('/regions', (req, res) => {
     const data = req.session.data
-    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61") && (["Active", "Deactivated"].includes(organisation.status)))
+    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61") && (["Active", "Invited", "Deactivated"].includes(organisation.status)))
 
     const closedOrganisationsCount = data.organisations.filter((organisation) => (organisation.region === "Y61" && organisation.status == "Closed")).length
 
