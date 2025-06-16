@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Sorry, the service is unavailable" %}
+
+{% block header %}
+  {% include "includes/header-logged-out.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p>You have made too many requests.</p>
+
+      <p>You will be able to use the service later.</p>
+
+    </div>
+  </div>
+{% endblock %}
