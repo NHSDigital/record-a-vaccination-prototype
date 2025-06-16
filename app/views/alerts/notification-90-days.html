@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  {{ currentOrganisation.name }} – Home
+{% endblock %}
+
+{% set currentSection = "home" %}
+
+
+
+
+{% block content %}
+
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% include "_notification-90-days.html" %}
+
+
+
+      <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-6">{{ currentOrganisation.name }}</h1>
+
+      <p>You have not yet recorded a vaccination.</p>
+
+      <p class="nhsuk-body"><a href="/vaccines/choose-site">Add vaccines</a></p>
+
+      <p class="nhsuk-body"><a href="/user-admin/add-user">Add users</a></p>
+
+      <p class="nhsuk-body"><a href="/record-vaccinations">Record vaccinations</a></p>
+
+      <p>Find help and guidance at <a href="/reports">guide.ravs.england.nhs.uk</a></p>
+
+
+
+      <h2 class="nhsuk-heading-m">Total vaccinations</h2>
+
+    </div>
+  </div>
+
+
+<ul class="nhsuk-grid-row nhsuk-card-group">
+
+    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+      {% set cardHtml %}
+        <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">0</p>
+        Today
+      {% endset %}
+
+      {{ card({
+        headingHtml: cardHtml
+      }) }}
+    </li>
+
+    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+      {% set cardHtml %}
+        <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">0</p>
+        Past 7 days
+      {% endset %}
+
+      {{ card({
+        headingHtml: cardHtml
+      }) }}
+    </li>
+
+
+    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+      {% set cardHtml %}
+        <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">0</p>
+        November so far
+      {% endset %}
+
+      {{ card({
+        headingHtml: cardHtml
+      }) }}
+    </li>
+
+</ul>
+
+
+    </div>
+  </div>
+{% endblock %}

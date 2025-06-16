@@ -1,0 +1,58 @@
+
+{% block head %}
+  <script src="/js/feedback-panel.js"></script>
+{% endblock %}
+
+{% from 'checkboxes/macro.njk' import checkboxes %}
+<div class="app-feedback-panel" data-module="feedback-panel">
+  <div data-module="feedback-panel__initial-question">
+    <h2 class="app-feedback-panel__title">Extra column in reports</h2>
+
+
+    <fieldset class="nhsuk-fieldset">
+      <legend class="nhsuk-fieldset__legend nhsuk-u-margin-bottom-4">We've separated the patient's first and last names in the reports.</legend>
+
+
+      <div class="app-button-group nhsuk-u-margin-bottom-0">
+       
+        <a href="#" class="nhsuk-link nhsuk-link--no-visited-state" data-module="feedback-panel__close">Close</a>
+
+
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="app-feedback-panel__comments"  data-module="feedback-panel__comments" hidden>
+
+    <h2 class="app-feedback-panel__title">Thank you.</h2>
+    {{ textarea({
+      name: "example",
+      id: "example",
+      rows: 3,
+      label: {
+        text: "Feedback (optional)"
+      }
+    }) }}
+
+    {{ checkboxes({
+      items: [
+        {
+          value: "contactable",
+          text: "I’m happy to be contacted about my feedback"
+        }
+      ]
+    })}}
+
+
+    <div class="app-button-group nhsuk-u-margin-bottom-0">
+      {{ button({
+        text: "Send feedback",
+        classes: "app-button--outlined app-button--small"
+      }) }}
+
+
+      <a href="#" class="nhsuk-link nhsuk-link--no-visited-state" data-module="feedback-panel__close">Close</a>
+    </div>
+
+  </div>
+</div>

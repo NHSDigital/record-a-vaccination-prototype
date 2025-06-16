@@ -1,0 +1,59 @@
+
+{% block head %}
+  <script src="/js/feedback-panel.js"></script>
+{% endblock %}
+
+{% from 'checkboxes/macro.njk' import checkboxes %}
+<div class="app-feedback-panel" data-module="feedback-panel">
+  <div data-module="feedback-panel__initial-question">
+    <h2 class="app-feedback-panel__title">It's now easier to manage users</h2>
+
+
+    <fieldset class="nhsuk-fieldset">
+      <legend class="nhsuk-fieldset__legend nhsuk-u-margin-bottom-4">Users deactivated due to 90 dyas of not logging in can now be reactivated all together.</legend>
+
+      <div class="app-button-group nhsuk-u-margin-bottom-0">
+
+        <a href="#" class="nhsuk-link nhsuk-link--no-visited-state" data-module="feedback-panel__close">Manage users</a>
+
+        <a href="#" class="nhsuk-link nhsuk-link--no-visited-state" data-module="feedback-panel__close">Close</a>
+
+
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="app-feedback-panel__comments"  data-module="feedback-panel__comments" hidden>
+
+    <h2 class="app-feedback-panel__title">Thank you.</h2>
+    {{ textarea({
+      name: "example",
+      id: "example",
+      rows: 3,
+      label: {
+        text: "Feedback (optional)"
+      }
+    }) }}
+
+    {{ checkboxes({
+      items: [
+        {
+          value: "contactable",
+          text: "I’m happy to be contacted about my feedback"
+        }
+      ]
+    })}}
+
+
+    <div class="app-button-group nhsuk-u-margin-bottom-0">
+      {{ button({
+        text: "Send feedback",
+        classes: "nhsuk-button--secondary app-button--small"
+      }) }}
+
+
+      <a href="#" class="nhsuk-link nhsuk-link--no-visited-state" data-module="feedback-panel__close">Close</a>
+    </div>
+
+  </div>
+</div>
