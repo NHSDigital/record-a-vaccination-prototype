@@ -16,15 +16,6 @@
 
       <p class="nhsuk-body-l">Once they’re set up, they can add other users and vaccination sites.</p>
 
-      {% if awaitingApprovalOrganisationsCount > 0 %}
-        <p class="nhsuk-body-l">You have <a href="/regions/awaiting-approval">{{ awaitingApprovalOrganisationsCount | plural("organisation") }}</a> waiting for approval.</p>
-      {% endif %}
-
-
-      {% from 'inset-text/macro.njk' import insetText %}
-
-
-
       {{ button({
         "text": "Invite an organisation",
         "href": "/regions/add-organisation"
