@@ -1,0 +1,149 @@
+
+{% extends 'layout.html' %}
+
+{% set currentSection = "appointments" %}
+
+{% set pageName = "Which team is vaccinating?" %}
+
+
+
+{% block beforeContent %}
+  {{ backLink({ href: "/appointments/vaccine" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+
+      <div class="nhsuk-form-group">
+
+        <fieldset class="nhsuk-fieldset">
+          <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+
+            <span class="nhsuk-caption-m">Step 5 of 5</span>
+              
+                  <fieldset class="nhsuk-fieldset" aria-describedby="example-hint">
+                    <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+                      <h1 class="nhsuk-fieldset__heading">
+                        Select the patient eligibility
+                    </h1>
+                    </legend>
+                    <div class="nhsuk-hint" id="example-hint">
+                    </div>
+                    <div class="nhsuk-checkboxes">
+              
+                      <div class="nhsuk-checkboxes__item">
+                        <input class="nhsuk-checkboxes__input" id="example-1" name="example" type="checkbox" value="email">
+                        <label class="nhsuk-label nhsuk-checkboxes__label" for="example-1">
+                            Resident in a care home
+                        </label>
+                      </div>
+              
+                      <div class="nhsuk-checkboxes__item">
+                        <input class="nhsuk-checkboxes__input" id="example-2" name="example" type="checkbox" value="phone">
+                        <label class="nhsuk-label nhsuk-checkboxes__label" for="example-2">
+                            Staff in a care home
+                        </label>
+                      </div>
+              
+                      <div class="nhsuk-checkboxes__item">
+                        <input class="nhsuk-checkboxes__input" id="example-3" name="example" type="checkbox" value="text message">
+                        <label class="nhsuk-label nhsuk-checkboxes__label" for="example-3">
+                          Healthcare worker
+                        </label>
+                      </div>
+
+                      <div class="nhsuk-checkboxes__item">
+                        <input class="nhsuk-checkboxes__input" id="example-3" name="example" type="checkbox" value="text message">
+                        <label class="nhsuk-label nhsuk-checkboxes__label" for="example-3">
+                          Social care worker
+                        </label>
+                      </div>
+
+                      <div class="nhsuk-checkboxes__item">
+                        <input class="nhsuk-checkboxes__input" id="example-3" name="example" type="checkbox" value="text message">
+                        <label class="nhsuk-label nhsuk-checkboxes__label" for="example-3">
+                          Based on age 
+                        </label>
+                      </div>
+
+                      <div class="nhsuk-checkboxes__item">
+                        <input class="nhsuk-checkboxes__input" id="example-3" name="example" type="checkbox" value="text message">
+                        <label class="nhsuk-label nhsuk-checkboxes__label" for="example-3">
+                          Pregnant
+                        </label>
+                      </div>
+
+                      <div class="nhsuk-checkboxes__item">
+                        <input class="nhsuk-checkboxes__input" id="example-3" name="example" type="checkbox" value="text message">
+                        <label class="nhsuk-label nhsuk-checkboxes__label" for="example-3">
+                          Immunosuppressed
+                        </label>
+                      </div>
+                      <div class="nhsuk-checkboxes__item">
+                        <input class="nhsuk-checkboxes__input" id="example-3" name="example" type="checkbox" value="text message">
+                        <label class="nhsuk-label nhsuk-checkboxes__label" for="example-3">
+                          In a clinical risk group
+                        </label>
+                      </div>
+                      <div class="nhsuk-checkboxes__item">
+                        <input class="nhsuk-checkboxes__input" id="example-3" name="example" type="checkbox" value="text message">
+                        <label class="nhsuk-label nhsuk-checkboxes__label" for="example-3">
+                          Homeless or living in a closed setting
+                        </label>
+                      </div>
+                      <div class="nhsuk-checkboxes__item">
+                        <input class="nhsuk-checkboxes__input" id="example-3" name="example" type="checkbox" value="text message">
+                        <label class="nhsuk-label nhsuk-checkboxes__label" for="example-3">
+                            Household contact of someone immunosuppressed
+                        </label>
+                      </div>
+                      <div class="nhsuk-checkboxes__item">
+                        <input class="nhsuk-checkboxes__input" id="example-3" name="example" type="checkbox" value="text message">
+                        <label class="nhsuk-label nhsuk-checkboxes__label" for="example-3">
+                            Carer
+                        </label>
+                      </div>
+                      <div class="nhsuk-checkboxes__item">
+                        <input class="nhsuk-checkboxes__input" id="example-3" name="example" type="checkbox" value="text message">
+                        <label class="nhsuk-label nhsuk-checkboxes__label" for="example-3">
+                            Has had CAR-T therapy or a stem cell transplant since their last vaccination
+                        </label>
+                      </div>
+
+
+                    </div>
+                  </fieldset>
+                </div>
+              
+              </form>
+
+
+
+          </div>
+        </fieldset>
+      </div>
+
+
+      {{ button({
+        text: "Continue",
+        href: "/appointments/check-details"
+      }) }}
+
+      <p class="nhsuk-body-m"><a href="/appointments/check-details">Skip this for now</a></p>
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+

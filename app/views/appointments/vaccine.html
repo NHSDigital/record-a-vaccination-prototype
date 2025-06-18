@@ -8,7 +8,7 @@
 
 
 {% block beforeContent %}
-  {{ backLink({ href: "/appointments/add" }) }}
+  {{ backLink({ href: "/appointments/check2" }) }}
 {% endblock %}
 
 {% block content %}
@@ -28,30 +28,29 @@
         <fieldset class="nhsuk-fieldset">
           <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
 
-            <span class="nhsuk-caption-m">Step 2 of 6</span>
+            <span class="nhsuk-caption-m">Step 4 of 5</span>
 
             <h1 class="nhsuk-fieldset__heading">
-              Select a site or team
+              Which vaccine will you be giving?
             </h1>
           </legend>
           <div class="nhsuk-radios">
             <div class="nhsuk-radios__item">
               <input class="nhsuk-radios__input" id="example-1" name="example" type="radio" value="yes">
               <label class="nhsuk-label nhsuk-radios__label" for="example-1">
-                Anne Ward Maternity Unit
+                COVID-19
               </label>
             </div>
             <div class="nhsuk-radios__item">
               <input class="nhsuk-radios__input" id="example-2" name="example" type="radio" value="no">
               <label class="nhsuk-label nhsuk-radios__label" for="example-2">
-                Josephine Clinic
+                Flu
               </label>
             </div>
             <div class="nhsuk-radios__item">
               <input class="nhsuk-radios__input" id="example-2" name="example" type="radio" value="no">
               <label class="nhsuk-label nhsuk-radios__label" for="example-2">
-                St Mary’s Hospital
-              </label>
+                RSV              </label>
             </div>
 
           </div>
@@ -61,8 +60,10 @@
 
       {{ button({
         text: "Continue",
-        href: "/appointments/add-nhs-numbers"
+        href: "/appointments/eligibility"
       }) }}
+
+      <p class="nhsuk-body-m"><a href="/appointments/eligibility">Skip this for now</a></p>
 
 
 

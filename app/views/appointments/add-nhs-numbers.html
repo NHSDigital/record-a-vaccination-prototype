@@ -19,18 +19,25 @@
         }) }}
       {% endif %}
 
-      <form action="/appointments/check1" method="post" novalidate>
+
+ <span class="nhsuk-caption-m">Step 3 of 5</span>
 
 <h1 class="nhsuk-heading-l">Add patient NHS numbers</h1>
 
-<p>Copy patient NHS numbers from your booked appointments for Wednesday 4 June 2025 at Anne Ward Maternity Unit.</p>
+<p class="nhsuk-body-m">Copy and paste patient NHS numbers from your <a href="https://digital.nhs.uk/coronavirus/vaccinations/booking-systems/local-booking-solutions">booking system (opens in new tab)</a> or elsewhere.</p>
+
 
 <div class="nhsuk-form-group">
   <label class="nhsuk-label" for="example-longer">
     NHS numbers
   </label>
   <div class="nhsuk-hint" id="contact-hint">
-    Ony 1 NHS number allowed per line.
+  1 NHS number allowed per line with no punctuation, for example:
+  
+  <br>9435797881
+  <br>9435792103
+  <br>9435740820
+
   </div>
   <div class="nhsuk-hint" id="example-longer-hint">
   </div> 
@@ -43,9 +50,11 @@
   </div>
 
 
-  <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
-  Continue
-</button>
+  {{ button({
+    text: "Continue",
+    href: "/appointments/check2"
+  }) }}
+
 
 {% endblock %}
 
