@@ -60,9 +60,10 @@
   <div class="app-feedback-panel__comments"  data-module="feedback-panel__comments" hidden>
 
     <h2 class="app-feedback-panel__title">Thank you.</h2>
-    {{ textarea({
+    {{ characterCount({
       name: "example",
       id: "example",
+      maxlength: 200,
       rows: 3,
       label: {
         text: "Feedback (optional)"
