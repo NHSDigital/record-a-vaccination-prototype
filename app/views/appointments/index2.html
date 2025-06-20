@@ -10,24 +10,28 @@
 
       <h1 class="nhsuk-heading-l">Appointments</h1>
       
-      <p class="nhsuk-body-m">Add a list of patients from your <a href="https://digital.nhs.uk/coronavirus/vaccinations/booking-systems/local-booking-solutions">booking system (opens in new tab)</a> or elsewhere to save time recording vaccinations.</p>
+     
+      <br>
+      {{ tag({
+        text: "New",
+        classes: "nhsuk-tag--blue"
+      })}}
+      <br>   <br>
+      <p class="nhsuk-body-m">Add patients from your <a href="https://digital.nhs.uk/coronavirus/vaccinations/booking-systems/local-booking-solutions">booking system (opens in new tab)</a> or elsewhere to save time recording vaccinations.</p>
 
-      <p>You will need a:</p>
+
+      <p>You will need:</p>
       <ul class="nhsuk-list nhsuk-list--bullet">
-        <li>list of patient NHS numbers</li>
-        <li>team or site</li>
+        <li>patient NHS numbers</li>
+        <li>a team or site</li>
       </ul>
 
-      <p>You can then select a/an (optional):</p>
+      <p>You can select (optional):</p>
       <ul class="nhsuk-list nhsuk-list--bullet">
         <li>date</li>
         <li>vaccine</li>
-        <li>eligibility type</li>
-        <li>location</li>
+        <li>eligibility</li>
       </ul>
-
-      <p class="nhsuk-body-m">Adding a list of patients and choosing vaccine options in advance will save time when recording vaccinations.</p>
-
 
 
         {{ button({

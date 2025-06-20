@@ -5,40 +5,55 @@
 {% set currentSection = "appointments" %}
 
 {% block content %}
-  <div class="nhsuk-grid-row">
+<div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
       <h1 class="nhsuk-heading-l">Appointments</h1>
-      
-      <p class="nhsuk-body-m">Add patient lists from your <a href="https://digital.nhs.uk/coronavirus/vaccinations/booking-systems/local-booking-solutions">booking system</a> or elsewhere to save time recording vaccinations.</p>
 
-      <p>You will need, as a minimum:</p>
+
+      <br>
+    
+      <h3 class="nhsuk-heading-m">Site and Teams</h3>
+
+      <p class="nhsuk-body-m"><a href="/appointments/index3">Anne Ward Maternity Unit</a></p>
+
+      <p class="nhsuk-body-m"><a href="/appointments/mvp3">St Mary’s Hospital</a></p>
+
+
+      <br>
+      {{ tag({
+        text: "New",
+        classes: "nhsuk-tag--blue"
+      })}}
+      <br>   <br>
+      <p class="nhsuk-body-m">Add patients from your <a href="https://digital.nhs.uk/coronavirus/vaccinations/booking-systems/local-booking-solutions">booking system (opens in new tab)</a> or elsewhere to save time recording vaccinations.</p>
+
+
+      <p>You will need:</p>
       <ul class="nhsuk-list nhsuk-list--bullet">
-        <li>a list of patient NHS numbers</li>
+        <li>patient NHS numbers</li>
         <li>a team or site</li>
       </ul>
 
-      <p>You can then pre-select, if needed, the:</p>
+      <p>You can select (optional):</p>
       <ul class="nhsuk-list nhsuk-list--bullet">
         <li>date</li>
         <li>vaccine</li>
         <li>eligibility</li>
-        <li>location</li>
       </ul>
+
+    
 
 
         {{ button({
           text: "Start now",
-          href: "/appointments/add-nhs-numbers"
+          href: "/appointments/add"
         }) }}
 
+    </div>
+  </div>
 
-        <br><br>
-        <h3 class="nhsuk-heading-m">My appointments</h3>
-
-        <p class="nhsuk-body-m"><a href="/appointments/index3">Anne Ward Maternity Unit</a></p>
-
-
+    
 
     </div>
   </div>

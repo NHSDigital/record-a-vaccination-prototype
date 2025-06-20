@@ -5,29 +5,19 @@
 {% set currentSection = "appointments" %}
 
 
-
 {% block beforeContent %}
-<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
-  <ol class="nhsuk-breadcrumb__list">
-    <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="/appointments/index2">Appointments</a></li>
-    <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="/appointments/index3">Anne Ward Maternity Unit</a></li>
-  </ol>
-  <p class="nhsuk-breadcrumb__back">
-    <a class="nhsuk-breadcrumb__backlink" href="#">
-      <span class="nhsuk-u-visually-hidden">Back to &nbsp;</span>
-      Level three
-    </a>
-  </p>
-</nav>
+  {{ backLink({
+    href: "/appointments/index4",
+    text: "Back"
+  }) }}
 {% endblock %}
-
 
 
 {% block content %}
 
 <!-- <p class="nhsuk-body-l">This example shows only the <mark>NHS number</mark>, and <mark>Date</mark> used.</p> -->
 
-<br>
+
 
   <style>
     .jointTopBot {
@@ -44,16 +34,12 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      <div class="nhsuk-caption-l">Anne Ward Maternity Unit</div>
-        <h1 class="nhsuk-heading-l">Wednesday 4 June 2025</h1>
-
-
+      <div class="nhsuk-caption-l"></div>
+        <h1 class="nhsuk-heading-l">St Mary's Hospital</h1>
 
 
         <p><a href="/record-vaccinations/vaccinator">Record a walk-in</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/appointments/add-nhs-numbers">Add NHS numbers</a></p>
 
-
-  <br>
 
 
   <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
@@ -65,7 +51,7 @@
       </li>
       <li class="x-govuk-secondary-navigation__list-item ">
         <a class="x-govuk-secondary-navigation__link" href="/appointments/mvp4">
-          Recorded (1)
+          Recorded (7)
         </a>
       </li>
     
