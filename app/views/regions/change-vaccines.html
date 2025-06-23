@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Change vaccines for " + organisation.name %}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/regions/organisations/" + organisation.id,
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {{ checkboxes({
+        name: "example-inline",
+        classes: "nhsuk-radios--inline",
+        fieldset: {
+          legend: {
+            text: "Which vaccinations can " + organisation.name + " record?",
+            classes: "nhsuk-fieldset__legend--l",
+            isPageHeading: true
+          }
+        },
+        values: (vaccinesEnabled | pluck("name")),
+        items: [
+          {
+            value: "RSV",
+            text: "RSV"
+          },
+          {
+            value: "COVID-19",
+            text: "COVID-19"
+          },
+          {
+            value: "flu",
+            text: "Flu"
+          },
+          {
+            value: "pertussis",
+            text: "Pertussis"
+          }
+        ]
+      }) }}
+
+      {{ button({
+        text: "Save"
+      }) }}
+
+    </div>
+  </div>
+{% endblock %}

@@ -248,10 +248,29 @@ module.exports = router => {
 
     const users = data.users.filter((user) => (user.organisations || []).find((organisation) => organisation.id === id))
 
+    const vaccines = organisation.vaccines
+    const vaccinesEnabled = vaccines.filter((vaccine) => vaccine.status === "enabled")
 
     res.render('regions/organisation', {
       organisation,
-      users
+      users,
+      vaccinesEnabled
+    })
+  })
+
+  // Viewing the page to set vaccines per organisation
+  router.get('/regions/organisations/:id/change-vaccines', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const organisation = data.organisations.find((org) => org.id === id)
+    if (!organisation) { res.redirect('/regions/'); return }
+
+    const vaccines = organisation.vaccines
+    const vaccinesEnabled = vaccines.filter((vaccine) => vaccine.status === "enabled")
+
+    res.render('regions/change-vaccines', {
+      organisation,
+      vaccinesEnabled
     })
   })
 

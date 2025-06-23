@@ -3016,6 +3016,12 @@ module.exports = [
       "postcode": "NR4 7UY"
     },
     "status": "Active",
+    vaccines: [
+      {name: "RSV", status: "enabled"},
+      {name: "COVID-19", status: "enabled"},
+      {name: "pertussis", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     "type": "NHS Trust",
     "region": "Y61"
   },
@@ -4121,6 +4127,12 @@ module.exports = [
       "postcode": "CB2 0AY"
     },
     "status": "Active",
+    vaccines: [
+      {name: "RSV", status: "enabled"},
+      {name: "COVID-19", status: "enabled"},
+      {name: "pertussis", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     "type": "NHS Trust",
     "region": "Y61"
   },
@@ -6058,6 +6070,12 @@ module.exports = [
       postcode: 'NN17 1NU'
     },
     type: 'Community Pharmacy',
+    vaccines: [
+      {name: "RSV", status: "enabled"},
+      {name: "COVID-19", status: "enabled"},
+      {name: "pertussis", status: "disabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: 'Active',
     "region": "Y61"
   },

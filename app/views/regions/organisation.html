@@ -28,7 +28,16 @@
         <p><a href="/regions/organisations/{{ organisation.id }}/reactivate">Reactivate organisation</a></p>
 
       {% else  %}
-        <p>The organisation can record vaccinations.</p>
+
+        <p>They can record
+          {% if (vaccinesEnabled | length) == 4 %}
+            all
+          {% else %}
+            {{ vaccinesEnabled | pluck("name") | formatList }}
+          {% endif %}
+        vaccinations.
+          <a href="/regions/organisations/{{organisation.id}}/change-vaccines">Change <span class="nhsuk-u-visually-hidden">vaccines available</span></a>
+        </p>
 
         <p><a href="/regions/organisations/{{organisation.id}}/deactivate">Deactivate organisation</a></p>
 

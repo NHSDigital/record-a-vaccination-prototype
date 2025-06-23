@@ -31,6 +31,10 @@ module.exports = function (env) { /* eslint-disable-line no-unused-vars */
     return dateFormatter.format(date)
   }
 
+  filters.pluck = function(array, attribute) {
+    return array.map((item) => item[attribute])
+  }
+
   /* ------------------------------------------------------------------
     add your methods to the filters obj below this comment block:
     @example:
