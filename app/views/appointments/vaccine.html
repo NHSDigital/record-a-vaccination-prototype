@@ -34,6 +34,9 @@
               Which vaccine will you be giving?
             </h1>
           </legend>
+          <div class="nhsuk-hint" id="contact-hint">
+            You will still be able to give multiple vaccines if required.
+          </div>
           <div class="nhsuk-radios">
             <div class="nhsuk-radios__item">
               <input class="nhsuk-radios__input" id="example-1" name="example" type="radio" value="yes">
@@ -53,6 +56,17 @@
                 RSV              </label>
             </div>
 
+            <div class="nhsuk-radios__divider">or</div>
+
+            <div class="nhsuk-radios">
+              <div class="nhsuk-radios__item">
+                <input class="nhsuk-radios__input" id="example-hints-1" name="example-hints" type="radio" value="mobile" aria-describedby="example-hints-1-item-hint">
+                <label class="nhsuk-label nhsuk-radios__label" for="example-hints-1">
+                  Skip this for now
+                </label>
+              </div>
+
+
           </div>
         </fieldset>
       </div>
@@ -63,7 +77,6 @@
         href: "/appointments/eligibility"
       }) }}
 
-      <p class="nhsuk-body-m"><a href="/appointments/eligibility">Skip this for now</a></p>
 
 
 
