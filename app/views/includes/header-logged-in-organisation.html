@@ -1,59 +1,64 @@
 {% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
 
 {{ header({
-    classes: "nhsuk-header--left",
     "service": {
-        "name": "Record a vaccination",
+        "text": "Record a vaccination",
         "href": "/"
       },
       "showNav": "true",
       "showSearch": "false",
-      "primaryLinks": [
+      account: {
+        items: [
+          {
+            href: "/user-profile",
+            text: currentUser.email,
+            icon: true
+          },
+          {
+            href: '/sign-out',
+            text: 'Log out'
+          } if data.currentUserId
+        ]
+      },
+      "navigation": {
+        items: [
         {
-          url  : "/home/",
-          label : "Home",
-          classes: ("app-header__navigation-item--current" if currentSection == "home")
+          href  : "/home/",
+          text : "Home",
+          active: (currentSection == "home")
         },
         {
-          url  : "/appointments/index2",
-          label : "Appointments <span class=\"nhsuk-tag app-tag--header nhsuk-u-margin-left-2\">New</span>" | safe,
-          classes: ("app-header__navigation-item--current" if currentSection == "appointments")
+          href  : "/appointments/index2",
+          text : "Appointments" | safe,
+          active: (currentSection == "appointments")
         },
         {
-          url  : "/record-vaccinations",
-          label : ("Record vaccinations") | safe,
-          classes: ("app-header__navigation-item--current" if currentSection == "vaccinate")
+          href  : "/record-vaccinations",
+          text : ("Record vaccinations") | safe,
+          active: (currentSection == "vaccinate")
         },
         {
-          url: "/vaccines",
-          label: "Vaccines",
-          classes: ("app-header__navigation-item--current" if currentSection == "vaccines")
+          href: "/vaccines",
+          text: "Vaccines",
+          active: (currentSection == "vaccines")
         } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
         {
-          url: "/records",
-          label: "Records",
-          classes: ("app-header__navigation-item--current" if currentSection == "records")
+          href: "/records",
+          text: "Records",
+          active: (currentSection == "records")
         } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
 
         {
-          url: "/reports",
-          label: "Reports",
-          classes: ("app-header__navigation-item--current" if currentSection == "reports")
+          href: "/reports",
+          text: "Reports",
+          active: (currentSection == "reports")
         } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
         {
-          url: '/user-admin',
-          label: 'Manage users',
-          classes: ("app-header__navigation-item--current" if currentSection == "manage-users")
-        } if (currentUser and organisationSetting.permissionLevel === "Lead administrator"),
-        {
-          url: "/user-profile",
-          label: currentUser.email,
-          classes: "app-header__navigation-item--right-aligned " + ("app-header__navigation-item--current" if currentSection == "user-profile")
-        },
-        {
-          url: '/sign-out',
-          label: 'Log out'
-        }
-      ] if data.currentUserId
+          href: '/user-admin',
+          text: 'Manage users',
+          active: (currentSection == "manage-users")
+        } if (currentUser and organisationSetting.permissionLevel === "Lead administrator")
+      ]
+      }
     })
   }}
