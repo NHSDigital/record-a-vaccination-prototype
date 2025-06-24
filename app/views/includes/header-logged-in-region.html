@@ -1,21 +1,20 @@
 {{ header({
   classes: "nhsuk-header--left",
-  "service": {
-      "name": "Record a vaccination",
-      "href": "/"
-    },
-    "showNav": "true",
-    "showSearch": "false",
-    "primaryLinks": [
+  service: {
+    text: "Record a vaccination",
+    href: "/"
+  },
+  account: {
+    items: [
       {
-        url: "#",
-        label: currentUser.email,
-        classes: "app-header__navigation-item--right-aligned " + ("app-header__navigation-item--current" if currentSection == "user-profile")
+        href: "#",
+        text: currentUser.email,
+        icon: true
       },
       {
-        url: '/sign-out',
-        label: 'Log out'
+        href: '/sign-out',
+        text: 'Log out'
       }
     ]
-  })
-}}
+  }
+}) }}
