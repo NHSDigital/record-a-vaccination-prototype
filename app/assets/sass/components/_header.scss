@@ -1,0 +1,14 @@
+// Remove default underline from link
+.app-header__navigation--no-underline .nhsuk-header__navigation-link {
+  text-decoration: none;
+}
+
+// Add underline back to just the label in the link
+.app-header__navigation--no-underline .nhsuk-header__navigation-link .app-header__navigation-link-label {
+  text-decoration: underline;
+}
+
+// Remove underline from the label in the link on hover
+.app-header__navigation--no-underline .nhsuk-header__navigation-link:hover .app-header__navigation-link-label {
+  text-decoration: none;
+}

@@ -5,4 +5,8 @@
   background-color: nhsuk-tint($color_nhsuk-blue, 80%);
   border-color: nhsuk-tint($color_nhsuk-blue, 80%);
   color: nhsuk-shade($color_nhsuk-blue, 30%);
+
+  // Reduce padding slightly from 4px to 3px so it fits in the navigation item
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
