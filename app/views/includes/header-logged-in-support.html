@@ -1,31 +1,35 @@
 {{ header({
-  classes: "nhsuk-header--left",
   "service": {
-      "name": "Record a vaccination",
+      "text": "Record a vaccination",
       "href": "/"
     },
     "showNav": "true",
     "showSearch": "false",
-    "primaryLinks": [
+    account: {
+      items: [
+        {
+          href: "#",
+          text: currentUser.email,
+          icon: true
+        },
+        {
+          href: '/sign-out',
+          text: 'Log out'
+        }
+      ]
+    },
+    "navigation": {
+      items: [
       {
-        url  : "/support/regions",
-        label : "Regions",
-        classes: ("app-header__navigation-item--current" if currentSection == "regions")
+        href: "/support/regions",
+        text : "Regions",
+        active: (currentSection == "regions")
       },
       {
-        url  : "/support/users",
-        label : "Users",
-        classes: ("app-header__navigation-item--current" if currentSection == "users")
-      },
-      {
-        url: "#",
-        label: currentUser.email,
-        classes: "app-header__navigation-item--right-aligned " + ("app-header__navigation-item--current" if currentSection == "user-profile")
-      },
-      {
-        url: '/sign-out',
-        label: 'Log out'
+        href: "/support/users",
+        text : "Users",
+        active: (currentSection == "users")
       }
-    ]
+    ] }
   })
 }}
