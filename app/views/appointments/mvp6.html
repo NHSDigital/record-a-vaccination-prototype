@@ -1,0 +1,164 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Appointments" %}
+
+{% set currentSection = "appointments" %}
+
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/appointments/index4",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+
+<!-- <p class="nhsuk-body-l">This example shows only the <mark>NHS number</mark>, and <mark>Date</mark> used.</p> -->
+
+
+
+  <style>
+    .jointTopBot {
+      border-top: 4px solid #768692;
+    }
+    .jointMid {
+    border-bottom: 2px solid #d8dde0;
+    }
+
+  </style>
+
+
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <div class="nhsuk-caption-l"></div>
+
+        <h1 class="nhsuk-heading-l">St Mary's Hospital</h1>
+
+        <p><a href="/appointments/date">Add NHS numbers</a></p>
+
+
+        <p>11 July 2025 <br><a href="/appointments/date">Change</a></p>
+
+
+        <p>RSV<br><a href="/appointments/date">Change</a></p>
+
+
+        <p><a href="/appointments/eligibility">Delete list</a></p>
+
+
+        {{ input({
+          label: {
+            text: "Search for name or NHS number"
+          },
+          id: "firstName",
+          name: "firstName",
+          value: data.firstName,
+          classes: "nhsuk-input--width-20",
+          errorMessage: {
+            text: firstNameError
+          } if firstNameError
+        }) }}
+        <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+          Search list
+        </button>
+
+
+<br>
+        <p><a href="/appointments/mvp7">View list of 30 patients</a></p>
+
+
+
+      <table class="nhsuk-table-responsive" role="table">
+        <caption class="nhsuk-table__caption">3 patients recorded</caption>
+        <thead class="nhsuk-table__head" role="rowgroup">
+            <thead role="rowgroup" class="nhsuk-table__head">
+                <tr role="row">
+      
+                  
+                  <th role="columnheader" class="" scope="col">
+                    Name
+                  </th>
+                  <th role="columnheader" class="" scope="col">
+                    Date of birth
+                  </th>
+                  <th role="columnheader" class="" scope="col">
+                    Address
+                  </th>
+
+                  <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric"></th>
+
+                  
+                </tr>
+        </thead>
+
+        <tbody class="nhsuk-table__body">
+              
+          <tr role="row" class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">
+                Adam Aarrons
+          </td>
+          
+            <td class="nhsuk-table__cell">
+              21 April 1954
+          </td>
+          
+          <td class="nhsuk-table__cell">
+              16 Anderson Rd, Beeston
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record another vaccination</a>
+        </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">
+                Alex Aarrons
+            </td>
+            
+              <td class="nhsuk-table__cell">
+                8 December 1959	
+            </td>
+            
+            <td class="nhsuk-table__cell">
+                73 Roman Rd,
+                Leeds
+            </td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record another vaccination</a>
+            </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                    Ben Benson
+            </td>
+
+                <td class="nhsuk-table__cell">
+                  23 May 1976 
+            </td>
+
+            <td class="nhsuk-table__cell">
+                92-93 The Calls, Leeds    
+            </td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record another vaccination</a>
+            </td>
+            </tr>
+
+
+          </tbody>
+        </table>
+
+       
+
+    </div>
+  </div>
+
+{% endblock %}
+
+
+

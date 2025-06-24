@@ -8,35 +8,25 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Appointments</h1>
-      
-     
-      <br>
       {{ tag({
         text: "New",
         classes: "nhsuk-tag--blue"
       })}}
-      <br>   <br>
-      <p class="nhsuk-body-m">Add patients from your <a href="https://digital.nhs.uk/coronavirus/vaccinations/booking-systems/local-booking-solutions">booking system</a> or elsewhere to save time recording vaccinations.</p>
-
+    <br><br>
+      <h1 class="nhsuk-heading-l">Lists</h1>
+      
+      <p class="nhsuk-body-m">Add lists of patients or staff from your <a href="https://digital.nhs.uk/coronavirus/vaccinations/booking-systems/local-booking-solutions">booking system</a> or elsewhere to save time when recording vaccinations.</p>
 
       <p>You will need:</p>
       <ul class="nhsuk-list nhsuk-list--bullet">
-        <li>patient or staff NHS numbers</li>
         <li>a team or site</li>
+        <li>a date (optional)</li>
+        <li>a list of NHS numbers</li>
       </ul>
-
-      <p>You can select (optional):</p>
-      <ul class="nhsuk-list nhsuk-list--bullet">
-        <li>date</li>
-        <li>vaccine</li>
-        <li>eligibility</li>
-      </ul>
-
 
         {{ button({
-          text: "Start now",
-          href: "/appointments/add"
+          text: "Add a list",
+          href: "/appointments/team"
         }) }}
 
     </div>

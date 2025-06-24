@@ -10,63 +10,41 @@
 
 {% block content %}
 
-
-
-
 <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-        <div class="nhsuk-panel">
-            <h1 class="nhsuk-panel__title">
-              Appointments added
-            </h1>
-            <div class="nhsuk-panel__body">
-            
-              <a href="/appointments/index3" class="nhsuk-link--reverse">Anne Ward Maternity Unit</a> 9 July 2025.
-            </div>
-          </div>
-
-
-      <h1 class="nhsuk-heading-l">Appointments</h1>
-
-
-      <br>
-      <h3 class="nhsuk-heading-m">Site and Teams</h3>
-
-      <p class="nhsuk-body-m"><a href="/appointments/index3">Anne Ward Maternity Unit</a></p>
-
-      <p class="nhsuk-body-m"><a href="/appointments/mvp3">St Mary’s Hospital</a></p>
-
-
-      <br>
       {{ tag({
         text: "New",
         classes: "nhsuk-tag--blue"
       })}}
-      <br>   <br>
-      <p class="nhsuk-body-m">Add patients from your <a href="https://digital.nhs.uk/coronavirus/vaccinations/booking-systems/local-booking-solutions">booking system</a> or elsewhere to save time recording vaccinations.</p>
-
+    <br><br>
+      <h1 class="nhsuk-heading-l">Lists</h1>
+      
+      <p class="nhsuk-body-m">Add lists of patients or staff from your <a href="https://digital.nhs.uk/coronavirus/vaccinations/booking-systems/local-booking-solutions">booking system</a> or elsewhere to save time when recording vaccinations.</p>
 
       <p>You will need:</p>
       <ul class="nhsuk-list nhsuk-list--bullet">
-        <li>patient or staff NHS numbers</li>
         <li>a team or site</li>
+        <li>a date (optional)</li>
+        <li>a list of NHS numbers</li>
       </ul>
-
-      <p>You can select (optional):</p>
-      <ul class="nhsuk-list nhsuk-list--bullet">
-        <li>date</li>
-        <li>vaccine</li>
-        <li>eligibility</li>
-      </ul>
-
-    
-
 
         {{ button({
-          text: "Start now",
-          href: "/appointments/add"
+          text: "Add a list",
+          href: "/appointments/team"
         }) }}
+
+
+<br><br>
+        <h2 class="nhsuk-heading-m">Sites</h2>
+
+        <p class="nhsuk-body-m"><a href="/appointments/index3">Anne Ward Maternity Unit</a></p>
+  
+        <p class="nhsuk-body-m"><a href="/appointments/index5">St Mary’s Hospital</a></p>
+  
+
+            </div>
+
 
     </div>
   </div>
@@ -75,5 +53,6 @@
 
     </div>
   </div>
+
 
 {% endblock %}

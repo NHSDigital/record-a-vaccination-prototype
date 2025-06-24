@@ -8,7 +8,7 @@
 
 
 {% block beforeContent %}
-  {{ backLink({ href: "/appointments/add" }) }}
+  {{ backLink({ href: "/appointments/index2" }) }}
 {% endblock %}
 
 {% block content %}
@@ -28,10 +28,8 @@
         <fieldset class="nhsuk-fieldset">
           <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
 
-            <span class="nhsuk-caption-m">Step 2 of 5</span>
-
             <h1 class="nhsuk-fieldset__heading">
-              Select a site or team
+              Choose a site or team
             </h1>
           </legend>
           <div class="nhsuk-radios">
@@ -61,7 +59,7 @@
 
       {{ button({
         text: "Continue",
-        href: "/appointments/add-nhs-numbers"
+        href: "/appointments/add"
       }) }}
 
 

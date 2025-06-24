@@ -6,7 +6,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/appointments/index2",
+    href: "/appointments/team",
     text: "Back"
   }) }}
 {% endblock %}
@@ -24,10 +24,9 @@
   <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
     <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
 
-      <span class="nhsuk-caption-m">Step 1 of 5</span>
 
       <h1 class="nhsuk-fieldset__heading">
-        Select a date
+        Choose a date
       </h1>
     </legend>
 
@@ -68,27 +67,13 @@
         </label>
       </div>
 
-      <div class="nhsuk-radios__item">
-        <input class="nhsuk-radios__input" id="contact-2" name="contact" type="radio" value="phone" aria-controls="conditional-contact-2" aria-expanded="false">
-        <label class="nhsuk-label nhsuk-radios__label" for="contact-2">
-          Saturday 12 July 2025
-        </label>
-      </div>
-
-      <div class="nhsuk-radios__item">
-        <input class="nhsuk-radios__input" id="contact-2" name="contact" type="radio" value="phone" aria-controls="conditional-contact-2" aria-expanded="false">
-        <label class="nhsuk-label nhsuk-radios__label" for="contact-2">
-          Sunday 13 July 2025
-        </label>
-      </div>
-
-
+      <div class="nhsuk-radios__divider">or</div>
 
 
       <div class="nhsuk-radios__item">
         <input class="nhsuk-radios__input" id="contact-3" name="contact" type="radio" value="" aria-controls="conditional-contact-3" aria-expanded="false">
         <label class="nhsuk-label nhsuk-radios__label" for="contact-3">
-          Choose a different date
+          Select a different date
         </label>
       </div>
       <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-contact-3">
@@ -130,17 +115,15 @@
       </div>
 
 
-      <div class="nhsuk-radios__divider">or</div>
-
 
     <div class="nhsuk-radios">
       <div class="nhsuk-radios__item">
         <input class="nhsuk-radios__input" id="example-hints-1" name="example-hints" type="radio" value="mobile" aria-describedby="example-hints-1-item-hint">
         <label class="nhsuk-label nhsuk-radios__label" for="example-hints-1">
-          No date specified
+          No date
         </label>
         <div class="nhsuk-hint nhsuk-radios__hint" id="example-hints-1-item-hint">
-          For example, pateint or staff lists with no date
+          For example, staff or maternity lists
         </div>
       </div>
   </fieldset>
@@ -148,7 +131,7 @@
 
       {{ button({
         text: "Continue",
-        href: "/appointments/team"
+        href: "/appointments/add-nhs-numbers"
       }) }}
 
     </div>

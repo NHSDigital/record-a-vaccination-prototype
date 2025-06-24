@@ -40,37 +40,32 @@
 
         <p><a href="/appointments/add-nhs-numbers">Add NHS numbers</a></p>
 
-        <p>11 July 2025 <br><a href="/appointments/date">Change</a></p>
-
+        <p><a href="/appointments/add">Add date</a></p>  
 
         <p><a href="/appointments/vaccine">Add vaccine</a></p>  
 
-        <p><a href="/appointments/eligibility">Add eligibility</a></p>
+        <p><a href="/appointments/delete">Delete list</a></p>
+        
 
-
-  <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
-    <ul class="x-govuk-secondary-navigation__list">
-      <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
-        <a class="x-govuk-secondary-navigation__link" href="/appointments/mvp3" aria-current=page>
-          Patients (30)
-        </a>
-      </li>
-      <li class="x-govuk-secondary-navigation__list-item ">
-        <a class="x-govuk-secondary-navigation__link" href="/appointments/mvp4">
-          Completed (0)
-        </a>
-      </li>
-    
-      
-    </ul>
-  </nav>
-
-  <br>
-
+        {{ input({
+          label: {
+            text: "Search for name or NHS number"
+          },
+          id: "firstName",
+          name: "firstName",
+          value: data.firstName,
+          classes: "nhsuk-input--width-20",
+          errorMessage: {
+            text: firstNameError
+          } if firstNameError
+        }) }}
+        <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+          Search list
+        </button>
 
 
       <table class="nhsuk-table-responsive" role="table">
-        <caption class="nhsuk-table__caption">30 patients</caption>
+        <caption class="nhsuk-table__caption">100 patients</caption>
         <thead class="nhsuk-table__head" role="rowgroup">
             <thead role="rowgroup" class="nhsuk-table__head">
                 <tr role="row">
@@ -80,10 +75,10 @@
                     Name
                   </th>
                   <th role="columnheader" class="" scope="col">
-                    Date of birth
+                    NHS number
                   </th>
                   <th role="columnheader" class="" scope="col">
-                    Address
+                    Date of birth
                   </th>
                   <th role="columnheader" class="" scope="col">
                   </th>
@@ -101,17 +96,17 @@
           </td>
           
             <td class="nhsuk-table__cell">
-              21 April 1954
+              9562312564
           </td>
           
           <td class="nhsuk-table__cell">
-              16 Anderson Rd, Beeston
+            21 April 1954
           </td>
           <td class="nhsuk-table__cell">
             <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
           </td>
           <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-            <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
+            <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove
           </td> 
             </tr>
 
@@ -121,15 +116,14 @@
             </td>
             
               <td class="nhsuk-table__cell">
-                8 December 1959	
+                9623584569
             </td>
             
             <td class="nhsuk-table__cell">
-                73 Roman Rd,
-                Leeds
+              8 December 1959	
             </td>
             <td class="nhsuk-table__cell">
-              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
             </td>
             <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
               <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
@@ -142,14 +136,14 @@
             </td>
 
                 <td class="nhsuk-table__cell">
-                  23 May 1976 
+                  9875582565
             </td>
 
             <td class="nhsuk-table__cell">
-                92-93 The Calls, Leeds    
+              23 May 1976 
             </td>
             <td class="nhsuk-table__cell">
-              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
             </td>
             <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
               <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
@@ -163,14 +157,14 @@
             </td>
             
               <td class="nhsuk-table__cell">
-                9 August 2006
+                9111102224
             </td>
             
             <td class="nhsuk-table__cell">
-                 44 Mellor drive, Meanwood
+              9 August 2006
             </td>
             <td class="nhsuk-table__cell">
-            <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
             </td>
             <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
               <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
@@ -183,14 +177,14 @@
             </td>
             
               <td class="nhsuk-table__cell">
-                16 May 2006
+                999633365
             </td>
             
             <td class="nhsuk-table__cell">
-                124 Moss Lane, Leeds
+              16 May 2006
             </td>
             <td class="nhsuk-table__cell">
-              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
             </td>
             <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
               <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
@@ -204,14 +198,14 @@
             </td>
             
               <td class="nhsuk-table__cell">
-                2 May 2002
+                9784512586
             </td>
             
             <td class="nhsuk-table__cell">
-                24 Acre Drive, Leeds
+              2 May 2002
             </td>
             <td class="nhsuk-table__cell">
-              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
             </td>
             <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
               <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
@@ -224,15 +218,15 @@
               </td>
               
                 <td class="nhsuk-table__cell">
-                  11 June 1956
+                  9330254878
               </td>
               
               <td class="nhsuk-table__cell">
-                  9 Yale Close, York
+                11 June 1956
               </td>
               <td class="nhsuk-table__cell">
-                <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
-              </td>
+                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
+            </td>
               <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
                 <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
               </td> 
@@ -246,15 +240,15 @@
               </td>
               
                 <td class="nhsuk-table__cell">
-                  14 November 1994
+                  9025587485
               </td>
               
               <td class="nhsuk-table__cell">
-                  198 Lovell Drive, Leeds
+                14 November 1994
               </td>
               <td class="nhsuk-table__cell">
-                <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
-              </td>
+                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
+            </td>
               <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
                 <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
               </td> 
@@ -266,14 +260,14 @@
                 </td>
                 
                   <td class="nhsuk-table__cell">
-                    3 March 1958
+                    9001258457
                 </td>
                 
                 <td class="nhsuk-table__cell">
-                    4 Park Lane, Leeds
+                  3 March 1958
                 </td>
                 <td class="nhsuk-table__cell">
-                  <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+                    <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
                 </td>
                 <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
                   <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
@@ -287,15 +281,15 @@
                   </td>
                   
                     <td class="nhsuk-table__cell">
-                      2 March 1984
+                      9853623256
                   </td>
                   
                   <td class="nhsuk-table__cell">
-                      1 The Avenue, Leeds
+                    2 March 1984
                   </td>
                   <td class="nhsuk-table__cell">
-                    <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
-                  </td>
+                    <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
+                </td>
                   <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
                     <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
                   </td> 
@@ -308,14 +302,14 @@
                     </td>
                     
                       <td class="nhsuk-table__cell">
-                        9 September 1999
+                        910200021
                     </td>
                     
                     <td class="nhsuk-table__cell">
-                        99 Ings Drive, Leeds
+                      9 September 199
                     </td>
                     <td class="nhsuk-table__cell">
-                      <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+                        <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
                     </td>
                     <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
                       <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
@@ -324,19 +318,19 @@
 
                       <tr role="row" class="nhsuk-table__row">
                         <td class="nhsuk-table__cell">
-                            Harrison, Harriet
+                             Harriet Harrison 
                       </td>
                       
                         <td class="nhsuk-table__cell">
-                          10 Janurary 2000
+                          9630021558
                       </td>
                       
                       <td class="nhsuk-table__cell">
-                          4a The Flats, Bradford
+                        10 Janurary 2000
                       </td>
                       <td class="nhsuk-table__cell">
-                        <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
-                      </td>
+                        <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
+                    </td>
                       <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
                         <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
                       </td> 
@@ -345,18 +339,18 @@
 
                         <tr role="row" class="nhsuk-table__row">
                           <td class="nhsuk-table__cell">
-                              Illingworth, India
+                              India Illingworth
                         </td>
                         
                           <td class="nhsuk-table__cell">
-                            4 February 1980
+                            9856236569
                         </td>
                         
                         <td class="nhsuk-table__cell">
-                            Lakeside, Menston Gardens
+                          4 February 1980
                         </td>
                         <td class="nhsuk-table__cell">
-                          <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+                            <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
                         </td>
                         <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
                           <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
@@ -368,18 +362,18 @@
 
                         <tr role="row" class="nhsuk-table__row">
                           <td class="nhsuk-table__cell">
-                              Julian, Winston
+                              Katehrine Kitson 
                         </td>
                         
                           <td class="nhsuk-table__cell">
-                            20 May 1979
+                            9636956814
                         </td>
                         
                         <td class="nhsuk-table__cell">
-                            42 Wentworth Place
+                          20 May 1979
                         </td>
                         <td class="nhsuk-table__cell">
-                          <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+                            <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
                         </td>
                         <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
                           <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
@@ -391,18 +385,18 @@
 
           <tr role="row" class="nhsuk-table__row">
             <td class="nhsuk-table__cell">
-                Jones, Mike
+                Luke Law
           </td>
           
             <td class="nhsuk-table__cell">
-              13 October 2002      
+              9854525125     
 
           </td>
           
           <td class="nhsuk-table__cell">
-            56 Birkett Road          </td>
+            13 October 2002           </td>
           <td class="nhsuk-table__cell">
-            <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+            <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
           </td>
           <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
             <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
@@ -411,19 +405,19 @@
 
         <tr role="row" class="nhsuk-table__row">
           <td class="nhsuk-table__cell">
-              Lochan, Clive
+              Lucinda Lesley
       </td>
       
           <td class="nhsuk-table__cell">
-            13 July 1983
+           9851245252
       </td>
       
       <td class="nhsuk-table__cell">
-        Old Mill House, Shrawley     
+        13 July 1983   
       </td>
       <td class="nhsuk-table__cell">
-        <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
-      </td>
+        <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
+    </td>
       <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
         <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
       </td> 
@@ -432,18 +426,18 @@
 
   <tr role="row" class="nhsuk-table__row">
     <td class="nhsuk-table__cell">
-        Michaels, Melvin
+        Michael Miller
 </td>
 
     <td class="nhsuk-table__cell">
-      13 October 2002
+      9520120232
 </td>
 
 <td class="nhsuk-table__cell">
-  49C Howards Thicket    
+  13 October 2002    
 </td>
 <td class="nhsuk-table__cell">
-  <a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+    <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
 </td>
 <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
   <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
@@ -452,18 +446,18 @@
 
 <tr role="row" class="nhsuk-table__row">
   <td class="nhsuk-table__cell">
-      Nolan, Nick
+      Nick Nolan 
 </td>
 
   <td class="nhsuk-table__cell">
-    6 January 1976
+   9520124578
 </td>
 
 <td class="nhsuk-table__cell">
-  9 Stowe Close 
+  6 January 1976
 </td>
 <td class="nhsuk-table__cell">
-<a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+    <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
 </td>
 <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
 <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
@@ -472,18 +466,18 @@
 
 <tr role="row" class="nhsuk-table__row">
   <td class="nhsuk-table__cell">
-      Ollis, Oliver
+       Oliver Osmond
 </td>
 
   <td class="nhsuk-table__cell">
-    11 December 1987
+    9523654781
 </td>
 
 <td class="nhsuk-table__cell">
-  105 Western Road
+  11 December 1987
 </td>
 <td class="nhsuk-table__cell">
-<a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+    <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
 </td>
 <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
 <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
@@ -492,18 +486,18 @@
 
 <tr role="row" class="nhsuk-table__row">
   <td class="nhsuk-table__cell">
-      Parker, Peter
+      Peter Parker
 </td>
 
   <td class="nhsuk-table__cell">
-    4 June 1999
+    9525885255
 </td>
 
 <td class="nhsuk-table__cell">
-  3 Peelers Court
+  4 June 1999
 </td>
 <td class="nhsuk-table__cell">
-<a class="nhsuk-link" href="/record-vaccinations/patient-history">Record vaccination</a>
+    <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
 </td>
 <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
 <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>

@@ -8,7 +8,7 @@
 
 
 {% block beforeContent %}
-  {{ backLink({ href: "/appointments/check2" }) }}
+  {{ backLink({ href: "/appointments/mvp3" }) }}
 {% endblock %}
 
 {% block content %}
@@ -28,10 +28,10 @@
         <fieldset class="nhsuk-fieldset">
           <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
 
-            <span class="nhsuk-caption-m">Step 4 of 5</span>
+            <span class="nhsuk-caption-m"></span>
 
             <h1 class="nhsuk-fieldset__heading">
-              Which vaccine will you be giving?
+              Choose a vaccine
             </h1>
           </legend>
           <div class="nhsuk-hint" id="contact-hint">
@@ -56,17 +56,6 @@
                 RSV              </label>
             </div>
 
-            <div class="nhsuk-radios__divider">or</div>
-
-            <div class="nhsuk-radios">
-              <div class="nhsuk-radios__item">
-                <input class="nhsuk-radios__input" id="example-hints-1" name="example-hints" type="radio" value="mobile" aria-describedby="example-hints-1-item-hint">
-                <label class="nhsuk-label nhsuk-radios__label" for="example-hints-1">
-                  Skip this for now
-                </label>
-              </div>
-
-
           </div>
         </fieldset>
       </div>
@@ -74,7 +63,7 @@
 
       {{ button({
         text: "Continue",
-        href: "/appointments/eligibility"
+        href: "/appointments/mvp7"
       }) }}
 
 
