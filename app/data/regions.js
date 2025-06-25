@@ -42,7 +42,27 @@ module.exports = [
       "line1": "c/o nhs england",
       "town": "leeds",
       "postcode": "LS2 7UA"
-    }
+    },
+    inbox: [
+      {
+        id: "HKFFU48574",
+        fromOrganisationId: "FA424",
+        vaccineRequested: "flu",
+        sentOn: "2025-06-22"
+      },
+      {
+        id: "PFU47263463",
+        fromOrganisationId: "FA02S",
+        vaccineRequested: "pertussis",
+        sentOn: "2025-06-24"
+      },
+      {
+        id: "OFU536369FUF",
+        fromOrganisationId: "PDL93",
+        vaccineRequested: "COVID-19",
+        sentOn: "2025-06-25"
+      }
+    ]
   },
   {
     "id": "Y59",

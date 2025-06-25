@@ -274,6 +274,23 @@ module.exports = router => {
     })
   })
 
+  // Updating vaccines enabled per organisation
+  router.post('/regions/organisations/:id/update-vaccines', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const organisation = data.organisations.find((org) => org.id === id)
+    if (!organisation) { res.redirect('/regions/'); return }
+
+    const vaccinesEnabled = data.vaccinesEnabled
+
+    for (vaccine of organisation.vaccines) {
+      vaccine.status = (vaccinesEnabled.includes(vaccine.name) ? "enabled" : "disabled")
+    }
+
+    res.redirect(`/regions/organisations/${id}`)
+  })
+
+
   // Delete an organisation confirmation page
   router.get('/regions/organisations/:id/delete', (req, res) => {
     const organisation = req.session.data.organisations.find((org) => org.id === req.params.id)
@@ -407,4 +424,31 @@ module.exports = router => {
     }
 
   })
+
+  router.get('/regions/messages', (req, res) => {
+    const data = req.session.data
+
+    const currentOrganisation = data.regions.find((region) => region.id === "Y62")
+
+    const inbox = currentOrganisation.inbox
+
+    res.render('regions/messages/index', {
+      currentOrganisation,
+      inbox
+    })
+  })
+
+  router.get('/regions/messages/:id', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+
+    const currentOrganisation = data.regions.find((region) => region.id === "Y62")
+    const inbox = currentOrganisation.inbox
+    const message = inbox.find((message) => message.id === id)
+
+    res.render('regions/messages/show', {
+      message
+    })
+  })
+
 }

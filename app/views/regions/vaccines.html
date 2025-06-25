@@ -8,7 +8,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/regions/organisations/" + organisation.id,
+    href: "/regions/organisation-details",
     text: "Back"
   }) }}
 {% endblock %}
@@ -17,13 +17,11 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form method="post" action="/regions/organisations/{{ organisation.id }}/update-vaccines" novalidate>
-
-        <div class="nhsuk-caption-l">{{ organisation.name }}</div>
+      <form method="post" action="/regions/add-email" novalidate>
 
         {% set items = [] %}
 
-        {% for vaccine in (organisation.vaccines | sort(false, false, "name")) %}
+        {% for vaccine in (data.vaccines | sort(false, false, "name")) %}
           {% set items = (items.push({
             value: vaccine.name,
             text: (vaccine.name | capitaliseFirstLetter)
@@ -40,8 +38,8 @@
               isPageHeading: true
             }
           },
-          values: (vaccinesEnabled | pluck("name")),
-          items: items
+          items: items,
+          values: data.vaccinesEnabled
         }) }}
 
         {{ button({

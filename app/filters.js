@@ -35,6 +35,10 @@ module.exports = function (env) { /* eslint-disable-line no-unused-vars */
     return array.map((item) => item[attribute])
   }
 
+  filters.capitaliseFirstLetter = function(string) {
+    return string.charAt(0) .toUpperCase() + string.slice(1)
+  }
+
   /* ------------------------------------------------------------------
     add your methods to the filters obj below this comment block:
     @example:

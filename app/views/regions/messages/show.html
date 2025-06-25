@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% set from = data.organisations | findById(message.fromOrganisationId) %}
+{% set pageName = from.name %}
+{% set currentSection = "messages" %}
+{}
+
+{% block header %}
+  {% include "includes/header-logged-in-region.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    text: "Back",
+    href: "/regions/messages"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-leading-l">{{ pageName }}</h1>
+
+      <p>Requested access to record {{ message.vaccineRequested }}.</p>
+
+      <p>Sent on {{ message.sentOn | govukDate }}.</p>
+
+      <form>
+        <div class="app-button-group">
+          {{ button({
+            text: "Approve"
+          }) }}
+
+          {{ button({
+            text: "Deny",
+            classes: "nhsuk-button--warning"
+          }) }}
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

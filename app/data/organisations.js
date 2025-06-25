@@ -6088,9 +6088,15 @@ module.exports = [
       postcode: 'KT15 2AD'
     },
     type: 'Community Pharmacy',
-    status: 'Applied',
+    status: 'Active',
     region: "Y61",
     appliedOn: "2015-04-12",
+    vaccines: [
+      {name: "RSV", status: "disabled"},
+      {name: "COVID-19", status: "enabled"},
+      {name: "pertussis", status: "requested"},
+      {name: "flu", status: "enabled"}
+    ],
     application: {
       firstName: "Francis",
       lastName: "Blue",
@@ -6126,9 +6132,15 @@ module.exports = [
       postcode: 'B63 8PX'
     },
     type: 'Community Pharmacy',
-    status: 'Applied',
+    status: 'Active',
     region: "Y61",
     appliedOn: "2015-04-13",
+    vaccines: [
+      {name: "RSV", status: "disabled"},
+      {name: "COVID-19", status: "requested"},
+      {name: "pertussis", status: "disabled"},
+      {name: "flu", status: "enabled"}
+    ],
     application: {
       firstName: "Jason",
       lastName: "Green",

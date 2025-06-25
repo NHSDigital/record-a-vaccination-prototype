@@ -40,6 +40,23 @@
           },
           {
             key: {
+              text: "Vaccines"
+            },
+            value: {
+              text: (data.vaccinesEnabled | join(", "))
+            },
+            actions: {
+              items: [
+                {
+                  href: "/regions/vaccines",
+                  text: "Change",
+                  visuallyHiddenText: "vaccines enabled"
+                }
+              ]
+            }
+          },
+          {
+            key: {
               text: "User"
             },
             value: {

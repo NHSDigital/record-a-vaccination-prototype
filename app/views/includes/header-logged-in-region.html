@@ -8,6 +8,16 @@
     "showSearch": "false",
     "primaryLinks": [
       {
+        url: "/regions",
+        label: "Organisations",
+      classes: ("app-header__navigation-item--current" if currentSection == "organisations")
+      },
+      {
+        url: "/regions/messages",
+        label: "Messages <span class=\"app-count\">3</span>" | safe,
+      classes: ("app-header__navigation-item--with-count " + ("app-header__navigation-item--current" if currentSection == "messages"))
+      },
+      {
         url: "#",
         label: currentUser.email,
         classes: "app-header__navigation-item--right-aligned " + ("app-header__navigation-item--current" if currentSection == "user-profile")
