@@ -13,35 +13,39 @@
 
       <h1 class="nhsuk-leading-l">{{ pageName }}</h1>
 
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for message in inbox | sort(true, true, "sentOn") %}
-            {% set from = data.organisations | findById(message.fromOrganisationId) %}
+      {% if (inbox | length) > 0 %}
+        <table>
+          <thead>
             <tr>
-              <td>
-                <a href="/regions/messages/{{ message.id }}">{{ from.name }}</a>
-                <div>Requesting access to record {{ message.vaccineRequested }}</div>
-              </td>
-              <td>
-                {% set daysAgo = message.sentOn | daysAgo %}
-                {% if daysAgo == 0 %}
-                  Today
-                {% elif datsAgo == 1 %}
-                  Yesterday
-                {% else %}
-                  {{ daysAgo }} days ago
-                {% endif %}
-              </td>
+              <th></th>
+              <th></th>
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {% for message in inbox | sort(true, true, "sentOn") %}
+              {% set from = data.organisations | findById(message.fromOrganisationId) %}
+              <tr>
+                <td>
+                  <a href="/regions/messages/{{ message.id }}">{{ from.name }}</a>
+                  <div>Requesting access to record {{ message.vaccineRequested }}</div>
+                </td>
+                <td>
+                  {% set daysAgo = message.sentOn | daysAgo %}
+                  {% if daysAgo == 0 %}
+                    Today
+                  {% elif datsAgo == 1 %}
+                    Yesterday
+                  {% else %}
+                    {{ daysAgo }} days ago
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>No messages.</p>
+      {% endif %}
     </div>
   </div>
 {% endblock %}

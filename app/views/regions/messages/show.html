@@ -26,14 +26,18 @@
 
       <p>Sent on {{ message.sentOn | govukDate }}.</p>
 
-      <form>
+      <form action="/regions/messages/{{ message.id }}/decide" method="post">
         <div class="app-button-group">
           {{ button({
-            text: "Approve"
+            text: "Approve",
+            name: "decision",
+            value: "approve"
           }) }}
 
           {{ button({
             text: "Deny",
+            name: "decision",
+            value: "reject",
             classes: "nhsuk-button--warning"
           }) }}
 

@@ -426,29 +426,46 @@ module.exports = router => {
   })
 
   router.get('/regions/messages', (req, res) => {
-    const data = req.session.data
-
-    const currentOrganisation = data.regions.find((region) => region.id === "Y62")
-
-    const inbox = currentOrganisation.inbox
+    const inbox = res.locals.currentRegion.inbox
 
     res.render('regions/messages/index', {
-      currentOrganisation,
       inbox
     })
   })
 
   router.get('/regions/messages/:id', (req, res) => {
-    const data = req.session.data
     const id = req.params.id
 
-    const currentOrganisation = data.regions.find((region) => region.id === "Y62")
-    const inbox = currentOrganisation.inbox
+    const inbox = res.locals.currentRegion.inbox
     const message = inbox.find((message) => message.id === id)
 
     res.render('regions/messages/show', {
       message
     })
+  })
+
+  router.post('/regions/messages/:id/decide', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+
+    const inbox = res.locals.currentRegion.inbox
+    const message = inbox.find((message) => message.id === id)
+
+    const decision = data.decision
+
+    const fromOrganisation = data.organisations.find((organisation) => organisation.id === message.fromOrganisationId)
+
+    let vaccine = fromOrganisation.vaccines.find((vaccine) => vaccine.name === message.vaccineRequested)
+
+    if (decision === "approve") {
+      vaccine.status = "enabled"
+    } else if (decision === "reject") {
+      vaccine.status = "disabled"
+    }
+
+    inbox.splice(inbox.indexOf(message), 1)
+
+    res.redirect('/regions/messages')
   })
 
 }
