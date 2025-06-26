@@ -251,10 +251,13 @@ module.exports = router => {
     const vaccines = organisation.vaccines
     const vaccinesEnabled = vaccines.filter((vaccine) => vaccine.status === "enabled")
 
+    const messages = res.locals.currentRegion.inbox.filter((message) => message.fromOrganisationId === id)
+
     res.render('regions/organisation', {
       organisation,
       users,
-      vaccinesEnabled
+      vaccinesEnabled,
+      messages
     })
   })
 
