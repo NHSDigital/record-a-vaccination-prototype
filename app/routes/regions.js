@@ -2,7 +2,10 @@ module.exports = router => {
 
   router.get('/regions', (req, res) => {
     const data = req.session.data
-    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61") && (["Active", "Invited", "Deactivated"].includes(organisation.status)))
+
+    const currentRegion = res.locals.currentRegion
+
+    const organisations = data.organisations.filter((organisation) => (organisation.region === currentRegion.id) && (["Active", "Invited", "Deactivated"].includes(organisation.status)))
 
     const closedOrganisationsCount = data.organisations.filter((organisation) => (organisation.region === "Y61" && organisation.status == "Closed")).length
 
@@ -13,8 +16,10 @@ module.exports = router => {
   })
 
   router.get('/regions/organisations/closed', (req, res) => {
+    const currentRegion = res.locals.currentRegion
+
     const data = req.session.data
-    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61" && organisation.status == "Closed"))
+    const organisations = data.organisations.filter((organisation) => (organisation.region === currentRegion.id && organisation.status == "Closed"))
 
     res.render('regions/closed-organisations', {
       organisations
@@ -248,7 +253,7 @@ module.exports = router => {
 
     const users = data.users.filter((user) => (user.organisations || []).find((organisation) => organisation.id === id))
 
-    const vaccines = organisation.vaccines
+    const vaccines = organisation.vaccines || []
     const vaccinesEnabled = vaccines.filter((vaccine) => vaccine.status === "enabled")
 
     const messages = res.locals.currentRegion.inbox.filter((message) => message.fromOrganisationId === id)
@@ -268,7 +273,7 @@ module.exports = router => {
     const organisation = data.organisations.find((org) => org.id === id)
     if (!organisation) { res.redirect('/regions/'); return }
 
-    const vaccines = organisation.vaccines
+    const vaccines = organisation.vaccines || []
     const vaccinesEnabled = vaccines.filter((vaccine) => vaccine.status === "enabled")
 
     res.render('regions/change-vaccines', {
@@ -286,7 +291,9 @@ module.exports = router => {
 
     const vaccinesEnabled = data.vaccinesEnabled
 
-    for (vaccine of organisation.vaccines) {
+    const vaccines = organisation.vaccines || []
+
+    for (vaccine of vaccines) {
       vaccine.status = (vaccinesEnabled.includes(vaccine.name) ? "enabled" : "disabled")
     }
 

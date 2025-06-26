@@ -15,10 +15,9 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
       <form action="/vaccines/add-batch" method="post" novalidate="true">
-
         {% set items = [] %}
 
-        {% for vaccine in (data.vaccines) %}
+        {% for vaccine in (vaccinesEnabled) %}
           {% if vaccine.products %}
             {% set productItems = [] %}
             {% for vaccineProduct in (vaccine.products) %}
@@ -45,7 +44,7 @@
 
           {% set items = (items.push({
             value: vaccine.name,
-            text: vaccine.name,
+            text: (vaccine.name | capitaliseFirstLetter),
             conditional: {
               html: conditionalHtml
             } if vaccine.products
@@ -77,6 +76,40 @@
           "text": "Continue"
         }) }}
       </form>
+
+      {% if (vaccinesDisabled | length) > 0 %}
+        {% call details({ text: "Need to add additional vaccine types?"}) %}
+          <p>If you have been commissioned to give other vaccines, select the vaccines you need.</p>
+
+          {% set requestableItems = [] %}
+          {% for vaccine in (vaccinesDisabled) %}
+            {% set requestableItems = (requestableItems.push({
+              value: vaccine.name,
+              text: (vaccine.name | capitaliseFirstLetter)
+            }), requestableItems) %}
+          {% endfor %}
+
+          <form action="/vaccines/request" method="post">
+            {{ radios({
+              name: "vaccineRequested",
+              id: "vaccine-requested",
+              fieldset: {
+                legend: {
+                  text: "Vaccine",
+                  classes: "nhsuk-fieldset__legend--s"
+                }
+              },
+              items: requestableItems
+            }) }}
+
+            {{ button({
+              text: "Send request",
+              classes: "nhsuk-button--secondary"
+            }) }}
+          </form>
+
+        {% endcall %}
+      {% endif %}
 
     </div>
   </div>

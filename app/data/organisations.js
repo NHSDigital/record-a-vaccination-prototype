@@ -710,6 +710,13 @@ module.exports = [
     },
     "status": "Active",
     "type": "NHS Trust",
+    region: "Y62",
+    vaccines: [
+      {name: "RSV", status: "enabled"},
+      {name: "COVID-19", status: "enabled"},
+      {name: "pertussis", status: "disabled"},
+      {name: "flu", status: "enabled"}
+    ],
     sites: [
       {
         id: "RW3NM",
@@ -1852,12 +1859,18 @@ module.exports = [
   },
   {
     "id": "RMA",
-    "name": "Greater manchester ambulance service NHS trust",
+    "name": "Greater Manchester Ambulance Service NHS trust",
     "address": {
       "line1": "156-158 bury old road",
       "town": "Manchester",
       "postcode": "M45 6AQ"
     },
+    vaccines: [
+      {name: "RSV", status: "enabled"},
+      {name: "COVID-19", status: "enabled"},
+      {name: "pertussis", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     "status": "Active",
     "type": "NHS Trust",
     "region": "Y62"
@@ -2711,12 +2724,18 @@ module.exports = [
   },
   {
     "id": "R0A",
-    "name": "Manchester university NHS Foundation Trust",
+    "name": "Manchester University NHS Foundation Trust",
     "address": {
       "line1": "Cobbett house",
       "town": "Manchester",
       "postcode": "M13 9WL"
     },
+    vaccines: [
+      {name: "RSV", status: "enabled"},
+      {name: "COVID-19", status: "enabled"},
+      {name: "pertussis", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     "status": "Active",
     "type": "NHS Trust",
     "region": "Y62"
@@ -3023,7 +3042,7 @@ module.exports = [
       {name: "flu", status: "enabled"}
     ],
     "type": "NHS Trust",
-    "region": "Y61"
+    "region": "Y62"
   },
   {
     "id": "RMY",
@@ -3200,16 +3219,22 @@ module.exports = [
     },
     "status": "Active",
     "type": "NHS Trust",
-    "region": "Y62"
+    "region": "Y61"
   },
   {
     "id": "RES",
-    "name": "North mersey community NHS trust",
+    "name": "North Mersey Community NHS trust",
     "address": {
       "line1": "Rathbone hospital",
       "town": "Liverpool",
       "postcode": "L9 7JP"
     },
+    vaccines: [
+      {name: "RSV", status: "enabled"},
+      {name: "COVID-19", status: "enabled"},
+      {name: "pertussis", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     "status": "Active",
     "type": "NHS Trust",
     "region": "Y62"
@@ -4134,7 +4159,7 @@ module.exports = [
       {name: "flu", status: "enabled"}
     ],
     "type": "NHS Trust",
-    "region": "Y61"
+    "region": "Y62"
   },
   {
     "id": "RLZ",
@@ -6077,7 +6102,7 @@ module.exports = [
       {name: "flu", status: "enabled"}
     ],
     status: 'Active',
-    "region": "Y61"
+    "region": "Y62"
   },
   {
     id: 'FA02S',
@@ -6089,7 +6114,7 @@ module.exports = [
     },
     type: 'Community Pharmacy',
     status: 'Active',
-    region: "Y61",
+    region: "Y62",
     appliedOn: "2015-04-12",
     vaccines: [
       {name: "RSV", status: "disabled"},
@@ -6114,7 +6139,7 @@ module.exports = [
     },
     type: 'Community Pharmacy',
     status: 'Applied',
-    region: "Y61",
+    region: "Y62",
     appliedOn: "2015-04-15",
     application: {
       firstName: "James",
@@ -6133,7 +6158,7 @@ module.exports = [
     },
     type: 'Community Pharmacy',
     status: 'Active',
-    region: "Y61",
+    region: "Y62",
     appliedOn: "2015-04-13",
     vaccines: [
       {name: "RSV", status: "disabled"},
@@ -6158,7 +6183,7 @@ module.exports = [
     },
     type: 'Community Pharmacy',
     status: 'Applied',
-    region: "Y61",
+    region: "Y62",
     appliedOn: "2015-04-02",
     application: {
       firstName: "Elizabeth",
