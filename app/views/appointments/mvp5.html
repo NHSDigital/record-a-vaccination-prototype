@@ -9,9 +9,8 @@
   {{ backLink({
     href: "/appointments/index4"
   }) }}
-  </style>
-
-
+ {% endblock %}
+{% block content %}
 
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
@@ -31,14 +30,6 @@
           },
     text: "Back"
   }) }}
-{% endblock %}
-
-
-{% block content %}
-
-<!-- <p class="nhsuk-body-l">This example shows only the <mark>NHS number</mark>, and <mark>Date</mark> used.</p> -->
-
-
 
   <style>
     .jointTopBot {
@@ -50,6 +41,7 @@
             text: firstNameError
           } if firstNameError
         }) }}
+  </style>
         <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
           Search list
         </button>
