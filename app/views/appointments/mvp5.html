@@ -8,19 +8,6 @@
 {% block beforeContent %}
   {{ backLink({
     href: "/appointments/index4",
-    text: "Back"
-  }) }}
-{% endblock %}
-
-
-{% block content %}
-
-<!-- <p class="nhsuk-body-l">This example shows only the <mark>NHS number</mark>, and <mark>Date</mark> used.</p> -->
-
-
-
-  <style>
-    .jointTopBot {
       border-top: 4px solid #768692;
     }
     .jointMid {
@@ -36,7 +23,9 @@
 
       <div class="nhsuk-caption-l"></div>
 
-        <h1 class="nhsuk-heading-l">St Mary's Hospital</h1>
+        <h1 class="nhsuk-heading-l">St Mary's Hospital list</h1>
+
+        <p>To record a vaccination, search for the person in the list and select the Record link next to their details.</p>
 
         <p><a href="/appointments/add-nhs-numbers">Add more NHS numbers</a>&nbsp&nbsp&nbsp&nbsp<a href="/appointments/delete">Delete list</a></p>
 
@@ -45,6 +34,19 @@
           label: {
             text: "Search for name or NHS number"
           },
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+
+<!-- <p class="nhsuk-body-l">This example shows only the <mark>NHS number</mark>, and <mark>Date</mark> used.</p> -->
+
+
+
+  <style>
+    .jointTopBot {
           id: "firstName",
           name: "firstName",
           value: data.firstName,
