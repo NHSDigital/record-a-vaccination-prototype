@@ -21,15 +21,26 @@
 
         <p>To record a vaccination, search for the person in the list and select the Record link next to their details.</p>
 
-        <p><a href="/appointments/add-nhs-numbers">Add more NHS numbers</a>&nbsp&nbsp&nbsp&nbsp<a href="/appointments/delete">Delete list</a></p>
+        <p><a href="/appointments/add-nhs-numbers">Add more NHS numbers</a></p>
 
 
-        {{ input({
-          label: {
-            text: "Search for name or NHS number"
-          },
-    text: "Back"
-  }) }}
+        <div class="nhsuk-u-margin-top-5">
+          <form action="/user-admin" method="get" novalidate>
+            <div class="nhsuk-form-group nhsuk-u-margin-bottom-0">
+              <label class="nhsuk-label" for="q">
+                Search for name or NHS number
+              </label>
+              <input class="nhsuk-input nhsuk-input--width-20" id="q" name="q" type="search" value="{{ q }}">
+
+              {{ button({
+                text: "Search",
+                classes: "nhsuk-button--secondary nhsuk-u-margin-left-2 app-button--small nhsuk-u-margin-bottom-0"
+              })}}
+            </div>
+          </form>
+        </div>
+
+
 
   <style>
     .jointTopBot {
@@ -42,51 +53,48 @@
           } if firstNameError
         }) }}
   </style>
-        <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
-          Search list
-        </button>
 
-        <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
+
+        <!-- <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
           <ul class="x-govuk-secondary-navigation__list">
             <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
               <a class="x-govuk-secondary-navigation__link" href="/appointments/mvp5" aria-current=page>
-                Patients (100)
+                To be vaccinated (100)
               </a>
             </li>
             <li class="x-govuk-secondary-navigation__list-item ">
               <a class="x-govuk-secondary-navigation__link" href="/appointments/mvp6">
-                Completed (3)
+                Done (3)
               </a>
             </li>
 
 
           </ul>
-        </nav>
+        </nav> -->
 
+<!--
+        <div class="nhsuk-u-margin-top-5">
+          <form action="/user-admin" method="get" novalidate>
+            <div class="nhsuk-form-group nhsuk-u-margin-bottom-0">
+              <label class="nhsuk-label" for="q">
+                Search for name or NHS number
+              </label>
+              <input class="nhsuk-input nhsuk-input--width-20" id="q" name="q" type="search" value="{{ q }}">
 
-<br>
-
-
-
-
-  <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
-    <ul class="x-govuk-secondary-navigation__list">
-      <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
-        <a class="x-govuk-secondary-navigation__link" href="/appointments/mvp5" aria-current=page>
-          List of patients (100)
-        </a>
-      </li>
-      <li class="x-govuk-secondary-navigation__list-item ">
-        <a class="x-govuk-secondary-navigation__link" href="/appointments/mvp7">
-          Completed (0)
-        </a>
-      </li>
-
-
-    </ul>
-  </nav>
+              {{ button({
+                text: "Search",
+                classes: "nhsuk-button--secondary nhsuk-u-margin-left-2 app-button--small nhsuk-u-margin-bottom-0"
+              })}}
+            </div>
+          </form>
+        </div> -->
 
 <br>
+
+    </div>
+  </div>
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
 
       <table class="nhsuk-table-responsive" role="table">
         <caption class="nhsuk-table__caption"></caption>
@@ -105,10 +113,15 @@
                     Date of birth
                   </th>
                   <th role="columnheader" class="" scope="col">
+                    Vaccines given
+                  </th>
+
+                  <th role="columnheader" class="" scope="col">
                   </th>
                   <th role="columnheader" class="" scope="col">
 
                   </th>
+
                   <th role="columnheader" class="" scope="col">
 
                   </th>
@@ -129,6 +142,10 @@
 
           <td class="nhsuk-table__cell">
             21 April 1954
+          </td>
+
+          <td class="nhsuk-table__cell">
+            COVID-19
           </td>
 
           <td class="nhsuk-table__cell">
@@ -153,6 +170,10 @@
             </td>
 
             <td class="nhsuk-table__cell">
+              Flu
+            </td>
+
+            <td class="nhsuk-table__cell">
                 <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
             </td>
             <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
@@ -171,6 +192,9 @@
 
             <td class="nhsuk-table__cell">
               23 May 1976
+            </td>
+            <td class="nhsuk-table__cell">
+              COVID-19, Pertussis
             </td>
             <td class="nhsuk-table__cell">
                 <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
@@ -193,6 +217,10 @@
             <td class="nhsuk-table__cell">
               9 August 2006
             </td>
+
+            <td class="nhsuk-table__cell">
+
+            </td>
             <td class="nhsuk-table__cell">
                 <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
             </td>
@@ -212,6 +240,10 @@
 
             <td class="nhsuk-table__cell">
               16 May 2006
+            </td>
+            <td class="nhsuk-table__cell">
+              COVID-19, Pertussis, RSV, Flu
+
             </td>
             <td class="nhsuk-table__cell">
                 <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
@@ -235,6 +267,9 @@
               2 May 2002
             </td>
             <td class="nhsuk-table__cell">
+
+            </td>
+            <td class="nhsuk-table__cell">
                 <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
             </td>
             <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
@@ -253,6 +288,9 @@
 
               <td class="nhsuk-table__cell">
                 11 June 1956
+              </td>
+              <td class="nhsuk-table__cell">
+
               </td>
               <td class="nhsuk-table__cell">
                 <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
@@ -277,6 +315,9 @@
                 14 November 1994
               </td>
               <td class="nhsuk-table__cell">
+
+              </td>
+              <td class="nhsuk-table__cell">
                 <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
             </td>
               <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
@@ -295,6 +336,9 @@
 
                 <td class="nhsuk-table__cell">
                   3 March 1958
+                </td>
+            <td class="nhsuk-table__cell">
+
                 </td>
                 <td class="nhsuk-table__cell">
                     <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
@@ -318,6 +362,9 @@
                     2 March 1984
                   </td>
                   <td class="nhsuk-table__cell">
+
+                  </td>
+                  <td class="nhsuk-table__cell">
                     <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
                 </td>
                   <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
@@ -339,6 +386,9 @@
                       9 September 199
                     </td>
                     <td class="nhsuk-table__cell">
+
+                    </td>
+                    <td class="nhsuk-table__cell">
                         <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
                     </td>
                     <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
@@ -356,7 +406,10 @@
                       </td>
 
                       <td class="nhsuk-table__cell">
-                        10 Janurary 2000
+                        10 January 2000
+                      </td>
+                      <td class="nhsuk-table__cell">
+
                       </td>
                       <td class="nhsuk-table__cell">
                         <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
@@ -378,6 +431,9 @@
 
                         <td class="nhsuk-table__cell">
                           4 February 1980
+                        </td>
+                        <td class="nhsuk-table__cell">
+
                         </td>
                         <td class="nhsuk-table__cell">
                             <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
@@ -403,6 +459,9 @@
                           20 May 1979
                         </td>
                         <td class="nhsuk-table__cell">
+
+                        </td>
+                        <td class="nhsuk-table__cell">
                             <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
                         </td>
                         <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
@@ -425,6 +484,9 @@
 
           <td class="nhsuk-table__cell">
             13 October 2002           </td>
+            <td class="nhsuk-table__cell">
+
+            </td>
           <td class="nhsuk-table__cell">
             <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
           </td>
@@ -444,6 +506,9 @@
 
       <td class="nhsuk-table__cell">
         13 July 1983
+      </td>
+      <td class="nhsuk-table__cell">
+
       </td>
       <td class="nhsuk-table__cell">
         <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
@@ -466,6 +531,9 @@
 <td class="nhsuk-table__cell">
   13 October 2002
 </td>
+            <td class="nhsuk-table__cell">
+
+</td>
 <td class="nhsuk-table__cell">
     <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
 </td>
@@ -485,6 +553,9 @@
 
 <td class="nhsuk-table__cell">
   6 January 1976
+</td>
+            <td class="nhsuk-table__cell">
+
 </td>
 <td class="nhsuk-table__cell">
     <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
@@ -506,6 +577,9 @@
 <td class="nhsuk-table__cell">
   11 December 1987
 </td>
+            <td class="nhsuk-table__cell">
+
+</td>
 <td class="nhsuk-table__cell">
     <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
 </td>
@@ -523,8 +597,12 @@
     9525885255
 </td>
 
+
 <td class="nhsuk-table__cell">
   4 June 1999
+</td>
+            <td class="nhsuk-table__cell">
+
 </td>
 <td class="nhsuk-table__cell">
     <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
@@ -582,6 +660,9 @@
             </a>
           </div>
         </nav>
+
+        <p><a href="/appointments/delete">Delete list</a></p>
+
 
 
     </div>
