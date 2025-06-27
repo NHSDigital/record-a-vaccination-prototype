@@ -14,6 +14,8 @@
 
       <h1 class="nhsuks-heading-xl">Edit batch</h1>
 
+      <p>Your changes will only apply to vaccinations saved in future.</p>
+
       <form action="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/update" method="post" novalidate="true">
 
         {{ input({
