@@ -34,7 +34,7 @@
           {% if (vaccinesEnabled | length) == 4 %}
             all
           {% else %}
-            {{ vaccinesEnabled | pluck("name") | formatList }}
+            {{ vaccinesEnabled | sort(false, false, "name") | pluck("name") | formatList }}
           {% endif %}
         vaccinations.
           <a href="/regions/organisations/{{organisation.id}}/change-vaccines">Change <span class="nhsuk-u-visually-hidden">vaccines available</span></a>
