@@ -38,16 +38,16 @@
 
         <h1 class="nhsuk-heading-l">St Mary's Hospital</h1>
 
-        <p><a href="/appointments/date">Add NHS numbers</a></p>
+        <p>Add a date or vaccine to apply to all patients on your list and save time when you Record.</p>
 
 
         <p>11 July 2025 <br><a href="/appointments/date">Change</a></p>
 
+        <p>COVID-19<br><a href="/appointments/date">Change</a></p>
 
-        <p>RSV<br><a href="/appointments/date">Change</a></p>
+        <p><a href="/appointments/add-nhs-numbers">Add NHS numbers</a></p> 
 
-
-        <p><a href="/appointments/eligibility">Delete list</a></p>
+        <p><a href="/appointments/add-nhs-numbers">Delete list</a></p> 
 
 
         {{ input({
@@ -67,13 +67,27 @@
         </button>
 
 
-<br>
-        <p><a href="/appointments/mvp7">View list of 30 patients</a></p>
 
+        <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
+          <ul class="x-govuk-secondary-navigation__list">
+            
+            <li class="x-govuk-secondary-navigation__list-item ">
+              <a class="x-govuk-secondary-navigation__link" href="/appointments/mvp5">
+                Patients (100)
+              </a>
+            </li>
+            <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
+              <a class="x-govuk-secondary-navigation__link" href="/appointments/mvp6" aria-current=page>
+                Completed (3)
+              </a>  
+          </ul>
+        </nav>
+
+<br>
 
 
       <table class="nhsuk-table-responsive" role="table">
-        <caption class="nhsuk-table__caption">3 patients recorded</caption>
+        <caption class="nhsuk-table__caption"></caption>
         <thead class="nhsuk-table__head" role="rowgroup">
             <thead role="rowgroup" class="nhsuk-table__head">
                 <tr role="row">
@@ -110,7 +124,7 @@
               16 Anderson Rd, Beeston
           </td>
           <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-            <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record another vaccination</a>
+            <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record another vaccine</a>
         </td>
             </tr>
 
@@ -128,7 +142,7 @@
                 Leeds
             </td>
             <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record another vaccination</a>
+                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record another vaccine</a>
             </td>
               </tr>
 
@@ -145,7 +159,7 @@
                 92-93 The Calls, Leeds    
             </td>
             <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record another vaccination</a>
+                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record another vaccine</a>
             </td>
             </tr>
 

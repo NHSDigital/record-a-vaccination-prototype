@@ -38,14 +38,17 @@
 
         <h1 class="nhsuk-heading-l">St Mary's Hospital</h1>
 
-        <p><a href="/appointments/add-nhs-numbers">Add NHS numbers</a></p>
+        <p>Add a date or vaccine to apply to all patients on your list and save time when you Record.</p>
 
-        <p><a href="/appointments/add">Add date</a></p>  
 
-        <p><a href="/appointments/vaccine">Add vaccine</a></p>  
+        <p><a href="/appointments/add">Add a date</a></p>  
 
-        <p><a href="/appointments/delete">Delete list</a></p>
-        
+        <p><a href="/appointments/vaccine">Add a vaccine</a></p>   
+
+        <p><a href="/appointments/vaccine">Add NHS numbers</a></p>   
+
+        <p><a href="/appointments/vaccine">Delete list</a></p>   
+
 
         {{ input({
           label: {
@@ -63,9 +66,30 @@
           Search list
         </button>
 
+        <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
+          <ul class="x-govuk-secondary-navigation__list">
+            <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
+              <a class="x-govuk-secondary-navigation__link" href="/appointments/mvp5" aria-current=page>
+                Patients (100)
+              </a>
+            </li>
+            <li class="x-govuk-secondary-navigation__list-item ">
+              <a class="x-govuk-secondary-navigation__link" href="/appointments/mvp6">
+                Completed (3)
+              </a>
+            </li>
+          
+            
+          </ul>
+        </nav>
+
+
+<br>
+
+
 
       <table class="nhsuk-table-responsive" role="table">
-        <caption class="nhsuk-table__caption">100 patients</caption>
+        <caption class="nhsuk-table__caption"></caption>
         <thead class="nhsuk-table__head" role="rowgroup">
             <thead role="rowgroup" class="nhsuk-table__head">
                 <tr role="row">
@@ -83,6 +107,10 @@
                   <th role="columnheader" class="" scope="col">
                   </th>
                   <th role="columnheader" class="" scope="col">
+                    
+                  </th>
+                  <th role="columnheader" class="" scope="col">
+                    
                   </th>
                   
                 </tr>
@@ -102,6 +130,7 @@
           <td class="nhsuk-table__cell">
             21 April 1954
           </td>
+          
           <td class="nhsuk-table__cell">
             <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
           </td>
@@ -122,6 +151,7 @@
             <td class="nhsuk-table__cell">
               8 December 1959	
             </td>
+            
             <td class="nhsuk-table__cell">
                 <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
             </td>
