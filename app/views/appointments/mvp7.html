@@ -36,528 +36,67 @@
 
       <div class="nhsuk-caption-l"></div>
 
-      <h1 class="nhsuk-heading-l">St Mary's Hospital</h1>
+        <h1 class="nhsuk-heading-l">St Mary's Hospital</h1>
 
-      <p><a href="/appointments/date">Add NHS numbers</a></p>
-
-
-      <p>11 July 2025 <br><a href="/appointments/add">Change</a></p>
+        <p><a href="/appointments/add-nhs-numbers">Add more NHS numbers</a>&nbsp&nbsp&nbsp&nbsp<a href="/appointments/delete">Delete list</a></p>
 
 
-      <p>RSV<br><a href="/appointments/vaccine">Change</a></p>
+        {{ input({
+          label: {
+            text: "Search for name or NHS number"
+          },
+          id: "firstName",
+          name: "firstName",
+          value: data.firstName,
+          classes: "nhsuk-input--width-20",
+          errorMessage: {
+            text: firstNameError
+          } if firstNameError
+        }) }}
+        <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+          Search list
+        </button>
+
+
+
+  <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
+    <ul class="x-govuk-secondary-navigation__list">
+     
+      <li class="x-govuk-secondary-navigation__list-item ">
+        <a class="x-govuk-secondary-navigation__link" href="/appointments/mvp5">
+          List of patients (100)
+        </a>
+      </li>
+    
+      <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
+        <a class="x-govuk-secondary-navigation__link" href="/appointments/mvp7" aria-current=page>
+          Completed (0)
+        </a>
+      </li>
+     
+    
       
-
-      <p><a href="/appointments/eligibility">Delete list</a></p>
-
-      {{ input({
-        label: {
-          text: "Search for name or NHS number"
-        },
-        id: "firstName",
-        name: "firstName",
-        value: data.firstName,
-        classes: "nhsuk-input--width-20",
-        errorMessage: {
-          text: firstNameError
-        } if firstNameError
-      }) }}
-      <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
-        Search list
-      </button>
-
-
-
-
+    </ul>
+  </nav>
+        
 <br>
-        <p><a href="/appointments/mvp6">View list of 3 patients recorded</a></p>
-
-
 
       <table class="nhsuk-table-responsive" role="table">
-        <caption class="nhsuk-table__caption">30 patients</caption>
+        <caption class="nhsuk-table__caption">0 patients completed</caption>
         <thead class="nhsuk-table__head" role="rowgroup">
             <thead role="rowgroup" class="nhsuk-table__head">
-                <tr role="row">
-      
-                  
-                  <th role="columnheader" class="" scope="col">
-                    Name
-                  </th>
-                  <th role="columnheader" class="" scope="col">
-                    Date of birth
-                  </th>
-                  <th role="columnheader" class="" scope="col">
-                    Address
-                  </th>
-                  <th role="columnheader" class="" scope="col">
-                  </th>
-                  <th role="columnheader" class="" scope="col">
-                  </th>
-                  
-                </tr>
-        </thead>
-
-        <tbody class="nhsuk-table__body">
-              
-          <tr role="row" class="nhsuk-table__row">
-            <td class="nhsuk-table__cell">
-                Adam Aarrons
-          </td>
-          
-            <td class="nhsuk-table__cell">
-              21 April 1954
-          </td>
-          
-          <td class="nhsuk-table__cell">
-              16 Anderson Rd, Beeston
-          </td>
-          <td class="nhsuk-table__cell">
-            <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-          </td>
-          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-            <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove
-          </td> 
-            </tr>
-
-            <tr role="row" class="nhsuk-table__row">
-              <td class="nhsuk-table__cell">
-                Alex Aarrons
-            </td>
-            
-              <td class="nhsuk-table__cell">
-                8 December 1959	
-            </td>
-            
-            <td class="nhsuk-table__cell">
-                73 Roman Rd,
-                Leeds
-            </td>
-            <td class="nhsuk-table__cell">
-                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-            </td>
-            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-            </td> 
-              </tr>
-
-              <tr role="row" class="nhsuk-table__row">
-                <td class="nhsuk-table__cell">
-                    Ben Benson
-            </td>
-
-                <td class="nhsuk-table__cell">
-                  23 May 1976 
-            </td>
-
-            <td class="nhsuk-table__cell">
-                92-93 The Calls, Leeds    
-            </td>
-            <td class="nhsuk-table__cell">
-                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-            </td>
-            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-            </td> 
-            </tr>
-
-
-            <tr role="row" class="nhsuk-table__row">
-              <td class="nhsuk-table__cell">
-                  Brian Briggs
-            </td>
-            
-              <td class="nhsuk-table__cell">
-                9 August 2006
-            </td>
-            
-            <td class="nhsuk-table__cell">
-                 44 Mellor drive, Meanwood
-            </td>
-            <td class="nhsuk-table__cell">
-                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-            </td>
-            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-            </td> 
-              </tr>
-
-            <tr role="row" class="nhsuk-table__row">
-              <td class="nhsuk-table__cell">
-                  Christin Cuthbert
-            </td>
-            
-              <td class="nhsuk-table__cell">
-                16 May 2006
-            </td>
-            
-            <td class="nhsuk-table__cell">
-                124 Moss Lane, Leeds
-            </td>
-            <td class="nhsuk-table__cell">
-                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-            </td>
-            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-            </td> 
-              </tr>
-
-
-            <tr role="row" class="nhsuk-table__row">
-              <td class="nhsuk-table__cell">
-                  Collette Carlisle
-            </td>
-            
-              <td class="nhsuk-table__cell">
-                2 May 2002
-            </td>
-            
-            <td class="nhsuk-table__cell">
-                24 Acre Drive, Leeds
-            </td>
-            <td class="nhsuk-table__cell">
-                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-            </td>
-            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-              <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-            </td> 
-              </tr>
-
-              <tr role="row" class="nhsuk-table__row">
-                <td class="nhsuk-table__cell">
-                Daniella Davenport
-              </td>
-              
-                <td class="nhsuk-table__cell">
-                  11 June 1956
-              </td>
-              
-              <td class="nhsuk-table__cell">
-                  9 Yale Close, York
-              </td>
-              <td class="nhsuk-table__cell">
-                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-            </td>
-              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-              </td> 
-                </tr>
-
-
-
-              <tr role="row" class="nhsuk-table__row">
-                <td class="nhsuk-table__cell">
-                    Denis Daniels
-              </td>
-              
-                <td class="nhsuk-table__cell">
-                  14 November 1994
-              </td>
-              
-              <td class="nhsuk-table__cell">
-                  198 Lovell Drive, Leeds
-              </td>
-              <td class="nhsuk-table__cell">
-                <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-            </td>
-              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-              </td> 
-                </tr>
-
-                <tr role="row" class="nhsuk-table__row">
-                  <td class="nhsuk-table__cell">
-                     Elle Ellison
-                </td>
-                
-                  <td class="nhsuk-table__cell">
-                    3 March 1958
-                </td>
-                
-                <td class="nhsuk-table__cell">
-                    4 Park Lane, Leeds
-                </td>
-                <td class="nhsuk-table__cell">
-                    <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-                </td>
-                <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                  <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-                </td> 
-                  </tr>
-
-                  <tr role="row" class="nhsuk-table__row">
-                    <td class="nhsuk-table__cell">
-                      Fraser Fredricks
-
-                  </td>
-                  
-                    <td class="nhsuk-table__cell">
-                      2 March 1984
-                  </td>
-                  
-                  <td class="nhsuk-table__cell">
-                      1 The Avenue, Leeds
-                  </td>
-                  <td class="nhsuk-table__cell">
-                    <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-                </td>
-                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                    <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-                  </td> 
-                    </tr>
-  
-
-                    <tr role="row" class="nhsuk-table__row">
-                      <td class="nhsuk-table__cell">
-                          Greg Gregson
-                    </td>
-                    
-                      <td class="nhsuk-table__cell">
-                        9 September 1999
-                    </td>
-                    
-                    <td class="nhsuk-table__cell">
-                        99 Ings Drive, Leeds
-                    </td>
-                    <td class="nhsuk-table__cell">
-                        <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-                    </td>
-                    <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                      <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-                    </td> 
-                      </tr>
-
-                      <tr role="row" class="nhsuk-table__row">
-                        <td class="nhsuk-table__cell">
-                             Harriet Harrison 
-                      </td>
-                      
-                        <td class="nhsuk-table__cell">
-                          10 Janurary 2000
-                      </td>
-                      
-                      <td class="nhsuk-table__cell">
-                          4a The Flats, Bradford
-                      </td>
-                      <td class="nhsuk-table__cell">
-                        <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-                    </td>
-                      <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                        <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-                      </td> 
-                        </tr>
-
-
-                        <tr role="row" class="nhsuk-table__row">
-                          <td class="nhsuk-table__cell">
-                              India Illingworth
-                        </td>
-                        
-                          <td class="nhsuk-table__cell">
-                            4 February 1980
-                        </td>
-                        
-                        <td class="nhsuk-table__cell">
-                            Jack Jacobs
-                        </td>
-                        <td class="nhsuk-table__cell">
-                            <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-                        </td>
-                        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                          <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-                        </td> 
-                          </tr>
-
-
-
-
-                        <tr role="row" class="nhsuk-table__row">
-                          <td class="nhsuk-table__cell">
-                              Katehrine Kitson 
-                        </td>
-                        
-                          <td class="nhsuk-table__cell">
-                            20 May 1979
-                        </td>
-                        
-                        <td class="nhsuk-table__cell">
-                            42 Wentworth Place
-                        </td>
-                        <td class="nhsuk-table__cell">
-                            <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-                        </td>
-                        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                          <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-                        </td> 
-                          </tr>
-
-
-        
-
-          <tr role="row" class="nhsuk-table__row">
-            <td class="nhsuk-table__cell">
-                Luke Law
-          </td>
-          
-            <td class="nhsuk-table__cell">
-              13 October 2002      
-
-          </td>
-          
-          <td class="nhsuk-table__cell">
-            56 Birkett Road          </td>
-          <td class="nhsuk-table__cell">
-            <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-          </td>
-          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-            <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-          </td> 
-            </tr>
-
-        <tr role="row" class="nhsuk-table__row">
-          <td class="nhsuk-table__cell">
-              Lucinda Lesley
-      </td>
-      
-          <td class="nhsuk-table__cell">
-            13 July 1983
-      </td>
-      
-      <td class="nhsuk-table__cell">
-        Old Mill House, Shrawley     
-      </td>
-      <td class="nhsuk-table__cell">
-        <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-    </td>
-      <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-        <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-      </td> 
-  </tr>
-
-
-  <tr role="row" class="nhsuk-table__row">
-    <td class="nhsuk-table__cell">
-        Michael Miller
-</td>
-
-    <td class="nhsuk-table__cell">
-      13 October 2002
-</td>
-
-<td class="nhsuk-table__cell">
-  49C Howards Thicket    
-</td>
-<td class="nhsuk-table__cell">
-    <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-</td>
-<td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-  <a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-</td> 
-</tr>
-
-<tr role="row" class="nhsuk-table__row">
-  <td class="nhsuk-table__cell">
-      Nick Nolan 
-</td>
-
-  <td class="nhsuk-table__cell">
-    6 January 1976
-</td>
-
-<td class="nhsuk-table__cell">
-  9 Stowe Close 
-</td>
-<td class="nhsuk-table__cell">
-    <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-</td>
-<td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-<a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-</td> 
-</tr>
-
-<tr role="row" class="nhsuk-table__row">
-  <td class="nhsuk-table__cell">
-       Oliver Osmond
-</td>
-
-  <td class="nhsuk-table__cell">
-    11 December 1987
-</td>
-
-<td class="nhsuk-table__cell">
-  105 Western Road
-</td>
-<td class="nhsuk-table__cell">
-    <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-</td>
-<td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-<a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-</td> 
-</tr>
-
-<tr role="row" class="nhsuk-table__row">
-  <td class="nhsuk-table__cell">
-      Peter Parker
-</td>
-
-  <td class="nhsuk-table__cell">
-    4 June 1999
-</td>
-
-<td class="nhsuk-table__cell">
-  3 Peelers Court
-</td>
-<td class="nhsuk-table__cell">
-    <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record</a>
-</td>
-<td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-<a class="nhsuk-link" href="/record-vaccinations/patient-history">Remove</a>
-</td> 
-</tr>
+             
 
          
 
           </tbody>
         </table>
 
-
-
-        <nav class="govuk-pagination" aria-label="Pagination">
-          <div class="govuk-pagination__prev">
-            <a class="govuk-link govuk-pagination__link" href="#" rel="prev">
-              <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
-                <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
-              </svg>
-              <span class="govuk-pagination__link-title">
-                Previous<span class="govuk-visually-hidden"> page</span>
-              </span>
-            </a>
-          </div>
-          <ul class="govuk-pagination__list">
-            <li class="govuk-pagination__item govuk-pagination__item--current">
-              <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1">
-                1
-              </a>
-            </li>
-            <li class="govuk-pagination__item">
-              <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2" aria-current="page">
-                2
-              </a>
-            </li>
-           
-          </ul>
-          <div class="govuk-pagination__next">
-            <a class="govuk-link govuk-pagination__link" href="#" rel="next">
-              <span class="govuk-pagination__link-title">
-                Next<span class="govuk-visually-hidden"> page</span>
-              </span>
-              <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
-                <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
-              </svg>
-            </a>
-          </div>
-        </nav>
-
        
+
+
+
+
 
     </div>
   </div>
