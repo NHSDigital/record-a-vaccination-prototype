@@ -4,14 +4,6 @@
 
 {% set currentSection = "vaccinate" %}
 
-{% block beforeContent %}
-  {% if (data.vaccine === "Flu" or data.vaccine == "COVID-19") %}
-    {% set backLinkHref = "/record-vaccinations/location" %}
-  {% else %}
-    {% set backLinkHref = "/record-vaccinations/eligibility" %}
-  {% endif %}
-  {{ backLink({ href: backLinkHref }) }}
-{% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -26,127 +18,6 @@
 
       <form action="/record-vaccinations/answer-patient-nhs-number-known" method="post" novalidate>
 
-
-        <dl class="nhsuk-summary-list">
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
-      Date
-    </dt>
-    <dd class="nhsuk-summary-list__value">
-        26 July 2025
-    </dd>
-    <dd class="nhsuk-summary-list__actions">
-      <a href="#">
-        Change<span class="nhsuk-u-visually-hidden"> date</span>
-      </a>
-    </dd>
-  </div>
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
-      Vaccine
-    </dt>
-    <dd class="nhsuk-summary-list__value">
-      COVID-19
-    </dd>
-    <dd class="nhsuk-summary-list__actions">
-      <a href="#">
-        Change<span class="nhsuk-u-visually-hidden"> vaccine</span>
-      </a>
-    </dd>
-  </div>
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
-      Batch
-    </dt>
-    <dd class="nhsuk-summary-list__value">
-      73 Roman Rd<br>Leeds<br> LS2 5ZN
-    </dd>
-    <dd class="nhsuk-summary-list__actions">
-      <a href="#">
-        Change<span class="nhsuk-u-visually-hidden"> contact information</span>
-      </a>
-    </dd>
-  </div>
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
-      Contact details
-    </dt>
-    <dd class="nhsuk-summary-list__value">
-      <p>07700 900362</p>
-      <p>karen.francis@example.com</p>
-    </dd>
-    <dd class="nhsuk-summary-list__actions">
-      <a href="#">
-        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
-      </a>
-    </dd>
-  </div>
-</dl>
-
-
-<div class="nhsuk-inset-text">
-  <span class="nhsuk-u-visually-hidden">Information: </span>
-
-  <dl class="nhsuk-summary-list">
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
-      Date
-    </dt>
-    <dd class="nhsuk-summary-list__value">
-      26 June 2026
-    </dd>
-    <dd class="nhsuk-summary-list__actions">
-      <a href="#">
-        Change<span class="nhsuk-u-visually-hidden"> date</span>
-      </a>
-    </dd>
-  </div>
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
-      Vaccine
-    </dt>
-    <dd class="nhsuk-summary-list__value">
-      COVID-19<br>Corminarty 30 JN.1
-    </dd>
-    <dd class="nhsuk-summary-list__actions">
-      <a href="#">
-        Change<span class="nhsuk-u-visually-hidden"> vaccine</span>
-      </a>
-    </dd>
-  </div>
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
-      Batch
-    </dt>
-    <dd class="nhsuk-summary-list__value">
-      4844987<br>Expires 4 October 2025
-    </dd>
-    <dd class="nhsuk-summary-list__actions">
-      <a href="#">
-        Change<span class="nhsuk-u-visually-hidden"> batch</span>
-      </a>
-    </dd>
-  </div>
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
-      Contact details
-    </dt>
-    <dd class="nhsuk-summary-list__value">
-      <p>07700 900362</p>
-      <p>karen.francis@example.com</p>
-    </dd>
-    <dd class="nhsuk-summary-list__actions">
-      <a href="#">
-        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
-      </a>
-    </dd>
-  </div>
-</dl>
-
-  <p>If you're no longer using these details <a href="https://yellowcard.mhra.gov.uk/" title="External website">clear and start again</a>.</p>
-
-
-</div>
 
         {% set nhsNumberHtml %}
 
@@ -196,9 +67,99 @@
           ]
         }) }}
 
+
+
+
         {{ button({
           text: "Continue"
         })}}
+
+        <details class="nhsuk-details">
+          <summary class="nhsuk-details__summary">
+            <span class="nhsuk-details__summary-text">
+              You are applying the following COVID-19 vaccination details
+            </span>
+          </summary>
+          <div class="nhsuk-details__text">
+        
+
+
+  <dl class="nhsuk-summary-list">
+    <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+        Date
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+        26 June 2026
+      </dd>
+    </div>
+    <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+        Vaccine
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+        <p>COVID-19</p>
+        <p>Corminarty 30 JN.1</p>
+      </dd>
+    </div>
+    <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+        Batch
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+        <p>4844987</p>
+        <p>Expires 4 October 2025</p>
+      </dd>
+    </div>
+    <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+        Team
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+        <p>St Mary’s Hospital</p>
+      </dd>
+    </div>
+    <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+        Vaccinator
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+        <p>Jane Doe</p>
+      </dd>
+    </div>
+    <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+        Location
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+        <p>Hospital Hub</p>
+      </dd>
+    </div>
+    <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+        Eligibility
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+        <p>Healthcare worker</p>
+      </dd>
+    </div>
+
+
+  </dl>
+
+        
+</div>
+</details>
+
+
+
+<p>To record vaccination from the beginning <a href="/reports">delete and start again</a>.</p>
+
+
+
+
+
+     
       </form>
 
     </div>
