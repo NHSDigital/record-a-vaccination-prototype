@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% set pageName = "Check and send" %}
+{% set currentSection = "organisations" %}
 
 {% block header %}
   {% include "includes/header-logged-in-region.html" %}
@@ -34,6 +35,23 @@
                   href: "/regions/add-organisation",
                   text: "Change",
                   visuallyHiddenText: "organisation name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Vaccines"
+            },
+            value: {
+              text: (data.vaccinesEnabled | join(", "))
+            },
+            actions: {
+              items: [
+                {
+                  href: "/regions/vaccines",
+                  text: "Change",
+                  visuallyHiddenText: "vaccines enabled"
                 }
               ]
             }

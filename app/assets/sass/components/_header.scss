@@ -32,3 +32,27 @@
   padding-top: 0px;
   padding-bottom: 0px;
 }
+
+
+.app-header__navigation-item--with-count {
+  .app-count {
+    margin-left: 6px;
+    min-width: nhsuk-spacing(4);
+    padding-bottom: 3px;
+    padding-top: 5px;
+    text-decoration: none;
+    @include nhsuk-font(14, $line-height: 1);
+  }
+}
+
+.app-count {
+  background-color: rgba(0, 47, 92, 0.4);
+  border-radius: nhsuk-spacing(3);
+  color: $color_nhsuk-white;
+  display: inline-block;
+  min-width: nhsuk-spacing(5);
+  padding-left: nhsuk-spacing(2);
+  padding-right: nhsuk-spacing(2);
+  text-align: center;
+  @include nhsuk-font(16);
+}

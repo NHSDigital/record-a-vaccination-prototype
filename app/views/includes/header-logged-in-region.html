@@ -1,3 +1,5 @@
+{% set inboxCount = (currentRegion.inbox | length) %}
+
 {{ header({
   classes: "nhsuk-header--left",
   "service": {
@@ -7,6 +9,16 @@
     "showNav": "true",
     "showSearch": "false",
     "primaryLinks": [
+      {
+        url: "/regions",
+        label: "Organisations",
+      classes: ("app-header__navigation-item--current" if currentSection == "organisations")
+      },
+      {
+        url: "/regions/messages",
+        label: ("Messages <span class=\"app-count\">" + inboxCount +"</span>") | safe,
+      classes: ("app-header__navigation-item--with-count " + ("app-header__navigation-item--current" if currentSection == "messages"))
+      },
       {
         url: "#",
         label: currentUser.email,

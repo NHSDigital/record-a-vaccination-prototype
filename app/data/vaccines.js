@@ -17,7 +17,7 @@ module.exports = [
     ]
   },
   {
-    name: "Flu",
+    name: "flu",
     products: [
       {
         name: "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)"
@@ -40,7 +40,7 @@ module.exports = [
     ]
   },
   {
-    name: "Pertussis",
+    name: "pertussis",
     products: [
       {
         name: "Adacel vaccine supsension"
