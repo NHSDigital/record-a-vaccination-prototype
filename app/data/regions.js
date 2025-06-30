@@ -47,19 +47,19 @@ module.exports = [
       {
         id: "HKFFU48574",
         fromOrganisationId: "FA424",
-        vaccineRequested: "flu",
+        vaccinesRequested: ["flu"],
         sentOn: "2025-06-22"
       },
       {
         id: "PFU47263463",
         fromOrganisationId: "FA02S",
-        vaccineRequested: "pertussis",
+        vaccinesRequested: ["pertussis", "RSV"],
         sentOn: "2025-06-24"
       },
       {
         id: "OFU536369FUF",
         fromOrganisationId: "PDL93",
-        vaccineRequested: "COVID-19",
+        vaccinesRequested: ["COVID-19"],
         sentOn: "2025-06-25"
       }
     ]

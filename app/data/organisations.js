@@ -712,7 +712,7 @@ module.exports = [
     "type": "NHS Trust",
     region: "Y62",
     vaccines: [
-      {name: "RSV", status: "enabled"},
+      {name: "RSV", status: "disabled"},
       {name: "COVID-19", status: "enabled"},
       {name: "pertussis", status: "disabled"},
       {name: "flu", status: "enabled"}

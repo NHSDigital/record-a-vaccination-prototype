@@ -22,7 +22,7 @@
 
       <h1 class="nhsuk-leading-l">{{ pageName }}</h1>
 
-      <p>Request to record {{ message.vaccineRequested }}.</p>
+      <p>Request to record {{ message.vaccinesRequested | formatList }}.</p>
 
       <p>Sent on {{ message.sentOn | govukDate }}.</p>
 

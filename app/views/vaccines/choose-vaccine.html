@@ -87,9 +87,10 @@
           {% endfor %}
 
           <form action="/vaccines/request" method="post">
+
             {{ checkboxes({
-              name: "vaccineRequested",
-              id: "vaccine-requested",
+              name: "vaccinesRequested",
+              idPrefix: "vaccines-requested",
               fieldset: {
                 legend: {
                   text: "Vaccine",

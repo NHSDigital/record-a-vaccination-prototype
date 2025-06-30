@@ -72,10 +72,12 @@ module.exports = (router) => {
     const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
 
-    const vaccineRequested = currentOrganisation.vaccines
-    .find((vaccine) => vaccine.name === data.vaccineRequested)
+    const vaccinesRequested = currentOrganisation.vaccines
+    .filter((vaccine) => data.vaccinesRequested.includes(vaccine.name))
 
-    vaccineRequested.status = "requested"
+    for (vaccineRequested of vaccinesRequested) {
+      vaccineRequested.status = "requested"
+    }
 
     const region = data.regions.find((region) => region.id === currentOrganisation.region)
 
@@ -86,7 +88,7 @@ module.exports = (router) => {
     region.inbox.push({
       id: generatedId,
       fromOrganisationId: currentOrganisation.id,
-      vaccineRequested: data.vaccineRequested,
+      vaccinesRequested: data.vaccinesRequested,
       sentOn: currentDate
     })
     res.redirect('/vaccines/requested')
