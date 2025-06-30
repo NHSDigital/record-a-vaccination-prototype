@@ -13,7 +13,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-    
+
 
 
       <h1 class="nhsuk-heading-xl">Manage users</h1>
@@ -48,12 +48,12 @@
 
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-full">
-    
+
       <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
         <ul class="x-govuk-secondary-navigation__list">
           <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
             <a class="x-govuk-secondary-navigation__link" href="/user-admin/index" aria-current=page>
-              Active (102)
+              Active ({{ totalUsers }})
             </a>
           </li>
           <li class="x-govuk-secondary-navigation__list-item ">
@@ -61,200 +61,79 @@
               Deactivated (3)
             </a>
           </li>
-        
+
         </ul>
       </nav>
- 
-    
-          <table class="nhsuk-table-responsive" role="table">
 
-            <br>
+      {% if totalUsers > 0 %}
 
+      <table class="nhsuk-table nhsuk-u-margin-top-4">
+        <caption class="nhsuk-table__caption nhsuk-table__caption--m">
+          {% if q %}
+            Showing {{ totalUsers | plural("active user") }} matching {{ q }}
+          {% else %}
+            {{ totalUsers | plural("active user") }}
+          {% endif %}
+        </caption>
+        <thead role="rowgroup" class="nhsuk-table__head">
+          <tr role="row">
+            <th role="columnheader" class="app-table__header--min-width-200" scope="col">
+              Name
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Email address
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Clinician
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Permission
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Last log in
+            </th>
+            <th role="columnheader" class="app-table__header--min-width-100" scope="col">
 
-            <caption class="nhsuk-table__caption">102 Active users</caption>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="nhsuk-table__body">
+          {% for user in (users | sort(false, true, "firstName")) %}
 
+            {% set userOrganisationSettings = (user.organisations | findById(data.currentOrganisationId)) %}
 
-            <thead class="nhsuk-table__head" role="rowgroup">
-                <thead role="rowgroup" class="nhsuk-table__head">
-                    <tr role="row">
-          
-                      <th role="columnheader" class="" scope="col">
-                        Name
-                      </th>
-                      <th role="columnheader" class="" scope="col">
-                        Email
-                      </th>
-                      <th role="columnheader" class="" scope="col">
-                        Clinician
-                      </th>
-                      <th role="columnheader" class="" scope="col">
-                        Permission
-                      </th>
-                      <th role="columnheader" class="" scope="col">
-                        Last log in
-                    </th>
-                      <th role="columnheader" class="" scope="col">
-                      </th>
-                      
-                    </tr>
-            </thead>
-    
-            <tbody class="nhsuk-table__body">
-                  
-            
+            <tr class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">
+                {{ user.lastName }}, {{ user.firstName }}
+              </td>
+              <td class="nhsuk-table__cell ">{{ user.email }}</td>
+              <td class="nhsuk-table__cell ">
+                {% if userOrganisationSettings.clinician %}
+                  Yes
+               {% else %}
+                  No
+                {% endif %}
+              </td>
+              <td class="nhsuk-table__cell ">{{ userOrganisationSettings.permissionLevel }}</td>
+              <td class="nhsuk-table__cell ">Today</td>
+              <td class="nhsuk-table__cell app-table__cell--right-aligned">
+                <a href="/user-admin/users/{{ user.id }}/change-role" class="nhsuk-link">Change <span class="nhsuk-u-visually-hidden">details for {{ user.firstName }} </span></a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
 
-                <tr role="row" class="nhsuk-table__row">
-                    <td class="nhsuk-table__cell">
-                        Benson, Ben
-                  </td>
-                  
-                    <td class="nhsuk-table__cell">
-                      email.example@nhs.net
-                  </td>
-                  
-                  <td class="nhsuk-table__cell">
-                      Yes
-                  </td>
-                  <td class="nhsuk-table__cell">
-                    Administrator
-                </td>
-                  <td class="nhsuk-table__cell">
-                    Today
-                </td>
-                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                    <a class="nhsuk-link" href="/user-admin/user-active">Change</a>
-                </td> 
-                    </tr>
+      {% else %}
 
-                    
-
-                        <tr role="row" class="nhsuk-table__row">
-                            <td class="nhsuk-table__cell">
-                                Daniels, Dillon
-                          </td>
-                          
-                            <td class="nhsuk-table__cell">
-                              email.example@nhs.net
-                          </td>
-                          
-                          <td class="nhsuk-table__cell">
-                              Yes
-                          </td>
-                          <td class="nhsuk-table__cell">
-                            Administrator
-                        </td>
-                          <td class="nhsuk-table__cell">
-                            Today
-                        </td>
-                          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                            <a class="nhsuk-link" href="/user-admin/user-active">Change</a>
-                        </td> 
-                            </tr>
-
-                            <tr role="row" class="nhsuk-table__row">
-                                <td class="nhsuk-table__cell">
-                                   Edwards, Elle
-                              </td>
-                              
-                                <td class="nhsuk-table__cell">
-                                  email.example@nhs.net
-                              </td>
-                              
-                              <td class="nhsuk-table__cell">
-                                  Yes
-                              </td>
-                              <td class="nhsuk-table__cell">
-                                Administrator
-                            </td>
-                              <td class="nhsuk-table__cell">
-                                Today
-                            </td>
-                              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                                <a class="nhsuk-link" href="/user-admin/user-active">Change</a>
-                            </td> 
-                                </tr>
-
-
-                                <tr role="row" class="nhsuk-table__row">
-                                    <td class="nhsuk-table__cell">
-                                        Aarrons, Sam
-                                  </td>
-                                  
-                                    <td class="nhsuk-table__cell">
-                                      email.example@nhs.net
-                                  </td>
-                                  
-                                  <td class="nhsuk-table__cell">
-                                      Yes
-                                  </td>
-                                  <td class="nhsuk-table__cell">
-                                    Administrator
-                                </td>
-                                  <td class="nhsuk-table__cell">
-                                    1 day ago
-                                </td>
-                                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                                    <a class="nhsuk-link" href="/user-admin/user-active">Change</a>
-                                  </td> 
-                                    </tr>
-                                    
-
-                                    <tr role="row" class="nhsuk-table__row">
-                                        <td class="nhsuk-table__cell">
-                                            Stephens, Samantha
-                                      </td>
-                                      
-                                        <td class="nhsuk-table__cell">
-                                          email.example@nhs.net
-                                      </td>
-                                      
-                                      <td class="nhsuk-table__cell">
-                                          Yes
-                                      </td>
-                                      <td class="nhsuk-table__cell">
-                                        Administrator
-                                    </td>
-                                      <td class="nhsuk-table__cell">
-                                        16 days ago
-                                    </td>
-                                      <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                                        <a class="nhsuk-link" href="/user-admin/user-active">Change</a>
-                                    </td> 
-                                        </tr>
-
-
-                                <tr role="row" class="nhsuk-table__row">
-                                    <td class="nhsuk-table__cell">
-                                        Craft, Callum
-                                  </td>
-                                  
-                                    <td class="nhsuk-table__cell">
-                                      email.example@nhs.net
-                                  </td>
-                                  
-                                  <td class="nhsuk-table__cell">
-                                      Yes
-                                  </td>
-                                  <td class="nhsuk-table__cell">
-                                    Administrator
-                                </td>
-                                <td class="nhsuk-table__cell">
-                                    86 days ago
-                                </td>
-                                 
-                                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                                    <a class="nhsuk-link" href="/user-admin/user-active">Change</a>
-                                  </td> 
-                                    </tr>
-    
-
-                
-              </tbody>
-            </table>
-    
-            
+        <div class="nhsuk-u-margin-top-6 nhsuk-u-margin-bottom-6">
+          <p>No users matching {{ q }}.</p>
         </div>
-      </div>
+
+      {% endif %}
+
+    </div>
+  </div>
 
 {% endblock %}
 
