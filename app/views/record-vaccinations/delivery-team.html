@@ -52,7 +52,7 @@
         })}}
       </form>
 
-      {% if organisationSetting.permissionLevel == "Lead administrator" %}
+      {% if organisationSetting.permissionLevel == "Lead administrator" or organisationSetting.permissionLevel == "Administrator" %}
         {{ details({
           text: "If your team is not listed",
           html: "You need to <a href=\"/vaccines\">add vaccines</a> for the team."
@@ -60,7 +60,7 @@
       {% else %}
         {{ details({
           text: "If your team is not listed",
-          html: "An administrator needs to add vaccines for that team."
+          html: "You'll need to ask an administrator to add vaccines for the team."
         }) }}
       {% endif %}
 
