@@ -465,12 +465,14 @@ module.exports = router => {
 
     const fromOrganisation = data.organisations.find((organisation) => organisation.id === message.fromOrganisationId)
 
-    let vaccine = fromOrganisation.vaccines.find((vaccine) => vaccine.name === message.vaccineRequested)
+    let vaccines = fromOrganisation.vaccines.filter((vaccine) => message.vaccinesRequested.includes(vaccine.name))
 
-    if (decision === "approve") {
-      vaccine.status = "enabled"
-    } else if (decision === "reject") {
-      vaccine.status = "disabled"
+    for (vaccine of vaccines) {
+      if (decision === "approve") {
+        vaccine.status = "enabled"
+      } else if (decision === "reject") {
+        vaccine.status = "disabled"
+      }
     }
 
     inbox.splice(inbox.indexOf(message), 1)
