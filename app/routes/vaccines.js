@@ -45,15 +45,55 @@ module.exports = (router) => {
 
   // Viewing select vaccine page
   router.get('/vaccines/choose-vaccine', (req, res) => {
+    const data = req.session.data
 
-    res.render('vaccines/choose-vaccine')
+    const vaccinesEnabledNames = res.locals.currentOrganisation.vaccines
+      .filter((vaccine) => vaccine.status === "enabled")
+      .map((vaccine) => vaccine.name)
+
+    const vaccinesEnabled = data.vaccines.filter((vaccine) => vaccinesEnabledNames.includes(vaccine.name))
+
+    const vaccinesDisabledNames = res.locals.currentOrganisation.vaccines
+    .filter((vaccine) => vaccine.status === "disabled")
+    .map((vaccine) => vaccine.name)
+
+
+    const vaccinesDisabled = data.vaccines.filter((vaccine) => vaccinesDisabledNames.includes(vaccine.name))
+
+    res.render('vaccines/choose-vaccine', {
+      vaccinesEnabled,
+      vaccinesDisabled
+    })
   })
 
-  // Viewing select vaccine page - as a pharmacy
-  router.get('/vaccines/choose-vaccine-pharmacy', (req, res) => {
+  // Confirmation of a vaccine being requested
+  router.post('/vaccines/request', (req, res) => {
 
-    res.render('vaccines/choose-vaccine-pharmacy')
+    const data = req.session.data
+    const currentOrganisation = res.locals.currentOrganisation
+
+    const vaccinesRequested = currentOrganisation.vaccines
+    .filter((vaccine) => data.vaccinesRequested.includes(vaccine.name))
+
+    for (vaccineRequested of vaccinesRequested) {
+      vaccineRequested.status = "requested"
+    }
+
+    const region = data.regions.find((region) => region.id === currentOrganisation.region)
+
+    const currentDate = new Date().toISOString()
+    const generatedId = "AB" + Math.floor(Math.random() * 10000000).toString()
+
+    region.inbox ||= []
+    region.inbox.push({
+      id: generatedId,
+      fromOrganisationId: currentOrganisation.id,
+      vaccinesRequested: data.vaccinesRequested,
+      sentOn: currentDate
+    })
+    res.redirect('/vaccines/requested')
   })
+
 
   // Confirmation of a vaccine being requested
   router.get('/vaccines/requested', (req, res) => {
