@@ -145,7 +145,7 @@ const userId = Math.floor(Math.random() * 10000000).toString()
           id: id,
           permissionLevel: req.body.permissionLevel,
           status: "Active",
-          clinician: (req.body.clinician === "yes")
+          vaccinator: (req.body.vaccinator === "yes")
         }
       ]
     })
@@ -233,7 +233,7 @@ const userId = Math.floor(Math.random() * 10000000).toString()
     const organisation = data.organisations.find((organisation) => organisation.id === organisationId)
     const userOrganisationSettings = user.organisations.find((organisation) => organisation.id === organisationId)
 
-    userOrganisationSettings.clinician = (req.body.clinician === "yes")
+    userOrganisationSettings.vaccinator = (req.body.vaccinator === "yes")
     userOrganisationSettings.status = req.body.status
     userOrganisationSettings.permissionLevel = req.body.permissionLevel
 
