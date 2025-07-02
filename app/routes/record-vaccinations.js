@@ -978,6 +978,16 @@ router.get('/record-vaccinations/check', (req, res) => {
     })
   })
 
+  router.get('/record-vaccinations/review-previous', (req, res) => {
+    const data = req.session.data
+    const vaccinator = data.users.find((user) => user.id === data.vaccinatorId)
+
+    res.render('record-vaccinations/review-previous', {
+      vaccinator
+    })
+  })
+
+
   router.post('/record-vaccinations/answer-injection-site', (req, res) => {
     const data = req.session.data
     const injectionSite = data.injectionSite
