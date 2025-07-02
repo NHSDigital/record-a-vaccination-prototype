@@ -56,20 +56,20 @@
       }) }}
 
       {{ radios({
-        name: "clinician",
+        name: "vaccinator",
         fieldset: {
           legend: {
-            text: "Are they a registered clinician?"
+            text: "Are they a vaccinator?"
           }
         },
         hint: {
-          text: "Only registered clinicians can assess the patient and record their consent"
+          text: "Vaccination records include the name of the person who gave the vaccination"
         },
         "items": [
           {
             value: "yes",
             text: "Yes",
-            id: "clinician"
+            id: "vaccinator"
           },
           {
             value: "no",

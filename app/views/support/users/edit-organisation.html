@@ -32,19 +32,19 @@
 
       <form action="/support/users/{{ user.id }}/organisations/{{ organisation.id }}/update" method="post" novalidate="true">
 
-      {% set clinicianStatus = ("yes" if userOrganisationSettings.clinician else "no") %}
+      {% set vaccinatorStatus = ("yes" if userOrganisationSettings.vaccinator else "no") %}
 
         {{ radios({
-          "name": "clinician",
+          "name": "vaccinator",
           "fieldset": {
             "legend": {
-              "text": "Are they a clinician?"
+              "text": "Are they a vaccinator?"
             }
           },
           hint: {
-            text: "Only a registered clinician can assess patients for vaccines"
+            text: "Vaccination records include the name of the person who gave the vaccination"
           },
-          value: clinicianStatus,
+          value: vaccinatorStatus,
           "items": [
             {
               "value": "yes",
