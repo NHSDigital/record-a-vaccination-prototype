@@ -75,7 +75,7 @@
       </form>
 
       {% if (vaccinesDisabled | length) > 0 %}
-        {% call details({ text: "Need to add more vaccine types?"}) %}
+        {% call details({ summaryText: "Need to add more vaccine types?"}) %}
           <p>Select the vaccines you need.</p>
 
           {% set requestableItems = [] %}
