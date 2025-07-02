@@ -1,0 +1,382 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check and confirm" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/same-vaccine/injection-site" }) }}
+{% endblock %}
+
+{% set consentHtml %}
+  {% if data.consent == "patient" %}
+    Patient
+  {% elseif data.consent == "Clinician acting in the patient’s best interests" %}
+    {{ data.consentClinicianName }}
+    <br>Clinician
+  {% elseif data.consent == "Person with lasting power of attorney for health and welfare" %}
+    {{ data.consentAttorneyName }}
+    <br>{{ data.consentAttorneyRelationship }}
+    <br>Power of attorney
+  {% elseif data.consent == "Parent or guardian" %}
+    {{ data.consentParentName }}
+    <br>Parent or guardian
+  {% elseif data.consent == "Independent mental capacity advocate" %}
+    {{ data.consentAdvocateName }}
+    <br>Independent mental capacity advocate
+  {% elseif data.consent == "Court appointed deputy" %}
+    {{ data.consentDeputyName }}
+    <br>{{ data.consentDeputyRelationship }}
+    <br>Court appointed deputy
+  {% endif %}
+{% endset %}
+
+{% set batchHtml %}
+  {% if data.vaccineBatch == "add-new" %}
+    {{ data.newBatchNumber }}
+    <br>Expires {{ (data.newBatchExpiryDate | isoDateFromDateInput | govukDate)  }}
+  {% else %}
+    {{ data.vaccineBatch }}
+    <br>Expires 4 January 2025
+  {% endif %}
+{% endset %}
+
+{% set locationHtml %}
+  {% if  data.locationType == "Care home" %}
+    {% for careHome in data.careHomes %}
+      {% if data.careHome == careHome.code %}
+        {{ careHome.name }}<br>
+        {{ careHome.address1 }}<br>
+        {{ careHome.town }}<br>
+        {{ careHome.postcode }}
+      {% endif %}
+    {% endfor %}
+
+  {% else %}
+    {{ data.locationType }}
+  {% endif %}
+{% endset %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Check and confirm</h1>
+
+      <h2 class="nhsuk-heading-m">Patient</h2>
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              text: (data.patientName if data.patientName else data.firstName + " " + data.lastName)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/create-a-record",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                } if not data.nhsNumber
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Date of birth"
+            },
+            value: {
+              text: (data.dateOfBirth | isoDateFromDateInput | govukDate)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/create-a-record",
+                  text: "Change",
+                  visuallyHiddenText: "date of birth"
+                } if not data.nhsNumber
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: "73 Roman Rd<br>Leeds<br> LS2 5ZN"
+            },
+            actions: {
+              items: [
+              ]
+            }
+          } if data.nhsNumber,
+          {
+            key: {
+              text: "Postcode"
+            },
+            value: {
+              text: data.postcode
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/create-a-record",
+                  text: "Change",
+                  visuallyHiddenText: "postcode"
+                } if not data.nhsNumber
+              ]
+            }
+          } if not data.nhsNumber,
+          {
+            key: {
+              text: "NHS number"
+            },
+            value: {
+              text: data.nhsNumber
+            },
+            actions: {
+              items: [
+              ]
+            }
+          } if data.nhsNumber,
+          {
+            key: {
+              text: "Gender"
+            },
+            value: {
+              text: data.gender
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/create-a-record",
+                  text: "Change",
+                  visuallyHiddenText: "gender"
+                } if not data.nhsNumber
+              ]
+            }
+          } if not data.nhsNumber
+        ]
+      }) }}
+
+      <h2 class="nhsuk-heading-m">Vaccination</h2>
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Date"
+            },
+            value: {
+              text: ("Today" if data.vaccinationToday == "yes" else (data.vaccinationDate | isoDateFromDateInput | govukDate))
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations",
+                  text: "Change",
+                  visuallyHiddenText: "vaccination date"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Vaccine"
+            },
+            value: {
+              html: data.vaccine + "<br>" + data.vaccineProduct
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/vaccine",
+                  text: "Change",
+                  visuallyHiddenText: "vaccine"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Batch"
+            },
+            value: {
+              html: batchHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: ("/record-vaccinations/add-batch" if data.vaccineBatch == "add-new" else "/record-vaccinations/batch"),
+                  text: "Change",
+                  visuallyHiddenText: "vaccine batch"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Team"
+            },
+            value: {
+              text: (currentOrganisation.sites | findById(data.deliveryTeam)).name
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/delivery-team",
+                  text: "Change",
+                  visuallyHiddenText: "team"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Vaccinator"
+            },
+            value: {
+              text: vaccinator.firstName + " " + vaccinator.lastName
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/vaccinator",
+                  text: "Change",
+                  visuallyHiddenText: "contact information"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Location"
+            },
+            value: {
+              html: locationHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/location",
+                  text: "Change",
+                  visuallyHiddenText: "contact information"
+                }
+              ]
+            }
+          } if (data.vaccine === "Flu" or data.vaccine == "COVID-19"),
+          {
+            key: {
+              text: "Eligibility"
+            },
+            value: {
+              html: ((data.eligibility | join("<br>")) if (data.eligibility | isArray) else data.eligibility)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/eligibility",
+                  text: "Change",
+                  visuallyHiddenText: "eligibility"
+                }
+              ]
+            }
+          } if (data.vaccine != "Pertussis"),
+          {
+            key: {
+              text: "Healthcare worker role"
+            },
+            value: {
+              html: data.healthcareWorker
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/healthcare-worker",
+                  text: "Change",
+                  visuallyHiddenText: "healthcare worker role"
+                }
+              ]
+            }
+          } if (data.healthcareWorker),
+          {
+            key: {
+              text: "Pregnancy due date"
+            },
+            value: {
+              text: (data.pregnancyDueDate | isoDateFromDateInput | govukDate)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/patient-estimated-due-date",
+                  text: "Change",
+                  visuallyHiddenText: "pregnancy due date"
+                }
+              ]
+            }
+          } if ((data.vaccine == "Pertussis") or ((data.eligibility | arrayOrStringIncludes("Pregnant"))) and (data.vaccine == "RSV")),
+          {
+            key: {
+              text: "Consent given by"
+            },
+            value: {
+              html: consentHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/consent",
+                  text: "Change",
+                  visuallyHiddenText: "consnet"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Injection site"
+            },
+            value: {
+              html: (data.otherInjectionSite if data.injectionSite == "other" else data.injectionSite)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/injection-site",
+                  text: "Change",
+                  visuallyHiddenText: "contact details"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <form action="/record-vaccinations/done" method="post" novalidate>
+
+        {{ textarea({
+          name: "notes",
+          id: "notes",
+          label: {
+            text: "Optional note"
+          },
+          hint: {
+            text: "This will not be sent to the patient's GP. Only your organisation will see it."
+          },
+          rows: 3,
+          classes: "nhsuk-u-margin-bottom-7"
+        }) }}
+
+
+        {{ button({
+          text: "Confirm and save"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
