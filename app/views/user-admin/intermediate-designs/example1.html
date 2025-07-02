@@ -1,0 +1,211 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Manage users and permissions
+{% endblock %}
+
+{% from '../../components/pagination/macro.njk' import appPagination %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/user-admin/example",
+    text: "Back to manage users"
+  }) }}
+{% endblock %}
+
+
+{% set currentSection = "manage-users" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+    
+
+
+      <h1 class="nhsuk-heading-xl">Deactivated users</h1>
+
+
+      <p>For security reasons, we have deactivated users who have not logged in for 90 days. <a href="/user-admin/reactivate-all">Reactivate these users</a></p>
+ 
+    
+          <table class="nhsuk-table-responsive" role="table">
+
+            <br>
+
+
+            <caption class="nhsuk-table__caption">Users</caption>
+
+
+            <thead class="nhsuk-table__head" role="rowgroup">
+                <thead role="rowgroup" class="nhsuk-table__head">
+                    <tr role="row">
+          
+                      <th role="columnheader" class="" scope="col">
+                        Name
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Email address
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Date
+                      </th>
+                      
+                      <th role="columnheader" class="" scope="col">
+                      </th>
+                      
+                    </tr>
+            </thead>
+    
+            <tbody class="nhsuk-table__body">
+                  
+            
+
+
+              <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                Alex Aarrons   
+                </td>
+              
+                <td class="nhsuk-table__cell">
+               alex.aarrons@nhs.net
+              </td>
+              
+              <td class="nhsuk-table__cell">
+                  17 June 2025
+              </td>
+              
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                <a class="nhsuk-link" href="/user-admin/user-active">Reactivate</a>
+            </td> 
+                </tr>
+
+
+                <tr role="row" class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">
+                    Ben Benson   
+                    </td>
+                  
+                    <td class="nhsuk-table__cell">
+                      ben.benson@nhs.net
+                  </td>
+                  
+                  <td class="nhsuk-table__cell">
+                    17 June 2025
+                  </td>
+                
+                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                    <a class="nhsuk-link" href="/user-admin/user-active">Reactivate</a>
+                </td> 
+                    </tr>
+
+                    
+
+                        <tr role="row" class="nhsuk-table__row">
+                            <td class="nhsuk-table__cell">
+                                Dillion Daniels
+                          </td>
+                          
+                            <td class="nhsuk-table__cell">
+                              dillon.daniels@nhs.net
+                          </td>
+                          <td class="nhsuk-table__cell">
+                            17 June 2025
+                          </td>
+                        
+                          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                            <a class="nhsuk-link" href="/user-admin/user-active">Reactivate</a>
+                        </td> 
+                            </tr>
+
+
+
+                            <tr role="row" class="nhsuk-table__row">
+                                <td class="nhsuk-table__cell">
+                                   Elle Edwards
+                              </td>
+                              
+                                <td class="nhsuk-table__cell">
+                                  elle.edwards@nhs.net
+                              </td>
+                              
+                             <td class="nhsuk-table__cell">
+                  17 June 2025
+              </td>
+              
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                <a class="nhsuk-link" href="/user-admin/user-active">Reactivate</a>
+            </td> 
+                </tr>
+
+
+                                <tr role="row" class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                        Francis Franklin
+                                  </td>
+                                  
+                                    <td class="nhsuk-table__cell">
+                                      francis.franklin@nhs.net
+                                  </td>
+                                  
+                                  <td class="nhsuk-table__cell">
+                                    17 June 2025
+                                </td>
+                                
+                                <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                                  <a class="nhsuk-link" href="/user-admin/user-active">Reactivate</a>
+                              </td> 
+                                  </tr>
+                                    
+
+                                    <tr role="row" class="nhsuk-table__row">
+                                        <td class="nhsuk-table__cell">
+                                            Gabby Gleeb
+                                      </td>
+                                      
+                                        <td class="nhsuk-table__cell">
+                                          gabby.gleeb@nhs.net
+                                      </td>
+                                      
+                                      <td class="nhsuk-table__cell">
+                                        17 June 2025
+                                    </td>
+                                    
+                                    <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                                      <a class="nhsuk-link" href="/user-admin/user-active">Reactivate</a>
+                                  </td> 
+                                      </tr>
+
+
+                                <tr role="row" class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                        Harriet Haywick
+                                  </td>
+                                  
+                                    <td class="nhsuk-table__cell">
+                                      harriet.haywick@nhs.net
+                                  </td>
+                                  
+                                  <td class="nhsuk-table__cell">
+                                    17 June 2025
+                                </td>
+                                
+                                <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                                  <a class="nhsuk-link" href="/user-admin/user-active">Reactivate</a>
+                              </td> 
+                                  </tr>
+    
+
+                
+              </tbody>
+            </table>
+    
+            
+        </div>
+      </div>
+
+{% endblock %}
+
+
+
+
