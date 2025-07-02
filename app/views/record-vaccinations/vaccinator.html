@@ -36,7 +36,7 @@
 
         {% set items = [] %}
 
-        {% if organisationSetting.clinician %}
+        {% if organisationSetting.vaccinator %}
           {% set items = (items.push({
             value: data.currentUserId,
             text: "Me (" + currentUser.firstName + " " + currentUser.lastName + ")"
@@ -61,7 +61,7 @@
             }
           },
           xhint: {
-            text: "Only users with clinician status are listed"
+            text: "Only users with vaccinator status are listed"
           },
           errorMessage: {
             text: vaccinatorError
