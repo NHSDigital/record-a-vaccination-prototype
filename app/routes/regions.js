@@ -231,7 +231,7 @@ module.exports = router => {
           id: organisation.id,
           status: 'Invited',
           permissionLevel: 'Lead administrator',
-          clinician: false
+          vaccinator: false
         }
       ]
     })
