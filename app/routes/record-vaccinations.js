@@ -105,7 +105,7 @@ module.exports = router => {
 
         const userOrgnisationSetting = (user.organisations || []).find((organisation) => organisation.id === data.currentOrganisationId)
 
-        return (user.id != data.currentUserId) && userOrgnisationSetting && userOrgnisationSetting.clinician && (userOrgnisationSetting.status === "Active")
+        return (user.id != data.currentUserId) && userOrgnisationSetting && userOrgnisationSetting.vaccinator && (userOrgnisationSetting.status === "Active")
       })
       .sort((a, b) => {
         const nameA = a.firstName.toUpperCase(); // ignore upper and lowercase
