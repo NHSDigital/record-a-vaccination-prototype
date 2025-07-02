@@ -84,7 +84,7 @@
               Email address
             </th>
             <th role="columnheader" class="" scope="col">
-              Clinician
+              Vaccinator
             </th>
             <th role="columnheader" class="" scope="col">
               Permission
@@ -108,7 +108,7 @@
               </td>
               <td class="nhsuk-table__cell ">{{ user.email }}</td>
               <td class="nhsuk-table__cell ">
-                {% if userOrganisationSettings.clinician %}
+                {% if userOrganisationSettings.vaccinator %}
                   Yes
                {% else %}
                   No
