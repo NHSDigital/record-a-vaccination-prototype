@@ -6,18 +6,22 @@
     text: "Record a vaccination",
     href: "/"
   },
-  account: {
+  navigation: {
     items: [
       {
         href: "/regions",
         text: "Organisations",
-        classes: ("app-header__navigation-item--current" if currentSection == "organisations")
+        active: (currentSection == "organisations")
       },
       {
         href: "/regions/messages",
         text: ("Messages <span class=\"app-count\">" + inboxCount +"</span>") | safe,
-        classes: ("app-header__navigation-item--with-count " + ("app-header__navigation-item--current" if currentSection == "messages"))
-      },
+        active: (currentSection == "messages")
+      }
+    ]
+  },
+  account: {
+    items: [
       {
         href: "#",
         text: currentUser.email,
