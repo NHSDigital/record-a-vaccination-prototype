@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Remove Tom Smith from the list?" %}
+
+{% set currentSection = "lists" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/lists/list",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+
+   <br>
+      <form action="/lists/list" method="post">
+        <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+        Yes, remove
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  {% endblock %}

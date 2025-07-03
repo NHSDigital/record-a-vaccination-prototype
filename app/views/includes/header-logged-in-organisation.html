@@ -14,16 +14,16 @@
           label : "Home",
           classes: ("app-header__navigation-item--current" if currentSection == "home")
         },
-        
+
         {
           url  : "/record-vaccinations",
           label : ("Record vaccinations") | safe,
           classes: ("app-header__navigation-item--current" if currentSection == "vaccinate")
         },
         {
-          url  : "/appointments/index2",
+          url  : "/lists",
           label : "Lists <span class=\"nhsuk-tag app-tag--header nhsuk-u-margin-left-2\">New</span>" | safe,
-          classes: ("app-header__navigation-item--current" if currentSection == "appointments")
+          classes: ("app-header__navigation-item--current" if currentSection == "lists")
         },
         {
           url: "/vaccines",
