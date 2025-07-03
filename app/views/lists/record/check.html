@@ -6,7 +6,7 @@
 
 {% block beforeContent %}
     {{ backLink({
-      href: "/appointments/appointments-recording/injection-site",
+      href: "/lists/record/injection-site",
       text: "Back"
     }) }}
 {% endblock %}
@@ -359,7 +359,7 @@
         ]
       }) }}
 
-      <form action="/appointments/appointments-recording/done" method="post" novalidate>
+      <form action="/lists/record/done" method="post" novalidate>
 
         {{ textarea({
           name: "notes",

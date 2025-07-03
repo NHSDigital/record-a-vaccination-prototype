@@ -6,14 +6,7 @@
 {% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
 
 {% block beforeContent %}
-  {% if data.nhsNumber %}
-    {{ backLink({
-      href: "/appointments/day",
-      text: "Back to Today’s appointments"
-    }) }}
-  {% else %}
-    {{ backLink({ href: "/record-vaccinations/delivery-team" }) }}
-  {% endif %}
+  {{ backLink({ href: "/record-vaccinations/delivery-team" }) }}
 {% endblock %}
 
 {% block content %}

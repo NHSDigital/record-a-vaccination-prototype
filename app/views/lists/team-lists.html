@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Anne Ward Maternity Unit" %}
+
+{% set currentSection = "lists" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/lists",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+
+<table class="nhsuk-table-responsive" role="table">
+  <caption class="nhsuk-table__caption"></caption>
+  <thead class="nhsuk-table__head" role="rowgroup">
+    <tr role="row">
+      <th scope="col" class="nhsuk-table__header nhsuk-u-width-one-half" role="columnheader">Date</th>
+      <th scope="col" class="nhsuk-table__header nhsuk-table__cell--numeric nhsuk-u-width-one-quarter" role="columnheader">Number of patients</th>
+
+    </tr>
+  </thead>
+  <tbody class="nhsuk-table__body">
+   <tr class="nhsuk-table__row" role="row">
+    <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p><a href="/lists/list">No date</a></p>
+     <td class="nhsuk-table__cell nhsuk-table__cell--numeric" role="cell">100</td>
+
+   </tr>
+    <tr class="nhsuk-table__row" role="row">
+     <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p><a href="/lists/list">Wednesday 9 July 2025</a></p>
+      <td class="nhsuk-table__cell nhsuk-table__cell--numeric" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Number of patients </span>32</td>
+    </tr>
+
+    <tr class="nhsuk-table__row" role="row">
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p><a href="/lists/list">Thursday 10 July 2025</a></p>
+       <td class="nhsuk-table__cell nhsuk-table__cell--numeric" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Number of patients </span>25</td>
+
+     </tr>
+
+     <tr class="nhsuk-table__row" role="row">
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p><a href="/lists/list">Friday 11 July 2025</a></p>
+       <td class="nhsuk-table__cell nhsuk-table__cell--numeric" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Number of patients </span>40</td>
+
+     </tr>
+  </tbody>
+</table>
+
+
+    </div>
+  </div>
+
+{% endblock %}

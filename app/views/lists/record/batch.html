@@ -6,7 +6,7 @@
 
 {% block beforeContent %}
     {{ backLink({
-      href: "/appointments/appointments-recording/vaccine",
+      href: "/lists/record/vaccine",
       text: "Back"
     }) }}
 {% endblock %}
@@ -25,7 +25,7 @@
       }) }}
     {% endif %}
 
-      <form action="/appointments/appointments-recording/eligibility" method="post" novalidate>
+      <form action="/lists/record/eligibility" method="post" novalidate>
 
           {{ radios({
             "idPrefix": "vaccineBatch",

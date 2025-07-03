@@ -1,14 +1,11 @@
-
 {% extends 'layout.html' %}
 
-{% set currentSection = "appointments" %}
+{% set currentSection = "lists" %}
 
 {% set pageName = "Which team is vaccinating?" %}
 
-
-
 {% block beforeContent %}
-  {{ backLink({ href: "/appointments/add" }) }}
+  {{ backLink({ href: "/lists" }) }}
 {% endblock %}
 
 {% block content %}
@@ -27,8 +24,9 @@
 
         <fieldset class="nhsuk-fieldset">
           <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+
             <h1 class="nhsuk-fieldset__heading">
-              Which site or team is vaccinating?
+              Choose a site or team
             </h1>
           </legend>
           <div class="nhsuk-radios">
@@ -58,7 +56,7 @@
 
       {{ button({
         text: "Continue",
-        href: "/appointments/add-nhs-numbers"
+        href: "/lists/date"
       }) }}
 
 

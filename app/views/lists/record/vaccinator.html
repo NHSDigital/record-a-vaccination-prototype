@@ -6,7 +6,7 @@
 
 {% block beforeContent %}
     {{ backLink({
-      href: "/appointments/appointments-recording/patient-history",
+      href: "/lists/record/patient-history",
       text: "Back"
     }) }}
 {% endblock %}
@@ -27,7 +27,7 @@
         }) }}
       {% endif %}
 
-      <form action="/appointments/appointments-recording/vaccine" method="post" novalidate>
+      <form action="/lists/record/vaccine" method="post" novalidate>
 
         {% set otherVaccinators = [
           {name: "James Bloggs", email: "james.bloggs@nhs.net" },

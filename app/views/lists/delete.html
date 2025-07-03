@@ -1,13 +1,12 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Appointments" %}
+{% set pageName = "Delete list" %}
 
-{% set currentSection = "appointments" %}
-
+{% set currentSection = "lists" %}
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/appointments/edit",
+    href: "/lists/list",
     text: "Back"
   }) }}
 {% endblock %}
@@ -18,14 +17,13 @@
     <div class="nhsuk-grid-column-two-thirds">
 
 
-      <h1 class="nhsuk-heading-l">Are you sure you want to delete 23 April 2025 at Anne Ward Maternity Unit</h1>
+      <h1 class="nhsuk-heading-l">Delete St Mary's Hospital 17 July 2025?</h1>
 
-
-      <p>Once deleted appointments cannot be restored.</p>
+      <p>The list will be deleted but not any vaccination records.</p>
 
    <br>
       <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
-        Yes, delete appointments
+        Yes, delete list
       </button>
 
     </div>

@@ -7,7 +7,7 @@
 
 {% block beforeContent %}
     {{ backLink({
-      href: "/appointments/appointments-recording/consent",
+      href: "/lists/record/consent",
       text: "Back"
     }) }}
 {% endblock %}
@@ -23,7 +23,7 @@
         }) }}
       {% endif %}
 
-      <form action="/appointments/appointments-recording/check" method="post" novalidate>
+      <form action="/lists/record/check" method="post" novalidate>
 
         {% set somewhereElseHtml %}
 

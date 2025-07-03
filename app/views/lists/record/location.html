@@ -7,7 +7,7 @@
 
 {% block beforeContent %}
     {{ backLink({
-      href: "/appointments/appointments-recording/eligibility",
+      href: "/lists/record/eligibility",
       text: "Back"
     }) }}
 {% endblock %}
@@ -22,7 +22,7 @@
         }) }}
       {% endif %}
 
-      <form action="/appointments/appointments-recording/consent" method="post" novalidate>
+      <form action="/lists/record/consent" method="post" novalidate>
 
         {% from 'radios/macro.njk' import radios %}
         {% from 'input/macro.njk' import input %}

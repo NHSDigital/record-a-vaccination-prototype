@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Vaccination saved" %}
+
+{% set patientName = data.patientName if data.patientName else "Jodies Smith" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      {% set panelHtml %}
+        <a href="#" class="nhsuk-link--reverse">Michael James's COVID-19 record</a> will be sent to their GP.
+      {% endset %}
+
+      {{ panel({
+        titleText: "Vaccination saved",
+        html: panelHtml
+      }) }}
+
+
+      {{ radios({
+        idPrefix: "next-step",
+        name: "nextStep",
+        fieldset: {
+          legend: {
+            text: "What would you like to do next?",
+            classes: "nhsuk-fieldset__legend--m"
+          }
+        },
+        errorMessage: {
+          text: error.text
+        } if error,
+        items: [
+          {
+            value: "same-patient-another-vaccination",
+            text: "Record a second vaccination for Michael James"
+          },
+          {
+            value: "same-vaccination-another-patient",
+            text: "Return to list"
+          }
+        ]
+      }) }}
+
+      {{ button({
+        text: "Continue",
+        href: "/lists"
+      }) }}
+
+
+    </div>
+  </div>
+
+{% endblock %}
+

@@ -6,7 +6,7 @@
 
 {% block beforeContent %}
     {{ backLink({
-      href: "/appointments/appointments-recording/bacth",
+      href: "/lists/record/batch",
       text: "Back"
     }) }}
 {% endblock %}
@@ -22,7 +22,7 @@
         }) }}
       {% endif %}
 
-      <form action="/appointments/appointments-recording/location" method="post" novalidate>
+      <form action="/lists/record/location" method="post" novalidate>
 
       {% if data.vaccine == "COVID-19" %}
         {% set eligibilityOptions = [

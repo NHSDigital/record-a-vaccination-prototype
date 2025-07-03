@@ -21,8 +21,8 @@
 
 {% block beforeContent %}
     {{ backLink({
-      href: "/appointments/mvp1",
-      text: "Back to appointments"
+      href: "/lists/list",
+      text: "Back to St Mary's Hospital 17 July 2025"
     }) }}
 {% endblock %}
 
@@ -182,7 +182,7 @@
         }) }}
 
 
-      <form action="/appointments/appointments-recording/vaccinator" method="post" novalidate>
+      <form action="/lists/record/vaccinator" method="post" novalidate>
         {{ button({
           text: "Continue"
         })}}
