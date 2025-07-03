@@ -15,7 +15,7 @@
   "dependencies": {
     "@babel/core": "^7.27.7",
     "@babel/preset-env": "^7.28.0",
-    "@x-govuk/govuk-prototype-components": "^4.0.0",
+    "@x-govuk/govuk-prototype-components": "^5.0.0",
     "@x-govuk/govuk-prototype-filters": "^2.0.0",
     "body-parser": "^1.20.2",
     "browser-sync": "^3.0.4",
