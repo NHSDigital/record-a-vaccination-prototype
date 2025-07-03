@@ -1,0 +1,106 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Which vaccine are you giving?" %}
+
+{% set currentSection = "vaccinate" %}
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/co-admin/eiligibility" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <div class="nhsuk-form-group">
+        
+
+        <form action="/record-vaccinations/co-admin/consent" method="post" novalidate>
+
+
+
+
+
+          <div class="nhsuk-form-group">
+
+            <fieldset class="nhsuk-fieldset" aria-describedby="example-hints-hint">
+              <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+                <span class="nhsuk-caption-l">Jodie Brown, born 24 June 1954 (aged 71)</span>
+
+                <h1 class="nhsuk-fieldset__heading">
+                  Where is the vaccination taking place?
+                </h1>
+              </legend>
+              <div class="nhsuk-hint" id="example-hints-hint">
+                <p class="nhsuk-u-margin-bottom-2">This is needed for payment and reporting.</p>
+              </div>
+              <div class="nhsuk-radios">
+                <div class="nhsuk-radios__item">
+                  <input class="nhsuk-radios__input" id="example-hints-1" name="example-hints" type="radio" value="yes">
+                  <label class="nhsuk-label nhsuk-radios__label" for="example-hints-1">
+                    Hospital hub for staff and patients
+
+                  </label>
+                </div>
+                <div class="nhsuk-radios__item">
+                  <input class="nhsuk-radios__input" id="example-hints-2" name="example-hints" type="radio" value="no">
+                  <label class="nhsuk-label nhsuk-radios__label" for="example-hints-2">
+                    Vaccination centre open to the public
+                  </label>
+                </div>
+                <div class="nhsuk-radios__item">
+                  <input class="nhsuk-radios__input" id="example-hints-3" name="example-hints" type="radio" value="not sure">
+                  <label class="nhsuk-label nhsuk-radios__label" for="example-hints-3">
+                    Community pharmacy
+                  </label>
+                </div>
+
+                <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="example-hints-3" name="example-hints" type="radio" value="not sure">
+                    <label class="nhsuk-label nhsuk-radios__label" for="example-hints-3">
+                        Care home
+                    </label>
+                  </div>
+
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="example-hints-3" name="example-hints" type="radio" value="not sure">
+                    <label class="nhsuk-label nhsuk-radios__label" for="example-hints-3">
+                        Housebound patient’s home
+                    </label>
+                  </div>
+
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="example-hints-3" name="example-hints" type="radio" value="not sure">
+                    <label class="nhsuk-label nhsuk-radios__label" for="example-hints-3">
+                        Outreach event
+                    </label>
+                  </div>
+
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="example-hints-3" name="example-hints" type="radio" value="not sure">
+                    <label class="nhsuk-label nhsuk-radios__label" for="example-hints-3">
+                        GP clinic
+                    </label>
+                  </div>
+
+
+              </div>
+            </fieldset>
+          </div>
+
+
+
+
+
+      </div>
+
+      <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+        Continue
+      </button>
+
+    </div>
+  </div>
+
+{% endblock %}
+

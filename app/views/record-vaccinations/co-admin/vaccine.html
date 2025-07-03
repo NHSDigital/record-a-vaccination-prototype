@@ -6,7 +6,7 @@
 {% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/record-vaccinations/co-admin/batch" }) }}
+  {{ backLink({ href: "/record-vaccinations/co-admin/done" }) }}
 {% endblock %}
 
 {% block content %}
@@ -22,7 +22,7 @@
           <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
          
 
-            <span class="nhsuk-caption-l">John Smith, born 24 July 1954 (aged 70)</span>
+            <span class="nhsuk-caption-l">Jodie Brown, born 24 June 1954 (aged 71)</span>
             <h1 class="nhsuk-heading-l">Which vaccine are you giving?</h1>
           </legend>
       

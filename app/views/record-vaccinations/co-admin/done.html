@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Vaccination saved" %}
+
+{% set patientName = data.patientName if data.patientName else "Jodies Smith" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      {% set panelHtml %}
+        <a href="#" class="nhsuk-link--reverse">{{ patientName }}’s {{ data.vaccine }} record</a> will be sent to their GP.
+      {% endset %}
+
+      {{ panel({
+        titleText: "Vaccination saved",
+        html: panelHtml
+      }) }}
+
+
+
+
+      <div class="nhsuk-form-group">
+
+        <form action="/record-vaccinations/co-admin/vaccine" method="post" novalidate>
+
+
+        <fieldset class="nhsuk-fieldset">
+          <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+            <h1 class="nhsuk-fieldset__heading">
+              What woudl you like to do now?
+            </h1>
+          </legend>
+          <div class="nhsuk-radios">
+            <div class="nhsuk-radios__item">
+              <input class="nhsuk-radios__input" id="example-1" name="example" type="radio" value="yes">
+              <label class="nhsuk-label nhsuk-radios__label" for="example-1">
+                Return to start
+              </label>
+            </div>
+            <div class="nhsuk-radios__item">
+              <input class="nhsuk-radios__input" id="example-2" name="example" type="radio" value="no">
+              <label class="nhsuk-label nhsuk-radios__label" for="example-2">
+                Jodie Brown's next vaccination
+              </label>
+            </div>
+            <div class="nhsuk-radios__item">
+                <input class="nhsuk-radios__input" id="example-2" name="example" type="radio" value="no">
+                <label class="nhsuk-label nhsuk-radios__label" for="example-2">
+                    Record the same vaccine for a different patient
+                </label>
+              </div>
+          </div>
+        </fieldset>
+      </div>
+
+
+
+
+
+
+
+      {{ button({
+        text: "Continue"
+      })}}
+
+
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+
