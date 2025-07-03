@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% set pageName = organisation.name %}
+{% set currentSection = "organisations" %}
 
 {% block header %}
   {% include "includes/header-logged-in-region.html" %}
@@ -28,7 +29,31 @@
         <p><a href="/regions/organisations/{{ organisation.id }}/reactivate">Reactivate organisation</a></p>
 
       {% else  %}
-        <p>The organisation can record vaccinations.</p>
+
+        <p>They can record
+          {% if (vaccinesEnabled | length) == 4 %}
+            all
+          {% else %}
+            {{ vaccinesEnabled | sort(false, false, "name") | pluck("name") | formatList }}
+          {% endif %}
+        vaccinations.
+          <a href="/regions/organisations/{{organisation.id}}/change-vaccines">Change <span class="nhsuk-u-visually-hidden">vaccines available</span></a>
+        </p>
+
+        {% if (messages | length) > 0 %}
+          {% set message = (messages | first) %}
+
+          {% set messageHtml %}
+            <p>Access to record {{ message.vaccineRequested }} requested on {{ message.sentOn | govukDate }}. <a href="/regions/messages/{{ message.id }}">View&nbsp;request</a></p>
+          {% endset %}
+
+          {{ insetText({
+            html: messageHtml,
+            classes: "nhsuk-u-margin-top-0 nhsuk-u-padding-top-1 nhsuk-u-padding-bottom-1"
+          }) }}
+        {% endif %}
+
+
 
         <p><a href="/regions/organisations/{{organisation.id}}/deactivate">Deactivate organisation</a></p>
 

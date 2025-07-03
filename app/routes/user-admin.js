@@ -155,14 +155,14 @@ module.exports = (router) => {
     const { lastName } = req.session.data
     const { email } = req.session.data
     const { permissionLevel } = req.session.data
-    const { clinician } = req.session.data
+    const { vaccinator } = req.session.data
 
     let existingUserWithSameEmail = false
     if (email) {
       existingUserWithSameEmail = data.users.find((user) => user.email === email)
     }
 
-    let firstNameError, lastNameError, emailError, permissionLevelError, clinicianError
+    let firstNameError, lastNameError, emailError, permissionLevelError, vaccinatorError
 
     if (!firstName || firstName === '') {
       firstNameError = 'Enter a first name'
@@ -184,17 +184,17 @@ module.exports = (router) => {
       permissionLevelError = 'Select a permission level'
     }
 
-    if (!clinician || clinician === '') {
-      clinicianError = 'Select if they’re a clinician'
+    if (!vaccinator || vaccinator === '') {
+      vaccinatorError = 'Select if they’re a vaccinator'
     }
 
-    if (firstNameError || lastNameError || emailError || permissionLevelError || clinicianError) {
+    if (firstNameError || lastNameError || emailError || permissionLevelError || vaccinatorError) {
       res.render('user-admin/add-user', {
         firstNameError,
         lastNameError,
         emailError,
         permissionLevelError,
-        clinicianError
+        vaccinatorError
       })
     } else {
       res.redirect('/user-admin/check')
@@ -205,7 +205,7 @@ module.exports = (router) => {
   router.post('/user-admin/add', (req, res) => {
 
     const data = req.session.data
-    const {firstName, lastName, email, permissionLevel, clinician} = data
+    const {firstName, lastName, email, permissionLevel, vaccinator} = data
 
     const existingUserWithSameEmail = data.users.find((user) => user.email === email)
 
@@ -216,7 +216,7 @@ module.exports = (router) => {
       existingUserWithSameEmail.organisations.push({
         id: data.currentOrganisationId,
         status: 'Invited',
-        clinician: (data.clinician === 'yes'),
+        vaccinator: (data.vaccinator === 'yes'),
         permissionLevel: data.permissionLevel
       })
 
@@ -230,7 +230,7 @@ module.exports = (router) => {
           {
             id: data.currentOrganisationId,
             status: 'Invited',
-            clinician: (data.clinician === 'yes'),
+            vaccinator: (data.vaccinator === 'yes'),
             permissionLevel: data.permissionLevel
           }
         ]
@@ -242,13 +242,13 @@ module.exports = (router) => {
     req.session.data.firstName = ''
     req.session.data.lastName = ''
     req.session.data.permissionLevel = ''
-    req.session.data.clinician = ''
+    req.session.data.vaccinator = ''
     req.session.data.showErrors = ''
 
     res.redirect('/user-admin')
   })
 
-  // Editing a user’s permission level and clinician status
+  // Editing a user’s permission level and vaccinator status
   router.get('/user-admin/users/:id/change-role', (req, res) => {
     const { id } = req.params
     const data = req.session.data
@@ -264,7 +264,7 @@ module.exports = (router) => {
     })
   })
 
-  // Updating a user’s permission level and clinician status
+  // Updating a user’s permission level and vaccinator status
   router.post('/user-admin/users/:id/update', (req, res) => {
     const { id } = req.params
 
@@ -273,11 +273,11 @@ module.exports = (router) => {
     const organisationSetting = user.organisations.find((organisation) => organisation.id === req.session.data.currentOrganisationId)
 
     organisationSetting.permissionLevel = req.body.permissionLevel
-    organisationSetting.clinician = (req.body.clinician === 'yes')
+    organisationSetting.vaccinator = (req.body.vaccinator === 'yes')
 
     // Reset session data
     req.session.data.permissionLevel = ''
-    req.session.data.clinician = ''
+    req.session.data.vaccinator = ''
 
     res.redirect('/user-admin')
   })

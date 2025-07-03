@@ -8,7 +8,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Paulina",
@@ -22,7 +22,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ocean",
@@ -37,7 +37,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kaisley",
@@ -51,7 +51,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Max",
@@ -65,7 +65,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Daisy",
@@ -79,7 +79,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Graham",
@@ -93,7 +93,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Briana",
@@ -107,7 +107,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lennon",
@@ -122,7 +122,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Evangeline",
@@ -137,7 +137,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2025-01-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ronin",
@@ -151,7 +151,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rayne",
@@ -166,7 +166,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Allan",
@@ -180,7 +180,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Veronica",
@@ -194,7 +194,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Finnegan",
@@ -209,7 +209,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Meghan",
@@ -223,7 +223,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Koda",
@@ -237,7 +237,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Jenesis",
@@ -252,7 +252,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Raymond",
@@ -267,7 +267,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ivanna",
@@ -281,7 +281,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Rayan",
@@ -295,7 +295,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jayda",
@@ -309,7 +309,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Kade",
@@ -323,7 +323,7 @@ module.exports = [
         "id": "RW3",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jane",
@@ -337,7 +337,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ahmed",
@@ -351,7 +351,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jayda",
@@ -365,7 +365,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jesus",
@@ -380,7 +380,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Journee",
@@ -395,7 +395,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Rodrigo",
@@ -409,7 +409,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lina",
@@ -423,7 +423,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nasir",
@@ -437,7 +437,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Halo",
@@ -451,7 +451,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Bo",
@@ -465,7 +465,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Oaklynn",
@@ -479,7 +479,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Otto",
@@ -494,7 +494,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-12",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lexie",
@@ -508,7 +508,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Wells",
@@ -523,7 +523,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-09",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Brynlee",
@@ -537,7 +537,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Korbin",
@@ -551,7 +551,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Liliana",
@@ -566,7 +566,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-11-04",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Grant",
@@ -580,7 +580,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sylvie",
@@ -594,7 +594,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Baker",
@@ -608,7 +608,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Kailey",
@@ -623,7 +623,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-23",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ermias",
@@ -637,7 +637,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Laurel",
@@ -652,7 +652,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-10-08",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Niklaus",
@@ -666,7 +666,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Parker",
@@ -680,7 +680,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Vance",
@@ -694,7 +694,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Aleah",
@@ -708,7 +708,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Uriel",
@@ -722,7 +722,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Scarlet",
@@ -736,7 +736,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ricky",
@@ -750,7 +750,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alayah",
@@ -765,7 +765,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-09-10",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Clark",
@@ -779,7 +779,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maxine",
@@ -793,7 +793,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Omari",
@@ -807,7 +807,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Rosalia",
@@ -821,7 +821,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Yusuf",
@@ -835,7 +835,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rayna",
@@ -849,7 +849,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lee",
@@ -863,7 +863,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Macy",
@@ -877,7 +877,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kash",
@@ -891,7 +891,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jordan",
@@ -905,7 +905,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Kamdyn",
@@ -920,7 +920,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-11-24",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Dior",
@@ -935,7 +935,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-08-01",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Byron",
@@ -950,7 +950,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-08-18",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lilliana",
@@ -964,7 +964,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Duncan",
@@ -978,7 +978,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Paislee",
@@ -992,7 +992,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Grady",
@@ -1006,7 +1006,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Nyomi",
@@ -1020,7 +1020,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Francis",
@@ -1034,7 +1034,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Bellamy",
@@ -1048,7 +1048,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Javier",
@@ -1062,7 +1062,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Aya",
@@ -1076,7 +1076,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Knox",
@@ -1090,7 +1090,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Isabelle",
@@ -1105,7 +1105,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-06-08",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Foster",
@@ -1119,7 +1119,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mckenzie",
@@ -1133,7 +1133,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Felix",
@@ -1148,7 +1148,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-05-25",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Egypt",
@@ -1162,7 +1162,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Axl",
@@ -1176,7 +1176,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Adalyn",
@@ -1191,7 +1191,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Anthony",
@@ -1206,7 +1206,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Evie",
@@ -1220,7 +1220,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Bo",
@@ -1234,7 +1234,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lauryn",
@@ -1248,7 +1248,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jericho",
@@ -1263,7 +1263,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Leona",
@@ -1277,7 +1277,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Franco",
@@ -1292,7 +1292,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Remy",
@@ -1306,7 +1306,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Drew",
@@ -1320,7 +1320,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lia",
@@ -1334,7 +1334,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Finnley",
@@ -1349,7 +1349,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Amelie",
@@ -1364,7 +1364,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Russell",
@@ -1378,7 +1378,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mackenzie",
@@ -1393,7 +1393,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Benson",
@@ -1408,7 +1408,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Emma",
@@ -1423,7 +1423,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Bradley",
@@ -1437,7 +1437,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nadia",
@@ -1452,7 +1452,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Judson",
@@ -1466,7 +1466,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rory",
@@ -1480,7 +1480,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mccoy",
@@ -1495,7 +1495,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Cecilia",
@@ -1510,7 +1510,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Zion",
@@ -1524,7 +1524,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Romina",
@@ -1538,7 +1538,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Wayne",
@@ -1552,7 +1552,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Serena",
@@ -1566,7 +1566,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Conner",
@@ -1581,7 +1581,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brynn",
@@ -1596,7 +1596,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "London",
@@ -1610,7 +1610,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Marlee",
@@ -1625,7 +1625,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Leandro",
@@ -1639,7 +1639,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Saoirse",
@@ -1654,7 +1654,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Drew",
@@ -1668,7 +1668,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jaliyah",
@@ -1682,7 +1682,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sonny",
@@ -1696,7 +1696,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Drew",
@@ -1710,7 +1710,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Luca",
@@ -1724,7 +1724,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Kira",
@@ -1739,7 +1739,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lucas",
@@ -1753,7 +1753,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Charlee",
@@ -1768,7 +1768,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Idris",
@@ -1782,7 +1782,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rachel",
@@ -1797,7 +1797,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Judah",
@@ -1812,7 +1812,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Nadia",
@@ -1826,7 +1826,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kellan",
@@ -1840,7 +1840,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Haylee",
@@ -1854,7 +1854,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rowan",
@@ -1869,7 +1869,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Amirah",
@@ -1884,7 +1884,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Rogelio",
@@ -1898,7 +1898,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Riley",
@@ -1912,7 +1912,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mason",
@@ -1927,7 +1927,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Aliyah",
@@ -1941,7 +1941,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Raymond",
@@ -1955,7 +1955,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Davina",
@@ -1970,7 +1970,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Cairo",
@@ -1984,7 +1984,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jessie",
@@ -1999,7 +1999,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rhett",
@@ -2013,7 +2013,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lorelai",
@@ -2028,7 +2028,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brian",
@@ -2042,7 +2042,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Julissa",
@@ -2056,7 +2056,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Marcellus",
@@ -2071,7 +2071,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Coraline",
@@ -2085,7 +2085,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Eliel",
@@ -2099,7 +2099,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Danielle",
@@ -2113,7 +2113,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Armando",
@@ -2127,7 +2127,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Melany",
@@ -2141,7 +2141,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jace",
@@ -2155,7 +2155,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Layne",
@@ -2170,7 +2170,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Odin",
@@ -2184,7 +2184,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Leighton",
@@ -2198,7 +2198,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nixon",
@@ -2212,7 +2212,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brittany",
@@ -2226,7 +2226,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Walker",
@@ -2240,7 +2240,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Rivka",
@@ -2254,7 +2254,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Jensen",
@@ -2269,7 +2269,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Hailey",
@@ -2284,7 +2284,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Musa",
@@ -2298,7 +2298,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Nevaeh",
@@ -2312,7 +2312,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alaric",
@@ -2326,7 +2326,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rosalie",
@@ -2340,7 +2340,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Aron",
@@ -2354,7 +2354,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alina",
@@ -2368,7 +2368,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sonny",
@@ -2383,7 +2383,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Juniper",
@@ -2397,7 +2397,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Finnley",
@@ -2411,7 +2411,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Mazikee",
@@ -2426,7 +2426,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Augustus",
@@ -2441,7 +2441,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Tinsley",
@@ -2455,7 +2455,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Isaias",
@@ -2469,7 +2469,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Fallon",
@@ -2484,7 +2484,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Deacon",
@@ -2498,7 +2498,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Leah",
@@ -2512,7 +2512,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sutton",
@@ -2526,7 +2526,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Briella",
@@ -2540,7 +2540,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Gunnar",
@@ -2554,7 +2554,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Cynthia",
@@ -2569,7 +2569,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Zahir",
@@ -2583,7 +2583,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Diana",
@@ -2598,7 +2598,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Anthony",
@@ -2612,7 +2612,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Elliana",
@@ -2626,7 +2626,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Legend",
@@ -2641,7 +2641,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Amoura",
@@ -2655,7 +2655,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Zeke",
@@ -2669,7 +2669,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Juliana",
@@ -2683,7 +2683,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lucca",
@@ -2697,7 +2697,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Cynthia",
@@ -2711,7 +2711,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Branson",
@@ -2725,7 +2725,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Emelia",
@@ -2739,7 +2739,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kamden",
@@ -2753,7 +2753,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brynleigh",
@@ -2767,7 +2767,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Santos",
@@ -2781,7 +2781,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kaydence",
@@ -2795,7 +2795,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Steven",
@@ -2809,7 +2809,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Juliette",
@@ -2824,7 +2824,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Bryant",
@@ -2838,7 +2838,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brooke",
@@ -2852,7 +2852,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Curtis",
@@ -2866,7 +2866,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Kataleya",
@@ -2881,7 +2881,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Christian",
@@ -2896,7 +2896,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kate",
@@ -2910,7 +2910,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Raylan",
@@ -2924,7 +2924,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Angel",
@@ -2938,7 +2938,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alberto",
@@ -2952,7 +2952,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Tinsley",
@@ -2966,7 +2966,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ramon",
@@ -2980,7 +2980,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ayla",
@@ -2994,7 +2994,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Orlando",
@@ -3008,7 +3008,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brittany",
@@ -3022,7 +3022,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Robert",
@@ -3036,7 +3036,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Annalise",
@@ -3051,7 +3051,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Charles",
@@ -3065,7 +3065,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Amelie",
@@ -3079,7 +3079,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Kendrick",
@@ -3093,7 +3093,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Braylee",
@@ -3107,7 +3107,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Emmanuel",
@@ -3121,7 +3121,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alexandria",
@@ -3135,7 +3135,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Joaquin",
@@ -3150,7 +3150,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Annika",
@@ -3164,7 +3164,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Sergio",
@@ -3178,7 +3178,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Sage",
@@ -3193,7 +3193,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Francis",
@@ -3207,7 +3207,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maeve",
@@ -3222,7 +3222,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lian",
@@ -3236,7 +3236,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Evelyn",
@@ -3250,7 +3250,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Forest",
@@ -3265,7 +3265,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Maci",
@@ -3279,7 +3279,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Crosby",
@@ -3293,7 +3293,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Daniella",
@@ -3307,7 +3307,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Vance",
@@ -3322,7 +3322,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Aislinn",
@@ -3336,7 +3336,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Johan",
@@ -3351,7 +3351,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Yamileth",
@@ -3365,7 +3365,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kane",
@@ -3379,7 +3379,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nora",
@@ -3393,7 +3393,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Larry",
@@ -3408,7 +3408,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Elianna",
@@ -3423,7 +3423,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Luis",
@@ -3438,7 +3438,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Lara",
@@ -3453,7 +3453,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Riley",
@@ -3467,7 +3467,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ensley",
@@ -3481,7 +3481,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Jasper",
@@ -3495,7 +3495,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Parker",
@@ -3509,7 +3509,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Abdiel",
@@ -3523,7 +3523,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Audrey",
@@ -3538,7 +3538,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Martin",
@@ -3552,7 +3552,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rosalee",
@@ -3567,7 +3567,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jamir",
@@ -3582,7 +3582,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Jazlyn",
@@ -3597,7 +3597,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Shiloh",
@@ -3611,7 +3611,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Justice",
@@ -3625,7 +3625,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jefferson",
@@ -3639,7 +3639,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Naomi",
@@ -3654,7 +3654,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Edward",
@@ -3668,7 +3668,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Denise",
@@ -3682,7 +3682,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ace",
@@ -3697,7 +3697,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Gwendolyn",
@@ -3711,7 +3711,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Leland",
@@ -3726,7 +3726,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Camilla",
@@ -3740,7 +3740,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Abdullah",
@@ -3754,7 +3754,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sofia",
@@ -3768,7 +3768,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Sergio",
@@ -3783,7 +3783,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Charley",
@@ -3798,7 +3798,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Houston",
@@ -3812,7 +3812,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Hannah",
@@ -3826,7 +3826,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kairo",
@@ -3840,7 +3840,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Elaina",
@@ -3854,7 +3854,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Gabriel",
@@ -3868,7 +3868,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Paloma",
@@ -3882,7 +3882,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kohen",
@@ -3896,7 +3896,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Braylee",
@@ -3910,7 +3910,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Roy",
@@ -3924,7 +3924,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nia",
@@ -3939,7 +3939,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Cole",
@@ -3953,7 +3953,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alessandra",
@@ -3967,7 +3967,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Titan",
@@ -3981,7 +3981,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Emilia",
@@ -3995,7 +3995,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Jaden",
@@ -4009,7 +4009,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Millie",
@@ -4023,7 +4023,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Felix",
@@ -4038,7 +4038,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Selene",
@@ -4052,7 +4052,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jaylen",
@@ -4066,7 +4066,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Avianna",
@@ -4080,7 +4080,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Muhammad",
@@ -4095,7 +4095,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nyla",
@@ -4109,7 +4109,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Grant",
@@ -4123,7 +4123,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lacey",
@@ -4137,7 +4137,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Van",
@@ -4152,7 +4152,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Shay",
@@ -4166,7 +4166,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Hamza",
@@ -4180,7 +4180,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Naya",
@@ -4194,7 +4194,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Frankie",
@@ -4208,7 +4208,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Hanna",
@@ -4223,7 +4223,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Cyrus",
@@ -4237,7 +4237,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rylan",
@@ -4251,7 +4251,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Emmett",
@@ -4266,7 +4266,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ariel",
@@ -4281,7 +4281,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jon",
@@ -4296,7 +4296,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kenzie",
@@ -4310,7 +4310,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Giovanni",
@@ -4324,7 +4324,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Melany",
@@ -4338,7 +4338,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Henry",
@@ -4352,7 +4352,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Veda",
@@ -4366,7 +4366,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Nathaniel",
@@ -4381,7 +4381,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kailani",
@@ -4395,7 +4395,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Cohen",
@@ -4409,7 +4409,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Reina",
@@ -4424,7 +4424,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Edwin",
@@ -4438,7 +4438,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Avayah",
@@ -4453,7 +4453,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Abner",
@@ -4467,7 +4467,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Opal",
@@ -4482,7 +4482,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Melvin",
@@ -4496,7 +4496,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Teresa",
@@ -4511,7 +4511,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Cannon",
@@ -4525,7 +4525,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Amaia",
@@ -4539,7 +4539,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Riley",
@@ -4553,7 +4553,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Keira",
@@ -4567,7 +4567,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Benicio",
@@ -4581,7 +4581,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Magdalena",
@@ -4596,7 +4596,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Thiago",
@@ -4610,7 +4610,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Adelina",
@@ -4624,7 +4624,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Reese",
@@ -4638,7 +4638,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rowan",
@@ -4653,7 +4653,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ezequiel",
@@ -4667,7 +4667,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Miracle",
@@ -4681,7 +4681,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Milan",
@@ -4695,7 +4695,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sylvia",
@@ -4709,7 +4709,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Leighton",
@@ -4723,7 +4723,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Camille",
@@ -4737,7 +4737,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jaxxon",
@@ -4751,7 +4751,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Wren",
@@ -4765,7 +4765,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Abel",
@@ -4779,7 +4779,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Aliya",
@@ -4793,7 +4793,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Memphis",
@@ -4808,7 +4808,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alice",
@@ -4822,7 +4822,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Mack",
@@ -4837,7 +4837,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Irene",
@@ -4851,7 +4851,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Walter",
@@ -4865,7 +4865,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Navy",
@@ -4879,7 +4879,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Anders",
@@ -4893,7 +4893,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Gianna",
@@ -4908,7 +4908,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rene",
@@ -4923,7 +4923,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rosa",
@@ -4937,7 +4937,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Amir",
@@ -4951,7 +4951,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Saoirse",
@@ -4965,7 +4965,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Jamie",
@@ -4980,7 +4980,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Valery",
@@ -4994,7 +4994,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ezequiel",
@@ -5008,7 +5008,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Elle",
@@ -5022,7 +5022,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sullivan",
@@ -5036,7 +5036,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Katie",
@@ -5050,7 +5050,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Amir",
@@ -5064,7 +5064,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Margo",
@@ -5079,7 +5079,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Cameron",
@@ -5093,7 +5093,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Chandler",
@@ -5107,7 +5107,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Huxley",
@@ -5121,7 +5121,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alena",
@@ -5135,7 +5135,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Spencer",
@@ -5150,7 +5150,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Kyla",
@@ -5165,7 +5165,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lane",
@@ -5179,7 +5179,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jaylin",
@@ -5194,7 +5194,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Michael",
@@ -5208,7 +5208,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Ila",
@@ -5222,7 +5222,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Benjamin",
@@ -5236,7 +5236,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Hailey",
@@ -5250,7 +5250,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Malcolm",
@@ -5264,7 +5264,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Regina",
@@ -5278,7 +5278,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Keith",
@@ -5293,7 +5293,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alaiya",
@@ -5307,7 +5307,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Remington",
@@ -5321,7 +5321,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Leia",
@@ -5335,7 +5335,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Seven",
@@ -5349,7 +5349,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Natalia",
@@ -5363,7 +5363,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Robin",
@@ -5377,7 +5377,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Calliope",
@@ -5391,7 +5391,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Charlie",
@@ -5405,7 +5405,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Isabella",
@@ -5419,7 +5419,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Dilan",
@@ -5434,7 +5434,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Cadence",
@@ -5448,7 +5448,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Crew",
@@ -5462,7 +5462,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Eva",
@@ -5477,7 +5477,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Iker",
@@ -5492,7 +5492,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Rosa",
@@ -5506,7 +5506,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maverick",
@@ -5521,7 +5521,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Myra",
@@ -5535,7 +5535,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "King",
@@ -5549,7 +5549,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Stephanie",
@@ -5563,7 +5563,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Emory",
@@ -5577,7 +5577,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Cassidy",
@@ -5591,7 +5591,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Denver",
@@ -5605,7 +5605,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lily",
@@ -5619,7 +5619,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Cruz",
@@ -5633,7 +5633,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kimber",
@@ -5647,7 +5647,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jeremiah",
@@ -5661,7 +5661,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Dallas",
@@ -5675,7 +5675,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Legacy",
@@ -5689,7 +5689,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Clara",
@@ -5703,7 +5703,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Kash",
@@ -5718,7 +5718,7 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Harmony",
@@ -5732,7 +5732,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Wesson",
@@ -5746,7 +5746,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Milani",
@@ -5761,7 +5761,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jeffrey",
@@ -5775,7 +5775,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Eliza",
@@ -5789,7 +5789,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Uriah",
@@ -5804,7 +5804,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Rosie",
@@ -5818,7 +5818,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Dillon",
@@ -5833,7 +5833,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Whitney",
@@ -5847,7 +5847,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Kace",
@@ -5862,7 +5862,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Gianna",
@@ -5876,7 +5876,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Kamryn",
@@ -5890,7 +5890,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Athena",
@@ -5904,7 +5904,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Ocean",
@@ -5918,7 +5918,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Shelby",
@@ -5932,7 +5932,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Tyson",
@@ -5946,7 +5946,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Carolina",
@@ -5961,7 +5961,7 @@ module.exports = [
         "permissionLevel": "Recorder",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Finley",
@@ -5975,7 +5975,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Khalani",
@@ -5989,7 +5989,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Bryan",
@@ -6003,7 +6003,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Zuri",
@@ -6018,7 +6018,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Frankie",
@@ -6032,7 +6032,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alessandra",
@@ -6046,7 +6046,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Damari",
@@ -6060,7 +6060,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Recorder",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nancy",
@@ -6074,7 +6074,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kamden",
@@ -6088,7 +6088,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Payton",
@@ -6102,7 +6102,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jason",
@@ -6117,7 +6117,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Emilia",
@@ -6132,7 +6132,7 @@ module.exports = [
         "permissionLevel": "Administrator",
         "status": "Deactivated",
         "deactivatedDate": "2024-12-05",
-        "clinician": false
+        "vaccinator": false
       }
     ],
     "firstName": "Jakobe",
@@ -6146,7 +6146,7 @@ module.exports = [
         "id": "RCF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Cash",
@@ -6160,7 +6160,7 @@ module.exports = [
         "id": "RBS",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Tatum",
@@ -6174,7 +6174,7 @@ module.exports = [
         "id": "RM9",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Briella",
@@ -6188,7 +6188,7 @@ module.exports = [
         "id": "RCL",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Harry",
@@ -6202,7 +6202,7 @@ module.exports = [
         "id": "RHN",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kayla",
@@ -6216,7 +6216,7 @@ module.exports = [
         "id": "RTK",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kohen",
@@ -6230,7 +6230,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Saul",
@@ -6244,7 +6244,7 @@ module.exports = [
         "id": "RVN",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Emmitt",
@@ -6258,7 +6258,7 @@ module.exports = [
         "id": "RF4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Vada",
@@ -6272,7 +6272,7 @@ module.exports = [
         "id": "RVL",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Eloise",
@@ -6286,7 +6286,7 @@ module.exports = [
         "id": "RCZ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kataleya",
@@ -6300,7 +6300,7 @@ module.exports = [
         "id": "RRP",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Freyja",
@@ -6314,7 +6314,7 @@ module.exports = [
         "id": "RCN",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Dennis",
@@ -6328,7 +6328,7 @@ module.exports = [
         "id": "RFF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rosa",
@@ -6342,7 +6342,7 @@ module.exports = [
         "id": "RNJ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Leia",
@@ -6356,7 +6356,7 @@ module.exports = [
         "id": "R1H",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Aylin",
@@ -6370,7 +6370,7 @@ module.exports = [
         "id": "RDD",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mercy",
@@ -6384,7 +6384,7 @@ module.exports = [
         "id": "RCP",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ishaan",
@@ -6398,7 +6398,7 @@ module.exports = [
         "id": "RD2",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lydia",
@@ -6412,7 +6412,7 @@ module.exports = [
         "id": "RDX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kyng",
@@ -6426,7 +6426,7 @@ module.exports = [
         "id": "RFT",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maddison",
@@ -6440,7 +6440,7 @@ module.exports = [
         "id": "RC1",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Langston",
@@ -6454,7 +6454,7 @@ module.exports = [
         "id": "RFU",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Malayah",
@@ -6468,7 +6468,7 @@ module.exports = [
         "id": "RV7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Belle",
@@ -6482,7 +6482,7 @@ module.exports = [
         "id": "RC9",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jada",
@@ -6496,7 +6496,7 @@ module.exports = [
         "id": "RWX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nixon",
@@ -6510,7 +6510,7 @@ module.exports = [
         "id": "RG6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rocco",
@@ -6524,7 +6524,7 @@ module.exports = [
         "id": "RXT",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Karen",
@@ -6538,7 +6538,7 @@ module.exports = [
         "id": "RYW",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "August",
@@ -6552,7 +6552,7 @@ module.exports = [
         "id": "RL7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sutton",
@@ -6566,7 +6566,7 @@ module.exports = [
         "id": "RWL",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Joey",
@@ -6580,7 +6580,7 @@ module.exports = [
         "id": "RQ3",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Collin",
@@ -6594,7 +6594,7 @@ module.exports = [
         "id": "RLU",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Boden",
@@ -6608,7 +6608,7 @@ module.exports = [
         "id": "RQ4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nova",
@@ -6622,7 +6622,7 @@ module.exports = [
         "id": "RMB",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Juniper",
@@ -6636,7 +6636,7 @@ module.exports = [
         "id": "RXL",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Tatum",
@@ -6650,7 +6650,7 @@ module.exports = [
         "id": "RMR",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Freya",
@@ -6664,7 +6664,7 @@ module.exports = [
         "id": "RML",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Annabelle",
@@ -6678,7 +6678,7 @@ module.exports = [
         "id": "RMC",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maverick",
@@ -6692,7 +6692,7 @@ module.exports = [
         "id": "RCE",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mabel",
@@ -6706,7 +6706,7 @@ module.exports = [
         "id": "RAE",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Serena",
@@ -6720,7 +6720,7 @@ module.exports = [
         "id": "RY2",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Karsyn",
@@ -6734,7 +6734,7 @@ module.exports = [
         "id": "RXH",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nathalia",
@@ -6748,7 +6748,7 @@ module.exports = [
         "id": "RGU",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Legacy",
@@ -6762,7 +6762,7 @@ module.exports = [
         "id": "RBR",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Legacy",
@@ -6776,7 +6776,7 @@ module.exports = [
         "id": "RG3",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Arjun",
@@ -6790,7 +6790,7 @@ module.exports = [
         "id": "RXQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Callahan",
@@ -6804,7 +6804,7 @@ module.exports = [
         "id": "REU",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mordechai",
@@ -6818,7 +6818,7 @@ module.exports = [
         "id": "RJF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Celeste",
@@ -6832,7 +6832,7 @@ module.exports = [
         "id": "RMN",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Iker",
@@ -6846,7 +6846,7 @@ module.exports = [
         "id": "RWY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Danielle",
@@ -6860,7 +6860,7 @@ module.exports = [
         "id": "RGA",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Teagan",
@@ -6874,7 +6874,7 @@ module.exports = [
         "id": "RJX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Stephanie",
@@ -6888,7 +6888,7 @@ module.exports = [
         "id": "RGT",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Darren",
@@ -6902,7 +6902,7 @@ module.exports = [
         "id": "RT1",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jenesis",
@@ -6916,7 +6916,7 @@ module.exports = [
         "id": "RYV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Paul",
@@ -6930,7 +6930,7 @@ module.exports = [
         "id": "RHB",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maximiliano",
@@ -6944,7 +6944,7 @@ module.exports = [
         "id": "RRQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kason",
@@ -6958,7 +6958,7 @@ module.exports = [
         "id": "RWM",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Marie",
@@ -6972,7 +6972,7 @@ module.exports = [
         "id": "RLG",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kataleya",
@@ -6986,7 +6986,7 @@ module.exports = [
         "id": "RV3",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Stetson",
@@ -7000,7 +7000,7 @@ module.exports = [
         "id": "RYX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Isabel",
@@ -7014,7 +7014,7 @@ module.exports = [
         "id": "RBU",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "John",
@@ -7028,7 +7028,7 @@ module.exports = [
         "id": "RCY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Gwendolyn",
@@ -7042,7 +7042,7 @@ module.exports = [
         "id": "RAU",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Abigail",
@@ -7056,7 +7056,7 @@ module.exports = [
         "id": "RFJ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maia",
@@ -7070,7 +7070,7 @@ module.exports = [
         "id": "RCV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Travis",
@@ -7084,7 +7084,7 @@ module.exports = [
         "id": "RQM",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mordechai",
@@ -7098,7 +7098,7 @@ module.exports = [
         "id": "RJT",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brinley",
@@ -7112,7 +7112,7 @@ module.exports = [
         "id": "RBP",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Malcolm",
@@ -7126,7 +7126,7 @@ module.exports = [
         "id": "RFS",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sierra",
@@ -7140,7 +7140,7 @@ module.exports = [
         "id": "RLK",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Layne",
@@ -7154,7 +7154,7 @@ module.exports = [
         "id": "RJU",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kendrick",
@@ -7168,7 +7168,7 @@ module.exports = [
         "id": "RRL",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brynleigh",
@@ -7182,7 +7182,7 @@ module.exports = [
         "id": "RLW",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Juniper",
@@ -7196,7 +7196,7 @@ module.exports = [
         "id": "RLN",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Daxton",
@@ -7210,7 +7210,7 @@ module.exports = [
         "id": "RME",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Boden",
@@ -7224,7 +7224,7 @@ module.exports = [
         "id": "RKX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Queen",
@@ -7238,7 +7238,7 @@ module.exports = [
         "id": "RK7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Indie",
@@ -7252,7 +7252,7 @@ module.exports = [
         "id": "RV4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Oakley",
@@ -7266,7 +7266,7 @@ module.exports = [
         "id": "RMM",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Samantha",
@@ -7280,7 +7280,7 @@ module.exports = [
         "id": "RA6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Anya",
@@ -7294,7 +7294,7 @@ module.exports = [
         "id": "RJ8",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Hope",
@@ -7308,7 +7308,7 @@ module.exports = [
         "id": "RJR",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rocco",
@@ -7322,7 +7322,7 @@ module.exports = [
         "id": "RXP",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Colson",
@@ -7336,7 +7336,7 @@ module.exports = [
         "id": "RTC",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ila",
@@ -7350,7 +7350,7 @@ module.exports = [
         "id": "RL6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brecken",
@@ -7364,7 +7364,7 @@ module.exports = [
         "id": "RYG",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Gatlin",
@@ -7378,7 +7378,7 @@ module.exports = [
         "id": "RNB",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Armando",
@@ -7392,7 +7392,7 @@ module.exports = [
         "id": "RHE",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Eliel",
@@ -7406,7 +7406,7 @@ module.exports = [
         "id": "RA0",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Edison",
@@ -7420,7 +7420,7 @@ module.exports = [
         "id": "RJ6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Callie",
@@ -7434,7 +7434,7 @@ module.exports = [
         "id": "RE6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Oakley",
@@ -7448,7 +7448,7 @@ module.exports = [
         "id": "RX4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lydia",
@@ -7462,7 +7462,7 @@ module.exports = [
         "id": "RYL",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rome",
@@ -7476,7 +7476,7 @@ module.exports = [
         "id": "RN7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Banks",
@@ -7490,7 +7490,7 @@ module.exports = [
         "id": "RFP",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Emmitt",
@@ -7504,7 +7504,7 @@ module.exports = [
         "id": "RY8",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Callahan",
@@ -7518,7 +7518,7 @@ module.exports = [
         "id": "RXM",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Boone",
@@ -7532,7 +7532,7 @@ module.exports = [
         "id": "RK8",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Manuel",
@@ -7546,7 +7546,7 @@ module.exports = [
         "id": "RWV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Milana",
@@ -7560,7 +7560,7 @@ module.exports = [
         "id": "RMW",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Darren",
@@ -7574,7 +7574,7 @@ module.exports = [
         "id": "RP5",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Eden",
@@ -7588,7 +7588,7 @@ module.exports = [
         "id": "RWC",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Shepard",
@@ -7602,7 +7602,7 @@ module.exports = [
         "id": "RAG",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Malia",
@@ -7616,7 +7616,7 @@ module.exports = [
         "id": "RHP",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Londyn",
@@ -7630,7 +7630,7 @@ module.exports = [
         "id": "RBD",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mina",
@@ -7644,7 +7644,7 @@ module.exports = [
         "id": "RDY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Callen",
@@ -7658,7 +7658,7 @@ module.exports = [
         "id": "RYK",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Aaliyah",
@@ -7672,7 +7672,7 @@ module.exports = [
         "id": "RC3",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alisson",
@@ -7686,7 +7686,7 @@ module.exports = [
         "id": "RV2",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Aryan",
@@ -7700,7 +7700,7 @@ module.exports = [
         "id": "RWH",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lyric",
@@ -7714,7 +7714,7 @@ module.exports = [
         "id": "RMZ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maxwell",
@@ -7728,7 +7728,7 @@ module.exports = [
         "id": "RD6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Anakin",
@@ -7742,7 +7742,7 @@ module.exports = [
         "id": "RJN",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Estrella",
@@ -7756,7 +7756,7 @@ module.exports = [
         "id": "RA5",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Elliot",
@@ -7770,7 +7770,7 @@ module.exports = [
         "id": "RC4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lola",
@@ -7784,7 +7784,7 @@ module.exports = [
         "id": "RVV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Everest",
@@ -7798,7 +7798,7 @@ module.exports = [
         "id": "RTM",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brielle",
@@ -7812,7 +7812,7 @@ module.exports = [
         "id": "RXR",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Krew",
@@ -7826,7 +7826,7 @@ module.exports = [
         "id": "RWK",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Giavanna",
@@ -7840,7 +7840,7 @@ module.exports = [
         "id": "RV6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Juniper",
@@ -7854,7 +7854,7 @@ module.exports = [
         "id": "RX9",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Paisleigh",
@@ -7868,7 +7868,7 @@ module.exports = [
         "id": "RYC",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Santana",
@@ -7882,7 +7882,7 @@ module.exports = [
         "id": "RDE",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ben",
@@ -7896,7 +7896,7 @@ module.exports = [
         "id": "RGJ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Josiah",
@@ -7910,7 +7910,7 @@ module.exports = [
         "id": "RHH",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Richard",
@@ -7924,7 +7924,7 @@ module.exports = [
         "id": "RXD",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nora",
@@ -7938,7 +7938,7 @@ module.exports = [
         "id": "RXC",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Eddie",
@@ -7952,7 +7952,7 @@ module.exports = [
         "id": "RMU",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Eliezer",
@@ -7966,7 +7966,7 @@ module.exports = [
         "id": "RF3",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Imani",
@@ -7980,7 +7980,7 @@ module.exports = [
         "id": "RGX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kaden",
@@ -7994,7 +7994,7 @@ module.exports = [
         "id": "RDL",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rocco",
@@ -8008,7 +8008,7 @@ module.exports = [
         "id": "RHC",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Fabian",
@@ -8022,7 +8022,7 @@ module.exports = [
         "id": "RVR",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Piper",
@@ -8036,7 +8036,7 @@ module.exports = [
         "id": "RA1",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Boone",
@@ -8050,7 +8050,7 @@ module.exports = [
         "id": "RB4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nico",
@@ -8064,7 +8064,7 @@ module.exports = [
         "id": "RQV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Karen",
@@ -8078,7 +8078,7 @@ module.exports = [
         "id": "R1L",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ishaan",
@@ -8092,7 +8092,7 @@ module.exports = [
         "id": "REA",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Keanu",
@@ -8106,7 +8106,7 @@ module.exports = [
         "id": "RBG",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Max",
@@ -8120,7 +8120,7 @@ module.exports = [
         "id": "RDF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Zechariah",
@@ -8134,7 +8134,7 @@ module.exports = [
         "id": "RQT",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Addisyn",
@@ -8148,7 +8148,7 @@ module.exports = [
         "id": "REB",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Elsa",
@@ -8162,7 +8162,7 @@ module.exports = [
         "id": "RDU",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Cataleya",
@@ -8176,7 +8176,7 @@ module.exports = [
         "id": "RM8",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Roberto",
@@ -8190,7 +8190,7 @@ module.exports = [
         "id": "RR7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Armando",
@@ -8204,7 +8204,7 @@ module.exports = [
         "id": "RM7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Stetson",
@@ -8218,7 +8218,7 @@ module.exports = [
         "id": "RE2",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kaysen",
@@ -8232,7 +8232,7 @@ module.exports = [
         "id": "RLT",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Julia",
@@ -8246,7 +8246,7 @@ module.exports = [
         "id": "RFL",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Faith",
@@ -8260,7 +8260,7 @@ module.exports = [
         "id": "R1J",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Josiah",
@@ -8274,7 +8274,7 @@ module.exports = [
         "id": "RTQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Roy",
@@ -8288,7 +8288,7 @@ module.exports = [
         "id": "RTE",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Annika",
@@ -8302,7 +8302,7 @@ module.exports = [
         "id": "RH6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Boone",
@@ -8316,7 +8316,7 @@ module.exports = [
         "id": "RJH",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sutton",
@@ -8330,7 +8330,7 @@ module.exports = [
         "id": "RQU",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Arjun",
@@ -8344,7 +8344,7 @@ module.exports = [
         "id": "RP4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Natasha",
@@ -8358,7 +8358,7 @@ module.exports = [
         "id": "RX5",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Elian",
@@ -8372,7 +8372,7 @@ module.exports = [
         "id": "RN3",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Micah",
@@ -8386,7 +8386,7 @@ module.exports = [
         "id": "RMA",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Bruce",
@@ -8400,7 +8400,7 @@ module.exports = [
         "id": "RXV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Laila",
@@ -8414,7 +8414,7 @@ module.exports = [
         "id": "RMG",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lauryn",
@@ -8428,7 +8428,7 @@ module.exports = [
         "id": "RJ1",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Tatum",
@@ -8442,7 +8442,7 @@ module.exports = [
         "id": "RVF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kareem",
@@ -8456,7 +8456,7 @@ module.exports = [
         "id": "RJS",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Julieta",
@@ -8470,7 +8470,7 @@ module.exports = [
         "id": "RQN",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Eloise",
@@ -8484,7 +8484,7 @@ module.exports = [
         "id": "RKD",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lydia",
@@ -8498,7 +8498,7 @@ module.exports = [
         "id": "RW1",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Pedro",
@@ -8512,7 +8512,7 @@ module.exports = [
         "id": "RN5",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Legacy",
@@ -8526,7 +8526,7 @@ module.exports = [
         "id": "RC5",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Boone",
@@ -8540,7 +8540,7 @@ module.exports = [
         "id": "RP2",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Malcolm",
@@ -8554,7 +8554,7 @@ module.exports = [
         "id": "RCD",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Paxton",
@@ -8568,7 +8568,7 @@ module.exports = [
         "id": "RQK",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jericho",
@@ -8582,7 +8582,7 @@ module.exports = [
         "id": "RRY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Julieta",
@@ -8596,7 +8596,7 @@ module.exports = [
         "id": "RDM",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Tiffany",
@@ -8610,7 +8610,7 @@ module.exports = [
         "id": "RG7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jaziel",
@@ -8624,7 +8624,7 @@ module.exports = [
         "id": "RR1",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ryan",
@@ -8638,7 +8638,7 @@ module.exports = [
         "id": "RD7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Edison",
@@ -8652,7 +8652,7 @@ module.exports = [
         "id": "RL5",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kailani",
@@ -8666,7 +8666,7 @@ module.exports = [
         "id": "R1A",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maddison",
@@ -8680,7 +8680,7 @@ module.exports = [
         "id": "RY4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Enoch",
@@ -8694,7 +8694,7 @@ module.exports = [
         "id": "RWR",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ari",
@@ -8708,7 +8708,7 @@ module.exports = [
         "id": "RCM",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maximiliano",
@@ -8722,7 +8722,7 @@ module.exports = [
         "id": "RQQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ezekiel",
@@ -8736,7 +8736,7 @@ module.exports = [
         "id": "RQX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jenesis",
@@ -8750,7 +8750,7 @@ module.exports = [
         "id": "RC8",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nora",
@@ -8764,7 +8764,7 @@ module.exports = [
         "id": "RH3",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maddison",
@@ -8778,7 +8778,7 @@ module.exports = [
         "id": "RY9",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Grady",
@@ -8792,7 +8792,7 @@ module.exports = [
         "id": "RFX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Bennett",
@@ -8806,7 +8806,7 @@ module.exports = [
         "id": "RGB",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Everlee",
@@ -8820,7 +8820,7 @@ module.exports = [
         "id": "RMV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Walter",
@@ -8834,7 +8834,7 @@ module.exports = [
         "id": "RWA",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Karina",
@@ -8848,7 +8848,7 @@ module.exports = [
         "id": "RV9",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kaysen",
@@ -8862,7 +8862,7 @@ module.exports = [
         "id": "RYN",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Adan",
@@ -8876,7 +8876,7 @@ module.exports = [
         "id": "RYJ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Zariah",
@@ -8890,13 +8890,13 @@ module.exports = [
         "id": "RGQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       },
       {
         "id": "RDQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Amora",
@@ -8910,7 +8910,7 @@ module.exports = [
         "id": "RR2",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Paige",
@@ -8924,7 +8924,7 @@ module.exports = [
         "id": "RGP",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maia",
@@ -8938,7 +8938,7 @@ module.exports = [
         "id": "RGW",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Isabela",
@@ -8952,7 +8952,7 @@ module.exports = [
         "id": "RXY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brodie",
@@ -8966,7 +8966,7 @@ module.exports = [
         "id": "RPD",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Colson",
@@ -8980,7 +8980,7 @@ module.exports = [
         "id": "RYY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jocelyn",
@@ -8994,7 +8994,7 @@ module.exports = [
         "id": "RNQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Demi",
@@ -9008,7 +9008,7 @@ module.exports = [
         "id": "RJB",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Valentina",
@@ -9022,7 +9022,7 @@ module.exports = [
         "id": "RJZ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Angel",
@@ -9036,7 +9036,7 @@ module.exports = [
         "id": "RPN",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alejandra",
@@ -9050,7 +9050,7 @@ module.exports = [
         "id": "RAX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Major",
@@ -9064,7 +9064,7 @@ module.exports = [
         "id": "RDT",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Finley",
@@ -9078,7 +9078,7 @@ module.exports = [
         "id": "RW5",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ibrahim",
@@ -9092,7 +9092,7 @@ module.exports = [
         "id": "RMD",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Cataleya",
@@ -9106,7 +9106,7 @@ module.exports = [
         "id": "RXN",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Levi",
@@ -9120,7 +9120,7 @@ module.exports = [
         "id": "REV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Braylon",
@@ -9134,13 +9134,13 @@ module.exports = [
         "id": "RGD",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       },
       {
         "id": "RPH",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Zion",
@@ -9154,7 +9154,7 @@ module.exports = [
         "id": "RY6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Elsa",
@@ -9168,7 +9168,7 @@ module.exports = [
         "id": "RR8",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Melvin",
@@ -9182,7 +9182,7 @@ module.exports = [
         "id": "RFB",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Annabelle",
@@ -9196,7 +9196,7 @@ module.exports = [
         "id": "RFD",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ashley",
@@ -9210,7 +9210,7 @@ module.exports = [
         "id": "RK2",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Matteo",
@@ -9224,7 +9224,7 @@ module.exports = [
         "id": "RT5",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Virginia",
@@ -9238,7 +9238,7 @@ module.exports = [
         "id": "RJ2",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sarah",
@@ -9252,7 +9252,7 @@ module.exports = [
         "id": "RN9",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jordan",
@@ -9266,7 +9266,7 @@ module.exports = [
         "id": "RGS",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Dallas",
@@ -9280,7 +9280,7 @@ module.exports = [
         "id": "RRX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Aryan",
@@ -9294,7 +9294,7 @@ module.exports = [
         "id": "RK4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Quinton",
@@ -9308,7 +9308,7 @@ module.exports = [
         "id": "RBX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brynleigh",
@@ -9322,7 +9322,7 @@ module.exports = [
         "id": "RY5",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Saul",
@@ -9336,7 +9336,7 @@ module.exports = [
         "id": "RP7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Wayne",
@@ -9350,7 +9350,7 @@ module.exports = [
         "id": "RY1",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Leia",
@@ -9364,7 +9364,7 @@ module.exports = [
         "id": "RBQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Gracie",
@@ -9378,7 +9378,7 @@ module.exports = [
         "id": "REM",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Murphy",
@@ -9392,7 +9392,7 @@ module.exports = [
         "id": "REP",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Anika",
@@ -9406,7 +9406,7 @@ module.exports = [
         "id": "RRU",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Milo",
@@ -9420,7 +9420,7 @@ module.exports = [
         "id": "R1K",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Aitana",
@@ -9434,7 +9434,7 @@ module.exports = [
         "id": "RWF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ivan",
@@ -9448,7 +9448,7 @@ module.exports = [
         "id": "R0A",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Stetson",
@@ -9462,7 +9462,7 @@ module.exports = [
         "id": "RPA",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Milan",
@@ -9476,7 +9476,7 @@ module.exports = [
         "id": "RMH",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Noah",
@@ -9490,7 +9490,7 @@ module.exports = [
         "id": "RBN",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Harlan",
@@ -9504,7 +9504,7 @@ module.exports = [
         "id": "RW4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brennan",
@@ -9518,7 +9518,7 @@ module.exports = [
         "id": "RB6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mason",
@@ -9532,7 +9532,7 @@ module.exports = [
         "id": "RAJ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Pedro",
@@ -9546,7 +9546,7 @@ module.exports = [
         "id": "RGL",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Eden",
@@ -9560,7 +9560,7 @@ module.exports = [
         "id": "RBT",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sage",
@@ -9574,7 +9574,7 @@ module.exports = [
         "id": "RP3",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Xzavier",
@@ -9588,7 +9588,7 @@ module.exports = [
         "id": "RDG",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jayleen",
@@ -9602,7 +9602,7 @@ module.exports = [
         "id": "RQ8",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Colby",
@@ -9616,7 +9616,7 @@ module.exports = [
         "id": "RQE",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ruth",
@@ -9630,7 +9630,7 @@ module.exports = [
         "id": "RG1",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Audrey",
@@ -9644,7 +9644,7 @@ module.exports = [
         "id": "RJD",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Karina",
@@ -9658,7 +9658,7 @@ module.exports = [
         "id": "RPS",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brantley",
@@ -9672,7 +9672,7 @@ module.exports = [
         "id": "RXF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Emmitt",
@@ -9686,7 +9686,7 @@ module.exports = [
         "id": "RRE",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kamari",
@@ -9700,7 +9700,7 @@ module.exports = [
         "id": "RD9",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kataleya",
@@ -9714,7 +9714,7 @@ module.exports = [
         "id": "RD8",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kennedi",
@@ -9728,7 +9728,7 @@ module.exports = [
         "id": "RP6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jaylah",
@@ -9742,7 +9742,7 @@ module.exports = [
         "id": "RQL",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Gracie",
@@ -9756,7 +9756,7 @@ module.exports = [
         "id": "RNM",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Royce",
@@ -9770,7 +9770,7 @@ module.exports = [
         "id": "RNP",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sutton",
@@ -9784,7 +9784,7 @@ module.exports = [
         "id": "RRH",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Isla",
@@ -9798,7 +9798,7 @@ module.exports = [
         "id": "RNH",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Paige",
@@ -9812,7 +9812,7 @@ module.exports = [
         "id": "RYH",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Frida",
@@ -9826,7 +9826,7 @@ module.exports = [
         "id": "RM1",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lauryn",
@@ -9840,7 +9840,7 @@ module.exports = [
         "id": "RMY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Scarlette",
@@ -9854,7 +9854,7 @@ module.exports = [
         "id": "RY3",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Isla",
@@ -9868,7 +9868,7 @@ module.exports = [
         "id": "RVJ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Orlando",
@@ -9882,7 +9882,7 @@ module.exports = [
         "id": "RNN",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Natasha",
@@ -9896,7 +9896,7 @@ module.exports = [
         "id": "RNL",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lola",
@@ -9910,7 +9910,7 @@ module.exports = [
         "id": "RR9",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alaiya",
@@ -9924,7 +9924,7 @@ module.exports = [
         "id": "RX6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Hope",
@@ -9938,7 +9938,7 @@ module.exports = [
         "id": "RVK",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Curtis",
@@ -9952,7 +9952,7 @@ module.exports = [
         "id": "RDJ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nyla",
@@ -9966,7 +9966,7 @@ module.exports = [
         "id": "RF6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brooke",
@@ -9980,7 +9980,7 @@ module.exports = [
         "id": "RAT",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alec",
@@ -9994,7 +9994,7 @@ module.exports = [
         "id": "RRD",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Matthias",
@@ -10008,7 +10008,7 @@ module.exports = [
         "id": "RAQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Xander",
@@ -10022,7 +10022,7 @@ module.exports = [
         "id": "RLF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Giovanna",
@@ -10036,7 +10036,7 @@ module.exports = [
         "id": "G6V2S",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kennedy",
@@ -10050,7 +10050,7 @@ module.exports = [
         "id": "RMK",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Karson",
@@ -10064,7 +10064,7 @@ module.exports = [
         "id": "RES",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mac",
@@ -10078,7 +10078,7 @@ module.exports = [
         "id": "RVT",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Monroe",
@@ -10092,25 +10092,25 @@ module.exports = [
         "id": "RLY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       },
       {
         "id": "R1F",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       },
       {
         "id": "RXK",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       },
       {
         "id": "RG9",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Zachariah",
@@ -10124,7 +10124,7 @@ module.exports = [
         "id": "RVW",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rayden",
@@ -10138,7 +10138,7 @@ module.exports = [
         "id": "RCH",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Hazel",
@@ -10152,7 +10152,7 @@ module.exports = [
         "id": "RLC",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nico",
@@ -10166,7 +10166,7 @@ module.exports = [
         "id": "RP8",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Clementine",
@@ -10180,7 +10180,7 @@ module.exports = [
         "id": "RYP",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Juniper",
@@ -10194,7 +10194,7 @@ module.exports = [
         "id": "RX7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Curtis",
@@ -10208,7 +10208,7 @@ module.exports = [
         "id": "RGK",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brecken",
@@ -10222,7 +10222,7 @@ module.exports = [
         "id": "RGN",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Banks",
@@ -10236,7 +10236,7 @@ module.exports = [
         "id": "RTV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mazikee",
@@ -10250,7 +10250,7 @@ module.exports = [
         "id": "RV8",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mary",
@@ -10264,7 +10264,7 @@ module.exports = [
         "id": "RJ3",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Imani",
@@ -10278,7 +10278,7 @@ module.exports = [
         "id": "RW7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Naya",
@@ -10292,7 +10292,7 @@ module.exports = [
         "id": "RT7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Issac",
@@ -10306,7 +10306,7 @@ module.exports = [
         "id": "RCA",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Stella",
@@ -10320,7 +10320,7 @@ module.exports = [
         "id": "RNW",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maisie",
@@ -10334,7 +10334,7 @@ module.exports = [
         "id": "RNS",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nikolai",
@@ -10348,7 +10348,7 @@ module.exports = [
         "id": "RP1",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Paisleigh",
@@ -10362,7 +10362,7 @@ module.exports = [
         "id": "RNF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Boone",
@@ -10376,7 +10376,7 @@ module.exports = [
         "id": "RM3",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Duncan",
@@ -10390,7 +10390,7 @@ module.exports = [
         "id": "RBZ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Callahan",
@@ -10404,7 +10404,7 @@ module.exports = [
         "id": "RAF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Makayla",
@@ -10418,7 +10418,7 @@ module.exports = [
         "id": "RJL",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Tanner",
@@ -10432,13 +10432,13 @@ module.exports = [
         "id": "RM6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       },
       {
         "id": "REH",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Amari",
@@ -10452,7 +10452,7 @@ module.exports = [
         "id": "RLM",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kailani",
@@ -10466,7 +10466,7 @@ module.exports = [
         "id": "RTF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Asher",
@@ -10480,7 +10480,7 @@ module.exports = [
         "id": "RFZ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maddison",
@@ -10494,7 +10494,7 @@ module.exports = [
         "id": "RCS",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Stephanie",
@@ -10508,7 +10508,7 @@ module.exports = [
         "id": "RCT",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Landyn",
@@ -10522,7 +10522,7 @@ module.exports = [
         "id": "RK6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jadiel",
@@ -10536,7 +10536,7 @@ module.exports = [
         "id": "RX1",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maddison",
@@ -10550,7 +10550,7 @@ module.exports = [
         "id": "RHA",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Marisol",
@@ -10564,7 +10564,7 @@ module.exports = [
         "id": "RBF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Xander",
@@ -10578,7 +10578,7 @@ module.exports = [
         "id": "REX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brooke",
@@ -10592,7 +10592,7 @@ module.exports = [
         "id": "RNU",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Abby",
@@ -10606,7 +10606,7 @@ module.exports = [
         "id": "RNX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jace",
@@ -10620,7 +10620,7 @@ module.exports = [
         "id": "RTH",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Paisleigh",
@@ -10634,7 +10634,7 @@ module.exports = [
         "id": "RNY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Naya",
@@ -10648,7 +10648,7 @@ module.exports = [
         "id": "RHX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Paxton",
@@ -10662,7 +10662,7 @@ module.exports = [
         "id": "RPG",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Amari",
@@ -10676,7 +10676,7 @@ module.exports = [
         "id": "RDA",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Neil",
@@ -10690,7 +10690,7 @@ module.exports = [
         "id": "RW6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ronan",
@@ -10704,7 +10704,7 @@ module.exports = [
         "id": "RT2",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maxwell",
@@ -10718,7 +10718,7 @@ module.exports = [
         "id": "RK1",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brinley",
@@ -10732,7 +10732,7 @@ module.exports = [
         "id": "RR4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Giana",
@@ -10746,7 +10746,7 @@ module.exports = [
         "id": "RED",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maximo",
@@ -10760,7 +10760,7 @@ module.exports = [
         "id": "RD3",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Fox",
@@ -10774,7 +10774,7 @@ module.exports = [
         "id": "RN4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Clare",
@@ -10788,7 +10788,7 @@ module.exports = [
         "id": "RHU",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Curtis",
@@ -10802,7 +10802,7 @@ module.exports = [
         "id": "RNG",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Eddie",
@@ -10816,7 +10816,7 @@ module.exports = [
         "id": "RMF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Malia",
@@ -10830,7 +10830,7 @@ module.exports = [
         "id": "RLH",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Milana",
@@ -10844,7 +10844,7 @@ module.exports = [
         "id": "R0C",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Marvin",
@@ -10858,7 +10858,7 @@ module.exports = [
         "id": "RYT",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jenesis",
@@ -10872,7 +10872,7 @@ module.exports = [
         "id": "RG2",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Karson",
@@ -10886,7 +10886,7 @@ module.exports = [
         "id": "RGZ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Marie",
@@ -10900,7 +10900,7 @@ module.exports = [
         "id": "RPC",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Cameron",
@@ -10914,7 +10914,7 @@ module.exports = [
         "id": "RFK",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Albert",
@@ -10928,7 +10928,7 @@ module.exports = [
         "id": "RG4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Yahir",
@@ -10942,7 +10942,7 @@ module.exports = [
         "id": "RPV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kenzo",
@@ -10956,7 +10956,7 @@ module.exports = [
         "id": "RFY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Laila",
@@ -10970,7 +10970,7 @@ module.exports = [
         "id": "REZ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Isaias",
@@ -10984,7 +10984,7 @@ module.exports = [
         "id": "RNR",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brynleigh",
@@ -10998,7 +10998,7 @@ module.exports = [
         "id": "RXE",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kelvin",
@@ -11012,7 +11012,7 @@ module.exports = [
         "id": "RFG",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Dax",
@@ -11026,7 +11026,7 @@ module.exports = [
         "id": "RH1",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Daleyza",
@@ -11040,7 +11040,7 @@ module.exports = [
         "id": "RHW",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Marie",
@@ -11054,7 +11054,7 @@ module.exports = [
         "id": "RT3",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Tyson",
@@ -11068,7 +11068,7 @@ module.exports = [
         "id": "RPX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Paris",
@@ -11082,7 +11082,7 @@ module.exports = [
         "id": "REF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nevaeh",
@@ -11096,7 +11096,7 @@ module.exports = [
         "id": "RH8",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Marco",
@@ -11110,7 +11110,7 @@ module.exports = [
         "id": "RAL",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Cohen",
@@ -11124,7 +11124,7 @@ module.exports = [
         "id": "RF2",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Shepherd",
@@ -11138,7 +11138,7 @@ module.exports = [
         "id": "RQ6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Victor",
@@ -11152,7 +11152,7 @@ module.exports = [
         "id": "RBM",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Autumn",
@@ -11166,7 +11166,7 @@ module.exports = [
         "id": "RAK",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Harlan",
@@ -11180,7 +11180,7 @@ module.exports = [
         "id": "RBB",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Reece",
@@ -11194,7 +11194,7 @@ module.exports = [
         "id": "RAN",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mazikee",
@@ -11208,7 +11208,7 @@ module.exports = [
         "id": "RAM",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jolene",
@@ -11222,7 +11222,7 @@ module.exports = [
         "id": "RGM",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Avi",
@@ -11236,7 +11236,7 @@ module.exports = [
         "id": "RLZ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Issac",
@@ -11250,7 +11250,7 @@ module.exports = [
         "id": "RA2",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Malia",
@@ -11264,7 +11264,7 @@ module.exports = [
         "id": "RD1",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Noelle",
@@ -11278,7 +11278,7 @@ module.exports = [
         "id": "RPR",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Daxton",
@@ -11292,7 +11292,7 @@ module.exports = [
         "id": "RBJ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Bailey",
@@ -11306,7 +11306,7 @@ module.exports = [
         "id": "RMJ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Reese",
@@ -11320,7 +11320,7 @@ module.exports = [
         "id": "RNZ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kate",
@@ -11334,7 +11334,7 @@ module.exports = [
         "id": "RNE",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Princeton",
@@ -11348,7 +11348,7 @@ module.exports = [
         "id": "RCC",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mariana",
@@ -11362,7 +11362,7 @@ module.exports = [
         "id": "RF7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rylie",
@@ -11376,7 +11376,7 @@ module.exports = [
         "id": "RH7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Zainab",
@@ -11390,7 +11390,7 @@ module.exports = [
         "id": "RCU",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Blake",
@@ -11404,7 +11404,7 @@ module.exports = [
         "id": "RHQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Peyton",
@@ -11418,7 +11418,7 @@ module.exports = [
         "id": "RK5",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Camille",
@@ -11432,7 +11432,7 @@ module.exports = [
         "id": "R1D",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Selah",
@@ -11446,7 +11446,7 @@ module.exports = [
         "id": "RTW",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Reginald",
@@ -11460,7 +11460,7 @@ module.exports = [
         "id": "R1C",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Curtis",
@@ -11474,7 +11474,7 @@ module.exports = [
         "id": "RKV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Augustine",
@@ -11488,7 +11488,7 @@ module.exports = [
         "id": "RDB",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Khaleesi",
@@ -11502,7 +11502,7 @@ module.exports = [
         "id": "RH2",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maddison",
@@ -11516,7 +11516,7 @@ module.exports = [
         "id": "RYE",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ila",
@@ -11530,7 +11530,7 @@ module.exports = [
         "id": "RTA",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Leland",
@@ -11544,7 +11544,7 @@ module.exports = [
         "id": "RYD",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Laila",
@@ -11558,7 +11558,7 @@ module.exports = [
         "id": "RWN",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Caiden",
@@ -11572,7 +11572,7 @@ module.exports = [
         "id": "RPF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sincere",
@@ -11586,7 +11586,7 @@ module.exports = [
         "id": "RVP",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Layla",
@@ -11600,7 +11600,7 @@ module.exports = [
         "id": "RV5",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Henrik",
@@ -11614,7 +11614,7 @@ module.exports = [
         "id": "RYQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Esther",
@@ -11628,7 +11628,7 @@ module.exports = [
         "id": "RW9",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mohammad",
@@ -11642,7 +11642,7 @@ module.exports = [
         "id": "RE4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maximilian",
@@ -11656,7 +11656,7 @@ module.exports = [
         "id": "RTR",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Roselyn",
@@ -11670,7 +11670,7 @@ module.exports = [
         "id": "RCJ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Milana",
@@ -11684,7 +11684,7 @@ module.exports = [
         "id": "R0B",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Aitana",
@@ -11698,7 +11698,7 @@ module.exports = [
         "id": "RE9",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maia",
@@ -11712,7 +11712,7 @@ module.exports = [
         "id": "RJC",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jazmine",
@@ -11726,7 +11726,7 @@ module.exports = [
         "id": "RQY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "John",
@@ -11740,7 +11740,7 @@ module.exports = [
         "id": "RVM",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Amaris",
@@ -11754,7 +11754,7 @@ module.exports = [
         "id": "RXG",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kenzo",
@@ -11768,7 +11768,7 @@ module.exports = [
         "id": "RYF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Saul",
@@ -11782,7 +11782,7 @@ module.exports = [
         "id": "RB8",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Imani",
@@ -11796,7 +11796,7 @@ module.exports = [
         "id": "RHS",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Flynn",
@@ -11810,7 +11810,7 @@ module.exports = [
         "id": "RDK",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Emani",
@@ -11824,7 +11824,7 @@ module.exports = [
         "id": "RW2",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mckenna",
@@ -11838,7 +11838,7 @@ module.exports = [
         "id": "REQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Everlee",
@@ -11852,7 +11852,7 @@ module.exports = [
         "id": "RVY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Adelaide",
@@ -11866,19 +11866,19 @@ module.exports = [
         "id": "RPW",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       },
       {
         "id": "REE",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       },
       {
         "id": "RH5",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alice",
@@ -11892,7 +11892,7 @@ module.exports = [
         "id": "RJ7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kamryn",
@@ -11906,7 +11906,7 @@ module.exports = [
         "id": "RER",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Khari",
@@ -11920,7 +11920,7 @@ module.exports = [
         "id": "RAZ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Isabela",
@@ -11934,7 +11934,7 @@ module.exports = [
         "id": "RQR",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lilliana",
@@ -11948,7 +11948,7 @@ module.exports = [
         "id": "RJ5",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rayden",
@@ -11962,7 +11962,7 @@ module.exports = [
         "id": "RDV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sonny",
@@ -11976,7 +11976,7 @@ module.exports = [
         "id": "RB7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Saige",
@@ -11990,7 +11990,7 @@ module.exports = [
         "id": "R1E",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Bellamy",
@@ -12004,7 +12004,7 @@ module.exports = [
         "id": "RMS",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Addisyn",
@@ -12018,7 +12018,7 @@ module.exports = [
         "id": "RMT",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ana",
@@ -12032,7 +12032,7 @@ module.exports = [
         "id": "RWJ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kimberly",
@@ -12046,7 +12046,7 @@ module.exports = [
         "id": "RNT",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Gianna",
@@ -12060,7 +12060,7 @@ module.exports = [
         "id": "RT6",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Frida",
@@ -12074,7 +12074,7 @@ module.exports = [
         "id": "RPQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Emerson",
@@ -12088,7 +12088,7 @@ module.exports = [
         "id": "RTP",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alma",
@@ -12102,7 +12102,7 @@ module.exports = [
         "id": "RTJ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Harlan",
@@ -12116,7 +12116,7 @@ module.exports = [
         "id": "RTN",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Journee",
@@ -12130,7 +12130,7 @@ module.exports = [
         "id": "RQ2",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Isaias",
@@ -12144,7 +12144,7 @@ module.exports = [
         "id": "RDR",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nia",
@@ -12158,7 +12158,7 @@ module.exports = [
         "id": "RX2",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brielle",
@@ -12172,7 +12172,7 @@ module.exports = [
         "id": "RPK",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Eddie",
@@ -12186,7 +12186,7 @@ module.exports = [
         "id": "RMQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Egypt",
@@ -12200,7 +12200,7 @@ module.exports = [
         "id": "RMP",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Curtis",
@@ -12214,7 +12214,7 @@ module.exports = [
         "id": "RNK",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Creed",
@@ -12228,7 +12228,7 @@ module.exports = [
         "id": "RVX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Skyla",
@@ -12242,7 +12242,7 @@ module.exports = [
         "id": "RV1",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sarah",
@@ -12256,7 +12256,7 @@ module.exports = [
         "id": "RX3",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sarah",
@@ -12270,7 +12270,7 @@ module.exports = [
         "id": "RG8",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Azrael",
@@ -12284,7 +12284,7 @@ module.exports = [
         "id": "RGV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Whitney",
@@ -12298,7 +12298,7 @@ module.exports = [
         "id": "RQ9",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sergio",
@@ -12312,7 +12312,7 @@ module.exports = [
         "id": "RBV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Max",
@@ -12326,7 +12326,7 @@ module.exports = [
         "id": "REN",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Autumn",
@@ -12340,7 +12340,7 @@ module.exports = [
         "id": "RNA",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Elyse",
@@ -12354,7 +12354,7 @@ module.exports = [
         "id": "RBH",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Celeste",
@@ -12368,7 +12368,7 @@ module.exports = [
         "id": "RAB",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kendrick",
@@ -12382,7 +12382,7 @@ module.exports = [
         "id": "RAV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Zev",
@@ -12396,7 +12396,7 @@ module.exports = [
         "id": "RAS",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lilliana",
@@ -12410,7 +12410,7 @@ module.exports = [
         "id": "RQ7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Clare",
@@ -12424,7 +12424,7 @@ module.exports = [
         "id": "RTD",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mariam",
@@ -12438,7 +12438,7 @@ module.exports = [
         "id": "RQW",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "John",
@@ -12452,7 +12452,7 @@ module.exports = [
         "id": "RKF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kaydence",
@@ -12466,7 +12466,7 @@ module.exports = [
         "id": "RCX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nevaeh",
@@ -12480,7 +12480,7 @@ module.exports = [
         "id": "RHV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ainsley",
@@ -12494,7 +12494,7 @@ module.exports = [
         "id": "RL1",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Cecilia",
@@ -12508,7 +12508,7 @@ module.exports = [
         "id": "RFR",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jessica",
@@ -12522,7 +12522,7 @@ module.exports = [
         "id": "RDZ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alan",
@@ -12536,7 +12536,7 @@ module.exports = [
         "id": "RPY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Aubriella",
@@ -12550,7 +12550,7 @@ module.exports = [
         "id": "RRJ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nixon",
@@ -12564,7 +12564,7 @@ module.exports = [
         "id": "RCK",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jada",
@@ -12578,7 +12578,7 @@ module.exports = [
         "id": "RL4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rey",
@@ -12592,7 +12592,7 @@ module.exports = [
         "id": "RXW",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Melvin",
@@ -12606,7 +12606,7 @@ module.exports = [
         "id": "RET",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kendall",
@@ -12620,7 +12620,7 @@ module.exports = [
         "id": "RA9",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jason",
@@ -12634,7 +12634,7 @@ module.exports = [
         "id": "R1G",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Guillermo",
@@ -12648,7 +12648,7 @@ module.exports = [
         "id": "RRG",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Emmie",
@@ -12662,7 +12662,7 @@ module.exports = [
         "id": "RM4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Aurora",
@@ -12676,13 +12676,13 @@ module.exports = [
         "id": "RA8",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       },
       {
         "id": "RBA",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alanna",
@@ -12696,7 +12696,7 @@ module.exports = [
         "id": "RHY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lennon",
@@ -12710,7 +12710,7 @@ module.exports = [
         "id": "RQS",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Melani",
@@ -12724,7 +12724,7 @@ module.exports = [
         "id": "RWD",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jordan",
@@ -12738,7 +12738,7 @@ module.exports = [
         "id": "RRV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Elsa",
@@ -12752,7 +12752,7 @@ module.exports = [
         "id": "RQP",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Arianna",
@@ -12766,7 +12766,7 @@ module.exports = [
         "id": "RM2",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Liv",
@@ -12780,7 +12780,7 @@ module.exports = [
         "id": "RHM",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maddison",
@@ -12794,7 +12794,7 @@ module.exports = [
         "id": "RRK",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mikayla",
@@ -12808,7 +12808,7 @@ module.exports = [
         "id": "RA7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alonzo",
@@ -12822,7 +12822,7 @@ module.exports = [
         "id": "RKB",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Judah",
@@ -12836,7 +12836,7 @@ module.exports = [
         "id": "R0D",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Azrael",
@@ -12850,7 +12850,7 @@ module.exports = [
         "id": "RTG",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Maxwell",
@@ -12864,7 +12864,7 @@ module.exports = [
         "id": "RWE",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Emerson",
@@ -12878,7 +12878,7 @@ module.exports = [
         "id": "RTX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Amiyah",
@@ -12892,7 +12892,7 @@ module.exports = [
         "id": "RJE",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Mathias",
@@ -12906,7 +12906,7 @@ module.exports = [
         "id": "RK9",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rosa",
@@ -12920,7 +12920,7 @@ module.exports = [
         "id": "RYR",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Aliyah",
@@ -12934,7 +12934,7 @@ module.exports = [
         "id": "RQF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Penelope",
@@ -12948,7 +12948,7 @@ module.exports = [
         "id": "RGF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kalel",
@@ -12962,7 +12962,7 @@ module.exports = [
         "id": "RJM",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rhett",
@@ -12976,7 +12976,7 @@ module.exports = [
         "id": "RBK",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Elisa",
@@ -12990,7 +12990,7 @@ module.exports = [
         "id": "REL",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Dexter",
@@ -13004,7 +13004,7 @@ module.exports = [
         "id": "RWW",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jenesis",
@@ -13018,7 +13018,7 @@ module.exports = [
         "id": "RJQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Roselyn",
@@ -13032,7 +13032,7 @@ module.exports = [
         "id": "RKC",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Steven",
@@ -13046,7 +13046,7 @@ module.exports = [
         "id": "RDC",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Karter",
@@ -13060,7 +13060,7 @@ module.exports = [
         "id": "RT4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lorelei",
@@ -13074,7 +13074,7 @@ module.exports = [
         "id": "RH4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lana",
@@ -13088,7 +13088,7 @@ module.exports = [
         "id": "RE7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Hannah",
@@ -13102,7 +13102,7 @@ module.exports = [
         "id": "RWG",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Sutton",
@@ -13116,7 +13116,7 @@ module.exports = [
         "id": "RQJ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Bode",
@@ -13130,7 +13130,7 @@ module.exports = [
         "id": "RXJ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Addisyn",
@@ -13144,7 +13144,7 @@ module.exports = [
         "id": "RJV",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Langston",
@@ -13158,7 +13158,7 @@ module.exports = [
         "id": "RKL",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Faith",
@@ -13172,7 +13172,7 @@ module.exports = [
         "id": "RFW",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Isabel",
@@ -13186,7 +13186,7 @@ module.exports = [
         "id": "RKA",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Enoch",
@@ -13200,7 +13200,7 @@ module.exports = [
         "id": "RYA",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Martha",
@@ -13214,7 +13214,7 @@ module.exports = [
         "id": "RGR",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Matthias",
@@ -13228,7 +13228,7 @@ module.exports = [
         "id": "RW8",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Amber",
@@ -13242,7 +13242,7 @@ module.exports = [
         "id": "RRC",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Emilio",
@@ -13256,7 +13256,7 @@ module.exports = [
         "id": "RGH",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Gunner",
@@ -13270,7 +13270,7 @@ module.exports = [
         "id": "RJ9",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Wyatt",
@@ -13284,7 +13284,7 @@ module.exports = [
         "id": "RE5",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Malia",
@@ -13298,7 +13298,7 @@ module.exports = [
         "id": "RA3",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kora",
@@ -13312,7 +13312,7 @@ module.exports = [
         "id": "RGC",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Brecken",
@@ -13326,7 +13326,7 @@ module.exports = [
         "id": "RKE",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Parker",
@@ -13340,7 +13340,7 @@ module.exports = [
         "id": "RJY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Wilson",
@@ -13354,7 +13354,7 @@ module.exports = [
         "id": "RVQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Robin",
@@ -13368,7 +13368,7 @@ module.exports = [
         "id": "RN1",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lana",
@@ -13382,7 +13382,7 @@ module.exports = [
         "id": "RR5",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Estella",
@@ -13396,7 +13396,7 @@ module.exports = [
         "id": "RY7",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Rosie",
@@ -13410,7 +13410,7 @@ module.exports = [
         "id": "RBL",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Jax",
@@ -13424,19 +13424,19 @@ module.exports = [
         "id": "RQ5",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       },
       {
         "id": "RND",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       },
       {
         "id": "RXA",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Zuri",
@@ -13450,19 +13450,19 @@ module.exports = [
         "id": "RLR",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       },
       {
         "id": "RXX",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       },
       {
         "id": "RAP",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Wade",
@@ -13476,7 +13476,7 @@ module.exports = [
         "id": "RWP",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Natalia",
@@ -13490,7 +13490,7 @@ module.exports = [
         "id": "RRZ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Teagan",
@@ -13504,7 +13504,7 @@ module.exports = [
         "id": "RWQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Nancy",
@@ -13518,7 +13518,7 @@ module.exports = [
         "id": "RPL",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Giavanna",
@@ -13532,7 +13532,7 @@ module.exports = [
         "id": "RHJ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Alana",
@@ -13546,7 +13546,7 @@ module.exports = [
         "id": "REY",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Lochlan",
@@ -13560,7 +13560,7 @@ module.exports = [
         "id": "RRF",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Frances",
@@ -13574,7 +13574,7 @@ module.exports = [
         "id": "RLQ",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Tanner",
@@ -13588,7 +13588,7 @@ module.exports = [
         "id": "RA4",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Anika",
@@ -13602,7 +13602,7 @@ module.exports = [
         "id": "RCB",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Kensley",
@@ -13616,7 +13616,7 @@ module.exports = [
         "id": "RX8",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Ayan",
@@ -13630,7 +13630,7 @@ module.exports = [
         "id": "FA424",
         "permissionLevel": "Lead administrator",
         "status": "Active",
-        "clinician": true
+        "vaccinator": true
       }
     ],
     "firstName": "Grady",

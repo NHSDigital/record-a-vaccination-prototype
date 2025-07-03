@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block pageTitle %}
-  Add user
-{% endblock %}
+{% set pageName = "Change role for user" %}
 
 {% set currentSection = "manage-users" %}
 
@@ -19,7 +17,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Ben Benson</h1>
+      <h1 class="nhsuk-heading-l">{{ user.firstName }} {{ user.lastName }}</h1>
 
       <dl class="nhsuk-summary-list">
         <div class="nhsuk-summary-list__row">
@@ -27,14 +25,14 @@
             Email
           </dt>
           <dd class="nhsuk-summary-list__value">
-            ben.benson@nhs.net
+            {{ user.email }}
           </dd>
         </div>
         <div class="nhsuk-summary-list__row">
           <dt class="nhsuk-summary-list__key">
             Last log in
           </dt>
-          <dd class="nhsuk-summary-list__value"> 
+          <dd class="nhsuk-summary-list__value">
             86 days ago
           </dd>
         </div>
@@ -44,18 +42,18 @@
       <form action="/user-admin/users/{{ user.id }}/update" method="post" novalidate="true">
 
         {{ radios({
-          "name": "clinician",
+          "name": "vaccinator",
           "fieldset": {
             "legend": {
-              "text": "Are they a clinician?",
+              "text": "Are they a vaccinator?",
               classes: "nhsuk-fieldset__legend--s"
-              
+
             }
           },
           hint: {
-            text: "Only a registered clinician can assess patients for vaccines"
+            text: "Vaccination records include the name of the person who gave the vaccination"
           },
-          value: ("yes" if userOrganisationSettings.clinician else "no"),
+          value: ("yes" if userOrganisationSettings.vaccinator else "no"),
           "items": [
             {
               "value": "yes",
@@ -105,14 +103,10 @@
 
         <p>Do they still need an account? <a href="/user-admin/{{ user.id }}/deactivate">Deactivate this account</a></p>
 
-
-
         {{ button({
           "text": "Continue"
       }) }}
       </form>
-
-      
 
     </div>
   </div>
