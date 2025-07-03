@@ -24,7 +24,7 @@
 
         {% set items = [] %}
 
-        {% for vaccine in (organisation.vaccines | sort(false, false, "name")) %}
+        {% for vaccine in (vaccinesNotYetAdded) %}
           {% set items = (items.push({
             value: vaccine.name,
             text: (vaccine.name | capitaliseFirstLetter)
@@ -32,21 +32,20 @@
         {% endfor %}
 
         {{ checkboxes({
-          name: "vaccinesEnabled",
+          name: "vaccinesToAdd",
           classes: "nhsuk-radios--inline",
           fieldset: {
             legend: {
-              text: "Which vaccinations can they record?",
+              text: "Which vaccines would you like give them access to?",
               classes: "nhsuk-fieldset__legend--l",
               isPageHeading: true
             }
           },
-          values: (vaccinesEnabled | pluck("name")),
           items: items
         }) }}
 
         {{ button({
-          text: "Save"
+          text: "Confirm"
         }) }}
       </form>
 
