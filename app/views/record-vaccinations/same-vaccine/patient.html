@@ -1,0 +1,91 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Do you have the patient’s NHS number?" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {% if (data.vaccine === "Flu" or data.vaccine == "COVID-19") %}
+    {% set backLinkHref = "/record-vaccinations/location" %}
+  {% else %}
+    {% set backLinkHref = "/record-vaccinations/same-vaccine/svdp1" %}
+  {% endif %}
+  {{ backLink({ href: backLinkHref }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errorList | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errorList
+        }) }}
+      {% endif %}
+
+      <form action="/record-vaccinations/same-vaccine/patient-history" method="post" novalidate>
+
+
+
+
+
+        <div class="nhsuk-form-group">
+
+            <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
+              <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+           
+                <h1 class="nhsuk-heading-l">
+                    <span class="nhsuk-caption-l">COVID-19, Corminarty 30 JN.1</span>
+                    Do you have the patient’s NHS&nbsp;number?
+                  </h1>
+              </legend>
+
+              <div class="nhsuk-radios nhsuk-radios--conditional">
+                <div class="nhsuk-radios__item">
+                  <input class="nhsuk-radios__input" id="contact-1" name="contact" type="radio" value="email" aria-controls="conditional-contact-1" aria-expanded="false">
+                  <label class="nhsuk-label nhsuk-radios__label" for="contact-1">
+                    Yes
+                  </label>
+                </div>
+                <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-contact-1">
+                    <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="example-with-hint-text">
+                          NHS number
+                        </label>
+                        <div class="nhsuk-hint" id="example-with-hint-text-hint">
+                            For example, 485 777 3456
+                        </div> <input class="nhsuk-input nhsuk-input--width-10" id="example-with-hint-text" name="example-with-hint-text" type="text" aria-describedby="example-with-hint-text-hint">
+                      </div>
+                
+                  
+          
+                </div>
+                <div class="nhsuk-radios__item">
+                  <input class="nhsuk-radios__input" id="contact-2" name="contact" type="radio" value="phone" aria-controls="conditional-contact-2" aria-expanded="false">
+                  <label class="nhsuk-label nhsuk-radios__label" for="contact-2">
+                    No
+                  </label>
+                </div>
+                
+        
+
+
+            </fieldset>
+          </div>
+
+          {{ button({
+            text: "Continue"
+          })}}
+        </form>
+
+
+
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+

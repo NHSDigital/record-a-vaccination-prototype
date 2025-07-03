@@ -9,7 +9,7 @@
 {% block beforeContent %}
 <nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
   <ol class="nhsuk-breadcrumb__list">
-    <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="/appointments/index2">Appointments</a></li>
+    <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="/appointments/index4">Appointments</a></li>
     <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="/appointments/index3">Anne Ward Maternity Unit</a></li>
   </ol>
   <p class="nhsuk-breadcrumb__back">
@@ -27,7 +27,6 @@
 
 <!-- <p class="nhsuk-body-l">This example shows only the <mark>NHS number</mark>, and <mark>Date</mark> used.</p> -->
 
-<br>
 
   <style>
     .jointTopBot {
@@ -45,27 +44,23 @@
     <div class="nhsuk-grid-column-full">
 
       <div class="nhsuk-caption-l">Anne Ward Maternity Unit</div>
-        <h1 class="nhsuk-heading-l">Wednesday 4 June 2025</h1>
-
-
+        <h1 class="nhsuk-heading-l">Wednesday 9 July 2025</h1>
 
 
         <p><a href="/record-vaccinations/vaccinator">Record a walk-in</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/appointments/add-nhs-numbers">Add NHS numbers</a></p>
 
-
-  <br>
 
 
   <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
     <ul class="x-govuk-secondary-navigation__list">
       <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
         <a class="x-govuk-secondary-navigation__link" href="/appointments/mvp1" aria-current=page>
-          Remaining (32)
+          Appointments (32)
         </a>
       </li>
       <li class="x-govuk-secondary-navigation__list-item ">
         <a class="x-govuk-secondary-navigation__link" href="/appointments/mvp2">
-          Recorded (0)
+          Completed (0)
         </a>
       </li>
     
@@ -78,7 +73,7 @@
 
 
       <table class="nhsuk-table-responsive" role="table">
-        <caption class="nhsuk-table__caption">32 appointments remaining</caption>
+        <caption class="nhsuk-table__caption">32 appointments</caption>
         <thead class="nhsuk-table__head" role="rowgroup">
             <thead role="rowgroup" class="nhsuk-table__head">
                 <tr role="row">
@@ -92,6 +87,9 @@
                   </th>
                   <th role="columnheader" class="" scope="col">
                     Address
+                  </th>
+                  <th role="columnheader" class="" scope="col">
+                  Vaccine
                   </th>
                   <th role="columnheader" class="" scope="col">
                   </th>
@@ -116,6 +114,9 @@
               16 Anderson Rd, Beeston
           </td>
           <td class="nhsuk-table__cell">
+            RSV
+        </td>
+          <td class="nhsuk-table__cell">
             <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record vaccination</a>
           </td>
           <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
@@ -136,6 +137,9 @@
                 73 Roman Rd,
                 Leeds
             </td>
+            <td class="nhsuk-table__cell">
+              RSV
+          </td>
             <td class="nhsuk-table__cell">
               <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record vaccination</a>
             </td>
@@ -159,6 +163,9 @@
                  44 Mellor drive, Meanwood
             </td>
             <td class="nhsuk-table__cell">
+              RSV
+          </td>
+            <td class="nhsuk-table__cell">
               <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record vaccination</a>
             </td>
             <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
@@ -174,10 +181,12 @@
               <td class="nhsuk-table__cell">
                 16 May 2006
             </td>
-            
             <td class="nhsuk-table__cell">
                 124 Moss Lane, Leeds
             </td>
+            <td class="nhsuk-table__cell">
+              RSV
+          </td>
             <td class="nhsuk-table__cell">
               <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record vaccination</a>
             </td>
@@ -200,6 +209,9 @@
                 92-93 The Calls, Leeds    
             </td>
             <td class="nhsuk-table__cell">
+              RSV
+          </td>
+            <td class="nhsuk-table__cell">
               <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record vaccination</a>
             </td>
             <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
@@ -220,6 +232,9 @@
                 24 Acre Drive, Leeds
             </td>
             <td class="nhsuk-table__cell">
+              RSV
+          </td>
+            <td class="nhsuk-table__cell">
               <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record vaccination</a>
             </td>
             <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
@@ -239,6 +254,9 @@
               <td class="nhsuk-table__cell">
                   9 Yale Close, York
               </td>
+              <td class="nhsuk-table__cell">
+                RSV
+            </td>
               <td class="nhsuk-table__cell">
                 <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record vaccination</a>
               </td>
@@ -262,6 +280,9 @@
                   198 Lovell Drive, Leeds
               </td>
               <td class="nhsuk-table__cell">
+                RSV
+            </td>
+              <td class="nhsuk-table__cell">
                 <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record vaccination</a>
               </td>
               <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
@@ -282,6 +303,9 @@
                     4 Park Lane, Leeds
                 </td>
                 <td class="nhsuk-table__cell">
+                  RSV
+              </td>
+                <td class="nhsuk-table__cell">
                   <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record vaccination</a>
                 </td>
                 <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
@@ -301,6 +325,9 @@
                   <td class="nhsuk-table__cell">
                       1 The Avenue, Leeds
                   </td>
+                  <td class="nhsuk-table__cell">
+                    RSV
+                </td>
                   <td class="nhsuk-table__cell">
                     <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record vaccination</a>
                   </td>
@@ -323,6 +350,9 @@
                         99 Ings Drive, Leeds
                     </td>
                     <td class="nhsuk-table__cell">
+                      RSV
+                  </td>
+                    <td class="nhsuk-table__cell">
                       <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record vaccination</a>
                     </td>
                     <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
@@ -342,6 +372,9 @@
                       <td class="nhsuk-table__cell">
                           4a The Flats, Bradford
                       </td>
+                      <td class="nhsuk-table__cell">
+                        RSV
+                    </td>
                       <td class="nhsuk-table__cell">
                         <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record vaccination</a>
                       </td>
@@ -363,6 +396,9 @@
                         <td class="nhsuk-table__cell">
                             Lakeside, Menston Gardens
                         </td>
+                        <td class="nhsuk-table__cell">
+                          RSV
+                      </td>
                         <td class="nhsuk-table__cell">
                           <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record vaccination</a>
                         </td>
@@ -387,6 +423,9 @@
                             42 Wentworth Place
                         </td>
                         <td class="nhsuk-table__cell">
+                          RSV
+                      </td>
+                        <td class="nhsuk-table__cell">
                           <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record vaccination</a>
                         </td>
                         <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
@@ -408,6 +447,9 @@
               2a The Flats, Headingley
           </td>
           <td class="nhsuk-table__cell">
+            RSV
+        </td>
+          <td class="nhsuk-table__cell">
             <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record vaccination</a>
           </td>
           <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
@@ -427,6 +469,9 @@
           
           <td class="nhsuk-table__cell">
             56 Birkett Road          </td>
+            <td class="nhsuk-table__cell">
+              RSV
+          </td>
           <td class="nhsuk-table__cell">
             <a class="nhsuk-link" href="/appointments/appointments-recording/patient-history">Record vaccination</a>
           </td>

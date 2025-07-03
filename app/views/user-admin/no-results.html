@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Manage users and permissions
+{% endblock %}
+
+{% from '../../components/pagination/macro.njk' import appPagination %}
+
+
+{% set currentSection = "manage-users" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+    
+
+
+      <h1 class="nhsuk-heading-xl">Manage users</h1>
+
+      {{ button({
+        "text": "Add user",
+        "href": "/user-admin/add-user"
+      }) }}
+
+
+     
+            <label class="nhsuk-label" for="q">
+              Search users by name or email
+            </label>
+            <input class="nhsuk-input nhsuk-input--width-20" id="q" name="q" type="search" value="{{ q }}">
+
+            {{ button({
+              text: "Search",
+              classes: "nhsuk-button--secondary nhsuk-u-margin-left-2 app-button--small nhsuk-u-margin-bottom-0"
+            })}}
+
+          </div>
+        </form>
+      </div>
+
+      <br>
+
+      <p>For security, we deactivate users who have not logged in for 90 days. <a href="/user-admin/reactivate-all">Reactivate users (2)</a></p>
+
+<p class="nhsuk-body-l">No search results found.</p>
+
+
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+    
+      <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
+        <ul class="x-govuk-secondary-navigation__list">
+          <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
+            <a class="x-govuk-secondary-navigation__link" href="/user-admin/index" aria-current=page>
+              Active (0)
+            </a>
+          </li>
+          <li class="x-govuk-secondary-navigation__list-item ">
+            <a class="x-govuk-secondary-navigation__link" href="/user-admin/deactivated">
+              Deactivated (0)
+            </a>
+          </li>
+        
+        </ul>
+      </nav>
+ 
+    
+          <table class="nhsuk-table-responsive" role="table">
+
+           
+
+                
+              </tbody>
+            </table>
+    
+            
+        </div>
+      </div>
+
+{% endblock %}
+
+
+
+

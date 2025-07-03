@@ -8,7 +8,7 @@
 
 
 {% block beforeContent %}
-  {{ backLink({ href: "/appointments/index2" }) }}
+  {{ backLink({ href: "/appointments/mvp3" }) }}
 {% endblock %}
 
 {% block content %}
@@ -28,28 +28,32 @@
         <fieldset class="nhsuk-fieldset">
           <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
 
+            <span class="nhsuk-caption-m"></span>
+
             <h1 class="nhsuk-fieldset__heading">
-              Choose a site or team
+              Choose a vaccine
             </h1>
           </legend>
+          <div class="nhsuk-hint" id="contact-hint">
+            This will not affect coadministration.
+          </div>
           <div class="nhsuk-radios">
             <div class="nhsuk-radios__item">
               <input class="nhsuk-radios__input" id="example-1" name="example" type="radio" value="yes">
               <label class="nhsuk-label nhsuk-radios__label" for="example-1">
-                Anne Ward Maternity Unit
+                COVID-19
               </label>
             </div>
             <div class="nhsuk-radios__item">
               <input class="nhsuk-radios__input" id="example-2" name="example" type="radio" value="no">
               <label class="nhsuk-label nhsuk-radios__label" for="example-2">
-                Josephine Clinic
+                Flu
               </label>
             </div>
             <div class="nhsuk-radios__item">
               <input class="nhsuk-radios__input" id="example-2" name="example" type="radio" value="no">
               <label class="nhsuk-label nhsuk-radios__label" for="example-2">
-                St Mary’s Hospital
-              </label>
+                RSV              </label>
             </div>
 
           </div>
@@ -59,8 +63,9 @@
 
       {{ button({
         text: "Continue",
-        href: "/appointments/add-nhs-numbers"
+        href: "/appointments/mvp7"
       }) }}
+
 
 
 

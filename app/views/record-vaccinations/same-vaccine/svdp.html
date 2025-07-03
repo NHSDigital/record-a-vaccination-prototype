@@ -1,0 +1,169 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Do you have the patient’s NHS number?" %}
+
+{% set currentSection = "vaccinate" %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errorList | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errorList
+        }) }}
+      {% endif %}
+
+      <form action="/record-vaccinations/answer-patient-nhs-number-known" method="post" novalidate>
+
+
+        {% set nhsNumberHtml %}
+
+          {{ input({
+            id: "nhs-number",
+            name: "nhsNumber",
+            classes: "nhsuk-input--width-10",
+            inputmode: "numeric",
+            errorMessage: nhsNumberError,
+            label: {
+              text: "NHS number",
+              classes: "nhsuk-label--s"
+            },
+            value: data.nhsNumber,
+            hint: {
+              text: "For example, 485 777 3456"
+            }
+          }) }}
+        {% endset %}
+
+
+        {{ radios({
+          idPrefix: "nhs-number-known",
+          name: "nhsNumberKnown",
+          fieldset: {
+            legend: {
+              html: "Do you have the patient’s NHS&nbsp;number?",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: "true"
+            }
+          },
+          errorMessage: nhsNumberKnownError if nhsNumberKnownError,
+          items: [
+            {
+              value: "yes",
+              text: "Yes",
+              checked: (data.nhsNumberKnown == 'yes'),
+              conditional: {
+                html: nhsNumberHtml
+              }
+            },
+            {
+              value: "no",
+              text: "No",
+              checked: (data.nhsNumberKnown == 'no')
+            }
+          ]
+        }) }}
+
+
+
+
+        {{ button({
+          text: "Continue"
+        })}}
+
+        <details class="nhsuk-details">
+          <summary class="nhsuk-details__summary">
+            <span class="nhsuk-details__summary-text">
+              You are applying the following COVID-19 vaccination details
+            </span>
+          </summary>
+          <div class="nhsuk-details__text">
+        
+
+
+  <dl class="nhsuk-summary-list">
+    <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+        Date
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+        26 June 2026
+      </dd>
+    </div>
+    <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+        Vaccine
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+        <p>COVID-19</p>
+        <p>Corminarty 30 JN.1</p>
+      </dd>
+    </div>
+    <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+        Batch
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+        <p>4844987</p>
+        <p>Expires 4 October 2025</p>
+      </dd>
+    </div>
+    <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+        Team
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+        <p>St Mary’s Hospital</p>
+      </dd>
+    </div>
+    <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+        Vaccinator
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+        <p>Jane Doe</p>
+      </dd>
+    </div>
+    <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+        Location
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+        <p>Hospital Hub</p>
+      </dd>
+    </div>
+    <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+        Eligibility
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+        <p>Healthcare worker</p>
+      </dd>
+    </div>
+
+
+  </dl>
+
+        
+</div>
+</details>
+
+
+
+<p>To record vaccination from the beginning <a href="/reports">delete and start again</a>.</p>
+
+
+
+
+
+     
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
