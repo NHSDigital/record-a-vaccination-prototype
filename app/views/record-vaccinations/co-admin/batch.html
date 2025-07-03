@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Which vaccine are you giving?" %}
+
+{% set currentSection = "vaccinate" %}
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/co-admin/vaccine" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <div class="nhsuk-form-group">
+        
+
+          <fieldset class="nhsuk-fieldset">
+            <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+              <span class="nhsuk-caption-l">John Smith, born 24 July 1954 (aged 70)</span>
+            <h1 class="nhsuk-heading-l">Which batch are you using?</h1>
+            </legend>
+            <div class="nhsuk-radios">
+              <div class="nhsuk-radios__item">
+                <input class="nhsuk-radios__input" id="example-hints-1" name="example-hints" type="radio" value="mobile" aria-describedby="example-hints-1-item-hint">
+                <label class="nhsuk-label nhsuk-radios__label" for="example-hints-1">
+                  A89465
+                </label>
+                <div class="nhsuk-hint nhsuk-radios__hint" id="example-hints-1-item-hint">
+                  Expires 12 December 2025
+                </div>
+              </div>
+              <div class="nhsuk-radios__item">
+                <input class="nhsuk-radios__input" id="example-hints-2" name="example-hints" type="radio" value="landline" aria-describedby="example-hints-2-item-hint">
+                <label class="nhsuk-label nhsuk-radios__label" for="example-hints-2">
+                  B85465
+                </label>
+                <div class="nhsuk-hint nhsuk-radios__hint" id="example-hints-2-item-hint">
+                  Expires 24 December 2025
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+
+      </div>
+
+      <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+        Continue
+      </button>
+
+    </div>
+  </div>
+
+{% endblock %}
+
