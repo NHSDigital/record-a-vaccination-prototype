@@ -37,7 +37,10 @@
             {{ vaccinesEnabled | sort(false, false, "name") | pluck("name") | formatList }}
           {% endif %}
         vaccinations.
-          <a href="/regions/organisations/{{organisation.id}}/change-vaccines">Change <span class="nhsuk-u-visually-hidden">vaccines available</span></a>
+
+          {% if (vaccinesEnabled | length) < 4 %}
+            <a href="/regions/organisations/{{organisation.id}}/add-vaccines">Add vaccines<span class="nhsuk-u-visually-hidden"></span></a>
+          {% endif %}
         </p>
 
         {% if (messages | length) > 0 %}
