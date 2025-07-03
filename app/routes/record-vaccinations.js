@@ -105,7 +105,7 @@ module.exports = router => {
 
         const userOrgnisationSetting = (user.organisations || []).find((organisation) => organisation.id === data.currentOrganisationId)
 
-        return (user.id != data.currentUserId) && userOrgnisationSetting && userOrgnisationSetting.clinician && (userOrgnisationSetting.status === "Active")
+        return (user.id != data.currentUserId) && userOrgnisationSetting && userOrgnisationSetting.vaccinator && (userOrgnisationSetting.status === "Active")
       })
       .sort((a, b) => {
         const nameA = a.firstName.toUpperCase(); // ignore upper and lowercase
@@ -977,6 +977,16 @@ router.get('/record-vaccinations/check', (req, res) => {
       vaccinator
     })
   })
+
+  router.get('/record-vaccinations/review-previous', (req, res) => {
+    const data = req.session.data
+    const vaccinator = data.users.find((user) => user.id === data.vaccinatorId)
+
+    res.render('record-vaccinations/review-previous', {
+      vaccinator
+    })
+  })
+
 
   router.post('/record-vaccinations/answer-injection-site', (req, res) => {
     const data = req.session.data
