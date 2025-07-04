@@ -474,7 +474,7 @@ module.exports = router => {
       res.redirect('/record-vaccinations/patient-estimated-due-date-rsv-warning')
 
     // Pertussis is recommended between 16 weeks (112 days) and 32 weeks
-    } else if (data.vaccinationToday == 'yes' && data.vaccine === "Pertussis" && numberOfDaysPregnant < 112) {
+    } else if (data.vaccinationToday == 'yes' && data.vaccine === "pertussis" && numberOfDaysPregnant < 112) {
       res.redirect('/record-vaccinations/patient-estimated-due-date-pertussis-warning')
     } else {
       res.redirect('/record-vaccinations/consent')
@@ -564,7 +564,7 @@ module.exports = router => {
 
     } else {
 
-      if ((data.vaccine === "COVID-19") || (data.vaccine == "Flu")) {
+      if ((data.vaccine === "COVID-19") || (data.vaccine == "flu")) {
         if (data.eligibility === "Healthcare worker" || data.eligibility.includes("Healthcare worker")) {
           nextPage = "/record-vaccinations/healthcare-worker"
         } else {
@@ -770,7 +770,7 @@ module.exports = router => {
       redirectPath = "/record-vaccinations/add-batch"
     } else if (!vaccineBatch) {
       redirectPath = "/record-vaccinations/batch?showError=yes"
-    } else if (["COVID-19", "Flu", "RSV"].includes(data.vaccine)) {
+    } else if (["COVID-19", "flu", "RSV"].includes(data.vaccine)) {
       redirectPath = "/record-vaccinations/eligibility"
     } else if (data.repeatPatient === "yes") {
       redirectPath = "/record-vaccinations/patient-estimated-due-date"
@@ -816,7 +816,7 @@ module.exports = router => {
 
     if (data.newBatchNumber === '' || data.newBatchExpiryDate?.day === '' || data.newBatchExpiryDate?.month === '' || data.newBatchExpiryDate?.year === '') {
       nextPage = "/record-vaccinations/add-batch?showErrors=yes"
-    } else if (data.vaccine === "Pertussis") {
+    } else if (data.vaccine === "pertussis") {
       nextPage = "/record-vaccinations/patient"
     } else {
       nextPage = "/record-vaccinations/eligibility"
