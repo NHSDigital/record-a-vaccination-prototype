@@ -17,6 +17,7 @@ require('./routes/lists')(router)
 require('./routes/support')(router)
 require('./routes/auth')(router)
 require('./routes/home')(router)
+require('./routes/helpers')(router)
 
 
 
