@@ -19,6 +19,8 @@
         }) }}
       {% endif %}
 
+      <form action="/lists/add-numbers" method="post" novalidate>
+
 <h1 class="nhsuk-heading-l">Add a list of NHS numbers</h1>
 
 <p class="nhsuk-body-m">Copy and paste NHS numbers from a spreadsheet or another source.</p>
@@ -43,10 +45,9 @@
 
 
   {{ button({
-    text: "Confirm",
-    href: "/lists/list"
+    text: "Confirm"
   }) }}
-
+</form>
 
 {% endblock %}
 
