@@ -8,6 +8,55 @@
   {{ backLink({ href: "/record-vaccinations/batch" }) }}
 {% endblock %}
 
+{% set CovidEligibilityOptions = [
+  "Resident in a care home",
+  "Staff in a care home",
+  "Healthcare worker",
+  "Social care worker",
+  "Based on age",
+  "Pregnant",
+  "Immunosuppressed",
+  "In a clinical risk group",
+  "Homeless or living in a closed setting",
+  "Household contact of someone immunosuppressed",
+  "Carer",
+  "Has had CAR-T therapy or a stem cell transplant since their last vaccination"
+] %}
+
+{% set RSVEligibilityOptions = [
+  "Aged 75 to 80",
+  "Pregnant"
+] %}
+
+{% set NationalFluEligibilityOptions = [
+  "Healthcare worker",
+  "Resident in a care home",
+  "Staff in a care home",
+  "Healthcare worker",
+  "Social worker",
+  "Based on age",
+  "Pregnant",
+  "Immunosuppressed",
+  "In a clinical risk group",
+  "Household contact of someone immunosuppressed",
+  "Carer",
+  "Has had CAR-T therapy or a stem cell transplant since their last vaccination"
+] %}
+
+{% set londonFluEligibilityOptions = [
+  "Homeless",
+  "Gypsy, Roma and Traveller communities",
+  "Sex worker",
+  "Learning disability",
+  "Mental health issue",
+  "In a detained estate or in contact with justice system",
+  "Asylum seeker",
+  "Victim of modern slavery",
+  "Experiencing drug or alcohol dependency",
+  "Another health exclusion group based on local need",
+  "Frontline health care worker not covered by national criteria"
+] %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
@@ -21,86 +70,65 @@
 
       <form action="/record-vaccinations/answer-eligibility" method="post" novalidate>
 
-      {% if data.vaccine == "COVID-19" %}
-        {% set eligibilityOptions = [
-          "Resident in a care home",
-          "Staff in a care home",
-          "Healthcare worker",
-          "Social care worker",
-          "Based on age",
-          "Pregnant",
-          "Immunosuppressed",
-          "In a clinical risk group",
-          "Homeless or living in a closed setting",
-          "Household contact of someone immunosuppressed",
-          "Carer",
-          "Has had CAR-T therapy or a stem cell transplant since their last vaccination"
-        ] %}
-      {% elif data.vaccine == "flu" %}
-        {% set eligibilityOptions = [
-          "Resident in a care home",
-          "Staff in a care home",
-          "Healthcare worker",
-          "Social worker",
-          "Based on age",
-          "Pregnant",
-          "Immunosuppressed",
-          "In a clinical risk group",
-          "Household contact of someone immunosuppressed",
-          "Carer",
-          "Has had CAR-T therapy or a stem cell transplant since their last vaccination"
-        ] %}
-      {% elif data.vaccine == "RSV" %}
-        {% set eligibilityOptions = [
-          "Aged 75 to 80",
-          "Pregnant"
-        ] %}
-      {% else %}
-        {% set eligibilityOptions = [] %}
-      {% endif %}
+        {% if data.vaccine == "COVID-19" %}
+          {% set eligibilityOptions = covidEligiblityOptions %}
+        {% elif data.vaccine == "flu" %}
+          {% set eligibilityOptions = NationalFluEligibilityOptions %}
+        {% elif data.vaccine == "RSV" %}
+          {% set eligibilityOptions = RSVEligibilityOptions %}
+        {% else %}
+          {% set eligibilityOptions = [] %}
+        {% endif %}
 
-      {% set items = [] %}
-      {% for option in eligibilityOptions %}
-        {% set items = (items.push({
-          text: option,
-          value: option,
-          checked: (data.eligibility | arrayOrStringIncludes(option))
-          }), items) %}
-      {% endfor %}
+        {% set items = [] %}
+        {% for option in eligibilityOptions %}
+          {% set items = (items.push({
+            text: option,
+            value: option,
+            checked: (data.eligibility | arrayOrStringIncludes(option))
+            }), items) %}
+        {% endfor %}
 
-      {% if data.vaccine == "RSV" %}
-        {{ radios({
-          idPrefix: "eligibility",
-          name: "eligibility",
-          fieldset: {
-            legend: {
-              text: "Why are you giving them the vaccine?",
-              classes: "nhsuk-fieldset__legend--l",
-              isPageHeading: true
-            }
-          },
-          items: items
-        }) }}
-      {% else %}
-          {{ checkboxes({
+
+        {% call fieldset({
+          legend: {
+            text: "Why are you giving them the vaccine?",
+            classes: "nhsuk-fieldset__legend--l",
+            isPageHeading: true
+          }
+        }) %}
+
+          {% if data.vaccine == "flu" %}
+            <h2 class="nhsuk-heading-s nhsuk-u-margin-bottom-2 nhsuk-u-margin-top-4">National flu eligibility</h2>
+          {% endif %}
+
+          {{ radios({
             idPrefix: "eligibility",
             name: "eligibility",
-            errorMessage: {
-              text: (errors | first).text
-            } if (errors | length) > 0,
-            fieldset: {
-              legend: {
-                text: "Why are you giving them the vaccine?",
-                classes: "nhsuk-fieldset__legend--l",
-                isPageHeading: true
-              }
-            },
-        hint: {
-            text: "You can select more than 1 option. But only the first option selected is sent to NHS England."
-          },
             items: items
           }) }}
-        {% endif %}
+
+          {% if data.vaccine == "flu" %}
+
+            {% set items = [] %}
+            {% for option in londonFluEligibilityOptions %}
+              {% set items = (items.push({
+                text: option,
+                value: option,
+                checked: (data.eligibility | arrayOrStringIncludes(option))
+                }), items) %}
+            {% endfor %}
+
+            <h2 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">London flu eligibility</h2>
+            {{ radios({
+              idPrefix: "eligibility-2",
+              name: "eligibility",
+              items: items
+            }) }}
+
+          {% endif %}
+
+        {% endcall %}
 
         {{ button({
           text: "Continue"
