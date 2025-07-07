@@ -99,19 +99,6 @@
         }) %}
 
           {% if data.vaccine == "flu" %}
-            <h2 class="nhsuk-heading-s nhsuk-u-margin-bottom-2 nhsuk-u-margin-top-4">National flu eligibility</h2>
-          {% endif %}
-
-          {{ radios({
-            idPrefix: "eligibility",
-            name: "eligibility",
-            items: items
-          }) }}
-
-
-          {% if data.vaccine == "flu" %}
-
-            <h2 class="nhsuk-heading-s nhsuk-u-margin-bottom-2 nhsuk-u-margin-top-4">London flu eligibility</h2>
 
             {% set londonFluItems = [] %}
             {% for option in londonFluEligibilityOptions %}
@@ -121,15 +108,34 @@
                 checked: (data.eligibility | arrayOrStringIncludes(option))
                 }), londonFluItems) %}
             {% endfor %}
-            {{ radios({
-              idPrefix: "eligibility-2",
-              name: "eligibility",
-              items: londonFluItems
-            }) }}
+
+            {% set londonFluHtml %}
+              {{ radios({
+                idPrefix: "eligibility-2",
+                name: "eligibility",
+                items: londonFluItems
+              }) }}
+            {% endset %}
+
+            {% set items = (items.push({
+              divider: "or"
+            }), items) %}
+
+            {% set items = (items.push({
+              text: "London flu vaccination criteria",
+              value: "london-flu",
+              conditional: {
+                html: londonFluHtml
+              }
+            }), items) %}
 
           {% endif %}
 
-
+          {{ radios({
+            idPrefix: "eligibility",
+            name: "eligibility",
+            items: items
+          }) }}
 
 
 
