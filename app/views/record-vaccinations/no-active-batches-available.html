@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "No batches available" %}
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      {% if organisationSetting.permissionLevel == "Recorder" %}
+        <p>There are no batches available for Spikevax JN.1. You'll need to ask an administrator to add a batch.</p>
+      {% else %}
+        <p>There are no batches available for Spikevax JN.1. <a href="/vaccines/">Add a batch</a></p>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}
