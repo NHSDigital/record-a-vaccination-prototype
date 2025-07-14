@@ -1,0 +1,116 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Why are you giving them the vaccine?" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/batch" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      <form action="/record-vaccinations/answer-eligibility" method="post" novalidate>
+
+     
+        <div class="nhsuk-form-group">
+
+            <fieldset class="nhsuk-fieldset">
+              <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+                <h1 class="nhsuk-fieldset__heading">
+                    Why are you giving them the vaccine?                </h1>
+              </legend>
+              <div class="nhsuk-hint" id="example-hints-hint">
+                <p class="nhsuk-u-margin-bottom-2">Select one option</p>
+              </div>
+
+              <br>
+              <p class="nhsuk-u-margin-bottom-2"><b>Aged 65 and over<b></p>
+              <div class="nhsuk-radios">
+                <div class="nhsuk-radios__item">
+                  <input class="nhsuk-radios__input" id="example-divider-1" name="example-divider" type="radio" value="nhsuk-login">
+                  <label class="nhsuk-label nhsuk-radios__label" for="example-divider-1">
+                    Aged 65 and over
+                  </label>
+                </div>
+
+                <br>
+                <p class="nhsuk-u-margin-bottom-2"><b>Aged 18 to 64 years with a chronic condition<b></p>
+
+
+
+                <div class="nhsuk-radios__item">
+                  <input class="nhsuk-radios__input" id="example-divider-2" name="example-divider" type="radio" value="government-verify">
+                  <label class="nhsuk-label nhsuk-radios__label" for="example-divider-2">
+                    Heart disease
+                </label>
+                </div>
+                <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="example-divider-2" name="example-divider" type="radio" value="government-verify">
+                    <label class="nhsuk-label nhsuk-radios__label" for="example-divider-2">
+                        Kidney disease
+                    </label>
+                  </div>
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="example-divider-2" name="example-divider" type="radio" value="government-verify">
+                    <label class="nhsuk-label nhsuk-radios__label" for="example-divider-2">
+                      Liver disease
+                   </label>
+                  </div>
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="example-divider-2" name="example-divider" type="radio" value="government-verify">
+                    <label class="nhsuk-label nhsuk-radios__label" for="example-divider-2">
+                        Respiratory disease
+                    </label>
+                  </div>
+                 
+                 
+                 
+                  <br>
+                  <p class="nhsuk-u-margin-bottom-2">Aged 18 to 64 years</p>
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="example-divider-4" name="example-divider" type="radio" value="create-account">
+                    <label class="nhsuk-label nhsuk-radios__label" for="example-divider-4">
+                        Cochlear implants
+                    </label>
+                  </div>
+
+
+
+                  <br>
+                  <p class="nhsuk-u-margin-bottom-2">Aged 8 to 64 years</p>
+                  
+                  <div class="nhsuk-radios__item">
+                  <input class="nhsuk-radios__input" id="example-divider-4" name="example-divider" type="radio" value="create-account">
+                  <label class="nhsuk-label nhsuk-radios__label" for="example-divider-4">
+                    Diabetes
+                  </label>
+                </div>
+              
+
+              </div>
+            </fieldset>
+          </div>
+
+
+
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "COVID-19 vaccine interval warning" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/patient-history" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Jodie Brown does is too young for this vaccine campaign</h1>
+
+      <p>
+        Jodie Brown is 4 years and 364 days old.
+      </p>
+
+      <p>
+        The minimum recommended age for this MMR (measles, mumps and rubella) campaign is 5 years old.
+      </p>
+
+      <p>
+        Your organisation may not be paid for this vaccination.
+      </p>
+   
+    </div>
+  </div>
+
+  {{ button({
+    "text": "Continue anyway",
+    "href": "/record-vaccinations/consent"
+  }) }}
+
+{% endblock %}
+

@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "COVID-19 vaccine interval warning" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/patient-history" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Jodie Brown had a PPV vaccine less than 1 year ago</h1>
+
+      <p>
+        Jodie Brown had a PPV (Pneumococcal Polysaccharide Vaccination) vaccine on 15 September 2024.
+      </p>
+
+      <p>
+        For most people, the minimum recommended gap between PPV vaccine doses is at least 1 year.
+      </p>
+      <p>
+        See ‘Doses and schedules’ in the <a href="https://www.gov.uk/government/publications/covid-19-vaccination-programme-guidance-for-healthcare-practitioners/covid-19-vaccination-programme-information-for-healthcare-practitioners" target="_blank">
+UKHSA guidance on COVID-19 vaccination (opens in new tab)</a>.
+      </p>
+    </div>
+  </div>
+
+  {{ button({
+    "text": "Continue anyway",
+    "href": "/record-vaccinations/consent"
+  }) }}
+
+{% endblock %}
+
