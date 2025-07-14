@@ -57,7 +57,6 @@
 
       <form action="/record-vaccinations/answer-eligibility" method="post" novalidate>
 
-
         {% if data.vaccine == "COVID-19" %}
           {% set eligibilityOptions = CovidEligibilityOptions %}
         {% elif data.vaccine == "flu" %}
@@ -76,7 +75,6 @@
             checked: (data.eligibility | arrayOrStringIncludes(option))
             }), items) %}
         {% endfor %}
-
 
         {% call fieldset({
           legend: {
@@ -124,8 +122,6 @@
             name: "eligibility",
             items: items
           }) }}
-
-
 
         {% endcall %}
 
