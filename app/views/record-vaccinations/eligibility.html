@@ -10,17 +10,8 @@
 
 {% set CovidEligibilityOptions = [
   "Resident in a care home",
-  "Staff in a care home",
-  "Healthcare worker",
-  "Social care worker",
-  "Based on age",
-  "Pregnant",
-  "Immunosuppressed",
-  "In a clinical risk group",
-  "Homeless or living in a closed setting",
-  "Household contact of someone immunosuppressed",
-  "Carer",
-  "Has had CAR-T therapy or a stem cell transplant since their last vaccination"
+  "Aged 75 and over, and not in a care home",
+  "Immunosuppressed"
 ] %}
 
 {% set RSVEligibilityOptions = [
@@ -29,18 +20,14 @@
 ] %}
 
 {% set NationalFluEligibilityOptions = [
-  "Healthcare worker",
-  "Resident in a care home",
-  "Staff in a care home",
-  "Healthcare worker",
-  "Social worker",
   "Based on age",
+  "Healthcare worker",
   "Pregnant",
-  "Immunosuppressed",
   "In a clinical risk group",
-  "Household contact of someone immunosuppressed",
+  "Resident in a care home",
   "Carer",
-  "Has had CAR-T therapy or a stem cell transplant since their last vaccination"
+  "Social care worker",
+  "Household contact of someone immunosuppressed"
 ] %}
 
 {% set londonFluEligibilityOptions = [
@@ -48,13 +35,13 @@
   "Gypsy, Roma and Traveller communities",
   "Sex worker",
   "Learning disability",
-  "Mental health issue",
+  "Mental health condition",
   "In a detained estate or in contact with justice system",
-  "Asylum seeker",
+  "Migrant or asylum seeker",
   "Victim of modern slavery",
-  "Experiencing drug or alcohol dependency",
+  "Drug or alcohol dependency",
   "Another health exclusion group based on local need",
-  "Frontline health care worker not covered by national criteria"
+  "Healthcare worker not covered by national criteria"
 ] %}
 
 {% block content %}
@@ -70,8 +57,9 @@
 
       <form action="/record-vaccinations/answer-eligibility" method="post" novalidate>
 
+
         {% if data.vaccine == "COVID-19" %}
-          {% set eligibilityOptions = covidEligiblityOptions %}
+          {% set eligibilityOptions = CovidEligibilityOptions %}
         {% elif data.vaccine == "flu" %}
           {% set eligibilityOptions = NationalFluEligibilityOptions %}
         {% elif data.vaccine == "RSV" %}
@@ -99,19 +87,6 @@
         }) %}
 
           {% if data.vaccine == "flu" %}
-            <h2 class="nhsuk-heading-s nhsuk-u-margin-bottom-2 nhsuk-u-margin-top-4">National flu eligibility</h2>
-          {% endif %}
-
-          {{ radios({
-            idPrefix: "eligibility",
-            name: "eligibility",
-            items: items
-          }) }}
-
-
-          {% if data.vaccine == "flu" %}
-
-            <h2 class="nhsuk-heading-s nhsuk-u-margin-bottom-2 nhsuk-u-margin-top-4">London flu eligibility</h2>
 
             {% set londonFluItems = [] %}
             {% for option in londonFluEligibilityOptions %}
@@ -121,15 +96,34 @@
                 checked: (data.eligibility | arrayOrStringIncludes(option))
                 }), londonFluItems) %}
             {% endfor %}
-            {{ radios({
-              idPrefix: "eligibility-2",
-              name: "eligibility",
-              items: londonFluItems
-            }) }}
+
+            {% set londonFluHtml %}
+              {{ radios({
+                idPrefix: "eligibility-2",
+                name: "eligibility",
+                items: londonFluItems
+              }) }}
+            {% endset %}
+
+            {% set items = (items.push({
+              divider: "or"
+            }), items) %}
+
+            {% set items = (items.push({
+              text: "London flu service",
+              value: "london-flu",
+              conditional: {
+                html: londonFluHtml
+              }
+            }), items) %}
 
           {% endif %}
 
-
+          {{ radios({
+            idPrefix: "eligibility",
+            name: "eligibility",
+            items: items
+          }) }}
 
 
 
