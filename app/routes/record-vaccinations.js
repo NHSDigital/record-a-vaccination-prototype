@@ -562,17 +562,16 @@ module.exports = router => {
         nextPage = "/record-vaccinations/patient-history"
       }
 
-    } else {
-
-      if ((data.vaccine === "COVID-19") || (data.vaccine == "flu")) {
-        if (data.eligibility === "Healthcare worker" || data.eligibility.includes("Healthcare worker")) {
-          nextPage = "/record-vaccinations/healthcare-worker"
-        } else {
-          nextPage = "/record-vaccinations/location"
-        }
+    } else if (data.vaccine == "flu") {
+      if (data.eligibility === "Healthcare worker") {
+        nextPage = "/record-vaccinations/healthcare-worker"
       } else {
         nextPage = "/record-vaccinations/patient"
       }
+    } else if (data.vaccine == "COVID-19") {
+      nextPage = "/record-vaccinations/location"
+    } else {
+      nextPage = "/record-vaccinations/patient"
     }
 
     res.redirect(nextPage)
