@@ -31,14 +31,14 @@
       {% else  %}
 
         <p>They can record
-          {% if (vaccinesEnabled | length) == 4 %}
+          {% if (vaccinesEnabled | length) == (data.vaccines | length) %}
             all
           {% else %}
             {{ vaccinesEnabled | sort(false, false, "name") | pluck("name") | formatList }}
           {% endif %}
         vaccinations.
 
-          {% if (vaccinesEnabled | length) < 4 %}
+          {% if (vaccinesEnabled | length) < (data.vaccines | length) %}
             <a href="/regions/organisations/{{organisation.id}}/add-vaccines">Add vaccines<span class="nhsuk-u-visually-hidden"></span></a>
           {% endif %}
         </p>
