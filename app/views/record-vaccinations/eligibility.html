@@ -44,6 +44,21 @@
   "Healthcare worker not covered by national criteria"
 ] %}
 
+{% set pneumococcalOver65Options = [
+  "Aged 65 and over"
+] %}
+
+{% set pneumococcalUnder65Options = [
+  "Heart disease",
+  "Kidney disease",
+  "Liver disease",
+  "Respiratory disease",
+  "Immunosuppressed",
+  "Cochlear implants",
+  "Diabetes"
+] %}
+
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
@@ -63,6 +78,8 @@
           {% set eligibilityOptions = NationalFluEligibilityOptions %}
         {% elif data.vaccine == "RSV" %}
           {% set eligibilityOptions = RSVEligibilityOptions %}
+        {% elif data.vaccine == "pneumococcal" %}
+          {% set eligibilityOptions = pneumococcalOver65Options %}
         {% else %}
           {% set eligibilityOptions = [] %}
         {% endif %}
@@ -71,8 +88,7 @@
         {% for option in eligibilityOptions %}
           {% set items = (items.push({
             text: option,
-            value: option,
-            checked: (data.eligibility | arrayOrStringIncludes(option))
+            value: option
             }), items) %}
         {% endfor %}
 
@@ -90,8 +106,7 @@
             {% for option in londonFluEligibilityOptions %}
               {% set londonFluItems = (londonFluItems.push({
                 text: option,
-                value: option,
-                checked: (data.eligibility | arrayOrStringIncludes(option))
+                value: option
                 }), londonFluItems) %}
             {% endfor %}
 
@@ -99,7 +114,8 @@
               {{ radios({
                 idPrefix: "eligibility-2",
                 name: "eligibility",
-                items: londonFluItems
+                items: londonFluItems,
+                value: data.eligibility
               }) }}
             {% endset %}
 
@@ -117,11 +133,35 @@
 
           {% endif %}
 
+          {% if data.vaccine == "pneumococcal" %}
+            <h2 class="nhsuk-u-font-size-19 nhsuk-u-margin-bottom-2 nhsuk-u-margin-top-3 nhsuk-u-font-weight-normal">Aged 65 and over</h2>
+          {% endif %}
+
           {{ radios({
             idPrefix: "eligibility",
             name: "eligibility",
+            value: data.eligibility,
             items: items
           }) }}
+
+          {% if data.vaccine == "pneumococcal" %}
+            <h2 class="nhsuk-u-font-size-19 nhsuk-u-margin-bottom-2 nhsuk-u-margin-top-3 nhsuk-u-font-weight-normal">Aged 18 to 64 and in a clinical risk group</h2>
+
+            {% set pneumococcalUnder64Items = [] %}
+            {% for option in pneumococcalUnder65Options %}
+              {% set pneumococcalUnder64Items = (pneumococcalUnder64Items.push({
+                text: option,
+                value: option
+                }), pneumococcalUnder64Items) %}
+            {% endfor %}
+
+            {{ radios({
+              idPrefix: "eligibility2",
+              name: "eligibility",
+              value: data.eligibility,
+              items: pneumococcalUnder64Items
+            }) }}
+          {% endif %}
 
         {% endcall %}
 
