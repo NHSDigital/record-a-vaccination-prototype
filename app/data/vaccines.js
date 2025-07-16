@@ -54,7 +54,7 @@ module.exports = [
     ]
   },
   {
-    name: "PPV (Pneumococcal Polysaccharide Vaccination)",
+    name: "Pneumococcal",
     products: [
       {
         name: "Pneumovax"
