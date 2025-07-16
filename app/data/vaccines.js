@@ -54,7 +54,18 @@ module.exports = [
     ]
   },
   {
-    name: "Pneumococcal",
+    name: "MMR",
+    products: [
+      {
+        name: "MMRVaXPro"
+      },
+      {
+        name: "Priorix"
+      }
+    ]
+  },
+  {
+    name: "pneumococcal",
     products: [
       {
         name: "Pneumovax"
