@@ -69,9 +69,6 @@ module.exports = [
     products: [
       {
         name: "Pneumovax"
-      },
-      {
-        name: "Prevenar"
       }
     ]
   },
