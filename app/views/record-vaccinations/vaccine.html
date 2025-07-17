@@ -49,7 +49,7 @@
 
       {% set items = [] %}
 
-      {% for vaccine in (vaccinesAvailable) %}
+      {% for vaccine in (vaccinesAvailable | sort(false, false, "name")) %}
 
         {% if vaccine.products %}
 
