@@ -20,12 +20,7 @@
       {% endif %}
 
       <form action="/record-vaccinations/answer-location" method="post" novalidate>
-
-        {% from 'radios/macro.njk' import radios %}
-        {% from 'input/macro.njk' import input %}
-
         {% set careHtml %}
-
 
         <div class="nhsuk-form-group">
           <label class="nhsuk-label nhsuk-label--s" for="care-home">
@@ -53,8 +48,6 @@
 
           </select>
         </div>
-
-
       {% endset -%}
 
         {{ radios({
@@ -70,44 +63,26 @@
           hint: {
             text: "This is needed for payment and reporting."
           },
+          value: data.locationType,
           items: [
             {
-              text: "Hospital hub for staff and patients",
-              value: "Hospital hub for staff and patients",
-              checked: (data.locationType === "Hospital hub for staff and patients")
-            },
-            {
-              text: "Vaccination centre open to the public",
-              value: "Vaccination centre open to the public",
-              checked: (data.locationType === "Vaccination centre open to the public")
-            },
-            {
-              text: "Community pharmacy",
-              value: "Community pharmacy",
-              checked: (data.locationType === "Community pharmacy")
+              text: "On site",
+              value: "On site"
             },
             {
               value: "Care home",
               text: "Care home",
-              checked: (data.locationType === "Care home"),
               conditional: {
                 html: careHtml
               }
             },
             {
               text: "Housebound patient’s home",
-              value: "Housebound patient’s home",
-              checked: (data.locationType === "Housebound patient’s home")
+              value: "Housebound patient’s home"
             },
             {
               text: "Outreach event",
-              value: "Outreach event",
-              checked: (data.locationType === "Outreach event")
-            },
-            {
-              text: "GP clinic",
-              value: "GP clinic",
-              checked: (data.locationType === "GP clinic")
+              value: "Outreach event"
             }
           ]
 

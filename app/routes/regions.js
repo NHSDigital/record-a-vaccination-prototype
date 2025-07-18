@@ -273,8 +273,12 @@ module.exports = router => {
     const organisation = data.organisations.find((org) => org.id === id)
     if (!organisation) { res.redirect('/regions/'); return }
 
-    const vaccines = organisation.vaccines || []
-    const vaccinesNotYetAdded = vaccines.filter((vaccine) => vaccine.status !== "enabled")
+    const organisationVaccines = organisation.vaccines || []
+    const vaccineEnabledNames = organisationVaccines.filter((vaccine) => vaccine.status === "enabled").map((vaccine) => vaccine.name)
+
+    const allVaccines = data.vaccines
+
+    const vaccinesNotYetAdded = allVaccines.filter((vaccine) => !vaccineEnabledNames.includes(vaccine.name))
 
     res.render('regions/add-vaccines', {
       organisation,
@@ -293,10 +297,20 @@ module.exports = router => {
 
     const vaccines = organisation.vaccines || []
 
-    for (vaccine of vaccines) {
-      if (vaccinesToAdd.includes(vaccine.name)) {
-        vaccine.status = "enabled"
+    for (vaccineToAdd of vaccinesToAdd) {
+
+      const existingVaccine = vaccines.find((vaccine) => vaccine.name === vaccineToAdd)
+
+      if (existingVaccine) {
+        existingVaccine.status = "enabled"
+      } else {
+
+        vaccines.push({
+          name: vaccineToAdd,
+          status: "enabled"
+        })
       }
+
     }
 
     res.redirect(`/regions/organisations/${id}`)

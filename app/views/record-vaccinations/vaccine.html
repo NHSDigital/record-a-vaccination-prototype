@@ -49,7 +49,7 @@
 
       {% set items = [] %}
 
-      {% for vaccine in (vaccinesAvailable) %}
+      {% for vaccine in (vaccinesAvailable | sort(false, false, "name")) %}
 
         {% if vaccine.products %}
 
@@ -70,7 +70,8 @@
                   "text": "Vaccine product"
                 }
               },
-              "items": productItems
+              "items": productItems,
+              value: data.vaccineProduct
             }) }}
           {% endset %}
         {% endif %}
@@ -94,6 +95,7 @@
             "isPageHeading": true
           }
         },
+        value: data.vaccine,
         errorMessage: {
           text: vaccineError
         } if vaccineError,

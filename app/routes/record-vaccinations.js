@@ -562,17 +562,16 @@ module.exports = router => {
         nextPage = "/record-vaccinations/patient-history"
       }
 
-    } else {
-
-      if ((data.vaccine === "COVID-19") || (data.vaccine == "flu")) {
-        if (data.eligibility === "Healthcare worker" || data.eligibility.includes("Healthcare worker")) {
-          nextPage = "/record-vaccinations/healthcare-worker"
-        } else {
-          nextPage = "/record-vaccinations/location"
-        }
+    } else if (data.vaccine == "flu") {
+      if (data.eligibility === "Healthcare worker") {
+        nextPage = "/record-vaccinations/healthcare-worker"
       } else {
         nextPage = "/record-vaccinations/patient"
       }
+    } else if (data.vaccine == "COVID-19") {
+      nextPage = "/record-vaccinations/location"
+    } else {
+      nextPage = "/record-vaccinations/patient"
     }
 
     res.redirect(nextPage)
@@ -778,7 +777,7 @@ module.exports = router => {
       redirectPath = "/record-vaccinations/add-batch"
     } else if (!vaccineBatch) {
       redirectPath = "/record-vaccinations/batch?showError=yes"
-    } else if (["COVID-19", "flu", "RSV"].includes(data.vaccine)) {
+    } else if (["COVID-19", "flu", "RSV", "pneumococcal"].includes(data.vaccine)) {
       redirectPath = "/record-vaccinations/eligibility"
     } else if (data.repeatPatient === "yes") {
       redirectPath = "/record-vaccinations/patient-estimated-due-date"
@@ -824,7 +823,7 @@ module.exports = router => {
 
     if (data.newBatchNumber === '' || data.newBatchExpiryDate?.day === '' || data.newBatchExpiryDate?.month === '' || data.newBatchExpiryDate?.year === '') {
       nextPage = "/record-vaccinations/add-batch?showErrors=yes"
-    } else if (data.vaccine === "pertussis") {
+    } else if ((data.vaccine === "pertussis") || (data.vaccine === "MMR")) {
       nextPage = "/record-vaccinations/patient"
     } else {
       nextPage = "/record-vaccinations/eligibility"

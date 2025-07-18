@@ -47,18 +47,17 @@ module.exports = (router) => {
   router.get('/vaccines/choose-vaccine', (req, res) => {
     const data = req.session.data
 
-    const vaccinesEnabledNames = res.locals.currentOrganisation.vaccines
+    const organisationVaccines = res.locals.currentOrganisation.vaccines || []
+
+    const vaccinesEnabled = organisationVaccines
       .filter((vaccine) => vaccine.status === "enabled")
+
+    const vaccinesEnabledNames = vaccinesEnabled
       .map((vaccine) => vaccine.name)
 
-    const vaccinesEnabled = data.vaccines.filter((vaccine) => vaccinesEnabledNames.includes(vaccine.name))
+    const allVaccines = data.vaccines
 
-    const vaccinesDisabledNames = res.locals.currentOrganisation.vaccines
-    .filter((vaccine) => vaccine.status === "disabled")
-    .map((vaccine) => vaccine.name)
-
-
-    const vaccinesDisabled = data.vaccines.filter((vaccine) => vaccinesDisabledNames.includes(vaccine.name))
+    const vaccinesDisabled = allVaccines.filter((vaccine) => !vaccinesEnabledNames.includes(vaccine.name))
 
     res.render('vaccines/choose-vaccine', {
       vaccinesEnabled,
