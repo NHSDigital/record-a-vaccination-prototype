@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Which team are you working with?" %}
+{% set pageName = "Which site is it?" %}
 
 {% set currentSection = "vaccinate" %}
 {% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
@@ -35,7 +35,7 @@
           name: "deliveryTeam",
           fieldset: {
             legend: {
-              text: "Which team are you working with?",
+              text: "Which site is it?",
               classes: "nhsuk-fieldset__legend--l",
               isPageHeading: true
             }
@@ -54,13 +54,13 @@
 
       {% if organisationSetting.permissionLevel == "Lead administrator" or organisationSetting.permissionLevel == "Administrator" %}
         {{ details({
-          text: "If your team is not listed",
-          html: "You need to <a href=\"/vaccines\">add vaccines</a> for the team."
+          text: "If your site is not listed",
+          html: "You need to <a href=\"/vaccines\">add vaccines</a> for the site."
         }) }}
       {% else %}
         {{ details({
           text: "If your team is not listed",
-          html: "You'll need to ask an administrator to add vaccines for the team."
+          html: "You'll need to ask an administrator to add vaccines for the site."
         }) }}
       {% endif %}
 
