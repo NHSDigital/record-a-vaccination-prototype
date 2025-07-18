@@ -708,7 +708,15 @@ module.exports = router => {
         (batch.vaccine === data.vaccine)
     }) || {}
 
-    const batches = vaccine.batches
+    const dateToday = new Date()
+
+    const batches = (vaccine.batches || [])
+      .filter(function(batch) {
+        const expiryDate = new Date(Date.parse(batch.expiryDate))
+
+        return (expiryDate > dateToday)
+      })
+      .filter((batch) => !batch.depletedDate)
 
     if (req.query.showError === 'yes') {
 
