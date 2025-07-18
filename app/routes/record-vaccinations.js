@@ -74,7 +74,7 @@ module.exports = router => {
     if (req.query.showErrors === "yes") {
       if (!req.session.data.deliveryTeam) {
         errors.push({
-          text: "Select a team",
+          text: "Select a site",
           href: "#delivery-team-1"
         })
       }
