@@ -43,10 +43,10 @@ module.exports = [
     name: "pertussis",
     products: [
       {
-        name: "Adacel vaccine supsension"
+        name: "Adacel vaccine suspension"
       },
       {
-        name: "Boostrix-IPV supsension"
+        name: "Boostrix-IPV suspension"
       },
       {
         name: "Repevax vaccine suspension"
