@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Which team was it? – Records" %}
+{% set pageName = "Which site was it? – Records" %}
 
 {% set currentSection = "records" %}
 
@@ -16,14 +16,14 @@
     <div class="nhsuk-grid-column-two-thirds">
 
       <form action="/records/records/{{ vaccination.id }}" method="post">
-        <input type="hidden" name="changedField" value="Team">
+        <input type="hidden" name="changedField" value="Site">
 
         {{ radios({
           idPrefix: "deliveryTeam",
           name: "deliveryTeam",
           fieldset: {
             legend: {
-              text: "Which team was it?",
+              text: "Which site was it?",
               classes: "nhsuk-fieldset__legend--l",
               isPageHeading: true
             }
