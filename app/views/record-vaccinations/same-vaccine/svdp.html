@@ -1,9 +1,17 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Do you have the patient’s NHS number?" %}
+{% set pageName = "Same vaccine different patient" %}
 
 {% set currentSection = "vaccinate" %}
 
+
+
+{% block beforeContent %}
+{{ backLink({
+  href: "/record-vaccinations/done",
+  text: "Back"
+}) }}
+{% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -16,147 +24,129 @@
         }) }}
       {% endif %}
 
-      <form action="/record-vaccinations/answer-patient-nhs-number-known" method="post" novalidate>
+
+      <h1 class="nhsuk-heading-l">Check these details still apply</h1>
+      
+
+      <form action="/record-vaccinations/same-vaccine/patient" method="post" novalidate>
+
+    
+
+        <dl class="nhsuk-summary-list">
+          <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">
+              Date
+            </dt>
+            <dd class="nhsuk-summary-list__value">
+              20 July 2025
+            </dd>
+            <dd class="nhsuk-summary-list__actions">
+              <a href="#">
+                Change<span class="nhsuk-u-visually-hidden"> date</span>
+              </a>
+            </dd>
+          </div>
+          <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">
+              Team
+            </dt>
+            <dd class="nhsuk-summary-list__value">
+             St Mary's Hospital
+            </dd>
+            <dd class="nhsuk-summary-list__actions">
+              <a href="#">
+                Change<span class="nhsuk-u-visually-hidden"> team</span>
+              </a>
+            </dd>
+          </div>
 
 
-        {% set nhsNumberHtml %}
-
-          {{ input({
-            id: "nhs-number",
-            name: "nhsNumber",
-            classes: "nhsuk-input--width-10",
-            inputmode: "numeric",
-            errorMessage: nhsNumberError,
-            label: {
-              text: "NHS number",
-              classes: "nhsuk-label--s"
-            },
-            value: data.nhsNumber,
-            hint: {
-              text: "For example, 485 777 3456"
-            }
-          }) }}
-        {% endset %}
+          <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">
+              Vaccinator
+            </dt>
+            <dd class="nhsuk-summary-list__value">
+             Jane Doe
+            </dd>
+            <dd class="nhsuk-summary-list__actions">
+              <a href="#">
+                Change<span class="nhsuk-u-visually-hidden"> vaccinator</span>
+              </a>
+            </dd>
+          </div>
 
 
-        {{ radios({
-          idPrefix: "nhs-number-known",
-          name: "nhsNumberKnown",
-          fieldset: {
-            legend: {
-              html: "Do you have the patient’s NHS&nbsp;number?",
-              classes: "nhsuk-fieldset__legend--l",
-              isPageHeading: "true"
-            }
-          },
-          errorMessage: nhsNumberKnownError if nhsNumberKnownError,
-          items: [
-            {
-              value: "yes",
-              text: "Yes",
-              checked: (data.nhsNumberKnown == 'yes'),
-              conditional: {
-                html: nhsNumberHtml
-              }
-            },
-            {
-              value: "no",
-              text: "No",
-              checked: (data.nhsNumberKnown == 'no')
-            }
-          ]
-        }) }}
 
+          <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">
+              Vaccine
+            </dt>
+            <dd class="nhsuk-summary-list__value">
+              <p>COVID-19</p>
+              <p>Corminarty 30 JN.1m</p>
+            </dd>
+            <dd class="nhsuk-summary-list__actions">
+              <a href="#">
+                Change<span class="nhsuk-u-visually-hidden"> vaccine</span>
+              </a>
+            </dd>
+          </div>
+          <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">
+              Batch
+            </dt>
+            <dd class="nhsuk-summary-list__value">
+              789465
+            </dd>
+            <dd class="nhsuk-summary-list__actions">
+              <a href="#">
+                Change<span class="nhsuk-u-visually-hidden"> batch</span>
+              </a>
+            </dd>
+          </div>
+        
+          <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">
+              Eligibility
+            </dt>
+            <dd class="nhsuk-summary-list__value">
+             Healthcare worker
+            </dd>
+            <dd class="nhsuk-summary-list__actions">
+              <a href="#">
+                Change<span class="nhsuk-u-visually-hidden"> eligibility</span>
+              </a>
+            </dd>
+          </div>
 
+          <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">
+              Location
+            </dt>
+            <dd class="nhsuk-summary-list__value">
+             Hospital hub for staff and patients
+            </dd>
+            <dd class="nhsuk-summary-list__actions">
+              <a href="#">
+                Change<span class="nhsuk-u-visually-hidden"> location</span>
+              </a>
+            </dd>
+          </div>
+
+        </dl>
 
 
         {{ button({
-          text: "Continue"
+          text: "Yes, continue to next patient"
         })}}
-
-        <details class="nhsuk-details">
-          <summary class="nhsuk-details__summary">
-            <span class="nhsuk-details__summary-text">
-              You are applying the following COVID-19 vaccination details
-            </span>
-          </summary>
-          <div class="nhsuk-details__text">
-        
+      </form>
 
 
-  <dl class="nhsuk-summary-list">
-    <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-        Date
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-        26 June 2026
-      </dd>
+      <p><a href="/record-vaccinations">Start again</a> to record a vaccination from the beginning.</p>
+
+
     </div>
-    <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-        Vaccine
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-        <p>COVID-19</p>
-        <p>Corminarty 30 JN.1</p>
-      </dd>
-    </div>
-    <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-        Batch
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-        <p>4844987</p>
-        <p>Expires 4 October 2025</p>
-      </dd>
-    </div>
-    <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-        Team
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-        <p>St Mary’s Hospital</p>
-      </dd>
-    </div>
-    <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-        Vaccinator
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-        <p>Jane Doe</p>
-      </dd>
-    </div>
-    <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-        Location
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-        <p>Hospital Hub</p>
-      </dd>
-    </div>
-    <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-        Eligibility
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-        <p>Healthcare worker</p>
-      </dd>
-    </div>
-
-
-  </dl>
-
-        
-</div>
-</details>
-
-
-
-<p>To record vaccination from the beginning <a href="/reports">delete and start again</a>.</p>
-
-
-
+  </div>
 
 
      
