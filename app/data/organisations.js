@@ -715,7 +715,8 @@ module.exports = [
       {name: "RSV", status: "disabled"},
       {name: "COVID-19", status: "enabled"},
       {name: "pertussis", status: "disabled"},
-      {name: "flu", status: "enabled"}
+      {name: "flu", status: "enabled"},
+      {name: "flu (London Flu service)", status: "enabled"}
     ],
     sites: [
       {

@@ -769,7 +769,7 @@ module.exports = router => {
       redirectPath = "/record-vaccinations/add-batch"
     } else if (!vaccineBatch) {
       redirectPath = "/record-vaccinations/batch?showError=yes"
-    } else if (["COVID-19", "flu", "RSV", "pneumococcal"].includes(data.vaccine)) {
+    } else if (["COVID-19", "flu", "flu (London flu service)", "RSV", "pneumococcal"].includes(data.vaccine)) {
       redirectPath = "/record-vaccinations/eligibility"
     } else if (data.repeatPatient === "yes") {
       redirectPath = "/record-vaccinations/patient-estimated-due-date"

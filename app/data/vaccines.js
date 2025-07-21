@@ -40,6 +40,29 @@ module.exports = [
     ]
   },
   {
+    name: "flu (London flu service)",
+    products: [
+      {
+        name: "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)"
+      },
+      {
+        name: "Cell-based Quadrivalent Influenza Vaccine (QIVc)"
+      },
+      {
+        name: "Fluenz (LAIV)"
+      },
+      {
+        name: "Influenza Tetra MYL (QIVe)"
+      },
+      {
+        name: "Quadrivalent Influenza Vaccine (QIVe)"
+      },
+      {
+        name: "Quadrivalent Influenza Vaccine - High Dose (QIV-HD)"
+      }
+    ]
+  },
+  {
     name: "pertussis",
     products: [
       {
