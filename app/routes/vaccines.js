@@ -49,13 +49,13 @@ module.exports = (router) => {
 
     const organisationVaccines = res.locals.currentOrganisation.vaccines || []
 
-    const vaccinesEnabled = organisationVaccines
+    const vaccinesEnabledNames = organisationVaccines
       .filter((vaccine) => vaccine.status === "enabled")
-
-    const vaccinesEnabledNames = vaccinesEnabled
       .map((vaccine) => vaccine.name)
 
     const allVaccines = data.vaccines
+
+    const vaccinesEnabled = allVaccines.filter((vaccine) => vaccinesEnabledNames.includes(vaccine.name))
 
     const vaccinesDisabled = allVaccines.filter((vaccine) => !vaccinesEnabledNames.includes(vaccine.name))
 
