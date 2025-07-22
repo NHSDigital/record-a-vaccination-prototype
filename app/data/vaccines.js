@@ -40,7 +40,7 @@ module.exports = [
     ]
   },
   {
-    name: "flu (London flu service)",
+    name: "flu (London service)",
     products: [
       {
         name: "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)"
