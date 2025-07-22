@@ -13,58 +13,36 @@
 {% endblock %}
 
 {% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+        <form action="/reports/choose-site" method="post">
 
-      <div class="nhsuk-grid-row">
-        <div class="nhsuk-grid-column-two-thirds">
+          {% set items = [] %}
 
+          {% for vaccine in (enabledVaccines | sort(false, false, "name")) %}
+            {% set items = (items.push({
+              value: vaccine.name,
+              text: (vaccine.name | capitaliseFirstLetter)
+            }), items) %}
+          {% endfor %}
 
-
-            <form action="/reports/choose-site" method="post">
-              {{ checkboxes({
-                "idPrefix": "vaccines",
-                "name": "vaccines",
-                "fieldset": {
-                  "legend": {
-                    "text": "Choose vaccines",
-                    "classes": "nhsuk-fieldset__legend--xl",
-                    isPageHeading: true
-                  }
-                },
-                "items": [
-                  {
-                    "value": "COVID-19",
-                    "text": "COVID-19",
-                    checked: (data.vaccines | arrayOrStringIncludes("COVID-19"))
-                  },
-                  {
-                    "value": "Flu",
-                    "text": "Flu",
-                    checked: (data.vaccines | arrayOrStringIncludes("Flu"))
-                  },
-                  {
-                    "value": "Pertussis",
-                    "text": "Pertussis",
-                    checked: (data.vaccines | arrayOrStringIncludes("Pertussis"))
-                  },
-                  {
-                    "value": "RSV",
-                    "text": "RSV",
-                    checked: (data.vaccines | arrayOrStringIncludes("RSV"))
-                  }
-                  ]
-              }) }}
-            {{ button({
-              "text": "Continue"
-            }) }}
-          </form>
-
-
-        </div>
-      </div>
-
-
-
-
+          {{ checkboxes({
+            idPrefix: "vaccines",
+            name: "vaccines",
+            fieldset: {
+              legend: {
+                text: "Choose vaccines",
+                classes: "nhsuk-fieldset__legend--xl",
+                isPageHeading: true
+              }
+            },
+            values: data.vaccines,
+            items: items
+          }) }}
+        {{ button({
+          "text": "Continue"
+        }) }}
+      </form>
     </div>
   </div>
 {% endblock %}
