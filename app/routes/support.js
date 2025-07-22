@@ -50,6 +50,16 @@ const userId = Math.floor(Math.random() * 10000000).toString()
 
   })
 
+  // Viewing list of organisations
+  router.get('/support/organisations', (req, res) => {
+
+    const organisations = req.session.data.organisations
+
+    res.render('support/organisations', {
+      organisations
+    })
+  })
+
   // Viewing an organisation
   router.get('/support/organisations/:id', (req, res) => {
     const { id } = req.params
@@ -57,10 +67,68 @@ const userId = Math.floor(Math.random() * 10000000).toString()
 
     const users = req.session.data.users.filter((user) => (user.organisations || []).find((organisation) => organisation.id === id))
 
+    const vaccines = organisation.vaccines || []
+    const vaccinesEnabled = vaccines.filter((vaccine) => vaccine.status === "enabled")
+
+
     res.render('support/organisations/show', {
       organisation,
+      vaccinesEnabled,
       users
     })
+  })
+
+  // Add vaccine for an organisation page
+  router.get('/support/organisations/:id/add-vaccines', (req, res) => {
+    const { id } = req.params
+    const data = req.session.data
+    const organisation = data.organisations.find((organisation) => organisation.id === id)
+
+    const organisationVaccines = organisation.vaccines || []
+    const vaccineEnabledNames = organisationVaccines.filter((vaccine) => vaccine.status === "enabled").map((vaccine) => vaccine.name)
+
+    const allVaccines = data.vaccines
+
+    const vaccinesNotYetAdded = allVaccines.filter((vaccine) => !vaccineEnabledNames.includes(vaccine.name))
+
+
+    res.render('support/organisations/add-vaccines', {
+      organisation,
+      vaccinesNotYetAdded
+    })
+  })
+
+  // Updating vaccines enabled per organisation
+  router.post('/support/organisations/:id/update-vaccines', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const organisation = data.organisations.find((org) => org.id === id)
+    if (!organisation) { res.redirect('/support/'); return }
+
+    const vaccinesToAdd = data.vaccinesToAdd
+
+    if (!organisation.vaccines) {
+      organisation.vaccines = []
+    }
+
+    let vaccines = organisation.vaccines
+
+    for (vaccineToAdd of vaccinesToAdd) {
+
+      const existingVaccine = vaccines.find((vaccine) => vaccine.name === vaccineToAdd)
+
+      if (existingVaccine) {
+        existingVaccine.status = "enabled"
+      } else {
+
+        vaccines.push({
+          name: vaccineToAdd,
+          status: "enabled"
+        })
+      }
+    }
+
+    res.redirect(`/support/organisations/${id}`)
   })
 
   // Changing a feature flag

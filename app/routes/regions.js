@@ -267,18 +267,22 @@ module.exports = router => {
   })
 
   // Viewing the page to set vaccines per organisation
-  router.get('/regions/organisations/:id/change-vaccines', (req, res) => {
+  router.get('/regions/organisations/:id/add-vaccines', (req, res) => {
     const data = req.session.data
     const id = req.params.id
     const organisation = data.organisations.find((org) => org.id === id)
     if (!organisation) { res.redirect('/regions/'); return }
 
-    const vaccines = organisation.vaccines || []
-    const vaccinesEnabled = vaccines.filter((vaccine) => vaccine.status === "enabled")
+    const organisationVaccines = organisation.vaccines || []
+    const vaccineEnabledNames = organisationVaccines.filter((vaccine) => vaccine.status === "enabled").map((vaccine) => vaccine.name)
 
-    res.render('regions/change-vaccines', {
+    const allVaccines = data.vaccines
+
+    const vaccinesNotYetAdded = allVaccines.filter((vaccine) => !vaccineEnabledNames.includes(vaccine.name))
+
+    res.render('regions/add-vaccines', {
       organisation,
-      vaccinesEnabled
+      vaccinesNotYetAdded
     })
   })
 
@@ -289,12 +293,24 @@ module.exports = router => {
     const organisation = data.organisations.find((org) => org.id === id)
     if (!organisation) { res.redirect('/regions/'); return }
 
-    const vaccinesEnabled = data.vaccinesEnabled
+    const vaccinesToAdd = data.vaccinesToAdd
 
     const vaccines = organisation.vaccines || []
 
-    for (vaccine of vaccines) {
-      vaccine.status = (vaccinesEnabled.includes(vaccine.name) ? "enabled" : "disabled")
+    for (vaccineToAdd of vaccinesToAdd) {
+
+      const existingVaccine = vaccines.find((vaccine) => vaccine.name === vaccineToAdd)
+
+      if (existingVaccine) {
+        existingVaccine.status = "enabled"
+      } else {
+
+        vaccines.push({
+          name: vaccineToAdd,
+          status: "enabled"
+        })
+      }
+
     }
 
     res.redirect(`/regions/organisations/${id}`)

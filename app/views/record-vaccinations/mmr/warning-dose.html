@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "COVID-19 vaccine interval warning" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/patient-history" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Jodie Brown has already had 2 doses of MMR</h1>
+
+      <p>
+        Jodie Brown had a second MMR vaccine on 10 July 2025.
+      </p>
+
+      <p>
+        Most people only need 2 doses of the MMR vaccine.
+      </p>
+   
+    </div>
+  </div>
+
+  {{ button({
+    "text": "Continue anyway",
+    "href": "/record-vaccinations/consent"
+  }) }}
+
+{% endblock %}
+

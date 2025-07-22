@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Add a list of NHS numbers" %}
+
+{% set currentSection = "lists" %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      <form action="/lists/add-numbers" method="post" novalidate>
+
+<h1 class="nhsuk-heading-m">Loading</h1>
+
+
+<div class="loader"></div>
+<style>
+.loader {
+    border: 12px solid #DEE0E2;
+    border-radius: 50%;
+    border-top-color: #005eb8;
+    width: 80px;
+    height: 80px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .center {
+  margin: auto;
+
+}
+</style>
+
+<br>
+
+
+<p>Looking up NHS numbers <br> Found 16 out of 104</p>
+
+
+<meta http-equiv=refresh content="5; url=http:/lists/list">
+
+
+{% endblock %}
+

@@ -17,7 +17,7 @@
       <form action="/vaccines/add-batch" method="post" novalidate="true">
         {% set items = [] %}
 
-        {% for vaccine in (vaccinesEnabled) %}
+        {% for vaccine in (vaccinesEnabled | sort(false, false, "name")) %}
           {% if vaccine.products %}
             {% set productItems = [] %}
             {% for vaccineProduct in (vaccine.products) %}
@@ -79,7 +79,7 @@
           <p>Select the vaccines you need.</p>
 
           {% set requestableItems = [] %}
-          {% for vaccine in (vaccinesDisabled) %}
+          {% for vaccine in (vaccinesDisabled | sort(false, false, "name")) %}
             {% set requestableItems = (requestableItems.push({
               value: vaccine.name,
               text: (vaccine.name | capitaliseFirstLetter)

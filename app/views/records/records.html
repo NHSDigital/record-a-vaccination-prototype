@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Patient's vaccination records – Records" %}
+
+{% set currentSection = "records" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/records/by-batch" }) }}
+{% endblock %}
+
+{% set dateOfBirthHtml %}
+  {% if data.dateOfBirth %}
+    {{ (data.dateOfBirth | isoDateFromDateInput | govukDate) }}
+    <br>(75 years old)
+  {% endif %}
+{% endset %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      <h1 class="nhsuk-heading-l">AB2345 records</h1>
+
+   
+
+
+
+<br>
+
+      <h2 class="nhsuk-heading-m">Vaccination history</h2>
+
+      <p>You can only view, change or delete records your organisation has created.</p>
+
+      {% set rows = [] %}
+
+      {% for vaccinationRecorded in vaccinationsRecorded %}
+
+        {% set rows = (rows.push([
+          {
+            text: (vaccinationRecorded.date | isoDateFromDateInput | govukDate)
+          },
+          {
+            text: vaccinationRecorded.vaccine
+          },
+          {
+            text: vaccinationRecorded.vaccineProduct
+          },
+          {
+            html: '<a href="/records/records/' + vaccinationRecorded.id + '">View<span class="nhsuk-u-visually-hidden"> Y vaccination recorded on X</span></a>'
+          } if vaccinationRecorded.editable
+        ]), rows) %}
+
+      {% endfor %}
+
+
+      {{ table({
+        responsive: true,
+        panel: false,
+        firstCellIsHeader: true,
+        head: [
+          {
+            text: "Date"
+          },
+          {
+            text: "Vaccine"
+          },
+          {
+            text: "Product"
+          },
+          {
+          }
+        ],
+        rows: rows
+      }) }}
+
+
+    </div>
+
+
+
+{% endblock %}
+

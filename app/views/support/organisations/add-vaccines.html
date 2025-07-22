@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Add vaccines for " + organisation.name %}
+{% set currentSection = "organisations" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/support/organisations/" + organisation.id,
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form method="post" action="/support/organisations/{{ organisation.id }}/update-vaccines" novalidate>
+
+        <div class="nhsuk-caption-l">{{ organisation.name }}</div>
+
+        {% set items = [] %}
+
+        {% for vaccine in (vaccinesNotYetAdded | sort(false, false, "name")) %}
+          {% set items = (items.push({
+            value: vaccine.name,
+            text: (vaccine.name | capitaliseFirstLetter)
+          }), items) %}
+        {% endfor %}
+
+        {{ checkboxes({
+          name: "vaccinesToAdd",
+          classes: "nhsuk-radios--inline",
+          fieldset: {
+            legend: {
+              text: "Which vaccines do you want to add?",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          items: items
+        }) }}
+
+        {{ button({
+          text: "Confirm"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

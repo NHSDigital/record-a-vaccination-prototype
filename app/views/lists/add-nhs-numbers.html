@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Add a list of NHS numbers" %}
+
+{% set currentSection = "lists" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/lists/date" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      <form action="/lists/loading" method="post" novalidate>
+
+<h1 class="nhsuk-heading-l">Add a list of NHS numbers</h1>
+
+<p class="nhsuk-body-m">Copy and paste NHS numbers from a spreadsheet or another source.</p>
+<p>Each number must be 10 digits and can include spaces. Include 1 NHS number per line with no punctuation.</p>
+<p>For example,
+  <br>485 777 3456
+  <br>9012345678
+  <br>1234567890
+</p>
+
+<div class="nhsuk-form-group">
+  <label class="nhsuk-label nhsuk-label--s" for="example-longer">
+    NHS numbers
+  </label>
+
+  <textarea class="nhsuk-textarea" id="example-longer" name="example-longer" rows=" 10 " style="width:200px" aria-describedby="example-longer-hint"></textarea>
+</div>
+
+
+    </div>
+  </div>
+
+
+  {{ button({
+    text: "Confirm"
+  }) }}
+</form>
+
+{% endblock %}
+

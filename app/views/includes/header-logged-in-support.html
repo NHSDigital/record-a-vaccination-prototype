@@ -29,6 +29,20 @@
         href: "/support/users",
         text : "Users",
         active: (currentSection == "users")
+      },
+      {
+        url  : "/support/organisations",
+        label : "Organisations",
+        active: (currentSection == "organisations")
+      },
+      {
+        url: "#",
+        label: currentUser.email,
+        classes: "app-header__navigation-item--right-aligned " + ("app-header__navigation-item--current" if currentSection == "user-profile")
+      },
+      {
+        url: '/sign-out',
+        label: 'Log out'
       }
     ] }
   })

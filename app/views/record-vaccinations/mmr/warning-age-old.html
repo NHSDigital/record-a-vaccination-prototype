@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "COVID-19 vaccine interval warning" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/patient-history" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Jodie Brown is too old for the London MMR service</h1>
+
+      <p>
+        Jodie Brown is 20 years and 4 days old.
+      </p>
+
+      <p>
+        To be eligible for this service, you have to be under the age of 20. Refer this patient to their GP for a vaccination.
+      </p>
+
+      <p>
+        Your organisation may not be paid for this vaccination.
+      </p>
+   
+    </div>
+  </div>
+
+  {{ button({
+    "text": "Continue anyway",
+    "href": "/record-vaccinations/consent"
+  }) }}
+
+{% endblock %}
+

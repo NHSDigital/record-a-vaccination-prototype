@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Which batch was used? – Records" %}
+{% set pageName = "Which batch was it? – Records" %}
 
 {% set currentSection = "records" %}
 
@@ -23,7 +23,7 @@
             "name": "batchNumber",
             "fieldset": {
               "legend": {
-                "text": ("Which batch was used?" if vaccination.vaccinationToday == 'yes' else "Which batch was used?"),
+                "text": "Which batch was it?",
                 "classes": "nhsuk-fieldset__legend--l",
                 "isPageHeading": true
               }

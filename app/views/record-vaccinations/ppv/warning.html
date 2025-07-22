@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "COVID-19 vaccine interval warning" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/patient-history" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Jodie Brown has already had a pneumococcal vaccine</h1>
+
+      <p>
+        Jodie Brown had a pneumococcal vaccine on 15 September 2024.
+      </p>
+
+      <p>
+        Most adults only need 1 dose of the pneumococcal vaccine.</p>
+     
+    </div>
+  </div>
+
+  {{ button({
+    "text": "Continue anyway",
+    "href": "/record-vaccinations/consent"
+  }) }}
+
+{% endblock %}
+

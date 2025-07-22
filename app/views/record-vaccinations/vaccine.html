@@ -42,14 +42,14 @@
 
       {% if data.repeatPatient == 'yes' and data.patientName %}
 
-        {% set question = ("Which vaccine are you giving " + data.patientName + "?" if data.vaccinationToday == 'yes' else "Which vaccine did you give " + data.patientName + "?") %}
+        {% set question = ("Which vaccine are you giving " + data.patientName + "?" if data.vaccinationToday == 'yes' else "Which vaccine was it " + data.patientName + "?") %}
       {% else %}
-        {% set question = ("Which vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which vaccine did you give?") %}
+        {% set question = ("Which vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which vaccine was it?") %}
       {% endif %}
 
       {% set items = [] %}
 
-      {% for vaccine in (vaccinesAvailable) %}
+      {% for vaccine in (vaccinesAvailable | sort(false, false, "name")) %}
 
         {% if vaccine.products %}
 
@@ -57,7 +57,7 @@
           {% for vaccineProduct in (vaccine.products) %}
             {% set productItems = (productItems.push({
               value: vaccineProduct.name,
-              text: vaccineProduct.name
+              text: (vaccineProduct.name | capitaliseFirstLetter )
             }), productItems) %}
           {% endfor %}
 
@@ -70,14 +70,15 @@
                   "text": "Vaccine product"
                 }
               },
-              "items": productItems
+              "items": productItems,
+              value: data.vaccineProduct
             }) }}
           {% endset %}
         {% endif %}
 
         {% set items = (items.push({
           value: vaccine.name,
-          text: vaccine.name,
+          text: (vaccine.name | capitaliseFirstLetter),
           conditional: {
             html: conditionalHtml
           } if vaccine.products
@@ -94,6 +95,7 @@
             "isPageHeading": true
           }
         },
+        value: data.vaccine,
         errorMessage: {
           text: vaccineError
         } if vaccineError,

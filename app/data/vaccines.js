@@ -40,16 +40,58 @@ module.exports = [
     ]
   },
   {
+    name: "flu (London service)",
+    products: [
+      {
+        name: "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)"
+      },
+      {
+        name: "Cell-based Quadrivalent Influenza Vaccine (QIVc)"
+      },
+      {
+        name: "Fluenz (LAIV)"
+      },
+      {
+        name: "Influenza Tetra MYL (QIVe)"
+      },
+      {
+        name: "Quadrivalent Influenza Vaccine (QIVe)"
+      },
+      {
+        name: "Quadrivalent Influenza Vaccine - High Dose (QIV-HD)"
+      }
+    ]
+  },
+  {
     name: "pertussis",
     products: [
       {
-        name: "Adacel vaccine supsension"
+        name: "Adacel vaccine suspension"
       },
       {
-        name: "Boostrix-IPV supsension"
+        name: "Boostrix-IPV suspension"
       },
       {
         name: "Repevax vaccine suspension"
+      }
+    ]
+  },
+  {
+    name: "MMR",
+    products: [
+      {
+        name: "MMRVaXPro"
+      },
+      {
+        name: "Priorix"
+      }
+    ]
+  },
+  {
+    name: "pneumococcal",
+    products: [
+      {
+        name: "Pneumovax"
       }
     ]
   },
