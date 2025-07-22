@@ -1,0 +1,198 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Choose data" %}
+
+{% set currentSection = "reports" %}
+
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/reports/choose-site",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if error %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [error]
+        }) }}
+      {% endif %}
+
+      <form action="/reports/update-data" method="post" novalidate="true">
+
+        <form method="post" novalidate>
+
+          <div class="nhsuk-form-group">
+        
+            <fieldset class="nhsuk-fieldset" aria-describedby="nationality-hint">
+              <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+                <h1 class="nhsuk-fieldset__heading">
+                  Choose data
+                </h1>
+              </legend>
+
+              <div class="nhsuk-checkboxes">
+        
+
+                <label class="nhsuk-label" for="example">
+                  Patient
+                </label>
+
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                    Name
+                  </label>
+                </div>
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                    NHS number
+                  </label>
+                </div>
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                  Date of birth
+                  </label>
+                </div>
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                    Gender
+                  </label>
+                </div>
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                   Address
+                  </label>
+                </div>
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                    Consent
+                  </label>
+                </div>
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                    Eligibility
+                  </label>
+                </div>
+               
+
+
+                <br>
+                <label class="nhsuk-label" for="example">
+                  Staff 
+                </label>
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                    Name
+                  </label>
+                </div>
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                    Email address
+                  </label>
+                </div>
+              
+              
+              
+                <br>
+                <label class="nhsuk-label" for="example">
+                  Site
+                </label>
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                    Name
+                  </label>
+                </div>
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                    ODS code
+                  </label>
+                </div>
+
+                  
+                <br>
+                <label class="nhsuk-label" for="example">
+                  Vaccine
+                </label>
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                    Date
+                  </label>
+                </div>
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                    Vaccine type
+                  </label>
+                </div>
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                   Product
+                  </label>
+                </div>
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                    Batch
+                  </label>
+                </div>
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                    Dose
+                  </label>
+                </div>
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                    Injection site
+                  </label>
+                </div>
+                <div class="nhsuk-checkboxes__item">
+                  <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british" aria-describedby="nationality-1-item-hint" checked>
+                  <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+                    Comments
+                  </label>
+                </div>
+
+                  
+      
+
+
+               
+              </div>
+            </fieldset>
+          </div>
+        
+        </form>
+
+
+
+        {{ button({
+          "text": "Continue"
+        }) }}
+      </form>
+
+
+    </div>
+  </div>
+
+
+{% endblock %}
