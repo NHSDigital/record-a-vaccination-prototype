@@ -76,6 +76,8 @@
           {% set eligibilityOptions = CovidEligibilityOptions %}
         {% elif data.vaccine == "flu" %}
           {% set eligibilityOptions = NationalFluEligibilityOptions %}
+        {% elif data.vaccine == "flu (London service)" %}
+          {% set eligibilityOptions = londonFluEligibilityOptions %}
         {% elif data.vaccine == "RSV" %}
           {% set eligibilityOptions = RSVEligibilityOptions %}
         {% elif data.vaccine == "pneumococcal" %}
@@ -99,39 +101,6 @@
             isPageHeading: true
           }
         }) %}
-
-          {% if data.vaccine == "flu" %}
-
-            {% set londonFluItems = [] %}
-            {% for option in londonFluEligibilityOptions %}
-              {% set londonFluItems = (londonFluItems.push({
-                text: option,
-                value: option
-                }), londonFluItems) %}
-            {% endfor %}
-
-            {% set londonFluHtml %}
-              {{ radios({
-                idPrefix: "eligibility-2",
-                name: "eligibility",
-                items: londonFluItems,
-                value: data.eligibility
-              }) }}
-            {% endset %}
-
-            {% set items = (items.push({
-              divider: "or"
-            }), items) %}
-
-            {% set items = (items.push({
-              text: "London flu service",
-              value: "london-flu",
-              conditional: {
-                html: londonFluHtml
-              }
-            }), items) %}
-
-          {% endif %}
 
           {% if data.vaccine == "pneumococcal" %}
             <h2 class="nhsuk-u-font-size-19 nhsuk-u-margin-bottom-2 nhsuk-u-margin-top-3 nhsuk-u-font-weight-normal">Aged 65 and over</h2>
