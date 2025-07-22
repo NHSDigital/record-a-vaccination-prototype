@@ -37,7 +37,7 @@
               items: []
             }
           },
-{
+          {
             key: {
               text: "Name",
               classes: "nhsuk-u-font-weight-normal"
@@ -72,6 +72,23 @@
                 }
               ]
             }
+          },{
+            key: {
+              text: "Vaccines enabled",
+              classes: "nhsuk-u-font-weight-normal"
+            },
+            value: {
+              html: (vaccinesEnabled | sort(false, false, "name") | pluck("name") | formatList)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/support/organisations/" + organisation.id + "/add-vaccines",
+                  text: "Add",
+                  visuallyHiddenText: "vaccines"
+                }
+              ]
+            } if ((vaccinesEnabled | length) != (data.vaccines | length))
           }
         ]
       }) }}
