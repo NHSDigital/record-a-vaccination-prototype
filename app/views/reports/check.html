@@ -31,7 +31,7 @@
             actions: {
               items: [
                 {
-                  href: "/reports/choose-dates-2",
+                  href: "/reports/choose-dates",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -60,12 +60,10 @@
           },
           {
             key: {
-              text: ("Vaccines" if (data.vaccines | length) > 1 else "Vaccine"),
-              classes: "xnhsuk-u-font-weight-bold"
+              text: ("Vaccines" if (data.vaccines | length) > 1 else "Vaccine")
             },
             value: {
-              text: (data.vaccines | join(", ")) if data.vaccines,
-              classes: "xnhsuk-u-font-weight-bold"
+              text: (data.vaccines | sort(false, false, "name") | join(", ") | capitaliseFirstLetter) if data.vaccines
             },
             actions: {
               items: [
