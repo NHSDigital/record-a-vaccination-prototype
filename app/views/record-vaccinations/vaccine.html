@@ -109,12 +109,12 @@
 
         {% if organisationSetting.permissionLevel == "Recorder" %}
           {{ details({
-            text: "If the vaccine is not listed",
+            summaryText: "If the vaccine is not listed",
             html: "You'll need to ask an administrator to add it."
           }) }}
         {% else %}
           {{ details({
-            text: "If the vaccine is not listed",
+            summaryText: "If the vaccine is not listed",
             html: "Go to <a href=\"/vaccines\">Vaccines</a> to add it."
           }) }}
         {% endif %}

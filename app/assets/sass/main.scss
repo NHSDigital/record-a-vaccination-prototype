@@ -1,5 +1,5 @@
 // Import NHS.UK frontend library
-@import 'node_modules/nhsuk-frontend/packages/nhsuk';
+@import "node_modules/nhsuk-frontend/dist/nhsuk";
 
 // Local override classes
 @import 'overrides';
@@ -9,7 +9,6 @@
 @import 'components/related-nav';
 @import 'components/indent-list';
 @import 'components/feedback-panel';
-@import 'components/button-group';
 @import 'components/checkboxes';
 
 // Import GOVUK-frontend
