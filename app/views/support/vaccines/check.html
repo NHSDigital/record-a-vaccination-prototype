@@ -1,0 +1,111 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check vaccine programme and products" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ backLink({ href: "/support/vaccines/add" }) }}
+{% endblock %}
+
+
+
+{% block content %}
+   <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+
+
+
+      <dl class="nhsuk-summary-list">
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Programme
+    </dt>
+
+    <dd class="nhsuk-summary-list__value">
+      <p>COVID-19</p>
+      <p>SCTID 1156257007</p>
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/find">
+        Change<span class="nhsuk-u-visually-hidden"> name</span>
+      </a>
+    </dd>
+  </div>
+
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Product 1
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p>Corminarty 30 JN.1</p>
+      <p>AMP 123456789</p>
+            <p>Single dose</p>
+                  <p>Adult (Over 18)</p>
+
+
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/add">
+        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+      </a>
+    </dd>
+  </div>
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Product 2
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p>Corminarty 30 JN.1</p>
+      <p>AMP 123456789</p>
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/add">
+        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+      </a>
+    </dd>
+  </div>
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Product 3
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p>Corminarty 30 JN.1</p>
+      <p>AMP 123456789</p>
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/add">
+        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+      </a>
+    </dd>
+  </div>
+</dl>
+
+          <form action="/support/vaccines" method="post">
+         
+          <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+            Confirm
+          </button>
+
+
+          </form>
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+

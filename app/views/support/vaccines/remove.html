@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Are you sure you want to remove Comirnaty 30 JN.1 from RAVS?" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ backLink({ href: "/support/vaccines/vaccine" }) }}
+{% endblock %}
+
+
+
+{% block content %}
+   <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+
+      <p>Example</p>
+
+
+   
+
+          <form action="/support/vaccines/vaccine" method="post">
+         
+          <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+            Yes, remove product
+          </button>
+
+
+          </form>
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+

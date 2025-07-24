@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Choose vaccine product" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ backLink({ href: "/support/vaccines/find" }) }}
+{% endblock %}
+
+
+
+{% block content %}
+   <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+
+          <p>You can check <a href="https://termbrowser.nhs.uk/?" target="_new">AMP codes (opens in new tab)</a>.</p>
+
+
+          <form action="/support/vaccines/add" method="post">
+
+          <div class="nhsuk-form-group">
+          <label class="nhsuk-label" for="example">
+            Enter vaccine product AMP code
+          </label>
+          
+
+        <select class="nhsuk-select nhsuk-u-width-one-half" id="siteId" name="siteId"
+              data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+              <option selected value=""></option>
+
+              {% for site in currentOrganisation.sites %}
+                <option value="{{ site.id }}">{{ site.name }} ({{site.id }})</option>
+              {% endfor %}
+            </select>
+          
+
+          </div>
+            
+
+     {{ button({
+        text: "  Check",
+        href: "/support/vaccines/check"
+      }) }}
+
+          </form>
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+
