@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "The patient has already had a first dose of MMR" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/patient-history" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Jodie Brown has already had a first dose of MMR</h1>
+
+      <p>Jodie Brown had a first dose of MMR on 10 July 2025. You need to go back and select MMR (second dose).</p>
+         
+    </div>
+  </div>
+
+  {{ button({
+    "text": "Select vaccine",
+    "href": "/record-vaccinations/vaccine"
+  }) }}
+
+  {{ button({
+    "text": "Continue anyway",
+    "href": "/record-vaccinations/consent"
+  }) }}
+
+{% endblock %}
