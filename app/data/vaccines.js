@@ -77,7 +77,18 @@ module.exports = [
     ]
   },
   {
-    name: "MMR",
+    name: "MMR (first dose)",
+    products: [
+      {
+        name: "MMRVaXPro"
+      },
+      {
+        name: "Priorix"
+      }
+    ]
+  },
+  {
+    name: "MMR (second dose)",
     products: [
       {
         name: "MMRVaXPro"

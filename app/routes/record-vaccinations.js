@@ -823,7 +823,7 @@ module.exports = router => {
 
     if (data.newBatchNumber === '' || data.newBatchExpiryDate?.day === '' || data.newBatchExpiryDate?.month === '' || data.newBatchExpiryDate?.year === '') {
       nextPage = "/record-vaccinations/add-batch?showErrors=yes"
-    } else if ((data.vaccine === "pertussis") || (data.vaccine === "MMR")) {
+    } else if ((data.vaccine === "pertussis") || (data.vaccine === "MMR (first dose)") || (data.vaccine === "MMR (second dose)")) {
       nextPage = "/record-vaccinations/patient"
     } else {
       nextPage = "/record-vaccinations/eligibility"
