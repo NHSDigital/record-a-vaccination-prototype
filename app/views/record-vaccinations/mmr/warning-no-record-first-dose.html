@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "There is no record of a first dose of MMR" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/patient-history" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">There is no record of Jodie Brown's first dose of MMR</h1>
+
+      <p>You selected MMR (second dose) but there is no record of a first dose for Jodie Brown. </p>
+      <p>If they have not had a first dose, you need to select MMR (first dose).</p>
+      <p>If they have confirmed they have had a first dose, continue.</p>
+   
+    </div>
+  </div>
+
+  {{ button({
+    "text": "Select vaccine",
+    "href": "/record-vaccinations/consent"
+  }) }}
+
+  {{ button({
+    "text": "Continue anyway",
+    "href": "/record-vaccinations/consent"
+  }) }}
+
+{% endblock %}
