@@ -1,0 +1,113 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "COVID-19" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ backLink({ href: "/support/vaccines" }) }}
+{% endblock %}
+
+
+
+{% block content %}
+
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+  
+
+
+
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-one-half">
+
+
+      <dl class="nhsuk-summary-list">
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      SCTID    </dt>
+    <dd class="nhsuk-summary-list__value">
+      3456789
+    </dd>
+  </div>
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+Dose    </dt>
+    <dd class="nhsuk-summary-list__value">
+      First
+    </dd>
+
+  </div>
+
+
+
+
+
+  </div>
+</div>
+
+
+
+  
+</dl>
+
+
+
+    <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+      Add product
+    </button>
+
+
+<div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+<table class="nhsuk-table-responsive" role="table">
+  <caption class="nhsuk-table__caption"></caption>
+  <thead class="nhsuk-table__head" role="rowgroup">
+    <tr role="row">
+      <th scope="col" class="nhsuk-table__header nhsuk-u-width-one-half" role="columnheader">Product</th>
+      <th scope="col" class="nhsuk-table__header nhsuk-u-width-one-quarter" role="columnheader">Code</th>
+      <th scope="col" class="nhsuk-table__header nhsuk-u-width-one-quarter" role="columnheader">Date added</th>
+      <th scope="col" class="nhsuk-table__header nhsuk-u-width-one-quarter" role="columnheader"></th>
+
+    </tr>
+  </thead>
+  <tbody class="nhsuk-table__body">
+    <tr class="nhsuk-table__row" role="row">
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Product </span>Comirnaty 30 JN.1</td>
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Code </span>567899</td>
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date added</span>10 June 2024</td>
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true"></span><a href="/support/vaccines/remove">Remove</a></td>
+
+    </tr>
+    <tr class="nhsuk-table__row" role="row">
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Product </span>	Comirnaty 10 JN.1</td>
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Code</span>567898</td>
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date added</span>17 June 2024</td>
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true"></span><a>Remove</a></td>
+
+    </tr>
+    <tr class="nhsuk-table__row" role="row">
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Product </span>	Comirnaty 3 JN.1</td>
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Code</span>567897</td>
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date added</span>4 July 2024</td>
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true"></span><a>Remove</a></td>
+
+    </tr>
+  </tbody>
+</table>
+
+ </div>
+  </div>
+
+
+    </div>
+  </div>
+
+{% endblock %}
+

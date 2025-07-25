@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Vaccines" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+  
+            <p>All vaccines added will be available for organisations in RAVS.</p>
+
+
+     {{ button({
+        text: "  Add vaccine programme",
+        href: "/support/vaccines/find"
+      }) }}
+
+
+
+      <ul class="nhsuk-list">
+          <li><a href="/support/vaccines/vaccine">COVID-19</a></li>
+
+          <li><a href="/support/vaccines/vaccine">Flu</a></li>
+
+          <li><a href="/support/vaccines/vaccine">MMR</a></li>
+
+          <li><a href="/support/vaccines/vaccine">Pertussis</a></li>
+
+          <li><a href="/support/vaccines/vaccine">Pneumococcal</a></li>
+
+          <li><a href="/support/vaccines/vaccine">RSV</a></li>
+        </ul>
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+
