@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Vaccines" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+
+      <form action="/support/add" method="post" novalidate>
+
+ 
+        {{ button({
+          text: "Add a new vaccine service"
+        })}}
+
+
+      <ul class="nhsuk-list">
+          <li><a href="/support/vaccine">COVID-19</a></li>
+          <li><a href="/support/vaccine">Flu</a></li>
+          <li><a href="/support/vaccine">MMR</a></li>
+          <li><a href="/support/vaccine">Pertussis</a></li>
+          <li><a href="/support/vaccine">Pneumococcal</a></li>
+          <li><a href="/support/vaccine">RSV</a></li>
+
+      </ul>
+      
+
+    </div>
+  </div>
+  
+
+{% endblock %}
+

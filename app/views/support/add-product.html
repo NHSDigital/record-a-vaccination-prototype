@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Find vaccine" %}
+
+{% set currentSection = "add" %}
+
+
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+{{ backLink({ href: "/support/add", text: "Back" }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-xl">Add vaccine products</h1>
+
+      <p>Example</p>
+
+      <p>You can check <a href="https://termbrowser.nhs.uk/" target="_new">SNOMED codes here (opens in new tab)</a>.</p>
+
+      <form action="/support/vaccines/add-product" method="post">
+
+
+
+        <div class="nhsuk-form-group">
+          <label class="nhsuk-label" for="productCODE">
+            Product code
+          </label> <input class="govuk-input govuk-!-width-one-half" id="example" name="example" type="text" size="two-thirds">
+        </div>
+
+
+
+
+      {{ button({
+        "text": "Continue"
+      }) }}
+
+    </form>
+
+
+    </div>
+  </div>
+
+
+
+{% endblock %}
+

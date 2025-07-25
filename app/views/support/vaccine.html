@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Vaccines" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+{{ backLink({ href: "/support/vaccines", text: "Back" }) }}
+{% endblock %}
+
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+
+      <form action="/support/add" method="post" novalidate>
+
+ 
+        <table class="nhsuk-table-responsive" role="table">
+          <caption class="nhsuk-table__caption">Example</caption>
+          <thead class="nhsuk-table__head" role="rowgroup">
+            <tr role="row">
+              <th scope="col" class="nhsuk-table__header nhsuk-u-width-one-half" role="columnheader">Product</th>
+              <th scope="col" class="nhsuk-table__header nhsuk-u-width-one-quarter" role="columnheader">Code</th>
+              <th scope="col" class="nhsuk-table__header nhsuk-u-width-one-quarter" role="columnheader">Doses</th>
+            </tr>
+          </thead>
+          <tbody class="nhsuk-table__body">
+            <tr class="nhsuk-table__row" role="row">
+              <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Product </span>Corminarty 30 JN.1</td>
+              <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Code </span>66588941</td>
+              <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Doses </span>1</td>
+            </tr>
+            <tr class="nhsuk-table__row" role="row">
+              <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Product </span>Corminarty 10 JN.1</td>
+              <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Code </span>666588940</td>
+              <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Doses </span>1</td>
+            </tr>
+            <tr class="nhsuk-table__row" role="row">
+              <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Product </span>Corminarty 3 JN.1</td>
+              <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Code</span>666588942</td>
+              <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Doses </span>1</td>
+            </tr>
+          </tbody>
+        </table>
+
+     
+      
+
+    </div>
+  </div>
+  
+
+{% endblock %}
+
