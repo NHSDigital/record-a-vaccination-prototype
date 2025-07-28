@@ -1,0 +1,103 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "What dose of the vaccine did you give?" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/consent" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      <form action="/record-vaccinations/answer-injection-site" method="post" novalidate>
+
+        {% set somewhereElseHtml %}
+
+        {{ radios({
+          idPrefix: "other-injection-site",
+          name: "otherInjectionSite",
+          fieldset: {
+            legend: {
+              text: "Injection site",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          errorMessage: {
+            text: otherInjectionSiteError.text
+          } if otherInjectionSiteError,
+          items: [
+            {
+              value: "Left buttock",
+              text: "Left buttock",
+              checked: (data.otherInjectionSite == "Left buttock")
+            },
+            {
+              value: "Right buttock",
+              text: "Right buttock",
+              checked: (data.otherInjectionSite == "Right buttock")
+            },
+            {
+              value: "Left thigh",
+              text: "Left thigh",
+              checked: (data.otherInjectionSite == "Left thigh")
+            },
+            {
+              value: "Right thigh",
+              text: "Right thigh",
+              checked: (data.otherInjectionSite == "Right thigh")
+            }
+          ]
+        }) }}
+        {% endset %}
+
+
+        {{ radios({
+          idPrefix: "injection-site",
+          name: "injectionSite",
+          fieldset: {
+            legend: {
+              text: ("What dose of the vaccine did you give?" if data.vaccinationToday == 'yes' else "Where was the injection given?"),
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          errorMessage: {
+            text: injectionSiteError.text
+          } if injectionSiteError,
+          items: [
+            {
+              value: "Full dose (2ml)",
+              text: "Full dose (2ml)",
+              checked: (data.injectionSite == 'Left arm')
+            },
+            {
+              value: "Half dose (1ml)",
+              text: "Half dose (1ml)",
+              checked: (data.injectionSite == 'Right arm')
+            },
+            {
+            
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
