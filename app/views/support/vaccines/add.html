@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Choose vaccine product" %}
+{% set pageName = "Add a vaccine product" %}
 
 {% set currentSection = "vaccines" %}
 
@@ -10,7 +10,7 @@
 
 
 {% block beforeContent %}
-  {{ backLink({ href: "/support/vaccines/find" }) }}
+  {{ backLink({ href: "/support/vaccines/interval" }) }}
 {% endblock %}
 
 
@@ -48,7 +48,7 @@
             
 
      {{ button({
-        text: "  Check",
+        text: "  Continue",
         href: "/support/vaccines/check"
       }) }}
 

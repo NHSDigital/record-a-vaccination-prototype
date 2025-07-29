@@ -33,7 +33,9 @@
 
     <dd class="nhsuk-summary-list__value">
       <p>COVID-19</p>
-      <p>SCTID 1156257007</p>
+      <div class="nhsuk-hint" id="contact-hint">
+        1156257007
+      </div>
     </dd>
     <dd class="nhsuk-summary-list__actions">
       <a href="/support/vaccines/find">
@@ -43,16 +45,95 @@
   </div>
 
 
+
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Start date
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p>1 October 2025</p>
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/add">
+        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+      </a>
+    </dd>
+  </div>
+
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      End date
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p>31 March 2026</p>
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/add">
+        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+      </a>
+    </dd>
+  </div>
+
+
+
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Upper age limit
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p></p>
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/add">
+        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+      </a>
+    </dd>
+  </div>
+
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Lower age limit
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p>65 years, 0 days</p>
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/add">
+        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+      </a>
+    </dd>
+  </div>
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Interval between doses
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p>52 weeks</p>
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/add">
+        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+      </a>
+    </dd>
+  </div>
+
+
+
+
   <div class="nhsuk-summary-list__row">
     <dt class="nhsuk-summary-list__key">
       Product 1
     </dt>
     <dd class="nhsuk-summary-list__value">
-      <p>Corminarty 30 JN.1</p>
-      <p>AMP 123456789</p>
-            <p>Single dose</p>
-                  <p>Adult (Over 18)</p>
-
+      <p>Corminarty 10 JN.1</p>
+            <div class="nhsuk-hint" id="contact-hint">
+        123456788
+      </div>
 
     </dd>
     <dd class="nhsuk-summary-list__actions">
@@ -61,6 +142,7 @@
       </a>
     </dd>
   </div>
+
 
   <div class="nhsuk-summary-list__row">
     <dt class="nhsuk-summary-list__key">
@@ -68,7 +150,10 @@
     </dt>
     <dd class="nhsuk-summary-list__value">
       <p>Corminarty 30 JN.1</p>
-      <p>AMP 123456789</p>
+            <div class="nhsuk-hint" id="contact-hint">
+        123456789
+      </div>
+
     </dd>
     <dd class="nhsuk-summary-list__actions">
       <a href="/support/vaccines/add">
@@ -77,26 +162,26 @@
     </dd>
   </div>
 
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
-      Product 3
-    </dt>
-    <dd class="nhsuk-summary-list__value">
-      <p>Corminarty 30 JN.1</p>
-      <p>AMP 123456789</p>
-    </dd>
-    <dd class="nhsuk-summary-list__actions">
-      <a href="/support/vaccines/add">
-        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
-      </a>
-    </dd>
-  </div>
+  
 </dl>
 
-          <form action="/support/vaccines" method="post">
+
+          <form action="/support/vaccines/add" method="post">
+
+
+          <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+            Add another vaccine product
+          </button>
+
+          <br>
+        </form>
+
+
+
+          <form action="/support/vaccines/vaccine" method="post">
          
           <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
-            Confirm
+            Confirm vaccine
           </button>
 
 
