@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Vaccine start date" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ backLink({ href: "/support/vaccines/interval" }) }}
+{% endblock %}
+
+
+
+{% block content %}
+   <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+<h1 class="nhsuk-heading-l">What is the dose amount?</h1>
+
+<div class="nhsuk-form-group">
+  <label class="nhsuk-label" for="example">
+    Dosage in millilitres
+  </label>
+  <div class="nhsuk-input__wrapper">
+    <input class="nhsuk-input nhsuk-input--width-5" id="example" name="example" type="text">
+    <div class="nhsuk-input__suffix" aria-hidden="true">ml</div>
+  </div>
+</div>
+
+
+          <form action="/support/vaccines/eligibility" method="get" novalidate>
+
+            <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+              Continue
+            </button>
+            
+
+
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+

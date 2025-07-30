@@ -10,7 +10,7 @@
 
 
 {% block beforeContent %}
-  {{ backLink({ href: "/support/vaccines/add" }) }}
+  {{ backLink({ href: "/support/vaccines/eligibility" }) }}
 {% endblock %}
 
 
@@ -25,7 +25,10 @@
 
 
 
-      <dl class="nhsuk-summary-list">
+
+
+
+  <dl class="nhsuk-summary-list">
   <div class="nhsuk-summary-list__row">
     <dt class="nhsuk-summary-list__key">
       Programme
@@ -76,6 +79,62 @@
     </dd>
   </div>
 
+</dl>
+
+
+
+
+
+
+
+
+
+
+<br>
+
+
+<dl class="nhsuk-summary-list">
+
+
+
+
+
+
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Product 1
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p>Corminarty 30 JN.1</p>
+            <div class="nhsuk-hint" id="contact-hint">
+        123456789
+      </div>
+
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/add">
+        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+      </a>
+    </dd>
+  </div>
+
+
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Manufacturer
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p>Pfizer</p>
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/add">
+        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+      </a>
+    </dd>
+  </div>
+
 
 
 
@@ -88,7 +147,7 @@
     </dd>
     <dd class="nhsuk-summary-list__actions">
       <a href="/support/vaccines/add">
-        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+        Add<span class="nhsuk-u-visually-hidden"> contact details</span>
       </a>
     </dd>
   </div>
@@ -110,7 +169,7 @@
 
   <div class="nhsuk-summary-list__row">
     <dt class="nhsuk-summary-list__key">
-      Interval between doses
+      Interval
     </dt>
     <dd class="nhsuk-summary-list__value">
       <p>52 weeks</p>
@@ -124,17 +183,12 @@
 
 
 
-
   <div class="nhsuk-summary-list__row">
     <dt class="nhsuk-summary-list__key">
-      Product 1
+      Dose
     </dt>
     <dd class="nhsuk-summary-list__value">
-      <p>Corminarty 10 JN.1</p>
-            <div class="nhsuk-hint" id="contact-hint">
-        123456788
-      </div>
-
+      <p>3.5ml</p>
     </dd>
     <dd class="nhsuk-summary-list__actions">
       <a href="/support/vaccines/add">
@@ -144,16 +198,16 @@
   </div>
 
 
+
+
   <div class="nhsuk-summary-list__row">
     <dt class="nhsuk-summary-list__key">
-      Product 2
+      Eligibility
     </dt>
     <dd class="nhsuk-summary-list__value">
-      <p>Corminarty 30 JN.1</p>
-            <div class="nhsuk-hint" id="contact-hint">
-        123456789
-      </div>
-
+      <p>Aged 65 or over</p>
+      <p>Immunosupressed</p>
+      <p>Pregnant</p>
     </dd>
     <dd class="nhsuk-summary-list__actions">
       <a href="/support/vaccines/add">
@@ -161,6 +215,9 @@
       </a>
     </dd>
   </div>
+
+
+
 
   
 </dl>
@@ -181,7 +238,7 @@
           <form action="/support/vaccines/vaccine" method="post">
          
           <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
-            Confirm vaccine
+            Confirm vaccine and products
           </button>
 
 

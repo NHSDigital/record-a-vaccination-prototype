@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check vaccine programme details" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ backLink({ href: "/support/vaccines/campaign-end" }) }}
+{% endblock %}
+
+
+
+{% block content %}
+   <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+
+
+
+      <dl class="nhsuk-summary-list">
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Programme
+    </dt>
+
+    <dd class="nhsuk-summary-list__value">
+      <p>COVID-19</p>
+      <div class="nhsuk-hint" id="contact-hint">
+        1156257007
+      </div>
+    </dd>
+    
+  </div>
+
+
+
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Start date
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p>1 October 2025</p>
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+  
+  </div>
+
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      End date
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p>31 March 2026</p>
+    </dd>
+   
+  </div>
+  
+</dl>
+
+
+    
+
+
+
+          <form action="/support/vaccines/add" method="post">
+         
+          <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+            Continue
+          </button>
+
+
+          </form>
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+
