@@ -10,31 +10,30 @@
 
 
 {% block beforeContent %}
-  {{ backLink({ href: "/support/vaccines/interval" }) }}
+  {{ backLink({ href: "/support/vaccines/find" }) }}
 {% endblock %}
 
 
 
 {% block content %}
+
+<h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
    <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-two-thirds">
+    <div class="nhsuk-grid-column-one-third">
 
 
-      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
-
-
-          <p>You can check <a href="https://termbrowser.nhs.uk/?" target="_new">AMP codes (opens in new tab)</a>.</p>
+    
 
 
           <form action="/support/vaccines/add" method="post">
 
           <div class="nhsuk-form-group">
-          <label class="nhsuk-label" for="example">
+          <label class="nhsuk-label" for="input-width-20">
             Enter a vaccine product AMP code
           </label>
-          
 
-        <select class="nhsuk-select nhsuk-u-width-one-half" id="siteId" name="siteId"
+        <select class="nhsuk-select nhsuk-input--width-20" id="input-width-20" name="test-width-20"
               data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
               <option selected value=""></option>
 
@@ -49,7 +48,7 @@
 
           <div class="nhsuk-form-group">
             <label class="nhsuk-label" for="input-width-20">
-              Product name in RAVS
+              Enter display name
             </label> 
        
             <input class="nhsuk-input nhsuk-input--width-20" id="input-width-20" name="test-width-20" type="text">
@@ -68,6 +67,10 @@
 
     </div>
   </div>
+
+
+  <p>You can check <a href="https://termbrowser.nhs.uk/?" target="_new">AMP codes here (opens in new tab)</a>.</p>
+
 
 {% endblock %}
 

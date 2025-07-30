@@ -22,71 +22,76 @@
 
 
 
-          <div class="nhsuk-form-group">
+        <div class="nhsuk-form-group">
 
             <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
               <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
                 <h1 class="nhsuk-fieldset__heading">
-                  Does the vaccine product have a lower age limit?
+                  Would you like to set an lower age limit for the Corminarty 30 JN.1?
                 </h1>
               </legend>
               <div class="nhsuk-hint" id="contact-hint">
+                Select one option
               </div>
               <div class="nhsuk-radios nhsuk-radios--conditional">
                 <div class="nhsuk-radios__item">
                   <input class="nhsuk-radios__input" id="contact-1" name="contact" type="radio" value="email" aria-controls="conditional-contact-1" aria-expanded="false">
                   <label class="nhsuk-label nhsuk-radios__label" for="contact-1">
-                    Yes
+                    Years
                   </label>
                 </div>
                 <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-contact-1">
                   <div class="nhsuk-form-group">
-                    
-                    <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
-                          <legend class="nhsuk-fieldset__legend nhsuk-label--m">
-                  
-                          <label class="nhsuk-label nhsuk-date-input__label" for="example-day">
-                            Age limit
-                          </label>
-                       <div class="nhsuk-hint" id="example-hint">
-                            For example, for adults aged 50 and over use 50 0
-                          </div>
-                          <div class="nhsuk-date-input" id="example">
-                            <div class="nhsuk-date-input__item">
-                              <div class="nhsuk-form-group">
-                                <label class="nhsuk-label nhsuk-date-input__label" for="example-day">
-                                  Years
-                                </label> <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="example-day" name="example[day]" type="text" inputmode="numeric">
-                              </div>
-                            </div>
-                            
-                            <div class="nhsuk-date-input__item">
-                              <div class="nhsuk-form-group">
-                                <label class="nhsuk-label nhsuk-date-input__label" for="example-year">
-                                  Days
-                                </label> <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-3" id="example-year" name="example[year]" type="text" inputmode="numeric">
-                              </div>
-                            </div>
-                          </div>
-                        </fieldset>
-                      </div>
-                    </div>
-                  
-                  
-    
-                
-                
+                    <label class="nhsuk-label" for="input-width-3">
+                      Enter minimum age in years
+                    </label> <input class="nhsuk-input nhsuk-input--width-3" id="email" name="email" type="text">
+                  </div>
+          
+                </div>
                 <div class="nhsuk-radios__item">
                   <input class="nhsuk-radios__input" id="contact-2" name="contact" type="radio" value="phone" aria-controls="conditional-contact-2" aria-expanded="false">
-                  <label class="nhsuk-label nhsuk-radios__label" for="contact-2">
-                    No
+                  <label class="nhsuk-label nhsuk-radios__label" for="input-width-3">
+                    Months
                   </label>
-                </div>              
+                </div>
+                <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-contact-2">
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="phone">
+                      Enter minimum age in months
+                    </label> <input class="nhsuk-input nhsuk-input--width-3" id="phone" name="phone" type="text">
+                  </div>
+          
+                </div>
+                <div class="nhsuk-radios__item">
+                  <input class="nhsuk-radios__input" id="contact-3" name="contact" type="radio" value="" aria-controls="conditional-contact-3" aria-expanded="false">
+                  <label class="nhsuk-label nhsuk-radios__label" for="contact-3">
+                    Weeks
+                  </label>
+                </div>
+                <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-contact-3">
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="input-width-3">
+                      Enter minimum age in weekes
+                    </label> <input class="nhsuk-input nhsuk-input--width-3" id="email" name="email" type="text">
+                  </div>
+          
+                </div>
               </div>
+    
+              <div class="nhsuk-radios__divider">or</div>
+              <div class="nhsuk-radios__item">
+                <input class="nhsuk-radios__input" id="example-divider-4" name="example-divider" type="radio" value="create-account">
+                <label class="nhsuk-label nhsuk-radios__label" for="example-divider-4">
+                  No, no age limit
+                </label>
+              </div>
+            </div>
+    
+        </div>
+    
             </fieldset>
           </div>
-  
-
+    
 
           <form action="/support/vaccines/interval" method="get" novalidate>
 
