@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Are you sure you want to removed COVID-19?" %}
+{% set pageName = "Are you sure you want to deactivate Spikevax 10 JN.1?" %}
 
 {% set currentSection = "vaccines" %}
 
@@ -10,7 +10,7 @@
 
 
 {% block beforeContent %}
-  {{ backLink({ href: "/support/vaccines/vaccine" }) }}
+  {{ backLink({ href: "/support/vaccines/product" }) }}
 {% endblock %}
 
 
@@ -21,19 +21,16 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>Removing this vaccine will make it unavailable on RAVS for any organisation.</p>
+      <p>Once deactivate, organisations will no longer be able to vaccinate using this prodct.</p>
 
-
+      <p>You will be able to reactivate the product at any time.</p>
 
       <form action="/regions/organisations/{{ organisation.id}}/deactivated" method="post" novalidate="true">
         {{ button({
-          "text": "Yes, remove vaccine",
-          classes: "nhsuk-button--warning"
+          "text": "Yes, deactivate",
+          classes: "nhsuk-button"
         }) }}
     </form>
-
-
-
 
     </div>
   </div>

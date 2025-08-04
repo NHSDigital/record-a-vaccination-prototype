@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Add a vaccine product" %}
+{% set pageName = "Edit display name" %}
 
 {% set currentSection = "vaccines" %}
 
@@ -10,7 +10,7 @@
 
 
 {% block beforeContent %}
-  {{ backLink({ href: "/support/vaccines/find" }) }}
+  {{ backLink({ href: "/support/vaccines/product" }) }}
 {% endblock %}
 
 
@@ -28,22 +28,7 @@
 
           <form action="/support/vaccines/add" method="post">
 
-          <div class="nhsuk-form-group">
-          <label class="nhsuk-label" for="input-width-20">
-            Enter a vaccine product AMP code
-          </label>
-
-        <select class="nhsuk-select nhsuk-input--width-20" id="input-width-20" name="test-width-20"
-              data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
-              <option selected value=""></option>
-
-              {% for site in currentOrganisation.sites %}
-                <option value="{{ site.id }}">{{ site.name }} ({{site.id }})</option>
-              {% endfor %}
-            </select>
-          
-
-          </div>
+         
 
 
           <div class="nhsuk-form-group">
@@ -69,7 +54,6 @@
   </div>
 
 
-  <p>You can check <a href="https://termbrowser.nhs.uk/?" target="_new">AMP codes here (opens in new tab)</a>.</p>
 
 
 {% endblock %}
