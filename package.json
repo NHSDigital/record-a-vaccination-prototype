@@ -35,7 +35,7 @@
     "nhsuk-frontend": "^9.6.4",
     "nunjucks": "^3.2.4",
     "path": "^0.12.7",
-    "sass-embedded": "1.89.2"
+    "sass-embedded": "1.90.0"
   },
   "engines": {
     "node": "^22",
