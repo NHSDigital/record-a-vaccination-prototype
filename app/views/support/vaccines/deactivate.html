@@ -21,9 +21,8 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>Once deactivate, organisations will no longer be able to vaccinate using this prodct.</p>
+      <p>Organisations will no longer be able to use this prodct.</p>
 
-      <p>You will be able to reactivate the product at any time.</p>
 
       <form action="/regions/organisations/{{ organisation.id}}/deactivated" method="post" novalidate="true">
         {{ button({
