@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Are you sure you want to remove COVID-19?" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ backLink({ href: "/support/vaccines/vaccine" }) }}
+{% endblock %}
+
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p></p>
+
+
+
+      <form action="/regions/organisations/{{ organisation.id}}/deactivated" method="post" novalidate="true">
+        {{ button({
+          "text": "Yes, remove vaccine",
+          classes: "nhsuk-button--warning"
+        }) }}
+    </form>
+
+
+
+
+    </div>
+  </div>
+{% endblock %}
