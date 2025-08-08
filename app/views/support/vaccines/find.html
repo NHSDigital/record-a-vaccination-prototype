@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Find a vaccine" %}
+{% set pageName = "Choose a vaccine" %}
 
 {% set currentSection = "vaccines" %}
 
@@ -23,7 +23,7 @@
 
 
     
-          <form action="/support/vaccines/add" method="post">
+          <form action="/support/vaccines/eligibility" method="post">
 
 
 
@@ -31,13 +31,24 @@
               <div class="nhsuk-grid-column-one-third">
           
 
+
+
+                <div class="nhsuk-form-group">
+                  <label class="nhsuk-label" for="input-width-20">
+                    Enter display name
+                  </label> 
+             
+                  <input class="nhsuk-input nhsuk-input--width-20" id="input-width-20" name="test-width-20" type="text">
+                </div>
+      
+
+
+
                   <div class="nhsuk-form-group">
           <label class="nhsuk-label" for="example">
             Enter a SNOMED procedure code
           </label>
           
-
-
 
             <select class="nhsuk-select nhsuk-u-width-20" id="siteId" name="siteId"
               data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
@@ -50,15 +61,6 @@
           </div>
   
 
-
-
-          <div class="nhsuk-form-group">
-            <label class="nhsuk-label" for="input-width-20">
-              Enter display name
-            </label> 
-       
-            <input class="nhsuk-input nhsuk-input--width-20" id="input-width-20" name="test-width-20" type="text">
-          </div>
 
 
 

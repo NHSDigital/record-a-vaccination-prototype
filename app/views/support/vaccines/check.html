@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Check vaccine and products" %}
+{% set pageName = "Check details" %}
 
 {% set currentSection = "vaccines" %}
 
@@ -29,6 +29,24 @@
 <dl class="nhsuk-summary-list">
 
 
+
+
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Display
+    </dt>
+
+    <dd class="nhsuk-summary-list__value">
+      <p>COVID-19</p>
+      
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/find">
+        Change<span class="nhsuk-u-visually-hidden"> name</span>
+      </a>
+    </dd>
+  </div>
 
 
 
@@ -68,138 +86,6 @@
 
 
 
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
-      Product
-    </dt>
-    <dd class="nhsuk-summary-list__value">
-      <p>Comirnaty 30
-        Omicron JN.1
-        3 micrograms/dose
-        Pfizer BioNTech</p>
-     
-
-    </dd>
-    <dd class="nhsuk-summary-list__actions">
-      <a href="/support/vaccines/add">
-        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
-      </a>
-    </dd>
-  </div>
-
-
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
-      Display name
-    </dt>
-    <dd class="nhsuk-summary-list__value">
-      <p>Corminarty 30 JN.1</p>
-     
-
-    </dd>
-    <dd class="nhsuk-summary-list__actions">
-      <a href="/support/vaccines/add">
-        <span class="nhsuk-u-visually-hidden"> contact details</span>
-      </a>
-    </dd>
-  </div>
-
-
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
-      AMP code
-    </dt>
-    <dd class="nhsuk-summary-list__value">
-      <p>123456789</p>
-            
-
-    </dd>
-    <dd class="nhsuk-summary-list__actions">
-      <a href="/support/vaccines/add">
-        <span class="nhsuk-u-visually-hidden"> contact details</span>
-      </a>
-    </dd>
-  </div>
-
-
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
-      Manufacturer
-    </dt>
-    <dd class="nhsuk-summary-list__value">
-      <p>Pfizer</p>
-    </dd>
-    <dd class="nhsuk-summary-list__actions">
-      <a href="/support/vaccines/add">
-        <span class="nhsuk-u-visually-hidden"> contact details</span>
-      </a>
-    </dd>
-  </div>
-
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
-      Dose
-    </dt>
-    <dd class="nhsuk-summary-list__value">
-      <p>3.5ml</p>
-    </dd>
-    <dd class="nhsuk-summary-list__actions">
-      <a href="/support/vaccines/add">
-        <span class="nhsuk-u-visually-hidden"> contact details</span>
-      </a>
-    </dd>
-  </div>
-
-
-
-
-<br>
-
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
-      Upper age limit
-    </dt>
-    <dd class="nhsuk-summary-list__value">
-      <p></p>
-    </dd>
-    <dd class="nhsuk-summary-list__actions">
-      <a href="/support/vaccines/add">
-        Add<span class="nhsuk-u-visually-hidden"> contact details</span>
-      </a>
-    </dd>
-  </div>
-
-
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
-      Lower age limit
-    </dt>
-    <dd class="nhsuk-summary-list__value">
-      <p>65 years</p>
-    </dd>
-    <dd class="nhsuk-summary-list__actions">
-      <a href="/support/vaccines/add">
-        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
-      </a>
-    </dd>
-  </div>
-
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
-      Interval
-    </dt>
-    <dd class="nhsuk-summary-list__value">
-      <p>52 weeks</p>
-    </dd>
-    <dd class="nhsuk-summary-list__actions">
-      <a href="/support/vaccines/add">
-        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
-      </a>
-    </dd>
-  </div>
-
-
-
 
 
 
@@ -210,9 +96,7 @@
       Eligibility
     </dt>
     <dd class="nhsuk-summary-list__value">
-      <p>Aged 65 or over</p>
-      <p>Immunosupressed</p>
-      <p>Pregnant</p>
+      <p>Aged 65 or over, Immunosupressed, Pregnant</p>
     </dd>
     <dd class="nhsuk-summary-list__actions">
       <a href="/support/vaccines/add">
@@ -221,29 +105,14 @@
     </dd>
   </div>
 
-
-
-
   
 </dl>
 
 
           <form action="/support/vaccines/add" method="post">
-
-
-          <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
-            Add another vaccine product
-          </button>
-
-          <br>
-        </form>
-
-
-
-          <form action="/support/vaccines/vaccine" method="post">
          
           <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
-            Confirm vaccine and product
+            Continue
           </button>
 
 

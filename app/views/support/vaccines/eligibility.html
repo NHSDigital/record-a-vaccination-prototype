@@ -10,7 +10,7 @@
 
 
 {% block beforeContent %}
-  {{ backLink({ href: "/support/vaccines/interval" }) }}
+  {{ backLink({ href: "/support/vaccines/find" }) }}
 {% endblock %}
 
 
@@ -19,24 +19,87 @@
    <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+<form method="post" novalidate>
 
-<h1 class="nhsuk-heading-l">Add vaccine eligibility for Corminarty 30 JN.1</h1>
+  <div class="nhsuk-form-group">
 
-<div class="nhsuk-form-group">
-  <label class="nhsuk-label" for="full">
-    Eligibility 1
-  </label> <input class="nhsuk-input nhsuk-u-width-full" id="full" name="full" type="text">
-</div>
+    <fieldset class="nhsuk-fieldset" aria-describedby="example-hint">
+      <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+        <h1 class="nhsuk-fieldset__heading">
+          Add vaccine eligibility for COVID-19
+        </h1>
+      </legend>
+      <div class="nhsuk-hint" id="example-hint">
+      </div>
+      <div class="nhsuk-checkboxes">
 
-<div class="nhsuk-form-group">
-  <label class="nhsuk-label" for="full">
-    Eligibility 2
-  </label> <input class="nhsuk-input nhsuk-u-width-full" id="full" name="full" type="text">
-</div>
+        <div class="nhsuk-checkboxes__item">
+          <input class="nhsuk-checkboxes__input" id="example-1" name="example" type="checkbox" value="email">
+          <label class="nhsuk-label nhsuk-checkboxes__label" for="example-1">
+            Age based
+          </label>
+        </div>
+
+        <div class="nhsuk-checkboxes__item">
+          <input class="nhsuk-checkboxes__input" id="example-2" name="example" type="checkbox" value="phone">
+          <label class="nhsuk-label nhsuk-checkboxes__label" for="example-2">
+            Care worker
+          </label>
+        </div>
+
+        <div class="nhsuk-checkboxes__item">
+          <input class="nhsuk-checkboxes__input" id="example-3" name="example" type="checkbox" value="text message">
+          <label class="nhsuk-label nhsuk-checkboxes__label" for="example-3">
+          Example   </label>
+        </div>
+
+
+        <div class="nhsuk-checkboxes__item">
+          <input class="nhsuk-checkboxes__input" id="example-3" name="example" type="checkbox" value="text message">
+          <label class="nhsuk-label nhsuk-checkboxes__label" for="example-3">
+          Example   </label>
+        </div>
+
+
+        <div class="nhsuk-checkboxes__item">
+          <input class="nhsuk-checkboxes__input" id="example-3" name="example" type="checkbox" value="text message">
+          <label class="nhsuk-label nhsuk-checkboxes__label" for="example-3">
+          Example   </label>
+        </div>
+
+
+        <div class="nhsuk-checkboxes__item">
+          <input class="nhsuk-checkboxes__input" id="example-3" name="example" type="checkbox" value="text message">
+          <label class="nhsuk-label nhsuk-checkboxes__label" for="example-3">
+          Example   </label>
+        </div>
+
+
+        <div class="nhsuk-checkboxes__item">
+          <input class="nhsuk-checkboxes__input" id="example-3" name="example" type="checkbox" value="text message">
+          <label class="nhsuk-label nhsuk-checkboxes__label" for="example-3">
+          Example   </label>
+        </div>
+
+
+        <div class="nhsuk-checkboxes__item">
+          <input class="nhsuk-checkboxes__input" id="example-3" name="example" type="checkbox" value="text message">
+          <label class="nhsuk-label nhsuk-checkboxes__label" for="example-3">
+          Example   </label>
+        </div>
+      
+      
+      
+      
+      </div>
+    </fieldset>
+  </div>
+
+</form>
 
 <div>
 <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
-  Add another eligibility
+  Add new eligibility
 </button>
 </div>
           <form action="/support/vaccines/check" method="get" novalidate>

@@ -28,6 +28,20 @@
 
           <form action="/support/vaccines/add" method="post">
 
+
+
+            <div class="nhsuk-form-group">
+              <label class="nhsuk-label" for="input-width-20">
+                Enter display name
+              </label> 
+         
+              <input class="nhsuk-input nhsuk-input--width-20" id="input-width-20" name="test-width-20" type="text">
+            </div>
+            
+              
+
+
+
           <div class="nhsuk-form-group">
           <label class="nhsuk-label" for="input-width-20">
             Enter a vaccine product AMP code
@@ -46,19 +60,12 @@
           </div>
 
 
-          <div class="nhsuk-form-group">
-            <label class="nhsuk-label" for="input-width-20">
-              Enter display name
-            </label> 
-       
-            <input class="nhsuk-input nhsuk-input--width-20" id="input-width-20" name="test-width-20" type="text">
-          </div>
-          
+    
             
 
      {{ button({
         text: "  Continue",
-        href: "/support/vaccines/administration"
+        href: "/support/vaccines/campaign-start"
       }) }}
 
           </form>

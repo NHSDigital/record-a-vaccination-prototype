@@ -10,7 +10,7 @@
 
 
 {% block beforeContent %}
-  {{ backLink({ href: "/support/vaccines/age-upper" }) }}
+  {{ backLink({ href: "/support/vaccines/campaign-end" }) }}
 {% endblock %}
 
 
@@ -82,7 +82,7 @@
               <div class="nhsuk-radios__item">
                 <input class="nhsuk-radios__input" id="example-divider-4" name="example-divider" type="radio" value="create-account">
                 <label class="nhsuk-label nhsuk-radios__label" for="example-divider-4">
-                  No, no age limit
+                  No lower age limit
                 </label>
               </div>
             </div>
@@ -93,7 +93,7 @@
           </div>
     
 
-          <form action="/support/vaccines/interval" method="get" novalidate>
+          <form action="/support/vaccines/age-upper" method="get" novalidate>
 
             <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
               Continue
