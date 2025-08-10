@@ -70,12 +70,12 @@
 
       {% if organisationSetting.permissionLevel == "Lead administrator" %}
         {{ details({
-          text: "If the vaccinator is not listed",
+          summaryText: "If the vaccinator is not listed",
           html: "Make sure they are added in <a href=\"/user-admin\">Manage users</a> as a vaccinator."
         }) }}
       {% else %}
         {{ details({
-          text: "If the vaccinator is not listed",
+          summaryText: "If the vaccinator is not listed",
           html: "You'll need to ask a lead administrator to add them."
         }) }}
 
