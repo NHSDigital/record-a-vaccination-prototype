@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Which dose is this?" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      <form action="/record-vaccinations/answer-date" method="post" novalidate>
+
+        <div class="nhsuk-form-group">
+
+          <fieldset class="nhsuk-fieldset">
+            <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+              <h1 class="nhsuk-fieldset__heading">
+                Which dose of flu is this?
+              </h1>
+            </legend>
+            <div class="nhsuk-radios">
+              <div class="nhsuk-radios__item">
+                <input class="nhsuk-radios__input" id="example-1" name="example" type="radio" value="yes">
+                <label class="nhsuk-label nhsuk-radios__label" for="example-1">
+                  First
+                </label>
+              </div>
+              <div class="nhsuk-radios__item">
+                <input class="nhsuk-radios__input" id="example-2" name="example" type="radio" value="no">
+                <label class="nhsuk-label nhsuk-radios__label" for="example-2">
+                  Second
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
