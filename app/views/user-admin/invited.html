@@ -48,6 +48,12 @@
           <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
             <ul class="x-govuk-secondary-navigation__list">
              
+              <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
+                <a class="x-govuk-secondary-navigation__link" href="/user-admin/invited" aria-current=page>
+                  Invited (4)
+                </a>
+              </li>
+
               <li class="x-govuk-secondary-navigation__list-item ">
                 <a class="x-govuk-secondary-navigation__link" href="/user-admin/INDEX">
                   Active (102)
@@ -60,11 +66,7 @@
                 </a>
               </li>
   
-              <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
-                <a class="x-govuk-secondary-navigation__link" href="/user-admin/invited" aria-current=page>
-                  Invited (3)
-                </a>
-              </li>
+          
 
             </ul>
           </nav>
@@ -80,7 +82,7 @@
             <br>
     
 
-            <caption class="nhsuk-table__caption">3 Invited</caption>
+            <caption class="nhsuk-table__caption">4 Invited users</caption>
 
             <thead class="nhsuk-table__head" role="rowgroup">
                 <thead role="rowgroup" class="nhsuk-table__head">
@@ -100,7 +102,7 @@
                       </th>
                       
                       <th role="columnheader" class="" scope="col">
-                        Invitation
+                        Invite sent
                     </th>
                       <th role="columnheader" class="" scope="col">
                         
@@ -111,6 +113,7 @@
     
             <tbody class="nhsuk-table__body">
                   
+
               <tr role="row" class="nhsuk-table__row">
                 <td class="nhsuk-table__cell">
                     Jane Doe
@@ -127,10 +130,34 @@
                 Administrator
             </td>
             <td class="nhsuk-table__cell">
-               1 day ago
+               Today
             </td>
-              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                <a class="nhsuk-link" href="/user-admin/reactivate"></a>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+              <a class="nhsuk-link" href="/user-admin/reactivate"></a>
+            </td> 
+                </tr>
+
+
+              <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                    Jane Doe
+              </td>
+              
+                <td class="nhsuk-table__cell">
+                  jane.doe4@nhs.net
+              </td>
+              
+              <td class="nhsuk-table__cell">
+                  Yes
+              </td>
+              <td class="nhsuk-table__cell">
+                Administrator
+            </td>
+            <td class="nhsuk-table__cell">
+               6 days ago
+            </td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+              <a class="nhsuk-link" href="/user-admin/reactivate"></a>
             </td> 
                 </tr>
 
@@ -151,36 +178,38 @@
                     Administrator
                 </td>
                 <td class="nhsuk-table__cell">
-                    6 days ago
+                    24 days ago
                 </td>
-                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                    <a class="nhsuk-link" href="/user-admin/reactivate"></a>
-                  </td> 
+                <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                  <a class="nhsuk-link" href="/user-admin/reactivate">Resend invite</a>
+                </td> 
                     </tr>
 
-                <tr role="row" class="nhsuk-table__row">
+        
+                    <tr role="row" class="nhsuk-table__row">
+                      <td class="nhsuk-table__cell">
+                          Tony Shah
+                    </td>
+                    
+                      <td class="nhsuk-table__cell">
+                      tony.shah@nhs.net
+                    </td>
+                    
                     <td class="nhsuk-table__cell">
-                        Tony Shah
-                  </td>
-                  
+                        Yes
+                    </td>
                     <td class="nhsuk-table__cell">
-                    tony.shah@nhs.net
-                  </td>
-                  
-                  <td class="nhsuk-table__cell">
-                      Yes
+                      Administrator
                   </td>
                   <td class="nhsuk-table__cell">
-                    Administrator
-                </td>
-                <td class="nhsuk-table__cell">
-                    Expired
-                </td>
-                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                    <a class="nhsuk-link" href="/user-admin/reactivate">Resend invite</a>
-                  </td> 
-                    </tr>
+                      89 days ago
+                  </td>
+                    <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                      <a class="nhsuk-link" href="/user-admin/reactivate">Resend invite</a>
+                    </td> 
+                      </tr>
 
+                     
                 
               </tbody>
             </table>
