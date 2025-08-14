@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "What dose of the vaccine did you give?" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/consent" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      <form action="/record-vaccinations/answer-dose" method="post" novalidate>
+
+      
+        {{ radios({
+          idPrefix: "dose",
+          name: "dose",
+          fieldset: {
+            legend: {
+              text: ("What dose of the vaccine did you give?" if data.vaccinationToday == 'yes' else "What dose of the vaccine was given?"),
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          errorMessage: {
+            text: doseError.text
+          } if doseError,
+          items: [
+            {
+              value: "0.2ml (0.1ml in each nostril)",
+              text: "0.2ml (0.1ml in each nostril)",
+              checked: (data.injectionSite == 'Left arm')
+            },
+            {
+              value: "0.1ml (given in 1 nostril only)",
+              text: "0.1ml (given in 1 nostril only)",
+              checked: (data.injectionSite == 'Right arm')
+            },
+            {
+            
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
