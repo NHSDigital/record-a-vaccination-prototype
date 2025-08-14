@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Add a vaccine product" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ backLink({ href: "/support/vaccines/find" }) }}
+{% endblock %}
+
+
+
+{% block content %}
+
+<h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+   <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-third">
+
+
+    
+
+
+          <form action="/support/vaccines/add" method="post">
+
+
+
+            <div class="nhsuk-form-group">
+              <label class="nhsuk-label" for="input-width-20">
+                Enter display name
+              </label> 
+         
+              <input class="nhsuk-input nhsuk-input--width-20" id="input-width-20" name="test-width-20" type="text">
+            </div>
+            
+              
+
+
+
+          <div class="nhsuk-form-group">
+          <label class="nhsuk-label" for="input-width-20">
+            Enter a vaccine product AMP code
+          </label>
+
+        <select class="nhsuk-select nhsuk-input--width-20" id="input-width-20" name="test-width-20"
+              data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+              <option selected value=""></option>
+
+              {% for site in currentOrganisation.sites %}
+                <option value="{{ site.id }}">{{ site.name }} ({{site.id }})</option>
+              {% endfor %}
+            </select>
+          
+
+          </div>
+
+
+    
+            
+
+     {{ button({
+        text: "  Continue",
+        href: "/support/vaccines/campaign-start"
+      }) }}
+
+          </form>
+
+
+
+    </div>
+  </div>
+
+
+  <p>You can check <a href="https://termbrowser.nhs.uk/?" target="_new">AMP codes here (opens in new tab)</a>.</p>
+
+
+{% endblock %}
+
