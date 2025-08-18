@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Add a vaccine product" %}
+{% set pageName = "Add a vaccine procedure" %}
 
 {% set currentSection = "vaccines" %}
 
@@ -10,7 +10,7 @@
 
 
 {% block beforeContent %}
-  {{ backLink({ href: "/support/vaccines/procedure" }) }}
+  {{ backLink({ href: "/support/vaccines/target-disease" }) }}
 {% endblock %}
 
 
@@ -37,19 +37,16 @@
          
               <input class="nhsuk-input nhsuk-input--width-20" id="input-width-20" name="test-width-20" type="text">
             </div>
-            
-              
-
 
             <div class="nhsuk-form-group">
               <label class="nhsuk-label" for="input-width-20">
-                Vaccine product AMP code
+                Enter a SNOMED procedure code
               </label> 
          
               <input class="nhsuk-input nhsuk-input--width-20" id="input-width-20" name="test-width-20" type="text">
-            </div>
+            </div>    
 
-     
+          
 
 
     
@@ -57,7 +54,7 @@
 
      {{ button({
         text: "  Continue",
-        href: "/support/vaccines/administration"
+        href: "/support/vaccines/eligibility"
       }) }}
 
           </form>
@@ -68,7 +65,7 @@
   </div>
 
 
-  <p>You can check <a href="https://termbrowser.nhs.uk/?" target="_new">AMP codes here (opens in new tab)</a>.</p>
+  <p>You can check <a href="https://termbrowser.nhs.uk/?" target="_new">SNOMED codes here (opens in new tab)</a>.</p>
 
 
 {% endblock %}

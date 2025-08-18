@@ -1,0 +1,177 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "COVID-19" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ backLink({ href: "/support/vaccines" }) }}
+{% endblock %}
+
+
+
+{% block content %}
+
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+          <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+
+          <dl class="nhsuk-summary-list">
+       
+   
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Target disease
+    </dt>
+
+    <dd class="nhsuk-summary-list__value">
+      <p>COVID-19</p>
+      
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/find">
+        Change<span class="nhsuk-u-visually-hidden"> name</span>
+      </a>
+    </dd>
+  </div>
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      SNOMED code
+    </dt>
+
+    <dd class="nhsuk-summary-list__value">
+      <p>41823411000001109</p>
+      
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/find">
+        Change<span class="nhsuk-u-visually-hidden"> name</span>
+      </a>
+    </dd>
+  </div>
+
+
+  </dl>
+
+ 
+
+    <form action="/support/vaccines/add-procedure" method="post">
+      <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+        Add a procedure
+      </button>
+      </form>
+
+    </div>
+  </div>
+
+  
+<table class="nhsuk-table-responsive" role="table">
+  <caption class="nhsuk-table__caption">Procedures</caption>
+  <thead class="nhsuk-table__head" role="rowgroup">
+    <tr role="row">
+      <th scope="col" class="nhsuk-table__header " role="columnheader">Name</th>
+
+      <th scope="col" class="nhsuk-table__header " role="columnheader">Procedure code</th>
+
+      <th scope="col" class="nhsuk-table__header " role="columnheader">Eligibility</th>
+
+      <th scope="col" class="nhsuk-table__header " role="columnheader">Start date</th>
+
+      <th scope="col" class="nhsuk-table__header " role="columnheader">End date</th>
+
+
+
+
+    </tr>
+  </thead>
+  <tbody class="nhsuk-table__body">
+    <tr class="nhsuk-table__row" role="row">
+      
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true"></span><a href="/support/vaccines/procedure">COVID-19 dose 1</a></td>
+   
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Display name</span>	
+        41823411000001205</td>
+
+        <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Display name</span>	
+          Pregnant</td>
+
+          <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Display name</span>	
+            1 October 2025</td>
+
+            <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Display name</span>	
+              10 March 2026</td>
+
+
+    </tr>
+
+
+    <tr class="nhsuk-table__row" role="row">
+      
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true"></span><a href="/support/vaccines/procedure-empty">COVID-19 dose 2</a></td>
+   
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Display name</span>	
+        41823411000001205</td>   
+      
+
+        <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Display name</span>	
+          Based on age, In a clincial risk group, Health or social care worker</td>
+
+          <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Display name</span>	
+            1 October 2025</td>
+
+            <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Display name</span>	
+              10 March 2026</td>
+
+     
+
+    </tr>
+
+
+    <tr class="nhsuk-table__row" role="row">
+      
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true"></span><a href="/support/vaccines/procedure">COVID-19 dose 3</a></td>
+   
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Display name</span>	
+        41823411000001205</td>    
+      
+        <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Display name</span>	
+          Based on age, In a clincial risk group, Health or social care worker</td>
+
+          <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Display name</span>	
+            22 October 2025</td>
+
+            <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Display name</span>	
+              22 December 2025</td>
+
+
+    </tr>
+
+
+  </div>
+</div>
+
+
+
+  </tbody>
+</table>
+
+
+ 
+  <p><a href="/support/vaccines/remove">Remove target disease</a></p>
+
+
+ 
+
+
+ 
+{% endblock %}
+
