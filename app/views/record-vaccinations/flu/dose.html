@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "What dose of the vaccine did you give?" %}
+{% set pageName = "Did you give a full dose of the vaccine?" %}
 
 {% set currentSection = "vaccinate" %}
 
@@ -27,7 +27,7 @@
           name: "dose",
           fieldset: {
             legend: {
-              text: ("What dose of the vaccine did you give?" if data.vaccinationToday == 'yes' else "What dose of the vaccine was given?"),
+              text: ("Did you give a full dose of the vaccine?" if data.vaccinationToday == 'yes' else "Was a full dose of the vaccine given?"),
               classes: "nhsuk-fieldset__legend--l",
               isPageHeading: true
             }
@@ -37,14 +37,12 @@
           } if doseError,
           items: [
             {
-              value: "0.2ml (0.1ml in each nostril)",
-              text: "0.2ml (0.1ml in each nostril)",
-              checked: (data.injectionSite == 'Left arm')
+              value: "Yes, both nostrils",
+              text: "Yes, both nostrils"
             },
             {
-              value: "0.1ml (given in 1 nostril only)",
-              text: "0.1ml (given in 1 nostril only)",
-              checked: (data.injectionSite == 'Right arm')
+              value: "No, 1 nostril only",
+              text: "No, 1 nostril only",
             },
             {
             
