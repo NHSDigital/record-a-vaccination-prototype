@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check details" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ backLink({ href: "/support/vaccines/eligibility" }) }}
+{% endblock %}
+
+
+
+{% block content %}
+   <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+
+
+
+
+<dl class="nhsuk-summary-list">
+
+
+
+
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Target disease
+    </dt>
+
+    <dd class="nhsuk-summary-list__value">
+      <p>COVID-19</p>
+      
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/find">
+        Change<span class="nhsuk-u-visually-hidden"> name</span>
+      </a>
+    </dd>
+  </div>
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      SNOMED code
+    </dt>
+
+    <dd class="nhsuk-summary-list__value">
+      <p>41823411000001109</p>
+      
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/find">
+        Change<span class="nhsuk-u-visually-hidden"> name</span>
+      </a>
+    </dd>
+  </div>
+  
+</dl>
+
+
+          <form action="/support/vaccines/index" method="post">
+         
+          <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+            Confirm
+          </button>
+
+
+          </form>
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+

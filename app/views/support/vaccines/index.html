@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Vaccines" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+  
+            <p>Add or update new target diseases, procedure codes or vaccine products in RAVS.</p>
+
+
+     {{ button({
+        text: "  Add a target disease",
+        href: "/support/vaccines/choose"
+      }) }}
+
+
+<h2 class="nhsuk-heading-m">Target diseases</h2>
+
+
+      <ul class="nhsuk-list">
+          <li><a href="/support/vaccines/target-disease">COVID-19</a></li>
+
+          <li><a href="/support/vaccines/target-disease-empty">Flu</a></li>
+
+          <li><a href="/support/vaccines/target-disease">MMR</a></li>
+
+          <li><a href="/support/vaccines/target-disease">Pertussis</a></li>
+
+          <li><a href="/support/vaccines/target-disease">Pneumococcal</a></li>
+
+          <li><a href="/support/vaccines/target-disease">RSV</a></li>
+        </ul>
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+

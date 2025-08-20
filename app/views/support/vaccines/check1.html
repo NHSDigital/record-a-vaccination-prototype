@@ -1,0 +1,173 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check and confirm" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ backLink({ href: "/support/vaccines/administration" }) }}
+{% endblock %}
+
+
+
+{% block content %}
+   <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+
+
+
+
+<dl class="nhsuk-summary-list">
+
+
+
+
+
+
+
+<div class="nhsuk-summary-list__row">
+  <dt class="nhsuk-summary-list__key">
+    Name
+  </dt>
+  <dd class="nhsuk-summary-list__value">
+    <p>Dose 1</p>
+   
+
+  </dd>
+  <dd class="nhsuk-summary-list__actions">
+    <a href="/support/vaccines/add">
+      Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+    </a>
+  </dd>
+</div>
+
+
+
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      SNOMED procedure code
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p>71388002</p>
+            
+
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/add">
+        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+      </a>
+    </dd>
+  </div>
+
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Eligibility
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p>Based on age, In a clincial risk group, Health or social care worker</p>
+            
+
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/add">
+        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+      </a>
+    </dd>
+  </div>
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Start date
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p>1 October 2025</p>
+     
+  
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/add">
+        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+      </a>
+    </dd>
+  </div>
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      End date
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p>10 March 2026</p>
+     
+  
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/add">
+        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+      </a>
+    </dd>
+  </div>
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Lower age
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p>65 years</p>
+     
+  
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/add">
+        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+      </a>
+    </dd>
+  </div>
+
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Upper age
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      <p>99 years</p>
+     
+  
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/support/vaccines/add">
+        Change<span class="nhsuk-u-visually-hidden"> contact details</span>
+      </a>
+    </dd>
+  </div>
+
+
+</dl>
+
+
+
+          <form action="/support/vaccines/target-disease" method="post">
+         
+          <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+            Confirm and save
+          </button>
+
+
+          </form>
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+

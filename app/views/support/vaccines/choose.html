@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Add a target disease" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ backLink({ href: "/support/vaccines/index" }) }}
+{% endblock %}
+
+
+
+{% block content %}
+   <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+
+          <form action="/support/vaccines/check" method="post">
+
+                  <div class="nhsuk-form-group">
+
+          <div class="nhsuk-form-group">
+            <label class="nhsuk-label" for="input-width-20">
+              Name of target disease
+            </label> <input class="nhsuk-input nhsuk-input--width-20" id="input-width-20" name="test-width-20" type="text">
+          </div>
+   
+
+
+
+        <div class="nhsuk-form-group">
+          <label class="nhsuk-label" for="input-width-20">
+            Enter SNOMED code
+          </label> <input class="nhsuk-input nhsuk-input--width-20" id="input-width-20" name="test-width-20" type="text">
+        </div>
+      </div>
+
+
+
+<button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+  Continue
+</button>
+
+
+
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+
