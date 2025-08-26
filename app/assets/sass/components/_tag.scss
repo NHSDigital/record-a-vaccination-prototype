@@ -2,9 +2,9 @@
 // This is like the nhsuk-tag--blue variant,
 // but without the darker border.
 .app-tag--header {
-  background-color: nhsuk-tint($color_nhsuk-blue, 80%);
-  border-color: nhsuk-tint($color_nhsuk-blue, 80%);
-  color: nhsuk-shade($color_nhsuk-blue, 30%);
+  background-color: nhsuk-tint(nhsuk-colour("blue"), 80%);
+  border-color: nhsuk-tint(nhsuk-colour("blue"), 80%);
+  color: nhsuk-shade(nhsuk-colour("blue"), 30%);
 
   // Reduce padding slightly from 4px to 3px so it fits in the navigation item
   padding-top: 3px;
