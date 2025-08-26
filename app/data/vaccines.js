@@ -20,22 +20,25 @@ module.exports = [
     name: "flu",
     products: [
       {
-        name: "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)"
+        name: "Adjuvanted Trivalent Influenza Vaccine (aTIV)"
       },
       {
-        name: "Cell-based Quadrivalent Influenza Vaccine (QIVc)"
+        name: "Cell-based Trivalent Influenza Vaccine (TIVc)"
+      },
+      {
+        name: "Efluelda (TIV-HD)"
       },
       {
         name: "Fluenz (LAIV)"
       },
       {
-        name: "Influenza Tetra MYL (QIVe)"
+        name: "Influvac (TIVe)"
       },
       {
-        name: "Quadrivalent Influenza Vaccine (QIVe)"
+        name: "Supemtek (TIVr)"
       },
       {
-        name: "Quadrivalent Influenza Vaccine - High Dose (QIV-HD)"
+        name: "Vaxigrip (TIVe)"
       }
     ]
   },
@@ -43,22 +46,25 @@ module.exports = [
     name: "flu (London service)",
     products: [
       {
-        name: "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)"
+        name: "Adjuvanted Trivalent Influenza Vaccine (aTIV)"
       },
       {
-        name: "Cell-based Quadrivalent Influenza Vaccine (QIVc)"
+        name: "Cell-based Trivalent Influenza Vaccine (TIVc)"
+      },
+      {
+        name: "Efluelda (TIV-HD)"
       },
       {
         name: "Fluenz (LAIV)"
       },
       {
-        name: "Influenza Tetra MYL (QIVe)"
+        name: "Influvac (TIVe)"
       },
       {
-        name: "Quadrivalent Influenza Vaccine (QIVe)"
+        name: "Supemtek (TIVr)"
       },
       {
-        name: "Quadrivalent Influenza Vaccine - High Dose (QIV-HD)"
+        name: "Vaxigrip (TIVe)"
       }
     ]
   },

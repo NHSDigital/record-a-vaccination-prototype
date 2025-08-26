@@ -1,9 +1,12 @@
 module.exports = router => {
 
   router.get('/prototype-setup/setup-batches', (req, res) => {
-
     const data = req.session.data
+    const currentOrganisation = res.locals.currentOrganisation
+
     let vaccineStock = data.vaccineStock
+
+    const organisationVaccines = currentOrganisation.vaccines
 
     const dateNow = new Date()
     const millisecondsPerDay = 86400000
@@ -12,6 +15,18 @@ module.exports = router => {
     const siteId = "RW3NM"
 
     for (vaccine of vaccines) {
+
+      const organisationVaccine = organisationVaccines.find((organisationVaccine) => organisationVaccine.name === vaccine.name)
+
+      if (organisationVaccine) {
+        organisationVaccine.status = "enabled"
+      } else {
+        organisationVaccines.push({
+          name: vaccine.name,
+          status: "enabled"
+        })
+      }
+
       for (vaccineProduct of vaccine.products) {
 
         const numberOfBatchesToAdd = 1 + Math.floor(Math.random() * 10)
