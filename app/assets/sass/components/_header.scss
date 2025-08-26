@@ -28,7 +28,7 @@
 .app-count {
   background-color: rgba(0, 47, 92, 0.4);
   border-radius: nhsuk-spacing(3);
-  color: $color_nhsuk-white;
+  color: nhsuk-colour("white");
   display: inline-block;
   min-width: nhsuk-spacing(5);
   padding-left: nhsuk-spacing(2);
