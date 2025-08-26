@@ -1,64 +1,60 @@
 {% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
 
 {{ header({
-    "service": {
-        "text": "Record a vaccination",
-        "href": "/"
+  service: {
+    text: "Record a vaccination",
+    href: "/"
+  },
+  account: {
+    items: [
+      {
+        href: "/user-profile",
+        text: currentUser.email,
+        icon: true
       },
-      "showNav": "true",
-      "showSearch": "false",
-      account: {
-        items: [
-          {
-            href: "/user-profile",
-            text: currentUser.email,
-            icon: true
-          },
-          {
-            href: '/sign-out',
-            text: 'Log out'
-          } if data.currentUserId
-        ]
+      {
+        href: '/sign-out',
+        text: 'Log out'
+      } if data.currentUserId
+    ]
+  },
+  navigation: {
+    items: [
+      {
+        href: "/home/",
+        text: "Home",
+        active: (currentSection == "home")
       },
-      "navigation": {
-        items: [
-        {
-          href  : "/home/",
-          text : "Home",
-          active: (currentSection == "home")
-        },
-        {
-          href  : "/record-vaccinations",
-          text : ("Record vaccinations") | safe,
-          active: (currentSection == "vaccinate")
-        },
-        {
-          url  : "/lists",
-          label : "Lists <span class=\"nhsuk-tag app-tag--header nhsuk-u-margin-left-2\">New</span>" | safe,
-          active: (currentSection == "lists")
-        },
-        {
-          url: "/vaccines",
-          label: "Vaccines",
-          active: (currentSection == "vaccines")
-        } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
-        {
-          href: "/records",
-          text: "Records",
-          active: (currentSection == "records")
-        } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
-
-        {
-          href: "/reports",
-          text: "Reports",
-          active: (currentSection == "reports")
-        } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
-        {
-          href: '/user-admin',
-          text: 'Manage users',
-          active: (currentSection == "manage-users")
-        } if (currentUser and organisationSetting.permissionLevel === "Lead administrator")
-      ]
-      }
-    })
-  }}
+      {
+        href: "/record-vaccinations",
+        text: ("Record vaccinations") | safe,
+        active: (currentSection == "vaccinate")
+      },
+      {
+        href: "/lists",
+        text: "Lists <span class=\"nhsuk-tag app-tag--header nhsuk-u-margin-left-2\">New</span>" | safe,
+        active: (currentSection == "lists")
+      },
+      {
+        href: "/vaccines",
+        text: "Vaccines",
+        active: (currentSection == "vaccines")
+      } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
+      {
+        href: "/records",
+        text: "Records",
+        active: (currentSection == "records")
+      } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
+      {
+        href: "/reports",
+        text: "Reports",
+        active: (currentSection == "reports")
+      } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
+      {
+        href: '/user-admin',
+        text: 'Manage users',
+        active: (currentSection == "manage-users")
+      } if (currentUser and organisationSetting.permissionLevel === "Lead administrator")
+    ]
+  }
+}) }}
