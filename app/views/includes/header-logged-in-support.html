@@ -1,49 +1,38 @@
 {{ header({
-  "service": {
-      "text": "Record a vaccination",
-      "href": "/"
-    },
-    "showNav": "true",
-    "showSearch": "false",
-    account: {
-      items: [
-        {
-          href: "#",
-          text: currentUser.email,
-          icon: true
-        },
-        {
-          href: '/sign-out',
-          text: 'Log out'
-        }
-      ]
-    },
-    "navigation": {
-      items: [
+  service: {
+    text: "Record a vaccination",
+    href: "/"
+  },
+  account: {
+    items: [
+      {
+        href: "#",
+        text: currentUser.email,
+        icon: true
+      },
+      {
+        href: '/sign-out',
+        text: 'Log out'
+      }
+    ]
+  },
+  navigation: {
+    items: [
       {
         href: "/support/regions",
-        text : "Regions",
+        text: "Regions",
         active: (currentSection == "regions")
       },
       {
         href: "/support/users",
-        text : "Users",
+        text: "Users",
         active: (currentSection == "users")
       },
       {
-        url  : "/support/organisations",
-        label : "Organisations",
+        href: "/support/organisations",
+        text: "Organisations",
         active: (currentSection == "organisations")
-      },
-      {
-        url: "#",
-        label: currentUser.email,
-        classes: "app-header__navigation-item--right-aligned " + ("app-header__navigation-item--current" if currentSection == "user-profile")
-      },
-      {
-        url: '/sign-out',
-        label: 'Log out'
       }
-    ] }
-  })
-}}
+    ]
+  }
+}) }}
