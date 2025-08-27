@@ -1,0 +1,130 @@
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-two-thirds">
+
+    <table class="nhsuk-table">
+      <caption class="nhsuk-table__caption nhsuk-table__caption--m">Past 7 days</caption>
+      <thead role="rowgroup" class="nhsuk-table__head">
+        <tr role="row">
+          <th role="columnheader" class="" scope="col">
+            Date
+          </th>
+          <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
+            Total
+          </th>
+        </tr>
+      </thead>
+      <tbody class="nhsuk-table__body">
+
+        {% set firstStat = (stats | first ) %}
+
+        {% for date in firstStat.days %}
+          {% if not loop.index0 == 0 %}
+            {% set total = 0 %}
+            <tr role="row" class="nhsuk-table__row">
+              <th class="nhsuk-table__header  nhsuk-u-font-weight-normal" scope="row">
+                {% if loop.index0 == 1 %}
+                  Today
+                {% else %}
+                  {{ date.date | dayName }} {{ date.date | govukDate(truncate=true) }}
+
+                  {% if loop.index0 == 2 %}(yesterday){% endif %}
+                {% endif %}
+              </th>
+
+              {% set dayIndex = loop.index0 %}
+              {% for vaccineStat in stats %}
+                {% set total = total + vaccineStat.days[dayIndex].count %}
+                <!-- <td class="nhsuk-table__cell nhsuk-table__cell--numeric">{{ vaccineStat.days[dayIndex].count }}</td> -->
+              {% endfor %}
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">{{ total }}</td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+
+  <table class="nhsuk-table">
+    <caption class="nhsuk-table__caption nhsuk-table__caption--m">By vaccine type</caption>
+    <thead role="rowgroup" class="nhsuk-table__head">
+      <tr role="row">
+        <th role="columnheader" class="" scope="col">
+          Vaccine
+        </th>
+          <th role="columnheader" class=" nhsuk-table__header--numeric" scope="col">
+            Today
+          </th>
+          <th role="columnheader" class=" nhsuk-table__header--numeric" scope="col">
+            Past 7 days
+          </th>
+          <th role="columnheader" class=" nhsuk-table__header--numeric" scope="col">
+            Total
+          </th>
+      </tr>
+    </thead>
+    <tbody class="nhsuk-table__body">
+
+    {% for vaccineStat in stats %}
+      <tr role="row">
+        <th class="nhsuk-table__header" scope="col">
+          {{ vaccineStat.vaccine | capitaliseFirstLetter }}
+        </th>
+        <td class="nhsuk-table__cell--numeric">
+          12
+        </td>
+        <td class="nhsuk-table__cell--numeric">
+          401
+        </td>
+        <td class="nhsuk-table__cell--numeric">
+          1,931
+        </td>
+      </tr>
+    {% endfor %}
+
+
+    </tbody>
+  </table>
+
+
+
+
+    {% if (sites | length) > 1 %}
+      <table class="nhsuk-table">
+        <caption class="nhsuk-table__caption nhsuk-table__caption--m">Past 7 days by site</caption>
+        <thead role="rowgroup" class="nhsuk-table__head">
+          <tr role="row">
+            <th role="columnheader" class="" scope="col">
+              Site
+            </th>
+            {% for vaccineStat in stats %}
+              <!-- <th role="columnheader" class=" nhsuk-table__header--numeric" scope="col">
+                {{ vaccineStat.vaccine }}
+              </th> -->
+            {% endfor %}
+            <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
+              Total
+            </th>
+          </tr>
+        </thead>
+        <tbody class="nhsuk-table__body">
+          {% for site in sites %}
+            {% set runningTotal = 0 %}
+            <tr>
+              <th class="nhsuk-table__header nhsuk-u-font-weight-normal" scope="row"><a href="/home/{{ site }}">{{ data.sites[site].name }}</a></th>
+              {% for vaccineStat in stats %}
+                {% set count = ((vaccineStat.days | first).count) * 3  %}
+                {% set runningTotal = runningTotal + count %}
+                <td class="nhsuk-table__cell nhsuk-table__cell--numeric">{{ count }}</td>
+              {% endfor %}
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">{{ runningTotal }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+    <p>For a more detailed breakdown, <a href="/reports">create a report</a>.</p>
+
+  </div>
+</div>
