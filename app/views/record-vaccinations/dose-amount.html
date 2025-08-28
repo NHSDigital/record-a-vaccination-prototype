@@ -5,7 +5,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/record-vaccinations/consent" }) }}
+  {{ backLink({ href: "/record-vaccinations/injection-site" }) }}
 {% endblock %}
 
 {% block content %}
@@ -19,12 +19,11 @@
         }) }}
       {% endif %}
 
-      <form action="/record-vaccinations/answer-dose" method="post" novalidate>
+      <form action="/record-vaccinations/check" method="post" novalidate>
 
-      
         {{ radios({
-          idPrefix: "dose",
-          name: "dose",
+          idPrefix: "dose-amount",
+          name: "doseAmount",
           fieldset: {
             legend: {
               text: ("Did you give a full dose of the vaccine?" if data.vaccinationToday == 'yes' else "Was a full dose of the vaccine given?"),
@@ -32,19 +31,18 @@
               isPageHeading: true
             }
           },
+          value: data.doseAmount,
           errorMessage: {
             text: doseError.text
           } if doseError,
           items: [
             {
-              value: "Yes, both nostrils",
-              text: "Yes, both nostrils",
-              checked: (data.dose == 'Yes, both nostrils')
+              value: "Both nostrils (full dose)",
+              text: "Yes, both nostrils"
             },
             {
-              value: "No, 1 nostril only",
-              text: "No, 1 nostril only",
-              checked: (data.dose == 'No, 1 nostril only')
+              value: "1 nostril only (half dose)",
+              text: "No, 1 nostril only"
             }
           ]
         }) }}
