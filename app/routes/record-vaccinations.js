@@ -1015,4 +1015,43 @@ router.get('/record-vaccinations/check', (req, res) => {
     res.redirect(redirectPath)
   })
 
+  router.get('/record-vaccinations/dose-amount', (req, res) => {
+    const data = req.session.data
+    const doseAmount = data.doseAmount
+
+    let errors = []
+    let doseAmountError
+
+    if (req.query.showErrors === "yes") {
+
+      if (!doseAmount || doseAmount === "") {
+        doseAmountError = {
+          text: "Select if you gave a full dose",
+          href: "#dose-amount"
+        }
+        errors.push(doseAmountError)
+      }
+    }
+
+    res.render('record-vaccinations/dose-amount', {
+      errors,
+      doseAmountError
+    })
+  })
+
+  router.post('/record-vaccinations/answer-dose-amount', (req, res) => {
+    const data = req.session.data
+    const doseAmount = data.doseAmount
+    let redirectPath
+
+
+    if (doseAmount && doseAmount != "") {
+      res.redirect("/record-vaccinations/check")
+    } else {
+
+      // Redirect back to the question and show an error
+      res.redirect("/record-vaccinations/dose-amount?showErrors=yes")
+    }
+  })
+
 }
