@@ -8,6 +8,8 @@
 
 
 {% set currentSection = "manage-users" %}
+{% set currentSubSection = "deactivated" %}
+
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -47,31 +49,8 @@
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-full">
 
-      <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
-        <ul class="x-govuk-secondary-navigation__list">
+          {% include "user-admin/_secondary-nav.html" %}
 
-             <li class="x-govuk-secondary-navigation__list-item ">
-            <a class="x-govuk-secondary-navigation__link" href="/user-admin/invited">
-              Invited (4)
-            </a>
-          </li>
-          <li class="x-govuk-secondary-navigation__list-item ">
-            <a class="x-govuk-secondary-navigation__link" href="/user-admin/index" aria-current=page>
-              Active (102)
-            </a>
-          </li>
-          <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
-            <a class="x-govuk-secondary-navigation__link" href="/user-admin/deactivated">
-              Deactivated (3)
-            </a>
-          </li>
-        </ul>
-      </nav>
-
-          </li>
-
-        </ul>
-      </nav>
 
 
 

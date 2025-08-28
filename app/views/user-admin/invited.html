@@ -8,6 +8,7 @@
 
 
 {% set currentSection = "manage-users" %}
+{% set currentSubSection = "invited" %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -22,10 +23,10 @@
 
       <div class="nhsuk-inset-text">
         <span class="nhsuk-u-visually-hidden">Information: </span>
-      
+
             <p>For security, we deactivate users who have not logged in for 90 days. <a href="/user-admin/reactivate-all">Reactivate users (2)</a></p>
       </div>
-      
+
 
       <div class="app-filters nhsuk-u-margin-top-5">
         <form action="/user-admin" method="get" novalidate>
@@ -49,50 +50,21 @@
 
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-full">
-    
-          <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
-            <ul class="x-govuk-secondary-navigation__list">
-             
-              <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
-                <a class="x-govuk-secondary-navigation__link" href="/user-admin/invited" aria-current=page>
-                  Invited (4)
-                </a>
-              </li>
 
-              <li class="x-govuk-secondary-navigation__list-item ">
-                <a class="x-govuk-secondary-navigation__link" href="/user-admin/INDEX">
-                  Active (102)
-                </a>
-              </li>
-
-              <li class="x-govuk-secondary-navigation__list-item ">
-                <a class="x-govuk-secondary-navigation__link" href="/user-admin/deactivated">
-                  Deactivated (3)
-                </a>
-              </li>
-  
-          
-
-            </ul>
-          </nav>
-
-    
-    
+          {% include "user-admin/_secondary-nav.html" %}
 
 
-             
-    
           <table class="nhsuk-table-responsive" role="table">
 
             <br>
-    
+
 
             <caption class="nhsuk-table__caption">4 Invited users</caption>
 
             <thead class="nhsuk-table__head" role="rowgroup">
                 <thead role="rowgroup" class="nhsuk-table__head">
                     <tr role="row">
-          
+
                       <th role="columnheader" class="" scope="col">
                         Name
                       </th>
@@ -105,29 +77,29 @@
                       <th role="columnheader" class="" scope="col">
                         Permission
                       </th>
-                      
+
                       <th role="columnheader" class="" scope="col">
                         Invite sent
                     </th>
                       <th role="columnheader" class="" scope="col">
-                        
+
                       </th>
-                      
+
                     </tr>
             </thead>
-    
+
             <tbody class="nhsuk-table__body">
-                  
+
 
               <tr role="row" class="nhsuk-table__row">
                 <td class="nhsuk-table__cell">
                     Jane Doe
               </td>
-              
+
                 <td class="nhsuk-table__cell">
                   jane.doe4@nhs.net
               </td>
-              
+
               <td class="nhsuk-table__cell">
                   Yes
               </td>
@@ -139,7 +111,7 @@
             </td>
             <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
               <a class="nhsuk-link" href="/user-admin/resend"></a>
-            </td> 
+            </td>
                 </tr>
 
 
@@ -147,11 +119,11 @@
                 <td class="nhsuk-table__cell">
                     Peter Parker
               </td>
-              
+
                 <td class="nhsuk-table__cell">
                   peter.parker@nhs.net
               </td>
-              
+
               <td class="nhsuk-table__cell">
                   Yes
               </td>
@@ -163,7 +135,7 @@
             </td>
             <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
               <a class="nhsuk-link" href="/user-admin/resend"></a>
-            </td> 
+            </td>
                 </tr>
 
 
@@ -171,11 +143,11 @@
                     <td class="nhsuk-table__cell">
                         John Smith
                   </td>
-                  
+
                     <td class="nhsuk-table__cell">
                     john.smith@nhs.net
                   </td>
-                  
+
                   <td class="nhsuk-table__cell">
                       Yes
                   </td>
@@ -187,19 +159,19 @@
                 </td>
                 <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
                   <a class="nhsuk-link" href="/user-admin/resend">Resend invite</a>
-                </td> 
+                </td>
                     </tr>
 
-        
+
                     <tr role="row" class="nhsuk-table__row">
                       <td class="nhsuk-table__cell">
                           Tony Shah
                     </td>
-                    
+
                       <td class="nhsuk-table__cell">
                       tony.shah@nhs.net
                     </td>
-                    
+
                     <td class="nhsuk-table__cell">
                         Yes
                     </td>
@@ -211,20 +183,20 @@
                   </td>
                     <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
                       <a class="nhsuk-link" href="/user-admin/resend">Resend invite</a>
-                    </td> 
+                    </td>
                       </tr>
 
-                     
-                
+
+
               </tbody>
             </table>
-    
-            
-            
+
+
+
         </div>
       </div>
-      
- 
+
+
 
 
 {% endblock %}
