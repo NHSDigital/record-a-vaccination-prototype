@@ -1,6 +1,6 @@
 .app-feedback-panel {
-  background-color: $color_nhsuk-white;
-  border-color: $color_nhsuk-blue;
+  background-color: nhsuk-colour("white");
+  border-color: nhsuk-colour("blue");
   border-width: nhsuk-spacing(1);
   border-style: solid;
   padding: nhsuk-spacing(4);

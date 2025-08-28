@@ -29,7 +29,7 @@
 
       <h1 class="nhsuk-heading-l">Check {{ data.patientName }}’s details and vaccination history</h1>
 
-      
+
       {{ summaryList({
         classes: 'xnhsuk-summary-list--no-border',
         rows: [
@@ -87,8 +87,8 @@
         {% endset %}
 
         {{ details({
-          text: "Screening considerations",
-          HTML: screeningConsiderations
+          summaryText: "Screening considerations",
+          html: screeningConsiderations
         }) }}
 
       {% endif %}
