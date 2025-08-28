@@ -232,7 +232,7 @@
               ]
             }
           },
-          {          
+          {
             key: {
               text: "Vaccinator"
             },
@@ -350,7 +350,24 @@
                 }
               ]
             }
-          }
+          },
+          {
+            key: {
+              text: "Dose"
+            },
+            value: {
+              text: data.doseAmount
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/dose-amount",
+                  text: "Change",
+                  visuallyHiddenText: "dose amount"
+                }
+              ]
+            }
+          } if data.doseAmount
         ]
       }) }}
 
