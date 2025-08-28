@@ -54,7 +54,7 @@
   width: 100%;
 
   @include nhsuk-media-query($media-type: print) {
-    color: $color_nhsuk-black;
+    color: nhsuk-colour("black");
   }
 
   .nhsuk-icon {
@@ -62,16 +62,16 @@
     top: -2px;
 
     @include nhsuk-media-query($media-type: print) {
-      color: $color_nhsuk-black;
+      color: nhsuk-colour("black");
       margin-top: 0;
     }
   }
 
   &:hover {
-    color: $nhsuk-link-hover-color;
+    color: $nhsuk-link-hover-colour;
 
     .nhsuk-icon {
-      fill: $nhsuk-link-hover-color;
+      fill: $nhsuk-link-hover-colour;
     }
 
     .nhsuk-pagination__page {
@@ -90,25 +90,25 @@
     &:hover,
     &:active {
       .nhsuk-icon {
-        fill: $nhsuk-focus-text-color;
+        fill: $nhsuk-focus-text-colour;
       }
     }
   }
 
   &:visited {
     .nhsuk-icon {
-      fill: $nhsuk-link-visited-color;
+      fill: $nhsuk-link-visited-colour;
     }
 
     &:hover {
       .nhsuk-icon {
-        fill: $nhsuk-link-hover-color;
+        fill: $nhsuk-link-hover-colour;
       }
     }
 
     &:focus {
       .nhsuk-icon {
-        fill: $nhsuk-focus-text-color;
+        fill: $nhsuk-focus-text-colour;
       }
     }
   }
@@ -156,14 +156,14 @@
 
 .nhsuk-pagination--numbered__link:visited:hover,
 .nhsuk-pagination--numbered__item a:hover {
-  color: $nhsuk-link-hover-color;
+  color: $nhsuk-link-hover-colour;
 }
 
 .nhsuk-pagination--numbered__prev:hover,
 .nhsuk-pagination--numbered__next:hover,
 .nhsuk-pagination--numbered__item:hover {
-  background-color: $color_nhsuk-grey-4;
-  color: $color_nhsuk-blue;
+  background-color: nhsuk-colour("grey-4");
+  color: nhsuk-colour("blue");
 }
 
 // Container for the list of numbered items
@@ -176,21 +176,21 @@
 // Current number
 .nhsuk-pagination--numbered__item--current,
 .nhsuk-pagination--numbered__item--current:hover {
-  background-color: $color_nhsuk-blue;
+  background-color: nhsuk-colour("blue");
   font-weight: $nhsuk-font-bold;
 
   .nhsuk-pagination--numbered__link {
-    color: $color_nhsuk-white;
+    color: nhsuk-colour("white");
   }
 
   .nhsuk-pagination--numbered__link:focus {
-    color: $color_nhsuk-black;
+    color: nhsuk-colour("black");
   }
 }
 
 .nhsuk-pagination--numbered__item--ellipses {
   font-weight: $nhsuk-font-bold;
-  color: $nhsuk-secondary-text-color;
+  color: $nhsuk-secondary-text-colour;
 
   &:hover {
     background-color: transparent;
@@ -200,7 +200,7 @@
 .nhsuk-pagination--numbered__link {
   min-width: nhsuk-spacing(3);
   vertical-align: middle;
-  color: $color_nhsuk-blue;
+  color: nhsuk-colour("blue");
 
   // Increase the touch area for the link to the parent element.
   @media screen {
@@ -218,15 +218,15 @@
 .nhsuk-pagination--numbered .nhsuk-icon {
   margin-top: 0;
   margin-bottom: -12px;
-  fill: $color_nhsuk-blue;
+  fill: nhsuk-colour("blue");
 }
 
 .nhsuk-pagination--numbered__link:visited .nhsuk-icon {
-  fill: $nhsuk-link-visited-color;
+  fill: $nhsuk-link-visited-colour;
 }
 
 .nhsuk-pagination--numbered__link:hover .nhsuk-icon {
-  fill: $nhsuk-link-hover-color;
+  fill: $nhsuk-link-hover-colour;
 }
 
 .nhsuk-pagination--numbered .nhsuk-icon__arrow-left {

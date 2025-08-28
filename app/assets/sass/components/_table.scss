@@ -20,11 +20,11 @@ table {
 
 .app-table__cell--border-right,
 .app-table__header--border-right {
-  border-right: 2px solid $color_nhsuk-grey-4;
+  border-right: 2px solid nhsuk-colour("grey-4");
 }
 
 .app-table__header--border-top {
-  border-top: 2px solid $color_nhsuk-grey-4;
+  border-top: 2px solid nhsuk-colour("grey-4");
 }
 
 .app-table__cell--padding-left,
