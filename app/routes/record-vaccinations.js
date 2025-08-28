@@ -658,6 +658,7 @@ module.exports = router => {
       data.consentAdvocateName = ""
       data.consentDeputyName = ""
       data.healthcareWorker = ""
+      data.doseAmount = ""
     }
 
     if (answer === 'same-vaccination-another-patient') {
@@ -689,6 +690,7 @@ module.exports = router => {
       req.session.data.vaccineProduct = ""
       req.session.data.vaccineBatch = ""
       req.session.data.eligibility = ""
+      req.session.data.nhsNumber = ""
 
       res.redirect('/record-vaccinations/vaccine')
     } else {
@@ -955,13 +957,13 @@ module.exports = router => {
 
       if (!injectionSite) {
         injectionSiteError = {
-          text: "Select where you gave the injection",
+          text: "Select where you gave the vaccine",
           href: "#injection-site-1"
         }
         errors.push(injectionSiteError)
       } else if (injectionSite === "other" && !otherInjectionSite) {
         otherInjectionSiteError = {
-          text: "Select where you gave the injection",
+          text: "Select where you gave the vaccine",
           href: "#other-injection-site-1"
         }
         errors.push(otherInjectionSiteError)
@@ -1001,11 +1003,55 @@ router.get('/record-vaccinations/check', (req, res) => {
     const otherInjectionSite = data.otherInjectionSite
     let redirectPath = "/record-vaccinations/check"
 
+
     if (!injectionSite || (injectionSite === "other" && !otherInjectionSite)) {
       redirectPath = "/record-vaccinations/injection-site?showErrors=yes"
+    } else if (data.vaccineProduct == "Fluenz (LAIV)") {
+
+      // Fluenz is a nasal spray which gets an extra question
+      redirectPath = "/record-vaccinations/dose-amount"
     }
 
     res.redirect(redirectPath)
+  })
+
+  router.get('/record-vaccinations/dose-amount', (req, res) => {
+    const data = req.session.data
+    const doseAmount = data.doseAmount
+
+    let errors = []
+    let doseAmountError
+
+    if (req.query.showErrors === "yes") {
+
+      if (!doseAmount || doseAmount === "") {
+        doseAmountError = {
+          text: "Select yes if you gave a full dose",
+          href: "#dose-amount"
+        }
+        errors.push(doseAmountError)
+      }
+    }
+
+    res.render('record-vaccinations/dose-amount', {
+      errors,
+      doseAmountError
+    })
+  })
+
+  router.post('/record-vaccinations/answer-dose-amount', (req, res) => {
+    const data = req.session.data
+    const doseAmount = data.doseAmount
+    let redirectPath
+
+
+    if (doseAmount && doseAmount != "") {
+      res.redirect("/record-vaccinations/check")
+    } else {
+
+      // Redirect back to the question and show an error
+      res.redirect("/record-vaccinations/dose-amount?showErrors=yes")
+    }
   })
 
 }

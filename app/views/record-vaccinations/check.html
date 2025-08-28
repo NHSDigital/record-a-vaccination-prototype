@@ -232,7 +232,7 @@
               ]
             }
           },
-          {          
+          {
             key: {
               text: "Vaccinator"
             },
@@ -329,14 +329,14 @@
                 {
                   href: "/record-vaccinations/consent",
                   text: "Change",
-                  visuallyHiddenText: "consnet"
+                  visuallyHiddenText: "consent"
                 }
               ]
             }
           },
           {
             key: {
-              text: "Injection site"
+              text: "Vaccination site"
             },
             value: {
               html: (data.otherInjectionSite if data.injectionSite == "other" else data.injectionSite)
@@ -346,11 +346,28 @@
                 {
                   href: "/record-vaccinations/injection-site",
                   text: "Change",
-                  visuallyHiddenText: "contact details"
+                  visuallyHiddenText: "Vaccination site"
                 }
               ]
             }
-          }
+          },
+          {
+            key: {
+              text: "Dose"
+            },
+            value: {
+              text: data.doseAmount
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/dose-amount",
+                  text: "Change",
+                  visuallyHiddenText: "dose amount"
+                }
+              ]
+            }
+          } if data.doseAmount
         ]
       }) }}
 
