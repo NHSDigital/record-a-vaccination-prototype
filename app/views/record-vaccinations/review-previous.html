@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Review your previous answers" %}
+{% set pageName = "Check these details still apply" %}
 
 {% set currentSection = "vaccinate" %}
 
@@ -12,7 +12,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Review your previous answers</h1>
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       {{ summaryList({
           rows: [
@@ -35,10 +35,44 @@
             },
             {
               key: {
+                text: "Site"
+              },
+              value: {
+                text: (currentOrganisation.sites | findById(data.deliveryTeam)).name
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/record-vaccinations/delivery-team",
+                    text: "Change",
+                    visuallyHiddenText: "site"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Vaccinator"
+              },
+              value: {
+                html: (vaccinator.firstName + " " + vaccinator.lastName)
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/record-vaccinations/vaccinator",
+                    text: "Change",
+                    visuallyHiddenText: "contact information"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
                 text: "Vaccine"
               },
               value: {
-                text: data.vaccine
+                html: (data.vaccine | capitaliseFirstLetter) + "<br>" + data.vaccineProduct
               },
               actions: {
                 items: [
@@ -46,23 +80,6 @@
                     href: "/record-vaccinations/vaccine",
                     text: "Change",
                     visuallyHiddenText: "vaccine"
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: "Product"
-              },
-              value: {
-                text: data.vaccineProduct
-              },
-              actions: {
-                items: [
-                  {
-                    href: "/record-vaccinations/vaccine",
-                    text: "Change",
-                    visuallyHiddenText: "vaccine product"
                   }
                 ]
               }
@@ -86,21 +103,21 @@
             },
             {
               key: {
-                text: "Vaccinator"
+                text: "Eligibility"
               },
               value: {
-                html: data.vaccinator
+                html: ((data.eligibility | join("<br>")) if (data.eligibility | isArray) else data.eligibility)
               },
               actions: {
                 items: [
                   {
-                    href: "/record-vaccinations/vaccinator",
+                    href: "/record-vaccinations/eligibility",
                     text: "Change",
-                    visuallyHiddenText: "contact information"
+                    visuallyHiddenText: "eligibility"
                   }
                 ]
               }
-            },
+            } if (data.eligibility),
             {
               key: {
                 text: "Location"
@@ -117,24 +134,7 @@
                   }
                 ]
               }
-            } if (data.vaccine === "Flu" or data.vaccine == "COVID-19"),
-            {
-              key: {
-                text: "Eligibility"
-              },
-              value: {
-                html: ((data.eligibility | join("<br>")) if (data.eligibility | isArray) else data.eligibility)
-              },
-              actions: {
-                items: [
-                  {
-                    href: "/record-vaccinations/eligibility",
-                    text: "Change",
-                    visuallyHiddenText: "eligibility"
-                  }
-                ]
-              }
-            } if (data.vaccine != "Pertussis")
+            } if (data.locationType)
           ]
         }) }}
 
@@ -142,6 +142,8 @@
         text: "Continue",
         href: "/record-vaccinations/patient"
       })}}
+
+      <p><a href="/record-vaccinations">Start again</a> to record a vaccination from the beginning.</p>
 
     </div>
   </div>

@@ -1,5 +1,5 @@
 // Import NHS.UK frontend library
-@import 'node_modules/nhsuk-frontend/packages/nhsuk';
+@import "node_modules/nhsuk-frontend/dist/nhsuk";
 
 // Local override classes
 @import 'overrides';
@@ -9,7 +9,7 @@
 @import 'components/related-nav';
 @import 'components/indent-list';
 @import 'components/feedback-panel';
-@import 'components/button-group';
+@import 'components/checkboxes';
 
 // Import GOVUK-frontend
 //
@@ -19,9 +19,9 @@
 
 // Reset some GOV.UK variables to be NHS-branded
 $govuk-font-family: 'Frutiger W01';
-$govuk-error-colour: $nhsuk-error-color;
-$govuk-input-border-colour: $nhsuk-form-border-color;
-$govuk-brand-colour: $nhsuk-link-color;
+$govuk-error-colour: $nhsuk-error-colour;
+$govuk-input-border-colour: $nhsuk-form-border-colour;
+$govuk-brand-colour: $nhsuk-link-colour;
 
 // Import X-GOVUK prototype components
 @import "node_modules/@x-govuk/govuk-prototype-components/src/x-govuk";

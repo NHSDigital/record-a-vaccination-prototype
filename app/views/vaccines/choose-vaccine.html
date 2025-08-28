@@ -15,10 +15,9 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
       <form action="/vaccines/add-batch" method="post" novalidate="true">
-
         {% set items = [] %}
 
-        {% for vaccine in (data.vaccines) %}
+        {% for vaccine in (vaccinesEnabled | sort(false, false, "name")) %}
           {% if vaccine.products %}
             {% set productItems = [] %}
             {% for vaccineProduct in (vaccine.products) %}
@@ -45,7 +44,7 @@
 
           {% set items = (items.push({
             value: vaccine.name,
-            text: vaccine.name,
+            text: (vaccine.name | capitaliseFirstLetter),
             conditional: {
               html: conditionalHtml
             } if vaccine.products
@@ -62,9 +61,6 @@
               "isPageHeading": true
             }
           },
-          hint: {
-            text: "Only add vaccines that NHS England has commissioned you to deliver."
-          },
           value: data.vaccine,
           errorMessage: {
             text: vaccineError
@@ -77,6 +73,41 @@
           "text": "Continue"
         }) }}
       </form>
+
+      {% if (vaccinesDisabled | length) > 0 %}
+        {% call details({ summaryText: "Need to add more vaccine types?"}) %}
+          <p>Select the vaccines you need.</p>
+
+          {% set requestableItems = [] %}
+          {% for vaccine in (vaccinesDisabled | sort(false, false, "name")) %}
+            {% set requestableItems = (requestableItems.push({
+              value: vaccine.name,
+              text: (vaccine.name | capitaliseFirstLetter)
+            }), requestableItems) %}
+          {% endfor %}
+
+          <form action="/vaccines/request" method="post">
+
+            {{ checkboxes({
+              name: "vaccinesRequested",
+              idPrefix: "vaccines-requested",
+              fieldset: {
+                legend: {
+                  text: "Vaccine",
+                  classes: "nhsuk-fieldset__legend--s"
+                }
+              },
+              items: requestableItems
+            }) }}
+
+            {{ button({
+              text: "Send request",
+              classes: "nhsuk-button--secondary"
+            }) }}
+          </form>
+
+        {% endcall %}
+      {% endif %}
 
     </div>
   </div>

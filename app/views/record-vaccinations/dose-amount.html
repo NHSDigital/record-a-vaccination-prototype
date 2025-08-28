@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Did you give a full dose of the vaccine?" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/injection-site" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      <form action="/record-vaccinations/answer-dose-amount" method="post" novalidate>
+
+        {{ radios({
+          idPrefix: "dose-amount",
+          name: "doseAmount",
+          fieldset: {
+            legend: {
+              text: ("Did you give a full dose of the vaccine?" if data.vaccinationToday == 'yes' else "Was a full dose of the vaccine given?"),
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          value: data.doseAmount,
+          errorMessage: {
+            text: doseAmountError.text
+          } if doseAmountError,
+          items: [
+            {
+              value: "Both nostrils (full dose)",
+              text: "Yes, both nostrils"
+            },
+            {
+              value: "1 nostril only (half dose)",
+              text: "No, 1 nostril only"
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

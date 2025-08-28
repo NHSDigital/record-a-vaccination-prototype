@@ -2,7 +2,10 @@ module.exports = router => {
 
   router.get('/regions', (req, res) => {
     const data = req.session.data
-    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61") && (["Active", "Deactivated"].includes(organisation.status)))
+
+    const currentRegion = res.locals.currentRegion
+
+    const organisations = data.organisations.filter((organisation) => (organisation.region === currentRegion.id) && (["Active", "Invited", "Deactivated"].includes(organisation.status)))
 
     const closedOrganisationsCount = data.organisations.filter((organisation) => (organisation.region === "Y61" && organisation.status == "Closed")).length
 
@@ -13,8 +16,10 @@ module.exports = router => {
   })
 
   router.get('/regions/organisations/closed', (req, res) => {
+    const currentRegion = res.locals.currentRegion
+
     const data = req.session.data
-    const organisations = data.organisations.filter((organisation) => (organisation.region === "Y61" && organisation.status == "Closed"))
+    const organisations = data.organisations.filter((organisation) => (organisation.region === currentRegion.id && organisation.status == "Closed"))
 
     res.render('regions/closed-organisations', {
       organisations
@@ -226,7 +231,7 @@ module.exports = router => {
           id: organisation.id,
           status: 'Invited',
           permissionLevel: 'Lead administrator',
-          clinician: false
+          vaccinator: false
         }
       ]
     })
@@ -248,12 +253,69 @@ module.exports = router => {
 
     const users = data.users.filter((user) => (user.organisations || []).find((organisation) => organisation.id === id))
 
+    const vaccines = organisation.vaccines || []
+    const vaccinesEnabled = vaccines.filter((vaccine) => vaccine.status === "enabled")
+
+    const messages = res.locals.currentRegion.inbox.filter((message) => message.fromOrganisationId === id)
 
     res.render('regions/organisation', {
       organisation,
-      users
+      users,
+      vaccinesEnabled,
+      messages
     })
   })
+
+  // Viewing the page to set vaccines per organisation
+  router.get('/regions/organisations/:id/add-vaccines', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const organisation = data.organisations.find((org) => org.id === id)
+    if (!organisation) { res.redirect('/regions/'); return }
+
+    const organisationVaccines = organisation.vaccines || []
+    const vaccineEnabledNames = organisationVaccines.filter((vaccine) => vaccine.status === "enabled").map((vaccine) => vaccine.name)
+
+    const allVaccines = data.vaccines
+
+    const vaccinesNotYetAdded = allVaccines.filter((vaccine) => !vaccineEnabledNames.includes(vaccine.name))
+
+    res.render('regions/add-vaccines', {
+      organisation,
+      vaccinesNotYetAdded
+    })
+  })
+
+  // Updating vaccines enabled per organisation
+  router.post('/regions/organisations/:id/update-vaccines', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const organisation = data.organisations.find((org) => org.id === id)
+    if (!organisation) { res.redirect('/regions/'); return }
+
+    const vaccinesToAdd = data.vaccinesToAdd
+
+    const vaccines = organisation.vaccines || []
+
+    for (vaccineToAdd of vaccinesToAdd) {
+
+      const existingVaccine = vaccines.find((vaccine) => vaccine.name === vaccineToAdd)
+
+      if (existingVaccine) {
+        existingVaccine.status = "enabled"
+      } else {
+
+        vaccines.push({
+          name: vaccineToAdd,
+          status: "enabled"
+        })
+      }
+
+    }
+
+    res.redirect(`/regions/organisations/${id}`)
+  })
+
 
   // Delete an organisation confirmation page
   router.get('/regions/organisations/:id/delete', (req, res) => {
@@ -388,4 +450,50 @@ module.exports = router => {
     }
 
   })
+
+  router.get('/regions/messages', (req, res) => {
+    const inbox = res.locals.currentRegion.inbox
+
+    res.render('regions/messages/index', {
+      inbox
+    })
+  })
+
+  router.get('/regions/messages/:id', (req, res) => {
+    const id = req.params.id
+
+    const inbox = res.locals.currentRegion.inbox
+    const message = inbox.find((message) => message.id === id)
+
+    res.render('regions/messages/show', {
+      message
+    })
+  })
+
+  router.post('/regions/messages/:id/decide', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+
+    const inbox = res.locals.currentRegion.inbox
+    const message = inbox.find((message) => message.id === id)
+
+    const decision = data.decision
+
+    const fromOrganisation = data.organisations.find((organisation) => organisation.id === message.fromOrganisationId)
+
+    let vaccines = fromOrganisation.vaccines.filter((vaccine) => message.vaccinesRequested.includes(vaccine.name))
+
+    for (vaccine of vaccines) {
+      if (decision === "approve") {
+        vaccine.status = "enabled"
+      } else if (decision === "reject") {
+        vaccine.status = "disabled"
+      }
+    }
+
+    inbox.splice(inbox.indexOf(message), 1)
+
+    res.redirect('/regions/messages')
+  })
+
 }

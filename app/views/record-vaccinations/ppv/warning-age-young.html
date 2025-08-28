@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "The patient is too young for the London pneumococcal service" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/patient-history" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Jodie Brown is too young for the London pneumococcal service 
+      </h1>
+
+      <p>
+        Jodie Brown is 17 years old. 
+      </p>
+
+      <p>
+        To be eligible for this service, you have to be aged 18 or older.
+      </p>
+
+      <p>
+        Your organisation may not be paid for this vaccination.
+      </p>
+   
+    </div>
+  </div>
+
+  {{ button({
+    "text": "Continue anyway",
+    "href": "/record-vaccinations/consent"
+  }) }}
+
+{% endblock %}
+

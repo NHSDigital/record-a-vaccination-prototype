@@ -1,0 +1,198 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Who is giving consent?" %}
+
+{% set currentSection = "consent" %}
+
+
+{% block beforeContent %}
+    {{ backLink({
+      href: "/lists/record/location",
+      text: "Back"
+    }) }}
+{% endblock %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+
+      <form action="/lists/record/injection-site" method="post" novalidate>
+
+        {% set consentClinicianHtml %}
+          {{ input({
+            label: {
+              text: "Name"
+            },
+            errorMessage: {
+              text: consentClinicianError.text
+            } if consentClinicianError,
+            id: "consent-clinician-name",
+            name: "consentClinicianName",
+            value: data.consentClinicianName
+          }) }}
+        {% endset %}
+
+        {% set consentAttorneyHtml %}
+          {{ input({
+            label: {
+              text: "Name"
+            },
+            errorMessage: {
+              text: consentAttorneyError.text
+            } if consentAttorneyError,
+            id: "consent-attorney-name",
+            name: "consentAttorneyName",
+            value: data.consentAttorneyName
+          }) }}
+
+          {{ input({
+            label: {
+              text: "Relationship to the patient"
+            },
+            errorMessage: {
+              text: consentAttorneyRelationshipError.text
+            } if consentAttorneyRelationshipError,
+            id: "consent-attorney-relationship",
+            name: "consentAttorneyRelationship",
+            value: data.consentAttorneyRelationship
+          }) }}
+        {% endset %}
+
+        {% set consentParentHtml %}
+          {{ input({
+            label: {
+              text: "Name"
+            },
+            errorMessage: {
+              text: consentParentError.text
+            } if consentParentError,
+            id: "consent-parent-name",
+            name: "consentParentName",
+            value: data.consentParentName
+          }) }}
+        {% endset %}
+
+        {% set consentAdvocateHtml %}
+          {{ input({
+            label: {
+              text: "Name"
+            },
+            errorMessage: {
+              text: consentAdvocateError.text
+            } if consentAdvocateError,
+            id: "consent-advocate-name",
+            name: "consentAdvocateName",
+            value: data.consentAdvocateName
+          }) }}
+        {% endset %}
+
+        {% set consentDeputyHtml %}
+          {{ input({
+            label: {
+              text: "Name"
+            },
+            errorMessage: {
+              text: consentDeputyError.text
+            } if consentDeputyError,
+            id: "consent-deputy-name",
+            name: "consentDeputyName",
+            value: data.consentDeputyName
+          }) }}
+
+          {{ input({
+            label: {
+              text: "Relationship to the patient"
+            },
+            errorMessage: {
+              text: consentDeputyRelationshipError.text
+            } if consentDeputyRelationshipError,
+            id: "consent-deputy-relationship",
+            name: "consentDeputyRelationship",
+            value: data.consentDeputyRelationship
+          }) }}
+        {% endset %}
+
+        {{ radios({
+          idPrefix: "consent",
+          name: "consent",
+          fieldset: {
+            legend: {
+              text: ("Who is giving consent?" if data.vaccinationToday == 'yes' else "Who gave consent?"),
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: "true"
+            }
+          },
+          errorMessage: {
+            text: consentError.text
+          } if consentError,
+          items: [
+            {
+              value: 'patient',
+              text: (data.patientName or "Michael James"),
+              checked: (data.consent === 'patient')
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "Clinician acting in the patient’s best interests",
+              text: "Clinician acting in the patient’s best interests",
+              checked: (data.consent === "Clinician acting in the patient’s best interests"),
+              conditional: {
+                html: consentClinicianHtml
+              }
+            },
+            {
+                value: "Person with lasting power of attorney for health and welfare",
+                text: "Person with lasting power of attorney for health and welfare",
+                checked: (data.consent === "Person with lasting power of attorney for health and welfare"),
+                conditional: {
+                  html: consentAttorneyHtml
+                }
+              },
+              {
+                value: "Parent or guardian",
+                text: "Parent or guardian",
+                checked: (data.consent === "Parent or guardian"),
+                conditional: {
+                  html: consentParentHtml
+                }
+              },
+              {
+                value: "Independent mental capacity advocate",
+                text: "Independent mental capacity advocate",
+                checked: (data.consent === "Independent mental capacity advocate"),
+                conditional: {
+                  html: consentAdvocateHtml
+                }
+              },
+              {
+                value: "Court appointed deputy",
+                text: "Court appointed deputy",
+                checked: (data.consent === "Court appointed deputy"),
+                conditional: {
+                  html: consentDeputyHtml
+                }
+              }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

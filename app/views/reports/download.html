@@ -5,18 +5,13 @@
 {% set currentSection = "reports" %}
 
 
-{% block beforeContent %}
-  {{ backLink({
-    href: "/reports/check",
-    text: "Back"
-  }) }}
-{% endblock %}
-
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-xl">Report is ready</h1>
+      {% include "reports/_feedback.html" %}
+
+      <h1 class="nhsuk-heading-l">Report is ready</h1>
 
       <p class="nhsuk-body-l">You have created a report from 16 July to 30 July 2024 for COVID-19 and Flu at Verrington (RH635)</p>
 
@@ -24,6 +19,8 @@
         "text": "Download report",
         "href": "/reports"
       }) }}
+
+      <p><a href="/reports">Create a new report</a></p>
 
 
     </div>

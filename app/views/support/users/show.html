@@ -125,7 +125,7 @@
               Permission level
             </th>
             <th role="columnheader" class="" scope="col">
-              Clinician
+              Vaccinator
             </th>
             <th role="columnheader" class="" scope="col">
               Status
@@ -144,7 +144,7 @@
                 {{ organisation.permissionLevel }}
               </td>
               <td class="nhsuk-table__cell " style="min-width: 150px;">
-                {{ "Yes" if organisation.clinician else "No" }}
+                {{ "Yes" if organisation.vaccinator else "No" }}
               </td>
               <td class="nhsuk-table__cell ">
                 {{ organisation.status }}

@@ -74,7 +74,7 @@ module.exports = router => {
     if (req.query.showErrors === "yes") {
       if (!req.session.data.deliveryTeam) {
         errors.push({
-          text: "Select a team",
+          text: "Select a site",
           href: "#delivery-team-1"
         })
       }
@@ -105,7 +105,7 @@ module.exports = router => {
 
         const userOrgnisationSetting = (user.organisations || []).find((organisation) => organisation.id === data.currentOrganisationId)
 
-        return (user.id != data.currentUserId) && userOrgnisationSetting && userOrgnisationSetting.clinician && (userOrgnisationSetting.status === "Active")
+        return (user.id != data.currentUserId) && userOrgnisationSetting && userOrgnisationSetting.vaccinator && (userOrgnisationSetting.status === "Active")
       })
       .sort((a, b) => {
         const nameA = a.firstName.toUpperCase(); // ignore upper and lowercase
@@ -474,7 +474,7 @@ module.exports = router => {
       res.redirect('/record-vaccinations/patient-estimated-due-date-rsv-warning')
 
     // Pertussis is recommended between 16 weeks (112 days) and 32 weeks
-    } else if (data.vaccinationToday == 'yes' && data.vaccine === "Pertussis" && numberOfDaysPregnant < 112) {
+    } else if (data.vaccinationToday == 'yes' && data.vaccine === "pertussis" && numberOfDaysPregnant < 112) {
       res.redirect('/record-vaccinations/patient-estimated-due-date-pertussis-warning')
     } else {
       res.redirect('/record-vaccinations/consent')
@@ -562,17 +562,16 @@ module.exports = router => {
         nextPage = "/record-vaccinations/patient-history"
       }
 
-    } else {
-
-      if ((data.vaccine === "COVID-19") || (data.vaccine == "Flu")) {
-        if (data.eligibility === "Healthcare worker" || data.eligibility.includes("Healthcare worker")) {
-          nextPage = "/record-vaccinations/healthcare-worker"
-        } else {
-          nextPage = "/record-vaccinations/location"
-        }
+    } else if (data.vaccine == "flu") {
+      if (data.eligibility === "Health or social care worker") {
+        nextPage = "/record-vaccinations/healthcare-worker"
       } else {
         nextPage = "/record-vaccinations/patient"
       }
+    } else if (data.vaccine == "COVID-19") {
+      nextPage = "/record-vaccinations/location"
+    } else {
+      nextPage = "/record-vaccinations/patient"
     }
 
     res.redirect(nextPage)
@@ -659,6 +658,7 @@ module.exports = router => {
       data.consentAdvocateName = ""
       data.consentDeputyName = ""
       data.healthcareWorker = ""
+      data.doseAmount = ""
     }
 
     if (answer === 'same-vaccination-another-patient') {
@@ -690,6 +690,7 @@ module.exports = router => {
       req.session.data.vaccineProduct = ""
       req.session.data.vaccineBatch = ""
       req.session.data.eligibility = ""
+      req.session.data.nhsNumber = ""
 
       res.redirect('/record-vaccinations/vaccine')
     } else {
@@ -708,7 +709,15 @@ module.exports = router => {
         (batch.vaccine === data.vaccine)
     }) || {}
 
-    const batches = vaccine.batches
+    const dateToday = new Date()
+
+    const batches = (vaccine.batches || [])
+      .filter(function(batch) {
+        const expiryDate = new Date(Date.parse(batch.expiryDate))
+
+        return (expiryDate > dateToday)
+      })
+      .filter((batch) => !batch.depletedDate)
 
     if (req.query.showError === 'yes') {
 
@@ -770,7 +779,7 @@ module.exports = router => {
       redirectPath = "/record-vaccinations/add-batch"
     } else if (!vaccineBatch) {
       redirectPath = "/record-vaccinations/batch?showError=yes"
-    } else if (["COVID-19", "Flu", "RSV"].includes(data.vaccine)) {
+    } else if (["COVID-19", "flu", "flu (London service)", "RSV", "pneumococcal"].includes(data.vaccine)) {
       redirectPath = "/record-vaccinations/eligibility"
     } else if (data.repeatPatient === "yes") {
       redirectPath = "/record-vaccinations/patient-estimated-due-date"
@@ -816,7 +825,7 @@ module.exports = router => {
 
     if (data.newBatchNumber === '' || data.newBatchExpiryDate?.day === '' || data.newBatchExpiryDate?.month === '' || data.newBatchExpiryDate?.year === '') {
       nextPage = "/record-vaccinations/add-batch?showErrors=yes"
-    } else if (data.vaccine === "Pertussis") {
+    } else if ((data.vaccine === "pertussis") || (data.vaccine === "MMR")) {
       nextPage = "/record-vaccinations/patient"
     } else {
       nextPage = "/record-vaccinations/eligibility"
@@ -948,13 +957,13 @@ module.exports = router => {
 
       if (!injectionSite) {
         injectionSiteError = {
-          text: "Select where you gave the injection",
+          text: "Select where you gave the vaccine",
           href: "#injection-site-1"
         }
         errors.push(injectionSiteError)
       } else if (injectionSite === "other" && !otherInjectionSite) {
         otherInjectionSiteError = {
-          text: "Select where you gave the injection",
+          text: "Select where you gave the vaccine",
           href: "#other-injection-site-1"
         }
         errors.push(otherInjectionSiteError)
@@ -978,17 +987,71 @@ router.get('/record-vaccinations/check', (req, res) => {
     })
   })
 
+  router.get('/record-vaccinations/review-previous', (req, res) => {
+    const data = req.session.data
+    const vaccinator = data.users.find((user) => user.id === data.vaccinatorId)
+
+    res.render('record-vaccinations/review-previous', {
+      vaccinator
+    })
+  })
+
+
   router.post('/record-vaccinations/answer-injection-site', (req, res) => {
     const data = req.session.data
     const injectionSite = data.injectionSite
     const otherInjectionSite = data.otherInjectionSite
     let redirectPath = "/record-vaccinations/check"
 
+
     if (!injectionSite || (injectionSite === "other" && !otherInjectionSite)) {
       redirectPath = "/record-vaccinations/injection-site?showErrors=yes"
+    } else if (data.vaccineProduct == "Fluenz (LAIV)") {
+
+      // Fluenz is a nasal spray which gets an extra question
+      redirectPath = "/record-vaccinations/dose-amount"
     }
 
     res.redirect(redirectPath)
+  })
+
+  router.get('/record-vaccinations/dose-amount', (req, res) => {
+    const data = req.session.data
+    const doseAmount = data.doseAmount
+
+    let errors = []
+    let doseAmountError
+
+    if (req.query.showErrors === "yes") {
+
+      if (!doseAmount || doseAmount === "") {
+        doseAmountError = {
+          text: "Select yes if you gave a full dose",
+          href: "#dose-amount"
+        }
+        errors.push(doseAmountError)
+      }
+    }
+
+    res.render('record-vaccinations/dose-amount', {
+      errors,
+      doseAmountError
+    })
+  })
+
+  router.post('/record-vaccinations/answer-dose-amount', (req, res) => {
+    const data = req.session.data
+    const doseAmount = data.doseAmount
+    let redirectPath
+
+
+    if (doseAmount && doseAmount != "") {
+      res.redirect("/record-vaccinations/check")
+    } else {
+
+      // Redirect back to the question and show an error
+      res.redirect("/record-vaccinations/dose-amount?showErrors=yes")
+    }
   })
 
 }

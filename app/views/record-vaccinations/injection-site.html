@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Where did you give the injection?" %}
+{% set pageName = "Where did you give the vaccine?" %}
 
 {% set currentSection = "vaccinate" %}
 
@@ -28,7 +28,7 @@
           name: "otherInjectionSite",
           fieldset: {
             legend: {
-              text: "Injection site",
+              text: "Body part",
               classes: "nhsuk-fieldset__legend--s"
             }
           },
@@ -66,7 +66,7 @@
           name: "injectionSite",
           fieldset: {
             legend: {
-              text: "Where did you give the injection?",
+              text: ("Where did you give the vaccine?" if data.vaccinationToday == 'yes' else "Where was the vaccine given?"),
               classes: "nhsuk-fieldset__legend--l",
               isPageHeading: true
             }
@@ -84,6 +84,11 @@
               value: "Right arm",
               text: "Right arm",
               checked: (data.injectionSite == 'Right arm')
+            },
+            {
+              value: "Nose",
+              text: "Nose",
+              checked: (data.injectionSite == 'Nose')
             },
             {
               divider: "or"

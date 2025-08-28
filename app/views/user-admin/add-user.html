@@ -14,7 +14,7 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-      {% if (firstNameError or lastNameError or emailError or roleError or clinicianError) %}
+      {% if (firstNameError or lastNameError or emailError or roleError or vaccinatorError) %}
         {{ errorSummary({
           "titleText": "There is a problem",
           "errorList": [
@@ -31,9 +31,9 @@
               "href": "#email"
             } if emailError,
             {
-              "text": clinicianError,
-              "href": "#clinician"
-            } if clinicianError,
+              "text": vaccinatorError,
+              "href": "#vaccinator"
+            } if vaccinatorError,
             {
               "text": permissionLevelError,
               "href": "#permission-level-1"
@@ -87,31 +87,31 @@
         }) }}
 
         {{ radios({
-          "name": "clinician",
+          "name": "vaccinator",
           "fieldset": {
             "legend": {
-              "text": "Are they a registered clinician?"
+              "text": "Are they a vaccinator?"
             }
           },
           hint: {
-            text: "Only registered clinicians can assess the patient and record their consent."
+            text: "Vaccination records include the name of the person who gave the vaccination"
           },
           "items": [
             {
               "value": "yes",
               "text": "Yes",
-              id: "clinician",
-              checked: (data.clinician == "yes")
+              id: "vaccinator",
+              checked: (data.vaccinator == "yes")
             },
             {
               "value": "no",
               "text": "No",
-              checked: (data.clinician == "no")
+              checked: (data.vaccinator == "no")
             }
           ],
           "errorMessage": {
-            "text": clinicianError
-          } if clinicianError
+            "text": vaccinatorError
+          } if vaccinatorError
         }) }}
 
 

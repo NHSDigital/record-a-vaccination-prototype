@@ -1,21 +1,37 @@
+{% set inboxCount = (currentRegion.inbox | length) %}
+
 {{ header({
   classes: "nhsuk-header--left",
-  "service": {
-      "name": "Record a vaccination",
-      "href": "/"
-    },
-    "showNav": "true",
-    "showSearch": "false",
-    "primaryLinks": [
+  service: {
+    text: "Record a vaccination",
+    href: "/"
+  },
+  navigation: {
+    items: [
       {
-        url: "#",
-        label: currentUser.email,
-        classes: "app-header__navigation-item--right-aligned " + ("app-header__navigation-item--current" if currentSection == "user-profile")
+        href: "/regions",
+        text: "Organisations",
+        active: (currentSection == "organisations")
       },
       {
-        url: '/sign-out',
-        label: 'Log out'
+        href: "/regions/messages",
+        text: ("Messages <span class=\"app-count\">" + inboxCount +"</span>") | safe,
+        active: (currentSection == "messages")
       }
     ]
-  })
-}}
+  },
+  account: {
+    items: [
+      {
+        href: "#",
+        text: currentUser.email,
+        classes: "app-header__navigation-item--right-aligned " + ("app-header__navigation-item--current" if currentSection == "user-profile"),
+        icon: true
+      },
+      {
+        href: '/sign-out',
+        text: 'Log out'
+      }
+    ]
+  }
+}) }}

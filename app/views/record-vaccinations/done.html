@@ -27,39 +27,6 @@
         html: panelHtml
       }) }}
 
-      {% if 1==1 %}
-
-        {{ radios({
-          idPrefix: "next-step",
-          name: "nextStep",
-          fieldset: {
-            legend: {
-              text: "What would you like to do next?",
-              classes: "nhsuk-fieldset__legend--m"
-            }
-          },
-          errorMessage: {
-            text: error.text
-          } if error,
-          items: [
-            {
-              value: "same-patient-another-vaccination",
-              text: "Record a second vaccination for " + patientName
-            },
-            {
-              value: "same-vaccination-another-patient",
-              text: "Return to Today’s appointments"
-            }
-          ]
-        }) }}
-
-        {{ button({
-          text: "Continue"
-        })}}
-
-
-      {% else %}
-
       <form action="/record-vaccinations/what-next" method="post" novalidate>
 
       {% set lowercaseVaccineName %}
@@ -76,6 +43,26 @@
         {% endif %}
       {% endset %}
 
+      {% set items = [] %}
+        {% set items = (items.push({
+          value: "same-patient-another-vaccination",
+          text: patientName + "’s next vaccination"
+        }), items) %}
+
+        {% set items = (items.push({
+          value: "same-vaccination-another-patient",
+          text: lowercaseVaccineName + " vaccination for another patient"
+        }), items) %}
+
+        {% set items = (items.push({
+          divider: "or"
+        }), items) %}
+
+        {% set items = (items.push({
+          value: "different-vaccination-another-patient",
+          text: "A different vaccination for another patient"
+        }), items) %}
+
         {{ radios({
           idPrefix: "next-step",
           name: "nextStep",
@@ -88,30 +75,13 @@
           errorMessage: {
             text: error.text
           } if error,
-          items: [
-            {
-              value: "same-patient-another-vaccination",
-              text: patientName + "’s next vaccination"
-            },
-            {
-              value: "same-vaccination-another-patient",
-              text: lowercaseVaccineName + " vaccination for another patient"
-            },
-            {
-              divider: "or"
-            },
-            {
-              value: "different-vaccination-another-patient",
-              text: "A different vaccination for another patient"
-            }
-          ]
+          items: items
         }) }}
 
         {{ button({
           text: "Continue"
         })}}
       </form>
-      {% endif %}
 
     </div>
   </div>

@@ -6,14 +6,7 @@
 {% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
 
 {% block beforeContent %}
-  {% if data.nhsNumber %}
-    {{ backLink({
-      href: "/appointments/day",
-      text: "Back to Today’s appointments"
-    }) }}
-  {% else %}
-    {{ backLink({ href: "/record-vaccinations/delivery-team" }) }}
-  {% endif %}
+  {{ backLink({ href: "/record-vaccinations/delivery-team" }) }}
 {% endblock %}
 
 {% block content %}
@@ -36,7 +29,7 @@
 
         {% set items = [] %}
 
-        {% if organisationSetting.clinician %}
+        {% if organisationSetting.vaccinator %}
           {% set items = (items.push({
             value: data.currentUserId,
             text: "Me (" + currentUser.firstName + " " + currentUser.lastName + ")"
@@ -61,7 +54,7 @@
             }
           },
           xhint: {
-            text: "Only users with clinician status are listed"
+            text: "Only users with vaccinator status are listed"
           },
           errorMessage: {
             text: vaccinatorError
@@ -77,13 +70,13 @@
 
       {% if organisationSetting.permissionLevel == "Lead administrator" %}
         {{ details({
-          text: "If the vaccinator is not listed",
-          html: "Make sure they are added in <a href=\"/user-admin\">Manage users</a> as a clinician."
+          summaryText: "If the vaccinator is not listed",
+          html: "Make sure they are added in <a href=\"/user-admin\">Manage users</a> as a vaccinator."
         }) }}
       {% else %}
         {{ details({
-          text: "If the vaccinator is not listed",
-          html: ">If the vaccinator is not listed, ask a lead administrator to make sure they are added as a clinician."
+          summaryText: "If the vaccinator is not listed",
+          html: "You'll need to ask a lead administrator to add them."
         }) }}
 
       {% endif %}

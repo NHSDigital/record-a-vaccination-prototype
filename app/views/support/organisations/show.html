@@ -37,7 +37,7 @@
               items: []
             }
           },
-{
+          {
             key: {
               text: "Name",
               classes: "nhsuk-u-font-weight-normal"
@@ -72,6 +72,23 @@
                 }
               ]
             }
+          },{
+            key: {
+              text: "Vaccines enabled",
+              classes: "nhsuk-u-font-weight-normal"
+            },
+            value: {
+              html: (vaccinesEnabled | sort(false, false, "name") | pluck("name") | formatList)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/support/organisations/" + organisation.id + "/add-vaccines",
+                  text: "Add",
+                  visuallyHiddenText: "vaccines"
+                }
+              ]
+            } if ((vaccinesEnabled | length) != (data.vaccines | length))
           }
         ]
       }) }}
@@ -157,7 +174,7 @@
                 Permission level
               </th>
               <th role="columnheader" class="" scope="col">
-                Clinician
+                Vaccinator
               </th>
               <th role="columnheader" class="" scope="col">
                 Status
@@ -178,7 +195,7 @@
                   {{ userOrganisationSettings.permissionLevel }}
                 </td>
                 <td class="nhsuk-table__cell " style="min-width: 150px;">
-                  {{ "Yes" if userOrganisationSettings.clinician else "No" }}
+                  {{ "Yes" if userOrganisationSettings.vaccinator else "No" }}
                 </td>
                 <td class="nhsuk-table__cell ">
                   {{ userOrganisationSettings.status }}

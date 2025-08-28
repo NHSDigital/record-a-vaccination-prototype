@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "The patient had an MMR vaccination less than 1 month ago" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/patient-history" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Jodie Brown had an MMR vaccination less than 1 month ago</h1>
+
+      <p>
+        Jodie Brown had an MMR vaccination on 10 July 2025.
+      </p>
+
+      <p>
+        The minimum recommended gap between MMR doses is 1 month.
+      </p>
+   
+    </div>
+  </div>
+
+  {{ button({
+    "text": "Continue anyway",
+    "href": "/record-vaccinations/consent"
+  }) }}
+
+{% endblock %}
+

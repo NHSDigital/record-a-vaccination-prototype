@@ -17,39 +17,87 @@ module.exports = [
     ]
   },
   {
-    name: "Flu",
+    name: "flu",
     products: [
       {
-        name: "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)"
+        name: "Adjuvanted Trivalent Influenza Vaccine (aTIV)"
       },
       {
-        name: "Cell-based Quadrivalent Influenza Vaccine (QIVc)"
+        name: "Cell-based Trivalent Influenza Vaccine (TIVc)"
+      },
+      {
+        name: "Efluelda (TIV-HD)"
       },
       {
         name: "Fluenz (LAIV)"
       },
       {
-        name: "Influenza Tetra MYL (QIVe)"
+        name: "Influvac (TIVe)"
       },
       {
-        name: "Quadrivalent Influenza Vaccine (QIVe)"
+        name: "Supemtek (TIVr)"
       },
       {
-        name: "Quadrivalent Influenza Vaccine - High Dose (QIV-HD)"
+        name: "Vaxigrip (TIVe)"
       }
     ]
   },
   {
-    name: "Pertussis",
+    name: "flu (London service)",
     products: [
       {
-        name: "Adacel vaccine supsension"
+        name: "Adjuvanted Trivalent Influenza Vaccine (aTIV)"
       },
       {
-        name: "Boostrix-IPV supsension"
+        name: "Cell-based Trivalent Influenza Vaccine (TIVc)"
+      },
+      {
+        name: "Efluelda (TIV-HD)"
+      },
+      {
+        name: "Fluenz (LAIV)"
+      },
+      {
+        name: "Influvac (TIVe)"
+      },
+      {
+        name: "Supemtek (TIVr)"
+      },
+      {
+        name: "Vaxigrip (TIVe)"
+      }
+    ]
+  },
+  {
+    name: "pertussis",
+    products: [
+      {
+        name: "Adacel vaccine suspension"
+      },
+      {
+        name: "Boostrix-IPV suspension"
       },
       {
         name: "Repevax vaccine suspension"
+      }
+    ]
+  },
+  {
+    name: "MMR",
+    products: [
+      {
+        name: "MMRVaXPro"
+      },
+      {
+        name: "Priorix"
+      }
+    ]
+  },
+  {
+    name: "pneumococcal",
+    products: [
+      {
+        name: "Pneumovax"
       }
     ]
   },
