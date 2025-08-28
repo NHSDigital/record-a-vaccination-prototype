@@ -1026,7 +1026,7 @@ router.get('/record-vaccinations/check', (req, res) => {
 
       if (!doseAmount || doseAmount === "") {
         doseAmountError = {
-          text: "Select if you gave a full dose",
+          text: "Select yes if you gave a full dose",
           href: "#dose-amount"
         }
         errors.push(doseAmountError)
