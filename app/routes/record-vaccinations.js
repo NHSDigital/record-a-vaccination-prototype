@@ -658,6 +658,7 @@ module.exports = router => {
       data.consentAdvocateName = ""
       data.consentDeputyName = ""
       data.healthcareWorker = ""
+      data.doseAmount = ""
     }
 
     if (answer === 'same-vaccination-another-patient') {
@@ -689,6 +690,7 @@ module.exports = router => {
       req.session.data.vaccineProduct = ""
       req.session.data.vaccineBatch = ""
       req.session.data.eligibility = ""
+      req.session.data.nhsNumber = ""
 
       res.redirect('/record-vaccinations/vaccine')
     } else {
@@ -1001,8 +1003,13 @@ router.get('/record-vaccinations/check', (req, res) => {
     const otherInjectionSite = data.otherInjectionSite
     let redirectPath = "/record-vaccinations/check"
 
+
     if (!injectionSite || (injectionSite === "other" && !otherInjectionSite)) {
       redirectPath = "/record-vaccinations/injection-site?showErrors=yes"
+    } else if (data.vaccineProduct == "Fluenz (LAIV)") {
+
+      // Fluenz is a nasal spray which gets an extra question
+      redirectPath = "/record-vaccinations/dose-amount"
     }
 
     res.redirect(redirectPath)
