@@ -563,7 +563,7 @@ module.exports = router => {
       }
 
     } else if (data.vaccine == "flu") {
-      if (data.eligibility === "Healthcare worker") {
+      if (data.eligibility === "Health or social care worker") {
         nextPage = "/record-vaccinations/healthcare-worker"
       } else {
         nextPage = "/record-vaccinations/patient"
