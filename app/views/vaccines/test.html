@@ -1,0 +1,151 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Vaccines" %}
+
+{% set currentSection = "vaccines" %}
+
+{% set sites = [] %}
+{% for vaccine in (data.vaccineStock) %}
+  {% if not (sites | arrayOrStringIncludes(vaccine.siteId)) %}
+    {% set sites = (sites.push(vaccine.siteId), sites) %}
+  {% endif %}
+{% endfor %}
+
+
+
+      {% set panelHtml %}
+        <a href="#" class="nhsuk-link--reverse">{{ patientName }}’s {{ data.vaccine }} record</a> will be sent to their GP.
+      {% endset %}
+      {% include "_feedback-panel.html" %}
+
+      {{ panel({
+        titleText: "Vaccination saved",
+        html: panelHtml
+      }) }}
+
+      
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds nhsuk-u-margin-bottom-5">
+
+      <h1 class="nhsuk-heading-xl">Vaccines</h1>
+
+      <p class="nhsuk-body-l">Add and edit your vaccines for your organisation.</p>
+
+      {{ button({
+        "text": "Add vaccine",
+        "href": "/vaccines/choose-site"
+      }) }}
+
+    </div>
+  </div>
+
+  {% from 'select/macro.njk' import select %}
+
+  {% if (sites | length) > 4 %}
+    {% set filterItems = [{
+      text: "All sites",
+      value: "",
+      selected: true
+    }] %}
+
+    {% for site in sites %}
+      {% set filterItems = (filterItems.push({text: currentOrganisation.sites[site].name, value: site}), filterItems) %}
+    {% endfor %}
+
+
+      {{ select({
+        label: {
+          text: "Show"
+        },
+        id: "select-1",
+        name: "select-1",
+        items: filterItems,
+        classes: "nhsuk-u-margin-bottom-3"
+      }) }}
+  {% endif %}
+
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      {% for siteId in sites %}
+
+        {% set site =  currentOrganisation.sites | findById(siteId) %}
+
+        <table class="nhsuk-table">
+          <caption class="nhsuk-table__caption nhsuk-table__caption--m nhsuk-u-margin-bottom-2">{{ site.name }}</caption>
+          <thead role="rowgroup" class="nhsuk-table__head">
+            <tr role="row">
+              <th role="columnheader" class="" scope="col">
+                Vaccine
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Product
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Active batches
+              </th>
+              <th role="columnheader" class="" scope="col">
+              <th role="columnheader" class="" scope="col">
+
+              </th>
+            </tr>
+          </thead>
+          <tbody class="nhsuk-table__body">
+
+        {% set vaccinesAtSite = [] %}
+        {% for vaccine in (data.vaccineStock) %}
+          {% if vaccine.siteId == siteId and not (vaccinesAtSite | arrayOrStringIncludes(vaccine.vaccine)) %}
+            {% set vaccinesAtSite = (vaccinesAtSite.push(vaccine.vaccine), vaccinesAtSite) %}
+          {% endif %}
+        {% endfor %}
+
+        {% for vaccineAtSite in vaccinesAtSite %}
+
+          {% set vaccineProductsAtSite = [] %}
+            {% for vaccine in (data.vaccineStock) %}
+              {% if vaccine.vaccine == vaccineAtSite and vaccine.siteId == siteId and not (vaccineProductsAtSite | arrayOrStringIncludes(vaccine.vaccineProduct)) %}
+                {% set vaccineProductsAtSite = (vaccineProductsAtSite.push(vaccine.vaccineProduct), vaccineProductsAtSite) %}
+              {% endif %}
+            {% endfor %}
+
+
+
+              {% for vaccineProduct in vaccineProductsAtSite %}
+                <tr class="nhsuk-table__row">
+                  <td class="nhsuk-table__cell">
+                    {{ vaccineAtSite | capitaliseFirstLetter }}
+                  </td>
+                  <td class="nhsuk-table__cell">
+                    {{ vaccineProduct }}
+                  </td>
+                  <td class="nhsuk-table__cell ">
+                    {% set count = 0 %}
+                    {% set thisVaccine = {} %}
+                    {% for vaccine in data.vaccineStock %}
+                      {% if (vaccine.siteId == siteId) and (vaccine.vaccine == vaccineAtSite) and (vaccine.vaccineProduct == vaccineProduct) %}
+                        {% set thisVaccine = vaccine %}
+                      {% endif %}
+                    {% endfor %}
+                    {{ thisVaccine.batches | length }}
+                  </td>
+                  <td class="nhsuk-table__cell ">
+                    <div class="nhsuk-u-margin-bottom-1"><a href="/vaccines/{{ thisVaccine.id }}" class="nhsuk-link">View</a></div>
+                  </td>
+                  <td class="nhsuk-table__cell ">
+                    <div><a href="/vaccines/{{ thisVaccine.id }}/add" class="nhsuk-link">Add batch</a></div>
+                  </td>
+                </tr>
+              {% endfor %}
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endfor %}
+
+
+    </div>
+  </div>
+
+{% endblock %}
+
