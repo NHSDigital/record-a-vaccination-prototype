@@ -1,41 +1,38 @@
 {{ header({
-  classes: "nhsuk-header--left",
-  "service": {
-      "name": "Record a vaccination",
-      "href": "/"
-    },
-    "showNav": "true",
-    "showSearch": "false",
-    "primaryLinks": [
-    {
-        url  : "/support/vaccines",
-        label : "Vaccines",
-        classes: ("app-header__navigation-item--current" if currentSection == "vaccines")
-      },  
-    {
-        url  : "/support/regions",
-        label : "Regions",
-        classes: ("app-header__navigation-item--current" if currentSection == "regions")
+  service: {
+    text: "Record a vaccination",
+    href: "/"
+  },
+  account: {
+    items: [
+      {
+        href: "#",
+        text: currentUser.email,
+        icon: true
       },
       {
-        url  : "/support/organisations",
-        label : "Organisations",
-        classes: ("app-header__navigation-item--current" if currentSection == "organisations")
-      },
-      {
-        url  : "/support/users",
-        label : "Users",
-        classes: ("app-header__navigation-item--current" if currentSection == "users")
-      },
-      {
-        url: "#",
-        label: currentUser.email,
-        classes: "app-header__navigation-item--right-aligned " + ("app-header__navigation-item--current" if currentSection == "user-profile")
-      },
-      {
-        url: '/sign-out',
-        label: 'Log out'
+        href: '/sign-out',
+        text: 'Log out'
       }
     ]
-  })
-}}
+  },
+  navigation: {
+    items: [
+      {
+        href: "/support/regions",
+        text: "Regions",
+        active: (currentSection == "regions")
+      },
+      {
+        href: "/support/users",
+        text: "Users",
+        active: (currentSection == "users")
+      },
+      {
+        href: "/support/organisations",
+        text: "Organisations",
+        active: (currentSection == "organisations")
+      }
+    ]
+  }
+}) }}
