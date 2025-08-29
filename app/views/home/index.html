@@ -12,14 +12,55 @@
         {% include "home/_no-vaccinations-recorded.html" %}
       {% endif %}
 
-      <h2 class="nhsuk-heading-m">Total vaccinations</h2>
+      <h2 class="nhsuk-heading-m">All vaccinations</h2>
 
     </div>
   </div>
 
   {% include "home/_vaccination-totals.html" %}
 
+
   {% if totalVaccinationsRecorded > 0 %}
-    {% include "home/_vaccinations-last-7-days.html" %}
+
+    {% set past7DaysHtml %}
+      {% include "home/_by-last-7-days.html" %}
+    {% endset %}
+
+    {% set byVaccinationHtml %}
+      {% include "home/_by-vaccine.html" %}
+    {% endset %}
+
+    {% set bySiteHtml %}
+      {% include "home/_by-site.html" %}
+    {% endset %}
+
+
+    {{ tabs({
+      items: [
+      {
+        label: "Past 7 days",
+        id: "past-7-days",
+        panel: {
+          html: past7DaysHtml
+          }
+        },
+        {
+          label: "By vaccination",
+          id: "by-vaccination",
+          panel: {
+            html: byVaccinationHtml
+          }
+        },
+        {
+          label: "By site",
+          id: "by-site",
+          panel: {
+            html: bySiteHtml
+          }
+        }
+      ]
+    }) }}
+
+    <p>For a more detailed breakdown, <a href="/reports">create a report</a>.</p>
   {% endif %}
 {% endblock %}

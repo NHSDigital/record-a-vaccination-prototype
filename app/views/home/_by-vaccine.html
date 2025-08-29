@@ -1,0 +1,40 @@
+<table class="nhsuk-table">
+  <caption class="nhsuk-table__caption nhsuk-table__caption--m">By vaccination</caption>
+  <thead role="rowgroup" class="nhsuk-table__head">
+    <tr role="row">
+      <th role="columnheader" class="" scope="col">
+        Vaccination
+      </th>
+        <th role="columnheader" class=" nhsuk-table__header--numeric" scope="col">
+          Today
+        </th>
+        <th role="columnheader" class=" nhsuk-table__header--numeric" scope="col">
+          Past 7 days
+        </th>
+        <th role="columnheader" class=" nhsuk-table__header--numeric" scope="col">
+          Total
+        </th>
+    </tr>
+  </thead>
+  <tbody class="nhsuk-table__body">
+
+  {% for vaccineStat in stats %}
+    <tr role="row">
+      <th class="nhsuk-table__header nhsuk-u-font-weight-normal" scope="col">
+        {{ vaccineStat.vaccine | capitaliseFirstLetter }}
+      </th>
+      <td class="nhsuk-table__cell--numeric">
+        12
+      </td>
+      <td class="nhsuk-table__cell--numeric">
+        401
+      </td>
+      <td class="nhsuk-table__cell--numeric">
+        1,931
+      </td>
+    </tr>
+  {% endfor %}
+
+
+  </tbody>
+</table>

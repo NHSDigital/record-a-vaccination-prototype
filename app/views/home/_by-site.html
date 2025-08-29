@@ -1,0 +1,32 @@
+<table class="nhsuk-table">
+  <caption class="nhsuk-table__caption nhsuk-table__caption--m">By site</caption>
+  <thead role="rowgroup" class="nhsuk-table__head">
+    <tr role="row">
+      <th role="columnheader" class="" scope="col">
+        Site
+      </th>
+      <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
+        Today
+      </th>
+      <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
+        Past 7 days
+      </th>
+      <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
+        Total
+      </th>
+    </tr>
+  </thead>
+  <tbody class="nhsuk-table__body">
+    {% for totalBySite in totalsBySite %}
+      {% set site = currentOrganisation.sites | findById(totalBySite.siteId) %}
+      <tr>
+        <th class="nhsuk-table__header nhsuk-u-font-weight-normal" scope="row">
+          {{ site.name }}
+        </th>
+        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">14</td>
+        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">102</td>
+        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">1,351</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

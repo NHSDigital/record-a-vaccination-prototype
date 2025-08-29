@@ -79,13 +79,26 @@ module.exports = router => {
       stats.push(vaccineStat)
     }
 
+    let totalsBySite = []
+
+    // This is faked for now
+    let siteIds = [...new Set(data.vaccineStock.map((vaccine) => vaccine.siteId))]
+
+    for (siteId of siteIds) {
+      totalsBySite.push({
+        siteId: siteId
+      })
+    }
+
+
     res.render('home/index', {
       stats,
       totalVaccinationsRecorded,
       totalVaccinationsRecordedToday,
       totalVaccinationsRecordedThisMonth,
       totalVaccinationsRecordedPast7Days,
-      monthToday
+      monthToday,
+      totalsBySite
     })
   })
 
