@@ -68,19 +68,18 @@
               isPageHeading: "true"
             }
           },
+          value: data.vaccinator,
           errorMessage: {
             text: vaccinatorError
           } if vaccinatorError,
           items: [
             {
               value: "Jane Smith",
-              text: "Me (Jane Smith)",
-              checked: (data.vaccinator === "Jane Smith")
+              text: "Me (Jane Smith)"
             },
             {
               value: "Anna Brown",
-              text: "Anna Brown (anna.brown@nhs.net)",
-              checked: (data.vaccinator === "Anna Brown")
+              text: "Anna Brown (anna.brown@nhs.net)"
             },
             {
               divider: "or"
@@ -88,7 +87,6 @@
             {
               value: "Someone else",
               text: "Someone else",
-              checked: (data.vaccinator === "Someone else"),
               conditional: {
                 html: otherVaccinatorHtml
               }
