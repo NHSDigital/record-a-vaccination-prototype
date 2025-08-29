@@ -57,6 +57,7 @@ const appViews = [
   path.join(__dirname, 'node_modules/nhsuk-frontend/dist/nhsuk/macros'),
   path.join(__dirname, 'node_modules/nhsuk-frontend/dist/nhsuk'),
   path.join(__dirname, 'node_modules/nhsuk-frontend/dist'),
+  path.join(__dirname, 'node_modules/@x-govuk/govuk-prototype-components/src/x-govuk/components'),
   path.join(__dirname, 'app/components/'),
 ];
 

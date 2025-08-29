@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Reactivate user" %}
+
+
+{% set currentSection = "manage-users" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/user-admin/invited",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Resend invite to Wallace West</h1>
+
+      <form action="/user-admin/invited" method="post" novalidate="true">
+        {{ button({
+          "text": "Confirm"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+
+{% endblock %}
