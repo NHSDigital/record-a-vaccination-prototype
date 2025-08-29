@@ -1,0 +1,18 @@
+{% from 'secondary-navigation/macro.njk' import xGovukSecondaryNavigation %}
+
+{{ xGovukSecondaryNavigation({
+  visuallyHiddenTitle: "Secondary menu",
+  items: [{
+    text: "Invited (4)",
+    href: "/user-admin/invited",
+    current: (currentSubSection == "invited")
+  }, {
+    text: "Active (2)",
+    href: "/user-admin",
+    current: (currentSubSection == "active")
+  }, {
+    text: "Deactivated (3)",
+    href: "/user-admin/deactivated",
+    current: (currentSubSection == "deactivated")
+  }]
+}) }}
