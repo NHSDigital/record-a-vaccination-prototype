@@ -1,0 +1,38 @@
+<ul class="nhsuk-grid-row nhsuk-card-group">
+
+  {% set topStats = [] %}
+
+  {% set topStats = (topStats.push({
+    label: "Today",
+    value: totalVaccinationsRecordedToday
+  }), topStats) %}
+
+  {% set topStats = (topStats.push({
+    label: "Past 7 days",
+    value: totalVaccinationsRecordedPast7Days
+  }), topStats) %}
+
+  {% set topStats = (topStats.push({
+    label: (monthToday | monthName) + " to date",
+    value: totalVaccinationsRecordedThisMonth
+  }), topStats) %}
+
+  {% set topStats = (topStats.push({
+    label: "Total",
+    value: totalVaccinationsRecorded
+  }), topStats) %}
+
+  {% for stat in topStats %}
+    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+      {% set cardHtml %}
+        <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">{{ stat.value }}</p>
+        {{ stat.label }}
+      {% endset %}
+
+      {{ card({
+        headingHtml: cardHtml
+      }) }}
+    </li>
+  {% endfor %}
+
+</ul>

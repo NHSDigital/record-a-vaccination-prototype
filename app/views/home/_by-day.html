@@ -1,0 +1,31 @@
+<table class="nhsuk-table">
+  <caption class="nhsuk-table__caption nhsuk-table__caption--m">By day</caption>
+  <thead role="rowgroup" class="nhsuk-table__head">
+    <tr role="row">
+      <th role="columnheader" class="" scope="col">
+        Date
+      </th>
+      <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
+        Total
+      </th>
+    </tr>
+  </thead>
+  <tbody class="nhsuk-table__body">
+    {% for totalByDay in totalsByDay %}
+      <tr role="row" class="nhsuk-table__row">
+        <th class="nhsuk-table__header  nhsuk-u-font-weight-normal" scope="row">
+          {% if loop.index0 == 1 %}
+            Today
+          {% else %}
+            {{ totalByDay.day | dayName }} {{ totalByDay.day | govukDate(truncate=true) }}
+
+            {% if loop.index0 == 2 %}(yesterday){% endif %}
+          {% endif %}
+        </th>
+        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+          513
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
