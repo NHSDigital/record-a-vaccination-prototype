@@ -73,12 +73,12 @@
           },
           errorMessage: {
             text: vaccinationTodayError
-          } if vaccinationTodayError,
+          } if va'ccinationTodayError,
+          value: "no",
           items: [
             {
               value: "no",
-              text: (vaccination.date | isoDateFromDateInput | govukDate),
-              checked: true
+              text: (vaccination.date | isoDateFromDateInput | govukDate)
             },
             {
               value: "yes",

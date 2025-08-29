@@ -66,8 +66,7 @@
       {% for option in eligibilityOptions %}
         {% set items = (items.push({
           text: option,
-          value: option,
-          checked: (data.eligibility | arrayOrStringIncludes(option))
+          value: option
           }), items) %}
       {% endfor %}
 
@@ -82,6 +81,7 @@
               isPageHeading: true
             }
           },
+          value: data.eligibility,
           items: items
         }) }}
       {% else %}
@@ -91,6 +91,7 @@
             errorMessage: {
               text: (errors | first).text
             } if (errors | length) > 0,
+            values: data.eligibility,
             fieldset: {
               legend: {
                 text: "Why are you giving them the vaccine?",

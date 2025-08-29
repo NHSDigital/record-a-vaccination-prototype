@@ -70,47 +70,41 @@
               isPageHeading: true
             }
           },
+          value: data.locationType,
           hint: {
             text: "This is needed for payment and reporting."
           },
           items: [
             {
               text: "Hospital hub for staff and patients",
-              value: "Hospital hub for staff and patients",
-              checked: (data.locationType === "Hospital hub for staff and patients")
+              value: "Hospital hub for staff and patients"
             },
             {
               text: "Vaccination centre open to the public",
-              value: "Vaccination centre open to the public",
-              checked: (data.locationType === "Vaccination centre open to the public")
+              value: "Vaccination centre open to the public"
             },
             {
               text: "Community pharmacy",
-              value: "Community pharmacy",
-              checked: (data.locationType === "Community pharmacy")
+              value: "Community pharmacy"
             },
             {
               value: "Care home",
               text: "Care home",
-              checked: (data.locationType === "Care home"),
               conditional: {
                 html: careHtml
               }
             },
             {
               text: "Housebound patient’s home",
-              value: "Housebound patient’s home",
-              checked: (data.locationType === "Housebound patient’s home")
+              value: "Housebound patient’s home"
             },
             {
               text: "Outreach event",
-              value: "Outreach event",
-              checked: (data.locationType === "Outreach event")
+              value: "Outreach event"
             },
             {
               text: "GP clinic",
-              value: "GP clinic",
-              checked: (data.locationType === "GP clinic")
+              value: "GP clinic"
             }
           ]
 

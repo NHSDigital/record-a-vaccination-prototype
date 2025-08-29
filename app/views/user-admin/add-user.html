@@ -96,17 +96,16 @@
           hint: {
             text: "Vaccination records include the name of the person who gave the vaccination"
           },
+          value: data.vaccinator,
           "items": [
             {
               "value": "yes",
               "text": "Yes",
-              id: "vaccinator",
-              checked: (data.vaccinator == "yes")
+              id: "vaccinator"
             },
             {
               "value": "no",
-              "text": "No",
-              checked: (data.vaccinator == "no")
+              "text": "No"
             }
           ],
           "errorMessage": {
