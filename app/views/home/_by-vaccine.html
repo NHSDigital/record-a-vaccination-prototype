@@ -18,10 +18,10 @@
   </thead>
   <tbody class="nhsuk-table__body">
 
-  {% for vaccineStat in stats %}
+  {% for totalByVaccine in totalsByVaccine %}
     <tr role="row">
       <th class="nhsuk-table__header nhsuk-u-font-weight-normal" scope="col">
-        {{ vaccineStat.vaccine | capitaliseFirstLetter }}
+        {{ totalByVaccine.vaccine | capitaliseFirstLetter }}
       </th>
       <td class="nhsuk-table__cell--numeric">
         12

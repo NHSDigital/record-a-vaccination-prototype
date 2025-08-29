@@ -22,8 +22,8 @@
 
   {% if totalVaccinationsRecorded > 0 %}
 
-    {% set past7DaysHtml %}
-      {% include "home/_by-last-7-days.html" %}
+    {% set byDayHtml %}
+      {% include "home/_by-day.html" %}
     {% endset %}
 
     {% set byVaccinationHtml %}
@@ -38,10 +38,10 @@
     {{ tabs({
       items: [
       {
-        label: "Past 7 days",
+        label: "By day",
         id: "past-7-days",
         panel: {
-          html: past7DaysHtml
+          html: byDayHtml
           }
         },
         {
