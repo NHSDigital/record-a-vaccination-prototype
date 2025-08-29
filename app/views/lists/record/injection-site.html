@@ -36,29 +36,26 @@
               classes: "nhsuk-fieldset__legend--s"
             }
           },
+          value: data.otherInjectionSite,
           errorMessage: {
             text: otherInjectionSiteError.text
           } if otherInjectionSiteError,
           items: [
             {
               value: "Left buttock",
-              text: "Left buttock",
-              checked: (data.otherInjectionSite == "Left buttock")
+              text: "Left buttock"
             },
             {
               value: "Right buttock",
-              text: "Right buttock",
-              checked: (data.otherInjectionSite == "Right buttock")
+              text: "Right buttock"
             },
             {
               value: "Left thigh",
-              text: "Left thigh",
-              checked: (data.otherInjectionSite == "Left thigh")
+              text: "Left thigh"
             },
             {
               value: "Right thigh",
-              text: "Right thigh",
-              checked: (data.otherInjectionSite == "Right thigh")
+              text: "Right thigh"
             }
           ]
         }) }}
@@ -78,16 +75,15 @@
           errorMessage: {
             text: injectionSiteError.text
           } if injectionSiteError,
+          value: data.injectionSite,
           items: [
             {
               value: "Left arm",
-              text: "Left arm",
-              checked: (data.injectionSite == 'Left arm')
+              text: "Left arm"
             },
             {
               value: "Right arm",
-              text: "Right arm",
-              checked: (data.injectionSite == 'Right arm')
+              text: "Right arm"
             },
             {
               divider: "or"
@@ -95,7 +91,6 @@
             {
               value: "other",
               text: "Somewhere else",
-              checked: (data.injectionSite == 'other'),
               conditional: {
                 html: somewhereElseHtml
               }

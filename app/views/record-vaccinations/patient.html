@@ -56,20 +56,19 @@
               isPageHeading: "true"
             }
           },
+          value: data.nhsNumberKnown,
           errorMessage: nhsNumberKnownError if nhsNumberKnownError,
           items: [
             {
               value: "yes",
               text: "Yes",
-              checked: (data.nhsNumberKnown == 'yes'),
               conditional: {
                 html: nhsNumberHtml
               }
             },
             {
               value: "no",
-              text: "No",
-              checked: (data.nhsNumberKnown == 'no')
+              text: "No"
             }
           ]
         }) }}
