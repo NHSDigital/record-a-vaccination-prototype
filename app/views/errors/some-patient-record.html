@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "There is a problem finding the patient's vaccination history" %}
+{% set pageName = "Some patient history not found" %}
 
 
 {% block beforeContent %}
@@ -15,7 +15,8 @@
     <div class="nhsuk-grid-column-two-thirds">
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>The patient's full vaccination history may not be available to view.</p>
+
+      <p> You will not be able to view the patient's full vaccination history.</p>
 
 
 
@@ -23,8 +24,8 @@
   Continue anyway
 </button>
 
-&nbsp;&nbsp;&nbsp;&nbsp;
 
+&nbsp; &nbsp;
 
 <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
   Try again
