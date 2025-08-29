@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Some patient history not found" %}
+{% set pageName = "There was a problem getting Jodie Brown's vaccination history" %}
 
 
 {% block beforeContent %}
@@ -16,19 +16,18 @@
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
 
-      <p> You will not be able to view the patient's full vaccination history.</p>
+      <p>You will not be able to see the patient's full vaccination history.</p>
 
 
 
 <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
-  Continue anyway
-</button>
+Try again</button>
 
 
 &nbsp; &nbsp;
 
 <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
-  Try again
+  Continue anyway
 </button>
 
 
