@@ -50,14 +50,14 @@
           panel: {
             html: byVaccinationHtml
           }
-        },
+        } if (totalsByVaccine | length) > 1,
         {
           label: "By site",
           id: "by-site",
           panel: {
             html: bySiteHtml
           }
-        }
+        } if (totalsBySite | length) > 1
       ]
     }) }}
 
