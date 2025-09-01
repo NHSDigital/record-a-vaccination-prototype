@@ -63,11 +63,13 @@ module.exports = router => {
   });
 
 
-  router.get('/prototype-setup/add-vaccinations', (req, res) => {
+  router.post('/prototype-setup/add-vaccinations', (req, res) => {
     const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
 
-    const vaccinationsToAdd = 3;
+
+
+    const vaccinationsToAdd = parseInt(data.numberOfVaccinationsToAdd);
 
     const dateToday = new Date()
 
