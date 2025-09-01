@@ -957,13 +957,13 @@ module.exports = router => {
 
       if (!injectionSite) {
         injectionSiteError = {
-          text: "Select where you gave the vaccine",
+          text: "Select where you gave the injection",
           href: "#injection-site-1"
         }
         errors.push(injectionSiteError)
       } else if (injectionSite === "other" && !otherInjectionSite) {
         otherInjectionSiteError = {
-          text: "Select where you gave the vaccine",
+          text: "Select where you gave the injection",
           href: "#other-injection-site-1"
         }
         errors.push(otherInjectionSiteError)
