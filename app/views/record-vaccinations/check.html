@@ -5,7 +5,11 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/record-vaccinations/injection-site" }) }}
+  {% if vaccineProduct.type == "nasal spray" %}
+    {{ backLink({ href: "/record-vaccinations/dose-amount" }) }}
+  {% else %}
+    {{ backLink({ href: "/record-vaccinations/injection-site" }) }}
+  {% endif %}
 {% endblock %}
 
 {% set consentHtml %}
@@ -350,7 +354,7 @@
                 }
               ]
             }
-          },
+          } if (vaccineProduct.type == "injection"),
           {
             key: {
               text: "Dose"
@@ -367,7 +371,7 @@
                 }
               ]
             }
-          } if data.doseAmount
+          } if (vaccineProduct.type == "nasal spray")
         ]
       }) }}
 

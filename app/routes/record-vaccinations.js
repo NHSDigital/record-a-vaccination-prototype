@@ -629,8 +629,6 @@ module.exports = router => {
     const healthcareWorker = data.healthcareWorker
     let nextPage
 
-    console.log(healthcareWorker)
-
     if (healthcareWorker && healthcareWorker != '') {
       nextPage = '/record-vaccinations/location'
     } else {
@@ -930,6 +928,8 @@ module.exports = router => {
     const consentDeputyRelationship = data.consentDeputyRelationship
     const consentAttorneyRelationship = data.consentAttorneyRelationship
 
+    const vaccineProduct = data.vaccines.find((vaccine) => vaccine.name === data.vaccine)?.products.find((vaccineProduct) => vaccineProduct.name === data.vaccineProduct)
+
     if (
       (consent === "patient") ||
       (consent === "Clinician acting in the patient’s best interests" && consentClinicianName != '') ||
@@ -938,7 +938,13 @@ module.exports = router => {
       (consent === "Independent mental capacity advocate" && consentAdvocateName != '') ||
       (consent === "Court appointed deputy" && consentDeputyName != '' && consentDeputyRelationship != "")
     ) {
-      res.redirect('/record-vaccinations/injection-site')
+
+      if (vaccineProduct?.type === "nasal spray") {
+        res.redirect('/record-vaccinations/dose-amount')
+      } else {
+        res.redirect('/record-vaccinations/injection-site')
+      }
+
     } else {
       res.redirect('/record-vaccinations/consent?showErrors=yes')
     }
@@ -978,12 +984,16 @@ module.exports = router => {
     })
   })
 
-router.get('/record-vaccinations/check', (req, res) => {
+  router.get('/record-vaccinations/check', (req, res) => {
     const data = req.session.data
     const vaccinator = data.users.find((user) => user.id === data.vaccinatorId)
 
+    // Get the details of the vaccine product
+    const vaccineProduct = data.vaccines.find((vaccine) => vaccine.name === data.vaccine)?.products.find((vaccineProduct) => vaccineProduct.name === data.vaccineProduct)
+
     res.render('record-vaccinations/check', {
-      vaccinator
+      vaccinator,
+      vaccineProduct
     })
   })
 
@@ -1006,10 +1016,6 @@ router.get('/record-vaccinations/check', (req, res) => {
 
     if (!injectionSite || (injectionSite === "other" && !otherInjectionSite)) {
       redirectPath = "/record-vaccinations/injection-site?showErrors=yes"
-    } else if (data.vaccineProduct == "Fluenz (LAIV)") {
-
-      // Fluenz is a nasal spray which gets an extra question
-      redirectPath = "/record-vaccinations/dose-amount"
     }
 
     res.redirect(redirectPath)
