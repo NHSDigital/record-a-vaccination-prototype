@@ -14,12 +14,12 @@
     {% for totalByDay in totalsByDay %}
       <tr role="row" class="nhsuk-table__row">
         <th class="nhsuk-table__header  nhsuk-u-font-weight-normal" scope="row">
-          {% if loop.index0 == 1 %}
+          {% if loop.index == 1 %}
             Today
           {% else %}
             {{ totalByDay.day | dayName }} {{ totalByDay.day | govukDate(truncate=true) }}
 
-            {% if loop.index0 == 2 %}(yesterday){% endif %}
+            {% if loop.index == 2 %}(yesterday){% endif %}
           {% endif %}
         </th>
         <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
