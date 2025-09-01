@@ -5,7 +5,6 @@ module.exports = router => {
     const data = req.session.data
     const vaccinationsRecorded = data.vaccinationsRecorded
 
-
     let totalsBySite = []
     let totalsByVaccine = []
     let totalsByDay = []
@@ -22,7 +21,7 @@ module.exports = router => {
     const totalVaccinationsRecordedToday = vaccinationsRecorded.filter((vaccination) => {
       return (
         parseInt(vaccination.date.day) == dayToday &&
-        parseInt(vaccination.date.month) == monthToday,
+        parseInt(vaccination.date.month) == monthToday &&
         parseInt(vaccination.date.year) == yearToday
       )
     }).length
@@ -41,7 +40,7 @@ module.exports = router => {
 
     const totalVaccinationsRecordedThisMonth = vaccinationsRecorded.filter((vaccination) => {
       return (
-        parseInt(vaccination.date.month) == monthToday,
+        parseInt(vaccination.date.month) == monthToday &&
         parseInt(vaccination.date.year) == yearToday
       )
     }).length
@@ -52,9 +51,23 @@ module.exports = router => {
       .filter((vaccine) => vaccine.status === "enabled")
       .map((vaccine) => vaccine.name)
 
+
+
     for (let i = 0; i < 7; i++) {
+
+      let date = new Date()
+      date.setUTCDate(dateToday.getUTCDate() - i)
+
       totalsByDay.push({
-        day: dateToday.toISOString()
+        day: date.toISOString(),
+        value: vaccinationsRecorded.filter((vaccination) => {
+          return (
+            parseInt(vaccination.date.day) == date.getDate() &&
+            parseInt(vaccination.date.month) == (date.getMonth() + 1) &&
+            parseInt(vaccination.date.year) == date.getFullYear()
+          )
+        }).length
+
       })
     }
 

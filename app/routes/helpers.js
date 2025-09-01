@@ -67,8 +67,6 @@ module.exports = router => {
     const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
 
-
-
     const vaccinationsToAdd = parseInt(data.numberOfVaccinationsToAdd);
 
     const dateToday = new Date()
