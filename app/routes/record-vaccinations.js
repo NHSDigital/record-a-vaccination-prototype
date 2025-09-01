@@ -609,7 +609,7 @@ module.exports = router => {
       },
       batchNumber: data.vaccineBatch,
       batchExpiryDate: "2025-12-05",
-      deliveryTeam: data.deliveryTeam,
+      siteId: data.deliveryTeam,
       vaccinator: (vaccinator.firstName + " " + vaccinator.lastName),
       eligibility: data.eligibility,
       pregnancyDueDate: data.pregnancyDueDate,

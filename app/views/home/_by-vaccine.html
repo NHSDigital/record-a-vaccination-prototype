@@ -24,13 +24,13 @@
         {{ totalByVaccine.vaccine | capitaliseFirstLetter }}
       </th>
       <td class="nhsuk-table__cell--numeric">
-        12
+        {{ totalByVaccine.today }}
       </td>
       <td class="nhsuk-table__cell--numeric">
-        401
+        {{ totalByVaccine.past7Days }}
       </td>
       <td class="nhsuk-table__cell--numeric">
-        1,931
+        {{ totalByVaccine.total }}
       </td>
     </tr>
   {% endfor %}

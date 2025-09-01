@@ -21,11 +21,17 @@
       {% set site = currentOrganisation.sites | findById(totalBySite.siteId) %}
       <tr>
         <th class="nhsuk-table__header nhsuk-u-font-weight-normal" scope="row">
-          {{ site.name }}
+          {{ site.name }} ({{ totalBySite.siteId }})
         </th>
-        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">14</td>
-        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">102</td>
-        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">1,351</td>
+        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+          {{ totalBySite.today }}
+        </td>
+        <td class="nhsuk-table__cell--numeric">
+          {{ totalBySite.past7Days }}
+        </td>
+        <td class="nhsuk-table__cell--numeric">
+          {{ totalBySite.total }}
+        </td>
       </tr>
     {% endfor %}
   </tbody>

@@ -83,6 +83,7 @@ module.exports = router => {
 
       data.vaccinationsRecorded.push({
         id: generatedId,
+        siteId: "RW3NM",
         date: {
           day: dayToday,
           month: monthToday,
@@ -96,7 +97,6 @@ module.exports = router => {
         },
         batchNumber: "74725GJ0",
         batchExpiryDate: "2025-01-05",
-        deliveryTeam: "Albert House",
         vaccinator: "Anna Brown",
         eligibility: ["Pregnant"],
         pregnancyDueDate: {
