@@ -40,6 +40,12 @@ module.exports = router => {
       })
     }
 
+    if (filters.siteId) {
+      vaccinations = vaccinations.filter((vaccination) => {
+        return (vaccination.siteId === filters.siteId)
+      })
+    }
+
     if (filters.vaccine) {
       vaccinations = vaccinations.filter((vaccination) => {
         return (vaccination.vaccine === filters.vaccine)
