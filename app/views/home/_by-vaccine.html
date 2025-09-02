@@ -11,6 +11,9 @@
         <th role="columnheader" class=" nhsuk-table__header--numeric" scope="col">
           Past 7 days
         </th>
+        <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
+          {{ (monthToday | monthName) }} to date
+        </th>
         <th role="columnheader" class=" nhsuk-table__header--numeric" scope="col">
           Total
         </th>
@@ -28,6 +31,9 @@
       </td>
       <td class="nhsuk-table__cell--numeric">
         {{ totalByVaccine.past7Days }}
+      </td>
+      <td class="nhsuk-table__cell--numeric">
+        {{ totalByVaccine.month }}
       </td>
       <td class="nhsuk-table__cell--numeric">
         {{ totalByVaccine.total }}

@@ -100,6 +100,10 @@ module.exports = router => {
           date: dateToday,
           vaccine: vaccine
         }),
+        month: countVaccinations(vaccinationsRecorded, {
+          month: dateToday,
+          vaccine: vaccine
+        }),
         past7Days: countVaccinations(vaccinationsRecorded, {
           minDate: sevenDaysAgo,
           maxDate: dateToday,
@@ -118,6 +122,10 @@ module.exports = router => {
         siteId: siteId,
         today: countVaccinations(vaccinationsRecorded, {
           date: dateToday,
+          siteId: siteId
+        }),
+        month:countVaccinations(vaccinationsRecorded, {
+          month: dateToday,
           siteId: siteId
         }),
         past7Days: countVaccinations(vaccinationsRecorded, {

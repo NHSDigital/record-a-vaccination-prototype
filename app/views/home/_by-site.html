@@ -9,6 +9,9 @@
         Today
       </th>
       <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
+        {{ (monthToday | monthName) }} to date
+      </th>
+      <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
         Past 7 days
       </th>
       <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
@@ -28,6 +31,9 @@
         </td>
         <td class="nhsuk-table__cell--numeric">
           {{ totalBySite.past7Days }}
+        </td>
+        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+          {{ totalBySite.month }}
         </td>
         <td class="nhsuk-table__cell--numeric">
           {{ totalBySite.total }}
