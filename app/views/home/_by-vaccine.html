@@ -21,7 +21,7 @@
   </thead>
   <tbody class="nhsuk-table__body">
 
-  {% for totalByVaccine in totalsByVaccine %}
+  {% for totalByVaccine in (totalsByVaccine | sort(false, true, "vaccine") ) %}
     <tr role="row">
       <th class="nhsuk-table__header nhsuk-u-font-weight-normal" scope="col">
         {{ totalByVaccine.vaccine | capitaliseFirstLetter }}
