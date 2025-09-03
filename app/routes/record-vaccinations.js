@@ -577,6 +577,50 @@ module.exports = router => {
     res.redirect(nextPage)
   })
 
+  router.post('/record-vaccinations/confirmed', (req, res) => {
+
+    const data = req.session.data
+
+    const generatedId = Math.floor(Math.random() * 10000000).toString()
+
+    const dateToday = new Date()
+
+    const dayToday = (dateToday.getDate())
+    // Months in JavaScript are zero-indexed
+    const monthToday = (dateToday.getMonth() + 1)
+    const yearToday = (dateToday.getFullYear())
+
+    if (data.vaccinationToday === 'yes') {
+      data.vaccinationDate.day = dayToday
+      data.vaccinationDate.month = monthToday
+      data.vaccinationDate.year = yearToday
+    }
+
+    const vaccinator = data.users.find((user) => user.id === data.vaccinatorId)
+
+    data.vaccinationsRecorded.push({
+      id: generatedId,
+      date: data.vaccinationDate,
+      vaccine: data.vaccine,
+      vaccineProduct: data.vaccineProduct,
+      patient: {
+        name: data.firstName + " " + data.lastName,
+        nhsNumber: data.nhsNumber
+      },
+      batchNumber: data.vaccineBatch,
+      batchExpiryDate: "2025-12-05",
+      siteId: data.deliveryTeam,
+      vaccinator: (vaccinator.firstName + " " + vaccinator.lastName),
+      eligibility: data.eligibility,
+      pregnancyDueDate: data.pregnancyDueDate,
+      consent: data.consent,
+      injectionSite: data.injectionSite,
+      notes: data.notes,
+      editable: true
+    })
+
+    res.redirect('/record-vaccinations/done')
+  })
 
 
   router.get('/record-vaccinations/done', (req, res) => {
