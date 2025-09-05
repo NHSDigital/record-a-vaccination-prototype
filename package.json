@@ -24,7 +24,6 @@
     "@babel/core": "^7.28.3",
     "@babel/preset-env": "^7.28.3",
     "@inquirer/prompts": "^7.5.3",
-    "@x-govuk/govuk-prototype-components": "^4.0.1",
     "@x-govuk/govuk-prototype-filters": "^2.0.0",
     "body-parser": "^2.2.0",
     "browser-sync": "^3.0.4",

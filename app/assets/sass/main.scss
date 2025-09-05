@@ -11,22 +11,6 @@
 @import 'components/feedback-panel';
 @import 'components/checkboxes';
 
-// Import GOVUK-frontend
-//
-// This is so we can use a few components within the GOV.UK Design System
-// which aren’t yet part of the NHS Design System
-@import "govuk-frontend/dist/govuk/all";
-
-// Reset some GOV.UK variables to be NHS-branded
-$govuk-font-family: 'Frutiger W01';
-$govuk-error-colour: $nhsuk-error-colour;
-$govuk-input-border-colour: $nhsuk-form-border-colour;
-$govuk-brand-colour: $nhsuk-link-colour;
-
-// Import X-GOVUK prototype components
-@import "node_modules/@x-govuk/govuk-prototype-components/src/x-govuk";
-
-
 // Local components or modifiers
 @import 'components/header';
 @import 'components/summary-list';
