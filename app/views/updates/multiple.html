@@ -13,20 +13,17 @@
 
 {% block content %}
 
+{% set notificationHtml %}
+  <p class="nhsuk-notification-banner__heading">
+    There have been 4 updates since you last logged in.
+    <a class="nhsuk-notification-banner__link" href="/updates">View updates</a>.
+  </p>
+{% endset %}
 
-<div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
-    <div class="govuk-notification-banner__header">
-      <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
-        Updates
-      </h2>
-    </div>
-    <div class="govuk-notification-banner__content">
-      <p class="govuk-notification-banner__heading">
-        There have been 4 updates since you last logged in.
-        <a class="govuk-notification-banner__link" href="/updates">View updates</a>.
-      </p>
-    </div>
-  </div>
+{{ notificationBanner({
+  titleText: "Updates",
+  html: notificationHtml
+}) }}
 
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds nhsuk-u-margin-bottom-5">
