@@ -1,5 +1,5 @@
 // Import NHS.UK frontend library
-@import "node_modules/nhsuk-frontend/dist/nhsuk";
+@import "nhsuk-frontend/dist/nhsuk";
 
 // Local override classes
 @import 'overrides';
@@ -15,7 +15,7 @@
 //
 // This is so we can use a few components within the GOV.UK Design System
 // which aren’t yet part of the NHS Design System
-@import "node_modules/govuk-frontend/dist/govuk/all";
+@import "govuk-frontend/dist/govuk/all";
 
 // Reset some GOV.UK variables to be NHS-branded
 $govuk-font-family: 'Frutiger W01';
