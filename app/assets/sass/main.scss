@@ -38,6 +38,7 @@ $govuk-brand-colour: $nhsuk-link-colour;
 @import 'components/numbered-heading';
 
 @import '../../components/pagination/_pagination';
+@import '../../components/secondary-navigation/_secondary-navigation';
 
 .autocomplete__wrapper ul > li {
   margin-bottom: 0;
