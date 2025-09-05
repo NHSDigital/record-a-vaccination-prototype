@@ -1,0 +1,16 @@
+{% from "../../../node_modules/nhsuk-frontend/dist/nhsuk/macros/attributes.njk" import nhsukAttributes %}
+
+<nav class="app-secondary-navigation {%- if params.classes %} {{ params.classes }}{% endif -%}" {% if params.labelledBy %}aria-labelledby="{{ params.labelledBy }}"{% else %}aria-label="{{ params.visuallyHiddenTitle or "Secondary menu" }}"{% endif %}
+  {{- nhsukAttributes(params.attributes) }}>
+  <ul class="app-secondary-navigation__list">
+  {% for item in params.items %}
+    {% if item %}
+    <li class="app-secondary-navigation__list-item{{ " app-secondary-navigation__list-item--current" if item.current }}{% if item.classes %} {{ item.classes }}{% endif -%}">
+      <a class="app-secondary-navigation__link" href="{{ item.href }}"{{ " aria-current=page" if item.current }}>
+        {{- item.text -}}
+      </a>
+    </li>
+    {% endif %}
+  {% endfor %}
+  </ul>
+</nav>
