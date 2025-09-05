@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Sorry, there is a problem with the service" %}
+
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/patient" }) }}
+{% endblock %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p>We could not get the patient's details. Try again later.</p>
+
+
+
+    </div>
+  </div>
+
+
+{% endblock %}
