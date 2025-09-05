@@ -85,9 +85,9 @@ module.exports = router => {
         id: generatedId,
         siteId: "RW3NM",
         date: {
-          day: dayToday,
-          month: monthToday,
-          year: yearToday
+          day: dayToday.toString(),
+          month: monthToday.toString(),
+          year: yearToday.toString()
         },
         vaccine: "RSV",
         vaccineProduct: "Abrysvo",
