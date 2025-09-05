@@ -31,7 +31,7 @@ function compileStyles() {
     })
     .pipe(
       sass({
-        loadPaths: ['node_modules'],
+        loadPaths: ['node_modules', '.'],
         sourceMap: true,
         sourceMapIncludeSources: true
       }).on('error', (error) => {
