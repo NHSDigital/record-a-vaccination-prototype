@@ -3,19 +3,15 @@ module.exports = [
     name: "COVID-19",
     products: [
       {
-        name: "Comirnaty 30 JN.1",
+        name: "Comirnaty 3 LP.8.1",
         type: "injection"
       },
       {
-        name: "Comirnaty 10 JN.1",
+        name: "Comirnaty 10 LP.8.1",
         type: "injection"
       },
       {
-        name: "Comirnaty 3 JN.1",
-        type: "injection"
-      },
-      {
-        name: "Spikevax JN.1",
+        name: "Comirnaty 30 KP.2",
         type: "injection"
       }
     ]
