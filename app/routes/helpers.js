@@ -111,7 +111,7 @@ module.exports = router => {
       })
     }
 
-    res.redirect('/home')
+    res.redirect('/records')
   });
 
 }

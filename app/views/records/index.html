@@ -11,6 +11,92 @@
       <h1 class="nhsuk-heading-l">Records</h1>
       <p class="nhsuk-body-l">Search for a vaccination record you want to view, edit or delete.</p>
 
+    </div>
+  </div>
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-quarter">
+
+      {% set filtersHtml %}
+
+        {% set vaccineItems = [] %}
+        {% for vaccine in (vaccinesRecorded | sort(false, false)) %}
+          {% set vaccineItems = (vaccineItems.push({
+            value: vaccine,
+            text: (vaccine | capitaliseFirstLetter)
+          }), vaccineItems) %}
+        {% endfor %}
+
+
+        {{ checkboxes({
+          fieldset: {
+            legend: {
+              text: "Vaccine"
+            }
+          },
+          items: vaccineItems
+        }) }}
+      {% endset %}
+
+
+      {{ card({
+        classes: "nhsuk-u-margin-top-0 app-card--filters",
+        heading: "Filters",
+        feature: true,
+        descriptionHtml: filtersHtml
+      }) }}
+
+
+    </div>
+
+    <div class="nhsuk-grid-column-three-quarters">
+
+      <h2 class="nhsuk-heading-m">{{ data.vaccinationsRecorded | length | plural("record") }} </h2>
+
+      {% set resultsTableHtml %}
+        <table class="nhsuk-table">
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Date</th>
+              <th>Vaccine</th>
+              <th>Vaccinator</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for record in data.vaccinationsRecorded %}
+              <tr>
+                <td>
+                  <a href="#">{{ record.patient.name }}</a><br>
+                  <span class="nhsuk-u-secondary-text-colour nhsuk-u-nowrap">{{ record.patient.nhsNumber }}</span>
+                </td>
+                <td>
+                  <span class="nhsuk-u-nowrap">
+                    {{ record.date | isoDateFromDateInput | govukDate(truncate=true) }}
+                  </span>
+                </td>
+                <td>
+                  {{ record.vaccine | capitaliseFirstLetter }}<br>
+                  {{ record.vaccineProduct }}<br>
+                  <span class="nhsuk-u-secondary-text-colour">{{ record.batchNumber }}</span>
+                </td>
+                <td>{{ record.vaccinator }}</td>
+              </tr>
+
+
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endset %}
+
+      {{ card({
+        classes: "nhsuk-u-margin-top-0",
+        descriptionHtml: resultsTableHtml
+      }) }}
+
+        <p>Showing 1 to {{ data.vaccinationsRecorded | length }} of {{ data.vaccinationsRecorded | length }} records<p>
+
+
       <form action="/records/answer-search" method="post" novalidate>
 
         {% set nhsNumberHtml %}
