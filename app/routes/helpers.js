@@ -1,3 +1,5 @@
+const { randomItem } = require('../lib/utils/random-item.js')
+
 module.exports = router => {
 
   router.get('/prototype-setup/setup-batches', (req, res) => {
@@ -67,6 +69,10 @@ module.exports = router => {
     const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
 
+    const listOfFirstNames = ["Susana", "Steven", "Aleah", "Kaylen", "Stephan", "Donavon", "Emely", "Kailee", "Brooks", "Brenton", "Miles", "Emanuel", "Jedidiah", "Glenn", "Jude", "Ivory", "Austen", "Alyson", "Jaime", "Jordin", "Chad", "Janay", "Tahj", "Reginald", "Enoch", "Amiyah", "Benito", "April", "Joelle", "Brant"]
+
+    const listOfLastNames = ["Ross", "Friedman", "Switzer", "Devore", "Dominguez", "Kohn", "Moreau", "Farrar", "Hogue", "Goldsmith", "Wilkins", "Cornwell", "Wimberly", "Messer", "Woods", "Forrest", "Aiello", "Kuykendall", "Trout", "Bigelow", "Moreland", "Lentz", "Hurst", "Quinonez", "Pak", "McNally", "Longo", "Hunt", "Villa", "Breaux"]
+
     const vaccinationsToAdd = parseInt(data.numberOfVaccinationsToAdd);
 
     const dateToday = new Date()
@@ -76,10 +82,26 @@ module.exports = router => {
     const monthToday = (dateToday.getMonth() + 1)
     const yearToday = (dateToday.getFullYear())
 
+    const organisationVaccines = res.locals.currentOrganisation.vaccines || []
+
+    const vaccinesEnabled = organisationVaccines
+      .filter((vaccine) => vaccine.status === "enabled")
+
 
     for (let i = 0; i < vaccinationsToAdd; i++) {
 
       const generatedId = Math.floor(Math.random() * 10000000).toString()
+      const randomVaccine = randomItem(vaccinesEnabled)
+
+      const vaccineProductsInStock = data.vaccineStock.filter((vaccineStockItem) => vaccineStockItem.vaccine == randomVaccine.name)
+
+      const randomVaccineProduct = randomItem(vaccineProductsInStock)
+      const randombatchNumber = randomItem(randomVaccineProduct.batches)
+
+      const randomName = randomItem(listOfFirstNames) + " " + randomItem(listOfLastNames)
+
+      const randomNhsNumber = "9" + (100000000 + Math.floor(Math.random() * 900000000)).toString()
+
 
       data.vaccinationsRecorded.push({
         id: generatedId,
@@ -89,13 +111,13 @@ module.exports = router => {
           month: monthToday.toString(),
           year: yearToday.toString()
         },
-        vaccine: "RSV",
-        vaccineProduct: "Abrysvo",
+        vaccine: randomVaccine.name,
+        vaccineProduct: randomVaccineProduct.vaccineProduct,
         patient: {
-          name: "Jodie Brown",
-          nhsNumber: "9123123123"
+          name: randomName,
+          nhsNumber: randomNhsNumber
         },
-        batchNumber: "74725GJ0",
+        batchNumber: randombatchNumber.batchNumber,
         batchExpiryDate: "2025-01-05",
         vaccinator: "Anna Brown",
         eligibility: ["Pregnant"],
