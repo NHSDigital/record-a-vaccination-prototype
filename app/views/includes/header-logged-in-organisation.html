@@ -42,7 +42,7 @@
       } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
       {
         href: "/records",
-        text: "Records",
+        html: "Records <span class=\"nhsuk-tag app-tag--header nhsuk-u-margin-left-2\">New</span>" | safe,
         active: (currentSection == "records")
       } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
       {

@@ -6,7 +6,31 @@
 
 {% block content %}
   <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      {% set introHtml %}
+        <p>This new section lets you view and edit the vaccinations you have recorded.</p>
+        <p>You can use it as an alternative to <b>Find a patient</b>, which will remain available until 31 November 2025.</p>
+        <p class="nhsuk-u-margin-bottom-0"><a href="#" class="nhsuk-link">Find out more about the changes (opens in new tab)</a></p>
+
+      {% endset %}
+
+      {{ panel({
+        titleText: "A new way to find vaccination records",
+        headlingLevel: 2,
+        classes: "app-panel--info nhsuk-u-margin-bottom-7",
+        html: introHtml
+      }) }}
+
+    </div>
+  </div>
+
+
+  <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
+
+
 
       <h1 class="nhsuk-heading-l">Records</h1>
       <p class="nhsuk-body-l">Search for a vaccination record you want to view, edit or delete.</p>
