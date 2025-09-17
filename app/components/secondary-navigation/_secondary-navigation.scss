@@ -1,0 +1,64 @@
+
+  $_current-link-border-width: nhsuk-spacing(1);
+
+  .app-secondary-navigation {
+    border-bottom: 1px solid $nhsuk-border-colour;
+  }
+
+  .app-secondary-navigation__link {
+    @include nhsuk-link-style-default;
+    @include nhsuk-link-style-no-visited-state;
+  }
+
+  .app-secondary-navigation__list {
+    @include nhsuk-font(19);
+    list-style: none;
+    margin: 0;
+    margin-bottom: nhsuk-spacing(3);
+    padding: 0;
+
+    @include nhsuk-media-query($from: tablet) {
+      align-items: start;
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 0;
+    }
+
+    // IE11 trips over flexbox and doesn’t wrap anything, making all of the items
+    // into a single, horizontally scrolling row. This CSS hack removes the
+    // flexbox definition for IE 10 & 11, reverting it a non-flexbox version.
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      display: block;
+    }
+  }
+
+  .app-secondary-navigation__list-item {
+    border: 0 solid $nhsuk-link-colour;
+    margin: nhsuk-spacing(2) 0;
+    position: relative;
+
+    @include nhsuk-media-query($from: tablet) {
+      margin-bottom: 0;
+      margin-top: 0;
+      padding: nhsuk-spacing(4) 0;
+
+      &:not(:last-child) {
+        @include nhsuk-responsive-margin(6, $direction: right);
+      }
+    }
+  }
+
+  .app-secondary-navigation__list-item--current {
+    @include nhsuk-media-query($until: tablet) {
+      border-left-width: $_current-link-border-width;
+      // Negative offset the left margin so we can place a current page indicator
+      // to the left without misaligning the list item text.
+      margin-left: ((nhsuk-spacing(2) + $_current-link-border-width) * -1);
+      padding-left: nhsuk-spacing(2);
+    }
+
+    @include nhsuk-media-query($from: tablet) {
+      border-bottom-width: $_current-link-border-width;
+      padding-bottom: nhsuk-spacing(4) - $_current-link-border-width;
+    }
+  }
