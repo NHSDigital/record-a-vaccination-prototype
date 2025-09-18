@@ -1,5 +1,20 @@
 module.exports = router => {
 
+  router.get('/records', (req, res) => {
+
+    const data = req.session.data
+
+    const organisationVaccines = res.locals.currentOrganisation.vaccines || []
+
+    // Get a list of all the different vaccine names recorded so far
+    const vaccinesRecorded = [...new Set(data.vaccinationsRecorded
+      .map((record) => record.vaccine))]
+
+    res.render('records/index', {
+      vaccinesRecorded
+    })
+  })
+
  router.post('/records/answer-search', (req, res) => {
   const data = req.session.data
 
