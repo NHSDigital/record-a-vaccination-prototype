@@ -1,0 +1,118 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Vaccine start date" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block header %}
+  {% include "includes/header-logged-in-support.html" %}
+{% endblock %}
+
+
+{% block beforeContent %}
+  {{ backLink({ href: "/support/vaccines/add" }) }}
+{% endblock %}
+
+
+
+{% block content %}
+   <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+
+          <div class="nhsuk-form-group">
+
+            <fieldset class="nhsuk-fieldset">
+              <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+                <h1 class="nhsuk-fieldset__heading">
+                    Who is the manufacturer?
+                </h1>
+              </legend>
+              <div class="nhsuk-radios">
+                <div class="nhsuk-radios__item">
+                  <input class="nhsuk-radios__input" id="example-divider-1" name="example-divider" type="radio" value="nhsuk-login">
+                  <label class="nhsuk-label nhsuk-radios__label" for="example-divider-1">
+                    AstraZeneca UK Ltd 
+                  </label>
+                </div>
+                
+                <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="example-divider-2" name="example-divider" type="radio" value="government-verify">
+                    <label class="nhsuk-label nhsuk-radios__label" for="example-divider-2">
+                      CSL Seqirus
+                    </label>
+                  </div>
+               
+                <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="example-divider-2" name="example-divider" type="radio" value="government-verify">
+                    <label class="nhsuk-label nhsuk-radios__label" for="example-divider-2">
+                      GlaxoSmithKline UK Ltd
+                    </label>
+                  </div>
+               
+                <div class="nhsuk-radios__item">
+                  <input class="nhsuk-radios__input" id="example-divider-2" name="example-divider" type="radio" value="government-verify">
+                  <label class="nhsuk-label nhsuk-radios__label" for="example-divider-2">
+                    Moderna
+                  </label>
+                </div>
+                <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="example-divider-2" name="example-divider" type="radio" value="government-verify">
+                    <label class="nhsuk-label nhsuk-radios__label" for="example-divider-2">
+                      Pfizer
+                    </label>
+                  </div>
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="example-divider-2" name="example-divider" type="radio" value="government-verify">
+                    <label class="nhsuk-label nhsuk-radios__label" for="example-divider-2">
+                      Sanofi
+                    </label>
+                  </div>
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="example-divider-2" name="example-divider" type="radio" value="government-verify">
+                    <label class="nhsuk-label nhsuk-radios__label" for="example-divider-2">
+                      Sanofi Pasteur
+                    </label>
+                  </div>
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="example-divider-2" name="example-divider" type="radio" value="government-verify">
+                    <label class="nhsuk-label nhsuk-radios__label" for="example-divider-2">
+                      Viotris
+                    </label>
+                  </div>
+                <div class="nhsuk-radios__divider">or</div>
+                <div class="nhsuk-radios nhsuk-radios--conditional">
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="contact-1" name="contact" type="radio" value="email" aria-controls="conditional-contact-1" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-radios__label" for="contact-1">
+                        Add a new manufacturer
+                      </label>
+                    </div>
+                    <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-contact-1">
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="email">
+                          Name
+                        </label> <input class="nhsuk-input nhsuk-u-width-two-thirds" id="email" name="email" type="text">
+                      </div>
+              </div>
+            </fieldset>
+          </div>
+
+
+          <form action="/support/vaccines/age-upper" method="get" novalidate>
+
+            <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
+              Continue
+            </button>
+            
+
+
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+
