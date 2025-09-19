@@ -27,7 +27,7 @@
       <p>Sent on {{ message.sentOn | govukDate }}.</p>
 
       <form action="/regions/messages/{{ message.id }}/decide" method="post">
-        <div class="app-button-group">
+        <div class="nhsuk-button-group">
           {{ button({
             text: "Approve",
             name: "decision",
