@@ -59,10 +59,7 @@
         items: items,
         errorMessage: {
           text: (errors | first).text
-        } if (errors | length),
-        attributes: {
-          "data-module": "autocomplete"
-        }
+        } if (errors | length)
       }) }}
 
         {{ button({
