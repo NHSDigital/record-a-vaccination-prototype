@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "lists" %}
+
+{% set pageName = "Name your list" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/lists" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+
+
+ <h1 class="nhsuk-heading-l">Name your list</h1>
+
+  <p class="nhsuk-body-m">Give your list a name you can easily remember.</p>
+
+  <label class="nhsuk-label" for="example">
+    Name
+  </label> <input class="nhsuk-input" id="example" name="example" type="text">
+
+<br>
+<br>
+
+
+      {{ button({
+        text: "Continue",
+        href: "/lists/date"
+      }) }}
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+

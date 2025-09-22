@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "lists" %}
+
+{% set pageName = "Name your list" %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+
+
+  <div class="nhsuk-panel">
+  <h1 class="nhsuk-panel__title">
+    PDS look up complete
+  </h1>
+  <div class="nhsuk-panel__body">
+    Your NHS numbers have been successfully added
+  </div>
+</div>
+
+      {{ button({
+        text: "Continue to list",
+        href: "/lists/date"
+      }) }}
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+
