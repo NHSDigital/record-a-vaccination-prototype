@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "lists" %}
+
+{% set pageName = "Check details" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/lists/name" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+
+
+
+
+        <h1 class="nhsuk-heading-l">Check details</h1>
+
+
+<dl class="nhsuk-summary-list">
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Name
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      Maternity list
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/lists/name">
+        Change<span class="nhsuk-u-visually-hidden"> name</span>
+      </a>
+    </dd>
+  </div>
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Site
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      Anne Ward Maternity Unit
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/lists/team">
+        Change<span class="nhsuk-u-visually-hidden"> date of birth</span>
+      </a>
+    </dd>
+  </div>
+  <div class="nhsuk-summary-list__row">
+    <dt class="nhsuk-summary-list__key">
+      Date
+    </dt>
+    <dd class="nhsuk-summary-list__value">
+      14 October 2025
+    </dd>
+    <dd class="nhsuk-summary-list__actions">
+      <a href="/lists/date">
+        Change<span class="nhsuk-u-visually-hidden"> contact information</span>
+      </a>
+    </dd>
+  </div>
+
+</dl>
+
+      {{ button({
+        text: "Continue",
+        href: "/lists/add-nhs-numbers"
+      }) }}
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+

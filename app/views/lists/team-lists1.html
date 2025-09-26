@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Manchester Hospital" %}
+{% set pageName = "St Mary’s Hospital" %}
 
 {% set currentSection = "lists" %}
 
@@ -21,42 +21,61 @@
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
 
+<p class="nhsuk-body-m">It can take up to several minutes for a list to be created. When the list is ready the status will change from 'Pending' to 'Ready'.</p>
+
+      
 <table class="nhsuk-table-responsive" role="table">
   <caption class="nhsuk-table__caption"></caption>
   <thead class="nhsuk-table__head" role="rowgroup">
     <tr role="row">
-      <th scope="col" class="nhsuk-table__header nhsuk-u-width-one-third" role="columnheader">Name</th>
+      <th scope="col" class="nhsuk-table__header nhsuk-u-width-one-third" role="columnheader">List</th>
 
-      <th scope="col" class="nhsuk-table__header nhsuk-u-width-one-third" role="columnheader">Date</th>
+      <th scope="col" class="nhsuk-table__header nhsuk-u-width-one-third" role="columnheader">Status</th>
       <th scope="col" class="nhsuk-table__header nhsuk-table__cell--numeric nhsuk-u-width-one-third" role="columnheader">Number of patients</th>
 
     </tr>
   </thead>
   <tbody class="nhsuk-table__body">
 
+
     <tr class="nhsuk-table__row" role="row">
-     <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Name </span><a href="/lists/list">Staff list</a></p>
+     <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Name </span><p>Staff list</p>
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p>Pending...</p>
+      <td class="nhsuk-table__cell nhsuk-table__cell--numeric" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Number of patients </span>100</td>
+    </tr>
+
+     <tr class="nhsuk-table__row" role="row">
+     <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Name </span><p>Staff list</p>
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p>3 minutes remaining</p>
+      <td class="nhsuk-table__cell nhsuk-table__cell--numeric" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Number of patients </span>100</td>
+    </tr>
+
+
+    <tr class="nhsuk-table__row" role="row">
+     <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Name </span><a href="/lists/list3">Maternity list</a></p>
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p>Ready</p>
+      <td class="nhsuk-table__cell nhsuk-table__cell--numeric" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Number of patients </span>120</td>
+    </tr>
+
+
+ <tr class="nhsuk-table__row" role="row">
+     <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Name </span><a href="/lists/list1">Monday 6 October 2025</a></p>
       <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p><a href="/lists/list"></a></p>
       <td class="nhsuk-table__cell nhsuk-table__cell--numeric" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Number of patients </span>116</td>
     </tr>
 
-   </tr>
-    <tr class="nhsuk-table__row" role="row">
-     <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Name </span><a href="/lists/list">Maternity list</a></p>
-      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p>Wednesday 8 October 2025</p>
-      <td class="nhsuk-table__cell nhsuk-table__cell--numeric" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Number of patients </span>32</td>
-    </tr>
 
      <tr class="nhsuk-table__row" role="row">
-     <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Name </span><a href="/lists/list">Weekday clinic </a></p>
-      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p></p>
-      <td class="nhsuk-table__cell nhsuk-table__cell--numeric" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Number of patients </span>40</td>
+     <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Name </span><a href="/lists/list1">Tuesday 7 October 2025</a></p>
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p><a href="/lists/list"></a></p>
+      <td class="nhsuk-table__cell nhsuk-table__cell--numeric" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Number of patients </span>116</td>
     </tr>
 
+
      <tr class="nhsuk-table__row" role="row">
-     <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Name </span><a href="/lists/list">Sunday clinic </a></p>
-      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p>Sunday 12 October 2025</p>
-      <td class="nhsuk-table__cell nhsuk-table__cell--numeric" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Number of patients </span>24</td>
+     <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Name </span><a href="/lists/list1">Wednesday 8 October 2025</a></p>
+      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p><a href="/lists/list"></a></p>
+      <td class="nhsuk-table__cell nhsuk-table__cell--numeric" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Number of patients </span>116</td>
     </tr>
 
     
