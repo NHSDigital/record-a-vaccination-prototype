@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "lists" %}
+
+{% set pageName = "Name your list" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/lists/date" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+
+
+<div class="nhsuk-form-group">
+
+
+
+  <div class="nhsuk-form-group">
+
+  <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
+    <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+      <h1 class="nhsuk-fieldset__heading">
+       Enter a name for your list
+      </h1>
+    </legend>
+
+
+  <label class="nhsuk-label" for="example">
+    List name
+  </label><div class="nhsuk-hint" id="example-with-hint-text-hint">
+            For example, Maternity list
+          </div> <input class="nhsuk-input" id="example" name="example" type="text">
+</div>
+
+    
+  
+  </fieldset>
+</div>
+
+
+
+      {{ button({
+        text: "Continue",
+        href: "/lists/add-nhs-numbers"
+      }) }}
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+
