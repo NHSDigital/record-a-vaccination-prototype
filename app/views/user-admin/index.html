@@ -61,6 +61,10 @@
           {% if q %}
             Showing {{ totalUsers | plural("active user") }} matching {{ q }}
           {% else %}
+
+            {% if totalPages > 1 %}
+              Showing {{ ((page - 1) * 20) + 1 }} to  {{ ((page - 1) * 20) + (users | length) }} of
+            {% endif %}
             {{ totalUsers | plural("active user") }}
           {% endif %}
         </caption>
@@ -112,6 +116,35 @@
           {% endfor %}
         </tbody>
       </table>
+
+      {% set items = [] %}
+
+      {% set ellipsisAdded = false %}
+      {% for i in range(1, totalPages + 1) -%}
+        {% if i == 1 or i == (page -1) or (i == page) or (i == page + 1) or (i == totalPages) %}
+          {% set items = (items.push({
+            number: i,
+            href: "/user-admin?page=" + i + "&q=" + (q if q else ""),
+            current: (i === page)
+          }), items) %}
+          {% set ellipsisAdded = false %}
+        {% elif ellipsisAdded == false %}
+          {% set items = (items.push({
+            ellipsis: true
+          }), items) %}
+          {% set ellipsisAdded = true %}
+        {% endif %}
+      {%- endfor %}
+
+      {% if totalPages > 1 %}
+
+
+        {{ appPagination({
+          previousUrl:  "/user-admin?page=" + (page - 1) + "&q=" + (q if q else "") if page != 1,
+          nextUrl: "/user-admin?page=" + (page + 1) + "&q=" + (q if q else "")  if page != totalPages,
+          items: items
+        }) }}
+      {% endif %}
 
       {% else %}
 
