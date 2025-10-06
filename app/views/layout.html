@@ -79,11 +79,7 @@
     <!-- Custom JavaScript files can be added to this file -->
     {% include "includes/scripts.html" %}
 
-    <script src="/js/x-govuk.js"></script>
-    <script>
-      window.GOVUKPrototypeComponents.initAll()
-    </script>
-    <!-- For adding page specific JavsScript -->
+    <!-- For adding page specific JavaScript -->
     {% block pageScripts %}{% endblock %}
   {% endblock %}
 {% endblock %}

@@ -20,6 +20,8 @@
         }) }}
       {% endif %}
 
+      {% include "record-vaccinations/_new-notice.html" %}
+
       <form action="/record-vaccinations/answer-date" method="post" novalidate>
         {% set previousDateHtml %}
 
