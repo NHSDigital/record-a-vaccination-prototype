@@ -136,4 +136,46 @@ module.exports = router => {
     res.redirect('/records')
   });
 
+
+  router.post('/prototype-setup/add-users', (req, res) => {
+    const data = req.session.data
+    const currentOrganisation = res.locals.currentOrganisation
+
+    const listOfFirstNames = ["Susana", "Steven", "Aleah", "Kaylen", "Stephan", "Donavon", "Emely", "Kailee", "Brooks", "Brenton", "Miles", "Emanuel", "Jedidiah", "Glenn", "Jude", "Ivory", "Austen", "Alyson", "Jaime", "Jordin", "Chad", "Janay", "Tahj", "Reginald", "Enoch", "Amiyah", "Benito", "April", "Joelle", "Brant"]
+
+    const listOfLastNames = ["Ross", "Friedman", "Switzer", "Devore", "Dominguez", "Kohn", "Moreau", "Farrar", "Hogue", "Goldsmith", "Wilkins", "Cornwell", "Wimberly", "Messer", "Woods", "Forrest", "Aiello", "Kuykendall", "Trout", "Bigelow", "Moreland", "Lentz", "Hurst", "Quinonez", "Pak", "McNally", "Longo", "Hunt", "Villa", "Breaux"]
+
+
+    const usersToAdd = parseInt(data.numberOfUsersToAdd);
+
+    const permissionLevels = ["Recorder", "Administrator", "Lead administrator"]
+
+
+    for (let i = 0; i < usersToAdd; i++) {
+      const generatedId = Math.floor(Math.random() * 10000000).toString()
+
+      const generatedEmailId = Math.floor(Math.random() * 10).toString()
+
+      const randomFirstName = randomItem(listOfFirstNames)
+      const randomLastName = randomItem(listOfLastNames)
+
+      data.users.push({
+        id: generatedId,
+        email: `${randomFirstName.toLowerCase()}.${randomLastName.toLowerCase()}${generatedEmailId}@nhs.net`,
+        organisations: [
+          {
+            id: currentOrganisation.id,
+            permissionLevel: randomItem(permissionLevels),
+            status: "Active",
+            vaccinator: randomItem([true, true, false])
+          }
+        ],
+        firstName: randomFirstName,
+        lastName: randomLastName
+      })
+    }
+
+    res.redirect('/user-admin')
+  });
+
 }

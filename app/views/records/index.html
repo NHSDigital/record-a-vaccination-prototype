@@ -6,6 +6,27 @@
 
 {% block content %}
   <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% set insetTextHtml %}
+        <p><span class="nhsuk-tag nhsuk-tag--blue">New</span></p>
+        <p>This new section lets you view and edit vaccination records created by your organisation.</p>
+        <p>You can continue using <b>Find a patient</b> until 30&nbsp;November&nbsp;2025.</p>
+        <p class="nhsuk-u-margin-bottom-0"><a href="https://guide.ravs.england.nhs.uk/records/" class="nhsuk-link" target="_blank">Find out more (opens in new tab)</a></p>
+
+      {% endset %}
+
+      {{ insetText({
+        html: insetTextHtml,
+        classes: "nhsuk-u-margin-top-0 nhsuk-u-padding-top-3 nhsuk-u-padding-bottom-3 app-inset-text--white"
+      }) }}
+
+
+    </div>
+  </div>
+
+
+  <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
       <h1 class="nhsuk-heading-xl">Records</h1>
