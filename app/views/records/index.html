@@ -103,18 +103,21 @@
               ]
             }) }}
 
-            {% set vaccinators = ["Anna Brown"] %}
-            {% set vaccinatorItems = [] %}
+            {% set vaccinatorItems = [{
+              value: "",
+              text: ""
+            }] %}
 
             {% for vaccinator in (vaccinators | sort(false, false)) %}
               {% set vaccinatorItems = (vaccinatorItems.push({
-                value: vaccinator,
-                text: vaccinator
+                value: vaccinator.id,
+                text: (vaccinator.firstName + " " + vaccinator.lastName)
               }), vaccinatorItems) %}
             {% endfor %}
 
 
             {{ select({
+              name: "vaccinatorId",
               label: {
                 text: "Vaccinator",
                 classes: "nhsuk-label--s"
