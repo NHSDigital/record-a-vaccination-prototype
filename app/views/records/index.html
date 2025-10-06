@@ -24,6 +24,9 @@
 
             <div class="app-search--input">
               {{ input({
+                type: "search",
+                name: "nameOrNhsNumber",
+                value: data.nameOrNhsNumber,
                 label: {
                   text: "Patient name or NHS number"
                 }
@@ -32,7 +35,7 @@
 
             <div class="app-search--button">
               {{ button({
-                classes: "nhsuk-u-margin-left-4",
+                classes: "nhsuk-u-margin-left-4 app-button--small",
                 text: "Search"
               }) }}
             </div>
@@ -141,7 +144,7 @@
       }) }}
 
 
-      <h2 class="nhsuk-heading-m">{{ data.vaccinationsRecorded | length | plural("record") }} </h2>
+      <h2 class="nhsuk-heading-m">{{ vaccinationsRecorded | length | plural("record") }} </h2>
 
       {% set resultsTableHtml %}
         <table class="nhsuk-table">
@@ -154,7 +157,7 @@
             </tr>
           </thead>
           <tbody>
-            {% for record in data.vaccinationsRecorded %}
+            {% for record in vaccinationsRecorded %}
               <tr>
                 <td>
                   <a href="/records/records/{{ record.id }}">{{ record.patient.name }}</a><br>

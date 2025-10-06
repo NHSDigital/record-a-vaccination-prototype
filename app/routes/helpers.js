@@ -105,6 +105,7 @@ module.exports = router => {
 
       data.vaccinationsRecorded.push({
         id: generatedId,
+        organisationId: "RW3",
         siteId: "RW3NM",
         date: {
           day: dayToday.toString(),
