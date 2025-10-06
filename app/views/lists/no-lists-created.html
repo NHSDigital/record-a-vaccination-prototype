@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Lists" %}
+{% set pageName = "no-lists-created" %}
 
 {% set currentSection = "lists" %}
 
@@ -13,24 +13,33 @@
         classes: "nhsuk-tag--blue"
       })}}
     <br><br>
-
-    
       <h1 class="nhsuk-heading-l">Lists</h1>
 
       <p class="nhsuk-body-m">To save time when you record vaccinations, you can add a list of NHS numbers.</p>
 
+      {% set howItWorksHtml %}
+        <p>Add a list of NHS numbers and we will match them to patient details.</p>
+        <p>This means you will not have to input each patient's NHS number when you record vaccinations.</p>
+      {% endset %}
+
+      {% if (lists | length) > 0 %}
+        {{ details({
+          text: "How it works",
+          html: howItWorksHtml
+        }) }}
 
         <ul class="nhsuk-list xnhsuk-u-margin-top-6 nhsuk-u-margin-bottom-6">
           <li><a href="/lists/team-lists">Anne Ward Maternity Unit</a></li>
           <li><a href="/lists/team-lists">St Mary’s Hospital </a></li>
-            <li><a href="/lists/team-lists">Manchester Hospital </a></li>
-
         </ul>
-        
 
+      {% else %}
+        <h2 class="nhsuk-heading-m">How it works</h2>
 
+        {{ howItWorksHtml | safe }}
 
-  
+      {% endif %}
+
 
       {{ button({
         text: "Add a list",

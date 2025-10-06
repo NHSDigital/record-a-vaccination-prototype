@@ -5,7 +5,7 @@
 {% set pageName = "Name your list" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/lists/date" }) }}
+  {{ backLink({ href: "/lists/list" }) }}
 {% endblock %}
 
 {% block content %}
@@ -34,10 +34,7 @@
       </h1>
     </legend>
 
-
-  <label class="nhsuk-label" for="example">
-    List name
-  </label><div class="nhsuk-hint" id="example-with-hint-text-hint">
+    <div class="nhsuk-hint" id="example-with-hint-text-hint">
             For example, Maternity list
           </div> <input class="nhsuk-input" id="example" name="example" type="text">
 </div>
