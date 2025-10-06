@@ -10,9 +10,13 @@ module.exports = router => {
     const vaccinesRecorded = [...new Set(data.vaccinationsRecorded
       .map((record) => record.vaccine))]
 
-    res.render('records/index', {
-      vaccinesRecorded
-    })
+    if (vaccinesRecorded.length === 0) {
+      res.render('records/no-vaccinations-recorded')
+    } else {
+      res.render('records/index', {
+        vaccinesRecorded
+      })
+    }
   })
 
  router.post('/records/answer-search', (req, res) => {
