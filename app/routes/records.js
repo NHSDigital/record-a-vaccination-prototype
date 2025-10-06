@@ -22,7 +22,8 @@ module.exports = router => {
       vaccinationsRecorded = vaccinationsRecorded.filter(function(record) {
 
         return (
-          record.patient.name.toLowerCase().startsWith(nameOrNhsNumberSearch.toLowerCase())
+          record.patient.name.toLowerCase().startsWith(nameOrNhsNumberSearch.toLowerCase()) ||
+          (record.patient.nhsNumber === nameOrNhsNumberSearch)
         )
 
       })

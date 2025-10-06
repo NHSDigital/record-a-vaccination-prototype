@@ -144,7 +144,9 @@
       }) }}
 
 
-      <h2 class="nhsuk-heading-m">{{ vaccinationsRecorded | length | plural("record") }} </h2>
+      <h2 class="nhsuk-heading-m">{{ vaccinationsRecorded | length | plural("record") }}
+      {% if data.nameOrNhsNumber %} matching {{ data.nameOrNhsNumber }}{% endif %}
+      </h2>
 
       {% set resultsTableHtml %}
         <table class="nhsuk-table">
