@@ -25,6 +25,9 @@
 
       <h1 class="nhsuk-heading-l">{{ vaccination.patient.name }}’s {{vaccination.vaccine}} vaccination record</h1>
 
+
+      {% set vaccinator = (data.users | findById(vaccination.vaccinatorId)) %}
+
       {{ summaryList({
         rows: [
         {
@@ -138,7 +141,7 @@
               text: "Vaccinator"
             },
             value: {
-              text: vaccination.vaccinator
+              text: (vaccinator.firstName + " " + vaccinator.lastName)
             },
             actions: {
               items: [

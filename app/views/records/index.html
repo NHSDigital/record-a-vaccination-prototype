@@ -176,7 +176,11 @@
                   {{ record.vaccineProduct }}<br>
                   <span class="nhsuk-u-secondary-text-colour">{{ record.batchNumber }}</span>
                 </td>
-                <td>{{ record.vaccinator }}</td>
+                <td>
+                  {% set vaccinator =  data.users | findById(record.vaccinatorId) %}
+                  {{ vaccinator.firstName }}
+                  {{ vaccinator.lastName }}
+                </td>
               </tr>
 
 

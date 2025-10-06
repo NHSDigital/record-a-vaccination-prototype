@@ -596,8 +596,6 @@ module.exports = router => {
       data.vaccinationDate.year = yearToday
     }
 
-    const vaccinator = data.users.find((user) => user.id === data.vaccinatorId)
-
     data.vaccinationsRecorded.push({
       id: generatedId,
       date: data.vaccinationDate,
@@ -610,7 +608,7 @@ module.exports = router => {
       batchNumber: data.vaccineBatch,
       batchExpiryDate: "2025-12-05",
       siteId: data.deliveryTeam,
-      vaccinator: (vaccinator.firstName + " " + vaccinator.lastName),
+      vaccinatorId: data.vaccinatorId,
       eligibility: data.eligibility,
       pregnancyDueDate: data.pregnancyDueDate,
       consent: data.consent,

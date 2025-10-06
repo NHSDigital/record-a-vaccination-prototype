@@ -82,11 +82,16 @@ module.exports = router => {
     const monthToday = (dateToday.getMonth() + 1)
     const yearToday = (dateToday.getFullYear())
 
-    const organisationVaccines = res.locals.currentOrganisation.vaccines || []
+    const organisationVaccines = currentOrganisation.vaccines || []
 
     const vaccinesEnabled = organisationVaccines
       .filter((vaccine) => vaccine.status === "enabled")
 
+    const vaccinators = data.users.filter(function(user) {
+      const userInOrganisation = (user.organisations || []).find((userOrg) => userOrg.id === currentOrganisation.id)
+
+      return (userInOrganisation && userInOrganisation.vaccinator)
+    })
 
     for (let i = 0; i < vaccinationsToAdd; i++) {
 
@@ -98,10 +103,11 @@ module.exports = router => {
       const randomVaccineProduct = randomItem(vaccineProductsInStock)
       const randombatchNumber = randomItem(randomVaccineProduct.batches)
 
+      const vaccinator = randomItem(vaccinators)
+
       const randomName = randomItem(listOfFirstNames) + " " + randomItem(listOfLastNames)
 
       const randomNhsNumber = "9" + (100000000 + Math.floor(Math.random() * 900000000)).toString()
-
 
       data.vaccinationsRecorded.push({
         id: generatedId,
@@ -120,7 +126,7 @@ module.exports = router => {
         },
         batchNumber: randombatchNumber.batchNumber,
         batchExpiryDate: "2025-01-05",
-        vaccinator: "Anna Brown",
+        vaccinatorId: vaccinator.id,
         eligibility: ["Pregnant"],
         pregnancyDueDate: {
           day: "04",
