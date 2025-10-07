@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% set pageName = "Delete list" %}
+{% set site = currentOrganisation.sites | findById(patientList.siteId) %}
 
 {% set currentSection = "lists" %}
 
@@ -12,8 +13,14 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <span class="nhsuk-caption-l">{{ (patientList.date | govukDate) if patientList.date else patientList.name }}</span>
-      <h1 class="nhsuk-heading-l">Delete {{ patientList.name }} list?</h1>
+      <span class="nhsuk-caption-l">{{ site.name }}</span>
+      <h1 class="nhsuk-heading-l">
+        {% if patientList.date %}
+          Delete list for {{ patientList.date | govukDate }}?
+        {% else %}
+          Delete {{ patientList.name }} list?
+        {% endif %}
+      </h1>
 
       <p>The list will be deleted but not any vaccination records.</p>
 
