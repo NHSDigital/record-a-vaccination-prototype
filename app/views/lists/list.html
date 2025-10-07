@@ -7,7 +7,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/lists/index"
+    href: "/lists/site/" + patientList.siteId
   }) }}
  {% endblock %}
 {% block content %}
@@ -23,7 +23,7 @@
 
 
         <p>
-          <a href="/lists/list/{{ patientList.id }}/add-more-nhs-numbers">Add more NHS numbers</a>    &nbsp; &nbsp; &nbsp;
+          <a href="/lists/list/{{ patientList.id }}/add">Add more NHS numbers</a>    &nbsp; &nbsp; &nbsp;
           <a href="/lists/list/{{ patientList.id }}/edit-name">Edit list name</a>  &nbsp; &nbsp; &nbsp;
           <a href="/lists/list/{{ patientList.id }}/delete">Delete list</a>
         </p>

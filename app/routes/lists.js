@@ -21,8 +21,14 @@ module.exports = router => {
     const siteId = req.params.siteId
     const lists = req.session.data.lists.filter((list) => list.organisationId === currentOrganisation.id).filter((list) => list.siteId === siteId)
 
+    let justAddedList = null
+    if (req.query.justAddedId) {
+      justAddedList = req.session.data.lists.find((list) => list.id == req.query.justAddedId)
+    }
+
     res.render('lists/team-lists', {
-      lists
+      lists,
+      justAddedList
     })
   })
 
@@ -86,7 +92,7 @@ module.exports = router => {
     data.name = null
     data.nhsNumbers = null
 
-    res.redirect('/lists')
+    res.redirect(`/lists/site/${siteId}?justAddedId=${id}`)
 
   })
 
@@ -101,5 +107,43 @@ module.exports = router => {
       patientList
     })
   })
+
+  router.get('/lists/list/:id/edit-name', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const patientList = data.lists.find((list) => list.id === id)
+
+    if (!patientList) { return res.redirect('/lists') }
+
+    res.render('lists/edit-name', {
+      patientList
+    })
+  })
+
+  router.get('/lists/list/:id/add', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const patientList = data.lists.find((list) => list.id === id)
+
+    if (!patientList) { return res.redirect('/lists') }
+
+    res.render('lists/add-more-nhs-numbers', {
+      patientList
+    })
+  })
+
+  router.get('/lists/list/:id/delete', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const patientList = data.lists.find((list) => list.id === id)
+
+    if (!patientList) { return res.redirect('/lists') }
+
+    res.render('lists/delete', {
+      patientList
+    })
+  })
+
+
 
 }

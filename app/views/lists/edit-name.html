@@ -5,7 +5,7 @@
 {% set pageName = "Name your list" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/lists/list" }) }}
+  {{ backLink({ href: "/lists/list/" + patientList.id }) }}
 {% endblock %}
 
 {% block content %}
@@ -39,8 +39,8 @@
           </div> <input class="nhsuk-input" id="example" name="example" type="text">
 </div>
 
-    
-  
+
+
   </fieldset>
 </div>
 
