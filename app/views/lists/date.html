@@ -33,7 +33,7 @@
 
 
     {% set dateinputHtml %}
-    
+
     {{ dateInput({
       id: "example",
       namePrefix: "example",
@@ -108,13 +108,12 @@
           value: "date-input",
           text: "Select a different date",
           conditional: {
-             html: dateinputHtml 
-          }  
+             html: dateinputHtml
+          }
         },
         {
           value: "no-date",
-          text: "No date",
-          dateKnown: 'no'
+          text: "No date"
         }
       ]
     }) }}
@@ -127,7 +126,7 @@
 }) }}
 
 </form>
-  
+
 
     </div>
   </div>

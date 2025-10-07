@@ -1,3 +1,5 @@
+const { randomItem } = require('../lib/utils/random-item.js')
+
 module.exports = router => {
 
   router.get('/lists', (req, res) => {
@@ -74,11 +76,19 @@ module.exports = router => {
     const nhsNumbers = data.nhsNumbers.split(/\n/)
     const id = Math.floor(Math.random() * 10000000).toString()
 
+    const listOfFirstNames = ["Scott", "Siera", "Ramsey", "Blair", "Gretchen", "Kelli", "Sheridan", "Anya", "Alexis", "Kegan", "Jamia", "Sunny", "Haley", "Elsa", "Ayanna", "Chiara", "Zander", "Oswaldo", "Paris", "Bennett", "Reyna", "Camryn", "Nehemiah", "Craig", "Jalil", "Derick", "Easton", "Mohammed", "Arnold", "Linnea", "Edna", "Cameron", "Gissell", "Melina", "Annalise", "Jalin", "Aric", "Kentrell", "Nyla", "Leslie", "Maranda", "Kinley", "Montana", "Britney", "Uriah", "Raul", "Vincent", "Dustin", "Grant", "Kia"]
+
+    const listOfLastNames = ["Menendez", "Salisbury", "Mateo", "Alarcon", "Lenz", "Potter", "Kramer", "Trevino", "Singleton", "Batchelor", "Witte", "Rhoades", "Barragan", "Watson", "Fiore", "Beattie", "Parr", "Traylor", "Gillette", "Kim", "Fennell", "Eubanks", "Ko", "Mcfarlane", "Waite", "Gaines", "Rosado", "Rao", "Bynum", "Wentz", "Cheng", "Loera", "Hyman", "Ferrell", "Nixon", "Pierre", "Strand", "Wirth", "Delagarza", "Dixon", "Yoon", "Hines", "Hinds", "Barron", "Bruce", "Pease", "Rhodes", "Doss", "Marsh", "France"]
+
     const patients = nhsNumbers.map(function(nhsNumber) {
       return {
-        nhsNumber: nhsNumber
+        nhsNumber: nhsNumber,
+        firstName: randomItem(listOfFirstNames),
+        lastName: randomItem(listOfLastNames),
+        dateOfBirth: "1945-01-18"
       }
     })
+
 
     data.lists.push({
       id: id,
