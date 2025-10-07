@@ -120,6 +120,18 @@ module.exports = router => {
     })
   })
 
+  router.post('/lists/:id/update-name', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const patientList = data.lists.find((list) => list.id === id)
+
+    if (!patientList) { return res.redirect('/lists') }
+
+    patientList.name = data.name
+
+    res.redirect(`/lists/list/${patientList.id}`)
+  })
+
   router.get('/lists/list/:id/add', (req, res) => {
     const data = req.session.data
     const id = req.params.id
