@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Staff list" %}
+{% set pageName = patientList.name %}
+{% set site = currentOrganisation.sites | findById(patientList.siteId) %}
 
 {% set currentSection = "lists" %}
 
@@ -14,17 +15,18 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <div class="nhsuk-caption-l">St Mary's Hospital</div>
+      <div class="nhsuk-caption-l">{{ site.name }}</div>
 
         <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
         <p>To record a vaccination, search for the person in the list and select the Record link next to their details.</p>
 
 
-        <p><a href="/lists/add-more-nhs-numbers">Add more NHS numbers</a>    &nbsp; &nbsp; &nbsp;   <a href="/lists/edit-name">Edit list name</a>  &nbsp; &nbsp; &nbsp;     <a href="/lists/delete">Delete list</a></p>
-
-
-
+        <p>
+          <a href="/lists/list/{{ patientList.id }}/add-more-nhs-numbers">Add more NHS numbers</a>    &nbsp; &nbsp; &nbsp;
+          <a href="/lists/list/{{ patientList.id }}/edit-name">Edit list name</a>  &nbsp; &nbsp; &nbsp;
+          <a href="/lists/list/{{ patientList.id }}/delete">Delete list</a>
+        </p>
 
         <div class="nhsuk-u-margin-top-5">
           <form action="/lists/list-search" method="get" novalidate>
@@ -42,21 +44,6 @@
           </form>
         </div>
 
-
-
-  <style>
-    .jointTopBot {
-          id: "firstName",
-          name: "firstName",
-          value: data.firstName,
-          classes: "nhsuk-input--width-20",
-          errorMessage: {
-            text: firstNameError
-          } if firstNameError
-        }) }}
-  </style>
-
-
 <br>
 
     </div>
@@ -64,7 +51,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      <table class="nhsuk-table-responsive" role="table">
+      <table class="nhsuk-table">
         <caption class="nhsuk-table__caption">Showing 30 of 120 patients</caption>
         <thead class="nhsuk-table__head" role="rowgroup">
             <thead role="rowgroup" class="nhsuk-table__head">
@@ -94,447 +81,40 @@
 
         <tbody class="nhsuk-table__body">
 
-          <tr role="row" class="nhsuk-table__row">
-            <td class="nhsuk-table__cell">
-                Adam Aarrons
-          </td>
-
-            <td class="nhsuk-table__cell">
-              9562312564
-          </td>
-
-          <td class="nhsuk-table__cell">
-            21 April 1954
-          </td>
-
-          <td class="nhsuk-table__cell">
-            <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-          </td>
-          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-            <a class="nhsuk-link" href="/lists/remove">Remove
-          </td>
-            </tr>
-
-            <tr role="row" class="nhsuk-table__row">
+          {% for patient in patientList.patients %}
+            <tr class="nhsuk-table__row">
               <td class="nhsuk-table__cell">
-                Alex Aarrons
-            </td>
-
-              <td class="nhsuk-table__cell">
-                9623584569
-            </td>
-
-            <td class="nhsuk-table__cell">
-              8 December 1959
-            </td>
-
-
-
-            <td class="nhsuk-table__cell">
-                <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-            </td>
-            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-              <a class="nhsuk-link" href="/lists/remove">Remove</a>
-            </td>
-              </tr>
-
-              <tr role="row" class="nhsuk-table__row">
-                <td class="nhsuk-table__cell">
-                    Ben Benson
-            </td>
-
-                <td class="nhsuk-table__cell">
-                  9875582565
-            </td>
-
-            <td class="nhsuk-table__cell">
-              23 May 1976
-            </td>
-
-            <td class="nhsuk-table__cell">
-                <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-            </td>
-            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-              <a class="nhsuk-link" href="/lists/remove">Remove</a>
-            </td>
-            </tr>
-
-
-            <tr role="row" class="nhsuk-table__row">
-              <td class="nhsuk-table__cell">
-                  Brian Briggs
-            </td>
-
-              <td class="nhsuk-table__cell">
-                9111102224
-            </td>
-
-            <td class="nhsuk-table__cell">
-              9 August 2006
-            </td>
-
-
-            <td class="nhsuk-table__cell">
-                <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-            </td>
-            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-              <a class="nhsuk-link" href="/lists/remove">Remove</a>
-            </td>
-              </tr>
-
-            <tr role="row" class="nhsuk-table__row">
-              <td class="nhsuk-table__cell">
-                  Christin Cuthbert
-            </td>
-
-              <td class="nhsuk-table__cell">
-                999633365
-            </td>
-
-            <td class="nhsuk-table__cell">
-              16 May 2006
-            </td>
-
-            <td class="nhsuk-table__cell">
-                <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-            </td>
-            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-              <a class="nhsuk-link" href="/lists/remove">Remove</a>
-            </td>
-              </tr>
-
-
-            <tr role="row" class="nhsuk-table__row">
-              <td class="nhsuk-table__cell">
-                  Collette Carlisle
-            </td>
-
-              <td class="nhsuk-table__cell">
-                9784512586
-            </td>
-
-            <td class="nhsuk-table__cell">
-              2 May 2002
-            </td>
-
-            <td class="nhsuk-table__cell">
-                <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-            </td>
-            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-              <a class="nhsuk-link" href="/lists/remove">Remove</a>
-            </td>
-              </tr>
-
-              <tr role="row" class="nhsuk-table__row">
-                <td class="nhsuk-table__cell">
-                Daniella Davenport
+                {{ patient.firstName }}
+                {{ patient.lastName }}
               </td>
-
-                <td class="nhsuk-table__cell">
-                  9330254878
-              </td>
-
               <td class="nhsuk-table__cell">
-                11 June 1956
+                {{ patient.nhsNumber }}
               </td>
-
+              <td class="nhsuk-table__cell">
+                {{ patient.dateOfBirth }}
+              </td>
               <td class="nhsuk-table__cell">
                 <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-            </td>
+              </td>
               <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                <a class="nhsuk-link" href="/lists/remove">Remove</a>
+                <a class="nhsuk-link" href="/lists/remove">Remove
               </td>
-                </tr>
-
-
-
-              <tr role="row" class="nhsuk-table__row">
-                <td class="nhsuk-table__cell">
-                    Denis Daniels
-              </td>
-
-                <td class="nhsuk-table__cell">
-                  9025587485
-              </td>
-
-              <td class="nhsuk-table__cell">
-                14 November 1994
-              </td>
-
-              <td class="nhsuk-table__cell">
-                <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-            </td>
-              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                <a class="nhsuk-link" href="/lists/remove">Remove</a>
-              </td>
-                </tr>
-
-                <tr role="row" class="nhsuk-table__row">
-                  <td class="nhsuk-table__cell">
-                     Elle Ellison
-                </td>
-
-                  <td class="nhsuk-table__cell">
-                    9001258457
-                </td>
-
-                <td class="nhsuk-table__cell">
-                  3 March 1958
-                </td>
-
-                <td class="nhsuk-table__cell">
-                    <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-                </td>
-                <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                  <a class="nhsuk-link" href="/lists/remove">Remove</a>
-                </td>
-                  </tr>
-
-                  <tr role="row" class="nhsuk-table__row">
-                    <td class="nhsuk-table__cell">
-                      Fraser Fredricks
-
-                  </td>
-
-                    <td class="nhsuk-table__cell">
-                      9853623256
-                  </td>
-
-                  <td class="nhsuk-table__cell">
-                    2 March 1984
-                  </td>
-
-                  <td class="nhsuk-table__cell">
-                    <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-                </td>
-                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                    <a class="nhsuk-link" href="/lists/remove">Remove</a>
-                  </td>
-                    </tr>
-
-
-                    <tr role="row" class="nhsuk-table__row">
-                      <td class="nhsuk-table__cell">
-                          Greg Gregson
-                    </td>
-
-                      <td class="nhsuk-table__cell">
-                        910200021
-                    </td>
-
-                    <td class="nhsuk-table__cell">
-                      9 September 199
-                    </td>
-
-                    <td class="nhsuk-table__cell">
-                        <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-                    </td>
-                    <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                      <a class="nhsuk-link" href="/lists/remove">Remove</a>
-                    </td>
-                      </tr>
-
-                      <tr role="row" class="nhsuk-table__row">
-                        <td class="nhsuk-table__cell">
-                             Harriet Harrison
-                      </td>
-
-                        <td class="nhsuk-table__cell">
-                          9630021558
-                      </td>
-
-                      <td class="nhsuk-table__cell">
-                        10 January 2000
-                      </td>
-
-                      <td class="nhsuk-table__cell">
-                        <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-                    </td>
-                      <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                        <a class="nhsuk-link" href="/lists/remove">Remove</a>
-                      </td>
-                        </tr>
-
-
-                        <tr role="row" class="nhsuk-table__row">
-                          <td class="nhsuk-table__cell">
-                              India Illingworth
-                        </td>
-
-                          <td class="nhsuk-table__cell">
-                            9856236569
-                        </td>
-
-                        <td class="nhsuk-table__cell">
-                          4 February 1980
-                        </td>
-
-                        <td class="nhsuk-table__cell">
-                            <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-                        </td>
-                        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                          <a class="nhsuk-link" href="/lists/remove">Remove</a>
-                        </td>
-                          </tr>
-
-
-
-
-                        <tr role="row" class="nhsuk-table__row">
-                          <td class="nhsuk-table__cell">
-                              Katehrine Kitson
-                        </td>
-
-                          <td class="nhsuk-table__cell">
-                            9636956814
-                        </td>
-
-                        <td class="nhsuk-table__cell">
-                          20 May 1979
-                        </td>
-
-                        <td class="nhsuk-table__cell">
-                            <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-                        </td>
-                        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-                          <a class="nhsuk-link" href="/lists/remove">Remove</a>
-                        </td>
-                          </tr>
-
-
-
+            </tr>
+          {% endfor %}
 
           <tr role="row" class="nhsuk-table__row">
             <td class="nhsuk-table__cell">
-                Luke Law
-          </td>
-
+              NHS number not found
+            </td>
             <td class="nhsuk-table__cell">
-              9854525125
-
-          </td>
-
-          <td class="nhsuk-table__cell">
-            13 October 2002           </td>
-
-          <td class="nhsuk-table__cell">
-            <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-          </td>
-          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+              9523654781
+            </td>
+            <td class="nhsuk-table__cell"></td>
+            <td class="nhsuk-table__cell"></td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
             <a class="nhsuk-link" href="/lists/remove">Remove</a>
-          </td>
-            </tr>
-
-        <tr role="row" class="nhsuk-table__row">
-          <td class="nhsuk-table__cell">
-              Lucinda Lesley
-      </td>
-
-          <td class="nhsuk-table__cell">
-           9851245252
-      </td>
-
-      <td class="nhsuk-table__cell">
-        13 July 1983
-      </td>
-
-      <td class="nhsuk-table__cell">
-        <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-    </td>
-      <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-        <a class="nhsuk-link" href="/lists/remove">Remove</a>
-      </td>
-  </tr>
-
-
-  <tr role="row" class="nhsuk-table__row">
-    <td class="nhsuk-table__cell">
-        Michael Miller
-</td>
-
-    <td class="nhsuk-table__cell">
-      9520120232
-</td>
-
-<td class="nhsuk-table__cell">
-  13 October 2002
-</td>
-
-<td class="nhsuk-table__cell">
-    <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-</td>
-<td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-  <a class="nhsuk-link" href="/lists/remove">Remove</a>
-</td>
-</tr>
-
-<tr role="row" class="nhsuk-table__row">
-  <td class="nhsuk-table__cell">
-      Nick Nolan
-</td>
-
-  <td class="nhsuk-table__cell">
-   9520124578
-</td>
-
-<td class="nhsuk-table__cell">
-  6 January 1976
-</td>
-
-<td class="nhsuk-table__cell">
-    <a class="nhsuk-link" href="/lists/record/patient-history">Record</a>
-</td>
-<td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-<a class="nhsuk-link" href="/lists/remove">Remove</a>
-</td>
-</tr>
-
-<tr role="row" class="nhsuk-table__row">
-  <td class="nhsuk-table__cell">
-       NHS number not found
-</td>
-
-  <td class="nhsuk-table__cell">
-    9523654781
-</td>
-
-<td class="nhsuk-table__cell">
-
-</td>
-
-<td class="nhsuk-table__cell">
-    <a class="nhsuk-link" href="/lists/record/patient-history"></a>
-</td>
-<td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-<a class="nhsuk-link" href="/lists/remove">Remove</a>
-</td>
-</tr>
-
-<tr role="row" class="nhsuk-table__row">
-  <td class="nhsuk-table__cell">
-    NHS number not found
-
-</td>
-
-  <td class="nhsuk-table__cell">
-    9525885255
-</td>
-
-
-<td class="nhsuk-table__cell">
-
-</td>
-
-<td class="nhsuk-table__cell">
-    <a class="nhsuk-link" href="/lists/record/patient-history"></a>
-</td>
-<td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-<a class="nhsuk-link" href="/lists/remove">Remove</a>
-</td>
-</tr>
-
-
-
+            </td>
+          </tr>
           </tbody>
         </table>
 
