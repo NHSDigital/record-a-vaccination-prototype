@@ -12,7 +12,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <span class="nhsuk-caption-l">St Mary's Hospital</span>
+      <span class="nhsuk-caption-l">{{ (patientList.date | govukDate) if patientList.date else patientList.name }}</span>
       <h1 class="nhsuk-heading-l">Delete {{ patientList.name }} list?</h1>
 
       <p>The list will be deleted but not any vaccination records.</p>
