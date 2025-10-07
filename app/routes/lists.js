@@ -2,6 +2,10 @@ const { randomItem } = require('../lib/utils/random-item.js')
 
 module.exports = router => {
 
+    const listOfFirstNames = ["Scott", "Siera", "Ramsey", "Blair", "Gretchen", "Kelli", "Sheridan", "Anya", "Alexis", "Kegan", "Jamia", "Sunny", "Haley", "Elsa", "Ayanna", "Chiara", "Zander", "Oswaldo", "Paris", "Bennett", "Reyna", "Camryn", "Nehemiah", "Craig", "Jalil", "Derick", "Easton", "Mohammed", "Arnold", "Linnea", "Edna", "Cameron", "Gissell", "Melina", "Annalise", "Jalin", "Aric", "Kentrell", "Nyla", "Leslie", "Maranda", "Kinley", "Montana", "Britney", "Uriah", "Raul", "Vincent", "Dustin", "Grant", "Kia"]
+
+    const listOfLastNames = ["Menendez", "Salisbury", "Mateo", "Alarcon", "Lenz", "Potter", "Kramer", "Trevino", "Singleton", "Batchelor", "Witte", "Rhoades", "Barragan", "Watson", "Fiore", "Beattie", "Parr", "Traylor", "Gillette", "Kim", "Fennell", "Eubanks", "Ko", "Mcfarlane", "Waite", "Gaines", "Rosado", "Rao", "Bynum", "Wentz", "Cheng", "Loera", "Hyman", "Ferrell", "Nixon", "Pierre", "Strand", "Wirth", "Delagarza", "Dixon", "Yoon", "Hines", "Hinds", "Barron", "Bruce", "Pease", "Rhodes", "Doss", "Marsh", "France"]
+
   router.get('/lists', (req, res) => {
     const currentOrganisation = res.locals.currentOrganisation
     const lists = req.session.data.lists.filter((list) => list.organisationId === currentOrganisation.id)
@@ -75,10 +79,6 @@ module.exports = router => {
     const siteId = data.siteId
     const nhsNumbers = data.nhsNumbers.split(/\n/)
     const id = Math.floor(Math.random() * 10000000).toString()
-
-    const listOfFirstNames = ["Scott", "Siera", "Ramsey", "Blair", "Gretchen", "Kelli", "Sheridan", "Anya", "Alexis", "Kegan", "Jamia", "Sunny", "Haley", "Elsa", "Ayanna", "Chiara", "Zander", "Oswaldo", "Paris", "Bennett", "Reyna", "Camryn", "Nehemiah", "Craig", "Jalil", "Derick", "Easton", "Mohammed", "Arnold", "Linnea", "Edna", "Cameron", "Gissell", "Melina", "Annalise", "Jalin", "Aric", "Kentrell", "Nyla", "Leslie", "Maranda", "Kinley", "Montana", "Britney", "Uriah", "Raul", "Vincent", "Dustin", "Grant", "Kia"]
-
-    const listOfLastNames = ["Menendez", "Salisbury", "Mateo", "Alarcon", "Lenz", "Potter", "Kramer", "Trevino", "Singleton", "Batchelor", "Witte", "Rhoades", "Barragan", "Watson", "Fiore", "Beattie", "Parr", "Traylor", "Gillette", "Kim", "Fennell", "Eubanks", "Ko", "Mcfarlane", "Waite", "Gaines", "Rosado", "Rao", "Bynum", "Wentz", "Cheng", "Loera", "Hyman", "Ferrell", "Nixon", "Pierre", "Strand", "Wirth", "Delagarza", "Dixon", "Yoon", "Hines", "Hinds", "Barron", "Bruce", "Pease", "Rhodes", "Doss", "Marsh", "France"]
 
     const patients = nhsNumbers.map(function(nhsNumber) {
       return {
@@ -154,6 +154,33 @@ module.exports = router => {
     res.render('lists/add-more-nhs-numbers', {
       patientList
     })
+  })
+
+  router.post('/lists/:id/nhs-numbers-added', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const patientList = data.lists.find((list) => list.id === id)
+
+    if (!patientList) { return res.redirect('/lists') }
+
+    const nhsNumbers = data.nhsNumbers.split(/\n/)
+
+    for (nhsNumber of nhsNumbers) {
+      patientList.patients.push({
+        nhsNumber: nhsNumber,
+        firstName: randomItem(listOfFirstNames),
+        lastName: randomItem(listOfLastNames),
+        dateOfBirth: "1945-01-18"
+      })
+    }
+
+    // reset values
+    data.date = null
+    data.name = null
+    data.nhsNumbers = null
+
+    res.redirect(`/lists/list/${patientList.id}`)
+
   })
 
   router.get('/lists/list/:id/delete', (req, res) => {
