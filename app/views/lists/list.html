@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = patientList.name %}
+{% set pageName = (patientList.date | govukDate) if patientList.date else patientList.name %}
 {% set site = currentOrganisation.sites | findById(patientList.siteId) %}
 
 {% set currentSection = "lists" %}
@@ -24,7 +24,9 @@
 
         <p>
           <a href="/lists/list/{{ patientList.id }}/add">Add more NHS numbers</a>    &nbsp; &nbsp; &nbsp;
-          <a href="/lists/list/{{ patientList.id }}/edit-name">Edit list name</a>  &nbsp; &nbsp; &nbsp;
+          {% if patientList.name %}
+            <a href="/lists/list/{{ patientList.id }}/edit-name">Edit list name</a>  &nbsp; &nbsp; &nbsp;
+          {% endif %}
           <a href="/lists/list/{{ patientList.id }}/delete">Delete list</a>
         </p>
 

@@ -59,7 +59,7 @@ module.exports = router => {
 
     const date = req.session.data.date
 
-    if (date === 'no-date') {
+    if (date === '') {
 
       res.redirect('/lists/name')
 
