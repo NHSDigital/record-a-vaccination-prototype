@@ -19,6 +19,7 @@ module.exports = router => {
   router.get('/lists/site/:siteId', (req, res) => {
     const currentOrganisation = res.locals.currentOrganisation
     const siteId = req.params.siteId
+    const site = currentOrganisation.sites.find((site) => site.id === siteId)
     const lists = req.session.data.lists.filter((list) => list.organisationId === currentOrganisation.id).filter((list) => list.siteId === siteId)
 
     let justAddedList = null
@@ -28,6 +29,7 @@ module.exports = router => {
 
     res.render('lists/team-lists', {
       lists,
+      site,
       justAddedList
     })
   })
