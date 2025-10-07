@@ -5,26 +5,24 @@
 {% set currentSection = "lists" %}
 
 {% block beforeContent %}
-  {{ backLink({
-    href: "/lists/list",
-    text: "Back"
-  }) }}
+  {{ backLink({ href: "/lists/list/" + patientList.id }) }}
 {% endblock %}
-
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
       <span class="nhsuk-caption-l">St Mary's Hospital</span>
-      <h1 class="nhsuk-heading-l">Delete Staff list?</h1>
+      <h1 class="nhsuk-heading-l">Delete {{ patientList.name }} list?</h1>
 
       <p>The list will be deleted but not any vaccination records.</p>
 
-   <br>
-      <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
-        Yes, delete list
-      </button>
+      <br>
+      <form action="/lists/{{ patientList.id }}/deleted" method="post">
+        {{ button({
+          text: "Yes, delete list"
+        }) }}
+      </form>
 
     </div>
   </div>

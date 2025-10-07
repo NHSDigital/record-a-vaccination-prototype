@@ -156,6 +156,20 @@ module.exports = router => {
     })
   })
 
+  router.post('/lists/:id/deleted', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const patientList = data.lists.find((list) => list.id === id)
+    const siteId = patientList.siteId
+
+    if (!patientList) { return res.redirect('/lists') }
+
+    // Remove item from array using 'splice', which takes an index
+    data.lists.splice(data.lists.indexOf(patientList), 1)
+
+    res.redirect(`/lists/site/${siteId}?justDeleted=true`)
+
+  })
 
 
 }
