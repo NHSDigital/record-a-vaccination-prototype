@@ -12,126 +12,83 @@
   }) }}
 {% endblock %}
 
-
-
 {% block content %}
-
-
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-<div class="nhsuk-form-group">
+      <form action="/lists/date-answer" method="post">
 
-  <form action="/lists/date-answer" method="post">
+        {% set dateinputHtml %}
+          {{ dateInput({
+            id: "other-date",
+            namePrefix: "otherDate",
+            values: data.otherDate,
+            fieldset: {
+              legend: {
+                text: "Date",
+                classes: "nhsuk-label--s",
+                isPageHeading: false
+              }
+            },
+            hint: {
+              text: "For example, 15 3 2026"
+            }
+          }) }}
+        {% endset %}
 
-  <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
-    <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+        {% set items = [] %}
+        {% for date in (dates) %}
+          {% set text %}
+            {% if loop.index == 1 %}
+              Today ({{ (date | govukDate(showWeekday=true)) }})
+            {% else %}
+              {{ (date | govukDate(showWeekday=true)) }}
+            {% endif %}
+          {% endset %}
 
+          {% set items = (items.push({
+            text: text,
+            value: date
+          }), items) %}
+        {% endfor %}
 
-    {% from 'radios/macro.njk' import radios %}
-    {% from 'date-input/macro.njk' import dateInput %}
+        {% set items = (items.push({
+          divider: 'or'
+        }), items) %}
 
-
-    {% set dateinputHtml %}
-
-    {{ dateInput({
-      id: "example",
-      namePrefix: "example",
-      fieldset: {
-        legend: {
-          text: "Select a date",
-          classes: "nhsuk-label--s",
-          isPageHeading: false
-        }
-      },
-      hint: {
-        text: "For example, 15 3 1984"
-      },
-      items: [
-        {
-          name: "day",
-          classes: "nhsuk-input--width-2"
-        },
-        {
-          name: "month",
-          classes: "nhsuk-input--width-2"
-        },
-        {
-          name: "year",
-          classes: "nhsuk-input--width-4"
-        }
-      ]
-    }) }}
-
-    {% endset -%}
-
-
-
-    {{ radios({
-      idPrefix: "example",
-      name: "date",
-      value: data['date'],
-      fieldset: {
-        legend: {
-          text: "Choose a date",
-          classes: "nhsuk-fieldset__legend--l",
-          isPageHeading: true
-        }
-      },
-      items: [
-        {
-          value: "2025-07-07",
-          text: "Today (Monday 7 July 2025)",
-          dateKnown: 'yes'
-        },
-        {
-          value: "2025-07-08",
-          text: "Tuesday 8 July 2025"
-        },
-        {
-          value: "2025-07-09",
-          text: "Wednesday 9 July 2025"
-        },
-        {
-          value: "2025-07-10",
-          text: "Thursday 10 July 2025"
-        },
-        {
-          value: "2025-07-11",
-          text: "Friday 11 July 2025"
-        },
-        {
-          divider: "or"
-        },
-
-         {
+        {% set items = (items.push({
           value: "other-date",
           text: "Select a different date",
           conditional: {
-             html: dateinputHtml
+            html: dateinputHtml
           }
-        },
-        {
-          value: "",
+        }), items) %}
+
+        {% set items = (items.push({
+          value: "no-date",
           text: "No date"
-        }
-      ]
-    }) }}
+        }), items) %}
 
-  </div>
+        {{ radios({
+          idPrefix: "date",
+          name: "date",
+          value: data.date,
+          fieldset: {
+            legend: {
+              text: "Choose a date",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          items: items
+        }) }}
 
-
-{{ button({
-  text: "Continue"
-}) }}
-
-</form>
-
+        {{ button({
+          text: "Continue"
+        }) }}
+      </form>
 
     </div>
   </div>
-
-
-
 {% endblock %}
 

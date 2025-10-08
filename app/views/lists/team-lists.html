@@ -18,19 +18,18 @@
     <div class="nhsuk-grid-column-two-thirds">
 
       {% if justAddedList %}
-        <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
-          <div class="nhsuk-notification-banner__header">
-            <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
-              Success
-            </h2>
-          </div>
-          <div class="nhsuk-notification-banner__content">
-            <h3 class="nhsuk-notification-banner__heading">
-              {{ justAddedList.name }} list added
-            </h3>
-            <p>It can take several minutes to check NHS numbers.</p>
-          </div>
-        </div>
+
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            {{ (justAddedList.date | govukDate) if justAddedList.date else  justAddedList.name }} list added
+          </h3>
+          <p>It can take several minutes to check NHS numbers.</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
       {% endif %}
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>

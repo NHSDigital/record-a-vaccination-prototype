@@ -1,4 +1,6 @@
 const { randomItem } = require('../lib/utils/random-item.js')
+const { dateFromYearMonthDay } = require('../lib/utils/date-from-year-month-day.js')
+
 
 module.exports = router => {
 
@@ -58,8 +60,26 @@ module.exports = router => {
 
   })
 
-  router.post('/lists/date-answer', (req, res) => {
+  router.get('/lists/date', (req, res) => {
+    const today = new Date()
+    const day = 86400000 // number of milliseconds in a day
+    const daysToInclude = 5
 
+    let dates = []
+
+    for (let i = 0; i < daysToInclude; i++) {
+      let date = new Date(today.getTime() - (i * day))
+
+      dates.push(date.toISOString().substring(0,10))
+    }
+
+    res.render('lists/date', {
+      dates
+    })
+
+  })
+
+  router.post('/lists/date-answer', (req, res) => {
     const date = req.session.data.date
 
     if (date === '') {
@@ -78,10 +98,29 @@ module.exports = router => {
     const currentOrganisation = res.locals.currentOrganisation
 
     const date = data.date
+    const otherDate = data.otherDate
     const name = data.name
     const siteId = data.siteId
     const nhsNumbers = data.nhsNumbers.split(/\n/)
     const id = Math.floor(Math.random() * 10000000).toString()
+
+    // Only 1 of these is set
+    let listDate, listName
+
+    if (date === "") {
+      // Name based list
+      listDate = null
+      listName = name
+    } else {
+      // Date based list
+      listName = null
+
+      if (date === "other-date") {
+        listDate = dateFromYearMonthDay(otherDate.year, otherDate.month, otherDate.day).toISOString().substring(0,10)
+      } else {
+        listDate = date
+      }
+    }
 
     const patients = nhsNumbers.map(function(nhsNumber) {
       return {
@@ -92,18 +131,18 @@ module.exports = router => {
       }
     })
 
-
     data.lists.push({
       id: id,
       organisationId: currentOrganisation.id,
       siteId: siteId,
-      date: date,
-      name: name,
+      date: listDate,
+      name: listName,
       patients: patients
     })
 
     // reset values
     data.date = null
+    data.otherDate = null
     data.name = null
     data.nhsNumbers = null
 
@@ -179,6 +218,7 @@ module.exports = router => {
 
     // reset values
     data.date = null
+    data.otherDate = {}
     data.name = null
     data.nhsNumbers = null
 
