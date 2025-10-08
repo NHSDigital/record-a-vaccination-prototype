@@ -7,19 +7,22 @@ module.exports = router => {
     const listOfLastNames = ["Menendez", "Salisbury", "Mateo", "Alarcon", "Lenz", "Potter", "Kramer", "Trevino", "Singleton", "Batchelor", "Witte", "Rhoades", "Barragan", "Watson", "Fiore", "Beattie", "Parr", "Traylor", "Gillette", "Kim", "Fennell", "Eubanks", "Ko", "Mcfarlane", "Waite", "Gaines", "Rosado", "Rao", "Bynum", "Wentz", "Cheng", "Loera", "Hyman", "Ferrell", "Nixon", "Pierre", "Strand", "Wirth", "Delagarza", "Dixon", "Yoon", "Hines", "Hinds", "Barron", "Bruce", "Pease", "Rhodes", "Doss", "Marsh", "France"]
 
   router.get('/lists', (req, res) => {
+    const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
-    const lists = req.session.data.lists.filter((list) => list.organisationId === currentOrganisation.id)
+    const lists = data.lists.filter((list) => list.organisationId === currentOrganisation.id)
+
+    const vaccinesAdded = data.vaccineStock.length
+
+    if (vaccinesAdded === 0) { return res.render('lists/no-vaccines-added') }
+    if (lists.length === 0) { return res.render('lists/no-lists-created') }
 
     const listSiteIds = [...new Set(lists.map((list) => list.siteId))]
     const sites = currentOrganisation.sites.filter((site) => listSiteIds.includes(site.id))
 
-    if (lists.length === 0) {
-      res.render('lists/no-lists-created')
-    } else {
-      res.render('lists/index', {
-        sites
-      })
-    }
+    res.render('lists/index', {
+      sites
+    })
+
   })
 
   router.get('/lists/site/:siteId', (req, res) => {
