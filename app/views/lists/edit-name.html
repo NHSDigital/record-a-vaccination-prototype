@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "lists" %}
+{% set site = currentOrganisation.sites | findById(patientList.siteId) %}
+{% set pageName = "Name your list" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/lists/list/" + patientList.id }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <span class="nhsuk-caption-l">{{ site.name }}</span>
+
+      <form action="/lists/{{ patientList.id }}/update-name" method="post" novalidate>
+
+        {{ input({
+          label: {
+            text: "Edit list name",
+            isPageHeading: true,
+            classes: "nhsuk-label--l"
+          },
+          hint: {
+            text: "For example, Maternity list"
+          },
+          id: "name",
+          name: "name",
+          value: patientList.name
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

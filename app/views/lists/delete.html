@@ -1,30 +1,35 @@
 {% extends 'layout.html' %}
 
 {% set pageName = "Delete list" %}
+{% set site = currentOrganisation.sites | findById(patientList.siteId) %}
 
 {% set currentSection = "lists" %}
 
 {% block beforeContent %}
-  {{ backLink({
-    href: "/lists/list",
-    text: "Back"
-  }) }}
+  {{ backLink({ href: "/lists/list/" + patientList.id }) }}
 {% endblock %}
-
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-
-      <h1 class="nhsuk-heading-l">Delete St Mary's Hospital 17 July 2025?</h1>
+      <span class="nhsuk-caption-l">{{ site.name }}</span>
+      <h1 class="nhsuk-heading-l">
+        {% if patientList.date %}
+          Delete list for {{ patientList.date | govukDate }}?
+        {% else %}
+          Delete {{ patientList.name }} list?
+        {% endif %}
+      </h1>
 
       <p>The list will be deleted but not any vaccination records.</p>
 
-   <br>
-      <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
-        Yes, delete list
-      </button>
+      <br>
+      <form action="/lists/{{ patientList.id }}/deleted" method="post">
+        {{ button({
+          text: "Yes, delete list"
+        }) }}
+      </form>
 
     </div>
   </div>

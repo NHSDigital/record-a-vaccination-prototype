@@ -32,8 +32,13 @@
       },
       {
         href: "/record-vaccinations",
-        text: ("Record vaccinations <span class=\"nhsuk-tag app-tag--header nhsuk-u-margin-left-2\">New</span>") | safe,
+        text: "Record vaccinations",
         active: (currentSection == "vaccinate")
+      },
+      {
+        href: "/lists",
+        text: ("Lists <span class=\"nhsuk-tag app-tag--header nhsuk-u-margin-left-2\">New</span>") | safe,
+        active: (currentSection == "lists")
       },
       {
         href: "/vaccines",
@@ -42,7 +47,7 @@
       } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
       {
         href: "/records",
-        html: "Records <span class=\"nhsuk-tag app-tag--header nhsuk-u-margin-left-2\">New</span>" | safe,
+        text: "Records",
         active: (currentSection == "records")
       } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
       {

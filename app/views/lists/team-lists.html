@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Anne Ward Maternity Unit" %}
+{% set pageName = site.name %}
 
 {% set currentSection = "lists" %}
 
@@ -11,52 +11,88 @@
   }) }}
 {% endblock %}
 
-
-
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+      {% if justAddedList %}
+
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            {{ (justAddedList.date | govukDate) if justAddedList.date else  justAddedList.name }} list added
+          </h3>
+          <p>It can take several minutes to check NHS numbers.</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
+      {% if (lists | length) > 0 %}
+        <table class="nhsuk-table">
+          <caption class="nhsuk-table__caption"></caption>
+          <thead class="nhsuk-table__head" role="rowgroup">
+            <tr role="row">
+              <th scope="col" class="nhsuk-table__header nhsuk-u-width-half" role="columnheader">List</th>
+              <th scope="col" class="nhsuk-table__header nhsuk-table__cell--numeric nhsuk-u-width-one-third" role="columnheader">NHS numbers</th>
+            </tr>
+          </thead>
+          <tbody class="nhsuk-table__body">
+            {% for list in lists %}
 
-<table class="nhsuk-table-responsive" role="table">
-  <caption class="nhsuk-table__caption"></caption>
-  <thead class="nhsuk-table__head" role="rowgroup">
-    <tr role="row">
-      <th scope="col" class="nhsuk-table__header nhsuk-u-width-one-half" role="columnheader">Date</th>
-      <th scope="col" class="nhsuk-table__header nhsuk-table__cell--numeric nhsuk-u-width-one-quarter" role="columnheader">Number of patients</th>
+              <tr class="nhsuk-table__row" role="row">
+                <td class="nhsuk-table__cell" role="cell">
+                  <a href="/lists/list/{{ list.id }}">
+                    {% if list.date %}
+                      {{ list.date | govukDate }}
+                    {% else %}
+                      {{ list.name }}
+                    {% endif %}
+                  </a>
+                </td>
+                <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                  {% if list.id == justAddedList.id %}
+                    <span id="loadingText"> 1 checked out of {{ list.patients | length }}</span>
+                  {% else %}
+                    {{ list.patients | length }}
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>No lists added.</p>
+      {% endif %}
 
-    </tr>
-  </thead>
-  <tbody class="nhsuk-table__body">
-   <tr class="nhsuk-table__row" role="row">
-    <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p><a href="/lists/list">No date</a></p>
-     <td class="nhsuk-table__cell nhsuk-table__cell--numeric" role="cell">100</td>
-
-   </tr>
-    <tr class="nhsuk-table__row" role="row">
-     <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p><a href="/lists/list">Wednesday 9 July 2025</a></p>
-      <td class="nhsuk-table__cell nhsuk-table__cell--numeric" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Number of patients </span>32</td>
-    </tr>
-
-    <tr class="nhsuk-table__row" role="row">
-      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p><a href="/lists/list">Thursday 10 July 2025</a></p>
-       <td class="nhsuk-table__cell nhsuk-table__cell--numeric" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Number of patients </span>25</td>
-
-     </tr>
-
-     <tr class="nhsuk-table__row" role="row">
-      <td class="nhsuk-table__cell" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Date </span><p><a href="/lists/list">Friday 11 July 2025</a></p>
-       <td class="nhsuk-table__cell nhsuk-table__cell--numeric" role="cell"><span class="nhsuk-table-responsive__heading" aria-hidden="true">Number of patients </span>40</td>
-
-     </tr>
-  </tbody>
-</table>
-
+      {{ button({
+        text: "Add a list",
+        href: "/lists/date?siteId=" + site.id
+      }) }}
 
     </div>
   </div>
+
+  {% if justAddedList %}
+    <script>
+      let current = 1;
+      const total = {{ justAddedList.patients | length }};
+      const textElement = document.getElementById("loadingText");
+
+      const interval = setInterval(() => {
+        current++;
+        if (current <= total) {
+          textElement.textContent = ` ${current} checked out of ${total}`;
+        } else {
+          clearInterval(interval);
+          textElement.textContent = `${total}`;
+        }
+      }, 500); // Update every 500ms (half a second)
+    </script>
+  {% endif %}
 
 {% endblock %}

@@ -11,6 +11,7 @@ module.exports = {
   users: users,
   vaccines: vaccines,
   vaccineStock: [],
+  lists: [],
   nhsNumberKnown: "yes",
   currentUserId: "2387441662601",
   currentOrganisationId: "RW3",
