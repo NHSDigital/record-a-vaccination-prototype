@@ -6,75 +6,200 @@
 
 {% block content %}
   <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-two-thirds">
-
-  
-
-
-  <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-
-
-      <h1 class="nhsuk-heading-l">Records</h1>
-      <p class="nhsuk-body-l">Search for a vaccination record you want to view or edit.</p>
-
-      <form action="/records/answer-search" method="post" novalidate>
-
-        {% set nhsNumberHtml %}
-
-          {{ input({
-            id: "nhsNumber",
-            name: "nhsNumber",
-            classes: "nhsuk-input--width-10",
-            inputmode: "numeric",
-
-            value: data.nhsNumber,
-            hint: {
-              text: "For example, 485 777 3456"
-            }
-          }) }}
-        {% endset %}
-
-
-        {{ radios({
-          idPrefix: "nhsNumberKnown",
-          name: "nhsNumberKnown",
-          fieldset: {
-            legend: {
-              html: "How do you want to search for a record?",
-              classes: "nhsuk-fieldset__legend--m",
-              isPageHeading: false
-            }
-          },
-          value: data.nhsNumberKnown,
-          items: [
-            {
-              value: "yes",
-              text: "NHS number",
-              conditional: {
-                html: nhsNumberHtml
-              }
-            },
-            {
-              value: "no",
-              text: "Patient details"
-            }
-          ]
-        }) }}
-
-        {{ button({
-          text: "Continue"
-        })}}
-      </form>
-
-
+      <h1 class="nhsuk-heading-xl">Records</h1>
 
     </div>
   </div>
 
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      {% set filtersHtml %}
+
+        <form action="/records" method="get" novalidate>
+
+          <div class="app-search">
+
+            <div class="app-search--input">
+              {{ input({
+                type: "search",
+                name: "nameOrNhsNumber",
+                value: data.nameOrNhsNumber,
+                label: {
+                  text: "Patient name or NHS number"
+                }
+              }) }}
+            </div>
+
+            <div class="app-search--button">
+              {{ button({
+                classes: "nhsuk-u-margin-left-4 app-button--small",
+                text: "Search"
+              }) }}
+            </div>
+          </div>
+
+          {% set additionalFiltersHtml %}
+            {% set vaccineItems = [] %}
+            {% for vaccine in (vaccinesRecorded | sort(false, false)) %}
+              {% set vaccineItems = (vaccineItems.push({
+                value: vaccine,
+                text: (vaccine | capitaliseFirstLetter)
+              }), vaccineItems) %}
+            {% endfor %}
 
 
+            {{ checkboxes({
+              name: "vaccine",
+              classes: "app-checkboxes--small",
+              fieldset: {
+                legend: {
+                  text: "Vaccine",
+                  classes: "nhsuk-fieldset__legend--s nhsuk-u-margin-bottom-1"
+                }
+              },
+              items: vaccineItems
+            }) }}
 
+            {{ input({
+              name: "batchNumber",
+              classes: "nhsuk-input--width-20",
+              label: {
+                text: "Vaccine batch number",
+                classes: "nhsuk-label--s"
+              }
+            }) }}
+
+            {{ dateInput({
+              id: "dateOfBirth",
+              namePrefix: "dateOfBirth",
+              fieldset: {
+                legend: {
+                  text: "Patient date of birth",
+                  classes: "nhsuk-fieldset__legend--s nhsuk-u-margin-bottom-1"
+                }
+              },
+              errorMessage: {
+                text: dateOfBirthError
+              } if dateOfBirthError,
+              items: [
+                {
+                  name: "day",
+                  classes: "nhsuk-input--width-2 " + ("nhsuk-input--error" if dateOfBirthError else ""),
+                  value: data.dateOfBirth.day
+                },
+                {
+                  name: "month",
+                  classes: "nhsuk-input--width-2 " + ("nhsuk-input--error" if dateOfBirthError else ""),
+                  value: data.dateOfBirth.month
+                },
+                {
+                  name: "year",
+                  classes: "nhsuk-input--width-4 " + ("nhsuk-input--error" if dateOfBirthError else ""),
+                  value: data.dateOfBirth.year
+                }
+              ]
+            }) }}
+
+            {% set vaccinatorItems = [{
+              value: "",
+              text: ""
+            }] %}
+
+            {% for vaccinator in (vaccinators | sort(false, false)) %}
+              {% set vaccinatorItems = (vaccinatorItems.push({
+                value: vaccinator.id,
+                text: (vaccinator.firstName + " " + vaccinator.lastName)
+              }), vaccinatorItems) %}
+            {% endfor %}
+
+
+            {{ select({
+              name: "vaccinatorId",
+              label: {
+                text: "Vaccinator",
+                classes: "nhsuk-label--s"
+              },
+              items: vaccinatorItems
+            }) }}
+
+            {{ button({
+              text: "Update results",
+              classes: "nhsuk-button--secondary"
+            }) }}
+          {% endset %}
+
+          {{ details({
+            summaryText: "Additional filters",
+            html: additionalFiltersHtml
+          }) }}
+        </form>
+      {% endset %}
+
+
+      {{ card({
+        classes: "nhsuk-u-margin-top-0 app-card--filters",
+        heading: "Find a record",
+        feature: true,
+        descriptionHtml: filtersHtml
+      }) }}
+
+
+      <h2 class="nhsuk-heading-m">{{ vaccinationsRecorded | length | plural("record") }}
+      {% if data.nameOrNhsNumber %} matching {{ data.nameOrNhsNumber }}{% endif %}
+      </h2>
+
+      {% set resultsTableHtml %}
+        <table class="nhsuk-table">
+          <thead>
+            <tr>
+              <th class="">Patient</th>
+              <th class="">Date</th>
+              <th class="nhsuk-u-width-one-third">Vaccine</th>
+              <th class="">Vaccinator</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for record in vaccinationsRecorded %}
+              <tr>
+                <td>
+                  <a href="/records/records/{{ record.id }}">{{ record.patient.name }}</a><br>
+                  <span class="nhsuk-u-secondary-text-colour nhsuk-u-nowrap">{{ record.patient.nhsNumber }}</span>
+                </td>
+                <td>
+                  <span class="nhsuk-u-nowrap">
+                    {{ record.date | isoDateFromDateInput | govukDate(truncate=true) }}
+                  </span><br>
+                  <span class="nhsuk-u-secondary-text-colour nhsuk-u-nowrap">13:14</span>
+                </td>
+                <td>
+                  {{ record.vaccine | capitaliseFirstLetter }}<br>
+                  {{ record.vaccineProduct }}<br>
+                  <span class="nhsuk-u-secondary-text-colour">{{ record.batchNumber }}</span>
+                </td>
+                <td>
+                  {% set vaccinator =  data.users | findById(record.vaccinatorId) %}
+                  {{ vaccinator.firstName }}
+                  {{ vaccinator.lastName }}
+                </td>
+              </tr>
+
+
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endset %}
+
+      {{ card({
+        classes: "nhsuk-u-margin-top-0",
+        descriptionHtml: resultsTableHtml
+      }) }}
+
+        <p>Showing 1 to {{ data.vaccinationsRecorded | length }} of {{ data.vaccinationsRecorded | length }} records<p>
+
+    </div>
+  </div>
 
 {% endblock %}

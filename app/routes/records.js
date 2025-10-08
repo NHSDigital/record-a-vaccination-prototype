@@ -1,5 +1,53 @@
 module.exports = router => {
 
+  router.get('/records', (req, res) => {
+
+    const data = req.session.data
+
+    const currentOrganisation = res.locals.currentOrganisation
+
+    let vaccinationsRecorded = data.vaccinationsRecorded.filter((vaccination) => vaccination.organisationId === currentOrganisation.id)
+
+    const totalVaccinationsRecorded = vaccinationsRecorded.length
+
+    // Get a list of all the different vaccine names recorded so far
+    const vaccinesRecorded = [...new Set(vaccinationsRecorded
+      .map((record) => record.vaccine))]
+
+    const idOfVaccinators = [...new Set(vaccinationsRecorded.map((vaccination) => vaccination.vaccinatorId))]
+
+    const vaccinators = data.users.filter((user) => idOfVaccinators.includes(user.id))
+
+    const nameOrNhsNumberSearch = data.nameOrNhsNumber
+
+    if (nameOrNhsNumberSearch && nameOrNhsNumberSearch != "") {
+      vaccinationsRecorded = vaccinationsRecorded.filter(function(record) {
+        return (
+          record.patient.name.toLowerCase().startsWith(nameOrNhsNumberSearch.toLowerCase()) ||
+          (record.patient.nhsNumber === nameOrNhsNumberSearch)
+        )
+      })
+    }
+
+    if (data.vaccinatorId && data.vaccinatorId != "") {
+      vaccinationsRecorded = vaccinationsRecorded.filter(function(record) {
+        return (
+          record.vaccinatorId === data.vaccinatorId
+        )
+      })
+    }
+
+    if (totalVaccinationsRecorded === 0) {
+      res.render('records/no-vaccinations-recorded')
+    } else {
+      res.render('records/index', {
+        vaccinesRecorded,
+        vaccinationsRecorded,
+        vaccinators
+      })
+    }
+  })
+
  router.post('/records/answer-search', (req, res) => {
   const data = req.session.data
 
