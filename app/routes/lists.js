@@ -153,12 +153,32 @@ module.exports = router => {
   router.get('/lists/list/:id', (req, res) => {
     const data = req.session.data
     const id = req.params.id
+    const q = req.query.q
     const patientList = data.lists.find((list) => list.id === id)
 
     if (!patientList) { return res.redirect('/lists') }
 
+    const totalPatients = patientList.patients.length
+
+    let patients = patientList.patients
+
+    if (q && q !== "") {
+
+      patients = patients.filter(function(patient) {
+        return (
+          patient.firstName.toLowerCase().startsWith(q.toLowerCase()) ||
+          patient.lastName.toLowerCase().startsWith(q.toLowerCase()) ||
+          (patient.firstName + " " + patient.lastName).toLowerCase().startsWith(q.toLowerCase()) ||
+          patient.nhsNumber === q
+        )
+
+      })
+    }
+
     res.render('lists/list', {
-      patientList
+      patientList,
+      patients,
+      totalPatients
     })
   })
 

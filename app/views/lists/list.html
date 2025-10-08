@@ -54,7 +54,7 @@
     <div class="nhsuk-grid-column-full">
 
       <table class="nhsuk-table">
-        <caption class="nhsuk-table__caption">Showing {{ patientList.patients | length }} of {{ patientList.patients | length }} patients</caption>
+        <caption class="nhsuk-table__caption">Showing {{ patients | length }} of {{ totalPatients }} patients</caption>
         <thead class="nhsuk-table__head" role="rowgroup">
             <thead role="rowgroup" class="nhsuk-table__head">
                 <tr role="row">
@@ -83,7 +83,7 @@
 
         <tbody class="nhsuk-table__body">
 
-          {% for patient in patientList.patients %}
+          {% for patient in patients %}
             <tr class="nhsuk-table__row">
               <td class="nhsuk-table__cell">
                 {{ patient.firstName }}
