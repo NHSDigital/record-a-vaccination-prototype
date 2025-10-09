@@ -2,7 +2,7 @@
 
 {% set currentSection = "lists" %}
 
-{% set pageName = "Name your list" %}
+{% set pageName = "List name" %}
 
 {% block beforeContent %}
   {{ backLink({ href: "/lists/date" }) }}
@@ -29,7 +29,7 @@
 
         {{ input({
           label: {
-            text: "List name",
+            text: "Enter a name for your list",
             isPageHeading: true,
             classes: "nhsuk-label--l"
           },
