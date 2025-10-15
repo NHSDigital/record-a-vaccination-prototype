@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Which legal mechanism are you using?" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/batch" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      <form action="/record-vaccinations/answer-legal-mechanism" method="post" novalidate>
+
+        {{ radios({
+          idPrefix: "legal-mechanism",
+          name: "legalMechanism",
+          fieldset: {
+            legend: {
+              text: ("Which legal mechanism are you using?" if data.vaccinationToday == 'yes' else "Which legal mechanism was used?"),
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          value: data.legalMechanism,
+          errorMessage: {
+            text: legalMechanismError.text
+          } if legalMechanismError,
+          items: [
+            {
+              value: "National protocol",
+              text: "National protocol (NP)"
+            },
+            {
+              value: "Patient group direction",
+              text: "Patient group direction (PGD)"
+            },
+            {
+              value: "Patient specific direction",
+              text: "Patient specific direction (PSD)"
+            },
+            {
+              value: "Written instruction",
+              text: "Written instruction (WI)",
+              hint: {
+                text: "Occupational health only"
+              }
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
