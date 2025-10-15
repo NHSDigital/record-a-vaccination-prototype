@@ -70,7 +70,7 @@
               text: "Site"
             },
             value: {
-              text: vaccination.deliveryTeam
+              text: (currentOrganisation.sites | findById(data.siteId)).name
             },
             actions: {
               items: [
