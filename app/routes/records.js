@@ -53,7 +53,8 @@ module.exports = router => {
 
   if (data.nhsNumberKnown === "yes") {
 
-    req.session.data.patientName = "Jodie Brown"
+    req.session.data.firstName = "Jodie"
+    req.session.data.firstName = "Brown"
     req.session.data.dateOfBirth = {day: "15", month: "8", year: "1949"}
     req.session.data.postcode = "GD3 I83"
 
@@ -157,7 +158,6 @@ module.exports = router => {
 
     if (firstName && lastName && dateOfBirth) {
 
-      data.patientName = firstName + " " + lastName
       data.nhsNumber = '9123456788'
 
       res.redirect('/records/patient-history')

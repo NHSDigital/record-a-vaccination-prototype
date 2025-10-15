@@ -190,7 +190,8 @@ module.exports = router => {
 
     if (nhsNumberKnown === "yes" && nhsNumber.match(/^\d{10}$/) &&  nhsNumber.startsWith('9')) {
 
-      req.session.data.patientName = "Jodie Brown"
+      req.session.data.firstName = "Jodie"
+      req.session.data.lastName = "Brown"
       req.session.data.dateOfBirth = {day: "15", month: "8", year: "1949"}
       req.session.data.postcode = "GD3 I83"
 
@@ -309,7 +310,8 @@ module.exports = router => {
       // Otherwise pretend there is a single result and
       // go to patient details page
       } else {
-        data.patientName = 'Jodie Brown'
+        data.firstName = 'Jodie'
+        data.lastName =  'Brown'
         data.nhsNumber = '9123456788'
         res.redirect('/record-vaccinations/patient-history')
       }
@@ -553,7 +555,7 @@ module.exports = router => {
 
       nextPage = "/record-vaccinations/eligibility?showErrors=yes"
 
-    } else if (data.patientName && data.patientName != "" && data.repeatPatient === "yes") {
+    } else if (data.firstName && data.firstName != "" && data.repeatPatient === "yes") {
 
       if (data.vaccine === "Pertussis" || ((data.vaccine == "RSV") && (eligibility === "Pregnant"))) {
         nextPage = "/record-vaccinations/patient-estimated-due-date"
@@ -705,7 +707,8 @@ module.exports = router => {
 
     if (answer === 'same-vaccination-another-patient') {
 
-      req.session.data.patientName = ""
+      req.session.data.firstName = ""
+      req.session.data.lastName = ""
       req.session.data.nhsNumber = ""
 
       // newly added batch becomes the default

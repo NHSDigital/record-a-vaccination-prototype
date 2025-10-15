@@ -22,12 +22,12 @@
       {% if recordDeleted %}
         {{ panel({
           titleText: "Record deleted",
-          text: (data.patientName + "’s " + recordDeleted + " record has been deleted."),
+          text: (data.firstName + " " + data.lastName + "’s " + recordDeleted + " record has been deleted."),
           classes: "nhsuk-u-margin-bottom-8"
         }) }}
       {% endif %}
 
-      <h1 class="nhsuk-heading-l">{{ data.patientName }}’s vaccination records</h1>
+      <h1 class="nhsuk-heading-l">{{ data.firstName }} {{ data.lastName }}’s vaccination records</h1>
 
       {{ summaryList({
         rows: [
@@ -36,7 +36,7 @@
               text: "Name"
             },
             value: {
-              text: data.patientName
+              text: (data.firstName + " " + data.lastName)
             }
           },
           {
