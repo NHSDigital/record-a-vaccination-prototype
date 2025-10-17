@@ -44,6 +44,23 @@
             value: {
               html: site.name
             }
+          },
+          {
+            key: {
+              text: "Legal mechanism"
+            },
+            value: {
+              html: (vaccine.legalMechanisms | join("<br>"))
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "legal mechanism"
+                }
+              ]
+            }
           }
         ]
       }) }}

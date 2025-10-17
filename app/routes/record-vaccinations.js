@@ -407,6 +407,26 @@ module.exports = router => {
 
   })
 
+  router.get('/record-vaccinations/legal-mechanism', (req, res) => {
+    const data = req.session.data
+
+    const vaccine = data.vaccineStock.find(function(batch) {
+      return (batch.vaccineProduct === data.vaccineProduct) &&
+        (batch.vaccine === data.vaccine)
+    })
+    if (!vaccine) { res.redirect('/record-vaccinations'); return }
+
+    const allLegalMechanisms = data.legalMechanisms
+
+    const legalMechanisms = allLegalMechanisms.filter((legalMechanism) => {
+      return vaccine.legalMechanisms.includes(legalMechanism.value)
+    })
+
+    res.render('record-vaccinations/legal-mechanism', {
+      legalMechanisms
+    })
+
+  })
 
   router.get('/record-vaccinations/patient-estimated-due-date', (req, res) => {
 
@@ -820,6 +840,18 @@ module.exports = router => {
     const vaccineBatch = data.vaccineBatch
     const vaccine = data.vaccine
 
+    const vaccineOptions = data.vaccineStock.find(function(batch) {
+      return (batch.vaccineProduct === data.vaccineProduct) &&
+        (batch.vaccine === data.vaccine)
+    })
+    if (!vaccineOptions) { res.redirect('/record-vaccinations'); return }
+
+    const allLegalMechanisms = data.legalMechanisms
+
+    const legalMechanisms = allLegalMechanisms.filter((legalMechanism) => {
+      return vaccineOptions.legalMechanisms.includes(legalMechanism['value'])
+    })
+
     let redirectPath
 
     if (vaccineBatch === "add-new") {
@@ -827,7 +859,16 @@ module.exports = router => {
     } else if (!vaccineBatch) {
       redirectPath = "/record-vaccinations/batch?showError=yes"
     } else if (["COVID-19", "flu", "flu (London service)", "RSV", "pneumococcal"].includes(data.vaccine)) {
-      redirectPath = "/record-vaccinations/legal-mechanism"
+
+      if (legalMechanisms.length > 1) {
+        redirectPath = "/record-vaccinations/legal-mechanism"
+      } else {
+        // Set legal mechanism to the only option available and skip
+        // the question
+        data.legalMechanism = legalMechanisms[0].value
+        redirectPath = "/record-vaccinations/eligibility"
+      }
+
     } else if (data.repeatPatient === "yes") {
       redirectPath = "/record-vaccinations/patient-estimated-due-date"
     } else {
