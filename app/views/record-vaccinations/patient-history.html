@@ -29,17 +29,16 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Check {{ data.patientName }}’s details and vaccination history</h1>
+      <h1 class="nhsuk-heading-l">Check {{ data.firstName }} {{ data.lastName }}’s details and vaccination history</h1>
 
       {{ summaryList({
-        classes: 'xnhsuk-summary-list--no-border',
         rows: [
           {
             key: {
               text: "Name"
             },
             value: {
-              text: data.patientName
+              text: (data.firstName + " " + data.lastName)
             }
           },
           {

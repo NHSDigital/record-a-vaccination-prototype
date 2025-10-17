@@ -75,7 +75,7 @@
               text: "Name"
             },
             value: {
-              text: (data.patientName if data.patientName else data.firstName + " " + data.lastName)
+              text: (data.firstName + " " + data.lastName)
             },
             actions: {
               items: [
@@ -190,7 +190,7 @@
               text: "Site"
             },
             value: {
-              text: (currentOrganisation.sites | findById(data.deliveryTeam)).name
+              text: (currentOrganisation.sites | findById(data.siteId)).name
             },
             actions: {
               items: [
@@ -232,6 +232,23 @@
                   href: ("/record-vaccinations/add-batch" if data.vaccineBatch == "add-new" else "/record-vaccinations/batch"),
                   text: "Change",
                   visuallyHiddenText: "vaccine batch"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Legal mechanism"
+            },
+            value: {
+              text: data.legalMechanism
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/legal-mechanism",
+                  text: "Change",
+                  visuallyHiddenText: "legal mechanism"
                 }
               ]
             }

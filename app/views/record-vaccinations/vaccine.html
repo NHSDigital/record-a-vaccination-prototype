@@ -40,9 +40,9 @@
 
       <form action="/record-vaccinations/answer-vaccine" method="post" novalidate>
 
-      {% if data.repeatPatient == 'yes' and data.patientName %}
+      {% if data.repeatPatient == 'yes' and data.firstName %}
 
-        {% set question = ("Which vaccine are you giving " + data.patientName + "?" if data.vaccinationToday == 'yes' else "Which vaccine was it " + data.patientName + "?") %}
+        {% set question = ("Which vaccine are you giving " + data.firstName + " " + data.lastName + "?" if data.vaccinationToday == 'yes' else "Which vaccine was it " + data.firstName + " " + data.lastName + "?") %}
       {% else %}
         {% set question = ("Which vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which vaccine was it?") %}
       {% endif %}

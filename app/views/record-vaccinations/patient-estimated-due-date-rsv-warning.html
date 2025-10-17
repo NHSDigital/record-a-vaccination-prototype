@@ -12,10 +12,10 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">{{ data.patientName }} is not yet 28 weeks pregnant</h1>
+      <h1 class="nhsuk-heading-l">{{ data.firstName }} {{ data.lastName }} is not yet 28 weeks pregnant</h1>
 
 
-      <p>{{ data.patientName }} is {{ fullWeeksPregnant | plural("week") }}{% if remainderDaysPregnant > 0 %} and {{ remainderDaysPregnant | plural("day") }}{% endif %} pregnant.
+      <p>{{ data.firstName }} {{ data.lastName }} is {{ fullWeeksPregnant | plural("week") }}{% if remainderDaysPregnant > 0 %} and {{ remainderDaysPregnant | plural("day") }}{% endif %} pregnant.
       </p>
 
       <p>The {{ data.vaccine }} vaccine is not routinely recommended before 28 weeks of pregnancy.</p>

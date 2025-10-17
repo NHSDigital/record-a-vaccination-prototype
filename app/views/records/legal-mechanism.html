@@ -1,0 +1,48 @@
+
+{% extends 'layout.html' %}
+
+{% set pageName = "Which legal mechanism was used?" %}
+
+{% set currentSection = "records" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/records/records/" + vaccination.id,
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/records/records/{{ vaccination.id }}" method="post">
+        <input type="hidden" name="changedField" value="Legal mechanism">
+
+        {{ radios({
+          idPrefix: "legal-mechanism",
+          name: "legalMechanism",
+          fieldset: {
+            legend: {
+              text: pageName,
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          value: vaccination.legalMechanism,
+          errorMessage: {
+            text: legalMechanismError.text
+          } if legalMechanismError,
+          items: data.legalMechanisms
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
