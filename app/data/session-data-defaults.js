@@ -17,6 +17,27 @@ module.exports = {
   currentOrganisationId: "RW3",
   currentRegionId: "Y62",
   vaccinationsRecorded: [],
+  legalMechanisms: [
+    {
+      value: "National protocol",
+      text: "National protocol"
+    },
+    {
+      value: "Patient group direction",
+      text: "Patient group direction (PGD)"
+    },
+    {
+      value: "Patient specific direction",
+      text: "Patient specific direction (PSD)"
+    },
+    {
+      value: "Written instruction",
+      text: "Written instruction",
+      hint: {
+        text: "Occupational health only"
+      }
+    }
+  ],
   data: [
     "Patients", "Staff", "Site or delivery team", "Assessment and consent", "Vaccination"
   ],

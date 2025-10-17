@@ -35,27 +35,7 @@
           errorMessage: {
             text: legalMechanismError.text
           } if legalMechanismError,
-          items: [
-            {
-              value: "National protocol",
-              text: "National protocol"
-            },
-            {
-              value: "Patient group direction",
-              text: "Patient group direction (PGD)"
-            },
-            {
-              value: "Patient specific direction",
-              text: "Patient specific direction (PSD)"
-            },
-            {
-              value: "Written instruction",
-              text: "Written instruction",
-              hint: {
-                text: "Occupational health only"
-              }
-            }
-          ]
+          items: data.legalMechanisms
         }) }}
 
         {{ button({
