@@ -88,9 +88,13 @@
 
 
       {% if totalPages > 1 %}
-        {{ appPagination({
-          previousUrl:  "/support/users?page=" + (page - 1) + "&q=" + (q if q else "") if page != 1,
-          nextUrl: "/support/users?page=" + (page + 1) + "&q=" + (q if q else "")  if page != totalPages,
+        {{ agination({
+          previous: {
+            href: "/support/users?page=" + (page - 1) + "&q=" + (q if q else "")
+          } if page != 1,
+          next: {
+            href: "/support/users?page=" + (page + 1) + "&q=" + (q if q else "")
+          } if page != totalPages,
           items: items
         }) }}
       {% endif %}

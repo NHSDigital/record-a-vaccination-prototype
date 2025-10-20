@@ -139,9 +139,13 @@
       {% if totalPages > 1 %}
 
 
-        {{ appPagination({
-          previousUrl:  "/user-admin?page=" + (page - 1) + "&q=" + (q if q else "") if page != 1,
-          nextUrl: "/user-admin?page=" + (page + 1) + "&q=" + (q if q else "")  if page != totalPages,
+        {{ pagination({
+          previous: {
+            href: "/user-admin?page=" + (page - 1) + "&q=" + (q if q else "")
+          } if page != 1,
+          next: {
+            href: "/user-admin?page=" + (page + 1) + "&q=" + (q if q else "")
+          } if page != totalPages,
           items: items
         }) }}
       {% endif %}
