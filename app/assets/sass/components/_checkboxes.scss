@@ -3,30 +3,3 @@
 .nhsuk-label {
   box-sizing: border-box;
 }
-
-
-.app-checkboxes--small {
-
-  .nhsuk-checkboxes__item,
-  .nhsuk-radios__item {
-    margin-bottom: 0;
-  }
-
-  .nhsuk-checkboxes__label,
-  .nhsuk-radios__label {
-    padding-left: 0;
-
-    &::before {
-      border-width: 3px;
-      padding: 0;
-      transform: scale(0.6667);
-      transform-origin: center left;
-    }
-
-    &::after {
-      box-sizing: border-box;
-      left: 3px;
-      transform: rotate(-45deg) scale(0.6667);
-    }
-  }
-}
