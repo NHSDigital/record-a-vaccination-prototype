@@ -6,6 +6,8 @@ module.exports = router => {
     const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
 
+    const allLegalMechanisms = data.legalMechanisms.map((legalMechaism) => legalMechaism.value)
+
     let vaccineStock = data.vaccineStock
 
     const organisationVaccines = currentOrganisation.vaccines
@@ -55,6 +57,7 @@ module.exports = router => {
           id: generatedVaccineId,
           vaccine: vaccine.name,
           vaccineProduct: vaccineProduct.name,
+          legalMechanisms: allLegalMechanisms,
           siteId: siteId,
           batches: batches
         })
