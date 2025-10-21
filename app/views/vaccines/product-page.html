@@ -144,9 +144,13 @@
 
 
       {% if totalPages > 0 %}
-        {{ appPagination({
-          previousUrl:  "/vaccines/" + vaccine.id + "?page=" + (page - 1) if page != 1,
-          nextUrl: "/vaccines/" + vaccine.id + "?page=" + (page + 1)  if page != totalPages,
+        {{ pagination({
+          previous: {
+            href: "/vaccines/" + vaccine.id + "?page=" + (page - 1) if page != 1
+          },
+          next: {
+            href: "/vaccines/" + vaccine.id + "?page=" + (page + 1)  if page != totalPages
+          },
           items: items
         }) }}
       {% endif %}
