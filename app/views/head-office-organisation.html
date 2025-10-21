@@ -1,0 +1,95 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Sign in" %}
+
+{% block header %}
+  {% include "includes/header-logged-out.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+    {% if error %}
+      {{ errorSummary({
+        titleText: "There is a problem",
+        errorList: [error]
+      }) }}
+    {% endif %}
+
+    <form action="/select-organisation" method="post">
+     
+     
+     
+      <div class="nhsuk-form-group">
+
+        <fieldset class="nhsuk-fieldset">
+          <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+            <h1 class="nhsuk-fieldset__heading">
+              Choose your organisation
+            </h1>
+          </legend>
+          <div class="nhsuk-radios" data-module="nhsuk-radios">
+            <div class="nhsuk-radios__item">
+              <input class="nhsuk-radios__input" id="example-hints" name="example-hints" type="radio" value="mobile" aria-describedby="example-hints-item-hint">
+              <label class="nhsuk-label nhsuk-radios__label" for="example-hints">
+                All organisations
+              </label>
+              <div class="nhsuk-hint nhsuk-radios__hint" id="example-hints-item-hint">
+                View data and report on all your organisations
+              </div>
+            </div>
+            <div class="nhsuk-radios__item">
+              <input class="nhsuk-radios__input" id="example-hints-2" name="example-hints" type="radio" value="landline" aria-describedby="example-hints-2-item-hint">
+              <label class="nhsuk-label nhsuk-radios__label" for="example-hints-2">
+                Abotts pharmacy
+              </label>
+              <div class="nhsuk-hint nhsuk-radios__hint" id="example-hints-2-item-hint">
+              </div>
+            </div>
+
+
+            <div class="nhsuk-radios__item">
+              <input class="nhsuk-radios__input" id="example-hints-2" name="example-hints" type="radio" value="landline" aria-describedby="example-hints-2-item-hint">
+              <label class="nhsuk-label nhsuk-radios__label" for="example-hints-2">
+                Burton road pharmacy
+              </label>
+              <div class="nhsuk-hint nhsuk-radios__hint" id="example-hints-2-item-hint">
+              </div>
+            </div>
+
+
+            <div class="nhsuk-radios__item">
+              <input class="nhsuk-radios__input" id="example-hints-2" name="example-hints" type="radio" value="landline" aria-describedby="example-hints-2-item-hint">
+              <label class="nhsuk-label nhsuk-radios__label" for="example-hints-2">
+                Pickfords pharmacy
+              </label>
+              <div class="nhsuk-hint nhsuk-radios__hint" id="example-hints-2-item-hint">
+              </div>
+            </div>
+
+
+            <div class="nhsuk-radios__item">
+              <input class="nhsuk-radios__input" id="example-hints-2" name="example-hints" type="radio" value="landline" aria-describedby="example-hints-2-item-hint">
+              <label class="nhsuk-label nhsuk-radios__label" for="example-hints-2">
+                Smith pharmacy
+              </label>
+              <div class="nhsuk-hint nhsuk-radios__hint" id="example-hints-2-item-hint">
+              </div>
+            </div>
+
+
+          </div>
+        </fieldset>
+      </div>
+
+      {{ button({
+        text: "Continue"
+      }) }}
+    </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}
