@@ -20,4 +20,3 @@ Publish (or 'push') the branch to GitHub.
 Open a Pull Request for your branch and ask for a review (if needed).
 
 Merge the pull request when ready. This will then automatically deploy the changes to Heroku.
-

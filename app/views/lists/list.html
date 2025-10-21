@@ -121,8 +121,10 @@
         </table>
 
 
-        {{ appPagination({
-          nextUrl: "#",
+        {{ pagination({
+          next: {
+            href: "#"
+          },
           items: [
             {
               number: 1,
