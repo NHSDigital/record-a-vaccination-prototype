@@ -6,6 +6,8 @@ module.exports = router => {
     const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
 
+    const allLegalMechanisms = data.legalMechanisms.map((legalMechaism) => legalMechaism.value)
+
     let vaccineStock = data.vaccineStock
 
     const organisationVaccines = currentOrganisation.vaccines
@@ -55,6 +57,7 @@ module.exports = router => {
           id: generatedVaccineId,
           vaccine: vaccine.name,
           vaccineProduct: vaccineProduct.name,
+          legalMechanisms: allLegalMechanisms,
           siteId: siteId,
           batches: batches
         })
@@ -103,6 +106,8 @@ module.exports = router => {
       const randomVaccineProduct = randomItem(vaccineProductsInStock)
       const randombatchNumber = randomItem(randomVaccineProduct.batches)
 
+      const randomLegalMechanism = randomItem(data.legalMechanisms).value
+
       const vaccinator = randomItem(vaccinators)
 
       const randomName = randomItem(listOfFirstNames) + " " + randomItem(listOfLastNames)
@@ -127,6 +132,7 @@ module.exports = router => {
         batchNumber: randombatchNumber.batchNumber,
         batchExpiryDate: "2025-01-05",
         vaccinatorId: vaccinator.id,
+        legalMechanism: randomLegalMechanism,
         eligibility: ["Pregnant"],
         pregnancyDueDate: {
           day: "04",

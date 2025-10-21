@@ -96,7 +96,7 @@
                 {{ patient.dateOfBirth | govukDate }}
               </td>
               <td class="nhsuk-table__cell">
-                <a class="nhsuk-link" href="/record-vaccinations/patient-history?patientName={{ patient.firstName}} {{ patient.lastName }}&nhsNumber={{ patient.nhsNumber }}&dateOfBirth={{ patient.dateOfBirth }}?fromListId={{ patientList.id }}">Record</a>
+                <a class="nhsuk-link" href="/record-vaccinations/patient-history?firstName={{ patient.firstName}}&lastName{{ patient.lastName }}&nhsNumber={{ patient.nhsNumber }}&dateOfBirth={{ patient.dateOfBirth }}?fromListId={{ patientList.id }}">Record</a>
               </td>
               <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
                 <a class="nhsuk-link" href="/lists/remove">Remove

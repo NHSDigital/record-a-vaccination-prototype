@@ -70,7 +70,7 @@
               text: "Site"
             },
             value: {
-              text: vaccination.deliveryTeam
+              text: (currentOrganisation.sites | findById(data.siteId)).name
             },
             actions: {
               items: [
@@ -138,6 +138,23 @@
           },
           {
             key: {
+              text: "Legal mechanism"
+            },
+            value: {
+              text: vaccination.legalMechanism
+            },
+            actions: {
+              items: [
+                {
+                  href: "/records/records/" + vaccination.id + "/legal-mechanism",
+                  text: "Change",
+                  visuallyHiddenText: "legal mechanism"
+                }
+              ]
+            }
+          },
+          {
+            key: {
               text: "Vaccinator"
             },
             value: {
@@ -172,7 +189,7 @@
                 }
               ]
             }
-          },
+          } if vaccination.locationType,
 
 
 
@@ -187,7 +204,7 @@
               text: "Eligibility"
             },
             value: {
-              text: (vaccination.eligibility | join("br"))
+              text: vaccination.eligibility
             },
             actions: {
               items: [
