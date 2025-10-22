@@ -26,14 +26,14 @@
         <fieldset class="nhsuk-fieldset">
           <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
             <h1 class="nhsuk-fieldset__heading">
-              Choose your organisation
+              Choose your pharmacy
             </h1>
           </legend>
           <div class="nhsuk-radios" data-module="nhsuk-radios">
             <div class="nhsuk-radios__item">
               <input class="nhsuk-radios__input" id="example-hints" name="example-hints" type="radio" value="mobile" aria-describedby="example-hints-item-hint">
               <label class="nhsuk-label nhsuk-radios__label" for="example-hints">
-                All organisations
+                Choose all pharmacies
               </label>
               <div class="nhsuk-hint nhsuk-radios__hint" id="example-hints-item-hint">
                 View data and report on all your organisations
@@ -83,11 +83,13 @@
         </fieldset>
       </div>
 
-      {{ button({
-        text: "Continue"
-      }) }}
+  
     </form>
 
+
+    <a href="/head-office/index" role="button" class="nhsuk-button">
+      Continue
+    </a>
 
     </div>
   </div>

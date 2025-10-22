@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+
+{% block header %}
+  {% include "includes/header-logged-in-head-office.html" %}
+{% endblock %}
+
+{% set pageName = "Choose pharmacies" %}
+
+{% set currentSection = "reports" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/reports/choose-vaccines",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+
+
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+          <form action="/reports/choose-data" method="post">
+
+
+
+
+
+            {{ checkboxes({
+                "idPrefix": "example",
+                "name": "reportSites",
+                "fieldset": {
+                  "legend": {
+                    "text": "Choose pharmacies",
+                    "classes": "nhsuk-fieldset__legend--xl",
+                    isPageHeading: true
+                  }
+                },
+                values: data.reportSites,
+                "items": [
+                {
+                  "value": "Select all pharmacies",
+                  "text": "Select all pharmacies"
+                },
+                {
+                    "value": "Pharmacy 1 (RH63S)",
+                    "text": "Pharmacy 1 (RH63S)"
+                  },
+                  {
+                    "value": "Pharmacy 1 (S204X)",
+                    "text": "Pharmacy 2 (S204X)"
+                  },
+                  {
+                    "value": "Pharmacy 3 (RH5S9)",
+                    "text": "Pharmacy 3 (RH5S9)"
+                  },
+                  {
+                    "value": "Pharmacy 4 (RH5C4)",
+                    "text": "Pharmacy 4 (RH5C4)"
+                  }
+                  ]
+              }) }}
+
+
+              {{ button({
+                "text": "Continue"
+              }) }}
+
+        </form>
+
+
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+{% endblock %}
+

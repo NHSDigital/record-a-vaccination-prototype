@@ -1,0 +1,196 @@
+{% extends 'layout.html' %}
+
+
+{% block header %}
+  {% include "includes/header-logged-in-head-office.html" %}
+{% endblock %}
+
+{% set pageName = currentOrganisation.name + " - Home" %}
+{% set currentSection = "home" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+      <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-6">Company name pharmacy</h1>
+
+      {% if totalVaccinationsRecorded == 0 %}
+        {% include "home/_no-vaccinations-recorded.html" %}
+      {% endif %}
+
+      <h2 class="nhsuk-heading-m">All vaccinations</h2>
+
+
+
+
+      <ul class="nhsuk-grid-row nhsuk-card-group">
+
+        
+       
+        <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+          <div class="nhsuk-card nhsuk-card--clickable">
+            <div class="nhsuk-card__content">
+              <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">91 <span class="nhsuk-u-visually-hidden">Applicants</span></p>Today
+            </div>
+          </div>
+        </li>
+
+        <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+          <div class="nhsuk-card nhsuk-card--clickable">
+            <div class="nhsuk-card__content">
+              <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">91 <span class="nhsuk-u-visually-hidden">Applicants</span></p>Past 7 days
+            </div>
+          </div>
+        </li>
+
+        <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+          <div class="nhsuk-card nhsuk-card--clickable">
+            <div class="nhsuk-card__content">
+              <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">91 <span class="nhsuk-u-visually-hidden">Applicants</span></p>October to date
+            </div>
+          </div>
+        </li>
+
+        <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+          <div class="nhsuk-card nhsuk-card--clickable">
+            <div class="nhsuk-card__content">
+              <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">91 <span class="nhsuk-u-visually-hidden">Applicants</span></p>Total
+            </div>
+          </div>
+        </li>
+
+
+      </ul>
+
+
+
+    </div>
+  </div>
+
+  
+
+  <div class="nhsuk-tabs" data-module="nhsuk-tabs">
+    <h2 class="nhsuk-tabs__title">
+      Contents
+    </h2>
+    <ul class="nhsuk-tabs__list">
+      <li class="nhsuk-tabs__list-item nhsuk-tabs__list-item--selected">
+        <a class="nhsuk-tabs__tab" href="#past-day">
+          By day
+        </a>
+      </li>
+      <li class="nhsuk-tabs__list-item">
+        <a class="nhsuk-tabs__tab" href="#past-week">
+          By vaccination
+        </a>
+      </li>
+      <li class="nhsuk-tabs__list-item">
+        <a class="nhsuk-tabs__tab" href="#past-month">
+          By site
+        </a>
+      </li>
+    </ul>
+    <div class="nhsuk-tabs__panel" id="past-day">
+  
+      <table class="nhsuk-table">
+        <caption class="nhsuk-table__caption">By day</caption>
+        <thead class="nhsuk-table__head">
+          <tr>
+            <th scope="col" class="nhsuk-table__header">Date</th>
+            <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">Total</th>
+          </tr>
+        </thead>
+        <tbody class="nhsuk-table__body">
+          <tr class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">Today</td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">91</td>
+          </tr>
+          <tr class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">Tue 21 Oct 2025 (yesterday)</td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">0</td>
+          </tr>
+          <tr class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">Monday 20 Oct 2025</td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">0</td>
+          </tr>
+          <tr class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">Sun 19 Oct 2025</td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">0</td>
+          </tr>
+          <tr class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">Sat 18 Oct 2025</td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">0</td>
+          </tr>
+          <tr class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">Fri 17 Oct 2025</td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">0</td>
+          </tr>
+          <tr class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">Thu 16 Oct 2025</td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">0</td>
+          </tr>
+        </tbody>
+      </table>
+  
+    </div>
+    <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="past-week">
+      <table class="nhsuk-table">
+        <caption class="nhsuk-table__caption">By vaccination</caption>
+        <thead class="nhsuk-table__head">
+          <tr>
+            <th scope="col" class="nhsuk-table__header">Vaccine type</th>
+            <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">Total</th>
+          </tr>
+        </thead>
+        <tbody class="nhsuk-table__body">
+          <tr class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">Example</td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">24</td>
+          </tr>
+          <tr class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">Example</td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">16</td>
+          </tr>
+          <tr class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">Example</td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">24</td>
+          </tr>
+        </tbody>
+      </table>
+  
+    </div>
+    <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="past-month">
+      <table class="nhsuk-table">
+        <caption class="nhsuk-table__caption">By site</caption>
+        <thead class="nhsuk-table__head">
+          <tr>
+            <th scope="col" class="nhsuk-table__header">Site</th>
+            <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">Total</th>
+          </tr>
+        </thead>
+        <tbody class="nhsuk-table__body">
+          <tr class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">Example</td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">95</td>
+          </tr>
+          <tr class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">Example</td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">122</td>
+          </tr>
+          <tr class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">Example</td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">126</td>
+          </tr>
+        </tbody>
+      </table>
+  
+    </div>
+   
+  </div>
+
+
+
+    <p>For a more detailed breakdown, <a href="/reports">create a report</a>.</p>
+ 
+
+
+{% endblock %}

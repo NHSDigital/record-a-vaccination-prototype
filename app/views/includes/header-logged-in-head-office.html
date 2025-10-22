@@ -1,0 +1,35 @@
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
+
+{{ header({
+  service: {
+    text: "Record a vaccination",
+    href: "/"
+  },
+  account: {
+    items: [
+      {
+        href: "/user-profile",
+        text: currentUser.email,
+        icon: true
+      },
+      {
+        href: '/sign-out',
+        text: 'Log out'
+      } if data.currentUserId
+    ]
+  },
+  navigation: {
+    items: [
+      {
+        href: "/home/",
+        text: "Home",
+        active: (currentSection == "home")
+      },
+      {
+        href: "/reports",
+        text: "Reports",
+        active: (currentSection == "reports")
+      } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)))
+    ]
+  }
+}) }}
