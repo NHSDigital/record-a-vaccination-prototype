@@ -21,6 +21,11 @@
 
       <form action="/record-vaccinations/answer-legal-mechanism" method="post" novalidate>
 
+        {{ tag({
+          text: "New",
+          classes: "nhsuk-tag nhsuk-tag--blue nhsuk-u-margin-bottom-3"
+        }) }}
+
         {{ radios({
           idPrefix: "legal-mechanism",
           name: "legalMechanism",
