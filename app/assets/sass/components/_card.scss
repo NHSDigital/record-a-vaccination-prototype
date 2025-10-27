@@ -1,0 +1,9 @@
+@use "sass:color";
+
+.app-card--filters {
+  background-color: color.scale(nhsuk-colour("grey-4"), $alpha: -50%);
+
+  .nhsuk-card__heading--feature {
+    background-color: nhsuk-colour("grey-1");
+  }
+}

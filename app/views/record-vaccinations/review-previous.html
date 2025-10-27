@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Review your previous answers" %}
+{% set pageName = "Check these details still apply" %}
 
 {% set currentSection = "vaccinate" %}
 
@@ -12,7 +12,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Review your previous answers</h1>
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       {{ summaryList({
           rows: [
@@ -35,51 +35,17 @@
             },
             {
               key: {
-                text: "Vaccine"
+                text: "Site"
               },
               value: {
-                text: data.vaccine
+                text: (currentOrganisation.sites | findById(data.deliveryTeam)).name
               },
               actions: {
                 items: [
                   {
-                    href: "/record-vaccinations/vaccine",
+                    href: "/record-vaccinations/delivery-team",
                     text: "Change",
-                    visuallyHiddenText: "vaccine"
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: "Product"
-              },
-              value: {
-                text: data.vaccineProduct
-              },
-              actions: {
-                items: [
-                  {
-                    href: "/record-vaccinations/vaccine",
-                    text: "Change",
-                    visuallyHiddenText: "vaccine product"
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: "Batch"
-              },
-              value: {
-                html: data.vaccineBatch + "<br>Expires 4 January 2025"
-              },
-              actions: {
-                items: [
-                  {
-                    href: "/record-vaccinations/batch",
-                    text: "Change",
-                    visuallyHiddenText: "vaccine batch"
+                    visuallyHiddenText: "site"
                   }
                 ]
               }
@@ -103,21 +69,55 @@
             },
             {
               key: {
-                text: "Location"
+                text: "Vaccine"
               },
               value: {
-                html: data.locationType
+                html: (data.vaccine | capitaliseFirstLetter) + "<br>" + data.vaccineProduct
               },
               actions: {
                 items: [
                   {
-                    href: "/record-vaccinations/location",
+                    href: "/record-vaccinations/vaccine",
                     text: "Change",
-                    visuallyHiddenText: "contact information"
+                    visuallyHiddenText: "vaccine"
                   }
                 ]
               }
-            } if (data.vaccine === "Flu" or data.vaccine == "COVID-19"),
+            },
+            {
+              key: {
+                text: "Batch"
+              },
+              value: {
+                html: data.vaccineBatch + "<br>Expires 4 January 2025"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/record-vaccinations/batch",
+                    text: "Change",
+                    visuallyHiddenText: "vaccine batch"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Legal mechanism"
+              },
+              value: {
+                text: data.legalMechanism
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/record-vaccinations/legal-mechanism",
+                    text: "Change",
+                    visuallyHiddenText: "legal mechanism"
+                  }
+                ]
+              }
+            },
             {
               key: {
                 text: "Eligibility"
@@ -134,7 +134,24 @@
                   }
                 ]
               }
-            } if (data.vaccine != "Pertussis")
+            } if (data.eligibility),
+            {
+              key: {
+                text: "Location"
+              },
+              value: {
+                html: data.locationType
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/record-vaccinations/location",
+                    text: "Change",
+                    visuallyHiddenText: "contact information"
+                  }
+                ]
+              }
+            } if (data.locationType)
           ]
         }) }}
 
@@ -142,6 +159,8 @@
         text: "Continue",
         href: "/record-vaccinations/patient"
       })}}
+
+      <p><a href="/record-vaccinations">Start again</a> to record a vaccination from the beginning.</p>
 
     </div>
   </div>

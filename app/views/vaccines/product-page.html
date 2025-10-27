@@ -4,8 +4,6 @@
 
 {% set currentSection = "vaccines" %}
 
-{% from '../../components/pagination/macro.njk' import appPagination %}
-
 
 {% block beforeContent %}
   {{ backLink({
@@ -45,6 +43,23 @@
             },
             value: {
               html: site.name
+            }
+          },
+          {
+            key: {
+              text: "Legal mechanism"
+            },
+            value: {
+              html: (vaccine.legalMechanisms | join("<br>"))
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "legal mechanism"
+                }
+              ]
             }
           }
         ]
@@ -146,9 +161,13 @@
 
 
       {% if totalPages > 0 %}
-        {{ appPagination({
-          previousUrl:  "/vaccines/" + vaccine.id + "?page=" + (page - 1) if page != 1,
-          nextUrl: "/vaccines/" + vaccine.id + "?page=" + (page + 1)  if page != totalPages,
+        {{ pagination({
+          previous: {
+            href: "/vaccines/" + vaccine.id + "?page=" + (page - 1) if page != 1
+          },
+          next: {
+            href: "/vaccines/" + vaccine.id + "?page=" + (page + 1)  if page != totalPages
+          },
           items: items
         }) }}
       {% endif %}

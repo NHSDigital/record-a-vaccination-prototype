@@ -5,7 +5,11 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/record-vaccinations/injection-site" }) }}
+  {% if vaccineProduct.type == "nasal spray" %}
+    {{ backLink({ href: "/record-vaccinations/dose-amount" }) }}
+  {% else %}
+    {{ backLink({ href: "/record-vaccinations/injection-site" }) }}
+  {% endif %}
 {% endblock %}
 
 {% set consentHtml %}
@@ -71,7 +75,7 @@
               text: "Name"
             },
             value: {
-              text: (data.patientName if data.patientName else data.firstName + " " + data.lastName)
+              text: (data.firstName + " " + data.lastName)
             },
             actions: {
               items: [
@@ -183,6 +187,23 @@
           },
           {
             key: {
+              text: "Site"
+            },
+            value: {
+              text: (currentOrganisation.sites | findById(data.siteId)).name
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/delivery-team",
+                  text: "Change",
+                  visuallyHiddenText: "Site"
+                }
+              ]
+            }
+          },
+          {
+            key: {
               text: "Vaccine"
             },
             value: {
@@ -217,17 +238,17 @@
           },
           {
             key: {
-              text: "Site"
+              text: "Legal mechanism"
             },
             value: {
-              text: (currentOrganisation.sites | findById(data.deliveryTeam)).name
+              text: data.legalMechanism
             },
             actions: {
               items: [
                 {
-                  href: "/record-vaccinations/delivery-team",
+                  href: "/record-vaccinations/legal-mechanism",
                   text: "Change",
-                  visuallyHiddenText: "Site"
+                  visuallyHiddenText: "legal mechanism"
                 }
               ]
             }
@@ -285,7 +306,7 @@
           } if (data.vaccine != "Pertussis"),
           {
             key: {
-              text: "Healthcare worker role"
+              text: "Role"
             },
             value: {
               html: data.healthcareWorker
@@ -295,7 +316,7 @@
                 {
                   href: "/record-vaccinations/healthcare-worker",
                   text: "Change",
-                  visuallyHiddenText: "healthcare worker role"
+                  visuallyHiddenText: "role"
                 }
               ]
             }
@@ -329,7 +350,7 @@
                 {
                   href: "/record-vaccinations/consent",
                   text: "Change",
-                  visuallyHiddenText: "consnet"
+                  visuallyHiddenText: "consent"
                 }
               ]
             }
@@ -346,15 +367,32 @@
                 {
                   href: "/record-vaccinations/injection-site",
                   text: "Change",
-                  visuallyHiddenText: "contact details"
+                  visuallyHiddenText: "Injection site"
                 }
               ]
             }
-          }
+          } if (vaccineProduct.type == "injection"),
+          {
+            key: {
+              text: "Dose"
+            },
+            value: {
+              text: data.doseAmount
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/dose-amount",
+                  text: "Change",
+                  visuallyHiddenText: "dose amount"
+                }
+              ]
+            }
+          } if (vaccineProduct.type == "nasal spray")
         ]
       }) }}
 
-      <form action="/record-vaccinations/done" method="post" novalidate>
+      <form action="/record-vaccinations/confirmed" method="post" novalidate>
 
         {{ textarea({
           name: "notes",

@@ -281,15 +281,4 @@ module.exports = (router) => {
 
     res.redirect('/user-admin')
   })
-
-
-  // Redirect the old versioned routes. These can be removed
-  // at some point in the future.
-  router.get('/user-admin/v4', (req, res) => {
-    res.redirect('/user-admin')
-  })
-
-  router.get('/user-admin/v4/:page*', (req, res) => {
-    res.redirect('/user-admin')
-  })
 }

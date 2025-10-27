@@ -4,10 +4,10 @@
   Manage users and permissions
 {% endblock %}
 
-{% from '../../components/pagination/macro.njk' import appPagination %}
-
 
 {% set currentSection = "manage-users" %}
+{% set currentSubSection = "deactivated" %}
+
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -19,6 +19,11 @@
         "href": "/user-admin/add-user"
       }) }}
 
+      <div class="nhsuk-inset-text">
+        <span class="nhsuk-u-visually-hidden">Information: </span>
+
+            <p>For security, we deactivate users who have not logged in for 90 days. <a href="/user-admin/reactivate-all">Reactivate users (2)</a></p>
+      </div>
 
       <div class="app-filters nhsuk-u-margin-top-5">
         <form action="/user-admin" method="get" novalidate>
@@ -37,37 +42,17 @@
       </div>
       <br>
 
-      <p>For security, we deactivate users who have not logged in for 90 days. <a href="/user-admin/reactivate-all">Reactivate users (2)</a></p>
-
-<br>
 
 
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-full">
 
-      <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
-        <ul class="x-govuk-secondary-navigation__list">
-            <li class="x-govuk-secondary-navigation__list-item ">
-            <a class="x-govuk-secondary-navigation__link" href="/user-admin" aria-current=page>
-              Active (2)
-            </a>
-          </li>
-          <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
-            <a class="x-govuk-secondary-navigation__link" href="/user-admin/deactivated">
-              Deactivated (3)
-            </a>
-          </li>
-
-        </ul>
-      </nav>
-
-
+          {% include "user-admin/_secondary-nav.html" %}
 
 
           <table class="nhsuk-table-responsive" role="table">
 
-            <br>
-
+          <br>
 
             <caption class="nhsuk-table__caption">3 Deactivated users</caption>
 
@@ -101,11 +86,11 @@
 
               <tr role="row" class="nhsuk-table__row">
                 <td class="nhsuk-table__cell">
-                  Jane Doe
+                    Adam Atkins
               </td>
 
                 <td class="nhsuk-table__cell">
-                  jane.doe@nhs.net
+                  adam.atkins@nhs.net
               </td>
 
               <td class="nhsuk-table__cell">
@@ -125,13 +110,12 @@
 
                 <tr role="row" class="nhsuk-table__row">
                     <td class="nhsuk-table__cell">
-                        Wallace West
+                        Alice Benson
                   </td>
 
                     <td class="nhsuk-table__cell">
-                    wallace.west@nhs.net
+                    alice.benson@nhs.net
                   </td>
-
                   <td class="nhsuk-table__cell">
                       Yes
                   </td>
@@ -144,8 +128,7 @@
                   <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
                     <a class="nhsuk-link" href="/user-admin/reactivate">Reactivate</a>
                   </td>
-                    </tr>
-
+                </tr>
                 <tr role="row" class="nhsuk-table__row">
                     <td class="nhsuk-table__cell">
                       Zack Phillips
@@ -154,7 +137,6 @@
                     <td class="nhsuk-table__cell">
                     zach.phillips@nhs.net
                   </td>
-
                   <td class="nhsuk-table__cell">
                       Yes
                   </td>

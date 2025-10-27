@@ -12,48 +12,40 @@
 
       <h1 class="nhsuk-heading-xl">{{ pageName }}</h1>
 
-
       {{ summaryList({
-        classes: "nhsuk-u-margin-bottom-2",
         rows: [
           {
             key: {
-              text: "Site name"
+              text: "Site"
             },
             value: {
-              text: site.name
+              html: site.name + " (" + data.siteId + ")<br>100 High Street, Manchester, M4 1LP"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccines/choose-site",
+                  text: "Change",
+                  visuallyHiddenText: "site"
+                }
+              ]
             }
           },
-          {
-            key: {
-              text: "ODS Code"
-            },
-            value: {
-              html: data.siteId
-            }
-          },
-          {
-            key: {
-              text: "Address"
-            },
-            value: {
-              html: "100 High Street, Manchester, M4 1LP"
-            }
-          }
-        ]
-      }) }}
-
-      <p class="nhsuk-u-margin-top-0"><a class="nhsuk-link nhsuk-link--no-visited-state" href="/vaccines/choose-site">Change site</a></p>
-
-      {{ summaryList({
-        classes: "nhsuk-u-margin-bottom-2 nhsuk-u-margin-top-6",
-        rows: [
           {
             key: {
               text: "Vaccine"
             },
             value: {
               html: data["vaccine"]
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccines/choose-vaccine",
+                  text: "Change",
+                  visuallyHiddenText: "product"
+                }
+              ]
             }
           },
           {
@@ -62,6 +54,15 @@
             },
             value: {
               html: data["vaccineProduct"]
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccines/choose-vaccine",
+                  text: "Change",
+                  visuallyHiddenText: "product"
+                }
+              ]
             }
           },
           {
@@ -71,21 +72,22 @@
             value: {
               html: data.packType
             }
-          } if data.packType
-        ]
-      }) }}
-
-      <p class="nhsuk-u-margin-top-0"><a class="nhsuk-link nhsuk-link--no-visited-state" href="/vaccines/choose-vaccine">Change vaccine</a></p>
-
-      {{ summaryList({
-        classes: "nhsuk-u-margin-bottom-2 nhsuk-u-margin-top-6",
-        rows: [
+          } if data.packType,
           {
             key: {
               text: "Batch number"
             },
             value: {
               html: data["batchNumber"]
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccines/add-batch",
+                  text: "Change",
+                  visuallyHiddenText: "batch number"
+                }
+              ]
             }
           },
           {
@@ -94,13 +96,36 @@
             },
             value: {
               html: (data.batchExpiryDate | isoDateFromDateInput | govukDate )
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccines/add-batch",
+                  text: "Change",
+                  visuallyHiddenText: "expiry date"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Legal mechanism"
+            },
+            value: {
+              html: (data.vaccineLegalMechanisms | join("<br>") if data.vaccineLegalMechanisms)
+            },
+            actions: {
+              items: [
+                {
+                  href: "/vaccines/legal-mechanisms",
+                  text: "Change",
+                  visuallyHiddenText: "legal mechanism"
+                }
+              ]
             }
           }
         ]
       }) }}
-
-      <p class="nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-8"><a class="nhsuk-link nhsuk-link--no-visited-state" href="/vaccines/add-batch">Edit batch</a></p>
-
 
 
       <form action="/vaccines/add" method="post">

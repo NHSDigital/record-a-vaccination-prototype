@@ -41,19 +41,18 @@
               isPageHeading: false
             }
           },
+          value: data.nhsNumberKnown,
           items: [
             {
               value: "yes",
               text: "NHS number",
-              checked: (data.nhsNumberKnown == 'yes'),
               conditional: {
                 html: nhsNumberHtml
               }
             },
             {
               value: "no",
-              text: "Patient details",
-              checked: (data.nhsNumberKnown == 'no')
+              text: "Patient details"
             }
           ]
         }) }}

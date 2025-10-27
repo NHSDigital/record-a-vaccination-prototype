@@ -35,26 +35,23 @@
           errorMessage: {
             text: otherInjectionSiteError.text
           } if otherInjectionSiteError,
+          value: data.otherInjectionSite,
           items: [
             {
               value: "Left buttock",
-              text: "Left buttock",
-              checked: (data.otherInjectionSite == "Left buttock")
+              text: "Left buttock"
             },
             {
               value: "Right buttock",
-              text: "Right buttock",
-              checked: (data.otherInjectionSite == "Right buttock")
+              text: "Right buttock"
             },
             {
               value: "Left thigh",
-              text: "Left thigh",
-              checked: (data.otherInjectionSite == "Left thigh")
+              text: "Left thigh"
             },
             {
               value: "Right thigh",
-              text: "Right thigh",
-              checked: (data.otherInjectionSite == "Right thigh")
+              text: "Right thigh"
             }
           ]
         }) }}
@@ -66,24 +63,23 @@
           name: "injectionSite",
           fieldset: {
             legend: {
-              text: "Where did you give the injection?",
+              text: ("Where did you give the injection?" if data.vaccinationToday == 'yes' else "Where was the injection given?"),
               classes: "nhsuk-fieldset__legend--l",
               isPageHeading: true
             }
           },
+          value: data.injectionSite,
           errorMessage: {
             text: injectionSiteError.text
           } if injectionSiteError,
           items: [
             {
               value: "Left arm",
-              text: "Left arm",
-              checked: (data.injectionSite == 'Left arm')
+              text: "Left arm"
             },
             {
               value: "Right arm",
-              text: "Right arm",
-              checked: (data.injectionSite == 'Right arm')
+              text: "Right arm"
             },
             {
               divider: "or"
@@ -91,7 +87,6 @@
             {
               value: "other",
               text: "Somewhere else",
-              checked: (data.injectionSite == 'other'),
               conditional: {
                 html: somewhereElseHtml
               }

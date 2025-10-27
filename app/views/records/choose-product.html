@@ -23,21 +23,20 @@
           name: "vaccineProduct",
           fieldset: {
             legend: {
-              text: "Which " + vaccination.vaccine + " vaccine did you give?",
+              text: "Which " + vaccination.vaccine + " vaccine product was it?",
               classes: "nhsuk-fieldset__legend--l",
               isPageHeading: true
             }
           },
+          value: data.vaccineProduct,
           items: [
             {
               value: "Abrysvo",
-              text: "Abrysvo",
-              checked: (data.vaccineProduct === "Abrysvo")
+              text: "Abrysvo"
             },
             {
               value: "Arexvy",
-              text: "Arexvy (example only)",
-              checked: (data.vaccineProduct === "Arexvy")
+              text: "Arexvy (example only)"
             }
           ]
         }) }}

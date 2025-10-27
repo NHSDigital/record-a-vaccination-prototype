@@ -20,6 +20,7 @@
         }) }}
       {% endif %}
 
+
       <form action="/record-vaccinations/answer-date" method="post" novalidate>
         {% set previousDateHtml %}
 
@@ -62,19 +63,18 @@
               isPageHeading: "true"
             }
           },
+          value: data.vaccinationToday,
           errorMessage: {
             text: vaccinationTodayError
           } if vaccinationTodayError,
           items: [
             {
               value: "yes",
-              text: "Yes",
-              checked: (data.vaccinationToday == 'yes')
+              text: "Yes"
             },
             {
               value: "no",
               text: "No, it was on a previous date",
-              checked: (data.vaccinationToday == 'no'),
               conditional: {
                 html: previousDateHtml
               }

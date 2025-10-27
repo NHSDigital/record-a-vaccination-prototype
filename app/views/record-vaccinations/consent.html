@@ -134,11 +134,11 @@
           errorMessage: {
             text: consentError.text
           } if consentError,
+          value: data.consent,
           items: [
             {
               value: 'patient',
-              text: (data.patientName or "Jodie Brown"),
-              checked: (data.consent === 'patient')
+              text: (data.firstName + " " + data.lastName)
             },
             {
               divider: "or"
@@ -146,7 +146,6 @@
             {
               value: "Clinician acting in the patient’s best interests",
               text: "Clinician acting in the patient’s best interests",
-              checked: (data.consent === "Clinician acting in the patient’s best interests"),
               conditional: {
                 html: consentClinicianHtml
               }
@@ -154,7 +153,6 @@
             {
                 value: "Person with lasting power of attorney for health and welfare",
                 text: "Person with lasting power of attorney for health and welfare",
-                checked: (data.consent === "Person with lasting power of attorney for health and welfare"),
                 conditional: {
                   html: consentAttorneyHtml
                 }
@@ -162,7 +160,6 @@
               {
                 value: "Parent or guardian",
                 text: "Parent or guardian",
-                checked: (data.consent === "Parent or guardian"),
                 conditional: {
                   html: consentParentHtml
                 }
@@ -170,7 +167,6 @@
               {
                 value: "Independent mental capacity advocate",
                 text: "Independent mental capacity advocate",
-                checked: (data.consent === "Independent mental capacity advocate"),
                 conditional: {
                   html: consentAdvocateHtml
                 }
@@ -178,7 +174,6 @@
               {
                 value: "Court appointed deputy",
                 text: "Court appointed deputy",
-                checked: (data.consent === "Court appointed deputy"),
                 conditional: {
                   html: consentDeputyHtml
                 }

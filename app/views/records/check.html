@@ -6,7 +6,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/records/patient-history",
+    href: "/records",
     text: "Back"
   }) }}
 {% endblock %}
@@ -24,6 +24,9 @@
     {% endif %}
 
       <h1 class="nhsuk-heading-l">{{ vaccination.patient.name }}’s {{vaccination.vaccine}} vaccination record</h1>
+
+
+      {% set vaccinator = (data.users | findById(vaccination.vaccinatorId)) %}
 
       {{ summaryList({
         rows: [
@@ -67,7 +70,7 @@
               text: "Site"
             },
             value: {
-              text: vaccination.deliveryTeam
+              text: (currentOrganisation.sites | findById(data.siteId)).name
             },
             actions: {
               items: [
@@ -135,10 +138,27 @@
           },
           {
             key: {
+              text: "Legal mechanism"
+            },
+            value: {
+              text: vaccination.legalMechanism
+            },
+            actions: {
+              items: [
+                {
+                  href: "/records/records/" + vaccination.id + "/legal-mechanism",
+                  text: "Change",
+                  visuallyHiddenText: "legal mechanism"
+                }
+              ]
+            }
+          },
+          {
+            key: {
               text: "Vaccinator"
             },
             value: {
-              text: vaccination.vaccinator
+              text: (vaccinator.firstName + " " + vaccinator.lastName)
             },
             actions: {
               items: [
@@ -169,7 +189,7 @@
                 }
               ]
             }
-          },
+          } if vaccination.locationType,
 
 
 
@@ -184,7 +204,7 @@
               text: "Eligibility"
             },
             value: {
-              text: (vaccination.eligibility | join("br"))
+              text: vaccination.eligibility
             },
             actions: {
               items: [

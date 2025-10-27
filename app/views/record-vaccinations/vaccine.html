@@ -40,11 +40,11 @@
 
       <form action="/record-vaccinations/answer-vaccine" method="post" novalidate>
 
-      {% if data.repeatPatient == 'yes' and data.patientName %}
+      {% if data.repeatPatient == 'yes' and data.firstName %}
 
-        {% set question = ("Which vaccine are you giving " + data.patientName + "?" if data.vaccinationToday == 'yes' else "Which vaccine did you give " + data.patientName + "?") %}
+        {% set question = ("Which vaccine are you giving " + data.firstName + " " + data.lastName + "?" if data.vaccinationToday == 'yes' else "Which vaccine was it " + data.firstName + " " + data.lastName + "?") %}
       {% else %}
-        {% set question = ("Which vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which vaccine did you give?") %}
+        {% set question = ("Which vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which vaccine was it?") %}
       {% endif %}
 
       {% set items = [] %}
@@ -109,12 +109,12 @@
 
         {% if organisationSetting.permissionLevel == "Recorder" %}
           {{ details({
-            text: "If the vaccine is not listed",
+            summaryText: "If the vaccine is not listed",
             html: "You'll need to ask an administrator to add it."
           }) }}
         {% else %}
           {{ details({
-            text: "If the vaccine is not listed",
+            summaryText: "If the vaccine is not listed",
             html: "Go to <a href=\"/vaccines\">Vaccines</a> to add it."
           }) }}
         {% endif %}

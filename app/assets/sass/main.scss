@@ -1,5 +1,5 @@
 // Import NHS.UK frontend library
-@import 'node_modules/nhsuk-frontend/packages/nhsuk';
+@import "nhsuk-frontend/dist/nhsuk";
 
 // Local override classes
 @import 'overrides';
@@ -9,40 +9,22 @@
 @import 'components/related-nav';
 @import 'components/indent-list';
 @import 'components/feedback-panel';
-@import 'components/button-group';
 @import 'components/checkboxes';
 
-// Import GOVUK-frontend
-//
-// This is so we can use a few components within the GOV.UK Design System
-// which aren’t yet part of the NHS Design System
-@import "node_modules/govuk-frontend/dist/govuk/all";
-
-// Reset some GOV.UK variables to be NHS-branded
-$govuk-font-family: 'Frutiger W01';
-$govuk-error-colour: $nhsuk-error-color;
-$govuk-input-border-colour: $nhsuk-form-border-color;
-$govuk-brand-colour: $nhsuk-link-color;
-
-// Import X-GOVUK prototype components
-@import "node_modules/@x-govuk/govuk-prototype-components/src/x-govuk";
-
-
 // Local components or modifiers
+@import 'components/card';
 @import 'components/header';
 @import 'components/summary-list';
 @import 'components/table';
 @import 'components/button';
 @import 'components/filters';
+@import 'components/search';
 @import 'components/section';
 @import 'components/tag';
 @import 'components/numbered-heading';
+@import 'components/inset-text';
 
-@import '../../components/pagination/_pagination';
-
-.autocomplete__wrapper ul > li {
-  margin-bottom: 0;
-}
+@import '../../components/secondary-navigation/_secondary-navigation';
 
 ///////////////////////////////////////////
 // Add your custom CSS/Sass styles below...

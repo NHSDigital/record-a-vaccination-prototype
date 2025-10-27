@@ -1,0 +1,204 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Manage users and permissions
+{% endblock %}
+
+
+{% set currentSection = "manage-users" %}
+{% set currentSubSection = "invited" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+      <h1 class="nhsuk-heading-xl">Manage users</h1>
+
+      {{ button({
+        "text": "Add user",
+        "href": "/user-admin/add-user"
+      }) }}
+
+
+      <div class="nhsuk-inset-text">
+        <span class="nhsuk-u-visually-hidden">Information: </span>
+
+            <p>For security, we deactivate users who have not logged in for 90 days. <a href="/user-admin/reactivate-all">Reactivate users (2)</a></p>
+      </div>
+
+
+      <div class="app-filters nhsuk-u-margin-top-5">
+        <form action="/user-admin" method="get" novalidate>
+          <div class="nhsuk-form-group nhsuk-u-margin-bottom-0">
+            <label class="nhsuk-label" for="q">
+              Search invited users by name or email
+            </label>
+            <input class="nhsuk-input nhsuk-input--width-20" id="q" name="q" type="search" value="{{ q }}">
+
+            {{ button({
+              text: "Search",
+              classes: "nhsuk-button--secondary nhsuk-u-margin-left-2 app-button--small nhsuk-u-margin-bottom-0"
+            })}}
+          </div>
+        </form>
+      </div>
+      <br>
+
+
+
+
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+
+          {% include "user-admin/_secondary-nav.html" %}
+
+
+          <table class="nhsuk-table-responsive" role="table">
+
+            <br>
+
+
+            <caption class="nhsuk-table__caption">4 Invited users</caption>
+
+            <thead class="nhsuk-table__head" role="rowgroup">
+                <thead role="rowgroup" class="nhsuk-table__head">
+                    <tr role="row">
+
+                      <th role="columnheader" class="" scope="col">
+                        Name
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Email
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Clinician
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Permission
+                      </th>
+
+                      <th role="columnheader" class="" scope="col">
+                        Invite sent
+                    </th>
+                      <th role="columnheader" class="" scope="col">
+
+                      </th>
+
+                    </tr>
+            </thead>
+
+            <tbody class="nhsuk-table__body">
+
+
+              <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                    Jane Doe
+              </td>
+
+                <td class="nhsuk-table__cell">
+                  jane.doe4@nhs.net
+              </td>
+
+              <td class="nhsuk-table__cell">
+                  Yes
+              </td>
+              <td class="nhsuk-table__cell">
+                Administrator
+            </td>
+            <td class="nhsuk-table__cell">
+               Today
+            </td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+              <a class="nhsuk-link" href="/user-admin/resend"></a>
+            </td>
+                </tr>
+
+
+              <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                    Peter Parker
+              </td>
+
+                <td class="nhsuk-table__cell">
+                  peter.parker@nhs.net
+              </td>
+
+              <td class="nhsuk-table__cell">
+                  Yes
+              </td>
+              <td class="nhsuk-table__cell">
+                Administrator
+            </td>
+            <td class="nhsuk-table__cell">
+               6 days ago
+            </td>
+            <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+              <a class="nhsuk-link" href="/user-admin/resend"></a>
+            </td>
+                </tr>
+
+
+                <tr role="row" class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">
+                        John Smith
+                  </td>
+
+                    <td class="nhsuk-table__cell">
+                    john.smith@nhs.net
+                  </td>
+
+                  <td class="nhsuk-table__cell">
+                      Yes
+                  </td>
+                  <td class="nhsuk-table__cell">
+                    Administrator
+                </td>
+                <td class="nhsuk-table__cell">
+                    24 days ago
+                </td>
+                <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                  <a class="nhsuk-link" href="/user-admin/resend">Resend invite</a>
+                </td>
+                    </tr>
+
+
+                    <tr role="row" class="nhsuk-table__row">
+                      <td class="nhsuk-table__cell">
+                          Tony Shah
+                    </td>
+
+                      <td class="nhsuk-table__cell">
+                      tony.shah@nhs.net
+                    </td>
+
+                    <td class="nhsuk-table__cell">
+                        Yes
+                    </td>
+                    <td class="nhsuk-table__cell">
+                      Administrator
+                  </td>
+                  <td class="nhsuk-table__cell">
+                      89 days ago
+                  </td>
+                    <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+                      <a class="nhsuk-link" href="/user-admin/resend">Resend invite</a>
+                    </td>
+                      </tr>
+
+
+
+              </tbody>
+            </table>
+
+
+
+        </div>
+      </div>
+
+
+
+
+{% endblock %}
+
+
+
+

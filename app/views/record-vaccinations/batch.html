@@ -1,6 +1,10 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Which batch are you using?" %}
+{% if (batches | length) > 0 %}
+  {% set pageName = "Which batch are you using?" %}
+{% else %}
+  {% set pageName = "No batches available" %}
+{% endif %}
 
 {% set currentSection = "vaccinate" %}
 {% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
@@ -25,25 +29,27 @@
       <form action="/record-vaccinations/answer-batch" method="post" novalidate>
 
       {% set items = [] %}
-      {% for batch in (batches) %}
-        {% set items = (items.push({
-          text: batch.batchNumber,
-          hint: {
-            text: "Expires " + (batch.expiryDate | govukDate)
-          },
-          value: batch.id
-        }), items) %}
-      {% endfor %}
 
-      {% if organisationSetting.permissionLevel != "Recorder" %}
-        {% set items = (items.push({
-          divider: "or"
-        }), items) %}
-        {% set items = (items.push({
-          value: "add-new",
-          text: "Add a batch"
-        }), items) %}
-      {% endif %}
+      {% if (batches | length) > 0 %}
+        {% for batch in (batches) %}
+          {% set items = (items.push({
+            text: batch.batchNumber,
+            hint: {
+              text: "Expires " + (batch.expiryDate | govukDate)
+            },
+            value: batch.id
+          }), items) %}
+        {% endfor %}
+
+        {% if organisationSetting.permissionLevel != "Recorder" %}
+          {% set items = (items.push({
+            divider: "or"
+          }), items) %}
+          {% set items = (items.push({
+            value: "add-new",
+            text: "Add a batch"
+          }), items) %}
+        {% endif %}
 
 
         {{ radios({
@@ -66,11 +72,24 @@
         {{ button({
           text: "Continue"
         })}}
+
+      {% else %}
+
+        <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+        {% if organisationSetting.permissionLevel == "Recorder" %}
+          <p>An admin user needs to add a vaccine before you can record a vaccination.</p>
+        {% else %}
+          <p>You need to <a href="/vaccines/">add a batch</a> before you can record a vaccination.</p>
+        {% endif %}
+
+      {% endif %}
+
       </form>
 
       {% if organisationSetting.permissionLevel == "Recorder" %}
         {{ details({
-          text: "If the batch is not listed",
+          summaryText: "If the batch is not listed",
           html: "You'll need to ask an administrator to add the batch."
         }) }}
       {% endif %}

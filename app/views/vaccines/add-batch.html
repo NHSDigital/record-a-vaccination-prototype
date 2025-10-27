@@ -17,7 +17,7 @@
 
       <h1 class="nhsuk-heading-l">Add batch</h1>
 
-      <form action="/vaccines/check" method="post" novalidate="true">
+      <form action="/vaccines/legal-mechanisms" method="post" novalidate="true">
 
         {{ input({
           "label": {
@@ -57,16 +57,15 @@
                 classes: "nhsuk-fieldset__legend--s"
               }
             },
+            value: data.packType,
             "items": [
               {
-                "value": "Single vial",
-                "text": "Single vial",
-                checked: (data.packType == "Single vial")
+                "value": "Single item",
+                "text": "Single item"
               },
               {
-                "value": "10 vials",
-                "text": "10 vials",
-                checked: (data.packType == "10 vials")
+                "value": "10 items",
+                "text": "10 items"
               }
             ]
           }) }}

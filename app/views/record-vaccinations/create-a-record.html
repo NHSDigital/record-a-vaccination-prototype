@@ -98,8 +98,8 @@
             }) }}
 
             {{ details({
-                text: "If the patient is homeless",
-                HTML: "
+                summaryTest: "If the patient is homeless",
+                html: "
                 <p>Enter the postcode ZZ99 3VZ </p>
 
                 "
@@ -117,26 +117,23 @@
                 errorMessage: {
                   text: genderError
                 } if genderError,
+                value: data.gender,
                 items: [
                 {
                     value: "Male",
-                    text: "Male",
-                    checked: (data.gender === "Male")
+                    text: "Male"
                 },
                 {
                     value: "Female",
-                    text: "Female",
-                    checked: (data.gender === "Female")
+                    text: "Female"
                 },
                 {
                     value: "Other",
-                    text: "Other",
-                    checked: (data.gender === "Other")
+                    text: "Other"
                 },
                 {
                     value: "Unknown",
-                    text: "Unknown",
-                    checked: (data.gender === "Unknown")
+                    text: "Unknown"
                 }
                 ]
             }) }}

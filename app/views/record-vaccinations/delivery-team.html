@@ -23,16 +23,16 @@
       <form action="/record-vaccinations/answer-delivery-team" method="post" novalidate>
 
         {% set items = [] %}
-        {% for deliveryTeam in (sitesInUse | sort(false, false, "name")) %}
+        {% for site in (sitesInUse | sort(false, false, "name")) %}
           {% set items = (items.push({
-            text: deliveryTeam.name,
-            value: deliveryTeam.id
+            text: site.name,
+            value: site.id
           }), items) %}
         {% endfor %}
 
         {{ radios({
-          idPrefix: "delivery-team",
-          name: "deliveryTeam",
+          idPrefix: "site-id",
+          name: "siteId",
           fieldset: {
             legend: {
               text: ("Which site is it?" if data.vaccinationToday == 'yes' else "Which site was it?"),
@@ -44,7 +44,7 @@
             text: (errors | first).text
           } if (errors | length) > 0,
           items: items,
-          value: data.deliveryTeam
+          value: data.siteId
         }) }}
 
         {{ button({
@@ -54,12 +54,12 @@
 
       {% if organisationSetting.permissionLevel == "Lead administrator" or organisationSetting.permissionLevel == "Administrator" %}
         {{ details({
-          text: "If your site is not listed",
+          summaryText: "If your site is not listed",
           html: "You need to <a href=\"/vaccines\">add vaccines</a> for the site."
         }) }}
       {% else %}
         {{ details({
-          text: "If your site is not listed",
+          summaryText: "If your site is not listed",
           html: "You'll need to ask an administrator to add vaccines for the site."
         }) }}
       {% endif %}

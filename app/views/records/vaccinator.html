@@ -50,7 +50,7 @@
             </div>
 
             <select class="nhsuk-select" id="otherVaccinator" name="otherVaccinator"
-              data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+              data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
                 <option {{ "selected" if vaccination.otherVaccinator == "" }} value=""></option>
 
                 {% for otherVaccinator in otherVaccinators %}
@@ -71,19 +71,18 @@
               isPageHeading: "true"
             }
           },
+          value: data.vaccinator,
           errorMessage: {
             text: vaccinatorError
           } if vaccinatorError,
           items: [
             {
               value: "Jane Smith",
-              text: "Me (Jane Smith)",
-              checked: (vaccination.vaccinator === "Jane Smith")
+              text: "Me (Jane Smith)"
             },
             {
               value: "Anna Brown",
-              text: "Anna Brown (anna.brown@nhs.net)",
-              checked: (vaccination.vaccinator === "Anna Brown")
+              text: "Anna Brown (anna.brown@nhs.net)"
             },
             {
               divider: "or"
@@ -91,7 +90,6 @@
             {
               value: "Someone else",
               text: "Someone else",
-              checked: (vaccination.vaccinator === "Someone else"),
               conditional: {
                 html: otherVaccinatorHtml
               }
