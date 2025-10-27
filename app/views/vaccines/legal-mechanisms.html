@@ -16,6 +16,11 @@
     <div class="nhsuk-grid-column-two-thirds">
       <form action="/vaccines/check" method="post" novalidate="true">
 
+        {{ tag({
+          text: "New",
+          classes: "nhsuk-tag nhsuk-tag--blue nhsuk-u-margin-bottom-3"
+        }) }}
+
         {{ checkboxes({
           idPrefix: "legal-mechanisms",
           name: "vaccineLegalMechanisms",
