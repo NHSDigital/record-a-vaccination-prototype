@@ -133,8 +133,6 @@ module.exports = (router) => {
 
     let from, to
 
-    console.log(dateOption)
-
     switch (dateOption) {
       case 'custom_date_range':
         from = filters.isoDateFromDateInput(fromInput)

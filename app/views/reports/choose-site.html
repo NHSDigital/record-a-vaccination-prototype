@@ -18,19 +18,19 @@
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
 
-          <form action="/reports/choose-data1" method="post">
+          <form action="/reports/choose-data" method="post">
 
             {{ checkboxes({
-                "idPrefix": "example",
-                "name": "reportSites",
+                "idPrefix": "sites-to-report",
+                "name": "sitesToReport",
                 "fieldset": {
                   "legend": {
                     "text": "Choose sites",
-                    "classes": "nhsuk-fieldset__legend--xl",
+                    "classes": "nhsuk-fieldset__legend--l",
                     isPageHeading: true
                   }
                 },
-                values: data.reportSites,
+                values: data.sitesToReport,
                 "items": [
                   {
                     "value": "Verington (RH63S)",

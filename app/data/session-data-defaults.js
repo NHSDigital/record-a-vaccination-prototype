@@ -17,6 +17,14 @@ module.exports = {
   currentOrganisationId: "RW3",
   currentRegionId: "Y62",
   vaccinationsRecorded: [],
+
+  // These are the options for extracting CSV reports
+  patientDataOptions: ["Name", "NHS number", "Gender", "Date of birth", "Address", "Postcode"],
+  staffDataOptions: ["Recorder", "Vaccinator"],
+  locationDataOptions: ["Site name", "Site ODS code", "Location type"],
+  consentAndEligibilityDataOptions: ["Consent", "Eligibility", "Estimated due date"],
+  vaccinationDataOptions: ["Vaccine type", "Product", "Batch", "Batch expiry date", "Dose amount", "Vaccination site", "Vaccination date", "Comments"],
+
   legalMechanisms: [
     {
       value: "National protocol",
@@ -37,9 +45,6 @@ module.exports = {
         text: "Occupational health only"
       }
     }
-  ],
-  data: [
-    "Patients", "Staff", "Site or delivery team", "Assessment and consent", "Vaccination"
   ],
   careHomes: [
     {name: "Colin Care Home", code: "VL025", address1: "1 St James Street", town: "Manchester", postcode: "M1 63P"},
