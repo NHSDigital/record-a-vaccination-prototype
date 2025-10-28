@@ -19,11 +19,11 @@ module.exports = {
   vaccinationsRecorded: [],
 
   // These are the options for extracting CSV reports
-  patientDataOptions: ["Name", "NHS number", "Gender", "Date of birth", "Address", "Postcode"],
+  patientDataOptions: ["Name", "NHS number", "Gender", "Date of birth", "Address", "Postcode", "ODS code of their GP"],
   staffDataOptions: ["Recorder", "Vaccinator"],
   locationDataOptions: ["Site name", "Site ODS code", "Location type"],
   consentAndEligibilityDataOptions: ["Consent", "Eligibility", "Estimated due date"],
-  vaccinationDataOptions: ["Vaccine type", "Product", "Batch", "Batch expiry date", "Dose amount", "Vaccination site", "Vaccination date", "Comments"],
+  vaccinationDataOptions: ["Vaccine type", "Product", "Batch", "Batch expiry date", "Dose amount", "Vaccination site", "Vaccination date", "Legal mechanism", "Comments"],
 
   legalMechanisms: [
     {
