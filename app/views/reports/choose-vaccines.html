@@ -15,30 +15,31 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-        <form action="/reports/choose-site" method="post">
+      <form action="/reports/choose-site" method="post">
 
-          {% set items = [] %}
+        {% set items = [] %}
 
-          {% for vaccine in (enabledVaccines | sort(false, false, "name")) %}
-            {% set items = (items.push({
-              value: vaccine.name,
-              text: (vaccine.name | capitaliseFirstLetter)
-            }), items) %}
-          {% endfor %}
+        {% for vaccine in (enabledVaccines | sort(false, false, "name")) %}
+          {% set items = (items.push({
+            value: vaccine.name,
+            text: (vaccine.name | capitaliseFirstLetter)
+          }), items) %}
+        {% endfor %}
 
-          {{ checkboxes({
-            idPrefix: "vaccines",
-            name: "vaccines",
-            fieldset: {
-              legend: {
-                text: "Choose vaccines",
-                classes: "nhsuk-fieldset__legend--xl",
-                isPageHeading: true
-              }
-            },
-            values: data.vaccines,
-            items: items
-          }) }}
+        {{ checkboxes({
+          idPrefix: "vaccines-to-report",
+          name: "vaccinesToReport",
+          fieldset: {
+            legend: {
+              text: "Choose vaccines",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          values: data.vaccinesToReport,
+          items: items
+        }) }}
+
         {{ button({
           "text": "Continue"
         }) }}
