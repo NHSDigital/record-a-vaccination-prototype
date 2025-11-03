@@ -548,6 +548,7 @@ module.exports = router => {
 
   router.get('/record-vaccinations/eligibility', (req, res) => {
     const data = req.session.data
+    const from = req.query.from
     const eligibility = data.eligibility
     let errors = []
 
@@ -561,7 +562,8 @@ module.exports = router => {
     }
 
     res.render('record-vaccinations/eligibility', {
-      errors
+      errors,
+      from
     })
   })
 
@@ -583,16 +585,22 @@ module.exports = router => {
         nextPage = "/record-vaccinations/patient-history"
       }
 
-    } else if (data.vaccine == "flu") {
-      if (data.eligibility === "Health or social care worker") {
-        nextPage = "/record-vaccinations/healthcare-worker"
-      } else {
-        nextPage = "/record-vaccinations/patient"
-      }
-    } else if (data.vaccine == "COVID-19") {
+    } else if (data.vaccine == "flu" && data.eligibility === "Health or social care worker" && (!data.healthcareWorker || data.healthcareWorker === "")) {
+
+      nextPage = "/record-vaccinations/healthcare-worker"
+
+    } else if (data.vaccine == "COVID-19" && (!data.locationType || data.locationType === "")) {
+
       nextPage = "/record-vaccinations/location"
+
+    } else if (data.repeatVaccination === "yes") {
+
+      nextPage = "/record-vaccinations/review-previous"
+
     } else {
+
       nextPage = "/record-vaccinations/patient"
+
     }
 
     res.redirect(nextPage)
@@ -738,7 +746,7 @@ module.exports = router => {
         data.newBatchNumber = ""
       }
 
-      res.redirect('/record-vaccinations/review-previous')
+      res.redirect('/record-vaccinations/review-previous?repeatVaccination=yes&repeatPatient=no')
 
     } else if (answer === 'same-patient-another-vaccination') {
 
@@ -759,7 +767,7 @@ module.exports = router => {
       req.session.data.nhsNumber = ""
       req.session.data.legalMechanism = ""
 
-      res.redirect('/record-vaccinations/vaccine')
+      res.redirect('/record-vaccinations/vaccine?repeatPatient=no&repeatVaccination=no')
     } else {
       res.redirect('/record-vaccinations/done?showErrors=yes')
     }
