@@ -67,6 +67,16 @@ module.exports = router => {
     res.redirect('/vaccines')
   });
 
+  router.get('/prototype-setup/add-vaccinations', (req, res) => {
+    const data = req.session.data
+
+    const vaccinesAddedCount = data.vaccineStock.length
+
+
+    res.render('prototype-setup/add-vaccinations', {
+      vaccinesAddedCount
+    })
+  })
 
   router.post('/prototype-setup/add-vaccinations', (req, res) => {
     const data = req.session.data
