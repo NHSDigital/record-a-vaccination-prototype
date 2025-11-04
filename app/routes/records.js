@@ -120,8 +120,8 @@ module.exports = router => {
       vaccination.vaccine = data.vaccine
       vaccination.vaccineProduct = data.vaccineProduct
     }
-    if (data.deliveryTeam) {
-      vaccination.deliveryTeam = data.deliveryTeam
+    if (data.siteId) {
+      vaccination.siteId = data.siteId
     }
     if (data.vaccinator) {
       vaccination.vaccinator = data.vaccinator
