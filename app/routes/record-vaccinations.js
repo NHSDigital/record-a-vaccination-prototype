@@ -418,9 +418,7 @@ module.exports = router => {
 
     const allLegalMechanisms = data.legalMechanisms
 
-    const legalMechanisms = allLegalMechanisms.filter((legalMechanism) => {
-      return vaccine.legalMechanisms.includes(legalMechanism.value)
-    })
+    const legalMechanisms = allLegalMechanisms
 
     res.render('record-vaccinations/legal-mechanism', {
       legalMechanisms
@@ -640,7 +638,6 @@ module.exports = router => {
       organisationId: currentOrganisation.id,
       siteId: data.siteId,
       vaccinatorId: data.vaccinatorId,
-      legalMechanism: data.legalMechanism,
       eligibility: data.eligibility,
       pregnancyDueDate: data.pregnancyDueDate,
       consent: data.consent,
@@ -755,7 +752,6 @@ module.exports = router => {
       req.session.data.vaccineProduct = ""
       req.session.data.vaccineBatch = ""
       req.session.data.eligibility = ""
-      req.session.data.legalMechanism = ""
 
       res.redirect('/record-vaccinations/vaccine?repeatPatient=yes&repeatVaccination=no')
 
@@ -766,7 +762,6 @@ module.exports = router => {
       req.session.data.vaccineBatch = ""
       req.session.data.eligibility = ""
       req.session.data.nhsNumber = ""
-      req.session.data.legalMechanism = ""
       req.session.data.healthcareWorker = ""
 
       res.redirect('/record-vaccinations/vaccine?repeatPatient=no&repeatVaccination=no')
@@ -856,11 +851,6 @@ module.exports = router => {
     })
     if (!vaccineOptions) { res.redirect('/record-vaccinations'); return }
 
-    const allLegalMechanisms = data.legalMechanisms
-
-    const legalMechanisms = allLegalMechanisms.filter((legalMechanism) => {
-      return vaccineOptions.legalMechanisms.includes(legalMechanism['value'])
-    })
 
     let redirectPath
 
@@ -870,14 +860,7 @@ module.exports = router => {
       redirectPath = "/record-vaccinations/batch?showError=yes"
     } else if (["COVID-19", "flu", "flu (London service)", "RSV", "pneumococcal"].includes(data.vaccine)) {
 
-      if (legalMechanisms.length > 1) {
-        redirectPath = "/record-vaccinations/legal-mechanism"
-      } else {
-        // Set legal mechanism to the only option available and skip
-        // the question
-        data.legalMechanism = legalMechanisms[0].value
-        redirectPath = "/record-vaccinations/eligibility"
-      }
+      redirectPath = "/record-vaccinations/eligibility"
 
     } else if (data.repeatPatient === "yes") {
       redirectPath = "/record-vaccinations/patient-estimated-due-date"
@@ -923,10 +906,10 @@ module.exports = router => {
 
     if (data.newBatchNumber === '' || data.newBatchExpiryDate?.day === '' || data.newBatchExpiryDate?.month === '' || data.newBatchExpiryDate?.year === '') {
       nextPage = "/record-vaccinations/add-batch?showErrors=yes"
-    } else if ((data.vaccine === "pertussis") || (data.vaccine === "MMR")) {
-      nextPage = "/record-vaccinations/patient"
+    } else if (["COVID-19", "flu", "flu (London service)", "RSV", "pneumococcal"].includes(data.vaccine)) {
+      nextPage = "/record-vaccinations/eligibility"
     } else {
-      nextPage = "/record-vaccinations/legal-mechanism"
+      nextPage = "/record-vaccinations/patient"
     }
 
     res.redirect(nextPage)

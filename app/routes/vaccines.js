@@ -14,7 +14,6 @@ module.exports = (router) => {
       vaccine: data.vaccine,
       vaccineProduct: data.vaccineProduct,
       siteId: data.siteId,
-      legalMechanisms: data.vaccineLegalMechanisms,
       batches: [
         {
           id: Math.floor(Math.random() * 10000000).toString(),
@@ -34,7 +33,6 @@ module.exports = (router) => {
     req.session.data.batchExpiryDate.day = ''
     req.session.data.batchExpiryDate.month = ''
     req.session.data.batchExpiryDate.year = ''
-    req.session.data.vaccineLegalMechanisms = ''
 
     res.redirect('/vaccines/' + generatedId)
   })
@@ -109,12 +107,6 @@ module.exports = (router) => {
     res.render('vaccines/add-batch')
   })
 
-  // Viewing legal mechanisms page
-  router.get('/vaccines/legal-mechanisms', (req, res) => {
-
-    res.render('vaccines/legal-mechanisms')
-  })
-
   // Viewing check answers page
   router.get('/vaccines/check', (req, res) => {
 
@@ -153,7 +145,6 @@ module.exports = (router) => {
     req.session.data.batchExpiryDate.day = ''
     req.session.data.batchExpiryDate.month = ''
     req.session.data.batchExpiryDate.year = ''
-    req.session.data.vaccineLegalMechanisms = ''
 
     res.redirect('/vaccines/' + vaccine.id)
   })
