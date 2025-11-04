@@ -136,10 +136,6 @@ module.exports = router => {
       vaccination.batchNumber = data.batchNumber
     }
 
-    if (data.legalMechanism) {
-      vaccination.legalMechanism = data.legalMechanism
-    }
-
     if (data.notes) {
       vaccination.notes = data.notes
     }

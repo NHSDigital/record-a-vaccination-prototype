@@ -5,7 +5,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {% set backHref = from if from else "/record-vaccinations/legal-mechanism" %}
+  {% set backHref = from if from else "/record-vaccinations/batch" %}
 
   {{ backLink({ href: backHref }) }}
 {% endblock %}
