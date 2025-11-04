@@ -4,9 +4,7 @@
 
 {% set currentSection = "vaccinate" %}
 
-{% if (data.vaccine === "COVID-19") %}
-  {% set nextPage = "/record-vaccinations/warning" %}
-{% elseif ((data.vaccine == "RSV") and (data.eligibility | arrayOrStringIncludes("Pregnant"))) or (data.vaccine == "Pertussis") %}
+{% if ((data.vaccine == "RSV") and (data.eligibility | arrayOrStringIncludes("Pregnant"))) or (data.vaccine == "Pertussis") %}
   {% set nextPage = "/record-vaccinations/patient-estimated-due-date" %}
 {% else %}
   {% set nextPage = "/record-vaccinations/consent" %}
@@ -77,11 +75,11 @@
           </ul>
         {% endset %}
 
-    
+
 
       {% endif %}
 
-      
+
 
       <form action="{{ nextPage }}" method="post" novalidate>
         {{ button({
