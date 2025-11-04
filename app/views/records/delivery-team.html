@@ -19,8 +19,8 @@
         <input type="hidden" name="changedField" value="Site">
 
         {{ radios({
-          idPrefix: "deliveryTeam",
-          name: "deliveryTeam",
+          idPrefix: "site-id",
+          name: "siteId",
           fieldset: {
             legend: {
               text: "Which site was it?",
@@ -28,7 +28,7 @@
               isPageHeading: true
             }
           },
-          value: data.deliveryTeam,
+          value: data.siteId,
           items: [
             {
               value: "Anne Ward Maternity Unit",
