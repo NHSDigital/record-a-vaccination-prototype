@@ -703,10 +703,12 @@ module.exports = router => {
     const healthcareWorker = data.healthcareWorker
     let nextPage
 
-    if (healthcareWorker && healthcareWorker != '') {
-      nextPage = '/record-vaccinations/location'
-    } else {
+    if (!healthcareWorker || healthcareWorker === '') {
       nextPage = '/record-vaccinations/healthcare-worker?showErrors=yes'
+    } else if (data.repeatVaccination === "yes") {
+      nextPage = '/record-vaccinations/review-previous'
+    } else {
+      nextPage = '/record-vaccinations/location'
     }
 
     res.redirect(nextPage)
