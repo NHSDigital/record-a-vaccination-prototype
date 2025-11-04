@@ -731,7 +731,6 @@ module.exports = router => {
       data.consentParentName = ""
       data.consentAdvocateName = ""
       data.consentDeputyName = ""
-      data.healthcareWorker = ""
       data.doseAmount = ""
     }
 
@@ -768,6 +767,7 @@ module.exports = router => {
       req.session.data.eligibility = ""
       req.session.data.nhsNumber = ""
       req.session.data.legalMechanism = ""
+      req.session.data.healthcareWorker = ""
 
       res.redirect('/record-vaccinations/vaccine?repeatPatient=no&repeatVaccination=no')
     } else {
