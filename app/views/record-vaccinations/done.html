@@ -18,7 +18,6 @@
       {% set panelHtml %}
         <a href="#" class="nhsuk-link--reverse">{{ data.firstName }} {{ data.lastName }}’s {{ data.vaccine }} record</a> will be sent to their GP.
       {% endset %}
-      {% include "_feedback-panel.html" %}
 
       {{ panel({
         titleText: "Vaccination saved",
