@@ -13,8 +13,7 @@ module.exports = router => {
   router.get('/sign-in-as-single-org-user', (req ,res) => {
 
     // Set organisation and user Id
-    req.session.data.currentOrganisationId = req.session.data.organisations[1].id
-    req.session.data.currentUserId = "12345";
+    req.session.data.currentOrganisationId = "RW3"; req.session.data.currentUserId = "2387441662601";
 
     res.redirect('/home')
   })
@@ -50,7 +49,7 @@ module.exports = router => {
   router.get('/sign-out', (req, res) => {
     req.session.data.currentUserId = null
 
-    res.redirect('/signed-out')
+    res.redirect('/product-page')
   })
 
 }
