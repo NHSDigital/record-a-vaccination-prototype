@@ -12,6 +12,16 @@
         {% include "home/_no-vaccinations-recorded.html" %}
       {% endif %}
 
+      {% from 'inset-text/macro.njk' import insetText %}
+
+{% set insetTextHtml %}
+  <h2 class="nhsuk-heading-s">Updates</h2><p>To find out about the latest changes we've made to the service, go to <a href="/updates" title="External website">What's new</a>.</p>
+{% endset %}
+
+{{ insetText({
+  html: insetTextHtml
+}) }}
+
       <h2 class="nhsuk-heading-m">All vaccinations</h2>
 
     </div>
