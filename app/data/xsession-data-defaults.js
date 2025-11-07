@@ -4,9 +4,7 @@ const featureFlags = require('./feature-flags')
 const users = require('./users')
 const vaccines = require('./vaccines')
 
-
 module.exports = {
-  name: 'Test',
   organisations: organisations,
   regions: regions,
   featureFlags: featureFlags,
@@ -27,7 +25,28 @@ module.exports = {
   consentAndEligibilityDataOptions: ["Consent", "Eligibility", "Estimated due date"],
   vaccinationDataOptions: ["Vaccine type", "Product", "Batch", "Batch expiry date", "Dose amount", "Vaccination site", "Vaccination date", "Legal mechanism", "Comments"],
 
- careHomes: [
+  legalMechanisms: [
+    {
+      value: "National protocol",
+      text: "National protocol"
+    },
+    {
+      value: "Patient group direction",
+      text: "Patient group direction (PGD)"
+    },
+    {
+      value: "Patient specific direction",
+      text: "Patient specific direction (PSD)"
+    },
+    {
+      value: "Written instruction",
+      text: "Written instruction",
+      hint: {
+        text: "Occupational health only"
+      }
+    }
+  ],
+  careHomes: [
     {name: "Colin Care Home", code: "VL025", address1: "1 St James Street", town: "Manchester", postcode: "M1 63P"},
     {name: "Abacus Care Home", code: "VLA2K", address1: "30 Pleasant view gardens", town: "Leeds", postcode: "L8 1PD"},
     {name: "Barrington House", code: "VL55M", address1: "16 Mount Avon Drive", town: "London", postcode: "SE12 9PR"}
@@ -523,5 +542,4 @@ module.exports = {
     "FAJ00": {"name": "Jades Chemist", "address": "19 The Parade", "town": "Crawley", "postcode": "Rh10 8Dt"},
     "FAZZZ": {"name": "Legally Closed Pharamcy", "address": "30 Legal Close", "town": "London", "postcode": "CL0 5ED", legallyClosed: "2001-02-04"}
   }
-
 }
