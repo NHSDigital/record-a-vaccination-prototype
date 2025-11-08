@@ -2,7 +2,6 @@ const express = require('express')
 const NHSPrototypeKit = require('nhsuk-prototype-kit')
 const path = require('path')
 const nunjucks = require('nunjucks')
-const session = require('express-session')
 const { join } = require('node:path')
 
 // Local dependencies
@@ -34,17 +33,6 @@ const appViews = [
 
 let nunjucksAppEnv = nunjucks.configure(appViews, { express: app, noCache: true })
 
-// Use session
-app.use(
-  session({
-    secret: 'nhsuk-prototype-kit',
-    resave: false,
-    saveUninitialized: true
-  })
-)
-
-// Local variables
-// app.use(locals(config))
 
 // Use public folder for static assets
 app.use(express.static(join(__dirname, 'public')))
@@ -55,34 +43,19 @@ app.use(
   express.static(join(__dirname, 'node_modules/nhsuk-frontend/dist/nhsuk'))
 )
 
-function setSessionDataDefaults(req, res, next) {
-  if (!req.session.data) {
-    req.session.data = {}
-  }
+NHSPrototypeKit.init({
+  express: app,
+  nunjucks: nunjucksAppEnv,
+  routes: routes,
+  sessionDataDefaults: sessionDataDefaults
+})
 
-  // req.session.data = Object.assign({}, sessionDataDefaults, req.session.data)
 
-  // Send session data to all views
-  res.locals.data = {}
-  for (const j in req.session.data) {
-    res.locals.data[j] = req.session.data[j]
-  }
-
-  next()
-}
-
-app.use(setSessionDataDefaults)
-
-NHSPrototypeKit.init(app, nunjucksAppEnv)
 
 // Add custom filters
 for (const [name, filter] of Object.entries(filters())) {
   nunjucksAppEnv.addFilter(name, filter)
 }
-
-// Use custom application routes
-app.use('/', routes)
-
 
 // Run the application
 app.listen(port)
