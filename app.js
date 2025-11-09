@@ -47,6 +47,7 @@ NHSPrototypeKit.init({
   express: app,
   nunjucks: nunjucksAppEnv,
   routes: routes,
+  locals: locals,
   sessionDataDefaults: sessionDataDefaults
 })
 
