@@ -44,6 +44,7 @@ app.use(
 )
 
 NHSPrototypeKit.init({
+  serviceName: 'Record a vaccination',
   express: app,
   nunjucks: nunjucksAppEnv,
   routes: routes,
