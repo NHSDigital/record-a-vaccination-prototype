@@ -5,21 +5,21 @@ const nunjucks = require('nunjucks')
 const { join } = require('node:path')
 
 // Local dependencies
-const config = require('./app/config')
 const locals = require('./app/locals')
 const routes = require('./app/routes')
 const filters = require('./app/filters')
 const sessionDataDefaults = require('./app/data/session-data-defaults')
 
+const SERVICE_NAME = 'Record a vaccination'
+
 // Set configuration variables
-const port = parseInt(process.env.PORT || config.port, 10) || 2000
+const port = parseInt(process.env.PORT, 10) || 2000
 
 // Initialise applications
 const app = express()
 
 // Add variables that are available in all views
 app.locals.asset_path = '/public/'
-// app.locals.serviceName = config.serviceName
 
 // Nunjucks configuration for application
 const appViews = [
@@ -44,7 +44,7 @@ app.use(
 )
 
 NHSPrototypeKit.init({
-  serviceName: 'Record a vaccination',
+  serviceName: SERVICE_NAME,
   express: app,
   nunjucks: nunjucksAppEnv,
   routes: routes,
