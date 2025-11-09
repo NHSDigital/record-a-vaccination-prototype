@@ -10,13 +10,7 @@
     "test": "jest",
     "test:ci": "jest --ci",
     "prewatch": "gulp build",
-    "watch": "gulp",
-    "lint": "npm run lint:js && npm run lint:prettier",
-    "lint:fix": "npm run lint:js:fix && npm run lint:prettier:fix",
-    "lint:prettier": "prettier --cache --cache-location .cache/prettier --cache-strategy content --check .",
-    "lint:prettier:fix": "prettier --write .",
-    "lint:js": "eslint --cache --cache-location .cache/eslint --cache-strategy content --color --ignore-path .gitignore \"**/*.js\"",
-    "lint:js:fix": "npm run lint:js -- --fix"
+    "watch": "gulp"
   },
   "author": "NHS England",
   "license": "MIT",
