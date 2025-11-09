@@ -5,12 +5,13 @@ const nunjucks = require('nunjucks')
 const { join } = require('node:path')
 
 // Local dependencies
+const config = require('./app/config')
 const locals = require('./app/locals')
 const routes = require('./app/routes')
 const filters = require('./app/filters')
 const sessionDataDefaults = require('./app/data/session-data-defaults')
 
-const SERVICE_NAME = 'Record a vaccination'
+const SERVICE_NAME = config.serviceName
 
 // Set configuration variables
 const port = parseInt(process.env.PORT, 10) || 2000
