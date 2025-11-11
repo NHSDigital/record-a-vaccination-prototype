@@ -16,7 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.3",
+    "@babel/preset-env": "^7.28.5",
     "@inquirer/prompts": "^7.9.0",
     "@x-govuk/govuk-prototype-filters": "^2.0.0",
     "browser-sync": "^3.0.4",
@@ -36,7 +36,7 @@
     "path": "^0.12.7",
     "plugin-error": "^2.0.1",
     "portscanner": "^2.2.0",
-    "sass-embedded": "1.77.5"
+    "sass-embedded": "1.93.3"
   },
   "devDependencies": {
   },
