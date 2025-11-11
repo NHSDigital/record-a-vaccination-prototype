@@ -1,3 +1,6 @@
+const { join } = require('node:path')
+const process = require('node:process')
+
 // External dependencies
 const browserSync = require('browser-sync')
 const gulp = require('gulp')
@@ -5,12 +8,33 @@ const babel = require('gulp-babel')
 const clean = require('gulp-clean')
 const nodemon = require('gulp-nodemon')
 const gulpSass = require('gulp-sass')
+const { createProxyMiddleware } = require('http-proxy-middleware')
 const PluginError = require('plugin-error')
 const dartSass = require('sass-embedded')
 
 // Local dependencies
 const config = require('./app/config')
-const { findAvailablePort } = require('./lib/utils')
+const findAvailablePort = require('./app/find-available-port')
+
+
+/**
+ * Add environment variables from .env file
+ * (Requires Node.js v20.12.0 or later)
+ *
+ * @see {@link https://nodejs.org/api/process.html#processloadenvfilepath}
+ */
+if ('loadEnvFile' in process) {
+  try {
+    process.loadEnvFile()
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      // File not found - this is fine
+    } else {
+      // Some other error occurred
+      throw error
+    }
+  }
+}
 
 // Set configuration variables
 const port = parseInt(process.env.PORT || config.port, 10) || 2000
@@ -127,14 +151,24 @@ async function startBrowserSync(done) {
 
   browserSync.init(
     {
-      proxy: `localhost:${proxyPort}`,
       port: proxyPort + 1000,
       ui: false,
       files: ['app/views/**/*.*', 'lib/example-templates/**/*.*'],
       ghostMode: false,
       open: false,
       notify: true,
-      watch: true
+      watch: true,
+
+      // Proxy to Node.js server
+      middleware: createProxyMiddleware({
+        changeOrigin: true,
+        target: `http://localhost:${proxyPort}`
+      }),
+
+      // Serve static assets
+      server: {
+        baseDir: join(__dirname, 'public')
+      }
     },
     done
   )
