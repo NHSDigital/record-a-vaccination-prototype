@@ -22,7 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.3",
+    "@babel/preset-env": "^7.28.5",
     "@inquirer/prompts": "^7.9.0",
     "@x-govuk/govuk-prototype-filters": "^2.0.0",
     "body-parser": "^2.2.0",
