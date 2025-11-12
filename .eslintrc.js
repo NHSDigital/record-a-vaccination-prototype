@@ -10,8 +10,7 @@ module.exports = {
     // Enable dotfile linting
     '!.*',
     'node_modules',
-    'node_modules/.*',
-
+    'node_modules/.*'
   ],
   overrides: [
     {
