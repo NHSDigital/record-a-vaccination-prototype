@@ -25,30 +25,23 @@
 
       <div class="nhsuk-form-group">
         <h1 class="nhsuk-label-wrapper">
-          <label class="nhsuk-label nhsuk-label--m nhsuk-u-margin-bottom-1" for="organisationCode">
+          <label class="nhsuk-label nhsuk-label--m nhsuk-u-margin-bottom-1" for="organisationId">
             NHS organisation or community pharmacy
           </label>
         </h1>
-        <div class="nhsuk-hint" id="organisationName-hint">
+        <div class="nhsuk-hint" id="organisation-id-hint">
           Search by name or ODS code
         </div>
-        <select class="nhsuk-select" id="organisationCode" name="organisationCode"
+        <select class="nhsuk-select" id="organisation-id" name="organisationId"
           data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
           <option selected value=""></option>
 
           {% set options = [] %}
 
-          {% for code, name in data.nhsTrusts %}
+          {% for organisation in data.allOrganisations %}
             {% set options = (options.push({
-              label: name + " (" + code + ")",
-              value: code
-            }), options) %}
-          {% endfor %}
-
-          {% for code, data in data.nhsPharmacies %}
-            {% set options = (options.push({
-              label: data.name + ", " + data.address + ", " + (data.postcode | upper) + " (" + code + ")",
-              value: code
+              label: organisation.name + " (" + organisation.id + ")",
+              value: organisation.id
             }), options) %}
           {% endfor %}
 
