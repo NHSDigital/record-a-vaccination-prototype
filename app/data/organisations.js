@@ -1,3 +1,4 @@
+// These are organisations set up as using RAVS
 module.exports = [
   {
     id: "RCF",
