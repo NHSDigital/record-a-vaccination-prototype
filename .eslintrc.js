@@ -21,8 +21,6 @@ module.exports = {
       extends: [
         'eslint:recommended',
         'plugin:import/recommended',
-        'plugin:jest/style',
-        'plugin:jest-dom/recommended',
         'plugin:jsdoc/recommended-typescript-flavor',
         'plugin:n/recommended',
         'plugin:promise/recommended',
@@ -39,9 +37,7 @@ module.exports = {
         'import',
         'jsdoc',
         'n',
-        'promise',
-        'jest',
-        'jest-dom'
+        'promise'
       ],
       rules: {
         // Always import Node.js packages from `node:*`
@@ -124,15 +120,6 @@ module.exports = {
           }
         ]
       }
-    },
-    {
-      // Configure ESLint in test files
-      files: ['**/*.test.{cjs,js,mjs}'],
-      extends: ['plugin:jest/recommended', 'plugin:jest/style'],
-      env: {
-        'jest/globals': true
-      },
-      plugins: ['jest']
     },
     {
       // Configure ESLint in browser JavaScript
