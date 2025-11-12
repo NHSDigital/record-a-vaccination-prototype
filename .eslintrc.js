@@ -12,8 +12,6 @@ module.exports = {
     'node_modules',
     'node_modules/.*',
 
-    // Prevent CHANGELOG history changes
-    'CHANGELOG.md'
   ],
   overrides: [
     {
