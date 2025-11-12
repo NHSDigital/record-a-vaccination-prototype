@@ -99,7 +99,7 @@ module.exports = router => {
       })
     }
 
-    for (vaccine of uniqueVaccinesRecorded) {
+    for (let vaccine of uniqueVaccinesRecorded) {
       totalsByVaccine.push({
         vaccine: vaccine,
         today: countVaccinations(vaccinationsRecorded, {
@@ -123,7 +123,7 @@ module.exports = router => {
 
     const siteIds = [...new Set(vaccinationsRecorded.map((vaccination) => vaccination.siteId))]
 
-    for (siteId of siteIds) {
+    for (let siteId of siteIds) {
       totalsBySite.push({
         siteId: siteId,
         today: countVaccinations(vaccinationsRecorded, {

@@ -204,7 +204,7 @@ module.exports = router => {
 
     const vaccines = organisation.vaccines || []
 
-    for (vaccineToAdd of vaccinesToAdd) {
+    for (let vaccineToAdd of vaccinesToAdd) {
 
       const existingVaccine = vaccines.find((vaccine) => vaccine.name === vaccineToAdd)
 
@@ -318,10 +318,6 @@ module.exports = router => {
 
     const user = data.users.find((user) => user.id === req.params.userId)
 
-    const userOrganisationSettings = (user.organisations || []).find((organisation) => organisation.id === organisation.id)
-
-    // if (!user || userOrganisationSettings.status == 'Active') { res.redirect(`/regions/organisations/${organisation.id}`); return }
-
     const numberOfActiveUsers = data.users.filter((user) => (user.organisations || []).find((orgSetting) => (orgSetting.id === organisation.id ) && (orgSetting.status === 'Active'))).length
 
     res.render('regions/uninvite', {
@@ -390,7 +386,7 @@ module.exports = router => {
 
     let vaccines = fromOrganisation.vaccines.filter((vaccine) => message.vaccinesRequested.includes(vaccine.name))
 
-    for (vaccine of vaccines) {
+    for (let vaccine of vaccines) {
       if (decision === "approve") {
         vaccine.status = "enabled"
       } else if (decision === "reject") {

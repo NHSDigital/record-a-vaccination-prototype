@@ -29,7 +29,6 @@ module.exports = (router) => {
   // Adding a user to a region
   router.post('/support/regions/:id/users', (req, res) => {
     const { id } = req.params
-    const region = req.session.data.regions.find((region) => region.id === id)
 
 const userId = Math.floor(Math.random() * 10000000).toString()
 
@@ -113,7 +112,7 @@ const userId = Math.floor(Math.random() * 10000000).toString()
 
     let vaccines = organisation.vaccines
 
-    for (vaccineToAdd of vaccinesToAdd) {
+    for (let vaccineToAdd of vaccinesToAdd) {
 
       const existingVaccine = vaccines.find((vaccine) => vaccine.name === vaccineToAdd)
 
@@ -199,7 +198,6 @@ const userId = Math.floor(Math.random() * 10000000).toString()
   // Adding a user to an organisation
   router.post('/support/organisations/:id/users', (req, res) => {
     const { id } = req.params
-    const organisation = req.session.data.organisations.find((organisation) => organisation.id === id)
 
     const userId = Math.floor(Math.random() * 10000000).toString()
 
@@ -298,7 +296,6 @@ const userId = Math.floor(Math.random() * 10000000).toString()
     const { id, organisationId } = req.params
     const data = req.session.data
     const user = data.users.find((user) => user.id === id)
-    const organisation = data.organisations.find((organisation) => organisation.id === organisationId)
     const userOrganisationSettings = user.organisations.find((organisation) => organisation.id === organisationId)
 
     userOrganisationSettings.vaccinator = (req.body.vaccinator === "yes")
@@ -328,7 +325,6 @@ const userId = Math.floor(Math.random() * 10000000).toString()
     const { id, regionId } = req.params
     const data = req.session.data
     const user = data.users.find((user) => user.id === id)
-    const region = data.regions.find((region) => region.id === regionId)
     const userRegionSettings = user.regions.find((region) => region.id === regionId)
 
     userRegionSettings.status = req.body.status

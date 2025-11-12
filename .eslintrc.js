@@ -4,16 +4,13 @@
 module.exports = {
   extends: ['prettier'],
   ignorePatterns: [
-    '**/app/**',
+    '**/lib/**',
     '**/public/**',
 
     // Enable dotfile linting
     '!.*',
     'node_modules',
-    'node_modules/.*',
-
-    // Prevent CHANGELOG history changes
-    'CHANGELOG.md'
+    'node_modules/.*'
   ],
   overrides: [
     {
@@ -32,13 +29,7 @@ module.exports = {
       parserOptions: {
         ecmaVersion: 'latest'
       },
-      plugins: [
-        '@typescript-eslint',
-        'import',
-        'jsdoc',
-        'n',
-        'promise'
-      ],
+      plugins: ['@typescript-eslint', 'import', 'jsdoc', 'n', 'promise'],
       rules: {
         // Always import Node.js packages from `node:*`
         'import/enforce-node-protocol-usage': ['error', 'always'],
