@@ -4,7 +4,7 @@
 module.exports = {
   extends: ['prettier'],
   ignorePatterns: [
-    '**/app/**',
+    '**/lib/**',
     '**/public/**',
 
     // Enable dotfile linting
@@ -32,13 +32,7 @@ module.exports = {
       parserOptions: {
         ecmaVersion: 'latest'
       },
-      plugins: [
-        '@typescript-eslint',
-        'import',
-        'jsdoc',
-        'n',
-        'promise'
-      ],
+      plugins: ['@typescript-eslint', 'import', 'jsdoc', 'n', 'promise'],
       rules: {
         // Always import Node.js packages from `node:*`
         'import/enforce-node-protocol-usage': ['error', 'always'],

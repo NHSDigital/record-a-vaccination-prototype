@@ -1,7 +1,7 @@
-const organisations = require('./organisations')
 const allOrganisations = require('./all-organisations')
-const regions = require('./regions')
 const featureFlags = require('./feature-flags')
+const organisations = require('./organisations')
+const regions = require('./regions')
 const users = require('./users')
 const vaccines = require('./vaccines')
 

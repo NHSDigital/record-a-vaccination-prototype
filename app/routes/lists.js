@@ -1,5 +1,5 @@
-const { randomItem } = require('../lib/utils/random-item.js')
 const { dateFromYearMonthDay } = require('../lib/utils/date-from-year-month-day.js')
+const { randomItem } = require('../lib/utils/random-item.js')
 
 
 module.exports = router => {
@@ -227,7 +227,7 @@ module.exports = router => {
 
     const nhsNumbers = data.nhsNumbers.split(/\n/)
 
-    for (nhsNumber of nhsNumbers) {
+    for (let nhsNumber of nhsNumbers) {
       patientList.patients.push({
         nhsNumber: nhsNumber,
         firstName: randomItem(listOfFirstNames),
