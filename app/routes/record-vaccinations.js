@@ -811,6 +811,8 @@ module.exports = router => {
     let errors = []
     let locationType = req.session.data.locationType
 
+    const careHomes = req.session.data.allOrganisations.filter((organisation) => organisation.type === "Care home")
+
     if (req.query.showErrors === "yes") {
       if (!locationType) {
         errors.push({
@@ -821,7 +823,8 @@ module.exports = router => {
     }
 
     res.render('record-vaccinations/location', {
-      errors
+      errors,
+      careHomes
     })
   })
 
@@ -1089,12 +1092,19 @@ module.exports = router => {
     const data = req.session.data
     const vaccinator = data.users.find((user) => user.id === data.vaccinatorId)
 
+    let careHome
+
     // Get the details of the vaccine product
     const vaccineProduct = data.vaccines.find((vaccine) => vaccine.name === data.vaccine)?.products.find((vaccineProduct) => vaccineProduct.name === data.vaccineProduct)
 
+    if (data.locationType === "Care home") {
+      careHome = data.allOrganisations.find((organisation) => organisation.id === data.careHomeId)
+    }
+
     res.render('record-vaccinations/check', {
       vaccinator,
-      vaccineProduct
+      vaccineProduct,
+      careHome
     })
   })
 

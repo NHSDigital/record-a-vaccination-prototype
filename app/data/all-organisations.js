@@ -3112,5 +3112,23 @@ module.exports = [
     "postcode": "CL0 5ED",
     "legallyClosed": "2001-02-04",
     "type": "Community pharmacy"
+  },
+  {
+    name: "Colin Care Home",
+    id: "VL025",
+    address: "1 St James Street, Manchester, M1 63P",
+    type: "Care home"
+  },
+  {
+    name: "Abacus Care Home",
+    id: "VLA2K",
+    address: "30 Pleasant view gardens, Leeds, L8 1PD",
+    type: "Care home"
+  },
+  {
+    name: "Barrington House",
+    id: "VL55M",
+    address: "16 Mount Avon Drive, London, SE12 9PR",
+    type: "Care home"
   }
 ]
