@@ -74,7 +74,7 @@ module.exports = (router) => {
     const vaccinesRequested = currentOrganisation.vaccines
     .filter((vaccine) => data.vaccinesRequested.includes(vaccine.name))
 
-    for (vaccineRequested of vaccinesRequested) {
+    for (let vaccineRequested of vaccinesRequested) {
       vaccineRequested.status = "requested"
     }
 

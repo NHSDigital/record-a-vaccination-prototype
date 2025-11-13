@@ -154,7 +154,6 @@ module.exports = router => {
     const firstName = data.firstName;
     const lastName = data.lastName;
     const dateOfBirth = data.dateOfBirth;
-    const postcode = data.postcode;
 
     if (firstName && lastName && dateOfBirth) {
 

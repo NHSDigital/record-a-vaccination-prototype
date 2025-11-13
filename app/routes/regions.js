@@ -7,7 +7,7 @@ module.exports = router => {
 
     const organisations = data.organisations.filter((organisation) => (organisation.region === currentRegion.id) && (["Active", "Invited", "Deactivated"].includes(organisation.status)))
 
-    const closedOrganisationsCount = data.organisations.filter((organisation) => (organisation.region === "Y61" && organisation.status == "Closed")).length
+    const closedOrganisationsCount = data.organisations.filter((organisation) => (organisation.region === currentRegion.id && organisation.status == "Closed")).length
 
     res.render('regions/index', {
       organisations,
@@ -28,7 +28,7 @@ module.exports = router => {
 
   router.get('/regions/review/:id', (req, res) => {
     const data = req.session.data
-    const organisation = data.organisations.find((org) => org.id === req.params.id)
+    const organisation = data.allOrganisations.find((org) => org.id === req.params.id)
 
     res.render('regions/organisation-request', {
       organisation
@@ -37,7 +37,7 @@ module.exports = router => {
 
   router.get('/regions/accept/:id', (req, res) => {
     const data = req.session.data
-    const organisation = data.organisations.find((org) => org.id === req.params.id)
+    const organisation = data.allOrganisations.find((org) => org.id === req.params.id)
 
     res.render('regions/accept', {
       organisation
@@ -46,49 +46,33 @@ module.exports = router => {
 
   // Inviting an organisation
   router.post('/regions/add', (req, res) => {
+    const data = req.session.data
+    const currentRegion = res.locals.currentRegion
 
-    const organisationCode = req.session.data.organisationCode
+    const organisationId = data.organisationId
+    const organisation = data.allOrganisations.find((org) => org.id === organisationId)
+
     const addedUserId = Math.floor(Math.random() * 10000000).toString()
-
-    let organisationName, organisationLine1, organisationTown, organisationPostcode, organisationType
-
-    if (organisationCode.startsWith('FA')) {
-      organisationName = req.session.data.nhsPharmacies[organisationCode].name
-      organisationLine1 = req.session.data.nhsPharmacies[organisationCode].address
-      organisationTown = req.session.data.nhsPharmacies[organisationCode].town
-      organisationPostcode = req.session.data.nhsPharmacies[organisationCode].postcode
-      organisationType = 'Community Pharmacy'
-    } else {
-      organisationName = req.session.data.nhsTrusts[organisationCode]
-      organisationLine1 = 'Cobbett House, Oxford Road'
-      organisationTown = 'Manchester'
-      organisationPostcode = 'M13 9WL'
-      organisationType = 'NHS Trust'
-    }
 
     // Add organisation
     req.session.data.organisations.push({
-      id: req.session.data.organisationCode,
-      name: organisationName,
-      address: {
-        line1: organisationLine1,
-        town: organisationTown,
-        postcode: organisationPostcode
-      },
-      type: organisationType,
+      id: organisation.id,
+      name: organisation.name,
+      address: organisation.address,
+      type: organisation.type,
       status: 'Invited',
-      region: "Y61"
+      region: currentRegion.id
     })
 
     req.session.data.users.push({
       id: addedUserId,
       email: req.session.data.email,
       status: 'Invited',
-      firstName: req.session.data.firstName,
-      lastName: req.session.data.lastName,
+      firstName: data.firstName,
+      lastName: data.lastName,
       organisations: [
         {
-          id: req.session.data.organisationCode,
+          id: organisation.id,
           status: "Invited",
           permissionLevel: "Lead administrator"
         }
@@ -97,45 +81,17 @@ module.exports = router => {
 
     // Remove data from adding organisation flow
     req.session.data.email = ''
-    req.session.data.organisationCode = ''
+    req.session.data.organisationId = ''
     req.session.data.firstName = ''
     req.session.data.lastName = ''
 
-    res.redirect('/regions/organisations/' + organisationCode)
+    res.redirect('/regions/organisations/' + organisationId)
   })
 
   router.get('/regions/organisation-details', (req, res) => {
-    const organisationCode = req.session.data.organisationCode
-
-    let organisationName, organisationLine1, organisationTown, organisationPostcode, organisationType, legallyClosed
-
-    if (organisationCode.startsWith('FA')) {
-      organisationName = req.session.data.nhsPharmacies[organisationCode].name
-      organisationLine1 = req.session.data.nhsPharmacies[organisationCode].address
-      organisationTown = req.session.data.nhsPharmacies[organisationCode].town
-      organisationPostcode = req.session.data.nhsPharmacies[organisationCode].postcode
-      legallyClosed = req.session.data.nhsPharmacies[organisationCode].legallyClosed
-      organisationType = 'Community Pharmacy'
-    } else {
-      organisationName = req.session.data.nhsTrusts[organisationCode]
-      legallyClosed = false
-      organisationLine1 = 'Cobbett House, Oxford Road'
-      organisationTown = 'Manchester'
-      organisationPostcode = 'M13 9WL'
-      organisationType = 'NHS Trust'
-    }
-
-    const organisation = {
-      code: organisationCode,
-      name: organisationName,
-      type: organisationType,
-      address: {
-        line1: organisationLine1,
-        town: organisationTown,
-        postcode: organisationPostcode
-      },
-      legallyClosed: legallyClosed
-    }
+    const data = req.session.data
+    const organisationId = data.organisationId
+    const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
 
     res.render('regions/organisation-details', {
       organisation
@@ -143,34 +99,9 @@ module.exports = router => {
   })
 
   router.get('/regions/add-email', (req, res) => {
-    const organisationCode = req.session.data.organisationCode
-
-    let organisationName, organisationLine1, organisationTown, organisationPostcode, organisationType
-
-    if (organisationCode.startsWith('FA')) {
-      organisationName = req.session.data.nhsPharmacies[organisationCode].name
-      organisationLine1 = req.session.data.nhsPharmacies[organisationCode].address
-      organisationTown = req.session.data.nhsPharmacies[organisationCode].town
-      organisationPostcode = req.session.data.nhsPharmacies[organisationCode].postcode
-      organisationType = 'Community Pharmacy'
-    } else {
-      organisationName = req.session.data.nhsTrusts[organisationCode]
-      organisationLine1 = 'Cobbett House, Oxford Road'
-      organisationTown = 'Manchester'
-      organisationPostcode = 'M13 9WL'
-      organisationType = 'NHS Trust'
-    }
-
-    const organisation = {
-      id: organisationCode,
-      name: organisationName,
-      type: organisationType,
-      address: {
-        line1: organisationLine1,
-        town: organisationTown,
-        postcode: organisationPostcode
-      }
-    }
+    const data = req.session.data
+    const organisationId = data.organisationId
+    const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
 
     res.render('regions/add-email', {
       organisation
@@ -178,34 +109,10 @@ module.exports = router => {
   })
 
   router.get('/regions/check-and-send', (req, res) => {
-    const organisationCode = req.session.data.organisationCode
+    const data = req.session.data
+    const organisationId = data.organisationId
+    const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
 
-    let organisationName, organisationLine1, organisationTown, organisationPostcode, organisationType
-
-    if (organisationCode.startsWith('FA')) {
-      organisationName = req.session.data.nhsPharmacies[organisationCode].name
-      organisationLine1 = req.session.data.nhsPharmacies[organisationCode].address
-      organisationTown = req.session.data.nhsPharmacies[organisationCode].town
-      organisationPostcode = req.session.data.nhsPharmacies[organisationCode].postcode
-      organisationType = 'Community Pharmacy'
-    } else {
-      organisationName = req.session.data.nhsTrusts[organisationCode]
-      organisationLine1 = '73 Roman Rd'
-      organisationTown = 'Leeds'
-      organisationPostcode = 'LS2 5ZN'
-      organisationType = 'NHS Trust'
-    }
-
-    const organisation = {
-      id: organisationCode,
-      name: organisationName,
-      type: organisationType,
-      address: {
-        line1: organisationLine1,
-        town: organisationTown,
-        postcode: organisationPostcode
-      }
-    }
 
     res.render('regions/check-and-send', {
       organisation
@@ -297,7 +204,7 @@ module.exports = router => {
 
     const vaccines = organisation.vaccines || []
 
-    for (vaccineToAdd of vaccinesToAdd) {
+    for (let vaccineToAdd of vaccinesToAdd) {
 
       const existingVaccine = vaccines.find((vaccine) => vaccine.name === vaccineToAdd)
 
@@ -411,10 +318,6 @@ module.exports = router => {
 
     const user = data.users.find((user) => user.id === req.params.userId)
 
-    const userOrganisationSettings = (user.organisations || []).find((organisation) => organisation.id === organisation.id)
-
-    // if (!user || userOrganisationSettings.status == 'Active') { res.redirect(`/regions/organisations/${organisation.id}`); return }
-
     const numberOfActiveUsers = data.users.filter((user) => (user.organisations || []).find((orgSetting) => (orgSetting.id === organisation.id ) && (orgSetting.status === 'Active'))).length
 
     res.render('regions/uninvite', {
@@ -483,7 +386,7 @@ module.exports = router => {
 
     let vaccines = fromOrganisation.vaccines.filter((vaccine) => message.vaccinesRequested.includes(vaccine.name))
 
-    for (vaccine of vaccines) {
+    for (let vaccine of vaccines) {
       if (decision === "approve") {
         vaccine.status = "enabled"
       } else if (decision === "reject") {

@@ -1,3 +1,4 @@
+// These are organisations set up as using RAVS
 module.exports = [
   {
     id: "RCF",
@@ -8082,7 +8083,7 @@ module.exports = [
     status: "Closed",
     dateClosed: "2024-12-04",
     type: "NHS Trust",
-    region: "Y61"
+    region: "Y62"
   },
   {
     id: "RLQ",
@@ -8125,7 +8126,7 @@ module.exports = [
     status: "Closed",
     dateClosed: "2025-02-12",
     type: "NHS Trust",
-    region: "Y61"
+    region: "Y62"
   },
   {
     id: "RX8",
