@@ -21,7 +21,7 @@
   "dependencies": {
     "@babel/core": "^7.28.5",
     "@babel/preset-env": "^7.28.5",
-    "@inquirer/prompts": "^7.10.0",
+    "@inquirer/prompts": "^7.10.1",
     "@x-govuk/govuk-prototype-filters": "^2.0.3",
     "body-parser": "^2.2.0",
     "browser-sync": "^3.0.4",
@@ -51,9 +51,9 @@
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-jsdoc": "^61.1.12",
+    "eslint-plugin-jsdoc": "^61.2.1",
     "eslint-plugin-n": "^17.23.1",
-    "eslint-plugin-promise": "^6.6.0",
+    "eslint-plugin-promise": "^7.2.1",
     "prettier": "^3.6.2"
   },
   "engines": {
