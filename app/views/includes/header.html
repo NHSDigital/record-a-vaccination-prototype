@@ -1,5 +1,75 @@
 {% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
 
+{% set navigationItems = [] %}
+
+{% if currentUser and currentOrganisation and not (currentOrganisation.type === "Region")  %}
+
+  <!-- All users -->
+  {% set navigationItems = (navigationItems.push({
+    href: "/home/",
+    text: "Home",
+    active: (currentSection == "home")
+  }), navigationItems) %}
+  {% set navigationItems = (navigationItems.push({
+    href: "/record-vaccinations",
+    text: "Record vaccinations",
+    active: (currentSection == "vaccinate")
+  }), navigationItems) %}
+
+  <!-- Admins or lead admins -->
+  {% if (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) %}
+    {% set navigationItems = (navigationItems.push({
+      href: "/vaccines",
+      text: "Vaccines",
+      active: (currentSection == "vaccines")
+    }), navigationItems) %}
+  {% endif %}
+
+  <!-- All users -->
+  {% set navigationItems = (navigationItems.push({
+    href: "/records",
+    text: "Records",
+    active: (currentSection == "records")
+  }), navigationItems) %}
+
+  <!-- Admins or lead admins -->
+  {% if (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) %}
+    {% set navigationItems = (navigationItems.push({
+      href: "/reports",
+      text: "Reports",
+      active: (currentSection == "reports")
+    }), navigationItems) %}
+  {% endif %}
+
+  <!-- Lead admins only -->
+  {% if (["Lead administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) %}
+    {% set navigationItems = (navigationItems.push({
+      href: '/user-admin',
+      text: 'Manage users',
+      active: (currentSection == "manage-users")
+    }), navigationItems) %}
+  {% endif %}
+{% endif %}
+
+<!-- Regional users -->
+{% if currentUser and currentOrganisation and (currentOrganisation.type === "Region")  %}
+
+  {% set inboxCount = (currentOrganisation.inbox | length) %}
+
+  {% set navigationItems = (navigationItems.push({
+    href: "/regions",
+    text: "Organisations",
+    active: (currentSection == "organisations")
+  }), navigationItems) %}
+
+  {% set navigationItems = (navigationItems.push({
+    href: "/regions/messages",
+    text: ("Messages <span class=\"app-count\">" + inboxCount +"</span>") | safe,
+    active: (currentSection == "messages")
+  }), navigationItems) %}
+
+{% endif %}
+
 {{ header({
   service: {
     text: "Record a vaccination",
@@ -23,37 +93,6 @@
     ]
   },
   navigation: {
-    items: [
-      {
-        href: "/home/",
-        text: "Home",
-        active: (currentSection == "home")
-      } if currentUser,
-      {
-        href: "/record-vaccinations",
-        text: "Record vaccinations",
-        active: (currentSection == "vaccinate")
-      } if currentUser,
-      {
-        href: "/vaccines",
-        text: "Vaccines",
-        active: (currentSection == "vaccines")
-      } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
-      {
-        href: "/records",
-        text: "Records",
-        active: (currentSection == "records")
-      } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
-      {
-        href: "/reports",
-        text: "Reports",
-        active: (currentSection == "reports")
-      } if (currentUser and (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel))),
-      {
-        href: '/user-admin',
-        text: 'Manage users',
-        active: (currentSection == "manage-users")
-      } if (currentUser and organisationSetting.permissionLevel === "Lead administrator")
-    ] if data.currentUserId
+    items: navigationItems
   }
 }) }}

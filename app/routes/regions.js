@@ -3,7 +3,7 @@ module.exports = router => {
   router.get('/regions', (req, res) => {
     const data = req.session.data
 
-    const currentRegion = res.locals.currentRegion
+    const currentRegion = res.locals.currentOrganisation
 
     const organisations = data.organisations.filter((organisation) => (organisation.region === currentRegion.id) && (["Active", "Invited", "Deactivated"].includes(organisation.status)))
 
@@ -16,7 +16,7 @@ module.exports = router => {
   })
 
   router.get('/regions/organisations/closed', (req, res) => {
-    const currentRegion = res.locals.currentRegion
+    const currentRegion = res.locals.currentOrganisation
 
     const data = req.session.data
     const organisations = data.organisations.filter((organisation) => (organisation.region === currentRegion.id && organisation.status == "Closed"))
@@ -47,7 +47,7 @@ module.exports = router => {
   // Inviting an organisation
   router.post('/regions/add', (req, res) => {
     const data = req.session.data
-    const currentRegion = res.locals.currentRegion
+    const currentRegion = res.locals.currentOrganisation
 
     const organisationId = data.organisationId
     const organisation = data.allOrganisations.find((org) => org.id === organisationId)
@@ -163,7 +163,7 @@ module.exports = router => {
     const vaccines = organisation.vaccines || []
     const vaccinesEnabled = vaccines.filter((vaccine) => vaccine.status === "enabled")
 
-    const messages = res.locals.currentRegion.inbox.filter((message) => message.fromOrganisationId === id)
+    const messages = res.locals.currentOrganisation.inbox.filter((message) => message.fromOrganisationId === id)
 
     res.render('regions/organisation', {
       organisation,
@@ -355,7 +355,7 @@ module.exports = router => {
   })
 
   router.get('/regions/messages', (req, res) => {
-    const inbox = res.locals.currentRegion.inbox
+    const inbox = res.locals.currentOrganisation.inbox
 
     res.render('regions/messages/index', {
       inbox
@@ -365,7 +365,7 @@ module.exports = router => {
   router.get('/regions/messages/:id', (req, res) => {
     const id = req.params.id
 
-    const inbox = res.locals.currentRegion.inbox
+    const inbox = res.locals.currentOrganisation.inbox
     const message = inbox.find((message) => message.id === id)
 
     res.render('regions/messages/show', {
@@ -377,7 +377,7 @@ module.exports = router => {
     const data = req.session.data
     const id = req.params.id
 
-    const inbox = res.locals.currentRegion.inbox
+    const inbox = res.locals.currentOrganisation.inbox
     const message = inbox.find((message) => message.id === id)
 
     const decision = data.decision

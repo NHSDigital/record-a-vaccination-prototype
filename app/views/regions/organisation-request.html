@@ -3,10 +3,6 @@
 {% set pageName = organisation.name %}
 {% set currentSection = "organisations" %}
 
-{% block header %}
-  {% include "includes/header-logged-in-region.html" %}
-{% endblock %}
-
 {% block beforeContent %}
   {{ backLink({
     href: "/regions/awaiting-approval",

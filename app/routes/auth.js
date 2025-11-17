@@ -11,18 +11,34 @@ module.exports = router => {
       return
     }
 
-    const userOrganisationIds = user.organisations
+    const userOrganisationIds = (user.organisations || [])
+      .filter((organisation) => organisation.status === "Active")
+      .map((organisation) => organisation.id)
+
+    const userRegionIds = (user.regions || [])
       .filter((organisation) => organisation.status === "Active")
       .map((organisation) => organisation.id)
 
     if (userOrganisationIds.length === 1) {
 
       req.session.data.currentUserId = user.id;
-      req.session.data.currentOrganisationId = userOrganisationIds.first
+      req.session.data.currentOrganisationId = userOrganisationIds[0]
 
-      res.redirect('/home/')
+      res.redirect('/home')
+
+    } else if (userRegionIds.length === 1) {
+
+      console.log(userRegionIds)
+
+      req.session.data.currentUserId = user.id
+      req.session.data.currentOrganisationId = userRegionIds[0]
+
+      res.redirect('/regions')
+
     } else {
+
       res.redirect('/auth/select-organisation')
+
     }
 
   })
