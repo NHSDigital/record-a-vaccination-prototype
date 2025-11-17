@@ -19,6 +19,19 @@ require('./routes/auth')(router)
 require('./routes/home')(router)
 require('./routes/helpers')(router)
 
+router.get('/product-page', (req, res) => {
+  // Sign out the user - this is just to make it easier
+  // to demo.
+  if (req.session.data.currentUserId) {
+    req.session.data.currentUserId = null
+
+    // Needs a redirect as the data has already been cached
+    res.redirect('/product-page')
+    return
+  }
+
+  res.render('product-page')
+})
 
 
 module.exports = router;

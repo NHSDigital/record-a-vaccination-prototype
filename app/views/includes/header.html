@@ -15,7 +15,11 @@
       {
         href: '/sign-out',
         text: 'Log out'
-      } if data.currentUserId
+      } if data.currentUserId,
+      {
+        href: "/auth/okta-sign-in",
+        text: "Log in"
+      } if not data.currentUserId
     ]
   },
   navigation: {
@@ -50,6 +54,6 @@
         text: 'Manage users',
         active: (currentSection == "manage-users")
       } if (currentUser and organisationSetting.permissionLevel === "Lead administrator")
-    ] if currentUser
+    ] if data.currentUserId
   }
 }) }}
