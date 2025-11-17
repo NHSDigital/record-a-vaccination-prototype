@@ -33,6 +33,7 @@ module.exports = router => {
     const email = data.email
     const user = data.users.find((user) => user.email === email)
 
+    const userOrganisationIds = user.organisations.map((organisation) => organisation.id)
     const organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
 
     res.render('auth/select-organisation', {
@@ -50,8 +51,6 @@ module.exports = router => {
 
 
     const selectedOrganisationId = req.session.data.organisationId
-
-    const userOrganisationIds = user.organisations.map((organisation) => organisation.id)
 
 
     if (selectedOrganisationId) {
