@@ -49,9 +49,7 @@ module.exports = router => {
     const email = data.email
     const user = data.users.find((user) => user.email === email)
 
-
     const selectedOrganisationId = req.session.data.organisationId
-
 
     if (selectedOrganisationId) {
       req.session.data.currentUserId = user.id;
