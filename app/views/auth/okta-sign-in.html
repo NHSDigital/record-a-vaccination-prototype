@@ -17,7 +17,7 @@
 
   <div data-se="o-form-label" class="okta-form-label o-form-label"><label for="email">Email&nbsp;</label></div>
 
-  <div data-se="o-form-input-container" class="o-form-input"><span data-se="o-form-input-identifier" class="o-form-input-name-identifier o-form-control okta-form-input-field input-fix"><input type="text" placeholder="" name="email" id="input28" value="" aria-label="" autocomplete="username"></span></div></div><div data-se="o-form-fieldset-credentials.passcode" class="o-form-fieldset o-form-label-top"><div data-se="o-form-label" class="okta-form-label o-form-label"><label for="input36">Password&nbsp;</label></div><div data-se="o-form-input-container" class="o-form-input"><span data-se="o-form-input-credentials.passcode" class="o-form-input-name-credentials.passcode o-form-control okta-form-input-field input-fix"><input type="password" placeholder="" name="credentials.passcode" id="input36" value="" aria-label="" autocomplete="current-password" class="password-with-toggle" style="margin-bottom: 20px;"><span class="password-toggle"><span class="eyeicon visibility-16 button-show"></span><span class="eyeicon visibility-off-16 button-hide"></span></span></span></div></div><div data-se="o-form-fieldset-rememberMe" class="o-form-fieldset o-form-label-top"><div data-se="o-form-input-container" class="o-form-input"><span data-se="o-form-input-rememberMe" class="o-form-input-name-rememberMe"><div class="custom-checkbox"><input type="checkbox" name="rememberMe" id="input44"><label for="input44" data-se-for-name="rememberMe">Keep me signed in</label></div></span></div></div></div></div>
+  <div data-se="o-form-input-container" class="o-form-input"><span data-se="o-form-input-identifier" class="o-form-input-name-identifier o-form-control okta-form-input-field input-fix"><input type="text" placeholder="" name="email" value="" aria-label="" autocomplete="username" id="email"></span></div></div><div data-se="o-form-fieldset-credentials.passcode" class="o-form-fieldset o-form-label-top"><div data-se="o-form-label" class="okta-form-label o-form-label"><label for="input36">Password&nbsp;</label></div><div data-se="o-form-input-container" class="o-form-input"><span data-se="o-form-input-credentials.passcode" class="o-form-input-name-credentials.passcode o-form-control okta-form-input-field input-fix"><input type="password" placeholder="" name="credentials.passcode" id="input36" value="" aria-label="" autocomplete="current-password" class="password-with-toggle" style="margin-bottom: 20px;"><span class="password-toggle"><span class="eyeicon visibility-16 button-show"></span><span class="eyeicon visibility-off-16 button-hide"></span></span></span></div></div><div data-se="o-form-fieldset-rememberMe" class="o-form-fieldset o-form-label-top"><div data-se="o-form-input-container" class="o-form-input"><span data-se="o-form-input-rememberMe" class="o-form-input-name-rememberMe"><div class="custom-checkbox"><input type="checkbox" name="rememberMe" id="input44"><label for="input44" data-se-for-name="rememberMe">Keep me signed in</label></div></span></div></div></div></div>
 
     {{ button({
       classes: "app-button--okta nhsuk-u-margin-top-5",
@@ -25,5 +25,33 @@
     }) }}
 
   </div></form></div><div class="siw-main-footer"><div class="auth-footer"></div></div></div></div></div></main></div>
+
+</main></div></div>
+
+  <div style="background-color: #d8dde0; padding: 30px;">
+    <h2 class="nhsuk-heading-s">Testing area</h2>
+    <p>Log in as:</p>
+
+    <ul>
+      <li><a href="#" data-email="jane.smith@nhs.net" data-module="prefill-email">Lead admin for an NHS trust</a></li>
+      <li><a href="#" data-email="ocean.merritt@nhs.net" data-module="prefill-email">Recorder for an NHS trust</a></li>
+      <li><a href="#" data-email="graham.wallace@nhs.net" data-module="prefill-email">Recorder for multiple NHS trusts</a></li>
+      <li><a href="#" data-email="paulina.sloan@nhs.net" data-module="prefill-email">Lead admin for multiple pharmacies</a></li>
+      <li><a href="#" data-email="jason.white@nhs.net" data-module="prefill-email">Regional lead</a></li>
+
+    </ul>
+  </div>
+
+  <script>
+
+    const prefillLinks = document.querySelectorAll('a[data-module=prefill-email]')
+
+    for (link of prefillLinks) {
+      link.addEventListener('click', function(event) {
+        const email = event.target.getAttribute('data-email');
+        document.getElementById('email').setAttribute('value', email);
+      })
+    }
+  </script>
 
 {% endblock %}
