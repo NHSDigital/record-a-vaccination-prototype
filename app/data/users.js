@@ -1,14 +1,77 @@
 module.exports = [
+  // Jane Smith is the default signed in user
+  // She's a lead admin for an NHS trust
+  {
+    "id": "2387441662601",
+    "email": "jane.smith@nhs.net",
+    "organisations": [
+      {
+        "id": "RW3",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Jane",
+    "lastName": "Smith"
+  },
+  // Graham Wallace is a recorder at
+  // multiple NHS Trusts (eg bank staff)
+  {
+    "id": "3283602393037",
+    "email": "graham.wallace@nhs.net",
+    "organisations": [
+      {
+        "id": "RLR",
+        "permissionLevel": "Recorder",
+        "status": "Active",
+        "vaccinator": true
+      },
+      {
+        "id": "RXX",
+        "permissionLevel": "Recorder",
+        "status": "Active",
+        "vaccinator": true
+      },
+      {
+        "id": "RAP",
+        "permissionLevel": "Recorder",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Graham",
+    "lastName": "Wallace"
+  },
+  // Paulina Sloan is a lead admin for
+  // a chain of pharmacies
   {
     "id": "9847489647892",
     "email": "paulina.sloan@nhs.net",
     "organisations": [
       {
-        "id": "RCY",
-        "permissionLevel": "Administrator",
-        "status": "Deactivated",
-        "deactivatedDate": "2024-12-05",
-        "vaccinator": true
+        "id": "FA424",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FA02S",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FVJ99",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "PDL93",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
       }
     ],
     "firstName": "Paulina",
@@ -314,20 +377,6 @@ module.exports = [
     ],
     "firstName": "Kade",
     "lastName": "Ho"
-  },
-  {
-    "id": "2387441662601",
-    "email": "jane.smith@nhs.net",
-    "organisations": [
-      {
-        "id": "RW3",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": true
-      }
-    ],
-    "firstName": "Jane",
-    "lastName": "Smith"
   },
   {
     "id": "9524725216001",
@@ -13441,32 +13490,6 @@ module.exports = [
     ],
     "firstName": "Zuri",
     "lastName": "Wiggins"
-  },
-  {
-    "id": "3283602393037",
-    "email": "wade.wallace@nhs.net",
-    "organisations": [
-      {
-        "id": "RLR",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": true
-      },
-      {
-        "id": "RXX",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": true
-      },
-      {
-        "id": "RAP",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": true
-      }
-    ],
-    "firstName": "Wade",
-    "lastName": "Wallace"
   },
   {
     "id": "6791828016461",

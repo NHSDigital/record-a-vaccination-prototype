@@ -1,56 +1,75 @@
 module.exports = router => {
 
-  router.get('/select-organisation', (req, res) => {
+  router.post('/auth/sign-in', (req, res) => {
 
-    const organisations = req.session.data.organisations.filter((organisation) =>  ["FAC81", "FA464"].includes(organisation.id))
+    const data = req.session.data
+    const email = data.email || "jane.smith@nhs.net"
+    const user = data.users.find((user) => user.email === email)
 
-    res.render('select-organisation', {
+    if (!user) {
+      res.redirect('/auth/okta-sign-in')
+      return
+    }
+
+    const userOrganisationIds = user.organisations
+      .filter((organisation) => organisation.status === "Active")
+      .map((organisation) => organisation.id)
+
+    if (userOrganisationIds.length === 1) {
+
+      req.session.data.currentUserId = user.id;
+      req.session.data.currentOrganisationId = userOrganisationIds.first
+
+      res.redirect('/home/')
+    } else {
+      res.redirect('/auth/select-organisation')
+    }
+
+  })
+
+
+  router.get('/auth/select-organisation', (req, res) => {
+    const data = req.session.data
+    const email = data.email
+    const user = data.users.find((user) => user.email === email)
+
+    const userOrganisationIds = user.organisations.map((organisation) => organisation.id)
+    const organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
+
+    res.render('auth/select-organisation', {
+      email,
       organisations
     })
 
   })
 
-  router.get('/sign-in-as-single-org-user', (req ,res) => {
-
-    // Set organisation and user Id
-    req.session.data.currentOrganisationId = req.session.data.organisations[1].id
-    req.session.data.currentUserId = "12345";
-
-    res.redirect('/home')
-  })
-
   router.post('/select-organisation', (req, res) => {
-    const organisationId = req.session.data.organisationId
 
-    if (organisationId) {
-      req.session.data.currentUserId = "12345";
-      req.session.data.currentOrganisationId = organisationId;
+    const data = req.session.data
+    const email = data.email
+    const user = data.users.find((user) => user.email === email)
 
-      // Reset data
-      delete req.session.data.organisationId
-      req.session.data.multiOrganisation = "no"
+
+    const selectedOrganisationId = req.session.data.organisationId
+
+    const userOrganisationIds = user.organisations.map((organisation) => organisation.id)
+
+
+    if (selectedOrganisationId) {
+      req.session.data.currentUserId = user.id;
+      req.session.data.currentOrganisationId = selectedOrganisationId;
 
       res.redirect('/home')
     } else {
 
-      const error = {
-        text: "Select an organisation",
-        href: "#organisationId-1"
-      }
-
-      const organisations = req.session.data.organisations.filter((organisation) =>  ["FAC81", "FA464"].includes(organisation.id))
-
-      res.render('select-organisation', {
-        error,
-        organisations
-      })
+      res.redirect('/auth/select-organisation')
     }
   })
 
   router.get('/sign-out', (req, res) => {
     req.session.data.currentUserId = null
 
-    res.redirect('/signed-out')
+    res.redirect('/product-page')
   })
 
 }

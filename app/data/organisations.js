@@ -4327,9 +4327,9 @@ module.exports = [
   },
   {
     id: "RAP",
-    name: "North middlesex University Hospital NHS Trust",
+    name: "North Middlesex University Hospital NHS Trust",
     address: {
-      line1: "North middlesex hospital",
+      line1: "13 Granary Way",
       town: "London",
       postcode: "N18 1QX"
     },
@@ -6517,9 +6517,9 @@ module.exports = [
   },
   {
     id: "RXX",
-    name: "Surrey and borders partnership NHS Foundation Trust",
+    name: "Surrey and Borders Partnership NHS Foundation Trust",
     address: {
-      line1: "18 mole business park",
+      line1: "18 Mole Business park",
       town: "Leatherhead",
       postcode: "KT22 7AD"
     },

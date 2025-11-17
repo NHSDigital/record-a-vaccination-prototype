@@ -11,7 +11,7 @@
         href: "/user-profile",
         text: currentUser.email,
         icon: true
-      },
+      } if currentUser,
       {
         href: '/sign-out',
         text: 'Log out'
@@ -24,12 +24,12 @@
         href: "/home/",
         text: "Home",
         active: (currentSection == "home")
-      },
+      } if currentUser,
       {
         href: "/record-vaccinations",
         text: "Record vaccinations",
         active: (currentSection == "vaccinate")
-      },
+      } if currentUser,
       {
         href: "/vaccines",
         text: "Vaccines",
@@ -50,6 +50,6 @@
         text: 'Manage users',
         active: (currentSection == "manage-users")
       } if (currentUser and organisationSetting.permissionLevel === "Lead administrator")
-    ]
+    ] if currentUser
   }
 }) }}
