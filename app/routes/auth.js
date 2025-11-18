@@ -21,8 +21,8 @@ module.exports = router => {
 
     if (user.admin) {
       req.session.data.currentUserId = user.id;
+      req.session.data.currentOrganisationId = null
       res.redirect('/support')
-
 
     } else if (userOrganisationIds.length === 1) {
 
@@ -32,8 +32,6 @@ module.exports = router => {
       res.redirect('/home')
 
     } else if (userRegionIds.length === 1) {
-
-      console.log(userRegionIds)
 
       req.session.data.currentUserId = user.id
       req.session.data.currentOrganisationId = userRegionIds[0]
@@ -85,6 +83,7 @@ module.exports = router => {
 
   router.get('/sign-out', (req, res) => {
     req.session.data.currentUserId = null
+    req.session.data.currentOrganisationId = null
 
     res.redirect('/product-page')
   })

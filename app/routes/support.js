@@ -2,6 +2,9 @@ module.exports = (router) => {
 
   // Support dashboard
   router.get('/support', (req, res) => {
+
+    console.log(`current org id from view: ${req.session.data.currentOrganisationId}`)
+
     const regions = req.session.data.organisations.filter((organisation) => organisation.type === 'Region')
 
     res.render('support/index', {
