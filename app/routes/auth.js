@@ -19,7 +19,12 @@ module.exports = router => {
       .filter((organisation) => organisation.status === "Active")
       .map((organisation) => organisation.id)
 
-    if (userOrganisationIds.length === 1) {
+    if (user.admin) {
+      req.session.data.currentUserId = user.id;
+      res.redirect('/support')
+
+
+    } else if (userOrganisationIds.length === 1) {
 
       req.session.data.currentUserId = user.id;
       req.session.data.currentOrganisationId = userOrganisationIds[0]

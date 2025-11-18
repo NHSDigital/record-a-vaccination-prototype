@@ -13754,5 +13754,12 @@ module.exports = [
     ],
     "firstName": "Graeme",
     "lastName": "White"
+  },
+  {
+    "id": "66435353634",
+    "email": "sally.green@nhs.net",
+    "firstName": "Sally",
+    "lastName": "Green",
+    admin: true
   }
 ]
