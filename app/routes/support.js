@@ -1,6 +1,17 @@
 module.exports = (router) => {
 
   // Viewing a region's stats
+router.get('/support/regions', (req, res) => {
+  const { id } = req.params
+
+  const regions = req.session.data.organisations.filter((organisation) => organisation.type === 'Region')
+
+  res.render('support/regions', {
+    regions
+  })
+})
+
+  // Viewing a region's stats
   router.get('/support/regions/:id', (req, res) => {
     const { id } = req.params
     const region = req.session.data.regions.find((region) => region.id === id)

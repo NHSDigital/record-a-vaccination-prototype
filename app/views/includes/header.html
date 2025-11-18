@@ -2,7 +2,7 @@
 
 {% set navigationItems = [] %}
 
-{% if currentUser and currentOrganisation and not (currentOrganisation.type === "Region")  %}
+{% if currentUser and currentOrganisation and not (currentOrganisation.type === "Region") and not currentUser.admin  %}
 
   <!-- All users -->
   {% set navigationItems = (navigationItems.push({
@@ -66,6 +66,33 @@
     href: "/regions/messages",
     text: ("Messages <span class=\"app-count\">" + inboxCount +"</span>") | safe,
     active: (currentSection == "messages")
+  }), navigationItems) %}
+
+{% endif %}
+
+{% if currentUser.admin %}
+  {% set navigationItems = (navigationItems.push({
+    href: "/support",
+    text: "Home",
+    active: (currentSection == "dashboard")
+  }), navigationItems) %}
+
+  {% set navigationItems = (navigationItems.push({
+    href: "/support/regions",
+    text: "Regions",
+    active: (currentSection == "regions")
+  }), navigationItems) %}
+
+  {% set navigationItems = (navigationItems.push({
+    href: "/support/users",
+    text: "Users",
+    active: (currentSection == "users")
+  }), navigationItems) %}
+
+  {% set navigationItems = (navigationItems.push({
+    href: "/support/organisations",
+    text: "Organisations",
+    active: (currentSection == "organisations")
   }), navigationItems) %}
 
 {% endif %}
