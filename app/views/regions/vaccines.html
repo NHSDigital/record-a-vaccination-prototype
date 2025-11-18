@@ -3,10 +3,6 @@
 {% set pageName = "Change vaccines for " + organisation.name %}
 {% set currentSection = "organisations" %}
 
-{% block header %}
-  {% include "includes/header-logged-in-region.html" %}
-{% endblock %}
-
 {% block beforeContent %}
   {{ backLink({
     href: "/regions/organisation-details",
@@ -31,7 +27,6 @@
 
         {{ checkboxes({
           name: "vaccinesEnabled",
-          classes: "nhsuk-radios--inline",
           fieldset: {
             legend: {
               text: "Which vaccinations can they record?",

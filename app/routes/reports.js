@@ -3,8 +3,6 @@ const filters = require('.././filters.js')()
 module.exports = (router) => {
 
   router.get('/reports/choose-vaccines', (req, res) => {
-    const data = req.session.data
-
     const organisationVaccines = res.locals.currentOrganisation.vaccines || []
 
     const enabledVaccines = organisationVaccines
@@ -132,8 +130,6 @@ module.exports = (router) => {
     const dateOption = data.date
 
     let from, to
-
-    console.log(dateOption)
 
     switch (dateOption) {
       case 'custom_date_range':

@@ -3,9 +3,12 @@
 // This button is slightly shorter than the usual one,
 // so that when it sits to the right of a text input
 // (eg a search box) it is the same height.
+//
+// Remove this when https://github.com/nhsuk/nhsuk-frontend/pull/1643 has
+// been merged and released.
 .app-button--small {
   @include nhsuk-font-size(16);
-  padding: nhsuk-spacing(2) 12px;
+  padding: 5px 12px;
 }
 
 .app-button--min-width {

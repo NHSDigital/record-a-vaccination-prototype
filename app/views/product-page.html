@@ -2,10 +2,6 @@
 
 {% set pageName = "" %}
 
-{% block header %}
-  {% include "includes/header-logged-out.html" %}
-{% endblock %}
-
 {% block main %}
 <div class="nhsuk-hero">
   <div class="nhsuk-width-container nhsuk-hero--border">
@@ -14,7 +10,7 @@
         <div class="nhsuk-hero__wrapper">
           <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-5">The simplest way to record vaccinations</h1>
 
-          <p>Record COVID-19, flu, RSV and pertussis vaccinations.</p>
+          <p>Record NHS vaccinations, including COVID-19, flu, RSV and pertussis.</p>
 
           <p class="nhsuk-body">Used by community pharmacies, NHS trusts and GPs.</p>
 
@@ -25,7 +21,7 @@
               classes: "nhsuk-button--reverse"
             }) }}
 
-            <p class="nhsuk-body nhsuk-u-margin-bottom-0">or <a href="/okta-sign-in" class="nhsuk-link nhsuk-link--reverse nhsuk-u-font-weight-bold">log in</a></p>
+            <p class="nhsuk-body nhsuk-u-margin-bottom-0">or <a href="/auth/okta-sign-in" class="nhsuk-link nhsuk-link--reverse nhsuk-u-font-weight-bold">log in</a></p>
           </div>
         </div>
       </div>
@@ -157,21 +153,21 @@
       <div class="nhsuk-grid-column-one-third">
         <div class="nhsuk-u-font-size-19 nhsuk-u-margin-top-2">
           More than<br>
-          <span class="nhsuk-u-font-size-36 nhsuk-u-font-weight-bold">1.4 million</span><br> vaccinations recorded
+          <span class="nhsuk-u-font-size-36 nhsuk-u-font-weight-bold">2 million</span><br> vaccinations recorded
         </div>
       </div>
 
       <div class="nhsuk-grid-column-one-third">
         <div class="nhsuk-u-font-size-19 nhsuk-u-margin-top-2">
           Over<br>
-          <span class="nhsuk-u-font-size-36 nhsuk-u-font-weight-bold">13,000</span><br>
+          <span class="nhsuk-u-font-size-36 nhsuk-u-font-weight-bold">14,000</span><br>
           users
         </div>
       </div>
       <div class="nhsuk-grid-column-one-third">
         <div class="nhsuk-u-font-size-19 nhsuk-u-margin-top-2">
           Used by<br>
-          <span class="nhsuk-u-font-size-36 nhsuk-u-font-weight-bold">300+</span><br>
+          <span class="nhsuk-u-font-size-36 nhsuk-u-font-weight-bold">600+</span><br>
           pharmacies and NHS trusts
 
         </div>

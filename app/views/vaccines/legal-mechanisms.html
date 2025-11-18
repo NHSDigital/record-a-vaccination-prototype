@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Which legal mechanism will you be using?" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/vaccines/add-batch",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <form action="/vaccines/check" method="post" novalidate="true">
+
+        {{ tag({
+          text: "New",
+          classes: "nhsuk-tag nhsuk-tag--blue nhsuk-u-margin-bottom-3"
+        }) }}
+
+        {{ checkboxes({
+          idPrefix: "legal-mechanisms",
+          name: "vaccineLegalMechanisms",
+          fieldset: {
+            legend: {
+              text: pageName,
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          hint: {
+            text: "This will set the options available when recording a vaccination. If you select a single option it will be applied automatically."
+          },
+          values: data.vaccineLegalMechanisms,
+          errorMessage: {
+            text: legalMechanismsError.text
+          } if legalMechanismsError,
+          items: data.legalMechanisms
+        }) }}
+
+        {{ button({
+          "text": "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}

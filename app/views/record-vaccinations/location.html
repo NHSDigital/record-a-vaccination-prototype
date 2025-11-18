@@ -23,27 +23,27 @@
         {% set careHtml %}
 
         <div class="nhsuk-form-group">
-          <label class="nhsuk-label nhsuk-label--s" for="care-home">
+          <label class="nhsuk-label nhsuk-label--s" for="careHomeId">
             Care home details
           </label>
           <div class="nhsuk-hint" id="care-home-hint">
             Search by name or ODS code
           </div>
-          <select class="nhsuk-select" id="care-home" name="careHome"
-            aria-describedby="care-home-hint" data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+          <select class="nhsuk-select" id="care-home" name="careHomeId"
+            aria-describedby="care-home-hint" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
             <option {% if not data.caeHome %}selected{% endif %} value=""></option>
 
           {% set options = [] %}
 
-          {% for careHome in data.careHomes %}
+          {% for careHome in careHomes %}
             {% set options = (options.push({
-              label: careHome.name + ", " + careHome.address1 + ", " + careHome.town + ", " + careHome.postcode + " (" + careHome.code + ")",
-              value: careHome.code
+              label: careHome.name + ", " + careHome.address + " (" + careHome.id + ")",
+              value: careHome.id
             }), options) %}
           {% endfor %}
 
           {% for option in (options | sort(false, true, "label")) %}
-            <option value="{{ option.value }}" {% if data.careHome == option.value %}selected{%endif %}>{{ option.label }}</option>
+            <option value="{{ option.value }}" {% if data.careHomeId == option.value %}selected{%endif %}>{{ option.label }}</option>
           {% endfor %}
 
           </select>

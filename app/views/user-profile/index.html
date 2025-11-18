@@ -26,9 +26,11 @@
 
         {% set organisationHtml %}
           <div>{{ currentOrganisation.name }}</div>
-          <p class="app-summary__explanation">
-            {{ currentOrganisation.address.line1 }}, {{ currentOrganisation.address.postcode }}
-          </p>
+          {% if currentOrganisation.type != "Region" %}
+            <p class="app-summary__explanation">
+              {{ currentOrganisation.address.line1 }}, {{ currentOrganisation.address.postcode }}
+            </p>
+          {% endif %}
 
         {% endset %}
 
@@ -66,7 +68,7 @@
             },
             {
               key: {
-                text: "Organisation"
+                text: ("Region" if currentOrganisation.type === "Region" else "Organisation")
               },
               value: {
                 html: organisationHtml
@@ -77,7 +79,7 @@
                   }
                 ]
               }
-            },
+            } if currentOrganisation,
             {
               key: {
                 text: "Permission level"
@@ -91,11 +93,11 @@
                   }
                 ]
               }
-            }
+            } if organisationSettings
           ]
         }) }}
 
-      {% if organisationSettings.permissionLevel != 'Lead administrator' %}
+      {% if organisationSettings and organisationSettings.permissionLevel != 'Lead administrator' %}
 
         <p>Only lead administrators can change permission levels. The lead administrators for Southampton NHS Trust are:</p>
 

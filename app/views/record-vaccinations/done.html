@@ -2,8 +2,6 @@
 
 {% set pageName = "Vaccination saved" %}
 
-{% set patientName = data.patientName if data.patientName else "Jodies Smith" %}
-
 {% set currentSection = "vaccinate" %}
 
 {% block content %}
@@ -18,9 +16,8 @@
       {% endif %}
 
       {% set panelHtml %}
-        <a href="#" class="nhsuk-link--reverse">{{ patientName }}’s {{ data.vaccine }} record</a> will be sent to their GP.
+        <a href="#" class="nhsuk-link--reverse">{{ data.firstName }} {{ data.lastName }}’s {{ data.vaccine }} record</a> will be sent to their GP.
       {% endset %}
-      {% include "_feedback-panel.html" %}
 
       {{ panel({
         titleText: "Vaccination saved",
@@ -34,9 +31,9 @@
           An RSV
         {% elseif (data.vaccine == "COVID-19") %}
           A COVID-19
-        {% elseif (data.vaccine == "Flu") %}
+        {% elseif (data.vaccine == "flu") %}
           A flu
-        {% elseif (data.vaccine == "Pertussis") %}
+        {% elseif (data.vaccine == "pertussis") %}
           A pertussis
         {% else %}
           A COVID-19
@@ -46,7 +43,7 @@
       {% set items = [] %}
         {% set items = (items.push({
           value: "same-patient-another-vaccination",
-          text: patientName + "’s next vaccination"
+          text: (data.firstName + " " + data.lastName + "’s next vaccination")
         }), items) %}
 
         {% set items = (items.push({

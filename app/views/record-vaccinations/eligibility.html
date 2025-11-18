@@ -5,7 +5,9 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/record-vaccinations/batch" }) }}
+  {% set backHref = from if from else "/record-vaccinations/batch" %}
+
+  {{ backLink({ href: backHref }) }}
 {% endblock %}
 
 {% set CovidEligibilityOptions = [

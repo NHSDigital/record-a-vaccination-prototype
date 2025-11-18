@@ -5,11 +5,7 @@
 {% set currentSection = "consent" %}
 
 {% block beforeContent %}
-  {% if data.vaccine === "COVID-19" %}
-    {% set backLinkHref = "/record-vaccinations/warning" %}
-  {% else %}
-    {% set backLinkHref = "/record-vaccinations/patient-history" %}
-  {% endif %}
+  {% set backLinkHref = "/record-vaccinations/patient-history" %}
   {{ backLink({ href: backLinkHref }) }}
 {% endblock %}
 
@@ -138,7 +134,7 @@
           items: [
             {
               value: 'patient',
-              text: (data.patientName or "Jodie Brown")
+              text: (data.firstName + " " + data.lastName)
             },
             {
               divider: "or"

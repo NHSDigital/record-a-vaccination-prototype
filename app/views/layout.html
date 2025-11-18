@@ -7,7 +7,6 @@
 <!-- Extends the prototype kit template which in turn extends the NHS.UK frontend template -->
 {% extends "prototype-kit-template.njk" %}
 
-{% from '../components/pagination/macro.njk' import appPagination %}
 {% from '../components/secondary-navigation/macro.njk' import appSecondaryNavigation %}
 
 
@@ -22,7 +21,7 @@
 {% endblock %}
 
 {% block header %}
-  {% include "includes/header-logged-in-organisation.html" %}
+  {% include "includes/header.html" %}
 {% endblock %}
 
 <!-- Edit the footer -->
@@ -32,28 +31,28 @@
     meta: {
       items: [
         {
-          href: "/accessibility-statement",
-          text: "Accessibility statement"
-        },
-        {
           href: "/contact-us",
           text: "Contact us"
-        },
-        {
-          href: "/cookies",
-          text: "Cookies"
         },
         {
           href: "https://guide.ravs.england.nhs.uk/guide/",
           text: "User guide (opens in new tab)"
         },
         {
-          href: "/terms-of-use1",
-          text: "Terms of use"
+          href: "/updates",
+          text: "What's new (opens in new tab)"
         },
         {
-          href: "/updates",
-          text: "What's new"
+          href: "/cookies",
+          text: "Cookies"
+        },
+        {
+          href: "/accessibility-statement",
+          text: "Accessibility statement"
+        },
+        {
+          href: "/terms-of-use1",
+          text: "Terms of use"
         },
         {
           href: "/prototype-admin/reset-data",
@@ -79,11 +78,7 @@
     <!-- Custom JavaScript files can be added to this file -->
     {% include "includes/scripts.html" %}
 
-    <script src="/js/x-govuk.js"></script>
-    <script>
-      window.GOVUKPrototypeComponents.initAll()
-    </script>
-    <!-- For adding page specific JavsScript -->
+    <!-- For adding page specific JavaScript -->
     {% block pageScripts %}{% endblock %}
   {% endblock %}
 {% endblock %}

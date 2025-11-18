@@ -66,7 +66,7 @@ const appViews = [
   join(__dirname, 'node_modules/nhsuk-frontend/dist/nhsuk/macros'),
   join(__dirname, 'node_modules/nhsuk-frontend/dist/nhsuk'),
   join(__dirname, 'node_modules/nhsuk-frontend/dist'),
-  join(__dirname, 'app/components/'),
+  join(__dirname, 'app/components/')
 ]
 
 /**

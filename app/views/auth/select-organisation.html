@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Sign in" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+    {% if error %}
+      {{ errorSummary({
+        titleText: "There is a problem",
+        errorList: [error]
+      }) }}
+    {% endif %}
+
+    <form action="/select-organisation" method="post">
+
+      {% set items = [] %}
+      {% for organisation in organisations %}
+
+        {% set items = (items.push({
+          value: organisation.id,
+          text: organisation.name,
+          hint: {
+            text: organisation.address.line1
+          }
+        }), items) %}
+      {% endfor %}
+
+
+
+      {{ radios({
+        name: "organisationId",
+        fieldset: {
+          legend: {
+            text: "Choose your organisation",
+            classes: "nhsuk-fieldset__legend--l nhsuk-u-margin-bottom-5",
+            isPageHeading: true
+          }
+        },
+        errorMessage: {
+          text: error.text
+        } if error,
+        items: items
+      }) }}
+
+      {{ button({
+        text: "Continue"
+      }) }}
+    </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

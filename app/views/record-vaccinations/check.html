@@ -47,15 +47,8 @@
 
 {% set locationHtml %}
   {% if  data.locationType == "Care home" %}
-    {% for careHome in data.careHomes %}
-      {% if data.careHome == careHome.code %}
-        {{ careHome.name }}<br>
-        {{ careHome.address1 }}<br>
-        {{ careHome.town }}<br>
-        {{ careHome.postcode }}
-      {% endif %}
-    {% endfor %}
-
+    {{ careHome.name }}<br>
+    {{ careHome.address }}
   {% else %}
     {{ data.locationType }}
   {% endif %}
@@ -75,7 +68,7 @@
               text: "Name"
             },
             value: {
-              text: (data.patientName if data.patientName else data.firstName + " " + data.lastName)
+              text: (data.firstName + " " + data.lastName)
             },
             actions: {
               items: [
@@ -190,7 +183,7 @@
               text: "Site"
             },
             value: {
-              text: (currentOrganisation.sites | findById(data.deliveryTeam)).name
+              text: (currentOrganisation.sites | findById(data.siteId)).name
             },
             actions: {
               items: [
