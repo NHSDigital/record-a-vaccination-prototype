@@ -54,7 +54,7 @@ postcode:
           </tr>
         </thead>
         <tbody class="nhsuk-table__body">
-          {% for region in (data.regions | sort(false, true, "name")) %}
+          {% for region in (regions | sort(false, true, "name")) %}
             <tr role="row" class="nhsuk-table__row">
               <th class="nhsuk-table__cell app-table__cell--border-right nhsuk-u-font-weight-normal"><a href="/support/regions/{{ region.id }}">{{ region.name }}</a></th>
               <td class="nhsuk-table__cell app-table__cell--padding-left app-table__cell--border-right nhsuk-table__cell--numeric">150</td>

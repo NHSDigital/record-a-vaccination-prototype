@@ -85,7 +85,7 @@ postcode:
 
 
       {% if totalPages > 1 %}
-        {{ agination({
+        {{ pagination({
           previous: {
             href: "/support/users?page=" + (page - 1) + "&q=" + (q if q else "")
           } if page != 1,
