@@ -1,9 +1,27 @@
 module.exports = (router) => {
 
+  // Support dashboard
+  router.get('/support', (req, res) => {
+    const regions = req.session.data.organisations.filter((organisation) => organisation.type === 'Region')
+
+    res.render('support/index', {
+      regions
+    })
+  })
+
+  // Region index
+  router.get('/support/regions', (req, res) => {
+    const regions = req.session.data.organisations.filter((organisation) => organisation.type === 'Region')
+
+    res.render('support/regions', {
+      regions
+    })
+  })
+
   // Viewing a region's stats
   router.get('/support/regions/:id', (req, res) => {
     const { id } = req.params
-    const region = req.session.data.regions.find((region) => region.id === id)
+    const region = req.session.data.organisations.find((region) => region.id === id)
 
     const organisations = req.session.data.organisations.filter((organisation) => organisation.region === id)
 

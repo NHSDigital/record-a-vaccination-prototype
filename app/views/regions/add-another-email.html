@@ -3,10 +3,6 @@
 {% set pageName = "Add another user" %}
 {% set currentSection = "organisations" %}
 
-{% block header %}
-  {% include "includes/header-logged-in-region.html" %}
-{% endblock %}
-
 {% block beforeContent %}
   {{ backLink({
     href: "/regions/organisations/" + organisation.id,
