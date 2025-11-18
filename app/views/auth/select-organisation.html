@@ -2,6 +2,15 @@
 
 {% set pageName = "Sign in" %}
 
+{% if from === "select-mode" %}
+  {% block beforeContent %}
+    {{ backLink({
+      text: "Back",
+      href: "/auth/select-mode"
+    }) }}
+  {% endblock %}
+{% endif %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">

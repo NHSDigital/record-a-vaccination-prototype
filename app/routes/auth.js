@@ -40,12 +40,26 @@ module.exports = router => {
 
     } else {
 
-      res.redirect('/auth/select-organisation')
+      res.redirect('/auth/select-mode')
 
     }
 
   })
 
+
+  router.post('/auth/answer-select-mode', (req, res) => {
+    const data = req.session.data
+    const loginMode = data.loginMode
+
+    if (loginMode === 'single') {
+      res.redirect('/auth/select-organisation?from=select-mode')
+    } else if (loginMode === 'create-reports') {
+      res.redirect('/home')
+    } else {
+      res.redirect('/auth/select-mode')
+    }
+
+  })
 
   router.get('/auth/select-organisation', (req, res) => {
     const data = req.session.data
