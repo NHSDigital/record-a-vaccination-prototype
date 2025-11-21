@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Sign in" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+    <form action="/auth/answer-select-mode" method="post">
+
+      <div class="nhsuk-caption-l">
+      {{ tag({
+        text: "New",
+        classes: "nhsuk-tag--blue"
+      }) }}</div>
+      <h1 class="nhsuk-heading-l">Create reports across organisations</h1>
+
+      <p>You are a lead administrator for multiple organisations in RAVS.</p>
+
+      <p>You can now create a single reports across organisations instead of doing this individually.</p>
+
+      <p>If you log in this way, you will not be able to record vaccinations, manage vaccines or users.</p>
+
+      {{ radios({
+        name: "loginMode",
+        fieldset: {
+          legend: {
+            text: "What would you like to do?",
+            classes: "nhsuk-fieldset__legend--m",
+            isPageHeading: true
+          }
+        },
+        items: [
+          {
+            text: "Create reports across organisations",
+            value: "create-reports"
+          },
+          {
+            text: "Log in as a single organisation",
+            value: "single"
+          }
+        ]
+      }) }}
+
+      {{ button({
+        text: "Continue"
+      }) }}
+    </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

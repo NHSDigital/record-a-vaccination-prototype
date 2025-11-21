@@ -3,10 +3,21 @@ const filters = require('.././filters.js')()
 module.exports = (router) => {
 
   router.get('/reports/choose-vaccines', (req, res) => {
-    const organisationVaccines = res.locals.currentOrganisation.vaccines || []
+    let enabledVaccines
 
-    const enabledVaccines = organisationVaccines
-      .filter((vaccine) => vaccine.status === "enabled")
+    if (res.locals.currentOrganisation) {
+
+      const organisationVaccines = res.locals.currentOrganisation.vaccines || []
+
+      enabledVaccines = organisationVaccines.filter((vaccine) => vaccine.status === "enabled")
+
+    } else {
+
+      // Multi-org mode - enable all vaccines for now
+      // TODO: only show vaccines enabled across all the
+      // organisations you have access to.
+      enabledVaccines = data.vaccines
+    }
 
     res.render('reports/choose-vaccines', {
       enabledVaccines
@@ -61,6 +72,16 @@ module.exports = (router) => {
       dateToError
     })
 
+  })
+
+  router.get('/reports/choose-site', (req, res) => {
+
+    let sites = []
+
+
+    res.render('reports/choose-site', {
+      sites
+    })
   })
 
 

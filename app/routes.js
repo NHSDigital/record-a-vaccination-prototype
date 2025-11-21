@@ -30,11 +30,11 @@ const authorise = function(options = {}) {
 
 
 // These routes require being logged in
-router.use('/home{*splat}', authorise({userType: 'organisation'}))
+router.use('/home{*splat}', authorise())
 router.use('/record-vaccinations{*splat}', authorise({userType: 'organisation'}))
 router.use('/vaccines{*splat}', authorise({userType: 'organisation'}))
 router.use('/records{*splat}', authorise({userType: 'organisation'}))
-router.use('/reports{*splat}', authorise({userType: 'organisation'}))
+router.use('/reports{*splat}', authorise())
 router.use('/user-admin{*splat}', authorise())
 router.use('/user-profile{*splat}', authorise())
 router.use('/regions{*splat}', authorise({userType: 'regional'}))
