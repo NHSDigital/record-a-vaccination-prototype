@@ -3,11 +3,11 @@ module.exports = router => {
   router.get('/regions', (req, res) => {
     const data = req.session.data
 
-    const currentRegion = res.locals.currentOrganisation
+    const currentOrganisation = res.locals.currentOrganisation
 
-    const organisations = data.organisations.filter((organisation) => (organisation.region === currentRegion.id) && (["Active", "Invited", "Deactivated"].includes(organisation.status)))
+    const organisations = data.organisations.filter((organisation) => (organisation.region === currentOrganisation.id) && (["Active", "Invited", "Deactivated"].includes(organisation.status)))
 
-    const closedOrganisationsCount = data.organisations.filter((organisation) => (organisation.region === currentRegion.id && organisation.status == "Closed")).length
+    const closedOrganisationsCount = data.organisations.filter((organisation) => (organisation.region === currentOrganisation.id && organisation.status == "Closed")).length
 
     res.render('regions/index', {
       organisations,
@@ -16,10 +16,10 @@ module.exports = router => {
   })
 
   router.get('/regions/organisations/closed', (req, res) => {
-    const currentRegion = res.locals.currentOrganisation
+    const currentOrganisation = res.locals.currentOrganisation
 
     const data = req.session.data
-    const organisations = data.organisations.filter((organisation) => (organisation.region === currentRegion.id && organisation.status == "Closed"))
+    const organisations = data.organisations.filter((organisation) => (organisation.region === currentOrganisation.id && organisation.status == "Closed"))
 
     res.render('regions/closed-organisations', {
       organisations
@@ -47,7 +47,7 @@ module.exports = router => {
   // Inviting an organisation
   router.post('/regions/add', (req, res) => {
     const data = req.session.data
-    const currentRegion = res.locals.currentOrganisation
+    const currentOrganisation = res.locals.currentOrganisation
 
     const organisationId = data.organisationId
     const organisation = data.allOrganisations.find((org) => org.id === organisationId)
@@ -61,7 +61,7 @@ module.exports = router => {
       address: organisation.address,
       type: organisation.type,
       status: 'Invited',
-      region: currentRegion.id
+      region: currentOrganisation.id
     })
 
     req.session.data.users.push({
@@ -163,7 +163,7 @@ module.exports = router => {
     const vaccines = organisation.vaccines || []
     const vaccinesEnabled = vaccines.filter((vaccine) => vaccine.status === "enabled")
 
-    const messages = res.locals.currentOrganisation.inbox.filter((message) => message.fromOrganisationId === id)
+    const messages = (res.locals.currentOrganisation.inbox || []).filter((message) => message.fromOrganisationId === id)
 
     res.render('regions/organisation', {
       organisation,
