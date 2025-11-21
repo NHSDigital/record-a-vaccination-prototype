@@ -40,7 +40,8 @@ module.exports = router => {
 
     } else {
 
-      req.session.data.currentUserId = user.id
+        req.session.data.userId = user.id
+
       res.redirect('/auth/select-mode')
 
     }
@@ -58,6 +59,8 @@ module.exports = router => {
 
       req.session.data.currentMode = "reports"
       req.session.data.currentOrganisationId = null
+      req.session.data.currentUserId = data.userId
+
 
       res.redirect('/home')
     } else {
