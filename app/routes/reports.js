@@ -3,6 +3,7 @@ const filters = require('.././filters.js')()
 module.exports = (router) => {
 
   router.get('/reports/choose-vaccines', (req, res) => {
+    const data = req.session.data
     let enabledVaccines
 
     if (res.locals.currentOrganisation) {
