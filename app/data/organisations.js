@@ -8338,5 +8338,133 @@ module.exports = [
       town: "leeds",
       postcode: "LS2 7UE"
     }
+  },
+  {
+    id: 'PX9141',
+    name: 'MediCare Pharmacy',
+    address: {
+      line1: '28 High Street',
+      town: 'London',
+      postcode: 'N5 1PL'
+    },
+    type: 'Community Pharmacy',
+    status: 'Active',
+    region: "Y56",
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ]
+  },
+  {
+    id: 'PX4825',
+    name: 'MediCare Pharmacy',
+    address: {
+      line1: '104 Bow Street',
+      town: 'London',
+      postcode: 'N12 8PL'
+    },
+    type: 'Community Pharmacy',
+    status: 'Active',
+    region: "Y56",
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ]
+  },
+  {
+    id: 'PX7314',
+    name: 'MediCare Pharmacy',
+    address: {
+      line1: '99 Flowers Road',
+      town: 'London',
+      postcode: 'E12 8PL'
+    },
+    type: 'Community Pharmacy',
+    status: 'Active',
+    region: "Y56",
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ]
+  },
+  {
+    id: 'PX9151',
+    name: 'MediCare Pharmacy',
+    address: {
+      line1: '12 Church Road',
+      town: 'London',
+      postcode: 'W9 1PL'
+    },
+    type: 'Community Pharmacy',
+    status: 'Active',
+    region: "Y56",
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ]
+  },
+  {
+    id: 'PX2525',
+    name: 'MediCare Pharmacy',
+    address: {
+      line1: '1 Granary Road',
+      town: 'London',
+      postcode: 'SE1 9PL'
+    },
+    type: 'Community Pharmacy',
+    status: 'Active',
+    region: "Y56",
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ]
+  },
+  {
+    id: 'PC8141',
+    name: 'MediCare Pharmacy',
+    address: {
+      line1: '8 Manchester Road',
+      town: 'London',
+      postcode: 'N7 9PL'
+    },
+    type: 'Community Pharmacy',
+    status: 'Active',
+    region: "Y56",
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ]
+  },
+  {
+    id: 'P9824',
+    name: 'MediCare Pharmacy',
+    address: {
+      line1: '12 John Robinson Road',
+      town: 'London',
+      postcode: 'W11 9LP'
+    },
+    type: 'Community Pharmacy',
+    status: 'Active',
+    region: "Y56",
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ]
+  },
+  {
+    id: 'PD812',
+    name: 'MediCare Pharmacy',
+    address: {
+      line1: '18 Church Road',
+      town: 'London',
+      postcode: 'W9 1PL'
+    },
+    type: 'Community Pharmacy',
+    status: 'Active',
+    region: "Y56",
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ]
   }
 ]

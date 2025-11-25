@@ -77,6 +77,64 @@ module.exports = [
     "firstName": "Paulina",
     "lastName": "Sloan"
   },
+  // Amanda White is a lead admin for
+  // a chain of pharmacies
+  {
+    "firstName": "Amanda",
+    "lastName": "White",
+    "id": "6424325235325",
+    "email": "amanda.white@nhs.net",
+    "organisations": [
+      {
+        "id": "PX9141",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "PX4825",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "PX7314",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "PX9151",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "PX2525",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "PC8141",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "P9824",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "PD812",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      }
+    ]
+  },
   {
     "id": "1394978032564",
     "email": "ocean.merritt@nhs.net",
