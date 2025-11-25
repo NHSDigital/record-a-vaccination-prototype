@@ -4,21 +4,20 @@ module.exports = (router) => {
 
   router.get('/reports/choose-vaccines', (req, res) => {
     const data = req.session.data
-    let enabledVaccines
+    let enabledVaccines = []
 
     if (res.locals.currentOrganisation) {
 
       const organisationVaccines = res.locals.currentOrganisation.vaccines || []
 
       enabledVaccines = organisationVaccines.filter((vaccine) => vaccine.status === "enabled")
+    }
 
-    } else {
-
-      // Multi-org mode - enable all vaccines for now
-      // TODO: only show vaccines enabled across all the
-      // organisations you have access to.
+      // Temporary: show all vaccines if none have batches adde
+    if (enabledVaccines.length === 0) {
       enabledVaccines = data.vaccines
     }
+
 
     res.render('reports/choose-vaccines', {
       enabledVaccines
@@ -87,9 +86,13 @@ module.exports = (router) => {
 
       const siteIdsWithVaccines = [...new Set(vaccineStock.map((vaccineAdded) => vaccineAdded.siteId))]
 
-      const sitesInUse = currentOrganisation.sites.filter((site) => siteIdsWithVaccines.includes(site.id))
+      const sitesInUse = (currentOrganisation.sites || []).filter((site) => siteIdsWithVaccines.includes(site.id))
 
       sites = sitesInUse
+
+      if (sites === []) {
+        sites = [currentOrganisation]
+      }
 
     } else {
 
@@ -163,6 +166,7 @@ module.exports = (router) => {
   router.get('/reports/check', (req, res) => {
 
     const data = req.session.data
+    const siteIds = data.siteIdsToReport
     const today = new Date()
     const days = 86400000 // number of milliseconds in a day
 
@@ -198,6 +202,8 @@ module.exports = (router) => {
         to = today.toISOString().substring(0,10)
         break
     }
+
+
 
     res.render('reports/check', {
       from,
