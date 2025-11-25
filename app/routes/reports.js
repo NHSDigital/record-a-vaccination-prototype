@@ -76,9 +76,28 @@ module.exports = (router) => {
   })
 
   router.get('/reports/choose-site', (req, res) => {
+    const data = req.session.data
+    const currentOrganisation = res.locals.currentOrganisation
+    const currentUser = res.locals.currentUser
+    const vaccineStock = data.vaccineStock
 
     let sites = []
 
+    if (currentOrganisation) {
+
+      const siteIdsWithVaccines = [...new Set(vaccineStock.map((vaccineAdded) => vaccineAdded.siteId))]
+
+      const sitesInUse = currentOrganisation.sites.filter((site) => siteIdsWithVaccines.includes(site.id))
+
+      sites = sitesInUse
+
+    } else {
+
+      const userOrganisationIds = currentUser.organisations.map((organisation) => organisation.id)
+      const organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
+
+      sites = organisations
+    }
 
     res.render('reports/choose-site', {
       sites

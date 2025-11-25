@@ -20,6 +20,23 @@
 
           <form action="/reports/choose-data" method="post">
 
+            {% set items = [] %}
+
+            {% for site in (sites | sort(false, false, "name")) %}
+
+              {% if site.address %}
+                {% set hint = {
+                  text: site.address.line1 + ", " + site.address.postcode
+                } %}
+              {% endif %}
+
+              {% set items = (items.push({
+                value: site.id,
+                text: site.name,
+                hint: hint
+              }), items) %}
+            {% endfor %}
+
             {{ checkboxes({
                 "idPrefix": "sites-to-report",
                 "name": "sitesToReport",
@@ -31,24 +48,7 @@
                   }
                 },
                 values: data.sitesToReport,
-                "items": [
-                  {
-                    "value": "Verington (RH63S)",
-                    "text": "Verington (RH63S)"
-                  },
-                  {
-                    "value": "Tower (S204X)",
-                    "text": "Tower (S204X)"
-                  },
-                  {
-                    "value": "The Exchange (RH5S9)",
-                    "text": "The Exchange (RH5S9)"
-                  },
-                  {
-                    "value": "Willowbank Day Hospital (RH5C4)",
-                    "text": "Willowbank Day Hospital (RH5C4)"
-                  }
-                  ]
+                "items": items
               }) }}
 
 
