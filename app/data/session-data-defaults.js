@@ -15,7 +15,6 @@ module.exports = {
   nhsNumberKnown: "yes",
   currentUserId: "2387441662601",
   currentOrganisationId: "RW3",
-  currentRegionId: "Y62",
   vaccinationsRecorded: [],
 
   // These are the options for extracting CSV reports
