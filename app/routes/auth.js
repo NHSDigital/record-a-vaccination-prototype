@@ -106,6 +106,7 @@ module.exports = router => {
   router.get('/sign-out', (req, res) => {
     req.session.data.currentUserId = null
     req.session.data.currentOrganisationId = null
+    req.session.data.currentMode = null
 
     res.redirect('/product-page')
   })
