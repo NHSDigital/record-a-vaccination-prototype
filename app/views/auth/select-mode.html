@@ -15,29 +15,30 @@
       }) }}</div>
       <h1 class="nhsuk-heading-l">Create reports across organisations</h1>
 
-      <p>You are a lead administrator for multiple organisations in RAVS.</p>
+      <p>As an administrator using RAVS at several organisations, you can either:</p>
 
-      <p>You can now create a single reports across organisations instead of doing this individually.</p>
-
-      <p>If you log in this way, you will not be able to record vaccinations, manage vaccines or users.</p>
+      <ul>
+        <li>access RAVS at 1 organisation to record vaccinations, manage vaccines and manage users</li>
+        <li>create a report across several organisations</li>
+      </ul>
 
       {{ radios({
         name: "loginMode",
         fieldset: {
           legend: {
-            text: "What would you like to do?",
+            text: "What do you want to do?",
             classes: "nhsuk-fieldset__legend--m",
             isPageHeading: true
           }
         },
         items: [
           {
-            text: "Create reports across organisations",
-            value: "create-reports"
+            text: "Use RAVS at 1 organisation",
+            value: "single"
           },
           {
-            text: "Log in as a single organisation",
-            value: "single"
+            text: "Create a report across several organisations",
+            value: "create-reports"
           }
         ]
       }) }}
