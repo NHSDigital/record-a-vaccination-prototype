@@ -73,11 +73,32 @@
         </form>
 
 
-        </div>
-      </div>
+      // All row checkboxes (everything starting with select- except select-all)
+      const otherCheckboxes = Array.from(
+        document.querySelectorAll('input:not([data-select-all])')
+      );
 
+      // Click on header toggles all rows
+      selectAllCheckbox.addEventListener('change', () => {
 
+        otherCheckboxes.forEach(cb => {
+          cb.checked = selectAllCheckbox.checked;
+        });
+        selectAllCheckbox.indeterminate = false;
+      });
 
+      // Click on rows updates header state
+      otherCheckboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+          const allChecked = otherCheckboxes.every(c => c.checked);
+          const noneChecked = otherCheckboxes.every(c => !c.checked);
+
+          selectAllCheckbox.checked = allChecked;
+          selectAllCheckbox.indeterminate = !allChecked && !noneChecked;
+        });
+      });
+    });
+  </script>
 
     </div>
   </div>
