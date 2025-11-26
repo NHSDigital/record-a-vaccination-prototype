@@ -34,7 +34,7 @@ module.exports = router => {
     const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
 
-    const vaccinesAddedCount = data.vaccineStock.length
+    const vaccinesAddedCount = data.vaccineStock.filter((vaccine) => vaccine.organisationId === currentOrganisation.id).length
 
     let vaccinationTodayError
 
