@@ -2,6 +2,17 @@ const filters = require('.././filters.js')()
 
 module.exports = (router) => {
 
+  router.get('/reports', (req, res) => {
+    const data = req.session.data
+    const currentOrganisation = res.locals.currentOrganisation
+
+    const vaccinationsRecordedCount = data.vaccinationsRecorded.filter((vaccination) => vaccination.organisationId === currentOrganisation.id).length
+
+    res.render('reports/index', {
+      vaccinationsRecordedCount
+    })
+  })
+
   router.get('/reports/choose-vaccines', (req, res) => {
     const data = req.session.data
     let enabledVaccines = []
