@@ -94,6 +94,64 @@ module.exports = [
     "firstName": "Paulina",
     "lastName": "Sloan"
   },
+  // Each pharmacy in Paulina Sloan’s chain has its own vaccinator
+  {
+    "id": "46436346",
+    "email": "jeremy.blue@nhs.net",
+    "organisations": [
+      {
+        "id": "FA424",
+        "permissionLevel": "Recorder",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Jeremy",
+    "lastName": "Blue"
+  },
+
+  {
+    "id": "64746353",
+    "email": "jeremy.blue@nhs.net",
+    "organisations": [
+      {
+        "id": "FA02S",
+        "permissionLevel": "Recorder",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Jeremy",
+    "lastName": "Blue"
+  },
+  {
+    "id": "46436436436",
+    "email": "jeremy.blue@nhs.net",
+    "organisations": [
+      {
+        "id": "FVJ99",
+        "permissionLevel": "Recorder",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Jeremy",
+    "lastName": "Blue"
+  },
+  {
+    "id": "646436311",
+    "email": "jeremy.blue@nhs.net",
+    "organisations": [
+      {
+        "id": "PDL93",
+        "permissionLevel": "Recorder",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Jeremy",
+    "lastName": "Blue"
+  },
   // Amanda White is a lead admin for
   // a chain of pharmacies
   {

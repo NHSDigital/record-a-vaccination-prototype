@@ -8170,6 +8170,12 @@ module.exports = [
   {
     id: 'FA424',
     name: 'Pickfords Pharmacy',
+    sites: [
+      {
+        id: "343252356",
+        name: "Pickfords Pharmacy"
+      }
+    ],
     address: {
       line1: '8 Spencer Court',
       town: 'Corby',
@@ -8203,6 +8209,12 @@ module.exports = [
       {name: "pertussis", status: "requested"},
       {name: "flu", status: "enabled"}
     ],
+    sites: [
+      {
+        id: "646436436",
+        name: "Addlestone Pharmacy"
+      }
+    ],
     application: {
       firstName: "Francis",
       lastName: "Blue",
@@ -8213,6 +8225,12 @@ module.exports = [
   {
     id: 'FVJ99',
     name: 'Pharmacy 4U',
+    sites: [
+      {
+        id: "123535",
+        name: "Pharmacy 4U"
+      }
+    ],
     address: {
       line1: '7 London Road',
       town: 'Leeds',
@@ -8232,6 +8250,12 @@ module.exports = [
   {
     id: 'PDL93',
     name: 'Silverfields Chemists',
+    sites: [
+      {
+        id: "6346321142",
+        name: "Silverfields Chemists"
+      }
+    ],
     address: {
       line1: '28 High Street',
       town: 'Bradford',
@@ -8257,6 +8281,12 @@ module.exports = [
   {
     id: 'JF93',
     name: 'Village Chemist',
+    sites: [
+      {
+        id: "14643622",
+        name: "Village Chemist"
+      }
+    ],
     address: {
       line1: 'The Parada',
       town: 'Greenfield',
@@ -8377,6 +8407,12 @@ module.exports = [
     vaccines: [
       {name: "COVID-19", status: "enabled"},
       {name: "flu", status: "enabled"}
+    ],
+    sites: [
+      {
+        id: "3535346",
+        name: "MediCare Pharmacy"
+      }
     ]
   },
   {
@@ -8393,6 +8429,12 @@ module.exports = [
     vaccines: [
       {name: "COVID-19", status: "enabled"},
       {name: "flu", status: "enabled"}
+    ],
+    sites: [
+      {
+        id: "46436",
+        name: "MediCare Pharmacy"
+      }
     ]
   },
   {
@@ -8409,6 +8451,12 @@ module.exports = [
     vaccines: [
       {name: "COVID-19", status: "enabled"},
       {name: "flu", status: "enabled"}
+    ],
+    sites: [
+      {
+        id: "6436436",
+        name: "MediCare Pharmacy"
+      }
     ]
   },
   {
@@ -8425,6 +8473,12 @@ module.exports = [
     vaccines: [
       {name: "COVID-19", status: "enabled"},
       {name: "flu", status: "enabled"}
+    ],
+    sites: [
+      {
+        id: "64364643",
+        name: "MediCare Pharmacy"
+      }
     ]
   },
   {
@@ -8441,6 +8495,12 @@ module.exports = [
     vaccines: [
       {name: "COVID-19", status: "enabled"},
       {name: "flu", status: "enabled"}
+    ],
+    sites: [
+      {
+        id: "346346436",
+        name: "MediCare Pharmacy"
+      }
     ]
   },
   {
@@ -8457,6 +8517,12 @@ module.exports = [
     vaccines: [
       {name: "COVID-19", status: "enabled"},
       {name: "flu", status: "enabled"}
+    ],
+    sites: [
+      {
+        id: "46464311",
+        name: "MediCare Pharmacy"
+      }
     ]
   },
   {
@@ -8473,6 +8539,12 @@ module.exports = [
     vaccines: [
       {name: "COVID-19", status: "enabled"},
       {name: "flu", status: "enabled"}
+    ],
+    sites: [
+      {
+        id: "4643643",
+        name: "MediCare Pharmacy"
+      }
     ]
   },
   {
@@ -8489,6 +8561,12 @@ module.exports = [
     vaccines: [
       {name: "COVID-19", status: "enabled"},
       {name: "flu", status: "enabled"}
+    ],
+    sites: [
+      {
+        id: "12s457446",
+        name: "MediCare Pharmacy"
+      }
     ]
   }
 ]
