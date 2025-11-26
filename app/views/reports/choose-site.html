@@ -20,7 +20,13 @@
 
           <form action="/reports/choose-data" method="post">
 
-            {% set items = [] %}
+            {% set items = [{
+              text: "All " + (sites|length) + " sites",
+              value: "all",
+              exclusive: true
+            }, {
+              divider: "or"
+            }] %}
 
             {% for site in (sites | sort(false, false, "name")) %}
 
@@ -38,18 +44,18 @@
             {% endfor %}
 
             {{ checkboxes({
-                "idPrefix": "sites-to-report",
-                "name": "sitesToReport",
-                "fieldset": {
-                  "legend": {
-                    "text": "Choose sites",
-                    "classes": "nhsuk-fieldset__legend--l",
-                    isPageHeading: true
-                  }
-                },
-                values: data.sitesToReport,
-                "items": items
-              }) }}
+              "idPrefix": "sites-to-report",
+              "name": "siteIdsToReport",
+              "fieldset": {
+                "legend": {
+                  "text": "Choose sites",
+                  "classes": "nhsuk-fieldset__legend--l",
+                  isPageHeading: true
+                }
+              },
+              values: data.siteIdsToReport,
+              "items": items
+            }) }}
 
 
           {{ button({

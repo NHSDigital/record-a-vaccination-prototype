@@ -164,11 +164,20 @@ module.exports = (router) => {
 
 
   router.get('/reports/check', (req, res) => {
-
+    const currentOrganisation = res.locals.currentOrganisation
     const data = req.session.data
-    const siteIds = data.siteIdsToReport
+    const siteIds = data.siteIdsToReport || []
     const today = new Date()
     const days = 86400000 // number of milliseconds in a day
+
+    let sites = []
+
+    if (currentOrganisation) {
+      sites = (currentOrganisation.sites || []).filter((site) => siteIds.includes(site.id))
+    } else {
+      sites = data.organisations.filter((organisation) => siteIds.includes(organisation.id))
+    }
+
 
     const fromInput = data.from
     const toInput = data.to
@@ -206,6 +215,7 @@ module.exports = (router) => {
 
 
     res.render('reports/check', {
+      sites,
       from,
       to
     })

@@ -29,9 +29,9 @@
 
         {% set items = (items.push({
           value: organisation.id,
-          text: organisation.name,
+          text: organisation.name + " (" + organisation.id + ")",
           hint: {
-            text: organisation.address.line1
+            text: organisation.address.line1 + ", " +  organisation.address.town + ", " + organisation.address.postcode
           }
         }), items) %}
       {% endfor %}

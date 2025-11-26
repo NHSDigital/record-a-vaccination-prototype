@@ -41,6 +41,14 @@
         {{ dataFields | join(", ") }}
       {% endset %}
 
+      {% set sitesHtml %}
+        <ul class="nhsuk-list">
+          {% for site in sites | sort(false, false, "name") %}
+            <li>{{ site.name }}</li>
+          {% endfor %}
+        </ul>
+      {% endset %}
+
       {{ summaryList({
         rows: [
           {
@@ -99,10 +107,10 @@
           },
           {
             key: {
-              text: ("Sites" if (data.reportSites | length) > 1 else "Site")
+              text: ("Sites" if (data.siteIdsToReport | length) > 1 else "Site")
             },
             value: {
-              text: (data.sitesToReport | join(",  ")) if data.sitesToReport
+              html: sitesHtml
             },
             actions: {
               items: [
