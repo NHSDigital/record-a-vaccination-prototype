@@ -5,8 +5,16 @@ module.exports = (router) => {
   router.get('/reports', (req, res) => {
     const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
+    let vaccinationsRecordedCount
 
-    const vaccinationsRecordedCount = data.vaccinationsRecorded.filter((vaccination) => vaccination.organisationId === currentOrganisation.id).length
+    if (currentOrganisation) {
+      vaccinationsRecordedCount = data.vaccinationsRecorded.filter((vaccination) => vaccination.organisationId === currentOrganisation.id).length
+    } else {
+
+      // TODO: count across all organisations you
+      // have access to
+      vaccinationsRecordedCount = 100
+    }
 
     res.render('reports/index', {
       vaccinationsRecordedCount
@@ -97,9 +105,10 @@ module.exports = (router) => {
 
       const siteIdsWithVaccines = [...new Set(vaccineStock.map((vaccineAdded) => vaccineAdded.siteId))]
 
-      const sitesInUse = (currentOrganisation.sites || []).filter((site) => siteIdsWithVaccines.includes(site.id))
-
-      sites = sitesInUse
+      // const sitesInUse = (currentOrganisation.sites || []).filter((site) => siteIdsWithVaccines.includes(site.id))
+      //
+      // Showing all sites for now, for demo purposes
+      sites = currentOrganisation.sites
 
       if (sites === []) {
         sites = [currentOrganisation]
