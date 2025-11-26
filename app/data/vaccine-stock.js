@@ -7,6 +7,7 @@ module.exports = [
     id: "436436436",
     vaccine: "COVID-19",
     vaccineProduct: "Comirnaty 3 LP.8.1",
+    organisationId: "RW3", // Central Manchester Trust
     siteId: "RW3NM", // North Manchester General Hospital
     batches: [
       {
@@ -20,6 +21,7 @@ module.exports = [
     id: "646436346",
     vaccine: "flu",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
+    organisationId: "RW3", // Central Manchester Trust
     siteId: "RW3NM", // North Manchester General Hospital
     batches: [
       {
@@ -33,6 +35,7 @@ module.exports = [
     id: "25463625",
     vaccine: "COVID-19",
     vaccineProduct: "Comirnaty 3 LP.8.1",
+    organisationId: "RW3", // Central Manchester Trust
     siteId: "RW3HT", // Heaton Moor Health Centre"
     batches: [
       {
@@ -46,6 +49,7 @@ module.exports = [
     id: "64364364",
     vaccine: "pertussis",
     vaccineProduct: "Adacel vaccine suspension",
+    organisationId: "RW3", // Central Manchester Trust
     siteId: "RW3HT", // Heaton Moor Health Centre"
     batches: [
       {
@@ -59,6 +63,7 @@ module.exports = [
     id: "18582856",
     vaccine: "flu",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
+    organisationId: "RW3", // Central Manchester Trust
     siteId: "RW3HT", // Heaton Moor Health Centre"
     batches: [
       {
@@ -72,6 +77,7 @@ module.exports = [
     id: "46436436",
     vaccine: "RSV",
     vaccineProduct: "Abrysvo",
+    organisationId: "RW3", // Central Manchester Trust
     siteId: "RW3HT", // Heaton Moor Health Centre"
     batches: [
       {

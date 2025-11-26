@@ -902,6 +902,12 @@ module.exports = [
     status: "Active",
     type: "NHS Trust",
     region: "Y56",
+    vaccines: [
+      {name: "RSV", status: "enabled"},
+      {name: "COVID-19", status: "enabled"},
+      {name: "pertussis", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     sites: [
       {
         id: "RV3GH",

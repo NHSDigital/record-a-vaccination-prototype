@@ -1,8 +1,19 @@
 module.exports = (router) => {
 
+  router.get('/vaccines', (req, res) => {
+    const currentOrganisation = res.locals.currentOrganisation
+    const data = req.session.data
+
+    const vaccineStock = data.vaccineStock.filter((vaccine) => vaccine.organisationId === currentOrganisation.id)
+
+    res.render('vaccines/index', {
+      vaccineStock
+    })
+  })
+
   // Adding a vaccine
   router.post('/vaccines/add', (req, res) => {
-
+    const currentOrganisation = res.locals.currentOrganisation
     const data = req.session.data
 
     const generatedId = Math.floor(Math.random() * 10000000).toString()
@@ -13,6 +24,7 @@ module.exports = (router) => {
       id: generatedId,
       vaccine: data.vaccine,
       vaccineProduct: data.vaccineProduct,
+      organisationId: currentOrganisation.id,
       siteId: data.siteId,
       batches: [
         {
