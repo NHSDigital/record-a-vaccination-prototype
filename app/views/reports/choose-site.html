@@ -20,13 +20,21 @@
 
           <form action="/reports/choose-data" method="post">
 
-            {% set items = [{
-              text: "All " + (sites|length) + " sites",
-              value: "all",
-              exclusive: true
-            }, {
-              divider: "or"
-            }] %}
+            {% set items = [] %}
+
+            {% if (sites | length) > 1 %}
+
+              {% set items = (items.push({
+                text: "All " + (sites|length) + " sites",
+                value: "all",
+                exclusive: true
+              }), items) %}
+
+              {% set items = (items.push({
+                divider: "or"
+              }), items) %}
+
+            {% endif %}
 
             {% for site in (sites | sort(false, false, "name")) %}
 
