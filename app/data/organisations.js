@@ -893,7 +893,7 @@ module.exports = [
   },
   {
     id: "RV3",
-    name: "Central and north west London NHS Foundation Trust",
+    name: "Central and North West London NHS Foundation Trust",
     address: {
       line1: "Trust headquarters",
       town: "London",
@@ -901,7 +901,25 @@ module.exports = [
     },
     status: "Active",
     type: "NHS Trust",
-    region: "Y56"
+    region: "Y56",
+    sites: [
+      {
+        id: "RV3GH",
+        name: "Solent road health centre"
+      },
+      {
+        id: "RV3GJ",
+        name: "Vauxhall Bridge Road"
+      },
+      {
+        id: "RV3GP",
+        name: "Franklin House Clinic"
+      },
+      {
+        id: "RV3KE",
+        name: "Combined Antenatal Clinic"
+      }
+    ]
   },
   {
     id: "RYX",
@@ -942,11 +960,11 @@ module.exports = [
     type: "NHS Trust",
     region: "Y62",
     vaccines: [
-      {name: "RSV", status: "disabled"},
+      {name: "RSV", status: "enabled"},
       {name: "COVID-19", status: "enabled"},
-      {name: "pertussis", status: "disabled"},
+      {name: "pertussis", status: "enabled"},
       {name: "flu", status: "enabled"},
-      {name: "flu (London service)", status: "enabled"}
+      {name: "flu (London service)", status: "disabled"}
     ],
     sites: [
       {

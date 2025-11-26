@@ -3,6 +3,7 @@ const featureFlags = require('./feature-flags')
 const organisations = require('./organisations')
 const users = require('./users')
 const vaccines = require('./vaccines')
+const vaccineStock = require('./vaccine-stock')
 
 module.exports = {
   organisations: organisations,
@@ -10,7 +11,7 @@ module.exports = {
   featureFlags: featureFlags,
   users: users,
   vaccines: vaccines,
-  vaccineStock: [],
+  vaccineStock: vaccineStock,
   lists: [],
   nhsNumberKnown: "yes",
   currentUserId: "2387441662601",
