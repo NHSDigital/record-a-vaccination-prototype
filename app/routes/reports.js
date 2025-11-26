@@ -97,13 +97,13 @@ module.exports = (router) => {
     const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
     const currentUser = res.locals.currentUser
-    const vaccineStock = data.vaccineStock
+    // const vaccineStock = data.vaccineStock
 
     let sites = []
 
     if (currentOrganisation) {
 
-      const siteIdsWithVaccines = [...new Set(vaccineStock.map((vaccineAdded) => vaccineAdded.siteId))]
+      // const siteIdsWithVaccines = [...new Set(vaccineStock.map((vaccineAdded) => vaccineAdded.siteId))]
 
       // const sitesInUse = (currentOrganisation.sites || []).filter((site) => siteIdsWithVaccines.includes(site.id))
       //
