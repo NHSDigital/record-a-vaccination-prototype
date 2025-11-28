@@ -843,6 +843,7 @@ module.exports = router => {
   router.post('/record-vaccinations/answer-batch', (req, res) => {
 
     const data = req.session.data
+    const eligibility = data.eligibility
     const vaccineBatch = data.vaccineBatch
 
     const vaccineOptions = data.vaccineStock.find(function(batch) {
@@ -860,7 +861,7 @@ module.exports = router => {
     } else if (["COVID-19", "flu", "flu (London service)", "RSV", "pneumococcal"].includes(data.vaccine)) {
       redirectPath = "/record-vaccinations/eligibility"
     } else if (data.vaccine === "Pertussis" || ((data.vaccine == "RSV") && (eligibility === "Pregnant"))) {
-      nextPage = "/record-vaccinations/patient-estimated-due-date"
+      redirectPath = "/record-vaccinations/patient-estimated-due-date"
     } else {
       redirectPath = "/record-vaccinations/consent"
     }
