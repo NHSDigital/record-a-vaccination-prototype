@@ -39,7 +39,7 @@ module.exports = [
     "email": "graham.wallace@nhs.net",
     "organisations": [
       {
-        "id": "RLR",
+        "id": "RWP",
         "permissionLevel": "Recorder",
         "status": "Active",
         "vaccinator": true
@@ -59,6 +59,28 @@ module.exports = [
     ],
     "firstName": "Graham",
     "lastName": "Wallace"
+  },
+  // Phoebe Black is a recorder at
+  // multiple NHS Trusts (eg bank staff)
+  {
+    "id": "2058253531",
+    "email": "phoebe.black@nhs.net",
+    "organisations": [
+      {
+        "id": "RWP",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "RXX",
+        "permissionLevel": "Administrator",
+        "status": "Active",
+        "vaccinator": false
+      }
+    ],
+    "firstName": "Phoebe",
+    "lastName": "Black"
   },
   // Paulina Sloan is a lead admin for
   // a chain of pharmacies

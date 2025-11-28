@@ -40,34 +40,34 @@
 
           {% if site.address %}
             {% set hint = {
-              text: site.address.line1 + ", " + site.address.postcode
+              text: site.address.line1 + ", " + site.address.town + ", " + site.address.postcode
             } %}
           {% endif %}
 
           {% set items = (items.push({
             value: site.id,
-            text: site.name,
+            text: site.name + " (" + site.id + ")",
             hint: hint
           }), items) %}
         {% endfor %}
 
         {{ checkboxes({
-          "idPrefix": "sites-to-report",
-          "name": "siteIdsToReport",
-          "fieldset": {
-            "legend": {
-              "text": "Choose sites",
-              "classes": "nhsuk-fieldset__legend--l",
+          idPrefix: "sites-to-report",
+          name: "siteIdsToReport",
+          fieldset: {
+            legend: {
+              text: "Choose sites",
+              classes: "nhsuk-fieldset__legend--l",
               isPageHeading: true
             }
           },
           values: data.siteIdsToReport,
-          "items": items
+          items: items
         }) }}
 
 
         {{ button({
-          "text": "Continue"
+          text: "Continue"
         }) }}
 
       </form>

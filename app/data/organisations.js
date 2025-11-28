@@ -6552,6 +6552,26 @@ module.exports = [
     region: "Y63",
     vaccines: [
       {name: "COVID-19", status: "enabled"}
+    ],
+    sites: [
+      {
+        id: "RXX23",
+        name: "The Meadows",
+        address: {
+          line1: "Bagshot Road",
+          town: "Woking",
+          postcode: "GU21 2RP"
+        }
+      },
+      {
+        id: "RXXCD",
+        name: "Willow House",
+        address: {
+          line1: "23 Grosvenor Road",
+          town: "Aldershot",
+          postcode: "GU11 1DL"
+        }
+      }
     ]
   },
   {
@@ -7992,8 +8012,8 @@ module.exports = [
     ]
   },
   {
-    id: "RLR",
-    name: "Worcester Royal Infirmary NHS Trust",
+    id: "RWP",
+    name: "Worcester Acute Hospitals NHS Trust",
     address: {
       line1: "Ronkswood branch",
       town: "Worcester",
@@ -8004,21 +8024,26 @@ module.exports = [
     region: "Y63",
     vaccines: [
       {name: "COVID-19", status: "enabled"}
-    ]
-  },
-  {
-    id: "RWP",
-    name: "Worcestershire Acute Hospitals NHS Trust",
-    address: {
-      line1: "Worcestershire Royal hospital",
-      town: "Worcester",
-      postcode: "WR5 1DD"
-    },
-    status: "Active",
-    type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-
+    ],
+    sites: [
+      {
+        id: "RWP01",
+        name: "Alexandra Hospital",
+        address: {
+          line1: "Woodrow Drive",
+          town: "Redditch",
+          postcode: "B98 7UB"
+        }
+      },
+      {
+        id: "RWP03",
+        name: "Evesham Community Hospital",
+        address: {
+          line1: "Waterside",
+          town: "Evesham",
+          postcode: "WR11 1JT"
+        }
+      }
     ]
   },
   {
@@ -8411,7 +8436,12 @@ module.exports = [
     sites: [
       {
         id: "3535346",
-        name: "MediCare Pharmacy"
+        name: "MediCare Pharmacy",
+        address: {
+          line1: '28 High Street',
+          town: 'London',
+          postcode: 'N5 1PL'
+        }
       }
     ]
   },
@@ -8433,7 +8463,12 @@ module.exports = [
     sites: [
       {
         id: "46436",
-        name: "MediCare Pharmacy"
+        name: "MediCare Pharmacy",
+        address: {
+          line1: '104 Bow Street',
+          town: 'London',
+          postcode: 'N12 8PL'
+        }
       }
     ]
   },
@@ -8455,7 +8490,12 @@ module.exports = [
     sites: [
       {
         id: "6436436",
-        name: "MediCare Pharmacy"
+        name: "MediCare Pharmacy",
+        address: {
+          line1: '99 Flowers Road',
+          town: 'London',
+          postcode: 'E12 8PL'
+        }
       }
     ]
   },
@@ -8477,7 +8517,12 @@ module.exports = [
     sites: [
       {
         id: "64364643",
-        name: "MediCare Pharmacy"
+        name: "MediCare Pharmacy",
+        address: {
+          line1: '12 Church Road',
+          town: 'London',
+          postcode: 'W9 1PL'
+        }
       }
     ]
   },
@@ -8499,7 +8544,12 @@ module.exports = [
     sites: [
       {
         id: "346346436",
-        name: "MediCare Pharmacy"
+        name: "MediCare Pharmacy",
+        address: {
+          line1: '1 Granary Road',
+          town: 'London',
+          postcode: 'SE1 9PL'
+        }
       }
     ]
   },
@@ -8521,7 +8571,12 @@ module.exports = [
     sites: [
       {
         id: "46464311",
-        name: "MediCare Pharmacy"
+        name: "MediCare Pharmacy",
+        address: {
+          line1: '8 Manchester Road',
+          town: 'London',
+          postcode: 'N7 9PL'
+        }
       }
     ]
   },
@@ -8543,7 +8598,12 @@ module.exports = [
     sites: [
       {
         id: "4643643",
-        name: "MediCare Pharmacy"
+        name: "MediCare Pharmacy",
+        address: {
+          line1: '12 John Robinson Road',
+          town: 'London',
+          postcode: 'W11 9LP'
+        }
       }
     ]
   },
@@ -8565,7 +8625,12 @@ module.exports = [
     sites: [
       {
         id: "12s457446",
-        name: "MediCare Pharmacy"
+        name: "MediCare Pharmacy",
+        address: {
+          line1: '18 Church Road',
+          town: 'London',
+          postcode: 'W9 1PL'
+        }
       }
     ]
   }

@@ -119,7 +119,11 @@ module.exports = (router) => {
       const userOrganisationIds = currentUser.organisations.map((organisation) => organisation.id)
       const organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
 
-      sites = organisations
+      for (organisation of organisations) {
+        for (site of (organisation.sites || [])) {
+          sites.push(site)
+        }
+      }
     }
 
     res.render('reports/choose-site', {
