@@ -13,59 +13,100 @@
 
 {% block content %}
 
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/reports/choose-data" method="post">
+
+        {% set items = [] %}
+
+        {% if (sites | length) > 1 %}
+
+          {% set items = (items.push({
+            text: "All " + (sites|length) + " sites",
+            value: "all",
+            attributes: {
+              "data-select-all": "true"
+            }
+          }), items) %}
+
+          {% set items = (items.push({
+            divider: "or"
+          }), items) %}
+
+        {% endif %}
+
+        {% for site in (sites | sort(false, false, "name")) %}
+
+          {% if site.address %}
+            {% set hint = {
+              text: site.address.line1 + ", " + site.address.town + ", " + site.address.postcode
+            } %}
+          {% endif %}
+
+          {% set items = (items.push({
+            value: site.id,
+            text: site.name + " (" + site.id + ")",
+            hint: hint
+          }), items) %}
+        {% endfor %}
+
+        {{ checkboxes({
+          idPrefix: "sites-to-report",
+          name: "siteIdsToReport",
+          fieldset: {
+            legend: {
+              text: "Choose sites",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          values: data.siteIdsToReport,
+          items: items
+        }) }}
 
 
-      <div class="nhsuk-grid-row">
-        <div class="nhsuk-grid-column-two-thirds">
+        {{ button({
+          text: "Continue"
+        }) }}
 
-          <form action="/reports/choose-data" method="post">
-
-            {{ checkboxes({
-                "idPrefix": "sites-to-report",
-                "name": "sitesToReport",
-                "fieldset": {
-                  "legend": {
-                    "text": "Choose sites",
-                    "classes": "nhsuk-fieldset__legend--l",
-                    isPageHeading: true
-                  }
-                },
-                values: data.sitesToReport,
-                "items": [
-                  {
-                    "value": "Verington (RH63S)",
-                    "text": "Verington (RH63S)"
-                  },
-                  {
-                    "value": "Tower (S204X)",
-                    "text": "Tower (S204X)"
-                  },
-                  {
-                    "value": "The Exchange (RH5S9)",
-                    "text": "The Exchange (RH5S9)"
-                  },
-                  {
-                    "value": "Willowbank Day Hospital (RH5C4)",
-                    "text": "Willowbank Day Hospital (RH5C4)"
-                  }
-                  ]
-              }) }}
-
-
-          {{ button({
-            "text": "Continue"
-          }) }}
-
-        </form>
-
-
-        </div>
-      </div>
-
-
-
+      </form>
 
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // Select all checkbox
+      const selectAllCheckbox = document.querySelector('input[data-select-all]');
+
+      // All row checkboxes (everything starting with select- except select-all)
+      const otherCheckboxes = Array.from(
+        document.querySelectorAll('input:not([data-select-all])')
+      );
+
+      // Click on header toggles all rows
+      selectAllCheckbox.addEventListener('change', () => {
+
+        otherCheckboxes.forEach(cb => {
+          cb.checked = selectAllCheckbox.checked;
+        });
+        selectAllCheckbox.indeterminate = false;
+      });
+
+      // Click on rows updates header state
+      otherCheckboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+          const allChecked = otherCheckboxes.every(c => c.checked);
+          const noneChecked = otherCheckboxes.every(c => !c.checked);
+
+          selectAllCheckbox.checked = allChecked;
+          selectAllCheckbox.indeterminate = !allChecked && !noneChecked;
+        });
+      });
+    });
+  </script>
+
 {% endblock %}
 

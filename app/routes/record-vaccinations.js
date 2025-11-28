@@ -32,7 +32,9 @@ module.exports = router => {
 
   router.get('/record-vaccinations', (req, res) => {
     const data = req.session.data
-    const vaccinesAddedCount = data.vaccineStock.length
+    const currentOrganisation = res.locals.currentOrganisation
+
+    const vaccinesAddedCount = data.vaccineStock.filter((vaccine) => vaccine.organisationId === currentOrganisation.id).length
 
     let vaccinationTodayError
 

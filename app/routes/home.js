@@ -57,10 +57,37 @@ module.exports = router => {
 
   // Dashboard
   router.get('/home', (req, res) => {
+    const currentOrganisation = res.locals.currentOrganisation
+    const currentUser = res.locals.currentUser
+
     const data = req.session.data
     const vaccinationsRecorded = data.vaccinationsRecorded
     const dateToday = new Date()
     const monthToday = (dateToday.getMonth() + 1) // JavaScript dates are 0-indexed
+
+    let sites = []
+
+    if (currentOrganisation) {
+      // Showing all sites for now, for demo purposes
+      sites = currentOrganisation.sites
+
+      if (sites === []) {
+        sites = [currentOrganisation]
+      }
+
+    } else {
+
+      const userOrganisationIds = currentUser.organisations.map((organisation) => organisation.id)
+      const organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
+
+      for (const organisation of organisations) {
+        for (const site of (organisation.sites || [])) {
+          sites.push(site)
+        }
+      }
+    }
+
+
 
     let totalsBySite = []
     let totalsByVaccine = []
@@ -100,6 +127,7 @@ module.exports = router => {
     }
 
     for (let vaccine of uniqueVaccinesRecorded) {
+
       totalsByVaccine.push({
         vaccine: vaccine,
         today: countVaccinations(vaccinationsRecorded, {
@@ -121,32 +149,40 @@ module.exports = router => {
       })
     }
 
-    const siteIds = [...new Set(vaccinationsRecorded.map((vaccination) => vaccination.siteId))]
+    // const siteIds = [...new Set(vaccinationsRecorded.map((vaccination) => vaccination.siteId))]
 
-    for (let siteId of siteIds) {
-      totalsBySite.push({
-        siteId: siteId,
-        today: countVaccinations(vaccinationsRecorded, {
-          date: dateToday,
-          siteId: siteId
-        }),
-        month:countVaccinations(vaccinationsRecorded, {
-          month: dateToday,
-          siteId: siteId
-        }),
-        past7Days: countVaccinations(vaccinationsRecorded, {
-          minDate: sevenDaysAgo,
-          maxDate: dateToday,
-          siteId: siteId
-        }),
-        total: countVaccinations(vaccinationsRecorded, {
-          siteId: siteId
-        })
+    for (let site of sites) {
+
+      const total = countVaccinations(vaccinationsRecorded, {
+        siteId: site.id
       })
+
+      if (total > 0) {
+        totalsBySite.push({
+          siteId: site.id,
+          today: countVaccinations(vaccinationsRecorded, {
+            date: dateToday,
+            siteId: site.id
+          }),
+          month:countVaccinations(vaccinationsRecorded, {
+            month: dateToday,
+            siteId: site.id
+          }),
+          past7Days: countVaccinations(vaccinationsRecorded, {
+            minDate: sevenDaysAgo,
+            maxDate: dateToday,
+            siteId: site.id
+          }),
+          total: total
+        })
+      }
     }
 
 
+
+
     res.render('home/index', {
+      sites,
       totalVaccinationsRecorded,
       totalVaccinationsRecordedToday,
       totalVaccinationsRecordedThisMonth,

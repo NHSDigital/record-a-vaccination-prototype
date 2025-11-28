@@ -2,6 +2,15 @@
 
 {% set pageName = "Sign in" %}
 
+{% if from === "select-mode" %}
+  {% block beforeContent %}
+    {{ backLink({
+      text: "Back",
+      href: "/auth/select-mode"
+    }) }}
+  {% endblock %}
+{% endif %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
@@ -20,9 +29,9 @@
 
         {% set items = (items.push({
           value: organisation.id,
-          text: organisation.name,
+          text: organisation.name + " (" + organisation.id + ")",
           hint: {
-            text: organisation.address.line1
+            text: organisation.address.line1 + ", " +  organisation.address.town + ", " + organisation.address.postcode
           }
         }), items) %}
       {% endfor %}

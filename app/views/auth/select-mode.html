@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Sign in" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/auth/answer-select-mode" method="post">
+
+        {{ radios({
+          name: "loginMode",
+          fieldset: {
+            legend: {
+              text: "What do you want to do?",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          hint: {
+            text: "As an administrator at several organisations you have 2 options. To switch between these, log out and log back in again."
+          },
+          items: [
+            {
+              text: "Use the service at 1 organisation",
+              value: "single",
+              hint: {
+                text: "For example, to record vaccinations and manage vaccines"
+              }
+            },
+            {
+              text: "Create a report across several organisations",
+              value: "create-reports"
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

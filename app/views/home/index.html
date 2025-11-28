@@ -6,9 +6,9 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-      <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-6">{{ currentOrganisation.name }}</h1>
+      <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-6">{% if currentOrganisation %}{{ currentOrganisation.name }}{% else %}Home{% endif %}</h1>
 
-      {% if totalVaccinationsRecorded == 0 %}
+      {% if currentOrganisation and totalVaccinationsRecorded == 0 %}
         {% include "home/_no-vaccinations-recorded.html" %}
       {% endif %}
 
