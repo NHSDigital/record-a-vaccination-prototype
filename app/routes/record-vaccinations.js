@@ -760,7 +760,7 @@ module.exports = router => {
       req.session.data.nhsNumber = ""
       req.session.data.healthcareWorker = ""
 
-      res.redirect('/record-vaccinations/vaccine?repeatPatient=no&repeatVaccination=no')
+      res.redirect('/record-vaccinations/?repeatPatient=no&repeatVaccination=no')
     } else {
       res.redirect('/record-vaccinations/done?showErrors=yes')
     }
