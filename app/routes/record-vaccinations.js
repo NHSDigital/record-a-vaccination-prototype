@@ -840,7 +840,6 @@ module.exports = router => {
   router.post('/record-vaccinations/answer-batch', (req, res) => {
 
     const data = req.session.data
-    const eligibility = data.eligibility
     const vaccineBatch = data.vaccineBatch
 
     const vaccineOptions = data.vaccineStock.find(function(batch) {
