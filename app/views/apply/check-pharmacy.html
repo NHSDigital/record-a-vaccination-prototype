@@ -2,10 +2,6 @@
 
 {% set pageName = "Check this is your pharmacy" %}
 
-{% block header %}
-  {% include "includes/header-logged-out.html" %}
-{% endblock %}
-
 {% block beforeContent %}
   {{ backLink({
     href: "/apply/start",
@@ -50,7 +46,7 @@
               text: "Address"
             },
             value: {
-                html: (organisation.address.line1 + "<br>" + organisation.address.town + "<br>" + organisation.address.postcode) if organisation.address else ""
+                html: (organisation.address) if organisation.address else ""
               }
           }
         ]

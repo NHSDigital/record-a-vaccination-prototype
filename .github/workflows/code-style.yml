@@ -1,0 +1,20 @@
+name: Code style checks
+
+on: pull_request
+
+jobs:
+  lint:
+    name: Code style checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+      # Ensure npm 11.5.1 or later is installed
+      - name: Update npm
+        run: npm install -g npm@latest
+      - name: Install dependencies
+        run: npm ci
+      - name: Run code style checks
+        run: npm run lint

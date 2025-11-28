@@ -151,7 +151,7 @@ module.exports = router => {
     let vaccinesAvailable = JSON.parse(JSON.stringify(data.vaccines)).filter((vaccine) => vaccinesAdded.includes(vaccine.name))
 
     // Filter all vaccine products to only show ones with batches added
-    for (vaccineAvailable of vaccinesAvailable) {
+    for (let vaccineAvailable of vaccinesAvailable) {
       vaccineAvailable.products = vaccineAvailable.products.filter((vaccineProduct) => vaccineProductsAdded.includes(vaccineProduct.name))
     }
 
@@ -206,7 +206,6 @@ module.exports = router => {
   router.get('/record-vaccinations/patient', (req, res) => {
 
     const data = req.session.data
-    const showError = data.showError
     const nhsNumberKnown = data.nhsNumberKnown
     const nhsNumber = String(data.nhsNumber).replaceAll(' ', '')
 
@@ -392,11 +391,11 @@ module.exports = router => {
 
   router.post('/record-vaccinations/create-a-record', (req, res) => {
     const data = req.session.data
-    const firstName = req.session.data.firstName;
-    const lastName = req.session.data.lastName;
-    const dateOfBirth = req.session.data.dateOfBirth;
-    const postcode = req.session.data.postcode;
-    const gender = req.session.data.gender;
+    const firstName = data.firstName;
+    const lastName = data.lastName;
+    const dateOfBirth = data.dateOfBirth;
+    const postcode = data.postcode;
+    const gender = data.gender;
 
     if (firstName != '' && lastName != '' && dateOfBirth.day != '' && dateOfBirth.month != '' && dateOfBirth.year != '' && postcode != '' && gender != '') {
 
@@ -774,7 +773,6 @@ module.exports = router => {
   router.get('/record-vaccinations/batch', (req, res) => {
     let error
     const data = req.session.data
-    const currentOrganisation = res.locals.currentOrganisation
 
     const vaccine = data.vaccineStock.find(function(batch) {
       return (batch.vaccineProduct === data.vaccineProduct) &&
@@ -811,6 +809,8 @@ module.exports = router => {
     let errors = []
     let locationType = req.session.data.locationType
 
+    const careHomes = req.session.data.allOrganisations.filter((organisation) => organisation.type === "Care home")
+
     if (req.query.showErrors === "yes") {
       if (!locationType) {
         errors.push({
@@ -821,7 +821,8 @@ module.exports = router => {
     }
 
     res.render('record-vaccinations/location', {
-      errors
+      errors,
+      careHomes
     })
   })
 
@@ -843,7 +844,6 @@ module.exports = router => {
 
     const data = req.session.data
     const vaccineBatch = data.vaccineBatch
-    const vaccine = data.vaccine
 
     const vaccineOptions = data.vaccineStock.find(function(batch) {
       return (batch.vaccineProduct === data.vaccineProduct) &&
@@ -1086,12 +1086,19 @@ module.exports = router => {
     const data = req.session.data
     const vaccinator = data.users.find((user) => user.id === data.vaccinatorId)
 
+    let careHome
+
     // Get the details of the vaccine product
     const vaccineProduct = data.vaccines.find((vaccine) => vaccine.name === data.vaccine)?.products.find((vaccineProduct) => vaccineProduct.name === data.vaccineProduct)
 
+    if (data.locationType === "Care home") {
+      careHome = data.allOrganisations.find((organisation) => organisation.id === data.careHomeId)
+    }
+
     res.render('record-vaccinations/check', {
       vaccinator,
-      vaccineProduct
+      vaccineProduct,
+      careHome
     })
   })
 
@@ -1146,8 +1153,6 @@ module.exports = router => {
   router.post('/record-vaccinations/answer-dose-amount', (req, res) => {
     const data = req.session.data
     const doseAmount = data.doseAmount
-    let redirectPath
-
 
     if (doseAmount && doseAmount != "") {
       res.redirect("/record-vaccinations/check")
