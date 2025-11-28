@@ -262,7 +262,7 @@
                 }
               ]
             }
-          } if (data.vaccine != "Pertussis"),
+          } if (data.vaccine != "pertussis"),
           {
             key: {
               text: "Location"
@@ -313,7 +313,7 @@
                 }
               ]
             }
-          } if ((data.vaccine == "Pertussis") or ((data.eligibility | arrayOrStringIncludes("Pregnant"))) and (data.vaccine == "RSV")),
+          } if ((data.vaccine == "pertussis") or ((data.eligibility | arrayOrStringIncludes("Pregnant"))) and (data.vaccine == "RSV")),
           {
             key: {
               text: "Consent given by"
