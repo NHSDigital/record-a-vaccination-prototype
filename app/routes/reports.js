@@ -243,4 +243,17 @@ module.exports = (router) => {
 
   })
 
+  router.post('/reports/download', (req, res) => {
+    const data = req.session.data
+
+    // Reset values
+    data.siteIdsToReport = null
+    data.from = null
+    data.to = null
+    data.vaccinesToReport = null
+
+
+    res.redirect('/reports/download')
+  })
+
 }

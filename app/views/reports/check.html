@@ -90,7 +90,7 @@
           },
           {
             key: {
-              text: ("Vaccines" if (data.vaccines | length) > 1 else "Vaccine")
+              text: ("Vaccines" if (data.vaccinesToReport | length) > 1 else "Vaccine")
             },
             value: {
               text: (data.vaccinesToReport | sort(false, false, "name") | join(", ") | capitaliseFirstLetter) if data.vaccines
