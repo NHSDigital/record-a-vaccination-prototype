@@ -44,7 +44,7 @@
       {% set sitesHtml %}
         <ul class="nhsuk-list">
           {% for site in sites | sort(false, false, "name") %}
-            <li>{{ site.name }}</li>
+            <li>{{ site.name }} ({{ site.id }})</li>
           {% endfor %}
         </ul>
       {% endset %}

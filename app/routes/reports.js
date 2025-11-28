@@ -196,12 +196,9 @@ module.exports = (router) => {
 
     let sites = []
 
-    if (currentOrganisation) {
-      sites = (currentOrganisation.sites || []).filter((site) => siteIds.includes(site.id))
-    } else {
-      sites = data.organisations.filter((organisation) => siteIds.includes(organisation.id))
-    }
+    const allSites = data.organisations.map((organisation) => organisation.sites).flat().filter(Boolean)
 
+    sites = allSites.filter((site) => siteIds.includes(site.id))
 
     const fromInput = data.from
     const toInput = data.to
