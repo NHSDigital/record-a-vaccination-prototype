@@ -97,7 +97,7 @@
 
         {% call fieldset({
           legend: {
-            text: ("Why are you giving them the vaccine?" if data.vaccinationToday == 'yes' else "Why was the patient eligible for the vaccine?"),
+            text: ("Why are you vaccinating " + data.firstName + " " + data.lastName + "?" if data.vaccinationToday == 'yes' else "Why was the patient eligible for the vaccine?"),
             classes: "nhsuk-fieldset__legend--l",
             isPageHeading: true
           }

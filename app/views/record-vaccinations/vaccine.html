@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Which vaccine are you giving?" %}
+{% set pageName = "Which vaccine are you giving to " + data.firstName + " " + data.lastName + "?" %}
 
 {% set currentSection = "vaccinate" %}
 {% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
@@ -18,6 +18,8 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
+
+      <span class="nhsuk-caption-l">Patient: {{ data.firstName }} {{ data.lastName }}</span>
 
       {% if vaccineError %}
         {% set error = {text: vaccineError, href: "#vaccine-1"} %}
@@ -50,7 +52,7 @@
 
         {% set question = ("Which vaccine are you giving " + data.firstName + " " + data.lastName + "?" if data.vaccinationToday == 'yes' else "Which vaccine was it " + data.firstName + " " + data.lastName + "?") %}
       {% else %}
-        {% set question = ("Which vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which vaccine was it?") %}
+        {% set question = ("Which vaccine are you giving " + data.firstName + " " + data.lastName + "?" if data.vaccinationToday == 'yes' else "Which vaccine was it?") %}
       {% endif %}
 
       {% set items = [] %}

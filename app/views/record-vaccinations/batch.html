@@ -28,6 +28,8 @@
 
       <form action="/record-vaccinations/answer-batch" method="post" novalidate>
 
+      <span class="nhsuk-caption-l">Patient: {{ data.firstName }} {{ data.lastName }}</span>
+
       {% set items = [] %}
 
       {% if (batches | length) > 0 %}

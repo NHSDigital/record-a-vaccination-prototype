@@ -13,6 +13,8 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+        <span class="nhsuk-caption-l">Patient: {{ data.firstName }} {{ data.lastName }}</span>
+
       {% if vaccinatorError %}
         {{ errorSummary({
           titleText: "There is a problem",
@@ -48,7 +50,7 @@
           name: "vaccinatorId",
           fieldset: {
             legend: {
-              text: ("Who is the vaccinator?" if data.vaccinationToday == 'yes' else "Who was the vaccinator?"),
+              text: ("Who is vaccinating " + data.firstName + " " + data.lastName + "?" if data.vaccinationToday == 'yes' else "Who was the vaccinator?"),
               classes: "nhsuk-fieldset__legend--l",
               isPageHeading: "true"
             }

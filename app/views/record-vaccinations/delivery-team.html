@@ -20,6 +20,8 @@
         }) }}
       {% endif %}
 
+        <span class="nhsuk-caption-l">{{ data.firstName }} {{ data.lastName }}</span>
+
       <form action="/record-vaccinations/answer-delivery-team" method="post" novalidate>
 
         {% set items = [] %}
