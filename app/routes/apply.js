@@ -8,12 +8,12 @@ module.exports = router => {
     if (error === "no-pharmacy") {
       errors.push({
         text: "Select pharmacy",
-        href: "#organisation-code"
+        href: "#organisation-id"
       })
     } else if (error === "existing-account") {
       errors.push({
         text: "This pharmacy already has access to the service.",
-        href: "#organisation-code"
+        href: "#organisation-id"
       })
     }
 
@@ -25,8 +25,8 @@ module.exports = router => {
 
   router.post('/apply/answer-pharmacy', (req, res) => {
     const data = req.session.data
-    const organisationCode = data.organisationCode
-    const organisation = data.organisations.find((organisation) => organisation.id === organisationCode)
+    const organisationId = data.organisationId
+    const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
 
 
     console.log(req.body)
@@ -40,18 +40,14 @@ module.exports = router => {
       res.redirect('/apply/check-pharmacy')
     }
 
-    res.render('apply/start', {
-      errors
-    })
-
   })
 
 
   // Show organisation check page
   router.get('/apply/check-pharmacy', (req, res) => {
     const data = req.session.data
-    const organisationCode = data.organisationCode
-    const organisation = data.organisations.find((organisation) => organisation.id === organisationCode)
+    const organisationId = data.organisationId
+    const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
     if (!organisation) { res.redirect('/apply/start'); return }
 
     res.render('apply/check-pharmacy', {
@@ -62,8 +58,8 @@ module.exports = router => {
   // Check your answers page
   router.get('/apply/check', (req, res) => {
     const data = req.session.data
-    const organisationCode = data.organisationCode
-    const organisation = data.organisations.find((organisation) => organisation.id === organisationCode)
+    const organisationId = data.organisationId
+    const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
     if (!organisation) { res.redirect('/apply/start'); return }
 
     res.render('apply/check', {
@@ -74,8 +70,8 @@ module.exports = router => {
   // Check your email page
   router.get('/apply/check-your-email', (req, res) => {
     const data = req.session.data
-    const organisationCode = data.organisationCode
-    const organisation = data.organisations.find((organisation) => organisation.id === organisationCode)
+    const organisationId = data.organisationId
+    const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
 
     if (!organisation) { res.redirect('/apply/start'); return }
 
@@ -94,8 +90,8 @@ module.exports = router => {
   // Welcome email mockup
   router.get('/apply/welcome-email', (req, res) => {
     const data = req.session.data
-    const organisationCode = data.organisationCode
-    const organisation = data.organisations.find((organisation) => organisation.id === organisationCode)
+    const organisationId = data.organisationId
+    const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
     if (!organisation) { res.redirect('/apply/start'); return }
 
     res.render('apply/welcome-email', {

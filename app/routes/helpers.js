@@ -16,7 +16,7 @@ module.exports = router => {
     const vaccines = data.vaccines
     const siteId = "RW3NM"
 
-    for (vaccine of vaccines) {
+    for (let vaccine of vaccines) {
 
       const organisationVaccine = organisationVaccines.find((organisationVaccine) => organisationVaccine.name === vaccine.name)
 
@@ -29,7 +29,7 @@ module.exports = router => {
         })
       }
 
-      for (vaccineProduct of vaccine.products) {
+      for (let vaccineProduct of vaccine.products) {
 
         const numberOfBatchesToAdd = 1 + Math.floor(Math.random() * 10)
 

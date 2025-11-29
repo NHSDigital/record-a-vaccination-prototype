@@ -47,15 +47,8 @@
 
 {% set locationHtml %}
   {% if  data.locationType == "Care home" %}
-    {% for careHome in data.careHomes %}
-      {% if data.careHome == careHome.code %}
-        {{ careHome.name }}<br>
-        {{ careHome.address1 }}<br>
-        {{ careHome.town }}<br>
-        {{ careHome.postcode }}
-      {% endif %}
-    {% endfor %}
-
+    {{ careHome.name }}<br>
+    {{ careHome.address }}
   {% else %}
     {{ data.locationType }}
   {% endif %}
