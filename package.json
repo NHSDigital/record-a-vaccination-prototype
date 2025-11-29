@@ -4,36 +4,21 @@
   "description": "A prototype of the NHS Record a vaccination service.",
   "main": "app.js",
   "scripts": {
-    "build": "gulp build",
-    "postinstall": "npm run build",
-    "start": "node app.js",
-    "prewatch": "gulp build",
-    "watch": "gulp"
+    "start": "node app.js"
   },
   "author": "NHS England",
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.28.5",
     "@babel/preset-env": "^7.28.5",
-    "browser-sync": "^3.0.4",
+    "@x-govuk/govuk-prototype-filters": "^2.1.0",
     "express": "^5.1.0",
-    "gulp": "^5.0.1",
-    "gulp-babel": "^8.0.0",
-    "gulp-clean": "^0.4.0",
-    "gulp-clean-css": "^4.3.0",
-    "gulp-nodemon": "^2.5.0",
-    "gulp-rename": "^2.1.0",
-    "gulp-sass": "^6.0.1",
-    "http-proxy-middleware": "^3.0.5",
     "nhsuk-frontend": "^10.1.0",
     "nhsuk-prototype-kit": "8.0.0-internal.4",
     "nunjucks": "^3.2.4",
     "path": "^0.12.7",
     "plugin-error": "^2.0.1",
-    "portscanner": "^2.2.0",
     "sass-embedded": "1.93.3"
-  },
-  "devDependencies": {
   },
   "engines": {
     "node": "^22",
