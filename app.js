@@ -34,6 +34,10 @@ const appViews = [
 
 let nunjucksAppEnv = nunjucks.configure(appViews, { express: app, noCache: true })
 
+for (const [name, filter] of Object.entries(filters())) {
+  nunjucksAppEnv.addFilter(name, filter)
+}
+
 
 // Use public folder for static assets
 app.use(express.static(join(__dirname, 'public')))
