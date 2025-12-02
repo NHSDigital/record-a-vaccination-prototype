@@ -80,13 +80,15 @@ module.exports = router => {
     const data = req.session.data
     const email = data.email
     const user = data.users.find((user) => user.email === email)
+    const from = req.query.from
 
     const userOrganisationIds = user.organisations.map((organisation) => organisation.id)
     const organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
 
     res.render('auth/select-organisation', {
       email,
-      organisations
+      organisations,
+      from
     })
 
   })

@@ -2,19 +2,20 @@
 
 {% set pageName = "Sign in" %}
 
-{% if from === "select-mode" %}
-  {% block beforeContent %}
+
+{% block beforeContent %}
+  {% if from === "select-mode" %}
     {{ backLink({
       text: "Back",
       href: "/auth/select-mode"
     }) }}
-  {% endblock %}
-{% endif %}
+  {% endif %}
+{% endblock %}
+
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-
     {% if error %}
       {{ errorSummary({
         titleText: "There is a problem",
