@@ -2,11 +2,41 @@ const filters = require('.././filters.js')()
 
 module.exports = (router) => {
 
-  router.get('/reports/choose-vaccines', (req, res) => {
-    const organisationVaccines = res.locals.currentOrganisation.vaccines || []
+  router.get('/reports', (req, res) => {
+    const data = req.session.data
+    const currentOrganisation = res.locals.currentOrganisation
+    let vaccinationsRecordedCount
 
-    const enabledVaccines = organisationVaccines
-      .filter((vaccine) => vaccine.status === "enabled")
+    if (currentOrganisation) {
+      vaccinationsRecordedCount = data.vaccinationsRecorded.filter((vaccination) => vaccination.organisationId === currentOrganisation.id).length
+    } else {
+
+      // TODO: count across all organisations you
+      // have access to
+      vaccinationsRecordedCount = 100
+    }
+
+    res.render('reports/index', {
+      vaccinationsRecordedCount
+    })
+  })
+
+  router.get('/reports/choose-vaccines', (req, res) => {
+    const data = req.session.data
+    let enabledVaccines = []
+
+    if (res.locals.currentOrganisation) {
+
+      const organisationVaccines = res.locals.currentOrganisation.vaccines || []
+
+      enabledVaccines = organisationVaccines.filter((vaccine) => vaccine.status === "enabled")
+    }
+
+      // Temporary: show all vaccines if none have batches adde
+    if (enabledVaccines.length === 0) {
+      enabledVaccines = data.vaccines
+    }
+
 
     res.render('reports/choose-vaccines', {
       enabledVaccines
@@ -61,6 +91,38 @@ module.exports = (router) => {
       dateToError
     })
 
+  })
+
+  router.get('/reports/choose-site', (req, res) => {
+    const data = req.session.data
+    const currentOrganisation = res.locals.currentOrganisation
+    const currentUser = res.locals.currentUser
+
+    let sites = []
+
+    if (currentOrganisation) {
+      // Showing all sites for now, for demo purposes
+      sites = currentOrganisation.sites
+
+      if (sites === []) {
+        sites = [currentOrganisation]
+      }
+
+    } else {
+
+      const userOrganisationIds = currentUser.organisations.map((organisation) => organisation.id)
+      const organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
+
+      for (const organisation of organisations) {
+        for (const site of (organisation.sites || [])) {
+          sites.push(site)
+        }
+      }
+    }
+
+    res.render('reports/choose-site', {
+      sites
+    })
   })
 
 
@@ -120,10 +182,16 @@ module.exports = (router) => {
 
 
   router.get('/reports/check', (req, res) => {
-
     const data = req.session.data
+    const siteIds = data.siteIdsToReport || []
     const today = new Date()
     const days = 86400000 // number of milliseconds in a day
+
+    let sites = []
+
+    const allSites = data.organisations.map((organisation) => organisation.sites).flat().filter(Boolean)
+
+    sites = allSites.filter((site) => siteIds.includes(site.id))
 
     const fromInput = data.from
     const toInput = data.to
@@ -158,11 +226,27 @@ module.exports = (router) => {
         break
     }
 
+
+
     res.render('reports/check', {
+      sites,
       from,
       to
     })
 
+  })
+
+  router.post('/reports/download', (req, res) => {
+    const data = req.session.data
+
+    // Reset values
+    data.siteIdsToReport = null
+    data.from = null
+    data.to = null
+    data.vaccinesToReport = null
+
+
+    res.redirect('/reports/download')
   })
 
 }
