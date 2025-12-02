@@ -5,8 +5,14 @@
 {% set currentSection = "vaccinate" %}
 {% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
 
+{% if data.repeatPatient === "yes" %}
+  {% set previousPage = "/record-vaccinations/done" %}
+{% else %}
+  {% set previousPage = "/record-vaccinations/vaccinator" %}
+{% endif %}
+
 {% block beforeContent %}
-  {{ backLink({ href: "/record-vaccinations/vaccinator" }) }}
+  {{ backLink({ href: previousPage }) }}
 {% endblock %}
 
 {% block content %}
