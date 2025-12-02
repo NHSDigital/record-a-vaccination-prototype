@@ -4362,6 +4362,17 @@ module.exports = [
     region: "Y63",
     vaccines: [
       {name: "COVID-19", status: "enabled"}
+    ],
+    sites: [
+      {
+        id: "RAP24",
+        name: "Labour Ward",
+        address: {
+          line1: "13 Granary Way",
+          town: "London",
+          postcode: "N18 1QX"
+        }
+      }
     ]
   },
   {
