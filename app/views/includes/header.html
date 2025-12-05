@@ -102,6 +102,13 @@
 
 {% endif %}
 
+{% set organisationHtml %}
+  {{ currentOrganisation.name | truncate(30) }}
+  {% if currentUser and currentOrganisation and ((currentUser.organisations | length) > 1) %}
+    <a href="/auth/select-organisation" class="nhsuk-link--reverse">Change<span class="nhsuk-u-visually-hidden"> organisation</span></a>
+  {% endif %}
+{% endset %}
+
 {{ header({
   service: {
     text: "Record a vaccination",
@@ -115,7 +122,7 @@
         icon: true
       } if currentUser,
       {
-        text: (currentOrganisation.name | truncate(30))
+        html: organisationHtml
       } if currentOrganisation,
       {
         href: '/sign-out',
