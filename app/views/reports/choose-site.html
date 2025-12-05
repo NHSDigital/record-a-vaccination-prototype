@@ -19,7 +19,7 @@
 
         {% set items = [] %}
 
-        {% if ((sites | length) > 1) or ((organisations | length) > 1) %}
+        {% if ((sites | length) > 2) or ((organisations | length) > 2) %}
 
           {% set items = (items.push({
             text: "All " + ((sites|length) if sites else (organisations|length)) + " " + ("sites" if sites else "organisations"),
