@@ -31,12 +31,12 @@
           {{ input({
             id: "nhs-number",
             name: "nhsNumber",
-            classes: "nhsuk-input--width-10",
+            classes: "nhsuk-input--width-10 nhsuk-input--code",
             inputmode: "numeric",
             errorMessage: nhsNumberError,
             label: {
               text: "NHS number",
-              classes: "nhsuk-label--s"
+              size: "s"
             },
             value: data.nhsNumber,
             hint: {
@@ -52,7 +52,7 @@
           fieldset: {
             legend: {
               html: "Do you have the patient’s NHS&nbsp;number?",
-              classes: "nhsuk-fieldset__legend--l",
+              size: "l",
               isPageHeading: "true"
             }
           },
