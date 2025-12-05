@@ -1,9 +1,9 @@
 <table class="nhsuk-table">
-  <caption class="nhsuk-table__caption nhsuk-table__caption--m">By site</caption>
+  <caption class="nhsuk-table__caption nhsuk-table__caption--m">By organisation</caption>
   <thead role="rowgroup" class="nhsuk-table__head">
     <tr role="row">
       <th role="columnheader" class="" scope="col">
-        Site
+        Organisation
       </th>
       <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
         Today
@@ -20,23 +20,23 @@
     </tr>
   </thead>
   <tbody class="nhsuk-table__body">
-    {% for totalBySite in (totalsBySite | sort(false, false, "siteName")) %}
-      {% set site = sites | findById(totalBySite.siteId) %}
+    {% for totalByOrganisation in (totalsByOrganisation | sort(false, false, "organisationName")) %}
+      {% set organisation = data.organisations | findById(totalByOrganisation.organisationId) %}
       <tr>
         <th class="nhsuk-table__header nhsuk-u-font-weight-normal" scope="row">
-          {{ site.name }} ({{ totalBySite.siteId }})
+          {{ organisation.name }} ({{ organisation.id }})
         </th>
         <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-          {{ totalBySite.today }}
+          {{ totalByOrganisation.today }}
         </td>
         <td class="nhsuk-table__cell--numeric">
-          {{ totalBySite.past7Days }}
+          {{ totalByOrganisation.past7Days }}
         </td>
         <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-          {{ totalBySite.month }}
+          {{ totalByOrganisation.month }}
         </td>
         <td class="nhsuk-table__cell--numeric">
-          {{ totalBySite.total }}
+          {{ totalByOrganisation.total }}
         </td>
       </tr>
     {% endfor %}
