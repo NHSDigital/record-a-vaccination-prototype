@@ -20,7 +20,7 @@
     </tr>
   </thead>
   <tbody class="nhsuk-table__body">
-    {% for totalByOrganisation in totalsByOrganisation %}
+    {% for totalByOrganisation in (totalsByOrganisation | sort(false, false, "organisationName")) %}
       {% set organisation = data.organisations | findById(totalByOrganisation.organisationId) %}
       <tr>
         <th class="nhsuk-table__header nhsuk-u-font-weight-normal" scope="row">

@@ -161,6 +161,7 @@ module.exports = router => {
       if (total > 0) {
         totalsBySite.push({
           siteId: site.id,
+          siteName: site.name,
           today: countVaccinations(vaccinationsRecorded, {
             date: dateToday,
             siteId: site.id
@@ -179,8 +180,6 @@ module.exports = router => {
       }
     }
 
-    console.log(organisations )
-
     for (let organisation of organisations) {
 
       const total = countVaccinations(vaccinationsRecorded, {
@@ -190,6 +189,7 @@ module.exports = router => {
       if (total !== -1) {
         totalsByOrganisation.push({
           organisationId: organisation.id,
+          organisationName: organisation.name,
           today: countVaccinations(vaccinationsRecorded, {
             date: dateToday,
             organisationId: organisation.id
