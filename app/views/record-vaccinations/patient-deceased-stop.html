@@ -22,7 +22,7 @@
             Name
           </dt>
           <dd class="nhsuk-summary-list__value">
-            Jodie Brown
+            {{ data.firstName | default("Jodie") }} {{ data.lastName | default("Brown") }}
           </dd>
 
           <dd class="nhsuk-summary-list__actions">
