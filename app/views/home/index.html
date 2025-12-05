@@ -1,6 +1,10 @@
 {% extends 'layout.html' %}
 
-{% set pageName = currentOrganisation.name + " - Home" %}
+{% if currentOrganisation %}
+  {% set pageName = currentOrganisation.name + " - Home" %}
+{% else %}
+  {% set pageName = "Home" %}
+{% endif %}
 {% set currentSection = "home" %}
 
 {% block content %}
@@ -45,6 +49,9 @@
       {% include "home/_by-site.html" %}
     {% endset %}
 
+    {% set byOrganisationHtml %}
+      {% include "home/_by-organisation.html" %}
+    {% endset %}
 
     {{ tabs({
       items: [
@@ -68,7 +75,14 @@
           panel: {
             html: bySiteHtml
           }
-        } if (totalsBySite | length) > 1
+        } if (totalsBySite | length) > 1,
+        {
+          label: "By organisation",
+          id: "by-organisations",
+          panel: {
+            html: byOrganisationHtml
+          }
+        } if (totalsByOrganisation | length) > 1
       ]
     }) }}
 

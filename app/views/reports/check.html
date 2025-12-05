@@ -49,6 +49,14 @@
         </ul>
       {% endset %}
 
+      {% set organisationsHtml %}
+        <ul class="nhsuk-list">
+          {% for organisation in organisations | sort(false, false, "name") %}
+            <li>{{ organisation.name }} ({{ organisation.id }})</li>
+          {% endfor %}
+        </ul>
+      {% endset %}
+
       {{ summaryList({
         rows: [
           {
@@ -121,7 +129,24 @@
               }
               ]
             }
-          },
+          } if sites,
+          {
+            key: {
+              text: ("Organisations" if (data.siteIdsToReport | length) > 1 else "Organisation")
+            },
+            value: {
+              html: organisationsHtml
+            },
+            actions: {
+              items: [
+              {
+                href: "/reports/choose-site",
+                text: "Change",
+                visuallyHiddenText: "change organisation"
+              }
+              ]
+            }
+          } if organisations,
           {
             key: {
               text: "Data"
