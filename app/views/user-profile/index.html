@@ -25,7 +25,7 @@
         {% endset %}
 
         {% set organisationHtml %}
-          <div>{{ currentOrganisation.name }}</div>
+          <div>{{ currentOrganisation.name }} ({{ currentOrganisation.id }})</div>
           {% if currentOrganisation.type != "Region" %}
             <p class="app-summary__explanation">
               {{ currentOrganisation.address.line1 }}, {{ currentOrganisation.address.postcode }}
