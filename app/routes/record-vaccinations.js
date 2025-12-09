@@ -751,7 +751,6 @@ module.exports = router => {
       req.session.data.vaccineBatch = ""
       req.session.data.eligibility = ""
 
-      res.redirect('/record-vaccinations/vaccine?repeatPatient=yes&repeatVaccination=no')
 
     } else if (answer === 'different-vaccination-another-patient') {
 
