@@ -644,6 +644,8 @@ module.exports = router => {
       editable: true
     })
 
+    data.lastAddedVaccinationId = generatedId
+
     res.redirect('/record-vaccinations/done')
   })
 
@@ -652,6 +654,8 @@ module.exports = router => {
     const data = req.session.data
     let errors = []
     let error
+
+    const lastAddedVaccination = data.vaccinationsRecorded.find((record) => record.id === data.lastAddedVaccinationId)
 
     if (req.query.showErrors === 'yes') {
       if (!data.nextStep) {
@@ -664,6 +668,7 @@ module.exports = router => {
     }
 
     res.render('record-vaccinations/done', {
+      lastAddedVaccination,
       errors,
       error
     })
@@ -751,6 +756,7 @@ module.exports = router => {
       req.session.data.vaccineBatch = ""
       req.session.data.eligibility = ""
 
+      res.redirect('/record-vaccinations/patient-history?repeatPatient=yes&repeatVaccination=no')
 
     } else if (answer === 'different-vaccination-another-patient') {
 
