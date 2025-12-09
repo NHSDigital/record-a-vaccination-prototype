@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Choose sites" %}
+{% set pageName = ("Choose sites" if sites else "Choose organisations") %}
 
 {% set currentSection = "reports" %}
 
@@ -12,7 +12,6 @@
 {% endblock %}
 
 {% block content %}
-
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
@@ -20,10 +19,10 @@
 
         {% set items = [] %}
 
-        {% if (sites | length) > 1 %}
+        {% if ((sites | length) > 2) or ((organisations | length) > 2) %}
 
           {% set items = (items.push({
-            text: "All " + (sites|length) + " sites",
+            text: "All " + ((sites|length) if sites else (organisations|length)) + " " + ("sites" if sites else "organisations"),
             value: "all",
             attributes: {
               "data-select-all": "true"
@@ -36,17 +35,17 @@
 
         {% endif %}
 
-        {% for site in (sites | sort(false, false, "name")) %}
+        {% for siteOrOrg in ((sites if sites else organisations) | sort(false, false, "name")) %}
 
-          {% if site.address %}
+          {% if siteOrOrg.address %}
             {% set hint = {
-              text: site.address.line1 + ", " + site.address.town + ", " + site.address.postcode
+              text: siteOrOrg.address.line1 + ", " + siteOrOrg.address.town + ", " + siteOrOrg.address.postcode
             } %}
           {% endif %}
 
           {% set items = (items.push({
-            value: site.id,
-            text: site.name + " (" + site.id + ")",
+            value: siteOrOrg.id,
+            text: siteOrOrg.name + " (" + siteOrOrg.id + ")",
             hint: hint
           }), items) %}
         {% endfor %}
@@ -56,7 +55,7 @@
           name: "siteIdsToReport",
           fieldset: {
             legend: {
-              text: "Choose sites",
+              text: pageName,
               classes: "nhsuk-fieldset__legend--l",
               isPageHeading: true
             }

@@ -27,11 +27,16 @@
               value: data.nameOrNhsNumber,
               label: {
                 text: "Patient name or NHS number"
+              },
+              formGroup: {
+                classes: "nhsuk-u-margin-bottom-0",
+                afterInput: {
+                  html: button({
+                    text: "Search",
+                    classes: "nhsuk-button--secondary nhsuk-button--small"
+                  })
+                }
               }
-            }) }}
-            {{ button({
-              classes: "nhsuk-button--secondary app-button--small",
-              text: "Search"
             }) }}
           </div>
 
@@ -63,7 +68,7 @@
               classes: "nhsuk-input--width-20",
               label: {
                 text: "Vaccine batch number",
-                classes: "nhsuk-label--s"
+                size: "s"
               }
             }) }}
 
@@ -115,7 +120,7 @@
               name: "vaccinatorId",
               label: {
                 text: "Vaccinator",
-                classes: "nhsuk-label--s"
+                size: "s"
               },
               items: vaccinatorItems
             }) }}
