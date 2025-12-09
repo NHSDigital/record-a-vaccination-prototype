@@ -17,13 +17,15 @@
 {% if data.repeatVaccination === "yes" %}
   {% set nextPage = "/record-vaccinations/consent" %}
 {% elseif data.repeatPatient === "yes" %}
-  {% set nextPage = "/record-vaccinations/consent" %}
+  {% set nextPage = "/record-vaccinations/vaccine" %}
 {% else %}
   {% set nextPage = "/record-vaccinations/vaccination-date" %}
 {% endif %}
 
 {% if data.repeatVaccination === "yes" %}
   {% set previousPage = "/record-vaccinations/patient" %}
+{% elseif data.repeatPatient === "yes" %}
+  {% set previousPage = "/record-vaccinations/done" %}
 {% else %}
   {% set previousPage = "/record-vaccinations" %}
 {% endif %}
