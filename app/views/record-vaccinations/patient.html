@@ -5,12 +5,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {% if (data.vaccine === "Flu" or data.vaccine == "COVID-19") %}
-    {% set backLinkHref = "/record-vaccinations/location" %}
-  {% else %}
-    {% set backLinkHref = "/record-vaccinations/eligibility" %}
-  {% endif %}
-  {{ backLink({ href: backLinkHref }) }}
+  {{ backLink({ href: "/record-vaccinations/review-previous" }) }}
 {% endblock %}
 
 {% block content %}
@@ -31,12 +26,12 @@
           {{ input({
             id: "nhs-number",
             name: "nhsNumber",
-            classes: "nhsuk-input--width-10",
+            classes: "nhsuk-input--width-10 nhsuk-input--code",
             inputmode: "numeric",
             errorMessage: nhsNumberError,
             label: {
               text: "NHS number",
-              classes: "nhsuk-label--s"
+              size: "s"
             },
             value: data.nhsNumber,
             hint: {
@@ -52,7 +47,7 @@
           fieldset: {
             legend: {
               html: "Do you have the patient’s NHS&nbsp;number?",
-              classes: "nhsuk-fieldset__legend--l",
+              size: "l",
               isPageHeading: "true"
             }
           },

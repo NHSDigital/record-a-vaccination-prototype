@@ -1,14 +1,11 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "When was the vaccination? – Records" %}
+{% set pageName = "Is the vaccination today?" %}
 
-{% set currentSection = "records" %}
+{% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({
-    href: "/records/records/" + vaccination.id,
-    text: "Back"
-  }) }}
+  {{ backLink({ href: "/record-vaccinations/patient-history" }) }}
 {% endblock %}
 
 {% block content %}
@@ -27,10 +24,9 @@
         }) }}
       {% endif %}
 
-      <form action="/records/records/{{ vaccination.id }}" method="post">
-        <input type="hidden" name="changedField" value="Date">
 
-        {% set otherDateHtml %}
+      <form action="/record-vaccinations/answer-date" method="post" novalidate>
+        {% set previousDateHtml %}
 
           {{ dateInput({
             id: "vaccinationDate",
@@ -38,7 +34,7 @@
             fieldset: {
               legend: {
                 text: "Vaccination date",
-                size: "s"
+                classes: "nhsuk-label--s"
               }
             },
             hint: {
@@ -62,36 +58,36 @@
         {% endset -%}
 
         {{ radios({
-          idPrefix: "vaccination-date-changed",
-          name: "vaccinationDateChanged",
+          idPrefix: "vaccinationToday",
+          name: "vaccinationToday",
           fieldset: {
             legend: {
-              text: "When was the vaccination?",
-              size: "l",
+              text: "Is the vaccination today?",
+              classes: "nhsuk-fieldset__legend--l",
               isPageHeading: "true"
             }
           },
+          value: data.vaccinationToday,
           errorMessage: {
             text: vaccinationTodayError
-          } if va'ccinationTodayError,
-          value: "no",
+          } if vaccinationTodayError,
           items: [
             {
-              value: "no",
-              text: (vaccination.date | isoDateFromDateInput | govukDate)
+              value: "yes",
+              text: "Yes"
             },
             {
-              value: "yes",
-              text: "Choose another date",
+              value: "no",
+              text: "No, it was on a previous date",
               conditional: {
-                html: otherDateHtml
+                html: previousDateHtml
               }
             }
           ]
         }) }}
 
         {{ button({
-          text: "Save"
+          text: "Continue"
         })}}
       </form>
 

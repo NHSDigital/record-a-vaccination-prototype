@@ -2,6 +2,8 @@ const allOrganisations = require('./all-organisations')
 const featureFlags = require('./feature-flags')
 const organisations = require('./organisations')
 const users = require('./users')
+const vaccinationsRecorded = require('./vaccinations-recorded')
+const vaccineStock = require('./vaccine-stock')
 const vaccines = require('./vaccines')
 
 module.exports = {
@@ -10,12 +12,12 @@ module.exports = {
   featureFlags: featureFlags,
   users: users,
   vaccines: vaccines,
-  vaccineStock: [],
+  vaccineStock: vaccineStock,
   lists: [],
   nhsNumberKnown: "yes",
   currentUserId: "2387441662601",
   currentOrganisationId: "RW3",
-  vaccinationsRecorded: [],
+  vaccinationsRecorded: vaccinationsRecorded,
 
   // These are the options for extracting CSV reports
   patientDataOptions: ["Name", "NHS number", "Gender", "Date of birth", "Address", "Postcode", "ODS code of their GP"],

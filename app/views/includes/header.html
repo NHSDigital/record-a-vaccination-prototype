@@ -2,7 +2,7 @@
 
 {% set navigationItems = [] %}
 
-{% if currentUser and currentOrganisation and not (currentOrganisation.type === "Region") and not currentUser.admin  %}
+{% if currentUser and not (currentOrganisation.type === "Region") %}
 
   <!-- All users -->
   {% set navigationItems = (navigationItems.push({
@@ -10,30 +10,35 @@
     text: "Home",
     active: (currentSection == "home")
   }), navigationItems) %}
-  {% set navigationItems = (navigationItems.push({
-    href: "/record-vaccinations",
-    text: "Record vaccinations",
-    active: (currentSection == "vaccinate")
-  }), navigationItems) %}
 
-  <!-- Admins or lead admins -->
-  {% if (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) %}
+  {% if currentOrganisation %}
     {% set navigationItems = (navigationItems.push({
-      href: "/vaccines",
-      text: "Vaccines",
-      active: (currentSection == "vaccines")
+      href: "/record-vaccinations",
+      text: "Record vaccinations",
+      active: (currentSection == "vaccinate")
     }), navigationItems) %}
+
+    <!-- Admins or lead admins -->
+    {% if (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) %}
+      {% set navigationItems = (navigationItems.push({
+        href: "/vaccines",
+        text: "Vaccines",
+        active: (currentSection == "vaccines")
+      }), navigationItems) %}
+    {% endif %}
   {% endif %}
 
   <!-- All users -->
-  {% set navigationItems = (navigationItems.push({
-    href: "/records",
-    text: "Records",
-    active: (currentSection == "records")
-  }), navigationItems) %}
+  {% if currentOrganisation %}
+    {% set navigationItems = (navigationItems.push({
+      href: "/records",
+      text: "Records",
+      active: (currentSection == "records")
+    }), navigationItems) %}
+  {% endif %}
 
   <!-- Admins or lead admins -->
-  {% if (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) %}
+  {% if (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) or data.currentMode == "reports" %}
     {% set navigationItems = (navigationItems.push({
       href: "/reports",
       text: "Reports",
@@ -106,9 +111,12 @@
     items: [
       {
         href: "/user-profile",
-        text: currentUser.email,
+        text: (currentUser.firstName + " " + currentUser.lastName),
         icon: true
       } if currentUser,
+      {
+        text: (currentOrganisation.name | truncate(30))
+      } if currentOrganisation,
       {
         href: '/sign-out',
         text: 'Log out'

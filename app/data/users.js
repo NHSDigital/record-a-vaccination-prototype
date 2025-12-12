@@ -15,6 +15,23 @@ module.exports = [
     "firstName": "Jane",
     "lastName": "Smith"
   },
+  // Henry is a lead admin for an NHS trust
+  // that has only just been added (no vaccines,
+  // users or vaccinations)
+  {
+    "id": "16346346361",
+    "email": "henry.blue@nhs.net",
+    "organisations": [
+      {
+        "id": "RV3",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Henry",
+    "lastName": "Blue"
+  },
   // Graham Wallace is a recorder at
   // multiple NHS Trusts (eg bank staff)
   {
@@ -22,7 +39,7 @@ module.exports = [
     "email": "graham.wallace@nhs.net",
     "organisations": [
       {
-        "id": "RLR",
+        "id": "RWP",
         "permissionLevel": "Recorder",
         "status": "Active",
         "vaccinator": true
@@ -42,6 +59,28 @@ module.exports = [
     ],
     "firstName": "Graham",
     "lastName": "Wallace"
+  },
+  // Phoebe Black is a recorder at
+  // multiple NHS Trusts (eg bank staff)
+  {
+    "id": "2058253531",
+    "email": "phoebe.black@nhs.net",
+    "organisations": [
+      {
+        "id": "RWP",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "RXX",
+        "permissionLevel": "Administrator",
+        "status": "Active",
+        "vaccinator": false
+      }
+    ],
+    "firstName": "Phoebe",
+    "lastName": "Black"
   },
   // Paulina Sloan is a lead admin for
   // a chain of pharmacies
@@ -76,6 +115,206 @@ module.exports = [
     ],
     "firstName": "Paulina",
     "lastName": "Sloan"
+  },
+  // Each pharmacy in Paulina Sloan’s chain has its own vaccinator
+  {
+    "id": "46436346",
+    "email": "jeremy.blue@nhs.net",
+    "organisations": [
+      {
+        "id": "FA424",
+        "permissionLevel": "Recorder",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Jeremy",
+    "lastName": "Blue"
+  },
+
+  {
+    "id": "64746353",
+    "email": "jeremy.blue@nhs.net",
+    "organisations": [
+      {
+        "id": "FA02S",
+        "permissionLevel": "Recorder",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Jeremy",
+    "lastName": "Blue"
+  },
+  {
+    "id": "46436436436",
+    "email": "jeremy.blue@nhs.net",
+    "organisations": [
+      {
+        "id": "FVJ99",
+        "permissionLevel": "Recorder",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Jeremy",
+    "lastName": "Blue"
+  },
+  {
+    "id": "646436311",
+    "email": "jeremy.blue@nhs.net",
+    "organisations": [
+      {
+        "id": "PDL93",
+        "permissionLevel": "Recorder",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Jeremy",
+    "lastName": "Blue"
+  },
+  // Amanda White is a lead admin for
+  // a chain of pharmacies
+  {
+    "firstName": "Amanda",
+    "lastName": "White",
+    "id": "6424325235325",
+    "email": "amanda.white@nhs.net",
+    "organisations": [
+      {
+        "id": "FX9141",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FX4825",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FX7314",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FX9151",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FQ2525",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FW1941",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FP9824",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FP1812",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FA7K23",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FG2R56",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FH9P12",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FA7K23",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FJ4M89",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FK5N34",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FL7Q67",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FM8R23",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FN9S45",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FP2T78",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FQ3U12",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FR4V56",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FS5W89",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      },
+      {
+        "id": "FT6X34",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": false
+      }
+    ]
   },
   {
     "id": "1394978032564",

@@ -41,6 +41,22 @@
         {{ dataFields | join(", ") }}
       {% endset %}
 
+      {% set sitesHtml %}
+        <ul class="nhsuk-list">
+          {% for site in sites | sort(false, false, "name") %}
+            <li>{{ site.name }} ({{ site.id }})</li>
+          {% endfor %}
+        </ul>
+      {% endset %}
+
+      {% set organisationsHtml %}
+        <ul class="nhsuk-list">
+          {% for organisation in organisations | sort(false, false, "name") %}
+            <li>{{ organisation.name }} ({{ organisation.id }})</li>
+          {% endfor %}
+        </ul>
+      {% endset %}
+
       {{ summaryList({
         rows: [
           {
@@ -82,7 +98,7 @@
           },
           {
             key: {
-              text: ("Vaccines" if (data.vaccines | length) > 1 else "Vaccine")
+              text: ("Vaccines" if (data.vaccinesToReport | length) > 1 else "Vaccine")
             },
             value: {
               text: (data.vaccinesToReport | sort(false, false, "name") | join(", ") | capitaliseFirstLetter) if data.vaccines
@@ -99,10 +115,10 @@
           },
           {
             key: {
-              text: ("Sites" if (data.reportSites | length) > 1 else "Site")
+              text: ("Sites" if (data.siteIdsToReport | length) > 1 else "Site")
             },
             value: {
-              text: (data.sitesToReport | join(",  ")) if data.sitesToReport
+              html: sitesHtml
             },
             actions: {
               items: [
@@ -113,7 +129,24 @@
               }
               ]
             }
-          },
+          } if sites,
+          {
+            key: {
+              text: ("Organisations" if (data.siteIdsToReport | length) > 1 else "Organisation")
+            },
+            value: {
+              html: organisationsHtml
+            },
+            actions: {
+              items: [
+              {
+                href: "/reports/choose-site",
+                text: "Change",
+                visuallyHiddenText: "change organisation"
+              }
+              ]
+            }
+          } if organisations,
           {
             key: {
               text: "Data"
