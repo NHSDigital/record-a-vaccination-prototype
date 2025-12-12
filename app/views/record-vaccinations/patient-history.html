@@ -18,6 +18,8 @@
   {% set nextPage = "/record-vaccinations/consent" %}
 {% elseif data.repeatPatient === "yes" %}
   {% set nextPage = "/record-vaccinations/vaccine" %}
+{% elseif data.vaccinationToday %}
+  {% set nextPage = "/record-vaccinations/vaccinator" %}
 {% else %}
   {% set nextPage = "/record-vaccinations/vaccination-date" %}
 {% endif %}
