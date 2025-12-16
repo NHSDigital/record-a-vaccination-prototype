@@ -2,7 +2,7 @@
 
 This contains prototype interfaces for the NHS Record a vaccination service.
 
-It uses the <a href="http://nhsuk-prototype-kit.azurewebsites.net/docs">NHS.UK prototype kit</a>.
+It uses the <a href="https://prototype-kit.service-manual.nhs.uk">NHS.UK prototype kit</a>.
 
 ## Running the prototypes locally
 

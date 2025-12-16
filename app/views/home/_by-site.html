@@ -20,8 +20,8 @@
     </tr>
   </thead>
   <tbody class="nhsuk-table__body">
-    {% for totalBySite in totalsBySite %}
-      {% set site = currentOrganisation.sites | findById(totalBySite.siteId) %}
+    {% for totalBySite in (totalsBySite | sort(false, false, "siteName")) %}
+      {% set site = sites | findById(totalBySite.siteId) %}
       <tr>
         <th class="nhsuk-table__header nhsuk-u-font-weight-normal" scope="row">
           {{ site.name }} ({{ totalBySite.siteId }})

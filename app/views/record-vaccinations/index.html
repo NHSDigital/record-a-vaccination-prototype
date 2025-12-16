@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Is the vaccination today?" %}
+{% set pageName = "Do you have the patient’s NHS number?" %}
 
 {% set currentSection = "vaccinate" %}
 
@@ -8,76 +8,58 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if vaccinationTodayError %}
+      {% if (errorList | length) > 0 %}
         {{ errorSummary({
           titleText: "There is a problem",
-          errorList: [
-            {
-              text: vaccinationTodayError,
-              href: "#vaccinationToday-1"
-            }
-          ]
+          errorList: errorList
         }) }}
       {% endif %}
 
+      <form action="/record-vaccinations/answer-patient-nhs-number-known" method="post" novalidate>
 
-      <form action="/record-vaccinations/answer-date" method="post" novalidate>
-        {% set previousDateHtml %}
+        {% set nhsNumberHtml %}
 
-          {{ dateInput({
-            id: "vaccinationDate",
-            namePrefix: "vaccinationDate",
-            fieldset: {
-              legend: {
-                text: "Vaccination date",
-                classes: "nhsuk-label--s"
-              }
+          {{ input({
+            id: "nhs-number",
+            name: "nhsNumber",
+            classes: "nhsuk-input--width-10",
+            inputmode: "numeric",
+            errorMessage: nhsNumberError,
+            label: {
+              text: "NHS number",
+              classes: "nhsuk-label--s"
             },
+            value: data.nhsNumber,
             hint: {
-              text: "For example, 15 3 2024"
-            },
-            items: [
-              {
-                name: "day",
-                classes: "nhsuk-input--width-2"
-              },
-              {
-                name: "month",
-                classes: "nhsuk-input--width-2"
-              },
-              {
-                name: "year",
-                classes: "nhsuk-input--width-4"
-              }
-            ]
+              text: "For example, 485 777 3456"
+            }
           }) }}
-        {% endset -%}
+        {% endset %}
+
 
         {{ radios({
-          idPrefix: "vaccinationToday",
-          name: "vaccinationToday",
+          idPrefix: "nhs-number-known",
+          name: "nhsNumberKnown",
           fieldset: {
             legend: {
-              text: "Is the vaccination today?",
+              html: "Do you have the patient’s NHS&nbsp;number?",
               classes: "nhsuk-fieldset__legend--l",
               isPageHeading: "true"
             }
           },
-          value: data.vaccinationToday,
-          errorMessage: {
-            text: vaccinationTodayError
-          } if vaccinationTodayError,
+          value: data.nhsNumberKnown,
+          errorMessage: nhsNumberKnownError if nhsNumberKnownError,
           items: [
             {
               value: "yes",
-              text: "Yes"
+              text: "Yes",
+              conditional: {
+                html: nhsNumberHtml
+              }
             },
             {
               value: "no",
-              text: "No, it was on a previous date",
-              conditional: {
-                html: previousDateHtml
-              }
+              text: "No"
             }
           ]
         }) }}

@@ -32,7 +32,9 @@ module.exports = router => {
 
   router.get('/record-vaccinations', (req, res) => {
     const data = req.session.data
-    const vaccinesAddedCount = data.vaccineStock.length
+    const currentOrganisation = res.locals.currentOrganisation
+
+    const vaccinesAddedCount = data.vaccineStock.filter((vaccine) => vaccine.organisationId === currentOrganisation.id).length
 
     let vaccinationTodayError
 
@@ -151,7 +153,7 @@ module.exports = router => {
     let vaccinesAvailable = JSON.parse(JSON.stringify(data.vaccines)).filter((vaccine) => vaccinesAdded.includes(vaccine.name))
 
     // Filter all vaccine products to only show ones with batches added
-    for (vaccineAvailable of vaccinesAvailable) {
+    for (let vaccineAvailable of vaccinesAvailable) {
       vaccineAvailable.products = vaccineAvailable.products.filter((vaccineProduct) => vaccineProductsAdded.includes(vaccineProduct.name))
     }
 
@@ -206,7 +208,6 @@ module.exports = router => {
   router.get('/record-vaccinations/patient', (req, res) => {
 
     const data = req.session.data
-    const showError = data.showError
     const nhsNumberKnown = data.nhsNumberKnown
     const nhsNumber = String(data.nhsNumber).replaceAll(' ', '')
 
@@ -392,11 +393,11 @@ module.exports = router => {
 
   router.post('/record-vaccinations/create-a-record', (req, res) => {
     const data = req.session.data
-    const firstName = req.session.data.firstName;
-    const lastName = req.session.data.lastName;
-    const dateOfBirth = req.session.data.dateOfBirth;
-    const postcode = req.session.data.postcode;
-    const gender = req.session.data.gender;
+    const firstName = data.firstName;
+    const lastName = data.lastName;
+    const dateOfBirth = data.dateOfBirth;
+    const postcode = data.postcode;
+    const gender = data.gender;
 
     if (firstName != '' && lastName != '' && dateOfBirth.day != '' && dateOfBirth.month != '' && dateOfBirth.year != '' && postcode != '' && gender != '') {
 
@@ -569,21 +570,18 @@ module.exports = router => {
     const data = req.session.data
     const eligibility = data.eligibility
 
+
     let nextPage;
 
     if (!eligibility || eligibility === "" || eligibility == []) {
 
       nextPage = "/record-vaccinations/eligibility?showErrors=yes"
 
-    } else if (data.firstName && data.firstName != "" && data.repeatPatient === "yes") {
+    } else if (eligibility === "Pregnant" && data.vaccine === "RSV") {
 
-      if (data.vaccine === "Pertussis" || ((data.vaccine == "RSV") && (eligibility === "Pregnant"))) {
-        nextPage = "/record-vaccinations/patient-estimated-due-date"
-      } else {
-        nextPage = "/record-vaccinations/patient-history"
-      }
+      nextPage = "/record-vaccinations/patient-estimated-due-date"
 
-    } else if (data.vaccine == "flu" && data.eligibility === "Health or social care worker" && (!data.healthcareWorker || data.healthcareWorker === "")) {
+    } else if (data.vaccine == "flu" && data.eligibility === "Health or social care worker") {
 
       nextPage = "/record-vaccinations/healthcare-worker"
 
@@ -597,7 +595,7 @@ module.exports = router => {
 
     } else {
 
-      nextPage = "/record-vaccinations/patient"
+      nextPage = "/record-vaccinations/consent"
 
     }
 
@@ -646,6 +644,8 @@ module.exports = router => {
       editable: true
     })
 
+    data.lastAddedVaccinationId = generatedId
+
     res.redirect('/record-vaccinations/done')
   })
 
@@ -654,6 +654,8 @@ module.exports = router => {
     const data = req.session.data
     let errors = []
     let error
+
+    const lastAddedVaccination = data.vaccinationsRecorded.find((record) => record.id === data.lastAddedVaccinationId)
 
     if (req.query.showErrors === 'yes') {
       if (!data.nextStep) {
@@ -666,6 +668,7 @@ module.exports = router => {
     }
 
     res.render('record-vaccinations/done', {
+      lastAddedVaccination,
       errors,
       error
     })
@@ -705,7 +708,7 @@ module.exports = router => {
     } else if (data.repeatVaccination === "yes") {
       nextPage = '/record-vaccinations/review-previous'
     } else {
-      nextPage = '/record-vaccinations/location'
+      nextPage = '/record-vaccinations/consent'
     }
 
     res.redirect(nextPage)
@@ -753,7 +756,7 @@ module.exports = router => {
       req.session.data.vaccineBatch = ""
       req.session.data.eligibility = ""
 
-      res.redirect('/record-vaccinations/vaccine?repeatPatient=yes&repeatVaccination=no')
+      res.redirect('/record-vaccinations/patient-history?repeatPatient=yes&repeatVaccination=no')
 
     } else if (answer === 'different-vaccination-another-patient') {
 
@@ -764,7 +767,7 @@ module.exports = router => {
       req.session.data.nhsNumber = ""
       req.session.data.healthcareWorker = ""
 
-      res.redirect('/record-vaccinations/vaccine?repeatPatient=no&repeatVaccination=no')
+      res.redirect('/record-vaccinations/?repeatPatient=no&repeatVaccination=no')
     } else {
       res.redirect('/record-vaccinations/done?showErrors=yes')
     }
@@ -774,7 +777,6 @@ module.exports = router => {
   router.get('/record-vaccinations/batch', (req, res) => {
     let error
     const data = req.session.data
-    const currentOrganisation = res.locals.currentOrganisation
 
     const vaccine = data.vaccineStock.find(function(batch) {
       return (batch.vaccineProduct === data.vaccineProduct) &&
@@ -811,6 +813,8 @@ module.exports = router => {
     let errors = []
     let locationType = req.session.data.locationType
 
+    const careHomes = req.session.data.allOrganisations.filter((organisation) => organisation.type === "Care home")
+
     if (req.query.showErrors === "yes") {
       if (!locationType) {
         errors.push({
@@ -821,7 +825,8 @@ module.exports = router => {
     }
 
     res.render('record-vaccinations/location', {
-      errors
+      errors,
+      careHomes
     })
   })
 
@@ -833,7 +838,7 @@ module.exports = router => {
     if (!data.locationType) {
       redirectPath = "/record-vaccinations/location?showErrors=yes"
     } else {
-      redirectPath = "/record-vaccinations/patient"
+      redirectPath = "/record-vaccinations/consent"
     }
 
     res.redirect(redirectPath)
@@ -843,14 +848,12 @@ module.exports = router => {
 
     const data = req.session.data
     const vaccineBatch = data.vaccineBatch
-    const vaccine = data.vaccine
 
     const vaccineOptions = data.vaccineStock.find(function(batch) {
       return (batch.vaccineProduct === data.vaccineProduct) &&
         (batch.vaccine === data.vaccine)
     })
     if (!vaccineOptions) { res.redirect('/record-vaccinations'); return }
-
 
     let redirectPath
 
@@ -859,13 +862,12 @@ module.exports = router => {
     } else if (!vaccineBatch) {
       redirectPath = "/record-vaccinations/batch?showError=yes"
     } else if (["COVID-19", "flu", "flu (London service)", "RSV", "pneumococcal"].includes(data.vaccine)) {
-
       redirectPath = "/record-vaccinations/eligibility"
-
-    } else if (data.repeatPatient === "yes") {
+    } else if (data.vaccine === "pertussis") {
       redirectPath = "/record-vaccinations/patient-estimated-due-date"
     } else {
-      redirectPath = "/record-vaccinations/patient"
+      // MMR
+      redirectPath = "/record-vaccinations/consent"
     }
     res.redirect(redirectPath)
   })
@@ -1089,12 +1091,19 @@ module.exports = router => {
     const data = req.session.data
     const vaccinator = data.users.find((user) => user.id === data.vaccinatorId)
 
+    let careHome
+
     // Get the details of the vaccine product
     const vaccineProduct = data.vaccines.find((vaccine) => vaccine.name === data.vaccine)?.products.find((vaccineProduct) => vaccineProduct.name === data.vaccineProduct)
 
+    if (data.locationType === "Care home") {
+      careHome = data.allOrganisations.find((organisation) => organisation.id === data.careHomeId)
+    }
+
     res.render('record-vaccinations/check', {
       vaccinator,
-      vaccineProduct
+      vaccineProduct,
+      careHome
     })
   })
 
@@ -1149,8 +1158,6 @@ module.exports = router => {
   router.post('/record-vaccinations/answer-dose-amount', (req, res) => {
     const data = req.session.data
     const doseAmount = data.doseAmount
-    let redirectPath
-
 
     if (doseAmount && doseAmount != "") {
       res.redirect("/record-vaccinations/check")

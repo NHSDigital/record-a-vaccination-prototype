@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Choose dates" %}
+{% set pageName = "Choose a timeframe" %}
 
 {% set currentSection = "reports" %}
 
@@ -47,7 +47,7 @@
             fieldset: {
               legend: {
                 text: "From",
-                classes: "nhsuk-label--s"
+                size: "s"
               }
             },
             hint: {
@@ -83,7 +83,7 @@
               fieldset: {
                 legend: {
                   text: "To",
-                  classes: "nhsuk-label--s"
+                  size: "s"
                 }
               },
               hint: {
@@ -121,8 +121,8 @@
           "name": "date",
           "fieldset": {
             "legend": {
-              "text": "Choose dates",
-              "classes": "nhsuk-fieldset__legend--xl",
+              "text": "Choose a timeframe",
+              "size": "l",
               "isPageHeading": true
             }
           },
