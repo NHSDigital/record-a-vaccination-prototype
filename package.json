@@ -21,7 +21,7 @@
     "sass-embedded": "1.93.3"
   },
   "engines": {
-    "node": "^22",
+    "node": "^24",
     "npm": "^11"
   }
 }
