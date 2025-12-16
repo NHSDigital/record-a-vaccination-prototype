@@ -2,10 +2,7 @@
 
 {% set pageName = "Add vaccines for " + organisation.name %}
 {% set currentSection = "organisations" %}
-
-{% block header %}
-  {% include "includes/header-logged-in-support.html" %}
-{% endblock %}
+postcode:
 
 {% block beforeContent %}
   {{ backLink({
@@ -37,7 +34,7 @@
           fieldset: {
             legend: {
               text: "Which vaccines do you want to add?",
-              classes: "nhsuk-fieldset__legend--l",
+              size: "l",
               isPageHeading: true
             }
           },

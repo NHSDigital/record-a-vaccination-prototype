@@ -3,10 +3,7 @@
 {% set pageName = "Regions" %}
 
 {% set currentSection = "regions" %}
-
-{% block header %}
-  {% include "includes/header-logged-in-support.html" %}
-{% endblock %}
+postcode:
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -15,7 +12,7 @@
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       <ul class="nhsuk-list">
-        {% for region in (data.regions | sort(false, true, "name")) %}
+        {% for region in (regions | sort(false, true, "name")) %}
           <li><a href="/support/regions/{{ region.id }}">{{ region.name }}</a></li>
         {% endfor %}
       </ul>

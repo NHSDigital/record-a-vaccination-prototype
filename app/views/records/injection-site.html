@@ -31,26 +31,23 @@
               classes: "nhsuk-fieldset__legend--s"
             }
           },
+          value: data.otherInjectionSite,
           items: [
             {
               value: "Left buttock",
-              text: "Left buttock",
-              checked: (vaccination.otherInjectionSite == "Left buttock")
+              text: "Left buttock"
             },
             {
               value: "Right buttock",
-              text: "Right buttock",
-              checked: (vaccination.otherInjectionSite == "Right buttock")
+              text: "Right buttock"
             },
             {
               value: "Left thigh",
-              text: "Left thigh",
-              checked: (vaccination.otherInjectionSite == "Left thigh")
+              text: "Left thigh"
             },
             {
               value: "Right thigh",
-              text: "Right thigh",
-              checked: (vaccination.otherInjectionSite == "Right thigh")
+              text: "Right thigh"
             }
           ]
         }) }}
@@ -63,20 +60,19 @@
           fieldset: {
             legend: {
               text: "Where was the injection given?",
-              classes: "nhsuk-fieldset__legend--l",
+              size: "l",
               isPageHeading: true
             }
           },
+          value: data.injectionSite,
           items: [
             {
               value: "Left arm",
-              text: "Left arm",
-              checked: (vaccination.injectionSite == 'Left arm')
+              text: "Left arm"
             },
             {
               value: "Right arm",
-              text: "Right arm",
-              checked: (vaccination.injectionSite == 'Right arm')
+              text: "Right arm"
             },
             {
               divider: "or"
@@ -84,7 +80,6 @@
             {
               value: "other",
               text: "Somewhere else",
-              checked: (vaccination.injectionSite == 'other'),
               conditional: {
                 html: somewhereElseHtml
               }

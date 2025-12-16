@@ -1,0 +1,44 @@
+<table class="nhsuk-table">
+  <caption class="nhsuk-table__caption nhsuk-table__caption--m">By site</caption>
+  <thead role="rowgroup" class="nhsuk-table__head">
+    <tr role="row">
+      <th role="columnheader" class="" scope="col">
+        Site
+      </th>
+      <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
+        Today
+      </th>
+      <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
+        Past 7 days
+      </th>
+      <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
+        {{ (monthToday | monthName) }} to date
+      </th>
+      <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
+        Total
+      </th>
+    </tr>
+  </thead>
+  <tbody class="nhsuk-table__body">
+    {% for totalBySite in (totalsBySite | sort(false, false, "siteName")) %}
+      {% set site = sites | findById(totalBySite.siteId) %}
+      <tr>
+        <th class="nhsuk-table__header nhsuk-u-font-weight-normal" scope="row">
+          {{ site.name }} ({{ totalBySite.siteId }})
+        </th>
+        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+          {{ totalBySite.today }}
+        </td>
+        <td class="nhsuk-table__cell--numeric">
+          {{ totalBySite.past7Days }}
+        </td>
+        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+          {{ totalBySite.month }}
+        </td>
+        <td class="nhsuk-table__cell--numeric">
+          {{ totalBySite.total }}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

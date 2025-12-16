@@ -3,16 +3,16 @@ module.exports = [
     name: "COVID-19",
     products: [
       {
-        name: "Comirnaty 30 JN.1"
+        name: "Comirnaty 3 LP.8.1",
+        type: "injection"
       },
       {
-        name: "Comirnaty 10 JN.1"
+        name: "Comirnaty 10 LP.8.1",
+        type: "injection"
       },
       {
-        name: "Comirnaty 3 JN.1"
-      },
-      {
-        name: "Spikevax JN.1"
+        name: "Comirnaty 30 KP.2",
+        type: "injection"
       }
     ]
   },
@@ -20,25 +20,32 @@ module.exports = [
     name: "flu",
     products: [
       {
-        name: "Adjuvanted Trivalent Influenza Vaccine (aTIV)"
+        name: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
+        type: "injection"
       },
       {
-        name: "Cell-based Trivalent Influenza Vaccine (TIVc)"
+        name: "Cell-based Trivalent Influenza Vaccine (TIVc)",
+        type: "injection"
       },
       {
-        name: "Efluelda (TIV-HD)"
+        name: "Efluelda (TIV-HD)",
+        type: "injection"
       },
       {
-        name: "Fluenz (LAIV)"
+        name: "Fluenz (LAIV)",
+        type: "nasal spray"
       },
       {
-        name: "Influvac (TIVe)"
+        name: "Influvac (TIVe)",
+        type: "injection"
       },
       {
-        name: "Supemtek (TIVr)"
+        name: "Supemtek (TIVr)",
+        type: "injection"
       },
       {
-        name: "Vaxigrip (TIVe)"
+        name: "Vaxigrip (TIVe)",
+        type: "injection"
       }
     ]
   },
@@ -46,25 +53,32 @@ module.exports = [
     name: "flu (London service)",
     products: [
       {
-        name: "Adjuvanted Trivalent Influenza Vaccine (aTIV)"
+        name: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
+        type: "injection"
       },
       {
-        name: "Cell-based Trivalent Influenza Vaccine (TIVc)"
+        name: "Cell-based Trivalent Influenza Vaccine (TIVc)",
+        type: "injection"
       },
       {
-        name: "Efluelda (TIV-HD)"
+        name: "Efluelda (TIV-HD)",
+        type: "injection"
       },
       {
-        name: "Fluenz (LAIV)"
+        name: "Fluenz (LAIV)",
+        type: "nasal spray"
       },
       {
-        name: "Influvac (TIVe)"
+        name: "Influvac (TIVe)",
+        type: "injection"
       },
       {
-        name: "Supemtek (TIVr)"
+        name: "Supemtek (TIVr)",
+        type: "injection"
       },
       {
-        name: "Vaxigrip (TIVe)"
+        name: "Vaxigrip (TIVe)",
+        type: "injection"
       }
     ]
   },
@@ -72,13 +86,16 @@ module.exports = [
     name: "pertussis",
     products: [
       {
-        name: "Adacel vaccine suspension"
+        name: "Adacel vaccine suspension",
+        type: "injection"
       },
       {
-        name: "Boostrix-IPV suspension"
+        name: "Boostrix-IPV suspension",
+        type: "injection"
       },
       {
-        name: "Repevax vaccine suspension"
+        name: "Repevax vaccine suspension",
+        type: "injection"
       }
     ]
   },
@@ -86,10 +103,12 @@ module.exports = [
     name: "MMR",
     products: [
       {
-        name: "MMRVaXPro"
+        name: "MMRVaXPro",
+        type: "injection"
       },
       {
-        name: "Priorix"
+        name: "Priorix",
+        type: "injection"
       }
     ]
   },
@@ -97,7 +116,8 @@ module.exports = [
     name: "pneumococcal",
     products: [
       {
-        name: "Pneumovax"
+        name: "Pneumovax",
+        type: "injection"
       }
     ]
   },
@@ -105,7 +125,8 @@ module.exports = [
     name: "RSV",
     products: [
       {
-        name: "Abrysvo"
+        name: "Abrysvo",
+        type: "injection"
       }
     ]
   }

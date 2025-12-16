@@ -19,30 +19,28 @@
         <input type="hidden" name="changedField" value="Site">
 
         {{ radios({
-          idPrefix: "deliveryTeam",
-          name: "deliveryTeam",
+          idPrefix: "site-id",
+          name: "siteId",
           fieldset: {
             legend: {
               text: "Which site was it?",
-              classes: "nhsuk-fieldset__legend--l",
+              size: "l",
               isPageHeading: true
             }
           },
+          value: data.siteId,
           items: [
             {
               value: "Anne Ward Maternity Unit",
-              text: "Anne Ward Maternity Unit",
-              checked: (data.deliveryTeam === "Anne Ward Maternity Unit")
+              text: "Anne Ward Maternity Unit"
             },
             {
               value: "St Mary’s Hospital",
-              text: "St Mary’s Hospital",
-              checked: (data.deliveryTeam === "St Mary’s Hospital")
+              text: "St Mary’s Hospital"
             },
             {
               value: "Josephine Clinic",
-              text: "Josephine Clinic",
-              checked: (data.deliveryTeam === "Josephine Clinic")
+              text: "Josephine Clinic"
             }
           ]
         }) }}

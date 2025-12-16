@@ -1,12 +1,3 @@
-// Short button variant
-//
-// This button is slightly shorter than the usual one,
-// so that when it sits to the right of a text input
-// (eg a search box) it is the same height.
-.app-button--small {
-  @include nhsuk-font-size(16);
-  padding: nhsuk-spacing(2) 12px;
-}
 
 .app-button--min-width {
   min-width: 80px;

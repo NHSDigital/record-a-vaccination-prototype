@@ -38,7 +38,7 @@
             fieldset: {
               legend: {
                 text: "Vaccination date",
-                classes: "nhsuk-label--s"
+                size: "s"
               }
             },
             hint: {
@@ -67,18 +67,18 @@
           fieldset: {
             legend: {
               text: "When was the vaccination?",
-              classes: "nhsuk-fieldset__legend--l",
+              size: "l",
               isPageHeading: "true"
             }
           },
           errorMessage: {
             text: vaccinationTodayError
-          } if vaccinationTodayError,
+          } if va'ccinationTodayError,
+          value: "no",
           items: [
             {
               value: "no",
-              text: (vaccination.date | isoDateFromDateInput | govukDate),
-              checked: true
+              text: (vaccination.date | isoDateFromDateInput | govukDate)
             },
             {
               value: "yes",

@@ -104,8 +104,8 @@ module.exports = (router) => {
 
   router.get('/user-admin/:id/deactivate', (req, res) => {
 
-    const data = req.session.data;
-    const user = req.session.data.users.find((user) => user.id === req.params.id)
+    const data = req.session.data
+    const user = data.users.find((user) => user.id === req.params.id)
 
     res.render('user-admin/deactivate',{
       user
@@ -132,8 +132,8 @@ module.exports = (router) => {
 
   router.get('/user-admin/:id/reactivate', (req, res) => {
 
-    const data = req.session.data;
-    const user = req.session.data.users.find((user) => user.id === req.params.id)
+    const data = req.session.data
+    const user = data.users.find((user) => user.id === req.params.id)
 
     res.render('user-admin/reactivate',{
       user
@@ -142,8 +142,8 @@ module.exports = (router) => {
 
   router.post('/user-admin/:id/reactivate', (req, res) => {
 
-    const data = req.session.data;
-    const user = req.session.data.users.find((user) => user.id === req.params.id)
+    const data = req.session.data
+    const user = data.users.find((user) => user.id === req.params.id)
     user.status = 'Active'
 
     res.redirect('/user-admin')
@@ -205,7 +205,7 @@ module.exports = (router) => {
   router.post('/user-admin/add', (req, res) => {
 
     const data = req.session.data
-    const {firstName, lastName, email, permissionLevel, vaccinator} = data
+    const email = data.email
 
     const existingUserWithSameEmail = data.users.find((user) => user.email === email)
 
@@ -279,17 +279,6 @@ module.exports = (router) => {
     req.session.data.permissionLevel = ''
     req.session.data.vaccinator = ''
 
-    res.redirect('/user-admin')
-  })
-
-
-  // Redirect the old versioned routes. These can be removed
-  // at some point in the future.
-  router.get('/user-admin/v4', (req, res) => {
-    res.redirect('/user-admin')
-  })
-
-  router.get('/user-admin/v4/:page*', (req, res) => {
     res.redirect('/user-admin')
   })
 }

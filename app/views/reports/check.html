@@ -17,7 +17,45 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-xl">{{ pageName }}</h1>
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      {% set dataFields = [] %}
+
+      {% for field in data.patientDataToReport %}
+        {% set dataFields = (dataFields.push(field), dataFields) %}
+      {% endfor %}
+      {% for field in data.staffDataToReport %}
+        {% set dataFields = (dataFields.push(field), dataFields) %}
+      {% endfor %}
+      {% for field in data.siteDataToReport %}
+        {% set dataFields = (dataFields.push(field), dataFields) %}
+      {% endfor %}
+      {% for field in data.consentAndEligibilityDataToReport %}
+        {% set dataFields = (dataFields.push(field), dataFields) %}
+      {% endfor %}
+      {% for field in data.vaccinationDataToReport %}
+        {% set dataFields = (dataFields.push(field), dataFields) %}
+      {% endfor %}
+
+      {% set dataValue %}
+        {{ dataFields | join(", ") }}
+      {% endset %}
+
+      {% set sitesHtml %}
+        <ul class="nhsuk-list">
+          {% for site in sites | sort(false, false, "name") %}
+            <li>{{ site.name }} ({{ site.id }})</li>
+          {% endfor %}
+        </ul>
+      {% endset %}
+
+      {% set organisationsHtml %}
+        <ul class="nhsuk-list">
+          {% for organisation in organisations | sort(false, false, "name") %}
+            <li>{{ organisation.name }} ({{ organisation.id }})</li>
+          {% endfor %}
+        </ul>
+      {% endset %}
 
       {{ summaryList({
         rows: [
@@ -60,15 +98,15 @@
           },
           {
             key: {
-              text: ("Vaccines" if (data.vaccines | length) > 1 else "Vaccine")
+              text: ("Vaccines" if (data.vaccinesToReport | length) > 1 else "Vaccine")
             },
             value: {
-              text: (data.vaccines | sort(false, false, "name") | join(", ") | capitaliseFirstLetter) if data.vaccines
+              text: (data.vaccinesToReport | sort(false, false, "name") | join(", ") | capitaliseFirstLetter) if data.vaccines
             },
             actions: {
               items: [
                 {
-                  href: "/reports/choose-vaccines-2",
+                  href: "/reports/choose-vaccines",
                   text: "Change",
                   visuallyHiddenText: "change vaccines"
                 }
@@ -77,27 +115,44 @@
           },
           {
             key: {
-              text: ("Sites" if (data.reportSites | length) > 1 else "Site")
+              text: ("Sites" if (data.siteIdsToReport | length) > 1 else "Site")
             },
             value: {
-              text: (data.reportSites | join(",  ")) if data.reportSites
+              html: sitesHtml
             },
             actions: {
               items: [
               {
-                href: "/reports/choose-site-2",
+                href: "/reports/choose-site",
                 text: "Change",
                 visuallyHiddenText: "change sites"
               }
               ]
             }
-          },
+          } if sites,
+          {
+            key: {
+              text: ("Organisations" if (data.siteIdsToReport | length) > 1 else "Organisation")
+            },
+            value: {
+              html: organisationsHtml
+            },
+            actions: {
+              items: [
+              {
+                href: "/reports/choose-site",
+                text: "Change",
+                visuallyHiddenText: "change organisation"
+              }
+              ]
+            }
+          } if organisations,
           {
             key: {
               text: "Data"
             },
             value: {
-              text: (data.data | join(",  ")) if data.data
+              text: dataValue
             },
             actions: {
               items: [
@@ -109,12 +164,8 @@
               ]
             }
           }
-
-
         ]
       }) }}
-
-
 
       <form action="/reports/download" method="post">
         {{ button({

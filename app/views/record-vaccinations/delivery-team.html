@@ -6,7 +6,7 @@
 {% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/record-vaccinations/" }) }}
+  {{ backLink({ href: "/record-vaccinations/vaccination-date" }) }}
 {% endblock %}
 
 {% block content %}
@@ -23,20 +23,20 @@
       <form action="/record-vaccinations/answer-delivery-team" method="post" novalidate>
 
         {% set items = [] %}
-        {% for deliveryTeam in (sitesInUse | sort(false, false, "name")) %}
+        {% for site in (sitesInUse | sort(false, false, "name")) %}
           {% set items = (items.push({
-            text: deliveryTeam.name,
-            value: deliveryTeam.id
+            text: site.name,
+            value: site.id
           }), items) %}
         {% endfor %}
 
         {{ radios({
-          idPrefix: "delivery-team",
-          name: "deliveryTeam",
+          idPrefix: "site-id",
+          name: "siteId",
           fieldset: {
             legend: {
               text: ("Which site is it?" if data.vaccinationToday == 'yes' else "Which site was it?"),
-              classes: "nhsuk-fieldset__legend--l",
+              size: "l",
               isPageHeading: true
             }
           },
@@ -44,7 +44,7 @@
             text: (errors | first).text
           } if (errors | length) > 0,
           items: items,
-          value: data.deliveryTeam
+          value: data.siteId
         }) }}
 
         {{ button({

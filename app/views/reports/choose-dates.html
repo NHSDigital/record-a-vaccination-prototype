@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Choose dates" %}
+{% set pageName = "Choose a timeframe" %}
 
 {% set currentSection = "reports" %}
 
@@ -47,7 +47,7 @@
             fieldset: {
               legend: {
                 text: "From",
-                classes: "nhsuk-label--s"
+                size: "s"
               }
             },
             hint: {
@@ -83,7 +83,7 @@
               fieldset: {
                 legend: {
                   text: "To",
-                  classes: "nhsuk-label--s"
+                  size: "s"
                 }
               },
               hint: {
@@ -121,39 +121,35 @@
           "name": "date",
           "fieldset": {
             "legend": {
-              "text": "Choose dates",
-              "classes": "nhsuk-fieldset__legend--xl",
+              "text": "Choose a timeframe",
+              "size": "l",
               "isPageHeading": true
             }
           },
+          value: data.date,
           errorMessage: {
             text: dateError
           } if dateError,
           "items": [
             {
               "value": "Today",
-              "text": "Today",
-              checked: (data.date == "Today")
+              "text": "Today"
             },
             {
               "value": "Yesterday",
-              "text": "Yesterday",
-              checked: (data.date == "Yesterday")
+              "text": "Yesterday"
             },
             {
               "value": "Last7days",
-              "text": "Last 7 days",
-              checked: (data.date == "Last7days")
+              "text": "Last 7 days"
             },
             {
               "value": "Last14days",
-              "text": "Last 14 days",
-              checked: (data.date == "Last14days")
+              "text": "Last 14 days"
             },
             {
                 "value": "Last31days",
-                "text": "Last 31 days",
-                checked: (data.date == "Last31days")
+                "text": "Last 31 days"
               },
             {
               divider: "or"
@@ -161,7 +157,6 @@
             {
               "value": "custom_date_range",
               "text": "Select custom date range up to 31 days",
-              checked: (data.date == "custom_date_range"),
               conditional: {
                 html: custom_date_range
               }

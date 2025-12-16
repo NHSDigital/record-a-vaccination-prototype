@@ -1,3 +1,4 @@
+</form>
 {% extends 'layout.html' %}
 
 {% set pageName = "Choose a date" %}
@@ -15,124 +16,79 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+      <form action="/lists/date-answer" method="post">
 
+        {% set dateinputHtml %}
+          {{ dateInput({
+            id: "other-date",
+            namePrefix: "otherDate",
+            values: data.otherDate,
+            fieldset: {
+              legend: {
+                text: "Date",
+                size: "s",
+                isPageHeading: false
+              }
+            },
+            hint: {
+              text: "For example, 15 3 2026"
+            }
+          }) }}
+        {% endset %}
 
+        {% set items = [] %}
+        {% for date in (dates) %}
+          {% set text %}
+            {% if loop.index == 1 %}
+              Today ({{ (date | govukDate(showWeekday=true)) }})
+            {% else %}
+              {{ (date | govukDate(showWeekday=true)) }}
+            {% endif %}
+          {% endset %}
 
+          {% set items = (items.push({
+            text: text,
+            value: date
+          }), items) %}
+        {% endfor %}
 
-<div class="nhsuk-form-group">
+        {% set items = (items.push({
+          divider: 'or'
+        }), items) %}
 
-  <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
-    <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+        {% set items = (items.push({
+          value: "other-date",
+          text: "Select a different date",
+          conditional: {
+            html: dateinputHtml
+          }
+        }), items) %}
 
+        {% set items = (items.push({
+          value: "no-date",
+          text: "No date"
+        }), items) %}
 
-      <h1 class="nhsuk-fieldset__heading">
-        Choose a date
-      </h1>
-    </legend>
+        {{ radios({
+          idPrefix: "date",
+          name: "date",
+          value: data.date,
+          fieldset: {
+            legend: {
+              text: "Choose a date",
+              size: "l",
+              isPageHeading: true
+            }
+          },
+          items: items
+        }) }}
 
-
-    <div class="nhsuk-radios nhsuk-radios--conditional">
-      <div class="nhsuk-radios__item">
-        <input class="nhsuk-radios__input" id="contact-1" name="contact" type="radio" value="email" aria-controls="conditional-contact-1" aria-expanded="false">
-        <label class="nhsuk-label nhsuk-radios__label" for="contact-1">
-          Today (Monday 7 July 2025)
-        </label>
-      </div>
-
-      <div class="nhsuk-radios__item">
-        <input class="nhsuk-radios__input" id="contact-2" name="contact" type="radio" value="phone" aria-controls="conditional-contact-2" aria-expanded="false">
-        <label class="nhsuk-label nhsuk-radios__label" for="contact-2">
-          Tuesday 8 July 2025
-        </label>
-      </div>
-
-      <div class="nhsuk-radios__item">
-        <input class="nhsuk-radios__input" id="contact-2" name="contact" type="radio" value="phone" aria-controls="conditional-contact-2" aria-expanded="false">
-        <label class="nhsuk-label nhsuk-radios__label" for="contact-2">
-          Wednesday 9 July 2025
-        </label>
-      </div>
-
-      <div class="nhsuk-radios__item">
-        <input class="nhsuk-radios__input" id="contact-2" name="contact" type="radio" value="phone" aria-controls="conditional-contact-2" aria-expanded="false">
-        <label class="nhsuk-label nhsuk-radios__label" for="contact-2">
-          Thursday 10 July 2025
-        </label>
-      </div>
-
-      <div class="nhsuk-radios__item">
-        <input class="nhsuk-radios__input" id="contact-2" name="contact" type="radio" value="phone" aria-controls="conditional-contact-2" aria-expanded="false">
-        <label class="nhsuk-label nhsuk-radios__label" for="contact-2">
-          Friday 11 July 2025
-        </label>
-      </div>
-
-      <div class="nhsuk-radios__divider">or</div>
-
-
-      <div class="nhsuk-radios__item">
-        <input class="nhsuk-radios__input" id="contact-3" name="contact" type="radio" value="" aria-controls="conditional-contact-3" aria-expanded="false">
-        <label class="nhsuk-label nhsuk-radios__label" for="contact-3">
-          Select a different date
-        </label>
-      </div>
-      <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-contact-3">
-
-
-
-         <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
-    <legend class="nhsuk-fieldset__legend nhsuk-label--s">
-        Date
-    </legend>
-    <div class="nhsuk-hint" id="example-hint">
-      For example, 15 8 2025
-    </div>
-    <div class="nhsuk-date-input" id="example">
-      <div class="nhsuk-date-input__item">
-        <div class="nhsuk-form-group">
-          <label class="nhsuk-label nhsuk-date-input__label" for="example-day">
-            Day
-          </label> <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="example-day" name="example[day]" type="text" inputmode="numeric">
-        </div>
-      </div>
-      <div class="nhsuk-date-input__item">
-        <div class="nhsuk-form-group">
-          <label class="nhsuk-label nhsuk-date-input__label" for="example-month">
-            Month
-          </label> <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="example-month" name="example[month]" type="text" inputmode="numeric">
-        </div>
-      </div>
-      <div class="nhsuk-date-input__item">
-        <div class="nhsuk-form-group">
-          <label class="nhsuk-label nhsuk-date-input__label" for="example-year">
-            Year
-          </label> <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="example-year" name="example[year]" type="text" inputmode="numeric">
-        </div>
-      </div>
-    </div>
-  </fieldset>
-
-      </div>
-
-
-
-    <div class="nhsuk-radios">
-      <div class="nhsuk-radios__item">
-        <input class="nhsuk-radios__input" id="example-hints-1" name="example-hints" type="radio" value="mobile" aria-describedby="example-hints-1-item-hint">
-        <label class="nhsuk-label nhsuk-radios__label" for="example-hints-1">
-          No date
-        </label>
-        <div class="nhsuk-hint nhsuk-radios__hint" id="example-hints-1-item-hint">        </div>
-      </div>
-  </fieldset>
-</div>
-
-      {{ button({
-        text: "Continue",
-        href: "/lists/add-nhs-numbers"
-      }) }}
+        {{ button({
+          text: "Continue"
+        }) }}
+      </form>
 
     </div>
   </div>
-
 {% endblock %}
+

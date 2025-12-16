@@ -1,0 +1,44 @@
+<table class="nhsuk-table">
+  <caption class="nhsuk-table__caption nhsuk-table__caption--m">By organisation</caption>
+  <thead role="rowgroup" class="nhsuk-table__head">
+    <tr role="row">
+      <th role="columnheader" class="" scope="col">
+        Organisation
+      </th>
+      <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
+        Today
+      </th>
+      <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
+        Past 7 days
+      </th>
+      <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
+        {{ (monthToday | monthName) }} to date
+      </th>
+      <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
+        Total
+      </th>
+    </tr>
+  </thead>
+  <tbody class="nhsuk-table__body">
+    {% for totalByOrganisation in (totalsByOrganisation | sort(false, false, "organisationName")) %}
+      {% set organisation = data.organisations | findById(totalByOrganisation.organisationId) %}
+      <tr>
+        <th class="nhsuk-table__header nhsuk-u-font-weight-normal" scope="row">
+          {{ organisation.name }} ({{ organisation.id }})
+        </th>
+        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+          {{ totalByOrganisation.today }}
+        </td>
+        <td class="nhsuk-table__cell--numeric">
+          {{ totalByOrganisation.past7Days }}
+        </td>
+        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+          {{ totalByOrganisation.month }}
+        </td>
+        <td class="nhsuk-table__cell--numeric">
+          {{ totalByOrganisation.total }}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

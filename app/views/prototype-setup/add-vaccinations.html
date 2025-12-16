@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Add vaccinations" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    text: "Back",
+    href: "/prototype-setup"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Add vaccinations</h1>
+
+      {% if vaccinesAddedCount > 0 %}
+
+        <p>This adds random vaccinations, distributed across the current vaccines and batches set up, in order to test the <a href="/records">Records</a> section.</p>
+
+        <form action="/prototype-setup/add-vaccinations" method="post" novalidate>
+
+          {{ input({
+            name: "numberOfVaccinationsToAdd",
+            label: {
+              text: "How many would you like to add?",
+              isPageHeading: true,
+              size: "m"
+            },
+            classes: "nhsuk-input--width-5",
+            inputmode: "numeric"
+          }) }}
+
+          {{ button({
+            text: "Add vaccinations"
+          }) }}
+
+        </form>
+
+      {% else %}
+        <p>You need to add or setup some batches before vaccinations can be added.</p>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -4,10 +4,9 @@
   Manage users and permissions
 {% endblock %}
 
-{% from '../../components/pagination/macro.njk' import appPagination %}
-
 
 {% set currentSection = "manage-users" %}
+{% set currentSubSection = "active" %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -23,47 +22,45 @@
         "href": "/user-admin/add-user"
       }) }}
 
+      <div class="nhsuk-inset-text">
+        <span class="nhsuk-u-visually-hidden">Information: </span>
+
+            <p>For security, we deactivate users who have not logged in for 90 days. <a href="/user-admin/reactivate-all">Reactivate users (2)</a></p>
+      </div>
+
 
       <div class="app-filters nhsuk-u-margin-top-5">
         <form action="/user-admin" method="get" novalidate>
-          <div class="nhsuk-form-group nhsuk-u-margin-bottom-0">
-            <label class="nhsuk-label" for="q">
-              Search active users by name or email
-            </label>
-            <input class="nhsuk-input nhsuk-input--width-20" id="q" name="q" type="search" value="{{ q }}">
 
-            {{ button({
-              text: "Search",
-              classes: "nhsuk-button--secondary nhsuk-u-margin-left-2 app-button--small nhsuk-u-margin-bottom-0"
-            })}}
-          </div>
+          {{ input({
+            name: "q",
+            value: data.q,
+            classes: "nhsuk-input--width-20",
+            label: {
+              text: "Search active users by name or email"
+            },
+            formGroup: {
+              classes: "nhsuk-u-margin-bottom-0",
+              afterInput: {
+                html: button({
+                  text: "Search",
+                  classes: "nhsuk-button--secondary nhsuk-button--small"
+                })
+              }
+            }
+          }) }}
+
         </form>
       </div>
 
       <br>
 
-      <p>For security, we deactivate users who have not logged in for 90 days. <a href="/user-admin/reactivate-all">Reactivate users (2)</a></p>
 
-<br>
 
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-full">
 
-      <nav class="x-govuk-secondary-navigation" aria-label="Secondary menu">
-        <ul class="x-govuk-secondary-navigation__list">
-          <li class="x-govuk-secondary-navigation__list-item x-govuk-secondary-navigation__list-item--current">
-            <a class="x-govuk-secondary-navigation__link" href="/user-admin/index" aria-current=page>
-              Active ({{ totalUsers }})
-            </a>
-          </li>
-          <li class="x-govuk-secondary-navigation__list-item ">
-            <a class="x-govuk-secondary-navigation__link" href="/user-admin/deactivated">
-              Deactivated (3)
-            </a>
-          </li>
-
-        </ul>
-      </nav>
+          {% include "user-admin/_secondary-nav.html" %}
 
       {% if totalUsers > 0 %}
 
@@ -72,6 +69,10 @@
           {% if q %}
             Showing {{ totalUsers | plural("active user") }} matching {{ q }}
           {% else %}
+
+            {% if totalPages > 1 %}
+              Showing {{ ((page - 1) * 20) + 1 }} to  {{ ((page - 1) * 20) + (users | length) }} of
+            {% endif %}
             {{ totalUsers | plural("active user") }}
           {% endif %}
         </caption>
@@ -123,6 +124,39 @@
           {% endfor %}
         </tbody>
       </table>
+
+      {% set items = [] %}
+
+      {% set ellipsisAdded = false %}
+      {% for i in range(1, totalPages + 1) -%}
+        {% if i == 1 or i == (page -1) or (i == page) or (i == page + 1) or (i == totalPages) %}
+          {% set items = (items.push({
+            number: i,
+            href: "/user-admin?page=" + i + "&q=" + (q if q else ""),
+            current: (i === page)
+          }), items) %}
+          {% set ellipsisAdded = false %}
+        {% elif ellipsisAdded == false %}
+          {% set items = (items.push({
+            ellipsis: true
+          }), items) %}
+          {% set ellipsisAdded = true %}
+        {% endif %}
+      {%- endfor %}
+
+      {% if totalPages > 1 %}
+
+
+        {{ pagination({
+          previous: {
+            href: "/user-admin?page=" + (page - 1) + "&q=" + (q if q else "")
+          } if page != 1,
+          next: {
+            href: "/user-admin?page=" + (page + 1) + "&q=" + (q if q else "")
+          } if page != totalPages,
+          items: items
+        }) }}
+      {% endif %}
 
       {% else %}
 

@@ -5,7 +5,9 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/record-vaccinations/batch" }) }}
+  {% set backHref = from if from else "/record-vaccinations/batch" %}
+
+  {{ backLink({ href: backHref }) }}
 {% endblock %}
 
 {% set CovidEligibilityOptions = [
@@ -96,7 +98,7 @@
         {% call fieldset({
           legend: {
             text: ("Why are you giving them the vaccine?" if data.vaccinationToday == 'yes' else "Why was the patient eligible for the vaccine?"),
-            classes: "nhsuk-fieldset__legend--l",
+            size: "l",
             isPageHeading: true
           }
         }) %}

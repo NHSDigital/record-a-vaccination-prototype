@@ -8,24 +8,25 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      <h1 class="nhsuk-heading-xl nhsuk-u-margin-bottom-2">Reports</h1>
+      <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-2">Reports</h1>
       <p class="nhsuk-caption-m">Create and download reports</p>
 
-      {{ insetText({
-        html: "<p>Reports may take longer to process if you choose more data or a wider date range.</p>"
-      })}}
+      {% if vaccinationsRecordedCount > 0 %}
 
-      {{ button({
-        "text": "Create report",
-        "href": "/reports/choose-dates"
-      }) }}
+        {{ insetText({
+          html: "<p>Reports may take longer to process if you choose more data or a wider date range.</p>"
+        })}}
 
+        {{ button({
+          "text": "Create report",
+          "href": "/reports/choose-dates"
+        }) }}
+
+      {% else %}
+        <p>You have not yet recorded any vaccinations.</p>
+      {% endif %}
 
     </div>
   </div>
-
-
-
-
 
 {% endblock %}

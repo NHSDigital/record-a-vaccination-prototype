@@ -3,10 +3,6 @@
 {% set pageName = "Organisation" %}
 {% set currentSection = "organisations" %}
 
-{% block header %}
-  {% include "includes/header-logged-in-region.html" %}
-{% endblock %}
-
 {% block beforeContent %}
   {{ backLink({
     href: "/regions/add-organisation",
@@ -56,7 +52,7 @@
               text: "ODS code"
             },
             value: {
-              text: organisation.code
+              text: organisation.id
             }
           },
           {
@@ -64,7 +60,7 @@
               text: "Address"
             },
             value: {
-              html: (organisation.address.line1 + "<br>" + organisation.address.town + "<br>" + organisation.address.postcode)
+              html: (organisation.address)
             }
           }
         ]

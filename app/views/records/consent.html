@@ -37,15 +37,15 @@
           fieldset: {
             legend: {
               text: ("Who gave consent?" if data.vaccinationToday == 'yes' else "Who gave consent?"),
-              classes: "nhsuk-fieldset__legend--l",
+              size: "l",
               isPageHeading: "true"
             }
           },
+          value: data.consent,
           items: [
             {
               value: "Patient",
-              text: vaccination.patient.name,
-              checked: (vaccination.consent === "Patient")
+              text: vaccination.patient.name
             },
             {
               divider: "or"
@@ -53,7 +53,6 @@
             {
               value: "Clinician following the Mental Capacity Act",
               text: "Clinician following the Mental Capacity Act",
-              checked: (vaccination.consent === "Clinician following the Mental Capacity Act"),
               conditional: {
                 html: otherConsentHtml
               }
@@ -61,7 +60,6 @@
             {
                 value: "Person with power of attorney for personal welfare",
                 text: "Person with power of attorney for personal welfare",
-                checked: (vaccination.consent === "Person with power of attorney for personal welfare"),
                 conditional: {
                   html: otherConsentHtml
                 }
@@ -69,7 +67,6 @@
               {
                 value: "Parent or guardian",
                 text: "Parent or guardian",
-                checked: (vaccination.consent === "Parent or guardian"),
                 conditional: {
                   html: otherConsentHtml
                 }
@@ -77,7 +74,6 @@
               {
                 value: "Mental capacity advocate",
                 text: "Mental capacity advocate",
-                checked: (vaccination.consent === "Mental capacity advocate"),
                 conditional: {
                   html: otherConsentHtml
                 }
@@ -85,7 +81,6 @@
               {
                 value: "Court appointed deputy",
                 text: "Court appointed deputy",
-                checked: (vaccination.consent === "Court appointed deputy"),
                 conditional: {
                   html: otherConsentHtml
                 }

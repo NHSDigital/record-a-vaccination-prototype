@@ -24,58 +24,53 @@
             "fieldset": {
               "legend": {
                 "text": "Which batch was it?",
-                "classes": "nhsuk-fieldset__legend--l",
+                "size": "l",
                 "isPageHeading": true
               }
             },
+            value: data.batchNumber,
             "items": [
               {
                 "value": "AB2345",
                 "text": "AB2345",
                 hint: {
                   text: "Expires 14 February 2025"
-                },
-                checked: (vaccination.batchNumber == "AB2345")
+                }
               },
               {
                 "value": "DE8342",
                 "text": "DE8342",
                 hint: {
                   text: "Expires 19 February 2025"
-                },
-                checked: (vaccination.batchNumber == "DE8342")
+                }
               },
               {
                 "value": "LF842",
                 "text": "LF842",
                 hint: {
                   text: "Expires 28 February 2025"
-                },
-                checked: (vaccination.batchNumber == "LF842")
+                }
               },
               {
                 "value": "XT1234",
                 "text": "XT1234",
                 hint: {
                   text: "Expired 3 March 2024"
-                },
-                checked: (vaccination.batchNumber == "XT1234")
+                }
               },
               {
                 "value": "PU1234",
                 "text": "PU1234",
                 hint: {
                   text: "Expired 28 February 2024"
-                },
-                checked: (vaccination.batchNumber == "PU1234")
+                }
               },
               {
                 "value": "HN6543",
                 "text": "HN6543",
                 hint: {
                   text: "Expired 22 January 2024"
-                },
-                checked: (vaccination.batchNumber == "HN6543")
+                }
               }
             ]
           }) }}

@@ -1,156 +1,96 @@
 {% extends 'layout.html' %}
 
-{% set pageName = currentOrganisation.name + " - Home" %}
-
+{% if currentOrganisation %}
+  {% set pageName = currentOrganisation.name + " - Home" %}
+{% else %}
+  {% set pageName = "Home" %}
+{% endif %}
 {% set currentSection = "home" %}
-
-{% set sites = [] %}
-{% for vaccine in (data.vaccines) %}
-  {% if not (sites | arrayOrStringIncludes(vaccine.siteCode)) %}
-    {% set sites = (sites.push(vaccine.siteCode), sites) %}
-  {% endif %}
-{% endfor %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-      <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-6">{{ currentOrganisation.name }}</h1>
+      <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-6">{% if currentOrganisation %}{{ currentOrganisation.name }}{% else %}Overview{% endif %}</h1>
+      
 
-      <h2 class="nhsuk-heading-m">Total vaccinations</h2>
-
-    </div>
-  </div>
-
-
-<ul class="nhsuk-grid-row nhsuk-card-group">
-
-    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
-      {% set cardHtml %}
-        <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">38</p>
-        Today
-      {% endset %}
-
-      {{ card({
-        headingHtml: cardHtml
-      }) }}
-    </li>
-
-    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
-      {% set cardHtml %}
-        <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">134</p>
-        Past 7 days
-      {% endset %}
-
-      {{ card({
-        headingHtml: cardHtml
-      }) }}
-    </li>
-
-
-    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
-      {% set cardHtml %}
-        <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">546</p>
-        November so far
-      {% endset %}
-
-      {{ card({
-        headingHtml: cardHtml
-      }) }}
-    </li>
-
-</ul>
-
-
-
-  <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-three-quarters">
-
-      <table class="nhsuk-table">
-        <caption class="nhsuk-table__caption nhsuk-table__caption--m">Past 7 days by vaccine</caption>
-        <thead role="rowgroup" class="nhsuk-table__head">
-          <tr role="row">
-            <th role="columnheader" class="" scope="col">
-              Date
-            </th>
-            {% for vaccineStat in stats %}
-              <th role="columnheader" class=" nhsuk-table__header--numeric" scope="col">
-                {{ vaccineStat.vaccine }}
-              </th>
-            {% endfor %}
-            <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
-              Total
-            </th>
-          </tr>
-        </thead>
-        <tbody class="nhsuk-table__body">
-
-          {% set firstStat = (stats | first ) %}
-
-          {% for date in firstStat.days %}
-            {% if not loop.index0 == 0 %}
-              {% set total = 0 %}
-              <tr role="row" class="nhsuk-table__row">
-                <th class="nhsuk-table__header  nhsuk-u-font-weight-normal" scope="row">
-                  {% if loop.index0 == 1 %}
-                    Today
-                  {% else %}
-                    {{ date.date | dayName }} {{ date.date | govukDate(truncate=true) }}
-
-                    {% if loop.index0 == 2 %}(yesterday){% endif %}
-                  {% endif %}
-                </th>
-
-                {% set dayIndex = loop.index0 %}
-                {% for vaccineStat in stats %}
-                  {% set total = total + vaccineStat.days[dayIndex].count %}
-                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">{{ vaccineStat.days[dayIndex].count }}</td>
-                {% endfor %}
-                <td class="nhsuk-table__cell nhsuk-table__cell--numeric">{{ total }}</td>
-              </tr>
-            {% endif %}
-          {% endfor %}
-
-        </tbody>
-      </table>
-
-
-      {% if (sites | length) > 1 %}
-        <table class="nhsuk-table">
-          <caption class="nhsuk-table__caption nhsuk-table__caption--m">Past 7 days by site</caption>
-          <thead role="rowgroup" class="nhsuk-table__head">
-            <tr role="row">
-              <th role="columnheader" class="" scope="col">
-                Site
-              </th>
-              {% for vaccineStat in stats %}
-                <th role="columnheader" class=" nhsuk-table__header--numeric" scope="col">
-                  {{ vaccineStat.vaccine }}
-                </th>
-              {% endfor %}
-              <th role="columnheader" class="nhsuk-table__header--numeric" scope="col">
-                Total
-              </th>
-            </tr>
-          </thead>
-          <tbody class="nhsuk-table__body">
-            {% for site in sites %}
-              {% set runningTotal = 0 %}
-              <tr>
-                <th class="nhsuk-table__header nhsuk-u-font-weight-normal" scope="row"><a href="/home/{{ site }}">{{ data.sites[site].name }}</a></th>
-                {% for vaccineStat in stats %}
-                  {% set count = ((vaccineStat.days | first).count) * 3  %}
-                  {% set runningTotal = runningTotal + count %}
-                  <td class="nhsuk-table__cell nhsuk-table__cell--numeric">{{ count }}</td>
-                {% endfor %}
-                <td class="nhsuk-table__cell nhsuk-table__cell--numeric">{{ runningTotal }}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+      {% if currentOrganisation and totalVaccinationsRecorded == 0 %}
+        {% include "home/_no-vaccinations-recorded.html" %}
       {% endif %}
 
-      <p>For a more detailed breakdown, <a href="/reports">create a report</a>.</p>
+      {% from 'inset-text/macro.njk' import insetText %}
+
+{% set insetTextHtml %}
+  <p>Find out about the latest updates to the service:
+  <br><a href="/updates" title="External website">What's new (opens in new tab)</a></p>
+{% endset %}
+
+{{ insetText({
+  html: insetTextHtml
+}) }}
+
+      <h2 class="nhsuk-heading-m">All vaccinations</h2>
+      {% if not currentOrganisation %}
+      <p>This shows vaccination data for all your organisations combined.</p>
+      {% endif %}
+      
 
     </div>
   </div>
+
+  {% include "home/_vaccination-totals.html" %}
+
+
+  {% if totalVaccinationsRecorded > 0 %}
+
+    {% set byDayHtml %}
+      {% include "home/_by-day.html" %}
+    {% endset %}
+
+    {% set byVaccinationHtml %}
+      {% include "home/_by-vaccine.html" %}
+    {% endset %}
+
+    {% set bySiteHtml %}
+      {% include "home/_by-site.html" %}
+    {% endset %}
+
+    {% set byOrganisationHtml %}
+      {% include "home/_by-organisation.html" %}
+    {% endset %}
+
+    {{ tabs({
+      items: [
+      {
+        label: "By day",
+        id: "past-7-days",
+        panel: {
+          html: byDayHtml
+          }
+        },
+        {
+          label: "By vaccination",
+          id: "by-vaccination",
+          panel: {
+            html: byVaccinationHtml
+          }
+        } if (totalsByVaccine | length) > 1,
+        {
+          label: "By site",
+          id: "by-site",
+          panel: {
+            html: bySiteHtml
+          }
+        } if (totalsBySite | length) > 1,
+        {
+          label: "By organisation",
+          id: "by-organisations",
+          panel: {
+            html: byOrganisationHtml
+          }
+        } if (totalsByOrganisation | length) > 1
+      ]
+    }) }}
+
+    <p>For a more detailed breakdown, <a href="/reports">create a report</a>.</p>
+  {% endif %}
 {% endblock %}

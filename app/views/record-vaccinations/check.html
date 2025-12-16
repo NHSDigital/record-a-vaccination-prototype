@@ -5,7 +5,11 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/record-vaccinations/injection-site" }) }}
+  {% if vaccineProduct.type == "nasal spray" %}
+    {{ backLink({ href: "/record-vaccinations/dose-amount" }) }}
+  {% else %}
+    {{ backLink({ href: "/record-vaccinations/injection-site" }) }}
+  {% endif %}
 {% endblock %}
 
 {% set consentHtml %}
@@ -43,15 +47,8 @@
 
 {% set locationHtml %}
   {% if  data.locationType == "Care home" %}
-    {% for careHome in data.careHomes %}
-      {% if data.careHome == careHome.code %}
-        {{ careHome.name }}<br>
-        {{ careHome.address1 }}<br>
-        {{ careHome.town }}<br>
-        {{ careHome.postcode }}
-      {% endif %}
-    {% endfor %}
-
+    {{ careHome.name }}<br>
+    {{ careHome.address }}
   {% else %}
     {{ data.locationType }}
   {% endif %}
@@ -71,7 +68,7 @@
               text: "Name"
             },
             value: {
-              text: (data.patientName if data.patientName else data.firstName + " " + data.lastName)
+              text: (data.firstName + " " + data.lastName)
             },
             actions: {
               items: [
@@ -186,7 +183,7 @@
               text: "Site"
             },
             value: {
-              text: (currentOrganisation.sites | findById(data.deliveryTeam)).name
+              text: (currentOrganisation.sites | findById(data.siteId)).name
             },
             actions: {
               items: [
@@ -194,6 +191,23 @@
                   href: "/record-vaccinations/delivery-team",
                   text: "Change",
                   visuallyHiddenText: "Site"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Vaccinator"
+            },
+            value: {
+              text: vaccinator.firstName + " " + vaccinator.lastName
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/vaccinator",
+                  text: "Change",
+                  visuallyHiddenText: "contact information"
                 }
               ]
             }
@@ -234,21 +248,21 @@
           },
           {
             key: {
-              text: "Vaccinator"
+              text: "Eligibility"
             },
             value: {
-              text: vaccinator.firstName + " " + vaccinator.lastName
+              html: ((data.eligibility | join("<br>")) if (data.eligibility | isArray) else data.eligibility)
             },
             actions: {
               items: [
                 {
-                  href: "/record-vaccinations/vaccinator",
+                  href: "/record-vaccinations/eligibility",
                   text: "Change",
-                  visuallyHiddenText: "contact information"
+                  visuallyHiddenText: "eligibility"
                 }
               ]
             }
-          },
+          } if (data.vaccine != "pertussis"),
           {
             key: {
               text: "Location"
@@ -268,24 +282,7 @@
           } if (data.vaccine === "Flu" or data.vaccine == "COVID-19"),
           {
             key: {
-              text: "Eligibility"
-            },
-            value: {
-              html: ((data.eligibility | join("<br>")) if (data.eligibility | isArray) else data.eligibility)
-            },
-            actions: {
-              items: [
-                {
-                  href: "/record-vaccinations/eligibility",
-                  text: "Change",
-                  visuallyHiddenText: "eligibility"
-                }
-              ]
-            }
-          } if (data.vaccine != "Pertussis"),
-          {
-            key: {
-              text: "Healthcare worker role"
+              text: "Role"
             },
             value: {
               html: data.healthcareWorker
@@ -295,7 +292,7 @@
                 {
                   href: "/record-vaccinations/healthcare-worker",
                   text: "Change",
-                  visuallyHiddenText: "healthcare worker role"
+                  visuallyHiddenText: "role"
                 }
               ]
             }
@@ -316,7 +313,7 @@
                 }
               ]
             }
-          } if ((data.vaccine == "Pertussis") or ((data.eligibility | arrayOrStringIncludes("Pregnant"))) and (data.vaccine == "RSV")),
+          } if ((data.vaccine == "pertussis") or ((data.eligibility | arrayOrStringIncludes("Pregnant"))) and (data.vaccine == "RSV")),
           {
             key: {
               text: "Consent given by"
@@ -336,7 +333,7 @@
           },
           {
             key: {
-              text: "Vaccination site"
+              text: "Injection site"
             },
             value: {
               html: (data.otherInjectionSite if data.injectionSite == "other" else data.injectionSite)
@@ -346,11 +343,11 @@
                 {
                   href: "/record-vaccinations/injection-site",
                   text: "Change",
-                  visuallyHiddenText: "Vaccination site"
+                  visuallyHiddenText: "Injection site"
                 }
               ]
             }
-          },
+          } if (vaccineProduct.type == "injection"),
           {
             key: {
               text: "Dose"
@@ -367,11 +364,11 @@
                 }
               ]
             }
-          } if data.doseAmount
+          } if (vaccineProduct.type == "nasal spray")
         ]
       }) }}
 
-      <form action="/record-vaccinations/done" method="post" novalidate>
+      <form action="/record-vaccinations/confirmed" method="post" novalidate>
 
         {{ textarea({
           name: "notes",
