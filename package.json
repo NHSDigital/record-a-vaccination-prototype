@@ -14,7 +14,7 @@
     "@x-govuk/govuk-prototype-filters": "^2.1.0",
     "express": "^5.2.1",
     "nhsuk-frontend": "^10.2.2",
-    "nhsuk-prototype-kit": "8.0.0-internal.4",
+    "nhsuk-prototype-kit": "8.0.0-beta.1",
     "nunjucks": "^3.2.4",
     "path": "^0.12.7",
     "plugin-error": "^2.0.1",
