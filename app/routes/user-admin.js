@@ -173,9 +173,9 @@ module.exports = (router) => {
     }
 
     if (!email || email === '') {
-      emailError = 'Enter an NHS-approved email address'
+      emailError = 'Enter an email address'
     } else if (!(email.endsWith('nhs.net') || email.endsWith('.nhs.uk'))) {
-      emailError = 'Email address must be NHS-approved'
+      emailError = 'Enter an allowed email address'
     } else if (existingUserWithSameEmail && existingUserWithSameEmail.status !== 'Deactivated') {
       emailError = 'This email address has already been added'
     }
