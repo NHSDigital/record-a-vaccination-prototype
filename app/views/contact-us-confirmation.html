@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Vaccination saved" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% set panelHtml %}
+
+      {% endset %}
+
+      {{ panel({
+        titleText: "Contact form sent",
+        text: "We have sent you a confirmation email"
+      }) }}
+
+      <p>If you need to send additional information, you can reply to the email.</p>
+
+      <p>If you need help with a different issue, <a href="/contact-us">contact us again</a>.</p>
+
+    </div>
+  </div>
+
+{% endblock %}
+
