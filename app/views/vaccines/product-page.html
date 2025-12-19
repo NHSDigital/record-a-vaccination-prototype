@@ -42,7 +42,7 @@
               text: "Site"
             },
             value: {
-              html: site.name
+              html: site.name + (" (closed)" if site.status == "closed")
             }
           }
         ]
