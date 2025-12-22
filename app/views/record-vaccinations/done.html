@@ -16,7 +16,7 @@
       {% endif %}
 
       {% set panelHtml %}
-        <a href="#" class="nhsuk-link--reverse">{{ data.firstName }} {{ data.lastName }}’s {{ data.vaccine }} record</a> will be sent to their GP.
+        <a href="/records/records/{{ lastAddedVaccination.id }}" class="nhsuk-link--reverse">{{ lastAddedVaccination.patient.name }}’s {{ lastAddedVaccination.vaccine }} record</a> will be sent to their GP.
       {% endset %}
 
       {{ panel({
@@ -27,13 +27,13 @@
       <form action="/record-vaccinations/what-next" method="post" novalidate>
 
       {% set lowercaseVaccineName %}
-        {% if (data.vaccine == "RSV") %}
+        {% if (lastAddedVaccination.vaccine == "RSV") %}
           An RSV
-        {% elseif (data.vaccine == "COVID-19") %}
+        {% elseif (lastAddedVaccination.vaccine == "COVID-19") %}
           A COVID-19
-        {% elseif (data.vaccine == "flu") %}
+        {% elseif (lastAddedVaccination.vaccine == "flu") %}
           A flu
-        {% elseif (data.vaccine == "pertussis") %}
+        {% elseif (lastAddedVaccination.vaccine == "pertussis") %}
           A pertussis
         {% else %}
           A COVID-19
@@ -43,7 +43,7 @@
       {% set items = [] %}
         {% set items = (items.push({
           value: "same-patient-another-vaccination",
-          text: (data.firstName + " " + data.lastName + "’s next vaccination")
+          text: (lastAddedVaccination.patient.name + "’s next vaccination")
         }), items) %}
 
         {% set items = (items.push({

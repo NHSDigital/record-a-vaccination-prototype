@@ -6,7 +6,7 @@
 {% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/record-vaccinations/" }) }}
+  {{ backLink({ href: "/record-vaccinations/vaccination-date" }) }}
 {% endblock %}
 
 {% block content %}
@@ -24,10 +24,12 @@
 
         {% set items = [] %}
         {% for site in (sitesInUse | sort(false, false, "name")) %}
-          {% set items = (items.push({
-            text: site.name,
-            value: site.id
-          }), items) %}
+          {% if site.status != "closed" %}
+            {% set items = (items.push({
+              text: site.name,
+              value: site.id
+            }), items) %}
+          {% endif %}
         {% endfor %}
 
         {{ radios({
