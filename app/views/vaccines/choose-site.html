@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Site" %}
+{% set pageName = "Choose a site" %}
 
 
 {% set currentSection = "vaccines" %}
@@ -19,9 +19,9 @@
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
 
-          <h1 class="nhsuk-heading-xl">Site</h1>
+          <h1 class="nhsuk-heading-l">Choose a site</h1>
 
-          <p>Vaccines and batch information are added to sites within your Trust.</p>
+          <p>Select the site where you want to add a vaccine.</p>
 
           <p>You can <a href="https://digital.nhs.uk/services/organisation-data-service/request-a-new-code-or-update-organisation-details#site-request" target="_new">request a new site (opens in new tab)</a>.</p>
 
@@ -41,7 +41,9 @@
               <option selected value=""></option>
 
               {% for site in currentOrganisation.sites %}
-                <option value="{{ site.id }}">{{ site.name }} ({{site.id }})</option>
+                {% if site.status != "closed" %}
+                  <option value="{{ site.id }}">{{ site.name }} ({{site.id }})</option>
+                {% endif %}
               {% endfor %}
             </select>
           </div>

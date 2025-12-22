@@ -86,5 +86,19 @@ module.exports = [
         expiryDate: "2027-11-23"
       }
     ]
+  },
+  {
+    id: "36346181471414",
+    vaccine: "COVID-19",
+    vaccineProduct: "Comirnaty 3 LP.8.1",
+    organisationId: "RW3", // Central Manchester Trust
+    siteId: "RW07E", // "Central Manchester Medical Centre
+    batches: [
+      {
+        id: "325252145",
+        batchNumber: "PN8471",
+        expiryDate: "2024-02-06"
+      }
+    ]
   }
 ]

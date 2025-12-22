@@ -9,7 +9,7 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-      <h1 class="nhsuk-heading-xl">Your profile</h1>
+      <h1 class="nhsuk-heading-l">Your profile</h1>
 
         {% set permissionLevelHtml %}
           <div>{{ organisationSettings.permissionLevel }}</div>
@@ -25,7 +25,7 @@
         {% endset %}
 
         {% set organisationHtml %}
-          <div>{{ currentOrganisation.name }}</div>
+          <div>{{ currentOrganisation.name }} ({{ currentOrganisation.id }})</div>
           {% if currentOrganisation.type != "Region" %}
             <p class="app-summary__explanation">
               {{ currentOrganisation.address.line1 }}, {{ currentOrganisation.address.postcode }}
