@@ -61,7 +61,11 @@
         {% set site =  currentOrganisation.sites | findById(siteId) %}
 
         <table class="nhsuk-table">
-          <caption class="nhsuk-table__caption nhsuk-table__caption--m nhsuk-u-margin-bottom-2">{{ site.name }}</caption>
+          <caption class="nhsuk-table__caption nhsuk-table__caption--m nhsuk-u-margin-bottom-2">{{ site.name }}
+            {% if site.status == "closed" %}
+              (closed)
+            {% endif %}
+          </caption>
           <thead role="rowgroup" class="nhsuk-table__head">
             <tr role="row">
               <th role="columnheader" class="" scope="col">
@@ -121,7 +125,9 @@
                     <div class="nhsuk-u-margin-bottom-1"><a href="/vaccines/{{ thisVaccine.id }}" class="nhsuk-link">View</a></div>
                   </td>
                   <td class="nhsuk-table__cell ">
-                    <div><a href="/vaccines/{{ thisVaccine.id }}/add" class="nhsuk-link">Add batch</a></div>
+                    {% if site.status != "closed" %}
+                      <div><a href="/vaccines/{{ thisVaccine.id }}/add" class="nhsuk-link">Add batch</a></div>
+                    {% endif %}
                   </td>
                 </tr>
               {% endfor %}
