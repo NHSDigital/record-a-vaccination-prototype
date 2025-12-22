@@ -21,7 +21,7 @@
   "dependencies": {
     "@babel/core": "^7.28.5",
     "@babel/preset-env": "^7.28.5",
-    "@inquirer/prompts": "^7.10.1",
+    "@inquirer/prompts": "^8.1.0",
     "@x-govuk/govuk-prototype-filters": "^2.0.3",
     "body-parser": "^2.2.1",
     "browser-sync": "^3.0.4",
@@ -46,7 +46,7 @@
     "sass-embedded": "1.97.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^8.49.0",
+    "@typescript-eslint/eslint-plugin": "^8.50.0",
     "@typescript-eslint/parser": "^8.50.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
