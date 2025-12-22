@@ -19,7 +19,7 @@
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
 
-          <h1 class="nhsuk-heading-xl">Choose a site</h1>
+          <h1 class="nhsuk-heading-l">Choose a site</h1>
 
           <p>Select the site where you want to add a vaccine.</p>
 
@@ -41,7 +41,9 @@
               <option selected value=""></option>
 
               {% for site in currentOrganisation.sites %}
-                <option value="{{ site.id }}">{{ site.name }} ({{site.id }})</option>
+                {% if site.status != "closed" %}
+                  <option value="{{ site.id }}">{{ site.name }} ({{site.id }})</option>
+                {% endif %}
               {% endfor %}
             </select>
           </div>

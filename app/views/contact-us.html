@@ -96,7 +96,7 @@
         items: items
       }) }}
 
-      {{ textarea({
+      {{ characterCount({
         name: "supportQuery",
         label: {
           text: "Details",
@@ -104,7 +104,9 @@
         },
         hint: {
           text: "Tell us more about the issue"
-        }
+        },
+        maxlength: 500,
+        rows: 10
       }) }}
 
 
