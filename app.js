@@ -1,5 +1,5 @@
 const express = require('express')
-const NHSPrototypeKit = require('nhsuk-prototype-kit').default
+const NHSPrototypeKit = require('nhsuk-prototype-kit')
 const path = require('path')
 const nunjucks = require('nunjucks')
 const { join } = require('node:path')
