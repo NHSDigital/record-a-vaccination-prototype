@@ -28,10 +28,6 @@ module.exports = router => {
     const organisationId = data.organisationId
     const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
 
-
-    console.log(req.body)
-    console.log(req.session.data)
-
     if (!organisation) {
       res.redirect('/apply/start?error=no-pharmacy');
     } else if (organisation.id === "FA424") {
