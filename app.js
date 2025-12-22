@@ -1,14 +1,13 @@
-const NHSPrototypeKit = require('nhsuk-prototype-kit')
-
-const path = require('path')
 const { join } = require('node:path')
+
+const NHSPrototypeKit = require('nhsuk-prototype-kit')
 
 // Local dependencies
 const config = require('./app/config')
+const sessionDataDefaults = require('./app/data/session-data-defaults')
+const filters = require('./app/filters')
 const locals = require('./app/locals')
 const routes = require('./app/routes')
-const filters = require('./app/filters')
-const sessionDataDefaults = require('./app/data/session-data-defaults')
 
 const SERVICE_NAME = config.serviceName
 
@@ -35,4 +34,4 @@ for (const [name, filter] of Object.entries(filters())) {
   prototype.nunjucks.addFilter(name, filter)
 }
 
-prototype.start()
+prototype.start(port)
