@@ -1028,6 +1028,11 @@ module.exports = [
       {
         id: "RW3RC",
         name: "Royal Manchester Children’s Hospital"
+      },
+      {
+        id: "RW07E",
+        name: "Central Manchester Medical Centre",
+        status: "closed"
       }
     ]
   },

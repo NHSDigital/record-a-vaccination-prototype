@@ -41,7 +41,9 @@
               <option selected value=""></option>
 
               {% for site in currentOrganisation.sites %}
-                <option value="{{ site.id }}">{{ site.name }} ({{site.id }})</option>
+                {% if site.status != "closed" %}
+                  <option value="{{ site.id }}">{{ site.name }} ({{site.id }})</option>
+                {% endif %}
               {% endfor %}
             </select>
           </div>
