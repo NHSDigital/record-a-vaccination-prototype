@@ -1,15 +1,4 @@
-/**
- * @param {typeof config} config
- */
-module.exports =
-  (config) =>
-  /**
-   * @param {Request} req
-   * @param {Response} res
-   * @param {NextFunction} next
-   */
-  (req, res, next) => {
-    res.locals.serviceName = config.serviceName
+module.exports = function(req, res, next) {
 
     // Set currentUser for convenience
     if (req.session.data.currentUserId) {
@@ -17,7 +6,6 @@ module.exports =
     } else {
       res.locals.currentUser = null
     }
-
     // Set currentOrganisation for convenience
     if (req.session.data.currentOrganisationId) {
       res.locals.currentOrganisation = req.session.data.organisations.find((organisation) => organisation.id === req.session.data.currentOrganisationId)
@@ -25,10 +13,9 @@ module.exports =
       res.locals.currentOrganisation = null
     }
 
-    next()
-  }
+  // set current logged in region
+  // res.locals.currentRegion = req.session.data.regions.find((region) => region.id === req.session.data.currentRegionId);
 
-/**
- * @import { NextFunction, Request, Response } from 'express'
- * @import config from './config.js'
- */
+  next()
+}
+

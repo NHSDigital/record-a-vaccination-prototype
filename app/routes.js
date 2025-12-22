@@ -1,4 +1,6 @@
 // External dependencies
+
+/* eslint n/no-extraneous-require: "off" */
 const express = require('express');
 
 const router = express.Router();
