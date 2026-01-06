@@ -1,15 +1,15 @@
 # NHS Record a vaccination prototypes
 
-This contains prototype interfaces for the NHS Record a vaccination service.
+This contains a prototype for the NHS Record a vaccination service.
 
 It uses the <a href="https://prototype-kit.service-manual.nhs.uk">NHS.UK prototype kit</a>.
 
-## Running the prototypes locally
+## Running the prototype locally
 
 1. Download or clone this repository
 2. Open the Terminal app and navigate to this folder
 3. Type `npm install` to install the dependencies
-4. Type `npm run watch` to run the prototype
+4. Type `npm start` to run the prototype
 
 ## Publishing changes
 
