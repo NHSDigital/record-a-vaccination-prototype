@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% set currentSection = "none" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {{ radios({
+        idPrefix: "survey",
+        name: "survey",
+        fieldset: {
+          legend: {
+            text: "How satisfied are you with using RAVS?",
+            size: "l",
+            isPageHeading: true
+          }
+        },
+        items: [
+          {
+            text: "Very satisfied"
+          },
+          {
+            text: "Satisfied"
+          },
+          {
+            text: "Neither satisfied nor dissatisfied"
+          },
+          {
+            text: "Dissatisfied"
+          },
+          {
+            text: "Very dissatisfied"
+          }
+        ]
+      }) }}
+
+      {{ button({
+        text: "Continue",
+        href: "/home"
+      }) }}
+
+    </div>
+  </div>
+{% endblock %}

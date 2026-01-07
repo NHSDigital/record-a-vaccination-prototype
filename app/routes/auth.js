@@ -33,7 +33,7 @@ module.exports = router => {
       req.session.data.currentUserId = user.id;
       req.session.data.currentOrganisationId = userOrganisationIds[0]
 
-      res.redirect('/home')
+      res.redirect('/survey')
 
     } else if (userRegionIds.length === 1) {
 
@@ -69,7 +69,7 @@ module.exports = router => {
       req.session.data.currentUserId = data.userId
 
 
-      res.redirect('/home')
+      res.redirect('/survey')
     } else {
       res.redirect('/auth/select-mode')
     }
@@ -105,7 +105,7 @@ module.exports = router => {
       req.session.data.currentUserId = user.id;
       req.session.data.currentOrganisationId = selectedOrganisationId;
 
-      res.redirect('/home')
+      res.redirect('/survey')
     } else {
 
       res.redirect('/auth/select-organisation')
