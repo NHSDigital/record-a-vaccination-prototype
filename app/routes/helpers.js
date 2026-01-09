@@ -31,9 +31,9 @@ module.exports = router => {
 
       for (let vaccineProduct of vaccine.products) {
 
-        const numberOfBatchesToAdd = 1 + Math.floor(Math.random() * 10)
+        const numberOfBatchesToAdd = 1 + Math.floor(Math.random() * 40)
 
-        let batches = []
+        let batchesToAdd = []
 
         const generatedVaccineId = Math.floor(Math.random() * 10000000).toString()
 
@@ -44,20 +44,28 @@ module.exports = router => {
 
           const generatedExpiryDate = new Date(dateNow.getTime() + (Math.random() * 100 * millisecondsPerDay)).toISOString()
 
-          batches.push({
+          batchesToAdd.push({
             id: generatedBatchId,
             batchNumber: generatedBatchNumber,
             expiryDate: generatedExpiryDate
           })
         }
 
-        vaccineStock.push({
-          id: generatedVaccineId,
-          vaccine: vaccine.name,
-          vaccineProduct: vaccineProduct.name,
-          siteId: siteId,
-          batches: batches
-        })
+        const existingVaccineStockItem = vaccineStock.find((item) => ((item.vaccine === vaccine.name) && (item.vaccineProduct === vaccineProduct.name) && (item.siteId === siteId) && (item.organisationId === currentOrganisation.id)))
+
+        if (existingVaccineStockItem) {
+          existingVaccineStockItem.batches.push(...batchesToAdd)
+        } else {
+          vaccineStock.push({
+            id: generatedVaccineId,
+            vaccine: vaccine.name,
+            vaccineProduct: vaccineProduct.name,
+            organisationId: currentOrganisation.id,
+            siteId: siteId,
+            batches: batchesToAdd
+          })
+        }
+
       }
     }
 
