@@ -110,6 +110,23 @@
           </table>
         {% endif %}
 
+        {{ pagination({
+          next: {
+            href: "#"
+          },
+          items: [
+            {
+              number: 1,
+              href: "#",
+              current: true
+            },
+            {
+              number: 2,
+              href: "#"
+            }
+          ]
+        }) }}
+
         {% set buttonText = "Add another user" if (organisation.leadUsers | length) > 0  else "Add user" %}
 
         {{ button({ text: buttonText, href: "/regions/organisations/" + organisation.id + "/add-email"}) }}

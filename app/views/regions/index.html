@@ -72,6 +72,25 @@
           </table>
       </div>
     </div>
+
+
+    {{ pagination({
+      next: {
+        href: "#"
+      },
+      items: [
+        {
+          number: 1,
+          href: "#",
+          current: true
+        },
+        {
+          number: 2,
+          href: "#"
+        }
+      ]
+    }) }}
+
   {% endif %}
 
   {% if closedOrganisationsCount > 0 %}
