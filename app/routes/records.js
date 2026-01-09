@@ -3,6 +3,8 @@ module.exports = router => {
   router.get('/records', (req, res) => {
 
     const data = req.session.data
+    const perPage = 20; // Max number of users to show per page
+    const page = parseInt(req.query.page) || 1;  // Current page, default to 1
 
     const currentOrganisation = res.locals.currentOrganisation
 
@@ -37,13 +39,22 @@ module.exports = router => {
       })
     }
 
+    const indexStartFrom = (page - 1) * perPage
+    const vaccinations = vaccinationsRecorded.slice(indexStartFrom, indexStartFrom + perPage)
+    const totalPages = Math.ceil(vaccinationsRecorded.length / perPage)
+
+    const totalMatchingRecords = vaccinationsRecorded.length
+
     if (totalVaccinationsRecorded === 0) {
       res.render('records/no-vaccinations-recorded')
     } else {
       res.render('records/index', {
+        page,
+        totalPages,
         vaccinesRecorded,
-        vaccinationsRecorded,
-        vaccinators
+        vaccinations,
+        vaccinators,
+        totalMatchingRecords
       })
     }
   })

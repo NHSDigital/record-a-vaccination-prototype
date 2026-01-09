@@ -147,7 +147,7 @@
       }) }}
 
 
-      <h2 class="nhsuk-heading-m">{{ vaccinationsRecorded | length | plural("record") }}
+      <h2 class="nhsuk-heading-m">{{ totalMatchingRecords | plural("record") }}
       {% if data.nameOrNhsNumber %} matching {{ data.nameOrNhsNumber }}{% endif %}
       </h2>
 
@@ -162,7 +162,7 @@
             </tr>
           </thead>
           <tbody>
-            {% for record in vaccinationsRecorded %}
+            {% for record in vaccinations %}
               <tr>
                 <td>
                   <a href="/records/records/{{ record.id }}">{{ record.patient.name }}</a><br>
@@ -197,7 +197,41 @@
         descriptionHtml: resultsTableHtml
       }) }}
 
-        <p>Showing 1 to {{ data.vaccinationsRecorded | length }} of {{ data.vaccinationsRecorded | length }} records<p>
+      {% set items = [] %}
+
+      {% set queryString = "?" %}
+      {% if data.nameOrNhsNumber %}
+        {% set queryString = queryString + "&nameOrNhsNumber=" + data.nameOrNhsNumber %}
+      {% endif %}
+
+      {% set ellipsisAdded = false %}
+      {% for i in range(1, totalPages + 1) -%}
+        {% if i == 1 or i == (page -1) or (i == page) or (i == page + 1) or (i == totalPages) %}
+          {% set items = (items.push({
+            number: i,
+            href: "/records" + queryString + "&page=" + i,
+            current: (i === page)
+          }), items) %}
+          {% set ellipsisAdded = false %}
+        {% elif ellipsisAdded == false %}
+          {% set items = (items.push({
+            ellipsis: true
+          }), items) %}
+          {% set ellipsisAdded = true %}
+        {% endif %}
+      {%- endfor %}
+
+      {% if totalPages > 1 %}
+        {{ pagination({
+          previous: {
+            href: "/records" + queryString + "&page=" + (page - 1)
+          } if page != 1,
+          next: {
+            href: "/records" + queryString + "&page=" + (page + 1)
+          } if page != totalPages,
+          items: items
+        }) }}
+      {% endif %}
 
     </div>
   </div>
