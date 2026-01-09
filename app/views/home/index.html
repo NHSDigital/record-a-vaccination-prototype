@@ -11,7 +11,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
       <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-6">{% if currentOrganisation %}{{ currentOrganisation.name }}{% else %}Overview{% endif %}</h1>
-      
+
 
       {% if currentOrganisation and totalVaccinationsRecorded == 0 %}
         {% include "home/_no-vaccinations-recorded.html" %}
@@ -32,7 +32,7 @@
       {% if not currentOrganisation %}
       <p>This shows vaccination data for all your organisations combined.</p>
       {% endif %}
-      
+
 
     </div>
   </div>
