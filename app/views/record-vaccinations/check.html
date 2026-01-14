@@ -85,7 +85,7 @@
               text: "Date of birth"
             },
             value: {
-              text: (data.dateOfBirth | isoDateFromDateInput | govukDate) <br>(76 years old)
+              html: (data.dateOfBirth | isoDateFromDateInput | govukDate) + "<br>(76 years old)"
             },
             actions: {
               items: [
