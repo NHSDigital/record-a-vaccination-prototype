@@ -8,7 +8,7 @@
 {% set dateOfBirthHtml %}
   {% if data.dateOfBirth.day %}
     {{ (data.dateOfBirth | isoDateFromDateInput | govukDate) }}
-    <br>(75 years old)
+    <br>(76 years old)
   {% else %}
     {{ (data.dateOfBirth | govukDate) }}
   {% endif %}
@@ -78,7 +78,7 @@
           },
           {
             key: {
-              text: "Registered GP"
+              text: "GP surgery"
             },
             value: {
               html: "Beech House surgery <br>1 Ash Tree Road<br>Knaresborough<br>HG5 0UB"
