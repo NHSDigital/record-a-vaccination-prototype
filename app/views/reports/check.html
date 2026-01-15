@@ -36,6 +36,9 @@
       {% for field in data.vaccinationDataToReport %}
         {% set dataFields = (dataFields.push(field), dataFields) %}
       {% endfor %}
+      {% for field in data.paymentDataToReport %}
+        {% set dataFields = (dataFields.push(field), dataFields) %}
+      {% endfor %}
 
       {% set dataValue %}
         {{ dataFields | join(", ") }}
