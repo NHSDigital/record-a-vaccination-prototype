@@ -141,6 +141,32 @@
           }) }}
         {% endset %}
 
+        {% set paymentHtml %}
+
+          {% set items = [] %}
+          {% for option in data.paymentDataOptions %}
+            {% set items = (items.push({
+              text: option.text,
+              value: option.text,
+              hint: {
+                text: option.hint
+              }
+            }), items) %}
+          {% endfor %}
+
+          {{ checkboxes({
+            idPrefix: "payment-data",
+            name: "paymentDataToReport",
+            fieldset: {
+              legend: {
+                text: "Payment data"
+              }
+            },
+            values: data.paymentDataToReport,
+            items: items
+          }) }}
+        {% endset %}
+
         {{ checkboxes({
           idPrefix: "data",
           name: "data",
@@ -179,19 +205,28 @@
               conditional: {
                 html: sitesHtml
               }
-            },{
+            },
+            {
               value: "Consent and eligibility",
               text: "Consent and eligibility",
               conditional: {
                 html: consentAndEligibilityHtml
               }
-            },{
+            },
+            {
               value: "Vaccination",
               text: "Vaccination",
               conditional: {
                 html: vaccinationHtml
               }
-            }
+            },
+            {
+              value: "Payment information",
+              text: "Payment information",
+              conditional: {
+                html: paymentHtml
+              }
+            } if (currentOrganisation.type == "Community Pharmacy")
           ]
         }) }}
 

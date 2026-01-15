@@ -25,6 +25,10 @@ module.exports = {
   locationDataOptions: ["Site name", "Site ODS code", "Location type"],
   consentAndEligibilityDataOptions: ["Consent", "Eligibility", "Estimated due date"],
   vaccinationDataOptions: ["Vaccine type", "Product", "Batch", "Batch expiry date", "Dose amount", "Vaccination site", "Vaccination date", "Legal mechanism", "Comments"],
+  paymentDataOptions: [
+    {text: "Deposit ID", hint: "Set when the vaccination has been sent to NHSBSA"},
+    {text: "Claim ID", hint: "Set when NHSBSA have authorised payment"}
+  ],
 
   legalMechanisms: [
     {
