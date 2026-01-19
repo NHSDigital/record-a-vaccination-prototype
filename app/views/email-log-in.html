@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Log in</h1>
+
+      {{ input({
+        id: "email",
+        name: "email",
+        label: {
+          text: "Email",
+          classes: "nhsuk-label--s"
+        }
+      }) }}
+
+      {{ button({
+        text: "Continue"
+      }) }}
+
+    </div>
+  </div>
+
+{% endblock %}
