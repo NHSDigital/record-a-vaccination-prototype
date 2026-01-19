@@ -1,0 +1,37 @@
+
+{% extends 'layout.html' %}
+
+{% set pageName = "Contact us" %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+      
+      <h2 class="nhsuk-heading-m">Check our guidance</h2>
+      
+      <p>Before contacting the helpdesk, you may find an answer to you query in our guidance:</p>
+
+      <ul>
+        <li><a href="https://guide.ravs.england.nhs.uk/record-vaccinations/">Recording a vaccination</a></li>
+        <li><a href="https://guide.ravs.england.nhs.uk/managing-vaccines/">Managing vaccine batches</a></li>
+        <li><a href="https://guide.ravs.england.nhs.uk/managing-users/">Managing users</a></li>
+        <li><a href="https://guide.ravs.england.nhs.uk/records/">Editing and deleting records</a></li>
+        <li><a href="https://guide.ravs.england.nhs.uk/reporting/">Reports</a></li>
+      </ul>
+
+      <h2 class="nhsuk-heading-m">Contact the helpdesk</h2>
+
+      <p>To raise an issue with our helpdesk, you'll need to log in to the NHS National IT Cusotmer Support Portal first.
+     {{ button({
+        text: "Continue",
+        href: "https://nhsdigitaltraining.service-now.com/csm?id=sc_cat_item&sys_id=7406446b9779f290dd80f2df9153af58&sysparm_category=952a26ff97bf16d0dd80f2df9153af31"
+      }) }}
+
+    </div>
+  </div>
+
+
+{% endblock %}
