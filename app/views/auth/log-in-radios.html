@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Sign in" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+
+      <form action="/auth/log-in-answer" method="post">
+
+        {{ radios({
+          fieldset: {
+            legend: {
+              text: "How do you want to log in?",
+              size: "l",
+              isPageHeading: true
+            }
+          },
+          items: [
+            {
+              text: "Okta"
+            },
+            {
+              divider: "or"
+            },
+            {
+              text: "MediCare"
+            },
+            {
+              text: "PharmaPMR"
+            },
+            {
+              text: "PharmacyPlus+"
+            },
+            {
+              text: "Phoenix"
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

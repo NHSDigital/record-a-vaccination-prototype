@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Log in" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-6">Log in with</h1>
+
+
+      <form action="/auth/log-in-answer" method="post">
+
+        {{ button({
+          text: "Okta",
+          classes: "app-button--min-width-2"
+        }) }}
+
+        <p>or</p>
+
+        <div>
+          {{ button({
+            text: "MediCare",
+            classes: "nhsuk-button--secondary app-button--min-width-2"
+          }) }}
+        </div>
+
+        <div>
+          {{ button({
+            text: "PharmaPMR",
+            classes: "nhsuk-button--secondary app-button--min-width-2"
+          }) }}
+        </div>
+
+        <div>
+          {{ button({
+            text: "PharmacyPlus+",
+            classes: "nhsuk-button--secondary app-button--min-width-2"
+          }) }}
+        </div>
+
+        <div>
+          {{ button({
+            text: "Phoenix",
+            classes: "nhsuk-button--secondary app-button--min-width-2"
+          }) }}
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
