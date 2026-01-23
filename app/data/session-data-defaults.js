@@ -26,8 +26,8 @@ module.exports = {
   consentAndEligibilityDataOptions: ["Consent", "Eligibility", "Estimated due date"],
   vaccinationDataOptions: ["Vaccine type", "Product", "Batch", "Batch expiry date", "Dose amount", "Vaccination site", "Vaccination date", "Legal mechanism", "Comments"],
   paymentDataOptions: [
-    {text: "Deposit ID", hint: "Set when the vaccination has been sent to NHSBSA"},
-    {text: "Claim ID", hint: "Set when NHSBSA have authorised payment"}
+    {text: "Deposit ID", hint: "Set before we send the claim to NHSBSA"},
+    {text: "Claim ID", hint: "Set when NHSBSA have received the claim"}
   ],
 
   legalMechanisms: [
