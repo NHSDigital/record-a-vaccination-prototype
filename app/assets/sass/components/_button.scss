@@ -3,6 +3,10 @@
   min-width: 80px;
 }
 
+.app-button--min-width-2 {
+  min-width: 300px;
+}
+
 // Make buttons full width on mobile
 // This is temporary until https://github.com/nhsuk/nhsuk-frontend/pull/1309 is merged
 .nhsuk-button {
