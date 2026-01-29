@@ -19,19 +19,27 @@ const viewsPath = [
   join(__dirname, 'app/components/')
 ]
 
-const prototype = NHSPrototypeKit.init({
-  serviceName: SERVICE_NAME,
-  routes: routes,
-  locals: locals,
-  sessionDataDefaults: sessionDataDefaults,
-  viewsPath: viewsPath,
-  buildOptions: {
-    entryPoints: ['app/assets/sass/main.scss']
-  }
-})
+async function init() {
+  const prototype = await NHSPrototypeKit.init({
+    serviceName: SERVICE_NAME,
+    buildOptions: {
+      entryPoints: ['app/assets/sass/main.scss']
+    },
+    viewsPath,
+    routes,
+    locals,
+    sessionDataDefaults
+  })
 
-for (const [name, filter] of Object.entries(filters())) {
-  prototype.nunjucks.addFilter(name, filter)
+  // Add custom port number
+  prototype.app?.set('port', config.port)
+
+  // Add custom Nunjucks filters
+  for (const [name, filter] of Object.entries(filters)) {
+    prototype.nunjucks.addFilter(name, filter)
+  }
+
+  prototype.start()
 }
 
-prototype.start(port)
+init()
