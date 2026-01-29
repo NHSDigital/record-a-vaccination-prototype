@@ -11,9 +11,6 @@ const routes = require('./app/routes')
 
 const SERVICE_NAME = config.serviceName
 
-// Set configuration variables
-const port = parseInt(process.env.PORT, 10) || 2000
-
 const viewsPath = [
   join(__dirname, 'app/views/'),
   join(__dirname, 'app/components/')
