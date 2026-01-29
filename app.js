@@ -36,7 +36,7 @@ async function init() {
 
   // Add custom Nunjucks filters
   for (const [name, filter] of Object.entries(filters)) {
-    prototype.nunjucks.addFilter(name, filter)
+    prototype.nunjucks?.addFilter(name, filter)
   }
 
   prototype.start()
