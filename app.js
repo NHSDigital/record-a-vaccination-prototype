@@ -11,11 +11,13 @@ const SERVICE_NAME = config.serviceName
 
 const viewsPath = ['app/views/', 'app/components/']
 
+const entryPoints = ['app/assets/sass/main.scss', 'app/assets/javascript/*.js']
+
 async function init() {
   const prototype = await NHSPrototypeKit.init({
     serviceName: SERVICE_NAME,
     buildOptions: {
-      entryPoints: ['app/assets/sass/main.scss']
+      entryPoints
     },
     viewsPath,
     routes,
