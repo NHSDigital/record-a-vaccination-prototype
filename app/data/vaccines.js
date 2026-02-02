@@ -156,7 +156,7 @@ module.exports = [
     name: "HPV",
     products: [
       {
-        name: "Gardasil 9 ",
+        name: "Gardasil 9",
         type: "injection"
       }
     ]
@@ -203,7 +203,7 @@ module.exports = [
         type: "injection"
       },
       {
-        name: "Infanrix Hexa",
+        name: "Infanrix hexa",
         type: "injection"
       }
     ]
