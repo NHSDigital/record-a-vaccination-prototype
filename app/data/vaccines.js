@@ -209,7 +209,7 @@ module.exports = [
     ]
   },
   {
-    name: "4-in-1 (dTaP/IPV)",
+    name: "4-in-1 pre-school booster (DTaP/IPV)",
     products: [
       {
         name: "Boostrix-IPV",
