@@ -162,7 +162,7 @@ module.exports = [
     ]
   },
   {
-    name: "Hep B",
+    name: "Hepatitis B",
     products: [
       {
         name: "Engerix B",
