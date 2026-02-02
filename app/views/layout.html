@@ -68,12 +68,6 @@
 {% endblock %}
 
 {% block bodyEnd %}
-  {% block scripts %}
-    <!-- Custom JavaScript files can be added to this file -->
-    {% include "includes/scripts.html" %}
-
-    <!-- For adding page specific JavaScript -->
-    {% block pageScripts %}{% endblock %}
-  {% endblock %}
+  <script type="module" src="/assets/javascript/main.js"></script>
   {{ super() }}
 {% endblock %}
