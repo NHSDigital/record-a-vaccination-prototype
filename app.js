@@ -9,10 +9,7 @@ const routes = require('./app/routes')
 
 const SERVICE_NAME = config.serviceName
 
-const viewsPath = [
-  'app/views/',
-  'app/components/'
-]
+const viewsPath = ['app/views/', 'app/components/']
 
 async function init() {
   const prototype = await NHSPrototypeKit.init({
