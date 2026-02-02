@@ -1,5 +1,3 @@
-const { join } = require('node:path')
-
 const NHSPrototypeKit = require('nhsuk-prototype-kit')
 
 // Local dependencies
@@ -11,32 +9,24 @@ const routes = require('./app/routes')
 
 const SERVICE_NAME = config.serviceName
 
-const viewsPath = [
-  join(__dirname, 'app/views/'),
-  join(__dirname, 'app/components/')
-]
+const viewsPath = ['app/views/', 'app/components/']
+
+const entryPoints = ['app/assets/sass/main.scss', 'app/assets/javascript/*.js']
 
 async function init() {
   const prototype = await NHSPrototypeKit.init({
     serviceName: SERVICE_NAME,
     buildOptions: {
-      entryPoints: ['app/assets/sass/main.scss']
+      entryPoints
     },
     viewsPath,
     routes,
     locals,
+    filters,
     sessionDataDefaults
   })
 
-  // Add custom port number
-  prototype.app?.set('port', config.port)
-
-  // Add custom Nunjucks filters
-  for (const [name, filter] of Object.entries(filters())) {
-    prototype.nunjucks?.addFilter(name, filter)
-  }
-
-  prototype.start()
+  prototype.start(config.port)
 }
 
 init()
