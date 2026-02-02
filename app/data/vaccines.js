@@ -196,7 +196,7 @@ module.exports = [
     ]
   },
   {
-    name: "6-in-1 (DTaP/IPV/Hib/HepB)",
+    name: "6-in-1",
     products: [
       {
         name: "Vaxelis",
@@ -209,7 +209,7 @@ module.exports = [
     ]
   },
   {
-    name: "4-in-1 pre-school booster (DTaP/IPV)",
+    name: "4-in-1 pre-school booster",
     products: [
       {
         name: "Boostrix-IPV",
@@ -222,7 +222,7 @@ module.exports = [
     ]
   },
   {
-    name: "3-in-1 teenage booster (Td/IPV)",
+    name: "3-in-1 teenage booster",
     products: [
       {
         name: "Revaxis",
