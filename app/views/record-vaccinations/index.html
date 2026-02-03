@@ -8,6 +8,9 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+    {% include "includes/notification.html" %}
+
+
       {% if (errorList | length) > 0 %}
         {{ errorSummary({
           titleText: "There is a problem",
