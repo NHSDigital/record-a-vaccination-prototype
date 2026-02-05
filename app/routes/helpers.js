@@ -5,6 +5,7 @@ module.exports = router => {
   router.get('/prototype-setup/setup-batches', (req, res) => {
     const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
+    const currentSiteIds = currentOrganisation.sites.map((site) => site.id)
 
     let vaccineStock = data.vaccineStock
 
@@ -14,7 +15,7 @@ module.exports = router => {
     const millisecondsPerDay = 86400000
 
     const vaccines = data.vaccines
-    const siteId = "RW3NM"
+    const siteId = randomItem(currentSiteIds)
 
     for (let vaccine of vaccines) {
 
@@ -87,6 +88,8 @@ module.exports = router => {
     const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
 
+    const currentSiteIds = currentOrganisation.sites.map((site) => site.id)
+
     const listOfFirstNames = ["Susana", "Steven", "Aleah", "Kaylen", "Stephan", "Donavon", "Emely", "Kailee", "Brooks", "Brenton", "Miles", "Emanuel", "Jedidiah", "Glenn", "Jude", "Ivory", "Austen", "Alyson", "Jaime", "Jordin", "Chad", "Janay", "Tahj", "Reginald", "Enoch", "Amiyah", "Benito", "April", "Joelle", "Brant"]
 
     const listOfLastNames = ["Ross", "Friedman", "Switzer", "Devore", "Dominguez", "Kohn", "Moreau", "Farrar", "Hogue", "Goldsmith", "Wilkins", "Cornwell", "Wimberly", "Messer", "Woods", "Forrest", "Aiello", "Kuykendall", "Trout", "Bigelow", "Moreland", "Lentz", "Hurst", "Quinonez", "Pak", "McNally", "Longo", "Hunt", "Villa", "Breaux"]
@@ -129,8 +132,8 @@ module.exports = router => {
 
       data.vaccinationsRecorded.push({
         id: generatedId,
-        organisationId: "RW3",
-        siteId: "RW3NM",
+        organisationId: currentOrganisation.id,
+        siteId: randomItem(currentSiteIds),
         date: {
           day: dayToday.toString(),
           month: monthToday.toString(),
