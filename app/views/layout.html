@@ -12,7 +12,7 @@
 
 {% block head %}
   <!-- Add your custom CSS or Sass in /app/assets/sass/main.scss -->
-  <link href="/main.css" rel="stylesheet">
+  <link href="/assets/sass/main.css" rel="stylesheet">
 {% endblock %}
 
 <!-- Set the page title -->
@@ -68,12 +68,6 @@
 {% endblock %}
 
 {% block bodyEnd %}
-  {% block scripts %}
-    <!-- Custom JavaScript files can be added to this file -->
-    {% include "includes/scripts.html" %}
-
-    <!-- For adding page specific JavaScript -->
-    {% block pageScripts %}{% endblock %}
-  {% endblock %}
+  <script type="module" src="/assets/javascript/main.js"></script>
   {{ super() }}
 {% endblock %}
