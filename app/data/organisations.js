@@ -206,8 +206,30 @@ module.exports = [
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
+    sites: [
+      {
+        id: "RFFPK",
+        name: "Barnsley General Hospital"
+      }
+    ],
     vaccines: [
-      {name: "COVID-19", status: "enabled"}
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"},
+      {name: "pertussis", status: "enabled"},
+      {name: "MMR", status: "enabled"},
+      {name: "pneumococcal", status: "enabled"},
+      {name: "RSV", status: "enabled"},
+      {name: "BCG", status: "enabled"},
+      {name: "MMRV", status: "enabled"},
+      {name: "HPV", status: "enabled"},
+      {name: "Hepatitis B", status: "enabled"},
+      {name: "MenB", status: "enabled"},
+      {name: "6-in-1", status: "enabled"},
+      {name: "4-in-1 pre-school booster", status: "enabled"},
+      {name: "3-in-1 teenage booster", status: "enabled"},
+      {name: "MenACWY", status: "enabled"},
+      {name: "Rotavirus", status: "enabled"},
+      {name: "Shingles", status: "enabled"}
     ]
   },
   {

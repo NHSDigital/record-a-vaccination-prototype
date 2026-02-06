@@ -15,6 +15,9 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds nhsuk-u-margin-bottom-5">
 
+      {% include "includes/notification.html" %}
+
+
       <h1 class="nhsuk-heading-l">Vaccines</h1>
 
       <p class="nhsuk-body-l">Add and edit vaccines for your organisation.</p>
@@ -126,7 +129,7 @@
                   </td>
                   <td class="nhsuk-table__cell ">
                     {% if site.status != "closed" %}
-                      <div><a href="/vaccines/{{ thisVaccine.id }}/add" class="nhsuk-link">Add batch</a></div>
+                      <div><a href="/vaccines/{{ thisVaccine.id }}/add" class="nhsuk-link">Add&nbsp;batch</a></div>
                     {% endif %}
                   </td>
                 </tr>
