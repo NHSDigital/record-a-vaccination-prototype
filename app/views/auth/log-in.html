@@ -8,45 +8,44 @@
 
       <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-6">Log in</h1>
 
+      {{ button({
+        text: "Log in with Okta",
+        classes: "app-button--min-width-2",
+        href: "/auth/okta-sign-in"
+      }) }}
 
-      <form action="/auth/log-in-answer" method="post">
+      <p>or</p>
 
+      <div>
         {{ button({
-          text: "Log in with Okta",
-          classes: "app-button--min-width-2"
+          text: "Log in with MediCare",
+          classes: "nhsuk-button--secondary app-button--min-width-2",
+          href: "/auth/medicare-sign-in"
         }) }}
+      </div>
 
-        <p>or</p>
+      <div>
+        {{ button({
+          text: "Log in with PharmaPMR",
+          classes: "nhsuk-button--secondary app-button--min-width-2"
+        }) }}
+      </div>
 
-        <div>
-          {{ button({
-            text: "Log in with MediCare",
-            classes: "nhsuk-button--secondary app-button--min-width-2"
-          }) }}
-        </div>
+      <div>
+        {{ button({
+          text: "Log in with PharmacyPlus+",
+          classes: "nhsuk-button--secondary app-button--min-width-2"
+        }) }}
+      </div>
 
-        <div>
-          {{ button({
-            text: "Log in with PharmaPMR",
-            classes: "nhsuk-button--secondary app-button--min-width-2"
-          }) }}
-        </div>
+      <div>
+        {{ button({
+          text: "Log in with Phoenix",
+          classes: "nhsuk-button--secondary app-button--min-width-2"
+        }) }}
+      </div>
 
-        <div>
-          {{ button({
-            text: "Log in with PharmacyPlus+",
-            classes: "nhsuk-button--secondary app-button--min-width-2"
-          }) }}
-        </div>
 
-        <div>
-          {{ button({
-            text: "Log in with Phoenix",
-            classes: "nhsuk-button--secondary app-button--min-width-2"
-          }) }}
-        </div>
-
-      </form>
 
     </div>
   </div>
