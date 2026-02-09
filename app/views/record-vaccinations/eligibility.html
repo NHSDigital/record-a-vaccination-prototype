@@ -127,6 +127,13 @@
             isPageHeading: true
           }
         }) %}
+
+        {{ radios({
+            idPrefix: "eligibility",
+            name: "eligibility",
+            value: data.eligibility,
+            items: items
+          }) }}
           
         {% endcall %}
 
