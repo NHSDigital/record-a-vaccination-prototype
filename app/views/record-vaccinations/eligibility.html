@@ -97,7 +97,17 @@
         {% elif data.vaccine == "RSV" %}
           {% set eligibilityOptions = RSVEligibilityOptions %}
         {% elif data.vaccine == "pneumococcal" %}
-          {% set eligibilityOptions = pneumococcalOver65Options %}
+          {% set eligibilityOptions = pneumococcalEligibilityOptions %}
+        {% elif data.vaccine == "3-in-1" %}
+          {% set eligibilityOptions = 3-in-1EligibilityOptions %}
+        {% elif data.vaccine == "HPV" %}
+          {% set eligibilityOptions = HPVEligibilityOptions %}
+        {% elif data.vaccine == "MenACWY" %}
+          {% set eligibilityOptions = MenACWYEligibilityOptions %}
+        {% elif data.vaccine == "MenB" %}
+          {% set eligibilityOptions = MenBEligibilityOptions %}
+        {% elif data.vaccine == "shingles" %}
+          {% set eligibilityOptions = shinglesEligibilityOptions %}
         {% else %}
           {% set eligibilityOptions = [] %}
         {% endif %}
@@ -117,37 +127,7 @@
             isPageHeading: true
           }
         }) %}
-
-          {% if data.vaccine == "pneumococcal" %}
-            <h2 class="nhsuk-u-font-size-19 nhsuk-u-margin-bottom-2 nhsuk-u-margin-top-3 nhsuk-u-font-weight-normal">Aged 65 and over</h2>
-          {% endif %}
-
-          {{ radios({
-            idPrefix: "eligibility",
-            name: "eligibility",
-            value: data.eligibility,
-            items: items
-          }) }}
-
-          {% if data.vaccine == "pneumococcal" %}
-            <h2 class="nhsuk-u-font-size-19 nhsuk-u-margin-bottom-2 nhsuk-u-margin-top-3 nhsuk-u-font-weight-normal">Aged 18 to 64 and in a clinical risk group</h2>
-
-            {% set pneumococcalUnder64Items = [] %}
-            {% for option in pneumococcalUnder65Options %}
-              {% set pneumococcalUnder64Items = (pneumococcalUnder64Items.push({
-                text: option,
-                value: option
-                }), pneumococcalUnder64Items) %}
-            {% endfor %}
-
-            {{ radios({
-              idPrefix: "eligibility2",
-              name: "eligibility",
-              value: data.eligibility,
-              items: pneumococcalUnder64Items
-            }) }}
-          {% endif %}
-
+          
         {% endcall %}
 
         {{ button({
