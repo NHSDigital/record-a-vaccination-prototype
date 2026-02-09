@@ -6,7 +6,10 @@ module.exports = router => {
     const email = data.email || "jane.smith@nhs.net"
     const user = data.users.find((user) => user.email === email)
 
-    if (!user) {
+    if (email === 'freda.pink@nhs.net') {
+      res.redirect('/auth/keycloak-not-recognised')
+      return
+    } else if (!user) {
       res.redirect('/auth/okta-sign-in')
       return
     }

@@ -1,0 +1,20 @@
+{% extends '_layouts/keycloak.html' %}
+
+{% set pageName = "Sign in" %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1>You’re not a user of the service</h1>
+
+      <p>Your email address {{ data.email }} is not associated with an account on Record a vaccination.</p>
+
+      <p>If you have not previously used the service, ask a colleague at your organisation to add you as user.</p>
+
+      <p>If you have used the service, <a href="/auth/log-in">log in</a> using the account you used before.</p>
+
+    </div>
+  </div>
+{% endblock %}
