@@ -5,5 +5,5 @@ module.exports = {
   serviceName: 'Record a vaccination',
 
   // Port to run the prototype on locally
-  port: 2000
+  port: 3000
 }
