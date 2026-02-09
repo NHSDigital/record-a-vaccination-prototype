@@ -162,7 +162,7 @@ module.exports = [
     ]
   },
   {
-    name: "Hepatitis B",
+    name: "hepatitis B",
     products: [
       {
         name: "Engerix B",
@@ -240,7 +240,7 @@ module.exports = [
     ]
   },
   {
-    name: "Rotavirus",
+    name: "rotavirus",
     products: [
       {
         name: "Rotarix",
@@ -249,7 +249,7 @@ module.exports = [
     ]
   },
   {
-    name: "Shingles",
+    name: "shingles",
     products: [
       {
         name: "Shingrix",
