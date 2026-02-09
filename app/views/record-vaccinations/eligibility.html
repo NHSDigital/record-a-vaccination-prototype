@@ -50,7 +50,7 @@
   "In a clinical risk group"
 ] %}
 
-{% set 3-in-1EligibilityOptions = [
+{% set 3in1EligibilityOptions = [
   "Based on age",
   "In a clinical risk group"
 ] %}
@@ -99,7 +99,7 @@
         {% elif data.vaccine == "pneumococcal" %}
           {% set eligibilityOptions = pneumococcalEligibilityOptions %}
         {% elif data.vaccine == "3-in-1 teenage booster" %}
-          {% set eligibilityOptions = 3-in-1EligibilityOptions %}
+          {% set eligibilityOptions = 3in1EligibilityOptions %}
         {% elif data.vaccine == "HPV" %}
           {% set eligibilityOptions = HPVEligibilityOptions %}
         {% elif data.vaccine == "MenACWY" %}
