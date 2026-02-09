@@ -229,7 +229,7 @@ module.exports = [
   },
   {
     id: "RFF47457436",
-    vaccine: "Hepatitis B",
+    vaccine: "hepatitis B",
     vaccineProduct: "Engerix B",
     organisationId: "RFF", // Barnsley Hospital NHS Foundation Trust
     siteId: "RFFPK", // Barnsley General Hospital
@@ -313,7 +313,7 @@ module.exports = [
   },
   {
     id: "RFF27326334",
-    vaccine: "Rotavirus",
+    vaccine: "rotavirus",
     vaccineProduct: "Rotarix",
     organisationId: "RFF", // Barnsley Hospital NHS Foundation Trust
     siteId: "RFFPK", // Barnsley General Hospital
@@ -327,7 +327,7 @@ module.exports = [
   },
   {
     id: "RFF25325355",
-    vaccine: "Shingles",
+    vaccine: "shingles",
     vaccineProduct: "Shingrix",
     organisationId: "RFF", // Barnsley Hospital NHS Foundation Trust
     siteId: "RFFPK", // Barnsley General Hospital
