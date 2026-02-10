@@ -861,16 +861,38 @@ module.exports = router => {
       redirectPath = "/record-vaccinations/add-batch"
     } else if (!vaccineBatch) {
       redirectPath = "/record-vaccinations/batch?showError=yes"
-    } else if (["COVID-19", "flu", "flu (London service)", "RSV", "pneumococcal", "3-in-1 teenage booster", "HPV", "MenACWY", "MenB", "shingles"].includes(data.vaccine)) {
+    //} else if (["COVID-19", "flu", "flu (London service)", "RSV", "pneumococcal", "3-in-1 teenage booster", "HPV", "MenACWY", "MenB", "shingles"].includes(data.vaccine)) {
+    } else if (["COVID-19", "RSV", "pneumococcal", "3-in-1 teenage booster", "HPV", "MenACWY", "shingles"].includes(data.vaccine)) {
       redirectPath = "/record-vaccinations/eligibility"
     } else if (data.vaccine === "pertussis") {
       redirectPath = "/record-vaccinations/patient-estimated-due-date"
+    } else if (["6-in-1", "flu", "flu (London service)", "MenB", "MMRV", "pneumococcal"].includes(data.vaccine)) {
+      data.showError = "no"
+      redirectPath = "/record-vaccinations/dose"
     } else {
-      // MMR, MMRV, 4-in-1, 6-in-1, rotavirus, BCG, hepatitis B
       redirectPath = "/record-vaccinations/consent"
     }
     res.redirect(redirectPath)
   })
+
+  // START: answer-dose
+
+  router.post('/record-vaccinations/answer-dose', (req, res) => {
+
+    const data = req.session.data
+    const vaccineDose = data.vaccineDose
+
+    let redirectPath
+
+    if (!vaccineDose) {
+      redirectPath = "/record-vaccinations/dose?showError=yes"
+    } else {
+      redirectPath = "/record-vaccinations/eligibility"
+    }
+    res.redirect(redirectPath)
+  })
+
+  // END: answer-dose
 
   router.get('/record-vaccinations/add-batch', (req, res) => {
     const data = req.session.data
