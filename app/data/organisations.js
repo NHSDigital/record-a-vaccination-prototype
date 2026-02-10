@@ -222,14 +222,14 @@ module.exports = [
       {name: "BCG", status: "enabled"},
       {name: "MMRV", status: "enabled"},
       {name: "HPV", status: "enabled"},
-      {name: "Hepatitis B", status: "enabled"},
+      {name: "hepatitis B", status: "enabled"},
       {name: "MenB", status: "enabled"},
       {name: "6-in-1", status: "enabled"},
       {name: "4-in-1 pre-school booster", status: "enabled"},
       {name: "3-in-1 teenage booster", status: "enabled"},
       {name: "MenACWY", status: "enabled"},
-      {name: "Rotavirus", status: "enabled"},
-      {name: "Shingles", status: "enabled"}
+      {name: "rotavirus", status: "enabled"},
+      {name: "shingles", status: "enabled"}
     ]
   },
   {
