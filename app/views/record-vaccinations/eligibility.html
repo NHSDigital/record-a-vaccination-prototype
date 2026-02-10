@@ -45,20 +45,35 @@
   "Healthcare worker not covered by national criteria"
 ] %}
 
-{% set pneumococcalOver65Options = [
-  "Aged 65 and over"
+{% set pneumococcalEligibilityOptions = [
+  "Based on age",
+  "In an at-risk group"
 ] %}
 
-{% set pneumococcalUnder65Options = [
-  "Heart disease",
-  "Kidney disease",
-  "Liver disease",
-  "Respiratory disease",
-  "Immunosuppressed",
-  "Cochlear implants",
-  "Diabetes"
+{% set 3in1EligibilityOptions = [
+  "Based on age",
+  "In an at-risk group"
 ] %}
 
+{% set HPVEligibilityOptions = [
+  "Based on age",
+  "In an at-risk group"
+] %}
+
+{% set MenACWYEligibilityOptions = [
+  "Based on age",
+  "In an at-risk group"
+] %}
+
+{% set MenBEligibilityOptions = [
+  "Based on age",
+  "In an at-risk group"
+] %}
+
+{% set shinglesEligibilityOptions = [
+  "Based on age",
+  "In an at-risk group"
+] %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -82,7 +97,17 @@
         {% elif data.vaccine == "RSV" %}
           {% set eligibilityOptions = RSVEligibilityOptions %}
         {% elif data.vaccine == "pneumococcal" %}
-          {% set eligibilityOptions = pneumococcalOver65Options %}
+          {% set eligibilityOptions = pneumococcalEligibilityOptions %}
+        {% elif data.vaccine == "3-in-1 teenage booster" %}
+          {% set eligibilityOptions = 3in1EligibilityOptions %}
+        {% elif data.vaccine == "HPV" %}
+          {% set eligibilityOptions = HPVEligibilityOptions %}
+        {% elif data.vaccine == "MenACWY" %}
+          {% set eligibilityOptions = MenACWYEligibilityOptions %}
+        {% elif data.vaccine == "MenB" %}
+          {% set eligibilityOptions = MenBEligibilityOptions %}
+        {% elif data.vaccine == "shingles" %}
+          {% set eligibilityOptions = shinglesEligibilityOptions %}
         {% else %}
           {% set eligibilityOptions = [] %}
         {% endif %}
@@ -103,36 +128,13 @@
           }
         }) %}
 
-          {% if data.vaccine == "pneumococcal" %}
-            <h2 class="nhsuk-u-font-size-19 nhsuk-u-margin-bottom-2 nhsuk-u-margin-top-3 nhsuk-u-font-weight-normal">Aged 65 and over</h2>
-          {% endif %}
-
-          {{ radios({
+        {{ radios({
             idPrefix: "eligibility",
             name: "eligibility",
             value: data.eligibility,
             items: items
           }) }}
-
-          {% if data.vaccine == "pneumococcal" %}
-            <h2 class="nhsuk-u-font-size-19 nhsuk-u-margin-bottom-2 nhsuk-u-margin-top-3 nhsuk-u-font-weight-normal">Aged 18 to 64 and in a clinical risk group</h2>
-
-            {% set pneumococcalUnder64Items = [] %}
-            {% for option in pneumococcalUnder65Options %}
-              {% set pneumococcalUnder64Items = (pneumococcalUnder64Items.push({
-                text: option,
-                value: option
-                }), pneumococcalUnder64Items) %}
-            {% endfor %}
-
-            {{ radios({
-              idPrefix: "eligibility2",
-              name: "eligibility",
-              value: data.eligibility,
-              items: pneumococcalUnder64Items
-            }) }}
-          {% endif %}
-
+          
         {% endcall %}
 
         {{ button({

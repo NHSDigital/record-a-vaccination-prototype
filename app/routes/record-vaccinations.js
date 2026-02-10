@@ -861,12 +861,12 @@ module.exports = router => {
       redirectPath = "/record-vaccinations/add-batch"
     } else if (!vaccineBatch) {
       redirectPath = "/record-vaccinations/batch?showError=yes"
-    } else if (["COVID-19", "flu", "flu (London service)", "RSV", "pneumococcal"].includes(data.vaccine)) {
+    } else if (["COVID-19", "flu", "flu (London service)", "RSV", "pneumococcal", "3-in-1 teenage booster", "HPV", "MenACWY", "MenB", "shingles"].includes(data.vaccine)) {
       redirectPath = "/record-vaccinations/eligibility"
     } else if (data.vaccine === "pertussis") {
       redirectPath = "/record-vaccinations/patient-estimated-due-date"
     } else {
-      // MMR
+      // MMR, MMRV, 4-in-1, 6-in-1, rotavirus, BCG, hepatitis B
       redirectPath = "/record-vaccinations/consent"
     }
     res.redirect(redirectPath)
