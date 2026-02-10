@@ -9,6 +9,9 @@ module.exports = router => {
     if (email === 'freda.pink@nhs.net') {
       res.redirect('/auth/keycloak-not-recognised')
       return
+    } else if (email === 'james.blue@nhs.net') {
+      res.redirect('/auth/keycloak-existing-account-new-login')
+      return
     } else if (!user) {
       res.redirect('/auth/okta-sign-in')
       return

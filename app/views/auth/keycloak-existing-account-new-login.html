@@ -1,0 +1,49 @@
+{% extends '_layouts/keycloak.html' %}
+
+{% set pageName = "Sign in" %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">You previously logged in a different way</h1>
+
+      <p>Your email address {{ data.email }} is associated with a different log in method.</p>
+
+      <p>If you would like to be able to use both log in methods, first sign in using the way you used before:</p>
+
+      {{ button({
+        text: "Log in with Okta",
+        classes: "app-button--min-width-2",
+        href: "/auth/okta-sign-in"
+      }) }}
+
+      <div>
+        {{ button({
+          text: "Log in with PharmaPMR",
+          classes: "nhsuk-button--secondary app-button--min-width-2"
+        }) }}
+      </div>
+
+      <div>
+        {{ button({
+          text: "Log in with PharmacyPlus+",
+          classes: "nhsuk-button--secondary app-button--min-width-2"
+        }) }}
+      </div>
+
+      <div>
+        {{ button({
+          text: "Log in with Phoenix",
+          classes: "nhsuk-button--secondary app-button--min-width-2"
+        }) }}
+      </div>
+
+
+      <p>We will then link both log in methods to your account and in future you can log in either way.</p>
+
+
+    </div>
+  </div>
+{% endblock %}
