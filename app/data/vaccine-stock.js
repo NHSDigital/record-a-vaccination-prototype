@@ -338,5 +338,75 @@ module.exports = [
         expiryDate: "2026-10-13"
       }
     ]
+  },
+  {
+    id: "6346144",
+    vaccine: "COVID-19",
+    vaccineProduct: "Comirnaty 3 LP.8.1",
+    organisationId: "RCY", // Central Manchester Trust
+    siteId: "RCY72", // Ashford Hospital
+    batches: [
+      {
+        id: "523522",
+        batchNumber: "NH3791",
+        expiryDate: "2027-08-12"
+      }
+    ]
+  },
+  {
+    id: "12346353",
+    vaccine: "COVID-19",
+    vaccineProduct: "Comirnaty 3 LP.8.1",
+    organisationId: "RAP", // North Middlesex University Hospital NHS Trust
+    siteId: "RAP24", // Labour Ward
+    batches: [
+      {
+        id: "64632",
+        batchNumber: "253-15",
+        expiryDate: "2026-12-04"
+      }
+    ]
+  },
+  {
+    id: "46422414",
+    vaccine: "COVID-19",
+    vaccineProduct: "Comirnaty 3 LP.8.1",
+    organisationId: "RXX", // Surrey and Borders Partnership
+    siteId: "RXX23", // The Meadows
+    batches: [
+      {
+        id: "7463425",
+        batchNumber: "252-61",
+        expiryDate: "2026-12-04"
+      }
+    ]
+  },
+  {
+    id: "46422414",
+    vaccine: "COVID-19",
+    vaccineProduct: "Comirnaty 3 LP.8.1",
+    organisationId: "RWP", // Worcester Acute Hospitals
+    siteId: "RWP01", // Alexandra Hospital
+    batches: [
+      {
+        id: "4643646",
+        batchNumber: "353-5235",
+        expiryDate: "2026-11-04"
+      }
+    ]
+  },
+  {
+    id: "25235325",
+    vaccine: "RSV",
+    vaccineProduct: "Abrysvo",
+    organisationId: "FA424", // Pickfords Pharmacy
+    siteId: "FA424X", // Pickfords Pharmacy
+    batches: [
+      {
+        id: "325325",
+        batchNumber: "ANEUEC-91",
+        expiryDate: "2027-11-23"
+      }
+    ]
   }
 ]
