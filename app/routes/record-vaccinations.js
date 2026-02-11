@@ -861,8 +861,7 @@ module.exports = router => {
       redirectPath = "/record-vaccinations/add-batch"
     } else if (!vaccineBatch) {
       redirectPath = "/record-vaccinations/batch?showError=yes"
-    //} else if (["COVID-19", "flu", "flu (London service)", "RSV", "pneumococcal", "3-in-1 teenage booster", "HPV", "MenACWY", "MenB", "shingles"].includes(data.vaccine)) {
-    } else if (["COVID-19", "RSV", "pneumococcal", "3-in-1 teenage booster", "HPV", "MenACWY", "shingles"].includes(data.vaccine)) {
+    } else if (["COVID-19", "RSV", "3-in-1 teenage booster", "HPV", "MenACWY", "shingles"].includes(data.vaccine)) {
       redirectPath = "/record-vaccinations/eligibility"
     } else if (data.vaccine === "pertussis") {
       redirectPath = "/record-vaccinations/patient-estimated-due-date"
