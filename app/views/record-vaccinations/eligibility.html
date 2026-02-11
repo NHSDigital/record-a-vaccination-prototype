@@ -141,7 +141,7 @@
 
         {% call fieldset({
           legend: {
-            text: ("Why are you giving them the " + data.vaccine + "?" if data.vaccinationToday == 'yes' else "Why was the patient eligible for the " + data.vaccine + "?"),
+            text: ("Why are you giving them the " + data.vaccine + " vaccine?" if data.vaccinationToday == 'yes' else "Why was the patient eligible for the " + data.vaccine + " vaccine?"),
             size: "l",
             isPageHeading: true
           }
