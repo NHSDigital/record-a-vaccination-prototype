@@ -84,6 +84,11 @@
   "Age-based eligibility 0 to 5 years"
 ] %}
 
+{% set MMRVEligibilityOptions = [
+  "In a clinical risk group",
+  "Age-based eligibility 0 to 5 years"
+] %}
+
 {% block content %}
 
   <div class="nhsuk-grid-row">
@@ -120,6 +125,8 @@
           {% set eligibilityOptions = shinglesEligibilityOptions %}
         {% elif data.vaccine == "6-in-1" %}
           {% set eligibilityOptions = 6in1EligibilityOptions %}
+        {% elif data.vaccine == "MMRV" %}
+          {% set eligibilityOptions = MMRVEligibilityOptions %}
         {% else %}
           {% set eligibilityOptions = [] %}
         {% endif %}
@@ -158,4 +165,3 @@
   </div>
 
 {% endblock %}
-
