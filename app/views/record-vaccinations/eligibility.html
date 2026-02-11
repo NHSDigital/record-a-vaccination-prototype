@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Why are you giving them the vaccine?" %}
+{% set pageName = "Why are you giving them the " + data.vaccine + "?" %}
 
 {% set currentSection = "vaccinate" %}
 
@@ -141,7 +141,7 @@
 
         {% call fieldset({
           legend: {
-            text: ("Why are you giving them the vaccine?" if data.vaccinationToday == 'yes' else "Why was the patient eligible for the vaccine?"),
+            text: ("Why are you giving them the " + data.vaccine + "?" if data.vaccinationToday == 'yes' else "Why was the patient eligible for the " + data.vaccine + "?"),
             size: "l",
             isPageHeading: true
           }
