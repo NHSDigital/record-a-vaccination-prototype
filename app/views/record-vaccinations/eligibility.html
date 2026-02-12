@@ -1,11 +1,15 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Why are you giving them the vaccine?" %}
+{% set pageName = "Why are you giving them the " + data.vaccine + "?" %}
 
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {% set backHref = from if from else "/record-vaccinations/batch" %}
+  {% if ["6-in-1", "flu", "flu (London service)", "MenB", "MMRV", "pneumococcal"].includes(data.vaccine) %}
+    {% set backHref = "/record-vaccinations/dose" %}
+  {% else %}
+    {% set backHref = from if from else "/record-vaccinations/batch" %}
+  {% endif %}
 
   {{ backLink({ href: backHref }) }}
 {% endblock %}
@@ -75,7 +79,18 @@
   "In an at-risk group"
 ] %}
 
+{% set 6in1EligibilityOptions = [
+  "Based on age",
+  "In an at-risk group"
+] %}
+
+{% set MMRVEligibilityOptions = [
+  "Based on age",
+  "In an at-risk group"
+] %}
+
 {% block content %}
+
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
@@ -108,6 +123,10 @@
           {% set eligibilityOptions = MenBEligibilityOptions %}
         {% elif data.vaccine == "shingles" %}
           {% set eligibilityOptions = shinglesEligibilityOptions %}
+        {% elif data.vaccine == "6-in-1" %}
+          {% set eligibilityOptions = 6in1EligibilityOptions %}
+        {% elif data.vaccine == "MMRV" %}
+          {% set eligibilityOptions = MMRVEligibilityOptions %}
         {% else %}
           {% set eligibilityOptions = [] %}
         {% endif %}
@@ -122,7 +141,7 @@
 
         {% call fieldset({
           legend: {
-            text: ("Why are you giving them the vaccine?" if data.vaccinationToday == 'yes' else "Why was the patient eligible for the vaccine?"),
+            text: ("Why are you giving them the " + data.vaccine + " vaccine?" if data.vaccinationToday == 'yes' else "Why was the patient eligible for the " + data.vaccine + " vaccine?"),
             size: "l",
             isPageHeading: true
           }
@@ -146,4 +165,3 @@
   </div>
 
 {% endblock %}
-
