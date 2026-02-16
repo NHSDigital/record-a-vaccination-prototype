@@ -488,10 +488,7 @@ module.exports = [
     ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RXT",
@@ -507,10 +504,7 @@ module.exports = [
     ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RYW",
@@ -526,10 +520,7 @@ module.exports = [
     ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RL7",
@@ -545,10 +536,7 @@ module.exports = [
     ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RWL",
@@ -564,10 +552,7 @@ module.exports = [
     ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RQ3",
@@ -583,10 +568,7 @@ module.exports = [
     ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RLU",
@@ -602,10 +584,7 @@ module.exports = [
     ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RQ4",
@@ -621,10 +600,7 @@ module.exports = [
     ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RMB",
@@ -640,10 +616,7 @@ module.exports = [
     ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RXL",
@@ -659,10 +632,7 @@ module.exports = [
     ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RMR",
@@ -678,10 +648,7 @@ module.exports = [
     ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RML",
