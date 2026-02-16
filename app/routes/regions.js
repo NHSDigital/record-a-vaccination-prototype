@@ -229,7 +229,7 @@ module.exports = router => {
     const organisation = req.session.data.organisations.find((org) => org.id === req.params.id)
     if (!organisation) { res.redirect('/regions/'); return }
 
-    res.render('regions/delete-organisation', {
+    res.render('regions/delete', {
       organisation
     })
   })

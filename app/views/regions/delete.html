@@ -1,15 +1,19 @@
+{#
+  Organisations can only be deleted by regions if they are in 'invited'
+  state, and have never logged in to use the service. This is intended
+  for correcting mistakes, rather than off-boarding organsiations.
+
+  To off-board an organisation who is a current user of the service, the
+  regions can 'deactivate' them instead.
+#}
 {% extends 'layout.html' %}
 
 {% set pageName = "Deactivate " + organisation.name %}
 {% set currentSection = "organisations" %}
 
-{% block header %}
-  {% include "includes/header-logged-in-region.html" %}
-{% endblock %}
-
 {% block beforeContent %}
   {{ backLink({
-    href: "/regions/organisations/" + organisation.id,
+    href: "/regions/organisations/",
     text: "Back"
   }) }}
 {% endblock %}
@@ -18,15 +22,13 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Delete Central Manchester University Hospitals NHS Foundation Trust (RW3)</h1>
+      <h1 class="nhsuk-heading-l">Delete {{ organisation.name }} ({{ organisation.id }})</h1>
 
-      <p>Once you delete this organisation, no one at Central Manchester University Hospitals NHS Foundation Trust will be able to record vaccinations.</p>
+      <p>Once you delete this organisation, no one at {{ organisation.name }} will be able to record vaccinations.</p>
 
       <p>You can add this organisation back at any time.</p>
 
-
-
-      <form action="/regions/organisations/{{ organisation.id}}/deactivated" method="post" novalidate="true">
+      <form action="/regions/organisations/{{ organisation.id}}/deleted" method="post" novalidate="true">
         {{ button({
           "text": "Delete organisation",
           classes: "nhsuk-button--warning"

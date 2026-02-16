@@ -466,6 +466,10 @@ module.exports = [
       town: "Bracknell",
       postcode: "RG12 2UT"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y56"
@@ -478,6 +482,10 @@ module.exports = [
       town: "Hornchurch",
       postcode: "RM12 6RS"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -493,6 +501,10 @@ module.exports = [
       town: "Birmingham",
       postcode: "B13 8QY"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -508,6 +520,10 @@ module.exports = [
       town: "Birmingham",
       postcode: "B7 4BN"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -523,6 +539,10 @@ module.exports = [
       town: "Birmingham",
       postcode: "B9 5SS"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -538,6 +558,10 @@ module.exports = [
       town: "Birmingham",
       postcode: "B13 8JL"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -553,6 +577,10 @@ module.exports = [
       town: "Birmingham",
       postcode: "B4 6NH"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -568,6 +596,10 @@ module.exports = [
       town: "Birmingham",
       postcode: "B15 2TG"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -583,6 +615,10 @@ module.exports = [
       town: "West bromwich",
       postcode: "B70 8NY"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -598,6 +634,10 @@ module.exports = [
       town: "Blackburn",
       postcode: "BB2 3HH"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -613,6 +653,10 @@ module.exports = [
       town: "Blackpool",
       postcode: "FY3 8NR"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -628,6 +672,10 @@ module.exports = [
       town: "Blackpool",
       postcode: "FY3 8NR"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -922,31 +970,23 @@ module.exports = [
   },
   {
     id: "RHB",
-    name: "Camden and islington Community Health services NHS Trust",
+    name: "Camden and Islington Community Health Services NHS Trust",
     address: {
       line1: "St. pancras hospital",
       town: "London",
       postcode: "NW1 0PE"
     },
-    status: "Active",
-    type: "NHS Trust",
-    region: "Y56"
-  },
-  {
-    id: "RRQ",
-    name: "Camden and islington mental Health NHS Trust",
-    address: {
-      line1: "St. pancras hospital",
-      town: "London",
-      postcode: "NW1 0PE"
-    },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y56"
   },
   {
     id: "RWM",
-    name: "Cardiff and vale NHS Trust",
+    name: "Cardiff and Vale NHS Trust",
     address: {
       line1: "Cardigan house",
       town: "Cardiff",
@@ -982,7 +1022,7 @@ module.exports = [
       town: "London",
       postcode: "NW1 3AX"
     },
-    status: "Active",
+    status: "Deactivated",
     type: "NHS Trust",
     region: "Y56",
     vaccines: [
@@ -1018,6 +1058,10 @@ module.exports = [
       town: "London",
       postcode: "NW1 5JD"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y56"
@@ -1187,7 +1231,11 @@ module.exports = [
       town: "London",
       postcode: "SW10 9NH"
     },
-    status: "Active",
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
+    status: "Invited",
     type: "NHS Trust",
     region: "Y56"
   },
