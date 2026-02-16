@@ -50,7 +50,7 @@
             </div>
 
             <select class="nhsuk-select" id="otherVaccinator" name="otherVaccinator"
-              data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+              data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
                 <option {{ "selected" if vaccination.otherVaccinator == "" }} value=""></option>
 
                 {% for otherVaccinator in otherVaccinators %}
@@ -67,7 +67,7 @@
           fieldset: {
             legend: {
               text: ("Who was the vaccinator?" if vaccination.vaccinationToday == 'yes' else "Who was the vaccinator?"),
-              classes: "nhsuk-fieldset__legend--l",
+              size: "l",
               isPageHeading: "true"
             }
           },

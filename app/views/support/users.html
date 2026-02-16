@@ -3,10 +3,7 @@
 {% set pageName = "Users" %}
 
 {% set currentSection = "users" %}
-
-{% block header %}
-  {% include "includes/header-logged-in-support.html" %}
-{% endblock %}
+postcode:
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -24,7 +21,7 @@
 
             {{ button({
               text: "Search",
-              classes: "nhsuk-button--secondary nhsuk-u-margin-left-2 app-button--small nhsuk-u-margin-bottom-0"
+              classes: "nhsuk-button--secondary nhsuk-u-margin-left-2 nhsuk-button--small"
             })}}
           </div>
         </form>
@@ -88,9 +85,13 @@
 
 
       {% if totalPages > 1 %}
-        {{ appPagination({
-          previousUrl:  "/support/users?page=" + (page - 1) + "&q=" + (q if q else "") if page != 1,
-          nextUrl: "/support/users?page=" + (page + 1) + "&q=" + (q if q else "")  if page != totalPages,
+        {{ pagination({
+          previous: {
+            href: "/support/users?page=" + (page - 1) + "&q=" + (q if q else "")
+          } if page != 1,
+          next: {
+            href: "/support/users?page=" + (page + 1) + "&q=" + (q if q else "")
+          } if page != totalPages,
           items: items
         }) }}
       {% endif %}

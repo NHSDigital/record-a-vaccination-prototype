@@ -4,40 +4,52 @@
 
 {% set currentSection = "vaccinate" %}
 
-{% if (data.vaccine === "COVID-19") %}
-  {% set nextPage = "/record-vaccinations/warning" %}
-{% elseif ((data.vaccine == "RSV") and (data.eligibility | arrayOrStringIncludes("Pregnant"))) or (data.vaccine == "Pertussis") %}
-  {% set nextPage = "/record-vaccinations/patient-estimated-due-date" %}
-{% else %}
-  {% set nextPage = "/record-vaccinations/consent" %}
-{% endif %}
 
 {% set dateOfBirthHtml %}
-  {% if data.dateOfBirth %}
+  {% if data.dateOfBirth.day %}
     {{ (data.dateOfBirth | isoDateFromDateInput | govukDate) }}
-    <br>(75 years old)
+    <br>(76 years old)
+  {% else %}
+    {{ (data.dateOfBirth | govukDate) }}
   {% endif %}
 {% endset %}
 
+{% if data.repeatVaccination === "yes" %}
+  {% set nextPage = "/record-vaccinations/consent" %}
+{% elseif data.repeatPatient === "yes" %}
+  {% set nextPage = "/record-vaccinations/vaccine" %}
+{% elseif data.vaccinationToday %}
+  {% set nextPage = "/record-vaccinations/vaccinator" %}
+{% else %}
+  {% set nextPage = "/record-vaccinations/vaccination-date" %}
+{% endif %}
+
+{% if data.repeatVaccination === "yes" %}
+  {% set previousPage = "/record-vaccinations/patient" %}
+{% elseif data.repeatPatient === "yes" %}
+  {% set previousPage = "/record-vaccinations/done" %}
+{% else %}
+  {% set previousPage = "/record-vaccinations" %}
+{% endif %}
+
 {% block beforeContent %}
-  {{ backLink({ href: "/record-vaccinations/patient" }) }}
+  {{ backLink({ href: previousPage }) }}
 {% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Check {{ data.patientName }}’s details and vaccination history</h1>
+      <h1 class="nhsuk-heading-l">Check {{ data.firstName }} {{ data.lastName }}’s details and vaccination history</h1>
 
       {{ summaryList({
-        classes: 'xnhsuk-summary-list--no-border',
         rows: [
           {
             key: {
               text: "Name"
             },
             value: {
-              text: data.patientName
+              text: (data.firstName + " " + data.lastName)
             }
           },
           {
@@ -63,6 +75,14 @@
             value: {
               text: data.nhsNumber
             }
+          },
+          {
+            key: {
+              text: "GP surgery"
+            },
+            value: {
+              html: "Beech House surgery <br>1 Ash Tree Road<br>Knaresborough<br>HG5 0UB"
+            }
           }
         ]
       }) }}
@@ -86,13 +106,8 @@
 
       <h2 class="nhsuk-heading-m">Vaccination history</h2>
 
-      <p>This shows NHS vaccinations given in England. Currently it includes COVID-19, flu, MMR and RSV, plus some pertussis and pneumococcal vaccination records.</p>
+      <p>This shows NHS vaccinations given in England. Currently it includes COVID-19, flu and RSV, plus some pertussis, pneumococcal and MMR vaccination records.</p>
 
-      {{ warningCallout({
-        heading: "Important",
-        html: "<p>Due to a coding error, a small number of RSV vaccination records incorrectly show patients as vaccinated when they were only invited.</p>
-               <p>Check if the patient has had the vaccination. If they say no, offer the vaccination.</p>"
-      }) }}
     </div>
   </div>
   <div class="nhsuk-grid-row">
@@ -227,8 +242,10 @@
           ]
         }) }}
 
-        {{ appPagination({
-          nextUrl: "#",
+        {{ pagination({
+          next: {
+            href: "#"
+          },
           items: [
             {
               href: "#",

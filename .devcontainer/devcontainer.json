@@ -1,7 +1,7 @@
 {
   "name": "Record a vaccination prototype",
   // codespaces seems to have an issue using port 2000 so setting to 2001 for the NHS Prototype Kit
-  "runArgs": ["--env", "PORT=2001"],
+  "runArgs": ["--env", "PORT=3001"],
   "portsAttributes": {
     "3001": {
       "label": "Running prototype",
@@ -25,7 +25,7 @@
   "postCreateCommand": "npm install",
   // A command to run each time a tool has successfully attached to the container
   "postAttachCommand": {
-    "server": "npm run watch"
+    "server": "npm start"
   },
   // codespace customisations
   "customizations": {

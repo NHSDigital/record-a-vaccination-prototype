@@ -172,9 +172,9 @@
         }) }}
     {% endset %}
 
-      {% if vaccination.repeatPatient == 'yes' and vaccination.patientName %}
+      {% if vaccination.repeatPatient == 'yes' and (vaccination.firstName + vaccination.lastName) %}
 
-        {% set question = ("Which vaccine was it?" + vaccination.patientName + "?" if vaccination.vaccinationToday == 'yes' else "Which vaccine was it?" + vaccination.patientName + "?") %}
+        {% set question = ("Which vaccine was it?" + (vaccination.firstName + vaccination.lastName) + "?" if vaccination.vaccinationToday == 'yes' else "Which vaccine was it?" + (vaccination.firstName + vaccination.lastName) + "?") %}
       {% else %}
         {% set question = ("Which vaccine was it?" if vaccination.vaccinationToday == 'yes' else "Which vaccine was it?") %}
       {% endif %}
@@ -185,7 +185,7 @@
         "fieldset": {
           "legend": {
             "text": question,
-            "classes": "nhsuk-fieldset__legend--l",
+            "size": "l",
             "isPageHeading": true
           }
         },

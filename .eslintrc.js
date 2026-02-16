@@ -4,16 +4,13 @@
 module.exports = {
   extends: ['prettier'],
   ignorePatterns: [
-    '**/app/**',
+    '**/lib/**',
     '**/public/**',
 
     // Enable dotfile linting
     '!.*',
     'node_modules',
-    'node_modules/.*',
-
-    // Prevent CHANGELOG history changes
-    'CHANGELOG.md'
+    'node_modules/.*'
   ],
   overrides: [
     {
@@ -21,8 +18,6 @@ module.exports = {
       extends: [
         'eslint:recommended',
         'plugin:import/recommended',
-        'plugin:jest/style',
-        'plugin:jest-dom/recommended',
         'plugin:jsdoc/recommended-typescript-flavor',
         'plugin:n/recommended',
         'plugin:promise/recommended',
@@ -34,15 +29,7 @@ module.exports = {
       parserOptions: {
         ecmaVersion: 'latest'
       },
-      plugins: [
-        '@typescript-eslint',
-        'import',
-        'jsdoc',
-        'n',
-        'promise',
-        'jest',
-        'jest-dom'
-      ],
+      plugins: ['@typescript-eslint', 'import', 'jsdoc', 'n', 'promise'],
       rules: {
         // Always import Node.js packages from `node:*`
         'import/enforce-node-protocol-usage': ['error', 'always'],
@@ -124,15 +111,6 @@ module.exports = {
           }
         ]
       }
-    },
-    {
-      // Configure ESLint in test files
-      files: ['**/*.test.{cjs,js,mjs}'],
-      extends: ['plugin:jest/recommended', 'plugin:jest/style'],
-      env: {
-        'jest/globals': true
-      },
-      plugins: ['jest']
     },
     {
       // Configure ESLint in browser JavaScript

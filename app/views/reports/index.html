@@ -5,27 +5,37 @@
 {% set currentSection = "reports" %}
 
 {% block content %}
+
   <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-full">
+    <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-xl nhsuk-u-margin-bottom-2">Reports</h1>
-      <p class="nhsuk-caption-m">Create and download reports</p>
-
-      {{ insetText({
-        html: "<p>Reports may take longer to process if you choose more data or a wider date range.</p>"
-      })}}
-
-      {{ button({
-        "text": "Create report",
-        "href": "/reports/choose-dates"
-      }) }}
-
+      {% include "includes/notification.html" %}
 
     </div>
   </div>
 
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
 
+      <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-2">Reports</h1>
+      <p class="nhsuk-caption-m">Create and download reports</p>
 
+      {% if vaccinationsRecordedCount > 0 %}
 
+        {{ insetText({
+          html: "<p>Reports may take longer to process if you choose more data or a wider date range.</p>"
+        })}}
+
+        {{ button({
+          "text": "Create report",
+          "href": "/reports/choose-dates"
+        }) }}
+
+      {% else %}
+        <p>You have not yet recorded any vaccinations.</p>
+      {% endif %}
+
+    </div>
+  </div>
 
 {% endblock %}

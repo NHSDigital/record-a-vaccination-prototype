@@ -5,8 +5,14 @@
 {% set currentSection = "vaccinate" %}
 {% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
 
+{% if data.repeatPatient === "yes" %}
+  {% set previousPage = "/record-vaccinations/done" %}
+{% else %}
+  {% set previousPage = "/record-vaccinations/vaccinator" %}
+{% endif %}
+
 {% block beforeContent %}
-  {{ backLink({ href: "/record-vaccinations/vaccinator" }) }}
+  {{ backLink({ href: previousPage }) }}
 {% endblock %}
 
 {% block content %}
@@ -40,9 +46,9 @@
 
       <form action="/record-vaccinations/answer-vaccine" method="post" novalidate>
 
-      {% if data.repeatPatient == 'yes' and data.patientName %}
+      {% if data.repeatPatient == 'yes' and data.firstName %}
 
-        {% set question = ("Which vaccine are you giving " + data.patientName + "?" if data.vaccinationToday == 'yes' else "Which vaccine was it " + data.patientName + "?") %}
+        {% set question = ("Which vaccine are you giving " + data.firstName + " " + data.lastName + "?" if data.vaccinationToday == 'yes' else "Which vaccine was it " + data.firstName + " " + data.lastName + "?") %}
       {% else %}
         {% set question = ("Which vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which vaccine was it?") %}
       {% endif %}
@@ -91,7 +97,7 @@
         "fieldset": {
           "legend": {
             "text": question,
-            "classes": "nhsuk-fieldset__legend--l",
+            "size": "l",
             "isPageHeading": true
           }
         },

@@ -2,10 +2,6 @@
 
 {% set pageName = "" %}
 
-{% block header %}
-  {% include "includes/header-logged-out.html" %}
-{% endblock %}
-
 {% block main %}
 <div class="nhsuk-hero">
   <div class="nhsuk-width-container nhsuk-hero--border">
@@ -14,7 +10,7 @@
         <div class="nhsuk-hero__wrapper">
           <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-5">The simplest way to record vaccinations</h1>
 
-          <p>Record COVID-19, flu, RSV and pertussis vaccinations.</p>
+          <p>Record NHS vaccinations, including COVID-19, flu, RSV and pertussis.</p>
 
           <p class="nhsuk-body">Used by community pharmacies, NHS trusts and GPs.</p>
 
@@ -25,12 +21,12 @@
               classes: "nhsuk-button--reverse"
             }) }}
 
-            <p class="nhsuk-body nhsuk-u-margin-bottom-0">or <a href="/okta-sign-in" class="nhsuk-link nhsuk-link--reverse nhsuk-u-font-weight-bold">log in</a></p>
+            <p class="nhsuk-body nhsuk-u-margin-bottom-0">or <a href="/auth/okta-sign-in" class="nhsuk-link nhsuk-link--reverse nhsuk-u-font-weight-bold">log in</a></p>
           </div>
         </div>
       </div>
       <div class="nhsuk-grid-column-one-half nhsuk-u-one-half-tablet nhsuk-u-padding-top-6 app-u-hide-on-mobile">
-        <img class="app-homepage-illustration" src="/images/homepage-illustration.png" alt="" role="presentation" style="width: 100%;">
+        <img class="app-homepage-illustration" src="/assets/images/homepage-illustration.png" alt="" role="presentation" style="width: 100%;">
       </div>
     </div>
   </div>
@@ -76,7 +72,7 @@
         </div>
       </div>
       <div class="nhsuk-grid-column-one-half nhsuk-u-margin-top-0 nhsuk-u-padding-left-8 nhsuk-u-padding-left-4 nhsuk-u-padding-bottom-8">
-        <img src="/images/sign-up.png" alt="" style="max-width: 378px;">
+        <img src="/assets/images/sign-up.png" alt="" style="max-width: 378px;">
       </div>
     </div>
 
@@ -92,7 +88,7 @@
         </div>
       </div>
       <div class="nhsuk-grid-column-one-half nhsuk-u-margin-top-0 nhsuk-u-padding-left-8 nhsuk-u-padding-left-4 nhsuk-u-padding-bottom-8">
-        <img src="/images/add-users.png" alt="" style="max-width: 378px;">
+        <img src="/assets/images/add-users.png" alt="" style="max-width: 378px;">
       </div>
     </div>
 
@@ -110,7 +106,7 @@
         </div>
       </div>
       <div class="nhsuk-grid-column-one-half nhsuk-u-margin-top-0 nhsuk-u-padding-left-8 nhsuk-u-padding-left-4 nhsuk-u-padding-bottom-8">
-        <img src="/images/record-vaccinations.png" alt="" style="max-width: 378px;">
+        <img src="/assets/images/record-vaccinations.png" alt="" style="max-width: 378px;">
       </div>
     </div>
 
@@ -125,7 +121,7 @@
         </div>
       </div>
       <div class="nhsuk-grid-column-one-half nhsuk-u-margin-top-0 nhsuk-u-padding-left-8 nhsuk-u-padding-left-4 nhsuk-u-padding-bottom-8">
-        <img src="/images/track-performance.png" alt="" style="max-width: 378px;">
+        <img src="/assets/images/track-performance.png" alt="" style="max-width: 378px;">
       </div>
     </div>
 
@@ -141,7 +137,7 @@
         </div>
       </div>
       <div class="nhsuk-grid-column-one-half nhsuk-u-margin-top-0 nhsuk-u-padding-left-8 nhsuk-u-padding-left-4 nhsuk-u-padding-bottom-4">
-        <img src="/images/get-paid.png" alt="" style="max-width: 378px;">
+        <img src="/assets/images/get-paid.png" alt="" style="max-width: 378px;">
       </div>
     </div>
   </div>
@@ -157,21 +153,21 @@
       <div class="nhsuk-grid-column-one-third">
         <div class="nhsuk-u-font-size-19 nhsuk-u-margin-top-2">
           More than<br>
-          <span class="nhsuk-u-font-size-36 nhsuk-u-font-weight-bold">1.4 million</span><br> vaccinations recorded
+          <span class="nhsuk-u-font-size-36 nhsuk-u-font-weight-bold">2 million</span><br> vaccinations recorded
         </div>
       </div>
 
       <div class="nhsuk-grid-column-one-third">
         <div class="nhsuk-u-font-size-19 nhsuk-u-margin-top-2">
           Over<br>
-          <span class="nhsuk-u-font-size-36 nhsuk-u-font-weight-bold">13,000</span><br>
+          <span class="nhsuk-u-font-size-36 nhsuk-u-font-weight-bold">14,000</span><br>
           users
         </div>
       </div>
       <div class="nhsuk-grid-column-one-third">
         <div class="nhsuk-u-font-size-19 nhsuk-u-margin-top-2">
           Used by<br>
-          <span class="nhsuk-u-font-size-36 nhsuk-u-font-weight-bold">300+</span><br>
+          <span class="nhsuk-u-font-size-36 nhsuk-u-font-weight-bold">600+</span><br>
           pharmacies and NHS trusts
 
         </div>
@@ -187,7 +183,7 @@
 
     <div class="nhsuk-grid-row">
       <div class="nhsuk-grid-column-full-width">
-        <div style="width: 100px; height: 100px; background-image: url('/images/pharmacist.jpg'); background-size: cover; border-radius: 50px; float: left;"></div>
+        <div style="width: 100px; height: 100px; background-image: url('/assets/images/pharmacist.jpg'); background-size: cover; border-radius: 50px; float: left;"></div>
       <div style="margin-left: 150px; max-width: 700px;" class="nhsuk-body nhsuk-u-font-size-26 nhsuk-u-margin-top-0">
         <blockquote class="nhsuk-u-padding-0 nhsuk-u-margin-0 nhsuk-u-margin-bottom-1 nhsuk-u-padding-top-2">
           “Our pharmacists prefer using RAVS. <br>It’s straightforward and easy to use.”
@@ -216,7 +212,7 @@
 
           <p>You will still have access to your previous system for at least 6 months so you can download reports.</p>
 
-          <p>Other questions? <a href="#">Get in touch</a>.</p>
+          <p>Other questions? <a href="/help-and-support">Get in touch</a>.</p>
 
         </div>
       </div>
@@ -245,10 +241,9 @@
 
         </div>
         <div class="nhsuk-grid-column-one-third">
-          <h3 class="nhsuk-heading-s">Helpdesk</h3>
+          <h3 class="nhsuk-heading-s">Help and support</h3>
 
-          <p>0333 038 4268<br>
-          <a href="mailto:ravs.support@england.nhs.uk">ravs.support@england.nhs.uk</a></p>
+          <p><a href="/help-and-support">Contact our support team</a></p>
 
           <p>Monday to Friday, 8am to 6pm</p>
 

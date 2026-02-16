@@ -3,10 +3,6 @@
 {% set pageName = "Check and send" %}
 {% set currentSection = "organisations" %}
 
-{% block header %}
-  {% include "includes/header-logged-in-region.html" %}
-{% endblock %}
-
 {% block beforeContent %}
   {{ backLink({
     href: "/regions/add-email",
@@ -18,7 +14,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-xl">{{ pageName }}</h1>
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       {{ summaryList({
         rows: [

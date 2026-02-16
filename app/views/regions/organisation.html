@@ -3,10 +3,6 @@
 {% set pageName = organisation.name %}
 {% set currentSection = "organisations" %}
 
-{% block header %}
-  {% include "includes/header-logged-in-region.html" %}
-{% endblock %}
-
 {% block beforeContent %}
   {{ backLink({
     href: "/regions",
@@ -113,6 +109,23 @@
             </tbody>
           </table>
         {% endif %}
+
+        {{ pagination({
+          next: {
+            href: "#"
+          },
+          items: [
+            {
+              number: 1,
+              href: "#",
+              current: true
+            },
+            {
+              number: 2,
+              href: "#"
+            }
+          ]
+        }) }}
 
         {% set buttonText = "Add another user" if (organisation.leadUsers | length) > 0  else "Add user" %}
 

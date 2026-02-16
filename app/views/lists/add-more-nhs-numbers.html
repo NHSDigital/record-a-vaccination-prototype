@@ -5,47 +5,44 @@
 {% set currentSection = "lists" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/lists/list" }) }}
+  {{ backLink({ href: "/lists/list/" + patientList.id }) }}
 {% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if (errors | length) > 0 %}
-        {{ errorSummary({
-          titleText: "There is a problem",
-          errorList: errors
-        }) }}
-      {% endif %}
+      <span class="nhsuk-caption-l">{{ patientList.name }}</span>
+      <h1 class="nhsuk-heading-l">Add more NHS numbers to your list</h1>
 
-<h1 class="nhsuk-heading-l">Add more NHS numbers to your list</h1>
+      <p class="nhsuk-body-m">Copy and paste NHS numbers from a spreadsheet or another source.</p>
+      <p>Each number must be 10 digits and can include spaces. Include 1 NHS number per line with no punctuation.</p>
+      <p>For example,
+        <br>485 777 3456
+        <br>9012345678
+        <br>1234567890
+      </p>
 
-<p class="nhsuk-body-m">Copy and paste NHS numbers from a spreadsheet or another source.</p>
-<p>Each number must be 10 digits and can include spaces. Include 1 NHS number per line with no punctuation.</p>
-<p>For example,
-  <br>485 777 3456
-  <br>9012345678
-  <br>1234567890
-</p>
+      <form action="/lists/{{ patientList.id }}/nhs-numbers-added" method="post" novalidate>
 
 <div class="nhsuk-form-group">
-  <label class="nhsuk-label nhsuk-label--s" for="example-longer">
+  <label class="nhsuk-label nhsuk-label--s" for="nhsNumbers">
     NHS numbers
   </label>
 
-  <textarea class="nhsuk-textarea" id="example-longer" name="example-longer" rows=" 10 " style="width:200px" aria-describedby="example-longer-hint"></textarea>
+  <textarea class="nhsuk-textarea" id="example-longer" name="nhsNumbers" rows=" 10 " style="width:200px" aria-describedby="example-longer-hint"></textarea>
 </div>
 
 
-    </div>
-  </div>
-
 
   {{ button({
-    text: "Confirm",
-    href: "/lists/list"
+    text: "Confirm"
   }) }}
+</form>
+
+    </div>
+</div>
+
 
 
 {% endblock %}

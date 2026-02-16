@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Choose data" %}
+{% set pageName = "Data details" %}
 
 {% set currentSection = "reports" %}
 
@@ -26,17 +26,161 @@
       <form action="/reports/update-data" method="post" novalidate="true">
 
 
+        {% set patientsHtml %}
+
+          {% set items = [] %}
+          {% for option in data.patientDataOptions %}
+            {% set items = (items.push({
+              text: option,
+              value: option
+            }), items) %}
+          {% endfor %}
+
+          {{ checkboxes({
+            idPrefix: "patient-data",
+            name: "patientDataToReport",
+            fieldset: {
+              legend: {
+                text: "Patient data"
+              }
+            },
+            values: data.patientDataToReport,
+            items: items
+          }) }}
+        {% endset %}
+
+        {% set staffHtml %}
+
+          {% set items = [] %}
+          {% for option in data.staffDataOptions %}
+            {% set items = (items.push({
+              text: option,
+              value: option
+            }), items) %}
+          {% endfor %}
+
+          {{ checkboxes({
+            idPrefix: "staff-data",
+            name: "staffDataToReport",
+            fieldset: {
+              legend: {
+                text: "Staff data"
+              }
+            },
+            values: data.staffDataToReport,
+            items: items
+          }) }}
+        {% endset %}
+
+        {% set sitesHtml %}
+
+          {% set items = [] %}
+          {% for option in data.locationDataOptions %}
+            {% set items = (items.push({
+              text: option,
+              value: option
+            }), items) %}
+          {% endfor %}
+
+          {{ checkboxes({
+            idPrefix: "site-data",
+            name: "siteDataToReport",
+            fieldset: {
+              legend: {
+                text: "Site data"
+              }
+            },
+            values: data.siteDataToReport,
+            items: items
+          }) }}
+        {% endset %}
+
+        {% set consentAndEligibilityHtml %}
+
+          {% set items = [] %}
+          {% for option in data.consentAndEligibilityDataOptions %}
+            {% set items = (items.push({
+              text: option,
+              value: option
+            }), items) %}
+          {% endfor %}
+
+          {{ checkboxes({
+            idPrefix: "consent-and-eligibility-data",
+            name: "consentAndEligibilityDataToReport",
+            fieldset: {
+              legend: {
+                text: "Consent and eligibility data"
+              }
+            },
+            values: data.consentAndEligibilityDataToReport,
+            items: items
+          }) }}
+        {% endset %}
+
+        {% set vaccinationHtml %}
+
+          {% set items = [] %}
+          {% for option in data.vaccinationDataOptions %}
+            {% set items = (items.push({
+              text: option,
+              value: option
+            }), items) %}
+          {% endfor %}
+
+          {{ checkboxes({
+            idPrefix: "vaccination-data",
+            name: "vaccinationDataToReport",
+            fieldset: {
+              legend: {
+                text: "Vaccination data"
+              }
+            },
+            values: data.vaccinationDataToReport,
+            items: items
+          }) }}
+        {% endset %}
+
+        {% set paymentHtml %}
+
+          {% set items = [] %}
+          {% for option in data.paymentDataOptions %}
+            {% set items = (items.push({
+              text: option.text,
+              value: option.text,
+              hint: {
+                text: option.hint
+              }
+            }), items) %}
+          {% endfor %}
+
+          {{ checkboxes({
+            idPrefix: "payment-data",
+            name: "paymentDataToReport",
+            fieldset: {
+              legend: {
+                text: "Payment data"
+              }
+            },
+            values: data.paymentDataToReport,
+            items: items
+          }) }}
+        {% endset %}
+
         {{ checkboxes({
           idPrefix: "data",
           name: "data",
+          attributes: {
+            id: "data-fields"
+          },
           errorMessage: {
             text: error.text
           } if error,
           fieldset: {
             legend: {
-              text: "Choose data",
+              text: "Which details would you like to include?",
               isPageHeading: true,
-              classes: "nhsuk-fieldset__legend--xl"
+              classes: "nhsuk-fieldset__legend--l"
             }
           },
           values: data.data,
@@ -44,34 +188,43 @@
             {
               value: "Patients",
               text: "Patients",
-              hint: {
-                text: "NHS number, name, date of birth, gender, address"
+              conditional: {
+                html: patientsHtml
               }
             },
             {
               value: "Staff",
               text: "Staff",
-              hint: {
-                text: "Recorder or vaccinator names and email addresses"
+              conditional: {
+                html: staffHtml
               }
             },
             {
-              value: "Site or delivery team",
-              text: "Site or delivery team",
-              hint: {
-                text: "Names and ODS codes"
+              value: "Sites",
+              text: "Sites",
+              conditional: {
+                html: sitesHtml
               }
-            },{
-              value: "Assessment and consent",
-              text: "Assessment and consent",
-              hint: {
-                text: "Vaccinated and not givens, date, consent and eligibility details, and comments"
+            },
+            {
+              value: "Consent and eligibility",
+              text: "Consent and eligibility",
+              conditional: {
+                html: consentAndEligibilityHtml
               }
-            },{
+            },
+            {
               value: "Vaccination",
               text: "Vaccination",
-              hint: {
-                text: "Date, vaccine details and dose given, site of body, legal mechanism and comments"
+              conditional: {
+                html: vaccinationHtml
+              }
+            },
+            {
+              value: "Payment information",
+              text: "Payment information",
+              conditional: {
+                html: paymentHtml
               }
             }
           ]
@@ -86,5 +239,55 @@
     </div>
   </div>
 
+<script>
+  function checkOrUncheckChildren(event) {
+
+    const checkboxClicked = event.target
+
+    const checkboxesControlled = document.getElementById(checkboxClicked.getAttribute('aria-controls')).querySelectorAll('input[type=checkbox')
+
+    for (checkbox of checkboxesControlled) {
+      checkbox.checked = checkboxClicked.checked
+    }
+  }
+
+  const parentCheckboxes = document.getElementById('data-fields').querySelectorAll('input[type=checkbox][aria-controls]')
+
+  for (checkbox of parentCheckboxes) {
+    checkbox.addEventListener('click', checkOrUncheckChildren)
+  }
+
+  function uncheckParentIfAllUnchecked(event) {
+
+    const checkboxClicked = event.target
+
+    const parentGroup = checkboxClicked.closest('.nhsuk-checkboxes__conditional')
+
+    const parentGroupId = parentGroup.getAttribute('id')
+
+    const parentCheckbox = document.querySelector(`input[aria-controls=${parentGroupId}]`)
+
+    const allCheckboxesInGroup = parentGroup.querySelectorAll('input[type=checkbox]')
+
+    let checkboxStatuses = []
+
+    for (checkbox of allCheckboxesInGroup) {
+      checkboxStatuses.push(checkbox.checked)
+    }
+
+    if (!checkboxStatuses.includes(true)) {
+      // Uncheck parent
+      parentCheckbox.click()
+    }
+  }
+
+  const childCheckboxes = document.getElementById('data-fields').querySelectorAll('.nhsuk-checkboxes__conditional input[type=checkbox]')
+
+  for (checkbox of childCheckboxes) {
+    checkbox.addEventListener('click', uncheckParentIfAllUnchecked)
+  }
+
+
+</script>
 
 {% endblock %}

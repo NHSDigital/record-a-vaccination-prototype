@@ -2,10 +2,6 @@
 
 {% set pageName = "Sign up for your pharmacy" %}
 
-{% block header %}
-  {% include "includes/header-logged-out.html" %}
-{% endblock %}
-
 {% block beforeContent %}
   {{ backLink({
     href: "/product-page",
@@ -28,7 +24,7 @@
 
       <p>You can sign up if you are a community pharmacy offering NHS vaccinations.</p>
 
-      <p>If you need to sign up for more than 1 pharmacy, you can use this form multiple times or <a href="/contact">contact us</a>.</li>
+      <p>If you need to sign up for more than 1 pharmacy, you can use this form multiple times.</li>
       </p>
 
       <form action="/apply/answer-pharmacy" method="post">
@@ -36,22 +32,22 @@
       {% set options = [] %}
       {% set items = [{ text: "", value: ""}] %}
 
-      {% for organisation in data.organisations %}
-        {% if organisation.type == "Community Pharmacy" %}
+      {% for organisation in data.allOrganisations | sort(false, false, "name") %}
+        {% if organisation.type == "Community pharmacy" %}
           {% set items = (items.push({
-            text: organisation.name + ", " + organisation.address.line1 + ", " + (organisation.address.postcode | upper) + " (" + organisation.id + ")",
+            text: organisation.name + ", " + organisation.address + ", " + (organisation.address.postcode | upper) + " (" + organisation.id + ")",
             value: organisation.id,
-            selected: (organisation.id === data.organisationCode)
+            selected: (organisation.id === data.organisationId)
           }), items) %}
         {% endif %}
       {% endfor %}
 
       {{ select({
-        id: "organisation-code",
-        name: "organisationCode",
+        id: "organisation-id",
+        name: "organisationId",
         label: {
           text: "Find your pharmacy",
-          classes: "nhsuk-label--m nhsuk-u-margin-bottom-1"
+          size: "m"
         },
         hint: {
           text: "Search by name or ODS code"
@@ -59,10 +55,7 @@
         items: items,
         errorMessage: {
           text: (errors | first).text
-        } if (errors | length),
-        attributes: {
-          "data-module": "autocomplete"
-        }
+        } if (errors | length)
       }) }}
 
         {{ button({

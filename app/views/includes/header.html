@@ -1,0 +1,140 @@
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
+
+{% set navigationItems = [] %}
+
+{% if currentUser and not (currentOrganisation.type === "Region") %}
+
+  <!-- All users -->
+  {% set navigationItems = (navigationItems.push({
+    href: "/home/",
+    text: "Home",
+    active: (currentSection == "home")
+  }), navigationItems) %}
+
+  {% if currentOrganisation %}
+    {% set navigationItems = (navigationItems.push({
+      href: "/record-vaccinations",
+      text: "Record vaccinations",
+      active: (currentSection == "vaccinate")
+    }), navigationItems) %}
+
+    <!-- Admins or lead admins -->
+    {% if (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) %}
+      {% set navigationItems = (navigationItems.push({
+        href: "/vaccines",
+        text: "Vaccines",
+        active: (currentSection == "vaccines")
+      }), navigationItems) %}
+    {% endif %}
+  {% endif %}
+
+  <!-- All users -->
+  {% if currentOrganisation %}
+    {% set navigationItems = (navigationItems.push({
+      href: "/records",
+      text: "Records",
+      active: (currentSection == "records")
+    }), navigationItems) %}
+  {% endif %}
+
+  <!-- Admins or lead admins -->
+  {% if (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) or data.currentMode == "reports" %}
+    {% set navigationItems = (navigationItems.push({
+      href: "/reports",
+      text: "Reports",
+      active: (currentSection == "reports")
+    }), navigationItems) %}
+  {% endif %}
+
+  <!-- Lead admins only -->
+  {% if (["Lead administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) %}
+    {% set navigationItems = (navigationItems.push({
+      href: '/user-admin',
+      text: 'Manage users',
+      active: (currentSection == "manage-users")
+    }), navigationItems) %}
+  {% endif %}
+{% endif %}
+
+<!-- Regional users -->
+{% if currentUser and currentOrganisation and (currentOrganisation.type === "Region")  %}
+
+  {% set inboxCount = (currentOrganisation.inbox | length) %}
+
+  {% set navigationItems = (navigationItems.push({
+    href: "/regions",
+    text: "Organisations",
+    active: (currentSection == "organisations")
+  }), navigationItems) %}
+
+  {% set navigationItems = (navigationItems.push({
+    href: "/regions/messages",
+    text: ("Messages <span class=\"app-count\">" + inboxCount +"</span>") | safe,
+    active: (currentSection == "messages")
+  }), navigationItems) %}
+
+{% endif %}
+
+{% if currentUser.admin %}
+  {% set navigationItems = (navigationItems.push({
+    href: "/support",
+    text: "Home",
+    active: (currentSection == "dashboard")
+  }), navigationItems) %}
+
+  {% set navigationItems = (navigationItems.push({
+    href: "/support/regions",
+    text: "Regions",
+    active: (currentSection == "regions")
+  }), navigationItems) %}
+
+  {% set navigationItems = (navigationItems.push({
+    href: "/support/users",
+    text: "Users",
+    active: (currentSection == "users")
+  }), navigationItems) %}
+
+  {% set navigationItems = (navigationItems.push({
+    href: "/support/organisations",
+    text: "Organisations",
+    active: (currentSection == "organisations")
+  }), navigationItems) %}
+
+{% endif %}
+
+{% set organisationHtml %}
+  {{ currentOrganisation.name | truncate(30) }}
+  {% if currentUser and currentOrganisation and ((currentUser.organisations | length) > 1) %}
+    <a href="/auth/select-organisation" class="nhsuk-link--reverse">Change<span class="nhsuk-u-visually-hidden"> organisation</span></a>
+  {% endif %}
+{% endset %}
+
+{{ header({
+  service: {
+    text: "Record a vaccination",
+    href: "/"
+  },
+  account: {
+    items: [
+      {
+        href: "/user-profile",
+        text: (currentUser.firstName + " " + currentUser.lastName),
+        icon: true
+      } if currentUser,
+      {
+        html: organisationHtml
+      } if currentOrganisation,
+      {
+        href: '/sign-out',
+        text: 'Log out'
+      } if data.currentUserId,
+      {
+        href: "/auth/okta-sign-in",
+        text: "Log in"
+      } if not data.currentUserId
+    ]
+  },
+  navigation: {
+    items: navigationItems
+  } if currentSection != "none"
+}) }}

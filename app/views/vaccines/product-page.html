@@ -16,7 +16,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-xl">{{ vaccine.vaccineProduct }}</h1>
+      <h1 class="nhsuk-heading-l">{{ vaccine.vaccineProduct }}</h1>
 
       {{ summaryList({
         classes: "nhsuk-u-margin-bottom-6",
@@ -42,16 +42,18 @@
               text: "Site"
             },
             value: {
-              html: site.name
+              html: site.name + (" (closed)" if site.status == "closed")
             }
           }
         ]
       }) }}
 
-      {{ button({
-        text: "Add batch",
-        href: "/vaccines/" + vaccine.id + "/add"
-      }) }}
+      {% if site.status != "closed" %}
+        {{ button({
+          text: "Add batch",
+          href: "/vaccines/" + vaccine.id + "/add"
+        }) }}
+      {% endif %}
 
     </div>
   </div>
@@ -82,9 +84,11 @@
             </th>
             <th role="columnheader" scope="col">
             </th>
-             </th>
-            <th role="columnheader" scope="col">
             </th>
+            {% if site.status != "closed" %}
+              <th role="columnheader" scope="col">
+              </th>
+            {% endif %}
 
           </tr>
         </thead>
@@ -116,16 +120,18 @@
                   {{ batch.depletedDate | govukDate }}
                 {% endif %}
               </td>
-              <td class="nhsuk-table__cell">{% if (batch.expiryDate | daysAgo) > 0 %}  {% else %}
-                <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}">Edit<span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
-                &nbsp;
-                {% if batch.depletedDate %}
-                  <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/reactivate">Reactivate<span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
-                {% else %}
-                  <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/deplete">Deplete<span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
-                {% endif %}
-                {% endif %}
-              </td>
+              {% if site.status != "closed" %}
+                <td class="nhsuk-table__cell">{% if (batch.expiryDate | daysAgo) > 0 %}  {% else %}
+                  <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}">Edit<span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
+                  &nbsp;
+                  {% if batch.depletedDate %}
+                    <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/reactivate">Reactivate<span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
+                  {% else %}
+                    <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/deplete">Deplete<span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
+                  {% endif %}
+                  {% endif %}
+                </td>
+              {% endif %}
 
             </tr>
           {% endfor %}
@@ -144,9 +150,13 @@
 
 
       {% if totalPages > 0 %}
-        {{ appPagination({
-          previousUrl:  "/vaccines/" + vaccine.id + "?page=" + (page - 1) if page != 1,
-          nextUrl: "/vaccines/" + vaccine.id + "?page=" + (page + 1)  if page != totalPages,
+        {{ pagination({
+          previous: {
+            href: "/vaccines/" + vaccine.id + "?page=" + (page - 1) if page != 1
+          },
+          next: {
+            href: "/vaccines/" + vaccine.id + "?page=" + (page + 1)  if page != totalPages
+          },
           items: items
         }) }}
       {% endif %}

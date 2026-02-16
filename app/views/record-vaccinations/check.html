@@ -47,15 +47,8 @@
 
 {% set locationHtml %}
   {% if  data.locationType == "Care home" %}
-    {% for careHome in data.careHomes %}
-      {% if data.careHome == careHome.code %}
-        {{ careHome.name }}<br>
-        {{ careHome.address1 }}<br>
-        {{ careHome.town }}<br>
-        {{ careHome.postcode }}
-      {% endif %}
-    {% endfor %}
-
+    {{ careHome.name }}<br>
+    {{ careHome.address }}
   {% else %}
     {{ data.locationType }}
   {% endif %}
@@ -75,7 +68,7 @@
               text: "Name"
             },
             value: {
-              text: (data.patientName if data.patientName else data.firstName + " " + data.lastName)
+              text: (data.firstName + " " + data.lastName)
             },
             actions: {
               items: [
@@ -92,7 +85,7 @@
               text: "Date of birth"
             },
             value: {
-              text: (data.dateOfBirth | isoDateFromDateInput | govukDate)
+              html: (data.dateOfBirth | isoDateFromDateInput | govukDate) + "<br>(76 years old)"
             },
             actions: {
               items: [
@@ -190,7 +183,7 @@
               text: "Site"
             },
             value: {
-              text: (currentOrganisation.sites | findById(data.deliveryTeam)).name
+              text: (currentOrganisation.sites | findById(data.siteId)).name
             },
             actions: {
               items: [
@@ -198,6 +191,23 @@
                   href: "/record-vaccinations/delivery-team",
                   text: "Change",
                   visuallyHiddenText: "Site"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Vaccinator"
+            },
+            value: {
+              text: vaccinator.firstName + " " + vaccinator.lastName
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/vaccinator",
+                  text: "Change",
+                  visuallyHiddenText: "contact information"
                 }
               ]
             }
@@ -238,21 +248,21 @@
           },
           {
             key: {
-              text: "Vaccinator"
+              text: "Eligibility"
             },
             value: {
-              text: vaccinator.firstName + " " + vaccinator.lastName
+              html: ((data.eligibility | join("<br>")) if (data.eligibility | isArray) else data.eligibility)
             },
             actions: {
               items: [
                 {
-                  href: "/record-vaccinations/vaccinator",
+                  href: "/record-vaccinations/eligibility",
                   text: "Change",
-                  visuallyHiddenText: "contact information"
+                  visuallyHiddenText: "eligibility"
                 }
               ]
             }
-          },
+          } if (data.vaccine != "pertussis"),
           {
             key: {
               text: "Location"
@@ -270,23 +280,6 @@
               ]
             }
           } if (data.vaccine === "Flu" or data.vaccine == "COVID-19"),
-          {
-            key: {
-              text: "Eligibility"
-            },
-            value: {
-              html: ((data.eligibility | join("<br>")) if (data.eligibility | isArray) else data.eligibility)
-            },
-            actions: {
-              items: [
-                {
-                  href: "/record-vaccinations/eligibility",
-                  text: "Change",
-                  visuallyHiddenText: "eligibility"
-                }
-              ]
-            }
-          } if (data.vaccine != "Pertussis"),
           {
             key: {
               text: "Role"
@@ -320,7 +313,7 @@
                 }
               ]
             }
-          } if ((data.vaccine == "Pertussis") or ((data.eligibility | arrayOrStringIncludes("Pregnant"))) and (data.vaccine == "RSV")),
+          } if ((data.vaccine == "pertussis") or ((data.eligibility | arrayOrStringIncludes("Pregnant"))) and (data.vaccine == "RSV")),
           {
             key: {
               text: "Consent given by"

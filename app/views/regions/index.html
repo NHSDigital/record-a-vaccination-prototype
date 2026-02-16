@@ -1,17 +1,13 @@
 {% extends 'layout.html' %}
 
-{% set pageName = currentRegion.name %}
+{% set pageName = currentOrganisation.name %}
 {% set currentSection = "organisations" %}
-
-{% block header %}
-  {% include "includes/header-logged-in-region.html" %}
-{% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-xl">{{ pageName }}</h1>
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       <p class="nhsuk-body-l">Invite an organisation to create an NHS Record a vaccination service (RAVS) account.</p>
 
@@ -50,7 +46,7 @@
               </tr>
             </thead>
             <tbody class="nhsuk-table__body">
-              {% for organisation in organisations %}
+              {% for organisation in (organisations | sort(false, false, "name")) %}
                 <tr role="row" class="nhsuk-table__row">
                   <td class="nhsuk-table__cell">
                     <a href="/regions/organisations/{{ organisation.id }}">{{ organisation.name }}</a>
@@ -76,6 +72,25 @@
           </table>
       </div>
     </div>
+
+
+    {{ pagination({
+      next: {
+        href: "#"
+      },
+      items: [
+        {
+          number: 1,
+          href: "#",
+          current: true
+        },
+        {
+          number: 2,
+          href: "#"
+        }
+      ]
+    }) }}
+
   {% endif %}
 
   {% if closedOrganisationsCount > 0 %}

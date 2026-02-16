@@ -10,10 +10,7 @@
 {% endblock %}
 
 {% set currentSection = "organisations" %}
-
-{% block header %}
-  {% include "includes/header-logged-in-support.html" %}
-{% endblock %}
+postcode:
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -38,7 +35,7 @@
         fieldset: {
           legend: {
             text: pageName,
-            classes: "nhsuk-fieldset__legend--l",
+            size: "l",
             isPageHeading: true
           }
         },

@@ -1,0 +1,43 @@
+
+{% extends 'layout.html' %}
+
+{% set pageName = "Help and support" %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+          
+      <p>Find answers to common questions in our user guide:</p>
+
+      <ul>
+        <li><a href="https://guide.ravs.england.nhs.uk/logging-in/">Logging in</a></li>
+        <li><a href="https://guide.ravs.england.nhs.uk/record-vaccinations/">Recording a vaccination</a></li>
+        <li><a href="https://guide.ravs.england.nhs.uk/managing-vaccines/">Managing vaccine batches</a></li>
+        <li><a href="https://guide.ravs.england.nhs.uk/managing-users/">Managing users</a></li>
+        <li><a href="https://guide.ravs.england.nhs.uk/records/">Editing and deleting records</a></li>
+        <li><a href="https://guide.ravs.england.nhs.uk/reporting/">Reports</a></li>
+      </ul>
+
+      <h2 class="nhsuk-heading-m">Contact us</h2>
+
+      <p>The Record a vaccination support team is available Monday to Friday, 8am to 6pm.</p>
+      
+      <p>To contact the support team, you'll need to log in to the NHS National IT Customer Support Portal.</p>
+      
+      {% from "action-link/macro.njk" import actionLink %}
+
+      {{ actionLink({
+      text: "Contact our support team",
+      href: "https://www.support.digitalservices.nhs.uk/csm?id=sc_cat_item&sys_id=7406446b9779f290dd80f2df9153af58"
+      }) }}
+        
+     
+
+    </div>
+  </div>
+
+
+{% endblock %}

@@ -40,7 +40,7 @@
             Search by name or ODS code
           </div>
           <select class="nhsuk-select" id="care-home" name="careHome"
-            aria-describedby="care-home-hint" data-module="autocomplete" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+            aria-describedby="care-home-hint" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
             <option {% if not data.caeHome %}selected{% endif %} value=""></option>
 
           {% set options = [] %}
@@ -68,7 +68,7 @@
           fieldset: {
             legend: {
               text: ("Where did the vaccination take place?"),
-              classes: "nhsuk-fieldset__legend--l",
+              size: "l",
               isPageHeading: true
             }
           },
