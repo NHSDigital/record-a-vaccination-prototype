@@ -33,10 +33,7 @@
                   Name
                 </th>
                 <th role="columnheader" class="" scope="col">
-                  ODS&nbsp;code
-                </th>
-                <th role="columnheader" class="" scope="col">
-                  Type
+                  Vaccines
                 </th>
                 <th role="columnheader" class="" scope="col">
                   Status
@@ -49,25 +46,28 @@
               {% for organisation in (organisations | sort(false, false, "name")) %}
                 <tr role="row" class="nhsuk-table__row">
                   <td class="nhsuk-table__cell">
-                    <a href="/regions/organisations/{{ organisation.id }}">{{ organisation.name }}</a>
+                    <a href="/regions/organisations/{{ organisation.id }}">{{ organisation.name }} ({{ organisation.id }})</a>
                   </td>
                   <td class="nhsuk-table__cell ">
-                    {{ organisation.id }}
-                  </td>
-                  <td class="nhsuk-table__cell ">
-                    {{ organisation.type }}
+                    {% set vaccinesEnabled = [] %}
+                    {% for vaccine in organisation.vaccines %}
+                      {% if vaccine.status == "enabled" %}
+                        {% set vaccinesEnabled = (vaccinesEnabled.push(vaccine.name), vaccinesEnabled) %}
+                      {% endif %}
+                    {% endfor %}
+
+                    {{ vaccinesEnabled | sort | join(", ") }}
                   </td>
                   <td class="nhsuk-table__cell ">
                     {{ organisation.status }}
                   </td>
-
-
-
+                  <td class="nhsuk-table__cell ">
+                    {% if organisation.status == "Invited" %}
+                      <a href="/regions/organisations/{{ organisation.id }}/delete">Delete <span class="nhsuk-u-visually-hidden">{{ organisation.name }}</span></a>
+                    {% endif %}
                   </td>
                 </tr>
               {% endfor %}
-
-
             </tbody>
           </table>
       </div>

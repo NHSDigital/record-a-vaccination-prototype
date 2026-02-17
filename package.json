@@ -20,13 +20,13 @@
     "nhsuk-prototype-kit": "^8.0.1"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^8.55.0",
-    "@typescript-eslint/parser": "^8.54.0",
+    "@typescript-eslint/eslint-plugin": "^8.56.0",
+    "@typescript-eslint/parser": "^8.56.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-jsdoc": "^62.5.4",
-    "eslint-plugin-n": "^17.23.2",
+    "eslint-plugin-jsdoc": "^62.5.5",
+    "eslint-plugin-n": "^17.24.0",
     "eslint-plugin-promise": "^7.2.1",
     "prettier": "^3.8.1"
   },

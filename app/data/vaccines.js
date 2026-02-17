@@ -118,6 +118,14 @@ module.exports = [
       {
         name: "Pneumovax",
         type: "injection"
+      },
+      {
+        name: "Prevenar 13",
+        type: "injection"
+      },
+      {
+        name: "Prevenar 20",
+        type: "injection"
       }
     ]
   },
