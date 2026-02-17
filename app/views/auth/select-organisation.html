@@ -1,7 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Sign in" %}
-
+{% set pageName = "Choose your organisation" %}
 
 {% block beforeContent %}
   {% if from === "select-mode" %}
@@ -48,6 +47,7 @@
             isPageHeading: true
           }
         },
+        value: data.currentOrganisationId,
         errorMessage: {
           text: error.text
         } if error,

@@ -5,6 +5,7 @@ module.exports = router => {
   router.get('/prototype-setup/setup-batches', (req, res) => {
     const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
+    const currentSiteIds = currentOrganisation.sites.map((site) => site.id)
 
     let vaccineStock = data.vaccineStock
 
@@ -14,7 +15,7 @@ module.exports = router => {
     const millisecondsPerDay = 86400000
 
     const vaccines = data.vaccines
-    const siteId = "RW3NM"
+    const siteId = randomItem(currentSiteIds)
 
     for (let vaccine of vaccines) {
 
@@ -87,6 +88,8 @@ module.exports = router => {
     const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
 
+    const currentSiteIds = currentOrganisation.sites.map((site) => site.id)
+
     const listOfFirstNames = ["Susana", "Steven", "Aleah", "Kaylen", "Stephan", "Donavon", "Emely", "Kailee", "Brooks", "Brenton", "Miles", "Emanuel", "Jedidiah", "Glenn", "Jude", "Ivory", "Austen", "Alyson", "Jaime", "Jordin", "Chad", "Janay", "Tahj", "Reginald", "Enoch", "Amiyah", "Benito", "April", "Joelle", "Brant"]
 
     const listOfLastNames = ["Ross", "Friedman", "Switzer", "Devore", "Dominguez", "Kohn", "Moreau", "Farrar", "Hogue", "Goldsmith", "Wilkins", "Cornwell", "Wimberly", "Messer", "Woods", "Forrest", "Aiello", "Kuykendall", "Trout", "Bigelow", "Moreland", "Lentz", "Hurst", "Quinonez", "Pak", "McNally", "Longo", "Hunt", "Villa", "Breaux"]
@@ -118,44 +121,48 @@ module.exports = router => {
 
       const vaccineProductsInStock = data.vaccineStock.filter((vaccineStockItem) => vaccineStockItem.vaccine == randomVaccine.name)
 
-      const randomVaccineProduct = randomItem(vaccineProductsInStock)
-      const randombatchNumber = randomItem(randomVaccineProduct.batches)
+      if (vaccineProductsInStock.length > 0) {
 
-      const vaccinator = randomItem(vaccinators)
+        const randomVaccineProduct = randomItem(vaccineProductsInStock)
 
-      const randomName = randomItem(listOfFirstNames) + " " + randomItem(listOfLastNames)
+        const randombatchNumber = randomItem(randomVaccineProduct.batches)
 
-      const randomNhsNumber = "9" + (100000000 + Math.floor(Math.random() * 900000000)).toString()
+        const vaccinator = randomItem(vaccinators)
 
-      data.vaccinationsRecorded.push({
-        id: generatedId,
-        organisationId: "RW3",
-        siteId: "RW3NM",
-        date: {
-          day: dayToday.toString(),
-          month: monthToday.toString(),
-          year: yearToday.toString()
-        },
-        vaccine: randomVaccine.name,
-        vaccineProduct: randomVaccineProduct.vaccineProduct,
-        patient: {
-          name: randomName,
-          nhsNumber: randomNhsNumber
-        },
-        batchNumber: randombatchNumber.batchNumber,
-        batchExpiryDate: "2025-01-05",
-        vaccinatorId: vaccinator.id,
-        eligibility: ["Pregnant"],
-        pregnancyDueDate: {
-          day: "04",
-          month: "02",
-          year: "2025"
-        },
-        consent: "Patient",
-        injectionSite: "Left arm",
-        notes: "The patient has been taking Warfarin for 1 month as prescribed by GP.",
-        editable: true
-      })
+        const randomName = randomItem(listOfFirstNames) + " " + randomItem(listOfLastNames)
+
+        const randomNhsNumber = "9" + (100000000 + Math.floor(Math.random() * 900000000)).toString()
+
+        data.vaccinationsRecorded.push({
+          id: generatedId,
+          organisationId: currentOrganisation.id,
+          siteId: randomItem(currentSiteIds),
+          date: {
+            day: dayToday.toString(),
+            month: monthToday.toString(),
+            year: yearToday.toString()
+          },
+          vaccine: randomVaccine.name,
+          vaccineProduct: randomVaccineProduct.vaccineProduct,
+          patient: {
+            name: randomName,
+            nhsNumber: randomNhsNumber
+          },
+          batchNumber: randombatchNumber.batchNumber,
+          batchExpiryDate: "2025-01-05",
+          vaccinatorId: vaccinator.id,
+          eligibility: ["Pregnant"],
+          pregnancyDueDate: {
+            day: "04",
+            month: "02",
+            year: "2025"
+          },
+          consent: "Patient",
+          injectionSite: "Left arm",
+          notes: "The patient has been taking Warfarin for 1 month as prescribed by GP.",
+          editable: true
+        })
+      }
     }
 
     res.redirect('/records')

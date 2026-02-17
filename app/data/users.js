@@ -330,15 +330,17 @@ module.exports = [
     "firstName": "Ocean",
     "lastName": "Merritt"
   },
+  // Kaisley Wells is a Lead administrator at
+  // Barnsley Hospital NHS Foundation Trust (RFF) with
+  // all vaccine types enabled
   {
     "id": "5960938237423",
     "email": "kaisley.wells@nhs.net",
     "organisations": [
       {
-        "id": "RCY",
-        "permissionLevel": "Recorder",
-        "status": "Deactivated",
-        "deactivatedDate": "2024-12-05",
+        "id": "RFF",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
         "vaccinator": true
       }
     ],

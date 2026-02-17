@@ -4,10 +4,16 @@ module.exports = [
     id: "RCF",
     name: "Airedale NHS Foundation Trust",
     address: {
-      line1: "Airedale General hospital",
+      line1: "Airedale General Hospital",
       town: "Keighley",
       postcode: "BD20 6TD"
     },
+    sites: [
+      {
+        id: "RCF71",
+        town: "Airedale General Hospital"
+      }
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -23,6 +29,12 @@ module.exports = [
       town: "Liverpool",
       postcode: "L12 2AP"
     },
+    sites: [
+      {
+        id: "RBS22",
+        town: "Alder Hey Children’s Hospital"
+      }
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y62",
@@ -38,6 +50,12 @@ module.exports = [
       town: "Redditch",
       postcode: "B98 7UB"
     },
+    sites: [
+      {
+        id: "RM922",
+        town: "Alexandra Hospital"
+      }
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -53,6 +71,12 @@ module.exports = [
       town: "Ipswich",
       postcode: "IP4 9LE"
     },
+    sites: [
+      {
+        id: "RCLAB",
+        town: "Allington Hospital"
+      }
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -68,6 +92,12 @@ module.exports = [
       town: "Andover",
       postcode: "SP10 3LB"
     },
+    sites: [
+      {
+        id: "RHNNC",
+        town: "Andover Hospital"
+      }
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -83,6 +113,16 @@ module.exports = [
       town: "Chertsey",
       postcode: "KT16 0PZ"
     },
+    sites: [
+      {
+        id: "RTKNC",
+        town: "Ashford Hospital"
+      },
+      {
+        id: "RTKLP",
+        town: "St Peter’s Hospital"
+      }
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -98,6 +138,9 @@ module.exports = [
       town: "Ashford",
       postcode: "TW15 3AA"
     },
+    sites: [
+      {id: "RCY72", name: "Ashford Hospital"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -113,6 +156,9 @@ module.exports = [
       town: "Bath",
       postcode: "BA1 3QE"
     },
+    sites: [
+      {id: "RVN12", name: "Avon Hospital"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -128,6 +174,9 @@ module.exports = [
       town: "Romford",
       postcode: "RM7 0AG"
     },
+    sites: [
+      {id: "RF481", name: "Barking General Hospital"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -143,6 +192,9 @@ module.exports = [
       town: "Barnet",
       postcode: "EN5 3DJ"
     },
+    sites: [
+      {id: "RVL81", name: "Barnet General Hospital"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -158,6 +210,9 @@ module.exports = [
       town: "Barnet",
       postcode: "EN5 5TS"
     },
+    sites: [
+      {id: "RCZ91", name: "Barnet Community Hospital"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -173,6 +228,9 @@ module.exports = [
       town: "London",
       postcode: "N15 3TH"
     },
+    sites: [
+      {id: "RRP91", name: "Barnet Mental Health Centre"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y56",
@@ -188,6 +246,9 @@ module.exports = [
       town: "Barnsley",
       postcode: "S70 3RD"
     },
+    sites: [
+      {id: "RCN91", name: "Barnsley Community Hospital"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -206,8 +267,30 @@ module.exports = [
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
+    sites: [
+      {
+        id: "RFFPK",
+        name: "Barnsley General Hospital"
+      }
+    ],
     vaccines: [
-      {name: "COVID-19", status: "enabled"}
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"},
+      {name: "pertussis", status: "enabled"},
+      {name: "MMR", status: "enabled"},
+      {name: "pneumococcal", status: "enabled"},
+      {name: "RSV", status: "enabled"},
+      {name: "BCG", status: "enabled"},
+      {name: "MMRV", status: "enabled"},
+      {name: "HPV", status: "enabled"},
+      {name: "hepatitis B", status: "enabled"},
+      {name: "MenB", status: "enabled"},
+      {name: "6-in-1", status: "enabled"},
+      {name: "4-in-1 pre-school booster", status: "enabled"},
+      {name: "3-in-1 teenage booster", status: "enabled"},
+      {name: "MenACWY", status: "enabled"},
+      {name: "rotavirus", status: "enabled"},
+      {name: "shingles", status: "enabled"}
     ]
   },
   {
@@ -383,6 +466,10 @@ module.exports = [
       town: "Bracknell",
       postcode: "RG12 2UT"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y56"
@@ -395,12 +482,13 @@ module.exports = [
       town: "Hornchurch",
       postcode: "RM12 6RS"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RXT",
@@ -410,12 +498,13 @@ module.exports = [
       town: "Birmingham",
       postcode: "B13 8QY"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RYW",
@@ -425,12 +514,13 @@ module.exports = [
       town: "Birmingham",
       postcode: "B7 4BN"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RL7",
@@ -440,12 +530,13 @@ module.exports = [
       town: "Birmingham",
       postcode: "B9 5SS"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RWL",
@@ -455,12 +546,13 @@ module.exports = [
       town: "Birmingham",
       postcode: "B13 8JL"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RQ3",
@@ -470,12 +562,13 @@ module.exports = [
       town: "Birmingham",
       postcode: "B4 6NH"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RLU",
@@ -485,12 +578,13 @@ module.exports = [
       town: "Birmingham",
       postcode: "B15 2TG"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RQ4",
@@ -500,12 +594,13 @@ module.exports = [
       town: "West bromwich",
       postcode: "B70 8NY"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RMB",
@@ -515,12 +610,13 @@ module.exports = [
       town: "Blackburn",
       postcode: "BB2 3HH"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RXL",
@@ -530,12 +626,13 @@ module.exports = [
       town: "Blackpool",
       postcode: "FY3 8NR"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RMR",
@@ -545,12 +642,13 @@ module.exports = [
       town: "Blackpool",
       postcode: "FY3 8NR"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
+    region: "Y63"
   },
   {
     id: "RML",
@@ -839,31 +937,23 @@ module.exports = [
   },
   {
     id: "RHB",
-    name: "Camden and islington Community Health services NHS Trust",
+    name: "Camden and Islington Community Health Services NHS Trust",
     address: {
       line1: "St. pancras hospital",
       town: "London",
       postcode: "NW1 0PE"
     },
-    status: "Active",
-    type: "NHS Trust",
-    region: "Y56"
-  },
-  {
-    id: "RRQ",
-    name: "Camden and islington mental Health NHS Trust",
-    address: {
-      line1: "St. pancras hospital",
-      town: "London",
-      postcode: "NW1 0PE"
-    },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y56"
   },
   {
     id: "RWM",
-    name: "Cardiff and vale NHS Trust",
+    name: "Cardiff and Vale NHS Trust",
     address: {
       line1: "Cardigan house",
       town: "Cardiff",
@@ -899,7 +989,7 @@ module.exports = [
       town: "London",
       postcode: "NW1 3AX"
     },
-    status: "Active",
+    status: "Deactivated",
     type: "NHS Trust",
     region: "Y56",
     vaccines: [
@@ -935,6 +1025,10 @@ module.exports = [
       town: "London",
       postcode: "NW1 5JD"
     },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y56"
@@ -1104,7 +1198,11 @@ module.exports = [
       town: "London",
       postcode: "SW10 9NH"
     },
-    status: "Active",
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
+    status: "Invited",
     type: "NHS Trust",
     region: "Y56"
   },
@@ -7900,6 +7998,9 @@ module.exports = [
       town: "London",
       postcode: "E11 1NR"
     },
+    sites: [
+      {id: "RGC13", name: "Whipps Cross Hospital"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -7915,81 +8016,9 @@ module.exports = [
       town: "London",
       postcode: "N19 5NF"
     },
-    status: "Active",
-    type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
-  },
-  {
-    id: "RJY",
-    name: "Wigan and Leigh Health Services NHS Trust",
-    address: {
-      line1: "Royal albert edward infirmary",
-      town: "Wigan",
-      postcode: "WN1 2NN"
-    },
-    status: "Active",
-    type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
-  },
-  {
-    id: "RVQ",
-    name: "Wiltshire and Swindon Healthcare NHS Trust",
-    address: {
-      line1: "C/o water research council",
-      town: "Swindon",
-      postcode: "SN5 8YF"
-    },
-    status: "Active",
-    type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
-  },
-  {
-    id: "RN1",
-    name: "Winchester and Eastleigh Healthcare NHS Trust",
-    address: {
-      line1: "Royal hampshire county hospital",
-      town: "Winchester",
-      postcode: "SO22 5DG"
-    },
-    status: "Active",
-    type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
-  },
-  {
-    id: "RR5",
-    name: "Wirral and West Cheshire Community NHS Trust",
-    address: {
-      line1: "Victoria central hospital",
-      town: "Wallasey",
-      postcode: "CH44 5UF"
-    },
-    status: "Active",
-    type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
-  },
-  {
-    id: "RY7",
-    name: "Wirral Community Health and Care NHS Foundation Trust",
-    address: {
-      line1: "Derby road",
-      town: "Birkenhead",
-      postcode: "CH42 0LQ"
-    },
+    sites: [
+      {id: "RKESJ", name: "Whittington Hospital - Maternity Wing"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -8005,6 +8034,9 @@ module.exports = [
       town: "Wirral",
       postcode: "CH49 5PE"
     },
+    sites: [
+      {id: "RBLSJ", name: "Wirral Hospital"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -8020,6 +8052,9 @@ module.exports = [
       town: "Wolverhampton",
       postcode: "WV1 4SA"
     },
+    sites: [
+      {id: "RQ5SJ", name: "Wolverhampton Hospital"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -8070,6 +8105,9 @@ module.exports = [
       town: "Worcester",
       postcode: "WR4 9RW"
     },
+    sites: [
+      {id: "RRZNP", name: "Worcestershire Hospital"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -8085,6 +8123,9 @@ module.exports = [
       town: "Worcester",
       postcode: "WR4 9RW"
     },
+    sites: [
+      {id: "RWQ11", name: "Worcestershire Hospital"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -8094,12 +8135,15 @@ module.exports = [
   },
   {
     id: "RPL",
-    name: "Worthing and southlands Hospitals NHS Trust",
+    name: "Worthing and Southlands Hospitals NHS Trust",
     address: {
       line1: "Worthing hospital",
       town: "Worthing",
       postcode: "BN11 2DH"
     },
+    sites: [
+      {id: "RPL11", name: "Southlands Hospital"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -8115,6 +8159,9 @@ module.exports = [
       town: "Worthing",
       postcode: "BN13 3EP"
     },
+    sites: [
+      {id: "RHJ11", name: "Worthing Hospital"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -8130,6 +8177,9 @@ module.exports = [
       town: "Wigan",
       postcode: "WN6 9EP"
     },
+    sites: [
+      {id: "REY11", name: "Wrightington Hospital"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -8145,6 +8195,9 @@ module.exports = [
       town: "Wigan",
       postcode: "WN1 2NN"
     },
+    sites: [
+      {id: "RRF11", name: "Wigan Hospital"}
+    ],
     status: "Closed",
     dateClosed: "2024-12-04",
     type: "NHS Trust",
@@ -8152,12 +8205,15 @@ module.exports = [
   },
   {
     id: "RLQ",
-    name: "Wye valley NHS Trust",
+    name: "Wye Valley NHS Trust",
     address: {
       line1: "County hospital",
       town: "Hereford",
       postcode: "HR1 2ER"
     },
+    sites: [
+      {id: "RLQ81", name: "Wye Valley Hospital"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -8173,6 +8229,9 @@ module.exports = [
       town: "Yeovil",
       postcode: "BA21 4AT"
     },
+    sites: [
+      {id: "RA481", name: "Yeovil Hospital"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -8188,6 +8247,9 @@ module.exports = [
       town: "York",
       postcode: "YO31 8HE"
     },
+    sites: [
+      {id: "RCB14", name: "York Hospital"}
+    ],
     status: "Closed",
     dateClosed: "2025-02-12",
     type: "NHS Trust",
@@ -8201,6 +8263,9 @@ module.exports = [
       town: "Wakefield",
       postcode: "WF2 0XQ"
     },
+    sites: [
+      {id: "RX81", name: "Yorkshire Ambulance Service"}
+    ],
     status: "Active",
     type: "NHS Trust",
     region: "Y63",
@@ -8213,7 +8278,7 @@ module.exports = [
     name: 'Pickfords Pharmacy',
     sites: [
       {
-        id: "343252356",
+        id: "FA424X",
         name: "Pickfords Pharmacy"
       }
     ],

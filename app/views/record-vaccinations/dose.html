@@ -1,0 +1,116 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Which dose of the " + data.vaccine + " are you giving?" %}
+
+{% set currentSection = "vaccinate" %}
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
+
+{% set previousPage = "/record-vaccinations/batch" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: previousPage }) }}
+{% endblock %}
+
+{% block content %}
+
+  {% set errors = [] %}
+
+  {% if data.showError == "yes" %}
+    {% set errors = [{
+      text: "Select which dose of the " + data.vaccine + " are you giving",
+      href: "#vaccineDose"
+    }] %}
+  {% endif %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+      <form action="/record-vaccinations/answer-dose" method="post" novalidate>
+
+        {% if data.vaccine == "6-in-1" %}
+          {% set doseOptions = [
+            "1st dose",
+            "2nd dose",
+            "3rd dose",
+            "4th dose"
+          ] %}
+        {% elif data.vaccine == "flu" %}
+          {% set doseOptions = [
+            "1st dose",
+            "2nd dose"
+          ] %}
+        {% elif data.vaccine == "MenB" %}
+          {% set doseOptions = [
+            "1st dose",
+            "2nd dose",
+            "Booster"
+          ] %}
+        {% elif data.vaccine == "MMRV" %}
+          {% set doseOptions = [
+            "1st dose",
+            "2nd dose",
+            "3rd dose"
+          ] %}
+        {% elif data.vaccine == "pneumococcal" %}
+          {% set doseOptions = [
+            "1st dose",
+            "2nd dose",
+            "Booster"
+          ] %}
+        {% else %}
+          {% set doseOptions = [] %}
+        {% endif %}
+
+        {% set items = [] %}
+
+        {% for option in doseOptions %}
+          {% set items = (items.push({
+            text: option,
+            value: option,
+            checked: (data.vaccineDose == option)
+          }), items) %}
+        {% endfor %}
+
+        {% set items = (items.push({
+          divider: "or"
+        }), items) %}
+
+        {% set items = (items.push({
+          text: "I'm not sure",
+          value: "Not sure",
+          checked: (data.vaccineDose == "Not sure")
+        }), items) %}
+
+        {{ radios({
+          idPrefix: "vaccineDose",
+          name: "vaccineDose",
+          errorMessage: {
+            text: (errors | first).text
+          } if (errors | length) > 0,
+          fieldset: {
+            legend: {
+              text: "Which dose of the " + data.vaccine + " vaccine are you giving?",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          items: items
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+
+  </div>
+
+{% endblock %}
