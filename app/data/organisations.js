@@ -891,21 +891,6 @@ module.exports = [
     ]
   },
   {
-    id: "RGT",
-    name: "Cambridge University Hospitals NHS Foundation Trust",
-    address: {
-      line1: "Cambridge biomedical campus",
-      town: "Cambridge",
-      postcode: "CB2 0QQ"
-    },
-    status: "Active",
-    type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
-  },
-  {
     id: "RT1",
     name: "Cambridgeshire and peterborough NHS Foundation Trust",
     address: {

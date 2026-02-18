@@ -7171,20 +7171,6 @@ module.exports = [
     "lastName": "Mora"
   },
   {
-    "id": "3444754326063",
-    "email": "darren.phan@nhs.net",
-    "organisations": [
-      {
-        "id": "RGT",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": true
-      }
-    ],
-    "firstName": "Darren",
-    "lastName": "Phan"
-  },
-  {
     "id": "8975436615083",
     "email": "jenesis.esparza@nhs.net",
     "organisations": [
