@@ -56,7 +56,7 @@ module.exports = router => {
 
     let vaccinesEnabled = []
 
-    for (vaccineEnabled of data.vaccinesEnabled) {
+    for (const vaccineEnabled of data.vaccinesEnabled) {
       vaccinesEnabled.push({name: vaccineEnabled, status: "enabled"})
     }
 
