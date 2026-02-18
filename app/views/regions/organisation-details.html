@@ -29,6 +29,12 @@
         }) }}
       {% endif %}
 
+      {% set addressHtml %}
+        {{ organisation.address.line1 }}<br>
+        {{ organisation.address.town }}<br>
+        {{ organisation.address.postcode }}
+      {% endset %}
+
       {{ summaryList({
         rows: [
           {
@@ -60,7 +66,7 @@
               text: "Address"
             },
             value: {
-              html: (organisation.address)
+              html: addressHtml
             }
           }
         ]
