@@ -67,9 +67,12 @@ module.exports = router => {
     const currentUser = res.locals.currentUser
 
     const data = req.session.data
-    const vaccinationsRecorded = data.vaccinationsRecorded
+    const allVaccinationsRecorded = data.vaccinationsRecorded
     const dateToday = new Date()
     const monthToday = (dateToday.getMonth() + 1) // JavaScript dates are 0-indexed
+
+    // Vaccinations to count
+    let vaccinationsRecorded = []
 
     let sites = []
     let organisations = []
@@ -78,11 +81,18 @@ module.exports = router => {
       // Showing all sites for now, for demo purposes
       sites = currentOrganisation.sites
 
-      if (sites === []) {
+      // Filter vaccinations to only those recorded by the current
+      // organisation
+      vaccinationsRecorded = allVaccinationsRecorded.filter((vaccination)=> vaccination.organisationId === currentOrganisation.id)
+
+      if (sites.length === 0) {
         sites = [currentOrganisation]
       }
 
     } else {
+
+      // Include all organisations for now
+      vaccinationsRecorded = allVaccinationsRecorded
 
       const userOrganisationIds = currentUser.organisations.map((organisation) => organisation.id)
       organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
