@@ -74,23 +74,29 @@
         }) }}
       </form>
 
-      {% if (vaccinesDisabled | length) > 0 %}
-        {% call details({ summaryText: "Need to add more vaccine types?"}) %}
-          <p>Select the vaccines you need.</p>
+      {% if (vaccinesThatCanBeRequested | length) > 0 %}
 
+        {% set detailsHtml %}
           {% set requestableItems = [] %}
-          {% for vaccine in (vaccinesDisabled | sort(false, false, "name")) %}
+          {% for vaccine in (vaccinesThatCanBeRequested | sort) %}
+
             {% set requestableItems = (requestableItems.push({
-              value: vaccine.name,
-              text: (vaccine.name | capitaliseFirstLetter)
+              value: vaccine,
+              text: (vaccine | capitaliseFirstLetter)
             }), requestableItems) %}
           {% endfor %}
 
-          <form action="/vaccines/request" method="post">
+          <form action="/vaccines/enable" method="post">
+
+            <p>You can now use RAVS to record national {{ vaccinesThatCanBeRequested | join(" and ") }} vaccinations.</p>
+
+            <p>Any vaccinations you record will be sent to Manage your service (MYS) for payments.</p>
+
+            <p>You will still have access to your previous system for at least 6 months so you can download reports.</p>
 
             {{ checkboxes({
-              name: "vaccinesRequested",
-              idPrefix: "vaccines-requested",
+              name: "vaccinesAdded",
+              idPrefix: "vaccines-added",
               fieldset: {
                 legend: {
                   text: "Vaccine",
@@ -101,12 +107,17 @@
             }) }}
 
             {{ button({
-              text: "Send request",
-              classes: "nhsuk-button--secondary"
+              text: "Add",
+              classes: "nhsuk-button--secondary nhsuk-u-margin-bottom-0"
             }) }}
           </form>
+        {% endset %}
 
-        {% endcall %}
+        {{ details({
+          summaryText: "Add other vaccines",
+          html: detailsHtml
+        }) }}
+
       {% endif %}
 
     </div>

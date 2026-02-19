@@ -4,10 +4,24 @@ module.exports = (router) => {
     const currentOrganisation = res.locals.currentOrganisation
     const data = req.session.data
 
+    const organisationVaccines = res.locals.currentOrganisation.vaccines || []
+
+    const vaccinesEnabledNames = organisationVaccines
+      .filter((vaccine) => vaccine.status === "enabled")
+      .map((vaccine) => vaccine.name)
+
+    const allVaccines = data.vaccines
+
+    const vaccinesThatCanBeRequested =  allVaccines
+      .filter((vaccine) => vaccine.availableToAllSites)
+      .filter((vaccine) => !vaccinesEnabledNames.includes(vaccine.name))
+      .map((vaccine) => vaccine.name)
+
     const vaccineStock = data.vaccineStock.filter((vaccine) => vaccine.organisationId === currentOrganisation.id)
 
     res.render('vaccines/index', {
-      vaccineStock
+      vaccineStock,
+      vaccinesThatCanBeRequested
     })
   })
 
@@ -69,40 +83,43 @@ module.exports = (router) => {
 
     const vaccinesEnabled = allVaccines.filter((vaccine) => vaccinesEnabledNames.includes(vaccine.name))
 
-    const vaccinesDisabled = allVaccines.filter((vaccine) => !vaccinesEnabledNames.includes(vaccine.name))
+    const vaccinesThatCanBeRequested =  allVaccines
+    .filter((vaccine) => vaccine.availableToAllSites)
+    .filter((vaccine) => !vaccinesEnabledNames.includes(vaccine.name))
+    .map((vaccine) => vaccine.name)
+
 
     res.render('vaccines/choose-vaccine', {
       vaccinesEnabled,
-      vaccinesDisabled
+      vaccinesThatCanBeRequested
     })
   })
 
-  // Confirmation of a vaccine being requested
-  router.post('/vaccines/request', (req, res) => {
+  // Enabling a new vaccine type
+  router.post('/vaccines/enable', (req, res) => {
 
     const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
 
-    const vaccinesRequested = currentOrganisation.vaccines
-    .filter((vaccine) => data.vaccinesRequested.includes(vaccine.name))
+    const vaccinesAdded = data.vaccinesAdded
 
-    for (let vaccineRequested of vaccinesRequested) {
-      vaccineRequested.status = "requested"
+    for (vaccine of vaccinesAdded) {
+
+      let vaccineToEnable = currentOrganisation.vaccines.find((vaccine) => vaccine.name === vaccine)
+
+      if (vaccineToEnable) {
+        vaccineToEnable.status = "enabled"
+
+      } else {
+
+        currentOrganisation.vaccines.push({
+          name: vaccine,
+          status: "enabled"
+        })
+      }
     }
 
-    const region = data.regions.find((region) => region.id === currentOrganisation.region)
-
-    const currentDate = new Date().toISOString()
-    const generatedId = "AB" + Math.floor(Math.random() * 10000000).toString()
-
-    region.inbox ||= []
-    region.inbox.push({
-      id: generatedId,
-      fromOrganisationId: currentOrganisation.id,
-      vaccinesRequested: data.vaccinesRequested,
-      sentOn: currentDate
-    })
-    res.redirect('/vaccines/requested')
+    res.redirect('/vaccines/choose-vaccine')
   })
 
 
