@@ -9050,5 +9050,32 @@ module.exports = [
         }
       }
     ]
+  },
+  {
+    id: "FT81513",
+    name: "Holborn Pharmacy",
+    address: {
+      line1: "131 Old Street",
+      town: "London",
+      postcode: "WC1 7RP"
+    },
+    type: "Community Pharmacy",
+    status: "Active",
+    region: "Y56",
+    vaccines: [
+      {name: "MMR", status: "enabled"},
+      {name: "flu (London service)", status: "enabled"}
+    ],
+    sites: [
+      {
+        id: "FX252",
+        name: "Holborn Pharmacy",
+        address: {
+          line1: "131 Old Street",
+          town: "London",
+          postcode: "WC1 7RP"
+        }
+      }
+    ]
   }
 ]
