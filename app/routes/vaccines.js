@@ -103,7 +103,7 @@ module.exports = (router) => {
 
     const vaccinesAdded = data.vaccinesAdded
 
-    for (vaccine of vaccinesAdded) {
+    for (const vaccine of vaccinesAdded) {
 
       let vaccineToEnable = currentOrganisation.vaccines.find((vaccine) => vaccine.name === vaccine)
 
