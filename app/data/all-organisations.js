@@ -301,7 +301,12 @@ module.exports = [
   {
     id:  "RGT",
     name: "Cambridge University Hospitals NHS Foundation Trust",
-    type: "NHS Trust"
+    type: "NHS Trust",
+    address: {
+      line1: "University Street",
+      town: "Cambridge",
+      postcode: "CM6 9PQ"
+    }
   },
   {
     id:  "RH5",

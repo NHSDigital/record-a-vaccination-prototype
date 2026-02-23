@@ -23,6 +23,10 @@ module.exports = router => {
       .filter((organisation) => organisation.status === "Active")
       .map((organisation) => organisation.id)
 
+    // reset email and password
+    req.session.data.email = ""
+    req.session.data.password = ""
+
     if (user.admin) {
       req.session.data.currentUserId = user.id;
       req.session.data.currentOrganisationId = null
