@@ -130,6 +130,34 @@ module.exports = [
     ]
   },
   {
+    id: "RFF3463461441",
+    vaccine: "flu",
+    vaccineProduct: "Fluenz (LAIV)",
+    organisationId: "RFF", // Barnsley Hospital NHS Foundation Trust
+    siteId: "RFFPK", // Barnsley General Hospital
+    batches: [
+      {
+        id: "847741",
+        batchNumber: "194-638",
+        expiryDate: "2026-10-12"
+      }
+    ]
+  },
+  {
+    id: "RFF10585413",
+    vaccine: "flu",
+    vaccineProduct: "Influvac (TIVe)",
+    organisationId: "RFF", // Barnsley Hospital NHS Foundation Trust
+    siteId: "RFFPK", // Barnsley General Hospital
+    batches: [
+      {
+        id: "947458144",
+        batchNumber: "46-4614",
+        expiryDate: "2026-12-23"
+      }
+    ]
+  },
+  {
     id: "RFF0466214643",
     vaccine: "pertussis",
     vaccineProduct: "Adacel vaccine",
