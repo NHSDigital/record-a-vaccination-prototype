@@ -88,11 +88,9 @@
 
           <form action="/vaccines/enable" method="post">
 
-            <p>You can now use RAVS to record national {{ vaccinesThatCanBeRequested | join(" and ") }} vaccinations.</p>
+          <p>You can now use Record a vaccination for national {{ vaccinesThatCanBeRequested | join(" and ") }} vaccinations.</p>
 
-            <p>Any vaccinations you record will be sent to Manage your service (MYS) for payments.</p>
-
-            <p>You will still have access to your previous system for at least 6 months so you can download reports.</p>
+          <p>Pharmacies are paid automatically by the NHS Business Services Authority.</p>
 
             {{ checkboxes({
               name: "vaccinesAdded",
