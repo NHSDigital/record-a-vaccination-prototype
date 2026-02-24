@@ -408,5 +408,33 @@ module.exports = [
         expiryDate: "2027-11-23"
       }
     ]
+  },
+  {
+    id: "2514771",
+    vaccine: "flu (London service)",
+    vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
+    organisationId: "FT81513", // Holborn Pharmacy
+    siteId: "FX252", // Holborn Pharmacy
+    batches: [
+      {
+        id: "46436436",
+        batchNumber: "LDJE-24",
+        expiryDate: "2026-12-04"
+      }
+    ]
+  },
+  {
+    id: "463646",
+    vaccine: "MMR",
+    vaccineProduct: "MMRVaXPro",
+    organisationId: "FT81513", // Holborn Pharmacy
+    siteId: "FX252", // Holborn Pharmacy
+    batches: [
+      {
+        id: "346436342",
+        batchNumber: "14-251",
+        expiryDate: "2027-01-13"
+      }
+    ]
   }
 ]
