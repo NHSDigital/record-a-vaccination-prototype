@@ -22,6 +22,22 @@
 
       <p class="nhsuk-body-l">Add and edit vaccines for your organisation.</p>
 
+      {% if (vaccinesThatCanBeRequested | length) > 0 %}
+
+      {% set insetTextHtml %}
+        <p>{{ tag({ text: "New", classes: "nhsuk-tag--blue"}) }}</p>
+        <p>You can now use Record a vaccination for national COVID-19 and flu vaccinations.</p>
+
+        <p>You'll be paid automatically for these vaccinations by the NHS Business Services Authority (NHSBSA), through Manage Your Service (MYS).</p>
+      {% endset %}
+
+      {{ insetText({
+        html: insetTextHtml,
+        classes: "nhsuk-u-padding-top-1 nhsuk-u-padding-bottom-1 nhsuk-u-margin-top-1 nhsuk-u-margin-bottom-6"
+      }) }}
+
+      {% endif %}
+
       {{ button({
         "text": "Add vaccine",
         "href": "/vaccines/choose-site"
