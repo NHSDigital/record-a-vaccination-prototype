@@ -16,8 +16,8 @@
   "license": "MIT",
   "dependencies": {
     "@x-govuk/govuk-prototype-filters": "^2.1.0",
-    "nhsuk-frontend": "^10.3.1",
-    "nhsuk-prototype-kit": "^8.0.1"
+    "nhsuk-frontend": "github:nhsuk/nhsuk-frontend#50ec9a5c8",
+    "nhsuk-prototype-kit": "^8.0.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.56.0",
