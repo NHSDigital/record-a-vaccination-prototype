@@ -43,8 +43,8 @@
           ] %}
         {% elif data.vaccine == "flu" %}
           {% set doseOptions = [
-            "1st or only dose this season",
-            "2nd dose this season"
+            "1st dose",
+            "2nd dose"
           ] %}
         {% elif data.vaccine == "MenB" %}
           {% set doseOptions = [
@@ -71,22 +71,44 @@
         {% set items = [] %}
 
         {% for option in doseOptions %}
-          {% set items = (items.push({
-            text: option,
-            value: option,
-            checked: (data.vaccineDose == option)
-          }), items) %}
+
+          {% set hintText = "" %}
+
+          {% if data.vaccine == "flu" and option == "1st dose" %}
+            {% set hintText = "1st or only dose this season" %}
+          {% elif data.vaccine == "flu" and option == "2nd dose" %}
+            {% set hintText = "2nd dose this season" %}
+          {% endif %}
+
+          {% if hintText %}
+            {% set items = (items.push({
+              text: option,
+              value: option,
+              checked: (data.vaccineDose == option),
+              hint: {
+                text: hintText
+              }
+            }), items) %}
+          {% else %}
+            {% set items = (items.push({
+              text: option,
+              value: option,
+              checked: (data.vaccineDose == option)
+            }), items) %}
+          {% endif %}
+
         {% endfor %}
 
-        {% set items = (items.push({
-          divider: "or"
-        }), items) %}
-
-        {% set items = (items.push({
-          text: "I'm not sure",
-          value: "Not sure",
-          checked: (data.vaccineDose == "Not sure")
-        }), items) %}
+        {% if data.vaccine != "flu" %}
+          {% set items = (items.push({
+            divider: "or"
+          }), items) %}
+          {% set items = (items.push({
+            text: "I'm not sure",
+            value: "Not sure",
+            checked: (data.vaccineDose == "Not sure")
+          }), items) %}
+        {% endif %}
 
         {{ radios({
           idPrefix: "vaccineDose",
