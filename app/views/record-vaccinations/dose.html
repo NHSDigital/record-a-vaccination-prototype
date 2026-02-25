@@ -43,8 +43,8 @@
           ] %}
         {% elif data.vaccine == "flu" %}
           {% set doseOptions = [
-            "1st dose",
-            "2nd dose"
+            "1st or only dose this season",
+            "2nd dose this season"
           ] %}
         {% elif data.vaccine == "MenB" %}
           {% set doseOptions = [
@@ -74,10 +74,8 @@
 
           {% set hintText = "" %}
 
-          {% if data.vaccine == "flu" and option == "1st dose" %}
-            {% set hintText = "1st or only dose this season" %}
-          {% elif data.vaccine == "flu" and option == "2nd dose" %}
-            {% set hintText = "2nd dose this season" %}
+          {% if data.vaccine == "flu" and option == "2nd dose" %}
+            {% set hintText = "Only given to some children in an at-risk group" %}
           {% endif %}
 
           {% if hintText %}
