@@ -9,41 +9,16 @@
 
       <h1 class="nhsuk-heading-l">You previously logged in a different way</h1>
 
-      <p>You previously logged in with Okta.</p>
+      <p>Your email address <b>{{ data.email }}</b> is linked to a different log-in option.</p>
 
-      <p>If you want to log in with PharmaPMR, you need to log in with Okta first.</p>
-      <p>We will then link both Okta and PharmaPMR to your account, and in future, you can log in either way.</p>
+      <p>You need to log in with the option you used previously.</p>
+
+      <p>We will then link options to your RAVS account, and in future you will be able to log in with either.</p>
 
       {{ button({
-        text: "Log in with Okta",
-        classes: "app-button--min-width-2",
-        href: "/auth/okta-sign-in"
+        text: "Continue",
+        href: "/auth/log-in"
       }) }}
-
-      <div>
-        {{ button({
-          text: "Log in with PharmaPMR",
-          classes: "nhsuk-button--secondary app-button--min-width-2"
-        }) }}
-      </div>
-
-      <div>
-        {{ button({
-          text: "Log in with PharmacyPlus+",
-          classes: "nhsuk-button--secondary app-button--min-width-2"
-        }) }}
-      </div>
-
-      <div>
-        {{ button({
-          text: "Log in with Phoenix",
-          classes: "nhsuk-button--secondary app-button--min-width-2"
-        }) }}
-      </div>
-
-
-      
-
 
     </div>
   </div>
