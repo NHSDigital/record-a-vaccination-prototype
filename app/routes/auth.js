@@ -7,7 +7,7 @@ module.exports = router => {
     const user = data.users.find((user) => user.email === email)
 
     if (email === 'freda.pink@nhs.net') {
-      res.redirect('/auth/keycloak-not-recognised')
+      res.redirect('/auth/user-not-recognised')
       return
     } else if (email === 'james.blue@nhs.net') {
       res.redirect('/auth/keycloak-existing-account-new-login')

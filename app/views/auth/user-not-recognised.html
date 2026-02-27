@@ -1,7 +1,6 @@
-{% extends '_layouts/keycloak.html' %}
+{% extends 'layout.html' %}
 
 {% set pageName = "Sign in" %}
-
 
 {% block content %}
   <div class="nhsuk-grid-row">
@@ -9,7 +8,7 @@
 
       <h1 class="nhsuk-heading-l">We cannot find a user with this email</h1>
 
-      <p>There is no RAVS account for {{ data.email }}.</p>
+      <p>There is no Record a vaccination (RAVS) account for {{ data.email }}.</p>
 
       <p>If you’ve previously used RAVS, <a href="/auth/log-in">try logging in with the option you used last time</a>.</p>
 
