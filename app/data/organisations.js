@@ -891,21 +891,6 @@ module.exports = [
     ]
   },
   {
-    id: "RGT",
-    name: "Cambridge University Hospitals NHS Foundation Trust",
-    address: {
-      line1: "Cambridge biomedical campus",
-      town: "Cambridge",
-      postcode: "CB2 0QQ"
-    },
-    status: "Active",
-    type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
-  },
-  {
     id: "RT1",
     name: "Cambridgeshire and peterborough NHS Foundation Trust",
     address: {
@@ -9062,6 +9047,33 @@ module.exports = [
           line1: "203 London Road",
           town: "Southampton",
           postcode: "SO15 2AY"
+        }
+      }
+    ]
+  },
+  {
+    id: "FT81513",
+    name: "Holborn Pharmacy",
+    address: {
+      line1: "131 Old Street",
+      town: "London",
+      postcode: "WC1 7RP"
+    },
+    type: "Community Pharmacy",
+    status: "Active",
+    region: "Y56",
+    vaccines: [
+      {name: "MMR", status: "enabled"},
+      {name: "flu (London service)", status: "enabled"}
+    ],
+    sites: [
+      {
+        id: "FX252",
+        name: "Holborn Pharmacy",
+        address: {
+          line1: "131 Old Street",
+          town: "London",
+          postcode: "WC1 7RP"
         }
       }
     ]
