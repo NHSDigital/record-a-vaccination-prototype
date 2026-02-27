@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Sign in" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">We cannot find a user with this email</h1>
+
+      <p>There is no Record a vaccination (RAVS) account for <b>{{ data.email }}</b>.</p>
+
+      <p>If you’ve previously used RAVS, <a href="/auth/log-in">try logging in with the email address you used last time</a>.</p>
+
+      <p>If you've never used RAVS before, you'll need to be invited by a colleague to use the service.</p>
+
+    </div>
+  </div>
+{% endblock %}

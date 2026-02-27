@@ -1,0 +1,121 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Sign in" %}
+
+
+{% block header %}
+<header>
+  <div class="service-name">
+    <span class="logo">+</span>
+    MediCare
+  </div>
+</header>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+
+{% block content %}
+<style>
+  * { box-sizing: border-box; }
+  html, body { background-color: cornsilk; }
+  body {
+    margin: 0; padding: 0;
+  }
+  header {
+    margin: 0; padding: 40px;
+    color: snow;
+    background-color: darkred;
+  }
+  .logo {
+    font-size: 60px;
+    font-weight: bold;
+    line-height: 50px;
+    color: salmon;
+  }
+  .service-name {
+    font-size: 40px;
+    font-weight: bold;
+  }
+
+  label {
+    display: block;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  input[type=text],
+  input[type=password] {
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 0;
+    border: 2px solid black;
+    width: 400px;
+  }
+
+  .field {
+    margin-bottom: 40px;
+  }
+
+  button {
+    font-size: 30px;
+    padding: 10px;
+    border: 0px;
+    border-radius: 5px;
+    background-color: darkred;
+    color: snow;
+  }
+</style>
+
+<main>
+
+  <form action="/auth/medicare-authorise" method="post">
+
+    <h1>Sign in with your MediCare account</h1>
+
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="text" id="email" name="email">
+    </div>
+
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="text" id="password" name="password">
+    </div>
+
+    <button type="submit">Log in</button>
+
+  </form>
+
+</main>
+</div>
+</div>
+
+
+<div style="background-color: #d8dde0; padding: 30px;">
+  <h2 class="nhsuk-heading-s">Testing area</h2>
+  <p>Log in as:</p>
+
+  <ul>
+    <li><a href="#" data-email="paulina.sloan@nhs.net" data-module="prefill-email">Lead admin at a small chain of pharmacies</a></li>
+    <li><a href="#" data-email="amanda.white@nhs.net" data-module="prefill-email">Lead admin for a large chain of pharmacies with the same name</a></li>
+    <li><a href="#" data-email="freda.pink@nhs.net" data-module="prefill-email">A MediCare user who has not used RAVS before</a></li>
+    <li><a href="#" data-email="james.blue@nhs.net" data-module="prefill-email">A user who has only used RAVS via a different login method</a></li>
+  </ul>
+</div>
+
+<script>
+
+  const prefillLinks = document.querySelectorAll('a[data-module=prefill-email]')
+
+  for (link of prefillLinks) {
+    link.addEventListener('click', function(event) {
+      const email = event.target.getAttribute('data-email');
+      document.getElementById('email').setAttribute('value', email);
+    })
+  }
+</script>
+
+{% endblock %}
