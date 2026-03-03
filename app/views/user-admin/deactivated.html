@@ -19,11 +19,7 @@
         "href": "/user-admin/add-user"
       }) }}
 
-      <div class="nhsuk-inset-text">
-        <span class="nhsuk-u-visually-hidden">Information: </span>
-
-            <p>For security, we deactivate users who have not logged in for 90 days. <a href="/user-admin/reactivate-all">Reactivate users (2)</a></p>
-      </div>
+      {% include "user-admin/_deactivated-users-notice.html" %}
 
       {% include "user-admin/_search-filter.html" %}
 

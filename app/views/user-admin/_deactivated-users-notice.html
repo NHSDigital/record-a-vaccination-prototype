@@ -1,0 +1,9 @@
+{# This should only be shown if there is more than 1 user deactivated due to inactivity #}
+{% set insetTextHtml %}
+  <p>For security, we deactivate users who have not logged in for 90 days. <a href="/user-admin/reactivate-all">Reactivate users (2)</a></p>
+{% endset %}
+
+{{ insetText({
+  html: insetTextHtml,
+  classes: "nhsuk-u-margin-top-0"
+}) }}
