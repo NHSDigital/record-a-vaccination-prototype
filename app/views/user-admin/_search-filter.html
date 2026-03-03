@@ -1,0 +1,23 @@
+<div class="app-filters nhsuk-u-margin-top-5">
+  <form action="/user-admin" method="get" novalidate>
+
+    {{ input({
+      name: "q",
+      value: data.q,
+      classes: "nhsuk-input--width-20",
+      label: {
+        text: "Search " + currentSubSection + " users by name or email"
+      },
+      formGroup: {
+        classes: "nhsuk-u-margin-bottom-0",
+        afterInput: {
+          html: button({
+            text: "Search",
+            classes: "nhsuk-button--secondary nhsuk-button--small"
+          })
+        }
+      }
+    }) }}
+
+  </form>
+</div>
