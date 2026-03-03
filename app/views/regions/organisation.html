@@ -24,39 +24,40 @@
 
         <p><a href="/regions/organisations/{{ organisation.id }}/reactivate">Reactivate organisation</a></p>
 
-      {% else  %}
-
-        <p>They can record
-          {% if (vaccinesEnabled | length) == (data.vaccines | length) %}
-            all
-          {% else %}
-            {{ vaccinesEnabled | sort(false, false, "name") | pluck("name") | formatList }}
-          {% endif %}
-        vaccinations.
-
-          {% if (vaccinesEnabled | length) < (data.vaccines | length) %}
-            <a href="/regions/organisations/{{organisation.id}}/add-vaccines">Add vaccines<span class="nhsuk-u-visually-hidden"></span></a>
-          {% endif %}
-        </p>
-
-        {% if (messages | length) > 0 %}
-          {% set message = (messages | first) %}
-
-          {% set messageHtml %}
-            <p>Access to record {{ message.vaccineRequested }} requested on {{ message.sentOn | govukDate }}. <a href="/regions/messages/{{ message.id }}">View&nbsp;request</a></p>
-          {% endset %}
-
-          {{ insetText({
-            html: messageHtml,
-            classes: "nhsuk-u-margin-top-0 nhsuk-u-padding-top-1 nhsuk-u-padding-bottom-1"
-          }) }}
-        {% endif %}
-
-
-
-        <p><a href="/regions/organisations/{{organisation.id}}/deactivate">Deactivate organisation</a></p>
-
       {% endif %}
+
+
+      <p>They can record
+        {% if (vaccinesEnabled | length) == (data.vaccines | length) %}
+          all
+        {% else %}
+          {{ vaccinesEnabled | sort(false, false, "name") | pluck("name") | formatList }}
+        {% endif %}
+      vaccinations.
+
+        {% if (vaccinesEnabled | length) < (data.vaccines | length) %}
+          <a href="/regions/organisations/{{organisation.id}}/add-vaccines">Add vaccines<span class="nhsuk-u-visually-hidden"></span></a>
+        {% endif %}
+      </p>
+
+      {% if (messages | length) > 0 %}
+        {% set message = (messages | first) %}
+
+        {% set messageHtml %}
+          <p>Access to record {{ message.vaccineRequested }} requested on {{ message.sentOn | govukDate }}. <a href="/regions/messages/{{ message.id }}">View&nbsp;request</a></p>
+        {% endset %}
+
+        {{ insetText({
+          html: messageHtml,
+          classes: "nhsuk-u-margin-top-0 nhsuk-u-padding-top-1 nhsuk-u-padding-bottom-1"
+        }) }}
+      {% endif %}
+
+
+      {% if organisation.status != 'Invited' %}
+        <p><a href="/regions/organisations/{{organisation.id}}/deactivate">Deactivate organisation</a></p>
+      {% endif %}
+
     </div>
   </div>
 
@@ -110,22 +111,25 @@
           </table>
         {% endif %}
 
-        {{ pagination({
-          next: {
-            href: "#"
-          },
-          items: [
-            {
-              number: 1,
-              href: "#",
-              current: true
-            },
-            {
-              number: 2,
+
+        {% if (users | length) > 3 %}
+          {{ pagination({
+            next: {
               href: "#"
-            }
-          ]
-        }) }}
+            },
+            items: [
+              {
+                number: 1,
+                href: "#",
+                current: true
+              },
+              {
+                number: 2,
+                href: "#"
+              }
+            ]
+          }) }}
+        {% endif %}
 
         {% set buttonText = "Add another user" if (organisation.leadUsers | length) > 0  else "Add user" %}
 

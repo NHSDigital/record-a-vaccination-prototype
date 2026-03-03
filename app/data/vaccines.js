@@ -1,6 +1,7 @@
 module.exports = [
   {
     name: "COVID-19",
+    availableToAllSites: true,
     products: [
       {
         name: "Comirnaty 3 LP.8.1",
@@ -18,6 +19,7 @@ module.exports = [
   },
   {
     name: "flu",
+    availableToAllSites: true,
     products: [
       {
         name: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",

@@ -248,6 +248,23 @@
           },
           {
             key: {
+              text: "Dose sequence"
+            },
+            value: {
+              text: data.vaccineDose
+            },
+            actions: {
+              items: [
+                {
+                  href: "/record-vaccinations/dose",
+                  text: "Change",
+                  visuallyHiddenText: "dose sequence"
+                }
+              ]
+            }
+          } if (data.vaccine == "6-in-1" or data.vaccine == "flu" or data.vaccine == "MenB" or data.vaccine == "MMRV" or data.vaccine == "pneumococcal"),
+          {
+            key: {
               text: "Eligibility"
             },
             value: {
@@ -350,7 +367,7 @@
           } if (vaccineProduct.type == "injection"),
           {
             key: {
-              text: "Dose"
+              text: "Dose amount"
             },
             value: {
               text: data.doseAmount

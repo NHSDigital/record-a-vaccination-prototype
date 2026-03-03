@@ -36,7 +36,7 @@
         {% elseif (lastAddedVaccination.vaccine == "pertussis") %}
           A pertussis
         {% else %}
-          A COVID-19
+          A {{ lastAddedVaccination.vaccine }}
         {% endif %}
       {% endset %}
 

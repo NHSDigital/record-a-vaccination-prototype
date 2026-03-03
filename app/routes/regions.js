@@ -54,6 +54,14 @@ module.exports = router => {
 
     const addedUserId = Math.floor(Math.random() * 10000000).toString()
 
+    let vaccinesEnabled = []
+
+    for (const vaccineEnabled of data.vaccinesEnabled) {
+      vaccinesEnabled.push({name: vaccineEnabled, status: "enabled"})
+    }
+
+    console.log(vaccinesEnabled)
+
     // Add organisation
     req.session.data.organisations.push({
       id: organisation.id,
@@ -61,7 +69,8 @@ module.exports = router => {
       address: organisation.address,
       type: organisation.type,
       status: 'Invited',
-      region: currentOrganisation.id
+      region: currentOrganisation.id,
+      vaccines: vaccinesEnabled
     })
 
     req.session.data.users.push({
