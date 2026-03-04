@@ -1,0 +1,151 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "" %}
+
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/apply/check-pharmacy",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/apply/pharmacy-chain-check" method="post">
+
+        {{ checkboxes({
+
+        fieldset: {
+          legend: {
+            text: "Select the pharmacies where you want to use RAVS",
+            size: "l"
+          }
+        },
+        items: [
+          {
+            value: "all",
+            text: "Select all",
+            attributes: {
+              "data-select-all": "true"
+            }
+          },
+          {
+            divider: "or"
+          },
+          {
+            value: "FEP81",
+            text: "Well, NN6 9EL (FEP81)"
+          },
+          {
+            value: "FHE39",
+            text: "Well, LE7 2EQ (FHE39)"
+          },
+          {
+            value: "FG726",
+            text: "Well Crewkerne - Middle path, TA18 8BG (FG726)"
+          },
+          {
+            value: "FNV78",
+            text: "Well, BS9 2HL (FNV78)"
+          },
+          {
+            value: "FNV78",
+            text: "Well, BS9 2HL (FNV78)"
+          },
+          {
+            value: "FCJ72",
+            text: "Well, M44 6AJ (FCJ72)"
+          },
+          {
+            value: "FQA25",
+            text: "Well Wellingborough - Cannon Street, NN8 4DN (FQA25)"
+          },
+          {
+            value: "FA310",
+            text: "Well, HU9 3DL (FA310)"
+          },
+          {
+            value: "FGM21",
+            text: "Well, DT4 9SS (FGM21)"
+          },
+          {
+            value: "FE320",
+            text: "Well, BH19 1AE (FE320)"
+          },
+          {
+            value: "FLL29",
+            text: "Well, SK14 2QR (FLL29)"
+          },
+          {
+            value: "FXW67",
+            text: "Well, BS16 6BB (FXW67)"
+          },
+          {
+            value: "FF386",
+            text: "Well, LS19 7SP (FF386)"
+          },
+          {
+            value: "FHD39",
+            text: "Well Cradley - Windmill Hill, B63 2DB (FHD39)"
+          },
+          {
+            value: "FHK15",
+            text: "Well, BN41 1LA (FHK15)"
+          },
+          {
+            value: "FGD26",
+            text: "Well, DT4 9PQ (FGD26)"
+          }
+        ]
+
+        }) }}
+
+
+        {{ button({
+          text: "Confirm"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // Select all checkbox
+      const selectAllCheckbox = document.querySelector('input[data-select-all]');
+
+      // All row checkboxes (everything starting with select- except select-all)
+      const otherCheckboxes = Array.from(
+        document.querySelectorAll('input:not([data-select-all])')
+      );
+
+      // Click on header toggles all rows
+      selectAllCheckbox.addEventListener('change', () => {
+
+        otherCheckboxes.forEach(cb => {
+          cb.checked = selectAllCheckbox.checked;
+        });
+        selectAllCheckbox.indeterminate = false;
+      });
+
+      // Click on rows updates header state
+      otherCheckboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+          const allChecked = otherCheckboxes.every(c => c.checked);
+          const noneChecked = otherCheckboxes.every(c => !c.checked);
+
+          selectAllCheckbox.checked = allChecked;
+          selectAllCheckbox.indeterminate = !allChecked && !noneChecked;
+        });
+      });
+    });
+  </script>
+
+{% endblock %}

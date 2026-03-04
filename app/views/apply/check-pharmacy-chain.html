@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Check this is your pharmacy" %}
+{% set pageName = "Check this is your pharmacy company" %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -22,7 +22,7 @@
               text: "Name"
             },
             value: {
-              text: organisation.name
+              text: "Bestway National Chemists Ltd"
             }
           },
           {
@@ -30,7 +30,7 @@
               text: "Type"
             },
             value: {
-              text: organisation.type
+              text: "Pharmacy company"
             }
           },
           {
@@ -40,13 +40,21 @@
             value: {
               text: "P0MG"
             }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: "Merchants Warehouse, Castle Street, Manchester, M3 4LZ"
+            }
           }
         ]
       }) }}
 
       {{ button({
         "text": "Continue",
-        href: "/apply/vaccine-types"
+        href: "/apply/pharmacies"
       }) }}
 
     </div>
