@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Sign up for your pharmacy" %}
+{% set pageName = "Sign up" %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -20,14 +20,8 @@
         }) }}
       {% endif %}
 
-      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>You can sign up if you are a community pharmacy offering NHS vaccinations.</p>
-
-      <p>If you need to sign up for more than 1 pharmacy, you can use this form multiple times.</li>
-      </p>
-
-      <form action="/apply/answer-pharmacy" method="post">
+      <form action="/apply/check-pharmacy-chain" method="post">
 
       {% set options = [] %}
       {% set items = [{ text: "", value: ""}] %}
@@ -42,21 +36,109 @@
         {% endif %}
       {% endfor %}
 
-      {{ select({
-        id: "organisation-id",
-        name: "organisationId",
-        label: {
-          text: "Find your pharmacy",
-          size: "m"
+      {% set pharmacyChains = [
+      {
+        text: ""
+      },
+      {
+        value: "P08F",
+        text: "Boots UK Limited"
+      },
+      {
+        value: "P0MG",
+        text: "Bestway National Chemists Ltd"
+      },
+      {
+        value: "P07F",
+        text: "Lloyds Pharmacy Ltd"
+      },
+      {
+        value: "P29F",
+        text: "Tesco PLC"
+      },
+      {
+        value: "P10F",
+        text: "Asda Stores Ltd"
+      },
+      {
+        value: "P4YF",
+        text: "Medashealthcare Limited"
+      },
+      {
+        value: "P569",
+        text: "Rajja Ltd"
+      },
+      {
+        value: "P06L",
+        text: "Safedale Limited"
+      }
+      ]
+
+      %}
+
+      {% set multipleHtml %}
+
+        {{ select({
+          id: "organisation-id",
+          name: "organisationId",
+          label: {
+            text: "Pharmacy company",
+            size: "s"
+          },
+          hint: {
+            text: "Search by name or ODS code"
+          },
+          items: pharmacyChains | sort(false, false, "text")
+        }) }}
+
+      {% endset %}
+
+
+      {% set singleHtml %}
+          {{ select({
+            id: "organisation-id",
+            name: "organisationId",
+            label: {
+              text: "Pharmacy",
+              size: "s"
+            },
+            hint: {
+              text: "Search by name or ODS code"
+            },
+            items: items,
+            errorMessage: {
+              text: (errors | first).text
+            } if (errors | length)
+          }) }}
+        {% endset %}
+
+      {{ radios({
+        name: "oneOrMany",
+        fieldset: {
+          legend: {
+            text: "Are you signing up for 1 pharmacy or a pharmacy chain?",
+            size: "l",
+            isPageHeading: true
+          }
         },
-        hint: {
-          text: "Search by name or ODS code"
-        },
-        items: items,
-        errorMessage: {
-          text: (errors | first).text
-        } if (errors | length)
+        items: [
+          {
+            value: "single",
+            text: "A single pharmacy",
+            conditional: {
+              html: singleHtml
+            }
+          },
+          {
+            value: "pharmacy",
+            text: "A pharmacy chain",
+            conditional: {
+              html: multipleHtml
+            }
+          }
+        ]
       }) }}
+
 
         {{ button({
           "text": "Continue"

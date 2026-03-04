@@ -1,0 +1,152 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check your answers" %}
+
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/apply/contact-details",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <h2 class="nhsuk-heading-m">Your pharmacies</h2>
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Company"
+            },
+            value: {
+              html: "Bestway National Chemists Ltd"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/apply/start",
+                  text: "Change",
+                  visuallyHiddenText: "pharmacy"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Pharmacies"
+            },
+            value: {
+              html: "Well (P1141),<br>Well (P1141),<br>etc"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/apply/start",
+                  text: "Change",
+                  visuallyHiddenText: "pharmacy"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="nhsuk-heading-m">Your details</h2>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              html: data.firstName + " " + data.lastName
+            },
+            actions: {
+              items: [
+                {
+                  href: "/apply/contact-details",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Email"
+            },
+            value: {
+              text: data.email
+            },
+            actions: {
+              items: [
+                {
+                  href: "/apply/contact-details",
+                  text: "Change",
+                  visuallyHiddenText: "email"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="nhsuk-heading-m">Your colleague</h2>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              html: data.firstName + " " + data.lastName
+            },
+            actions: {
+              items: [
+                {
+                  href: "/apply/contact-details",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Email"
+            },
+            value: {
+              text: data.email
+            },
+            actions: {
+              items: [
+                {
+                  href: "/apply/contact-details",
+                  text: "Change",
+                  visuallyHiddenText: "email"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <form action="/apply/check-your-email-chain" method="post">
+        {{ button({
+          text: "Confirm"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+
+{% endblock %}

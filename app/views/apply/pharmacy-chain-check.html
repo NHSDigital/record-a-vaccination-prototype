@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/apply/pharmacies",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+        <p>You have selected <b>23 pharmacies</b>:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Pharmacy</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Well, LE7 2EQ (FHE39)</td>
+              <td><a href="#">Remove</a></td>
+            </tr>
+            <tr>
+              <td>Well, LE7 2EQ (FHE39)</td>
+              <td><a href="#">Remove</a></td>
+            </tr>
+            <tr>
+              <td>Well, LE7 2EQ (FHE39)</td>
+              <td><a href="#">Remove</a></td>
+            </tr>
+            <tr>
+              <td>Well, LE7 2EQ (FHE39)</td>
+              <td><a href="#">Remove</a></td>
+            </tr>
+            <tr>
+              <td>Well, LE7 2EQ (FHE39)</td>
+              <td><a href="#">Remove</a></td>
+            </tr>
+            <tr>
+              <td>Well, LE7 2EQ (FHE39)</td>
+              <td><a href="#">Remove</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+      <form action="/apply/contact-details-chain">
+        {{ button({
+          text: "Continue"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

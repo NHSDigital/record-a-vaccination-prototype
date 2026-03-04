@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Lead users" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/apply/vaccine-types",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p>You will be added as a lead user to all 23 pharmacies. Once you have access, you can then invite users at individual pharmacies.</p>
+
+
+      <form action="/apply/check-chain" method="post" novalidate="true">
+
+      <h2 class="nhsuk-heading-m">Your details</h2>
+
+      <p>Use your personal nhs.net email, not a pharmacy email.</p>
+
+        {{ input({
+          "label": {
+            "text": "First name"
+          },
+          "id": "first-name",
+          "name": "firstName",
+          classes: "nhsuk-input--width-20",
+          value: data.firstName,
+          "errorMessage": {
+            "text": firstNameError
+          } if firstNameError
+        }) }}
+
+        {{ input({
+          "label": {
+            "text": "Last name"
+          },
+          "id": "last-name",
+          "name": "lastName",
+          classes: "nhsuk-input--width-20",
+          value: data.lastName,
+          "errorMessage": {
+            "text": lastNameError
+          } if lastNameError
+        }) }}
+
+        {{ input({
+          "label": {
+            "text": "Email address"
+          },
+          hint: {
+            text:"For example, joe.bloggs1@nhs.net"
+          },
+          "id": "email",
+          "name": "email",
+          type: "email",
+          value: data.email,
+          "errorMessage": {
+            "text": emailError
+          } if emailError
+        }) }}
+
+        <div>
+          {{ button({
+            text: "Add another lead user",
+            classes: "nhsuk-button--secondary"
+          }) }}
+        </div>
+
+        {{ button({
+          "text": "Continue"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
