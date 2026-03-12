@@ -1,24 +1,27 @@
 module.exports = router => {
 
   router.get('/apply/start', (req, res) => {
-    let errors = []
-
-    const error = req.query.error
-
-    if (error === "no-pharmacy") {
-      errors.push({
-        text: "Select pharmacy",
-        href: "#organisation-id"
-      })
-    } else if (error === "existing-account") {
-      errors.push({
-        text: "This pharmacy already has access to the service.",
-        href: "#organisation-id"
-      })
-    }
+    const data = req.session.data
+    const allOrganisations = data.allOrganisations.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1
+      } else if (a.name > b.name) {
+        return 1
+      } else {
+        if (a.postcode < b.postcode) {
+          return -1
+        } else {
+          return 1
+        }
+      }
+    })
+    const allPharmacies = allOrganisations.filter((organisation) => organisation.type === "Community pharmacy")
+    const allPharmacyCompanies = allOrganisations.filter((organisation) => organisation.type === "Pharmacy company")
 
     res.render('apply/start', {
-      errors
+      allOrganisations,
+      allPharmacies,
+      allPharmacyCompanies
     })
   })
 

@@ -19,12 +19,14 @@
       <form action="/apply/pharmacy-chain-check" method="post">
 
         {{ checkboxes({
-
         fieldset: {
           legend: {
-            text: "Select the pharmacies where you want to use RAVS",
+            text: "Select the pharmacies where you want to start using RAVS",
             size: "l"
           }
+        },
+        hint: {
+          text: "Pharmacies that are already using RAVS are not listed."
         },
         items: [
           {
@@ -46,24 +48,12 @@
             text: "Well, LE7 2EQ (FHE39)"
           },
           {
-            value: "FG726",
-            text: "Well Crewkerne - Middle path, TA18 8BG (FG726)"
-          },
-          {
-            value: "FNV78",
-            text: "Well, BS9 2HL (FNV78)"
-          },
-          {
             value: "FNV78",
             text: "Well, BS9 2HL (FNV78)"
           },
           {
             value: "FCJ72",
             text: "Well, M44 6AJ (FCJ72)"
-          },
-          {
-            value: "FQA25",
-            text: "Well Wellingborough - Cannon Street, NN8 4DN (FQA25)"
           },
           {
             value: "FA310",
@@ -90,16 +80,24 @@
             text: "Well, LS19 7SP (FF386)"
           },
           {
-            value: "FHD39",
-            text: "Well Cradley - Windmill Hill, B63 2DB (FHD39)"
-          },
-          {
             value: "FHK15",
             text: "Well, BN41 1LA (FHK15)"
           },
           {
             value: "FGD26",
             text: "Well, DT4 9PQ (FGD26)"
+          },
+          {
+            value: "FHD39",
+            text: "Well Cradley - Windmill Hill, B63 2DB (FHD39)"
+          },
+          {
+            value: "FG726",
+            text: "Well Crewkerne - Middle path, TA18 8BG (FG726)"
+          },
+          {
+            value: "FQA25",
+            text: "Well Wellingborough - Cannon Street, NN8 4DN (FQA25)"
           }
         ]
 

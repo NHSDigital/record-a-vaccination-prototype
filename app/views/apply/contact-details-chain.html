@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Lead users" %}
+{% set pageName = "Lead administrators" %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -15,8 +15,9 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>You will be added as a lead user to all 23 pharmacies. Once you have access, you can then invite users at individual pharmacies.</p>
+      <p>You can add up to 10 lead administrators, who will have access to RAVS at all 23 pharmacies.</p>
 
+      <p>Once they log in to RAVS, they will be able to add more users at individual pharmacies.</p>
 
       <form action="/apply/check-chain" method="post" novalidate="true">
 
@@ -66,9 +67,57 @@
           } if emailError
         }) }}
 
+        <h2 class="nhsuk-heading-m">2nd lead administrator</h2>
+
+        <p>Use their personal nhs.net email, not a pharmacy email.</p>
+
+          {{ input({
+            "label": {
+              "text": "First name"
+            },
+            "id": "first-name",
+            "name": "firstName",
+            classes: "nhsuk-input--width-20",
+            value: data.firstName,
+            "errorMessage": {
+              "text": firstNameError
+            } if firstNameError
+          }) }}
+
+          {{ input({
+            "label": {
+              "text": "Last name"
+            },
+            "id": "last-name",
+            "name": "lastName",
+            classes: "nhsuk-input--width-20",
+            value: data.lastName,
+            "errorMessage": {
+              "text": lastNameError
+            } if lastNameError
+          }) }}
+
+          {{ input({
+            "label": {
+              "text": "Email address"
+            },
+            hint: {
+              text:"For example, joe.bloggs1@nhs.net"
+            },
+            "id": "email",
+            "name": "email",
+            type: "email",
+            value: data.email,
+            "errorMessage": {
+              "text": emailError
+            } if emailError
+          }) }}
+
+
+
         <div>
           {{ button({
-            text: "Add another lead user",
+            text: "Add another lead administrator",
             classes: "nhsuk-button--secondary"
           }) }}
         </div>

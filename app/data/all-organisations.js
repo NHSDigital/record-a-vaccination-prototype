@@ -3135,5 +3135,45 @@ module.exports = [
     id: "VL55M",
     address: "16 Mount Avon Drive, London, SE12 9PR",
     type: "Care home"
+  },
+  {
+    id: "P08F",
+    name: "Boots UK Limited",
+    type: "Pharmacy company"
+  },
+  {
+    name: "P0MG",
+    id: "Bestway National Chemists Ltd",
+    type: "Pharmacy company"
+  },
+  {
+    id: "P07F",
+    name: "Lloyds Pharmacy Ltd",
+    type: "Pharmacy company"
+  },
+  {
+    id: "P29F",
+    name: "Tesco PLC",
+    type: "Pharmacy company"
+  },
+  {
+    id: "P10F",
+    name: "Asda Stores Ltd",
+    type: "Pharmacy company"
+  },
+  {
+    id: "P4YF",
+    name: "Medashealthcare Limited",
+    type: "Pharmacy company"
+  },
+  {
+    id: "P569",
+    name: "Rajja Ltd",
+    type: "Pharmacy company"
+  },
+  {
+    id: "P06L",
+    name: "Safedale Limited",
+    type: "Pharmacy company"
   }
 ]

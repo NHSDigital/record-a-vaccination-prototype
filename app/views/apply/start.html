@@ -9,7 +9,7 @@
   }) }}
 {% endblock %}
 
-  {% block content %}
+{% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
@@ -20,61 +20,29 @@
         }) }}
       {% endif %}
 
-
       <form action="/apply/check-pharmacy-chain" method="post">
 
       {% set options = [] %}
       {% set items = [{ text: "", value: ""}] %}
 
-      {% for organisation in data.allOrganisations | sort(false, false, "name") %}
-        {% if organisation.type == "Community pharmacy" %}
-          {% set items = (items.push({
-            text: organisation.name + ", " + organisation.address + ", " + (organisation.address.postcode | upper) + " (" + organisation.id + ")",
-            value: organisation.id,
-            selected: (organisation.id === data.organisationId)
-          }), items) %}
-        {% endif %}
+      {% for organisation in allPharmacies %}
+        {% set items = (items.push({
+          text: organisation.name + ", " + organisation.address + ", " + (organisation.address.postcode | upper) + " (" + organisation.id + ")",
+          value: organisation.id,
+          selected: (organisation.id === data.organisationId)
+        }), items) %}
       {% endfor %}
 
-      {% set pharmacyChains = [
-      {
-        text: ""
-      },
-      {
-        value: "P08F",
-        text: "Boots UK Limited"
-      },
-      {
-        value: "P0MG",
-        text: "Bestway National Chemists Ltd"
-      },
-      {
-        value: "P07F",
-        text: "Lloyds Pharmacy Ltd"
-      },
-      {
-        value: "P29F",
-        text: "Tesco PLC"
-      },
-      {
-        value: "P10F",
-        text: "Asda Stores Ltd"
-      },
-      {
-        value: "P4YF",
-        text: "Medashealthcare Limited"
-      },
-      {
-        value: "P569",
-        text: "Rajja Ltd"
-      },
-      {
-        value: "P06L",
-        text: "Safedale Limited"
-      }
-      ]
+      {% set pharmacyCompanyItems = [{ text: "", value: ""}] %}
 
-      %}
+      {{ pharmacyCompanies | dump }}
+
+      {% for pharmacyCompany in allPharmacyCompanies %}
+        {% set pharmacyCompanyItems = (pharmacyCompanyItems.push({
+          text: pharmacyCompany.name,
+          value: pharmacyCompany.id
+        }), pharmacyCompanyItems) %}
+      {% endfor %}
 
       {% set multipleHtml %}
 
@@ -88,56 +56,56 @@
           hint: {
             text: "Search by name or ODS code"
           },
-          items: pharmacyChains | sort(false, false, "text")
+          items: pharmacyCompanyItems
         }) }}
 
       {% endset %}
 
 
       {% set singleHtml %}
-          {{ select({
-            id: "organisation-id",
-            name: "organisationId",
-            label: {
-              text: "Pharmacy",
-              size: "s"
-            },
-            hint: {
-              text: "Search by name or ODS code"
-            },
-            items: items,
-            errorMessage: {
-              text: (errors | first).text
-            } if (errors | length)
-          }) }}
-        {% endset %}
+        {{ select({
+          id: "organisation-id",
+          name: "organisationId",
+          label: {
+            text: "Pharmacy",
+            size: "s"
+          },
+          hint: {
+            text: "Search by name or ODS code"
+          },
+          items: items,
+          errorMessage: {
+            text: (errors | first).text
+          } if (errors | length)
+        }) }}
+      {% endset %}
 
-      {{ radios({
-        name: "oneOrMany",
-        fieldset: {
-          legend: {
-            text: "Are you signing up for 1 pharmacy or a pharmacy chain?",
-            size: "l",
-            isPageHeading: true
-          }
-        },
-        items: [
-          {
-            value: "single",
-            text: "A single pharmacy",
-            conditional: {
-              html: singleHtml
+        {{ radios({
+          name: "oneOrMany",
+          fieldset: {
+            legend: {
+              text: "Are you signing up for 1 pharmacy or a pharmacy chain?",
+              size: "l",
+              isPageHeading: true
             }
           },
-          {
-            value: "pharmacy",
-            text: "A pharmacy chain",
-            conditional: {
-              html: multipleHtml
+          items: [
+            {
+              value: "single",
+              text: "A single pharmacy",
+              conditional: {
+                html: singleHtml
+              }
+            },
+            {
+              value: "pharmacy",
+              text: "A pharmacy chain",
+              conditional: {
+                html: multipleHtml
+              }
             }
-          }
-        ]
-      }) }}
+          ]
+        }) }}
 
 
         {{ button({
@@ -145,15 +113,6 @@
         }) }}
       </form>
 
-
     </div>
   </div>
 {% endblock %}
-
-
-
-
-
-
-
-
