@@ -47,8 +47,9 @@
       {% set multipleHtml %}
 
         {{ select({
-          id: "organisation-id",
-          name: "organisationId",
+          id: "pharmacy-chain-id",
+          name: "pharmacyChainId",
+          value: data.pharmacyChainId,
           label: {
             text: "Pharmacy company",
             size: "s"
@@ -82,6 +83,7 @@
 
         {{ radios({
           name: "oneOrMany",
+          value: data.oneOrMany,
           fieldset: {
             legend: {
               text: "Are you signing up for 1 pharmacy or a pharmacy chain?",

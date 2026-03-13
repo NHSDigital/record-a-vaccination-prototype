@@ -3142,8 +3142,8 @@ module.exports = [
     type: "Pharmacy company"
   },
   {
-    name: "P0MG",
-    id: "Bestway National Chemists Ltd",
+    id: "P0MG",
+    name: "Bestway National Chemists Ltd",
     type: "Pharmacy company"
   },
   {
@@ -3175,5 +3175,45 @@ module.exports = [
     id: "P06L",
     name: "Safedale Limited",
     type: "Pharmacy company"
+  },
+  {
+    id: "FAG83",
+    companyId: "P0MG",
+    name: "Well",
+    type: "Community pharmacy",
+    address: {
+      line1: "22A Lodgeside Avenue",
+      postcode: "BS15 1NH"
+    }
+  },
+  {
+    id: "FAL04",
+    companyId: "P0MG",
+    name: "Well",
+    type: "Community pharmacy",
+    address: {
+      line1: "67 St John'S Road",
+      postcode: "BA21 5NJ"
+    }
+  },
+  {
+    id: "FC155",
+    companyId: "P0MG",
+    name: "Well",
+    type: "Community pharmacy",
+    address: {
+      line1: "67 St Marys Green",
+      postcode: "NE16 4DN"
+    }
+  },
+  {
+    id: "FC155",
+    companyId: "P0MG",
+    name: "Well",
+    type: "Community pharmacy",
+    address: {
+      line1: "67 St Marys Green",
+      postcode: "NE16 4DN"
+    }
   }
 ]

@@ -54,6 +54,25 @@ module.exports = router => {
     })
   })
 
+  // Select which pharmacies in the chain to onboard
+  router.get('/apply/pharmacies', (req, res) => {
+    const data = req.session.data
+    const allOrganisations = data.allOrganisations
+
+    if (!data.pharmacyChainId) {
+      return res.redirect('/apply/start')
+    }
+
+    const pharmacies = allOrganisations.filter((organisation) => {
+      return organisation.type == "Community pharmacy" &&
+      organisation.companyId == data.pharmacyChainId
+    })
+
+    res.render('apply/pharmacies', {
+      pharmacies
+    })
+  })
+
   // Check your answers page
   router.get('/apply/check', (req, res) => {
     const data = req.session.data

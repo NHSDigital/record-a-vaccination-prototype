@@ -5,7 +5,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/apply/check-pharmacy",
+    href: "/apply/check-pharmacy-chain",
     text: "Back"
   }) }}
 {% endblock %}
@@ -16,91 +16,42 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+      {% set items = [
+        {
+          text: "Select all",
+          value: "",
+          attributes: {
+            "data-select-all": "true"
+          }
+        },
+        {
+          divider: "or"
+        }
+      ] %}
+
+      {% for pharmacy in pharmacies %}
+        {% set items = (items.push({
+          text: pharmacy.name + ", " + pharmacy.address.postcode + " (" + pharmacy.id + ")",
+          value: pharmacy.id
+        }), items) %}
+      {% endfor %}
+
       <form action="/apply/pharmacy-chain-check" method="post">
 
         {{ checkboxes({
-        fieldset: {
-          legend: {
-            text: "Select the pharmacies where you want to start using RAVS",
-            size: "l"
-          }
-        },
-        hint: {
-          text: "Pharmacies that are already using RAVS are not listed."
-        },
-        items: [
-          {
-            value: "all",
-            text: "Select all",
-            attributes: {
-              "data-select-all": "true"
+          id: "pharmacy-ids",
+          name: "pharmacyIds",
+          values: data.pharmacyIds,
+          fieldset: {
+            legend: {
+              text: "Select the pharmacies where you want to start using RAVS",
+              size: "l"
             }
           },
-          {
-            divider: "or"
+          hint: {
+            text: "Pharmacies that are already using RAVS are not listed."
           },
-          {
-            value: "FEP81",
-            text: "Well, NN6 9EL (FEP81)"
-          },
-          {
-            value: "FHE39",
-            text: "Well, LE7 2EQ (FHE39)"
-          },
-          {
-            value: "FNV78",
-            text: "Well, BS9 2HL (FNV78)"
-          },
-          {
-            value: "FCJ72",
-            text: "Well, M44 6AJ (FCJ72)"
-          },
-          {
-            value: "FA310",
-            text: "Well, HU9 3DL (FA310)"
-          },
-          {
-            value: "FGM21",
-            text: "Well, DT4 9SS (FGM21)"
-          },
-          {
-            value: "FE320",
-            text: "Well, BH19 1AE (FE320)"
-          },
-          {
-            value: "FLL29",
-            text: "Well, SK14 2QR (FLL29)"
-          },
-          {
-            value: "FXW67",
-            text: "Well, BS16 6BB (FXW67)"
-          },
-          {
-            value: "FF386",
-            text: "Well, LS19 7SP (FF386)"
-          },
-          {
-            value: "FHK15",
-            text: "Well, BN41 1LA (FHK15)"
-          },
-          {
-            value: "FGD26",
-            text: "Well, DT4 9PQ (FGD26)"
-          },
-          {
-            value: "FHD39",
-            text: "Well Cradley - Windmill Hill, B63 2DB (FHD39)"
-          },
-          {
-            value: "FG726",
-            text: "Well Crewkerne - Middle path, TA18 8BG (FG726)"
-          },
-          {
-            value: "FQA25",
-            text: "Well Wellingborough - Cannon Street, NN8 4DN (FQA25)"
-          }
-        ]
-
+          items: items
         }) }}
 
 

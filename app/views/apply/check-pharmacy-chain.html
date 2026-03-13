@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% set pageName = "Check this is your company" %}
+{% set pharmacyChain = data.allOrganisations | findById(data.pharmacyChainId) %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -22,7 +23,7 @@
               text: "Name"
             },
             value: {
-              text: "Bestway National Chemists Ltd"
+              text: pharmacyChain.name
             }
           },
           {
@@ -38,7 +39,7 @@
               text: "ODS code"
             },
             value: {
-              text: "P0MG"
+              text: pharmacyChain.id
             }
           },
           {

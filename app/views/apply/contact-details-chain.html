@@ -15,109 +15,112 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>You can add up to 10 lead administrators, who will have access to RAVS at all 23 pharmacies.</p>
+      <p>You will be a lead administrator for all {{ data.pharmacyIds | length }} pharmacies.</p>
 
-      <p>Once they log in to RAVS, they will be able to add more users at individual pharmacies.</p>
+      <p>Once you log in to RAVS, you will be able to add more users at individual pharmacies.</p>
 
       <form action="/apply/check-chain" method="post" novalidate="true">
 
       <h2 class="nhsuk-heading-m">Your details</h2>
 
-      <p>Use your personal nhs.net email, not a pharmacy email.</p>
 
         {{ input({
-          "label": {
-            "text": "First name"
+          label: {
+            text: "First name"
           },
-          "id": "first-name",
-          "name": "firstName",
+          id: "first-name",
+          name: "firstName",
           classes: "nhsuk-input--width-20",
-          value: data.firstName,
-          "errorMessage": {
-            "text": firstNameError
-          } if firstNameError
+          value: data.firstName
         }) }}
 
         {{ input({
-          "label": {
-            "text": "Last name"
+          label: {
+            text: "Last name"
           },
-          "id": "last-name",
-          "name": "lastName",
+          id: "last-name",
+          name: "lastName",
           classes: "nhsuk-input--width-20",
-          value: data.lastName,
-          "errorMessage": {
-            "text": lastNameError
-          } if lastNameError
+          value: data.lastName
         }) }}
 
         {{ input({
-          "label": {
-            "text": "Email address"
+          label: {
+            text: "Email address"
           },
           hint: {
-            text:"For example, joe.bloggs1@nhs.net"
+            html: "Use your personal nhs.net email, not a pharmacy email.<br>For example, joe.bloggs1@nhs.net"
           },
-          "id": "email",
-          "name": "email",
+          id: "email",
+          name: "email",
           type: "email",
-          value: data.email,
-          "errorMessage": {
-            "text": emailError
-          } if emailError
+          value: data.email
         }) }}
 
-        <h2 class="nhsuk-heading-m">2nd lead administrator</h2>
+        <div id="lead-administrator-2" {% if not data.firstName2 %}hidden{% endif %}>
+          <h2 class="nhsuk-heading-m">2nd lead administrator</h2>
 
-        <p>Use their personal nhs.net email, not a pharmacy email.</p>
+          <p>This user will also be a lead adminstrator for all 23 pharmacies.</p>
 
-          {{ input({
-            "label": {
-              "text": "First name"
-            },
-            "id": "first-name",
-            "name": "firstName",
-            classes: "nhsuk-input--width-20",
-            value: data.firstName,
-            "errorMessage": {
-              "text": firstNameError
-            } if firstNameError
-          }) }}
-
-          {{ input({
-            "label": {
-              "text": "Last name"
-            },
-            "id": "last-name",
-            "name": "lastName",
-            classes: "nhsuk-input--width-20",
-            value: data.lastName,
-            "errorMessage": {
-              "text": lastNameError
-            } if lastNameError
-          }) }}
-
-          {{ input({
-            "label": {
-              "text": "Email address"
-            },
-            hint: {
-              text:"For example, joe.bloggs1@nhs.net"
-            },
-            "id": "email",
-            "name": "email",
-            type: "email",
-            value: data.email,
-            "errorMessage": {
-              "text": emailError
-            } if emailError
-          }) }}
+          <div>
+            {{ button({
+              id: "remove-lead-admin-2",
+              text: "Remove",
+              type: "button",
+              classes: "nhsuk-button--secondary"
+            }) }}
+          </div>
 
 
+            {{ input({
+              "label": {
+                "text": "First name"
+              },
+              "id": "first-name-2",
+              "name": "firstName2",
+              classes: "nhsuk-input--width-20",
+              value: data.firstName2,
+              "errorMessage": {
+                "text": firstNameError
+              } if firstNameError
+            }) }}
 
-        <div>
+            {{ input({
+              "label": {
+                "text": "Last name"
+              },
+              "id": "last-name-2",
+              "name": "lastName2",
+              classes: "nhsuk-input--width-20",
+              value: data.lastName2,
+              "errorMessage": {
+                "text": lastNameError
+              } if lastNameError
+            }) }}
+
+            {{ input({
+              "label": {
+                "text": "Email address"
+              },
+              hint: {
+                html: "Use their personal nhs.net email, not a pharmacy email.<br>For example, joe.bloggs1@nhs.net"
+
+              },
+              "id": "email-2",
+              "name": "email2",
+              type: "email",
+              value: data.email2,
+              "errorMessage": {
+                "text": emailError
+              } if emailError
+            }) }}
+        </div>
+
+        <div {% if data.firstName2 %}hidden{% endif %}>
           {{ button({
+            id: "add-lead-admin-2",
             text: "Add another lead administrator",
+            type: "button",
             classes: "nhsuk-button--secondary"
           }) }}
         </div>
@@ -126,6 +129,29 @@
           "text": "Continue"
         }) }}
       </form>
+
+      <script>
+        document.getElementById("add-lead-admin-2").addEventListener('click', function(event) {
+          document.getElementById("lead-administrator-2").hidden = false
+
+          document.getElementById("add-lead-admin-2").parentElement.hidden = true
+
+          event.preventDefault()
+
+        })
+
+        document.getElementById("remove-lead-admin-2").addEventListener('click', function(event) {
+          document.getElementById("lead-administrator-2").hidden = true
+          document.getElementById("add-lead-admin-2").parentElement.hidden = false
+          document.getElementById("first-name-2").value = ""
+          document.getElementById("last-name-2").value = ""
+          document.getElementById("email-2").value = ""
+          event.preventDefault()
+        })
+
+
+
+      </script>
 
     </div>
   </div>

@@ -15,7 +15,7 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-        <p>You have selected <b>23 pharmacies</b>.</p>
+        <p>You have selected <b>{{ data.pharmacyIds | length }} pharmacies</b>.</p>
 
         <table>
           <thead>
@@ -25,30 +25,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Well, LE7 2EQ (FHE39)</td>
-              <td><a href="#">Remove</a></td>
-            </tr>
-            <tr>
-              <td>Well, LE7 2EQ (FHE39)</td>
-              <td><a href="#">Remove</a></td>
-            </tr>
-            <tr>
-              <td>Well, LE7 2EQ (FHE39)</td>
-              <td><a href="#">Remove</a></td>
-            </tr>
-            <tr>
-              <td>Well, LE7 2EQ (FHE39)</td>
-              <td><a href="#">Remove</a></td>
-            </tr>
-            <tr>
-              <td>Well, LE7 2EQ (FHE39)</td>
-              <td><a href="#">Remove</a></td>
-            </tr>
-            <tr>
-              <td>Well, LE7 2EQ (FHE39)</td>
-              <td><a href="#">Remove</a></td>
-            </tr>
+
+            {% for pharmacyId in data.pharmacyIds %}
+              {% if pharmacyId %}
+                {% set pharmacy = data.allOrganisations | findById(pharmacyId) %}
+                <tr>
+                  <td>{{ pharmacy.name }}, {{ pharmacy.address.postcode }} ({{ pharmacy.id }})</td>
+                  <td><a href="#">Remove</a></td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+
           </tbody>
         </table>
 

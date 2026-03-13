@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% set pageName = "Check your answers" %}
+{% set pharmacyChain = data.allOrganisations | findById(data.pharmacyChainId) %}
 
 
 {% block beforeContent %}
@@ -17,6 +18,16 @@
     <div class="nhsuk-grid-column-two-thirds">
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
+      {% set pharmaciesHtml %}
+        {% for pharmacyId in data.pharmacyIds %}
+          {% if pharmacyId %}
+            {% set pharmacy = data.allOrganisations | findById(pharmacyId) %}
+            {{ pharmacy.name }} ({{ pharmacy.id }})
+            <br>
+          {% endif %}
+        {% endfor %}
+      {% endset %}
+
       <h2 class="nhsuk-heading-m">Your pharmacies</h2>
       {{ summaryList({
         rows: [
@@ -25,7 +36,7 @@
               text: "Company"
             },
             value: {
-              html: "Bestway National Chemists Ltd"
+              html: pharmacyChain.name
             },
             actions: {
               items: [
@@ -42,12 +53,12 @@
               text: "Pharmacies"
             },
             value: {
-              html: "Well (P1141),<br>Well (P1141),<br>etc"
+              html: pharmaciesHtml
             },
             actions: {
               items: [
                 {
-                  href: "/apply/start",
+                  href: "/apply/pharmacies",
                   text: "Change",
                   visuallyHiddenText: "pharmacy"
                 }
@@ -71,7 +82,7 @@
             actions: {
               items: [
                 {
-                  href: "/apply/contact-details",
+                  href: "/apply/contact-details-chain",
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -88,7 +99,7 @@
             actions: {
               items: [
                 {
-                  href: "/apply/contact-details",
+                  href: "/apply/contact-details-chain",
                   text: "Change",
                   visuallyHiddenText: "email"
                 }
@@ -98,46 +109,49 @@
         ]
       }) }}
 
-      <h2 class="nhsuk-heading-m">Your colleague</h2>
+      {% if data.firstName2 %}
 
-      {{ summaryList({
-        rows: [
-          {
-            key: {
-              text: "Name"
+        <h2 class="nhsuk-heading-m">Your colleague</h2>
+
+        {{ summaryList({
+          rows: [
+            {
+              key: {
+                text: "Name"
+              },
+              value: {
+                html: data.firstName2 + " " + data.lastName2
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/apply/contact-details-chain",
+                    text: "Change",
+                    visuallyHiddenText: "name"
+                  }
+                ]
+              }
             },
-            value: {
-              html: data.firstName + " " + data.lastName
-            },
-            actions: {
-              items: [
-                {
-                  href: "/apply/contact-details",
-                  text: "Change",
-                  visuallyHiddenText: "name"
-                }
-              ]
+            {
+              key: {
+                text: "Email"
+              },
+              value: {
+                text: data.email2
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/apply/contact-details-chain",
+                    text: "Change",
+                    visuallyHiddenText: "email"
+                  }
+                ]
+              }
             }
-          },
-          {
-            key: {
-              text: "Email"
-            },
-            value: {
-              text: data.email
-            },
-            actions: {
-              items: [
-                {
-                  href: "/apply/contact-details",
-                  text: "Change",
-                  visuallyHiddenText: "email"
-                }
-              ]
-            }
-          }
-        ]
-      }) }}
+          ]
+        }) }}
+      {% endif %}
 
       <form action="/apply/check-your-email-chain" method="post">
         {{ button({
