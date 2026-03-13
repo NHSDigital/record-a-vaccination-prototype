@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Check this is your pharmacy" %}
+{% set pageName = "Check this is your company" %}
+{% set pharmacyChain = data.allOrganisations | findById(data.pharmacyChainId) %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -22,7 +23,7 @@
               text: "Name"
             },
             value: {
-              text: organisation.name
+              text: pharmacyChain.name
             }
           },
           {
@@ -30,7 +31,7 @@
               text: "Type"
             },
             value: {
-              text: organisation.type
+              text: "Pharmacy company"
             }
           },
           {
@@ -38,7 +39,15 @@
               text: "ODS code"
             },
             value: {
-              text: "P0MG"
+              text: pharmacyChain.id
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: "Merchants Warehouse<br>Castle Street<br>Manchester<br>M3 4LZ"
             }
           }
         ]
@@ -46,7 +55,7 @@
 
       {{ button({
         "text": "Continue",
-        href: "/apply/vaccine-types"
+        href: "/apply/pharmacies"
       }) }}
 
     </div>

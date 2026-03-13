@@ -1,0 +1,166 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check your answers" %}
+{% set pharmacyChain = data.allOrganisations | findById(data.pharmacyChainId) %}
+
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/apply/contact-details",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      {% set pharmaciesHtml %}
+        {% for pharmacyId in data.pharmacyIds %}
+          {% if pharmacyId %}
+            {% set pharmacy = data.allOrganisations | findById(pharmacyId) %}
+            {{ pharmacy.name }} ({{ pharmacy.id }})
+            <br>
+          {% endif %}
+        {% endfor %}
+      {% endset %}
+
+      <h2 class="nhsuk-heading-m">Your pharmacies</h2>
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Company"
+            },
+            value: {
+              html: pharmacyChain.name
+            },
+            actions: {
+              items: [
+                {
+                  href: "/apply/start",
+                  text: "Change",
+                  visuallyHiddenText: "pharmacy"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Pharmacies"
+            },
+            value: {
+              html: pharmaciesHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: "/apply/pharmacies",
+                  text: "Change",
+                  visuallyHiddenText: "pharmacy"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="nhsuk-heading-m">Your details</h2>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              html: data.firstName + " " + data.lastName
+            },
+            actions: {
+              items: [
+                {
+                  href: "/apply/contact-details-chain",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Email"
+            },
+            value: {
+              text: data.email
+            },
+            actions: {
+              items: [
+                {
+                  href: "/apply/contact-details-chain",
+                  text: "Change",
+                  visuallyHiddenText: "email"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      {% if data.firstName2 %}
+
+        <h2 class="nhsuk-heading-m">2nd lead administrator</h2>
+
+        {{ summaryList({
+          rows: [
+            {
+              key: {
+                text: "Name"
+              },
+              value: {
+                html: data.firstName2 + " " + data.lastName2
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/apply/contact-details-chain",
+                    text: "Change",
+                    visuallyHiddenText: "name"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Email"
+              },
+              value: {
+                text: data.email2
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/apply/contact-details-chain",
+                    text: "Change",
+                    visuallyHiddenText: "email"
+                  }
+                ]
+              }
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <form action="/apply/check-your-email-chain" method="post">
+        {{ button({
+          text: "Confirm"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+
+{% endblock %}

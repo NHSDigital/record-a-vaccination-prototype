@@ -1,0 +1,100 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "" %}
+
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/apply/check-pharmacy-chain",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% set items = [
+        {
+          text: "Select all",
+          value: "",
+          attributes: {
+            "data-select-all": "true"
+          }
+        },
+        {
+          divider: "or"
+        }
+      ] %}
+
+      {% for pharmacy in pharmacies %}
+        {% set items = (items.push({
+          text: pharmacy.name + ", " + pharmacy.address.postcode + " (" + pharmacy.id + ")",
+          value: pharmacy.id
+        }), items) %}
+      {% endfor %}
+
+      <form action="/apply/pharmacy-chain-check" method="post">
+
+        {{ checkboxes({
+          id: "pharmacy-ids",
+          name: "pharmacyIds",
+          values: data.pharmacyIds,
+          fieldset: {
+            legend: {
+              text: "Select the pharmacies where you want to start using RAVS",
+              size: "l"
+            }
+          },
+          hint: {
+            text: "Pharmacies that are already using RAVS are not listed."
+          },
+          items: items
+        }) }}
+
+
+        {{ button({
+          text: "Confirm"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // Select all checkbox
+      const selectAllCheckbox = document.querySelector('input[data-select-all]');
+
+      // All row checkboxes (everything starting with select- except select-all)
+      const otherCheckboxes = Array.from(
+        document.querySelectorAll('input:not([data-select-all])')
+      );
+
+      // Click on header toggles all rows
+      selectAllCheckbox.addEventListener('change', () => {
+
+        otherCheckboxes.forEach(cb => {
+          cb.checked = selectAllCheckbox.checked;
+        });
+        selectAllCheckbox.indeterminate = false;
+      });
+
+      // Click on rows updates header state
+      otherCheckboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+          const allChecked = otherCheckboxes.every(c => c.checked);
+          const noneChecked = otherCheckboxes.every(c => !c.checked);
+
+          selectAllCheckbox.checked = allChecked;
+          selectAllCheckbox.indeterminate = !allChecked && !noneChecked;
+        });
+      });
+    });
+  </script>
+
+{% endblock %}
