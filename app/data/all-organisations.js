@@ -3215,5 +3215,35 @@ module.exports = [
       line1: "67 St Marys Green",
       postcode: "NE16 4DN"
     }
+  },
+  {
+    id: "FA658",
+    companyId: "P569",
+    name: "Dhaliwal Chemist",
+    type: "Community pharmacy",
+    address: {
+      line1: "17 Station Street East",
+      postcode: "CV6 5FL"
+    }
+  },
+  {
+    id: "FD522",
+    companyId: "P569",
+    name: "Selcroft Pharmacy",
+    type: "Community pharmacy",
+    address: {
+      line1: "Selcroft Avenue",
+      postcode: "B32 2BX"
+    }
+  },
+  {
+    id: "FA088",
+    companyId: "P10F",
+    name: "Asda Pharmacy",
+    type: "Community pharmacy",
+    address: {
+      line1: "Crowhurst Road",
+      postcode: "BN1 8AS"
+    }
   }
 ]
