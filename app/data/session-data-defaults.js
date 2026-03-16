@@ -5,6 +5,7 @@ const users = require('./users')
 const vaccinationsRecorded = require('./vaccinations-recorded')
 const vaccineStock = require('./vaccine-stock')
 const vaccines = require('./vaccines')
+const appointments = require('./appointments')
 
 module.exports = {
   organisations: organisations,
@@ -13,6 +14,7 @@ module.exports = {
   users: users,
   vaccines: vaccines,
   vaccineStock: vaccineStock,
+  appointments: appointments,
   lists: [],
   nhsNumberKnown: "yes",
   currentUserId: "2387441662601",
