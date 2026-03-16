@@ -16,7 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "@x-govuk/govuk-prototype-filters": "^2.1.0",
-    "nhsuk-frontend": "github:nhsuk/nhsuk-frontend#50ec9a5c8",
+    "nhsuk-frontend": "github:nhsuk/nhsuk-frontend#0e310c29a",
     "nhsuk-prototype-kit": "^8.0.2"
   },
   "devDependencies": {
