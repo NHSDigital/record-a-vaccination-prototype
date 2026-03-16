@@ -1,7 +1,6 @@
 {% extends 'layout.html' %}
 
 {% set pageName = "Check this is your company" %}
-{% set pharmacyChain = data.allOrganisations | findById(data.pharmacyChainId) %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -23,7 +22,7 @@
               text: "Name"
             },
             value: {
-              text: pharmacyChain.name
+              text: organisation.name
             }
           },
           {
@@ -39,7 +38,7 @@
               text: "ODS code"
             },
             value: {
-              text: pharmacyChain.id
+              text: organisation.id
             }
           },
           {
@@ -47,7 +46,7 @@
               text: "Address"
             },
             value: {
-              html: "Merchants Warehouse<br>Castle Street<br>Manchester<br>M3 4LZ"
+              html: organisation.address.line1 + "<br>" + organisation.address.town + "<br>" + organisation.address.postcode
             }
           }
         ]

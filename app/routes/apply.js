@@ -1,7 +1,10 @@
+  const { getPharmaciesBelongingToOrganisation, getPharmacyChains, getOrganisation } = require('../lib/ods');
+
 module.exports = router => {
 
-  router.get('/apply/start', (req, res) => {
+  router.get('/apply/start', async (req, res) => {
     const data = req.session.data
+
     const allOrganisations = data.allOrganisations.sort((a, b) => {
       if (a.name < b.name) {
         return -1
@@ -16,7 +19,8 @@ module.exports = router => {
       }
     })
     const allPharmacies = allOrganisations.filter((organisation) => organisation.type === "Community pharmacy")
-    const allPharmacyCompanies = allOrganisations.filter((organisation) => organisation.type === "Pharmacy company")
+
+    const allPharmacyCompanies = await getPharmacyChains()
 
     res.render('apply/start', {
       allOrganisations,
@@ -25,9 +29,19 @@ module.exports = router => {
     })
   })
 
+  router.post('/apply/check-pharmacy-chain', async (req, res) => {
+    const data = req.session.data
+
+    const organisation = await getOrganisation(data.pharmacyChainId)
+
+    res.render('apply/check-pharmacy-chain', {
+      organisation
+    })
+  })
 
   router.post('/apply/answer-pharmacy', (req, res) => {
     const data = req.session.data
+
     const organisationId = data.organisationId
     const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
 
@@ -55,17 +69,23 @@ module.exports = router => {
   })
 
   // Select which pharmacies in the chain to onboard
-  router.get('/apply/pharmacies', (req, res) => {
+  router.get('/apply/pharmacies', async (req, res) => {
     const data = req.session.data
-    const allOrganisations = data.allOrganisations
 
-    if (!data.pharmacyChainId) {
-      return res.redirect('/apply/start')
-    }
+    let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyChainId)
 
-    const pharmacies = allOrganisations.filter((organisation) => {
-      return organisation.type == "Community pharmacy" &&
-      organisation.companyId == data.pharmacyChainId
+    pharmacies = pharmacies.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1
+      } else if (a.name > b.name) {
+        return 1
+      } else {
+        if (a.postcode < b.postcode) {
+          return -1
+        } else {
+          return 1
+        }
+      }
     })
 
     res.render('apply/pharmacies', {

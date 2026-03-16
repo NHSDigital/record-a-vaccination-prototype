@@ -31,7 +31,7 @@
 
       {% for pharmacy in pharmacies %}
         {% set items = (items.push({
-          text: pharmacy.name + ", " + pharmacy.address.postcode + " (" + pharmacy.id + ")",
+          text: (pharmacy.name | capitalize) + ", " + pharmacy.address.postcode + " (" + pharmacy.id + ")",
           value: pharmacy.id
         }), items) %}
       {% endfor %}
