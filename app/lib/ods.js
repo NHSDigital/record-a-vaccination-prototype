@@ -2,8 +2,6 @@
 async function getOrganisation(id) {
   const url = `https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations/${id}`;
 
-  console.log(url)
-
   const response = await fetch(url);
 
   if (!response.ok) {
@@ -31,53 +29,89 @@ async function getOrganisation(id) {
  * @returns {Promise<string[]>} Array of OrgId values
  */
 async function getPharmaciesBelongingToOrganisation(id) {
-  const url = `https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations?RelTypeId=RE6&TargetOrgId=${id}&Limit=1000`;
+  const limit = 1000;
+  let offset = 0;
+  let allPharmacies = [];
+  let hasMore = true;
 
-  const response = await fetch(url);
+  while (hasMore) {
+    let url = `https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations?RelTypeId=RE6&TargetOrgId=${id}&Limit=${limit}`;
+    if (offset > 0) {
+      url += `&Offset=${offset}`;
+    }
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch organisations: ${response.status} ${response.statusText}`);
+    console.log(url)
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch organisations: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+
+    const pharmacies = (data.Organisations || []).map(function(org) {
+      return {
+        id: org.OrgId,
+        name: org.Name,
+        address: {
+          postcode: org.PostCode
+        }
+      }
+    });
+
+    allPharmacies = allPharmacies.concat(pharmacies);
+
+    if (pharmacies.length < limit) {
+      hasMore = false;
+    } else {
+      offset += limit;
+    }
   }
 
-  const data = await response.json();
-
-  const pharmacies = (data.Organisations || []).map(function(org) {
-    return {
-      id: org.OrgId,
-      name: org.Name,
-      address: {
-        postcode: org.PostCode
-      }
-    }
-  });
-
-  return pharmacies;
+  return allPharmacies;
 }
 
 async function getPharmacyChains() {
-  const url = `https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations?PrimaryRoleId=181&Status=Active&Limit=1000`;
+  const limit = 1000;
+  let offset = 0;
+  let allPharmacies = [];
+  let hasMore = true;
 
-  const response = await fetch(url);
+  while (hasMore) {
+    let url = `https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations?PrimaryRoleId=181&Status=Active&Limit=${limit}`;
+    if (offset > 0) {
+      url += `&Offset=${offset}`;
+    }
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch organisations: ${response.status} ${response.statusText}`);
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch organisations: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+
+    const pharmacies = (data.Organisations || []).map(function(org) {
+      return {
+        id: org.OrgId,
+        name: org.Name,
+        address: {
+          postcode: org.PostCode
+        }
+      }
+    });
+
+    allPharmacies = allPharmacies.concat(pharmacies);
+
+    if (pharmacies.length < limit) {
+      hasMore = false;
+    } else {
+      offset += limit;
+    }
   }
 
-  const data = await response.json();
-
-  const pharmacies = (data.Organisations || []).map(function(org) {
-    return {
-      id: org.OrgId,
-      name: org.Name,
-      address: {
-        postcode: org.PostCode
-      }
-    }
-  });
-
-  console.log(pharmacies.length)
-
-  return pharmacies;
+  return allPharmacies;
 }
 
 module.exports = {

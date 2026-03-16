@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
 {% set pageName = "Check your answers" %}
-{% set pharmacyChain = data.allOrganisations | findById(data.pharmacyChainId) %}
-
 
 {% block beforeContent %}
   {{ backLink({
@@ -11,20 +9,15 @@
   }) }}
 {% endblock %}
 
-
-
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       {% set pharmaciesHtml %}
-        {% for pharmacyId in data.pharmacyIds %}
-          {% if pharmacyId %}
-            {% set pharmacy = data.allOrganisations | findById(pharmacyId) %}
-            {{ pharmacy.name }} ({{ pharmacy.id }})
-            <br>
-          {% endif %}
+        {% for pharmacy in pharmacies %}
+          {{ pharmacy.name | capitalize }} ({{ pharmacy.id }})
+          <br>
         {% endfor %}
       {% endset %}
 
@@ -36,7 +29,7 @@
               text: "Company"
             },
             value: {
-              html: pharmacyChain.name
+              html: (pharmacyChain.name | capitalize)
             },
             actions: {
               items: [

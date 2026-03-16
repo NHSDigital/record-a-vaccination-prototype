@@ -80,7 +80,7 @@ module.exports = router => {
       } else if (a.name > b.name) {
         return 1
       } else {
-        if (a.postcode < b.postcode) {
+        if (a.address.postcode < b.address.postcode) {
           return -1
         } else {
           return 1
@@ -89,6 +89,21 @@ module.exports = router => {
     })
 
     res.render('apply/pharmacies', {
+      pharmacies
+    })
+  })
+
+  // Check list of selected pharmacies
+  router.get('/apply/pharmacy-chain-check', async (req, res) => {
+    const data = req.session.data
+
+    let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyChainId)
+
+    pharmacies = pharmacies.filter((pharmacy) => {
+      return data.pharmacyIds.includes(pharmacy.id)
+    })
+
+    res.render('apply/pharmacy-chain-check', {
       pharmacies
     })
   })
@@ -104,6 +119,26 @@ module.exports = router => {
       organisation
     })
   })
+
+  // Check your answers page for a chain
+  router.get('/apply/check-chain', async (req, res) => {
+    const data = req.session.data
+
+    const pharmacyChain = await getOrganisation(data.pharmacyChainId)
+
+    let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyChainId)
+
+    pharmacies = pharmacies.filter((pharmacy) => {
+      return data.pharmacyIds.includes(pharmacy.id)
+    })
+
+
+    res.render('apply/check-chain', {
+      pharmacyChain,
+      pharmacies
+    })
+  })
+
 
   // Check your email page
   router.get('/apply/check-your-email', (req, res) => {
