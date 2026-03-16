@@ -31,7 +31,12 @@
                 {% set pharmacy = data.allOrganisations | findById(pharmacyId) %}
                 <tr>
                   <td>{{ pharmacy.name }}, {{ pharmacy.address.postcode }} ({{ pharmacy.id }})</td>
-                  <td><a href="#">Remove</a></td>
+                  <td class="nhsuk-u-text-align-right">
+                    {{ button({
+                      text: "Remove",
+                      classes: "nhsuk-button--small nhsuk-button--secondary nhsuk-u-margin-bottom-0"
+                    }) }}
+                  </td>
                 </tr>
               {% endif %}
             {% endfor %}
