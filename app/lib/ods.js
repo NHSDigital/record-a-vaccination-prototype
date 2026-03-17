@@ -1,117 +1,95 @@
 
-async function getOrganisation(id) {
-  const url = `https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations/${id}`;
+// There are 2 different ODS APIs, the old ORD API and the newer FHIR-based API.
+// The ORD API is officially deprecated and may be retired in the future.
+const BASE_ORD_URL = 'https://directory.spineservices.nhs.uk/ORD/2-0-0';
+const BASE_FHIR_URL = 'https://sandbox.api.service.nhs.uk/organisation-data-terminology-api/fhir'
 
-  const response = await fetch(url);
+/**
+ * Helper function to fetch paginated organisations from the ODS API
+ * @param {string} queryParams - Query parameters (without Limit/Offset)
+ * @returns {Promise<Object[]>} Array of organisation objects
+ */
+async function fetchPaginatedOrganisations(queryParams) {
+  const limit = 1000;
+  let offset = 0;
+  let allResults = [];
+  let hasMore = true;
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch organisations: ${response.status} ${response.statusText}`);
-  }
+  while (hasMore) {
+    let url = `${BASE_ORD_URL}/organisations?${queryParams}&Limit=${limit}`;
+    if (offset > 0) {
+      url += `&Offset=${offset}`;
+    }
 
-  const data = await response.json();
+    const response = await fetch(url);
 
-  const organisation = {
-    id: id,
-    name: data?.Organisation?.Name,
-    address: {
-      line1: data?.Organisation?.GeoLoc?.Location?.AddrLn1,
-      town: data?.Organisation?.GeoLoc?.Location?.Town,
-      postcode: data?.Organisation?.GeoLoc?.Location?.PostCode
+    if (!response.ok) {
+      throw new Error(`Failed to fetch organisations: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+
+    const results = (data.Organisations || []).map(function(org) {
+      return {
+        id: org.OrgId,
+        name: org.Name,
+        address: {
+          postcode: org.PostCode
+        }
+      }
+    });
+
+    allResults = allResults.concat(results);
+
+    if (results.length < limit) {
+      hasMore = false;
+    } else {
+      offset += limit;
     }
   }
 
-  return organisation;
+  return allResults;
 }
 
 /**
  * Fetches organisation data from the NHS ODS API
  * @param {string} id - The target organisation ID (e.g., 'P0MG')
- * @returns {Promise<string[]>} Array of OrgId values
+ * @returns {Promise<Object[]>} Array of pharmacy objects
  */
 async function getPharmaciesBelongingToOrganisation(id) {
-  const limit = 1000;
-  let offset = 0;
-  let allPharmacies = [];
-  let hasMore = true;
-
-  while (hasMore) {
-    let url = `https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations?RelTypeId=RE6&TargetOrgId=${id}&Limit=${limit}`;
-    if (offset > 0) {
-      url += `&Offset=${offset}`;
-    }
-
-    console.log(url)
-
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch organisations: ${response.status} ${response.statusText}`);
-    }
-
-    const data = await response.json();
-
-    const pharmacies = (data.Organisations || []).map(function(org) {
-      return {
-        id: org.OrgId,
-        name: org.Name,
-        address: {
-          postcode: org.PostCode
-        }
-      }
-    });
-
-    allPharmacies = allPharmacies.concat(pharmacies);
-
-    if (pharmacies.length < limit) {
-      hasMore = false;
-    } else {
-      offset += limit;
-    }
-  }
-
-  return allPharmacies;
+  return fetchPaginatedOrganisations(`RelTypeId=RE6&TargetOrgId=${id}`);
 }
 
 async function getPharmacyChains() {
-  const limit = 1000;
-  let offset = 0;
-  let allPharmacies = [];
-  let hasMore = true;
+  return fetchPaginatedOrganisations('PrimaryRoleId=181&Status=Active');
+}
 
-  while (hasMore) {
-    let url = `https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations?PrimaryRoleId=181&Status=Active&Limit=${limit}`;
-    if (offset > 0) {
-      url += `&Offset=${offset}`;
+async function getOrganisation(id) {
+  const url = `${BASE_FHIR_URL}/Organization/${id}`;
+
+  const response = await fetch(url, {
+    headers: {
+      'apikey': process.env.ODS_API_KEY
     }
+  });
 
-    const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch organisation: ${response.status} ${response.statusText}`);
+  }
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch organisations: ${response.status} ${response.statusText}`);
-    }
+  const data = await response.json();
 
-    const data = await response.json();
-
-    const pharmacies = (data.Organisations || []).map(function(org) {
-      return {
-        id: org.OrgId,
-        name: org.Name,
-        address: {
-          postcode: org.PostCode
-        }
-      }
-    });
-
-    allPharmacies = allPharmacies.concat(pharmacies);
-
-    if (pharmacies.length < limit) {
-      hasMore = false;
-    } else {
-      offset += limit;
+  const organisation = {
+    id: data.id,
+    name: data.name,
+    address: {
+      line1: data.address[0].line[0],
+      town: data.address[0].city,
+      postcode: data.address[0].postalCode
     }
   }
 
-  return allPharmacies;
+  return organisation;
 }
 
 module.exports = {
