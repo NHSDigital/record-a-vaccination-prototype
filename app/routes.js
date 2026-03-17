@@ -63,6 +63,7 @@ router.get('/product-page', (req, res) => {
   // to demo.
   if (req.session.data.currentUserId) {
     req.session.data.currentUserId = null
+    req.session.data.currentOrganisationId = null
 
     // Needs a redirect as the data has already been cached
     res.redirect('/product-page')
