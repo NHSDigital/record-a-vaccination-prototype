@@ -20,7 +20,7 @@
         }) }}
       {% endif %}
 
-      <form action="/apply/check-pharmacy-chain" method="post">
+      <form action="/apply/start-answer" method="post">
 
       {% set options = [] %}
       {% set items = [{ text: "", value: ""}] %}
@@ -98,7 +98,7 @@
               }
             },
             {
-              value: "pharmacy",
+              value: "chain",
               text: "A pharmacy chain",
               conditional: {
                 html: multipleHtml

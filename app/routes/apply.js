@@ -29,6 +29,18 @@ module.exports = router => {
     })
   })
 
+  router.post('/apply/start-answer', (req, res) => {
+    const data = req.session.data
+
+    if (data.oneOrMany === "single" && data.organisationId != "") {
+      res.redirect('/apply/check-pharmacy')
+    } else if (data.oneOrMany === "chain" && data.pharmacyChainId != "") {
+      res.redirect('/apply/check-pharmacy-chain')
+    } else {
+      res.redirect('/apply/start')
+    }
+  })
+
   router.get('/apply/check-pharmacy-chain', async (req, res) => {
     const data = req.session.data
 
