@@ -1,18 +1,19 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Sorry, the service is unavailable" %}
+{% set pageName = "Sorry, there is a problem with the service" %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>This may be a temporary problem.</p>
+      <p>Try again later.</p>
 
-      <button class="nhsuk-button" data-module="nhsuk-button" type="submit">
-      Try again
-      </button>
+      <p>If you urgently need to record a vaccination, <a href="https://guide.ravs.england.nhs.uk/service-unavailable/">download our paper form</a>.</p>
+
 
     </div>
   </div>
+
+
 {% endblock %}
