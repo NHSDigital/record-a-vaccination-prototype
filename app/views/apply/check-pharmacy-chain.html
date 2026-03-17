@@ -22,7 +22,7 @@
               text: "Name"
             },
             value: {
-              text: organisation.name
+              text: organisation.name | capitalize
             }
           },
           {
@@ -46,7 +46,7 @@
               text: "Address"
             },
             value: {
-              html: organisation.address.line1 + "<br>" + organisation.address.town + "<br>" + organisation.address.postcode
+              html: (organisation.address.line1 | capitalize) + "<br>" + (organisation.address.town | capitalize) + "<br>" + organisation.address.postcode
             }
           }
         ]

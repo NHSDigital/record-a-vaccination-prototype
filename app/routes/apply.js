@@ -29,7 +29,7 @@ module.exports = router => {
     })
   })
 
-  router.post('/apply/check-pharmacy-chain', async (req, res) => {
+  router.get('/apply/check-pharmacy-chain', async (req, res) => {
     const data = req.session.data
 
     const organisation = await getOrganisation(data.pharmacyChainId)
