@@ -28,11 +28,12 @@
 
 &nbsp; &nbsp;
 
-<button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
-  Continue anyway
-</button>
+{% from "button/macro.njk" import button %}
 
-
+{{ button({
+  text: "Continue anyway",
+  classes: "nhsuk-button--secondary"
+}) }}
 
     </div>
   </div>
