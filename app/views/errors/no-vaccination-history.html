@@ -19,9 +19,11 @@
   <p>You will not be able to see the patient's vaccination history.</p>
 
 
-<button class="nhsuk-button" data-module="nhsuk-button" type="submit">
-  Try again
-</button>
+{% from "button/macro.njk" import button %}
+
+{{ button({
+  text: "Try again"
+}) }}
 
 
 &nbsp; &nbsp;
