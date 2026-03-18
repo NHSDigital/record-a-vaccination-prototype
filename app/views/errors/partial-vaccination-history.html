@@ -16,19 +16,20 @@
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
 
-      <p>You may not see all the vaccination records that are usually shown in this service.</p>
+<p>You may not see all the vaccination records that are usually shown in this service.</p>
 
+{% from "button/macro.njk" import button %}
 
-
-<button class="nhsuk-button" data-module="nhsuk-button" type="submit">
-Try again</button>
-
+{{ button({
+  text: "Try again"
+}) }}
 
 &nbsp; &nbsp;
 
 <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
   Continue anyway
 </button>
+
 
 
     </div>
