@@ -15,9 +15,11 @@
 
       <p>Try again. Or if the problem persists and you urgently need to record a vaccination, <a href="https://guide.ravs.england.nhs.uk/service-unavailable/">download our paper form</a>.</p>
 
-<button class="nhsuk-button" data-module="nhsuk-button" type="submit">
-  Try again
-</button>
+{% from "button/macro.njk" import button %}
+
+{{ button({
+  text: "Try again"
+}) }}
 
     </div>
   </div>
