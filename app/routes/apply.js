@@ -1,23 +1,20 @@
-  const { getPharmaciesBelongingToOrganisation, getPharmacyChains, getOrganisation } = require('../lib/ods');
+const { getPharmaciesBelongingToOrganisation, getPharmacyChains, getOrganisation } = require('../lib/ods');
+
+const sortByNameThenPostcode = (getPostcode = (item) => item.postcode) => (a, b) => {
+  if (a.name < b.name) return -1
+  if (a.name > b.name) return 1
+  const postcodeA = getPostcode(a)
+  const postcodeB = getPostcode(b)
+  if (postcodeA < postcodeB) return -1
+  return 1
+}
 
 module.exports = router => {
 
   router.get('/apply/start', async (req, res) => {
     const data = req.session.data
 
-    const allOrganisations = data.allOrganisations.sort((a, b) => {
-      if (a.name < b.name) {
-        return -1
-      } else if (a.name > b.name) {
-        return 1
-      } else {
-        if (a.postcode < b.postcode) {
-          return -1
-        } else {
-          return 1
-        }
-      }
-    })
+    const allOrganisations = data.allOrganisations.sort(sortByNameThenPostcode())
     const allPharmacies = allOrganisations.filter((organisation) => organisation.type === "Community pharmacy")
 
     const allPharmacyCompanies = await getPharmacyChains()
@@ -86,19 +83,7 @@ module.exports = router => {
 
     let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyChainId)
 
-    pharmacies = pharmacies.sort((a, b) => {
-      if (a.name < b.name) {
-        return -1
-      } else if (a.name > b.name) {
-        return 1
-      } else {
-        if (a.address.postcode < b.address.postcode) {
-          return -1
-        } else {
-          return 1
-        }
-      }
-    })
+    pharmacies = pharmacies.sort(sortByNameThenPostcode((item) => item.address.postcode))
 
     res.render('apply/pharmacies', {
       pharmacies
@@ -113,7 +98,7 @@ module.exports = router => {
 
     pharmacies = pharmacies.filter((pharmacy) => {
       return data.pharmacyIds.includes(pharmacy.id)
-    })
+    }).sort(sortByNameThenPostcode())
 
     res.render('apply/pharmacy-chain-check', {
       pharmacies
