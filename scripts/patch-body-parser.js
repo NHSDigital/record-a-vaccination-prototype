@@ -1,12 +1,10 @@
-#!/usr/bin/env node
-
 /**
  * Patches nhsuk-prototype-kit to increase parameterLimit for forms with many fields.
  * This runs automatically after npm install via the postinstall script.
  */
 
-const fs = require('fs')
-const path = require('path')
+const fs = require('node:fs')
+const path = require('node:path')
 
 const filePath = path.join(
   __dirname,
@@ -14,11 +12,12 @@ const filePath = path.join(
 )
 
 const original = "bodyParser.urlencoded({ extended: true, limit: '10mb'})"
-const patched = "bodyParser.urlencoded({ extended: true, limit: '10mb', parameterLimit: 10000 })"
+const patched =
+  "bodyParser.urlencoded({ extended: true, limit: '10mb', parameterLimit: 10000 })"
 
 try {
   let content = fs.readFileSync(filePath, 'utf8')
-  
+
   if (content.includes(patched)) {
     console.log('✓ parameterLimit already patched')
   } else if (content.includes(original)) {
