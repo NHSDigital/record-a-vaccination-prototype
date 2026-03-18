@@ -11,17 +11,20 @@ const filePath = path.join(
   '../node_modules/nhsuk-prototype-kit/lib/middleware/index.js'
 )
 
-const original = "bodyParser.urlencoded({ extended: true, limit: '10mb'})"
-const patched =
-  "bodyParser.urlencoded({ extended: true, limit: '10mb', parameterLimit: 10000 })"
-
 try {
   let content = fs.readFileSync(filePath, 'utf8')
 
-  if (content.includes(patched)) {
+  // Check if already patched
+  if (/bodyParser\.urlencoded\([^)]*parameterLimit/.test(content)) {
     console.log('✓ parameterLimit already patched')
-  } else if (content.includes(original)) {
-    content = content.replace(original, patched)
+    // process.exit(0)
+  }
+
+  // Match bodyParser.urlencoded({ ... }) and add parameterLimit
+  const regex = /(bodyParser\.urlencoded\(\{[^}]+)(}\))/
+
+  if (regex.test(content)) {
+    content = content.replace(regex, '$1, parameterLimit: 10000 $2')
     fs.writeFileSync(filePath, content, 'utf8')
     console.log('✓ Patched parameterLimit to 10000 in nhsuk-prototype-kit')
   } else {
