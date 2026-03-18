@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Check this is your pharmacy" %}
+{% set pageName = "Check this is your company" %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -22,7 +22,7 @@
               text: "Name"
             },
             value: {
-              text: organisation.name
+              text: organisation.name | capitalize
             }
           },
           {
@@ -30,7 +30,7 @@
               text: "Type"
             },
             value: {
-              text: organisation.type
+              text: "Pharmacy company"
             }
           },
           {
@@ -38,7 +38,15 @@
               text: "ODS code"
             },
             value: {
-              text: "P0MG"
+              text: organisation.id
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: (organisation.address.line1 | capitalize) + "<br>" + (organisation.address.town | capitalize) + "<br>" + organisation.address.postcode
             }
           }
         ]
@@ -46,7 +54,7 @@
 
       {{ button({
         "text": "Continue",
-        href: "/apply/vaccine-types"
+        href: "/apply/pharmacies"
       }) }}
 
     </div>
