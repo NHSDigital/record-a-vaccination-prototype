@@ -1,30 +1,56 @@
+const { getPharmaciesBelongingToOrganisation, getPharmacyChains, getOrganisation } = require('../lib/ods');
+
+const sortByNameThenPostcode = (getPostcode = (item) => item.postcode) => (a, b) => {
+  if (a.name < b.name) return -1
+  if (a.name > b.name) return 1
+  const postcodeA = getPostcode(a)
+  const postcodeB = getPostcode(b)
+  if (postcodeA < postcodeB) return -1
+  return 1
+}
+
 module.exports = router => {
 
-  router.get('/apply/start', (req, res) => {
-    let errors = []
+  router.get('/apply/start', async (req, res) => {
+    const data = req.session.data
 
-    const error = req.query.error
+    const allOrganisations = data.allOrganisations.sort(sortByNameThenPostcode())
+    const allPharmacies = allOrganisations.filter((organisation) => organisation.type === "Community pharmacy")
 
-    if (error === "no-pharmacy") {
-      errors.push({
-        text: "Select pharmacy",
-        href: "#organisation-id"
-      })
-    } else if (error === "existing-account") {
-      errors.push({
-        text: "This pharmacy already has access to the service.",
-        href: "#organisation-id"
-      })
-    }
+    const allPharmacyCompanies = await getPharmacyChains()
 
     res.render('apply/start', {
-      errors
+      allOrganisations,
+      allPharmacies,
+      allPharmacyCompanies
     })
   })
 
+  router.post('/apply/start-answer', (req, res) => {
+    const data = req.session.data
+
+    if (data.oneOrMany === "single" && data.organisationId != "") {
+      res.redirect('/apply/check-pharmacy')
+    } else if (data.oneOrMany === "chain" && data.pharmacyChainId != "") {
+      res.redirect('/apply/check-pharmacy-chain')
+    } else {
+      res.redirect('/apply/start')
+    }
+  })
+
+  router.get('/apply/check-pharmacy-chain', async (req, res) => {
+    const data = req.session.data
+
+    const organisation = await getOrganisation(data.pharmacyChainId)
+
+    res.render('apply/check-pharmacy-chain', {
+      organisation
+    })
+  })
 
   router.post('/apply/answer-pharmacy', (req, res) => {
     const data = req.session.data
+
     const organisationId = data.organisationId
     const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
 
@@ -51,6 +77,34 @@ module.exports = router => {
     })
   })
 
+  // Select which pharmacies in the chain to onboard
+  router.get('/apply/pharmacies', async (req, res) => {
+    const data = req.session.data
+
+    let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyChainId)
+
+    pharmacies = pharmacies.sort(sortByNameThenPostcode((item) => item.address.postcode))
+
+    res.render('apply/pharmacies', {
+      pharmacies
+    })
+  })
+
+  // Check list of selected pharmacies
+  router.get('/apply/pharmacy-chain-check', async (req, res) => {
+    const data = req.session.data
+
+    let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyChainId)
+
+    pharmacies = pharmacies.filter((pharmacy) => {
+      return data.pharmacyIds.includes(pharmacy.id)
+    }).sort(sortByNameThenPostcode())
+
+    res.render('apply/pharmacy-chain-check', {
+      pharmacies
+    })
+  })
+
   // Check your answers page
   router.get('/apply/check', (req, res) => {
     const data = req.session.data
@@ -62,6 +116,26 @@ module.exports = router => {
       organisation
     })
   })
+
+  // Check your answers page for a chain
+  router.get('/apply/check-chain', async (req, res) => {
+    const data = req.session.data
+
+    const pharmacyChain = await getOrganisation(data.pharmacyChainId)
+
+    let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyChainId)
+
+    pharmacies = pharmacies.filter((pharmacy) => {
+      return data.pharmacyIds.includes(pharmacy.id)
+    })
+
+
+    res.render('apply/check-chain', {
+      pharmacyChain,
+      pharmacies
+    })
+  })
+
 
   // Check your email page
   router.get('/apply/check-your-email', (req, res) => {

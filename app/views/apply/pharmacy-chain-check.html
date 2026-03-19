@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check your list of pharmacies" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/apply/pharmacies",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+        <p>You have selected <b>{{ pharmacies | length }} pharmacies</b>.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Pharmacy</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {% for pharmacy in pharmacies %}
+              <tr>
+                <td>{{ pharmacy.name | capitalize }}, {{ pharmacy.address.postcode }} ({{ pharmacy.id }})</td>
+                <td class="nhsuk-u-text-align-right">
+                  {{ button({
+                    text: "Remove",
+                    classes: "nhsuk-button--small nhsuk-button--secondary nhsuk-u-margin-bottom-0"
+                  }) }}
+                </td>
+              </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+
+      <form action="/apply/contact-details-chain">
+        {{ button({
+          text: "Continue"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
