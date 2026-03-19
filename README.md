@@ -1,4 +1,4 @@
-# NHS Record a vaccination prototypes
+# NHS Record a vaccination prototype
 
 This contains a prototype for the NHS Record a vaccination service.
 
