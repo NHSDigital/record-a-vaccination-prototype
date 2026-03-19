@@ -18,7 +18,7 @@
   "dependencies": {
     "@x-govuk/govuk-prototype-filters": "^2.1.0",
     "accessible-autocomplete": "^3.0.1",
-    "nhsuk-frontend": "github:nhsuk/nhsuk-frontend#0e310c29a",
+    "nhsuk-frontend": "10.4.1",
     "nhsuk-prototype-kit": "^8.1.0"
   },
   "devDependencies": {
