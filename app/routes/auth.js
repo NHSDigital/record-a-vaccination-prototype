@@ -54,7 +54,7 @@ module.exports = router => {
 
     } else if (organisationsUserIsAnAdminAt.length > 1) {
 
-      req.session.data.userId = user.id
+      req.session.data.currentUserId = user.id
       res.redirect('/auth/select-mode')
 
     } else {
@@ -88,15 +88,13 @@ module.exports = router => {
 
   router.get('/auth/select-organisation', (req, res) => {
     const data = req.session.data
-    const email = data.email
-    const user = data.users.find((user) => user.email === email)
+    const user = res.locals.currentUser
     const from = req.query.from
 
     const userOrganisationIds = user.organisations.map((organisation) => organisation.id)
     const organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
 
     res.render('auth/select-organisation', {
-      email,
       organisations,
       from
     })
