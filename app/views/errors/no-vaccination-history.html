@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "There was a problem getting Jodie Brown's vaccination history" %}
+{% set pageName = "There is a temporary problem getting Jodie Brown's vaccination history" %}
 
 
 {% block beforeContent %}
@@ -19,18 +19,21 @@
   <p>You will not be able to see the patient's vaccination history.</p>
 
 
-<button class="nhsuk-button" data-module="nhsuk-button" type="submit">
-  Try again
-</button>
+{% from "button/macro.njk" import button %}
+
+{{ button({
+  text: "Try again"
+}) }}
 
 
 &nbsp; &nbsp;
 
-<button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
-  Continue anyway
-</button>
+{% from "button/macro.njk" import button %}
 
-
+{{ button({
+  text: "Continue anyway",
+  classes: "nhsuk-button--secondary"
+}) }}
 
     </div>
   </div>

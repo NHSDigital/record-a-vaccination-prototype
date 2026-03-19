@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "There is a temporary problem getting Jodie Brown's vaccination history" %}
+
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/patient" }) }}
+{% endblock %}
+
+{% set currentSection = "vaccinate" %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+
+<p>You may not see all the vaccination records that are usually shown in this service.</p>
+
+{% from "button/macro.njk" import button %}
+
+{{ button({
+  text: "Try again"
+}) }}
+
+&nbsp; &nbsp;
+
+{% from "button/macro.njk" import button %}
+
+{{ button({
+  text: "Continue anyway",
+  classes: "nhsuk-button--secondary"
+}) }}
+
+
+
+    </div>
+  </div>
+
+
+{% endblock %}
