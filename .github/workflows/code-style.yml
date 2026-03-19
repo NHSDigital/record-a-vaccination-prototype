@@ -11,9 +11,11 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
-      # Ensure npm 11.5.1 or later is installed
+      # npm v11.12.0 fails to install packages from GitHub.
+      # Ref https://github.com/npm/cli/issues/9133
+      # TODO: Revert the version constraint to "latest" after the issue is resolved.
       - name: Update npm
-        run: npm install -g npm@latest
+        run: npm install --global npm@'<11.12.0'
       - name: Install dependencies
         run: npm ci
       - name: Run code style checks
