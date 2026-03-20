@@ -104,13 +104,7 @@
 
       {% endif %}
 
-      {% from "warning-callout/macro.njk" import warningCallout %}
-
-{{ warningCallout({
-  heading: "Important",
-  text: "There was a problem getting the patient's vaccination history and some records may be missing. Ask them about previous vaccinations."
-}) }}
-
+      
       <h2 class="nhsuk-heading-m">Vaccination history</h2>
 
       <p>This shows NHS vaccinations given in England. Currently it includes COVID-19, flu and RSV, plus some pertussis, pneumococcal and MMR vaccination records.</p>
