@@ -15,10 +15,16 @@
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       {% set pharmaciesHtml %}
-        {% for pharmacy in pharmacies %}
-          {{ pharmacy.name }} ({{ pharmacy.id }})
-          <br>
-        {% endfor %}
+        {% if (pharmacies | length) <= 10 %}
+          <ul class="nhsuk-list">
+            {% for pharmacy in pharmacies %}
+              <li>{{ pharmacy.name }} ({{ pharmacy.id }})</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          {{ pharmacies | length }} pharmacies
+        {% endif %}
+
       {% endset %}
 
       <h2 class="nhsuk-heading-m">Your pharmacies</h2>
