@@ -1,3 +1,5 @@
+const { capitaliseFromOds } = require('./utils/capitalise-from-ods.js')
+
 
 // There are 2 different ODS APIs, the old ORD API and the newer FHIR-based API.
 // The ORD API is officially deprecated and may be retired in the future.
@@ -32,7 +34,7 @@ async function fetchPaginatedOrganisations(queryParams) {
     const results = (data.Organisations || []).map(function(org) {
       return {
         id: org.OrgId,
-        name: org.Name,
+        name: capitaliseFromOds(org.Name),
         address: {
           postcode: org.PostCode
         }
@@ -81,10 +83,10 @@ async function getOrganisation(id) {
 
   const organisation = {
     id: data.id,
-    name: data.name,
+    name: capitaliseFromOds(data.name),
     address: {
-      line1: data.address[0].line[0],
-      town: data.address[0].city,
+      line1: capitaliseFromOds(data.address[0].line[0]),
+      town: capitaliseFromOds(data.address[0].city),
       postcode: data.address[0].postalCode
     }
   }

@@ -105,6 +105,8 @@ module.exports = (router) => {
 
     for (const vaccine of vaccinesAdded) {
 
+      currentOrganisation.vaccines ||= []
+
       let vaccineToEnable = currentOrganisation.vaccines.find((vaccine) => vaccine.name === vaccine)
 
       if (vaccineToEnable) {

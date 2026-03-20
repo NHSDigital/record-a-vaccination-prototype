@@ -15,10 +15,16 @@
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       {% set pharmaciesHtml %}
-        {% for pharmacy in pharmacies %}
-          {{ pharmacy.name | capitalize }} ({{ pharmacy.id }})
-          <br>
-        {% endfor %}
+        {% if (pharmacies | length) <= 10 %}
+          <ul class="nhsuk-list">
+            {% for pharmacy in pharmacies %}
+              <li>{{ pharmacy.name }} ({{ pharmacy.id }})</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          {{ pharmacies | length }} pharmacies
+        {% endif %}
+
       {% endset %}
 
       <h2 class="nhsuk-heading-m">Your pharmacies</h2>
@@ -29,7 +35,7 @@
               text: "Company"
             },
             value: {
-              html: (pharmacyChain.name | capitalize)
+              html: pharmacyChain.name
             },
             actions: {
               items: [
@@ -146,7 +152,7 @@
         }) }}
       {% endif %}
 
-      <form action="/apply/check-your-email-chain" method="post">
+      <form action="/apply/check-chain-answer" method="post">
         {{ button({
           text: "Confirm"
         }) }}

@@ -43,7 +43,7 @@ module.exports = router => {
       req.session.data.currentUserId = user.id;
       req.session.data.currentOrganisationId = userOrganisationIds[0]
 
-      res.redirect('/survey')
+      res.redirect('/home')
 
     } else if (userRegionIds.length === 1) {
 
@@ -55,7 +55,10 @@ module.exports = router => {
     } else if (organisationsUserIsAnAdminAt.length > 1) {
 
       req.session.data.currentUserId = user.id
-      res.redirect('/auth/select-mode')
+
+      // Skipping the select mode screen for research purposes
+      res.redirect('/auth/select-organisation')
+      // res.redirect('/auth/select-mode')
 
     } else {
 
@@ -79,7 +82,7 @@ module.exports = router => {
       req.session.data.currentUserId = data.userId
 
 
-      res.redirect('/survey')
+      res.redirect('/home')
     } else {
       res.redirect('/auth/select-mode')
     }
@@ -102,18 +105,12 @@ module.exports = router => {
   })
 
   router.post('/select-organisation', (req, res) => {
-
-    const data = req.session.data
-    const email = data.email
-    const user = data.users.find((user) => user.email === email)
-
     const selectedOrganisationId = req.session.data.organisationId
 
     if (selectedOrganisationId) {
-      req.session.data.currentUserId = user.id;
       req.session.data.currentOrganisationId = selectedOrganisationId;
 
-      res.redirect('/survey')
+      res.redirect('/home')
     } else {
 
       res.redirect('/auth/select-organisation')
