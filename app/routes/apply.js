@@ -105,6 +105,17 @@ module.exports = router => {
     })
   })
 
+  // Check list of selected pharmacies
+  router.post('/apply/pharmacy-chain-check-remove-one', (req, res) => {
+    const data = req.session.data
+    const pharmacyIdToRemove = data.pharmacyIdToRemove
+
+    data.pharmacyIds = data.pharmacyIds.filter(id => id !== pharmacyIdToRemove)
+
+    res.redirect('/apply/pharmacy-chain-check')
+  })
+
+
   // Check your answers page
   router.get('/apply/check', (req, res) => {
     const data = req.session.data

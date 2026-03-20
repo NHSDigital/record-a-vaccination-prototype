@@ -15,7 +15,7 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-        <p>You have selected <b>{{ pharmacies | length }} pharmacies</b>.</p>
+        <p>You have selected <b>{{ pharmacies | length | plural("pharmacy") }}</b>.</p>
 
         <table>
           <thead>
@@ -30,10 +30,15 @@
               <tr>
                 <td>{{ pharmacy.name }}, {{ pharmacy.address.postcode }} ({{ pharmacy.id }})</td>
                 <td class="nhsuk-u-text-align-right">
-                  {{ button({
-                    text: "Remove",
-                    classes: "nhsuk-button--small nhsuk-button--secondary nhsuk-u-margin-bottom-0"
-                  }) }}
+                  {% if pharmacies | length > 1 %}
+                    <form action="/apply/pharmacy-chain-check-remove-one" method="post">
+                    <input type="hidden" name="pharmacyIdToRemove" value="{{ pharmacy.id }}">
+                    {{ button({
+                      text: "Remove",
+                      classes: "nhsuk-button--small nhsuk-button--secondary nhsuk-u-margin-bottom-0"
+                    }) }}
+                    </form>
+                  {% endif %}
                 </td>
               </tr>
             {% endfor %}
