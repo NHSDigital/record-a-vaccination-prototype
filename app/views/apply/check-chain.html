@@ -16,7 +16,7 @@
 
       {% set pharmaciesHtml %}
         {% for pharmacy in pharmacies %}
-          {{ pharmacy.name | capitalize }} ({{ pharmacy.id }})
+          {{ pharmacy.name }} ({{ pharmacy.id }})
           <br>
         {% endfor %}
       {% endset %}
@@ -29,7 +29,7 @@
               text: "Company"
             },
             value: {
-              html: (pharmacyChain.name | capitalize)
+              html: pharmacyChain.name
             },
             actions: {
               items: [
@@ -146,7 +146,7 @@
         }) }}
       {% endif %}
 
-      <form action="/apply/check-your-email-chain" method="post">
+      <form action="/apply/check-chain-answer" method="post">
         {{ button({
           text: "Confirm"
         }) }}

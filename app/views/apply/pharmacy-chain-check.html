@@ -28,7 +28,7 @@
 
             {% for pharmacy in pharmacies %}
               <tr>
-                <td>{{ pharmacy.name | capitalize }}, {{ pharmacy.address.postcode }} ({{ pharmacy.id }})</td>
+                <td>{{ pharmacy.name }}, {{ pharmacy.address.postcode }} ({{ pharmacy.id }})</td>
                 <td class="nhsuk-u-text-align-right">
                   {{ button({
                     text: "Remove",

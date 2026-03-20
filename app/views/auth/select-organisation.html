@@ -31,7 +31,7 @@
           value: organisation.id,
           text: organisation.name + " (" + organisation.id + ")",
           hint: {
-            text: organisation.address.line1 + ", " +  organisation.address.town + ", " + organisation.address.postcode
+            text: (organisation.address.line1 + ", " if organisation.address.line1 else "")  +  (organisation.address.town + ", " if organisation.address.town else "") + organisation.address.postcode
           }
         }), items) %}
       {% endfor %}

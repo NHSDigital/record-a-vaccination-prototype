@@ -37,7 +37,7 @@
 
       {% for pharmacyCompany in (allPharmacyCompanies | sort(false, false, "name")) %}
         {% set pharmacyCompanyItems = (pharmacyCompanyItems.push({
-          text: (pharmacyCompany.name | capitalize) + " (" + (pharmacyCompany.id) + ")",
+          text: (pharmacyCompany.name) + " (" + (pharmacyCompany.id) + ")",
           value: pharmacyCompany.id
         }), pharmacyCompanyItems) %}
       {% endfor %}
