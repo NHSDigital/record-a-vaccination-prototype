@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "" %}
+{% set pageName = "Select the pharmacies where you want to start using RAVS" %}
 
 
 {% block beforeContent %}
@@ -16,18 +16,19 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% set items = [
-        {
-          text: "Select all",
-          value: "",
-          attributes: {
-            "data-select-all": "true"
-          }
-        },
-        {
-          divider: "or"
-        }
-      ] %}
+      {% set items = [] %}
+      {% if pharmacies | length > 1 %}
+        {% set items = (items.push({
+           text: "Select none",
+           value: "",
+           attributes: {
+             "data-select-none": "true"
+           }
+          }), items) %}
+         {% set items = (items.push({
+            divider: "or"
+          }), items) %}
+      {% endif %}
 
       {% for pharmacy in pharmacies %}
         {% set items = (items.push({
@@ -44,7 +45,7 @@
           values: data.pharmacyIds,
           fieldset: {
             legend: {
-              text: "Select the pharmacies where you want to start using RAVS",
+              text: pageName,
               size: "l"
             }
           },
