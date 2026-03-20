@@ -105,9 +105,6 @@ module.exports = router => {
   })
 
   router.post('/select-organisation', (req, res) => {
-
-    const data = req.session.data
-
     const selectedOrganisationId = req.session.data.organisationId
 
     if (selectedOrganisationId) {
