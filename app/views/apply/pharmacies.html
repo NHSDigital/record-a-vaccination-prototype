@@ -19,10 +19,10 @@
       {% set items = [] %}
       {% if pharmacies | length > 1 %}
         {% set items = (items.push({
-           text: "Select none",
+           text: "Select all",
            value: "",
            attributes: {
-             "data-select-none": "true"
+             "data-select-all": "true"
            }
           }), items) %}
          {% set items = (items.push({
