@@ -107,8 +107,6 @@ module.exports = router => {
   router.post('/select-organisation', (req, res) => {
 
     const data = req.session.data
-    const email = data.email
-    const user = res.locals.currentUser
 
     const selectedOrganisationId = req.session.data.organisationId
 

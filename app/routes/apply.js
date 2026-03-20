@@ -180,7 +180,7 @@ module.exports = router => {
 
     let userOrganisationPermissions = []
 
-    for (pharmacy of pharmacies) {
+    for (const pharmacy of pharmacies) {
 
       // Add the pharmacy itself as the single site
       pharmacy.sites = [
