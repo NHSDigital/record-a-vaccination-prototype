@@ -886,7 +886,7 @@ module.exports = router => {
     if (!vaccineDose) {
       redirectPath = "/record-vaccinations/dose?showError=yes"
     } else {
-      redirectPath = "/record-vaccinations/eligibility"
+      redirectPath = "/record-vaccinations/consent"
     }
     res.redirect(redirectPath)
   })
