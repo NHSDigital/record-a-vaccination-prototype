@@ -97,17 +97,6 @@
 
         {% endfor %}
 
-        {% if data.vaccine != "flu" %}
-          {% set items = (items.push({
-            divider: "or"
-          }), items) %}
-          {% set items = (items.push({
-            text: "I'm not sure",
-            value: "Not sure",
-            checked: (data.vaccineDose == "Not sure")
-          }), items) %}
-        {% endif %}
-
         {{ radios({
           idPrefix: "vaccineDose",
           name: "vaccineDose",
