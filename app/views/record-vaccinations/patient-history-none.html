@@ -83,14 +83,8 @@
       {% endif %}
 
       <h2 class="nhsuk-heading-m">Vaccination history</h2>
-
-      {% from "details/macro.njk" import details %}
-
-{% call details({
-  summaryText: "Which vaccinations are shown here?",
-  classes: "nhsuk-expander"
-}) %}
-  <p>You should see these NHS vaccinations given in England:</p>
+      
+  <p>This shows NHS vaccinations given in England. Currently you should see:</p>
   <ul>
     <li>all COVID-19 and RSV vaccinations</li>
     <li>flu vaccinations recorded since 1 September 2024</li>
@@ -98,8 +92,6 @@
     <li>pneumococcal vaccinations recorded since 1 January 2026</li>
     <li>pertussis vaccinations recorded in RAVS since 1 September 2024</li>
   </ul>
-{% endcall %}
-
 
 
     </div>
