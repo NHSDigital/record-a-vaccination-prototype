@@ -83,18 +83,16 @@
       {% endif %}
 
       <h2 class="nhsuk-heading-m">Vaccination history</h2>
-      
-{% from "inset-text/macro.njk" import insetText %}
+
+      {% from "inset-text/macro.njk" import insetText %}
 
 {% set insetTextHtml %}
-  <p>This shows NHS vaccinations given in England. You should see:</p>
-  <ul>
-    <li>all COVID-19 and RSV records</li>
-    <li>flu records since September 2024</li>
-    <li>MMR records since September 2025</li>
-    <li>pneumococcal records since January 2026</li>
-    <li>pertussis records since September 2024 if recorded in RAVS</li>
-  </ul>
+        
+<p>This shows NHS vaccinations given in England.</p>
+
+<p>You should see all COVID-19, flu and RSV records going back to September 2024.</p>
+
+<p>It also includes some pertussis, pneumococcal and MMR records but less data is available for these.</p>
 {% endset %}
 
 {{ insetText({
