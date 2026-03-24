@@ -87,13 +87,16 @@
       {% from "details/macro.njk" import details %}
 
 {% call details({
-  summaryText: "Get your medical records",
+  summaryText: "Check which vaccinations are shown here",
   classes: "nhsuk-expander"
 }) %}
-  <p>You can see your GP records by:</p>
+  <p>This shows NHS vaccinations recorded in England. It includes:</p>
   <ul>
-    <li>asking for them at your GP surgery </li>
-    <li>going online to see them (if you have signed up for <a href="/using-the-nhs/nhs-services/gps/gp-online-services/">GP online services</a>) </li>
+    <li>all COVID-19 and RSV records </li>
+    <li>flu records since September 2024 </li>
+    <li>MMR records since September 2025 </li>
+    <li>pneumococcal records since January 2026 </li>
+    <li>pertussis records since September 2024, if recorded in RAVS </li>
   </ul>
 {% endcall %}
 
