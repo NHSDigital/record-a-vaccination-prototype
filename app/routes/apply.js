@@ -105,6 +105,17 @@ module.exports = router => {
     })
   })
 
+  // Check list of selected pharmacies
+  router.post('/apply/pharmacy-chain-check-remove-one', (req, res) => {
+    const data = req.session.data
+    const pharmacyIdToRemove = data.pharmacyIdToRemove
+
+    data.pharmacyIds = data.pharmacyIds.filter(id => id !== pharmacyIdToRemove)
+
+    res.redirect('/apply/pharmacy-chain-check')
+  })
+
+
   // Check your answers page
   router.get('/apply/check', (req, res) => {
     const data = req.session.data
@@ -155,6 +166,51 @@ module.exports = router => {
   router.post('/apply/answer-check', (req, res) => {
 
     res.redirect('/apply/check-your-email')
+  })
+
+  // Routing after the final check answers for chains page
+  router.post('/apply/check-chain-answer', async (req, res) => {
+    const data = req.session.data
+
+    let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyChainId)
+
+    pharmacies = pharmacies.filter((pharmacy) => {
+      return data.pharmacyIds.includes(pharmacy.id)
+    })
+
+    let userOrganisationPermissions = []
+
+    for (const pharmacy of pharmacies) {
+
+      // Add the pharmacy itself as the single site
+      pharmacy.sites = [
+        {
+          id: pharmacy.id,
+          name: pharmacy.name,
+          address: pharmacy.address
+        }
+      ]
+
+      data.organisations.push(pharmacy)
+      userOrganisationPermissions.push({
+        id: pharmacy.id,
+        permissionLevel: 'Lead administrator',
+        status: 'Active',
+        vaccinator: false
+      })
+    }
+
+    const user = {
+      id: Math.floor(Math.random() * 10000000).toString(),
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      organisations: userOrganisationPermissions
+    }
+
+    data.users.push(user)
+
+    res.redirect('/apply/check-your-email-chain')
   })
 
   // Welcome email mockup
