@@ -103,6 +103,23 @@
             },
             {
               key: {
+                text: "Dose sequence"
+              },
+              value: {
+                text: data.vaccineDose
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/record-vaccinations/dose",
+                    text: "Change",
+                    visuallyHiddenText: "dose sequence"
+                  }
+                ]
+              }
+            } if data.vaccineDose,
+            {
+              key: {
                 text: "Eligibility"
               },
               value: {
