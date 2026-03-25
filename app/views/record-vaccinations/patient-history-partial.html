@@ -103,7 +103,13 @@
         }) }}
 
       {% endif %}
-      
+
+      {% from "warning-callout/macro.njk" import warningCallout %}
+
+{{ warningCallout({
+  heading: "Important",
+  text: "For this patient, we can only show previous vaccinations that have been recorded in RAVS."
+}) }}
       
       <h2 class="nhsuk-heading-m">Vaccination history</h2>
 
