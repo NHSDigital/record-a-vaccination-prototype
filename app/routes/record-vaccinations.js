@@ -755,6 +755,7 @@ module.exports = router => {
       req.session.data.vaccineProduct = ""
       req.session.data.vaccineBatch = ""
       req.session.data.eligibility = ""
+      req.session.data.vaccineDose = ""
 
       res.redirect('/record-vaccinations/patient-history?repeatPatient=yes&repeatVaccination=no')
 
@@ -766,6 +767,7 @@ module.exports = router => {
       req.session.data.eligibility = ""
       req.session.data.nhsNumber = ""
       req.session.data.healthcareWorker = ""
+      req.session.data.vaccineDose = ""
 
       res.redirect('/record-vaccinations/?repeatPatient=no&repeatVaccination=no')
     } else {
