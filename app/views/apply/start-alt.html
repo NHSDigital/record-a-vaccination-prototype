@@ -1,7 +1,7 @@
 
 {% extends 'layout.html' %}
 
-{% set pageName = "Sign up" %}
+{% set pageName = "Sign up for the Record a vaccination service (RAVS)" %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -10,10 +10,31 @@
   }) }}
 {% endblock %}
 
+<p>You can sign up for either:</p>
+<ul class="nhsuk-list nhsuk-list--bullet">
+  <li>a single pharmacy</li>
+  <li>multiple pharmacies </li>
+</ul>
 
+<h2 class="nhsuk-heading-m">How signing up works</h2>
+<ol class="nhsuk-list nhsuk-list--number">
+  <li>Select the pharmacy or pharmacies.</li>
+  <li>Nominate up to 5 lead administrators, including yourself, who will get access to RAVS at the selected pharmacies.</li>
+  <li>Once they log in to RAVS, the lead administrators will be able to add more users, including more lead administrators, at individual pharmacies.</li>
+  <li>Anyone with lead administrator permissions can then add further users to the pharmacy or pharmacies where they have access to RAVS.</li>
+</ol>
+
+<h3 class="nhsuk-heading-s">Signing for a chain of pharmacies</h3>
+
+<p>If you have a large chain, you may want to consider signing up for a few pharmacies at the time.</p>
+<p>This would allow you to have different lead administrators for each subset of pharmacies.</p>
+
+<h2 class="nhsuk-heading-m">Get help and advice</h2>
+
+<p>If you have any questions about signing up, join a drop-in session with the RAVS team who will be happy to help</p>
 
         {{ button({
-          "text": "Continue"
+          "text": "Start now"
         }) }}
       </form>
 
