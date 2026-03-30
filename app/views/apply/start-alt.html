@@ -10,6 +10,12 @@
   }) }}
 {% endblock %}
 
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
 <p>You can sign up for either:</p>
 <ul class="nhsuk-list nhsuk-list--bullet">
   <li>a single pharmacy</li>
@@ -38,6 +44,10 @@
 {{ button({
   text: "Start now"
 }) }}
+
+</div>
+  </div>
+{% endblock %}
 
 
     </div>
