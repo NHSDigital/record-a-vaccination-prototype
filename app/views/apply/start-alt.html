@@ -1,0 +1,22 @@
+
+{% extends 'layout.html' %}
+
+{% set pageName = "Sign up" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/product-page",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+
+
+        {{ button({
+          "text": "Continue"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}
