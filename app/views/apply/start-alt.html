@@ -33,10 +33,12 @@
 
 <p>If you have any questions about signing up, join a drop-in session with the RAVS team who will be happy to help</p>
 
-        {{ button({
-          "text": "Start now"
-        }) }}
-      </form>
+{% from "button/macro.njk" import button %}
+
+{{ button({
+  text: "Start now"
+}) }}
+
 
     </div>
   </div>
