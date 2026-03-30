@@ -9,10 +9,19 @@
   }) }}
 {% endblock %}
 
+
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p>If you are signing up for more than 1 pharmacy, you can either sign up for each pharmacy individually using this form several times.</p> 
+        
+      <p>Or you can sign up for multiple pharmacies at once.</p>
+
+      
       {% if (errors | length) > 0 %}
         {{ errorSummary({
           titleText: "There is a problem",
@@ -90,7 +99,7 @@
           value: data.oneOrMany,
           fieldset: {
             legend: {
-              text: "Are you signing up for a single pharmacy or a pharmacy chain?",
+              text: "Are you signing up for a single pharmacy or multiple pharmacies?",
               size: "l",
               isPageHeading: true
             }
@@ -105,7 +114,7 @@
             },
             {
               value: "chain",
-              text: "A pharmacy chain",
+              text: "Multiple pharmacies",
               conditional: {
                 html: multipleHtml
               }
