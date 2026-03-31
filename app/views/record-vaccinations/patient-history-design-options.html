@@ -83,24 +83,16 @@
       {% endif %}
 
       <h2 class="nhsuk-heading-m">Vaccination history</h2>
-
-      {% from "inset-text/macro.njk" import insetText %}
-
-{% set insetTextHtml %}
-  <p>This only shows some NHS vaccinations given in England. Currently it includes:</p>
-  <ul>
-    <li>all vaccinations recorded in RAVS</li>
-    <li>most COVID-19, flu and RSV vaccinations recorded in other systems</li>
-    <li>some other vaccinations recorded in other systems</li>
-  </ul>
-
-{% endset %}
-
-{{ insetText({
-  html: insetTextHtml
-}) }}
-
       
+      <p>This only shows some NHS vaccinations given in England. Currently it includes:</p>
+      <ul>
+        <li>all vaccinations recorded in RAVS</li>
+        <li>most COVID-19, flu and RSV vaccinations recorded in other systems</li>
+        <li>some other vaccinations recorded in other systems</li>
+      </ul>
+      
+
+            
     </div>
   </div>
   <div class="nhsuk-grid-row">
