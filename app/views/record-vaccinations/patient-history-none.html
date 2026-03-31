@@ -87,16 +87,16 @@
       {% from "details/macro.njk" import details %}
 
 {% call details({
-  summaryText: "Check which vaccinations are shown here",
+  summaryText: "This only shows some NHS vaccination records. See more details.",
   classes: "nhsuk-expander"
 }) %}
-  <p>This shows NHS vaccinations recorded in England. It includes:</p>
+  <p>Currently the history you see here includes:</p>
   <ul>
-    <li>all COVID-19 and RSV records </li>
+    <li>most COVID-19 and RSV records </li>
     <li>flu records since September 2024 </li>
+    <li>pertussis records since September 2024, if recorded in RAVS </li>
     <li>MMR records since September 2025 </li>
     <li>pneumococcal records since January 2026 </li>
-    <li>pertussis records since September 2024, if recorded in RAVS </li>
   </ul>
 {% endcall %}
 
