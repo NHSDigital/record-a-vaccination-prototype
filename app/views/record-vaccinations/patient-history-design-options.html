@@ -84,22 +84,21 @@
 
       <h2 class="nhsuk-heading-m">Vaccination history</h2>
 
-      {% from "details/macro.njk" import details %}
+      {% from "inset-text/macro.njk" import insetText %}
 
-{% call details({
-  summaryText: "This only shows some NHS vaccination records. See more details.",
-  classes: "nhsuk-expander"
-}) %}
-  <p>Currently the history you see here includes:</p>
+{% set insetTextHtml %}
+  <p>YThis only shows some NHS vaccinations given in England. Currently it includes:</p>
   <ul>
-    <li>most COVID-19 and RSV records </li>
-    <li>flu records since September 2024 </li>
-    <li>pertussis records since September 2024, if recorded in RAVS </li>
-    <li>MMR records since September 2025 </li>
-    <li>pneumococcal records since January 2026 </li>
+    <li>all vaccinations recorded in RAVS</li>
+    <li>most COVID-19, flu and RSV vaccinations recorded in other systems</li>
+    <li>some other vaccinations recorded in other systems.</li>
   </ul>
-{% endcall %}
 
+{% endset %}
+
+{{ insetText({
+  html: insetTextHtml
+}) }}
 
       
     </div>
