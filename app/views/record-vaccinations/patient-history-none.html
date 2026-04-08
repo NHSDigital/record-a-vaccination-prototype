@@ -25,7 +25,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Check Jodie Brown’s details and vaccination history</h1>
+      <h1 class="nhsuk-heading-l">Check Jodie Brown’s details</h1>
 
       {{ summaryList({
         classes: 'xnhsuk-summary-list--no-border',
@@ -56,7 +56,15 @@
           },
           {
             key: {
-              text: "Postcode"
+              text: "NHS number"
+            },
+            value: {
+              text: "9449306028"
+            }
+          },
+          {
+            key: {
+              text: "GP surgery"
             },
             value: {
               text: "N7 0EA"
@@ -69,7 +77,7 @@
 
 {{ warningCallout({
   heading: "Important",
-  text: "We can only show previous vaccinations that have been recorded in RAVS."
+  text: "We could not get any vaccination history for this patient."
 }) }}
       
       <h2 class="nhsuk-heading-m">Vaccination history</h2>
