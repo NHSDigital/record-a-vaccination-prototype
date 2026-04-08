@@ -69,11 +69,49 @@
 
 {{ warningCallout({
   heading: "Important",
-  text: "We could not get any vaccination history for this patient."
+  text: "We can only show previous vaccinations that have been recorded in RAVS."
 }) }}
+      
+      <h2 class="nhsuk-heading-m">Vaccination history</h2>
 
+      <p>This shows NHS vaccinations given in England. Currently it includes COVID-19, flu and RSV, plus some pertussis, pneumococcal and MMR vaccination records.</p>
 
+    </div>
+  </div>
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
 
+        {{ table({
+          panel: false,
+          caption: "",
+          firstCellIsHeader: false,
+          head: [
+            {
+              text: "Date"
+            },
+            {
+              text: "Vaccine"
+            },
+            {
+              text: "Product"
+            }
+          ],
+          rows: [
+            [
+              {
+                text: "15 April 2025"
+              },
+              {
+                text: "COVID-19"
+              },
+              {
+                text: "Comirnaty 3"
+              }
+            ]
+           ]
+        }) }}
+
+        
 
       <form action="{{ nextPage }}" method="post" novalidate>
         {{ button({
