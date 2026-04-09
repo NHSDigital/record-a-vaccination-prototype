@@ -13,7 +13,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/apply/start-answer" method="post">
+      <form action="/apply/answer-find-pharmacy-company" method="post">
 
 
       {% set options = [] %}
@@ -37,12 +37,13 @@
             size: "l"
           },
           hint: {
-            text: "Search by company name"
+            text: "Search by the name of the company"
           },
           items: pharmacyCompanyItems,
           attributes: {
             "data-module": "app-autocomplete"
-          }
+          },
+          value: data.pharmacyCompanyId
         }) }}
 
         {{ button({

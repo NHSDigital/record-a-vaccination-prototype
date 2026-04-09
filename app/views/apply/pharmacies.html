@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Select the pharmacies where you want to start using RAVS" %}
+{% set pageName = "Which pharmacies do you want to sign up now?" %}
 
 
 {% block beforeContent %}
@@ -16,10 +16,20 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+      <h1 class="nhsuk-heading-l">Select pharmacies</h1>
+
+      <p>There are {{ (pharmacies | length) + 7}} active pharmacies in your company according to the <a href="">NHS Organisation Data Service</a> (ODS).</p>
+      
+      <p>7 of them are already using RAVS and are not listed here.</p>
+
+      {% if (pharmacies | length) > 50 %}
+        <p>For larger chains, we generally recommend signing up pharmacies in batches according to how they are managed in your organisation.</p>
+      {% endif %}
+
       {% set items = [] %}
       {% if pharmacies | length > 1 %}
         {% set items = (items.push({
-           text: "Select all",
+           text: "Select all " + (pharmacies | length),
            value: "",
            attributes: {
              "data-select-all": "true"
@@ -46,11 +56,8 @@
           fieldset: {
             legend: {
               text: pageName,
-              size: "l"
+              size: "m"
             }
-          },
-          hint: {
-            text: "Pharmacies that are already using RAVS are not listed."
           },
           items: items
         }) }}

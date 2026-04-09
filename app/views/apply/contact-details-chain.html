@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Lead administrators" %}
+{% set pageName = "Add lead administrators" %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -15,9 +15,57 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>You will be a lead administrator for all {{ data.pharmacyIds | length }} pharmacies.</p>
+      <p>You can add up to 10 lead administrators now, including you.</p>
+      
+      <p>The lead administrators will:</p>
+      
+      <ul>
+        <li>get access to RAVS for all {{ data.pharmacyIds | length }} pharmacies</li>
+        <li>be able to create reports for all {{ data.pharmacyIds | length }} pharmacies</li>
+        <li>be able to add more users at each pharmacy and choose their permission level</li>
+      </ul>
 
-      <p>Once you log in to RAVS, you will be able to add more users at individual pharmacies.</p>
+      {% call details({
+        summaryText: "About our permission levels"
+      }) %}
+        <p>As a lead administrator, you can add more lead administrators, administrators or recorders.</p>
+
+<table tabindex="0" class="nhsuk-table">
+<thead class="nhsuk-table__head">
+<tr class="nhsuk-table__row">
+<th class="nhsuk-table__header"><strong>Permission level</strong></th>
+<th class="nhsuk-table__header"><strong>Record and edit vaccinations</strong></th>
+<th class="nhsuk-table__header"><strong>Add and manage vaccines</strong></th>
+<th class="nhsuk-table__header"><strong>Create reports</strong></th>
+<th class="nhsuk-table__header"><strong>Add and manage users</strong></th>
+</tr>
+</thead>
+<tbody class="nhsuk-table__body">
+
+<tr class="nhsuk-table__row">
+<td class="nhsuk-table__cell"><strong>Lead administrator</strong></td>
+<td class="nhsuk-table__cell">Yes</td>
+<td class="nhsuk-table__cell">Yes</td>
+<td class="nhsuk-table__cell">Yes</td>
+<td class="nhsuk-table__cell">Yes</td>
+</tr>
+<tr class="nhsuk-table__row">
+<td class="nhsuk-table__cell"><strong>Administrator</strong></td>
+<td class="nhsuk-table__cell">Yes</td>
+<td class="nhsuk-table__cell">Yes</td>
+<td class="nhsuk-table__cell">Yes</td>
+<td class="nhsuk-table__cell">No</td>
+</tr>
+<tr class="nhsuk-table__row">
+<td class="nhsuk-table__cell"><strong>Recorder</strong></td>
+<td class="nhsuk-table__cell">Yes</td>
+<td class="nhsuk-table__cell">No</td>
+<td class="nhsuk-table__cell">No</td>
+<td class="nhsuk-table__cell">No</td>
+</tr>
+</tbody>
+</table>
+      {% endcall %}
 
       <form action="/apply/check-chain" method="post" novalidate="true">
 
@@ -59,8 +107,6 @@
 
         <div id="lead-administrator-2" {% if not data.firstName2 %}hidden{% endif %}>
           <h2 class="nhsuk-heading-m">2nd lead administrator</h2>
-
-          <p>This user will also be a lead adminstrator for all 23 pharmacies.</p>
 
           <div>
             {{ button({

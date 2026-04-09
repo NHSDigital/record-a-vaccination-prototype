@@ -13,83 +13,13 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if (errors | length) > 0 %}
-        {{ errorSummary({
-          titleText: "There is a problem",
-          errorList: errors
-        }) }}
-      {% endif %}
-
       <form action="/apply/start-answer" method="post">
 
-      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+        <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>Any community pharmacy offering NHS vaccinations can sign up.</p>
+        <p>Any community pharmacy offering NHS vaccinations can sign up.</p>
 
-      <p>For other NHS settings, your regions are responsible for inviting you to use the service.</p>
-
-      {% set options = [] %}
-      {% set items = [{ text: "", value: ""}] %}
-
-      {% for organisation in allPharmacies %}
-        {% set items = (items.push({
-          text: organisation.name + ", " + organisation.address + ", " + (organisation.address.postcode | upper) + " (" + organisation.id + ")",
-          value: organisation.id,
-          selected: (organisation.id === data.organisationId)
-        }), items) %}
-      {% endfor %}
-
-      {% set pharmacyCompanyItems = [{ text: "", value: ""}] %}
-
-      {% for pharmacyCompany in (allPharmacyCompanies | sort(false, false, "name")) %}
-        {% set pharmacyCompanyItems = (pharmacyCompanyItems.push({
-          text: (pharmacyCompany.name) + " (" + (pharmacyCompany.id) + ")",
-          value: pharmacyCompany.id
-        }), pharmacyCompanyItems) %}
-      {% endfor %}
-
-      {% set multipleHtml %}
-
-        {{ select({
-          id: "pharmacy-chain-id",
-          name: "pharmacyChainId",
-          value: data.pharmacyChainId,
-          label: {
-            text: "Pharmacy company",
-            size: "s"
-          },
-          hint: {
-            text: "Search by name or ODS code"
-          },
-          items: pharmacyCompanyItems,
-          attributes: {
-            "data-module": "app-autocomplete"
-          }
-        }) }}
-
-      {% endset %}
-
-
-      {% set singleHtml %}
-        {{ select({
-          id: "organisation-id",
-          name: "organisationId",
-          label: {
-            text: "Pharmacy",
-            size: "s"
-          },
-          hint: {
-            text: "Search by name or ODS code"
-          },
-          items: items,
-          attributes: {
-            "data-module": "app-autocomplete"
-          },
-          errorMessage: {
-            text: (errors | first).text
-          } if (errors | length)
-        }) }}
-      {% endset %}
+        <p>For other NHS settings, your regions are responsible for inviting you to use the service.</p>
 
         {{ radios({
           name: "oneOrMany",
