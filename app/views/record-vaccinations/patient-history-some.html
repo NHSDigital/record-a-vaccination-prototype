@@ -71,18 +71,10 @@
           },
           {
             key: {
-              text: "NHS number"
+              text: "Postcode"
             },
             value: {
-              text: data.nhsNumber
-            }
-          },
-          {
-            key: {
-              text: "GP surgery"
-            },
-            value: {
-              html: "Beech House surgery <br>1 Ash Tree Road<br>Knaresborough<br>HG5 0UB"
+              text: N7 0EA
             }
           }
         ]
@@ -109,7 +101,7 @@
 
 {{ warningCallout({
   heading: "Important",
-  text: "There was a problem getting the patient's vaccination history. We could not access some vaccination records."
+  text: "We can only show previous vaccination records that have been recorded in RAVS for this patient."
 }) }}
       
       <h2 class="nhsuk-heading-m">Vaccination history</h2>
