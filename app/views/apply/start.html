@@ -22,6 +22,12 @@
 
       <form action="/apply/start-answer" method="post">
 
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p>Any community pharmacy offering NHS vaccinations can sign up.</p>
+
+      <p>For other NHS settings, your regions are responsible for inviting you to use the service.</p>
+
       {% set options = [] %}
       {% set items = [{ text: "", value: ""}] %}
 
@@ -90,25 +96,19 @@
           value: data.oneOrMany,
           fieldset: {
             legend: {
-              text: "Are you signing up for 1 pharmacy or a pharmacy chain?",
-              size: "l",
+              text: "How many pharmacies do you want to sign up?",
+              size: "m",
               isPageHeading: true
             }
           },
           items: [
             {
               value: "single",
-              text: "A single pharmacy",
-              conditional: {
-                html: singleHtml
-              }
+              text: "A single pharmacy"
             },
             {
               value: "chain",
-              text: "A pharmacy chain",
-              conditional: {
-                html: multipleHtml
-              }
+              text: "A group of pharmacies"
             }
           ]
         }) }}
