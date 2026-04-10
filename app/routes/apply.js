@@ -65,8 +65,6 @@ module.exports = router => {
   })
 
   router.get('/apply/find-pharmacy-company', async (req, res) => {
-    const data = req.session.data
-
     const allPharmacyCompanies = await getPharmacyChains()
 
     res.render('apply/find-pharmacy-company', {
@@ -77,9 +75,6 @@ module.exports = router => {
 
 
   router.post('/apply/answer-find-pharmacy-company', (req, res) => {
-    const data = req.session.data
-    
-
     res.redirect('/apply/check-pharmacy-chain')
     // const organisationId = data.organisationId
     // const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
