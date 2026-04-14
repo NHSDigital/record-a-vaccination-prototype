@@ -131,7 +131,7 @@
       const checkboxItems = document.querySelectorAll('.nhsuk-checkboxes__item');
       
       function filterCheckboxes() {
-        const searchTerm = searchInput ? searchInput.value.toLowerCase().trim().replace(/\./g, '') : '';
+        const searchTerm = searchInput ? searchInput.value.toLowerCase().trim().replace(/[.()]/g, '') : '';
         const searchWords = searchTerm.split(/\s+/).filter(word => word.length > 0);
         
         checkboxItems.forEach(item => {
@@ -144,7 +144,7 @@
           // Skip if it's the select all checkbox
           if (checkbox.hasAttribute('data-select-all')) return;
           
-          const labelText = label.textContent.toLowerCase().replace(/\./g, '');
+          const labelText = label.textContent.toLowerCase().replace(/[.()]/g, '');
           const labelWords = labelText.split(/\s+/);
           const matches = searchWords.length === 0 || searchWords.every(searchWord => 
             labelWords.some(labelWord => labelWord.startsWith(searchWord))
