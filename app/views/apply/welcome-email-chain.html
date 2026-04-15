@@ -16,8 +16,8 @@
 
       <div class="app-email-preview">
 
-      <p>Dear {{ data.firstName }} {{ data.lastName }},</p>
-      <p>You have successfully signed up to use the NHS Record a vaccination service at a group of pharmacies.</p>
+      <p>Dear {{ data.firstName[0] }} {{ data.lastName[0] }},</p>
+      <p>You've been signed up to use the NHS Record a vaccination service for {{ data.pharmacyIds | length }} pharmacies.</p>
       <p>Here's what you need to do next:</p>
 
       <h2 class="nhsuk-heading-s">1. Activate your Okta account</h2>
@@ -45,12 +45,26 @@
         <li><a href="https://future.nhs.uk/vaccsandscreening/viewCalendar?cid=1351409&viewDate=20260320&eid=10708678">join a drop-in session</a></li>
       </ul>
 
+
+      <hr>
+
+      <h2 class="nhsuk-heading-s">The {{ data.pharmacyIds | length }} pharmacies you've been signed up for</h2>
+
+      <ul class="nhsuk-list">
+        {% for pharmacy in pharmacies %}
+          <li>{{ pharmacy.name }} ({{ pharmacy.id }})</li>
+        {% endfor %}
+      </ul>
+
+      <hr>
+
+
+
       <p>Kind regards,</p>
       <p>NHS Record a vaccination</p>
 
       <p>Do not reply to this email as we do not check this inbox.</p>
       <p>To contact us, go to: <a href="https://www.ravs.england.nhs.uk/help-and-support">Record a vaccination: Help and support</a></p>
-
 
 
     </div>

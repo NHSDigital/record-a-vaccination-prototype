@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Select the pharmacies where you want to start using RAVS" %}
+{% set pageName = "Which pharmacies do you want to sign up now?" %}
 
 
 {% block beforeContent %}
@@ -16,19 +16,18 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% set items = [] %}
-      {% if pharmacies | length > 1 %}
-        {% set items = (items.push({
-           text: "Select all",
-           value: "",
-           attributes: {
-             "data-select-all": "true"
-           }
-          }), items) %}
-         {% set items = (items.push({
-            divider: "or"
-          }), items) %}
+      <h1 class="nhsuk-heading-l">Select pharmacies</h1>
+
+      <p>There are {{ (pharmacies | length) + 7}} active pharmacies in your company according to the <a href="https://digital.nhs.uk/services/organisation-data-service">NHS Organisation Data Service</a> (ODS).</p>
+
+      <p>7 of them are already using RAVS and are not listed here.</p>
+
+      {% if (pharmacies | length) > 50 %}
+        <p>For larger chains, we recommend signing up pharmacies in batches based on how stores are managed in your organisation.</p>
       {% endif %}
+
+      {% set items = [] %}
+
 
       {% for pharmacy in pharmacies %}
         {% set items = (items.push({
@@ -39,22 +38,64 @@
 
       <form action="/apply/pharmacy-chain-check" method="post">
 
-        {{ checkboxes({
-          id: "pharmacy-ids",
-          name: "pharmacyIds",
-          values: data.pharmacyIds,
-          fieldset: {
-            legend: {
-              text: pageName,
-              size: "l"
-            }
-          },
-          hint: {
-            text: "Pharmacies that are already using RAVS are not listed."
-          },
-          items: items
-        }) }}
+        {% call fieldset({
+          legend: {
+            text: pageName,
+            size: "m"
+          }
+        }) %}
 
+        {% if (pharmacies | length) > 1 %}
+          {{ checkboxes({
+            idPrefix: "pharmacy-select-all",
+            name: "pharmacyIds",
+            values: data.pharmacyIds,
+            items: [
+              {
+                text: "Select all " + (pharmacies | length),
+                value: "",
+                attributes: {
+                  "data-select-all": "true"
+                }
+              },
+              {
+                divider: "or"
+              }
+            ]
+          }) }}
+        {% endif %}
+
+        {% if (pharmacies | length) > 20 %}
+          {{ input({
+            id: "pharmacy-search",
+            name: "pharmacySearch",
+            type: "search",
+            label: {
+              text: "Search"
+            },
+            classes: "nhsuk-input--width-20",
+            attributes: {
+              "data-module": "app-filter-checkboxes"
+            },
+            formGroup: {
+              classes: "nhsuk-u-margin-bottom-4"
+            }
+          }) }}
+        {% endif %}
+
+        <div class="app-checkboxes--scrollable-container">
+          {{ checkboxes({
+            id: "pharmacy-ids",
+            name: "pharmacyIds",
+            values: data.pharmacyIds,
+            items: items
+          }) }}
+        </div>
+
+
+        {% endcall %}
+
+        <p data-module="app-checkboxes-count"></p>
 
         {{ button({
           text: "Confirm"
@@ -68,12 +109,67 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
 
+      // Checkbox count functionality
+      const countDisplay = document.querySelector('[data-module="app-checkboxes-count"]');
+
+      function updateCheckboxCount() {
+        if (!countDisplay) return;
+        const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked:not([data-select-all])').length;
+        countDisplay.textContent = `${checkedCount} pharmacies selected`;
+      }
+
+      if (countDisplay) {
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+          cb.addEventListener('change', updateCheckboxCount);
+        });
+        updateCheckboxCount();
+      }
+
+
+      // Filter checkboxes functionality
+      const searchInput = document.querySelector('input[data-module="app-filter-checkboxes"]');
+      const checkboxItems = document.querySelectorAll('.nhsuk-checkboxes__item');
+
+      function filterCheckboxes() {
+        const searchTerm = searchInput ? searchInput.value.toLowerCase().trim().replace(/[.()]/g, '') : '';
+        const searchWords = searchTerm.split(/\s+/).filter(word => word.length > 0);
+
+        checkboxItems.forEach(item => {
+          console.log(item)
+          const label = item.querySelector('.nhsuk-checkboxes__label');
+          const checkbox = item.querySelector('.nhsuk-checkboxes__input');
+
+          if (!label || !checkbox) return;
+
+          // Skip if it's the select all checkbox
+          if (checkbox.hasAttribute('data-select-all')) return;
+
+          const labelText = label.textContent.toLowerCase().replace(/[.()]/g, '');
+          const labelWords = labelText.split(/\s+/);
+          const matches = searchWords.length === 0 || searchWords.every(searchWord =>
+            labelWords.some(labelWord => labelWord.startsWith(searchWord))
+          );
+          const isChecked = checkbox.checked;
+
+          // Show if matches OR if checked
+          if (matches || isChecked) {
+            item.removeAttribute('hidden');
+          } else {
+            item.setAttribute('hidden', '');
+          }
+        });
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', filterCheckboxes);
+      }
+
       // Select all checkbox
       const selectAllCheckbox = document.querySelector('input[data-select-all]');
 
-      // All row checkboxes (everything starting with select- except select-all)
+      // All row checkboxes (checkboxes without select-all attribute)
       const otherCheckboxes = Array.from(
-        document.querySelectorAll('input:not([data-select-all])')
+        document.querySelectorAll('input[type="checkbox"]:not([data-select-all])')
       );
 
       // Click on header toggles all rows
@@ -82,7 +178,8 @@
         otherCheckboxes.forEach(cb => {
           cb.checked = selectAllCheckbox.checked;
         });
-        selectAllCheckbox.indeterminate = false;
+        filterCheckboxes();
+        updateCheckboxCount();
       });
 
       // Click on rows updates header state

@@ -29,10 +29,10 @@ module.exports = router => {
   router.post('/apply/start-answer', (req, res) => {
     const data = req.session.data
 
-    if (data.oneOrMany === "single" && data.organisationId != "") {
-      res.redirect('/apply/check-pharmacy')
-    } else if (data.oneOrMany === "chain" && data.pharmacyChainId != "") {
-      res.redirect('/apply/check-pharmacy-chain')
+    if (data.oneOrMany === "single") {
+      res.redirect('/apply/find-single-pharmacy')
+    } else if (data.oneOrMany === "chain") {
+      res.redirect('/apply/group-of-pharmacies')
     } else {
       res.redirect('/apply/start')
     }
@@ -41,7 +41,7 @@ module.exports = router => {
   router.get('/apply/check-pharmacy-chain', async (req, res) => {
     const data = req.session.data
 
-    const organisation = await getOrganisation(data.pharmacyChainId)
+    const organisation = await getOrganisation(data.pharmacyCompanyId)
 
     res.render('apply/check-pharmacy-chain', {
       organisation
@@ -64,6 +64,31 @@ module.exports = router => {
 
   })
 
+  router.get('/apply/find-pharmacy-company', async (req, res) => {
+    const allPharmacyCompanies = await getPharmacyChains()
+
+    res.render('apply/find-pharmacy-company', {
+      allPharmacyCompanies
+    })
+
+  })
+
+
+  router.post('/apply/answer-find-pharmacy-company', (req, res) => {
+    res.redirect('/apply/check-pharmacy-chain')
+    // const organisationId = data.organisationId
+    // const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
+
+    // if (!organisation) {
+    //   res.redirect('/apply/start?error=no-pharmacy');
+    // } else if (organisation.id === "FA424") {
+    //   res.redirect('/apply/start?error=existing-account');
+    // } else {
+    //   res.redirect('/apply/check-pharmacy')
+    // }
+
+  })
+
 
   // Show organisation check page
   router.get('/apply/check-pharmacy', (req, res) => {
@@ -81,7 +106,7 @@ module.exports = router => {
   router.get('/apply/pharmacies', async (req, res) => {
     const data = req.session.data
 
-    let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyChainId)
+    let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyCompanyId)
 
     pharmacies = pharmacies.sort(sortByNameThenPostcode((item) => item.address.postcode))
 
@@ -94,7 +119,7 @@ module.exports = router => {
   router.get('/apply/pharmacy-chain-check', async (req, res) => {
     const data = req.session.data
 
-    let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyChainId)
+    let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyCompanyId)
 
     pharmacies = pharmacies.filter((pharmacy) => {
       return data.pharmacyIds.includes(pharmacy.id)
@@ -132,9 +157,9 @@ module.exports = router => {
   router.get('/apply/check-chain', async (req, res) => {
     const data = req.session.data
 
-    const pharmacyChain = await getOrganisation(data.pharmacyChainId)
+    const pharmacyChain = await getOrganisation(data.pharmacyCompanyId)
 
-    let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyChainId)
+    let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyCompanyId)
 
     pharmacies = pharmacies.filter((pharmacy) => {
       return data.pharmacyIds.includes(pharmacy.id)
@@ -172,7 +197,7 @@ module.exports = router => {
   router.post('/apply/check-chain-answer', async (req, res) => {
     const data = req.session.data
 
-    let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyChainId)
+    let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyCompanyId)
 
     pharmacies = pharmacies.filter((pharmacy) => {
       return data.pharmacyIds.includes(pharmacy.id)
@@ -222,6 +247,21 @@ module.exports = router => {
 
     res.render('apply/welcome-email', {
       organisation
+    })
+  })
+
+  // Welcome email mockup for groups
+  router.get('/apply/welcome-email-chain', async (req, res) => {
+    const data = req.session.data
+
+    let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyCompanyId)
+
+    pharmacies = pharmacies.filter((pharmacy) => {
+      return data.pharmacyIds.includes(pharmacy.id)
+    })
+
+    res.render('apply/welcome-email-chain', {
+      pharmacies  
     })
   })
 

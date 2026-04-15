@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Find your pharmacy company" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/apply/group-of-pharmacies",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/apply/answer-find-pharmacy-company" method="post">
+
+
+      {% set options = [] %}
+      {% set items = [{ text: "", value: ""}] %}
+
+      {% set pharmacyCompanyItems = [{ text: "", value: ""}] %}
+
+      {% for pharmacyCompany in (allPharmacyCompanies | sort(false, false, "name")) %}
+        {% set pharmacyCompanyItems = (pharmacyCompanyItems.push({
+          text: (pharmacyCompany.name) + " (" + (pharmacyCompany.id) + ")",
+          value: pharmacyCompany.id
+        }), pharmacyCompanyItems) %}
+      {% endfor %}
+
+
+        {{ select({
+          id: "pharamcy-company-id",
+          name: "pharmacyCompanyId",
+          label: {
+            text: pageName,
+            size: "l"
+          },
+          hint: {
+            text: "Search by the name of the company"
+          },
+          items: pharmacyCompanyItems,
+          attributes: {
+            "data-module": "app-autocomplete"
+          },
+          value: data.pharmacyCompanyId
+        }) }}
+
+        {{ button({
+          "text": "Continue"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

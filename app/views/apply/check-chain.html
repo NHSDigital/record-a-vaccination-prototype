@@ -67,90 +67,59 @@
         ]
       }) }}
 
-      <h2 class="nhsuk-heading-m">Your details</h2>
+      {% set ordinals = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th'] %}
+      {% set firstNames = data.firstName %}
+      {% set lastNames = data.lastName %}
+      {% set emails = data.email %}
+    
+      {% for firstName in firstNames %}
+        {% set index = loop.index0 %}
+        {% set lastName = lastNames[index] %}
+        {% set email = emails[index] %}
 
-      {{ summaryList({
-        rows: [
-          {
-            key: {
-              text: "Name"
-            },
-            value: {
-              html: data.firstName + " " + data.lastName
-            },
-            actions: {
-              items: [
-                {
-                  href: "/apply/contact-details-chain",
-                  text: "Change",
-                  visuallyHiddenText: "your name"
+        {% if firstName %}
+          <h2 class="nhsuk-heading-m">{{ ordinals[index] }} lead administrator</h2>
+
+          {{ summaryList({
+            rows: [
+              {
+                key: {
+                  text: "Name"
+                },
+                value: {
+                  html: firstName + " " + lastName
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/apply/contact-details-chain",
+                      text: "Change",
+                      visuallyHiddenText: ordinals[index] + " lead administrator's name"
+                    }
+                  ]
                 }
-              ]
-            }
-          },
-          {
-            key: {
-              text: "Email"
-            },
-            value: {
-              text: data.email
-            },
-            actions: {
-              items: [
-                {
-                  href: "/apply/contact-details-chain",
-                  text: "Change",
-                  visuallyHiddenText: "your email"
+              },
+              {
+                key: {
+                  text: "Email"
+                },
+                value: {
+                  text: email
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/apply/contact-details-chain",
+                      text: "Change",
+                      visuallyHiddenText: ordinals[index] + " lead administrator's email"
+                    }
+                  ]
                 }
-              ]
-            }
-          }
-        ]
-      }) }}
-
-      {% if data.firstName2 %}
-
-        <h2 class="nhsuk-heading-m">2nd lead administrator</h2>
-
-        {{ summaryList({
-          rows: [
-            {
-              key: {
-                text: "Name"
-              },
-              value: {
-                html: data.firstName2 + " " + data.lastName2
-              },
-              actions: {
-                items: [
-                  {
-                    href: "/apply/contact-details-chain",
-                    text: "Change",
-                    visuallyHiddenText: "2nd lead administrator’s name"
-                  }
-                ]
               }
-            },
-            {
-              key: {
-                text: "Email"
-              },
-              value: {
-                text: data.email2
-              },
-              actions: {
-                items: [
-                  {
-                    href: "/apply/contact-details-chain",
-                    text: "Change",
-                    visuallyHiddenText: "2nd lead administrator’s email"
-                  }
-                ]
-              }
-            }
-          ]
-        }) }}
-      {% endif %}
+            ]
+          }) }}
+        {% endif %}
+      {% endfor %}
 
       <form action="/apply/check-chain-answer" method="post">
         {{ button({
