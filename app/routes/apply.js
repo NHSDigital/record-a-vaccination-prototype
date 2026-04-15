@@ -250,4 +250,19 @@ module.exports = router => {
     })
   })
 
+  // Welcome email mockup for groups
+  router.get('/apply/welcome-email-chain', async (req, res) => {
+    const data = req.session.data
+
+    let pharmacies = await getPharmaciesBelongingToOrganisation(data.pharmacyCompanyId)
+
+    pharmacies = pharmacies.filter((pharmacy) => {
+      return data.pharmacyIds.includes(pharmacy.id)
+    })
+
+    res.render('apply/welcome-email-chain', {
+      pharmacies  
+    })
+  })
+
 }

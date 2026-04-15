@@ -16,7 +16,7 @@
 
       <div class="app-email-preview">
 
-      <p>Dear {{ data.firstName }} {{ data.lastName }},</p>
+      <p>Dear {{ data.firstName[0] }} {{ data.lastName[0] }},</p>
       <p>You've been signed up to use the NHS Record a vaccination service for {{ data.pharmacyIds | length }} pharmacies.</p>
       <p>Here's what you need to do next:</p>
 
@@ -50,9 +50,10 @@
 
       <h2 class="nhsuk-heading-s">The {{ data.pharmacyIds | length }} pharmacies you've been signed up for</h2>
 
-      <ul>
-        <li>Asda, M5 2PX (P121)</li>
-        <li>Asda, M5 2PX (P121)</li>
+      <ul class="nhsuk-list">
+        {% for pharmacy in pharmacies %}
+          <li>{{ pharmacy.name }} ({{ pharmacy.id }})</li>
+        {% endfor %}
       </ul>
 
       <hr>
