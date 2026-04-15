@@ -73,7 +73,7 @@ export class AddAnother extends Component {
     removeButtons.forEach(($button) => {
       $button.addEventListener('click', (event) => {
         event.preventDefault()
-        const index = parseInt($button.getAttribute('data-add-another-remove'), 10)
+        const index = parseInt($button.dataset.addAnotherRemove, 10)
         this.removeItem(index)
       })
     })
@@ -112,7 +112,7 @@ export class AddAnother extends Component {
 
     // Find items at and after the removed index
     const itemsToShift = visibleItems.filter($item => {
-      const itemIndex = parseInt($item.getAttribute('data-add-another-item'), 10)
+      const itemIndex = parseInt($item.dataset.addAnotherItem, 10)
       return itemIndex >= index
     })
 
