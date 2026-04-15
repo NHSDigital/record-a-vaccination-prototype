@@ -71,15 +71,9 @@
 
         {# Ordinal suffixes for numbers 1-10 #}
         {% set ordinals = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th'] %}
-        {% set firstNames = data['firstName[]'] | asArray %}
-        {% set lastNames = data['lastName[]'] | asArray %}
-        {% set emails = data['email[]'] | asArray %}
 
         {% for index in range(0, 10) %}
-          {% set firstNameValue = firstNames[index] %}
-          {% set lastNameValue = lastNames[index] %}
-          {% set emailValue = emails[index] %}
-          {% set isHidden = (index > 0) and not firstNameValue %}
+          {% set isHidden = (index > 0) and not data.firstName[index] %}
 
           <div id="lead-administrator-{{ index + 1 }}" data-add-another-item="{{ index + 1 }}" {% if isHidden %}hidden{% endif %}>
             <h2 class="nhsuk-heading-m">{{ ordinals[index] }} lead administrator</h2>
@@ -101,9 +95,9 @@
                 text: "First name"
               },
               id: "first-name-" + (index + 1),
-              name: "firstName[]",
+              name: "firstName",
               classes: "nhsuk-input--width-20",
-              value: firstNameValue
+              value: data.firstName[index]
             }) }}
 
             {{ input({
@@ -111,9 +105,9 @@
                 text: "Last name"
               },
               id: "last-name-" + (index + 1),
-              name: "lastName[]",
+              name: "lastName",
               classes: "nhsuk-input--width-20",
-              value: lastNameValue
+              value: data.lastName[index]
             }) }}
 
             {{ input({
@@ -124,14 +118,14 @@
                 html: "Use a personal nhs.net email, not a pharmacy email.<br>For example, joe.bloggs1@nhs.net"
               },
               id: "email-" + (index + 1),
-              name: "email[]",
+              name: "email",
               type: "email",
-              value: emailValue
+              value: data.email[index]
             }) }}
           </div>
         {% endfor %}
 
-        <div class="nhsuk-button-group" id="add-another-wrapper" {% if firstNames[9] %}hidden{% endif %}>
+        <div class="nhsuk-button-group" id="add-another-wrapper" {% if data.firstName[9] %}hidden{% endif %}>
           {{ button({
             id: "add-lead-admin",
             text: "Add another lead administrator",

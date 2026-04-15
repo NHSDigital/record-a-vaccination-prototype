@@ -68,10 +68,10 @@
       }) }}
 
       {% set ordinals = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th'] %}
-      {% set firstNames = data['firstName[]'] | asArray %}
-      {% set lastNames = data['lastName[]'] | asArray %}
-      {% set emails = data['email[]'] | asArray %}
-
+      {% set firstNames = data.firstName %}
+      {% set lastNames = data.lastName %}
+      {% set emails = data.email %}
+    
       {% for firstName in firstNames %}
         {% set index = loop.index0 %}
         {% set lastName = lastNames[index] %}
