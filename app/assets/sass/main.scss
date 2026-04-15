@@ -31,6 +31,10 @@
 // Add your custom CSS/Sass styles below...
 ///////////////////////////////////////////
 
+// Ensure hidden attribute works on button groups (which have display: flex)
+.nhsuk-button-group[hidden] {
+  display: none;
+}
 
 .nhsuk-header--left .nhsuk-header__navigation-list {
   justify-content: normal;

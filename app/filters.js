@@ -67,6 +67,23 @@ module.exports = function () {
     }
   }
 
+  /**
+   * Ensure a value is always returned as an array
+   * Useful for form fields with [] notation that may return a string if only one value
+   *
+   * @param {*} value - Value to convert to array
+   * @returns {Array} Value as an array
+   */
+  filters.asArray = function(value) {
+    if (value === undefined || value === null) {
+      return []
+    }
+    if (Array.isArray(value)) {
+      return value
+    }
+    return [value]
+  }
+
   /* keep the following line to return your filters to the app  */
   return filters
 }

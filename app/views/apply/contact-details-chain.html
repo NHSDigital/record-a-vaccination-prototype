@@ -67,107 +67,79 @@
 </table>
       {% endcall %}
 
-      <form action="/apply/check-chain" method="post" novalidate="true">
+      <form action="/apply/check-chain" method="post" novalidate="true" data-module="app-add-another">
 
-      <h2 class="nhsuk-heading-m">1st lead administrator</h2>
+        {# Ordinal suffixes for numbers 1-10 #}
+        {% set ordinals = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th'] %}
+        {% set firstNames = data['firstName[]'] | asArray %}
+        {% set lastNames = data['lastName[]'] | asArray %}
+        {% set emails = data['email[]'] | asArray %}
 
+        {% for index in range(0, 10) %}
+          {% set firstNameValue = firstNames[index] %}
+          {% set lastNameValue = lastNames[index] %}
+          {% set emailValue = emails[index] %}
+          {% set isHidden = (index > 0) and not firstNameValue %}
 
-        {{ input({
-          label: {
-            text: "First name"
-          },
-          id: "first-name",
-          name: "firstName",
-          classes: "nhsuk-input--width-20",
-          value: data.firstName
-        }) }}
+          <div id="lead-administrator-{{ index + 1 }}" data-add-another-item="{{ index + 1 }}" {% if isHidden %}hidden{% endif %}>
+            <h2 class="nhsuk-heading-m">{{ ordinals[index] }} lead administrator</h2>
 
-        {{ input({
-          label: {
-            text: "Last name"
-          },
-          id: "last-name",
-          name: "lastName",
-          classes: "nhsuk-input--width-20",
-          value: data.lastName
-        }) }}
-
-        {{ input({
-          label: {
-            text: "Email address"
-          },
-          hint: {
-            html: "Use your personal nhs.net email, not a pharmacy email.<br>For example, joe.bloggs1@nhs.net"
-          },
-          id: "email",
-          name: "email",
-          type: "email",
-          value: data.email
-        }) }}
-
-        <div id="lead-administrator-2" {% if not data.firstName2 %}hidden{% endif %}>
-          <h2 class="nhsuk-heading-m">2nd lead administrator</h2>
-
-          <div>
-            {{ button({
-              id: "remove-lead-admin-2",
-              text: "Remove",
-              type: "button",
-              classes: "nhsuk-button--secondary"
-            }) }}
-          </div>
-
+            <div hidden>
+              {{ button({
+                id: "remove-lead-admin-" + (index + 1),
+                text: "Remove",
+                type: "button",
+                classes: "nhsuk-button--secondary",
+                attributes: {
+                  "data-add-another-remove": (index + 1) | string
+                }
+              }) }}
+            </div>
 
             {{ input({
-              "label": {
-                "text": "First name"
+              label: {
+                text: "First name"
               },
-              "id": "first-name-2",
-              "name": "firstName2",
+              id: "first-name-" + (index + 1),
+              name: "firstName[]",
               classes: "nhsuk-input--width-20",
-              value: data.firstName2,
-              "errorMessage": {
-                "text": firstNameError
-              } if firstNameError
+              value: firstNameValue
             }) }}
 
             {{ input({
-              "label": {
-                "text": "Last name"
+              label: {
+                text: "Last name"
               },
-              "id": "last-name-2",
-              "name": "lastName2",
+              id: "last-name-" + (index + 1),
+              name: "lastName[]",
               classes: "nhsuk-input--width-20",
-              value: data.lastName2,
-              "errorMessage": {
-                "text": lastNameError
-              } if lastNameError
+              value: lastNameValue
             }) }}
 
             {{ input({
-              "label": {
-                "text": "Email address"
+              label: {
+                text: "Email address"
               },
               hint: {
-                html: "Use their personal nhs.net email, not a pharmacy email.<br>For example, joe.bloggs1@nhs.net"
-
+                html: "Use a personal nhs.net email, not a pharmacy email.<br>For example, joe.bloggs1@nhs.net"
               },
-              "id": "email-2",
-              "name": "email2",
+              id: "email-" + (index + 1),
+              name: "email[]",
               type: "email",
-              value: data.email2,
-              "errorMessage": {
-                "text": emailError
-              } if emailError
+              value: emailValue
             }) }}
-        </div>
+          </div>
+        {% endfor %}
 
-        <div {% if data.firstName2 %}hidden{% endif %}>
+        <div class="nhsuk-button-group" id="add-another-wrapper" {% if firstNames[9] %}hidden{% endif %}>
           {{ button({
-            id: "add-lead-admin-2",
+            id: "add-lead-admin",
             text: "Add another lead administrator",
             type: "button",
-            classes: "nhsuk-button--secondary"
+            classes: "nhsuk-button--secondary",
+            attributes: {
+              "data-add-another-add": "true"
+            }
           }) }}
         </div>
 
@@ -175,29 +147,6 @@
           "text": "Continue"
         }) }}
       </form>
-
-      <script>
-        document.getElementById("add-lead-admin-2").addEventListener('click', function(event) {
-          document.getElementById("lead-administrator-2").hidden = false
-
-          document.getElementById("add-lead-admin-2").parentElement.hidden = true
-
-          event.preventDefault()
-
-        })
-
-        document.getElementById("remove-lead-admin-2").addEventListener('click', function(event) {
-          document.getElementById("lead-administrator-2").hidden = true
-          document.getElementById("add-lead-admin-2").parentElement.hidden = false
-          document.getElementById("first-name-2").value = ""
-          document.getElementById("last-name-2").value = ""
-          document.getElementById("email-2").value = ""
-          event.preventDefault()
-        })
-
-
-
-      </script>
 
     </div>
   </div>
