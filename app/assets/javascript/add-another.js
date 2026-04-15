@@ -6,12 +6,14 @@ import { Component } from 'nhsuk-frontend'
  * Allows users to show/hide additional form sections with "Add another" and "Remove" buttons.
  * When an item is removed, subsequent items shift up to fill the gap.
  *
+ * Progressive enhancement: Without JavaScript, all items are visible and buttons are hidden.
+ * With JavaScript, empty items are hidden and buttons are shown as needed.
+ *
  * Usage:
  * - Add `data-module="app-add-another"` to a container element
- * - Add `data-add-another-item="N"` to each item section (where N is the item index: 2, 3, etc.)
- * - Add `data-add-another-add` to the "Add another" button
- * - Add `data-add-another-remove="N"` to the "Remove" button within each section
- * - Add an id like `add-another-wrapper` to the wrapper around the add button
+ * - Add `data-add-another-item="N"` to each item section (where N is the item index: 1, 2, 3, etc.)
+ * - Add `data-add-another-add` to the "Add another" button (hidden by default)
+ * - Add `data-add-another-remove="N"` to the "Remove" button within each section (hidden by default)
  *
  * @augments Component<HTMLElement>
  */
@@ -28,8 +30,10 @@ export class AddAnother extends Component {
     this.$addButton = this.$root.querySelector('[data-add-another-add]')
     this.$addButtonWrapper = this.$addButton?.closest('.nhsuk-button-group')
 
+    this.initializeItemVisibility()
     this.setupAddButton()
     this.setupRemoveButtons()
+    this.updateAddButtonVisibility()
     this.updateRemoveButtonVisibility()
   }
 
@@ -37,6 +41,53 @@ export class AddAnother extends Component {
    * Name for the component used when initialising using data-module attributes
    */
   static moduleName = 'app-add-another'
+
+  /**
+   * Check if an item has any input values
+   *
+   * @param {HTMLElement} $item - The item to check
+   * @returns {boolean} True if item has any non-empty input values
+   */
+  hasInputValues($item) {
+    const inputs = $item.querySelectorAll('input, textarea, select')
+    return Array.from(inputs).some(($input) => {
+      if ($input instanceof HTMLSelectElement) {
+        return $input.selectedIndex > 0
+      } else if ($input instanceof HTMLInputElement) {
+        if ($input.type === 'checkbox' || $input.type === 'radio') {
+          return $input.checked
+        }
+        return $input.value.trim() !== ''
+      } else if ($input instanceof HTMLTextAreaElement) {
+        return $input.value.trim() !== ''
+      }
+      return false
+    })
+  }
+
+  /**
+   * Initialize item visibility on page load
+   * Shows items that have values, hides empty items after the last filled one
+   */
+  initializeItemVisibility() {
+    // Find the last item with values
+    let lastFilledIndex = 0
+    this.$items.forEach(($item, index) => {
+      if (this.hasInputValues($item)) {
+        lastFilledIndex = index
+      }
+    })
+
+    // Show items up to and including the last filled one (minimum 1)
+    // Hide all items after that
+    this.$items.forEach(($item, index) => {
+      if (index <= lastFilledIndex) {
+        $item.hidden = false
+      } else {
+        $item.hidden = true
+      }
+    })
+  }
 
   /**
    * Get visible items
@@ -80,6 +131,17 @@ export class AddAnother extends Component {
   }
 
   /**
+   * Update visibility of add button based on number of hidden items
+   * Show if there are items left to add, hide if all items are visible
+   */
+  updateAddButtonVisibility() {
+    if (this.$addButtonWrapper) {
+      const hiddenItems = this.getHiddenItems()
+      this.$addButtonWrapper.hidden = hiddenItems.length === 0
+    }
+  }
+
+  /**
    * Add the next item
    */
   addItem() {
@@ -89,11 +151,7 @@ export class AddAnother extends Component {
       hiddenItems[0].hidden = false
     }
 
-    // Hide add button if all items are now visible
-    if (this.getHiddenItems().length === 0 && this.$addButtonWrapper) {
-      this.$addButtonWrapper.hidden = true
-    }
-
+    this.updateAddButtonVisibility()
     this.updateRemoveButtonVisibility()
   }
 
@@ -128,11 +186,7 @@ export class AddAnother extends Component {
       this.clearInputs(lastItem)
     }
 
-    // Show the add button wrapper
-    if (this.$addButtonWrapper) {
-      this.$addButtonWrapper.hidden = false
-    }
-
+    this.updateAddButtonVisibility()
     this.updateRemoveButtonVisibility()
   }
 
