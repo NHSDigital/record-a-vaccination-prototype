@@ -1,0 +1,134 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check your answers" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/apply/contact-details",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      {% set pharmaciesHtml %}
+        {% if (pharmacies | length) <= 10 %}
+          <ul class="nhsuk-list">
+            {% for pharmacy in pharmacies %}
+              <li>{{ pharmacy.name }} ({{ pharmacy.id }})</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          {{ pharmacies | length }} pharmacies
+        {% endif %}
+
+      {% endset %}
+
+      <h2 class="nhsuk-heading-m">Your pharmacies</h2>
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Company"
+            },
+            value: {
+              html: pharmacyChain.name
+            },
+            actions: {
+              items: [
+                {
+                  href: "/apply/start",
+                  text: "Change",
+                  visuallyHiddenText: "company"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Pharmacies"
+            },
+            value: {
+              html: pharmaciesHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: "/apply/pharmacies",
+                  text: "Change",
+                  visuallyHiddenText: "pharmacies"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      {% set ordinals = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th'] %}
+      {% set firstNames = data.firstName %}
+      {% set lastNames = data.lastName %}
+      {% set emails = data.email %}
+    
+      {% for firstName in firstNames %}
+        {% set index = loop.index0 %}
+        {% set lastName = lastNames[index] %}
+        {% set email = emails[index] %}
+
+        {% if firstName %}
+          <h2 class="nhsuk-heading-m">{{ ordinals[index] }} lead administrator</h2>
+
+          {{ summaryList({
+            rows: [
+              {
+                key: {
+                  text: "Name"
+                },
+                value: {
+                  html: firstName + " " + lastName
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/apply/contact-details-chain",
+                      text: "Change",
+                      visuallyHiddenText: ordinals[index] + " lead administrator's name"
+                    }
+                  ]
+                }
+              },
+              {
+                key: {
+                  text: "Email"
+                },
+                value: {
+                  text: email
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/apply/contact-details-chain",
+                      text: "Change",
+                      visuallyHiddenText: ordinals[index] + " lead administrator's email"
+                    }
+                  ]
+                }
+              }
+            ]
+          }) }}
+        {% endif %}
+      {% endfor %}
+
+      <form action="/apply/check-chain-answer" method="post">
+        {{ button({
+          text: "Confirm"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+
+{% endblock %}

@@ -1,10 +1,10 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Check this is your pharmacy" %}
+{% set pageName = "Check this is your company" %}
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/apply/start",
+    href: "/apply/find-pharmacy-company",
     text: "Back"
   }) }}
 {% endblock %}
@@ -30,7 +30,7 @@
               text: "Type"
             },
             value: {
-              text: organisation.type
+              text: "Pharmacy company"
             }
           },
           {
@@ -38,7 +38,15 @@
               text: "ODS code"
             },
             value: {
-              text: "P0MG"
+              text: organisation.id
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: organisation.address.line1 + "<br>" + organisation.address.town + "<br>" + organisation.address.postcode
             }
           }
         ]
@@ -46,7 +54,7 @@
 
       {{ button({
         "text": "Continue",
-        href: "/apply/vaccine-types"
+        href: "/apply/pharmacies"
       }) }}
 
     </div>

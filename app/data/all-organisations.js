@@ -3135,5 +3135,115 @@ module.exports = [
     id: "VL55M",
     address: "16 Mount Avon Drive, London, SE12 9PR",
     type: "Care home"
+  },
+  {
+    id: "P08F",
+    name: "Boots UK Limited",
+    type: "Pharmacy company"
+  },
+  {
+    id: "P0MG",
+    name: "Bestway National Chemists Ltd",
+    type: "Pharmacy company"
+  },
+  {
+    id: "P07F",
+    name: "Lloyds Pharmacy Ltd",
+    type: "Pharmacy company"
+  },
+  {
+    id: "P29F",
+    name: "Tesco PLC",
+    type: "Pharmacy company"
+  },
+  {
+    id: "P10F",
+    name: "Asda Stores Ltd",
+    type: "Pharmacy company"
+  },
+  {
+    id: "P4YF",
+    name: "Medashealthcare Limited",
+    type: "Pharmacy company"
+  },
+  {
+    id: "P569",
+    name: "Rajja Ltd",
+    type: "Pharmacy company"
+  },
+  {
+    id: "P06L",
+    name: "Safedale Limited",
+    type: "Pharmacy company"
+  },
+  {
+    id: "FAG83",
+    companyId: "P0MG",
+    name: "Well",
+    type: "Community pharmacy",
+    address: {
+      line1: "22A Lodgeside Avenue",
+      postcode: "BS15 1NH"
+    }
+  },
+  {
+    id: "FAL04",
+    companyId: "P0MG",
+    name: "Well",
+    type: "Community pharmacy",
+    address: {
+      line1: "67 St John'S Road",
+      postcode: "BA21 5NJ"
+    }
+  },
+  {
+    id: "FC155",
+    companyId: "P0MG",
+    name: "Well",
+    type: "Community pharmacy",
+    address: {
+      line1: "67 St Marys Green",
+      postcode: "NE16 4DN"
+    }
+  },
+  {
+    id: "FC155",
+    companyId: "P0MG",
+    name: "Well",
+    type: "Community pharmacy",
+    address: {
+      line1: "67 St Marys Green",
+      postcode: "NE16 4DN"
+    }
+  },
+  {
+    id: "FA658",
+    companyId: "P569",
+    name: "Dhaliwal Chemist",
+    type: "Community pharmacy",
+    address: {
+      line1: "17 Station Street East",
+      postcode: "CV6 5FL"
+    }
+  },
+  {
+    id: "FD522",
+    companyId: "P569",
+    name: "Selcroft Pharmacy",
+    type: "Community pharmacy",
+    address: {
+      line1: "Selcroft Avenue",
+      postcode: "B32 2BX"
+    }
+  },
+  {
+    id: "FA088",
+    companyId: "P10F",
+    name: "Asda Pharmacy",
+    type: "Community pharmacy",
+    address: {
+      line1: "Crowhurst Road",
+      postcode: "BN1 8AS"
+    }
   }
 ]

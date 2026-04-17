@@ -85,7 +85,7 @@ module.exports = router => {
       // organisation
       vaccinationsRecorded = allVaccinationsRecorded.filter((vaccination)=> vaccination.organisationId === currentOrganisation.id)
 
-      if (sites.length === 0) {
+      if (!sites.length || sites.length === 0) {
         sites = [currentOrganisation]
       }
 

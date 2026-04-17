@@ -6,7 +6,13 @@ module.exports = router => {
     const email = data.email || "jane.smith@nhs.net"
     const user = data.users.find((user) => user.email === email)
 
-    if (!user) {
+    if (email === 'freda.pink@nhs.net') {
+      res.redirect('/auth/user-not-recognised')
+      return
+    } else if (email === 'james.blue@nhs.net') {
+      res.redirect('/auth/keycloak-existing-account-new-login')
+      return
+    } else if (!user) {
       res.redirect('/auth/okta-sign-in')
       return
     }
@@ -37,7 +43,7 @@ module.exports = router => {
       req.session.data.currentUserId = user.id;
       req.session.data.currentOrganisationId = userOrganisationIds[0]
 
-      res.redirect('/survey')
+      res.redirect('/home')
 
     } else if (userRegionIds.length === 1) {
 
@@ -48,8 +54,11 @@ module.exports = router => {
 
     } else if (organisationsUserIsAnAdminAt.length > 1) {
 
-      req.session.data.userId = user.id
-      res.redirect('/auth/select-mode')
+      req.session.data.currentUserId = user.id
+
+      // Skipping the select mode screen for research purposes
+      res.redirect('/auth/select-organisation')
+      // res.redirect('/auth/select-mode')
 
     } else {
 
@@ -73,7 +82,7 @@ module.exports = router => {
       req.session.data.currentUserId = data.userId
 
 
-      res.redirect('/survey')
+      res.redirect('/home')
     } else {
       res.redirect('/auth/select-mode')
     }
@@ -82,15 +91,13 @@ module.exports = router => {
 
   router.get('/auth/select-organisation', (req, res) => {
     const data = req.session.data
-    const email = data.email
-    const user = data.users.find((user) => user.email === email)
+    const user = res.locals.currentUser
     const from = req.query.from
 
     const userOrganisationIds = user.organisations.map((organisation) => organisation.id)
     const organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
 
     res.render('auth/select-organisation', {
-      email,
       organisations,
       from
     })
@@ -98,18 +105,12 @@ module.exports = router => {
   })
 
   router.post('/select-organisation', (req, res) => {
-
-    const data = req.session.data
-    const email = data.email
-    const user = data.users.find((user) => user.email === email)
-
     const selectedOrganisationId = req.session.data.organisationId
 
     if (selectedOrganisationId) {
-      req.session.data.currentUserId = user.id;
       req.session.data.currentOrganisationId = selectedOrganisationId;
 
-      res.redirect('/survey')
+      res.redirect('/home')
     } else {
 
       res.redirect('/auth/select-organisation')

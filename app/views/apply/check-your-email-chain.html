@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Now check your email" %}
+{% set pharmacyChain = data.allOrganisations | findById(data.pharmacyChainId) %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h2 class="nhsuk-heading-l">{{ pageName }}</h2>
+
+      <p>We've created accounts for you and any other lead administrators you added. 
+      <p>This will give you access to Record a vaccination at the {{ data.pharmacyIds | length }} pharmacies you selected.</p>
+
+      <p>You and other lead administrators will now get a welcome email which includes:</p>
+        <ul>
+        <li>how to log in</li>
+        <li>how to add more users to individual pharmacies</li>
+        <li>links to our user guide and drop-in sessions</li>
+        <li>a list of the pharmacies you have signed up</li>
+      </ul>
+
+      <p>If you cannot find the email, check your spam or junk.</p>
+
+      <hr class="nhsuk-section-break nhsuk-section-break--xl nhsuk-section-break--visible">
+
+      <p><a href="/apply/welcome-email-chain">[Go to email inbox]</a></p>
+
+
+    </div>
+  </div>
+{% endblock %}
