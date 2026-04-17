@@ -51,6 +51,9 @@ module.exports = [
   },
   {
     time: "11:10",
+    cancelled: {
+      reason: "patient"
+    },
     patient: {
       nhsNumber: "98357151513",
       firstName: "Lorna",
@@ -124,6 +127,42 @@ module.exports = [
     },
     vaccinations: [
       "COVID-19", "RSV"
+    ]
+  },
+  {
+    time: "12:10",
+    cancelled: {
+      reason: "organisation"
+    },
+    patient: {
+      nhsNumber: "9741851731",
+      firstName: "Charlie",
+      lastName: "Green",
+      dateOfBirth: "1983-06-12",
+      contactDetails: {
+        email: "charlie.green@hotmail.com"
+      }
+    },
+    vaccinations: [
+      "COVID-19"
+    ]
+  },
+  {
+    time: "12:40",
+    cancelled: {
+      reason: "auto"
+    },
+    patient: {
+      nhsNumber: "9951736814",
+      firstName: "Jason",
+      lastName: "White",
+      dateOfBirth: "1998-03-19",
+      contactDetails: {
+        email: "jw225235@gmail.com"
+      }
+    },
+    vaccinations: [
+      "Flu"
     ]
   }
 

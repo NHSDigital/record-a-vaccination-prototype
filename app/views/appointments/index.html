@@ -12,53 +12,12 @@
 
       <p>Imported from <b>Manage your appointments</b>.</p>
 
-      {% set todayContent %}
+      {% set todayHtml %}
+        {% include "appointments/_scheduled.html" %}
+      {% endset %}
 
-      <table class="nhsuk-table-responsive" role="table" data-module="nhsuk-table">
-        <thead class="nhsuk-table__head" role="rowgroup">
-          <tr>
-            <th scope="col" class="nhsuk-table__header" aria-sort="ascending">Time</th>
-            <th scope="col" class="nhsuk-table__header" aria-sort="none">Name</th>
-            <th scope="col" class="nhsuk-table__header">Date of birth</th>
-            <th scope="col" class="nhsuk-table__header">Contact details</th>
-            <th scope="col" class="nhsuk-table__header">Vaccines</th>
-
-            <th scope="col" class="nhsuk-table__header">Action</th>
-
-          </tr>
-        </thead>
-        <tbody class="nhsuk-table__body">
-
-        {% for appointment in data.appointments %}
-          <tr class="nhsuk-table__row" role="row">
-            <td class="nhsuk-table__cell" data-value="{{ appointment.time }}">{{ appointment.time }}&nbsp;am</td>
-            <td class="nhsuk-table__cell">
-              {{ appointment.patient.firstName }}
-              {{ appointment.patient.lastName }}
-            </td>
-            <td class="nhsuk-table__cell">
-              {{ appointment.patient.dateOfBirth | govukDate }}
-            </td>
-            <td class="nhsuk-table__cell nhsuk-u-text-break-word">
-              {% if appointment.patient.contactDetails.mobile %}
-                {{ appointment.patient.contactDetails.mobile }}<br>
-              {% endif %}
-              {% if appointment.patient.contactDetails.email %}
-                <span class="nhsuk-u-font-size-16">{{ appointment.patient.contactDetails.email }}</span><br>
-              {% endif %}
-            </td>
-            <td class="nhsuk-table__cell">
-              {{ appointment.vaccinations | join(", ") }}
-            </td>
-            <td class="nhsuk-table__cell">
-              <a href="/record-vaccinations/patient-history?nhsNumber={{ appointment.patient.nhsNumber }}&dateOfBirth={{ appointment.patient.dateOfBirth }}&firstName={{ appointment.patient.firstName }}&lastName={{ appointment.patient.lastName }}&from=appointments">Record</a>
-            </td>
-
-          </tr>
-
-        {% endfor %}
-        </tbody>
-      </table>
+      {% set cancelledHtml %}
+        {% include "appointments/_cancelled.html" %}
       {% endset %}
 
       {{ tabs({
@@ -67,14 +26,14 @@
           label: "Scheduled",
           id: "scheduled",
           panel: {
-            html: todayContent
+            html: todayHtml
             }
           },
           {
             label: "Cancelled",
             id: "cancelled",
             panel: {
-              html: "TODO"
+              html: cancelledHtml
             }
           },
           {
