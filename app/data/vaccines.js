@@ -232,7 +232,7 @@ module.exports = [
     ]
   },
   {
-    name: "3-in-1 teenage booster",
+    name: "Td/IPV",
     products: [
       {
         name: "Revaxis",
