@@ -1,6 +1,5 @@
 {
   "name": "record-a-vaccination-prototype",
-  "version": "1.0.0",
   "description": "A prototype of the NHS Record a vaccination service.",
   "main": "app.js",
   "scripts": {
