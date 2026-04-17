@@ -9,8 +9,20 @@
     <div class="nhsuk-grid-column-full">
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+      <h2 class="nhsuk-heading-m">17 April 2026</h2>
 
       <p>Imported from <b>Manage your appointments</b>.</p>
+
+      {{ pagination({
+        previous: {
+          labelText: "Yesterday",
+          href: "#"
+        },
+        next: {
+          labelText: "Tomorrow",
+          href: "#"
+        }
+      }) }}
 
       {% set todayHtml %}
         {% include "appointments/_scheduled.html" %}
@@ -20,27 +32,32 @@
         {% include "appointments/_cancelled.html" %}
       {% endset %}
 
+      {% set vaccinationsGivenHtml %}
+        {% include "appointments/_vaccinations_given.html" %}
+      {% endset %}
+
+
       {{ tabs({
         items: [
         {
-          label: "Scheduled",
+          label: "Scheduled (26)",
           id: "scheduled",
           panel: {
             html: todayHtml
             }
           },
           {
-            label: "Cancelled",
+            label: "Cancelled (2)",
             id: "cancelled",
             panel: {
               html: cancelledHtml
             }
           },
           {
-            label: "Vaccinations given",
+            label: "Completed (5)",
             id: "done",
             panel: {
-              html: "TODO"
+              html: vaccinationsGivenHtml
             }
           }
         ]

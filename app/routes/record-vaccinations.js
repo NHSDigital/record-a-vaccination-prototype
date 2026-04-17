@@ -646,6 +646,16 @@ module.exports = router => {
 
     data.lastAddedVaccinationId = generatedId
 
+    // Add the vaccination ID to the appointment so that
+    // we can filter the appointments list by which ones have
+    // been given
+    if (data.appointmentId) {
+      const appointment = data.appointments.find((appointment) => appointment.id == data.appointmentId)
+
+      appointment.vaccinationIds ||= []
+      appointment.vaccinationIds.push(generatedId)
+    }
+
     res.redirect('/record-vaccinations/done')
   })
 
@@ -770,6 +780,19 @@ module.exports = router => {
       req.session.data.vaccineDose = ""
 
       res.redirect('/record-vaccinations/?repeatPatient=no&repeatVaccination=no')
+
+    } else if (answer === 'appointments') {
+
+      req.session.data.vaccine = ""
+      req.session.data.vaccineProduct = ""
+      req.session.data.vaccineBatch = ""
+      req.session.data.eligibility = ""
+      req.session.data.nhsNumber = ""
+      req.session.data.healthcareWorker = ""
+      req.session.data.vaccineDose = ""
+
+      res.redirect('/appointments')
+
     } else {
       res.redirect('/record-vaccinations/done?showErrors=yes')
     }

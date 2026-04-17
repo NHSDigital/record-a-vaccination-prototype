@@ -4,8 +4,8 @@
       <th scope="col" class="nhsuk-table__header" aria-sort="ascending">Time</th>
       <th scope="col" class="nhsuk-table__header" aria-sort="none">Name</th>
       <th scope="col" class="nhsuk-table__header">Date of birth</th>
-      <th scope="col" class="nhsuk-table__header">Contact details</th>
       <th scope="col" class="nhsuk-table__header">Vaccines</th>
+      <th scope="col" class="nhsuk-table__header">Contact details</th>
 
       <th scope="col" class="nhsuk-table__header">Action</th>
 
@@ -24,6 +24,9 @@
         <td class="nhsuk-table__cell">
           {{ appointment.patient.dateOfBirth | govukDate }}
         </td>
+        <td class="nhsuk-table__cell">
+          {{ appointment.vaccinations | join(", ") }}
+        </td>
         <td class="nhsuk-table__cell nhsuk-u-text-break-word">
           {% if appointment.patient.contactDetails.mobile %}
             {{ appointment.patient.contactDetails.mobile }}<br>
@@ -33,10 +36,8 @@
           {% endif %}
         </td>
         <td class="nhsuk-table__cell">
-          {{ appointment.vaccinations | join(", ") }}
-        </td>
-        <td class="nhsuk-table__cell">
-          <a href="/record-vaccinations/patient-history?nhsNumber={{ appointment.patient.nhsNumber }}&dateOfBirth={{ appointment.patient.dateOfBirth }}&firstName={{ appointment.patient.firstName }}&lastName={{ appointment.patient.lastName }}&from=appointments">Record</a>
+          <a href="/record-vaccinations/patient-history?nhsNumber={{ appointment.patient.nhsNumber }}&dateOfBirth={{ appointment.patient.dateOfBirth }}&firstName={{ appointment.patient.firstName }}&lastName={{ appointment.patient.lastName }}&from=appointments&appointmentId={{ appointment.id}}">Record</a>
+          <div class="nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-0"><a href="#">Cancel</a></div>
         </td>
       </tr>
     {% endif %}

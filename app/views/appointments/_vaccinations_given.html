@@ -4,18 +4,15 @@
       <th scope="col" class="nhsuk-table__header" aria-sort="ascending">Time</th>
       <th scope="col" class="nhsuk-table__header" aria-sort="none">Name</th>
       <th scope="col" class="nhsuk-table__header">Date of birth</th>
-      <th scope="col" class="nhsuk-table__header">Vaccines</th>
-
+      <th scope="col" class="nhsuk-table__header">Vaccines given</th>
       <th scope="col" class="nhsuk-table__header">Contact details</th>
-
-      <!-- <th scope="col" class="nhsuk-table__header">Cancelled by</th> -->
 
     </tr>
   </thead>
   <tbody class="nhsuk-table__body">
 
   {% for appointment in data.appointments %}
-    {% if appointment.cancelled %}
+    {% if not appointment.cancelled %}
       <tr class="nhsuk-table__row" role="row">
         <td class="nhsuk-table__cell" data-value="{{ appointment.time }}">{{ appointment.time }}&nbsp;am</td>
         <td class="nhsuk-table__cell">
@@ -26,9 +23,8 @@
           {{ appointment.patient.dateOfBirth | govukDate }}
         </td>
         <td class="nhsuk-table__cell">
-          {{ appointment.vaccinations | join(", ") }}
+          COVID-19, Flu
         </td>
-
         <td class="nhsuk-table__cell nhsuk-u-text-break-word">
           {% if appointment.patient.contactDetails.mobile %}
             {{ appointment.patient.contactDetails.mobile }}<br>
@@ -37,16 +33,8 @@
             <span class="nhsuk-u-font-size-16">{{ appointment.patient.contactDetails.email }}</span><br>
           {% endif %}
         </td>
-        <!-- <td class="nhsuk-table__cell">
-          {% if appointment.cancelled.reason == "patient" %}
-            Patient
-          {% elif appointment.cancelled.reason == "organisation" %}
-            Us
-          {% elif appointment.cancelled.reason == "auto" %}
-            Automatic
-          {% endif %}
-        </td> -->
       </tr>
+
     {% endif %}
   {% endfor %}
   </tbody>
