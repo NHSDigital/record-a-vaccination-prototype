@@ -65,12 +65,12 @@
 
       <ul>
         <li><a href="/errors/500">Sorry, there is a problem with the service (500 error)</a></li>
-        <li><a href="/errors/503">Service unavailable (503 error)</a></li>
+        <li><a href="/errors/503">Sorry, the service is unavailable (503 error)</a></li>
         <li><a href="/errors/rate-limit">Rate limited (429 error)</a></li>
-        <li><a href="/auth/user-not-recognised">User not recognised (after a successful 3rd party login)</a></li>
-        <li><a href="/errors/no-patient-details">We cannot show patient details</a></li>
-        <li><a href="/errors/no-vaccination-history">We cannot show vaccination history</a></li>
-        <li><a href="/errors/partial-vaccination-history">We cannot show some vaccination history</a></li>
+        <li><a href="/auth/user-not-recognised">We cannot find a user with this email (after a successful 3rd party login)</a></li>
+        <li><a href="/errors/no-patient-details">There is a temporary problem getting the patient's details (PDS API issue)</a></li>
+        <li><a href="/errors/still-no-patient-details">There is still a problem getting the patient's details (ongoing PDS API issue)</a></li>
+        <li><a href="/errors/no-vaccination-history">There is a temporary problem getting [patient name]'s vaccination history (history API issue)</a></li>
       </ul>
 
       <h2>Messaging</h2>
