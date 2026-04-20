@@ -287,7 +287,7 @@ module.exports = [
       {name: "MenB", status: "enabled"},
       {name: "6-in-1", status: "enabled"},
       {name: "4-in-1 pre-school booster", status: "enabled"},
-      {name: "3-in-1 teenage booster", status: "enabled"},
+      {name: "Td/IPV", status: "enabled"},
       {name: "MenACWY", status: "enabled"},
       {name: "rotavirus", status: "enabled"},
       {name: "shingles", status: "enabled"}

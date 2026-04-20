@@ -285,7 +285,7 @@ module.exports = [
   },
   {
     id: "RFF326464",
-    vaccine: "3-in-1 teenage booster",
+    vaccine: "Td/IPV",
     vaccineProduct: "Revaxis",
     organisationId: "RFF", // Barnsley Hospital NHS Foundation Trust
     siteId: "RFFPK", // Barnsley General Hospital
