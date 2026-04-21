@@ -1,6 +1,14 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Today’s appointments" %}
+{% if currentDay == today %}
+  {% set pageName = "Today’s appointments" %}
+{% elif nextDay == today %}
+  {% set pageName = "Yesterday’s appointments" %}
+{% elif previousDay == today %}
+  {% set pageName = "Tomorrow’s appointments" %}
+{% else %}
+  {% set pageName = "Appointments" %}
+{% endif %}
 {% set currentSection = "appointments" %}
 
 
@@ -9,18 +17,18 @@
     <div class="nhsuk-grid-column-full">
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
-      <h2 class="nhsuk-heading-m">17 April 2026</h2>
+      <h2 class="nhsuk-heading-m">{{ currentDay | formatDate }}</h2>
 
       <p>Imported from <b>Manage your appointments</b>.</p>
 
       {{ pagination({
         previous: {
-          labelText: "Yesterday",
-          href: "#"
+          labelText: ("Yesterday" if currentDay == today else (previousDay | formatDate)),
+          href: "/appointments?date=" + previousDay
         },
         next: {
-          labelText: "Tomorrow",
-          href: "#"
+          labelText: ("Tomorrow" if currentDay == today else (nextDay | formatDate)),
+          href: "/appointments?date=" + nextDay
         }
       }) }}
 
