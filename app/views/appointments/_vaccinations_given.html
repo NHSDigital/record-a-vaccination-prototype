@@ -11,7 +11,7 @@
   </thead>
   <tbody class="nhsuk-table__body">
 
-  {% for appointment in data.appointments %}
+  {% for appointment in appointments %}
     {% if not appointment.cancelled %}
       <tr class="nhsuk-table__row" role="row">
         <td class="nhsuk-table__cell" data-value="{{ appointment.time }}">{{ appointment.time }}&nbsp;am</td>
