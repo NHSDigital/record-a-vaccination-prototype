@@ -36,7 +36,9 @@
       </td>
       <td class="nhsuk-table__cell">
         <a href="/record-vaccinations/patient-history?nhsNumber={{ appointment.patient.nhsNumber }}&dateOfBirth={{ appointment.patient.dateOfBirth }}&firstName={{ appointment.patient.firstName }}&lastName={{ appointment.patient.lastName }}&from=appointments&appointmentId={{ appointment.id}}">Record</a>
-        <div class="nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-0"><a href="#">Cancel</a></div>
+        {% if currentDay >= today %}
+          <div class="nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-0"><a href="#">Cancel</a></div>
+        {% endif %}
       </td>
     </tr>
   {% endfor %}

@@ -3,6 +3,7 @@ module.exports = [
 
   {
     id: "163473464363",
+    date: "today",
     time: "10:00",
     patient: {
       nhsNumber: "9123123123",
@@ -21,6 +22,7 @@ module.exports = [
   },
   {
     id: "923532535",
+    date: "today",
     time: "10:30",
     patient: {
       nhsNumber: "9841414141",
@@ -38,6 +40,7 @@ module.exports = [
   },
   {
     id: "2364364369",
+    date: "today",
     time: "10:40",
     patient: {
       nhsNumber: "9841515715",
@@ -54,6 +57,7 @@ module.exports = [
   },
   {
     id: "3026352592",
+    date: "today",
     time: "11:10",
     cancelled: {
       reason: "patient"
@@ -73,6 +77,7 @@ module.exports = [
   },
   {
     id: "410059235",
+    date: "today",
     time: "11:20",
     patient: {
       nhsNumber: "9847471413",
@@ -89,6 +94,7 @@ module.exports = [
   },
   {
     id: "5019581446",
+    date: "today",
     time: "11:30",
     patient: {
       nhsNumber: "9841411411",
@@ -105,6 +111,7 @@ module.exports = [
   },
   {
     id: "69263464",
+    date: "today",
     time: "11:40",
     patient: {
       nhsNumber: "9841411411",
@@ -122,6 +129,7 @@ module.exports = [
   },
   {
     id: "7692855825",
+    date: "today",
     time: "11:50",
     patient: {
       nhsNumber: "9917425141",
@@ -139,6 +147,7 @@ module.exports = [
   },
   {
     id: "8928558275",
+    date: "today",
     time: "12:10",
     cancelled: {
       reason: "organisation"
@@ -158,6 +167,7 @@ module.exports = [
   },
   {
     id: "9255253581",
+    date: "today",
     time: "12:40",
     cancelled: {
       reason: "auto"
@@ -169,6 +179,40 @@ module.exports = [
       dateOfBirth: "1998-03-19",
       contactDetails: {
         email: "jw225235@gmail.com"
+      }
+    },
+    vaccinations: [
+      "Flu"
+    ]
+  },
+  {
+    id: "634633242",
+    date: "yesterday",
+    time: "11:20",
+    patient: {
+      nhsNumber: "9918571751",
+      firstName: "Danny",
+      lastName: "Green",
+      dateOfBirth: "1998-03-19",
+      contactDetails: {
+        email: "dgreen@gmail.com"
+      }
+    },
+    vaccinations: [
+      "Flu"
+    ]
+  },
+  {
+    id: "64639185885",
+    date: "tomorrow",
+    time: "11:20",
+    patient: {
+      nhsNumber: "9017474141",
+      firstName: "Mohammed",
+      lastName: "Khan",
+      dateOfBirth: "1993-01-23",
+      contactDetails: {
+        email: "mk25325@gmail.com"
       }
     },
     vaccinations: [
