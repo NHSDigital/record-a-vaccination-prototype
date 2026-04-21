@@ -32,7 +32,7 @@
             {{ appointment.patient.contactDetails.mobile }}<br>
           {% endif %}
           {% if appointment.patient.contactDetails.email %}
-            <span class="nhsuk-u-font-size-16">{{ appointment.patient.contactDetails.email }}</span><br>
+            {{ appointment.patient.contactDetails.email }}<br>
           {% endif %}
         </td>
         <td class="nhsuk-table__cell">
