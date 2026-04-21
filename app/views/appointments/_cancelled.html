@@ -14,40 +14,38 @@
   </thead>
   <tbody class="nhsuk-table__body">
 
-  {% for appointment in appointments %}
-    {% if appointment.cancelled %}
-      <tr class="nhsuk-table__row" role="row">
-        <td class="nhsuk-table__cell" data-value="{{ appointment.time }}">{{ appointment.time }}&nbsp;am</td>
-        <td class="nhsuk-table__cell">
-          {{ appointment.patient.firstName }}
-          {{ appointment.patient.lastName }}
-        </td>
-        <td class="nhsuk-table__cell">
-          {{ appointment.patient.dateOfBirth | govukDate }}
-        </td>
-        <td class="nhsuk-table__cell">
-          {{ appointment.vaccinations | join(", ") }}
-        </td>
+  {% for appointment in cancelledAppointments %}
+    <tr class="nhsuk-table__row" role="row">
+      <td class="nhsuk-table__cell" data-value="{{ appointment.time }}">{{ appointment.time }}&nbsp;am</td>
+      <td class="nhsuk-table__cell">
+        {{ appointment.patient.firstName }}
+        {{ appointment.patient.lastName }}
+      </td>
+      <td class="nhsuk-table__cell">
+        {{ appointment.patient.dateOfBirth | govukDate }}
+      </td>
+      <td class="nhsuk-table__cell">
+        {{ appointment.vaccinations | join(", ") }}
+      </td>
 
-        <td class="nhsuk-table__cell nhsuk-u-text-break-word">
-          {% if appointment.patient.contactDetails.mobile %}
-            {{ appointment.patient.contactDetails.mobile }}<br>
-          {% endif %}
-          {% if appointment.patient.contactDetails.email %}
-            <span class="nhsuk-u-font-size-16">{{ appointment.patient.contactDetails.email }}</span><br>
-          {% endif %}
-        </td>
-        <!-- <td class="nhsuk-table__cell">
-          {% if appointment.cancelled.reason == "patient" %}
-            Patient
-          {% elif appointment.cancelled.reason == "organisation" %}
-            Us
-          {% elif appointment.cancelled.reason == "auto" %}
-            Automatic
-          {% endif %}
-        </td> -->
-      </tr>
-    {% endif %}
+      <td class="nhsuk-table__cell nhsuk-u-text-break-word">
+        {% if appointment.patient.contactDetails.mobile %}
+          {{ appointment.patient.contactDetails.mobile }}<br>
+        {% endif %}
+        {% if appointment.patient.contactDetails.email %}
+          {{ appointment.patient.contactDetails.email }}<br>
+        {% endif %}
+      </td>
+      <!-- <td class="nhsuk-table__cell">
+        {% if appointment.cancelled.reason == "patient" %}
+          Patient
+        {% elif appointment.cancelled.reason == "organisation" %}
+          Us
+        {% elif appointment.cancelled.reason == "auto" %}
+          Automatic
+        {% endif %}
+      </td> -->
+    </tr>
   {% endfor %}
   </tbody>
 </table>

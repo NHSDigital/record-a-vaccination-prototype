@@ -40,21 +40,21 @@
       {{ tabs({
         items: [
         {
-          label: "Scheduled (26)",
+          label: "Scheduled (" + (scheduledAppointments | length) + ")",
           id: "scheduled",
           panel: {
             html: todayHtml
             }
           },
           {
-            label: "Cancelled (2)",
+            label: "Cancelled (" + (cancelledAppointments | length) + ")",
             id: "cancelled",
             panel: {
               html: cancelledHtml
             }
           },
           {
-            label: "Completed (5)",
+            label: "Completed (" + (completedAppointments | length) + ")",
             id: "done",
             panel: {
               html: vaccinationsGivenHtml

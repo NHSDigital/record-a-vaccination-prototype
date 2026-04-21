@@ -5,8 +5,16 @@ module.exports = (router) => {
 
     const appointments = data.appointments
 
+    const scheduledAppointments = appointments.filter((appointment) => !appointment.cancelled && (appointment.vaccinationIds || []).length === 0)
+
+    const cancelledAppointments = appointments.filter((appointment) => appointment.cancelled)
+
+    const completedAppointments = appointments.filter((appointment) => (appointment.vaccinationIds || []).length > 0)
+
     res.render('appointments/index', {
-      appointments
+      scheduledAppointments,
+      cancelledAppointments,
+      completedAppointments
     })
   })
 }
