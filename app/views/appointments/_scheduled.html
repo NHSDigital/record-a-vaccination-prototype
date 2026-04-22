@@ -24,7 +24,7 @@
         {{ appointment.patient.dateOfBirth | govukDate }}
       </td>
       <td class="nhsuk-table__cell">
-        {{ appointment.vaccinations | join(", ") }}
+        {{ appointment.vaccinations | join("<br>") | safe }}
       </td>
       <td class="nhsuk-table__cell nhsuk-u-text-break-word">
         {% if appointment.patient.contactDetails.mobile %}

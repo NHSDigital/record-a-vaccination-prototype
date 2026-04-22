@@ -61,6 +61,7 @@
       <h1 class="nhsuk-heading-l">Check and confirm</h1>
 
       <h2 class="nhsuk-heading-m">Patient</h2>
+
       {{ summaryList({
         rows: [
           {
@@ -85,7 +86,7 @@
               text: "Date of birth"
             },
             value: {
-              html: (data.dateOfBirth | isoDateFromDateInput | govukDate) + "<br>(76 years old)"
+              html: (data.dateOfBirth | formatDate) + "<br>(76 years old)"
             },
             actions: {
               items: [

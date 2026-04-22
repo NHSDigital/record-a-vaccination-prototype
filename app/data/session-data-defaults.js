@@ -17,8 +17,8 @@ module.exports = {
   appointments: appointments,
   lists: [],
   nhsNumberKnown: "yes",
-  currentUserId: "2387441662601",
-  currentOrganisationId: "RW3",
+  currentUserId: "46436346", // Jeremy Blue
+  currentOrganisationId: "FA424", // Pickfords Pharmacy
   vaccinationsRecorded: vaccinationsRecorded,
 
   // These are the options for extracting CSV reports

@@ -55,19 +55,19 @@
             }
           },
           {
-            label: "Cancelled (" + (cancelledAppointments | length) + ")",
-            id: "cancelled",
-            panel: {
-              html: cancelledHtml
-            }
-          },
-          {
             label: "Completed (" + (completedAppointments | length) + ")",
             id: "done",
             panel: {
               html: vaccinationsGivenHtml
             }
-          } if currentDay <= today
+          } if currentDay <= today,
+          {
+            label: "Cancelled (" + (cancelledAppointments | length) + ")",
+            id: "cancelled",
+            panel: {
+              html: cancelledHtml
+            }
+          }
         ]
       }) }}
 

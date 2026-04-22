@@ -53,12 +53,33 @@ module.exports = router => {
     })
   })
 
+  router.get('/record-vaccinations/vaccination-date', (req, res) => {
+
+    const data = req.session.data
+    const appointmentId = data.appointmentId
+
+    if (appointmentId) {
+      const appointment = data.appointments.find((appointment) => appointment.id === appointmentId)
+
+      if (appointment.date === "today") {
+        // Set vaccination date to today and skip question
+        req.session.data.vaccinationToday = "yes"
+        return res.redirect('/record-vaccinations/delivery-team')
+
+      }
+    }
+
+    res.render('record-vaccinations/vaccination-date')
+  })
+
   router.post('/record-vaccinations/answer-date', (req, res) => {
     const data = req.session.data
 
     if (!data.vaccinationToday) {
       return res.redirect('/record-vaccinations/?showErrors=yes')
     }
+
+
     res.redirect('/record-vaccinations/delivery-team')
   })
 
@@ -72,6 +93,12 @@ module.exports = router => {
 
     const sitesInUse = currentOrganisation.sites.filter((site) => siteIdsWithVaccines.includes(site.id))
 
+    // If there’s only 1 site set up (eg a pharmacy), then
+    // set that and skip this question.
+    if (sitesInUse.length === 1) {
+      data.siteId = sitesInUse[0].id
+      return res.redirect('/record-vaccinations/vaccinator')
+    }
 
     if (req.query.showErrors === "yes") {
       if (!req.session.data.siteId) {
@@ -617,6 +644,7 @@ module.exports = router => {
     const yearToday = (dateToday.getFullYear())
 
     if (data.vaccinationToday === 'yes') {
+      data.vaccinationDate = {}
       data.vaccinationDate.day = String(dayToday)
       data.vaccinationDate.month = String(monthToday)
       data.vaccinationDate.year = String(yearToday)
@@ -742,6 +770,7 @@ module.exports = router => {
       data.consentAdvocateName = ""
       data.consentDeputyName = ""
       data.doseAmount = ""
+      data.appointmentId = ""
     }
 
     if (answer === 'same-vaccination-another-patient') {
@@ -790,6 +819,8 @@ module.exports = router => {
       req.session.data.nhsNumber = ""
       req.session.data.healthcareWorker = ""
       req.session.data.vaccineDose = ""
+      req.session.data.vaccinationToday = ""
+      req.session.data.vaccinatorId = ""
 
       res.redirect('/appointments')
 
