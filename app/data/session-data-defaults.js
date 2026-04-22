@@ -26,31 +26,10 @@ module.exports = {
   staffDataOptions: ["Recorder", "Vaccinator"],
   locationDataOptions: ["Site name", "Site ODS code", "Location type"],
   consentAndEligibilityDataOptions: ["Consent", "Eligibility", "Estimated due date"],
-  vaccinationDataOptions: ["Vaccine type", "Product", "Batch", "Batch expiry date", "Dose amount", "Vaccination site", "Vaccination date", "Legal mechanism", "Comments"],
+  vaccinationDataOptions: ["Vaccine type", "Product", "Batch", "Batch expiry date", "Dose amount", "Vaccination site", "Vaccination date", "Comments"],
   paymentDataOptions: [
     {text: "Deposit ID", hint: "Set before we send the claim to NHSBSA"},
     {text: "Claim ID", hint: "Set when NHSBSA have received the claim"}
-  ],
-
-  legalMechanisms: [
-    {
-      value: "National protocol",
-      text: "National protocol"
-    },
-    {
-      value: "Patient group direction",
-      text: "Patient group direction (PGD)"
-    },
-    {
-      value: "Patient specific direction",
-      text: "Patient specific direction (PSD)"
-    },
-    {
-      value: "Written instruction",
-      text: "Written instruction",
-      hint: {
-        text: "Occupational health only"
-      }
-    }
   ]
+
 }
