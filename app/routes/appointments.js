@@ -28,6 +28,12 @@ module.exports = (router) => {
 
     const completedAppointments = appointments.filter((appointment) => (appointment.vaccinationIds || []).length > 0)
 
+    let vaccinators = []
+
+    if (data.vaccinatorIds) {
+      vaccinators = data.users.filter((user) => data.vaccinatorIds.includes(user.id))
+    }
+
 
     res.render('appointments/index', {
       scheduledAppointments,
@@ -36,7 +42,37 @@ module.exports = (router) => {
       today,
       currentDay,
       previousDay,
-      nextDay
+      nextDay,
+      vaccinators
     })
   })
+
+
+  router.get('/appointments/vaccinators', (req, res) => {
+    const data = req.session.data
+
+    let otherVaccinators = data.users
+    .filter((user) => {
+      const userOrgnisationSetting = (user.organisations || []).find((organisation) => organisation.id === data.currentOrganisationId)
+
+      return (user.id != data.currentUserId) && userOrgnisationSetting && userOrgnisationSetting.vaccinator && (userOrgnisationSetting.status === "Active")
+    })
+    .sort((a, b) => {
+      const nameA = a.firstName.toUpperCase(); // ignore upper and lowercase
+      const nameB = b.firstName.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    })
+
+    res.render('appointments/vaccinators', {
+      otherVaccinators
+    })
+
+  })
 }
+

@@ -154,6 +154,14 @@ module.exports = router => {
       }
     }
 
+    // If we’re recording a vaccination from today’s appointments, and there’s
+    // only 1 vaccinator set as present, then set them as the vaccinator
+    // and skip the question.
+    if (data.appointmentId && Array.isArray(data.vaccinatorIds) && data.vaccinatorIds.length == 1) {
+      req.session.data.vaccinatorId = data.vaccinatorIds[0]
+      return res.redirect('/record-vaccinations/vaccine')
+    }
+
     res.render('record-vaccinations/vaccinator', {
       vaccinatorError,
       otherVaccinators

@@ -14,12 +14,56 @@
 
 {% block content %}
   <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-full">
+    <div class="nhsuk-grid-column-two-thirds">
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
       <h2 class="nhsuk-heading-m">{{ currentDay | formatDate }}</h2>
 
       <p>Imported from <b>Manage your appointments</b>.</p>
+
+      {% if currentDay == today %}
+
+      {% set vaccinatorHtml %}
+        {% if (vaccinators | length) > 1  %}
+          <ul class="nhsuk-list">
+            {% for vaccinator in vaccinators %}
+              <li>{{ vaccinator.firstName }} {{ vaccinator.lastName }}</li>
+            {% endfor %}
+          </ul>
+        {% elif (vaccinators | length) == 1 %}
+          {{ (vaccinators | first).firstName }} {{ (vaccinators | first).lastName }}
+        {% else %}
+          <a href="/appointments/vaccinators" class="nhsuk-link">Set today’s vaccinator</a>
+        {% endif %}
+      {% endset %}
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: ("Vaccinators" if (vaccinators | length) > 1 else "Vaccinator")
+            },
+            value: {
+              html: vaccinatorHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: "/appointments/vaccinators",
+                  text: "Change",
+                  visuallyHiddenText: "vaccinator"
+                }
+              ]
+            } if data.vaccinatorIds
+          }
+        ]
+        }) }}
+      {% endif %}
+
+    </div>
+  </div>
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
 
       {{ pagination({
         previous: {
