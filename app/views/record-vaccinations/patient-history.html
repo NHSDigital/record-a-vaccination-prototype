@@ -106,7 +106,16 @@
 
       <h2 class="nhsuk-heading-m">Vaccination history</h2>
 
-      <p>This shows NHS vaccinations given in England. Currently it includes COVID-19, flu and RSV, plus some pertussis, pneumococcal and MMR vaccination records.</p>
+
+{% set insetTextHtml %}
+  <p>This shows NHS vaccinations given in England. It includes all vaccinations recorded in RAVS but only some recorded in other systems.</p>
+
+{% endset %}
+
+{{ insetText({
+  html: insetTextHtml,
+  classes: "nhsuk-u-padding-top-2 nhsuk-u-padding-bottom-2 nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-4"
+}) }}
 
     </div>
   </div>
