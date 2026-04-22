@@ -408,25 +408,6 @@ module.exports = router => {
 
   })
 
-  router.get('/record-vaccinations/legal-mechanism', (req, res) => {
-    const data = req.session.data
-
-    const vaccine = data.vaccineStock.find(function(batch) {
-      return (batch.vaccineProduct === data.vaccineProduct) &&
-        (batch.vaccine === data.vaccine)
-    })
-    if (!vaccine) { res.redirect('/record-vaccinations'); return }
-
-    const allLegalMechanisms = data.legalMechanisms
-
-    const legalMechanisms = allLegalMechanisms
-
-    res.render('record-vaccinations/legal-mechanism', {
-      legalMechanisms
-    })
-
-  })
-
   router.get('/record-vaccinations/patient-estimated-due-date', (req, res) => {
 
     const showError = req.query.showError
@@ -1023,24 +1004,6 @@ module.exports = router => {
     res.render('record-vaccinations/consent', {
       errors, consentError, consentClinicianError, consentAttorneyError, consentParentError, consentAdvocateError, consentDeputyError, consentAttorneyRelationshipError, consentDeputyRelationshipError
     })
-  })
-
-  router.post('/record-vaccinations/answer-legal-mechanism', (req, res) => {
-    const data = req.session.data
-
-    if (!data.legalMechanism) {
-
-      const legalMechanismError = {
-        text: "Select legal mechanism",
-        href: "#legal-mechanism"
-      }
-
-      res.render('record-vaccinations/legal-mechanism', {
-        legalMechanismError
-      })
-    } else {
-      res.redirect('/record-vaccinations/eligibility')
-    }
   })
 
   router.post('/record-vaccinations/answer-consent', (req, res) => {
