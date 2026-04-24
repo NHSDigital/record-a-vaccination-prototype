@@ -50,9 +50,8 @@ module.exports = router => {
       res.redirect('/regions')
 
     } else if (organisationsUserIsAnAdminAt.length > 1) {
-
-      req.session.data.currentUserId = user.id
-
+      // They are an admin at 2 or more organisations, so
+      // ask them to select mode (single org or report mode)
       res.redirect('/auth/select-mode')
 
     } else {
@@ -88,7 +87,9 @@ module.exports = router => {
 
   router.get('/auth/select-organisation', (req, res) => {
     const data = req.session.data
-    const user = res.locals.currentUser
+
+    const email = data.email
+    const user = data.users.find((user) => user.email === email)
     const from = req.query.from
 
     const userOrganisationIds = user.organisations.map((organisation) => organisation.id)
@@ -102,9 +103,13 @@ module.exports = router => {
   })
 
   router.post('/select-organisation', (req, res) => {
-    const selectedOrganisationId = req.session.data.organisationId
+    const data = req.session.data
+    const selectedOrganisationId = data.organisationId
+    const email = data.email
+    const user = data.users.find((user) => user.email === email)
 
     if (selectedOrganisationId) {
+      req.session.data.currentUserId = user.id
       req.session.data.currentOrganisationId = selectedOrganisationId;
 
       res.redirect('/home')
