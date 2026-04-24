@@ -63,6 +63,15 @@ module.exports = router => {
     })
   })
 
+  router.get('/pharmacies/add-lead-admins',(req, res) => {
+    const data = req.session.data
+    const users = data.users.slice(10, 20)
+
+    res.render('pharmacies/add-lead-admins', {
+      users
+    })
+  })
+
   router.get('/pharmacies/users/:id',(req, res) => {
     const data = req.session.data
     const id = req.params.id

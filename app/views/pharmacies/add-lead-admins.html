@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies" %}
+{% set pageName = "Add lead administrators" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/check-selection"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p>Who do you want to get be a lead administrator on RAVS for all {{ data.pharmacyIds | length }} pharmacies?</p>
+
+      {% set items = [] %}
+
+      {% set items = (items.push({
+        text: "Me (" + currentUser.firstName + " " + currentUser.lastName + ")",
+        value: user.id
+      }), items) %}
+
+      {% for user in (users | sort(false, false, "firstName")) %}
+        {% set items = (items.push({
+          text: user.firstName + " " + user.lastName,
+          value: user.id
+        }), items) %}
+      {% endfor %}
+
+      {% set items = (items.push({
+        divider: "or"
+      }), items) %}
+
+      {% set items = (items.push({
+        text: "No one, I’ll add lead administrators later",
+        value: "",
+        exclusive: true
+      }), items) %}
+
+      {{ checkboxes({
+        fieldset: {
+          legend: {
+            text: "Users",
+            size: "m"
+          }
+        },
+        items: items
+      }) }}
+
+      {{ button({
+        text: "Continue"
+      }) }}
+
+
+    </div>
+  </div>
+{% endblock %}
