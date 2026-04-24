@@ -14,7 +14,7 @@
     <div class="nhsuk-grid-column-two-thirds">
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <form data-module="app-add-another" action="" method="post">
+      <form data-module="app-add-another" data-add-another-min="0" action="" method="post">
 
       <p>Who do you want to assign as lead administrators for all {{ data.pharmacyIds | length }} pharmacies?</p>
 
@@ -97,23 +97,13 @@
       }) }}
 
       <div>
-      {{ button({
-        id: "add-lead-admin",
-        text: "Add a new lead administrator",
-        type: "button",
-        classes: "nhsuk-button--secondary",
-        attributes: {
-          "data-add-another-add": "true"
-        }
-      }) }}
-      </div>
-<!--
+      
       {# Ordinal suffixes for numbers 1-10 #}
       {% set ordinals = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th'] %}
 
       {% for index in range(0, 10) %}
         <div id="lead-administrator-{{ index + 1 }}" data-add-another-item="{{ index + 1 }}">
-          <h2 class="nhsuk-heading-m">{{ ordinals[index] }} lead administrator</h2>
+          <h2 class="nhsuk-heading-m">{{ ordinals[index] }} new lead administrator</h2>
 
           <div hidden>
             {{ button({
@@ -165,14 +155,16 @@
       <div class="nhsuk-button-group" id="add-another-wrapper" hidden>
         {{ button({
           id: "add-lead-admin",
-          text: "Add another lead administrator",
+          text: "Add a new lead administrator",
           type: "button",
           classes: "nhsuk-button--secondary",
           attributes: {
-            "data-add-another-add": "true"
+            "data-add-another-add": "true",
+            "data-add-another-text-first": "Add a new lead administrator",
+            "data-add-another-text-another": "Add another new lead administrator"
           }
         }) }}
-      </div> -->
+      </div>
 
 
       {{ button({

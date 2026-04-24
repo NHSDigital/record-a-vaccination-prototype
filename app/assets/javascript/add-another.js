@@ -14,6 +14,7 @@ import { Component } from 'nhsuk-frontend'
  * - Add `data-add-another-item="N"` to each item section (where N is the item index: 1, 2, 3, etc.)
  * - Add `data-add-another-add` to the "Add another" button (hidden by default)
  * - Add `data-add-another-remove="N"` to the "Remove" button within each section (hidden by default)
+ * - Optionally add `data-add-another-min="0"` to allow starting with no items visible (default is 1)
  *
  * @augments Component<HTMLElement>
  */
@@ -29,11 +30,13 @@ export class AddAnother extends Component {
     this.$items = Array.from(this.$root.querySelectorAll('[data-add-another-item]'))
     this.$addButton = this.$root.querySelector('[data-add-another-add]')
     this.$addButtonWrapper = this.$addButton?.closest('.nhsuk-button-group')
+    this.minItems = parseInt(this.$root.dataset.addAnotherMin ?? '1', 10)
 
     this.initializeItemVisibility()
     this.setupAddButton()
     this.setupRemoveButtons()
     this.updateAddButtonVisibility()
+    this.updateAddButtonText()
     this.updateRemoveButtonVisibility()
   }
 
@@ -71,17 +74,18 @@ export class AddAnother extends Component {
    */
   initializeItemVisibility() {
     // Find the last item with values
-    let lastFilledIndex = 0
+    let lastFilledIndex = -1
     this.$items.forEach(($item, index) => {
       if (this.hasInputValues($item)) {
         lastFilledIndex = index
       }
     })
 
-    // Show items up to and including the last filled one (minimum 1)
+    // Show items up to and including the last filled one (respecting minItems)
     // Hide all items after that
+    const minVisibleIndex = this.minItems - 1
     this.$items.forEach(($item, index) => {
-      if (index <= lastFilledIndex) {
+      if (index <= lastFilledIndex || index <= minVisibleIndex) {
         $item.hidden = false
       } else {
         $item.hidden = true
@@ -152,6 +156,7 @@ export class AddAnother extends Component {
     }
 
     this.updateAddButtonVisibility()
+    this.updateAddButtonText()
     this.updateRemoveButtonVisibility()
   }
 
@@ -163,8 +168,8 @@ export class AddAnother extends Component {
   removeItem(index) {
     const visibleItems = this.getVisibleItems()
 
-    // Don't remove if only one item is visible
-    if (visibleItems.length <= 1) {
+    // Don't remove if at minimum items
+    if (visibleItems.length <= this.minItems) {
       return
     }
 
@@ -187,16 +192,34 @@ export class AddAnother extends Component {
     }
 
     this.updateAddButtonVisibility()
+    this.updateAddButtonText()
     this.updateRemoveButtonVisibility()
   }
 
   /**
+   * Update the add button text based on number of visible items
+   * Uses data-add-another-text-first for the first item,
+   * data-add-another-text-another for subsequent items
+   */
+  updateAddButtonText() {
+    if (!this.$addButton) return
+
+    const firstText = this.$addButton.dataset.addAnotherTextFirst
+    const anotherText = this.$addButton.dataset.addAnotherTextAnother
+
+    if (!firstText || !anotherText) return
+
+    const visibleItems = this.getVisibleItems()
+    this.$addButton.textContent = visibleItems.length === 0 ? firstText : anotherText
+  }
+
+  /**
    * Update visibility of remove buttons based on number of visible items
-   * Remove buttons should only be visible when there are 2+ items
+   * Remove buttons should only be visible when there are more than minItems
    */
   updateRemoveButtonVisibility() {
     const visibleItems = this.getVisibleItems()
-    const showRemoveButtons = visibleItems.length >= 2
+    const showRemoveButtons = visibleItems.length > this.minItems
 
     this.$items.forEach($item => {
       const $removeButton = $item.querySelector('[data-add-another-remove]')
