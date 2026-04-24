@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-three-quarters">
+
+      <h1 class="nhsuk-heading-l">Pharmacies</h1>
+
+      <p>Add a new pharmacy or manage an existing pharmacy.</p>
+
+      {{ button({
+        text: "Add pharmacy",
+        href: "/pharmacies/select"
+      }) }}
+
+      <table class="nhsuk-table">
+        <caption class="nhsuk-table__caption nhsuk-table__caption--m">Current pharmacies</caption>
+        <thead role="rowgroup" class="nhsuk-table__head">
+          <tr role="row">
+            <th role="columnheader" class="" scope="col">
+              Name
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Vaccines
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Users
+            </th>
+            <th role="columnheader" class="" scope="col"></th>
+
+          </tr>
+        </thead>
+        <tbody class="nhsuk-table__body">
+          {% for organisation in organisations %}
+            <tr role="row" class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">
+                <a href="/pharmacies/{{ organisation.id }}">{{ organisation.name }} ({{ organisation.id}})</a>
+              </td>
+              <td class="nhsuk-table__cell ">
+                COVID-19
+              </td>
+              <td class="nhsuk-table__cell ">
+                1
+              </td>
+              <td class="nhsuk-table__cell ">
+                <a href="#">Deactivate</a>
+              </td>
+            </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,186 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <form action="/pharmacies/check-selection" method="post">
+
+      {% set items = [] %}
+
+      {% for pharmacy in pharmacies %}
+        {% set items = (items.push({
+          text: pharmacy.name + ", " + pharmacy.address.postcode + " (" + pharmacy.id + ")",
+          value: pharmacy.id
+        }), items) %}
+      {% endfor %}
+
+
+      {% call fieldset({
+        legend: {
+          text: "Select pharmacies",
+          size: "l",
+          classes: "nhsuk-u-margin-bottom-5"
+        }
+      }) %}
+
+      {% if (pharmacies | length) > 1 %}
+        {{ checkboxes({
+          idPrefix: "pharmacy-select-all",
+          name: "pharmacyIds",
+          values: data.pharmacyIds,
+          formGroup: {
+            classes: "nhsuk-u-margin-bottom-2"
+          },
+          items: [
+            {
+              text: "Select all " + (pharmacies | length),
+              value: "",
+              attributes: {
+                "data-select-all": "true"
+              }
+            },
+            {
+              divider: "or"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      {% if (pharmacies | length) > 20 %}
+        {{ input({
+          id: "pharmacy-search",
+          name: "pharmacySearch",
+          type: "search",
+          label: {
+            text: "Search"
+          },
+          classes: "nhsuk-input--width-20",
+          attributes: {
+            "data-module": "app-filter-checkboxes"
+          },
+          formGroup: {
+            classes: "nhsuk-u-margin-bottom-4"
+          }
+        }) }}
+      {% endif %}
+
+
+      <div class="app-checkboxes--scrollable-container">
+        {{ checkboxes({
+          id: "pharmacy-ids",
+          name: "pharmacyIds",
+          values: data.pharmacyIds,
+          items: items
+        }) }}
+      </div>
+
+      {% endcall %}
+
+
+      {{ button({
+        text: "Continue"
+      }) }}
+
+      </form>
+    </div>
+  </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // Checkbox count functionality
+      const countDisplay = document.querySelector('[data-module="app-checkboxes-count"]');
+
+      function updateCheckboxCount() {
+        if (!countDisplay) return;
+        const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked:not([data-select-all])').length;
+        countDisplay.textContent = `${checkedCount} pharmacies selected`;
+      }
+
+      if (countDisplay) {
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+          cb.addEventListener('change', updateCheckboxCount);
+        });
+        updateCheckboxCount();
+      }
+
+
+      // Filter checkboxes functionality
+      const searchInput = document.querySelector('input[data-module="app-filter-checkboxes"]');
+      const checkboxItems = document.querySelectorAll('.nhsuk-checkboxes__item');
+
+      function filterCheckboxes() {
+        const searchTerm = searchInput ? searchInput.value.toLowerCase().trim().replace(/[.()]/g, '') : '';
+        const searchWords = searchTerm.split(/\s+/).filter(word => word.length > 0);
+
+        checkboxItems.forEach(item => {
+          console.log(item)
+          const label = item.querySelector('.nhsuk-checkboxes__label');
+          const checkbox = item.querySelector('.nhsuk-checkboxes__input');
+
+          if (!label || !checkbox) return;
+
+          // Skip if it's the select all checkbox
+          if (checkbox.hasAttribute('data-select-all')) return;
+
+          const labelText = label.textContent.toLowerCase().replace(/[.()]/g, '');
+          const labelWords = labelText.split(/\s+/);
+          const matches = searchWords.length === 0 || searchWords.every(searchWord =>
+            labelWords.some(labelWord => labelWord.startsWith(searchWord))
+          );
+          const isChecked = checkbox.checked;
+
+          // Show if matches OR if checked
+          if (matches || isChecked) {
+            item.removeAttribute('hidden');
+          } else {
+            item.setAttribute('hidden', '');
+          }
+        });
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', filterCheckboxes);
+      }
+
+      // Select all checkbox
+      const selectAllCheckbox = document.querySelector('input[data-select-all]');
+
+      // All row checkboxes (checkboxes without select-all attribute)
+      const otherCheckboxes = Array.from(
+        document.querySelectorAll('input[type="checkbox"]:not([data-select-all])')
+      );
+
+      // Click on header toggles all rows
+      selectAllCheckbox.addEventListener('change', () => {
+
+        otherCheckboxes.forEach(cb => {
+          cb.checked = selectAllCheckbox.checked;
+        });
+        filterCheckboxes();
+        updateCheckboxCount();
+      });
+
+      // Click on rows updates header state
+      otherCheckboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+          const allChecked = otherCheckboxes.every(c => c.checked);
+          const noneChecked = otherCheckboxes.every(c => !c.checked);
+
+          selectAllCheckbox.checked = allChecked;
+          selectAllCheckbox.indeterminate = !allChecked && !noneChecked;
+        });
+      });
+    });
+  </script>
+
+
+{% endblock %}
