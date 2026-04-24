@@ -83,6 +83,18 @@ module.exports = router => {
   })
 
 
+  router.get('/pharmacies/:id/add-users',(req, res) => {
+    const data = req.session.data
+    const users = data.users.slice(10, 20)
+    const id = req.params.id
+    const organisation = data.organisations.find((organisation) => organisation.id === id)
+
+    res.render('pharmacies/add-users', {
+      users,
+      organisation
+    })
+  })
+
   router.get('/pharmacies/:id', (req, res) => {
     const data = req.session.data
     const id = req.params.id
