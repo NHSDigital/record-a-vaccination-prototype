@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% set currentSection = "pharmacies" %}
+{% set pageName = "Add pharmacies" %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -12,6 +13,13 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
       <form action="/pharmacies/check-selection" method="post">
+
+      <h1>{{ pageName }}</h1>
+
+      <p>There are {{ (pharmacies | length) + 7 }} active pharmacies in your company according to the <a href="https://digital.nhs.uk/services/organisation-data-service">NHS Organisation Data Service</a> (ODS).</p>
+
+      <p>{{ (pharmacies | length) }} of them are not yet using RAVS and can be added below.</p>
+
 
       {% set items = [] %}
 
@@ -26,7 +34,7 @@
       {% call fieldset({
         legend: {
           text: "Select pharmacies",
-          size: "l",
+          size: "m",
           classes: "nhsuk-u-margin-bottom-5"
         }
       }) %}

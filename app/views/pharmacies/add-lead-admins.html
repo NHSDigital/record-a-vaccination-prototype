@@ -14,13 +14,69 @@
     <div class="nhsuk-grid-column-two-thirds">
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>Who do you want to get be a lead administrator on RAVS for all {{ data.pharmacyIds | length }} pharmacies?</p>
+      <form data-module="app-add-another" action="" method="post">
+
+      <p>Who do you want to assign as lead administrators for all {{ data.pharmacyIds | length }} pharmacies?</p>
+
+      {% call details({
+        summaryText: "What is a lead administrator?",
+        classes: "nhsuk-expander"
+      }) %}
+        <p>Lead administrators are responsible for setting up the pharmacy's users and vaccines.</p>
+
+        <p>They will get a Welcome email telling them how to log into RAVS. Once logged in at ABC pharmacy, they will be able to:</p>
+
+        <ul>
+          <li>add more users, with different permission levels</li>
+          <li>add vaccines</li>
+          <li>create reports</li>
+        </ul>
+
+        <table tabindex="0" class="nhsuk-table">
+        <thead class="nhsuk-table__head">
+        <tr class="nhsuk-table__row">
+        <th class="nhsuk-table__header"><strong>Permission level</strong></th>
+        <th class="nhsuk-table__header"><strong>Record and edit vaccinations</strong></th>
+        <th class="nhsuk-table__header"><strong>Add and manage vaccines</strong></th>
+        <th class="nhsuk-table__header"><strong>Create reports</strong></th>
+        <th class="nhsuk-table__header"><strong>Add and manage users</strong></th>
+        </tr>
+        </thead>
+        <tbody class="nhsuk-table__body">
+
+        <tr class="nhsuk-table__row">
+        <td class="nhsuk-table__cell"><strong>Lead administrator</strong></td>
+        <td class="nhsuk-table__cell">Yes</td>
+        <td class="nhsuk-table__cell">Yes</td>
+        <td class="nhsuk-table__cell">Yes</td>
+        <td class="nhsuk-table__cell">Yes</td>
+        </tr>
+        <tr class="nhsuk-table__row">
+        <td class="nhsuk-table__cell"><strong>Administrator</strong></td>
+        <td class="nhsuk-table__cell">Yes</td>
+        <td class="nhsuk-table__cell">Yes</td>
+        <td class="nhsuk-table__cell">Yes</td>
+        <td class="nhsuk-table__cell">No</td>
+        </tr>
+        <tr class="nhsuk-table__row">
+        <td class="nhsuk-table__cell"><strong>Recorder</strong></td>
+        <td class="nhsuk-table__cell">Yes</td>
+        <td class="nhsuk-table__cell">No</td>
+        <td class="nhsuk-table__cell">No</td>
+        <td class="nhsuk-table__cell">No</td>
+        </tr>
+        </tbody>
+        </table>
+      {% endcall %}
 
       {% set items = [] %}
 
       {% set items = (items.push({
         text: "Me (" + currentUser.firstName + " " + currentUser.lastName + ")",
-        value: user.id
+        value: user.id,
+        hint: {
+          text: "Do not add yourself if you do not need to record vaccinations at these pharmacies"
+        }
       }), items) %}
 
       {% for user in (users | sort(false, false, "firstName")) %}
@@ -30,29 +86,100 @@
         }), items) %}
       {% endfor %}
 
-      {% set items = (items.push({
-        divider: "or"
-      }), items) %}
-
-      {% set items = (items.push({
-        text: "No one, I’ll add lead administrators later",
-        value: "",
-        exclusive: true
-      }), items) %}
-
       {{ checkboxes({
         fieldset: {
           legend: {
-            text: "Users",
+            text: "Existing lead administrators",
             size: "m"
           }
         },
         items: items
       }) }}
 
+      <div>
+      {{ button({
+        id: "add-lead-admin",
+        text: "Add a new lead administrator",
+        type: "button",
+        classes: "nhsuk-button--secondary",
+        attributes: {
+          "data-add-another-add": "true"
+        }
+      }) }}
+      </div>
+<!--
+      {# Ordinal suffixes for numbers 1-10 #}
+      {% set ordinals = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th'] %}
+
+      {% for index in range(0, 10) %}
+        <div id="lead-administrator-{{ index + 1 }}" data-add-another-item="{{ index + 1 }}">
+          <h2 class="nhsuk-heading-m">{{ ordinals[index] }} lead administrator</h2>
+
+          <div hidden>
+            {{ button({
+              id: "remove-lead-admin-" + (index + 1),
+              text: "Remove",
+              type: "button",
+              classes: "nhsuk-button--secondary",
+              attributes: {
+                "data-add-another-remove": (index + 1) | string
+              }
+            }) }}
+          </div>
+
+          {{ input({
+            label: {
+              text: "First name"
+            },
+            id: "first-name-" + (index + 1),
+            name: "firstName",
+            classes: "nhsuk-input--width-20",
+            value: data.firstName[index]
+          }) }}
+
+          {{ input({
+            label: {
+              text: "Last name"
+            },
+            id: "last-name-" + (index + 1),
+            name: "lastName",
+            classes: "nhsuk-input--width-20",
+            value: data.lastName[index]
+          }) }}
+
+          {{ input({
+            label: {
+              text: "Email address"
+            },
+            hint: {
+              html: "Use a personal nhs.net email, not a pharmacy email.<br>For example, joe.bloggs1@nhs.net"
+            },
+            id: "email-" + (index + 1),
+            name: "email",
+            type: "email",
+            value: data.email[index]
+          }) }}
+        </div>
+      {% endfor %}
+
+      <div class="nhsuk-button-group" id="add-another-wrapper" hidden>
+        {{ button({
+          id: "add-lead-admin",
+          text: "Add another lead administrator",
+          type: "button",
+          classes: "nhsuk-button--secondary",
+          attributes: {
+            "data-add-another-add": "true"
+          }
+        }) }}
+      </div> -->
+
+
       {{ button({
         text: "Continue"
       }) }}
+
+      </form>
 
 
     </div>

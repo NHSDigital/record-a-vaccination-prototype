@@ -35,11 +35,11 @@
     <div class="nhsuk-grid-column-full">
 
       <table class="nhsuk-table">
-        <caption class="nhsuk-table__caption nhsuk-table__caption--m">Pharmacies</caption>
+        <caption class="nhsuk-table__caption nhsuk-table__caption--m">Access and permission levels</caption>
         <thead role="rowgroup" class="nhsuk-table__head">
           <tr role="row">
             <th role="columnheader" class="" scope="col">
-              Name
+              Pharmacy
             </th>
             <th role="columnheader" class="" scope="col">
               Permission level
@@ -69,7 +69,7 @@
                 Active
               </td>
               <td class="nhsuk-table__cell ">
-                <a href="#">Remove</a>
+                <a href="#">Deactivate</a>
               </td>
             </tr>
             <tr role="row" class="nhsuk-table__row">
@@ -86,11 +86,16 @@
                 Active
               </td>
               <td class="nhsuk-table__cell ">
-                <a href="#">Remove</a>
+                <a href="#">Deactivate</a>
               </td>
             </tr>
         </tbody>
       </table>
+
+      {{ button({
+        text: "Add to another pharmacy",
+        classes: "nhsuk-button--secondary"
+      }) }}
 
       <p><a href="#">Deactivate user from all pharmacies</a></p>
 
