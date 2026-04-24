@@ -15,9 +15,9 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>You can assign up to 10 lead administrators now, including you, to the pharmacies you selected. You will be able to assign further lead administrators later. </p>
+      <p>You can assign up to 10 lead administrators now, including you, to the {{ data.pharmacyIds | length }} pharmacies you selected.</p>
 
-      <p>The people you add now must have an nhs.net email. But users you add later at individual pharmacies can have a range of allowed emails. 
+      <p>The people you add now must have an nhs.net email. But you can add more users later at individual pharmacies, including lead administrators, using a range of allowed emails.</p>
 
       {% call details({
   summaryText: "What can you do as a lead administrator?",
