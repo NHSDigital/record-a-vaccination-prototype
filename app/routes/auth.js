@@ -29,9 +29,6 @@ module.exports = router => {
       .filter((organisation) => organisation.status === "Active")
       .map((organisation) => organisation.id)
 
-    // reset email and password
-    req.session.data.email = ""
-    req.session.data.password = ""
 
     if (user.admin) {
       req.session.data.currentUserId = user.id;
@@ -75,10 +72,12 @@ module.exports = router => {
       res.redirect('/auth/select-organisation?from=select-mode')
     } else if (loginMode === 'create-reports') {
 
+      const email = data.email
+      const user = data.users.find((user) => user.email === email)
+
       req.session.data.currentMode = "reports"
       req.session.data.currentOrganisationId = null
-      req.session.data.currentUserId = data.userId
-
+      req.session.data.currentUserId = user.id
 
       res.redirect('/home')
     } else {
@@ -119,6 +118,7 @@ module.exports = router => {
     req.session.data.currentUserId = null
     req.session.data.currentOrganisationId = null
     req.session.data.currentMode = null
+    req.session.data.email = ""
 
     res.redirect('/product-page')
   })
