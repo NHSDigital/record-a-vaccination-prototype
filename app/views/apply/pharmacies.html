@@ -18,12 +18,26 @@
 
       <h1 class="nhsuk-heading-l">Select pharmacies</h1>
 
+      <p>You can sign up all your pharmacies at once by selecting all now. Or you can sign them up in batches, selecting a few now and then signing up another group later.
+        
       <p>There are {{ (pharmacies | length) + 7}} active pharmacies in your company according to the <a href="https://digital.nhs.uk/services/organisation-data-service">NHS Organisation Data Service</a> (ODS).</p>
 
-      <p>7 of them are already using RAVS and are not listed here.</p>
+      <p>Pharmacies already using Record a vaccination (RAVS) are not listed below.</p>
+     
+      {% call details({
+      summaryText: "7 pharmacies already using RAVS"
+      }) %}
+      <p>Asda Pharmacy, AB10 0JW (FDW48)</p>
+      <p>Asda Pharmacy, JD10 2JW (FXW46)</p>
+      <p>Asda Pharmacy, TN10 0JW (FQW48)</p>
+      <p>Asda Pharmacy, JD10 2JW (FZA46)</p>
+      <p>Asda Pharmacy, NW5 0JW (FBW48)</p>
+      <p>Asda Pharmacy, SE2 2JW (FNW46)</p>
+      <p>Asda Pharmacy, AB6 0JW (FMW48)</p>
+      {% endcall %}
 
       {% if (pharmacies | length) > 50 %}
-        <p>For larger chains, we recommend signing up pharmacies in batches based on how stores are managed in your organisation.</p>
+      
       {% endif %}
 
       {% set items = [] %}
