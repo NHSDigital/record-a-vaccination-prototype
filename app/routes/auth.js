@@ -3,7 +3,7 @@ module.exports = router => {
   router.post('/auth/sign-in', (req, res) => {
 
     const data = req.session.data
-    const email = data.email || "jane.smith@nhs.net"
+    const email = data.email
     const user = data.users.find((user) => user.email === email)
 
     if (email === 'freda.pink@nhs.net') {
@@ -29,9 +29,6 @@ module.exports = router => {
       .filter((organisation) => organisation.status === "Active")
       .map((organisation) => organisation.id)
 
-    // reset email and password
-    req.session.data.email = ""
-    req.session.data.password = ""
 
     if (user.admin) {
       req.session.data.currentUserId = user.id;
@@ -53,12 +50,9 @@ module.exports = router => {
       res.redirect('/regions')
 
     } else if (organisationsUserIsAnAdminAt.length > 1) {
-
-      req.session.data.currentUserId = user.id
-
-      // Skipping the select mode screen for research purposes
-      res.redirect('/auth/select-organisation')
-      // res.redirect('/auth/select-mode')
+      // They are an admin at 2 or more organisations, so
+      // ask them to select mode (single org or report mode)
+      res.redirect('/auth/select-mode')
 
     } else {
 
@@ -77,10 +71,12 @@ module.exports = router => {
       res.redirect('/auth/select-organisation?from=select-mode')
     } else if (loginMode === 'create-reports') {
 
+      const email = data.email
+      const user = data.users.find((user) => user.email === email)
+
       req.session.data.currentMode = "reports"
       req.session.data.currentOrganisationId = null
-      req.session.data.currentUserId = data.userId
-
+      req.session.data.currentUserId = user.id
 
       res.redirect('/home')
     } else {
@@ -91,7 +87,9 @@ module.exports = router => {
 
   router.get('/auth/select-organisation', (req, res) => {
     const data = req.session.data
-    const user = res.locals.currentUser
+
+    const email = data.email
+    const user = data.users.find((user) => user.email === email)
     const from = req.query.from
 
     const userOrganisationIds = user.organisations.map((organisation) => organisation.id)
@@ -105,9 +103,13 @@ module.exports = router => {
   })
 
   router.post('/select-organisation', (req, res) => {
-    const selectedOrganisationId = req.session.data.organisationId
+    const data = req.session.data
+    const selectedOrganisationId = data.organisationId
+    const email = data.email
+    const user = data.users.find((user) => user.email === email)
 
     if (selectedOrganisationId) {
+      req.session.data.currentUserId = user.id
       req.session.data.currentOrganisationId = selectedOrganisationId;
 
       res.redirect('/home')
@@ -121,6 +123,7 @@ module.exports = router => {
     req.session.data.currentUserId = null
     req.session.data.currentOrganisationId = null
     req.session.data.currentMode = null
+    req.session.data.email = ""
 
     res.redirect('/product-page')
   })
