@@ -39,6 +39,30 @@ module.exports = router => {
     })
   })
 
+  router.get('/pharmacies/check-selection', async (req, res) => {
+    const data = req.session.data
+
+    let pharmacies = await getPharmaciesBelongingToOrganisation("P15J")
+
+    pharmacies = pharmacies.filter((pharmacy) => {
+      return data.pharmacyIds.includes(pharmacy.id)
+    }).sort(sortByNameThenPostcode())
+
+
+    res.render('pharmacies/check-selection', {
+      pharmacies
+    })
+  })
+
+  router.get('/pharmacies/users',(req, res) => {
+    const data = req.session.data
+    const users = data.users.slice(10, 20)
+
+    res.render('pharmacies/users/index', {
+      users
+    })
+  })
+
 
   router.get('/pharmacies/:id', (req, res) => {
     const data = req.session.data
