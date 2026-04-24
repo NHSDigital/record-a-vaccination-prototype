@@ -3,7 +3,7 @@ module.exports = router => {
   router.post('/auth/sign-in', (req, res) => {
 
     const data = req.session.data
-    const email = data.email || "jane.smith@nhs.net"
+    const email = data.email
     const user = data.users.find((user) => user.email === email)
 
     if (email === 'freda.pink@nhs.net') {
@@ -56,9 +56,7 @@ module.exports = router => {
 
       req.session.data.currentUserId = user.id
 
-      // Skipping the select mode screen for research purposes
-      res.redirect('/auth/select-organisation')
-      // res.redirect('/auth/select-mode')
+      res.redirect('/auth/select-mode')
 
     } else {
 
