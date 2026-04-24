@@ -63,6 +63,16 @@ module.exports = router => {
     })
   })
 
+  router.get('/pharmacies/users/:id',(req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const user = data.users.find((user) => user.id === id)
+
+    res.render('pharmacies/users/user', {
+      user
+    })
+  })
+
 
   router.get('/pharmacies/:id', (req, res) => {
     const data = req.session.data

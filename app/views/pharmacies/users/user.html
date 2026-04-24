@@ -1,0 +1,100 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies-users" %}
+
+{% set pageName = user.firstName + " " + user.lastName %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/users"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Email"
+            },
+            value: {
+              text: user.email
+            }
+          }
+        ]
+      }) }}
+
+    </div>
+  </div>
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      <table class="nhsuk-table">
+        <caption class="nhsuk-table__caption nhsuk-table__caption--m">Pharmacies</caption>
+        <thead role="rowgroup" class="nhsuk-table__head">
+          <tr role="row">
+            <th role="columnheader" class="" scope="col">
+              Name
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Permission level
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Vaccinator
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Status
+            </th>
+            <th role="columnheader" class="" scope="col"></th>
+
+          </tr>
+        </thead>
+        <tbody class="nhsuk-table__body">
+            <tr role="row" class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">
+                <a href="#">Peak Pharmacy (P112)</a>
+              </td>
+              <td class="nhsuk-table__cell ">
+                Lead administrator
+              </td>
+              <td class="nhsuk-table__cell ">
+                Yes
+              </td>
+              <td class="nhsuk-table__cell ">
+                Active
+              </td>
+              <td class="nhsuk-table__cell ">
+                <a href="#">Remove</a>
+              </td>
+            </tr>
+            <tr role="row" class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">
+                <a href="#">Peak Pharmacy (P9241)</a>
+              </td>
+              <td class="nhsuk-table__cell ">
+                Recorder
+              </td>
+              <td class="nhsuk-table__cell ">
+                Yes
+              </td>
+              <td class="nhsuk-table__cell ">
+                Active
+              </td>
+              <td class="nhsuk-table__cell ">
+                <a href="#">Remove</a>
+              </td>
+            </tr>
+        </tbody>
+      </table>
+
+      <p><a href="#">Deactivate user from all pharmacies</a></p>
+
+    </div>
+  </div>
+
+{% endblock %}

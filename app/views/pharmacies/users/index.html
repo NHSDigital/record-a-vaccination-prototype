@@ -33,7 +33,7 @@
           {% for user in users %}
             <tr role="row" class="nhsuk-table__row">
               <td class="nhsuk-table__cell">
-                <a href="#">{{ user.firstName }} {{ user.lastName }}</a>
+                <a href="/pharmacies/users/{{ user.id }}">{{ user.firstName }} {{ user.lastName }}</a>
               </td>
               <td class="nhsuk-table__cell ">
                 {{ user.email }}
