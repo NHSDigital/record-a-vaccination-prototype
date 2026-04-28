@@ -15,20 +15,25 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>You can add up to 10 lead administrators now, including you.</p>
+      <p>You can assign up to 10 lead administrators now, including you, for the {{ data.pharmacyIds | length }} pharmacies you selected.</p>
       
-      <p>The lead administrators will:</p>
-      
-      <ul>
-        <li>get access to RAVS for all {{ data.pharmacyIds | length }} pharmacies</li>
-        <li>be able to create reports for all {{ data.pharmacyIds | length }} pharmacies</li>
-        <li>be able to add more users at each pharmacy and choose their permission level</li>
-      </ul>
+      <p>You will be able to add more users later at individual pharmacies, including more lead administrators.</p>
+
+      <p>The people you add now must have an nhs.net email. But when you add further users later, we allow a wide range of email addresses.</p>
 
       {% call details({
-        summaryText: "About our permission levels"
-      }) %}
-        <p>As a lead administrator, you can add more lead administrators, administrators or recorders.</p>
+  summaryText: "What can you do as a lead administrator?",
+  classes: "nhsuk-expander"
+}) %}
+  <p>A lead administrator added here can:</p>
+  <ul>
+    <li>access RAVS at all {{ data.pharmacyIds | length }} selected pharmacies </li>
+    <li>add users at each pharmacy, including more lead administrators, who can in turn add further users </li>
+    <li>assign different permission levels to the users they add </li>
+    <li>create reports that include all {{ data.pharmacyIds | length }} pharmacies </li>
+  </ul>
+      
+<p>This table shows the permission levels you can assign when you add users at individual pharmacies.</p>
 
 <table tabindex="0" class="nhsuk-table">
 <thead class="nhsuk-table__head">
@@ -142,5 +147,6 @@
 
     </div>
   </div>
+
 
 {% endblock %}
