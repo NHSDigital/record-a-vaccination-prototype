@@ -15,9 +15,13 @@ module.exports = router => {
     const data = req.session.data
     const currentUser = res.locals.currentUser
 
+    // TODO: get this from the current login
+    // rather than hardcode it
+    const companyId = 'P15951'
+
     const userOrganisationIds = currentUser.organisations.map((organisation) => organisation.id)
 
-    const organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
+    const organisations = data.organisations.filter((organisation) => organisation.companyId === companyId).sort(sortByNameThenPostcode())
 
     let organisationUserCounts = {}
 
@@ -62,6 +66,41 @@ module.exports = router => {
     res.render('pharmacies/check-selection', {
       pharmacies
     })
+  })
+
+  // Actually add the pharmacies
+  router.post('/pharmacies/added', async (req, res) => {
+    const data = req.session.data
+
+    // TODO: get this from the current login
+    // rather than hardcode it
+    const companyId = 'P15951'
+
+    let pharmacies = await getPharmaciesBelongingToOrganisation("P15J")
+
+    pharmacies = pharmacies.filter((pharmacy) => {
+      return data.pharmacyIds.includes(pharmacy.id)
+    }).sort(sortByNameThenPostcode())
+
+    for (const pharmacy of pharmacies) {
+
+      data.organisations.push({
+        id: pharmacy.id,
+        name: pharmacy.name,
+        type: 'Community Pharmacy',
+        companyId: companyId,
+        status: 'Active',
+        vaccines: [],
+        sites: [
+          {
+            id: pharmacy.id,
+            name: pharmacy.name
+          }
+        ]
+      })
+    }
+
+    res.redirect('/pharmacies?added=true')
   })
 
   router.get('/pharmacies/users',(req, res) => {

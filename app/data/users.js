@@ -174,8 +174,8 @@ module.exports = [
     "firstName": "Jeremy",
     "lastName": "Blue"
   },
-  // Amanda White is a lead admin for
-  // a chain of pharmacies
+  // Amanda White is a group administrator for the
+  // MediCare Health Ltd chain of pharmacies
   {
     "firstName": "Amanda",
     "lastName": "White",
@@ -183,10 +183,9 @@ module.exports = [
     "email": "amanda.white@nhs.net",
     "organisations": [
       {
-        "id": "FX9141",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
+        "id": "P15951",
+        "permissionLevel": "Group administrator",
+        "status": "Active"
       },
       {
         "id": "FX4825",
