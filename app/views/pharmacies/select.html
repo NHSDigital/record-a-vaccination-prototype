@@ -12,7 +12,7 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-      <form action="/pharmacies/check-selection" method="post">
+      <form action="/pharmacies/check-selection" method="post" data-module="app-checkboxes-count-select">
 
       <h1>{{ pageName }}</h1>
 
@@ -92,6 +92,7 @@
 
       {% endcall %}
 
+      <p data-i18n-selected-count.one="pharmacy" data-i18n-selected-count.many="pharmacies"></p>
 
       {{ button({
         text: "Continue"
@@ -103,23 +104,6 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-
-      // Checkbox count functionality
-      const countDisplay = document.querySelector('[data-module="app-checkboxes-count"]');
-
-      function updateCheckboxCount() {
-        if (!countDisplay) return;
-        const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked:not([data-select-all])').length;
-        countDisplay.textContent = `${checkedCount} pharmacies selected`;
-      }
-
-      if (countDisplay) {
-        document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-          cb.addEventListener('change', updateCheckboxCount);
-        });
-        updateCheckboxCount();
-      }
-
 
       // Filter checkboxes functionality
       const searchInput = document.querySelector('input[data-module="app-filter-checkboxes"]');
@@ -174,7 +158,6 @@
           cb.checked = selectAllCheckbox.checked;
         });
         filterCheckboxes();
-        updateCheckboxCount();
       });
 
       // Click on rows updates header state
