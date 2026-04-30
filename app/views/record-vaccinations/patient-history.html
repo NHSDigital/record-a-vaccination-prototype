@@ -24,7 +24,9 @@
   {% set nextPage = "/record-vaccinations/vaccination-date" %}
 {% endif %}
 
-{% if data.repeatVaccination === "yes" %}
+{% if data.from == "appointments" %}
+  {% set previousPage = "/appointments" %}
+{% elseif data.repeatVaccination === "yes" %}
   {% set previousPage = "/record-vaccinations/patient" %}
 {% elseif data.repeatPatient === "yes" %}
   {% set previousPage = "/record-vaccinations/done" %}

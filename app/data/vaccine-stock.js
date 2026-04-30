@@ -410,6 +410,34 @@ module.exports = [
     ]
   },
   {
+    id: "7436323",
+    vaccine: "Flu",
+    vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
+    organisationId: "FA424", // Pickfords Pharmacy
+    siteId: "FA424X", // Pickfords Pharmacy
+    batches: [
+      {
+        id: "464735235325",
+        batchNumber: "714-14",
+        expiryDate: "2026-12-14"
+      }
+    ]
+  },
+  {
+    id: "9235235325",
+    vaccine: "COVID-19",
+    vaccineProduct: "Comirnaty 3 LP.8.1",
+    organisationId: "FA424", // Pickfords Pharmacy
+    siteId: "FA424X", // Pickfords Pharmacy
+    batches: [
+      {
+        id: "82725252",
+        batchNumber: "AB-255",
+        expiryDate: "2027-01-22"
+      }
+    ]
+  },
+  {
     id: "2514771",
     vaccine: "flu (London service)",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
