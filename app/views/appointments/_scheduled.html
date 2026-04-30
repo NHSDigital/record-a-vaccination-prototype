@@ -22,6 +22,7 @@
       </td>
       <td class="nhsuk-table__cell">
         {{ appointment.patient.dateOfBirth | govukDate }}
+        <div class="nhsuk-u-secondary-text-colour">{{ appointment.patient.dateOfBirth | age }} old</div>
       </td>
       <td class="nhsuk-table__cell">
         {{ appointment.vaccinations | join("<br>") | safe }}
