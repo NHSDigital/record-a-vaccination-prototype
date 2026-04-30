@@ -36,7 +36,10 @@
         }), items) %}
       {% endfor %}
 
-      <form action="/apply/pharmacy-chain-check" method="post" data-module="app-checkboxes-count-select">
+      <form action="/apply/pharmacy-chain-check" method="post"
+        data-module="app-checkboxes-count-select"
+        data-i18n.selected-count.one="%{count} pharmacy selected"
+        data-i18n.selected-count.other="%{count} pharmacies selected">
 
         {% call fieldset({
           legend: {
@@ -98,7 +101,7 @@
 
         {% endcall %}
 
-        <p data-i18n-selected-count.one="pharmacy" data-i18n-selected-count.other="pharmacies"></p>
+        <p data-selected-count-display></p>
 
         {{ button({
           text: "Confirm"

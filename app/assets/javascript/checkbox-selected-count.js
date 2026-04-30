@@ -1,4 +1,4 @@
-import { Component, I18n } from 'nhsuk-frontend'
+import { ConfigurableComponent, I18n } from 'nhsuk-frontend'
 
 /**
  * Checkbox Selected Count component
@@ -7,13 +7,15 @@ import { Component, I18n } from 'nhsuk-frontend'
  *
  * Usage:
  * - Add `data-module="app-checkboxes-count-select"` to a wrapper element
- * - Add an element with pluralization attributes:
- *   `<p data-i18n-selected-count.one="item" data-i18n-selected-count.other="items"></p>`
+ * - Add an element with `data-selected-count-display` attribute to show the count
+ * - Configure i18n via data attributes on the module element:
+ *   `data-i18n.selected-count.one="%{count} pharmacy selected"`
+ *   `data-i18n.selected-count.other="%{count} pharmacies selected"`
  * - Checkboxes with `data-select-all` attribute are excluded from the count
  *
- * @augments Component<HTMLElement>
+ * @augments {ConfigurableComponent<CheckboxSelectedCountConfig>}
  */
-export class CheckboxSelectedCount extends Component {
+export class CheckboxSelectedCount extends ConfigurableComponent {
   static elementType = HTMLElement
 
   /**
@@ -23,24 +25,17 @@ export class CheckboxSelectedCount extends Component {
 
   /**
    * @param {Element | null} $root - HTML element to use for component
+   * @param {Partial<CheckboxSelectedCountConfig>} [config] - Component config
    */
-  constructor($root) {
-    super($root)
+  constructor($root, config = {}) {
+    super($root, config)
 
-    this.$countDisplay = this.$root.querySelector('[data-i18n-selected-count\\.one]')
+    this.$countDisplay = this.$root.querySelector('[data-selected-count-display]')
     this.$checkboxes = this.$root.querySelectorAll('input[type="checkbox"]')
 
+    this.i18n = new I18n(this.config.i18n)
+
     if (this.$countDisplay) {
-      const singularLabel = this.$countDisplay.getAttribute('data-i18n-selected-count.one') || 'selected'
-      const pluralLabel = this.$countDisplay.getAttribute('data-i18n-selected-count.other') || singularLabel
-
-      this.i18n = new I18n({
-        selectedCount: {
-          one: `%{count} ${singularLabel} selected`,
-          other: `%{count} ${pluralLabel} selected`
-        }
-      })
-
       this.setupEventListeners()
       this.updateCount()
     }
@@ -65,4 +60,50 @@ export class CheckboxSelectedCount extends Component {
 
     this.$countDisplay.textContent = this.i18n.t('selectedCount', { count: checkedCount })
   }
+
+  /**
+   * Checkbox Selected Count default config
+   *
+   * @constant
+   * @type {CheckboxSelectedCountConfig}
+   */
+  static defaults = Object.freeze({
+    i18n: {
+      selectedCount: {
+        one: '%{count} selected',
+        other: '%{count} selected'
+      }
+    }
+  })
+
+  /**
+   * Checkbox Selected Count config schema
+   *
+   * @constant
+   * @satisfies {Schema<CheckboxSelectedCountConfig>}
+   */
+  static schema = Object.freeze({
+    properties: {
+      i18n: { type: 'object' }
+    }
+  })
 }
+
+/**
+ * Checkbox Selected Count config
+ *
+ * @typedef {object} CheckboxSelectedCountConfig
+ * @property {CheckboxSelectedCountTranslations} [i18n] - Checkbox Selected Count translations
+ */
+
+/**
+ * Checkbox Selected Count translations
+ *
+ * @typedef {object} CheckboxSelectedCountTranslations
+ * @property {TranslationPluralForms} [selectedCount] - Count of selected checkboxes
+ */
+
+/**
+ * @import { TranslationPluralForms } from 'nhsuk-frontend'
+ * @import { Schema } from 'nhsuk-frontend/dist/nhsuk/common/configuration/index.mjs'
+ */
