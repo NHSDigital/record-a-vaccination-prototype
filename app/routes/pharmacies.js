@@ -19,9 +19,19 @@ module.exports = router => {
 
     const organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
 
+    let organisationUserCounts = {}
+
+    for (const organisation of organisations) {
+      organisationUserCounts[organisation.id] = data.users
+        .filter((user) => (user.organisations || [])
+          .find((orgPermission) => orgPermission.id === organisation.id)
+        ).length
+    }
+
 
     res.render('pharmacies/index', {
-      organisations
+      organisations,
+      organisationUserCounts
     })
   })
 
@@ -83,16 +93,92 @@ module.exports = router => {
   })
 
 
-  router.get('/pharmacies/:id/add-users',(req, res) => {
+  router.get('/pharmacies/:id/add-user',(req, res) => {
     const data = req.session.data
     const users = data.users.slice(10, 20)
     const id = req.params.id
     const organisation = data.organisations.find((organisation) => organisation.id === id)
 
-    res.render('pharmacies/add-users', {
+    res.render('pharmacies/add-user', {
       users,
       organisation
     })
+  })
+
+  router.get('/pharmacies/:id/add-user-permission-level',(req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const organisation = data.organisations.find((organisation) => organisation.id === id)
+    let existingUser
+
+    if (data.userId) {
+      existingUser = data.users.find((user) => user.id === data.userId)
+    }
+
+    res.render('pharmacies/add-user-permission-level', {
+      organisation,
+      existingUser
+    })
+  })
+
+  router.get('/pharmacies/:id/add-user-check',(req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const organisation = data.organisations.find((organisation) => organisation.id === id)
+    let existingUser
+
+    if (data.userId) {
+      existingUser = data.users.find((user) => user.id === data.userId)
+    }
+
+    res.render('pharmacies/add-user-check', {
+      organisation,
+      existingUser
+    })
+  })
+
+  router.get('/pharmacies/:id/user-added',(req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const organisation = data.organisations.find((organisation) => organisation.id === id)
+    let existingUser
+
+    if (data.userId) {
+      existingUser = data.users.find((user) => user.id === data.userId)
+
+      existingUser.organisations.push({
+        id: organisation.id,
+        status: 'Active',
+        vaccinator: (data.vaccinator === 'yes'),
+        permissionLevel: data.permissionLevel
+      })
+    } else {
+
+      data.users.push({
+        id: Math.floor(Math.random() * 10000000).toString(),
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        organisations: [
+          {
+            id: organisation.id,
+            status: 'Invited',
+            vaccinator: (data.vaccinator === 'yes'),
+            permissionLevel: data.permissionLevel
+          }
+        ]
+      })
+
+    }
+
+    // Reset data
+    req.session.data.email = ''
+    req.session.data.firstName = ''
+    req.session.data.lastName = ''
+    req.session.data.permissionLevel = ''
+    req.session.data.vaccinator = ''
+
+    res.redirect(`/pharmacies/${organisation.id}?added=true`)
   })
 
   router.get('/pharmacies/:id', (req, res) => {
@@ -101,10 +187,22 @@ module.exports = router => {
 
     const organisation = data.organisations.find((organisation) => organisation.id === id)
 
+    const userOrganisationPermissions = {}
+
+    const users = data.users
+    .filter((user) => (user.organisations || [])
+      .find((orgPermission) => orgPermission.id === organisation.id)
+    )
+
+    for (const user of users) {
+      userOrganisationPermissions[user.id] = user.organisations.find((userOrganisation) => userOrganisation.id === organisation.id)
+    }
+
     res.render('pharmacies/pharmacy', {
-      organisation
+      organisation,
+      users,
+      userOrganisationPermissions
     })
   })
-
 
 }

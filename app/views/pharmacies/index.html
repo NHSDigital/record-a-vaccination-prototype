@@ -28,8 +28,6 @@
             <th role="columnheader" class="" scope="col">
               Users
             </th>
-            <!-- <th role="columnheader" class="" scope="col"></th> -->
-
           </tr>
         </thead>
         <tbody class="nhsuk-table__body">
@@ -42,11 +40,8 @@
                 COVID-19, flu
               </td>
               <td class="nhsuk-table__cell ">
-                1
+                {{ organisationUserCounts[organisation.id] }}
               </td>
-              <!-- <td class="nhsuk-table__cell ">
-                <a href="#">Deactivate</a>
-              </td> -->
             </tr>
           {% endfor %}
 

@@ -33,15 +33,27 @@
             value: {
               text: organisation.address.line1 + ", " + organisation.address.town + ", " + organisation.address.postcode
             }
+          },
+          {
+            key: {
+              text: "Vaccines enabled"
+            },
+            value: {
+              text: "COVID-19, flu"
+            }
           }
         ]
       }) }}
 
       <h2 class="nhsuk-heading-m">Users</h2>
+    </div>
+  </div>
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-three-quarters">
 
       {{ button({
-        href: "/pharmacies/" + organisation.id + "/add-users",
-        text: "Add users"
+        href: "/pharmacies/" + organisation.id + "/add-user",
+        text: "Add user"
       }) }}
 
         <table class="nhsuk-table">
@@ -59,27 +71,33 @@
               <th role="columnheader" class="" scope="col">
                 Status
               </th>
-              <th role="columnheader" class="" scope="col"></th>
-
+              <th role="columnheader" class="" scope="col">
+                <span class="nhsuk-u-visually-hidden">Actions</span>
+              </th>
             </tr>
           </thead>
           <tbody class="nhsuk-table__body">
+            {% for user in users %}
               <tr role="row" class="nhsuk-table__row">
                 <td class="nhsuk-table__cell">
-                  <a href="/pharmacies/users/1394978032564">Jane Smith</a>
+                  <a href="/pharmacies/users/{{ user.id }}">
+                    {{ user.firstName }} {{ user.lastName }}
+                  </a>
                 </td>
                 <td class="nhsuk-table__cell ">
-                  Lead administrator
+                  {{ userOrganisationPermissions[user.id].permissionLevel }}
                 </td>
                 <td class="nhsuk-table__cell " style="min-width: 150px;">
-                  Yes
+                  {{ "Yes" if userOrganisationPermissions[user.id].vaccinator else "No" }}
                 </td>
                 <td class="nhsuk-table__cell ">
-                  Active
+                  {{ userOrganisationPermissions[user.id].status }}
                 </td>
-                <td class="nhsuk-table__cell ">
+                <td class="nhsuk-table__cell">
+                  <a href="#">Change<span class="nhsuk-u-visually-hidden">permission level for {{ user.firstName }} {{ user.lastName }}</span></a>
                 </td>
               </tr>
+            {% endfor %}
           </tbody>
         </table>
 
