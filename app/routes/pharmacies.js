@@ -89,6 +89,7 @@ module.exports = router => {
         name: pharmacy.name,
         type: 'Community Pharmacy',
         companyId: companyId,
+        address: pharmacy.address,
         status: 'Active',
         vaccines: [],
         sites: [
