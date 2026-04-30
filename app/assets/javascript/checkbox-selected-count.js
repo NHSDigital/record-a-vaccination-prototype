@@ -1,4 +1,4 @@
-import { Component } from 'nhsuk-frontend'
+import { Component, I18n } from 'nhsuk-frontend'
 
 /**
  * Checkbox Selected Count component
@@ -8,7 +8,7 @@ import { Component } from 'nhsuk-frontend'
  * Usage:
  * - Add `data-module="app-checkboxes-count-select"` to a wrapper element
  * - Add an element with pluralization attributes:
- *   `<p data-i18n-selected-count.one="item" data-i18n-selected-count.many="items"></p>`
+ *   `<p data-i18n-selected-count.one="item" data-i18n-selected-count.other="items"></p>`
  * - Checkboxes with `data-select-all` attribute are excluded from the count
  *
  * @augments Component<HTMLElement>
@@ -31,8 +31,16 @@ export class CheckboxSelectedCount extends Component {
     this.$checkboxes = this.$root.querySelectorAll('input[type="checkbox"]')
 
     if (this.$countDisplay) {
-      this.singularLabel = this.$countDisplay.getAttribute('data-i18n-selected-count.one') || 'selected'
-      this.pluralLabel = this.$countDisplay.getAttribute('data-i18n-selected-count.many') || 'selected'
+      const singularLabel = this.$countDisplay.getAttribute('data-i18n-selected-count.one') || 'selected'
+      const pluralLabel = this.$countDisplay.getAttribute('data-i18n-selected-count.other') || singularLabel
+
+      this.i18n = new I18n({
+        selectedCount: {
+          one: `%{count} ${singularLabel} selected`,
+          other: `%{count} ${pluralLabel} selected`
+        }
+      })
+
       this.setupEventListeners()
       this.updateCount()
     }
@@ -55,7 +63,6 @@ export class CheckboxSelectedCount extends Component {
       'input[type="checkbox"]:checked:not([data-select-all])'
     ).length
 
-    const label = checkedCount === 1 ? this.singularLabel : this.pluralLabel
-    this.$countDisplay.textContent = `${checkedCount} ${label} selected`
+    this.$countDisplay.textContent = this.i18n.t('selectedCount', { count: checkedCount })
   }
 }
