@@ -6,6 +6,20 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-three-quarters">
 
+      {% if added %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            {{ added }} pharmacies added
+          </h3>
+          <p>You can now add or assign users to these pharmacies.</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
       <h1 class="nhsuk-heading-l">Pharmacies</h1>
 
       <p>Add new pharmacies or manage an existing pharmacy.</p>

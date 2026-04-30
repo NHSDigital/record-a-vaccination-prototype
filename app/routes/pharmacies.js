@@ -14,6 +14,7 @@ module.exports = router => {
   router.get('/pharmacies', (req, res) => {
     const data = req.session.data
     const currentUser = res.locals.currentUser
+    const added = req.query.added
 
     // TODO: get this from the current login
     // rather than hardcode it
@@ -35,7 +36,8 @@ module.exports = router => {
 
     res.render('pharmacies/index', {
       organisations,
-      organisationUserCounts
+      organisationUserCounts,
+      added
     })
   })
 
@@ -101,7 +103,7 @@ module.exports = router => {
       })
     }
 
-    res.redirect('/pharmacies?added=true')
+    res.redirect(`/pharmacies?added=${pharmacies.length}`)
   })
 
   router.get('/pharmacies/users',(req, res) => {
@@ -181,11 +183,11 @@ module.exports = router => {
     const data = req.session.data
     const id = req.params.id
     const organisation = data.organisations.find((organisation) => organisation.id === id)
-    let existingUser
+    const existingUser = data.users.find((user) => user.id === data.userId)
 
-    if (data.userId) {
-      existingUser = data.users.find((user) => user.id === data.userId)
+    if (existingUser) {
 
+      existingUser.organisations ||= []
       existingUser.organisations.push({
         id: organisation.id,
         status: 'Active',
@@ -212,6 +214,7 @@ module.exports = router => {
     }
 
     // Reset data
+    req.session.data.userId = ''
     req.session.data.email = ''
     req.session.data.firstName = ''
     req.session.data.lastName = ''
