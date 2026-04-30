@@ -36,7 +36,7 @@
         }), items) %}
       {% endfor %}
 
-      <form action="/apply/pharmacy-chain-check" method="post">
+      <form action="/apply/pharmacy-chain-check" method="post" data-module="app-checkboxes-count-select">
 
         {% call fieldset({
           legend: {
@@ -98,7 +98,7 @@
 
         {% endcall %}
 
-        <p data-module="app-checkboxes-count"></p>
+        <p data-i18n-selected-count.one="pharmacy" data-i18n-selected-count.other="pharmacies"></p>
 
         {{ button({
           text: "Confirm"
@@ -111,23 +111,6 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-
-      // Checkbox count functionality
-      const countDisplay = document.querySelector('[data-module="app-checkboxes-count"]');
-
-      function updateCheckboxCount() {
-        if (!countDisplay) return;
-        const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked:not([data-select-all])').length;
-        countDisplay.textContent = `${checkedCount} pharmacies selected`;
-      }
-
-      if (countDisplay) {
-        document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-          cb.addEventListener('change', updateCheckboxCount);
-        });
-        updateCheckboxCount();
-      }
-
 
       // Filter checkboxes functionality
       const searchInput = document.querySelector('input[data-module="app-filter-checkboxes"]');
@@ -182,7 +165,6 @@
           cb.checked = selectAllCheckbox.checked;
         });
         filterCheckboxes();
-        updateCheckboxCount();
       });
 
       // Click on rows updates header state
