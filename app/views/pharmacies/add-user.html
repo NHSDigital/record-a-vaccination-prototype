@@ -27,9 +27,7 @@
         }), items) %}
       {% endfor %}
 
-      {% set items = (items.push({
-        divider: "or"
-      }), items) %}
+
 
       {% set newUserHtml %}
         {{ input({
@@ -60,25 +58,64 @@
         }) }}
       {% endset %}
 
-      {% set items = (items.push({
-        text: "Add a new user",
-        value: "add-new",
-        conditional: {
-          html: newUserHtml
-        }
-      }), items) %}
 
-      {{ radios({
-        name: "userId",
-        value: data.userId,
-        fieldset: {
-          legend: {
-            text: "User",
-            size: "m"
+
+      {% call fieldset({
+        legend: {
+          text: "User",
+          size: "m",
+          classes: "nhsuk-u-margin-bottom-5"
+        }
+      }) %}
+
+      {% if (users | length) > 10 %}
+        {{ input({
+          id: "user-search",
+          name: "userSearch",
+          type: "search",
+          label: {
+            text: "Search"
+          },
+          classes: "nhsuk-input--width-20",
+          attributes: {
+            "data-module": "app-radios-filter"
+          },
+          formGroup: {
+            classes: "nhsuk-u-margin-bottom-4"
           }
-        },
-        items: items
-      }) }}
+        }) }}
+      {% endif %}
+
+        <div class="app-scrollable-container">
+          {{ radios({
+            name: "userId",
+            value: data.userId,
+            items: items
+          }) }}
+        </div>
+
+        {{ radios({
+          name: "userId",
+          value: data.userId,
+          items: [
+            {
+              divider: "or"
+            },
+            {
+              text: "Add a new user",
+              value: "add-new",
+              id: "add-new",
+              attributes: {
+                "data-no-filter": ""
+              },
+              conditional: {
+                html: newUserHtml
+              }
+            }
+          ]
+        }) }}
+
+      {% endcall %}
 
       {{ button({
         text: "Continue"
