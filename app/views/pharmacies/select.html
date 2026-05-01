@@ -131,10 +131,9 @@
           const matches = searchWords.length === 0 || searchWords.every(searchWord =>
             labelWords.some(labelWord => labelWord.startsWith(searchWord))
           );
-          const isChecked = checkbox.checked;
 
-          // Show if matches OR if checked
-          if (matches || isChecked) {
+          // Show only if matches search term
+          if (matches) {
             item.removeAttribute('hidden');
           } else {
             item.setAttribute('hidden', '');
