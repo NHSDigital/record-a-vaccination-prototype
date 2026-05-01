@@ -227,6 +227,8 @@ module.exports = router => {
   router.get('/pharmacies/:id', (req, res) => {
     const data = req.session.data
     const id = req.params.id
+    const added = req.query.added
+
 
     const organisation = data.organisations.find((organisation) => organisation.id === id)
 
@@ -244,7 +246,8 @@ module.exports = router => {
     res.render('pharmacies/pharmacy', {
       organisation,
       users,
-      userOrganisationPermissions
+      userOrganisationPermissions,
+      added
     })
   })
 
