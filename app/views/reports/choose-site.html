@@ -25,6 +25,7 @@
             text: "All " + ((sites|length) if sites else (organisations|length)) + " " + ("sites" if sites else "organisations"),
             value: "all",
             attributes: {
+              "data-module": "app-checkbox-select-all",
               "data-select-all": "true"
             }
           }), items) %}
@@ -73,39 +74,6 @@
 
     </div>
   </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-
-      // Select all checkbox
-      const selectAllCheckbox = document.querySelector('input[data-select-all]');
-
-      // All row checkboxes (everything starting with select- except select-all)
-      const otherCheckboxes = Array.from(
-        document.querySelectorAll('input:not([data-select-all])')
-      );
-
-      // Click on header toggles all rows
-      selectAllCheckbox.addEventListener('change', () => {
-
-        otherCheckboxes.forEach(cb => {
-          cb.checked = selectAllCheckbox.checked;
-        });
-        selectAllCheckbox.indeterminate = false;
-      });
-
-      // Click on rows updates header state
-      otherCheckboxes.forEach(cb => {
-        cb.addEventListener('change', () => {
-          const allChecked = otherCheckboxes.every(c => c.checked);
-          const noneChecked = otherCheckboxes.every(c => !c.checked);
-
-          selectAllCheckbox.checked = allChecked;
-          selectAllCheckbox.indeterminate = !allChecked && !noneChecked;
-        });
-      });
-    });
-  </script>
 
 {% endblock %}
 

@@ -61,6 +61,7 @@
                 text: "Select all " + (pharmacies | length),
                 value: "",
                 attributes: {
+                  "data-module": "app-checkbox-select-all",
                   "data-select-all": "true"
                 }
               },
@@ -110,38 +111,5 @@
 
     </div>
   </div>
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-
-      // Select all checkbox
-      const selectAllCheckbox = document.querySelector('input[data-select-all]');
-
-      // All row checkboxes (checkboxes without select-all attribute)
-      const otherCheckboxes = Array.from(
-        document.querySelectorAll('input[type="checkbox"]:not([data-select-all])')
-      );
-
-      // Click on header toggles all rows
-      selectAllCheckbox.addEventListener('change', () => {
-
-        otherCheckboxes.forEach(cb => {
-          cb.checked = selectAllCheckbox.checked;
-        });
-      });
-
-      // Click on rows updates header state
-      otherCheckboxes.forEach(cb => {
-        cb.addEventListener('change', () => {
-          const allChecked = otherCheckboxes.every(c => c.checked);
-          const noneChecked = otherCheckboxes.every(c => !c.checked);
-
-          selectAllCheckbox.checked = allChecked;
-          selectAllCheckbox.indeterminate = !allChecked && !noneChecked;
-        });
-      });
-    });
-  </script>
 
 {% endblock %}
