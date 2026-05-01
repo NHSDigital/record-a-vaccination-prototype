@@ -75,7 +75,7 @@
           },
           classes: "nhsuk-input--width-20",
           attributes: {
-            "data-module": "app-filter-checkboxes"
+            "data-module": "app-checkbox-filter"
           },
           formGroup: {
             classes: "nhsuk-u-margin-bottom-4"
@@ -108,43 +108,6 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
 
-      // Filter checkboxes functionality
-      const searchInput = document.querySelector('input[data-module="app-filter-checkboxes"]');
-      const checkboxItems = document.querySelectorAll('.nhsuk-checkboxes__item');
-
-      function filterCheckboxes() {
-        const searchTerm = searchInput ? searchInput.value.toLowerCase().trim().replace(/[.()]/g, '') : '';
-        const searchWords = searchTerm.split(/\s+/).filter(word => word.length > 0);
-
-        checkboxItems.forEach(item => {
-          console.log(item)
-          const label = item.querySelector('.nhsuk-checkboxes__label');
-          const checkbox = item.querySelector('.nhsuk-checkboxes__input');
-
-          if (!label || !checkbox) return;
-
-          // Skip if it's the select all checkbox
-          if (checkbox.hasAttribute('data-select-all')) return;
-
-          const labelText = label.textContent.toLowerCase().replace(/[.()]/g, '');
-          const labelWords = labelText.split(/\s+/);
-          const matches = searchWords.length === 0 || searchWords.every(searchWord =>
-            labelWords.some(labelWord => labelWord.startsWith(searchWord))
-          );
-
-          // Show only if matches search term
-          if (matches) {
-            item.removeAttribute('hidden');
-          } else {
-            item.setAttribute('hidden', '');
-          }
-        });
-      }
-
-      if (searchInput) {
-        searchInput.addEventListener('input', filterCheckboxes);
-      }
-
       // Select all checkbox
       const selectAllCheckbox = document.querySelector('input[data-select-all]');
 
@@ -159,7 +122,6 @@
         otherCheckboxes.forEach(cb => {
           cb.checked = selectAllCheckbox.checked;
         });
-        filterCheckboxes();
       });
 
       // Click on rows updates header state
