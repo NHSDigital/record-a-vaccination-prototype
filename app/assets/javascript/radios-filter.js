@@ -36,8 +36,8 @@ export class RadiosFilter extends Component {
    * Filter radio items based on the search input value
    */
   filter() {
-    const searchTerm = this.$root.value.toLowerCase().trim().replace(/[.()]/g, '')
-    const searchWords = searchTerm.split(/\s+/).filter(word => word.length > 0)
+    const searchTerm = this.$root.value.toLowerCase().trim()
+    const searchWords = searchTerm.split(/[\s.@()]+/).filter(word => word.length > 0)
 
     console.log('Filtering radios with search term:', searchTerm)
 
@@ -52,10 +52,13 @@ export class RadiosFilter extends Component {
       // Skip items marked as excluded from filtering (e.g. "add new" options)
       if ($radio.hasAttribute('data-no-filter')) return
 
-      const labelText = $label.textContent.toLowerCase().replace(/[.()]/g, '')
-      const labelWords = labelText.split(/\s+/)
+      const $hint = $item.querySelector('.nhsuk-radios__hint')
+      const labelText = $label.textContent.toLowerCase()
+      const hintText = $hint ? $hint.textContent.toLowerCase() : ''
+      const combinedText = `${labelText} ${hintText}`
+      const combinedWords = combinedText.split(/[\s.@()]+/).filter(word => word.length > 0)
       const matches = searchWords.length === 0 || searchWords.every(searchWord =>
-        labelWords.some(labelWord => labelWord.startsWith(searchWord))
+        combinedWords.some(word => word.startsWith(searchWord))
       )
 
       if (matches) {

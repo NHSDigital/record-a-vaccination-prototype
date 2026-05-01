@@ -108,11 +108,16 @@ module.exports = router => {
 
   router.get('/pharmacies/users',(req, res) => {
     const data = req.session.data
-    const users = data.users.slice(10, 20)
+    const users = data.users.slice(2, 30)
 
     res.render('pharmacies/users/index', {
       users
     })
+  })
+
+  router.get('/pharmacies/users/new',(req, res) => {
+
+    res.render('pharmacies/users/new')
   })
 
   router.get('/pharmacies/add-lead-admins',(req, res) => {

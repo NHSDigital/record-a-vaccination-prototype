@@ -44,8 +44,7 @@
 
         {{ input({
           "label": {
-            "text": "Email address",
-            size: "s"
+            "text": "Email address"
           },
           "id": "email",
           "name": "email",
@@ -53,35 +52,25 @@
           value: data.email
         }) }}
 
-        {{ checkboxes({
+        {{ radios({
           idPrefix: "example",
           name: "example",
           fieldset: {
             legend: {
-              text: "Which pharmacy do you want to add them to?",
-              size: "s",
+              text: "Permission level",
               isPageHeading: true
             }
           },
           items: [
             {
               value: "all",
-              text: "All – add them as a super admin for Peak Pharmacy"
+              text: "Group admin for Peak Pharmacy"
             },
             {
               divider: "or"
             },
             {
-              text: "Peak Pharmacy (P141)"
-            },
-            {
-              text: "Peak Pharmacy (P931)"
-            },
-            {
-              text: "Peak Pharmacy (P291)"
-            },
-            {
-              text: "etc"
+              text: "I’ll add them to individual pharmacies"
             }
           ]
         }) }}

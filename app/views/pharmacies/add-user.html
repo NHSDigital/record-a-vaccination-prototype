@@ -23,7 +23,10 @@
       {% for user in (users | sort(false, false, "firstName")) %}
         {% set items = (items.push({
           text: user.firstName + " " + user.lastName,
-          value: user.id
+          value: user.id,
+          hint: {
+            text: user.email
+          }
         }), items) %}
       {% endfor %}
 
@@ -86,7 +89,7 @@
         }) }}
       {% endif %}
 
-        <div class="app-scrollable-container">
+        <div class="app-scrollable-container app-scrollable-container--fixed-height">
           {{ radios({
             name: "userId",
             value: data.userId,
