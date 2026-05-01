@@ -56,6 +56,8 @@
         text: "Add user"
       }) }}
 
+      {% if (users | length) > 0 %}
+
         <table class="nhsuk-table">
           <thead role="rowgroup" class="nhsuk-table__head">
             <tr role="row">
@@ -100,8 +102,9 @@
             {% endfor %}
           </tbody>
         </table>
+      {% endif %}
 
-        <p><a href="#">Deactivate this pharmacy</a></p>
+      <p><a href="#">Deactivate this pharmacy</a></p>
     </div>
   </div>
 

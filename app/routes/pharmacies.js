@@ -137,7 +137,7 @@ module.exports = router => {
 
   router.get('/pharmacies/:id/add-user',(req, res) => {
     const data = req.session.data
-    const users = data.users.slice(10, 20)
+    const users = data.users.slice(10, 30)
     const id = req.params.id
     const organisation = data.organisations.find((organisation) => organisation.id === id)
 
