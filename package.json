@@ -20,7 +20,7 @@
     "nhsuk-prototype-kit": "^8.2.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^8.59.1",
+    "@typescript-eslint/eslint-plugin": "^8.59.2",
     "@typescript-eslint/parser": "^8.59.1",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
