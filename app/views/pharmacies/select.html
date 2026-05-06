@@ -1,0 +1,109 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies" %}
+{% set pageName = "Add pharmacies" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <form action="/pharmacies/check-selection" method="post"
+        data-module="app-checkboxes-count-select"
+        data-i18n.selected-count.one="%{count} pharmacy selected"
+        data-i18n.selected-count.other="%{count} pharmacies selected">
+
+      <h1>{{ pageName }}</h1>
+
+      <p>There are {{ (pharmacies | length) + 7 }} active pharmacies in your company according to the <a href="https://digital.nhs.uk/services/organisation-data-service">NHS Organisation Data Service</a> (ODS).</p>
+
+      <p>{{ (pharmacies | length) }} of them are not yet using RAVS and can be added below.</p>
+
+
+      {% set items = [] %}
+
+      {% for pharmacy in pharmacies %}
+        {% set items = (items.push({
+          text: pharmacy.name + ", " + pharmacy.address.postcode + " (" + pharmacy.id + ")",
+          value: pharmacy.id
+        }), items) %}
+      {% endfor %}
+
+
+      {% call fieldset({
+        legend: {
+          text: "Select pharmacies",
+          size: "m",
+          classes: "nhsuk-u-margin-bottom-5"
+        }
+      }) %}
+
+      {% if (pharmacies | length) > 1 %}
+        {{ checkboxes({
+          idPrefix: "pharmacy-select-all",
+          name: "pharmacyIds",
+          values: data.pharmacyIds,
+          formGroup: {
+            classes: "nhsuk-u-margin-bottom-2"
+          },
+          items: [
+            {
+              text: "Select all " + (pharmacies | length),
+              value: "",
+              attributes: {
+                "data-module": "app-checkbox-select-all",
+                "data-select-all": "true"
+              }
+            },
+            {
+              divider: "or"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      {% if (pharmacies | length) > 20 %}
+        {{ input({
+          id: "pharmacy-search",
+          name: "pharmacySearch",
+          type: "search",
+          label: {
+            text: "Search"
+          },
+          classes: "nhsuk-input--width-20",
+          attributes: {
+            "data-module": "app-checkbox-filter"
+          },
+          formGroup: {
+            classes: "nhsuk-u-margin-bottom-4"
+          }
+        }) }}
+      {% endif %}
+
+
+      <div class="app-scrollable-container">
+        {{ checkboxes({
+          id: "pharmacy-ids",
+          name: "pharmacyIds",
+          values: data.pharmacyIds,
+          items: items
+        }) }}
+      </div>
+
+      {% endcall %}
+
+      <p data-selected-count-display></p>
+
+      {{ button({
+        text: "Continue"
+      }) }}
+
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

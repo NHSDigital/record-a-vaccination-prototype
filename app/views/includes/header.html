@@ -11,6 +11,21 @@
     active: (currentSection == "home")
   }), navigationItems) %}
 
+  <!-- Reports mode -->
+  {% if data.currentMode == "reports" %}
+    {% set navigationItems = (navigationItems.push({
+      href: "/pharmacies",
+      text: "Pharmacies",
+      active: (currentSection == "pharmacies")
+    }), navigationItems) %}
+
+    {% set navigationItems = (navigationItems.push({
+      href: "/pharmacies/users",
+      text: "Manage users",
+      active: (currentSection == "pharmacies-users")
+    }), navigationItems) %}
+  {% endif %}
+
   {% if currentOrganisation %}
     {% set navigationItems = (navigationItems.push({
       href: "/record-vaccinations",

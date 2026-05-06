@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies-users" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-three-quarters">
+
+      <h1 class="nhsuk-heading-l">Users</h1>
+
+      <p>Add a new user or manage an existing pharmacy.</p>
+
+      {{ button({
+        text: "Add user",
+        href: "/pharmacies/users/new"
+      }) }}
+
+      <table class="nhsuk-table">
+        <caption class="nhsuk-table__caption nhsuk-table__caption--m">Current users</caption>
+        <thead role="rowgroup" class="nhsuk-table__head">
+          <tr role="row">
+            <th role="columnheader" class="" scope="col">
+              Name
+            </th>
+            <th role="columnheader" class="" scope="col">
+              Email
+            </th>
+
+          </tr>
+        </thead>
+        <tbody class="nhsuk-table__body">
+          {% for user in users %}
+            <tr role="row" class="nhsuk-table__row">
+              <td class="nhsuk-table__cell">
+                <a href="/pharmacies/users/{{ user.id }}">{{ user.firstName }} {{ user.lastName }}</a>
+              </td>
+              <td class="nhsuk-table__cell ">
+                {{ user.email }}
+              </td>
+            </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{% endblock %}

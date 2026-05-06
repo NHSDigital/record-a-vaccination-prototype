@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies" %}
+{% set pageName = "Adding user to " + organisation.name  %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/" + organisation.id + "/add-user"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-l">
+        Adding
+        {% if existingUser %}
+          {{ existingUser.firstName }} {{ existingUser.lastName }}
+        {% else %}
+          {{ data.firstName }} {{ data.lastName }}
+        {% endif %}
+        to {{ organisation.name }} ({{ organisation.id }})
+      </h1>
+
+      <form action="/pharmacies/{{ organisation.id }}/add-user-check" method="post">
+
+        {{ radios({
+        name: "permissionLevel",
+        idPrefix: "permission-level",
+        fieldset: {
+          legend: {
+            text: "Permission level",
+            size: "s"
+          }
+        },
+        value: data.permissionLevel,
+        items: [
+          {
+            value: "Recorder",
+            text: "Recorder",
+            hint: {
+              text: "Record vaccinations only"
+            }
+          },
+          {
+            value: "Administrator",
+            text: "Administrator",
+            hint: {
+              text: "Record vaccinations, create reports and manage vaccines"
+            }
+          },
+          {
+            value: "Lead administrator",
+            text: "Lead administrator",
+            hint: {
+              text: "Record vaccinations, create reports, manage vaccines and users"
+            }
+          }
+        ]
+      }) }}
+
+      {{ radios({
+        "name": "vaccinator",
+        "fieldset": {
+          "legend": {
+            "text": "Are they a vaccinator?",
+            size: "s"
+          }
+        },
+        hint: {
+          text: "Vaccination records include the name of the person who gave the vaccination"
+        },
+        value: data.vaccinator,
+        "items": [
+          {
+            "value": "yes",
+            "text": "Yes",
+            id: "vaccinator"
+          },
+          {
+            "value": "no",
+            "text": "No"
+          }
+        ]
+      }) }}
+
+
+      {{ button({
+        text: "Continue"
+      }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies" %}
+{% set pageName = "Add user to " + organisation.name + " (" + organisation.id + ")"  %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/" + organisation.id
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p>You can add an existing user to the pharmacy, or invite a new user.</p>
+
+      <form data-module="app-add-another" data-add-another-min="0" action="/pharmacies/{{ organisation.id }}/add-user-permission-level" method="post">
+
+      {% set items = [] %}
+
+      {% for user in (users | sort(false, false, "firstName")) %}
+        {% set items = (items.push({
+          text: user.firstName + " " + user.lastName,
+          value: user.id,
+          hint: {
+            text: user.email
+          }
+        }), items) %}
+      {% endfor %}
+
+
+
+      {% set newUserHtml %}
+        {{ input({
+          label: {
+            text: "First name"
+          },
+          name: "firstName",
+          classes: "nhsuk-input--width-20",
+          value: data.firstName
+        }) }}
+
+        {{ input({
+          label: {
+            text: "Last name"
+          },
+          name: "lastName",
+          classes: "nhsuk-input--width-20",
+          value: data.lastName
+        }) }}
+
+        {{ input({
+          label: {
+            text: "Email address"
+          },
+          name: "email",
+          type: "email",
+          value: data.email
+        }) }}
+      {% endset %}
+
+
+
+      {% call fieldset({
+        legend: {
+          text: "User",
+          size: "m",
+          classes: "nhsuk-u-margin-bottom-5"
+        }
+      }) %}
+
+      {% if (users | length) > 10 %}
+        {{ input({
+          id: "user-search",
+          name: "userSearch",
+          type: "search",
+          label: {
+            text: "Search"
+          },
+          classes: "nhsuk-input--width-20",
+          attributes: {
+            "data-module": "app-radios-filter"
+          },
+          formGroup: {
+            classes: "nhsuk-u-margin-bottom-4"
+          }
+        }) }}
+      {% endif %}
+
+        <div class="app-scrollable-container app-scrollable-container--fixed-height">
+          {{ radios({
+            name: "userId",
+            value: data.userId,
+            items: items
+          }) }}
+        </div>
+
+        {{ radios({
+          name: "userId",
+          value: data.userId,
+          items: [
+            {
+              divider: "or"
+            },
+            {
+              text: "Add a new user",
+              value: "add-new",
+              id: "add-new",
+              attributes: {
+                "data-no-filter": ""
+              },
+              conditional: {
+                html: newUserHtml
+              }
+            }
+          ]
+        }) }}
+
+      {% endcall %}
+
+      {{ button({
+        text: "Continue"
+      }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+{% endblock %}
