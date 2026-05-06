@@ -19,7 +19,7 @@ module.exports = [
   },
   {
     id: "646436346",
-    vaccine: "flu",
+    vaccine: "Flu",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
     organisationId: "RW3", // Central Manchester Trust
     siteId: "RW3NM", // North Manchester General Hospital
@@ -47,7 +47,7 @@ module.exports = [
   },
   {
     id: "64364364",
-    vaccine: "pertussis",
+    vaccine: "Pertussis",
     vaccineProduct: "Adacel vaccine suspension",
     organisationId: "RW3", // Central Manchester Trust
     siteId: "RW3HT", // Heaton Moor Health Centre"
@@ -61,7 +61,7 @@ module.exports = [
   },
   {
     id: "18582856",
-    vaccine: "flu",
+    vaccine: "Flu",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
     organisationId: "RW3", // Central Manchester Trust
     siteId: "RW3HT", // Heaton Moor Health Centre"
@@ -117,7 +117,7 @@ module.exports = [
   },
   {
     id: "RFF09890483694",
-    vaccine: "flu",
+    vaccine: "Flu",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
     organisationId: "RFF", // Barnsley Hospital NHS Foundation Trust
     siteId: "RFFPK", // Barnsley General Hospital
@@ -131,7 +131,7 @@ module.exports = [
   },
   {
     id: "RFF0466214643",
-    vaccine: "pertussis",
+    vaccine: "Pertussis",
     vaccineProduct: "Adacel vaccine",
     organisationId: "RFF", // Barnsley Hospital NHS Foundation Trust
     siteId: "RFFPK", // Barnsley General Hospital
@@ -159,7 +159,7 @@ module.exports = [
   },
   {
     id: "RFF1141245745",
-    vaccine: "pneumococcal",
+    vaccine: "Pneumococcal",
     vaccineProduct: "Pneumovax",
     organisationId: "RFF", // Barnsley Hospital NHS Foundation Trust
     siteId: "RFFPK", // Barnsley General Hospital
@@ -229,7 +229,7 @@ module.exports = [
   },
   {
     id: "RFF47457436",
-    vaccine: "hepatitis B",
+    vaccine: "Hepatitis B",
     vaccineProduct: "Engerix B",
     organisationId: "RFF", // Barnsley Hospital NHS Foundation Trust
     siteId: "RFFPK", // Barnsley General Hospital
@@ -313,7 +313,7 @@ module.exports = [
   },
   {
     id: "RFF27326334",
-    vaccine: "rotavirus",
+    vaccine: "Rotavirus",
     vaccineProduct: "Rotarix",
     organisationId: "RFF", // Barnsley Hospital NHS Foundation Trust
     siteId: "RFFPK", // Barnsley General Hospital
@@ -327,7 +327,7 @@ module.exports = [
   },
   {
     id: "RFF25325355",
-    vaccine: "shingles",
+    vaccine: "Shingles",
     vaccineProduct: "Shingrix",
     organisationId: "RFF", // Barnsley Hospital NHS Foundation Trust
     siteId: "RFFPK", // Barnsley General Hospital
@@ -439,7 +439,7 @@ module.exports = [
   },
   {
     id: "2514771",
-    vaccine: "flu (London service)",
+    vaccine: "Flu (London service)",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
     organisationId: "FT81513", // Holborn Pharmacy
     siteId: "FX252", // Holborn Pharmacy

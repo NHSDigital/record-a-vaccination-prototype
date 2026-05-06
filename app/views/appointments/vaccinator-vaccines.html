@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "appointments" %}
+{% set pageName = "What vaccines are being administered?" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/appointments/vaccinators",
+    text: "Back"
+  }) }}
+{% endblock%}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      {% if vaccinators | length == 0 %}
+        <div class="nhsuk-warning-text">
+          <span class="nhsuk-warning-text__icon" aria-hidden="true">!</span>
+          <strong class="nhsuk-warning-text__text">You need to select at least one vaccinator first.</strong>
+        </div>
+        <p><a class="nhsuk-link" href="/appointments/vaccinators">Choose vaccinators</a></p>
+      {% else %}
+        <form action="/appointments/vaccinator-vaccines" method="post" novalidate>
+
+          <p class="nhsuk-body">For each vaccinator below, select the vaccine types they are administering today.</p>
+
+          {% set vaccinatorVaccines = data.vaccinatorVaccines or {} %}
+
+          {% for vaccinator in vaccinators %}
+            {% set items = [] %}
+            {% for vaccine in vaccines %}
+              {% set items = (items.push({
+                value: vaccine.name,
+                text: vaccine.name
+              }), items) %}
+            {% endfor %}
+
+            {{ checkboxes({
+              idPrefix: "vaccinator-" + vaccinator.id,
+              name: "vaccinatorVaccines[" + vaccinator.id + "]",
+              fieldset: {
+                legend: {
+                  text: vaccinator.firstName + " " + vaccinator.lastName,
+                  size: "m"
+                }
+              },
+              hint: {
+                text: "Select all vaccines this vaccinator is administering."
+              },
+              items: items,
+              values: vaccinatorVaccines[vaccinator.id]
+            }) }}
+          {% endfor %}
+
+          {{ button({
+            text: "Continue"
+          }) }}
+        </form>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}

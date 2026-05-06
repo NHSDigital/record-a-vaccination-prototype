@@ -1,0 +1,102 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "appointments" %}
+{% set pageName = "Which batch is being used today?" %}
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/appointments",
+    text: "Back"
+  }) }}
+{% endblock%}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/appointments" method="post" novalidate>
+
+        {% set covid19Html %}
+          {{ radios({
+            idPrefix: "covid19-batch",
+            name: "covid19BatchId",
+            items: [
+              {
+                value: "covid19-batch1",
+                text: "Batch 1"
+              },
+              {
+                value: "covid19-batch2",
+                text: "Batch 2"
+              }
+            ],
+            value: data.covid19BatchId
+          }) }}
+        {% endset %}
+
+        {% set rsvHtml %}
+          {{ radios({
+            idPrefix: "rsv-batch",
+            name: "rsvBatchId",
+            items: [
+              {
+                value: "rsv-batch1",
+                text: "Batch 1"
+              },
+              {
+                value: "rsv-batch2",
+                text: "Batch 2"
+              }
+            ],
+            value: data.rsvBatchId
+          }) }}
+        {% endset %}
+
+        {% set items = [] %}
+
+        {% set items = (items.push({
+          value: "covid19-batches",
+          text: "COVID-19",
+          conditional: {
+            html: covid19Html
+          }
+        }), items) %}
+
+        {% set items = (items.push({
+          value: "RSV-batches",
+          text: "RSV",
+          conditional: {
+            html: rsvHtml
+          }
+        }), items) %}
+
+       
+
+        {{ checkboxes({
+          idPrefix: "batch",
+          name: "batchIds",
+          fieldset: {
+            legend: {
+              text: pageName,
+              size: "l",
+              isPageHeading: "true"
+            }
+          },
+          hint: {
+            text: "Setting this lets you save time when recording today's vaccinations."
+          },
+          items: items,
+          values: data.batchIds
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+
+{% endblock %}

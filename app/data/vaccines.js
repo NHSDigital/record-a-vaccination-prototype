@@ -18,7 +18,7 @@ module.exports = [
     ]
   },
   {
-    name: "flu",
+    name: "Flu",
     availableToAllSites: true,
     products: [
       {
@@ -52,7 +52,7 @@ module.exports = [
     ]
   },
   {
-    name: "flu (London service)",
+    name: "Flu (London service)",
     products: [
       {
         name: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
@@ -85,7 +85,7 @@ module.exports = [
     ]
   },
   {
-    name: "pertussis",
+    name: "Pertussis",
     products: [
       {
         name: "Adacel vaccine",
@@ -115,7 +115,7 @@ module.exports = [
     ]
   },
   {
-    name: "pneumococcal",
+    name: "Pneumococcal",
     products: [
       {
         name: "Pneumovax",
@@ -172,7 +172,7 @@ module.exports = [
     ]
   },
   {
-    name: "hepatitis B",
+    name: "Hepatitis B",
     products: [
       {
         name: "Engerix B",
@@ -250,7 +250,7 @@ module.exports = [
     ]
   },
   {
-    name: "rotavirus",
+    name: "Rotavirus",
     products: [
       {
         name: "Rotarix",
@@ -259,7 +259,7 @@ module.exports = [
     ]
   },
   {
-    name: "shingles",
+    name: "Shingles",
     products: [
       {
         name: "Shingrix",

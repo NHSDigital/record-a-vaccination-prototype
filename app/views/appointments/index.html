@@ -27,13 +27,69 @@
         {% if (vaccinators | length) > 1  %}
           <ul class="nhsuk-list">
             {% for vaccinator in vaccinators %}
-              <li>{{ vaccinator.firstName }} {{ vaccinator.lastName }}</li>
+              {% set selectedVaccines = vaccinatorVaccinesSelected[vaccinator.id] or [] %}
+              <li>
+                {{ vaccinator.firstName }} {{ vaccinator.lastName }}{% if selectedVaccines | length > 0 %} — {{ selectedVaccines | join(', ') }}{% endif %}
+              </li>
             {% endfor %}
           </ul>
         {% elif (vaccinators | length) == 1 %}
-          {{ (vaccinators | first).firstName }} {{ (vaccinators | first).lastName }}
+          {% set selectedVaccines = vaccinatorVaccinesSelected[(vaccinators | first).id] or [] %}
+          {{ (vaccinators | first).firstName }} {{ (vaccinators | first).lastName }}{% if selectedVaccines | length > 0 %} — {{ selectedVaccines | join(', ') }}{% endif %}
         {% else %}
-          <a href="/appointments/vaccinators" class="nhsuk-link">Set today’s vaccinator</a>
+          <a href="/appointments/vaccinators" class="nhsuk-link">Set today’s vaccinators</a>
+        {% endif %}
+      {% endset %}
+
+      {% set batches = batches or [] %}
+
+      {% set batchHtml %}
+        {% set selectedBatches = [] %}
+
+        {% if data.batchIds %}
+          {% if "covid19-batches" in data.batchIds %}
+            {% set covidText = "COVID-19" %}
+            {% if data.covid19BatchId == "covid19-batch1" %}
+              {% set covidText = covidText + " — Batch 1" %}
+            {% elif data.covid19BatchId == "covid19-batch2" %}
+              {% set covidText = covidText + " — Batch 2" %}
+            {% else %}
+              {% set covidText = covidText + " — batch not selected" %}
+            {% endif %}
+            {% set selectedBatches = (selectedBatches.push(covidText), selectedBatches) %}
+          {% endif %}
+
+          {% if "RSV-batches" in data.batchIds %}
+            {% set rsvText = "RSV" %}
+            {% if data.rsvBatchId == "rsv-batch1" %}
+              {% set rsvText = rsvText + " — Batch 1" %}
+            {% elif data.rsvBatchId == "rsv-batch2" %}
+              {% set rsvText = rsvText + " — Batch 2" %}
+            {% else %}
+              {% set rsvText = rsvText + " — batch not selected" %}
+            {% endif %}
+            {% set selectedBatches = (selectedBatches.push(rsvText), selectedBatches) %}
+          {% endif %}
+        {% endif %}
+
+        {% if selectedBatches | length > 1 %}
+          <ul class="nhsuk-list">
+            {% for batchText in selectedBatches %}
+              <li>{{ batchText }}</li>
+            {% endfor %}
+          </ul>
+        {% elif selectedBatches | length == 1 %}
+          {{ selectedBatches | first }}
+        {% elif (batches | length) > 1  %}
+          <ul class="nhsuk-list">
+            {% for batch in batches %}
+              <li>{{ batch.name }}</li>
+            {% endfor %}
+          </ul>
+        {% elif (batches | length) == 1 %}
+          {{ (batches | first).name }}
+        {% else %}
+          <a href="/appointments/batches" class="nhsuk-link">Set today's batch</a>
         {% endif %}
       {% endset %}
 
@@ -55,6 +111,23 @@
                 }
               ]
             } if data.vaccinatorIds
+          },
+          {
+            key: {
+              text: ("Batches" if (batches | length) > 1 else "Batch")
+            },
+            value: {
+              html: batchHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: "/appointments/batches",
+                  text: "Change",
+                  visuallyHiddenText: "batch"
+                }
+              ]
+            } if data.batchIds
           }
         ]
         }) }}

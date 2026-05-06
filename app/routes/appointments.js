@@ -29,11 +29,23 @@ module.exports = (router) => {
     const completedAppointments = appointments.filter((appointment) => (appointment.vaccinationIds || []).length > 0)
 
     let vaccinators = []
+    let vaccinatorVaccinesSelected = {}
 
     if (data.vaccinatorIds) {
       vaccinators = data.users.filter((user) => data.vaccinatorIds.includes(user.id))
     }
 
+    if (data.vaccinatorVaccines) {
+      Object.entries(data.vaccinatorVaccines).forEach(([vaccinatorId, selected]) => {
+        if (Array.isArray(selected)) {
+          vaccinatorVaccinesSelected[vaccinatorId] = selected.filter(Boolean).filter(vaccine => vaccine !== '_unchecked')
+        } else if (typeof selected === 'string') {
+          vaccinatorVaccinesSelected[vaccinatorId] = selected && selected !== '_unchecked' ? [selected] : []
+        } else {
+          vaccinatorVaccinesSelected[vaccinatorId] = []
+        }
+      })
+    }
 
     res.render('appointments/index', {
       scheduledAppointments,
@@ -43,7 +55,8 @@ module.exports = (router) => {
       currentDay,
       previousDay,
       nextDay,
-      vaccinators
+      vaccinators,
+      vaccinatorVaccinesSelected
     })
   })
 
@@ -73,6 +86,39 @@ module.exports = (router) => {
       otherVaccinators
     })
 
+  })
+
+  router.post('/appointments/vaccinators', (req, res) => {
+    const data = req.session.data
+    data.vaccinatorIds = req.body.vaccinatorIds || []
+    res.redirect('/appointments/vaccinator-vaccines')
+  })
+
+  router.get('/appointments/vaccinator-vaccines', (req, res) => {
+    const data = req.session.data
+    let vaccinators = []
+
+    if (data.vaccinatorIds) {
+      vaccinators = data.users.filter((user) => data.vaccinatorIds.includes(user.id))
+    }
+
+    const organisationVaccines = (res.locals.currentOrganisation && res.locals.currentOrganisation.vaccines) || []
+    const vaccines = organisationVaccines.length ? organisationVaccines : [
+      { name: 'COVID-19' },
+      { name: 'RSV' }
+    ]
+
+    res.render('appointments/vaccinator-vaccines', {
+      vaccinators,
+      vaccines
+    })
+  })
+
+  router.post('/appointments/vaccinator-vaccines', (req, res) => {
+    const data = req.session.data
+    delete data.vaccinatorVaccines
+    data.vaccinatorVaccines = req.body.vaccinatorVaccines || {}
+    res.redirect('/appointments')
   })
 }
 
