@@ -2,12 +2,14 @@
   <thead class="nhsuk-table__head" role="rowgroup">
     <tr>
       <th scope="col" class="nhsuk-table__header" aria-sort="ascending">Time</th>
-      <th scope="col" class="nhsuk-table__header" aria-sort="none">Name</th>
+      <th scope="col" class="nhsuk-table__header" aria-sort="none">Name and NHS number</th>
       <th scope="col" class="nhsuk-table__header">Date of birth</th>
-      <th scope="col" class="nhsuk-table__header">Vaccines</th>
+      <th scope="col" class="nhsuk-table__header">Vaccines booked</th>
       <th scope="col" class="nhsuk-table__header">Contact details</th>
 
-      <th scope="col" class="nhsuk-table__header">Action</th>
+      {% if currentDay == today %}
+        <th scope="col" class="nhsuk-table__header">Action</th>
+      {% endif %}
 
     </tr>
   </thead>
@@ -15,10 +17,11 @@
 
   {% for appointment in scheduledAppointments %}
     <tr class="nhsuk-table__row" role="row">
-      <td class="nhsuk-table__cell" data-value="{{ appointment.time }}">{{ appointment.time }}&nbsp;am</td>
+      <td class="nhsuk-table__cell" data-value="{{ appointment.time }}">{{ appointment.time }}am</td>
       <td class="nhsuk-table__cell">
         {{ appointment.patient.firstName }}
         {{ appointment.patient.lastName }}
+        <div class="nhsuk-u-secondary-text-colour">{{ appointment.patient.nhsNumber }}</div>
       </td>
       <td class="nhsuk-table__cell">
         {{ appointment.patient.dateOfBirth | govukDate }}
@@ -35,12 +38,11 @@
           {{ appointment.patient.contactDetails.email }}<br>
         {% endif %}
       </td>
-      <td class="nhsuk-table__cell">
-        <a href="/record-vaccinations/patient-history?nhsNumber={{ appointment.patient.nhsNumber }}&dateOfBirth={{ appointment.patient.dateOfBirth }}&firstName={{ appointment.patient.firstName }}&lastName={{ appointment.patient.lastName }}&from=appointments&appointmentId={{ appointment.id}}">Record</a>
-        {% if currentDay >= today %}
-          <div class="nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-0"><a href="#">Cancel</a></div>
-        {% endif %}
-      </td>
+      {% if currentDay == today %}
+        <td class="nhsuk-table__cell">
+          <a href="/record-vaccinations/patient-history?nhsNumber={{ appointment.patient.nhsNumber }}&dateOfBirth={{ appointment.patient.dateOfBirth }}&firstName={{ appointment.patient.firstName }}&lastName={{ appointment.patient.lastName }}&from=appointments&appointmentId={{ appointment.id}}">Record</a>
+        </td>
+      {% endif %}
     </tr>
   {% endfor %}
   </tbody>

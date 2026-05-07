@@ -46,12 +46,10 @@
           text: (lastAddedVaccination.patient.name + "’s next vaccination")
         }), items) %}
 
-        {% if not data.appointmentId %}
-          {% set items = (items.push({
-            value: "same-vaccination-another-patient",
-            text: lowercaseVaccineName + " vaccination for another patient"
-          }), items) %}
-        {% endif %}
+        {% set items = (items.push({
+          value: "same-vaccination-another-patient",
+          text: lowercaseVaccineName + " vaccination for another patient"
+        }), items) %}
 
         {% set items = (items.push({
           divider: "or"

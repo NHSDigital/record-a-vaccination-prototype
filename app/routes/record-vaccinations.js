@@ -759,10 +759,10 @@ module.exports = router => {
       data.consentAdvocateName = ""
       data.consentDeputyName = ""
       data.doseAmount = ""
-      data.appointmentId = ""
     }
 
     if (answer === 'same-vaccination-another-patient') {
+      data.appointmentId = ""
 
       req.session.data.firstName = ""
       req.session.data.lastName = ""
@@ -788,6 +788,7 @@ module.exports = router => {
       res.redirect('/record-vaccinations/patient-history?repeatPatient=yes&repeatVaccination=no')
 
     } else if (answer === 'different-vaccination-another-patient') {
+      data.appointmentId = ""
 
       req.session.data.vaccine = ""
       req.session.data.vaccineProduct = ""
@@ -800,6 +801,7 @@ module.exports = router => {
       res.redirect('/record-vaccinations/?repeatPatient=no&repeatVaccination=no')
 
     } else if (answer === 'appointments') {
+      data.appointmentId = ""
 
       req.session.data.vaccine = ""
       req.session.data.vaccineProduct = ""

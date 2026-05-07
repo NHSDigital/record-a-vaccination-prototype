@@ -3,12 +3,23 @@ module.exports = (router) => {
   router.get('/appointments', (req, res) => {
     const data = req.session.data
 
-    const date = (req.query.date ? (new Date(req.query.date)) : (new Date()))
     const day = 86400000 // number of milliseconds in a day
-    const previousDay = (new Date(date.getTime() - day)).toISOString().substring(0,10)
-    const nextDay = (new Date(date.getTime() + day)).toISOString().substring(0,10)
-    const currentDay = date.toISOString().substring(0,10)
     const today = (new Date()).toISOString().substring(0,10)
+    const yesterday = (new Date(Date.now() - day)).toISOString().substring(0,10)
+    const tomorrow = (new Date(Date.now() + day)).toISOString().substring(0,10)
+    const requestedDay = req.query.date
+    const allowedDays = [yesterday, today, tomorrow]
+
+    if (requestedDay && !allowedDays.includes(requestedDay)) {
+      return res.redirect('/appointments')
+    }
+
+    const currentDay = requestedDay || today
+    const currentDate = new Date(currentDay)
+    const previousDay = (new Date(currentDate.getTime() - day)).toISOString().substring(0,10)
+    const nextDay = (new Date(currentDate.getTime() + day)).toISOString().substring(0,10)
+    const isYesterday = currentDay === yesterday
+    const isTomorrow = currentDay === tomorrow
 
     let appointments = data.appointments
 
@@ -43,36 +54,15 @@ module.exports = (router) => {
       currentDay,
       previousDay,
       nextDay,
+      isYesterday,
+      isTomorrow,
       vaccinators
     })
   })
 
 
   router.get('/appointments/vaccinators', (req, res) => {
-    const data = req.session.data
-
-    let otherVaccinators = data.users
-    .filter((user) => {
-      const userOrgnisationSetting = (user.organisations || []).find((organisation) => organisation.id === data.currentOrganisationId)
-
-      return (user.id != data.currentUserId) && userOrgnisationSetting && userOrgnisationSetting.vaccinator && (userOrgnisationSetting.status === "Active")
-    })
-    .sort((a, b) => {
-      const nameA = a.firstName.toUpperCase(); // ignore upper and lowercase
-      const nameB = b.firstName.toUpperCase(); // ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      return 0;
-    })
-
-    res.render('appointments/vaccinators', {
-      otherVaccinators
-    })
-
+    res.redirect('/appointments')
   })
 }
 

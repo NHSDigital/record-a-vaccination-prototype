@@ -17,48 +17,12 @@
     <div class="nhsuk-grid-column-two-thirds">
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+      <span class="nhsuk-caption-m">{{ currentDay | dayName('long') }}</span>
       <h2 class="nhsuk-heading-m">{{ currentDay | formatDate }}</h2>
+      
+      
 
-      <p>Imported from <b>Manage your appointments</b>.</p>
-
-      {% if currentDay == today %}
-
-      {% set vaccinatorHtml %}
-        {% if (vaccinators | length) > 1  %}
-          <ul class="nhsuk-list">
-            {% for vaccinator in vaccinators %}
-              <li>{{ vaccinator.firstName }} {{ vaccinator.lastName }}</li>
-            {% endfor %}
-          </ul>
-        {% elif (vaccinators | length) == 1 %}
-          {{ (vaccinators | first).firstName }} {{ (vaccinators | first).lastName }}
-        {% else %}
-          <a href="/appointments/vaccinators" class="nhsuk-link">Set today’s vaccinator</a>
-        {% endif %}
-      {% endset %}
-
-      {{ summaryList({
-        rows: [
-          {
-            key: {
-              text: ("Vaccinators" if (vaccinators | length) > 1 else "Vaccinator")
-            },
-            value: {
-              html: vaccinatorHtml
-            },
-            actions: {
-              items: [
-                {
-                  href: "/appointments/vaccinators",
-                  text: "Change",
-                  visuallyHiddenText: "vaccinator"
-                }
-              ]
-            } if data.vaccinatorIds
-          }
-        ]
-        }) }}
-      {% endif %}
+      <p>Imported from <b>Manage your appointments</b></p>
 
     </div>
   </div>
@@ -69,11 +33,11 @@
         previous: {
           labelText: ("Yesterday" if currentDay == today else (previousDay | formatDate)),
           href: "/appointments?date=" + previousDay
-        },
+        } if not isYesterday,
         next: {
           labelText: ("Tomorrow" if currentDay == today else (nextDay | formatDate)),
           href: "/appointments?date=" + nextDay
-        }
+        } if not isTomorrow
       }) }}
 
       {% set todayHtml %}
