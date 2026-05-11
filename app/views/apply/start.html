@@ -12,62 +12,62 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-     {% if (errors | length) > 0 %}
-      {{ errorSummary({
-        titleText: "There is a problem",
-        errorList: errors
-      }) }}
-     {% endif %}
+      {% if (errors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
       
-        <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-        <p>From 1 September 2026, community pharmacies offering NHS vaccinations must use this service.</p>
+      <p>From 1 September 2026, community pharmacies offering NHS vaccinations must use this service.</p>
 
-        <p>If you need to sign up for more than 1 pharmacy, you can use this form multiple times.</p>
+      <p>If you need to sign up for more than 1 pharmacy, you can use this form multiple times.</p>
 
-        <p>For chains with 50 or more branches, there is a separate bulk onboarding option. <a href="#">Contact us for more details</a>.</p>
+      <p>For chains with 50 or more branches, there is a separate bulk onboarding option. <a href="#">Contact us for more details</a>.</p>
 
-        <form action="/apply/answer-pharmacy" method="post">
+      <form action="/apply/answer-pharmacy" method="post">
 
         {% set options = [] %}
-        {% set items = [{ text: "", value: ""}] %}
+        {% set items = [{ text: "", value: ""}] %}
 
-        {% for organisation in data.organisations %}
-         {% if organisation.type == "Community Pharmacy" %}
-          {% set items = (items.push({
-            text: organisation.name + ", " + organisation.address.line1 + ", " + (organisation.address.postcode | upper) + " (" + organisation.id + ")",
-            value: organisation.id,
-            selected: (organisation.id === data.organisationCode)
-          }), items) %}
-         {% endif %}
-        {% endfor %}
+        {% for organisation in data.organisations %}
+          {% if organisation.type == "Community Pharmacy" %}
+            {% set items = (items.push({
+              text: organisation.name + ", " + organisation.address.line1 + ", " + (organisation.address.postcode | upper) + " (" + organisation.id + ")",
+              value: organisation.id,
+              selected: (organisation.id === data.organisationCode)
+            }), items) %}
+          {% endif %}
+        {% endfor %}
 
-        {{ select({
-         id: "organisation-code",
-         name: "organisationCode",
-         label: {
-          text: "Find your pharmacy",
-          classes: "nhsuk-label--m nhsuk-u-margin-bottom-1"
-        },
-        hint: {
-         text: "Search by name or ODS code"
-        },
-        items: items,
-        errorMessage: {
-         text: (errors | first).text
-        } if (errors | length),
-        attributes: {
-         "data-module": "autocomplete"
-        }
-      }) }}
+        {{ select({
+          id: "organisation-code",
+          name: "organisationCode",
+          label: {
+            text: "Find your pharmacy",
+            classes: "nhsuk-label--m nhsuk-u-margin-bottom-1"
+          },
+          hint: {
+            text: "Search by name or ODS code"
+          },
+          items: items,
+          errorMessage: {
+            text: (errors | first).text
+          } if (errors | length),
+          attributes: {
+            "data-module": "autocomplete"
+          }
+        }) }}
 
-        {{ button({
-          "text": "Continue"
-        }) }}
-      </form>
+        {{ button({
+          "text": "Continue"
+        }) }}
+      </form>
 
 
 
-    </div>
-  </div>
+    </div>
+  </div>
 {% endblock %}
