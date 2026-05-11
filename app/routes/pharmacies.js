@@ -15,9 +15,7 @@ module.exports = router => {
     const data = req.session.data
     const added = req.query.added
 
-    // TODO: get this from the current login
-    // rather than hardcode it
-    const companyId = 'P15951'
+    const companyId = res.locals.currentOrganisation.id
 
     const organisations = data.organisations.filter((organisation) => organisation.companyId === companyId).sort(sortByNameThenPostcode())
 
