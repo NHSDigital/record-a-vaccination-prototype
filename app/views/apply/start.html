@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Sign up" %}
+{% set pageName = "Sign up for your pharmacy" %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -19,29 +19,9 @@
 
         <p>Any community pharmacy offering NHS vaccinations can sign up.</p>
 
-        <p>For other NHS settings, your regions are responsible for inviting you to use the service.</p>
+        <p>If you need to sign up for more than 1 pharmacy, you can use this form multiple times.</p>
 
-        {{ radios({
-          name: "oneOrMany",
-          value: data.oneOrMany,
-          fieldset: {
-            legend: {
-              text: "How many pharmacies do you want to sign up?",
-              size: "m",
-              isPageHeading: true
-            }
-          },
-          items: [
-            {
-              value: "single",
-              text: "A single pharmacy"
-            },
-            {
-              value: "chain",
-              text: "A group of pharmacies"
-            }
-          ]
-        }) }}
+        <p>For chains with 50 or more branches, there is a separate bulk onboarding option. Contact us for more details.</p>
 
         {{ button({
           "text": "Continue"
