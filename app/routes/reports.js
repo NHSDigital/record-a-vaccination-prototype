@@ -7,24 +7,15 @@ module.exports = (router) => {
     const currentOrganisation = res.locals.currentOrganisation
     let vaccinationsRecordedCount
 
-    if (currentOrganisation) {
+    if (currentOrganisation.type === "Pharmacy HQ") {
 
-      if (currentOrganisation.type === "Pharmacy HQ") {
-
-        // TODO count vaccinations recorded at any pharmacies within this group.
-        vaccinationsRecordedCount = 1
-
-      } else {
-
-        vaccinationsRecordedCount = data.vaccinationsRecorded.filter((vaccination) => vaccination.organisationId === currentOrganisation.id).length
-
-      }
+      // TODO count vaccinations recorded at any pharmacies within this group.
+      vaccinationsRecordedCount = 1
 
     } else {
 
-      // TODO: count across all organisations you
-      // have access to
-      vaccinationsRecordedCount = 100
+      vaccinationsRecordedCount = data.vaccinationsRecorded.filter((vaccination) => vaccination.organisationId === currentOrganisation.id).length
+
     }
 
     res.render('reports/index', {

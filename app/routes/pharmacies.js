@@ -66,9 +66,7 @@ module.exports = router => {
   router.post('/pharmacies/added', async (req, res) => {
     const data = req.session.data
 
-    // TODO: get this from the current login
-    // rather than hardcode it
-    const companyId = 'P15951'
+    const companyId = res.locals.currentOrganisation.id
 
     let pharmacies = await getPharmaciesBelongingToOrganisation("P15J")
 
