@@ -21,10 +21,6 @@ module.exports = router => {
       .filter((organisation) => organisation.status === "Active")
       .map((organisation) => organisation.id)
 
-    const organisationsUserIsAnAdminAt = (user.organisations || [])
-    .filter((organisation) => (organisation.status === "Active" && ["Lead administrator", "Administrator"].includes(organisation.permissionLevel)))
-    .map((organisation) => organisation.id)
-
     const userRegionIds = (user.regions || [])
       .filter((organisation) => organisation.status === "Active")
       .map((organisation) => organisation.id)

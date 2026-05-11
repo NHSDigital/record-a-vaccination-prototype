@@ -64,7 +64,6 @@ module.exports = router => {
   // Dashboard
   router.get('/home', (req, res) => {
     const currentOrganisation = res.locals.currentOrganisation
-    const currentUser = res.locals.currentUser
 
     const data = req.session.data
     const allVaccinationsRecorded = data.vaccinationsRecorded
@@ -73,10 +72,8 @@ module.exports = router => {
 
     // Vaccinations to count
     let vaccinationsRecorded = []
-
     let sites = []
     let pharmacies = []
-    let organisations = []
 
     if (currentOrganisation) {
 
@@ -101,15 +98,6 @@ module.exports = router => {
           sites = [currentOrganisation]
         }
       }
-    } else {
-
-      // TODO: remove all this.
-
-      // Include all organisations for now
-      vaccinationsRecorded = allVaccinationsRecorded
-
-      const userOrganisationIds = currentUser.organisations.map((organisation) => organisation.id)
-      organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
     }
 
     let totalsBySite = []

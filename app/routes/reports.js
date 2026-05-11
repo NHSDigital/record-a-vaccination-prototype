@@ -115,9 +115,7 @@ module.exports = (router) => {
   })
 
   router.get('/reports/choose-site', (req, res) => {
-    const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
-    const currentUser = res.locals.currentUser
 
     const sites = currentOrganisation.sites || []
     res.render('reports/choose-site', {
@@ -196,7 +194,6 @@ module.exports = (router) => {
   router.get('/reports/check', (req, res) => {
     const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
-    const currentUser = res.locals.currentUser
     const siteIds = data.siteIdsToReport || []
     const today = new Date()
     const days = 86400000 // number of milliseconds in a day
@@ -205,18 +202,8 @@ module.exports = (router) => {
 
     let sites, pharmacies
 
-    if (currentOrganisation) {
-
-      sites = (currentOrganisation.sites || [])
+    sites = (currentOrganisation.sites || [])
         .filter((site) => siteIds.includes(site.id))
-
-    } else {
-
-      const userOrganisationIds = currentUser.organisations.map((organisation) => organisation.id)
-
-      organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
-        .filter((organisation) => siteIds.includes(organisation.id))
-    }
 
     pharmacies = data.organisations.filter((pharmacy) => pharmacyIdsToReport.includes(pharmacy.id))
 
