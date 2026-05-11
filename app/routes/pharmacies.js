@@ -1,4 +1,4 @@
-const { getPharmaciesBelongingToOrganisation, getPharmacyChains, getOrganisation } = require('../lib/ods');
+const { getPharmaciesBelongingToOrganisation } = require('../lib/ods');
 
 const sortByNameThenPostcode = (getPostcode = (item) => item.postcode) => (a, b) => {
   if (a.name < b.name) return -1
@@ -13,14 +13,11 @@ module.exports = router => {
 
   router.get('/pharmacies', (req, res) => {
     const data = req.session.data
-    const currentUser = res.locals.currentUser
     const added = req.query.added
 
     // TODO: get this from the current login
     // rather than hardcode it
     const companyId = 'P15951'
-
-    const userOrganisationIds = currentUser.organisations.map((organisation) => organisation.id)
 
     const organisations = data.organisations.filter((organisation) => organisation.companyId === companyId).sort(sortByNameThenPostcode())
 
@@ -42,13 +39,10 @@ module.exports = router => {
   })
 
   router.get('/pharmacies/select', async (req, res) => {
-    const data = req.session.data
-    const id = req.params.id
 
     let pharmacies = await getPharmaciesBelongingToOrganisation("P15J")
 
     pharmacies = pharmacies.sort(sortByNameThenPostcode((item) => item.address.postcode))
-
 
     res.render('pharmacies/select', {
       pharmacies
