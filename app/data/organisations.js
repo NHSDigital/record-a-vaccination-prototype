@@ -8261,6 +8261,7 @@ module.exports = [
   {
     id: 'FA424',
     name: 'Pickfords Pharmacy',
+    companyId: "P0191N",
     sites: [
       {
         id: "FA424X",
@@ -8285,6 +8286,7 @@ module.exports = [
   {
     id: 'FA02S',
     name: 'Addlestone Pharmacy',
+    companyId: "P0191N",
     address: {
       line1: '92a Station Road',
       town: 'Addlestone',
@@ -8316,6 +8318,7 @@ module.exports = [
   {
     id: 'FVJ99',
     name: 'Pharmacy 4U',
+    companyId: "P0191N",
     sites: [
       {
         id: "123535",
@@ -8340,6 +8343,7 @@ module.exports = [
   },
   {
     id: 'PDL93',
+    companyId: "P0191N",
     name: 'Silverfields Chemists',
     sites: [
       {
@@ -9110,5 +9114,17 @@ module.exports = [
         }
       }
     ]
+  },
+  {
+    id: "P0191N",
+    name: 'P.W. Pharmacies Ltd',
+    address: {
+      line1: '12 High Road',
+      town: 'Manchester',
+      postcode: 'M7 1LP'
+    },
+    type: 'Pharmacy HQ',
+    status: 'Active',
+    region: "Y56"
   }
 ]

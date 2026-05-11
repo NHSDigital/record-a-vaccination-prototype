@@ -82,35 +82,17 @@ module.exports = [
     "firstName": "Phoebe",
     "lastName": "Black"
   },
-  // Paulina Sloan is a lead admin for
-  // a chain of pharmacies
+  // Paulina Sloan is a group admin for
+  // a chain of pharmacies called
+  // P.W. Pharmacies Ltd
   {
     "id": "9847489647892",
     "email": "paulina.sloan@nhs.net",
     "organisations": [
       {
-        "id": "FA424",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FA02S",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FVJ99",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "PDL93",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
+        "id": "P0191N",
+        "permissionLevel": "Group administrator",
+        "status": "Active"
       }
     ],
     "firstName": "Paulina",
