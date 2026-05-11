@@ -8,7 +8,18 @@ module.exports = (router) => {
     let vaccinationsRecordedCount
 
     if (currentOrganisation) {
-      vaccinationsRecordedCount = data.vaccinationsRecorded.filter((vaccination) => vaccination.organisationId === currentOrganisation.id).length
+
+      if (currentOrganisation.type === "Pharmacy HQ") {
+
+        // TODO count vaccinations recorded at any pharmacies within this group.
+        vaccinationsRecordedCount = 1
+
+      } else {
+
+        vaccinationsRecordedCount = data.vaccinationsRecorded.filter((vaccination) => vaccination.organisationId === currentOrganisation.id).length
+
+      }
+
     } else {
 
       // TODO: count across all organisations you
@@ -41,6 +52,16 @@ module.exports = (router) => {
     res.render('reports/choose-vaccines', {
       enabledVaccines
     })
+  })
+
+  router.post('/reports/choose-vaccines-answer', (req, res) => {
+
+    if (res.locals.currentOrganisation.type === "Pharmacy HQ") {
+      res.redirect('/reports/choose-pharmacies')
+    } else {
+      res.redirect('/reports/choose-site')
+    }
+
   })
 
 
@@ -98,26 +119,22 @@ module.exports = (router) => {
     const currentOrganisation = res.locals.currentOrganisation
     const currentUser = res.locals.currentUser
 
-    let sites, organisations
-
-    if (currentOrganisation) {
-      // Showing all sites for now, for demo purposes
-      sites = currentOrganisation.sites
-
-      if (sites === []) {
-        sites = [currentOrganisation]
-      }
-
-    } else {
-
-      const userOrganisationIds = currentUser.organisations.map((organisation) => organisation.id)
-      organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
-    }
-
+    const sites = currentOrganisation.sites || []
     res.render('reports/choose-site', {
-      sites,
-      organisations
+      sites
     })
+  })
+
+  router.get('/reports/choose-pharmacies', (req, res) => {
+    const data = req.session.data
+    const currentOrganisation = res.locals.currentOrganisation
+
+    const pharmacies = data.organisations.filter((organisation) => organisation.companyId === currentOrganisation.id)
+
+    res.render('reports/choose-pharmacies', {
+      pharmacies
+    })
+
   })
 
 
@@ -184,11 +201,13 @@ module.exports = (router) => {
     const today = new Date()
     const days = 86400000 // number of milliseconds in a day
 
-    let sites, organisations
+    const pharmacyIdsToReport = data.pharmacyIdsToReport || []
+
+    let sites, pharmacies
 
     if (currentOrganisation) {
 
-      sites = currentOrganisation.sites
+      sites = (currentOrganisation.sites || [])
         .filter((site) => siteIds.includes(site.id))
 
     } else {
@@ -198,6 +217,8 @@ module.exports = (router) => {
       organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
         .filter((organisation) => siteIds.includes(organisation.id))
     }
+
+    pharmacies = data.organisations.filter((pharmacy) => pharmacyIdsToReport.includes(pharmacy.id))
 
     const fromInput = data.from
     const toInput = data.to
@@ -236,7 +257,7 @@ module.exports = (router) => {
 
     res.render('reports/check', {
       sites,
-      organisations,
+      pharmacies,
       from,
       to
     })

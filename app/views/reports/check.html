@@ -52,10 +52,10 @@
         </ul>
       {% endset %}
 
-      {% set organisationsHtml %}
+      {% set pharmaciesHtml %}
         <ul class="nhsuk-list">
-          {% for organisation in organisations | sort(false, false, "name") %}
-            <li>{{ organisation.name }} ({{ organisation.id }})</li>
+          {% for pharmacy in pharmacies | sort(false, false, "name") %}
+            <li>{{ pharmacy.name }} ({{ pharmacy.id }})</li>
           {% endfor %}
         </ul>
       {% endset %}
@@ -132,7 +132,24 @@
               }
               ]
             }
-          } if sites,
+          } if (sites | length) > 0,
+          {
+            key: {
+              text: ("Pharmacies" if (data.pharmacyIdsToReport | length) > 1 else "Pharmacy")
+            },
+            value: {
+              html: pharmaciesHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: "/reports/choose-pharmacies",
+                  text: "Change",
+                  visuallyHiddenText: "pharmacies"
+                }
+              ]
+            }
+          } if currentOrganisation.type == "Pharmacy HQ",
           {
             key: {
               text: ("Organisations" if (data.siteIdsToReport | length) > 1 else "Organisation")
