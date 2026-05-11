@@ -74,7 +74,6 @@ module.exports = router => {
       const email = data.email
       const user = data.users.find((user) => user.email === email)
 
-      req.session.data.currentMode = "reports"
       req.session.data.currentOrganisationId = null
       req.session.data.currentUserId = user.id
 
@@ -122,7 +121,6 @@ module.exports = router => {
   router.get('/sign-out', (req, res) => {
     req.session.data.currentUserId = null
     req.session.data.currentOrganisationId = null
-    req.session.data.currentMode = null
     req.session.data.email = ""
 
     res.redirect('/product-page')

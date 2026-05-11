@@ -17,7 +17,6 @@ module.exports = {
   nhsNumberKnown: "yes",
   currentUserId: "6424325235325",
   currentOrganisationId: "P15951",
-  currentMode: "reports",
   vaccinationsRecorded: vaccinationsRecorded,
 
   // These are the options for extracting CSV reports
