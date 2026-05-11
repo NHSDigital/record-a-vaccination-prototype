@@ -42,7 +42,6 @@
 
   {% include "home/_vaccination-totals.html" %}
 
-
   {% if totalVaccinationsRecorded > 0 %}
 
     {% set byDayHtml %}
@@ -57,9 +56,10 @@
       {% include "home/_by-site.html" %}
     {% endset %}
 
-    {% set byOrganisationHtml %}
-      {% include "home/_by-organisation.html" %}
+    {% set byPharmacyHtml %}
+      {% include "home/_by-pharmacy.html" %}
     {% endset %}
+
 
     {{ tabs({
       items: [
@@ -86,11 +86,11 @@
         } if (totalsBySite | length) > 1,
         {
           label: "By pharmacy",
-          id: "by-organisations",
+          id: "by-pharmacies",
           panel: {
-            html: byOrganisationHtml
+            html: byPharmacyHtml
           }
-        } if (totalsByOrganisation | length) > 1
+        } if (pharmacies | length) > 1
       ]
     }) }}
 

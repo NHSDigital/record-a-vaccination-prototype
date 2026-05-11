@@ -75,21 +75,35 @@ module.exports = router => {
     let vaccinationsRecorded = []
 
     let sites = []
+    let pharmacies = []
     let organisations = []
 
     if (currentOrganisation) {
-      // Showing all sites for now, for demo purposes
-      sites = currentOrganisation.sites
 
-      // Filter vaccinations to only those recorded by the current
-      // organisation
-      vaccinationsRecorded = allVaccinationsRecorded.filter((vaccination)=> vaccination.organisationId === currentOrganisation.id)
+      if (currentOrganisation.type == "Pharmacy HQ") {
 
-      if (!sites.length || sites.length === 0) {
-        sites = [currentOrganisation]
+        pharmacies = data.organisations.filter((organisation) => organisation.companyId === currentOrganisation.id)
+
+        vaccinationsRecorded = allVaccinationsRecorded
+
+
+
+      } else {
+
+        // Showing all sites for now, for demo purposes
+        sites = currentOrganisation.sites || []
+
+        // Filter vaccinations to only those recorded by the current
+        // organisation
+        vaccinationsRecorded = allVaccinationsRecorded.filter((vaccination)=> vaccination.organisationId === currentOrganisation.id)
+
+        if (!sites.length || sites.length === 0) {
+          sites = [currentOrganisation]
+        }
       }
-
     } else {
+
+      // TODO: remove all this.
 
       // Include all organisations for now
       vaccinationsRecorded = allVaccinationsRecorded
@@ -98,13 +112,10 @@ module.exports = router => {
       organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
     }
 
-
-
     let totalsBySite = []
-    let totalsByOrganisation = []
+    let totalsByPharmacy = []
     let totalsByVaccine = []
     let totalsByDay = []
-
 
     const totalVaccinationsRecorded = countVaccinations(vaccinationsRecorded)
 
@@ -190,28 +201,28 @@ module.exports = router => {
       }
     }
 
-    for (let organisation of organisations) {
+    for (let pharmacy of pharmacies) {
 
       const total = countVaccinations(vaccinationsRecorded, {
-        organisationId: organisation.id
+        organisationId: pharmacy.id
       })
 
       if (total !== -1) {
-        totalsByOrganisation.push({
-          organisationId: organisation.id,
-          organisationName: organisation.name,
+        totalsByPharmacy.push({
+          organisationId: pharmacy.id,
+          organisationName: pharmacy.name,
           today: countVaccinations(vaccinationsRecorded, {
             date: dateToday,
-            organisationId: organisation.id
+            organisationId: pharmacy.id
           }),
           month:countVaccinations(vaccinationsRecorded, {
             month: dateToday,
-            organisationId: organisation.id
+            organisationId: pharmacy.id
           }),
           past7Days: countVaccinations(vaccinationsRecorded, {
             minDate: sevenDaysAgo,
             maxDate: dateToday,
-            organisationId: organisation.id
+            organisationId: pharmacy.id
           }),
           total: total
         })
@@ -220,6 +231,7 @@ module.exports = router => {
 
     res.render('home/index', {
       sites,
+      pharmacies,
       totalVaccinationsRecorded,
       totalVaccinationsRecordedToday,
       totalVaccinationsRecordedThisMonth,
@@ -228,7 +240,7 @@ module.exports = router => {
       totalsBySite,
       totalsByVaccine,
       totalsByDay,
-      totalsByOrganisation
+      totalsByPharmacy
     })
   })
 }

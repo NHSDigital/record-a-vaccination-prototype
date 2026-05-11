@@ -16,7 +16,7 @@ module.exports = {
   lists: [],
   nhsNumberKnown: "yes",
   currentUserId: "6424325235325",
-  currentOrganisationId: null,
+  currentOrganisationId: "P15951",
   currentMode: "reports",
   vaccinationsRecorded: vaccinationsRecorded,
 
