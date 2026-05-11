@@ -111,8 +111,15 @@ module.exports = router => {
   })
 
   router.post('/pharmacies/users/new-answer',(req, res) => {
+    const data = req.session.data
+    const permissionLevel = data.permissionLevel
 
-    res.redirect('/pharmacies/users')
+    if (permissionLevel === "Group administrator") {
+      res.redirect('/pharmacies/users/check')
+    } else {
+      res.redirect('/pharmacies/users')
+    }
+
   })
 
   router.get('/pharmacies/add-lead-admins',(req, res) => {
@@ -123,6 +130,19 @@ module.exports = router => {
       users
     })
   })
+
+  router.get('/pharmacies/users/check',(req, res) => {
+
+    res.render('pharmacies/users/check')
+  })
+
+  router.post('/pharmacies/users/check-answer',(req, res) => {
+    // TODO: add the user
+
+    res.redirect('/pharmacies/users?added=true')
+  })
+
+
 
   router.get('/pharmacies/users/:id',(req, res) => {
     const data = req.session.data

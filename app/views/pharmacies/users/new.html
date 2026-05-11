@@ -53,8 +53,8 @@
         }) }}
 
         {{ radios({
-          idPrefix: "example",
-          name: "example",
+          idPrefix: "permission-level",
+          name: "permissionLevel",
           fieldset: {
             legend: {
               text: "Permission level",
@@ -63,14 +63,15 @@
           },
           items: [
             {
-              value: "all",
-              text: "Group admin for Peak Pharmacy"
+              value: "Group administrator",
+              text: "Group administrator for Peak Pharmacy"
             },
             {
               divider: "or"
             },
             {
-              text: "I’ll add them to individual pharmacies"
+              text: "I’ll add them to individual pharmacies later",
+              value: "none"
             }
           ]
         }) }}
