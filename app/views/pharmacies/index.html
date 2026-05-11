@@ -30,7 +30,7 @@
       }) }}
 
       <table class="nhsuk-table">
-        <caption class="nhsuk-table__caption nhsuk-table__caption--m">Current pharmacies ({{ organisations | length }})</caption>
+        <caption class="nhsuk-table__caption nhsuk-table__caption--m">Pharmacies added ({{ organisations | length }})</caption>
         <thead role="rowgroup" class="nhsuk-table__head">
           <tr role="row">
             <th role="columnheader" class="" scope="col">
@@ -51,7 +51,11 @@
                 <a href="/pharmacies/{{ organisation.id }}">{{ organisation.name }} ({{ organisation.id}})</a>
               </td>
               <td class="nhsuk-table__cell ">
-                COVID-19, flu
+                {% if loop.index0 == 0 %}
+                  <span class="nhsuk-u-secondary-text-colour">Not yet added</span>
+                {% else %}
+                  COVID-19, flu
+                {% endif %}
               </td>
               <td class="nhsuk-table__cell ">
                 {{ organisationUserCounts[organisation.id] }}

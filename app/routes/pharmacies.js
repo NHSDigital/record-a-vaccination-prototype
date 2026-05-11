@@ -120,6 +120,11 @@ module.exports = router => {
     res.render('pharmacies/users/new')
   })
 
+  router.post('/pharmacies/users/new-answer',(req, res) => {
+
+    res.redirect('/pharmacies/users')
+  })
+
   router.get('/pharmacies/add-lead-admins',(req, res) => {
     const data = req.session.data
     const users = data.users.slice(10, 20)
