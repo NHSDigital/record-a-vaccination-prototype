@@ -13,7 +13,15 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Check and add group administrator</h1>
+      <h1 class="nhsuk-heading-l">Check and add {{ "group administrator" if data.permissionLevel == "Group administrator" else "user" }}</h1>
+
+      {% set pharmaciesHtml %}
+        <ul class="nhsuk-list">
+          {% for pharmacy in pharmacies %}
+            <li>{{ pharmacy.name }}</li>
+          {% endfor %}
+        </ul>
+      {% endset %}
 
       {{ summaryList({
         rows: [
@@ -53,10 +61,27 @@
           },
           {
             key: {
+              text: "Vaccinator"
+            },
+            value: {
+              html: data.vaccinator | capitalize
+            },
+            actions: {
+              items: [
+                {
+                  href: "/pharmacies/users/new-permission-level",
+                  text: "Change",
+                  visuallyHiddenText: "vaccinator"
+                }
+              ]
+            }
+          } if data.groupAdministrator != "yes",
+          {
+            key: {
               text: "Permission level"
             },
             value: {
-              html: data.permissionLevel
+              html: ("Group administrator" if data.groupAdministrator == "yes" else data.permissionLevel)
             },
             actions: {
               items: [
@@ -67,7 +92,24 @@
                 }
               ]
             }
-          }
+          },
+          {
+            key: {
+              text: "Pharmacies"
+            },
+            value: {
+              html: pharmaciesHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: "/pharmacies/users/new-select-pharmacies",
+                  text: "Change",
+                  visuallyHiddenText: "pharmacies"
+                }
+              ]
+            }
+          } if data.groupAdministrator != "yes"
         ]
       }) }}
 

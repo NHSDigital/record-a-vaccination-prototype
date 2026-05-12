@@ -1,5 +1,8 @@
 const { getPharmaciesBelongingToOrganisation } = require('../lib/ods');
 
+const { byName } = require('../lib/utils/by-name');
+
+
 const sortByNameThenPostcode = (getPostcode = (item) => item.postcode) => (a, b) => {
   if (a.name < b.name) return -1
   if (a.name > b.name) return 1
@@ -98,7 +101,23 @@ module.exports = router => {
 
   router.get('/pharmacies/users',(req, res) => {
     const data = req.session.data
-    const users = data.users.slice(2, 30)
+    const companyId = res.locals.currentOrganisation.id
+    const pharmacies = data.organisations.filter((organisation) => organisation.companyId === companyId)
+
+    const pharmacyIds = pharmacies.map(pharmacy => pharmacy.id)
+
+    let users = data.users.sort(byName)
+
+    users = users.filter(function(user) {
+      // Get the IDs of all the organisations they have access to
+      const userOrganisationIds = (user.organisations || []).map((organisation) => organisation.id)
+
+      // See whether any of those organisations are the pharmacies in
+      // this chain, or the head office company id
+      return userOrganisationIds.some(id => pharmacyIds.includes(id) || id === companyId)
+    })
+
+
 
     res.render('pharmacies/users/index', {
       users
@@ -112,14 +131,51 @@ module.exports = router => {
 
   router.post('/pharmacies/users/new-answer',(req, res) => {
     const data = req.session.data
-    const permissionLevel = data.permissionLevel
+    const groupAdministrator = data.groupAdministrator
 
-    if (permissionLevel === "Group administrator") {
+    if (groupAdministrator === "yes") {
       res.redirect('/pharmacies/users/check')
     } else {
-      res.redirect('/pharmacies/users')
+      res.redirect('/pharmacies/users/new-select-pharmacies')
     }
+  })
 
+  router.get('/pharmacies/users/new-select-pharmacies',(req, res) => {
+    const data = req.session.data
+    const companyId = res.locals.currentOrganisation.id
+    const pharmacies = data.organisations.filter((organisation) => organisation.companyId === companyId)
+
+    res.render('pharmacies/users/new-select-pharmacies', {
+      pharmacies
+    })
+  })
+
+  router.get('/pharmacies/users/new-select-pharmacies-check',(req, res) => {
+    const data = req.session.data
+    const pharmacyIds = data.pharmacyIds
+    const companyId = res.locals.currentOrganisation.id
+
+    // Get pharmacies selected on previous page
+    const pharmacies = data.organisations.filter((organisation) => pharmacyIds.includes(organisation.id))
+
+
+    res.render('pharmacies/users/new-select-pharmacies-check', {
+      pharmacies
+    })
+  })
+
+  router.get('/pharmacies/users/new-permission-level',(req, res) => {
+    const data = req.session.data
+    const pharmacyIds = data.pharmacyIds || []
+    const companyId = res.locals.currentOrganisation.id
+
+    // Get pharmacies selected on previous page
+    const pharmacies = data.organisations.filter((organisation) => pharmacyIds.includes(organisation.id))
+
+
+    res.render('pharmacies/users/new-permission-level', {
+      pharmacies
+    })
   })
 
   router.get('/pharmacies/add-lead-admins',(req, res) => {
@@ -132,12 +188,47 @@ module.exports = router => {
   })
 
   router.get('/pharmacies/users/check',(req, res) => {
+    const data = req.session.data
+    const pharmacyIds = data.pharmacyIds || []
+    const companyId = res.locals.currentOrganisation.id
 
-    res.render('pharmacies/users/check')
+    // Get pharmacies selected on previous page
+    const pharmacies = data.organisations.filter((organisation) => pharmacyIds.includes(organisation.id))
+
+    res.render('pharmacies/users/check', {
+      pharmacies
+    })
+
+
   })
 
   router.post('/pharmacies/users/check-answer',(req, res) => {
-    // TODO: add the user
+    const data = req.session.data
+    const groupAdministrator = data.groupAdministrator
+
+    const user = {
+      id: Math.floor(Math.random() * 10000000).toString(),
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      organisations: []
+    }
+
+    if (groupAdministrator === "yes") {
+      user.organisations.push({
+        id: res.locals.currentOrganisation.id,
+        status: 'Invited',
+        permissionLevel: "Group administrator"
+      })
+    }
+
+    data.users.push(user)
+
+    // Reset answers
+    data.firstName = ''
+    data.lastName = ''
+    data.email = ''
+    data.permissionLevel = ''
 
     res.redirect('/pharmacies/users?added=true')
   })
