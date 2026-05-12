@@ -113,10 +113,9 @@ module.exports = [
     "firstName": "Jeremy",
     "lastName": "Blue"
   },
-
   {
     "id": "64746353",
-    "email": "jeremy.blue@nhs.net",
+    "email": "joseph.blue@nhs.net",
     "organisations": [
       {
         "id": "FA02S",
@@ -125,12 +124,12 @@ module.exports = [
         "vaccinator": true
       }
     ],
-    "firstName": "Jeremy",
-    "lastName": "Blue"
+    "firstName": "Joseph",
+    "lastName": "White"
   },
   {
     "id": "46436436436",
-    "email": "jeremy.blue@nhs.net",
+    "email": "jason.green@nhs.net",
     "organisations": [
       {
         "id": "FVJ99",
@@ -139,12 +138,12 @@ module.exports = [
         "vaccinator": true
       }
     ],
-    "firstName": "Jeremy",
-    "lastName": "Blue"
+    "firstName": "Jason",
+    "lastName": "Green"
   },
   {
     "id": "646436311",
-    "email": "jeremy.blue@nhs.net",
+    "email": "samantha.black@nhs.net",
     "organisations": [
       {
         "id": "PDL93",
@@ -153,8 +152,8 @@ module.exports = [
         "vaccinator": true
       }
     ],
-    "firstName": "Jeremy",
-    "lastName": "Blue"
+    "firstName": "Samantha",
+    "lastName": "Black"
   },
   // Amanda White is a group administrator for the
   // MediCare Health Ltd chain of pharmacies
