@@ -205,6 +205,7 @@ module.exports = router => {
   router.post('/pharmacies/users/check-answer',(req, res) => {
     const data = req.session.data
     const groupAdministrator = data.groupAdministrator
+    const pharmacyIds = data.pharmacyIds || []
 
     const user = {
       id: Math.floor(Math.random() * 10000000).toString(),
@@ -220,6 +221,20 @@ module.exports = router => {
         status: 'Invited',
         permissionLevel: "Group administrator"
       })
+    }
+
+    if (pharmacyIds.length > 0) {
+
+      for (pharmacyId of pharmacyIds) {
+
+        user.organisations.push({
+          id: pharmacyId,
+          status: 'Invited',
+          permissionLevel: data.permissionLevel,
+          vaccinator: data.vaccinator
+        })
+      }
+
     }
 
     data.users.push(user)

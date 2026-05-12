@@ -16,7 +16,7 @@
 
       <p>These are the pharmacies you will give {{ data.firstName }} {{ data.lastName }} access to.</p>
 
-      <form action="/pharmacies/users/check" method="post" novalidate="true">
+      <form action="/pharmacies/users/new-permission-level" method="post" novalidate="true">
         {% set rows = [] %}
 
         {% for pharmacy in pharmacies %}

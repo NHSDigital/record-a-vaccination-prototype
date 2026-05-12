@@ -51,44 +51,31 @@
               Status
             </th>
             <th role="columnheader" class="" scope="col"></th>
-
           </tr>
         </thead>
         <tbody class="nhsuk-table__body">
+          {% for organisation in user.organisations %}
+            {% set org = data.organisations | findById(organisation.id) %}
             <tr role="row" class="nhsuk-table__row">
               <td class="nhsuk-table__cell">
-                <a href="#">Peak Pharmacy (P112)</a>
+                <a href="/pharmacies/{{ organisation.id }}">
+                  {{ org.name }} ({{ organisation.id }})
+                </a>
               </td>
               <td class="nhsuk-table__cell ">
-                Lead administrator
+                {{ organisation.permissionLevel }}
               </td>
               <td class="nhsuk-table__cell ">
-                Yes
+                {{ organisation.vaccinator }}
               </td>
               <td class="nhsuk-table__cell ">
-                Active
+                {{ organisation.status }}
               </td>
               <td class="nhsuk-table__cell ">
                 <a href="#">Deactivate</a>
               </td>
             </tr>
-            <tr role="row" class="nhsuk-table__row">
-              <td class="nhsuk-table__cell">
-                <a href="#">Peak Pharmacy (P9241)</a>
-              </td>
-              <td class="nhsuk-table__cell ">
-                Recorder
-              </td>
-              <td class="nhsuk-table__cell ">
-                Yes
-              </td>
-              <td class="nhsuk-table__cell ">
-                Active
-              </td>
-              <td class="nhsuk-table__cell ">
-                <a href="#">Deactivate</a>
-              </td>
-            </tr>
+          {% endfor %}
         </tbody>
       </table>
 
