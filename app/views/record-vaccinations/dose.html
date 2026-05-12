@@ -78,6 +78,10 @@
             {% set hintText = "Only given to some children in an at-risk group" %}
           {% endif %}
 
+          {% if data.vaccine == "MenB" and option == "Booster" %}
+            {% set hintText = "Usually only given as part of the routine infant schedule" %}
+          {% endif %}
+        
           {% if hintText %}
             {% set items = (items.push({
               text: option,
