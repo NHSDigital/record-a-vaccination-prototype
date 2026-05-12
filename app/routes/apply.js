@@ -9,10 +9,29 @@ const sortByNameThenPostcode = (getPostcode = (item) => item.postcode) => (a, b)
   return 1
 }
 
+const findOrganisationById = (data, organisationId) => {
+  if (!organisationId) return null
+  return (data.organisations || []).find((organisation) => organisation.id === organisationId) ||
+    (data.allOrganisations || []).find((organisation) => organisation.id === organisationId)
+}
+
 module.exports = router => {
 
   router.get('/apply/start', async (req, res) => {
     const data = req.session.data
+    let errors = []
+
+    if (req.query.error === 'no-pharmacy') {
+      errors.push({
+        text: 'Select a pharmacy',
+        href: '#organisation-code'
+      })
+    } else if (req.query.error === 'existing-account') {
+      errors.push({
+        text: 'This pharmacy already has an account',
+        href: '#organisation-code'
+      })
+    }
 
     const allOrganisations = data.allOrganisations.sort(sortByNameThenPostcode())
     const allPharmacies = allOrganisations.filter((organisation) => organisation.type === "Community pharmacy")
@@ -22,7 +41,8 @@ module.exports = router => {
     res.render('apply/start', {
       allOrganisations,
       allPharmacies,
-      allPharmacyCompanies
+      allPharmacyCompanies,
+      errors
     })
   })
 
@@ -51,8 +71,9 @@ module.exports = router => {
   router.post('/apply/answer-pharmacy', (req, res) => {
     const data = req.session.data
 
-    const organisationId = data.organisationId
-    const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
+    const organisationId = data.organisationCode || data.organisationId
+    data.organisationId = organisationId
+    const organisation = findOrganisationById(data, organisationId)
 
     if (!organisation) {
       res.redirect('/apply/start?error=no-pharmacy');
@@ -94,7 +115,7 @@ module.exports = router => {
   router.get('/apply/check-pharmacy', (req, res) => {
     const data = req.session.data
     const organisationId = data.organisationId
-    const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
+    const organisation = findOrganisationById(data, organisationId)
     if (!organisation) { res.redirect('/apply/start'); return }
 
     res.render('apply/check-pharmacy', {
@@ -145,7 +166,7 @@ module.exports = router => {
   router.get('/apply/check', (req, res) => {
     const data = req.session.data
     const organisationId = data.organisationId
-    const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
+    const organisation = findOrganisationById(data, organisationId)
     if (!organisation) { res.redirect('/apply/start'); return }
 
     res.render('apply/check', {
@@ -177,7 +198,7 @@ module.exports = router => {
   router.get('/apply/check-your-email', (req, res) => {
     const data = req.session.data
     const organisationId = data.organisationId
-    const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
+    const organisation = findOrganisationById(data, organisationId)
 
     if (!organisation) { res.redirect('/apply/start'); return }
 
@@ -242,7 +263,7 @@ module.exports = router => {
   router.get('/apply/welcome-email', (req, res) => {
     const data = req.session.data
     const organisationId = data.organisationId
-    const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
+    const organisation = findOrganisationById(data, organisationId)
     if (!organisation) { res.redirect('/apply/start'); return }
 
     res.render('apply/welcome-email', {
