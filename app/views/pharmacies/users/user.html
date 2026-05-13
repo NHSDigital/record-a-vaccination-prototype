@@ -51,6 +51,7 @@
               Status
             </th>
             <th role="columnheader" class="" scope="col"></th>
+            <th role="columnheader" class="" scope="col"></th>
           </tr>
         </thead>
         <tbody class="nhsuk-table__body">
@@ -70,6 +71,9 @@
               </td>
               <td class="nhsuk-table__cell ">
                 {{ organisation.status }}
+              </td>
+              <td class="nhsuk-table__cell ">
+                <a href="#">Change<span class="nhsuk-u-visually-hidden">permission level at {{ organisation.name }}</span></a>
               </td>
               <td class="nhsuk-table__cell ">
                 <a href="#">Deactivate</a>
