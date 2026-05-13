@@ -34,61 +34,63 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      <table class="nhsuk-table">
-        <caption class="nhsuk-table__caption nhsuk-table__caption--m">Access and permission levels</caption>
-        <thead role="rowgroup" class="nhsuk-table__head">
-          <tr role="row">
-            <th role="columnheader" class="" scope="col">
-              Pharmacy
-            </th>
-            <th role="columnheader" class="" scope="col">
-              Permission level
-            </th>
-            <th role="columnheader" class="" scope="col">
-              Vaccinator
-            </th>
-            <th role="columnheader" class="" scope="col">
-              Status
-            </th>
-            <th role="columnheader" class="" scope="col"></th>
-            <th role="columnheader" class="" scope="col"></th>
-          </tr>
-        </thead>
-        <tbody class="nhsuk-table__body">
-          {% for organisation in user.organisations %}
-            {% set org = data.organisations | findById(organisation.id) %}
-            <tr role="row" class="nhsuk-table__row">
-              <td class="nhsuk-table__cell">
-                <a href="/pharmacies/{{ organisation.id }}">
-                  {{ org.name }} ({{ organisation.id }})
-                </a>
-              </td>
-              <td class="nhsuk-table__cell ">
-                {{ organisation.permissionLevel }}
-              </td>
-              <td class="nhsuk-table__cell ">
-                {{ organisation.vaccinator }}
-              </td>
-              <td class="nhsuk-table__cell ">
-                {{ organisation.status }}
-              </td>
-              <td class="nhsuk-table__cell ">
-                <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/change?from=user">Change<span class="nhsuk-u-visually-hidden">permission level at {{ organisation.name }}</span></a>
-              </td>
-              <td class="nhsuk-table__cell ">
-                <a href="#">Deactivate</a>
-              </td>
+      {% if (pharmacyRoles | length) > 0 %}
+        <table class="nhsuk-table">
+          <caption class="nhsuk-table__caption nhsuk-table__caption--m">Access and permission levels</caption>
+          <thead role="rowgroup" class="nhsuk-table__head">
+            <tr role="row">
+              <th role="columnheader" class="" scope="col">
+                Pharmacy
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Permission level
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Vaccinator
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Status
+              </th>
+              <th role="columnheader" class="" scope="col"></th>
+              <th role="columnheader" class="" scope="col"></th>
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+          </thead>
+          <tbody class="nhsuk-table__body">
+            {% for organisation in pharmacyRoles %}
+              {% set org = data.organisations | findById(organisation.id) %}
+              <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                  <a href="/pharmacies/{{ organisation.id }}">
+                    {{ org.name }} ({{ organisation.id }})
+                  </a>
+                </td>
+                <td class="nhsuk-table__cell ">
+                  {{ organisation.permissionLevel }}
+                </td>
+                <td class="nhsuk-table__cell ">
+                  {{ organisation.vaccinator }}
+                </td>
+                <td class="nhsuk-table__cell ">
+                  {{ organisation.status }}
+                </td>
+                <td class="nhsuk-table__cell ">
+                  <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/change?from=user">Change<span class="nhsuk-u-visually-hidden">permission level at {{ organisation.name }}</span></a>
+                </td>
+                <td class="nhsuk-table__cell ">
+                  <a href="#">Deactivate</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
 
-      {{ button({
-        text: "Add to another pharmacy",
-        classes: "nhsuk-button--secondary"
-      }) }}
+        {{ button({
+          text: "Add to another pharmacy",
+          classes: "nhsuk-button--secondary"
+        }) }}
 
-      <p><a href="#">Deactivate user from all pharmacies</a></p>
+        <p><a href="#">Deactivate user from all pharmacies</a></p>
+      {% endif %}
 
     </div>
   </div>

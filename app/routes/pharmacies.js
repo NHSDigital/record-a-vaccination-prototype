@@ -255,8 +255,11 @@ module.exports = router => {
     const id = req.params.id
     const user = data.users.find((user) => user.id === id)
 
+    const pharmacyRoles = (user.organisations || []).filter(role => role.permissionLevel !== "Group administrator")
+
     res.render('pharmacies/users/user', {
-      user
+      user,
+      pharmacyRoles
     })
   })
 
