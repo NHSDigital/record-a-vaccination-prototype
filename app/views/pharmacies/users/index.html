@@ -25,17 +25,30 @@
             <th role="columnheader" class="" scope="col">
               Email
             </th>
+            <th role="columnheader" class="" scope="col">
+              Role
+            </th>
 
           </tr>
         </thead>
         <tbody class="nhsuk-table__body">
           {% for user in users %}
+            {# See if they are a Group administrator #}
+            {% set groupRole = user.organisations | findById(currentOrganisation.id) %}
+
             <tr role="row" class="nhsuk-table__row">
               <td class="nhsuk-table__cell">
                 <a href="/pharmacies/users/{{ user.id }}">{{ user.firstName }} {{ user.lastName }}</a>
               </td>
               <td class="nhsuk-table__cell ">
                 {{ user.email }}
+              </td>
+              <td class="nhsuk-table__cell ">
+                {% if groupRole %}
+                  Group administrator
+                {% else %}
+                  {{ user.organisations | length | plural("pharmacy") }}
+                {% endif %}
               </td>
             </tr>
           {% endfor %}
