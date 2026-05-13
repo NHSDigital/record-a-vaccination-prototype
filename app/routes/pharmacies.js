@@ -117,10 +117,16 @@ module.exports = router => {
       return userOrganisationIds.some(id => pharmacyIds.includes(id) || id === companyId)
     })
 
+    groupAdministrators = users.filter(function(user) {
+      return user.organisations.find(org => org.permissionLevel === "Group administrator")
+    })
 
+    // Filter out group admins from the general user list
+    users = users.filter((user) => !groupAdministrators.includes(user))
 
     res.render('pharmacies/users/index', {
-      users
+      users,
+      groupAdministrators
     })
   })
 
