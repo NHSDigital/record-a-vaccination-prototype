@@ -23,4 +23,3 @@ updates:
           - 'prettier'
           - 'typescript-eslint'
           - '@typescript-eslint/*'
-
