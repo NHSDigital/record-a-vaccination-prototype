@@ -3,8 +3,23 @@ updates:
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
-      interval: 'daily'
+      interval: 'weekly'
+    cooldown:
+      default-days: 7
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
-      interval: 'daily'
+      interval: 'weekly'
+    cooldown:
+      default-days: 7
+    # Group packages into shared PRs
+    groups:
+      lint:
+        patterns:
+          - '@eslint/*'
+          - 'eslint'
+          - 'eslint-*'
+          - 'globals'
+          - 'prettier'
+          - 'typescript-eslint'
+          - '@typescript-eslint/*'
