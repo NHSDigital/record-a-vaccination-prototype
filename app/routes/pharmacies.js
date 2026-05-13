@@ -116,7 +116,7 @@ module.exports = router => {
       return userOrganisationIds.some(id => pharmacyIds.includes(id) || id === companyId)
     })
 
-    groupAdministrators = users.filter(function(user) {
+    const groupAdministrators = users.filter(function(user) {
       return user.organisations.find(org => org.permissionLevel === "Group administrator")
     })
 
@@ -158,7 +158,6 @@ module.exports = router => {
   router.get('/pharmacies/users/new-select-pharmacies-check',(req, res) => {
     const data = req.session.data
     const pharmacyIds = data.pharmacyIds
-    const companyId = res.locals.currentOrganisation.id
 
     // Get pharmacies selected on previous page
     const pharmacies = data.organisations.filter((organisation) => pharmacyIds.includes(organisation.id))
@@ -172,7 +171,6 @@ module.exports = router => {
   router.get('/pharmacies/users/new-permission-level',(req, res) => {
     const data = req.session.data
     const pharmacyIds = data.pharmacyIds || []
-    const companyId = res.locals.currentOrganisation.id
 
     // Get pharmacies selected on previous page
     const pharmacies = data.organisations.filter((organisation) => pharmacyIds.includes(organisation.id))
@@ -195,7 +193,6 @@ module.exports = router => {
   router.get('/pharmacies/users/check',(req, res) => {
     const data = req.session.data
     const pharmacyIds = data.pharmacyIds || []
-    const companyId = res.locals.currentOrganisation.id
 
     // Get pharmacies selected on previous page
     const pharmacies = data.organisations.filter((organisation) => pharmacyIds.includes(organisation.id))
@@ -230,7 +227,7 @@ module.exports = router => {
 
     if (pharmacyIds.length > 0) {
 
-      for (pharmacyId of pharmacyIds) {
+      for (const pharmacyId of pharmacyIds) {
 
         user.organisations.push({
           id: pharmacyId,
