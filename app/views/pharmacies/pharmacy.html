@@ -111,7 +111,7 @@
                   {{ userOrganisationPermissions[user.id].status }}
                 </td>
                 <td class="nhsuk-table__cell">
-                  <a href="#">Change<span class="nhsuk-u-visually-hidden">permission level for {{ user.firstName }} {{ user.lastName }}</span></a>
+                  <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/change">Change<span class="nhsuk-u-visually-hidden">permission level for {{ user.firstName }} {{ user.lastName }}</span></a>
                 </td>
               </tr>
             {% endfor %}

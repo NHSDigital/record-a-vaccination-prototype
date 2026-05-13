@@ -350,6 +350,40 @@ module.exports = router => {
     res.redirect(`/pharmacies/${organisation.id}?added=true`)
   })
 
+
+  router.get('/pharmacies/:pharmacyId/users/:userId/change',(req, res) => {
+    const data = req.session.data
+    const pharmacyId = req.params.pharmacyId
+    const userId = req.params.userId
+
+    const user = data.users.find(user => user.id === userId)
+    const pharmacy = data.organisations.find(organisation => organisation.id === pharmacyId)
+
+    const role = user.organisations.find(userOrg => userOrg.id === pharmacyId)
+
+    res.render('pharmacies/users/change-user-role', {
+      user,
+      pharmacy,
+      role
+    })
+  })
+
+  router.post('/pharmacies/:pharmacyId/users/:userId/change-answer',(req, res) => {
+    const data = req.session.data
+    const pharmacyId = req.params.pharmacyId
+    const userId = req.params.userId
+
+    const user = data.users.find(user => user.id === userId)
+    const pharmacy = data.organisations.find(organisation => organisation.id === pharmacyId)
+
+    const role = user.organisations.find(userOrg => userOrg.id === pharmacyId)
+
+    role.permissionLevel = data.permissionLevel
+    role.vaccinator = (data.vaccinator === "yes")
+
+    res.redirect(`/pharmacies/${pharmacy.id}`)
+  })
+
   router.get('/pharmacies/:id', (req, res) => {
     const data = req.session.data
     const id = req.params.id
