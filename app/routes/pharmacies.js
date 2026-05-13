@@ -1,5 +1,4 @@
 const { getPharmaciesBelongingToOrganisation } = require('../lib/ods');
-
 const { byName } = require('../lib/utils/by-name');
 
 
