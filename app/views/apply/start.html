@@ -36,8 +36,7 @@
           {% if organisation.type == "Community pharmacy" %}
             {% set items = (items.push({
               text: organisation.name + (", " + (organisation.address.postcode | upper) if organisation.address.postcode) + " (" + organisation.id + ")",
-              value: organisation.id,
-              selected: (organisation.id === data.organisationCode)
+              value: organisation.id
             }), items) %}
           {% endif %}
         {% endfor %}
@@ -45,6 +44,7 @@
         {{ select({
           id: "organisation-code",
           name: "organisationCode",
+          value: data.organisationCode,
           label: {
             text: "Find your pharmacy",
             classes: "nhsuk-label--m nhsuk-u-margin-bottom-1"
