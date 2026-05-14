@@ -18,7 +18,7 @@
           errorList: errors
         }) }}
       {% endif %}
-      
+
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       <p>From 1 September 2026, community pharmacies must use Record a vaccination for all NHS vaccinations.</p>
@@ -32,10 +32,10 @@
         {% set options = [] %}
         {% set items = [{ text: "", value: ""}] %}
 
-        {% for organisation in data.organisations %}
-          {% if organisation.type == "Community Pharmacy" %}
+        {% for organisation in data.allOrganisations %}
+          {% if organisation.type == "Community pharmacy" %}
             {% set items = (items.push({
-              text: organisation.name + ", " + organisation.address.line1 + ", " + (organisation.address.postcode | upper) + " (" + organisation.id + ")",
+              text: organisation.name + (", " + (organisation.address.postcode | upper) if organisation.address.postcode) + " (" + organisation.id + ")",
               value: organisation.id,
               selected: (organisation.id === data.organisationCode)
             }), items) %}
