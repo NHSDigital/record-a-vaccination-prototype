@@ -33,15 +33,12 @@ module.exports = router => {
       })
     }
 
-    const allOrganisations = data.allOrganisations.sort(sortByNameThenPostcode())
-    const allPharmacies = allOrganisations.filter((organisation) => organisation.type === "Community pharmacy")
+    const pharmacies = data.allOrganisations.sort(sortByNameThenPostcode()).filter((organisation) => organisation.type === "Community pharmacy")
 
     const allPharmacyCompanies = await getPharmacyChains()
 
     res.render('apply/start', {
-      allOrganisations,
-      allPharmacies,
-      allPharmacyCompanies,
+      pharmacies,
       errors
     })
   })
@@ -282,7 +279,7 @@ module.exports = router => {
     })
 
     res.render('apply/welcome-email-chain', {
-      pharmacies  
+      pharmacies
     })
   })
 

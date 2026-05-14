@@ -29,16 +29,13 @@
 
       <form action="/apply/answer-pharmacy" method="post">
 
-        {% set options = [] %}
         {% set items = [{ text: "", value: ""}] %}
 
-        {% for organisation in data.allOrganisations %}
-          {% if organisation.type == "Community pharmacy" %}
-            {% set items = (items.push({
-              text: organisation.name + (", " + (organisation.address.postcode | upper) if organisation.address.postcode) + " (" + organisation.id + ")",
-              value: organisation.id
-            }), items) %}
-          {% endif %}
+        {% for organisation in pharmacies %}
+          {% set items = (items.push({
+            text: organisation.name + (", " + (organisation.address.postcode | upper) if organisation.address.postcode) + " (" + organisation.id + ")",
+            value: organisation.id
+          }), items) %}
         {% endfor %}
 
         {{ select({
