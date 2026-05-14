@@ -1,5 +1,3 @@
-const { getPharmaciesBelongingToOrganisation, getPharmacyChains, getOrganisation } = require('../lib/ods');
-
 const sortByNameThenPostcode = (getPostcode = (item) => item.postcode) => (a, b) => {
   if (a.name < b.name) return -1
   if (a.name > b.name) return 1
@@ -17,7 +15,7 @@ const findOrganisationById = (data, organisationId) => {
 
 module.exports = router => {
 
-  router.get('/apply/start', async (req, res) => {
+  router.get('/apply/start', (req, res) => {
     const data = req.session.data
     let errors = []
 
@@ -35,7 +33,6 @@ module.exports = router => {
 
     const pharmacies = data.allOrganisations.sort(sortByNameThenPostcode()).filter((organisation) => organisation.type === "Community pharmacy")
 
-    const allPharmacyCompanies = await getPharmacyChains()
 
     res.render('apply/start', {
       pharmacies,
