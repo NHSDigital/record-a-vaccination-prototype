@@ -8339,7 +8339,11 @@ module.exports = [
       lastName: "Brown",
       email: "james.brown@nhs.net",
       phone: "01234 567890"
-    }
+    },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ]
   },
   {
     id: 'PDL93',
