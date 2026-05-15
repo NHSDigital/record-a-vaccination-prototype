@@ -9,7 +9,7 @@
       {% if added %}
         {% set html %}
           <h3 class="nhsuk-notification-banner__heading">
-            {{ added }} pharmacies added
+            {{ added | int | plural('pharmacy') }} added
           </h3>
           <p>You can now add or assign users to these pharmacies.</p>
         {% endset %}
