@@ -25,7 +25,7 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Check {{ data.patientName }}’s details</h1>
+      <h1 class="nhsuk-heading-l">Check Jodie Brown’s details and vaccination history</h1>
 
       {{ summaryList({
         classes: 'xnhsuk-summary-list--no-border',
@@ -56,30 +56,22 @@
           },
           {
             key: {
-              text: "NHS number"
+              text: "Postcode"
             },
             value: {
-              text: "9123456321"
+              text: "N7 0EA"
             }
           }
         ]
       }) }}
 
-      {% if data.vaccine == "COVID-19" %}
+      {% from "warning-callout/macro.njk" import warningCallout %}
 
-        {% set screeningConsiderations %}
-          <ul>
-            <li>Does the patient have a history of anaphylaxis or significant allergic reactions to any vaccines or their ingredients?</li>
-            <li>Has the patient had a serious adverse reaction after the COVID-19 vaccine?</li>
-            <li>Is the patient pregnant or could they be?</li>
-          </ul>
-        {% endset %}
-
-
-
-      {% endif %}
-
-
+{{ warningCallout({
+  heading: "Important",
+  text: "We could not get any vaccination history for this patient."
+}) }}
+          
 
       <form action="{{ nextPage }}" method="post" novalidate>
         {{ button({
