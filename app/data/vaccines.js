@@ -198,6 +198,7 @@ module.exports = [
   },
   {
     name: "MenB",
+    availableToAllSites: true,
     products: [
       {
         name: "Bexsero",
