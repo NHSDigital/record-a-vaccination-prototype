@@ -51,11 +51,14 @@
                 <a href="/pharmacies/{{ organisation.id }}">{{ organisation.name }} ({{ organisation.id}})</a>
               </td>
               <td class="nhsuk-table__cell ">
-                {% if loop.index0 == 0 %}
-                  <span class="nhsuk-u-secondary-text-colour">Not yet added</span>
-                {% else %}
-                  COVID-19, flu
-                {% endif %}
+                {% set vaccinesEnabled = [] %}
+                {% for vaccine in organisation.vaccines %}
+                  {% if vaccine.status == "enabled" %}
+                    {% set vaccinesEnabled = (vaccinesEnabled.push(vaccine.name), vaccinesEnabled) %}
+                  {% endif %}
+                {% endfor %}
+
+                {{ vaccinesEnabled | sort | join(", ") }}
               </td>
               <td class="nhsuk-table__cell ">
                 {{ organisationUserCounts[organisation.id] }}
