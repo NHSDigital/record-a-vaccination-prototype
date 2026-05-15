@@ -85,7 +85,9 @@ module.exports = router => {
         companyId: companyId,
         address: pharmacy.address,
         status: 'Active',
-        vaccines: [],
+        vaccines: [
+          {name: 'flu', status: 'enabled'}
+        ],
         sites: [
           {
             id: pharmacy.id,
