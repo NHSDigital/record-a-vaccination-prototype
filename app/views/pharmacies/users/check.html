@@ -113,10 +113,10 @@
         ]
       }) }}
 
-      <p>{{ data.firstName }} will receive this welcome email with information about activating an account:</p>
+      <p>{{ data.firstName }} will receive this welcome email telling them how to access the service:</p>
 
       <div class="app-email-preview">
-        {% include "pharmacies/users/welcome-email-group-admin.html" %}
+        {% include "user-admin/_welcome-email.html" %}
       </div>
 
       <form action="/pharmacies/users/check-answer" method="post">
