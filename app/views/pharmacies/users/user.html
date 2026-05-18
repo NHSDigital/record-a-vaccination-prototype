@@ -14,6 +14,21 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+      {% if addedToPharmacy %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            Added to pharmacy
+          </h3>
+          <p>The user can now log in to {{ addedToPharmacy.name }}</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
+
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       {{ summaryList({
@@ -68,7 +83,7 @@
                   {{ organisation.permissionLevel }}
                 </td>
                 <td class="nhsuk-table__cell ">
-                  {{ organisation.vaccinator }}
+                  {{ "Yes" if organisation.vaccinator else "No" }}
                 </td>
                 <td class="nhsuk-table__cell ">
                   {{ organisation.status }}
@@ -84,10 +99,13 @@
           </tbody>
         </table>
 
-        {{ button({
-          text: "Add to another pharmacy",
-          classes: "nhsuk-button--secondary"
-        }) }}
+        {% if totalPharmaciesAtOrganisation > (user.organisations | length) %}
+          {{ button({
+            text: "Add to another pharmacy",
+            classes: "nhsuk-button--secondary",
+            href: "/pharmacies/users/" + user.id + "/add-to"
+          }) }}
+        {% endif %}
 
         <p><a href="#">Deactivate user from all pharmacies</a></p>
       {% endif %}

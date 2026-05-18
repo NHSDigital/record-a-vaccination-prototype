@@ -254,19 +254,6 @@ module.exports = router => {
 
 
 
-  router.get('/pharmacies/users/:id',(req, res) => {
-    const data = req.session.data
-    const id = req.params.id
-    const user = data.users.find((user) => user.id === id)
-
-    const pharmacyRoles = (user.organisations || []).filter(role => role.permissionLevel !== "Group administrator")
-
-    res.render('pharmacies/users/user', {
-      user,
-      pharmacyRoles
-    })
-  })
-
 
   router.get('/pharmacies/:id/add-user',(req, res) => {
     const data = req.session.data
@@ -379,6 +366,7 @@ module.exports = router => {
     const data = req.session.data
     const pharmacyId = req.params.pharmacyId
     const userId = req.params.userId
+    const from = data.from
 
     const user = data.users.find(user => user.id === userId)
     const pharmacy = data.organisations.find(organisation => organisation.id === pharmacyId)
@@ -388,8 +376,80 @@ module.exports = router => {
     role.permissionLevel = data.permissionLevel
     role.vaccinator = (data.vaccinator === "yes")
 
-    res.redirect(`/pharmacies/${pharmacy.id}`)
+    if (from === "user") {
+      res.redirect(`/pharmacies/users/${user.id}`)
+    } else {
+      res.redirect(`/pharmacies/${pharmacy.id}`)
+    }
+
   })
+
+  router.get('/pharmacies/users/:id/add-to',(req, res) => {
+    const data = req.session.data
+    const userId = req.params.id
+    const user = data.users.find(user => user.id === userId)
+    const companyId = res.locals.currentOrganisation.id
+
+    const pharmacyIdsThatUserAlreadyHasAccessTo = user.organisations.map(organisation => organisation.id)
+
+    const pharmacies = data.organisations.filter((organisation) => (organisation.companyId === companyId) && !pharmacyIdsThatUserAlreadyHasAccessTo.includes(organisation.id))
+
+
+    res.render('pharmacies/users/add-to', {
+      user,
+      pharmacies
+    })
+  })
+
+  router.get('/pharmacies/users/:id/add-to-permission-level',(req, res) => {
+    const data = req.session.data
+    const userId = req.params.id
+    const user = data.users.find(user => user.id === userId)
+
+    const pharmacy = data.organisations.find(organisation => organisation.id === data.pharmacyId)
+
+
+    res.render('pharmacies/users/add-to-permission-level', {
+      user,
+      pharmacy
+    })
+  })
+
+  router.get('/pharmacies/users/:id/add-to-check',(req, res) => {
+    const data = req.session.data
+    const userId = req.params.id
+    const user = data.users.find(user => user.id === userId)
+
+    const pharmacy = data.organisations.find(organisation => organisation.id === data.pharmacyId)
+
+
+    res.render('pharmacies/users/add-to-check', {
+      user,
+      pharmacy
+    })
+  })
+
+  router.post('/pharmacies/users/:id/add-to-check-answer',(req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const user = data.users.find(user => user.id === id)
+    const pharmacy = data.organisations.find(organisation => organisation.id === data.pharmacyId)
+
+    user.organisations.push({
+      id: pharmacy.id,
+      status: 'Active',
+      permissionLevel: data.permissionLevel,
+      vaccinator: (data.vaccinator === 'yes')
+    })
+
+    // Reset answers
+    data.permissionLevel = ''
+    data.vaccinator = ''
+    data.pharmacyId = ''
+
+    res.redirect(`/pharmacies/users/${id}?addedToPharmacyId=${pharmacy.id}`)
+  })
+
 
   router.get('/pharmacies/:id', (req, res) => {
     const data = req.session.data
@@ -415,6 +475,32 @@ module.exports = router => {
       users,
       userOrganisationPermissions,
       added
+    })
+  })
+
+
+  router.get('/pharmacies/users/:id',(req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const user = data.users.find((user) => user.id === id)
+    const companyId = res.locals.currentOrganisation.id
+
+    const addedToPharmacyId = req.query.addedToPharmacyId
+    let addedToPharmacy
+
+    if (addedToPharmacyId) {
+      addedToPharmacy = data.organisations.find(organisation => organisation.id === addedToPharmacyId)
+    }
+
+    const totalPharmaciesAtOrganisation = data.organisations.filter(organisation => organisation.companyId === companyId).length
+
+    const pharmacyRoles = (user.organisations || []).filter(role => role.permissionLevel !== "Group administrator")
+
+    res.render('pharmacies/users/user', {
+      user,
+      pharmacyRoles,
+      addedToPharmacy,
+      totalPharmaciesAtOrganisation
     })
   })
 
