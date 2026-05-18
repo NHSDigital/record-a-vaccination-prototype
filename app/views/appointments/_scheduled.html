@@ -40,7 +40,7 @@
       </td>
       {% if currentDay == today %}
         <td class="nhsuk-table__cell">
-          <a href="/record-vaccinations/patient-history?nhsNumber={{ appointment.patient.nhsNumber }}&dateOfBirth={{ appointment.patient.dateOfBirth }}&firstName={{ appointment.patient.firstName }}&lastName={{ appointment.patient.lastName }}&from=appointments&appointmentId={{ appointment.id}}">Record</a>
+          <a href="/record-vaccinations/patient-history?nhsNumber={{ appointment.patient.nhsNumber }}&dateOfBirth={{ appointment.patient.dateOfBirth }}&firstName={{ appointment.patient.firstName }}&lastName={{ appointment.patient.lastName }}&from=appointments&appointmentId={{ appointment.id}}">Record<span class="nhsuk-u-visually-hidden"> vaccination for {{ appointment.patient.firstName }} {{ appointment.patient.lastName }}</span></a>
         </td>
       {% endif %}
     </tr>
