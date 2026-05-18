@@ -38,9 +38,9 @@
       </td>
       <td class="nhsuk-table__cell">
         {% if appointment.cancelled.reason == "patient" %}
-          Patient
+          By patient
         {% elif appointment.cancelled.reason == "organisation" %}
-          Us
+          By site
         {% elif appointment.cancelled.reason == "auto" %}
           Automatic
         {% endif %}
