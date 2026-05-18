@@ -4,7 +4,7 @@
       <th scope="col" class="nhsuk-table__header" aria-sort="ascending">Time</th>
       <th scope="col" class="nhsuk-table__header" aria-sort="none">Name and NHS number</th>
       <th scope="col" class="nhsuk-table__header">Date of birth</th>
-      <th scope="col" class="nhsuk-table__header">Vaccines</th>
+      <th scope="col" class="nhsuk-table__header">Vaccines booked</th>
 
       <th scope="col" class="nhsuk-table__header">Contact details</th>
       <th scope="col" class="nhsuk-table__header">Cancellation reason</th>
@@ -25,6 +25,7 @@
       </td>
       <td class="nhsuk-table__cell">
         {{ appointment.patient.dateOfBirth | govukDate }}
+        <div class="nhsuk-u-secondary-text-colour">{{ appointment.patient.dateOfBirth | age }} old</div>
       </td>
       <td class="nhsuk-table__cell">
         {{ appointment.vaccinations | join(", ") }}
