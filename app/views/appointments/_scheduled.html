@@ -21,7 +21,7 @@
       <td class="nhsuk-table__cell">
         {{ appointment.patient.firstName }}
         {{ appointment.patient.lastName }}
-        <div class="nhsuk-u-secondary-text-colour">{{ appointment.patient.nhsNumber }}</div>
+        <div class="nhsuk-u-secondary-text-colour">{{ appointment.patient.nhsNumber | formatNhsNumber }}</div>
       </td>
       <td class="nhsuk-table__cell">
         {{ appointment.patient.dateOfBirth | govukDate }}
