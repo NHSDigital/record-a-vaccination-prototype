@@ -67,10 +67,6 @@ export class Autocomplete extends Component {
 
   /**
    * Selected option
-   *
-   * @param {*} value - Current value
-   * @param {Array} options - Available options
-   * @returns {HTMLOptionElement} Selected option
    */
   selectedOption(value, options) {
     return [].filter.call(

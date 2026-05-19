@@ -1,0 +1,104 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies-users" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/users/new",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Check and add user to pharmacy</h1>
+
+      {% set pharmaciesHtml %}
+        <ul class="nhsuk-list">
+          {% for pharmacy in pharmacies %}
+            <li>{{ pharmacy.name }}</li>
+          {% endfor %}
+        </ul>
+      {% endset %}
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "User"
+            },
+            value: {
+              html: user.firstName + " " + user.lastName + "<br>" + user.email
+            }
+          },
+          {
+            key: {
+              text: "Pharmacy"
+            },
+            value: {
+              html: pharmacy.name + " (" + pharmacy.id + ")"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/pharmacies/users/" + user.id + "/add-to",
+                  text: "Change",
+                  visuallyHiddenText: "pharmacy"
+                }
+              ]
+            }
+          } if data.groupAdministrator != "yes",
+          {
+            key: {
+              text: "Vaccinator"
+            },
+            value: {
+              html: data.vaccinator | capitalize
+            },
+            actions: {
+              items: [
+                {
+                  href: "/pharmacies/users/" + user.id + "/add-to-permission-level",
+                  text: "Change",
+                  visuallyHiddenText: "vaccinator"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Permission level"
+            },
+            value: {
+              html: data.permissionLevel
+            },
+            actions: {
+              items: [
+                {
+                  href: "/pharmacies/users/" + user.id + "/add-to-permission-level",
+                  text: "Change",
+                  visuallyHiddenText: "permission level"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <p>{{ user.firstName }} will receive this email telling them they now have access to the pharmacy:</p>
+
+      <div class="app-email-preview">
+        {% include "user-admin/_welcome-email.html" %}
+      </div>
+
+      <form action="/pharmacies/users/{{ user.id }}/add-to-check-answer" method="post">
+        {{ button({
+          "text": "Confirm and send"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

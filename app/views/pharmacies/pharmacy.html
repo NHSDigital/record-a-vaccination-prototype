@@ -1,0 +1,136 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies" %}
+
+{% set pageName = organisation.name %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if added %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            User added
+          </h3>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "ODS code"
+            },
+            value: {
+              text: organisation.id
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              text: organisation.address.line1 + ", " + organisation.address.town + ", " + organisation.address.postcode
+            }
+          },
+          {
+            key: {
+              text: "Vaccines"
+            },
+            value: {
+              text: "COVID-19, flu"
+            }
+          }
+        ]
+      }) }}
+
+      {% if organisation.status == 'Deactivated' %}
+        <p>This pharmacy has been deactivated.</p>
+
+        <p>It will be closed in <b>90 days</b>. </p>
+      {% else %}
+        <p><a href="/pharmacies/{{ organisation.id }}/deactivate">Deactivate this pharmacy</a></p>
+
+      {% endif %}
+
+      <h2 class="nhsuk-heading-m">Users</h2>
+    </div>
+  </div>
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-three-quarters">
+
+      {% if organisation.status != 'Deactivated' %}
+        {{ button({
+          href: "/pharmacies/" + organisation.id + "/add-user",
+          text: "Add user"
+        }) }}
+      {% endif %}
+
+      {% if (users | length) > 0 %}
+
+        <table class="nhsuk-table">
+          <thead role="rowgroup" class="nhsuk-table__head">
+            <tr role="row">
+              <th role="columnheader" class="" scope="col">
+                Name
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Permission level
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Vaccinator
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Status
+              </th>
+              <th role="columnheader" class="" scope="col">
+                <span class="nhsuk-u-visually-hidden">Actions</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="nhsuk-table__body">
+            {% for user in users %}
+              <tr role="row" class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                  <a href="/pharmacies/users/{{ user.id }}">
+                    {{ user.firstName }} {{ user.lastName }}
+                  </a>
+                </td>
+                <td class="nhsuk-table__cell ">
+                  {{ userOrganisationPermissions[user.id].permissionLevel }}
+                </td>
+                <td class="nhsuk-table__cell " style="min-width: 150px;">
+                  {{ "Yes" if userOrganisationPermissions[user.id].vaccinator else "No" }}
+                </td>
+                <td class="nhsuk-table__cell ">
+                  {{ userOrganisationPermissions[user.id].status }}
+                </td>
+                <td class="nhsuk-table__cell">
+                  <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/change?from=pharmacy">Change<span class="nhsuk-u-visually-hidden">permission level for {{ user.firstName }} {{ user.lastName }}</span></a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>No users added yet.</p>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}

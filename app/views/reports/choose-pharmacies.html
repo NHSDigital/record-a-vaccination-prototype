@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Choose sites" %}
+{% set pageName = "Choose pharmacies" %}
 
 {% set currentSection = "reports" %}
 
@@ -19,41 +19,38 @@
 
         {% set items = [] %}
 
-        {% if ((sites | length) > 2) %}
+        {% set items = (items.push({
+          text: "All " + (pharmacies|length) + " pharmacies",
+          value: "all",
+          attributes: {
+            "data-module": "app-checkbox-select-all",
+            "data-select-all": "true"
+          }
+        }), items) %}
 
-          {% set items = (items.push({
-            text: "All " + (sites|length) + " " + ("sites" if sites else "site"),
-            value: "all",
-            attributes: {
-              "data-module": "app-checkbox-select-all",
-              "data-select-all": "true"
-            }
-          }), items) %}
+        {% set items = (items.push({
+          divider: "or"
+        }), items) %}
 
-          {% set items = (items.push({
-            divider: "or"
-          }), items) %}
 
-        {% endif %}
+        {% for pharmacy in pharmacies | sort(false, false, "name") %}
 
-        {% for site in (sites | sort(false, false, "name")) %}
-
-          {% if site.address %}
+          {% if pharmacy.address %}
             {% set hint = {
-              text: site.address.line1 + ", " + site.address.town + ", " + site.address.postcode
+              text: pharmacy.address.line1 + ", " + pharmacy.address.town + ", " + pharmacy.address.postcode
             } %}
           {% endif %}
 
           {% set items = (items.push({
-            value: site.id,
-            text: site.name + " (" + site.id + ")",
+            value: pharmacy.id,
+            text: pharmacy.name + " (" + pharmacy.id + ")",
             hint: hint
           }), items) %}
         {% endfor %}
 
         {{ checkboxes({
-          idPrefix: "sites-to-report",
-          name: "siteIdsToReport",
+          idPrefix: "pharmacy-to-report",
+          name: "pharmacyIdsToReport",
           fieldset: {
             legend: {
               text: pageName,
@@ -61,7 +58,7 @@
               isPageHeading: true
             }
           },
-          values: data.siteIdsToReport,
+          values: data.pharmacyIdsToReport,
           items: items
         }) }}
 

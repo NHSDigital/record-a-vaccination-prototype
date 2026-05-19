@@ -8261,6 +8261,7 @@ module.exports = [
   {
     id: 'FA424',
     name: 'Pickfords Pharmacy',
+    companyId: "P0191N",
     sites: [
       {
         id: "FA424X",
@@ -8285,6 +8286,7 @@ module.exports = [
   {
     id: 'FA02S',
     name: 'Addlestone Pharmacy',
+    companyId: "P0191N",
     address: {
       line1: '92a Station Road',
       town: 'Addlestone',
@@ -8316,6 +8318,7 @@ module.exports = [
   {
     id: 'FVJ99',
     name: 'Pharmacy 4U',
+    companyId: "P0191N",
     sites: [
       {
         id: "123535",
@@ -8336,10 +8339,15 @@ module.exports = [
       lastName: "Brown",
       email: "james.brown@nhs.net",
       phone: "01234 567890"
-    }
+    },
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ]
   },
   {
     id: 'PDL93',
+    companyId: "P0191N",
     name: 'Silverfields Chemists',
     sites: [
       {
@@ -8485,8 +8493,21 @@ module.exports = [
     }
   },
   {
+    id: 'P15951',
+    name: 'MediCare Health Ltd',
+    address: {
+      line1: '28 High Street',
+      town: 'London',
+      postcode: 'N5 1PL'
+    },
+    type: 'Pharmacy HQ',
+    status: 'Active',
+    region: "Y56"
+  },
+  {
     id: 'FX9141',
     name: 'MediCare Pharmacy',
+    companyId: 'P15951',
     address: {
       line1: '28 High Street',
       town: 'London',
@@ -8514,6 +8535,7 @@ module.exports = [
   {
     id: 'FX4825',
     name: 'MediCare Pharmacy',
+    companyId: 'P15951',
     address: {
       line1: '104 Bow Street',
       town: 'London',
@@ -8541,6 +8563,7 @@ module.exports = [
   {
     id: 'FX7314',
     name: 'MediCare Pharmacy',
+    companyId: 'P15951',
     address: {
       line1: '99 Flowers Road',
       town: 'London',
@@ -8568,6 +8591,7 @@ module.exports = [
   {
     id: 'FX9151',
     name: 'MediCare Pharmacy',
+    companyId: 'P15951',
     address: {
       line1: '12 Church Road',
       town: 'London',
@@ -8595,6 +8619,7 @@ module.exports = [
   {
     id: 'FQ2525',
     name: 'MediCare Pharmacy',
+    companyId: 'P15951',
     address: {
       line1: '1 Granary Road',
       town: 'London',
@@ -8622,6 +8647,7 @@ module.exports = [
   {
     id: 'FW1941',
     name: 'MediCare Pharmacy',
+    companyId: 'P15951',
     address: {
       line1: '8 Manchester Road',
       town: 'London',
@@ -8649,6 +8675,7 @@ module.exports = [
   {
     id: 'FP9824',
     name: 'MediCare Pharmacy',
+    companyId: 'P15951',
     address: {
       line1: '12 John Robinson Road',
       town: 'London',
@@ -8676,6 +8703,7 @@ module.exports = [
   {
     id: 'FP1812',
     name: 'MediCare Pharmacy',
+    companyId: 'P15951',
     address: {
       line1: '18 Church Road',
       town: 'London',
@@ -8703,6 +8731,7 @@ module.exports = [
   {
     id: "FA7K23",
     name: "MediCare Pharmacy",
+    companyId: 'P15951',
     address: {
       line1: "45 High Street",
       town: "Manchester",
@@ -8730,6 +8759,7 @@ module.exports = [
   {
     id: "FG2R56",
     name: "MediCare Pharmacy",
+    companyId: 'P15951',
     address: {
       line1: "78 Queen Street",
       town: "Birmingham",
@@ -8757,6 +8787,7 @@ module.exports = [
   {
     id: "FH9P12",
     name: "MediCare Pharmacy",
+    companyId: 'P15951',
     address: {
       line1: "23 Station Road",
       town: "Leeds",
@@ -8784,6 +8815,7 @@ module.exports = [
   {
     id: "FJ4M89",
     name: "MediCare Pharmacy",
+    companyId: 'P15951',
     address: {
       line1: "156 Market Street",
       town: "Liverpool",
@@ -8811,6 +8843,7 @@ module.exports = [
   {
     id: "FK5N34",
     name: "MediCare Pharmacy",
+    companyId: 'P15951',
     address: {
       line1: "89 Park Lane",
       town: "Bristol",
@@ -8838,6 +8871,7 @@ module.exports = [
   {
     id: "FL7Q67",
     name: "MediCare Pharmacy",
+    companyId: 'P15951',
     address: {
       line1: "34 Castle Street",
       town: "Edinburgh",
@@ -8865,6 +8899,7 @@ module.exports = [
   {
     id: "FM8R23",
     name: "MediCare Pharmacy",
+    companyId: 'P15951',
     address: {
       line1: "67 Main Street",
       town: "Glasgow",
@@ -8892,6 +8927,7 @@ module.exports = [
   {
     id: "FN9S45",
     name: "MediCare Pharmacy",
+    companyId: 'P15951',
     address: {
       line1: "112 Church Road",
       town: "Cardiff",
@@ -8919,6 +8955,7 @@ module.exports = [
   {
     id: "FP2T78",
     name: "MediCare Pharmacy",
+    companyId: 'P15951',
     address: {
       line1: "45 Bridge Street",
       town: "Newcastle",
@@ -8946,6 +8983,7 @@ module.exports = [
   {
     id: "FQ3U12",
     name: "MediCare Pharmacy",
+    companyId: 'P15951',
     address: {
       line1: "28 Victoria Road",
       town: "Sheffield",
@@ -8973,6 +9011,7 @@ module.exports = [
   {
     id: "FR4V56",
     name: "MediCare Pharmacy",
+    companyId: 'P15951',
     address: {
       line1: "91 Oxford Street",
       town: "Nottingham",
@@ -9000,6 +9039,7 @@ module.exports = [
   {
     id: "FS5W89",
     name: "MediCare Pharmacy",
+    companyId: 'P15951',
     address: {
       line1: "15 King Street",
       town: "Leicester",
@@ -9027,6 +9067,7 @@ module.exports = [
   {
     id: "FT6X34",
     name: "MediCare Pharmacy",
+    companyId: 'P15951',
     address: {
       line1: "203 London Road",
       town: "Southampton",
@@ -9077,5 +9118,17 @@ module.exports = [
         }
       }
     ]
+  },
+  {
+    id: "P0191N",
+    name: 'P.W. Pharmacies Ltd',
+    address: {
+      line1: '12 High Road',
+      town: 'Manchester',
+      postcode: 'M7 1LP'
+    },
+    type: 'Pharmacy HQ',
+    status: 'Active',
+    region: "Y56"
   }
 ]

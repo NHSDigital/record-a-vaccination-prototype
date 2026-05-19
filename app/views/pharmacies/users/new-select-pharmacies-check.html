@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies-users" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/users/new-select-pharmacies"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-three-quarters">
+
+      <h1 class="nhsuk-heading-l">Check pharmacies</h1>
+
+      <p>These are the pharmacies you will give {{ data.firstName }} {{ data.lastName }} access to.</p>
+
+      <form action="/pharmacies/users/new-permission-level" method="post" novalidate="true">
+        {% set rows = [] %}
+
+        {% for pharmacy in pharmacies %}
+
+          {% set removeHtml %}
+            {{ button({
+              text: "Remove",
+              classes: "nhsuk-button--secondary nhsuk-button--small nhsuk-u-margin-bottom-0"
+            }) }}
+          {% endset %}
+
+          {% set rows = (rows.push([
+            { text: pharmacy.name + ", " + pharmacy.address.postcode + " (" + pharmacy.id + ")" },
+            { html: removeHtml }
+          ]), rows) %}
+        {% endfor %}
+
+
+        {{ table({
+          head: [
+            { text: "Pharmacy" },
+            { text: "" }
+          ],
+          rows: rows
+        }) }}
+
+
+        {{ button({
+          "text": "Continue"
+      }) }}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

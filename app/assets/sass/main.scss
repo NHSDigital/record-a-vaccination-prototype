@@ -24,6 +24,7 @@
 @import 'components/tag';
 @import 'components/numbered-heading';
 @import 'components/inset-text';
+@import 'components/scrollable-container';
 
 @import '../../components/secondary-navigation/_secondary-navigation';
 
@@ -31,10 +32,12 @@
 // Add your custom CSS/Sass styles below...
 ///////////////////////////////////////////
 
-// Ensure hidden attribute works on button groups (which have display: flex)
-.nhsuk-button-group[hidden] {
+// Ensure hidden attribute works on button groups and radios (which have display: flex)
+.nhsuk-button-group[hidden],
+.nhsuk-radios__item[hidden] {
   display: none;
 }
+
 
 .nhsuk-header--left .nhsuk-header__navigation-list {
   justify-content: normal;
@@ -144,24 +147,4 @@ border-radius: 3px;
 
 .nhsuk-checkboxes__item[hidden] {
   display: none;
-}
-
-.app-checkboxes--scrollable-container {
-  max-height: 500px;
-  overflow-y: scroll;
-  margin-bottom: nhsuk-spacing(4);
-
-  // Force scrollbar to always be visible on WebKit browsers (Chrome, Safari)
-  &::-webkit-scrollbar {
-    width: $nhsuk-border-width-inset-text;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: $nhsuk-border-colour;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: $nhsuk-input-border-colour;
-    border-radius: 4px;
-  }
 }
