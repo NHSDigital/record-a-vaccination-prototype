@@ -362,6 +362,37 @@ module.exports = router => {
     })
   })
 
+  router.get('/pharmacies/:pharmacyId/users/:userId/deactivate-from-pharmacy',(req, res) => {
+    const data = req.session.data
+    const pharmacyId = req.params.pharmacyId
+    const userId = req.params.userId
+
+    const user = data.users.find(user => user.id === userId)
+    const pharmacy = data.organisations.find(organisation => organisation.id === pharmacyId)
+
+    res.render('pharmacies/users/deactivate-from-pharmacy', {
+      user,
+      pharmacy
+    })
+  })
+
+  router.post('/pharmacies/:pharmacyId/users/:userId/deactivate-from-pharmacy-answer',(req, res) => {
+    const data = req.session.data
+    const pharmacyId = req.params.pharmacyId
+    const userId = req.params.userId
+
+    const user = data.users.find(user => user.id === userId)
+    const pharmacy = data.organisations.find(organisation => organisation.id === pharmacyId)
+
+    const role = user.organisations.find(role => role.id === pharmacyId)
+
+    role.status = 'Deactivated'
+
+    res.redirect(`/pharmacies/users/${user.id}?deactivatedFromPharmacyId=${pharmacy.id}`)
+
+  })
+
+
   router.post('/pharmacies/:pharmacyId/users/:userId/change-answer',(req, res) => {
     const data = req.session.data
     const pharmacyId = req.params.pharmacyId
@@ -486,10 +517,15 @@ module.exports = router => {
     const companyId = res.locals.currentOrganisation.id
 
     const addedToPharmacyId = req.query.addedToPharmacyId
-    let addedToPharmacy
+    const deactivatedFromPharmacyId = req.query.deactivatedFromPharmacyId
+
+    let addedToPharmacy, deactivatedFromPharmacy
 
     if (addedToPharmacyId) {
       addedToPharmacy = data.organisations.find(organisation => organisation.id === addedToPharmacyId)
+    }
+    if (deactivatedFromPharmacyId) {
+      deactivatedFromPharmacy = data.organisations.find(organisation => organisation.id === deactivatedFromPharmacyId)
     }
 
     const totalPharmaciesAtOrganisation = data.organisations.filter(organisation => organisation.companyId === companyId).length
@@ -500,6 +536,7 @@ module.exports = router => {
       user,
       pharmacyRoles,
       addedToPharmacy,
+      deactivatedFromPharmacy,
       totalPharmaciesAtOrganisation
     })
   })

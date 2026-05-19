@@ -28,6 +28,20 @@
         }) }}
       {% endif %}
 
+      {% if deactivatedFromPharmacy %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            Deactivated from pharmacy
+          </h3>
+          <p>The user has been deactivated from {{ deactivatedFromPharmacy.name }}</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
@@ -92,7 +106,7 @@
                   <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/change?from=user">Change<span class="nhsuk-u-visually-hidden">permission level at {{ organisation.name }}</span></a>
                 </td>
                 <td class="nhsuk-table__cell ">
-                  <a href="#">Deactivate</a>
+                  <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/deactivate-from-pharmacy">Deactivate</a>
                 </td>
               </tr>
             {% endfor %}
@@ -107,7 +121,7 @@
           }) }}
         {% endif %}
 
-        <p><a href="#">Deactivate user from all pharmacies</a></p>
+        <p><a href="/pharmacies/users/" + user.id + "/add-to">Deactivate user from all pharmacies</a></p>
       {% endif %}
 
     </div>
