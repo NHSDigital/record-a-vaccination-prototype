@@ -55,10 +55,17 @@
           divider: "or"
         }), items) %}
 
-        {% set items = (items.push({
-          value: "different-vaccination-another-patient",
-          text: "A different vaccination for another patient"
-        }), items) %}
+        {% if data.appointmentId %}
+          {% set items = (items.push({
+            value: "appointments",
+            text: "Back to appointments list"
+          }), items) %}
+        {% else %}
+          {% set items = (items.push({
+            value: "different-vaccination-another-patient",
+            text: "A different vaccination for another patient"
+          }), items) %}
+        {% endif %}
 
         {{ radios({
           idPrefix: "next-step",
@@ -75,9 +82,14 @@
           items: items
         }) }}
 
-        {{ button({
-          text: "Continue"
-        })}}
+        <div class="nhsuk-button-group">
+          {{ button({
+            text: "Continue"
+          })}}
+
+          <p>or</p>
+          <a href="/home" class="nhsuk-link">Home</a>
+        </div>
       </form>
 
     </div>

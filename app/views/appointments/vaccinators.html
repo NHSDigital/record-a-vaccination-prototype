@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "appointments" %}
+{% set pageName = "Who is vaccinating today?" %}
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/appointments",
+    text: "Back"
+  }) }}
+{% endblock%}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/appointments" method="post" novalidate>
+
+        {% set items = [] %}
+
+        {% if organisationSetting.vaccinator %}
+          {% set items = (items.push({
+            value: data.currentUserId,
+            text: "Me (" + currentUser.firstName + " " + currentUser.lastName + ")"
+          }), items) %}
+        {% endif %}
+
+        {% for user in otherVaccinators %}
+          {% set items = (items.push({
+            value: user.id,
+            text: user.firstName + " " + user.lastName + " (" + user.email + ")"
+          }), items) %}
+        {% endfor %}
+
+        {{ checkboxes({
+          idPrefix: "vaccinator",
+          name: "vaccinatorIds",
+          fieldset: {
+            legend: {
+              text: pageName,
+              size: "l",
+              isPageHeading: "true"
+            }
+          },
+          hint: {
+            text: "Setting this lets you save time when recording today’s vaccinations."
+          },
+          items: items,
+          values: data.vaccinatorIds
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+
+{% endblock %}

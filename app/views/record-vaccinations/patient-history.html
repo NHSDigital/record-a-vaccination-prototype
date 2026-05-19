@@ -8,9 +8,10 @@
 {% set dateOfBirthHtml %}
   {% if data.dateOfBirth.day %}
     {{ (data.dateOfBirth | isoDateFromDateInput | govukDate) }}
-    <br>(76 years old)
+    <div class="nhsuk-u-secondary-text-colour">{{ data.dateOfBirth | isoDateFromDateInput | age }} old</div>
   {% else %}
     {{ (data.dateOfBirth | govukDate) }}
+    <div class="nhsuk-u-secondary-text-colour">{{ data.dateOfBirth | age }} old</div>
   {% endif %}
 {% endset %}
 
@@ -24,7 +25,9 @@
   {% set nextPage = "/record-vaccinations/vaccination-date" %}
 {% endif %}
 
-{% if data.repeatVaccination === "yes" %}
+{% if data.from == "appointments" %}
+  {% set previousPage = "/appointments" %}
+{% elseif data.repeatVaccination === "yes" %}
   {% set previousPage = "/record-vaccinations/patient" %}
 {% elseif data.repeatPatient === "yes" %}
   {% set previousPage = "/record-vaccinations/done" %}
