@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies" %}
+
+{% set pageName = "Deactivate " + pharmacy.name + " (" + pharmacy.id + ")" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/" + pharmacy.id
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p>Once this pharmacy has been deactivated, users will no longer be able to record vaccinations for this pharmacy.</p>
+
+      <p>For 90 days they will still be able to edit records and create reports. After 90 days the pharmacy will be closed and users will no longer have access to the Record a vaccination service for the pharmacy.</p>
+
+      <form action="/pharmacies/{{ pharmacy.id}}/deactivate-answer" method="post" novalidate="true">
+        {{ button({
+          "text": "Confirm and deactivate",
+          classes: "nhsuk-button--warning"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

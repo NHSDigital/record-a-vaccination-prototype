@@ -252,8 +252,25 @@ module.exports = router => {
     res.redirect('/pharmacies/users?added=true')
   })
 
+  router.get('/pharmacies/:id/deactivate',(req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const pharmacy = data.organisations.find(organisation => organisation.id === id)
 
+    res.render('pharmacies/deactivate', {
+      pharmacy
+    })
+  })
 
+  router.post('/pharmacies/:id/deactivate-answer',(req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const pharmacy = data.organisations.find(organisation => organisation.id === id)
+
+    pharmacy.status = 'Deactivated'
+
+    res.redirect(`/pharmacies/${id}`)
+  })
 
   router.get('/pharmacies/:id/add-user',(req, res) => {
     const data = req.session.data
