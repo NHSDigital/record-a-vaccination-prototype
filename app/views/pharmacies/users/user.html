@@ -106,7 +106,7 @@
                   <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/change?from=user">Change<span class="nhsuk-u-visually-hidden">permission level at {{ organisation.name }}</span></a>
                 </td>
                 <td class="nhsuk-table__cell ">
-                  <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/deactivate-from-pharmacy">Deactivate</a>
+                  <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/deactivate-from-pharmacy">Deactivate <span class="nhsuk-u-visually-hidden">from {{ organisation.name }}</span></a>
                 </td>
               </tr>
             {% endfor %}
@@ -121,7 +121,7 @@
           }) }}
         {% endif %}
 
-        <p><a href="/pharmacies/users/" + user.id + "/add-to">Deactivate user from all pharmacies</a></p>
+        <!-- <p><a href="/pharmacies/users/" + user.id + "/add-to">Deactivate user from all pharmacies</a></p> -->
       {% endif %}
 
     </div>
