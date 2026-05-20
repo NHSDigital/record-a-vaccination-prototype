@@ -13,6 +13,12 @@
 
   {% if currentOrganisation %}
     {% set navigationItems = (navigationItems.push({
+      href: "/appointments",
+      html: "Appointments <span class=\"nhsuk-tag app-tag--header nhsuk-u-margin-left-2\">New</span>",
+      active: (currentSection == "appointments")
+    }), navigationItems) %}
+
+    {% set navigationItems = (navigationItems.push({
       href: "/record-vaccinations",
       text: "Record vaccinations",
       active: (currentSection == "vaccinate")

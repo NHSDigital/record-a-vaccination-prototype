@@ -142,6 +142,46 @@ module.exports = [
     injectionSite: "Left arm",
     notes: "",
     editable: true
+  },
+  {
+    id: "DP001",
+    date: { day: "20", month: "05", year: "2026" },
+    vaccine: "COVID-19",
+    vaccineProduct: "Pfizer-BioNTech",
+    patient: {
+      name: "John Doe",
+      nhsNumber: "1234567890"
+    },
+    batchNumber: "DP001BATCH",
+    batchExpiryDate: "2027-05-20",
+    organisationId: "DP001", // Dean's Pharmacy
+    siteId: "DP001X", // Dean's Pharmacy
+    vaccinatorId: "123456789", // Vaccinator ID
+    eligibility: "Based on age",
+    consent: "patient",
+    injectionSite: "Right arm",
+    notes: "",
+    editable: true
+  },
+  {
+    id: "DP002",
+    date: { day: "20", month: "05", year: "2026" },
+    vaccine: "COVID-19",
+    vaccineProduct: "Pfizer-BioNTech",
+    patient: {
+      name: "Jane Doe",
+      nhsNumber: "9876543210"
+    },
+    batchNumber: "DP001COVID01",
+    batchExpiryDate: "2027-12-31",
+    organisationId: "DP001", // Dean's Pharmacy
+    siteId: "DP001X", // Dean's Pharmacy
+    vaccinatorId: "46436346", // Jeremy Blue
+    eligibility: "Based on age",
+    consent: "patient",
+    injectionSite: "Left arm",
+    notes: "",
+    editable: true
   }
 ]
 

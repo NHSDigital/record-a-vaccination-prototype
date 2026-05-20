@@ -116,14 +116,14 @@ module.exports = [
     "firstName": "Paulina",
     "lastName": "Sloan"
   },
-  // Each pharmacy in Paulina Sloan’s chain has its own vaccinator
+  // Each pharmacy in Paulina Sloan’s chain has its own vaccinator, some of who are also admins
   {
     "id": "46436346",
     "email": "jeremy.blue@nhs.net",
     "organisations": [
       {
         "id": "FA424",
-        "permissionLevel": "Recorder",
+        "permissionLevel": "Lead administrator",
         "status": "Active",
         "vaccinator": true
       }
@@ -167,6 +167,20 @@ module.exports = [
       {
         "id": "PDL93",
         "permissionLevel": "Recorder",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Jeremy",
+    "lastName": "Blue"
+  },
+  {
+    "id": "646436312",
+    "email": "jeremy.blue@nhs.net",
+    "organisations": [
+      {
+        "id": "DP001",
+        "permissionLevel": "Lead administrator",
         "status": "Active",
         "vaccinator": true
       }
@@ -9053,6 +9067,12 @@ module.exports = [
       {
         "id": "RY9",
         "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": true
+      },
+      {
+        "id": "DP001",
+        "permissionLevel": "Recorder",
         "status": "Active",
         "vaccinator": true
       }

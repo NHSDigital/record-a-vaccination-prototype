@@ -1,4 +1,5 @@
 const allOrganisations = require('./all-organisations')
+const appointments = require('./appointments')
 const featureFlags = require('./feature-flags')
 const organisations = require('./organisations')
 const users = require('./users')
@@ -13,10 +14,12 @@ module.exports = {
   users: users,
   vaccines: vaccines,
   vaccineStock: vaccineStock,
+  appointments: appointments,
   lists: [],
   nhsNumberKnown: "yes",
-  currentUserId: "2387441662601",
-  currentOrganisationId: "RW3",
+  currentUserId: "646436312", // Jeremy Blue
+  currentOrganisationId: "DP001", // Dean's Pharmacy
+  currentRoles: ["Lead admin"], // Updated Jeremy's role to Lead Admin
   vaccinationsRecorded: vaccinationsRecorded,
 
   // These are the options for extracting CSV reports

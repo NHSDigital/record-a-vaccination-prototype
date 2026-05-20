@@ -410,30 +410,72 @@ module.exports = [
     ]
   },
   {
-    id: "2514771",
-    vaccine: "flu (London service)",
+    id: "7436323",
+    vaccine: "Flu",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
-    organisationId: "FT81513", // Holborn Pharmacy
-    siteId: "FX252", // Holborn Pharmacy
+    organisationId: "FA424", // Pickfords Pharmacy
+    siteId: "FA424X", // Pickfords Pharmacy
     batches: [
       {
-        id: "46436436",
-        batchNumber: "LDJE-24",
-        expiryDate: "2026-12-04"
+        id: "464735235325",
+        batchNumber: "714-14",
+        expiryDate: "2026-12-14"
       }
     ]
   },
   {
-    id: "463646",
-    vaccine: "MMR",
-    vaccineProduct: "MMRVaXPro",
-    organisationId: "FT81513", // Holborn Pharmacy
-    siteId: "FX252", // Holborn Pharmacy
+    id: "9235235325",
+    vaccine: "COVID-19",
+    vaccineProduct: "Comirnaty 3 LP.8.1",
+    organisationId: "FA424", // Pickfords Pharmacy
+    siteId: "FA424X", // Pickfords Pharmacy
     batches: [
       {
-        id: "346436342",
-        batchNumber: "14-251",
-        expiryDate: "2027-01-13"
+        id: "82725252",
+        batchNumber: "AB-255",
+        expiryDate: "2027-01-22"
+      }
+    ]
+  },
+  {
+    id: "DP001RSV",
+    vaccine: "RSV",
+    vaccineProduct: "Abrysvo",
+    organisationId: "DP001", // Dean's Pharmacy
+    siteId: "DP001X", // Dean's Pharmacy
+    batches: [
+      {
+        id: "DP001RSV01",
+        batchNumber: "RSV-001",
+        expiryDate: "2027-12-31"
+      }
+    ]
+  },
+  {
+    id: "DP001COVID",
+    vaccine: "COVID-19",
+    vaccineProduct: "Comirnaty 3 LP.8.1",
+    organisationId: "DP001", // Dean's Pharmacy
+    siteId: "DP001X", // Dean's Pharmacy
+    batches: [
+      {
+        id: "DP001COVID01",
+        batchNumber: "COVID-001",
+        expiryDate: "2027-12-31"
+      }
+    ]
+  },
+  {
+    id: "DP001FLU",
+    vaccine: "Flu",
+    vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
+    organisationId: "DP001", // Dean's Pharmacy
+    siteId: "DP001X", // Dean's Pharmacy
+    batches: [
+      {
+        id: "DP001FLU01",
+        batchNumber: "FLU-001",
+        expiryDate: "2027-12-31"
       }
     ]
   }
