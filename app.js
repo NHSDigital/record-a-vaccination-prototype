@@ -1,5 +1,11 @@
 const NHSPrototypeKit = require('nhsuk-prototype-kit')
+
+// Local dependencies
 const config = require('./app/config')
+const sessionDataDefaults = require('./app/data/session-data-defaults')
+const filters = require('./app/filters')
+const locals = require('./app/locals')
+const routes = require('./app/routes')
 
 const RealDate = Date
 if (config.useFixedPrototypeDate && config.fixedPrototypeDate) {
@@ -27,12 +33,6 @@ if (config.useFixedPrototypeDate && config.fixedPrototypeDate) {
 
   global.Date = FixedDate
 }
-
-// Local dependencies
-const sessionDataDefaults = require('./app/data/session-data-defaults')
-const filters = require('./app/filters')
-const locals = require('./app/locals')
-const routes = require('./app/routes')
 
 const SERVICE_NAME = config.serviceName
 
