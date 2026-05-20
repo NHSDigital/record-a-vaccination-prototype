@@ -2,12 +2,20 @@
 
 {% if currentDay == today %}
   {% set pageName = "Today’s appointments" %}
+  {% set fixedCaptionDay = "Monday" %}
+  {% set fixedHeadingDate = "11 May 2026" %}
 {% elif nextDay == today %}
   {% set pageName = "Yesterday’s appointments" %}
+  {% set fixedCaptionDay = "Sunday" %}
+  {% set fixedHeadingDate = "10 May 2026" %}
 {% elif previousDay == today %}
   {% set pageName = "Tomorrow’s appointments" %}
+  {% set fixedCaptionDay = "Tuesday" %}
+  {% set fixedHeadingDate = "12 May 2026" %}
 {% else %}
   {% set pageName = "Appointments" %}
+  {% set fixedCaptionDay = currentDay | dayName('long') %}
+  {% set fixedHeadingDate = currentDay | formatDate %}
 {% endif %}
 {% set currentSection = "appointments" %}
 
@@ -17,8 +25,8 @@
     <div class="nhsuk-grid-column-two-thirds">
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
-      <span class="nhsuk-caption-m">{{ currentDay | dayName('long') }}</span>
-      <h2 class="nhsuk-heading-m">{{ currentDay | formatDate }}</h2>
+      <span class="nhsuk-caption-m">{{ fixedCaptionDay }}</span>
+      <h2 class="nhsuk-heading-m">{{ fixedHeadingDate }}</h2>
       
       
 
