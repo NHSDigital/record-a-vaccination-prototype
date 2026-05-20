@@ -17,7 +17,7 @@ module.exports = {
   appointments: appointments,
   lists: [],
   nhsNumberKnown: "yes",
-  currentUserId: "46436346", // Jeremy Blue
+  currentUserId: "646436312", // Jeremy Blue
   currentOrganisationId: "DP001", // Dean's Pharmacy
   currentRoles: ["Lead admin"], // Updated Jeremy's role to Lead Admin
   vaccinationsRecorded: vaccinationsRecorded,
