@@ -1,7 +1,34 @@
 const NHSPrototypeKit = require('nhsuk-prototype-kit')
+const config = require('./app/config')
+
+const RealDate = Date
+if (config.useFixedPrototypeDate && config.fixedPrototypeDate) {
+  class FixedDate extends RealDate {
+    constructor(...args) {
+      if (args.length === 0) {
+        super(config.fixedPrototypeDate)
+      } else {
+        super(...args)
+      }
+    }
+
+    static now() {
+      return new RealDate(config.fixedPrototypeDate).getTime()
+    }
+
+    static parse(value) {
+      return RealDate.parse(value)
+    }
+
+    static UTC(...args) {
+      return RealDate.UTC(...args)
+    }
+  }
+
+  global.Date = FixedDate
+}
 
 // Local dependencies
-const config = require('./app/config')
 const sessionDataDefaults = require('./app/data/session-data-defaults')
 const filters = require('./app/filters')
 const locals = require('./app/locals')
