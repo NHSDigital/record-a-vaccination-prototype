@@ -174,6 +174,20 @@ module.exports = [
     "firstName": "Jeremy",
     "lastName": "Blue"
   },
+  {
+    "id": "646436312",
+    "email": "jeremy.blue@nhs.net",
+    "organisations": [
+      {
+        "id": "DP001",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Jeremy",
+    "lastName": "Blue"
+  },
   // Amanda White is a lead admin for
   // a chain of pharmacies
   {

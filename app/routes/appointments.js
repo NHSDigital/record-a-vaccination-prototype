@@ -33,11 +33,23 @@ module.exports = (router) => {
       appointments = appointments.filter((appointment) => appointment.date === today)
     }
 
-    const scheduledAppointments = appointments.filter((appointment) => !appointment.cancelled && (appointment.vaccinationIds || []).length === 0)
 
-    const cancelledAppointments = appointments.filter((appointment) => appointment.cancelled)
+    // Use status field if present, otherwise fallback to old logic
+    const scheduledAppointments = appointments.filter((appointment) => {
+      if (appointment.status) {
+        return appointment.status !== 'completed' && !appointment.cancelled;
+      }
+      return !appointment.cancelled && (appointment.vaccinationIds || []).length === 0;
+    });
 
-    const completedAppointments = appointments.filter((appointment) => (appointment.vaccinationIds || []).length > 0)
+    const cancelledAppointments = appointments.filter((appointment) => appointment.cancelled);
+
+    const completedAppointments = appointments.filter((appointment) => {
+      if (appointment.status) {
+        return appointment.status === 'completed';
+      }
+      return (appointment.vaccinationIds || []).length > 0;
+    });
 
     let vaccinators = []
 

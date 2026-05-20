@@ -18,7 +18,8 @@ module.exports = [
     },
     vaccinations: [
       "COVID-19"
-    ]
+    ],
+    status: "completed"
   },
   {
     id: "923532535",
@@ -36,7 +37,8 @@ module.exports = [
     vaccinations: [
       "COVID-19",
       "Flu"
-    ]
+    ],
+    status: "completed"
   },
   {
     id: "2364364369",
@@ -235,6 +237,24 @@ module.exports = [
     },
     vaccinations: [
       "Flu"
+    ]
+  },
+  {
+    id: "293847562",
+    date: "today",
+    time: "11:10",
+    patient: {
+      nhsNumber: "1234567890",
+      firstName: "Rosie",
+      lastName: "Smith",
+      dateOfBirth: "1949-10-08",
+      contactDetails: {
+        mobile: "07123456789",
+        email: "rosie.smith@example.com"
+      }
+    },
+    vaccinations: [
+      "RSV", "COVID-19"
     ]
   }
 ]

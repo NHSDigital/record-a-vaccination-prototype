@@ -438,30 +438,44 @@ module.exports = [
     ]
   },
   {
-    id: "2514771",
-    vaccine: "flu (London service)",
-    vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
-    organisationId: "FT81513", // Holborn Pharmacy
-    siteId: "FX252", // Holborn Pharmacy
+    id: "DP001RSV",
+    vaccine: "RSV",
+    vaccineProduct: "Abrysvo",
+    organisationId: "DP001", // Dean's Pharmacy
+    siteId: "DP001X", // Dean's Pharmacy
     batches: [
       {
-        id: "46436436",
-        batchNumber: "LDJE-24",
-        expiryDate: "2026-12-04"
+        id: "DP001RSV01",
+        batchNumber: "RSV-001",
+        expiryDate: "2027-12-31"
       }
     ]
   },
   {
-    id: "463646",
-    vaccine: "MMR",
-    vaccineProduct: "MMRVaXPro",
-    organisationId: "FT81513", // Holborn Pharmacy
-    siteId: "FX252", // Holborn Pharmacy
+    id: "DP001COVID",
+    vaccine: "COVID-19",
+    vaccineProduct: "Comirnaty 3 LP.8.1",
+    organisationId: "DP001", // Dean's Pharmacy
+    siteId: "DP001X", // Dean's Pharmacy
     batches: [
       {
-        id: "346436342",
-        batchNumber: "14-251",
-        expiryDate: "2027-01-13"
+        id: "DP001COVID01",
+        batchNumber: "COVID-001",
+        expiryDate: "2027-12-31"
+      }
+    ]
+  },
+  {
+    id: "DP001FLU",
+    vaccine: "Flu",
+    vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
+    organisationId: "DP001", // Dean's Pharmacy
+    siteId: "DP001X", // Dean's Pharmacy
+    batches: [
+      {
+        id: "DP001FLU01",
+        batchNumber: "FLU-001",
+        expiryDate: "2027-12-31"
       }
     ]
   }

@@ -3052,7 +3052,7 @@ module.exports = [
     ]
   },
   {
-    id: "RGB",
+    id: "RGF",
     name: "Huddersfield Healthcare services NHS Trust",
     address: {
       line1: "The Royal infirmary",
@@ -5391,7 +5391,7 @@ module.exports = [
     ]
   },
   {
-    id: "RFY",
+    id: "RVY",
     name: "Riverside mental Health NHS Trust",
     address: {
       line1: "Commonwealth house",
@@ -6237,22 +6237,7 @@ module.exports = [
     ]
   },
   {
-    id: "RJC",
-    name: "South warwickshire University NHS Foundation Trust",
-    address: {
-      line1: "Warwick hospital",
-      town: "Warwick",
-      postcode: "CV34 5BW"
-    },
-    status: "Active",
-    type: "NHS Trust",
-    region: "Y63",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"}
-    ]
-  },
-  {
-    id: "RQY",
+    id: "RJF",
     name: "South west London and St George's Mental Health NHS Trust",
     address: {
       line1: "Springfield hospital",
@@ -6624,8 +6609,8 @@ module.exports = [
     ]
   },
   {
-    id: "RPQ",
-    name: "Surrey Ambulance Service NHS Trust",
+    id: "RPK",
+    name: "Sussex Ambulance Service NHS Trust",
     address: {
       line1: "The horseshoe",
       town: "Banstead",
@@ -7005,7 +6990,7 @@ module.exports = [
   },
   {
     id: "RAV",
-    name: "The Guys and Lewisham NHS Trust",
+    name: "The guys and Lewisham NHS Trust",
     address: {
       line1: "Guys hospital",
       town: "London",
@@ -7422,7 +7407,7 @@ module.exports = [
   },
   {
     id: "RHM",
-    name: "University Hospital Southampton NHS Foundation Trust",
+    name: "University Hospitals Southampton NHS Foundation Trust",
     address: {
       line1: "Southampton General Hospital",
       town: "Southampton",
@@ -7756,7 +7741,7 @@ module.exports = [
     address: {
       line1: "Trust offices",
       town: "Watford",
-      postcode: "WD18 0HB"
+      postcode: "WA18 0HB"
     },
     status: "Active",
     type: "NHS Trust",
@@ -8674,34 +8659,7 @@ module.exports = [
     ]
   },
   {
-    id: 'FP1812',
-    name: 'MediCare Pharmacy',
-    address: {
-      line1: '18 Church Road',
-      town: 'London',
-      postcode: 'W9 1PL'
-    },
-    type: 'Community Pharmacy',
-    status: 'Active',
-    region: "Y56",
-    vaccines: [
-      {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
-    ],
-    sites: [
-      {
-        id: "FX9141",
-        name: "MediCare Pharmacy",
-        address: {
-          line1: '18 Church Road',
-          town: 'London',
-          postcode: 'W9 1PL'
-        }
-      }
-    ]
-  },
-  {
-    id: "FA7K23",
+    id: "FM8934",
     name: "MediCare Pharmacy",
     address: {
       line1: "45 High Street",
@@ -9077,5 +9035,28 @@ module.exports = [
         }
       }
     ]
+  },
+  {
+    id: "DP001",
+    name: "Dean's Pharmacy",
+    sites: [
+      {
+        id: "DP001X",
+        name: "Dean's Pharmacy"
+      }
+    ],
+    address: {
+      line1: '123 Fake Street',
+      town: 'Faketown',
+      postcode: 'FK1 2AB'
+    },
+    type: 'Community Pharmacy',
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "RSV", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
+    status: 'Active',
+    region: "Y62"
   }
 ]
