@@ -8,9 +8,10 @@
 {% set dateOfBirthHtml %}
   {% if data.dateOfBirth.day %}
     {{ (data.dateOfBirth | isoDateFromDateInput | govukDate) }}
-    <br>(76 years old)
+    <div class="nhsuk-u-secondary-text-colour">{{ data.dateOfBirth | isoDateFromDateInput | age }} old</div>
   {% else %}
     {{ (data.dateOfBirth | govukDate) }}
+    <div class="nhsuk-u-secondary-text-colour">{{ data.dateOfBirth | age }} old</div>
   {% endif %}
 {% endset %}
 
@@ -69,7 +70,7 @@
               text: "Address"
             },
             value: {
-              html: "73 Roman Rd<br>Leeds<br> LS2 5ZN"
+              html: "73 Roman Rd<br>Faketown<br> FK1 2AB"
             }
           },
           {
@@ -85,7 +86,7 @@
               text: "GP surgery"
             },
             value: {
-              html: "Beech House surgery <br>1 Ash Tree Road<br>Knaresborough<br>HG5 0UB"
+              html: "Beech House surgery <br>1 Ash Tree Road<br>Faketown<br>FK2 3CD"
             }
           }
         ]
