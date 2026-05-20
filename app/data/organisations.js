@@ -8260,17 +8260,17 @@ module.exports = [
   },
   {
     id: 'FA424',
-    name: 'Pickfords Pharmacy',
+    name: "Dean's Pharmacy",
     sites: [
       {
         id: "FA424X",
-        name: "Pickfords Pharmacy"
+        name: "Dean's Pharmacy"
       }
     ],
     address: {
-      line1: '8 Spencer Court',
-      town: 'Corby',
-      postcode: 'NN17 1NU'
+      line1: '123 Fake Street',
+      town: 'Faketown',
+      postcode: 'FK1 2AB'
     },
     type: 'Community Pharmacy',
     vaccines: [

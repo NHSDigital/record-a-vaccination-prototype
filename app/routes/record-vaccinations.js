@@ -72,6 +72,22 @@ module.exports = router => {
     res.render('record-vaccinations/vaccination-date')
   })
 
+  router.post('/record-vaccinations/vaccination-date', (req, res) => {
+    const data = req.session.data
+    const appointmentId = data.appointmentId
+
+    if (appointmentId) {
+      const appointment = data.appointments.find((appointment) => appointment.id === appointmentId)
+
+      if (appointment && appointment.date === "today") {
+        req.session.data.vaccinationToday = "yes"
+        return res.redirect('/record-vaccinations/delivery-team')
+      }
+    }
+
+    res.render('record-vaccinations/vaccination-date')
+  })
+
   router.post('/record-vaccinations/answer-date', (req, res) => {
     const data = req.session.data
 
@@ -128,6 +144,9 @@ module.exports = router => {
   router.get('/record-vaccinations/vaccinator', (req, res) => {
     const data = req.session.data
     let vaccinatorError
+    const backLinkHref = (data.from === 'appointments' || data.appointmentId)
+      ? '/record-vaccinations/patient-history'
+      : '/record-vaccinations/delivery-team'
 
     let otherVaccinators = data.users
       .filter((user) => {
@@ -163,6 +182,7 @@ module.exports = router => {
     }
 
     res.render('record-vaccinations/vaccinator', {
+      backLinkHref,
       vaccinatorError,
       otherVaccinators
     })
@@ -218,6 +238,31 @@ module.exports = router => {
     res.redirect('/record-vaccinations/batch')
   })
 
+
+  router.get('/record-vaccinations/patient-history', (req, res) => {
+    const query = req.query
+
+    // When arriving from the appointments list, save all query params into session
+    if (query.from === 'appointments') {
+      req.session.data.from = query.from
+      req.session.data.appointmentId = query.appointmentId
+      req.session.data.nhsNumber = query.nhsNumber
+      req.session.data.dateOfBirth = query.dateOfBirth
+      req.session.data.firstName = query.firstName
+      req.session.data.lastName = query.lastName
+
+      // Appointment journeys are always for today in this prototype
+      req.session.data.vaccinationToday = 'yes'
+      req.session.data.repeatVaccination = ''
+      req.session.data.repeatPatient = ''
+    }
+
+    // Persist repeatVaccination / repeatPatient flags if passed via query
+    if (query.repeatVaccination) req.session.data.repeatVaccination = query.repeatVaccination
+    if (query.repeatPatient) req.session.data.repeatPatient = query.repeatPatient
+
+    res.render('record-vaccinations/patient-history')
+  })
 
   router.post('/record-vaccinations/answer-patient-nhs-number-known', (req, res) => {
 

@@ -14,7 +14,9 @@
   {% endif %}
 {% endset %}
 
-{% if data.repeatVaccination === "yes" %}
+{% if data.from == "appointments" or data.appointmentId %}
+  {% set nextPage = "/record-vaccinations/delivery-team" %}
+{% elseif data.repeatVaccination === "yes" %}
   {% set nextPage = "/record-vaccinations/consent" %}
 {% elseif data.repeatPatient === "yes" %}
   {% set nextPage = "/record-vaccinations/vaccine" %}
@@ -24,7 +26,7 @@
   {% set nextPage = "/record-vaccinations/vaccination-date" %}
 {% endif %}
 
-{% if data.from == "appointments" %}
+{% if data.from == "appointments" or data.appointmentId %}
   {% set previousPage = "/appointments" %}
 {% elseif data.repeatVaccination === "yes" %}
   {% set previousPage = "/record-vaccinations/patient" %}
