@@ -9069,6 +9069,12 @@ module.exports = [
         "permissionLevel": "Lead administrator",
         "status": "Active",
         "vaccinator": true
+      },
+      {
+        "id": "DP001",
+        "permissionLevel": "Recorder",
+        "status": "Active",
+        "vaccinator": true
       }
     ],
     "firstName": "Grady",
