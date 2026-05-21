@@ -37,7 +37,7 @@
         next: {
           labelText: ("Tomorrow" if currentDay == today else (nextDay | formatDate)),
           href: "/appointments?date=" + nextDay
-        } if not isTomorrow
+        } if not isMaxFutureDay
       }) }}
 
       {% set todayHtml %}

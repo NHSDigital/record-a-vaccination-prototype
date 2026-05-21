@@ -42,7 +42,7 @@
         {% elif appointment.cancelled.reason == "organisation" %}
           By site
         {% elif appointment.cancelled.reason == "auto" %}
-          Automatic
+          Patient has already had this vaccine
         {% endif %}
       </td>
     </tr>
