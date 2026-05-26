@@ -116,7 +116,7 @@ module.exports = [
     "firstName": "Paulina",
     "lastName": "Sloan"
   },
-  // Each pharmacy in Paulina Sloan’s chain has its own vaccinator, some of who are also admins
+  // Each pharmacy in Paulina Sloan’s chain has its own vaccinator, some of whom are also admins
   {
     "id": "46436346",
     "email": "jeremy.blue@nhs.net",
