@@ -22,7 +22,7 @@
       
       
 
-      <p>Imported from <a href="https://mya-prototype-11c9c1433d21.herokuapp.com/" target="_blank" rel="noopener noreferrer">Manage your appointments (opens in new tab)</a></p>
+      <p class="app-appointments-imported-from">Imported from <a href="https://mya-prototype-11c9c1433d21.herokuapp.com/" target="_blank" rel="noopener noreferrer">Manage your appointments (opens in new tab)</a></p>
 
     </div>
   </div>
@@ -78,6 +78,10 @@
           }
         ]
       }) }}
+
+      <div class="app-print-only">
+        {% include "appointments/_scheduled.html" %}
+      </div>
 
 
     </div>

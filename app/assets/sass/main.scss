@@ -31,6 +31,8 @@
 // Add your custom CSS/Sass styles below...
 ///////////////////////////////////////////
 
+@import 'print';
+
 // Ensure hidden attribute works on button groups (which have display: flex)
 .nhsuk-button-group[hidden] {
   display: none;

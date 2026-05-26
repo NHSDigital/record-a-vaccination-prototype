@@ -1,0 +1,119 @@
+/* Hide print-only content on screen */
+.app-print-only {
+  display: none;
+}
+
+@media print {
+  /* Show print-only content */
+  .app-print-only {
+    display: block !important;
+  }
+
+  /* Hide navigation, tabs, and pagination */
+  .nhsuk-header,
+  .nhsuk-navigation,
+  .nhsuk-breadcrumb,
+  .nhsuk-phase-banner,
+  .nhsuk-pagination,
+  .nhsuk-tabs,
+  .nhsuk-back-link,
+  .nhsuk-footer {
+    display: none !important;
+  }
+
+  /* Hide imported-from MYA line on print */
+  .app-appointments-imported-from {
+    display: none !important;
+  }
+
+  /* Expand table to full width and add borders for clarity */
+  table.nhsuk-table,
+  table.nhsuk-table-responsive {
+    width: 100% !important;
+    border-collapse: collapse;
+    font-size: 14pt;
+  }
+  table.nhsuk-table th,
+  table.nhsuk-table td,
+  table.nhsuk-table-responsive th,
+  table.nhsuk-table-responsive td {
+    border: 1px solid #222;
+    padding: 8px;
+  }
+
+  /* Force desktop table layout in print instead of responsive stacked cells */
+  .nhsuk-table-responsive .nhsuk-table__head {
+    display: table-header-group !important;
+  }
+  .nhsuk-table-responsive .nhsuk-table__body {
+    display: table-row-group !important;
+  }
+  .nhsuk-table-responsive .nhsuk-table__row {
+    display: table-row !important;
+  }
+  .nhsuk-table-responsive .nhsuk-table__header,
+  .nhsuk-table-responsive .nhsuk-table__cell {
+    display: table-cell !important;
+    width: auto !important;
+  }
+  .nhsuk-table-responsive .nhsuk-table__cell::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  /* Keep secondary info stacked below primary value, as on desktop */
+  .nhsuk-table-responsive .nhsuk-table__cell .nhsuk-u-secondary-text-colour {
+    display: block !important;
+  }
+
+  /* Keep contact details column narrow and wrap content in print */
+  .nhsuk-table-responsive .nhsuk-table__header:nth-child(5),
+  .nhsuk-table-responsive .nhsuk-table__cell:nth-child(5) {
+    width: 10rem !important;
+    max-width: 10rem !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
+
+  /* Remove actions column from printed table */
+  .nhsuk-table-responsive .nhsuk-table__header:nth-child(6),
+  .nhsuk-table-responsive .nhsuk-table__cell:nth-child(6) {
+    display: none !important;
+  }
+
+  /* Add a little extra right padding for readability in print */
+  .nhsuk-table-responsive .nhsuk-table__header,
+  .nhsuk-table-responsive .nhsuk-table__cell,
+  table.nhsuk-table th,
+  table.nhsuk-table td,
+  table.nhsuk-table-responsive th,
+  table.nhsuk-table-responsive td {
+    padding-right: 12px !important;
+  }
+
+  /* Make headings stand out */
+  h1, h2, h3 {
+    color: #000 !important;
+    page-break-after: avoid;
+  }
+
+  /* Add extra spacing for readability */
+  .nhsuk-grid-row, .nhsuk-grid-column-full, .nhsuk-grid-column-two-thirds {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Show date and day at the top if present */
+  .nhsuk-heading-m, .nhsuk-caption-m {
+    display: block !important;
+    color: #000 !important;
+  }
+
+  /* Remove print-unfriendly backgrounds */
+  body, .nhsuk-main-wrapper {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+}
