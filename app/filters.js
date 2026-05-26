@@ -18,9 +18,10 @@ module.exports = function () {
 
   filters.findById = findById
 
-  filters.dayName = function(isoDate) {
+  filters.dayName = function(isoDate, style = 'short') {
     const date = new Date(Date.parse(isoDate))
-    const dateFormatter = new Intl.DateTimeFormat('en-GB', {weekday: 'short'});
+    const weekdayStyle = (style === 'long') ? 'long' : 'short'
+    const dateFormatter = new Intl.DateTimeFormat('en-GB', {weekday: weekdayStyle});
 
     return dateFormatter.format(date)
   }

@@ -52,12 +52,17 @@
         }), items) %}
 
         {% set items = (items.push({
+          value: "different-vaccination-another-patient",
+          text: "A different vaccination for another patient"
+        }), items) %}
+
+        {% set items = (items.push({
           divider: "or"
         }), items) %}
 
         {% set items = (items.push({
-          value: "different-vaccination-another-patient",
-          text: "A different vaccination for another patient"
+          value: "appointments",
+          text: "Go to appointments list"
         }), items) %}
 
         {{ radios({
@@ -75,9 +80,14 @@
           items: items
         }) }}
 
-        {{ button({
-          text: "Continue"
-        })}}
+        <div class="nhsuk-button-group">
+          {{ button({
+            text: "Continue"
+          })}}
+
+          <p>or</p>
+          <a href="/home" class="nhsuk-link">Home</a>
+        </div>
       </form>
 
     </div>
