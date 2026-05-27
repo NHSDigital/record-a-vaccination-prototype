@@ -1,4 +1,4 @@
-<table class="nhsuk-table-responsive" role="table" data-module="nhsuk-table">
+<table class="nhsuk-table-responsive app-appointments-scheduled-table" role="table" data-module="nhsuk-table">
   <thead class="nhsuk-table__head" role="rowgroup">
     <tr>
       <th scope="col" class="nhsuk-table__header" aria-sort="ascending">Time</th>
@@ -8,7 +8,7 @@
       <th scope="col" class="nhsuk-table__header">Contact details</th>
 
       {% if currentDay == today %}
-        <th scope="col" class="nhsuk-table__header">Action</th>
+        <th scope="col" class="nhsuk-table__header app-appointments-action-col">Action</th>
       {% endif %}
 
     </tr>
@@ -39,7 +39,7 @@
         {% endif %}
       </td>
       {% if currentDay == today %}
-        <td class="nhsuk-table__cell">
+        <td class="nhsuk-table__cell app-appointments-action-col">
           <a href="/record-vaccinations/patient-history?nhsNumber={{ appointment.patient.nhsNumber }}&dateOfBirth={{ appointment.patient.dateOfBirth }}&firstName={{ appointment.patient.firstName }}&lastName={{ appointment.patient.lastName }}&from=appointments&appointmentId={{ appointment.id}}">Record<span class="nhsuk-u-visually-hidden"> vaccination for {{ appointment.patient.firstName }} {{ appointment.patient.lastName }}</span></a>
         </td>
       {% endif %}

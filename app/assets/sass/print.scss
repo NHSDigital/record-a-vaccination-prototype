@@ -1,0 +1,252 @@
+/* Hidden on screen; shown in print */
+.app-print-masthead {
+  display: none;
+}
+
+@page {
+  margin: 10mm;
+}
+
+@media print {
+  .nhsuk-width-container {
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .nhsuk-grid-row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .nhsuk-grid-column-full,
+  .nhsuk-grid-column-two-thirds {
+    float: none !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  html,
+  body,
+  .nhsuk-main-wrapper {
+    background: #fff !important;
+  }
+
+  .nhsuk-header,
+  .nhsuk-navigation,
+  .nhsuk-breadcrumb,
+  .nhsuk-phase-banner,
+  .nhsuk-back-link,
+  .nhsuk-pagination,
+  .app-appointments-imported-from,
+  .nhsuk-tabs__list,
+  .nhsuk-tabs__title {
+    display: none !important;
+  }
+
+  .nhsuk-tabs,
+  .nhsuk-tabs__panel {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+
+  .app-print-masthead {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #b1b4b6;
+    padding-bottom: 12px;
+    margin: 0 0 20px 0;
+  }
+
+  .app-print-masthead__logo {
+    display: inline-flex;
+    color: #005eb8;
+    flex-shrink: 0;
+  }
+
+  .app-print-masthead__logo .nhsuk-header__logo {
+    width: 100px;
+    height: 40px;
+    display: block;
+  }
+
+  .app-print-masthead__service {
+    color: #0b0c0c;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .nhsuk-caption-m {
+    margin-bottom: 0 !important;
+  }
+
+  .nhsuk-heading-m {
+    margin-bottom: 40px !important;
+  }
+
+  table.nhsuk-table-responsive {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    table-layout: fixed;
+  }
+
+  table.nhsuk-table-responsive thead {
+    display: table-header-group !important;
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    clip: auto !important;
+    clip-path: none !important;
+    white-space: normal !important;
+  }
+
+  table.nhsuk-table-responsive thead::before,
+  table.nhsuk-table-responsive thead::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  table.nhsuk-table-responsive tbody {
+    display: table-row-group !important;
+  }
+
+  table.nhsuk-table-responsive tr {
+    display: table-row !important;
+  }
+
+  table.nhsuk-table-responsive .nhsuk-table__body .nhsuk-table__row {
+    display: table-row !important;
+    margin-bottom: 0 !important;
+  }
+
+  table.nhsuk-table-responsive .nhsuk-table__body .nhsuk-table__row th,
+  table.nhsuk-table-responsive .nhsuk-table__body .nhsuk-table__row td {
+    justify-content: normal !important;
+    text-align: left !important;
+    min-width: 0 !important;
+  }
+
+  table.nhsuk-table-responsive th,
+  table.nhsuk-table-responsive td {
+    display: table-cell !important;
+    vertical-align: top !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: 1px solid #b1b4b6 !important;
+    border-bottom: 1px solid #b1b4b6 !important;
+    padding: 10px 16px 10px 0 !important;
+    color: #0b0c0c !important;
+  }
+
+  table.nhsuk-table-responsive th {
+    font-weight: 700 !important;
+    background-color: transparent !important;
+  }
+
+  table.nhsuk-table-responsive.nhsuk-table--with-sortable-columns thead th,
+  table.nhsuk-table-responsive thead th:first-child,
+  table.nhsuk-table-responsive tbody td:first-child {
+    padding-left: 0 !important;
+  }
+
+  table.nhsuk-table-responsive tbody tr:last-child td,
+  table.nhsuk-table-responsive tbody tr:last-child th {
+    border-bottom-width: 3px !important;
+  }
+
+  table.nhsuk-table-responsive td::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  table.nhsuk-table-responsive .nhsuk-u-secondary-text-colour {
+    display: block !important;
+  }
+
+  /* Remove sorting affordances in print */
+  table.nhsuk-table-responsive th[aria-sort] {
+    pointer-events: none !important;
+    background-image: none !important;
+    text-decoration: none !important;
+    padding: 10px 16px 10px 0 !important;
+    color: #0b0c0c !important;
+    font-weight: 700 !important;
+  }
+
+  table.nhsuk-table-responsive th[aria-sort]::before,
+  table.nhsuk-table-responsive th[aria-sort]::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  table.nhsuk-table-responsive th[aria-sort="ascending"] button::after,
+  table.nhsuk-table-responsive th[aria-sort="descending"] button::after,
+  table.nhsuk-table-responsive th[aria-sort] button::before,
+  table.nhsuk-table-responsive th[aria-sort] button::after {
+    content: none !important;
+    display: none !important;
+    border: 0 !important;
+    background: transparent !important;
+    height: 0 !important;
+  }
+
+  table.nhsuk-table-responsive th[aria-sort] button,
+  table.nhsuk-table-responsive th[aria-sort] [role="button"] {
+    display: inline-block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: inherit !important;
+    font: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+    text-align: left !important;
+    background: transparent !important;
+    text-decoration: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+  }
+
+  table.nhsuk-table-responsive th[aria-sort] button svg,
+  table.nhsuk-table-responsive th[aria-sort] [role="button"] svg,
+  table.nhsuk-table-responsive th[aria-sort] button .nhsuk-icon,
+  table.nhsuk-table-responsive th[aria-sort] [role="button"] .nhsuk-icon {
+    display: none !important;
+  }
+
+  table.app-appointments-scheduled-table {
+    table-layout: auto !important;
+    width: 100% !important;
+  }
+
+  table.app-appointments-scheduled-table .app-appointments-action-col,
+  table.app-appointments-scheduled-table th:last-child,
+  table.app-appointments-scheduled-table td:last-child,
+  table.app-appointments-scheduled-table a[href*="/record-vaccinations/patient-history"] {
+    display: none !important;
+    width: 0 !important;
+    max-width: 0 !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    overflow: hidden !important;
+  }
+
+  table.nhsuk-table-responsive:not(.app-appointments-scheduled-table) th:nth-child(5),
+  table.nhsuk-table-responsive:not(.app-appointments-scheduled-table) td:nth-child(5) {
+    width: 10rem !important;
+    max-width: 10rem !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+  }
+}
