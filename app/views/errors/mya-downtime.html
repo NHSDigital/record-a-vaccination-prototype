@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Sorry, there is a problem finding appointments" %}
+{% set pageName = "There is a temporary problem accessing appointments" %}
 {% set currentSection = "appointments" %}
 
 
@@ -9,7 +9,7 @@
     <div class="nhsuk-grid-column-two-thirds">
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
-      <p>Try again later.</p>
+      <p><a href="#">Try again</a> or go to <a href="#">Manage your appointments</a></p>
 
       <p>You can still record a vaccination using <a href="/record-vaccinations" class="nhsuk-link">Record vaccinations</a>.</p>
 
