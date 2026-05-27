@@ -63,6 +63,13 @@
             "1st dose",
             "2nd dose"
           ] %}
+        {% elif data.vaccine == "Td/IPV" %}
+          {% set doseOptions = [
+            "1st dose",
+            "2nd dose",
+            "3rd dose",
+            "Booster"
+          ] %}
         {% elif data.vaccine == "MMRV" %}
           {% set doseOptions = [
             "1st dose",
@@ -72,8 +79,12 @@
         {% elif data.vaccine == "pneumococcal" %}
           {% set doseOptions = [
             "1st dose",
-            "2nd dose",
-            "Booster"
+            "2nd dose"
+          ] %}
+        {% elif data.vaccine == "shingles" %}
+          {% set doseOptions = [
+            "1st dose",
+            "2nd dose"
           ] %}
         {% else %}
           {% set doseOptions = [] %}
@@ -113,6 +124,8 @@
           {% set radiosHint = "Select 1st dose if it is a routine school-age vaccination or a catch-up vaccination for under 25s" %}
         {% elif data.vaccine == "MenACWY" %}
           {% set radiosHint = "Select 1st dose for young people having a single dose as part of routine school-age vaccinations or a catch-up programme for under 25s" %}
+        {% elif data.vaccine == "Td/IPV" %}
+          {% set radiosHint = "Select 1st dose if it is a routine school-age vaccination or a catch-up vaccination for under 25s" %}
         {% endif %}
 
         {% if radiosHint %}
