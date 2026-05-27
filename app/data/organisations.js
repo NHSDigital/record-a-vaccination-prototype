@@ -275,7 +275,7 @@ module.exports = [
     ],
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"},
+      {name: "Flu", status: "enabled"},
       {name: "pertussis", status: "enabled"},
       {name: "MMR", status: "enabled"},
       {name: "pneumococcal", status: "enabled"},
@@ -468,7 +468,7 @@ module.exports = [
     },
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Active",
     type: "NHS Trust",
@@ -484,7 +484,7 @@ module.exports = [
     },
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Active",
     type: "NHS Trust",
@@ -500,7 +500,7 @@ module.exports = [
     },
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Active",
     type: "NHS Trust",
@@ -516,7 +516,7 @@ module.exports = [
     },
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Active",
     type: "NHS Trust",
@@ -532,7 +532,7 @@ module.exports = [
     },
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Active",
     type: "NHS Trust",
@@ -548,7 +548,7 @@ module.exports = [
     },
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Active",
     type: "NHS Trust",
@@ -564,7 +564,7 @@ module.exports = [
     },
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Active",
     type: "NHS Trust",
@@ -580,7 +580,7 @@ module.exports = [
     },
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Active",
     type: "NHS Trust",
@@ -596,7 +596,7 @@ module.exports = [
     },
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Active",
     type: "NHS Trust",
@@ -612,7 +612,7 @@ module.exports = [
     },
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Active",
     type: "NHS Trust",
@@ -628,7 +628,7 @@ module.exports = [
     },
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Active",
     type: "NHS Trust",
@@ -644,7 +644,7 @@ module.exports = [
     },
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Active",
     type: "NHS Trust",
@@ -930,7 +930,7 @@ module.exports = [
     },
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Active",
     type: "NHS Trust",
@@ -981,7 +981,7 @@ module.exports = [
       {name: "RSV", status: "enabled"},
       {name: "COVID-19", status: "enabled"},
       {name: "pertussis", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -1012,7 +1012,7 @@ module.exports = [
     },
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Active",
     type: "NHS Trust",
@@ -1048,8 +1048,8 @@ module.exports = [
       {name: "RSV", status: "enabled"},
       {name: "COVID-19", status: "enabled"},
       {name: "pertussis", status: "enabled"},
-      {name: "flu", status: "enabled"},
-      {name: "flu (London service)", status: "disabled"}
+      {name: "Flu", status: "enabled"},
+      {name: "Flu (London service)", status: "disabled"}
     ],
     sites: [
       {
@@ -1185,7 +1185,7 @@ module.exports = [
     },
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Invited",
     type: "NHS Trust",
@@ -2595,7 +2595,7 @@ module.exports = [
       {name: "RSV", status: "enabled"},
       {name: "COVID-19", status: "enabled"},
       {name: "pertussis", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Active",
     type: "NHS Trust",
@@ -3768,7 +3768,7 @@ module.exports = [
       {name: "RSV", status: "enabled"},
       {name: "COVID-19", status: "enabled"},
       {name: "pertussis", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Active",
     type: "NHS Trust",
@@ -4177,7 +4177,7 @@ module.exports = [
       {name: "RSV", status: "enabled"},
       {name: "COVID-19", status: "enabled"},
       {name: "pertussis", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     type: "NHS Trust",
     region: "Y62"
@@ -4431,7 +4431,7 @@ module.exports = [
       {name: "RSV", status: "enabled"},
       {name: "COVID-19", status: "enabled"},
       {name: "pertussis", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: "Active",
     type: "NHS Trust",
@@ -5685,7 +5685,7 @@ module.exports = [
       {name: "RSV", status: "enabled"},
       {name: "COVID-19", status: "enabled"},
       {name: "pertussis", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     type: "NHS Trust",
     region: "Y62"
@@ -8277,7 +8277,7 @@ module.exports = [
       {name: "RSV", status: "enabled"},
       {name: "COVID-19", status: "enabled"},
       {name: "pertussis", status: "disabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     status: 'Active',
     region: "Y62"
@@ -8298,7 +8298,7 @@ module.exports = [
       {name: "RSV", status: "disabled"},
       {name: "COVID-19", status: "enabled"},
       {name: "pertussis", status: "requested"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -8360,7 +8360,7 @@ module.exports = [
       {name: "RSV", status: "disabled"},
       {name: "COVID-19", status: "requested"},
       {name: "pertussis", status: "disabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     application: {
       firstName: "Jason",
@@ -8447,7 +8447,7 @@ module.exports = [
       {
         id: "HKFFU48574",
         fromOrganisationId: "FA424",
-        vaccinesRequested: ["flu"],
+        vaccinesRequested: ["Flu"],
         sentOn: "2025-06-22"
       },
       {
@@ -8497,7 +8497,7 @@ module.exports = [
     region: "Y56",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -8524,7 +8524,7 @@ module.exports = [
     region: "Y56",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -8551,7 +8551,7 @@ module.exports = [
     region: "Y56",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -8578,7 +8578,7 @@ module.exports = [
     region: "Y56",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -8605,7 +8605,7 @@ module.exports = [
     region: "Y56",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -8632,7 +8632,7 @@ module.exports = [
     region: "Y56",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -8659,7 +8659,7 @@ module.exports = [
     region: "Y56",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -8686,7 +8686,7 @@ module.exports = [
     region: "Y56",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -8713,7 +8713,7 @@ module.exports = [
     region: "X12",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -8740,7 +8740,7 @@ module.exports = [
     region: "Z34",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "disabled"}
+      {name: "Flu", status: "disabled"}
     ],
     sites: [
       {
@@ -8767,7 +8767,7 @@ module.exports = [
     region: "N45",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -8794,7 +8794,7 @@ module.exports = [
     region: "P67",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -8821,7 +8821,7 @@ module.exports = [
     region: "R89",
     vaccines: [
       {name: "COVID-19", status: "disabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -8848,7 +8848,7 @@ module.exports = [
     region: "S12",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -8875,7 +8875,7 @@ module.exports = [
     region: "T34",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -8902,7 +8902,7 @@ module.exports = [
     region: "U56",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "disabled"}
+      {name: "Flu", status: "disabled"}
     ],
     sites: [
       {
@@ -8929,7 +8929,7 @@ module.exports = [
     region: "V78",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -8956,7 +8956,7 @@ module.exports = [
     region: "W90",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -8983,7 +8983,7 @@ module.exports = [
     region: "X23",
     vaccines: [
       {name: "COVID-19", status: "disabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -9010,7 +9010,7 @@ module.exports = [
     region: "Y45",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -9037,7 +9037,7 @@ module.exports = [
     region: "Z67",
     vaccines: [
       {name: "COVID-19", status: "enabled"},
-      {name: "flu", status: "enabled"}
+      {name: "Flu", status: "enabled"}
     ],
     sites: [
       {
@@ -9064,7 +9064,7 @@ module.exports = [
     region: "Y56",
     vaccines: [
       {name: "MMR", status: "enabled"},
-      {name: "flu (London service)", status: "enabled"}
+      {name: "Flu (London service)", status: "enabled"}
     ],
     sites: [
       {

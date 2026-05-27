@@ -26,7 +26,7 @@ module.exports = [
   {
     id: "4643643",
     date: { day: "26", month: "11", year: "2025" },
-    vaccine: "flu",
+    vaccine: "Flu",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
     patient: {
       name: "Ade Green",
@@ -46,7 +46,7 @@ module.exports = [
   {
     id: "464743636",
     date: { day: "26", month: "11", year: "2025" },
-    vaccine: "flu",
+    vaccine: "Flu",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
     patient: {
       name: "Adele Purple",
@@ -66,7 +66,7 @@ module.exports = [
   {
     id: "54363532523",
     date: { day: "26", month: "11", year: "2025" },
-    vaccine: "flu",
+    vaccine: "Flu",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
     patient: {
       name: "Adele Purple",
@@ -86,7 +86,7 @@ module.exports = [
   {
     id: "2522352352",
     date: { day: "26", month: "11", year: "2025" },
-    vaccine: "flu",
+    vaccine: "Flu",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
     patient: {
       name: "Adele Purple",
@@ -106,7 +106,7 @@ module.exports = [
   {
     id: "464743636",
     date: { day: "26", month: "11", year: "2025" },
-    vaccine: "flu",
+    vaccine: "Flu",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
     patient: {
       name: "Adele Purple",
@@ -126,7 +126,7 @@ module.exports = [
   {
     id: "464743636",
     date: { day: "26", month: "11", year: "2025" },
-    vaccine: "flu",
+    vaccine: "Flu",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
     patient: {
       name: "Adele Purple",

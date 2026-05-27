@@ -5,7 +5,7 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {% if ["6-in-1", "flu", "flu (London service)", "MenB", "MMRV", "pneumococcal"].includes(data.vaccine) %}
+  {% if ["6-in-1", "Flu", "Flu (London service)", "MenB", "MMRV", "pneumococcal"].includes(data.vaccine) %}
     {% set backHref = "/record-vaccinations/dose" %}
   {% else %}
     {% set backHref = from if from else "/record-vaccinations/batch" %}
@@ -105,9 +105,9 @@
 
         {% if data.vaccine == "COVID-19" %}
           {% set eligibilityOptions = CovidEligibilityOptions %}
-        {% elif data.vaccine == "flu" %}
+        {% elif data.vaccine == "Flu" %}
           {% set eligibilityOptions = NationalFluEligibilityOptions %}
-        {% elif data.vaccine == "flu (London service)" %}
+        {% elif data.vaccine == "Flu (London service)" %}
           {% set eligibilityOptions = londonFluEligibilityOptions %}
         {% elif data.vaccine == "RSV" %}
           {% set eligibilityOptions = RSVEligibilityOptions %}
