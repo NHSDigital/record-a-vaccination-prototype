@@ -41,11 +41,17 @@
 
       {{ pagination({
         previous: {
-          labelText: ("Yesterday" if currentDay == today else (previousDay | formatDate)),
+          labelText: (
+            "Yesterday" if currentDay == today
+            else ("Today" if previousDay == today else (previousDay | formatDate))
+          ),
           href: "/appointments?date=" + previousDay
         } if not isYesterday,
         next: {
-          labelText: ("Tomorrow" if currentDay == today else (nextDay | formatDate)),
+          labelText: (
+            "Tomorrow" if currentDay == today
+            else ("Today" if nextDay == today else (nextDay | formatDate))
+          ),
           href: "/appointments?date=" + nextDay
         } if not isMaxFutureDay
       }) }}
