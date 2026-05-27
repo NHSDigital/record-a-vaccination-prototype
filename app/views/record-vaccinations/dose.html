@@ -115,7 +115,7 @@
         {# Set custom hint text for each vaccine #}
         {% set radiosHint = false %}
         {% if data.vaccine == "Flu" %}
-          {% set radiosHint = "Most children only have 1 dose per season. Select 1st dose if it is the only dose the child is having this season." %}
+          {% set radiosHint = "Most children only have a 1st or single dose each flu vaccination season" %}
         {% elif data.vaccine == "MenB" %}
           {% set radiosHint = "The booster dose is only given as part of the routine infant schedule" %}
         {% elif data.vaccine == "6-in-1" %}
