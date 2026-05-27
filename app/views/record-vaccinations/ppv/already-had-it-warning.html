@@ -12,22 +12,32 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Jodie Brown has already had a pneumococcal vaccine</h1>
+      <div class="nhsuk-panel nhsuk-panel--interruption">
+        {% if data.firstName and data.lastName %}
+          {% set displayName = data.firstName ~ ' ' ~ data.lastName %}
+        {% else %}
+          {% set displayName = 'Patient Name' %}
+        {% endif %}
+        <h1 class="nhsuk-panel__title">{{ displayName }} has already had a pneumococcal vaccine</h1>
 
-      <p>
-        Jodie Brown had a pneumococcal vaccine on 15 September 2024.
-      </p>
+        <div class="nhsuk-panel__body">
+          <p>
+            {{ displayName }} had a pneumococcal vaccine on 15 September 2024.
+          </p>
 
-      <p>
-        Most adults only need 1 dose of the pneumococcal vaccine.</p>
-     
+          <p>
+            Most adults only need 1 dose of the pneumococcal vaccine.
+          </p>
+
+          {{ button({
+            "text": "Continue anyway",
+            "href": "/record-vaccinations/consent",
+            "classes": "nhsuk-button--reverse"
+          }) }}
+        </div>
+      </div>
+
     </div>
   </div>
-
-  {{ button({
-    "text": "Continue anyway",
-    "href": "/record-vaccinations/consent"
-  }) }}
-
 {% endblock %}
 
