@@ -12,23 +12,33 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">{{ data.firstName }} {{ data.lastName }} had a COVID-19 vaccine less than 3 months ago</h1>
+      <div class="nhsuk-panel nhsuk-panel--interruption">
 
-      <p>
-        They had a COVID-19 vaccine on 15 April 2025.
-      </p>
+        {% if data.firstName and data.lastName %}
+          {% set displayName = data.firstName ~ ' ' ~ data.lastName %}
+        {% else %}
+          {% set displayName = 'Patient Name' %}
+        {% endif %}
+        <h1 class="nhsuk-panel__title">{{ displayName }} had a COVID-19 vaccine less than 3 months ago</h1>
 
-      <p>
-        For most people, the minimum recommended gap between COVID-19 vaccine doses is 3 months.
-      </p>
+        <div class="nhsuk-panel__body">
+          <p>
+            They had a COVID-19 vaccine on 15 April 2025.
+          </p>
+
+          <p>
+            For most people, the minimum recommended gap between COVID-19 vaccine doses is 3 months.
+          </p>
+
+          {{ button({
+            "text": "Continue anyway",
+            "href": "/record-vaccinations/consent",
+            "classes": "nhsuk-button--reverse"
+          }) }}
+        </div>
+      </div>
 
     </div>
   </div>
-
-  {{ button({
-    "text": "Continue anyway",
-    "href": "/record-vaccinations/consent"
-  }) }}
-
 {% endblock %}
 
