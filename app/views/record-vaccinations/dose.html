@@ -137,7 +137,7 @@
             } if (errors | length) > 0,
             fieldset: {
               legend: {
-                text: ("Which dose of the " + data.vaccine + " vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which dose of the " + data.vaccine + " vaccine was it?"),
+                text: ("Which dose of the " + (data.vaccine | lower) + " vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which dose of the " + (data.vaccine | lower) + " vaccine was it?"),
                 classes: "nhsuk-fieldset__legend--l",
                 isPageHeading: true
               }
@@ -156,7 +156,7 @@
             } if (errors | length) > 0,
             fieldset: {
               legend: {
-                text: ("Which dose of the " + data.vaccine + " vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which dose of the " + data.vaccine + " vaccine was it?"),
+                text: ("Which dose of the " + (data.vaccine | lower) + " vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which dose of the " + (data.vaccine | lower) + " vaccine was it?"),
                 classes: "nhsuk-fieldset__legend--l",
                 isPageHeading: true
               }
