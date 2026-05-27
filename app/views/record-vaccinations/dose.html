@@ -43,14 +43,25 @@
           ] %}
         {% elif data.vaccine == "flu" %}
           {% set doseOptions = [
-            "1st or only dose this season",
-            "2nd dose this season"
+            "1st dose",
+            "2nd dose"
           ] %}
         {% elif data.vaccine == "MenB" %}
           {% set doseOptions = [
             "1st dose",
             "2nd dose",
             "Booster"
+          ] %}
+        {% elif data.vaccine == "HPV" %}
+          {% set doseOptions = [
+            "1st dose",
+            "2nd dose",
+            "3rd dose"
+          ] %}
+        {% elif data.vaccine == "MMR" %}
+          {% set doseOptions = [
+            "1st dose",
+            "2nd dose"
           ] %}
         {% elif data.vaccine == "MMRV" %}
           {% set doseOptions = [
@@ -82,40 +93,64 @@
             {% set hintText = "Only given as part of the routine infant schedule" %}
           {% endif %}
         
-          {% if hintText %}
-            {% set items = (items.push({
-              text: option,
-              value: option,
-              checked: (data.vaccineDose == option),
-              hint: {
-                text: hintText
-              }
-            }), items) %}
-          {% else %}
-            {% set items = (items.push({
-              text: option,
-              value: option,
-              checked: (data.vaccineDose == option)
-            }), items) %}
-          {% endif %}
+          {% set items = (items.push({
+            text: option,
+            value: option,
+            checked: (data.vaccineDose == option)
+          }), items) %}
 
         {% endfor %}
 
-        {{ radios({
-          idPrefix: "vaccineDose",
-          name: "vaccineDose",
-          errorMessage: {
-            text: (errors | first).text
-          } if (errors | length) > 0,
-          fieldset: {
-            legend: {
-              text: ("Which dose of the " + data.vaccine + " vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which dose of the " + data.vaccine + " vaccine was it?"),
-              classes: "nhsuk-fieldset__legend--l",
-              isPageHeading: true
-            }
-          },
-          items: items
-        }) }}
+        {# Set custom hint text for each vaccine #}
+        {% set radiosHint = false %}
+        {% if data.vaccine == "flu" %}
+          {% set radiosHint = "Most children only have 1 dose per season. Select 1st dose if it is the only dose the child is having this season." %}
+        {% elif data.vaccine == "MenB" %}
+          {% set radiosHint = "The booster dose is only given as part of the routine infant schedule" %}
+        {% elif data.vaccine == "6-in-1" %}
+          {% set radiosHint = "This is needed for payment and reporting (6-in-1)." %}
+        {% elif data.vaccine == "HPV" %}
+          {% set radiosHint = "Select 1st dose if it is a routine school-age vaccination or a catch-up vaccination for under 25s" %}
+        {% elif data.vaccine == "MenACWY" %}
+          {% set radiosHint = "Select 1st dose for young people having a single dose as part of routine school-age vaccinations or a catch-up programme for under 25s" %}
+        {% endif %}
+
+        {% if radiosHint %}
+          {{ radios({
+            idPrefix: "vaccineDose",
+            name: "vaccineDose",
+            errorMessage: {
+              text: (errors | first).text
+            } if (errors | length) > 0,
+            fieldset: {
+              legend: {
+                text: ("Which dose of the " + data.vaccine + " vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which dose of the " + data.vaccine + " vaccine was it?"),
+                classes: "nhsuk-fieldset__legend--l",
+                isPageHeading: true
+              }
+            },
+            hint: {
+              text: radiosHint
+            },
+            items: items
+          }) }}
+        {% else %}
+          {{ radios({
+            idPrefix: "vaccineDose",
+            name: "vaccineDose",
+            errorMessage: {
+              text: (errors | first).text
+            } if (errors | length) > 0,
+            fieldset: {
+              legend: {
+                text: ("Which dose of the " + data.vaccine + " vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which dose of the " + data.vaccine + " vaccine was it?"),
+                classes: "nhsuk-fieldset__legend--l",
+                isPageHeading: true
+              }
+            },
+            items: items
+          }) }}
+        {% endif %}
 
         {{ button({
           text: "Continue"
