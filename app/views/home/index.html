@@ -31,8 +31,11 @@
   html: insetTextHtml
 }) }}
 
-      <h2 class="nhsuk-heading-m nhsuk-u-margin-bottom-1">All vaccinations</h2>
-      <p class="nhsuk-caption-m nhsuk-u-margin-top-0">Last updated: {{ dashboardLastUpdated }}</p>
+      {% set showLastUpdated = currentOrganisation and currentOrganisation.type == "Pharmacy HQ" %}
+      <h2 class="nhsuk-heading-m{% if showLastUpdated %} nhsuk-u-margin-bottom-1{% endif %}">All vaccinations</h2>
+      {% if showLastUpdated %}
+        <p class="nhsuk-caption-m nhsuk-u-margin-top-0">Last updated: {{ dashboardLastUpdated }}</p>
+      {% endif %}
       {% if not currentOrganisation %}
       <p>This shows vaccination data for all your organisations combined.</p>
       {% endif %}
