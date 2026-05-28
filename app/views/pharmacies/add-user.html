@@ -1,139 +1,222 @@
 {% extends 'layout.html' %}
 
 {% set currentSection = "pharmacies" %}
-{% set pageName = "Add user to " + organisation.name + " (" + organisation.id + ")"  %}
+{% set pageName = "Add user to " + organisation.name + " (" + organisation.id + ")" %}
 
 {% block beforeContent %}
-  {{ backLink({
-    href: "/pharmacies/" + organisation.id
-  }) }}
+{{ backLink({
+href: "/pharmacies/" + organisation.id
+}) }}
 {% endblock %}
 
 {% block content %}
-  <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-two-thirds">
-      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-two-thirds">
+    <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>You can add an existing user to the pharmacy, or invite a new user.</p>
+    <p>You can add an existing user to the pharmacy, or invite a new user.</p>
 
-      {% call details({
-        summaryText: "Help with adding a user",
-        classes: "nhsuk-expander"
-      }) %}
-        <p>Info about adding a lead admin to do all the work.</p>
-      {% endcall %}
+    {% call details({
+    summaryText: "What can you do as a lead administrator?",
+    classes: "nhsuk-expander"
+    }) %}
+    <p>A lead administrator added here can:</p>
+    <ul>
+      <li>access RAVS at all selected pharmacies</li>
+      <li>add users at each pharmacy, including more lead administrators, who can in turn add more users</li>
+      <li>assign different permission levels to the users they add</li>
+      <li>create reports that include all 8 pharmacies</li>
+    </ul>
+    <p>This table shows the permission levels you can assign when you add users at individual pharmacies.</p>
+    <table class="nhsuk-table">
+      <thead class="nhsuk-table__head">
+        <tr class="nhsuk-table__row">
+          <th scope="col" class="nhsuk-table__header">
+            Permission level
+          </th>
+          <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">
+            Record and edit vaccinations
+          </th>
+          <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">
+            Add and manage vaccinations
+          </th>
+          <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">
+            Create reports
+          </th>
+          <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">
+            Add and manage users
+          </th>
+        </tr>
+      </thead>
+      <tbody class="nhsuk-table__body">
+        <tr class="nhsuk-table__row">
+          <th scope="row" class="nhsuk-table__header">
+            Lead administrator
+          </th>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            Yes
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            Yes
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            Yes
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            Yes
+          </td>
+        </tr>
+        <tr class="nhsuk-table__row">
+          <th scope="row" class="nhsuk-table__header">
+            Administrator
+          </th>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            Yes
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            Yes
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            Yes
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            No
+          </td>
+        </tr>
+        <tr class="nhsuk-table__row">
+          <th scope="row" class="nhsuk-table__header">
+            Recorder
+          </th>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            Yes
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            No
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            No
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            No
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-      <form data-module="app-add-another" data-add-another-min="0" action="/pharmacies/{{ organisation.id }}/add-user-permission-level" method="post">
+    {% endcall %}
+
+    <form data-module="app-add-another" data-add-another-min="0"
+      action="/pharmacies/{{ organisation.id }}/add-user-permission-level" method="post">
 
       {% set items = [] %}
 
       {% for user in (users | sort(false, false, "firstName")) %}
-        {% set items = (items.push({
-          text: user.firstName + " " + user.lastName,
-          value: user.id,
-          hint: {
-            text: user.email
-          }
-        }), items) %}
+      {% set items = (items.push({
+      text: user.firstName + " " + user.lastName,
+      value: user.id,
+      hint: {
+      text: user.email
+      }
+      }), items) %}
       {% endfor %}
 
 
 
       {% set newUserHtml %}
-        {{ input({
-          label: {
-            text: "First name"
-          },
-          name: "firstName",
-          classes: "nhsuk-input--width-20",
-          value: data.firstName
-        }) }}
+      {{ input({
+      label: {
+      text: "First name"
+      },
+      name: "firstName",
+      classes: "nhsuk-input--width-20",
+      value: data.firstName
+      }) }}
 
-        {{ input({
-          label: {
-            text: "Last name"
-          },
-          name: "lastName",
-          classes: "nhsuk-input--width-20",
-          value: data.lastName
-        }) }}
+      {{ input({
+      label: {
+      text: "Last name"
+      },
+      name: "lastName",
+      classes: "nhsuk-input--width-20",
+      value: data.lastName
+      }) }}
 
-        {{ input({
-          label: {
-            text: "Email address"
-          },
-          name: "email",
-          type: "email",
-          value: data.email
-        }) }}
+      {{ input({
+      label: {
+      text: "Email address"
+      },
+      name: "email",
+      type: "email",
+      value: data.email
+      }) }}
       {% endset %}
 
 
 
       {% call fieldset({
-        legend: {
-          text: "User",
-          size: "m",
-          classes: "nhsuk-u-margin-bottom-5"
-        }
+      legend: {
+      text: "User",
+      size: "m",
+      classes: "nhsuk-u-margin-bottom-5"
+      }
       }) %}
 
       {% if (users | length) > 10 %}
-        {{ input({
-          id: "user-search",
-          name: "userSearch",
-          type: "search",
-          label: {
-            text: "Search"
-          },
-          classes: "nhsuk-input--width-20",
-          attributes: {
-            "data-module": "app-radios-filter"
-          },
-          formGroup: {
-            classes: "nhsuk-u-margin-bottom-4"
-          }
-        }) }}
+      {{ input({
+      id: "user-search",
+      name: "userSearch",
+      type: "search",
+      label: {
+      text: "Search"
+      },
+      classes: "nhsuk-input--width-20",
+      attributes: {
+      "data-module": "app-radios-filter"
+      },
+      formGroup: {
+      classes: "nhsuk-u-margin-bottom-4"
+      }
+      }) }}
       {% endif %}
 
-        <div class="app-scrollable-container app-scrollable-container--fixed-height">
-          {{ radios({
-            name: "userId",
-            value: data.userId,
-            items: items
-          }) }}
-        </div>
-
+      <div class="app-scrollable-container app-scrollable-container--fixed-height">
         {{ radios({
-          name: "userId",
-          value: data.userId,
-          items: [
-            {
-              divider: "or"
-            },
-            {
-              text: "Add a new user",
-              value: "add-new",
-              id: "add-new",
-              attributes: {
-                "data-no-filter": ""
-              },
-              conditional: {
-                html: newUserHtml
-              }
-            }
-          ]
+        name: "userId",
+        value: data.userId,
+        items: items
         }) }}
+      </div>
+
+      {{ radios({
+      name: "userId",
+      value: data.userId,
+      items: [
+      {
+      divider: "or"
+      },
+      {
+      text: "Add a new user",
+      value: "add-new",
+      id: "add-new",
+      attributes: {
+      "data-no-filter": ""
+      },
+      conditional: {
+      html: newUserHtml
+      }
+      }
+      ]
+      }) }}
 
       {% endcall %}
 
       {{ button({
-        text: "Continue"
+      text: "Continue"
       }) }}
 
-      </form>
+    </form>
 
 
-    </div>
   </div>
+</div>
 {% endblock %}
