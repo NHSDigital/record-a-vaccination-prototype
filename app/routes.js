@@ -43,6 +43,7 @@ router.use('/regions{*splat}', authorise({userType: 'regional'}))
 router.use('/support{*splat}', authorise({userType: 'admin'}))
 
 require('./routes/apply')(router)
+require('./routes/appointments')(router)
 require('./routes/record-vaccinations')(router)
 require('./routes/regions')(router)
 require('./routes/user-admin')(router)
