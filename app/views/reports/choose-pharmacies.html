@@ -15,43 +15,57 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-
-      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
       <form action="/reports/choose-data" method="post">
 
+        {% set items = [] %}
 
-        <div class="nhsuk-checkboxes" id="pharmacy-checkbox-list">
-          <div class="nhsuk-checkboxes__item">
-            <input class="nhsuk-checkboxes__input" id="pharmacy-to-report-all" name="pharmacyIdsToReport" type="checkbox" value="all" data-module="app-checkbox-select-all" data-select-all="true">
-            <label class="nhsuk-label nhsuk-checkboxes__label" for="pharmacy-to-report-all">All {{ pharmacies|length }} pharmacies</label>
-          </div>
-          <div class="nhsuk-checkboxes__divider nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2">or</div>
-          {% if pharmacies|length > 20 %}
-          <div class="nhsuk-form-group nhsuk-u-margin-bottom-4">
-            <label class="nhsuk-label" for="report-pharmacy-search">Search</label>
-            <input class="nhsuk-input nhsuk-input--width-20" id="report-pharmacy-search" name="report-pharmacy-search" type="search" autocomplete="off">
-          </div>
+        {% set items = (items.push({
+          text: "All " + (pharmacies|length) + " pharmacies",
+          value: "all",
+          attributes: {
+            "data-module": "app-checkbox-select-all",
+            "data-select-all": "true"
+          }
+        }), items) %}
+
+        {% set items = (items.push({
+          divider: "or"
+        }), items) %}
+
+
+        {% for pharmacy in pharmacies | sort(false, false, "name") %}
+
+          {% if pharmacy.address %}
+            {% set hint = {
+              text: pharmacy.address.line1 + ", " + pharmacy.address.town + ", " + pharmacy.address.postcode
+            } %}
           {% endif %}
-          {% for pharmacy in pharmacies | sort(false, false, "name") %}
-            {% if pharmacy.address %}
-              {% set hint = pharmacy.address.line1 + ", " + pharmacy.address.town + ", " + pharmacy.address.postcode %}
-            {% else %}
-              {% set hint = "" %}
-            {% endif %}
-            <div class="nhsuk-checkboxes__item">
-              <input class="nhsuk-checkboxes__input" id="pharmacy-to-report-{{ pharmacy.id }}" name="pharmacyIdsToReport" type="checkbox" value="{{ pharmacy.id }}">
-              <label class="nhsuk-label nhsuk-checkboxes__label" for="pharmacy-to-report-{{ pharmacy.id }}">{{ pharmacy.name }} ({{ pharmacy.id }})</label>
-              {% if hint %}<span class="nhsuk-hint nhsuk-checkboxes__hint">{{ hint }}</span>{% endif %}
-            </div>
-          {% endfor %}
-        </div>
+
+          {% set items = (items.push({
+            value: pharmacy.id,
+            text: pharmacy.name + " (" + pharmacy.id + ")",
+            hint: hint
+          }), items) %}
+        {% endfor %}
+
+        {{ checkboxes({
+          idPrefix: "pharmacy-to-report",
+          name: "pharmacyIdsToReport",
+          fieldset: {
+            legend: {
+              text: pageName,
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          values: data.pharmacyIdsToReport,
+          items: items
+        }) }}
 
 
-        <div class="nhsuk-u-margin-top-6">
-          {{ button({
-            text: "Continue"
-          }) }}
-        </div>
+        {{ button({
+          text: "Continue"
+        }) }}
 
       </form>
 

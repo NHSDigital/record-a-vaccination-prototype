@@ -31,7 +31,8 @@
   html: insetTextHtml
 }) }}
 
-      <h2 class="nhsuk-heading-m">All vaccinations</h2>
+      <h2 class="nhsuk-heading-m nhsuk-u-margin-bottom-1">All vaccinations</h2>
+      <p class="nhsuk-caption-m nhsuk-u-margin-top-0">Last updated: {{ dashboardLastUpdated }}</p>
       {% if not currentOrganisation %}
       <p>This shows vaccination data for all your organisations combined.</p>
       {% endif %}
