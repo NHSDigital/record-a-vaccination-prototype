@@ -1,11 +1,6 @@
 {% extends 'layout.html' %}
 
 {% set vaccineDisplayName = data.vaccine %}
-{% if data.vaccine == "Flu" %}
-  {% set vaccineDisplayName = "flu" %}
-{% elif data.vaccine == "Flu (London service)" %}
-  {% set vaccineDisplayName = "flu (London service)" %}
-{% endif %}
 
 {% set pageName = "Which dose of the " + vaccineDisplayName + " are you giving?" %}
 
