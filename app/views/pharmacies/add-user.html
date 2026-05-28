@@ -16,6 +16,12 @@
 
       <p>You can add an existing user to the pharmacy, or invite a new user.</p>
 
+      {% call details({
+        summaryText: "Help with adding a user"
+      }) %}
+        <p>Info about adding a lead admin to do all the work.</p>
+      {% endcall %}
+
       <form data-module="app-add-another" data-add-another-min="0" action="/pharmacies/{{ organisation.id }}/add-user-permission-level" method="post">
 
       {% set items = [] %}
