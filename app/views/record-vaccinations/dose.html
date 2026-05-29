@@ -115,17 +115,17 @@
         {# Set custom hint text for each vaccine #}
         {% set radiosHint = false %}
         {% if data.vaccine == "Flu" %}
-          {% set radiosHint = "Most children only have a 1st or single dose each flu vaccination season" %}
+          {% set radiosHint = "Most children only need a single or 1st dose each flu vaccination season" %}
         {% elif data.vaccine == "MenB" %}
           {% set radiosHint = "The booster dose is only given as part of the routine infant schedule" %}
         {% elif data.vaccine == "6-in-1" %}
           {% set radiosHint = "This is needed for payment and reporting (6-in-1)." %}
         {% elif data.vaccine == "HPV" %}
-          {% set radiosHint = "Select 1st dose if it is a routine school-age vaccination or a catch-up vaccination for under 25s" %}
+          {% set radiosHint = "Most people aged 24 and under only need a single or 1st dose of the HPV vaccine" %}
         {% elif data.vaccine == "MenACWY" %}
           {% set radiosHint = "Select 1st dose for young people having a single dose as part of routine school-age vaccinations or a catch-up programme for under 25s" %}
         {% elif data.vaccine == "Td/IPV" %}
-          {% set radiosHint = "Select 1st dose if it is a routine school-age vaccination or a catch-up vaccination for under 25s" %}
+          {% set radiosHint = "Most people aged 24 and under only need a single or 1st dose of the Td/IPV vaccine" %}
         {% endif %}
 
         {% if radiosHint %}
