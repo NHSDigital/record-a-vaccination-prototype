@@ -22,7 +22,7 @@ href: "/pharmacies/" + organisation.id
     classes: "nhsuk-expander"
     }) %}
     
-    <p>This table shows the permission levels you can assign when you add users at an individual pharmacy.</p>
+    <p>This table shows the permission levels you can assign when you add a user to a pharmacy.</p>
     <table class="nhsuk-table">
       <thead class="nhsuk-table__head">
         <tr class="nhsuk-table__row">
@@ -30,16 +30,16 @@ href: "/pharmacies/" + organisation.id
             Permission level
           </th>
           <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">
-            Record and edit vaccinations
+            Record vaccinations
           </th>
           <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">
-            Add and manage vaccinations
+            Manage vaccines
           </th>
           <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">
             Create reports
           </th>
           <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">
-            Add and manage users
+            Manage users
           </th>
         </tr>
       </thead>
@@ -97,7 +97,7 @@ href: "/pharmacies/" + organisation.id
         </tr>
       </tbody>
     </table>
-    <p>You should add at least 1 lead administrator per pharmacy, as that lead administrator can then add further users and manage vaccines at the individual pharmacy.</p>
+    <p>You should add at least 1 lead administrator per pharmacy, so that person can add further users and manage vaccines at the pharmacy.</p>
     {% endcall %}
 
     <form data-module="app-add-another" data-add-another-min="0"
