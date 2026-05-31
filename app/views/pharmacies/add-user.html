@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% set currentSection = "pharmacies" %}
-{% set pageName = "Add user to " + organisation.name + " (" + organisation.id + ")" %}
+{% set pageName = "Add a user to " + organisation.name + " (" + organisation.id + ")" %}
 
 {% block beforeContent %}
 {{ backLink({
@@ -15,19 +15,14 @@ href: "/pharmacies/" + organisation.id
     <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
     <p>You can add an existing user to the pharmacy, or invite a new user.</p>
+    <p>They will receive an email with details of how to access the Record a vaccination service.</p>
 
     {% call details({
-    summaryText: "What can you do as a lead administrator?",
+    summaryText: "What permissions will the user have?",
     classes: "nhsuk-expander"
     }) %}
-    <p>A lead administrator added here can:</p>
-    <ul>
-      <li>access RAVS at all selected pharmacies</li>
-      <li>add users at each pharmacy, including more lead administrators, who can in turn add more users</li>
-      <li>assign different permission levels to the users they add</li>
-      <li>create reports that include all 8 pharmacies</li>
-    </ul>
-    <p>This table shows the permission levels you can assign when you add users at individual pharmacies.</p>
+    
+    <p>This table shows the permission levels you can assign when you add users at an individual pharmacy.</p>
     <table class="nhsuk-table">
       <thead class="nhsuk-table__head">
         <tr class="nhsuk-table__row">
@@ -102,7 +97,7 @@ href: "/pharmacies/" + organisation.id
         </tr>
       </tbody>
     </table>
-
+    <p>You should add at least 1 lead administrator per pharmacy, as that lead administrator can then add further users and manage vaccines at the individual pharmacy.</p>
     {% endcall %}
 
     <form data-module="app-add-another" data-add-another-min="0"
