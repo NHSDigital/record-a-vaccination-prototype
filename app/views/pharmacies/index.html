@@ -48,13 +48,16 @@
             <th role="columnheader" class="" scope="col">
               Users
             </th>
+            <th role="columnheader" class="" scope="col">
+              Actions
+            </th>
           </tr>
         </thead>
         <tbody class="nhsuk-table__body">
           {% for organisation in organisations %}
             <tr role="row" class="nhsuk-table__row">
               <td class="nhsuk-table__cell">
-                <a href="/pharmacies/{{ organisation.id }}">{{ organisation.name }} ({{ organisation.id}})</a>
+                {{ organisation.name }} ({{ organisation.id}})
               </td>
               <td class="nhsuk-table__cell ">
                 {% set vaccinesEnabled = [] %}
@@ -68,6 +71,9 @@
               </td>
               <td class="nhsuk-table__cell ">
                 {{ organisationUserCounts[organisation.id] }}
+              </td>
+              <td class="nhsuk-table__cell ">
+                <a href="/pharmacies/{{ organisation.id }}">Manage</a>
               </td>
             </tr>
           {% endfor %}
