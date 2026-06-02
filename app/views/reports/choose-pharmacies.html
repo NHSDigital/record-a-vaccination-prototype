@@ -17,20 +17,22 @@
 
       <form action="/reports/choose-data" method="post">
 
-        {% set items = [] %}
+        {% set selectAllItems = [] %}
 
-        {% set items = (items.push({
+        {% set selectAllItems = (selectAllItems.push({
           text: "All " + (pharmacies|length) + " pharmacies",
           value: "all",
           attributes: {
             "data-module": "app-checkbox-select-all",
             "data-select-all": "true"
           }
-        }), items) %}
+        }), selectAllItems) %}
 
-        {% set items = (items.push({
+        {% set selectAllItems = (selectAllItems.push({
           divider: "or"
-        }), items) %}
+        }), selectAllItems) %}
+
+        {% set pharmacyItems = [] %}
 
 
         {% for pharmacy in pharmacies | sort(false, false, "name") %}
@@ -41,15 +43,15 @@
             } %}
           {% endif %}
 
-          {% set items = (items.push({
+          {% set pharmacyItems = (pharmacyItems.push({
             value: pharmacy.id,
             text: pharmacy.name + " (" + pharmacy.id + ")",
             hint: hint
-          }), items) %}
+          }), pharmacyItems) %}
         {% endfor %}
 
         {{ checkboxes({
-          idPrefix: "pharmacy-to-report",
+          idPrefix: "pharmacy-to-report-select-all",
           name: "pharmacyIdsToReport",
           fieldset: {
             legend: {
@@ -59,8 +61,38 @@
             }
           },
           values: data.pharmacyIdsToReport,
-          items: items
+          items: selectAllItems,
+          formGroup: {
+            classes: "nhsuk-u-margin-bottom-2"
+          }
         }) }}
+
+        {% if (pharmacies | length) > 20 %}
+          {{ input({
+            id: "pharmacy-search",
+            name: "pharmacySearch",
+            type: "search",
+            label: {
+              text: "Search"
+            },
+            classes: "nhsuk-input--width-20",
+            attributes: {
+              "data-module": "app-checkbox-filter"
+            },
+            formGroup: {
+              classes: "nhsuk-u-margin-bottom-4"
+            }
+          }) }}
+        {% endif %}
+
+        <div class="app-scrollable-container">
+          {{ checkboxes({
+            idPrefix: "pharmacy-to-report",
+            name: "pharmacyIdsToReport",
+            values: data.pharmacyIdsToReport,
+            items: pharmacyItems
+          }) }}
+        </div>
 
 
         {{ button({
