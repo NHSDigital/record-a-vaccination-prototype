@@ -38,6 +38,33 @@ module.exports = function () {
     }
   }
 
+  filters.vaccineDisplayName = function(vaccineName) {
+    if (!vaccineName) {
+      return null
+    }
+
+    const vaccineNameMap = {
+      'covid-19': 'COVID-19',
+      'rsv': 'RSV',
+      'bcg': 'BCG',
+      'mmr': 'MMR',
+      'mmrv': 'MMRV',
+      'hpv': 'HPV',
+      'menb': 'MenB',
+      'flu': 'Flu',
+      'flu (london service)': 'Flu (London service)',
+      'hepatitis b': 'Hepatitis B'
+    }
+
+    const normalisedName = vaccineName.toString().trim().toLowerCase()
+
+    if (vaccineNameMap[normalisedName]) {
+      return vaccineNameMap[normalisedName]
+    }
+
+    return filters.capitaliseFirstLetter(vaccineName)
+  }
+
   /**
    * Returns the name of a month, eg 'November', when
    * given the number of the month, eg 11.

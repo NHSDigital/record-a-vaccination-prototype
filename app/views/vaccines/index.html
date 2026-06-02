@@ -124,7 +124,7 @@
               {% for vaccineProduct in vaccineProductsAtSite %}
                 <tr class="nhsuk-table__row">
                   <td class="nhsuk-table__cell">
-                    {{ vaccineAtSite | capitaliseFirstLetter }}
+                    {{ vaccineAtSite | vaccineDisplayName }}
                   </td>
                   <td class="nhsuk-table__cell">
                     {{ vaccineProduct }}

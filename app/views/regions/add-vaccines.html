@@ -23,7 +23,7 @@
         {% for vaccine in (vaccinesNotYetAdded | sort(false, false, "name")) %}
           {% set items = (items.push({
             value: vaccine.name,
-            text: (vaccine.name | capitaliseFirstLetter)
+            text: (vaccine.name | vaccineDisplayName)
           }), items) %}
         {% endfor %}
 

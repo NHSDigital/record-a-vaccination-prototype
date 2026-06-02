@@ -60,6 +60,15 @@
         </ul>
       {% endset %}
 
+      {% set vaccinesToReportText = "" %}
+      {% if data.vaccinesToReport %}
+        {% set vaccinesToReportDisplay = [] %}
+        {% for vaccine in (data.vaccinesToReport | sort(false, false, "name")) %}
+          {% set vaccinesToReportDisplay = (vaccinesToReportDisplay.push(vaccine | vaccineDisplayName), vaccinesToReportDisplay) %}
+        {% endfor %}
+        {% set vaccinesToReportText = vaccinesToReportDisplay | join(", ") %}
+      {% endif %}
+
       {{ summaryList({
         rows: [
           {
@@ -104,7 +113,7 @@
               text: ("Vaccines" if (data.vaccinesToReport | length) > 1 else "Vaccine")
             },
             value: {
-              text: (data.vaccinesToReport | sort(false, false, "name") | join(", ") | capitaliseFirstLetter) if data.vaccines
+              text: vaccinesToReportText if data.vaccines
             },
             actions: {
               items: [

@@ -24,7 +24,7 @@
   {% for totalByVaccine in (totalsByVaccine | sort(false, true, "vaccine") ) %}
     <tr role="row">
       <th class="nhsuk-table__header nhsuk-u-font-weight-normal" scope="col">
-        {{ totalByVaccine.vaccine | capitaliseFirstLetter }}
+        {{ totalByVaccine.vaccine | vaccineDisplayName }}
       </th>
       <td class="nhsuk-table__cell--numeric">
         {{ totalByVaccine.today }}
