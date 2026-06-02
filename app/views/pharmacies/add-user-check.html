@@ -29,7 +29,7 @@
         rows: [
           {
             key: {
-              text: "Name"
+              text: "User"
             },
             value: {
               text: nameText
@@ -54,12 +54,12 @@
             actions: {
               items: [
                 {
-                  href: ("/pharmacies/" + organisation.id + "/add-user" if existingUser else "/pharmacies/" + organisation.id + "/add-user-permission-level"),
+                  href: "/pharmacies/" + organisation.id + "/add-user-permission-level",
                   text: "Change",
                   visuallyHiddenText: "email address"
                 }
               ]
-            }
+            } if not existingUser
           },
           {
             key: {
