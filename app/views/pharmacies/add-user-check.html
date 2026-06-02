@@ -100,9 +100,9 @@
 
 
       {% if existingUser %}
-        <p>{{ existingUser.firstName }} will be sent this email:</p>
+        <p>{{ existingUser.firstName }} {{ existingUser.lastName }} will receive this email telling them how to access the Record a vaccination service:</p>
       {% else %}
-        <p>{{ data.firstName }} will receive this welcome email with information about activating an account:</p>
+        <p>{{ data.firstName }} will receive this email telling them how to access the Record a vaccination service:</p>
       {% endif %}
 
       <div class="app-email-preview">
