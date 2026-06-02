@@ -117,39 +117,6 @@ href: "/pharmacies/" + organisation.id
       }), items) %}
       {% endfor %}
 
-
-
-      {% set newUserHtml %}
-      {{ input({
-      label: {
-      text: "First name"
-      },
-      name: "firstName",
-      classes: "nhsuk-input--width-20",
-      value: data.firstName
-      }) }}
-
-      {{ input({
-      label: {
-      text: "Last name"
-      },
-      name: "lastName",
-      classes: "nhsuk-input--width-20",
-      value: data.lastName
-      }) }}
-
-      {{ input({
-      label: {
-      text: "Email address"
-      },
-      name: "email",
-      type: "email",
-      value: data.email
-      }) }}
-      {% endset %}
-
-
-
       {% call fieldset({
       legend: {
       text: "User",
@@ -197,9 +164,6 @@ href: "/pharmacies/" + organisation.id
       id: "add-new",
       attributes: {
       "data-no-filter": ""
-      },
-      conditional: {
-      html: newUserHtml
       }
       }
       ]

@@ -37,7 +37,7 @@
             actions: {
               items: [
                 {
-                  href: "/pharmacies/" + organisation.id + "/add-user",
+                  href: ("/pharmacies/" + organisation.id + "/add-user" if existingUser else "/pharmacies/" + organisation.id + "/add-user-permission-level"),
                   text: "Change",
                   visuallyHiddenText: "name"
                 }
@@ -54,7 +54,7 @@
             actions: {
               items: [
                 {
-                  href: "/pharmacies/" + organisation.id + "/add-user",
+                  href: ("/pharmacies/" + organisation.id + "/add-user" if existingUser else "/pharmacies/" + organisation.id + "/add-user-permission-level"),
                   text: "Change",
                   visuallyHiddenText: "email address"
                 }
