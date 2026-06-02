@@ -321,6 +321,7 @@ module.exports = router => {
     const id = req.params.id
     const organisation = data.organisations.find((organisation) => organisation.id === id)
     const existingUser = data.users.find((user) => user.id === data.userId)
+    let addedUserId
 
     if (existingUser) {
 
@@ -331,10 +332,14 @@ module.exports = router => {
         vaccinator: (data.vaccinator === 'yes'),
         permissionLevel: data.permissionLevel
       })
+
+      addedUserId = existingUser.id
     } else {
 
+      const newUserId = Math.floor(Math.random() * 10000000).toString()
+
       data.users.push({
-        id: Math.floor(Math.random() * 10000000).toString(),
+        id: newUserId,
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
@@ -348,6 +353,8 @@ module.exports = router => {
         ]
       })
 
+      addedUserId = newUserId
+
     }
 
     // Reset data
@@ -358,7 +365,7 @@ module.exports = router => {
     req.session.data.permissionLevel = ''
     req.session.data.vaccinator = ''
 
-    res.redirect(`/pharmacies/${organisation.id}?added=true`)
+    res.redirect(`/pharmacies/${organisation.id}?added=true&addedUserId=${addedUserId}`)
   })
 
 
@@ -503,9 +510,11 @@ module.exports = router => {
     const data = req.session.data
     const id = req.params.id
     const added = req.query.added
+    const addedUserId = req.query.addedUserId
 
 
     const organisation = data.organisations.find((organisation) => organisation.id === id)
+    const addedUser = data.users.find((user) => user.id === addedUserId)
 
     const userOrganisationPermissions = {}
 
@@ -522,7 +531,8 @@ module.exports = router => {
       organisation,
       users,
       userOrganisationPermissions,
-      added
+      added,
+      addedUser
     })
   })
 
