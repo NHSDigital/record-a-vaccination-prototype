@@ -19,6 +19,21 @@
 
         {% set items = [] %}
 
+        {% if ((enabledVaccines | length) > 1) %}
+          {% set items = (items.push({
+            text: "All vaccines",
+            value: "all",
+            attributes: {
+              "data-module": "app-checkbox-select-all",
+              "data-select-all": "true"
+            }
+          }), items) %}
+
+          {% set items = (items.push({
+            divider: "or"
+          }), items) %}
+        {% endif %}
+
         {% for vaccine in (enabledVaccines | sort(false, false, "name")) %}
           {% set items = (items.push({
             value: vaccine.name,
