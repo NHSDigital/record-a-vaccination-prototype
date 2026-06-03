@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Remove all users" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    text: "Back",
+    href: "/prototype-setup"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Remove all users</h1>
+
+      <div class="nhsuk-warning-callout">
+        <h2 class="nhsuk-warning-callout__label">
+          <span role="text">Important</span>
+        </h2>
+        <p>This removes all users except the accounts used in sign-in testing scenarios.</p>
+      </div>
+
+      <p>Current users: {{ usersCount }}</p>
+      <p>Users that will be removed: {{ usersToRemoveCount }}</p>
+      <p>Sign-in scenario users that will be kept: {{ usersToKeepCount }}</p>
+      <p>Vaccination records in session: {{ vaccinationsCount }}</p>
+      <p>You can use <a href="/prototype-setup/add-users">Add users</a> afterwards to repopulate users.</p>
+
+      <form action="/prototype-setup/remove-all-users" method="post" novalidate>
+        {{ button({
+          text: "Remove other users"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

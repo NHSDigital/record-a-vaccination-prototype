@@ -143,7 +143,8 @@ href: "/pharmacies/" + organisation.id
       }) }}
       {% endif %}
 
-      <div class="app-scrollable-container app-scrollable-container--fixed-height">
+      {% if (users | length) > 0 %}
+      <div class="app-scrollable-container">
         {{ radios({
         name: "userId",
         value: data.userId,
@@ -168,6 +169,22 @@ href: "/pharmacies/" + organisation.id
       }
       ]
       }) }}
+      {% else %}
+      {{ radios({
+      name: "userId",
+      value: data.userId,
+      items: [
+      {
+      text: "Add a new user",
+      value: "add-new",
+      id: "add-new",
+      attributes: {
+      "data-no-filter": ""
+      }
+      }
+      ]
+      }) }}
+      {% endif %}
 
       {% endcall %}
 

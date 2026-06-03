@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Remove selected users" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    text: "Back",
+    href: "/prototype-setup"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Remove selected users</h1>
+
+      <p>Select the users you want to remove from this prototype session.</p>
+      <p>This can include sign-in scenario users.</p>
+
+      <form action="/prototype-setup/remove-selected-users" method="post" novalidate>
+
+        {{ checkboxes({
+          idPrefix: "userIds",
+          name: "userIds",
+          fieldset: {
+            legend: {
+              text: "Users",
+              classes: "nhsuk-fieldset__legend--m",
+              isPageHeading: false
+            }
+          },
+          errorMessage: error,
+          items: checkboxItems
+        }) }}
+
+        {{ button({
+          text: "Remove selected users"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
