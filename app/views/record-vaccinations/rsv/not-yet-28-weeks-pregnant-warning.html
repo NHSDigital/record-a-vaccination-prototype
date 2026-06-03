@@ -12,39 +12,40 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <div class="nhsuk-panel nhsuk-panel--interruption">
+      {% if data.firstName and data.lastName %}
+        {% set displayName = data.firstName ~ ' ' ~ data.lastName %}
+      {% else %}
+        {% set displayName = 'Patient Name' %}
+      {% endif %}
 
-        {% if data.firstName and data.lastName %}
-          {% set displayName = data.firstName ~ ' ' ~ data.lastName %}
-        {% else %}
-          {% set displayName = 'Patient Name' %}
-        {% endif %}
-        <h1 class="nhsuk-panel__title">{{ displayName }} is not yet 28 weeks pregnant</h1>
+      {% set panelHtml %}
+        {% set randomWeeks = (range(1, 27) | random) %}
+        <p>
+          {{ displayName }} is 
+          {% if fullWeeksPregnant is defined and fullWeeksPregnant is not none %}
+            {{ fullWeeksPregnant | plural("week") }}
+          {% else %}
+            {{ randomWeeks }} week{{ 's' if randomWeeks > 1 }}
+          {% endif %}
+          {% if remainderDaysPregnant is defined and remainderDaysPregnant > 0 %} and {{ remainderDaysPregnant | plural("day") }}{% endif %} pregnant.
+        </p>
 
-        <div class="nhsuk-panel__body">
+        <p>The RSV vaccine is not routinely recommended before 28 weeks of pregnancy.</p>
 
-          {% set randomWeeks = (range(1, 27) | random) %}
-          <p>
-            {{ displayName }} is 
-            {% if fullWeeksPregnant is defined and fullWeeksPregnant is not none %}
-              {{ fullWeeksPregnant | plural("week") }}
-            {% else %}
-              {{ randomWeeks }} week{{ 's' if randomWeeks > 1 }}
-            {% endif %}
-            {% if remainderDaysPregnant is defined and remainderDaysPregnant > 0 %} and {{ remainderDaysPregnant | plural("day") }}{% endif %} pregnant.
-          </p>
+        <p><a href="https://www.gov.uk/government/publications/respiratory-syncytial-virus-rsv-programme-information-for-healthcare-professionals/rsv-vaccination-of-pregnant-women-for-infant-protection-information-for-healthcare-practitioners" target="_blank">UKHSA guidance on RSV vaccination of pregnant women (opens in new tab)</a>.</p>
 
-          <p>The RSV vaccine is not routinely recommended before 28 weeks of pregnancy.</p>
+        {{ button({
+          "text": "Continue anyway",
+          "href": "/record-vaccinations/consent",
+          "classes": "nhsuk-button--reverse"
+        }) }}
+      {% endset %}
 
-          <p><a href="https://www.gov.uk/government/publications/respiratory-syncytial-virus-rsv-programme-information-for-healthcare-professionals/rsv-vaccination-of-pregnant-women-for-infant-protection-information-for-healthcare-practitioners" target="_blank">UKHSA guidance on RSV vaccination of pregnant women (opens in new tab)</a>.</p>
-
-          {{ button({
-            "text": "Continue anyway",
-            "href": "/record-vaccinations/consent",
-            "classes": "nhsuk-button--reverse"
-          }) }}
-        </div>
-      </div>
+      {{ panel({
+        titleText: displayName + " is not yet 28 weeks pregnant",
+        html: panelHtml,
+        classes: "nhsuk-panel--interruption"
+      }) }}
 
     </div>
   </div>
