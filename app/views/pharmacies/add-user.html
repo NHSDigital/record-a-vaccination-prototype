@@ -15,7 +15,6 @@ href: "/pharmacies/" + organisation.id
     <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
     <p>You can add an existing user to the pharmacy, or invite a new user.</p>
-    <p>They will receive an email with details of how to access the Record a vaccination service.</p>
 
     {% call details({
     summaryText: "What permissions will the user have?",
@@ -121,7 +120,7 @@ href: "/pharmacies/" + organisation.id
       legend: {
       text: "User",
       size: "m",
-      classes: "nhsuk-u-margin-bottom-5"
+      classes: "nhsuk-u-visually-hidden"
       }
       }) %}
 
