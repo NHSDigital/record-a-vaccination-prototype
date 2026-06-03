@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% set currentSection = "pharmacies" %}
-{% set pageName = "Add user to " + organisation.name  %}
+{% set pageName = "Add a user to " + organisation.name  %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -13,11 +13,11 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
       <h1 class="nhsuk-heading-l">
-        Adding
+        Add
         {% if existingUser %}
           {{ existingUser.firstName }} {{ existingUser.lastName }}
         {% else %}
-          new user
+          a new user
         {% endif %}
         to {{ organisation.name }} ({{ organisation.id }})
       </h1>
