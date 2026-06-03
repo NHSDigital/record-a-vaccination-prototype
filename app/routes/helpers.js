@@ -1,5 +1,5 @@
-const { randomItem } = require('../lib/utils/random-item.js')
 const seedUsers = require('../data/users.js')
+const { randomItem } = require('../lib/utils/random-item.js')
 
 module.exports = router => {
 
