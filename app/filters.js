@@ -43,6 +43,8 @@ module.exports = function () {
       return null
     }
 
+    const trimmedName = vaccineName.toString().trim()
+
     const vaccineNameMap = {
       'covid-19': 'COVID-19',
       'rsv': 'RSV',
@@ -51,18 +53,27 @@ module.exports = function () {
       'mmrv': 'MMRV',
       'hpv': 'HPV',
       'menb': 'MenB',
-      'flu': 'Flu',
-      'flu (london service)': 'Flu (London service)',
+      'flu': 'flu',
+      'flu (london service)': 'flu (London service)',
       'hepatitis b': 'Hepatitis B'
     }
 
-    const normalisedName = vaccineName.toString().trim().toLowerCase()
+    const normalisedName = trimmedName.toLowerCase()
+
+    // Always keep flu in sentence case, including unknown flu variants.
+    if (normalisedName.startsWith('flu')) {
+      if (normalisedName === 'flu (london service)') {
+        return 'flu (London service)'
+      }
+
+      return trimmedName.replace(/^flu/i, 'flu')
+    }
 
     if (vaccineNameMap[normalisedName]) {
       return vaccineNameMap[normalisedName]
     }
 
-    return filters.capitaliseFirstLetter(vaccineName)
+    return filters.capitaliseFirstLetter(trimmedName)
   }
 
   /**

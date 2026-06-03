@@ -52,11 +52,11 @@
                     {% set vaccinesEnabled = [] %}
                     {% for vaccine in organisation.vaccines %}
                       {% if vaccine.status == "enabled" %}
-                        {% set vaccinesEnabled = (vaccinesEnabled.push(vaccine.name), vaccinesEnabled) %}
+                        {% set vaccinesEnabled = (vaccinesEnabled.push(vaccine.name | vaccineDisplayName), vaccinesEnabled) %}
                       {% endif %}
                     {% endfor %}
 
-                    {{ vaccinesEnabled | sort | join(", ") }}
+                    {{ (vaccinesEnabled | sort | join(", ")) | capitaliseFirstLetter }}
                   </td>
                   <td class="nhsuk-table__cell ">
                     {{ organisation.status }}

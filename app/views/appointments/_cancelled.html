@@ -25,7 +25,7 @@
         <div class="nhsuk-u-secondary-text-colour">{{ appointment.patient.dateOfBirth | age }} old</div>
       </td>
       <td class="nhsuk-table__cell">
-        {{ appointment.vaccinations | join(", ") }}
+        {{ (appointment.vaccinations | join(", ")) | capitaliseFirstLetter }}
       </td>
 
       <td class="nhsuk-table__cell nhsuk-u-text-break-word">

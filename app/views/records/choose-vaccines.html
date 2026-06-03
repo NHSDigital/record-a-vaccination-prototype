@@ -24,7 +24,7 @@
           {% set errorHref = "#vaccineProductCovid-1" %}
         {% elseif vaccination.vaccine == "Pertussis" %}
           {% set errorHref = "#vaccineProductPertussis-1" %}
-        {% elseif vaccination.vaccine == "Flu" %}
+        {% elseif vaccination.vaccine == "flu" %}
           {% set errorHref = "#vaccineProductFlu-1" %}
         {% endif %}
 
@@ -89,7 +89,7 @@
           value: data.vaccineProduct,
           errorMessage: {
             text: vaccineProductError
-          } if vaccineProductError and vaccination.vaccine == "Flu",
+          } if vaccineProductError and vaccination.vaccine == "flu",
           "items": [
             {
               "value": "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)",
@@ -202,8 +202,8 @@
             }
           },
           {
-            "value": "Flu",
-            "text": "Flu",
+            "value": "flu",
+            "text": "flu",
             conditional: {
               html: fluProduct
             }

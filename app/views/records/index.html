@@ -178,7 +178,7 @@
                   <span class="nhsuk-u-secondary-text-colour nhsuk-u-nowrap">13:14</span>
                 </td>
                 <td>
-                  {{ record.vaccine | vaccineDisplayName }}<br>
+                  {{ (record.vaccine | vaccineDisplayName) | capitaliseFirstLetter }}<br>
                   {{ record.vaccineProduct }}<br>
                   <span class="nhsuk-u-secondary-text-colour">{{ record.batchNumber }}</span>
                 </td>

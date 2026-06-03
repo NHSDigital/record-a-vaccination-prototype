@@ -69,7 +69,7 @@
                   {% endif %}
                 {% endfor %}
 
-                {{ vaccinesEnabled | sort | join(", ") }}
+                {{ (vaccinesEnabled | sort | join(", ")) | capitaliseFirstLetter }}
               </td>
               <td class="nhsuk-table__cell ">
                 {{ organisationUserCounts[organisation.id] }}
