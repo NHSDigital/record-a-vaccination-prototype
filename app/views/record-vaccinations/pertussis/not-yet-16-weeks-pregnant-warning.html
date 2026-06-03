@@ -12,22 +12,41 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">{{ data.firstName }} {{ data.lastName }} is not yet 16 weeks pregnant</h1>
+      {% if data.firstName and data.lastName %}
+        {% set displayName = data.firstName ~ ' ' ~ data.lastName %}
+      {% else %}
+        {% set displayName = 'Patient Name' %}
+      {% endif %}
 
+      {% set panelHtml %}
+        {% set randomWeeks = (range(1, 15) | random) %}
+        <p>
+          {{ displayName }} is 
+          {% if fullWeeksPregnant is defined and fullWeeksPregnant is not none %}
+            {{ fullWeeksPregnant | plural("week") }}
+          {% else %}
+            {{ randomWeeks }} week{{ 's' if randomWeeks > 1 }}
+          {% endif %}
+          {% if remainderDaysPregnant is defined and remainderDaysPregnant > 0 %} and {{ remainderDaysPregnant | plural("day") }}{% endif %} pregnant.
+        </p>
+        <p>The pertussis vaccine is recommended between 16 and 32 weeks of pregnancy.</p>
 
-      <p>{{ data.firstName }} {{ data.lastName }} is {{ fullWeeksPregnant | plural("week") }}{% if remainderDaysPregnant > 0 %} and {{ remainderDaysPregnant | plural("day") }}{% endif %} pregnant.</p>
-      <p>The pertussis vaccine is recommended between 16 and 32 weeks of pregnancy.</p>
+        <p><a href="https://www.gov.uk/government/publications/vaccination-against-pertussis-whooping-cough-for-pregnant-women/pertussis-whooping-cough-vaccination-programme-for-pregnant-women" target="_blank">UKHSA guidance on pertussis vaccination of pregnant women (opens in new tab)</a>.</p>
 
-      <p><a href="https://www.gov.uk/government/publications/vaccination-against-pertussis-whooping-cough-for-pregnant-women/pertussis-whooping-cough-vaccination-programme-for-pregnant-women" target="_blank">UKHSA guidance on pertussis vaccination of pregnant women (opens in new tab)</a>.
+        {{ button({
+          "text": "Continue anyway",
+          "href": "/record-vaccinations/consent",
+          "classes": "nhsuk-button--reverse"
+        }) }}
+      {% endset %}
 
+      {{ panel({
+        titleText: displayName + " is not yet 16 weeks pregnant",
+        html: panelHtml,
+        classes: "nhsuk-panel--interruption"
+      }) }}
 
     </div>
   </div>
-
-  {{ button({
-    "text": "Continue anyway",
-    "href": "/record-vaccinations/consent"
-  }) }}
-
 {% endblock %}
 

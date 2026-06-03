@@ -12,23 +12,35 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Jodie Brown had an MMR vaccination less than 1 month ago</h1>
+      {% if data.firstName and data.lastName %}
+        {% set displayName = data.firstName ~ ' ' ~ data.lastName %}
+      {% else %}
+        {% set displayName = 'Patient Name' %}
+      {% endif %}
 
-      <p>
-        Jodie Brown had an MMR vaccination on 10 July 2025.
-      </p>
+      {% set panelHtml %}
+        <p>
+          {{ displayName }} had an MMR vaccination on 10 July 2025.
+        </p>
 
-      <p>
-        The minimum recommended gap between MMR doses is 1 month.
-      </p>
-   
+        <p>
+          The minimum recommended gap between MMR doses is 1 month.
+        </p>
+
+        {{ button({
+          "text": "Continue anyway",
+          "href": "/record-vaccinations/consent",
+          "classes": "nhsuk-button--reverse"
+        }) }}
+      {% endset %}
+
+      {{ panel({
+        titleText: displayName + " had an MMR vaccination less than 4 weeks ago",
+        html: panelHtml,
+        classes: "nhsuk-panel--interruption"
+      }) }}
+
     </div>
   </div>
-
-  {{ button({
-    "text": "Continue anyway",
-    "href": "/record-vaccinations/consent"
-  }) }}
-
 {% endblock %}
 

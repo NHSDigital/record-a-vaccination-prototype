@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "The patient has already had a pneumococcal vaccine" %}
+{% set pageName = "MenB vaccine interval warning" %}
 
 {% set currentSection = "vaccinate" %}
 
@@ -20,12 +20,12 @@
 
       {% set panelHtml %}
         <p>
-          {{ displayName }} had a pneumococcal vaccine on 15 September 2024.
+          They had a MenB vaccine on 15 April 2025.
         </p>
 
-        <p>
-          Most adults only need 1 dose of the pneumococcal vaccine.
-        </p>
+          <p>
+            The minimum recommended gap between MenB vaccine doses is 4 weeks.
+          </p>
 
         {{ button({
           "text": "Continue anyway",
@@ -35,7 +35,7 @@
       {% endset %}
 
       {{ panel({
-        titleText: displayName + " has already had a pneumococcal vaccine",
+        titleText: displayName + " had a MenB vaccine less than 3 months ago",
         html: panelHtml,
         classes: "nhsuk-panel--interruption"
       }) }}
