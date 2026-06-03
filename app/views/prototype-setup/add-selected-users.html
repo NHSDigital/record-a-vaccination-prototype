@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Add selected users back" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    text: "Back",
+    href: "/prototype-setup"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Add selected users back</h1>
+
+      {% if availableUsersCount > 0 %}
+        <p>Select the users you want to add back to this prototype session.</p>
+
+        <form action="/prototype-setup/add-selected-users" method="post" novalidate>
+
+          {% if signInUsersCount > 0 %}
+          <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-3">Sign-in scenario users</h3>
+          {{ checkboxes({
+            idPrefix: "signInUsers",
+            name: "userIds",
+            items: signInCheckboxItems,
+            fieldset: {
+              classes: "nhsuk-fieldset--no-legend"
+            }
+          }) }}
+          {% endif %}
+
+          {% if otherUsersCount > 0 %}
+          <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-3 nhsuk-u-margin-top-6">Non-scenario users</h3>
+          <div style="max-height: 400px; overflow-y: scroll; border: 1px solid #b1b4b6; padding: 16px; margin-bottom: 20px;">
+            {{ checkboxes({
+              idPrefix: "otherUsers",
+              name: "userIds",
+              items: otherCheckboxItems,
+              fieldset: {
+                classes: "nhsuk-fieldset--no-legend"
+              },
+              errorMessage: error if (signInUsersCount === 0) else false
+            }) }}
+          </div>
+          {% endif %}
+
+          {{ button({
+            text: "Add selected users"
+          }) }}
+
+        </form>
+
+      {% else %}
+        <p>There are no users available to add back. All users are already in the session.</p>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,4 +1,5 @@
 const { randomItem } = require('../lib/utils/random-item.js')
+const seedUsers = require('../data/users.js')
 
 module.exports = router => {
 
@@ -256,6 +257,71 @@ module.exports = router => {
       data.currentUserId = null
       data.currentOrganisationId = null
     }
+
+    res.redirect('/prototype-setup')
+  })
+
+  router.get('/prototype-setup/add-selected-users', (req, res) => {
+    const data = req.session.data
+    const currentUserIds = new Set(data.users.map((user) => user.id))
+    const availableUsers = seedUsers.filter((user) => !currentUserIds.has(user.id))
+      .sort((a, b) => {
+        const aName = `${a.firstName || ''} ${a.lastName || ''}`.trim().toLowerCase()
+        const bName = `${b.firstName || ''} ${b.lastName || ''}`.trim().toLowerCase()
+        return aName.localeCompare(bName)
+      })
+
+    const signInScenarioUsers = availableUsers.filter(user => signInScenarioEmails.includes((user.email || '').toLowerCase()))
+    const otherUsers = availableUsers.filter(user => !signInScenarioEmails.includes((user.email || '').toLowerCase()))
+
+    const signInCheckboxItems = buildUserCheckboxItems(signInScenarioUsers, [], data.currentUserId)
+    const otherCheckboxItems = buildUserCheckboxItems(otherUsers, [], data.currentUserId)
+
+    res.render('prototype-setup/add-selected-users', {
+      signInCheckboxItems,
+      otherCheckboxItems,
+      availableUsersCount: availableUsers.length,
+      signInUsersCount: signInScenarioUsers.length,
+      otherUsersCount: otherUsers.length
+    })
+  })
+
+  router.post('/prototype-setup/add-selected-users', (req, res) => {
+    const data = req.session.data
+    const selectedUserIds = req.body.userIds
+      ? (Array.isArray(req.body.userIds) ? req.body.userIds : [req.body.userIds])
+      : []
+
+    if (selectedUserIds.length === 0) {
+      const currentUserIds = new Set(data.users.map((user) => user.id))
+      const availableUsers = seedUsers.filter((user) => !currentUserIds.has(user.id))
+        .sort((a, b) => {
+          const aName = `${a.firstName || ''} ${a.lastName || ''}`.trim().toLowerCase()
+          const bName = `${b.firstName || ''} ${b.lastName || ''}`.trim().toLowerCase()
+          return aName.localeCompare(bName)
+        })
+
+      const signInScenarioUsers = availableUsers.filter(user => signInScenarioEmails.includes((user.email || '').toLowerCase()))
+      const otherUsers = availableUsers.filter(user => !signInScenarioEmails.includes((user.email || '').toLowerCase()))
+
+      const signInCheckboxItems = buildUserCheckboxItems(signInScenarioUsers, [], data.currentUserId)
+      const otherCheckboxItems = buildUserCheckboxItems(otherUsers, [], data.currentUserId)
+
+      res.render('prototype-setup/add-selected-users', {
+        signInCheckboxItems,
+        otherCheckboxItems,
+        availableUsersCount: availableUsers.length,
+        signInUsersCount: signInScenarioUsers.length,
+        otherUsersCount: otherUsers.length,
+        error: {
+          text: 'Select at least 1 user to add'
+        }
+      })
+      return
+    }
+
+    const usersToAdd = seedUsers.filter((user) => selectedUserIds.includes(user.id))
+    data.users.push(...usersToAdd)
 
     res.redirect('/prototype-setup')
   })
