@@ -11,7 +11,18 @@
     active: (currentSection == "home")
   }), navigationItems) %}
 
-  {% if currentOrganisation %}
+  <!-- Pharmacy HQs -->
+  {% if currentOrganisation.type === "Pharmacy HQ" %}
+    {% set navigationItems = (navigationItems.push({
+      href: "/pharmacies",
+      text: "Pharmacies",
+      active: (currentSection == "pharmacies")
+    }), navigationItems) %}
+
+  {% endif %}
+
+  <!-- All users except Pharmacy HQ users -->
+  {% if currentOrganisation and (currentOrganisation.type != "Pharmacy HQ") %}
     {% set navigationItems = (navigationItems.push({
       href: "/appointments",
       html: "Appointments <span class=\"nhsuk-tag app-tag--header nhsuk-u-margin-left-2\">New</span>",
@@ -23,19 +34,19 @@
       text: "Record vaccinations",
       active: (currentSection == "vaccinate")
     }), navigationItems) %}
-
-    <!-- Admins or lead admins -->
-    {% if (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) %}
-      {% set navigationItems = (navigationItems.push({
-        href: "/vaccines",
-        text: "Vaccines",
-        active: (currentSection == "vaccines")
-      }), navigationItems) %}
-    {% endif %}
   {% endif %}
 
-  <!-- All users -->
-  {% if currentOrganisation %}
+  <!-- Admins or lead admins -->
+  {% if (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) %}
+    {% set navigationItems = (navigationItems.push({
+      href: "/vaccines",
+      text: "Vaccines",
+      active: (currentSection == "vaccines")
+    }), navigationItems) %}
+  {% endif %}
+
+  <!-- All users except Pharmacy HQs -->
+  {% if currentOrganisation and (not currentOrganisation.type == "Pharmacy HQ") %}
     {% set navigationItems = (navigationItems.push({
       href: "/records",
       text: "Records",
@@ -43,8 +54,8 @@
     }), navigationItems) %}
   {% endif %}
 
-  <!-- Admins or lead admins -->
-  {% if (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) or data.currentMode == "reports" %}
+  <!-- Admins or lead admins or Pharmacy HQs -->
+  {% if (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) or currentOrganisation.type === "Pharmacy HQ" %}
     {% set navigationItems = (navigationItems.push({
       href: "/reports",
       text: "Reports",

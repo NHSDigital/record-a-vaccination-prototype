@@ -21,10 +21,6 @@ module.exports = router => {
       .filter((organisation) => organisation.status === "Active")
       .map((organisation) => organisation.id)
 
-    const organisationsUserIsAnAdminAt = (user.organisations || [])
-    .filter((organisation) => (organisation.status === "Active" && ["Lead administrator", "Administrator"].includes(organisation.permissionLevel)))
-    .map((organisation) => organisation.id)
-
     const userRegionIds = (user.regions || [])
       .filter((organisation) => organisation.status === "Active")
       .map((organisation) => organisation.id)
@@ -49,38 +45,10 @@ module.exports = router => {
 
       res.redirect('/regions')
 
-    } else if (organisationsUserIsAnAdminAt.length > 1) {
-      // They are an admin at 2 or more organisations, so
-      // ask them to select mode (single org or report mode)
-      res.redirect('/auth/select-mode')
-
     } else {
 
       res.redirect('/auth/select-organisation')
 
-    }
-
-  })
-
-
-  router.post('/auth/answer-select-mode', (req, res) => {
-    const data = req.session.data
-    const loginMode = data.loginMode
-
-    if (loginMode === 'single') {
-      res.redirect('/auth/select-organisation?from=select-mode')
-    } else if (loginMode === 'create-reports') {
-
-      const email = data.email
-      const user = data.users.find((user) => user.email === email)
-
-      req.session.data.currentMode = "reports"
-      req.session.data.currentOrganisationId = null
-      req.session.data.currentUserId = user.id
-
-      res.redirect('/home')
-    } else {
-      res.redirect('/auth/select-mode')
     }
 
   })
@@ -122,7 +90,6 @@ module.exports = router => {
   router.get('/sign-out', (req, res) => {
     req.session.data.currentUserId = null
     req.session.data.currentOrganisationId = null
-    req.session.data.currentMode = null
     req.session.data.email = ""
 
     res.redirect('/product-page')

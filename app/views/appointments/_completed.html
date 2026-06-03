@@ -24,7 +24,7 @@
         <div class="nhsuk-u-secondary-text-colour">{{ appointment.patient.dateOfBirth | age }} old</div>
       </td>
       <td class="nhsuk-table__cell">
-        {{ appointment.vaccinations | join("<br>") | safe }}
+        {{ (appointment.vaccinations | join("<br>")) | capitaliseFirstLetter | safe }}
       </td>
       <td class="nhsuk-table__cell nhsuk-u-text-break-word">
         {% if appointment.patient.contactDetails.mobile %}

@@ -52,13 +52,22 @@
         </ul>
       {% endset %}
 
-      {% set organisationsHtml %}
+      {% set pharmaciesHtml %}
         <ul class="nhsuk-list">
-          {% for organisation in organisations | sort(false, false, "name") %}
-            <li>{{ organisation.name }} ({{ organisation.id }})</li>
+          {% for pharmacy in pharmacies | sort(false, false, "name") %}
+            <li>{{ pharmacy.name }} ({{ pharmacy.id }})</li>
           {% endfor %}
         </ul>
       {% endset %}
+
+      {% set vaccinesToReportText = "" %}
+      {% if data.vaccinesToReport %}
+        {% set vaccinesToReportDisplay = [] %}
+        {% for vaccine in (data.vaccinesToReport | sort(false, false, "name")) %}
+          {% set vaccinesToReportDisplay = (vaccinesToReportDisplay.push(vaccine | vaccineDisplayName), vaccinesToReportDisplay) %}
+        {% endfor %}
+        {% set vaccinesToReportText = vaccinesToReportDisplay | join(", ") %}
+      {% endif %}
 
       {{ summaryList({
         rows: [
@@ -104,7 +113,7 @@
               text: ("Vaccines" if (data.vaccinesToReport | length) > 1 else "Vaccine")
             },
             value: {
-              text: (data.vaccinesToReport | sort(false, false, "name") | join(", ") | capitaliseFirstLetter) if data.vaccines
+              text: vaccinesToReportText if data.vaccines
             },
             actions: {
               items: [
@@ -132,7 +141,24 @@
               }
               ]
             }
-          } if sites,
+          } if (sites | length) > 0,
+          {
+            key: {
+              text: ("Pharmacies" if (data.pharmacyIdsToReport | length) > 1 else "Pharmacy")
+            },
+            value: {
+              html: pharmaciesHtml
+            },
+            actions: {
+              items: [
+                {
+                  href: "/reports/choose-pharmacies",
+                  text: "Change",
+                  visuallyHiddenText: "pharmacies"
+                }
+              ]
+            }
+          } if currentOrganisation.type == "Pharmacy HQ",
           {
             key: {
               text: ("Organisations" if (data.siteIdsToReport | length) > 1 else "Organisation")

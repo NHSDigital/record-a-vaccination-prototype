@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies-users" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/users/new"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-three-quarters">
+
+      <h1 class="nhsuk-heading-l">Select pharmacies</h1>
+
+      <p>You can invite the new user to 1 or more of your pharmacies.</p>
+
+      <form action="/pharmacies/users/new-select-pharmacies-check" method="post" novalidate="true">
+
+        {% set items = [] %}
+
+        {% for pharmacy in pharmacies %}
+          {% set items = (items.push({
+            text: pharmacy.name + ", " + pharmacy.address.postcode + " (" + pharmacy.id + ")",
+            value: pharmacy.id
+          }), items) %}
+        {% endfor %}
+
+        {% call fieldset({
+          legend: {
+            text: "Which pharmacies do you want to add " + data.firstName + " " + data.lastName + " to?",
+            size: "m"
+          }
+        }) %}
+
+          {{ input({
+            id: "pharmacy-search",
+            name: "pharmacySearch",
+            type: "search",
+            label: {
+              text: "Search"
+            },
+            classes: "nhsuk-input--width-20",
+            attributes: {
+              "data-module": "app-checkbox-filter"
+            },
+            formGroup: {
+              classes: "nhsuk-u-margin-bottom-4"
+            }
+          }) }}
+
+          <div class="app-scrollable-container">
+            {{ checkboxes({
+              id: "pharmacy-ids",
+              name: "pharmacyIds",
+              values: data.pharmacyIds,
+              items: items
+            }) }}
+          </div>
+
+        {% endcall %}
+
+        {{ button({
+          "text": "Continue"
+      }) }}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

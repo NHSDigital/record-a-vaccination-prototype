@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies-users" %}
+
+{% set pageName = "Add pharmacies" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/users/" + user.id
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <form action="/pharmacies/users/{{ user.id }}/add-to-permission-level" method="post">
+
+      {% set items = [] %}
+
+      {% for pharmacy in pharmacies %}
+        {% set items = (items.push({
+          text: pharmacy.name + ", " + pharmacy.address.postcode + " (" + pharmacy.id + ")",
+          value: pharmacy.id
+        }), items) %}
+      {% endfor %}
+
+      {{ radios({
+        id: "pharmacy-id",
+        name: "pharmacyId",
+        value: data.pharmacyId,
+        fieldset: {
+          legend: {
+            text: "Which pharmacy would you like to add " + user.firstName + " " + user.lastName + " to?",
+            size: "l"
+          }
+        },
+        items: items
+      }) }}
+
+      {{ button({
+        text: "Continue"
+      }) }}
+
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

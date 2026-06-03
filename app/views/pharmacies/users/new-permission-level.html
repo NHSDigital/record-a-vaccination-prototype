@@ -1,0 +1,93 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies-users" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/users/new-select-pharmacies-check"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-three-quarters">
+
+      <form action="/pharmacies/users/check" method="post" novalidate="true">
+
+        <h1 class="nhsuk-heading-l">{{ data.firstName }} {{ data.lastName }}’s role</h1>
+
+        <p>These roles will apply to the {{ data.pharmacyIds | length }} pharmacies.</p>
+
+        {{ radios({
+          name: "vaccinator",
+          fieldset: {
+            legend: {
+              text: "Are they a vaccinator?",
+              size: "s"
+            }
+          },
+          hint: {
+            text: "Vaccination records include the name of the person who gave the vaccination"
+          },
+          value: data.vaccinator,
+          items: [
+            {
+              value: "yes",
+              text: "Yes"
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+
+
+        {{ radios({
+          name: "permissionLevel",
+          idPrefix: "permission-level",
+          value: data.permissionLevel,
+          fieldset: {
+            legend: {
+              text: "Permission level",
+              size: "s"
+            }
+          },
+          items: [
+            {
+              value: "Recorder",
+              text: "Recorder",
+              hint: {
+                text: "Record vaccinations only"
+              }
+            },
+            {
+              "value": "Administrator",
+              "text": "Administrator",
+              "hint": {
+                "text": "Record vaccinations, create reports and manage vaccines"
+              }
+            },
+            {
+              "value": "Lead administrator",
+              "text": "Lead administrator",
+              "hint": {
+                "text": "Record vaccinations, create reports, manage vaccines and users"
+              }
+            }
+          ],
+          "errorMessage": {
+            "text": permissionLevelError
+          } if permissionLevelError
+        }) }}
+
+
+        {{ button({
+          "text": "Continue"
+      }) }}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

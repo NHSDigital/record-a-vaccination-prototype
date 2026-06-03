@@ -49,7 +49,7 @@
             {% for vaccine in (vaccinesRecorded | sort(false, false)) %}
               {% set vaccineItems = (vaccineItems.push({
                 value: vaccine,
-                text: (vaccine | capitaliseFirstLetter)
+                text: (vaccine | vaccineDisplayName)
               }), vaccineItems) %}
             {% endfor %}
 
@@ -178,14 +178,18 @@
                   <span class="nhsuk-u-secondary-text-colour nhsuk-u-nowrap">13:14</span>
                 </td>
                 <td>
-                  {{ record.vaccine | capitaliseFirstLetter }}<br>
+                  {{ (record.vaccine | vaccineDisplayName) | capitaliseFirstLetter }}<br>
                   {{ record.vaccineProduct }}<br>
                   <span class="nhsuk-u-secondary-text-colour">{{ record.batchNumber }}</span>
                 </td>
                 <td>
                   {% set vaccinator =  data.users | findById(record.vaccinatorId) %}
-                  {{ vaccinator.firstName }}
-                  {{ vaccinator.lastName }}
+                  {% if vaccinator %}
+                    {{ vaccinator.firstName }}
+                    {{ vaccinator.lastName }}
+                  {% else %}
+                    Unknown user
+                  {% endif %}
                 </td>
               </tr>
 

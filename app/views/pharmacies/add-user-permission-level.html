@@ -1,0 +1,127 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies" %}
+{% set pageName = "Add a user to " + organisation.name  %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/" + organisation.id + "/add-user"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-l">
+        Add
+        {% if existingUser %}
+          {{ existingUser.firstName }} {{ existingUser.lastName }}
+        {% else %}
+          a new user
+        {% endif %}
+        to {{ organisation.name }} ({{ organisation.id }})
+      </h1>
+
+      <form action="/pharmacies/{{ organisation.id }}/add-user-check" method="post">
+
+        {% if not existingUser %}
+            <p class="nhsuk-body">Users must have an NHS-approved email address. See the <a href="https://digital.nhs.uk/services/care-identity-service/applications-and-services/apply-for-care-id/care-identity-email-domain-allow-list" target="_blank" class="nhsuk-link">list of approved email domains (opens in new tab)</a>.</p>
+
+            {{ input({
+              label: {
+                text: "First name"
+              },
+              name: "firstName",
+              classes: "nhsuk-input--width-20",
+              value: data.firstName
+            }) }}
+
+            {{ input({
+              label: {
+                text: "Last name"
+              },
+              name: "lastName",
+              classes: "nhsuk-input--width-20",
+              value: data.lastName
+            }) }}
+
+            {{ input({
+              label: {
+                text: "Email address"
+              },
+              name: "email",
+              type: "email",
+              value: data.email
+            }) }}
+        {% endif %}
+
+      {{ radios({
+        "name": "vaccinator",
+        "fieldset": {
+          "legend": {
+            "text": "Are they a vaccinator?",
+            size: "s"
+          }
+        },
+        hint: {
+          text: "Vaccination records include the name of the person who gave the vaccination"
+        },
+        value: data.vaccinator,
+        "items": [
+          {
+            "value": "yes",
+            "text": "Yes",
+            id: "vaccinator"
+          },
+          {
+            "value": "no",
+            "text": "No"
+          }
+        ]
+      }) }}
+
+        {{ radios({
+        name: "permissionLevel",
+        idPrefix: "permission-level",
+        fieldset: {
+          legend: {
+            text: "Permission level",
+            size: "s"
+          }
+        },
+        value: data.permissionLevel,
+        items: [
+          {
+            value: "Recorder",
+            text: "Recorder",
+            hint: {
+              text: "Record vaccinations only"
+            }
+          },
+          {
+            value: "Administrator",
+            text: "Administrator",
+            hint: {
+              text: "Record vaccinations, create reports and manage vaccines"
+            }
+          },
+          {
+            value: "Lead administrator",
+            text: "Lead administrator",
+            hint: {
+              text: "Record vaccinations, create reports, manage vaccines and users"
+            }
+          }
+        ]
+      }) }}
+
+
+      {{ button({
+        text: "Continue"
+      }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

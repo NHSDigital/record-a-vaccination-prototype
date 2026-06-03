@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies-users" %}
+
+{% set pageName = "Add user to " + organisation.name + " (" + organisation.id + ")"  %}
+
+{% block beforeContent %}
+  {% set backHref = "/pharmacies/users/" + user.id if data.from == "user" else "/pharmacies/" + pharmacy.id %}
+  {{ backLink({
+    href: backHref
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Change {{ user.firstName }} {{ user.lastName }}'s role at {{ pharmacy.name }}</h1>
+
+      <form action="/pharmacies/{{ pharmacy.id }}/users/{{ user.id }}/change-answer" method="post">
+
+        {{ radios({
+          "name": "vaccinator",
+          "fieldset": {
+            "legend": {
+              "text": "Are they a vaccinator?",
+              size: "s"
+            }
+          },
+          hint: {
+            text: "Vaccination records include the name of the person who gave the vaccination"
+          },
+          value: ("yes" if role.vaccinator else "no"),
+          "items": [
+            {
+              "value": "yes",
+              "text": "Yes",
+              id: "vaccinator"
+            },
+            {
+              "value": "no",
+              "text": "No"
+            }
+          ]
+        }) }}
+
+        {{ radios({
+          name: "permissionLevel",
+          idPrefix: "permission-level",
+          fieldset: {
+            legend: {
+              text: "Permission level",
+              size: "s"
+            }
+          },
+          value: role.permissionLevel,
+          items: [
+            {
+              value: "Recorder",
+              text: "Recorder",
+              hint: {
+                text: "Record vaccinations only"
+              }
+            },
+            {
+              value: "Administrator",
+              text: "Administrator",
+              hint: {
+                text: "Record vaccinations, create reports and manage vaccines"
+              }
+            },
+            {
+              value: "Lead administrator",
+              text: "Lead administrator",
+              hint: {
+                text: "Record vaccinations, create reports, manage vaccines and users"
+              }
+            }
+          ]
+        }) }}
+
+
+        {{ button({
+          text: "Save"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+{% endblock %}

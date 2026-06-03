@@ -82,35 +82,17 @@ module.exports = [
     "firstName": "Phoebe",
     "lastName": "Black"
   },
-  // Paulina Sloan is a lead admin for
-  // a chain of pharmacies
+  // Paulina Sloan is a group admin for
+  // a chain of pharmacies called
+  // P.W. Pharmacies Ltd
   {
     "id": "9847489647892",
     "email": "paulina.sloan@nhs.net",
     "organisations": [
       {
-        "id": "FA424",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FA02S",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FVJ99",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "PDL93",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
+        "id": "P0191N",
+        "permissionLevel": "Group administrator",
+        "status": "Active"
       }
     ],
     "firstName": "Paulina",
@@ -131,10 +113,9 @@ module.exports = [
     "firstName": "Jeremy",
     "lastName": "Blue"
   },
-
   {
     "id": "64746353",
-    "email": "jeremy.blue@nhs.net",
+    "email": "joseph.blue@nhs.net",
     "organisations": [
       {
         "id": "FA02S",
@@ -143,12 +124,12 @@ module.exports = [
         "vaccinator": true
       }
     ],
-    "firstName": "Jeremy",
-    "lastName": "Blue"
+    "firstName": "Joseph",
+    "lastName": "White"
   },
   {
     "id": "46436436436",
-    "email": "jeremy.blue@nhs.net",
+    "email": "jason.green@nhs.net",
     "organisations": [
       {
         "id": "FVJ99",
@@ -157,12 +138,12 @@ module.exports = [
         "vaccinator": true
       }
     ],
-    "firstName": "Jeremy",
-    "lastName": "Blue"
+    "firstName": "Jason",
+    "lastName": "Green"
   },
   {
     "id": "646436311",
-    "email": "jeremy.blue@nhs.net",
+    "email": "samantha.black@nhs.net",
     "organisations": [
       {
         "id": "PDL93",
@@ -171,11 +152,11 @@ module.exports = [
         "vaccinator": true
       }
     ],
-    "firstName": "Jeremy",
-    "lastName": "Blue"
+    "firstName": "Samantha",
+    "lastName": "Black"
   },
-  // Amanda White is a lead admin for
-  // a chain of pharmacies
+  // Amanda White is a group administrator for the
+  // MediCare Health Ltd chain of pharmacies
   {
     "firstName": "Amanda",
     "lastName": "White",
@@ -183,145 +164,32 @@ module.exports = [
     "email": "amanda.white@nhs.net",
     "organisations": [
       {
-        "id": "FX9141",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FX4825",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FX7314",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FX9151",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FQ2525",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FW1941",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FP9824",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FP1812",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FA7K23",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FG2R56",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FH9P12",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FA7K23",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FJ4M89",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FK5N34",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FL7Q67",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FM8R23",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FN9S45",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FP2T78",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FQ3U12",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FR4V56",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FS5W89",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
-      },
-      {
-        "id": "FT6X34",
-        "permissionLevel": "Lead administrator",
-        "status": "Active",
-        "vaccinator": false
+        "id": "P15951",
+        "permissionLevel": "Group administrator",
+        "status": "Active"
       }
     ]
+  },
+  {
+    "id": "34634617277",
+    "email": "peter.orange@nhs.net",
+    "organisations": [
+      {
+        "id": "RCY",
+        "permissionLevel": "Recorder",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Peter",
+    "lastName": "Orange"
   },
   {
     "id": "1394978032564",
     "email": "ocean.merritt@nhs.net",
     "organisations": [
       {
-        "id": "RCY",
+        "id": "FR4V56",
         "permissionLevel": "Recorder",
         "status": "Active",
         "vaccinator": true

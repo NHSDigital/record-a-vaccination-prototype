@@ -38,6 +38,44 @@ module.exports = function () {
     }
   }
 
+  filters.vaccineDisplayName = function(vaccineName) {
+    if (!vaccineName) {
+      return null
+    }
+
+    const trimmedName = vaccineName.toString().trim()
+
+    const vaccineNameMap = {
+      'covid-19': 'COVID-19',
+      'rsv': 'RSV',
+      'bcg': 'BCG',
+      'mmr': 'MMR',
+      'mmrv': 'MMRV',
+      'hpv': 'HPV',
+      'menb': 'MenB',
+      'flu': 'flu',
+      'flu (london service)': 'flu (London service)',
+      'hepatitis b': 'Hepatitis B'
+    }
+
+    const normalisedName = trimmedName.toLowerCase()
+
+    // Always keep flu in sentence case, including unknown flu variants.
+    if (normalisedName.startsWith('flu')) {
+      if (normalisedName === 'flu (london service)') {
+        return 'flu (London service)'
+      }
+
+      return trimmedName.replace(/^flu/i, 'flu')
+    }
+
+    if (vaccineNameMap[normalisedName]) {
+      return vaccineNameMap[normalisedName]
+    }
+
+    return filters.capitaliseFirstLetter(trimmedName)
+  }
+
   /**
    * Returns the name of a month, eg 'November', when
    * given the number of the month, eg 11.
@@ -66,23 +104,6 @@ module.exports = function () {
     } catch (error) {
       return error.message.split(':')[0]
     }
-  }
-
-  /**
-   * Ensure a value is always returned as an array
-   * Useful for form fields with [] notation that may return a string if only one value
-   *
-   * @param {*} value - Value to convert to array
-   * @returns {Array} Value as an array
-   */
-  filters.asArray = function(value) {
-    if (value === undefined || value === null) {
-      return []
-    }
-    if (Array.isArray(value)) {
-      return value
-    }
-    return [value]
   }
 
   /* keep the following line to return your filters to the app  */

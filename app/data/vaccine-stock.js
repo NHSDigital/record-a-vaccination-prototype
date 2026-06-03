@@ -411,7 +411,7 @@ module.exports = [
   },
   {
     id: "7436323",
-    vaccine: "Flu",
+    vaccine: "flu",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
     organisationId: "FA424", // Pickfords Pharmacy
     siteId: "FA424X", // Pickfords Pharmacy

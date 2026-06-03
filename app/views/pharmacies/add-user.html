@@ -1,0 +1,199 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies" %}
+{% set pageName = "Add a user to " + organisation.name + " (" + organisation.id + ")" %}
+
+{% block beforeContent %}
+{{ backLink({
+href: "/pharmacies/" + organisation.id
+}) }}
+{% endblock %}
+
+{% block content %}
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-two-thirds">
+    <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+    <p>You can add an existing user to the pharmacy, or invite a new user.</p>
+
+    {% call details({
+    summaryText: "What permissions will the user have?",
+    classes: "nhsuk-expander"
+    }) %}
+    
+    <p>This table shows the permission levels you can assign when you add a user to a pharmacy.</p>
+    <table class="nhsuk-table">
+      <thead class="nhsuk-table__head">
+        <tr class="nhsuk-table__row">
+          <th scope="col" class="nhsuk-table__header">
+            Permission level
+          </th>
+          <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">
+            Record vaccinations
+          </th>
+          <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">
+            Manage vaccines
+          </th>
+          <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">
+            Create reports
+          </th>
+          <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">
+            Manage users
+          </th>
+        </tr>
+      </thead>
+      <tbody class="nhsuk-table__body">
+
+        <tr class="nhsuk-table__row">
+          <th scope="row" class="nhsuk-table__header">
+            Recorder
+          </th>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            Yes
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            No
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            No
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            No
+          </td>
+        </tr>
+        <tr class="nhsuk-table__row">
+          <th scope="row" class="nhsuk-table__header">
+            Administrator
+          </th>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            Yes
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            Yes
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            Yes
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            No
+          </td>
+        </tr>
+        <tr class="nhsuk-table__row">
+          <th scope="row" class="nhsuk-table__header">
+            Lead administrator
+          </th>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            Yes
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            Yes
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            Yes
+          </td>
+          <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+            Yes
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <p>You should add at least 1 lead administrator per pharmacy, so that person can add further users and manage vaccines at the pharmacy.</p>
+    {% endcall %}
+
+    <form data-module="app-add-another" data-add-another-min="0"
+      action="/pharmacies/{{ organisation.id }}/add-user-permission-level" method="post">
+
+      {% set items = [] %}
+
+      {% for user in (users | sort(false, false, "firstName")) %}
+      {% set items = (items.push({
+      text: user.firstName + " " + user.lastName,
+      value: user.id,
+      hint: {
+      text: user.email
+      }
+      }), items) %}
+      {% endfor %}
+
+      {% call fieldset({
+      legend: {
+      text: "User",
+      size: "m",
+      classes: "nhsuk-u-visually-hidden"
+      }
+      }) %}
+
+      {% if (users | length) > 10 %}
+      {{ input({
+      id: "user-search",
+      name: "userSearch",
+      type: "search",
+      label: {
+      text: "Search"
+      },
+      classes: "nhsuk-input--width-20",
+      attributes: {
+      "data-module": "app-radios-filter"
+      },
+      formGroup: {
+      classes: "nhsuk-u-margin-bottom-4"
+      }
+      }) }}
+      {% endif %}
+
+      {% if (users | length) > 0 %}
+      <div class="app-scrollable-container">
+        {{ radios({
+        name: "userId",
+        value: data.userId,
+        items: items
+        }) }}
+      </div>
+
+      {{ radios({
+      name: "userId",
+      value: data.userId,
+      items: [
+      {
+      divider: "or"
+      },
+      {
+      text: "Add a new user",
+      value: "add-new",
+      id: "add-new",
+      attributes: {
+      "data-no-filter": ""
+      }
+      }
+      ]
+      }) }}
+      {% else %}
+      {{ radios({
+      name: "userId",
+      value: data.userId,
+      items: [
+      {
+      text: "Add a new user",
+      value: "add-new",
+      id: "add-new",
+      attributes: {
+      "data-no-filter": ""
+      }
+      }
+      ]
+      }) }}
+      {% endif %}
+
+      {% endcall %}
+
+      {{ button({
+      text: "Continue"
+      }) }}
+
+    </form>
+
+
+  </div>
+</div>
+{% endblock %}

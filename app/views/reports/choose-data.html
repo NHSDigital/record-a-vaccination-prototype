@@ -240,52 +240,61 @@
   </div>
 
 <script>
-  function checkOrUncheckChildren(event) {
 
-    const checkboxClicked = event.target
+  document.addEventListener('DOMContentLoaded', function() {
 
-    const checkboxesControlled = document.getElementById(checkboxClicked.getAttribute('aria-controls')).querySelectorAll('input[type=checkbox')
+    function checkOrUncheckChildren(event) {
 
-    for (checkbox of checkboxesControlled) {
-      checkbox.checked = checkboxClicked.checked
-    }
-  }
+      const checkboxClicked = event.target
 
-  const parentCheckboxes = document.getElementById('data-fields').querySelectorAll('input[type=checkbox][aria-controls]')
+      const checkboxesControlled = document.getElementById(checkboxClicked.getAttribute('aria-controls')).querySelectorAll('input[type=checkbox')
 
-  for (checkbox of parentCheckboxes) {
-    checkbox.addEventListener('click', checkOrUncheckChildren)
-  }
-
-  function uncheckParentIfAllUnchecked(event) {
-
-    const checkboxClicked = event.target
-
-    const parentGroup = checkboxClicked.closest('.nhsuk-checkboxes__conditional')
-
-    const parentGroupId = parentGroup.getAttribute('id')
-
-    const parentCheckbox = document.querySelector(`input[aria-controls=${parentGroupId}]`)
-
-    const allCheckboxesInGroup = parentGroup.querySelectorAll('input[type=checkbox]')
-
-    let checkboxStatuses = []
-
-    for (checkbox of allCheckboxesInGroup) {
-      checkboxStatuses.push(checkbox.checked)
+      for (checkbox of checkboxesControlled) {
+        checkbox.checked = checkboxClicked.checked
+      }
     }
 
-    if (!checkboxStatuses.includes(true)) {
-      // Uncheck parent
-      parentCheckbox.click()
+    const parentCheckboxes = document.getElementById('data-fields').querySelectorAll('input[type=checkbox][aria-controls]')
+
+    console.log(parentCheckboxes)
+
+    for (checkbox of parentCheckboxes) {
+
+      console.log(checkbox)
+      checkbox.addEventListener('click', checkOrUncheckChildren)
     }
-  }
 
-  const childCheckboxes = document.getElementById('data-fields').querySelectorAll('.nhsuk-checkboxes__conditional input[type=checkbox]')
+    function uncheckParentIfAllUnchecked(event) {
 
-  for (checkbox of childCheckboxes) {
-    checkbox.addEventListener('click', uncheckParentIfAllUnchecked)
-  }
+      const checkboxClicked = event.target
+
+      const parentGroup = checkboxClicked.closest('.nhsuk-checkboxes__conditional')
+
+      const parentGroupId = parentGroup.getAttribute('id')
+
+      const parentCheckbox = document.querySelector(`input[aria-controls=${parentGroupId}]`)
+
+      const allCheckboxesInGroup = parentGroup.querySelectorAll('input[type=checkbox]')
+
+      let checkboxStatuses = []
+
+      for (checkbox of allCheckboxesInGroup) {
+        checkboxStatuses.push(checkbox.checked)
+      }
+
+      if (!checkboxStatuses.includes(true)) {
+        // Uncheck parent
+        parentCheckbox.click()
+      }
+    }
+
+    const childCheckboxes = document.getElementById('data-fields').querySelectorAll('.nhsuk-checkboxes__conditional input[type=checkbox]')
+
+    for (checkbox of childCheckboxes) {
+      checkbox.addEventListener('click', uncheckParentIfAllUnchecked)
+    }
+
+  })
 
 
 </script>

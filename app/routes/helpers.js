@@ -1,6 +1,46 @@
+const seedUsers = require('../data/users.js')
 const { randomItem } = require('../lib/utils/random-item.js')
 
 module.exports = router => {
+
+  const signInScenarioEmails = [
+    'jane.smith@nhs.net',
+    'henry.blue@nhs.net',
+    'jeremy.blue@nhs.net',
+    'ocean.merritt@nhs.net',
+    'graham.wallace@nhs.net',
+    'phoebe.black@nhs.net',
+    'paulina.sloan@nhs.net',
+    'amanda.white@nhs.net',
+    'jason.white@nhs.net',
+    'sally.green@nhs.net',
+    'kaisley.wells@nhs.net',
+    'jeremy13.blue@nhs.net'
+  ]
+
+  const buildUserCheckboxItems = (users, selectedUserIds = [], currentUserId = null) => {
+    return users.map((user) => {
+      let hintText = user.email || ''
+      const email = (user.email || '').toLowerCase()
+
+      if (signInScenarioEmails.includes(email)) {
+        hintText += ' (Sign-in scenario user)'
+      }
+
+      if (currentUserId === user.id) {
+        hintText += ' (Currently signed in)'
+      }
+
+      return {
+        value: user.id,
+        text: `${user.firstName || ''} ${user.lastName || ''}`.trim(),
+        checked: selectedUserIds.includes(user.id),
+        hint: {
+          text: hintText
+        }
+      }
+    })
+  }
 
   router.get('/prototype-setup/setup-batches', (req, res) => {
     const data = req.session.data
@@ -167,6 +207,150 @@ module.exports = router => {
 
     res.redirect('/records')
   });
+
+  router.get('/prototype-setup/remove-selected-users', (req, res) => {
+    const data = req.session.data
+
+    const users = [...data.users].sort((a, b) => {
+      const aName = `${a.firstName || ''} ${a.lastName || ''}`.trim().toLowerCase()
+      const bName = `${b.firstName || ''} ${b.lastName || ''}`.trim().toLowerCase()
+
+      return aName.localeCompare(bName)
+    })
+
+    const checkboxItems = buildUserCheckboxItems(users, [], data.currentUserId)
+
+    res.render('prototype-setup/remove-selected-users', {
+      checkboxItems
+    })
+  })
+
+  router.post('/prototype-setup/remove-selected-users', (req, res) => {
+    const data = req.session.data
+    const selectedUserIds = req.body.userIds
+      ? (Array.isArray(req.body.userIds) ? req.body.userIds : [req.body.userIds])
+      : []
+
+    const users = [...data.users].sort((a, b) => {
+      const aName = `${a.firstName || ''} ${a.lastName || ''}`.trim().toLowerCase()
+      const bName = `${b.firstName || ''} ${b.lastName || ''}`.trim().toLowerCase()
+
+      return aName.localeCompare(bName)
+    })
+
+    const checkboxItems = buildUserCheckboxItems(users, selectedUserIds, data.currentUserId)
+
+    if (selectedUserIds.length === 0) {
+      res.render('prototype-setup/remove-selected-users', {
+        checkboxItems,
+        error: {
+          text: 'Select at least 1 user to remove'
+        }
+      })
+      return
+    }
+
+    data.users = data.users.filter((user) => !selectedUserIds.includes(user.id))
+
+    const currentUserStillExists = data.users.some((user) => user.id === data.currentUserId)
+    if (!currentUserStillExists) {
+      data.currentUserId = null
+      data.currentOrganisationId = null
+    }
+
+    res.redirect('/prototype-setup')
+  })
+
+  router.get('/prototype-setup/add-selected-users', (req, res) => {
+    const data = req.session.data
+    const currentUserIds = new Set(data.users.map((user) => user.id))
+    const availableUsers = seedUsers.filter((user) => !currentUserIds.has(user.id))
+      .sort((a, b) => {
+        const aName = `${a.firstName || ''} ${a.lastName || ''}`.trim().toLowerCase()
+        const bName = `${b.firstName || ''} ${b.lastName || ''}`.trim().toLowerCase()
+        return aName.localeCompare(bName)
+      })
+
+    const signInScenarioUsers = availableUsers.filter(user => signInScenarioEmails.includes((user.email || '').toLowerCase()))
+    const otherUsers = availableUsers.filter(user => !signInScenarioEmails.includes((user.email || '').toLowerCase()))
+
+    const signInCheckboxItems = buildUserCheckboxItems(signInScenarioUsers, [], data.currentUserId)
+    const otherCheckboxItems = buildUserCheckboxItems(otherUsers, [], data.currentUserId)
+
+    res.render('prototype-setup/add-selected-users', {
+      signInCheckboxItems,
+      otherCheckboxItems,
+      availableUsersCount: availableUsers.length,
+      signInUsersCount: signInScenarioUsers.length,
+      otherUsersCount: otherUsers.length
+    })
+  })
+
+  router.post('/prototype-setup/add-selected-users', (req, res) => {
+    const data = req.session.data
+    const selectedUserIds = req.body.userIds
+      ? (Array.isArray(req.body.userIds) ? req.body.userIds : [req.body.userIds])
+      : []
+
+    if (selectedUserIds.length === 0) {
+      const currentUserIds = new Set(data.users.map((user) => user.id))
+      const availableUsers = seedUsers.filter((user) => !currentUserIds.has(user.id))
+        .sort((a, b) => {
+          const aName = `${a.firstName || ''} ${a.lastName || ''}`.trim().toLowerCase()
+          const bName = `${b.firstName || ''} ${b.lastName || ''}`.trim().toLowerCase()
+          return aName.localeCompare(bName)
+        })
+
+      const signInScenarioUsers = availableUsers.filter(user => signInScenarioEmails.includes((user.email || '').toLowerCase()))
+      const otherUsers = availableUsers.filter(user => !signInScenarioEmails.includes((user.email || '').toLowerCase()))
+
+      const signInCheckboxItems = buildUserCheckboxItems(signInScenarioUsers, [], data.currentUserId)
+      const otherCheckboxItems = buildUserCheckboxItems(otherUsers, [], data.currentUserId)
+
+      res.render('prototype-setup/add-selected-users', {
+        signInCheckboxItems,
+        otherCheckboxItems,
+        availableUsersCount: availableUsers.length,
+        signInUsersCount: signInScenarioUsers.length,
+        otherUsersCount: otherUsers.length,
+        error: {
+          text: 'Select at least 1 user to add'
+        }
+      })
+      return
+    }
+
+    const usersToAdd = seedUsers.filter((user) => selectedUserIds.includes(user.id))
+    data.users.push(...usersToAdd)
+
+    res.redirect('/prototype-setup')
+  })
+
+  router.get('/prototype-setup/remove-all-users', (req, res) => {
+    const data = req.session.data
+    const usersToKeep = data.users.filter((user) => signInScenarioEmails.includes((user.email || '').toLowerCase()))
+    const usersToRemove = data.users.length - usersToKeep.length
+
+    res.render('prototype-setup/remove-all-users', {
+      usersCount: data.users.length,
+      usersToKeepCount: usersToKeep.length,
+      usersToRemoveCount: usersToRemove,
+      vaccinationsCount: data.vaccinationsRecorded.length
+    })
+  })
+
+  router.post('/prototype-setup/remove-all-users', (req, res) => {
+    const data = req.session.data
+
+    data.users = data.users.filter((user) => signInScenarioEmails.includes((user.email || '').toLowerCase()))
+
+    const currentUserStillExists = data.users.some((user) => user.id === data.currentUserId)
+    if (!currentUserStillExists) {
+      data.currentUserId = null
+    }
+
+    res.redirect('/prototype-setup')
+  })
 
 
   router.post('/prototype-setup/add-users', (req, res) => {

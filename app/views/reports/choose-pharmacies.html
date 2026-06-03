@@ -1,0 +1,108 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Choose pharmacies" %}
+
+{% set currentSection = "reports" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/reports/choose-vaccines",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/reports/choose-data" method="post">
+
+        {% set selectAllItems = [] %}
+
+        {% set selectAllItems = (selectAllItems.push({
+          text: "All " + (pharmacies|length) + " pharmacies",
+          value: "all",
+          attributes: {
+            "data-module": "app-checkbox-select-all",
+            "data-select-all": "true"
+          }
+        }), selectAllItems) %}
+
+        {% set selectAllItems = (selectAllItems.push({
+          divider: "or"
+        }), selectAllItems) %}
+
+        {% set pharmacyItems = [] %}
+
+
+        {% for pharmacy in pharmacies | sort(false, false, "name") %}
+
+          {% if pharmacy.address %}
+            {% set hint = {
+              text: pharmacy.address.line1 + ", " + pharmacy.address.town + ", " + pharmacy.address.postcode
+            } %}
+          {% endif %}
+
+          {% set pharmacyItems = (pharmacyItems.push({
+            value: pharmacy.id,
+            text: pharmacy.name + " (" + pharmacy.id + ")",
+            hint: hint
+          }), pharmacyItems) %}
+        {% endfor %}
+
+        {{ checkboxes({
+          idPrefix: "pharmacy-to-report-select-all",
+          name: "pharmacyIdsToReport",
+          fieldset: {
+            legend: {
+              text: pageName,
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          values: data.pharmacyIdsToReport,
+          items: selectAllItems,
+          formGroup: {
+            classes: "nhsuk-u-margin-bottom-2"
+          }
+        }) }}
+
+        {% if (pharmacies | length) > 10 %}
+          {{ input({
+            id: "pharmacy-search",
+            name: "pharmacySearch",
+            type: "search",
+            label: {
+              text: "Search"
+            },
+            classes: "nhsuk-input--width-20",
+            attributes: {
+              "data-module": "app-checkbox-filter"
+            },
+            formGroup: {
+              classes: "nhsuk-u-margin-bottom-4"
+            }
+          }) }}
+        {% endif %}
+
+        <div class="app-scrollable-container">
+          {{ checkboxes({
+            idPrefix: "pharmacy-to-report",
+            name: "pharmacyIdsToReport",
+            values: data.pharmacyIdsToReport,
+            items: pharmacyItems
+          }) }}
+        </div>
+
+
+        {{ button({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
