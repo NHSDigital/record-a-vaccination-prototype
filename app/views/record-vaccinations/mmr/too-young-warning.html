@@ -12,27 +12,40 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Jodie Brown is too young for the London MMR service</h1>
+      {% if data.firstName and data.lastName %}
+        {% set displayName = data.firstName ~ ' ' ~ data.lastName %}
+      {% else %}
+        {% set displayName = 'Patient Name' %}
+      {% endif %}
 
-      <p>
-        Jodie Brown is 4 years old.
-      </p>
+      {% set panelHtml %}
+        <p>
+          {{ displayName }} is 4 years old.
+        </p>
 
-      <p>
-        To be eligible for this service, you have to be aged 5 years or over. Refer this patient to their GP for a vaccination.
-      </p>
+        <p>
+          To be eligible for this service, you have to be aged 5 years or over. Refer this patient to their GP for a vaccination.
+        </p>
 
-      <p>
-        Your organisation may not be paid for this vaccination.
-      </p>
+        <p>
+          Your organisation may not be paid for this vaccination.
+        </p>
+
+        {{ button({
+          "text": "Continue anyway",
+          "href": "/record-vaccinations/consent",
+          "classes": "nhsuk-button--reverse"
+        }) }}
+      {% endset %}
+
+      {{ panel({
+        titleText: displayName + " is too young for the London MMR service",
+        html: panelHtml,
+        classes: "nhsuk-panel--interruption"
+      }) }}
    
     </div>
   </div>
-
-  {{ button({
-    "text": "Continue anyway",
-    "href": "/record-vaccinations/consent"
-  }) }}
 
 {% endblock %}
 

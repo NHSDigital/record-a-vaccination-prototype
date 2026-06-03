@@ -12,23 +12,35 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Jodie Brown has already had 2 MMR vaccinations</h1>
+      {% if data.firstName and data.lastName %}
+        {% set displayName = data.firstName ~ ' ' ~ data.lastName %}
+      {% else %}
+        {% set displayName = 'Patient Name' %}
+      {% endif %}
 
-      <p>
-        Jodie Brown had a second MMR vaccination on 10 July 2025.
-      </p>
+      {% set panelHtml %}
+        <p>
+          {{ displayName }} had a 2nd MMR vaccination on 10 July 2025.
+        </p>
 
-      <p>
-        Most people only need 2 doses of the MMR vaccine.
-      </p>
-   
+        <p>
+          Most people only need 2 doses of the MMR vaccine.
+        </p>
+
+        {{ button({
+          "text": "Continue anyway",
+          "href": "/record-vaccinations/consent",
+          "classes": "nhsuk-button--reverse"
+        }) }}
+      {% endset %}
+
+      {{ panel({
+        titleText: displayName + " has already had 2 MMR vaccinations",
+        html: panelHtml,
+        classes: "nhsuk-panel--interruption"
+      }) }}
+
     </div>
   </div>
-
-  {{ button({
-    "text": "Continue anyway",
-    "href": "/record-vaccinations/consent"
-  }) }}
-
 {% endblock %}
 

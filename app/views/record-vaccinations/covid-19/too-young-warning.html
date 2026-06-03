@@ -13,18 +13,31 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">{{ data.firstName }} {{ data.lastName }} may be too young for this vaccine product</h1>
 
-      <p>Adjuvanted Quadrivalent Influenza Vaccine (aQIV) is not usually recommended for people under the age of 65. {{ data.firstName }} {{ data.lastName }} is 64 years old.</p>
-      <p>Check before going ahead or refer to a prescriber for a patient specific direction (PSD).</p>
+      {% if data.firstName and data.lastName %}
+        {% set displayName = data.firstName ~ ' ' ~ data.lastName %}
+      {% else %}
+        {% set displayName = 'Patient Name' %}
+      {% endif %}
+
+      {% set panelHtml %}
+        <p>Adjuvanted Quadrivalent Influenza Vaccine (aQIV) is not usually recommended for people under the age of 65. {{ displayName }} is 64 years old.</p>
+        <p>Check before going ahead or refer to a prescriber for a patient specific direction (PSD).</p>
+
+        {{ button({
+          "text": "Continue anyway",
+          "href": "/record-vaccinations/consent",
+          "classes": "nhsuk-button--reverse"
+        }) }}
+      {% endset %}
+
+      {{ panel({
+        titleText: displayName + " may be too young for this vaccine product",
+        html: panelHtml,
+        classes: "nhsuk-panel--interruption"
+      }) }}
 
     </div>
   </div>
-
-  {{ button({
-    "text": "Continue anyway",
-    "href": "/record-vaccinations/consent"
-  }) }}
-
 {% endblock %}
 

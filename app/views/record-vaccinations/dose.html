@@ -1,6 +1,8 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Which dose of the " + data.vaccine + " are you giving?" %}
+
+
+{% set pageName = "Which dose of the " + vaccineDisplayName + " are you giving?" %}
 
 {% set currentSection = "vaccinate" %}
 {% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
@@ -17,7 +19,7 @@
 
   {% if data.showError == "yes" %}
     {% set errors = [{
-      text: "Select which dose of the " + data.vaccine + " are you giving",
+      text: "Select which dose of the " + vaccineDisplayName + " are you giving",
       href: "#vaccineDose"
     }] %}
   {% endif %}
@@ -109,7 +111,7 @@
           } if (errors | length) > 0,
           fieldset: {
             legend: {
-              text: ("Which dose of the " + data.vaccine + " vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which dose of the " + data.vaccine + " vaccine was it?"),
+              text: ("Which dose of the " + vaccineDisplayName + " vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which dose of the " + vaccineDisplayName + " vaccine was it?"),
               classes: "nhsuk-fieldset__legend--l",
               isPageHeading: true
             }
