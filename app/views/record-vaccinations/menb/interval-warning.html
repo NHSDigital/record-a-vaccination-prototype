@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "MenB vaccine interval warning" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/patient-history" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if data.firstName and data.lastName %}
+        {% set displayName = data.firstName ~ ' ' ~ data.lastName %}
+      {% else %}
+        {% set displayName = 'Patient Name' %}
+      {% endif %}
+
+      {% set panelHtml %}
+        <p>
+          They had a MenB vaccine on 15 April 2025.
+        </p>
+
+          <p>
+            The minimum recommended gap between MenB vaccine doses is 4 weeks.
+          </p>
+
+        {{ button({
+          "text": "Continue anyway",
+          "href": "/record-vaccinations/consent",
+          "classes": "nhsuk-button--reverse"
+        }) }}
+      {% endset %}
+
+      {{ panel({
+        titleText: displayName + " had a MenB vaccine less than 3 months ago",
+        html: panelHtml,
+        classes: "nhsuk-panel--interruption"
+      }) }}
+
+    </div>
+  </div>
+{% endblock %}
+
