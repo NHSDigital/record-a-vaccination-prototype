@@ -20,6 +20,31 @@
       <form action="/pharmacies/{{ pharmacy.id }}/users/{{ user.id }}/change-answer" method="post">
 
         {{ radios({
+          "name": "vaccinator",
+          "fieldset": {
+            "legend": {
+              "text": "Are they a vaccinator?",
+              size: "s"
+            }
+          },
+          hint: {
+            text: "Vaccination records include the name of the person who gave the vaccination"
+          },
+          value: ("yes" if role.vaccinator else "no"),
+          "items": [
+            {
+              "value": "yes",
+              "text": "Yes",
+              id: "vaccinator"
+            },
+            {
+              "value": "no",
+              "text": "No"
+            }
+          ]
+        }) }}
+
+        {{ radios({
           name: "permissionLevel",
           idPrefix: "permission-level",
           fieldset: {
@@ -50,31 +75,6 @@
               hint: {
                 text: "Record vaccinations, create reports, manage vaccines and users"
               }
-            }
-          ]
-        }) }}
-
-        {{ radios({
-          "name": "vaccinator",
-          "fieldset": {
-            "legend": {
-              "text": "Are they a vaccinator?",
-              size: "s"
-            }
-          },
-          hint: {
-            text: "Vaccination records include the name of the person who gave the vaccination"
-          },
-          value: ("yes" if role.vaccinator else "no"),
-          "items": [
-            {
-              "value": "yes",
-              "text": "Yes",
-              id: "vaccinator"
-            },
-            {
-              "value": "no",
-              "text": "No"
             }
           ]
         }) }}

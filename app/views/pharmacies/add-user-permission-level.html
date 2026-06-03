@@ -25,12 +25,6 @@
       <form action="/pharmacies/{{ organisation.id }}/add-user-check" method="post">
 
         {% if not existingUser %}
-          {% call fieldset({
-            legend: {
-              text: "User details",
-              size: "s"
-            }
-          }) %}
             <p class="nhsuk-body">Users must have an NHS-approved email address. See the <a href="https://digital.nhs.uk/services/care-identity-service/applications-and-services/apply-for-care-id/care-identity-email-domain-allow-list" target="_blank" class="nhsuk-link">list of approved email domains (opens in new tab)</a>.</p>
 
             {{ input({
@@ -59,8 +53,32 @@
               type: "email",
               value: data.email
             }) }}
-          {% endcall %}
         {% endif %}
+
+      {{ radios({
+        "name": "vaccinator",
+        "fieldset": {
+          "legend": {
+            "text": "Are they a vaccinator?",
+            size: "s"
+          }
+        },
+        hint: {
+          text: "Vaccination records include the name of the person who gave the vaccination"
+        },
+        value: data.vaccinator,
+        "items": [
+          {
+            "value": "yes",
+            "text": "Yes",
+            id: "vaccinator"
+          },
+          {
+            "value": "no",
+            "text": "No"
+          }
+        ]
+      }) }}
 
         {{ radios({
         name: "permissionLevel",
@@ -93,31 +111,6 @@
             hint: {
               text: "Record vaccinations, create reports, manage vaccines and users"
             }
-          }
-        ]
-      }) }}
-
-      {{ radios({
-        "name": "vaccinator",
-        "fieldset": {
-          "legend": {
-            "text": "Are they a vaccinator?",
-            size: "s"
-          }
-        },
-        hint: {
-          text: "Vaccination records include the name of the person who gave the vaccination"
-        },
-        value: data.vaccinator,
-        "items": [
-          {
-            "value": "yes",
-            "text": "Yes",
-            id: "vaccinator"
-          },
-          {
-            "value": "no",
-            "text": "No"
           }
         ]
       }) }}
