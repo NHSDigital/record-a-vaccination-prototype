@@ -73,13 +73,13 @@
         {% elif data.vaccine == "MMRV" %}
           {% set doseOptions = [
             "1st dose",
-            "2nd dose",
-            "3rd dose"
+            "2nd dose"
           ] %}
         {% elif data.vaccine == "pneumococcal" %}
           {% set doseOptions = [
             "1st dose",
-            "2nd dose"
+            "2nd dose",
+            "Booster"
           ] %}
         {% elif data.vaccine == "shingles" %}
           {% set doseOptions = [
@@ -115,13 +115,15 @@
         {# Set custom hint text for each vaccine #}
         {% set radiosHint = false %}
         {% if data.vaccine == "Flu" %}
-          {% set radiosHint = "Most children only need a single or 1st dose each flu vaccination season" %}
+          {% set radiosHint = "Only select 2nd dose if the child is in an at-risk group and had their 1st ever dose earlier this season" %}
         {% elif data.vaccine == "MenB" %}
           {% set radiosHint = "The booster dose is only given as part of the routine infant schedule" %}
         {% elif data.vaccine == "HPV" %}
-          {% set radiosHint = "Most people aged 24 and under only need a single or 1st dose of the HPV vaccine" %}
+          {% set radiosHint = "Most people aged 24 and under only need a 1st dose of the HPV vaccine" %}
         {% elif data.vaccine == "Td/IPV" %}
-          {% set radiosHint = "Most people aged 24 and under only need a single or 1st dose of the Td/IPV vaccine" %}
+          {% set radiosHint = "Most people aged 24 and under only need a 1st dose of the Td/IPV vaccine" %}
+        {% elif data.vaccine == "Pneumococcal" %}
+          {% set radiosHint = "Most people aged 65 and over only need a 1st dose of the pneumococcal vaccine" %}
         {% endif %}
 
         {% if radiosHint %}
