@@ -24,12 +24,312 @@
 <!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
 {% block content %}
   <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-two-thirds">
+    <div class="nhsuk-grid-column-full">
 
       <h1>
         Prototype
       </h1>
 
+      <h2>Prototype setup</h2>
+
+      <p>Use a preset to quickly start with a specific scenario, or set up a custom configuration. Presets reset all session data before applying.</p>
+
+      {% set presetsTableHtml %}
+      {{ table({
+        responsive: true,
+        panel: false,
+        firstCellIsHeader: true,
+        head: [
+          {
+            text: "Preset",
+            classes: "nhsuk-u-width-one-third"
+          },
+          {
+            text: "User"
+          },
+          {
+            text: "Role"
+          },
+          {
+            text: "Scenario details"
+          }
+        ],
+        rows: [
+          [
+            {
+              header: "Preset",
+              html: '<a href="/prototype-setup/preset/trust-lead-admin">Lead admin, NHS Trust (multiple sites)</a>'
+            },
+            {
+              header: "User",
+              text: "Jane Smith"
+            },
+            {
+              header: "Role",
+              text: "Lead administrator"
+            },
+            {
+              header: "Scenario details",
+              text: "RW3 with multiple sites. Includes generated users and vaccination records."
+            }
+          ],
+          [
+            {
+              header: "Preset",
+              html: '<a href="/prototype-setup/preset/trust-lead-admin-no-vaccines">Lead admin, NHS Trust (no vaccines set up)</a>'
+            },
+            {
+              header: "User",
+              text: "Henry Blue"
+            },
+            {
+              header: "Role",
+              text: "Lead administrator"
+            },
+            {
+              header: "Scenario details",
+              text: "RV3. Newly added trust with no vaccines, users or vaccination records."
+            }
+          ],
+          [
+            {
+              header: "Preset",
+              html: '<a href="/prototype-setup/preset/pharmacy-lead-admin">Lead admin, single pharmacy</a>'
+            },
+            {
+              header: "User",
+              text: "Jeremy Blue"
+            },
+            {
+              header: "Role",
+              text: "Lead administrator"
+            },
+            {
+              header: "Scenario details",
+              text: "FA424. Includes generated users and vaccination records."
+            }
+          ],
+          [
+            {
+              header: "Preset",
+              html: '<a href="/prototype-setup/preset/recorder-single">Recorder, single organisation</a>'
+            },
+            {
+              header: "User",
+              text: "Ocean Merritt"
+            },
+            {
+              header: "Role",
+              text: "Recorder"
+            },
+            {
+              header: "Scenario details",
+              text: "FR4V56. Recorder permissions only, with no vaccines or additional users set up."
+            }
+          ],
+          [
+            {
+              header: "Preset",
+              html: '<a href="/prototype-setup/preset/recorder-pharmacy-no-appointments">Recorder, pharmacy with no appointments interface</a>'
+            },
+            {
+              header: "User",
+              text: "Riley Carter"
+            },
+            {
+              header: "Role",
+              text: "Recorder"
+            },
+            {
+              header: "Scenario details",
+              text: "FR4V56. Appointments interface is disabled for this pharmacy context."
+            }
+          ],
+          [
+            {
+              header: "Preset",
+              html: '<a href="/prototype-setup/preset/recorder-multi-trust">Recorder, multiple NHS Trusts</a>'
+            },
+            {
+              header: "User",
+              text: "Graham Wallace"
+            },
+            {
+              header: "Role",
+              text: "Recorder"
+            },
+            {
+              header: "Scenario details",
+              text: "Primary organisation RWP. Recorder access across multiple trusts."
+            }
+          ],
+          [
+            {
+              header: "Preset",
+              html: '<a href="/prototype-setup/preset/admin-two-trusts">Admin at 2 NHS Trusts</a>'
+            },
+            {
+              header: "User",
+              text: "Phoebe Black"
+            },
+            {
+              header: "Role",
+              text: "Lead administrator / Administrator"
+            },
+            {
+              header: "Scenario details",
+              text: "Primary organisation RWP. Admin access at 2 NHS trusts with different permission levels."
+            }
+          ],
+          [
+            {
+              header: "Preset",
+              html: '<a href="/prototype-setup/preset/pharmacy-group-admin-small">Group admin, small pharmacy chain</a>'
+            },
+            {
+              header: "User",
+              text: "Paulina Sloan"
+            },
+            {
+              header: "Role",
+              text: "Group administrator"
+            },
+            {
+              header: "Scenario details",
+              text: "P0191N for P.W. Pharmacies (small chain)."
+            }
+          ],
+          [
+            {
+              header: "Preset",
+              html: '<a href="/prototype-setup/preset/pharmacy-group-admin-large">Group admin, large pharmacy chain (same name)</a>'
+            },
+            {
+              header: "User",
+              text: "Amanda White"
+            },
+            {
+              header: "Role",
+              text: "Group administrator"
+            },
+            {
+              header: "Scenario details",
+              text: "P15951 for MediCare Health (large chain with same-name pharmacies)."
+            }
+          ],
+          [
+            {
+              header: "Preset",
+              html: '<a href="/prototype-setup/preset/regions">Regional lead</a>'
+            },
+            {
+              header: "User",
+              text: "Jason White"
+            },
+            {
+              header: "Role",
+              text: "Regional lead"
+            },
+            {
+              header: "Scenario details",
+              text: "Region Y56. Redirects to the regions interface."
+            }
+          ],
+          [
+            {
+              header: "Preset",
+              html: '<a href="/prototype-setup/preset/support-admin">Support user</a>'
+            },
+            {
+              header: "User",
+              text: "Sally Green"
+            },
+            {
+              header: "Role",
+              text: "Support admin"
+            },
+            {
+              header: "Scenario details",
+              text: "System-wide support user with no default organisation. Redirects to support interface."
+            }
+          ],
+          [
+            {
+              header: "Preset",
+              html: '<a href="/prototype-setup/preset/all-vaccines-trust">Lead admin, trust with all vaccines enabled</a>'
+            },
+            {
+              header: "User",
+              text: "Kaisley Wells"
+            },
+            {
+              header: "Role",
+              text: "Lead administrator"
+            },
+            {
+              header: "Scenario details",
+              text: "RFF with all vaccine types enabled, plus generated users and vaccination records."
+            }
+          ],
+          [
+            {
+              header: "Preset",
+              html: '<a href="/prototype-setup/preset/limited-vaccine-pharmacy">Lead admin, London pharmacy (local vaccination programme only)</a>'
+            },
+            {
+              header: "User",
+              text: "Jeremy Blue"
+            },
+            {
+              header: "Role",
+              text: "Lead administrator"
+            },
+            {
+              header: "Scenario details",
+              text: "FT81513 (Holborn Pharmacy), configured for MMR and flu (London service) only."
+            }
+          ]
+        ]
+      }) }}
+      {% endset %}
+
+      {% set customConfigHtml %}
+      <ul class="nhsuk-list">
+        <li><a href="/prototype-setup/custom-config">Set up a custom scenario</a> — choose user, vaccines and data volume step by step</li>
+        <li><a href="/prototype-setup">Manage prototype data</a> — add or remove users, batches and vaccination records individually</li>
+      </ul>
+      {% endset %}
+
+      {% set presetsTabHtml %}
+        <p class="nhsuk-u-margin-bottom-4">Start with one of the predefined test setups.</p>
+        {{ presetsTableHtml | safe }}
+      {% endset %}
+
+      {% set customTabHtml %}
+        <p class="nhsuk-u-margin-bottom-4">Build your own scenario with specific settings.</p>
+        {{ customConfigHtml | safe }}
+      {% endset %}
+
+      {{ tabs({
+        items: [
+          {
+            label: "Preset scenarios",
+            id: "preset-scenarios",
+            panel: {
+              html: presetsTabHtml
+            }
+          },
+          {
+            label: "Custom configuration",
+            id: "custom-configuration",
+            panel: {
+              html: customTabHtml
+            }
+          }
+        ]
+      }) }}
+
+      <hr class="nhsuk-section-break nhsuk-section-break--m nhsuk-section-break--visible">
 
       <h2>Signed-out interface</h2>
 

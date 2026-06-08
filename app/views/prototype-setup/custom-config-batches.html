@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Custom configuration — Batches per vaccine product" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    text: "Back",
+    href: "/prototype-setup/custom-config/vaccines"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <span class="nhsuk-caption-l">Step 3 of 4</span>
+      <h1 class="nhsuk-heading-l">How many batches should be added per vaccine product?</h1>
+
+      <p>This applies to each enabled vaccine product for the selected organisation.</p>
+
+      <form action="/prototype-setup/custom-config/batches" method="post" novalidate>
+
+        {{ radios({
+          idPrefix: "batchesPerProduct",
+          name: "batchesPerProduct",
+          fieldset: {
+            legend: {
+              text: "Batches per vaccine product",
+              classes: "nhsuk-visually-hidden"
+            }
+          },
+          items: [
+            { value: "1", text: "1", checked: customConfig.batchesPerProduct === "1" },
+            { value: "5", text: "5", checked: customConfig.batchesPerProduct === "5" or not customConfig.batchesPerProduct },
+            { value: "10", text: "10", checked: customConfig.batchesPerProduct === "10" },
+            { value: "20", text: "20", checked: customConfig.batchesPerProduct === "20" }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

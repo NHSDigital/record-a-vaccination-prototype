@@ -1,6 +1,10 @@
 module.exports = (router) => {
 
   router.get('/appointments', (req, res) => {
+    if (res.locals.currentOrganisation && res.locals.currentOrganisation.appointmentsInterfaceEnabled === false) {
+      return res.redirect('/home')
+    }
+
     const data = req.session.data
 
     const day = 86400000 // number of milliseconds in a day

@@ -22,13 +22,15 @@
   {% endif %}
 
   <!-- All users except Pharmacy HQ users -->
-  {% if currentOrganisation and (currentOrganisation.type != "Pharmacy HQ") %}
+  {% if currentOrganisation and (currentOrganisation.type != "Pharmacy HQ") and (currentOrganisation.appointmentsInterfaceEnabled !== false) %}
     {% set navigationItems = (navigationItems.push({
       href: "/appointments",
       html: "Appointments <span class=\"nhsuk-tag app-tag--header nhsuk-u-margin-left-2\">New</span>",
       active: (currentSection == "appointments")
     }), navigationItems) %}
+  {% endif %}
 
+  {% if currentOrganisation and (currentOrganisation.type != "Pharmacy HQ") %}
     {% set navigationItems = (navigationItems.push({
       href: "/record-vaccinations",
       text: "Record vaccinations",

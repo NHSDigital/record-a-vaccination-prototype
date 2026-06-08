@@ -56,14 +56,16 @@
           text: "A different vaccination for another patient"
         }), items) %}
 
-        {% set items = (items.push({
-          divider: "or"
-        }), items) %}
+        {% if currentOrganisation and (currentOrganisation.appointmentsInterfaceEnabled !== false) %}
+          {% set items = (items.push({
+            divider: "or"
+          }), items) %}
 
-        {% set items = (items.push({
-          value: "appointments",
-          text: "Go to appointments list"
-        }), items) %}
+          {% set items = (items.push({
+            value: "appointments",
+            text: "Go to appointments list"
+          }), items) %}
+        {% endif %}
 
         {{ radios({
           idPrefix: "next-step",

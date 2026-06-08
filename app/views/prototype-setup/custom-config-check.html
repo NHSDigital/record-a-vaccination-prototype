@@ -1,0 +1,94 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Custom configuration — Check your answers" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    text: "Back",
+    href: "/prototype-setup/custom-config/data"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Check your configuration</h1>
+
+      {% set userValue %}
+        {% if selectedUser %}
+          {{ selectedUser.name }}<br>
+          <span class="nhsuk-body-s nhsuk-u-secondary-text-color">{{ selectedUser.role }} — {{ selectedUser.orgDescription }}</span>
+        {% else %}
+          Not set
+        {% endif %}
+      {% endset %}
+
+      {% set vaccinesValue %}
+        {% if vaccineProductSelections and (vaccineProductSelections | length) > 0 %}
+          <div class="nhsuk-u-margin-bottom-0">
+            {% for vaccineSelection in vaccineProductSelections %}
+              <p class="nhsuk-body nhsuk-u-margin-bottom-1">
+                <strong>{{ vaccineSelection.vaccineName.charAt(0).toUpperCase() + vaccineSelection.vaccineName.slice(1) }}</strong>
+                {% if vaccineSelection.productNames and (vaccineSelection.productNames | length) > 0 %}
+                  — {{ vaccineSelection.productNames | join(', ') }}
+                {% else %}
+                  — all products
+                {% endif %}
+              </p>
+            {% endfor %}
+          </div>
+        {% else %}
+          None
+        {% endif %}
+      {% endset %}
+
+      {{ summaryList({
+        rows: [
+          {
+            key: { text: "User" },
+            value: { html: userValue },
+            actions: {
+              items: [{ href: "/prototype-setup/custom-config", text: "Change", visuallyHiddenText: "user" }]
+            }
+          },
+          {
+            key: { text: "Vaccines" },
+            value: { html: vaccinesValue },
+            actions: {
+              items: [{ href: "/prototype-setup/custom-config/vaccines", text: "Change", visuallyHiddenText: "vaccines" }]
+            }
+          },
+          {
+            key: { text: "Batches per vaccine product" },
+            value: { text: (customConfig.batchesPerProduct if customConfig.batchesPerProduct else "5") },
+            actions: {
+              items: [{ href: "/prototype-setup/custom-config/batches", text: "Change", visuallyHiddenText: "batches per vaccine product" }]
+            }
+          },
+          {
+            key: { text: "Additional users" },
+            value: { text: (customConfig.additionalUsers if customConfig.additionalUsers else "0") },
+            actions: {
+              items: [{ href: "/prototype-setup/custom-config/data", text: "Change", visuallyHiddenText: "additional users" }]
+            }
+          },
+          {
+            key: { text: "Vaccination records" },
+            value: { text: (customConfig.vaccinations if customConfig.vaccinations else "0") },
+            actions: {
+              items: [{ href: "/prototype-setup/custom-config/data", text: "Change", visuallyHiddenText: "vaccination records" }]
+            }
+          }
+        ]
+      }) }}
+
+      <form action="/prototype-setup/custom-config/apply" method="post" novalidate>
+        {{ button({
+          text: "Apply configuration"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

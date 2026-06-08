@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Custom configuration — Vaccines" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    text: "Back",
+    href: "/prototype-setup/custom-config"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <span class="nhsuk-caption-l">Step 2 of 4</span>
+      <h1 class="nhsuk-heading-l">Which vaccines do you want to enable?</h1>
+
+      <p>Select vaccines, then choose one or more products for each selected vaccine. Leave all unchecked to start with no vaccines.</p>
+
+      <form action="/prototype-setup/custom-config/vaccines" method="post" novalidate>
+
+        {{ checkboxes({
+          name: "vaccines",
+          items: checkboxItems
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}
