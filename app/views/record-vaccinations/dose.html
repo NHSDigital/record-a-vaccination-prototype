@@ -110,7 +110,7 @@
         {# Set custom hint text for each vaccine #}
         {% set radiosHint = false %}
         {% if data.vaccine == "flu" %}
-          {% set radiosHint = "Only select 2nd dose if the child is in an at-risk group and had their 1st ever dose earlier this season." %}
+          {% set radiosHint = "Only select 2nd dose if the child is in an at-risk group and had their 1st ever dose earlier this season" %}
         {% elif data.vaccine == "MenB" %}
           {% set radiosHint = "The booster dose is only given as part of the routine infant schedule" %}
         {% elif data.vaccine == "HPV" %}
