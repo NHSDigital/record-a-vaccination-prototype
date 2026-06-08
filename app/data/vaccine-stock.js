@@ -19,7 +19,7 @@ module.exports = [
   },
   {
     id: "646436346",
-    vaccine: "Flu",
+    vaccine: "flu",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
     organisationId: "RW3", // Central Manchester Trust
     siteId: "RW3NM", // North Manchester General Hospital
@@ -61,7 +61,7 @@ module.exports = [
   },
   {
     id: "18582856",
-    vaccine: "Flu",
+    vaccine: "flu",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
     organisationId: "RW3", // Central Manchester Trust
     siteId: "RW3HT", // Heaton Moor Health Centre"
@@ -117,7 +117,7 @@ module.exports = [
   },
   {
     id: "RFF09890483694",
-    vaccine: "Flu",
+    vaccine: "flu",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
     organisationId: "RFF", // Barnsley Hospital NHS Foundation Trust
     siteId: "RFFPK", // Barnsley General Hospital
@@ -439,7 +439,7 @@ module.exports = [
   },
   {
     id: "2514771",
-    vaccine: "Flu (London service)",
+    vaccine: "flu (London service)",
     vaccineProduct: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
     organisationId: "FT81513", // Holborn Pharmacy
     siteId: "FX252", // Holborn Pharmacy

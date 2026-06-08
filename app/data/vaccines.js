@@ -18,7 +18,7 @@ module.exports = [
     ]
   },
   {
-    name: "Flu",
+    name: "flu",
     availableToAllSites: true,
     products: [
       {
@@ -52,7 +52,7 @@ module.exports = [
     ]
   },
   {
-    name: "Flu (London service)",
+    name: "flu (London service)",
     products: [
       {
         name: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",

@@ -13,13 +13,8 @@
 
 {% block content %}
 
-  {% set errors = [] %}
-
-  {% if data.showError == "yes" %}
-    {% set errors = [{
-      text: "Select which dose of the " + data.vaccine + " are you giving",
-      href: "#vaccineDose"
-    }] %}
+        {% if data.vaccine == "flu" %}
+          {% set radiosHint = "Only select 2nd dose if the child is in an at-risk group and had their 1st ever dose earlier this season" %}
   {% endif %}
 
   <div class="nhsuk-grid-row">
@@ -41,7 +36,7 @@
             "3rd dose",
             "4th dose"
           ] %}
-        {% elif data.vaccine == "Flu" %}
+        {% elif data.vaccine == "flu" %}
           {% set doseOptions = [
             "1st dose",
             "2nd dose"
@@ -96,7 +91,7 @@
 
           {% set hintText = "" %}
 
-          {% if data.vaccine == "Flu" and option == "2nd dose this season" %}
+          {% if data.vaccine == "flu" and option == "2nd dose this season" %}
             {% set hintText = "Only given to some children in an at-risk group" %}
           {% endif %}
 
@@ -115,7 +110,7 @@
         {# Set custom hint text for each vaccine #}
         {% set radiosHint = false %}
         {% if data.vaccine == "Flu" %}
-          {% set radiosHint = "Only select 2nd dose if the child is in an at-risk group and had their 1st ever dose earlier this season" %}
+          {% set radiosHint = "Most children only have 1 dose per season. Select 1st dose if it is the only dose the child is having this season." %}
         {% elif data.vaccine == "MenB" %}
           {% set radiosHint = "The booster dose is only given as part of the routine infant schedule" %}
         {% elif data.vaccine == "HPV" %}

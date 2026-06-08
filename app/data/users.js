@@ -13990,7 +13990,7 @@ module.exports = [
     admin: true
   },
   // Jeremy is the lead pharmacist at a Holborn Pharmacy
-  // pharmacy onboarded for MMR and London Flu only
+  // pharmacy onboarded for MMR and London flu only
   {
     "id": "633464144",
     "email": "jeremy13.blue@nhs.net",
