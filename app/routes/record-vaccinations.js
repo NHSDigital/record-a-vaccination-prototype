@@ -27,6 +27,16 @@ function daysBetweenDates(date1, date2) {
   return Math.floor(differenceInDays)
 }
 
+function isFromTodaysAppointment(data) {
+  if (data.from !== 'appointments' || !data.appointmentId) {
+    return false
+  }
+
+  const appointment = data.appointments.find((candidateAppointment) => candidateAppointment.id === data.appointmentId)
+
+  return appointment?.date === 'today'
+}
+
 
 module.exports = router => {
 
@@ -56,17 +66,11 @@ module.exports = router => {
   router.get('/record-vaccinations/vaccination-date', (req, res) => {
 
     const data = req.session.data
-    const appointmentId = data.appointmentId
 
-    if (appointmentId) {
-      const appointment = data.appointments.find((appointment) => appointment.id === appointmentId)
-
-      if (appointment.date === "today") {
-        // Set vaccination date to today and skip question
-        req.session.data.vaccinationToday = "yes"
-        return res.redirect('/record-vaccinations/delivery-team')
-
-      }
+    if (isFromTodaysAppointment(data)) {
+      // Set vaccination date to today and skip question
+      req.session.data.vaccinationToday = "yes"
+      return res.redirect('/record-vaccinations/delivery-team')
     }
 
     res.render('record-vaccinations/vaccination-date')
@@ -932,6 +936,8 @@ module.exports = router => {
 
     if (!vaccineDose) {
       redirectPath = "/record-vaccinations/dose?showError=yes"
+    } else if (["flu", "flu (London service)", "pneumococcal"].includes(data.vaccine)) {
+      redirectPath = "/record-vaccinations/eligibility"
     } else {
       redirectPath = "/record-vaccinations/consent"
     }
@@ -976,6 +982,8 @@ module.exports = router => {
 
     if (data.newBatchNumber === '' || data.newBatchExpiryDate?.day === '' || data.newBatchExpiryDate?.month === '' || data.newBatchExpiryDate?.year === '') {
       nextPage = "/record-vaccinations/add-batch?showErrors=yes"
+    } else if (["flu", "flu (London service)", "pneumococcal"].includes(data.vaccine)) {
+      nextPage = "/record-vaccinations/dose"
     } else if (["COVID-19", "flu", "flu (London service)", "RSV", "pneumococcal"].includes(data.vaccine)) {
       nextPage = "/record-vaccinations/eligibility"
     } else {
