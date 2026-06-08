@@ -5,7 +5,7 @@
 {% block beforeContent %}
   {{ backLink({
     text: "Back",
-    href: "/prototype-setup/custom-config/data"
+    href: "/prototype-setup/custom-config/data-vaccinations"
   }) }}
 {% endblock %}
 
@@ -43,6 +43,14 @@
         {% endif %}
       {% endset %}
 
+      {% set additionalUsersValue %}
+        <p class="nhsuk-body nhsuk-u-margin-bottom-1">Lead administrator — {{ customConfig.additionalUsersLeadAdministrator if customConfig.additionalUsersLeadAdministrator else '0' }} total, {{ customConfig.additionalVaccinatorsLeadAdministrator if customConfig.additionalVaccinatorsLeadAdministrator else '0' }} vaccinators</p>
+        <p class="nhsuk-body nhsuk-u-margin-bottom-1">Administrator — {{ customConfig.additionalUsersAdministrator if customConfig.additionalUsersAdministrator else '0' }} total, {{ customConfig.additionalVaccinatorsAdministrator if customConfig.additionalVaccinatorsAdministrator else '0' }} vaccinators</p>
+        <p class="nhsuk-body nhsuk-u-margin-bottom-2">Recorder — {{ customConfig.additionalUsersRecorder if customConfig.additionalUsersRecorder else '0' }} total, {{ customConfig.additionalVaccinatorsRecorder if customConfig.additionalVaccinatorsRecorder else '0' }} vaccinators</p>
+        <p class="nhsuk-body nhsuk-u-margin-bottom-1"><strong>Total users: {{ customConfig.additionalUsers if customConfig.additionalUsers else '0' }}</strong></p>
+        <p class="nhsuk-body nhsuk-u-margin-bottom-0"><strong>Total vaccinators: {{ customConfig.additionalVaccinators if customConfig.additionalVaccinators else '0' }}</strong></p>
+      {% endset %}
+
       {{ summaryList({
         rows: [
           {
@@ -68,7 +76,7 @@
           },
           {
             key: { text: "Additional users" },
-            value: { text: (customConfig.additionalUsers if customConfig.additionalUsers else "0") },
+            value: { html: additionalUsersValue },
             actions: {
               items: [{ href: "/prototype-setup/custom-config/data", text: "Change", visuallyHiddenText: "additional users" }]
             }
@@ -77,7 +85,7 @@
             key: { text: "Vaccination records" },
             value: { text: (customConfig.vaccinations if customConfig.vaccinations else "0") },
             actions: {
-              items: [{ href: "/prototype-setup/custom-config/data", text: "Change", visuallyHiddenText: "vaccination records" }]
+              items: [{ href: "/prototype-setup/custom-config/data-vaccinations", text: "Change", visuallyHiddenText: "vaccination records" }]
             }
           }
         ]

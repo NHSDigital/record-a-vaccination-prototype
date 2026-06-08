@@ -79,19 +79,57 @@
     valueHtml: batchesValue
   }), progressItems) %}
 
-  {% if customConfig and (customConfig.additionalUsers or customConfig.vaccinations) %}
-    {% set dataValue %}
-      <p class="nhsuk-body-s nhsuk-u-margin-bottom-1">Additional users: <strong>{{ customConfig.additionalUsers or '0' }}</strong></p>
-      <p class="nhsuk-body-s nhsuk-u-margin-bottom-0">Vaccination records: <strong>{{ customConfig.vaccinations or '0' }}</strong></p>
+  {% if customConfig and (customConfig.additionalUsers or customConfig.additionalVaccinators or customConfig.additionalUsersLeadAdministrator or customConfig.additionalUsersAdministrator or customConfig.additionalUsersRecorder) %}
+    {% set additionalUsersValue %}
+      <p class="nhsuk-body-s nhsuk-u-margin-bottom-1">Additional users (total): <strong>{{ customConfig.additionalUsers or '0' }}</strong></p>
+      <p class="nhsuk-body-s nhsuk-u-margin-bottom-1">Vaccinators (total): <strong>{{ customConfig.additionalVaccinators or '0' }}</strong></p>
+
+      {% set additionalUserBreakdown = [
+        'Lead administrator: <strong>' + (customConfig.additionalUsersLeadAdministrator or '0') + '</strong>',
+        'Lead administrator vaccinators: <strong>' + (customConfig.additionalVaccinatorsLeadAdministrator or '0') + '</strong>',
+        'Administrator: <strong>' + (customConfig.additionalUsersAdministrator or '0') + '</strong>',
+        'Administrator vaccinators: <strong>' + (customConfig.additionalVaccinatorsAdministrator or '0') + '</strong>',
+        'Recorder: <strong>' + (customConfig.additionalUsersRecorder or '0') + '</strong>',
+        'Recorder vaccinators: <strong>' + (customConfig.additionalVaccinatorsRecorder or '0') + '</strong>'
+      ] %}
+
+      {% set additionalUserBreakdownHtml %}
+        {% for breakdownItem in additionalUserBreakdown %}
+          <p class="nhsuk-body-s nhsuk-u-margin-bottom-1">{{ breakdownItem | safe }}</p>
+        {% endfor %}
+      {% endset %}
+
+      <div class="app-custom-config-progress-card__details">
+        {{ details({
+          summaryText: 'View by permission level',
+          html: additionalUserBreakdownHtml
+        }) }}
+      </div>
     {% endset %}
   {% else %}
-    {% set dataValue %}
-      <p class="nhsuk-body-s nhsuk-u-secondary-text-color nhsuk-u-margin-bottom-0">No data volume (users and vaccinations) selected yet</p>
+    {% set additionalUsersValue %}
+      <p class="nhsuk-body-s nhsuk-u-secondary-text-color nhsuk-u-margin-bottom-0">No additional user counts selected yet</p>
     {% endset %}
   {% endif %}
+
   {% set progressItems = (progressItems.push({
-    title: 'Data volume',
-    valueHtml: dataValue
+    title: 'Additional users',
+    valueHtml: additionalUsersValue
+  }), progressItems) %}
+
+  {% if customConfig and customConfig.vaccinations %}
+    {% set vaccinationRecordsValue %}
+      <p class="nhsuk-body-s nhsuk-u-margin-bottom-0">Vaccination records: <strong>{{ customConfig.vaccinations }}</strong></p>
+    {% endset %}
+  {% else %}
+    {% set vaccinationRecordsValue %}
+      <p class="nhsuk-body-s nhsuk-u-secondary-text-color nhsuk-u-margin-bottom-0">No vaccination record count selected yet</p>
+    {% endset %}
+  {% endif %}
+
+  {% set progressItems = (progressItems.push({
+    title: 'Vaccination records',
+    valueHtml: vaccinationRecordsValue
   }), progressItems) %}
 
   {% for progressItem in progressItems %}

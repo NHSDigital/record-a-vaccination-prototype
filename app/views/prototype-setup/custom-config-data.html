@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Custom configuration — Data volume" %}
+{% set pageName = "Custom configuration — Additional users" %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -13,8 +13,8 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <span class="nhsuk-caption-l">Step 4 of 4</span>
-      <h1 class="nhsuk-heading-l">How much data do you want to add?</h1>
+      <span class="nhsuk-caption-l">Step 4 of 5</span>
+      <h1 class="nhsuk-heading-l">How many additional users do you want to add?</h1>
 
       <form action="/prototype-setup/custom-config/data" method="post" novalidate>
 
@@ -36,27 +36,6 @@
             { value: "5", text: "5", checked: customConfig.additionalUsers === "5" },
             { value: "15", text: "15", checked: customConfig.additionalUsers === "15" },
             { value: "30", text: "30", checked: customConfig.additionalUsers === "30" }
-          ]
-        }) }}
-
-        {{ radios({
-          idPrefix: "vaccinations",
-          name: "vaccinations",
-          fieldset: {
-            legend: {
-              text: "Vaccination records",
-              isPageHeading: false,
-              classes: "nhsuk-fieldset__legend--s"
-            }
-          },
-          hint: {
-            text: "Randomly generated vaccination records for the selected organisation"
-          },
-          items: [
-            { value: "0", text: "None", checked: customConfig.vaccinations === "0" or not customConfig.vaccinations },
-            { value: "10", text: "10", checked: customConfig.vaccinations === "10" },
-            { value: "30", text: "30", checked: customConfig.vaccinations === "30" },
-            { value: "100", text: "100", checked: customConfig.vaccinations === "100" }
           ]
         }) }}
 

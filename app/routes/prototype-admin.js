@@ -290,23 +290,59 @@ module.exports = (router) => {
     }
   }
 
-  function addRandomUsers(data, orgId, count) {
+  function createRandomUser(data, orgId, permissionLevel, vaccinator) {
+    const firstName = randomItem(listOfFirstNames)
+    const lastName = randomItem(listOfLastNames)
+    data.users.push({
+      id: Math.floor(Math.random() * 10000000).toString(),
+      email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}${Math.floor(Math.random() * 10)}@nhs.net`,
+      organisations: [{
+        id: orgId,
+        permissionLevel,
+        status: 'Active',
+        vaccinator: (typeof vaccinator === 'boolean') ? vaccinator : randomItem([true, true, false])
+      }],
+      firstName,
+      lastName
+    })
+  }
+
+  function addRandomUsers(data, orgId, countOrPermissionCounts) {
     const permissionLevels = ['Recorder', 'Administrator', 'Lead administrator']
+
+    if (countOrPermissionCounts && typeof countOrPermissionCounts === 'object' && countOrPermissionCounts.counts) {
+      const permissionCounts = countOrPermissionCounts.counts
+      const vaccinatorCounts = countOrPermissionCounts.vaccinatorCounts || {}
+
+      for (const permissionLevel of permissionLevels) {
+        const count = parseInt(permissionCounts[permissionLevel], 10) || 0
+        const vaccinatorCount = Math.min(parseInt(vaccinatorCounts[permissionLevel], 10) || 0, count)
+        const nonVaccinatorCount = Math.max(count - vaccinatorCount, 0)
+
+        for (let i = 0; i < vaccinatorCount; i++) {
+          createRandomUser(data, orgId, permissionLevel, true)
+        }
+
+        for (let i = 0; i < nonVaccinatorCount; i++) {
+          createRandomUser(data, orgId, permissionLevel, false)
+        }
+      }
+      return
+    }
+
+    if (countOrPermissionCounts && typeof countOrPermissionCounts === 'object') {
+      for (const permissionLevel of permissionLevels) {
+        const count = parseInt(countOrPermissionCounts[permissionLevel], 10) || 0
+        for (let i = 0; i < count; i++) {
+          createRandomUser(data, orgId, permissionLevel)
+        }
+      }
+      return
+    }
+
+    const count = parseInt(countOrPermissionCounts, 10) || 0
     for (let i = 0; i < count; i++) {
-      const firstName = randomItem(listOfFirstNames)
-      const lastName = randomItem(listOfLastNames)
-      data.users.push({
-        id: Math.floor(Math.random() * 10000000).toString(),
-        email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}${Math.floor(Math.random() * 10)}@nhs.net`,
-        organisations: [{
-          id: orgId,
-          permissionLevel: randomItem(permissionLevels),
-          status: 'Active',
-          vaccinator: randomItem([true, true, false])
-        }],
-        firstName,
-        lastName
-      })
+      createRandomUser(data, orgId, randomItem(permissionLevels))
     }
   }
 
@@ -763,16 +799,165 @@ module.exports = (router) => {
   // ----------------------------------------------------------------
 
   router.get('/prototype-setup/custom-config/data', (req, res) => {
-    res.render('prototype-setup/custom-config-data', {
+    res.render('prototype-setup/custom-config-data-users', {
       currentStep: 4,
       ...buildCustomConfigViewModel(req.session.data.customConfig || {})
     })
   })
 
   router.post('/prototype-setup/custom-config/data', (req, res) => {
+    const leadAdministratorValue = String(req.body.additionalUsersLeadAdministrator || '').trim()
+    const administratorValue = String(req.body.additionalUsersAdministrator || '').trim()
+    const recorderValue = String(req.body.additionalUsersRecorder || '').trim()
+    const leadAdministratorVaccinatorsValue = String(req.body.additionalVaccinatorsLeadAdministrator || '').trim()
+    const administratorVaccinatorsValue = String(req.body.additionalVaccinatorsAdministrator || '').trim()
+    const recorderVaccinatorsValue = String(req.body.additionalVaccinatorsRecorder || '').trim()
+
+    const customConfig = {
+      ...(req.session.data.customConfig || {}),
+      additionalUsersLeadAdministrator: leadAdministratorValue || '0',
+      additionalUsersAdministrator: administratorValue || '0',
+      additionalUsersRecorder: recorderValue || '0',
+      additionalVaccinatorsLeadAdministrator: leadAdministratorVaccinatorsValue || '0',
+      additionalVaccinatorsAdministrator: administratorVaccinatorsValue || '0',
+      additionalVaccinatorsRecorder: recorderVaccinatorsValue || '0'
+    }
+
+    const fields = [
+      {
+        key: 'additionalUsersLeadAdministrator',
+        value: customConfig.additionalUsersLeadAdministrator,
+        href: '#additionalUsersLeadAdministrator'
+      },
+      {
+        key: 'additionalUsersAdministrator',
+        value: customConfig.additionalUsersAdministrator,
+        href: '#additionalUsersAdministrator'
+      },
+      {
+        key: 'additionalUsersRecorder',
+        value: customConfig.additionalUsersRecorder,
+        href: '#additionalUsersRecorder'
+      },
+      {
+        key: 'additionalVaccinatorsLeadAdministrator',
+        value: customConfig.additionalVaccinatorsLeadAdministrator,
+        href: '#additionalVaccinatorsLeadAdministrator'
+      },
+      {
+        key: 'additionalVaccinatorsAdministrator',
+        value: customConfig.additionalVaccinatorsAdministrator,
+        href: '#additionalVaccinatorsAdministrator'
+      },
+      {
+        key: 'additionalVaccinatorsRecorder',
+        value: customConfig.additionalVaccinatorsRecorder,
+        href: '#additionalVaccinatorsRecorder'
+      }
+    ]
+
+    const additionalUserCountErrors = []
+
+    for (const field of fields) {
+      if (!/^\d+$/.test(field.value)) {
+        additionalUserCountErrors.push({
+          text: 'Enter a whole number of 0 or more',
+          href: field.href
+        })
+      }
+    }
+
+    const byPermission = [
+      {
+        users: customConfig.additionalUsersLeadAdministrator,
+        vaccinators: customConfig.additionalVaccinatorsLeadAdministrator,
+        vaccinatorFieldHref: '#additionalVaccinatorsLeadAdministrator',
+        label: 'Lead administrator vaccinators'
+      },
+      {
+        users: customConfig.additionalUsersAdministrator,
+        vaccinators: customConfig.additionalVaccinatorsAdministrator,
+        vaccinatorFieldHref: '#additionalVaccinatorsAdministrator',
+        label: 'Administrator vaccinators'
+      },
+      {
+        users: customConfig.additionalUsersRecorder,
+        vaccinators: customConfig.additionalVaccinatorsRecorder,
+        vaccinatorFieldHref: '#additionalVaccinatorsRecorder',
+        label: 'Recorder vaccinators'
+      }
+    ]
+
+    for (const permissionEntry of byPermission) {
+      const userCount = parseInt(permissionEntry.users, 10)
+      const vaccinatorCount = parseInt(permissionEntry.vaccinators, 10)
+      if (!Number.isNaN(userCount) && !Number.isNaN(vaccinatorCount) && vaccinatorCount > userCount) {
+        additionalUserCountErrors.push({
+          text: permissionEntry.label + ' cannot be higher than the total users for that permission level',
+          href: permissionEntry.vaccinatorFieldHref
+        })
+      }
+    }
+
+    if (additionalUserCountErrors.length > 0) {
+      res.render('prototype-setup/custom-config-data-users', {
+        currentStep: 4,
+        additionalUserCountErrors,
+        additionalUsersLeadAdministratorError: !/^\d+$/.test(customConfig.additionalUsersLeadAdministrator) ? 'Enter a whole number of 0 or more' : null,
+        additionalUsersAdministratorError: !/^\d+$/.test(customConfig.additionalUsersAdministrator) ? 'Enter a whole number of 0 or more' : null,
+        additionalUsersRecorderError: !/^\d+$/.test(customConfig.additionalUsersRecorder) ? 'Enter a whole number of 0 or more' : null,
+        additionalVaccinatorsLeadAdministratorError: !/^\d+$/.test(customConfig.additionalVaccinatorsLeadAdministrator)
+          ? 'Enter a whole number of 0 or more'
+          : (parseInt(customConfig.additionalVaccinatorsLeadAdministrator, 10) > parseInt(customConfig.additionalUsersLeadAdministrator, 10)
+            ? 'Cannot be higher than Lead administrator users'
+            : null),
+        additionalVaccinatorsAdministratorError: !/^\d+$/.test(customConfig.additionalVaccinatorsAdministrator)
+          ? 'Enter a whole number of 0 or more'
+          : (parseInt(customConfig.additionalVaccinatorsAdministrator, 10) > parseInt(customConfig.additionalUsersAdministrator, 10)
+            ? 'Cannot be higher than Administrator users'
+            : null),
+        additionalVaccinatorsRecorderError: !/^\d+$/.test(customConfig.additionalVaccinatorsRecorder)
+          ? 'Enter a whole number of 0 or more'
+          : (parseInt(customConfig.additionalVaccinatorsRecorder, 10) > parseInt(customConfig.additionalUsersRecorder, 10)
+            ? 'Cannot be higher than Recorder users'
+            : null),
+        ...buildCustomConfigViewModel(customConfig)
+      })
+      return
+    }
+
+    const totalAdditionalUsers =
+      (parseInt(customConfig.additionalUsersLeadAdministrator, 10) || 0) +
+      (parseInt(customConfig.additionalUsersAdministrator, 10) || 0) +
+      (parseInt(customConfig.additionalUsersRecorder, 10) || 0)
+
+    const totalAdditionalVaccinators =
+      (parseInt(customConfig.additionalVaccinatorsLeadAdministrator, 10) || 0) +
+      (parseInt(customConfig.additionalVaccinatorsAdministrator, 10) || 0) +
+      (parseInt(customConfig.additionalVaccinatorsRecorder, 10) || 0)
+
+    req.session.data.customConfig = {
+      ...customConfig,
+      additionalUsers: totalAdditionalUsers.toString(),
+      additionalVaccinators: totalAdditionalVaccinators.toString()
+    }
+    res.redirect('/prototype-setup/custom-config/data-vaccinations')
+  })
+
+  // ----------------------------------------------------------------
+  // Custom configuration — Step 5: Vaccination records
+  // ----------------------------------------------------------------
+
+  router.get('/prototype-setup/custom-config/data-vaccinations', (req, res) => {
+    res.render('prototype-setup/custom-config-data-vaccinations', {
+      currentStep: 5,
+      ...buildCustomConfigViewModel(req.session.data.customConfig || {})
+    })
+  })
+
+  router.post('/prototype-setup/custom-config/data-vaccinations', (req, res) => {
     req.session.data.customConfig = {
       ...(req.session.data.customConfig || {}),
-      additionalUsers: req.body.additionalUsers,
       vaccinations: req.body.vaccinations
     }
     res.redirect('/prototype-setup/custom-config/check')
@@ -824,9 +1009,28 @@ module.exports = (router) => {
       )
     }
 
-    const userCount = parseInt(customConfig.additionalUsers, 10) || 0
+    const permissionCounts = {
+      'Lead administrator': parseInt(customConfig.additionalUsersLeadAdministrator, 10) || 0,
+      Administrator: parseInt(customConfig.additionalUsersAdministrator, 10) || 0,
+      Recorder: parseInt(customConfig.additionalUsersRecorder, 10) || 0
+    }
+    const vaccinatorCounts = {
+      'Lead administrator': parseInt(customConfig.additionalVaccinatorsLeadAdministrator, 10) || 0,
+      Administrator: parseInt(customConfig.additionalVaccinatorsAdministrator, 10) || 0,
+      Recorder: parseInt(customConfig.additionalVaccinatorsRecorder, 10) || 0
+    }
+    const userCount = permissionCounts['Lead administrator'] + permissionCounts.Administrator + permissionCounts.Recorder
+
     if (userCount > 0) {
-      addRandomUsers(data, orgId, userCount)
+      addRandomUsers(data, orgId, {
+        counts: permissionCounts,
+        vaccinatorCounts
+      })
+    } else {
+      const fallbackUserCount = parseInt(customConfig.additionalUsers, 10) || 0
+      if (fallbackUserCount > 0) {
+        addRandomUsers(data, orgId, fallbackUserCount)
+      }
     }
 
     const vaccinationCount = parseInt(customConfig.vaccinations, 10) || 0
