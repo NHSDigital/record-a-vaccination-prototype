@@ -448,10 +448,10 @@ module.exports = (router) => {
     resetSession(req)
     const data = req.session.data
     data.currentUserId = '3283602393037'
-    data.currentOrganisationId = 'RWP'
+    data.email = 'graham.wallace@nhs.net'
     setupBatchesForOrg(data, 'RWP')
     addRandomVaccinations(data, 'RWP', 20)
-    res.redirect('/home')
+    res.redirect('/auth/select-organisation')
   })
 
   // ----------------------------------------------------------------
@@ -474,11 +474,11 @@ module.exports = (router) => {
     resetSession(req)
     const data = req.session.data
     data.currentUserId = '2058253531'
-    data.currentOrganisationId = 'RWP'
+    data.email = 'phoebe.black@nhs.net'
     setupBatchesForOrg(data, 'RWP')
     addRandomUsers(data, 'RWP', 10)
     addRandomVaccinations(data, 'RWP', 20)
-    res.redirect('/home')
+    res.redirect('/auth/select-organisation')
   })
 
   // ----------------------------------------------------------------

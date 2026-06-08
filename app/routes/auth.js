@@ -60,6 +60,11 @@ module.exports = router => {
     const user = data.users.find((user) => user.email === email)
     const from = req.query.from
 
+    if (!user) {
+      res.redirect('/auth/okta-sign-in')
+      return
+    }
+
     const userOrganisationIds = user.organisations.map((organisation) => organisation.id)
     const organisations = data.organisations.filter((organisation) => userOrganisationIds.includes(organisation.id) )
 
@@ -75,6 +80,11 @@ module.exports = router => {
     const selectedOrganisationId = data.organisationId
     const email = data.email
     const user = data.users.find((user) => user.email === email)
+
+    if (!user) {
+      res.redirect('/auth/okta-sign-in')
+      return
+    }
 
     if (selectedOrganisationId) {
       req.session.data.currentUserId = user.id
