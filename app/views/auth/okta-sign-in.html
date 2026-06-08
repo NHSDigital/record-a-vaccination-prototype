@@ -29,23 +29,11 @@
 </main></div></div>
 
   <div style="background-color: #d8dde0; padding: 30px;">
-    <h2 class="nhsuk-heading-s">Testing area</h2>
-    <p>Log in as:</p>
-
-    <ul>
-      <li><a href="#" data-email="jane.smith@nhs.net" data-module="prefill-email">Lead admin for an NHS trust (multiple sites set up)</a></li>
-      <li><a href="#" data-email="henry.blue@nhs.net" data-module="prefill-email">Lead admin for an NHS trust (no vaccines set up)</a></li>
-      <li><a href="#" data-email="jeremy.blue@nhs.net" data-module="prefill-email">Lead admin for a single pharmacy</a></li>
-      <li><a href="#" data-email="ocean.merritt@nhs.net" data-module="prefill-email">Recorder for an NHS trust</a></li>
-      <li><a href="#" data-email="graham.wallace@nhs.net" data-module="prefill-email">Recorder for multiple NHS trusts</a></li>
-      <li><a href="#" data-email="phoebe.black@nhs.net" data-module="prefill-email">Admin at 2 NHS trusts</a></li>
-      <li><a href="#" data-email="paulina.sloan@nhs.net" data-module="prefill-email">Group admin at a small chain of pharmacies</a></li>
-      <li><a href="#" data-email="amanda.white@nhs.net" data-module="prefill-email">Group admin for a large chain of pharmacies with the same name</a></li>
-      <li><a href="#" data-email="jason.white@nhs.net" data-module="prefill-email">Regional lead</a></li>
-      <li><a href="#" data-email="sally.green@nhs.net" data-module="prefill-email">Support user</a></li>
-      <li><a href="#" data-email="kaisley.wells@nhs.net" data-module="prefill-email">Lead admin at a trust with all vaccines enabled</a></li>
-      <li><a href="#" data-email="jeremy13.blue@nhs.net" data-module="prefill-email">Lead admin at a London pharmacy with local vaccination programme enabled only</a></li>
-    </ul>
+    <div style="background-color: #ffffff; padding: 20px;">
+      <h2 class="nhsuk-heading-s">Testing area</h2>
+      {% set enableEmailPrefill = true %}
+      {% include "includes/_preset-scenarios-table.html" %}
+    </div>
   </div>
 
   <script>

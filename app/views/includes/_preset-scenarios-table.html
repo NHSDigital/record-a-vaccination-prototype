@@ -1,0 +1,159 @@
+{% set presetScenarios = [
+  {
+    presetLabel: "Lead admin, NHS Trust (multiple sites)",
+    presetPath: "/prototype-setup/preset/trust-lead-admin",
+    userName: "Jane Smith",
+    userEmail: "jane.smith@nhs.net",
+    role: "Lead administrator",
+    scenarioDetails: "NHS trust with multiple sites. Includes generated users and vaccination records."
+  },
+  {
+    presetLabel: "Lead admin, NHS Trust (no vaccines set up)",
+    presetPath: "/prototype-setup/preset/trust-lead-admin-no-vaccines",
+    userName: "Henry Blue",
+    userEmail: "henry.blue@nhs.net",
+    role: "Lead administrator",
+    scenarioDetails: "Newly added trust with no vaccines, users or vaccination records."
+  },
+  {
+    presetLabel: "Lead admin, single pharmacy",
+    presetPath: "/prototype-setup/preset/pharmacy-lead-admin",
+    userName: "Jeremy Blue",
+    userEmail: "jeremy.blue@nhs.net",
+    role: "Lead administrator",
+    scenarioDetails: "Lead admin at a pharmacy.Includes generated users and vaccination records."
+  },
+  {
+    presetLabel: "Recorder, single pharmacy",
+    presetPath: "/prototype-setup/preset/recorder-single",
+    userName: "Ocean Merritt",
+    userEmail: "ocean.merritt@nhs.net",
+    role: "Recorder",
+    scenarioDetails: "Recorder at Seaside Drive Pharmacy. Recorder permissions only, with no vaccines or additional users set up."
+  },
+  {
+    presetLabel: "Recorder, pharmacy with no appointments interface",
+    presetPath: "/prototype-setup/preset/recorder-pharmacy-no-appointments",
+    userName: "Riley Carter",
+    userEmail: "riley.carter@nhs.net",
+    role: "Recorder",
+    scenarioDetails: "Appointments interface is disabled for this pharmacy context."
+  },
+  {
+    presetLabel: "Recorder, multiple NHS Trusts",
+    presetPath: "/prototype-setup/preset/recorder-multi-trust",
+    userName: "Graham Wallace",
+    userEmail: "graham.wallace@nhs.net",
+    role: "Recorder",
+    scenarioDetails: "Recorder access across multiple trusts."
+  },
+  {
+    presetLabel: "Admin at 2 NHS Trusts",
+    presetPath: "/prototype-setup/preset/admin-two-trusts",
+    userName: "Phoebe Black",
+    userEmail: "phoebe.black@nhs.net",
+    role: "Lead administrator / Administrator",
+    scenarioDetails: "Access at 2 NHS trusts with different permission levels."
+  },
+  {
+    presetLabel: "Group admin, small pharmacy chain",
+    presetPath: "/prototype-setup/preset/pharmacy-group-admin-small",
+    userName: "Paulina Sloan",
+    userEmail: "paulina.sloan@nhs.net",
+    role: "Group administrator",
+    scenarioDetails: "Group admin for a small pharmacy chain (3 pharmacies with different names)."
+  },
+  {
+    presetLabel: "Group admin, large pharmacy chain (same name)",
+    presetPath: "/prototype-setup/preset/pharmacy-group-admin-large",
+    userName: "Amanda White",
+    userEmail: "amanda.white@nhs.net",
+    role: "Group administrator",
+    scenarioDetails: "Group admin for a large pharmacy chain (same-name pharmacies)."
+  },
+  {
+    presetLabel: "Regional lead",
+    presetPath: "/prototype-setup/preset/regions",
+    userName: "Jason White",
+    userEmail: "jason.white@nhs.net",
+    role: "Regional lead",
+    scenarioDetails: "Redirects to the regions interface."
+  },
+  {
+    presetLabel: "Support user",
+    presetPath: "/prototype-setup/preset/support-admin",
+    userName: "Sally Green",
+    userEmail: "sally.green@nhs.net",
+    role: "Support admin",
+    scenarioDetails: "System-wide support user with no default organisation. Redirects to support interface."
+  },
+  {
+    presetLabel: "Lead admin, trust with all vaccines enabled",
+    presetPath: "/prototype-setup/preset/all-vaccines-trust",
+    userName: "Kaisley Wells",
+    userEmail: "kaisley.wells@nhs.net",
+    role: "Lead administrator",
+    scenarioDetails: "All vaccine types enabled, plus generated users and vaccination records."
+  },
+  {
+    presetLabel: "Lead admin, London pharmacy (local vaccination programme only)",
+    presetPath: "/prototype-setup/preset/limited-vaccine-pharmacy",
+    userName: "Jeremy Blue",
+    userEmail: "jeremy13.blue@nhs.net",
+    role: "Lead administrator",
+    scenarioDetails: "Pharmacy configured for MMR and flu (London service) only."
+  }
+] %}
+
+{% set rows = [] %}
+{% for scenario in presetScenarios %}
+  {% set userCell = {
+    header: "User",
+    text: scenario.userName
+  } %}
+
+  {% if enableEmailPrefill %}
+    {% set userCell = {
+      header: "User",
+      html: '<a href="#" data-email="' + scenario.userEmail + '" data-module="prefill-email">' + scenario.userName + '</a>'
+    } %}
+  {% endif %}
+
+  {% set rows = (rows.push([
+    {
+      header: "Preset",
+      html: '<a href="' + scenario.presetPath + '">' + scenario.presetLabel + '</a>'
+    },
+    userCell,
+    {
+      header: "Role",
+      text: scenario.role
+    },
+    {
+      header: "Scenario details",
+      text: scenario.scenarioDetails
+    }
+  ]), rows) %}
+{% endfor %}
+
+{{ table({
+  responsive: true,
+  panel: false,
+  firstCellIsHeader: true,
+  head: [
+    {
+      text: "Preset",
+      classes: "nhsuk-u-width-one-third"
+    },
+    {
+      text: "User"
+    },
+    {
+      text: "Role"
+    },
+    {
+      text: "Scenario details"
+    }
+  ],
+  rows: rows
+}) }}
