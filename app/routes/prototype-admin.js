@@ -143,6 +143,43 @@ module.exports = (router) => {
     return productsByVaccine
   }
 
+  function buildCustomConfigViewModel(customConfig = {}) {
+    const selectedUser = SIGN_IN_USERS.find(user => user.id === customConfig.userId) || null
+    const selectedProductsByVaccine = getSelectedProductsByVaccine(customConfig.vaccineProducts || [])
+    const selectedVaccines = (customConfig.vaccines || []).filter(vaccineName =>
+      vaccineName && vaccineName !== '_unchecked' && vaccineName !== '__allVaccines'
+    )
+    const vaccineProductSelections = selectedVaccines.map(vaccineName => ({
+      vaccineName,
+      productNames: selectedProductsByVaccine[vaccineName] || []
+    }))
+
+    return {
+      customConfig,
+      selectedUser,
+      vaccineProductSelections
+    }
+  }
+
+  function getAvailableVaccines(data) {
+    const currentVaccines = data && data.vaccines
+    const hasCatalogueShape = Array.isArray(currentVaccines) && currentVaccines.every(vaccine =>
+      vaccine && typeof vaccine === 'object' && typeof vaccine.name === 'string'
+    )
+
+    if (hasCatalogueShape) {
+      return currentVaccines
+    }
+
+    const fallbackVaccines = JSON.parse(JSON.stringify(sessionDataDefaults.vaccines || []))
+
+    if (data) {
+      data.vaccines = fallbackVaccines
+    }
+
+    return fallbackVaccines
+  }
+
   function setupBatchesForOrg(data, orgId) {
     const org = data.organisations.find(o => o.id === orgId)
     if (!org) return
@@ -558,7 +595,11 @@ module.exports = (router) => {
       hint: { text: `${user.role} — ${user.orgDescription}` },
       checked: customConfig.userId === user.id
     }))
-    res.render('prototype-setup/custom-config-user', { radioItems, customConfig })
+    res.render('prototype-setup/custom-config-user', {
+      radioItems,
+      currentStep: 1,
+      ...buildCustomConfigViewModel(customConfig)
+    })
   })
 
   router.post('/prototype-setup/custom-config', (req, res) => {
@@ -572,8 +613,10 @@ module.exports = (router) => {
       }))
       res.render('prototype-setup/custom-config-user', {
         radioItems,
-        customConfig,
+        currentStep: 1,
         userSelectionError: 'Select a user'
+        ,
+        ...buildCustomConfigViewModel(customConfig)
       })
       return
     }
@@ -594,7 +637,7 @@ module.exports = (router) => {
 
   router.get('/prototype-setup/custom-config/vaccines', (req, res) => {
     const customConfig = req.session.data.customConfig || {}
-    const allVaccines = req.session.data.vaccines || []
+    const allVaccines = getAvailableVaccines(req.session.data)
     const selectedVaccines = customConfig.vaccines || []
     const selectedVaccineProducts = customConfig.vaccineProducts || []
     const productValueDelimiter = '__product__'
@@ -641,17 +684,21 @@ module.exports = (router) => {
         }
       }))
     ]
-    res.render('prototype-setup/custom-config-vaccines', { checkboxItems, customConfig })
+    res.render('prototype-setup/custom-config-vaccines', {
+      checkboxItems,
+      currentStep: 2,
+      ...buildCustomConfigViewModel(customConfig)
+    })
   })
 
   router.post('/prototype-setup/custom-config/vaccines', (req, res) => {
-    const selectedVaccines = (req.body.vaccines
-      ? (Array.isArray(req.body.vaccines) ? req.body.vaccines : [req.body.vaccines])
+    const selectedVaccines = (req.body.selectedVaccines
+      ? (Array.isArray(req.body.selectedVaccines) ? req.body.selectedVaccines : [req.body.selectedVaccines])
       : [])
       .filter(value => value && value !== '_unchecked')
 
     const explicitVaccineSelections = selectedVaccines.filter(value => value !== '__allVaccines')
-    const allVaccines = (req.session.data.vaccines || []).map(vaccine => vaccine.name)
+    const allVaccines = getAvailableVaccines(req.session.data).map(vaccine => vaccine.name)
     const enabledVaccines = selectedVaccines.includes('__allVaccines') && explicitVaccineSelections.length === 0
       ? allVaccines
       : explicitVaccineSelections
@@ -681,14 +728,32 @@ module.exports = (router) => {
 
   router.get('/prototype-setup/custom-config/batches', (req, res) => {
     res.render('prototype-setup/custom-config-batches', {
-      customConfig: req.session.data.customConfig || {}
+      currentStep: 3,
+      ...buildCustomConfigViewModel(req.session.data.customConfig || {})
     })
   })
 
   router.post('/prototype-setup/custom-config/batches', (req, res) => {
+    const selectedBatchOption = req.body.batchesPerProduct
+    const customBatchCount = String(req.body.customBatchesPerProduct || '').trim()
+
+    if (selectedBatchOption === 'custom' && !/^\d+$/.test(customBatchCount)) {
+      const customConfig = {
+        ...(req.session.data.customConfig || {}),
+        batchesPerProduct: customBatchCount
+      }
+
+      res.render('prototype-setup/custom-config-batches', {
+        currentStep: 3,
+        batchCountError: 'Enter a whole number of 0 or more',
+        ...buildCustomConfigViewModel(customConfig)
+      })
+      return
+    }
+
     req.session.data.customConfig = {
       ...(req.session.data.customConfig || {}),
-      batchesPerProduct: req.body.batchesPerProduct
+      batchesPerProduct: selectedBatchOption === 'custom' ? customBatchCount : selectedBatchOption
     }
     res.redirect('/prototype-setup/custom-config/data')
   })
@@ -699,7 +764,8 @@ module.exports = (router) => {
 
   router.get('/prototype-setup/custom-config/data', (req, res) => {
     res.render('prototype-setup/custom-config-data', {
-      customConfig: req.session.data.customConfig || {}
+      currentStep: 4,
+      ...buildCustomConfigViewModel(req.session.data.customConfig || {})
     })
   })
 
@@ -718,18 +784,8 @@ module.exports = (router) => {
 
   router.get('/prototype-setup/custom-config/check', (req, res) => {
     const customConfig = req.session.data.customConfig || {}
-    const selectedUser = SIGN_IN_USERS.find(u => u.id === customConfig.userId) || null
-    const selectedProductsByVaccine = getSelectedProductsByVaccine(customConfig.vaccineProducts || [])
-    const selectedVaccines = (customConfig.vaccines || []).filter(vaccineName => vaccineName && vaccineName !== '_unchecked' && vaccineName !== '__allVaccines')
-    const vaccineProductSelections = selectedVaccines.map(vaccineName => ({
-      vaccineName,
-      productNames: selectedProductsByVaccine[vaccineName] || []
-    }))
-
     res.render('prototype-setup/custom-config-check', {
-      customConfig,
-      selectedUser,
-      vaccineProductSelections
+      ...buildCustomConfigViewModel(customConfig)
     })
   })
 

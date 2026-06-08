@@ -59,6 +59,7 @@ require('./routes/support')(router)
 require('./routes/auth')(router)
 require('./routes/home')(router)
 require('./routes/helpers')(router)
+require('./routes/explorations')(router)
 
 router.get('/product-page', (req, res) => {
   // Sign out the user - this is just to make it easier

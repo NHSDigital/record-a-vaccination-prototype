@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% set pageName = 'Record vaccinations v2' %}
+
+{% block beforeContent %}
+  {{ backLink({
+    text: 'Back',
+    href: '/explorations'
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-l">Record vaccinations v2</h1>
+
+      <p>This is a safe exploration area for trying new journey ideas. It has its own route namespace and does not change the live prototype flow.</p>
+
+      {{ insetText({
+        text: 'Use this page as the starting point for alternative layouts, content, or step structures before deciding whether to merge anything into the main prototype.'
+      }) }}
+    </div>
+  </div>
+{% endblock %}

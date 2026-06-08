@@ -1,0 +1,119 @@
+{% set progressCardHtml %}
+  {% set progressItems = [] %}
+
+  {% if selectedUser %}
+    {% set userValue %}
+      <p class="nhsuk-body nhsuk-u-margin-bottom-1">{{ selectedUser.name }}</p>
+      <p class="nhsuk-body-s nhsuk-u-secondary-text-color nhsuk-u-margin-bottom-0">{{ selectedUser.role }} — {{ selectedUser.orgDescription }}</p>
+    {% endset %}
+  {% else %}
+    {% set userValue %}
+      <p class="nhsuk-body-s nhsuk-u-secondary-text-color nhsuk-u-margin-bottom-0">No user selected yet</p>
+    {% endset %}
+  {% endif %}
+  {% set progressItems = (progressItems.push({
+    title: 'User',
+    valueHtml: userValue
+  }), progressItems) %}
+
+  {% if vaccineProductSelections and (vaccineProductSelections | length) > 0 %}
+    {% set vaccinesValue %}
+      {% for vaccineSelection in vaccineProductSelections %}
+        {% if loop.index <= 5 %}
+        <p class="nhsuk-body-s nhsuk-u-margin-bottom-1">
+          <strong>{{ vaccineSelection.vaccineName.charAt(0).toUpperCase() + vaccineSelection.vaccineName.slice(1) }}</strong>
+          {% if vaccineSelection.productNames and (vaccineSelection.productNames | length) > 0 %}
+            — {{ vaccineSelection.productNames | join(', ') }}
+          {% else %}
+            — all products
+          {% endif %}
+        </p>
+        {% endif %}
+      {% endfor %}
+
+      {% if (vaccineProductSelections | length) > 5 %}
+        {% set hiddenVaccinesHtml %}
+          {% for vaccineSelection in vaccineProductSelections %}
+            {% if loop.index > 5 %}
+              <p class="nhsuk-body-s nhsuk-u-margin-bottom-1">
+                <strong>{{ vaccineSelection.vaccineName.charAt(0).toUpperCase() + vaccineSelection.vaccineName.slice(1) }}</strong>
+                {% if vaccineSelection.productNames and (vaccineSelection.productNames | length) > 0 %}
+                  — {{ vaccineSelection.productNames | join(', ') }}
+                {% else %}
+                  — all products
+                {% endif %}
+              </p>
+            {% endif %}
+          {% endfor %}
+        {% endset %}
+
+        <div class="app-custom-config-progress-card__details">
+          {{ details({
+            summaryText: 'Show ' + ((vaccineProductSelections | length) - 5) + ' more',
+            html: hiddenVaccinesHtml
+          }) }}
+        </div>
+      {% endif %}
+    {% endset %}
+  {% else %}
+    {% set vaccinesValue %}
+      <p class="nhsuk-body-s nhsuk-u-secondary-text-color nhsuk-u-margin-bottom-0">No vaccines selected yet</p>
+    {% endset %}
+  {% endif %}
+  {% set progressItems = (progressItems.push({
+    title: 'Vaccines',
+    valueHtml: vaccinesValue
+  }), progressItems) %}
+
+  {% if customConfig and customConfig.batchesPerProduct %}
+    {% set batchesValue %}
+      <p class="nhsuk-body nhsuk-u-margin-bottom-0">{{ customConfig.batchesPerProduct }}</p>
+    {% endset %}
+  {% else %}
+    {% set batchesValue %}
+      <p class="nhsuk-body-s nhsuk-u-secondary-text-color nhsuk-u-margin-bottom-0">No batch count selected yet</p>
+    {% endset %}
+  {% endif %}
+  {% set progressItems = (progressItems.push({
+    title: 'Batches per product',
+    valueHtml: batchesValue
+  }), progressItems) %}
+
+  {% if customConfig and (customConfig.additionalUsers or customConfig.vaccinations) %}
+    {% set dataValue %}
+      <p class="nhsuk-body-s nhsuk-u-margin-bottom-1">Additional users: <strong>{{ customConfig.additionalUsers or '0' }}</strong></p>
+      <p class="nhsuk-body-s nhsuk-u-margin-bottom-0">Vaccination records: <strong>{{ customConfig.vaccinations or '0' }}</strong></p>
+    {% endset %}
+  {% else %}
+    {% set dataValue %}
+      <p class="nhsuk-body-s nhsuk-u-secondary-text-color nhsuk-u-margin-bottom-0">No data volume (users and vaccinations) selected yet</p>
+    {% endset %}
+  {% endif %}
+  {% set progressItems = (progressItems.push({
+    title: 'Data volume',
+    valueHtml: dataValue
+  }), progressItems) %}
+
+  {% for progressItem in progressItems %}
+    <div class="nhsuk-u-margin-bottom-4">
+      <p class="nhsuk-body nhsuk-u-font-weight-bold nhsuk-u-secondary-text-color nhsuk-u-margin-bottom-1">{{ progressItem.title }}</p>
+      {{ progressItem.valueHtml | safe }}
+    </div>
+  {% endfor %}
+{% endset %}
+
+{% set progressCardHeadingHtml %}
+  <span class="nhsuk-heading-m nhsuk-u-margin-bottom-3">Custom configuration</span>
+{% endset %}
+
+{% set progressCardDescriptionHtml %}
+  <p class="nhsuk-body-s nhsuk-u-secondary-text-color nhsuk-u-margin-bottom-4">This summary updates as you make selections in each step.</p>
+  <hr class="nhsuk-section-break nhsuk-section-break--s nhsuk-section-break--visible nhsuk-u-margin-bottom-4">
+  {{ progressCardHtml | safe }}
+{% endset %}
+
+{{ card({
+  classes: 'nhsuk-u-margin-top-0',
+  headingHtml: progressCardHeadingHtml,
+  descriptionHtml: progressCardDescriptionHtml
+}) }}
