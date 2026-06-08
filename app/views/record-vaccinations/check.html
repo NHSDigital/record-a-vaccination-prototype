@@ -218,7 +218,7 @@
               text: "Vaccine"
             },
             value: {
-              html: (data.vaccine ) + "<br>" + data.vaccineProduct
+              html: (data.vaccine | capitaliseFirstLetter) + "<br>" + (data.vaccineProduct | capitaliseFirstLetter)
             },
             actions: {
               items: [
