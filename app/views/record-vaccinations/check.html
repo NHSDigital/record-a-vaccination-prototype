@@ -218,7 +218,7 @@
               text: "Vaccine"
             },
             value: {
-              html: (data.vaccine | vaccineDisplayName) + "<br>" + data.vaccineProduct
+              html: (data.vaccine | capitaliseFirstLetter) + "<br>" + (data.vaccineProduct | capitaliseFirstLetter)
             },
             actions: {
               items: [
@@ -297,7 +297,7 @@
                 }
               ]
             }
-          } if (data.vaccine === "flu" or data.vaccine == "COVID-19"),
+          } if (data.vaccine == "COVID-19"),
           {
             key: {
               text: "Role"

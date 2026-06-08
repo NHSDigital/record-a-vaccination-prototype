@@ -64,7 +64,7 @@
       {% if data.vaccinesToReport %}
         {% set vaccinesToReportDisplay = [] %}
         {% for vaccine in (data.vaccinesToReport | sort(false, false, "name")) %}
-          {% set vaccinesToReportDisplay = (vaccinesToReportDisplay.push(vaccine | vaccineDisplayName), vaccinesToReportDisplay) %}
+          {% set vaccinesToReportDisplay = (vaccinesToReportDisplay.push(vaccine ), vaccinesToReportDisplay) %}
         {% endfor %}
         {% set vaccinesToReportText = vaccinesToReportDisplay | join(", ") %}
       {% endif %}

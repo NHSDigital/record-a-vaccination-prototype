@@ -19,8 +19,6 @@
   {% set nextPage = "/record-vaccinations/consent" %}
 {% elseif data.repeatPatient === "yes" %}
   {% set nextPage = "/record-vaccinations/vaccine" %}
-{% elseif data.vaccinationToday %}
-  {% set nextPage = "/record-vaccinations/vaccinator" %}
 {% else %}
   {% set nextPage = "/record-vaccinations/vaccination-date" %}
 {% endif %}
@@ -188,7 +186,7 @@
                 text: "25 October 2024"
               },
               {
-                text: "flu"
+                text: "Flu"
               },
               {
                 text: "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)"
@@ -210,7 +208,7 @@
                 text: "10 October 2023"
               },
               {
-                text: "flu"
+                text: "Flu"
               },
               {
                 text: "Not known",
