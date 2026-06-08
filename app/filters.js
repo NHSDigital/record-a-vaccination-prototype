@@ -53,21 +53,10 @@ module.exports = function () {
       'mmrv': 'MMRV',
       'hpv': 'HPV',
       'menb': 'MenB',
-      'flu': 'flu',
-      'flu (london service)': 'flu (London service)',
       'hepatitis b': 'Hepatitis B'
     }
 
     const normalisedName = trimmedName.toLowerCase()
-
-    // Always keep flu in sentence case, including unknown flu variants.
-    if (normalisedName.startsWith('flu')) {
-      if (normalisedName === 'flu (london service)') {
-        return 'flu (London service)'
-      }
-
-      return trimmedName.replace(/^flu/i, 'flu')
-    }
 
     if (vaccineNameMap[normalisedName]) {
       return vaccineNameMap[normalisedName]
