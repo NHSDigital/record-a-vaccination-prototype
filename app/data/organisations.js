@@ -9037,6 +9037,33 @@ module.exports = [
     ]
   },
   {
+    id: "FS2847",
+    name: "Seaside Drive Pharmacy",
+    address: {
+      line1: "42 Seaside Drive",
+      town: "Torquay",
+      postcode: "TQ1 2BH"
+    },
+    type: "Community Pharmacy",
+    status: "Active",
+    region: "Y50",
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
+    sites: [
+      {
+        id: "FS2847-01",
+        name: "Seaside Drive Pharmacy",
+        address: {
+          line1: "42 Seaside Drive",
+          town: "Torquay",
+          postcode: "TQ1 2BH"
+        }
+      }
+    ]
+  },
+  {
     id: "FS5W89",
     name: "MediCare Pharmacy",
     companyId: 'P15951',

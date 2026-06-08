@@ -189,7 +189,7 @@ module.exports = [
     "email": "ocean.merritt@nhs.net",
     "organisations": [
       {
-        "id": "FR4V56",
+        "id": "FS2847",
         "permissionLevel": "Recorder",
         "status": "Active",
         "vaccinator": true

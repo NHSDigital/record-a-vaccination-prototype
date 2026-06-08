@@ -502,7 +502,7 @@ module.exports = (router) => {
     resetSession(req)
     const data = req.session.data
     data.currentUserId = '1394978032564'
-    data.currentOrganisationId = 'FR4V56'
+    data.currentOrganisationId = 'FS2847'
     res.redirect('/home')
   })
 
