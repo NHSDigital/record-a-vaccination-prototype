@@ -37,7 +37,7 @@
         {% for vaccine in (enabledVaccines | sort(false, false, "name")) %}
           {% set items = (items.push({
             value: vaccine.name,
-            text: (vaccine.name | vaccineDisplayName)
+            text: (vaccine.name )
           }), items) %}
         {% endfor %}
 

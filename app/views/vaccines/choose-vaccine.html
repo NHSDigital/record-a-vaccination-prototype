@@ -44,7 +44,7 @@
 
           {% set items = (items.push({
             value: vaccine.name,
-            text: (vaccine.name | vaccineDisplayName),
+            text: (vaccine.name ),
             conditional: {
               html: conditionalHtml
             } if vaccine.products
@@ -82,7 +82,7 @@
 
             {% set requestableItems = (requestableItems.push({
               value: vaccine,
-              text: (vaccine | vaccineDisplayName)
+              text: (vaccine )
             }), requestableItems) %}
           {% endfor %}
 

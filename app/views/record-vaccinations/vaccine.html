@@ -84,7 +84,7 @@
 
         {% set items = (items.push({
           value: vaccine.name,
-          text: (vaccine.name | vaccineDisplayName),
+          text: (vaccine.name ),
           conditional: {
             html: conditionalHtml
           } if vaccine.products
