@@ -15,13 +15,8 @@
 
 {% block content %}
 
-  {% set errors = [] %}
-
-  {% if data.showError == "yes" %}
-    {% set errors = [{
-      text: "Select which dose of the " + data.vaccine + " are you giving",
-      href: "#vaccineDose"
-    }] %}
+        {% if data.vaccine == "flu" %}
+          {% set radiosHint = "Only select 2nd dose if the child is in an at-risk group and had their 1st ever dose earlier this season" %}
   {% endif %}
 
   <div class="nhsuk-grid-row">
@@ -45,8 +40,8 @@
           ] %}
         {% elif data.vaccine == "flu" %}
           {% set doseOptions = [
-            "1st or only dose this season",
-            "2nd dose this season"
+            "1st dose",
+            "2nd dose"
           ] %}
         {% elif data.vaccine == "MenB" %}
           {% set doseOptions = [
@@ -54,17 +49,39 @@
             "2nd dose",
             "Booster"
           ] %}
-        {% elif data.vaccine == "MMRV" %}
+        {% elif data.vaccine == "HPV" %}
           {% set doseOptions = [
             "1st dose",
             "2nd dose",
             "3rd dose"
+          ] %}
+        {% elif data.vaccine == "MMR" %}
+          {% set doseOptions = [
+            "1st dose",
+            "2nd dose"
+          ] %}
+        {% elif data.vaccine == "Td/IPV" %}
+          {% set doseOptions = [
+            "1st dose",
+            "2nd dose",
+            "3rd dose",
+            "Booster"
+          ] %}
+        {% elif data.vaccine == "MMRV" %}
+          {% set doseOptions = [
+            "1st dose",
+            "2nd dose"
           ] %}
         {% elif data.vaccine == "pneumococcal" %}
           {% set doseOptions = [
             "1st dose",
             "2nd dose",
             "Booster"
+          ] %}
+        {% elif data.vaccine == "shingles" %}
+          {% set doseOptions = [
+            "1st dose",
+            "2nd dose"
           ] %}
         {% else %}
           {% set doseOptions = [] %}
@@ -84,40 +101,64 @@
             {% set hintText = "Only given as part of the routine infant schedule" %}
           {% endif %}
         
-          {% if hintText %}
-            {% set items = (items.push({
-              text: option,
-              value: option,
-              checked: (data.vaccineDose == option),
-              hint: {
-                text: hintText
-              }
-            }), items) %}
-          {% else %}
-            {% set items = (items.push({
-              text: option,
-              value: option,
-              checked: (data.vaccineDose == option)
-            }), items) %}
-          {% endif %}
+          {% set items = (items.push({
+            text: option,
+            value: option,
+            checked: (data.vaccineDose == option)
+          }), items) %}
 
         {% endfor %}
 
-        {{ radios({
-          idPrefix: "vaccineDose",
-          name: "vaccineDose",
-          errorMessage: {
-            text: (errors | first).text
-          } if (errors | length) > 0,
-          fieldset: {
-            legend: {
-              text: ("Which dose of the " + data.vaccine + " vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which dose of the " + data.vaccine + " vaccine was it?"),
-              classes: "nhsuk-fieldset__legend--l",
-              isPageHeading: true
-            }
-          },
-          items: items
-        }) }}
+        {# Set custom hint text for each vaccine #}
+        {% set radiosHint = false %}
+        {% if data.vaccine == "flu" %}
+          {% set radiosHint = "Only select 2nd dose if the child is in an at-risk group and had their 1st ever dose earlier this season" %}
+        {% elif data.vaccine == "MenB" %}
+          {% set radiosHint = "The booster dose is only given as part of the routine infant schedule" %}
+        {% elif data.vaccine == "HPV" %}
+          {% set radiosHint = "Most people aged 24 and under only need a 1st dose of the HPV vaccine" %}
+        {% elif data.vaccine == "Td/IPV" %}
+          {% set radiosHint = "Most people aged 24 and under only need a 1st dose of the Td/IPV vaccine" %}
+        {% elif data.vaccine == "pneumococcal" %}
+          {% set radiosHint = "Most people aged 65 and over only need a 1st dose of the pneumococcal vaccine" %}
+        {% endif %}
+
+        {% if radiosHint %}
+          {{ radios({
+            idPrefix: "vaccineDose",
+            name: "vaccineDose",
+            errorMessage: {
+              text: (errors | first).text
+            } if (errors | length) > 0,
+            fieldset: {
+              legend: {
+                text: ("Which dose of the " + data.vaccine + " vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which dose of the " + data.vaccine + " vaccine was it?"),
+                classes: "nhsuk-fieldset__legend--l",
+                isPageHeading: true
+              }
+            },
+            hint: {
+              text: radiosHint
+            },
+            items: items
+          }) }}
+        {% else %}
+          {{ radios({
+            idPrefix: "vaccineDose",
+            name: "vaccineDose",
+            errorMessage: {
+              text: (errors | first).text
+            } if (errors | length) > 0,
+            fieldset: {
+              legend: {
+                text: ("Which dose of the " + data.vaccine + " vaccine are you giving?" if data.vaccinationToday == 'yes' else "Which dose of the " + data.vaccine + " vaccine was it?"),
+                classes: "nhsuk-fieldset__legend--l",
+                isPageHeading: true
+              }
+            },
+            items: items
+          }) }}
+        {% endif %}
 
         {{ button({
           text: "Continue"
