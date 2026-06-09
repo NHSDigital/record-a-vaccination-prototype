@@ -1,0 +1,110 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies-users" %}
+{% set pageName = user.firstName + " " + user.lastName %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/users"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      {% if addedToPharmacy %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            User updated
+          </h3>
+          <p>{{ user.firstName }} {{ user.lastName }} has been added to {{ addedToPharmacy.name }}</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
+      {% if deactivatedFromPharmacy %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            User updated
+          </h3>
+          <p>{{ user.firstName }} {{ user.lastName }} has been deactivated from {{ deactivatedFromPharmacy.name }}</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
+      <h1 class="nhsuk-heading-l">{{ user.firstName }} {{ user.lastName }}</h1>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Email"
+            },
+            value: {
+              text: user.email
+            }
+          }
+        ]
+      }) }}
+    </div>
+  </div>
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+      <h2 class="nhsuk-heading-m">Access and permission levels</h2>
+
+      {% if pharmacyRoles and (pharmacyRoles | length) > 0 %}
+        <table class="nhsuk-table">
+          <thead class="nhsuk-table__head">
+            <tr class="nhsuk-table__row">
+              <th class="nhsuk-table__header" scope="col">Pharmacy</th>
+              <th class="nhsuk-table__header" scope="col">Permission level</th>
+              <th class="nhsuk-table__header" scope="col">Vaccinator</th>
+              <th class="nhsuk-table__header" scope="col">Status</th>
+              <th class="nhsuk-table__header" scope="col"><span class="nhsuk-u-visually-hidden">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody class="nhsuk-table__body">
+            {% for role in pharmacyRoles %}
+              <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">{{ role.pharmacy.name }}</td>
+                <td class="nhsuk-table__cell">{{ role.permissionLevel }}</td>
+                <td class="nhsuk-table__cell">{{ "Yes" if role.vaccinator else "No" }}</td>
+                <td class="nhsuk-table__cell">{{ role.status }}</td>
+                <td class="nhsuk-table__cell" style="white-space: nowrap;">
+                  <a href="/pharmacies/{{ role.pharmacy.id }}/users/{{ user.id }}/change?from=user">Change<span class="nhsuk-u-visually-hidden"> permission level at {{ role.pharmacy.name }}</span></a>
+                  {% if role.status != 'Deactivated' %}
+                    &nbsp;
+                    <a href="/pharmacies/{{ role.pharmacy.id }}/users/{{ user.id }}/deactivate-from-pharmacy">Deactivate<span class="nhsuk-u-visually-hidden"> from {{ role.pharmacy.name }}</span></a>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        {{ button({
+          text: "Add to another pharmacy",
+          href: "/pharmacies/users/" + user.id + "/add-to",
+          classes: "nhsuk-button--secondary"
+        }) }}
+      {% else %}
+        <p>This user is not currently added to any individual pharmacies.</p>
+
+        {{ button({
+          text: "Add to a pharmacy",
+          href: "/pharmacies/users/" + user.id + "/add-to",
+          classes: "nhsuk-button--secondary"
+        }) }}
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

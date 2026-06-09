@@ -15,7 +15,32 @@
     <div class="nhsuk-grid-column-two-thirds">
       <form action="/pharmacies/users/{{ user.id }}/add-to-check" method="post">
 
-        <h1 class="nhsuk-heading-l">What should {{ user.firstName }} {{ user.lastName}}'s role at {{ pharmacy.name }} be?</h1>
+        <h1 class="nhsuk-heading-l">What should {{ user.firstName }} {{ user.lastName}}'s role at {{ pharmacy.name }} ({{ pharmacy.id }}) be?</h1>
+
+        {{ radios({
+          name: "vaccinator",
+          fieldset: {
+            legend: {
+              text: "Are they a vaccinator?",
+              size: "s"
+            }
+          },
+          hint: {
+            text: "Vaccination records include the name of the person who gave the vaccination"
+          },
+          value: data.vaccinator,
+          items: [
+            {
+              value: "yes",
+              text: "Yes",
+              id: "vaccinator"
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
 
         {{ radios({
           name: "permissionLevel",
@@ -48,31 +73,6 @@
               hint: {
                 text: "Record vaccinations, create reports, manage vaccines and users"
               }
-            }
-          ]
-        }) }}
-
-        {{ radios({
-          name: "vaccinator",
-          fieldset: {
-            legend: {
-              text: "Are they a vaccinator?",
-              size: "s"
-            }
-          },
-          hint: {
-            text: "Vaccination records include the name of the person who gave the vaccination"
-          },
-          value: data.vaccinator,
-          items: [
-            {
-              value: "yes",
-              text: "Yes",
-              id: "vaccinator"
-            },
-            {
-              value: "no",
-              text: "No"
             }
           ]
         }) }}

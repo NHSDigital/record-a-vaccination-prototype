@@ -1,0 +1,125 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Users" %}
+{% set currentSection = "pharmacies-users" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      {% if req.query.added == "true" %}
+        {{ notificationBanner({
+          titleText: "Success",
+          html: "User added"
+        }) }}
+      {% endif %}
+      {% if deactivatedGroupAdmin %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            User deactivated
+          </h3>
+          <p>{{ deactivatedGroupAdmin.firstName }} {{ deactivatedGroupAdmin.lastName }} has been successfully deactivated from the pharmacy group</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+      {% if deactivatedUser and deactivatedFromPharmacy %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            User deactivated
+          </h3>
+          <p>{{ deactivatedUser.firstName }} {{ deactivatedUser.lastName }} has been successfully deactivated from {{ deactivatedFromPharmacy.name }} ({{ deactivatedFromPharmacy.id }})</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
+      <h1 class="nhsuk-heading-l">Users</h1>
+
+      <p>Add a new user or change the permissions of an existing user.</p>
+
+      {{ button({
+        text: "Add user",
+        href: "/pharmacies/users/new"
+      }) }}
+
+      <h2 class="nhsuk-heading-m">Group administrators</h2>
+
+      {% if groupAdministrators and (groupAdministrators | length) > 0 %}
+        <table class="nhsuk-table">
+          <thead class="nhsuk-table__head">
+            <tr class="nhsuk-table__row">
+              <th class="nhsuk-table__header" scope="col">Name</th>
+              <th class="nhsuk-table__header" scope="col">Email</th>
+              {% if (groupAdministrators | length) >= 2 %}
+                <th class="nhsuk-table__header" scope="col"></th>
+              {% endif %}
+            </tr>
+          </thead>
+          <tbody class="nhsuk-table__body">
+            {% for user in groupAdministrators %}
+              <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">{{ user.firstName }} {{ user.lastName }}</td>
+                <td class="nhsuk-table__cell">{{ user.email }}</td>
+                {% if (groupAdministrators | length) >= 2 %}
+                  <td class="nhsuk-table__cell app-table__cell--right-aligned">
+                    <a href="/pharmacies/{{ currentOrganisation.id }}/users/{{ user.id }}/deactivate-from-group">Deactivate<span class="nhsuk-u-visually-hidden"> {{ user.firstName }} {{ user.lastName }}</span></a>
+                  </td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>No group administrators added yet.</p>
+      {% endif %}
+
+      <h2 class="nhsuk-heading-m">Users at individual pharmacies</h2>
+
+      {% if users and (users | length) > 0 %}
+        {% if (users | length) > 10 %}
+          {{ input({
+            id: "pharmacy-search",
+            name: "pharmacySearch",
+            type: "search",
+            label: {
+              text: "Search"
+            },
+            classes: "nhsuk-input--width-20",
+            formGroup: {
+              classes: "nhsuk-u-margin-bottom-4"
+            }
+          }) }}
+        {% endif %}
+
+        <table class="nhsuk-table" id="pharmacies-table-data">
+          <thead class="nhsuk-table__head">
+            <tr class="nhsuk-table__row">
+              <th class="nhsuk-table__header" scope="col">Name</th>
+              <th class="nhsuk-table__header" scope="col">Email</th>
+              <th class="nhsuk-table__header" scope="col">Pharmacies</th>
+              <th class="nhsuk-table__header" scope="col"><span class="nhsuk-u-visually-hidden">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody class="nhsuk-table__body">
+            {% for user in users %}
+              <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">{{ user.firstName }} {{ user.lastName }}</td>
+                <td class="nhsuk-table__cell">{{ user.email }}</td>
+                <td class="nhsuk-table__cell">{{ userPharmacyCounts[user.id] or 0 }}</td>
+                <td class="nhsuk-table__cell"><a href="/pharmacies/users/{{ user.id }}">Manage<span class="nhsuk-u-visually-hidden"> {{ user.firstName }} {{ user.lastName }}</span></a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>No users added to individual pharmacies yet.</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

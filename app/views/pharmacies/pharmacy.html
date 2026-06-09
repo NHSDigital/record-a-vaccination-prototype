@@ -118,8 +118,12 @@
                 <td class="nhsuk-table__cell ">
                   {{ userOrganisationPermissions[user.id].status }}
                 </td>
-                <td class="nhsuk-table__cell">
+                <td class="nhsuk-table__cell" style="white-space: nowrap;">
                   <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/change?from=pharmacy">Change<span class="nhsuk-u-visually-hidden">permission level for {{ user.firstName }} {{ user.lastName }}</span></a>
+                  {% if userOrganisationPermissions[user.id].status != 'Deactivated' %}
+                    &nbsp;
+                    <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/deactivate-from-pharmacy">Deactivate<span class="nhsuk-u-visually-hidden"> {{ user.firstName }} {{ user.lastName }}</span></a>
+                  {% endif %}
                 </td>
               </tr>
             {% endfor %}

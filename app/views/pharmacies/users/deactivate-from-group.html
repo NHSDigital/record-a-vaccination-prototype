@@ -6,7 +6,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/pharmacies/users/" + user.id,
+    href: "/pharmacies/users",
     text: "Back"
   }) }}
 {% endblock %}
@@ -15,16 +15,15 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+      <h1 class="nhsuk-heading-l">Deactivate {{ user.firstName }} {{ user.lastName }} from {{ groupName }}</h1>
 
-      <h1 class="nhsuk-heading-l">Deactivate {{ user.firstName }} {{ user.lastName }} from {{ pharmacy.name }} ({{ pharmacy.id }})</h1>
-
-      <p>Once you deactivate {{ user.firstName }} {{ user.lastName }} ({{ user.email}}), they cannot sign in and use NHS Record a vaccination at this pharmacy. They’ll receive an email to confirm their account has been deactivated.</p>
+      <p>Once you deactivate {{ user.firstName }} {{ user.lastName }} ({{ user.email }}), they cannot sign in and use NHS Record a vaccination for this pharmacy group. They’ll receive an email to confirm their account has been deactivated.</p>
 
       <p>Their Okta account will remain active, so they can continue to access other services.</p>
 
       <p>You can reactivate their account anytime.</p>
 
-      <form action="/pharmacies/{{ pharmacy.id }}/users/{{ user.id }}/deactivate-from-pharmacy-answer" method="post" novalidate="true">
+      <form action="/pharmacies/{{ groupId }}/users/{{ user.id }}/deactivate-from-group-answer" method="post" novalidate="true">
         {{ button({
           "text": "Deactivate",
           classes: "nhsuk-button--warning"
@@ -33,6 +32,5 @@
 
     </div>
   </div>
-
 
 {% endblock %}
