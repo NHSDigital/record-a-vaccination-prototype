@@ -9157,5 +9157,88 @@ module.exports = [
     type: 'Pharmacy HQ',
     status: 'Active',
     region: "Y56"
+  },
+  {
+    id: "FCX831",
+    name: "Riverside Community Pharmacy",
+    address: {
+      line1: "42 River Street",
+      town: "Bristol",
+      postcode: "BS2 8NT"
+    },
+    type: "Community Pharmacy",
+    status: "Closed",
+    region: "Y56",
+    companyId: "P0191N",
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "flu", status: "enabled"}
+    ],
+    sites: [
+      {
+        id: "FCX831-01",
+        name: "Riverside Community Pharmacy",
+        address: {
+          line1: "42 River Street",
+          town: "Bristol",
+          postcode: "BS2 8NT"
+        }
+      }
+    ]
+  },
+  {
+    id: "FDX942",
+    name: "Central Health Pharmacy",
+    address: {
+      line1: "78 Main Street",
+      town: "Oxford",
+      postcode: "OX1 3HR"
+    },
+    type: "Community Pharmacy",
+    status: "Closed",
+    region: "Y56",
+    companyId: "P0191N",
+    vaccines: [
+      {name: "COVID-19", status: "enabled"}
+    ],
+    sites: [
+      {
+        id: "FDX942-01",
+        name: "Central Health Pharmacy",
+        address: {
+          line1: "78 Main Street",
+          town: "Oxford",
+          postcode: "OX1 3HR"
+        }
+      }
+    ]
+  },
+  {
+    id: "FEY153",
+    name: "Wellcare Pharmacy",
+    address: {
+      line1: "156 High Street",
+      town: "Edinburgh",
+      postcode: "EH8 8DH"
+    },
+    type: "Community Pharmacy",
+    status: "Closed",
+    region: "Y56",
+    companyId: "P15951",
+    vaccines: [
+      {name: "COVID-19", status: "enabled"},
+      {name: "MMR", status: "enabled"}
+    ],
+    sites: [
+      {
+        id: "FEY153-01",
+        name: "Wellcare Pharmacy",
+        address: {
+          line1: "156 High Street",
+          town: "Edinburgh",
+          postcode: "EH8 8DH"
+        }
+      }
+    ]
   }
 ]

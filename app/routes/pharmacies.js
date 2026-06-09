@@ -19,11 +19,15 @@ module.exports = router => {
 
     const companyId = res.locals.currentOrganisation.id
 
-    const organisations = data.organisations.filter((organisation) => organisation.companyId === companyId).sort(sortByNameThenPostcode())
+    const allOrganisations = data.organisations.filter((organisation) => organisation.companyId === companyId).sort(sortByNameThenPostcode())
+    
+    // Separate active/deactivated pharmacies from closed ones
+    const organisations = allOrganisations.filter((org) => org.status !== 'Closed')
+    const closedOrganisations = allOrganisations.filter((org) => org.status === 'Closed')
 
     let organisationUserCounts = {}
 
-    for (const organisation of organisations) {
+    for (const organisation of allOrganisations) {
       organisationUserCounts[organisation.id] = data.users
         .filter((user) => (user.organisations || [])
           .find((orgPermission) => orgPermission.id === organisation.id)
@@ -33,6 +37,7 @@ module.exports = router => {
 
     res.render('pharmacies/index', {
       organisations,
+      closedOrganisations,
       organisationUserCounts,
       added
     })
