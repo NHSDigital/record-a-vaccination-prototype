@@ -4,7 +4,7 @@
 
 {% block content %}
   <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-three-quarters">
+    <div class="nhsuk-grid-column-full">
 
       {% if added %}
         {% set html %}
@@ -51,7 +51,10 @@
               Users
             </th>
             <th role="columnheader" class="" scope="col">
-              Actions
+              Status
+            </th>
+            <th role="columnheader" class="" scope="col">
+              <span class="nhsuk-u-visually-hidden">Actions</span>
             </th>
           </tr>
         </thead>
@@ -73,6 +76,9 @@
               </td>
               <td class="nhsuk-table__cell ">
                 {{ organisationUserCounts[organisation.id] }}
+              </td>
+              <td class="nhsuk-table__cell ">
+                {{ organisation.status }}
               </td>
               <td class="nhsuk-table__cell ">
                 <a href="/pharmacies/{{ organisation.id }}">Manage</a>
