@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Custom configuration — Additional users" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    text: "Back",
+    href: "/prototype-setup/custom-config/batches"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <span class="nhsuk-caption-l">Step 4 of 5</span>
+      <h1 class="nhsuk-heading-l">How many additional users do you want to add?</h1>
+
+      <form action="/prototype-setup/custom-config/data" method="post" novalidate>
+
+        {{ radios({
+          idPrefix: "additionalUsers",
+          name: "additionalUsers",
+          fieldset: {
+            legend: {
+              text: "Additional users",
+              isPageHeading: false,
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          hint: {
+            text: "Randomly generated users added to the selected organisation"
+          },
+          items: [
+            { value: "0", text: "None", checked: customConfig.additionalUsers === "0" or not customConfig.additionalUsers },
+            { value: "5", text: "5", checked: customConfig.additionalUsers === "5" },
+            { value: "15", text: "15", checked: customConfig.additionalUsers === "15" },
+            { value: "30", text: "30", checked: customConfig.additionalUsers === "30" }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+
+    <div class="nhsuk-grid-column-one-third">
+      {% include 'prototype-setup/_custom-config-progress-card.html' %}
+    </div>
+  </div>
+{% endblock %}

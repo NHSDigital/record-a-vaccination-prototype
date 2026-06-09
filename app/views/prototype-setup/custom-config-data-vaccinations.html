@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Custom configuration — Vaccination records" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    text: "Back",
+    href: "/prototype-setup/custom-config/data"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <span class="nhsuk-caption-l">Step 5 of 5</span>
+      <h1 class="nhsuk-heading-l">How many vaccination records do you want to add?</h1>
+
+      <form action="/prototype-setup/custom-config/data-vaccinations" method="post" novalidate>
+
+        {{ radios({
+          idPrefix: "vaccinations",
+          name: "vaccinations",
+          fieldset: {
+            legend: {
+              text: "Vaccination records",
+              isPageHeading: false,
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          hint: {
+            text: "Randomly generated vaccination records for the selected organisation"
+          },
+          items: [
+            { value: "0", text: "None", checked: customConfig.vaccinations === "0" or not customConfig.vaccinations },
+            { value: "10", text: "10", checked: customConfig.vaccinations === "10" },
+            { value: "30", text: "30", checked: customConfig.vaccinations === "30" },
+            { value: "100", text: "100", checked: customConfig.vaccinations === "100" }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+
+    <div class="nhsuk-grid-column-one-third">
+      {% include 'prototype-setup/_custom-config-progress-card.html' %}
+    </div>
+  </div>
+{% endblock %}

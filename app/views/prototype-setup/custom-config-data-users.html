@@ -1,0 +1,188 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Custom configuration — Additional users" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    text: "Back",
+    href: "/prototype-setup/custom-config/batches"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <style>
+    .app-user-count-pair {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .app-user-count-pair > .nhsuk-grid-column-one-half {
+      float: none;
+      width: auto;
+      flex: 0 0 auto;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      min-width: 140px;
+    }
+
+    .app-user-count-pair .nhsuk-form-group {
+      margin-bottom: 8px;
+    }
+  </style>
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if additionalUserCountErrors and (additionalUserCountErrors | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: additionalUserCountErrors
+        }) }}
+      {% endif %}
+
+      <span class="nhsuk-caption-l">Step 4 of 5</span>
+      <h1 class="nhsuk-heading-l">How many additional users do you want to add for each permission level, and how many should be vaccinators?</h1>
+
+      <form action="/prototype-setup/custom-config/data" method="post" novalidate>
+
+        <p>For each permission level, enter total users and then how many of those users should be vaccinators.</p>
+        <p>Use whole numbers of 0 or more. Vaccinator counts cannot be higher than total users for that permission level.</p>
+
+        <h2 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Lead administrator</h2>
+        <div class="nhsuk-grid-row nhsuk-u-margin-bottom-2 app-user-count-pair">
+          <div class="nhsuk-grid-column-one-half">
+            {{ input({
+              id: "additionalUsersLeadAdministrator",
+              name: "additionalUsersLeadAdministrator",
+              type: "number",
+              inputmode: "numeric",
+              classes: "nhsuk-input--width-4",
+              label: {
+                text: "Total users"
+              },
+              value: (customConfig.additionalUsersLeadAdministrator if customConfig.additionalUsersLeadAdministrator else "0"),
+              errorMessage: ({ text: additionalUsersLeadAdministratorError } if additionalUsersLeadAdministratorError else false),
+              attributes: {
+                min: "0",
+                step: "1"
+              }
+            }) }}
+          </div>
+          <div class="nhsuk-grid-column-one-half">
+            {{ input({
+              id: "additionalVaccinatorsLeadAdministrator",
+              name: "additionalVaccinatorsLeadAdministrator",
+              type: "number",
+              inputmode: "numeric",
+              classes: "nhsuk-input--width-4",
+              label: {
+                text: "Vaccinators"
+              },
+              value: (customConfig.additionalVaccinatorsLeadAdministrator if customConfig.additionalVaccinatorsLeadAdministrator else "0"),
+              errorMessage: ({ text: additionalVaccinatorsLeadAdministratorError } if additionalVaccinatorsLeadAdministratorError else false),
+              attributes: {
+                min: "0",
+                step: "1"
+              }
+            }) }}
+          </div>
+        </div>
+
+        <h2 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Administrator</h2>
+        <div class="nhsuk-grid-row nhsuk-u-margin-bottom-2 app-user-count-pair">
+          <div class="nhsuk-grid-column-one-half">
+            {{ input({
+              id: "additionalUsersAdministrator",
+              name: "additionalUsersAdministrator",
+              type: "number",
+              inputmode: "numeric",
+              classes: "nhsuk-input--width-4",
+              label: {
+                text: "Total users"
+              },
+              value: (customConfig.additionalUsersAdministrator if customConfig.additionalUsersAdministrator else "0"),
+              errorMessage: ({ text: additionalUsersAdministratorError } if additionalUsersAdministratorError else false),
+              attributes: {
+                min: "0",
+                step: "1"
+              }
+            }) }}
+          </div>
+          <div class="nhsuk-grid-column-one-half">
+            {{ input({
+              id: "additionalVaccinatorsAdministrator",
+              name: "additionalVaccinatorsAdministrator",
+              type: "number",
+              inputmode: "numeric",
+              classes: "nhsuk-input--width-4",
+              label: {
+                text: "Vaccinators"
+              },
+              value: (customConfig.additionalVaccinatorsAdministrator if customConfig.additionalVaccinatorsAdministrator else "0"),
+              errorMessage: ({ text: additionalVaccinatorsAdministratorError } if additionalVaccinatorsAdministratorError else false),
+              attributes: {
+                min: "0",
+                step: "1"
+              }
+            }) }}
+          </div>
+        </div>
+
+        <h2 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Recorder</h2>
+        <div class="nhsuk-grid-row app-user-count-pair">
+          <div class="nhsuk-grid-column-one-half">
+            {{ input({
+              id: "additionalUsersRecorder",
+              name: "additionalUsersRecorder",
+              type: "number",
+              inputmode: "numeric",
+              classes: "nhsuk-input--width-4",
+              label: {
+                text: "Total users"
+              },
+              value: (customConfig.additionalUsersRecorder if customConfig.additionalUsersRecorder else "0"),
+              errorMessage: ({ text: additionalUsersRecorderError } if additionalUsersRecorderError else false),
+              attributes: {
+                min: "0",
+                step: "1"
+              }
+            }) }}
+          </div>
+          <div class="nhsuk-grid-column-one-half">
+            {{ input({
+              id: "additionalVaccinatorsRecorder",
+              name: "additionalVaccinatorsRecorder",
+              type: "number",
+              inputmode: "numeric",
+              classes: "nhsuk-input--width-4",
+              label: {
+                text: "Vaccinators"
+              },
+              value: (customConfig.additionalVaccinatorsRecorder if customConfig.additionalVaccinatorsRecorder else "0"),
+              errorMessage: ({ text: additionalVaccinatorsRecorderError } if additionalVaccinatorsRecorderError else false),
+              attributes: {
+                min: "0",
+                step: "1"
+              }
+            }) }}
+          </div>
+        </div>
+
+        <div class="nhsuk-u-margin-top-4">
+          {{ button({
+            text: "Continue"
+          }) }}
+        </div>
+
+      </form>
+
+    </div>
+
+    <div class="nhsuk-grid-column-one-third">
+      {% include 'prototype-setup/_custom-config-progress-card.html' %}
+    </div>
+  </div>
+{% endblock %}

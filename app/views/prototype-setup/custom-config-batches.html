@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Custom configuration — Batches per vaccine product" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    text: "Back",
+    href: "/prototype-setup/custom-config/vaccines"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if batchCountError %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: batchCountError,
+              href: "#customBatchesPerProduct"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      {% set isCustomBatchCount = customConfig.batchesPerProduct and customConfig.batchesPerProduct !== "0" and customConfig.batchesPerProduct !== "1" and customConfig.batchesPerProduct !== "5" and customConfig.batchesPerProduct !== "10" %}
+
+      {% set customBatchCountHtml %}
+        {{ input({
+          id: "customBatchesPerProduct",
+          name: "customBatchesPerProduct",
+          type: "number",
+          inputmode: "numeric",
+          classes: "nhsuk-input--width-4",
+          label: {
+            text: "Number of batches"
+          },
+          hint: {
+            text: "Enter a whole number of 0 or more"
+          },
+          value: (customConfig.batchesPerProduct if isCustomBatchCount else ""),
+          errorMessage: ({ text: batchCountError } if batchCountError else false),
+          attributes: {
+            min: "0",
+            step: "1"
+          }
+        }) }}
+      {% endset %}
+
+      <span class="nhsuk-caption-l">Step 3 of 4</span>
+      <h1 class="nhsuk-heading-l">How many batches should be added per vaccine product?</h1>
+
+      <p>This applies to each enabled vaccine product for the selected organisation.</p>
+
+      <form action="/prototype-setup/custom-config/batches" method="post" novalidate>
+
+        {{ radios({
+          idPrefix: "batchesPerProduct",
+          name: "batchesPerProduct",
+          fieldset: {
+            legend: {
+              text: "Batches per vaccine product",
+              classes: "nhsuk-visually-hidden"
+            }
+          },
+          items: [
+            { value: "0", text: "0", checked: customConfig.batchesPerProduct === "0" },
+            { value: "1", text: "1", checked: customConfig.batchesPerProduct === "1" },
+            { value: "5", text: "5", checked: customConfig.batchesPerProduct === "5" or not customConfig.batchesPerProduct },
+            { value: "10", text: "10", checked: customConfig.batchesPerProduct === "10" },
+            {
+              value: "custom",
+              text: "Custom",
+              checked: isCustomBatchCount,
+              conditional: {
+                html: customBatchCountHtml
+              }
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+
+    <div class="nhsuk-grid-column-one-third">
+      {% include 'prototype-setup/_custom-config-progress-card.html' %}
+    </div>
+  </div>
+{% endblock %}

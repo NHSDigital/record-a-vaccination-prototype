@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Custom configuration — Choose user" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    text: "Back",
+    href: "/"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if userSelectionError %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: userSelectionError,
+              href: "#userId"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <span class="nhsuk-caption-l">Step 1 of 4</span>
+      <h1 class="nhsuk-heading-l">Which user do you want to sign in as?</h1>
+
+      <form action="/prototype-setup/custom-config" method="post" novalidate>
+
+        {{ radios({
+          idPrefix: "userId",
+          name: "userId",
+          errorMessage: ({ text: userSelectionError } if userSelectionError else false),
+          items: radioItems
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+
+    <div class="nhsuk-grid-column-one-third">
+      {% include 'prototype-setup/_custom-config-progress-card.html' %}
+    </div>
+  </div>
+{% endblock %}

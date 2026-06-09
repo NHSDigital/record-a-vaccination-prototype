@@ -44,7 +44,7 @@
 
           {% set items = (items.push({
             value: vaccine.name,
-            text: (vaccine.name ),
+            text: (vaccine.name | capitaliseFirstLetter),
             conditional: {
               html: conditionalHtml
             } if vaccine.products
@@ -82,7 +82,7 @@
 
             {% set requestableItems = (requestableItems.push({
               value: vaccine,
-              text: (vaccine )
+              text: (vaccine | capitaliseFirstLetter)
             }), requestableItems) %}
           {% endfor %}
 
