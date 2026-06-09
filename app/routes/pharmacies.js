@@ -350,7 +350,7 @@ module.exports = router => {
 
     pharmacy.status = 'Deactivated'
 
-    res.redirect(`/pharmacies/${id}`)
+    res.redirect(`/pharmacies/${id}?deactivated=true`)
   })
 
   router.get('/pharmacies/:id/add-user',(req, res) => {
@@ -607,6 +607,7 @@ module.exports = router => {
     const id = req.params.id
     const added = req.query.added
     const addedUserId = req.query.addedUserId
+    const deactivated = req.query.deactivated
 
 
     const organisation = data.organisations.find((organisation) => organisation.id === id)
@@ -628,7 +629,8 @@ module.exports = router => {
       users,
       userOrganisationPermissions,
       added,
-      addedUser
+      addedUser,
+      deactivated
     })
   })
 

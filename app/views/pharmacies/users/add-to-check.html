@@ -82,7 +82,7 @@
       <p>{{ user.firstName }} will receive this email telling them they now have access to the pharmacy:</p>
 
       <div class="app-email-preview">
-        {% include "user-admin/_welcome-email.html" %}
+        {% include "emails/variants/welcome-email.html" %}
       </div>
 
       <form action="/pharmacies/users/{{ user.id }}/add-to-check-answer" method="post">

@@ -28,6 +28,20 @@
         }) }}
       {% endif %}
 
+      {% if deactivated == "true" %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            Pharmacy deactivated
+          </h3>
+          <p>{{ organisation.name }} ({{ organisation.id }}) has been successfully deactivated.</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       {{ summaryList({

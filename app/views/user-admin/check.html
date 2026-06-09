@@ -101,9 +101,9 @@
 
       <div class="app-email-preview">
         {% if existingUserWithSameEmail %}
-          {% include "user-admin/_reactivation-email.html" %}
+          {% include "emails/variants/reactivation-email.html" %}
         {% else %}
-          {% include "user-admin/_welcome-email.html" %}
+          {% include "emails/variants/welcome-email.html" %}
         {% endif %}
       </div>
 
