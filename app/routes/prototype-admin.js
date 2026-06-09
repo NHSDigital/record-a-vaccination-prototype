@@ -434,6 +434,40 @@ module.exports = (router) => {
   })
 
   // ----------------------------------------------------------------
+  // Quick access: apply a scenario then jump to a target page
+  // ----------------------------------------------------------------
+
+  router.get('/prototype-setup/quick-access/:scenario', (req, res) => {
+    const { scenario } = req.params
+    const requestedNext = req.query.next
+    const nextPath = (typeof requestedNext === 'string' && requestedNext.startsWith('/'))
+      ? requestedNext
+      : '/home'
+
+    resetSession(req)
+    const data = req.session.data
+
+    if (scenario === 'pharmacy') {
+      data.currentUserId = '46436346'
+      data.currentOrganisationId = 'FA424'
+      setupBatchesForOrg(data, 'FA424')
+      addRandomUsers(data, 'FA424', 10)
+      addRandomVaccinations(data, 'FA424', 30)
+    } else if (scenario === 'regions') {
+      data.currentUserId = '636436353252'
+      data.currentOrganisationId = 'Y56'
+    } else if (scenario === 'support') {
+      data.currentUserId = '66435353634'
+      data.currentOrganisationId = null
+    } else {
+      res.redirect('/')
+      return
+    }
+
+    res.redirect(nextPath)
+  })
+
+  // ----------------------------------------------------------------
   // Preset: NHS Trust Lead Admin (Jane Smith, RW3)
   // ----------------------------------------------------------------
 
