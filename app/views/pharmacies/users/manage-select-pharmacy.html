@@ -75,7 +75,7 @@
           <tbody class="nhsuk-table__body">
             {% for role in pharmacyRoles %}
               <tr class="nhsuk-table__row">
-                <td class="nhsuk-table__cell">{{ role.pharmacy.name }}</td>
+                <td class="nhsuk-table__cell">{{ role.pharmacy.name }} ({{ role.pharmacy.id }})</td>
                 <td class="nhsuk-table__cell">{{ role.permissionLevel }}</td>
                 <td class="nhsuk-table__cell">{{ "Yes" if role.vaccinator else "No" }}</td>
                 <td class="nhsuk-table__cell">{{ role.status }}</td>
