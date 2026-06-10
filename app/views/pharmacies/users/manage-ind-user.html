@@ -63,7 +63,7 @@
           <h3 class="nhsuk-notification-banner__heading">
             User updated
           </h3>
-          <p>{{ user.firstName }} {{ user.lastName }} has been deactivated from {{ deactivatedFromAllCount }} {{ deactivatedFromAllCount | plural('pharmacy') }}.</p>
+          <p>{{ user.firstName }} {{ user.lastName }} has been deactivated from {{ deactivatedFromAllCount | plural('pharmacy') }}.</p>
         {% endset %}
 
         {{ notificationBanner({

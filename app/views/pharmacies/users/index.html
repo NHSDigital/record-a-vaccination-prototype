@@ -38,6 +38,19 @@
           type: "success"
         }) }}
       {% endif %}
+      {% if deactivatedFromAllUser %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            User deactivated
+          </h3>
+          <p>{{ deactivatedFromAllUser.firstName }} {{ deactivatedFromAllUser.lastName }} has been successfully deactivated from {{ deactivatedFromAllCount | plural("pharmacy") }}.</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
 
       <h1 class="nhsuk-heading-l">Users</h1>
 

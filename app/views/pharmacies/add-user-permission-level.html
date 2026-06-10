@@ -2,11 +2,11 @@
 
 {% set currentSection = "pharmacies" %}
 {% if existingUser %}
-  {% set pageName = existingUser.firstName + " " + existingUser.lastName + "'s role at " + organisation.name %}
+  {% set pageName = existingUser.firstName + " " + existingUser.lastName + "'s role at " + organisation.name + " (" + organisation.id + ")" %}
 {% elseif data.firstName or data.lastName %}
-  {% set pageName = (data.firstName + " " + data.lastName) + "'s role at " + organisation.name %}
+  {% set pageName = (data.firstName + " " + data.lastName) + "'s role at " + organisation.name + " (" + organisation.id + ")" %}
 {% else %}
-  {% set pageName = "New user's role at " + organisation.name %}
+  {% set pageName = "New user's role at " + organisation.name + " (" + organisation.id + ")" %}
 {% endif %}
 
 {% block beforeContent %}
@@ -20,11 +20,11 @@
     <div class="nhsuk-grid-column-two-thirds">
       <h1 class="nhsuk-heading-l">
         {% if existingUser %}
-          {{ existingUser.firstName }} {{ existingUser.lastName }}'s role at {{ organisation.name }}
+          {{ existingUser.firstName }} {{ existingUser.lastName }}'s role at {{ organisation.name }} ({{ organisation.id }})
         {% elseif data.firstName or data.lastName %}
-          {{ data.firstName }} {{ data.lastName }}'s role at {{ organisation.name }}
+          {{ data.firstName }} {{ data.lastName }}'s role at {{ organisation.name }} ({{ organisation.id }})
         {% else %}
-          New user's role at {{ organisation.name }}
+          Add new user to {{ organisation.name }} ({{ organisation.id }})
         {% endif %}
       </h1>
 
