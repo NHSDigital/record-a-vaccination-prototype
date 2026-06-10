@@ -94,6 +94,64 @@
 
       <h2 class="nhsuk-heading-m">Users at individual pharmacies</h2>
 
+      {% call details({
+        summaryText: "What permissions will the user have?",
+        classes: "nhsuk-expander"
+      }) %}
+        <p>This table shows the permission levels you can assign when you add a user to a pharmacy.</p>
+        <table class="nhsuk-table">
+          <thead class="nhsuk-table__head">
+            <tr class="nhsuk-table__row">
+              <th scope="col" class="nhsuk-table__header">
+                Permission level
+              </th>
+              <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">
+                Record vaccinations
+              </th>
+              <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">
+                Manage vaccines
+              </th>
+              <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">
+                Create reports
+              </th>
+              <th scope="col" class="nhsuk-table__header nhsuk-table__header--numeric">
+                Manage users
+              </th>
+            </tr>
+          </thead>
+          <tbody class="nhsuk-table__body">
+            <tr class="nhsuk-table__row">
+              <th scope="row" class="nhsuk-table__header">
+                Recorder
+              </th>
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">Yes</td>
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">No</td>
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">No</td>
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">No</td>
+            </tr>
+            <tr class="nhsuk-table__row">
+              <th scope="row" class="nhsuk-table__header">
+                Administrator
+              </th>
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">Yes</td>
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">Yes</td>
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">Yes</td>
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">No</td>
+            </tr>
+            <tr class="nhsuk-table__row">
+              <th scope="row" class="nhsuk-table__header">
+                Lead administrator
+              </th>
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">Yes</td>
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">Yes</td>
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">Yes</td>
+              <td class="nhsuk-table__cell nhsuk-table__cell--numeric">Yes</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>You should add at least 1 lead administrator per pharmacy, so that person can add further users and manage vaccines at the pharmacy.</p>
+      {% endcall %}
+
       {% if users and (users | length) > 0 %}
         {% if (users | length) > 10 %}
           {{ input({
