@@ -13,7 +13,13 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Check and add</h1>
+      <h1 class="nhsuk-heading-l">
+        {% if (pharmacies | length) > 1 %}
+          Check and add user to {{ pharmacies | length }} pharmacies
+        {% else %}
+          Check and add user to {{ pharmacies[0].name }} ({{ pharmacies[0].id }})
+        {% endif %}
+      </h1>
 
       {% set pharmaciesHtml %}
         <ul class="nhsuk-list">

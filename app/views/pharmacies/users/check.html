@@ -13,7 +13,15 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Check and add {{ "group administrator" if data.permissionLevel == "Group administrator" else "user" }}</h1>
+      <h1 class="nhsuk-heading-l">
+        {% if data.groupAdministrator == "yes" %}
+          Check and add group administrator
+        {% elif (pharmacies | length) > 1 %}
+          Check and add user to {{ pharmacies | length }} pharmacies
+        {% else %}
+          Check and add user to {{ pharmacies[0].name }} ({{ pharmacies[0].id }})
+        {% endif %}
+      </h1>
 
       {% set pharmaciesHtml %}
         <ul class="nhsuk-list">

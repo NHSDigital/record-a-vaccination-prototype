@@ -6,7 +6,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/pharmacies/users/" + user.id,
+    href: ("/pharmacies/" + pharmacy.id) if from == "pharmacy" else ("/pharmacies/users/" + user.id),
     text: "Back"
   }) }}
 {% endblock %}
@@ -24,7 +24,7 @@
 
       <p>You can reactivate their account anytime.</p>
 
-      <form action="/pharmacies/{{ pharmacy.id }}/users/{{ user.id }}/deactivate-from-pharmacy-answer" method="post" novalidate="true">
+      <form action="/pharmacies/{{ pharmacy.id }}/users/{{ user.id }}/deactivate-from-pharmacy-answer?from={{ from }}" method="post" novalidate="true">
         {{ button({
           "text": "Deactivate",
           classes: "nhsuk-button--warning"

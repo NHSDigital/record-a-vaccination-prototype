@@ -508,13 +508,15 @@ module.exports = router => {
     const data = req.session.data
     const pharmacyId = req.params.pharmacyId
     const userId = req.params.userId
+    const from = req.query.from === 'pharmacy' ? 'pharmacy' : 'user'
 
     const user = data.users.find(user => user.id === userId)
     const pharmacy = data.organisations.find(organisation => organisation.id === pharmacyId)
 
     res.render('pharmacies/users/deactivate-from-pharmacy', {
       user,
-      pharmacy
+      pharmacy,
+      from
     })
   })
 
@@ -522,6 +524,7 @@ module.exports = router => {
     const data = req.session.data
     const pharmacyId = req.params.pharmacyId
     const userId = req.params.userId
+    const from = req.query.from === 'pharmacy' ? 'pharmacy' : 'user'
 
     const user = data.users.find(user => user.id === userId)
     const pharmacy = data.organisations.find(organisation => organisation.id === pharmacyId)
@@ -530,8 +533,35 @@ module.exports = router => {
 
     role.status = 'Deactivated'
 
-    res.redirect(`/pharmacies/users?deactivatedUserId=${user.id}&deactivatedFromPharmacyId=${pharmacy.id}`)
+    if (from === 'user') {
+      return res.redirect(`/pharmacies/users/${user.id}?deactivatedFromPharmacyId=${pharmacy.id}`)
+    }
 
+    res.redirect(`/pharmacies/${pharmacy.id}?tab=deactivated&deactivatedUserId=${user.id}&deactivatedFromPharmacyId=${pharmacy.id}`)
+
+  })
+
+  router.get('/pharmacies/:pharmacyId/users/:userId/reactivate', (req, res) => {
+    const data = req.session.data
+    const pharmacyId = req.params.pharmacyId
+    const userId = req.params.userId
+
+    const user = data.users.find((item) => item.id === userId)
+    const pharmacy = data.organisations.find((organisation) => organisation.id === pharmacyId)
+
+    if (!user || !pharmacy) {
+      return res.redirect('/pharmacies')
+    }
+
+    const role = (user.organisations || []).find((item) => item.id === pharmacyId)
+
+    if (!role) {
+      return res.redirect(`/pharmacies/${pharmacyId}?tab=deactivated`)
+    }
+
+    role.status = 'Active'
+
+    res.redirect(`/pharmacies/${pharmacyId}?tab=active&reactivatedUserId=${userId}&reactivatedFromPharmacyId=${pharmacyId}`)
   })
 
   router.get('/pharmacies/users/:userId/deactivate-from-all-pharmacies', (req, res) => {
@@ -763,10 +793,17 @@ module.exports = router => {
     const added = req.query.added
     const addedUserId = req.query.addedUserId
     const deactivated = req.query.deactivated
+    const deactivatedUserId = req.query.deactivatedUserId
+    const deactivatedFromPharmacyId = req.query.deactivatedFromPharmacyId
+    const reactivatedUserId = req.query.reactivatedUserId
+    const reactivatedFromPharmacyId = req.query.reactivatedFromPharmacyId
+    const tab = (req.query.tab || 'active').toLowerCase()
 
 
     const organisation = data.organisations.find((organisation) => organisation.id === id)
     const addedUser = data.users.find((user) => user.id === addedUserId)
+    const deactivatedUser = data.users.find((user) => user.id === deactivatedUserId)
+    const reactivatedUser = data.users.find((user) => user.id === reactivatedUserId)
 
     const userOrganisationPermissions = {}
 
@@ -775,17 +812,43 @@ module.exports = router => {
       .find((orgPermission) => orgPermission.id === organisation.id)
     )
 
+    const usersByStatus = {
+      invited: [],
+      active: [],
+      deactivated: []
+    }
+
     for (const user of users) {
       userOrganisationPermissions[user.id] = user.organisations.find((userOrganisation) => userOrganisation.id === organisation.id)
+
+      const userOrganisationStatus = userOrganisationPermissions[user.id].status
+
+      if (userOrganisationStatus === 'Invited') {
+        usersByStatus.invited.push(user)
+      } else if (userOrganisationStatus === 'Deactivated') {
+        usersByStatus.deactivated.push(user)
+      } else {
+        usersByStatus.active.push(user)
+      }
     }
+
+    const validTabs = ['invited', 'active', 'deactivated']
+    const currentTab = validTabs.includes(tab) ? tab : 'active'
+    const usersForTab = usersByStatus[currentTab]
 
     res.render('pharmacies/pharmacy', {
       organisation,
-      users,
+      users: usersForTab,
+      usersByStatus,
+      currentTab,
       userOrganisationPermissions,
       added,
       addedUser,
-      deactivated
+      deactivated,
+      deactivatedUser,
+      deactivatedFromPharmacyId,
+      reactivatedUser,
+      reactivatedFromPharmacyId
     })
   })
 

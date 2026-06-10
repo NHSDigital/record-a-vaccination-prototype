@@ -129,6 +129,9 @@
             href: "/pharmacies/users/" + user.id + "/add-to",
             classes: "nhsuk-button--secondary"
           }) }}
+          {% if (pharmacyRoles | length) >= 2 %}
+            <a class="nhsuk-link" href="/pharmacies/users/{{ user.id }}/deactivate-from-all-pharmacies">Deactivate from all pharmacies</a>
+          {% endif %}
         </div>
       {% else %}
         <p>This user is not currently added to any individual pharmacies.</p>
