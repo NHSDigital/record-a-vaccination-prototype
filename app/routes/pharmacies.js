@@ -245,7 +245,7 @@ module.exports = router => {
 
   router.get('/pharmacies/users/new-select-pharmacies-check',(req, res) => {
     const data = req.session.data
-    const pharmacyIds = data.pharmacyIds
+    const pharmacyIds = data.pharmacyIds || []
 
     // Get pharmacies selected on previous page
     const pharmacies = data.organisations.filter((organisation) => pharmacyIds.includes(organisation.id))
@@ -254,6 +254,22 @@ module.exports = router => {
     res.render('pharmacies/users/new-select-pharmacies-check', {
       pharmacies
     })
+  })
+
+  router.get('/pharmacies/users/new-select-pharmacies-check/remove/:pharmacyId', (req, res) => {
+    const data = req.session.data
+    const pharmacyId = req.params.pharmacyId
+    const pharmacyIds = Array.isArray(data.pharmacyIds)
+      ? data.pharmacyIds
+      : (data.pharmacyIds ? [data.pharmacyIds] : [])
+
+    data.pharmacyIds = pharmacyIds.filter((id) => id !== pharmacyId)
+
+    if (data.pharmacyIds.length === 0) {
+      return res.redirect('/pharmacies/users/new-select-pharmacies')
+    }
+
+    res.redirect('/pharmacies/users/new-select-pharmacies-check')
   })
 
   router.get('/pharmacies/users/new-permission-level',(req, res) => {
