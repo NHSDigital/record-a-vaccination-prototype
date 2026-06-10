@@ -15,7 +15,7 @@
     <div class="nhsuk-grid-column-two-thirds">
       <form action="/pharmacies/users/{{ user.id }}/add-to-check" method="post">
 
-        <h1 class="nhsuk-heading-l">What should {{ user.firstName }} {{ user.lastName}}'s role at {{ pharmacy.name }} ({{ pharmacy.id }}) be?</h1>
+        <h1 class="nhsuk-heading-l">{{ user.firstName }} {{ user.lastName}}'s role at {{ pharmacy.name }} ({{ pharmacy.id }})</h1>
 
         {{ radios({
           name: "vaccinator",
