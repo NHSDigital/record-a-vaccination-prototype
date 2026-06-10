@@ -58,6 +58,20 @@
         }) }}
       {% endif %}
 
+      {% if deactivatedFromAllPharmacies %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            User updated
+          </h3>
+          <p>{{ user.firstName }} {{ user.lastName }} has been deactivated from {{ deactivatedFromAllCount }} {{ deactivatedFromAllCount | plural('pharmacy') }}.</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
       <h1 class="nhsuk-heading-l">{{ user.firstName }} {{ user.lastName }}</h1>
 
       {{ summaryList({
@@ -109,11 +123,16 @@
           </tbody>
         </table>
 
-        {{ button({
-          text: "Add to another pharmacy",
-          href: "/pharmacies/users/" + user.id + "/add-to",
-          classes: "nhsuk-button--secondary"
-        }) }}
+        <div class="nhsuk-button-group">
+          {{ button({
+            text: "Add to another pharmacy",
+            href: "/pharmacies/users/" + user.id + "/add-to",
+            classes: "nhsuk-button--secondary"
+          }) }}
+          {% if (pharmacyRoles | length) >= 2 %}
+            <a class="nhsuk-link" href="/pharmacies/users/{{ user.id }}/deactivate-from-all-pharmacies">Deactivate from all pharmacies</a>
+          {% endif %}
+        </div>
       {% else %}
         <p>This user is not currently added to any individual pharmacies.</p>
 

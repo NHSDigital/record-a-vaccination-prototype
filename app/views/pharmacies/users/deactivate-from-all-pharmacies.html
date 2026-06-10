@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Deactivate account" %}
+
+{% set currentSection = "pharmacies-users" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/users/" + user.id,
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Deactivate {{ user.firstName }} {{ user.lastName }} from {{ (pharmacies | length) | plural("pharmacy") }}</h1>
+
+      <p>Once you deactivate {{ user.firstName }} {{ user.lastName }} ({{ user.email }}), they will not be able to sign in and use NHS Record a vaccination at any of these pharmacies:</p>
+
+      <ul class="nhsuk-list nhsuk-list--bullet">
+        {% for pharmacy in pharmacies %}
+          <li>{{ pharmacy.name }} ({{ pharmacy.id }})</li>
+        {% endfor %}
+      </ul>
+
+      <p>Their Okta account will remain active, so they can continue to access other services.</p>
+
+      <p>You can reactivate their account anytime.</p>
+
+      <form action="/pharmacies/users/{{ user.id }}/deactivate-from-all-pharmacies-answer" method="post" novalidate="true">
+        {{ button({
+          text: "Deactivate",
+          classes: "nhsuk-button--warning"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

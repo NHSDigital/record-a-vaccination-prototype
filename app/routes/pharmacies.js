@@ -526,6 +526,59 @@ module.exports = router => {
 
   })
 
+  router.get('/pharmacies/users/:userId/deactivate-from-all-pharmacies', (req, res) => {
+    const data = req.session.data
+    const userId = req.params.userId
+    const companyId = res.locals.currentOrganisation.id
+
+    const user = data.users.find((item) => item.id === userId)
+
+    if (!user) {
+      return res.redirect('/pharmacies/users')
+    }
+
+    const activePharmacyRolesAtCompany = (user.organisations || [])
+      .map((role) => {
+        const pharmacy = data.organisations.find((organisation) => organisation.id === role.id)
+        return { role, pharmacy }
+      })
+      .filter(({ role, pharmacy }) => pharmacy && pharmacy.companyId === companyId && role.permissionLevel !== 'Group administrator' && role.status !== 'Deactivated')
+
+    if (activePharmacyRolesAtCompany.length === 0) {
+      return res.redirect(`/pharmacies/users/${userId}`)
+    }
+
+    res.render('pharmacies/users/deactivate-from-all-pharmacies', {
+      user,
+      pharmacies: activePharmacyRolesAtCompany.map(({ pharmacy }) => pharmacy)
+    })
+  })
+
+  router.post('/pharmacies/users/:userId/deactivate-from-all-pharmacies-answer', (req, res) => {
+    const data = req.session.data
+    const userId = req.params.userId
+    const companyId = res.locals.currentOrganisation.id
+
+    const user = data.users.find((item) => item.id === userId)
+
+    if (!user) {
+      return res.redirect('/pharmacies/users')
+    }
+
+    let updatedRolesCount = 0
+
+    for (const role of (user.organisations || [])) {
+      const pharmacy = data.organisations.find((organisation) => organisation.id === role.id)
+
+      if (pharmacy && pharmacy.companyId === companyId && role.permissionLevel !== 'Group administrator' && role.status !== 'Deactivated') {
+        role.status = 'Deactivated'
+        updatedRolesCount++
+      }
+    }
+
+    res.redirect(`/pharmacies/users/${userId}?deactivatedFromAllPharmacies=true&deactivatedFromAllCount=${updatedRolesCount}`)
+  })
+
 
   router.post('/pharmacies/:pharmacyId/users/:userId/change-answer',(req, res) => {
     const data = req.session.data
@@ -742,6 +795,8 @@ module.exports = router => {
     const addedToPharmacyId = req.query.addedToPharmacyId
     const addedToPharmacyIds = req.query.addedToPharmacyIds
     const deactivatedFromPharmacyId = req.query.deactivatedFromPharmacyId
+    const deactivatedFromAllPharmacies = req.query.deactivatedFromAllPharmacies === 'true'
+    const deactivatedFromAllCount = parseInt(req.query.deactivatedFromAllCount, 10) || 0
 
     let addedToPharmacy, addedToPharmacies, deactivatedFromPharmacy
 
@@ -777,6 +832,8 @@ module.exports = router => {
       addedToPharmacy,
       addedToPharmacies,
       deactivatedFromPharmacy,
+      deactivatedFromAllPharmacies,
+      deactivatedFromAllCount,
       totalPharmaciesAtOrganisation
     })
   })
