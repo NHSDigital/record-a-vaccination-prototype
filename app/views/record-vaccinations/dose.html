@@ -121,6 +121,8 @@
           {% set radiosHint = "Most people aged 24 and under only need a 1st dose of the Td/IPV vaccine" %}
         {% elif data.vaccine == "pneumococcal" %}
           {% set radiosHint = "Most people aged 65 and over only need a 1st dose of the pneumococcal vaccine" %}
+        {% elif data.vaccine == "MMRV" %}
+          {% set radiosHint = "Select 1st dose if this is the child's 1st MMRV vaccination, even if they've had MMR before" %}
         {% endif %}
 
         {% if radiosHint %}
