@@ -13,11 +13,16 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
       {% if addedToPharmacies and (addedToPharmacies | length) > 0 %}
+        {% set addedToPharmaciesWithOds = [] %}
+        {% for pharmacy in addedToPharmacies %}
+          {% set addedToPharmaciesWithOds = (addedToPharmaciesWithOds.push(pharmacy.name + " (" + pharmacy.id + ")"), addedToPharmaciesWithOds) %}
+        {% endfor %}
+
         {% set html %}
           <h3 class="nhsuk-notification-banner__heading">
             User updated
           </h3>
-          <p>{{ user.firstName }} {{ user.lastName }} has been added to {{ (addedToPharmacies | pluck('name') | join(', ')) }}.</p>
+          <p>{{ user.firstName }} {{ user.lastName }} has been added to {{ addedToPharmaciesWithOds | formatList }}.</p>
         {% endset %}
 
         {{ notificationBanner({
@@ -30,7 +35,7 @@
           <h3 class="nhsuk-notification-banner__heading">
             User updated
           </h3>
-          <p>{{ user.firstName }} {{ user.lastName }} has been added to {{ addedToPharmacy.name }}.</p>
+          <p>{{ user.firstName }} {{ user.lastName }} has been added to {{ addedToPharmacy.name }} ({{ addedToPharmacy.id }}).</p>
         {% endset %}
 
         {{ notificationBanner({

@@ -95,7 +95,7 @@
         ]
       }) }}
 
-      <p>{{ user.firstName }} will receive this email telling them they now have access to the {{ "pharmacy" if (pharmacies | length) == 1 else "pharmacies" }}:</p>
+      <p>{{ user.firstName }} {{ user.lastName }} will receive this email.</p>
 
       <div class="app-email-preview">
         {% if (pharmacies | length) > 1 %}
