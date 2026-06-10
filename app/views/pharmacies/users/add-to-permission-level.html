@@ -1,12 +1,13 @@
 {% extends 'layout.html' %}
 
 {% set currentSection = "pharmacies-users" %}
+{% set selectedPharmacy = (pharmacies | first) if (pharmacies | length) == 1 %}
 
 {% set pageName = "Add pharmacies" %}
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/pharmacies/users/" + user.id + "/add-to"
+    href: "/pharmacies/users/" + user.id + "/add-to-select-pharmacies-check" if (pharmacies | length) > 1 else "/pharmacies/users/" + user.id + "/add-to"
   }) }}
 {% endblock %}
 
@@ -15,7 +16,17 @@
     <div class="nhsuk-grid-column-two-thirds">
       <form action="/pharmacies/users/{{ user.id }}/add-to-check" method="post">
 
-        <h1 class="nhsuk-heading-l">{{ user.firstName }} {{ user.lastName}}'s role at {{ pharmacy.name }} ({{ pharmacy.id }})</h1>
+        <h1 class="nhsuk-heading-l">
+          {% if (pharmacies | length) == 1 and selectedPharmacy %}
+            {{ user.firstName }} {{ user.lastName }}'s role at {{ selectedPharmacy.name }} ({{ selectedPharmacy.id }})
+          {% else %}
+            {{ user.firstName }} {{ user.lastName }}'s role
+          {% endif %}
+        </h1>
+
+        {% if (pharmacies | length) > 1 %}
+          <p>These permissions will apply to the {{ pharmacies | length }} pharmacies.</p>
+        {% endif %}
 
         {{ radios({
           name: "vaccinator",

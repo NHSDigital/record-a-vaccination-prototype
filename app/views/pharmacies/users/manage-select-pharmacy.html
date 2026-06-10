@@ -12,7 +12,20 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-      {% if addedToPharmacy %}
+      {% if addedToPharmacies and (addedToPharmacies | length) > 0 %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            User updated
+          </h3>
+          <p>{{ user.firstName }} {{ user.lastName }} has been added to {{ (addedToPharmacies | pluck('name') | join(', ')) }}.</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+
+      {% elseif addedToPharmacy %}
         {% set html %}
           <h3 class="nhsuk-notification-banner__heading">
             User updated

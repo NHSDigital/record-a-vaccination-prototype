@@ -1,10 +1,11 @@
 {% extends 'layout.html' %}
 
 {% set currentSection = "pharmacies-users" %}
+{% set selectedPharmacy = (pharmacies | first) if (pharmacies | length) == 1 %}
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/pharmacies/users/new-select-pharmacies-check"
+    href: "/pharmacies/users/new-select-pharmacies" if (pharmacies | length) == 1 else "/pharmacies/users/new-select-pharmacies-check"
   }) }}
 {% endblock %}
 
@@ -14,9 +15,17 @@
 
       <form action="/pharmacies/users/check" method="post" novalidate="true">
 
-        <h1 class="nhsuk-heading-l">{{ data.firstName }} {{ data.lastName }}’s role</h1>
+        <h1 class="nhsuk-heading-l">
+          {% if (pharmacies | length) == 1 and selectedPharmacy %}
+            {{ data.firstName }} {{ data.lastName }}'s role at {{ selectedPharmacy.name }} ({{ selectedPharmacy.id }})
+          {% else %}
+            {{ data.firstName }} {{ data.lastName }}'s role
+          {% endif %}
+        </h1>
 
-        <p>These permissions will apply to the {{ data.pharmacyIds | length }} pharmacies.</p>
+        {% if (pharmacies | length) > 1 %}
+          <p>These permissions will apply to the {{ pharmacies | length }} pharmacies.</p>
+        {% endif %}
 
         {{ radios({
           name: "vaccinator",

@@ -13,7 +13,7 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-three-quarters">
-      <form action="/pharmacies/users/{{ user.id }}/add-to-permission-level" method="post">
+      <form action="/pharmacies/users/{{ user.id }}/add-to-select-pharmacies-check" method="post">
 
       {% set items = [] %}
 
@@ -26,7 +26,7 @@
 
       {% call fieldset({
         legend: {
-          text: "Which pharmacy would you like to add " + user.firstName + " " + user.lastName + " to?",
+          text: "Which pharmacies would you like to add " + user.firstName + " " + user.lastName + " to?",
           size: "l"
         }
       }) %}
@@ -41,7 +41,7 @@
             },
             classes: "nhsuk-input--width-20",
             attributes: {
-              "data-module": "app-radios-filter"
+              "data-module": "app-checkbox-filter"
             },
             formGroup: {
               classes: "nhsuk-u-margin-bottom-4"
@@ -50,10 +50,10 @@
         {% endif %}
 
         <div class="app-scrollable-container">
-          {{ radios({
-            id: "pharmacy-id",
-            name: "pharmacyId",
-            value: data.pharmacyId,
+          {{ checkboxes({
+            id: "pharmacy-ids",
+            name: "addToPharmacyIds",
+            values: data.addToPharmacyIds,
             items: items
           }) }}
         </div>
