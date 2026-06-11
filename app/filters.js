@@ -38,6 +38,25 @@ module.exports = function () {
     }
   }
 
+  filters.joinWithAnd = function(array) {
+    if (!Array.isArray(array) || array.length === 0) {
+      return ''
+    }
+
+    const items = array.map((item) => String(item))
+    items[0] = filters.capitaliseFirstLetter(items[0])
+
+    if (items.length === 1) {
+      return items[0]
+    }
+
+    if (items.length === 2) {
+      return `${items[0]} and ${items[1]}`
+    }
+
+    return `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`
+  }
+
   /**
    * Returns the name of a month, eg 'November', when
    * given the number of the month, eg 11.
