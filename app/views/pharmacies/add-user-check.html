@@ -106,11 +106,7 @@
       {% endif %}
 
       <div class="app-email-preview">
-        {% if existingUserWithSameEmail %}
-          {% include "emails/reactivation-email.html" %}
-        {% else %}
-          {% include "emails/welcome-email.html" %}
-        {% endif %}
+        {% include "emails/welcome-email.html" %}
       </div>
 
       <form action="/pharmacies/{{ organisation.id }}/user-added" method="post">
