@@ -12,9 +12,8 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-three-quarters">
 
-      <h1 class="nhsuk-heading-l">Select pharmacies</h1>
+      <h1 class="nhsuk-heading-l">Which pharmacies would you like to add {{ data.firstName }} {{ data.lastName }} to?</h1>
 
-      <p>You can invite the new user to 1 or more of your pharmacies.</p>
 
       <form action="/pharmacies/users/new-select-pharmacies-check" method="post" novalidate="true">
 
@@ -29,8 +28,9 @@
 
         {% call fieldset({
           legend: {
-            text: "Which pharmacies do you want to add " + data.firstName + " " + data.lastName + " to?",
-            size: "m"
+            text: "Select pharmacies",
+            size: "m",
+            classes: "nhsuk-u-visually-hidden"
           }
         }) %}
 
