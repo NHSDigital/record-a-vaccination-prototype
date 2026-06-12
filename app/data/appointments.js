@@ -62,7 +62,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu", "RSV"
+      "COVID-19", "RSV"
     ]
   },
   {

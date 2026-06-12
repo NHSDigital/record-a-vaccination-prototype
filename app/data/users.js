@@ -98,6 +98,19 @@ module.exports = [
     "firstName": "Paulina",
     "lastName": "Sloan"
   },
+  {
+    "id": "7301948572610",
+    "email": "michael.reid@nhs.net",
+    "organisations": [
+      {
+        "id": "P0191N",
+        "permissionLevel": "Group administrator",
+        "status": "Active"
+      }
+    ],
+    "firstName": "Michael",
+    "lastName": "Reid"
+  },
   // Each pharmacy in Paulina Sloan’s chain has its own vaccinator, some of whom are also admins
   {
     "id": "46436346",
@@ -155,6 +168,34 @@ module.exports = [
     "firstName": "Samantha",
     "lastName": "Black"
   },
+  {
+    "id": "2195407736418",
+    "email": "nina.hunt@nhs.net",
+    "organisations": [
+      {
+        "id": "FA424",
+        "permissionLevel": "Administrator",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Nina",
+    "lastName": "Hunt"
+  },
+  {
+    "id": "8701294465302",
+    "email": "liam.byrne@nhs.net",
+    "organisations": [
+      {
+        "id": "FA02S",
+        "permissionLevel": "Recorder",
+        "status": "Active",
+        "vaccinator": false
+      }
+    ],
+    "firstName": "Liam",
+    "lastName": "Byrne"
+  },
   // Amanda White is a group administrator for the
   // MediCare Health Ltd chain of pharmacies
   {
@@ -169,6 +210,47 @@ module.exports = [
         "status": "Active"
       }
     ]
+  },
+  {
+    "firstName": "Farah",
+    "lastName": "Iqbal",
+    "id": "6015872204914",
+    "email": "farah.iqbal@nhs.net",
+    "organisations": [
+      {
+        "id": "P15951",
+        "permissionLevel": "Group administrator",
+        "status": "Active"
+      }
+    ]
+  },
+  {
+    "id": "3041597862150",
+    "email": "kyle.mason@nhs.net",
+    "organisations": [
+      {
+        "id": "FX9141",
+        "permissionLevel": "Administrator",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Kyle",
+    "lastName": "Mason"
+  },
+  {
+    "id": "4586231970421",
+    "email": "elise.turner@nhs.net",
+    "organisations": [
+      {
+        "id": "FX4825",
+        "permissionLevel": "Recorder",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Elise",
+    "lastName": "Turner"
   },
   {
     "id": "34634617277",

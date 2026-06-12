@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/pharmacies/users/new-select-pharmacies"
+    href: "/pharmacies/users/" + user.id + "/add-to"
   }) }}
 {% endblock %}
 
@@ -14,14 +14,14 @@
 
       <h1 class="nhsuk-heading-l">Check pharmacies</h1>
 
-      <p>You are adding {{ data.firstName }} {{ data.lastName }} to these pharmacies.</p>
+      <p>You are adding {{ user.firstName }} {{ user.lastName }} to these pharmacies.</p>
 
       {% set rows = [] %}
 
       {% for pharmacy in pharmacies %}
 
         {% set removeHtml %}
-          <a class="nhsuk-button nhsuk-button--secondary nhsuk-button--small nhsuk-u-margin-bottom-0" href="/pharmacies/users/new-select-pharmacies-check/remove/{{ pharmacy.id }}" role="button" draggable="false">Remove</a>
+          <a class="nhsuk-button nhsuk-button--secondary nhsuk-button--small nhsuk-u-margin-bottom-0" href="/pharmacies/users/{{ user.id }}/add-to-select-pharmacies-check/remove/{{ pharmacy.id }}" role="button" draggable="false">Remove</a>
         {% endset %}
 
         {% set rows = (rows.push([
@@ -42,7 +42,7 @@
 
       {{ button({
         text: "Continue",
-        href: "/pharmacies/users/new-permission-level"
+        href: "/pharmacies/users/" + user.id + "/add-to-permission-level"
       }) }}
 
     </div>

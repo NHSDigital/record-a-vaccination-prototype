@@ -12,8 +12,8 @@
 
 {% block content %}
   <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-two-thirds">
-      <form action="/pharmacies/users/{{ user.id }}/add-to-permission-level" method="post">
+    <div class="nhsuk-grid-column-three-quarters">
+      <form action="/pharmacies/users/{{ user.id }}/add-to-select-pharmacies-check" method="post">
 
       {% set items = [] %}
 
@@ -24,18 +24,41 @@
         }), items) %}
       {% endfor %}
 
-      {{ radios({
-        id: "pharmacy-id",
-        name: "pharmacyId",
-        value: data.pharmacyId,
-        fieldset: {
-          legend: {
-            text: "Which pharmacy would you like to add " + user.firstName + " " + user.lastName + " to?",
-            size: "l"
-          }
-        },
-        items: items
-      }) }}
+      {% call fieldset({
+        legend: {
+          text: "Which pharmacies would you like to add " + user.firstName + " " + user.lastName + " to?",
+          size: "l"
+        }
+      }) %}
+
+        {% if (pharmacies | length) > 10 %}
+          {{ input({
+            id: "pharmacy-search",
+            name: "pharmacySearch",
+            type: "search",
+            label: {
+              text: "Search"
+            },
+            classes: "nhsuk-input--width-20",
+            attributes: {
+              "data-module": "app-checkbox-filter"
+            },
+            formGroup: {
+              classes: "nhsuk-u-margin-bottom-4"
+            }
+          }) }}
+        {% endif %}
+
+        <div class="app-scrollable-container">
+          {{ checkboxes({
+            id: "pharmacy-ids",
+            name: "addToPharmacyIds",
+            values: data.addToPharmacyIds,
+            items: items
+          }) }}
+        </div>
+
+      {% endcall %}
 
       {{ button({
         text: "Continue"

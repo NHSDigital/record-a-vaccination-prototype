@@ -13,12 +13,20 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Check and add {{ "group administrator" if data.permissionLevel == "Group administrator" else "user" }}</h1>
+      <h1 class="nhsuk-heading-l">
+        {% if data.groupAdministrator == "yes" %}
+          Check and add group administrator
+        {% elif (pharmacies | length) > 1 %}
+          Check and add user to {{ pharmacies | length }} pharmacies
+        {% else %}
+          Check and add user to {{ pharmacies[0].name }} ({{ pharmacies[0].id }})
+        {% endif %}
+      </h1>
 
       {% set pharmaciesHtml %}
         <ul class="nhsuk-list">
           {% for pharmacy in pharmacies %}
-            <li>{{ pharmacy.name }}</li>
+            <li>{{ pharmacy.name }} ({{ pharmacy.id }})</li>
           {% endfor %}
         </ul>
       {% endset %}
@@ -95,7 +103,7 @@
           },
           {
             key: {
-              text: "Pharmacies"
+              text: "Pharmacy" if (pharmacies | length) == 1 else "Pharmacies"
             },
             value: {
               html: pharmaciesHtml
@@ -113,10 +121,14 @@
         ]
       }) }}
 
-      <p>{{ data.firstName }} will receive this welcome email telling them how to access the service:</p>
+      <p>{{ data.firstName }} {{ data.lastName }} will receive this email.</p>
 
       <div class="app-email-preview">
-        {% include "user-admin/_welcome-email.html" %}
+        {% if (pharmacies | length) > 1 %}
+          {% include "emails/welcome-email-multiple-pharmacies.html" %}
+        {% else %}
+          {% include "emails/welcome-email.html" %}
+        {% endif %}
       </div>
 
       <form action="/pharmacies/users/check-answer" method="post">

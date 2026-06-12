@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/pharmacies/users/new",
+    href: "/pharmacies/users/" + user.id + "/add-to-permission-level",
     text: "Back"
   }) }}
 {% endblock %}
@@ -13,12 +13,18 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Check and add user to pharmacy</h1>
+      <h1 class="nhsuk-heading-l">
+        {% if (pharmacies | length) > 1 %}
+          Check and add user to {{ pharmacies | length }} pharmacies
+        {% else %}
+          Check and add user to {{ pharmacies[0].name }} ({{ pharmacies[0].id }})
+        {% endif %}
+      </h1>
 
       {% set pharmaciesHtml %}
         <ul class="nhsuk-list">
           {% for pharmacy in pharmacies %}
-            <li>{{ pharmacy.name }}</li>
+            <li>{{ pharmacy.name }} ({{ pharmacy.id }})</li>
           {% endfor %}
         </ul>
       {% endset %}
@@ -27,18 +33,26 @@
         rows: [
           {
             key: {
-              text: "User"
+              text: "Name"
             },
             value: {
-              html: user.firstName + " " + user.lastName + "<br>" + user.email
+              text: user.firstName + " " + user.lastName
             }
           },
           {
             key: {
-              text: "Pharmacy"
+              text: "Email address"
             },
             value: {
-              html: pharmacy.name + " (" + pharmacy.id + ")"
+              text: user.email
+            }
+          },
+          {
+            key: {
+              text: "Pharmacy" if (pharmacies | length) == 1 else "Pharmacies"
+            },
+            value: {
+              html: pharmaciesHtml
             },
             actions: {
               items: [
@@ -87,10 +101,14 @@
         ]
       }) }}
 
-      <p>{{ user.firstName }} will receive this email telling them they now have access to the pharmacy:</p>
+      <p>{{ user.firstName }} {{ user.lastName }} will receive this email.</p>
 
       <div class="app-email-preview">
-        {% include "user-admin/_welcome-email.html" %}
+        {% if (pharmacies | length) > 1 %}
+          {% include "emails/welcome-email-multiple-pharmacies.html" %}
+        {% else %}
+          {% include "emails/welcome-email.html" %}
+        {% endif %}
       </div>
 
       <form action="/pharmacies/users/{{ user.id }}/add-to-check-answer" method="post">

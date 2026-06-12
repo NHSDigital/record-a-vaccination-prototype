@@ -19,11 +19,15 @@ module.exports = router => {
 
     const companyId = res.locals.currentOrganisation.id
 
-    const organisations = data.organisations.filter((organisation) => organisation.companyId === companyId).sort(sortByNameThenPostcode())
+    const allOrganisations = data.organisations.filter((organisation) => organisation.companyId === companyId).sort(sortByNameThenPostcode())
+    
+    // Separate active/deactivated pharmacies from closed ones
+    const organisations = allOrganisations.filter((org) => org.status !== 'Closed')
+    const closedOrganisations = allOrganisations.filter((org) => org.status === 'Closed')
 
     let organisationUserCounts = {}
 
-    for (const organisation of organisations) {
+    for (const organisation of allOrganisations) {
       organisationUserCounts[organisation.id] = data.users
         .filter((user) => (user.organisations || [])
           .find((orgPermission) => orgPermission.id === organisation.id)
@@ -33,6 +37,7 @@ module.exports = router => {
 
     res.render('pharmacies/index', {
       organisations,
+      closedOrganisations,
       organisationUserCounts,
       added
     })
@@ -103,6 +108,11 @@ module.exports = router => {
   router.get('/pharmacies/users',(req, res) => {
     const data = req.session.data
     const companyId = res.locals.currentOrganisation.id
+    const deactivatedGroupAdminId = req.query.deactivatedGroupAdminId
+    const deactivatedUserId = req.query.deactivatedUserId
+    const deactivatedFromPharmacyId = req.query.deactivatedFromPharmacyId
+    const deactivatedFromAllUserId = req.query.deactivatedFromAllUserId
+    const deactivatedFromAllCount = parseInt(req.query.deactivatedFromAllCount, 10) || 0
     const pharmacies = data.organisations.filter((organisation) => organisation.companyId === companyId)
 
     const pharmacyIds = pharmacies.map(pharmacy => pharmacy.id)
@@ -119,16 +129,100 @@ module.exports = router => {
     })
 
     const groupAdministrators = users.filter(function(user) {
-      return user.organisations.find(org => org.permissionLevel === "Group administrator")
+      return user.organisations.find(org => org.permissionLevel === "Group administrator" && org.status !== 'Deactivated')
     })
 
-    // Filter out group admins from the general user list
-    users = users.filter((user) => !groupAdministrators.includes(user))
+    const deactivatedGroupAdmin = deactivatedGroupAdminId
+      ? data.users.find((user) => user.id === deactivatedGroupAdminId)
+      : undefined
+
+    const deactivatedUser = deactivatedUserId
+      ? data.users.find((user) => user.id === deactivatedUserId)
+      : undefined
+
+    const deactivatedFromPharmacy = deactivatedFromPharmacyId
+      ? data.organisations.find((organisation) => organisation.id === deactivatedFromPharmacyId)
+      : undefined
+
+    const deactivatedFromAllUser = deactivatedFromAllUserId
+      ? data.users.find((user) => user.id === deactivatedFromAllUserId)
+      : undefined
+
+    // Show only active users added to individual pharmacies in the general user list.
+    users = users.filter((user) => {
+      if (groupAdministrators.includes(user)) {
+        return false
+      }
+
+      return (user.organisations || []).some((organisation) => {
+        return pharmacyIds.includes(organisation.id) && organisation.status !== 'Deactivated'
+      })
+    })
+
+    const userPharmacyCounts = {}
+
+    for (const user of users) {
+      userPharmacyCounts[user.id] = (user.organisations || []).filter((organisation) => {
+        return pharmacyIds.includes(organisation.id) && organisation.status !== 'Deactivated'
+      }).length
+    }
 
     res.render('pharmacies/users/index', {
       users,
-      groupAdministrators
+      groupAdministrators,
+      deactivatedGroupAdmin,
+      deactivatedUser,
+      deactivatedFromPharmacy,
+      deactivatedFromAllUser,
+      deactivatedFromAllCount,
+      userPharmacyCounts
     })
+  })
+
+  router.get('/pharmacies/:groupId/users/:userId/deactivate-from-group',(req, res) => {
+    const data = req.session.data
+    const groupId = req.params.groupId
+    const userId = req.params.userId
+
+    const user = data.users.find((item) => item.id === userId)
+
+    if (!user) {
+      return res.redirect('/pharmacies/users')
+    }
+
+    const groupRole = (user.organisations || []).find((org) => org.id === groupId && org.permissionLevel === 'Group administrator')
+
+    if (!groupRole) {
+      return res.redirect('/pharmacies/users')
+    }
+
+    res.render('pharmacies/users/deactivate-from-group', {
+      user,
+      groupId,
+      groupName: (res.locals.currentOrganisation && res.locals.currentOrganisation.name) || 'this pharmacy group'
+    })
+  })
+
+  router.post('/pharmacies/:groupId/users/:userId/deactivate-from-group-answer',(req, res) => {
+    const data = req.session.data
+    const groupId = req.params.groupId
+    const userId = req.params.userId
+
+    const user = data.users.find((item) => item.id === userId)
+
+    if (!user) {
+      return res.redirect('/pharmacies/users')
+    }
+
+    const groupRole = (user.organisations || []).find((org) => org.id === groupId && org.permissionLevel === 'Group administrator')
+
+    if (!groupRole) {
+      return res.redirect('/pharmacies/users')
+    }
+
+    groupRole.status = 'Deactivated'
+
+    res.redirect(`/pharmacies/users?deactivatedGroupAdminId=${user.id}`)
   })
 
   router.get('/pharmacies/users/new',(req, res) => {
@@ -159,7 +253,15 @@ module.exports = router => {
 
   router.get('/pharmacies/users/new-select-pharmacies-check',(req, res) => {
     const data = req.session.data
-    const pharmacyIds = data.pharmacyIds
+    const pharmacyIds = data.pharmacyIds || []
+
+    if (pharmacyIds.length === 0) {
+      return res.redirect('/pharmacies/users/new-select-pharmacies')
+    }
+
+    if (pharmacyIds.length === 1) {
+      return res.redirect('/pharmacies/users/new-permission-level')
+    }
 
     // Get pharmacies selected on previous page
     const pharmacies = data.organisations.filter((organisation) => pharmacyIds.includes(organisation.id))
@@ -168,6 +270,22 @@ module.exports = router => {
     res.render('pharmacies/users/new-select-pharmacies-check', {
       pharmacies
     })
+  })
+
+  router.get('/pharmacies/users/new-select-pharmacies-check/remove/:pharmacyId', (req, res) => {
+    const data = req.session.data
+    const pharmacyId = req.params.pharmacyId
+    const pharmacyIds = Array.isArray(data.pharmacyIds)
+      ? data.pharmacyIds
+      : (data.pharmacyIds ? [data.pharmacyIds] : [])
+
+    data.pharmacyIds = pharmacyIds.filter((id) => id !== pharmacyId)
+
+    if (data.pharmacyIds.length === 0) {
+      return res.redirect('/pharmacies/users/new-select-pharmacies')
+    }
+
+    res.redirect('/pharmacies/users/new-select-pharmacies-check')
   })
 
   router.get('/pharmacies/users/new-permission-level',(req, res) => {
@@ -269,7 +387,7 @@ module.exports = router => {
 
     pharmacy.status = 'Deactivated'
 
-    res.redirect(`/pharmacies/${id}`)
+    res.redirect(`/pharmacies/${id}?deactivated=true`)
   })
 
   router.get('/pharmacies/:id/add-user',(req, res) => {
@@ -390,13 +508,15 @@ module.exports = router => {
     const data = req.session.data
     const pharmacyId = req.params.pharmacyId
     const userId = req.params.userId
+    const from = req.query.from === 'pharmacy' ? 'pharmacy' : 'user'
 
     const user = data.users.find(user => user.id === userId)
     const pharmacy = data.organisations.find(organisation => organisation.id === pharmacyId)
 
     res.render('pharmacies/users/deactivate-from-pharmacy', {
       user,
-      pharmacy
+      pharmacy,
+      from
     })
   })
 
@@ -404,6 +524,7 @@ module.exports = router => {
     const data = req.session.data
     const pharmacyId = req.params.pharmacyId
     const userId = req.params.userId
+    const from = req.query.from === 'pharmacy' ? 'pharmacy' : 'user'
 
     const user = data.users.find(user => user.id === userId)
     const pharmacy = data.organisations.find(organisation => organisation.id === pharmacyId)
@@ -412,8 +533,88 @@ module.exports = router => {
 
     role.status = 'Deactivated'
 
-    res.redirect(`/pharmacies/users/${user.id}?deactivatedFromPharmacyId=${pharmacy.id}`)
+    if (from === 'user') {
+      return res.redirect(`/pharmacies/users/${user.id}?deactivatedFromPharmacyId=${pharmacy.id}`)
+    }
 
+    res.redirect(`/pharmacies/${pharmacy.id}?tab=deactivated&deactivatedUserId=${user.id}&deactivatedFromPharmacyId=${pharmacy.id}`)
+
+  })
+
+  router.get('/pharmacies/:pharmacyId/users/:userId/reactivate', (req, res) => {
+    const data = req.session.data
+    const pharmacyId = req.params.pharmacyId
+    const userId = req.params.userId
+
+    const user = data.users.find((item) => item.id === userId)
+    const pharmacy = data.organisations.find((organisation) => organisation.id === pharmacyId)
+
+    if (!user || !pharmacy) {
+      return res.redirect('/pharmacies')
+    }
+
+    const role = (user.organisations || []).find((item) => item.id === pharmacyId)
+
+    if (!role) {
+      return res.redirect(`/pharmacies/${pharmacyId}?tab=deactivated`)
+    }
+
+    role.status = 'Active'
+
+    res.redirect(`/pharmacies/${pharmacyId}?tab=active&reactivatedUserId=${userId}&reactivatedFromPharmacyId=${pharmacyId}`)
+  })
+
+  router.get('/pharmacies/users/:userId/deactivate-from-all-pharmacies', (req, res) => {
+    const data = req.session.data
+    const userId = req.params.userId
+    const companyId = res.locals.currentOrganisation.id
+
+    const user = data.users.find((item) => item.id === userId)
+
+    if (!user) {
+      return res.redirect('/pharmacies/users')
+    }
+
+    const activePharmacyRolesAtCompany = (user.organisations || [])
+      .map((role) => {
+        const pharmacy = data.organisations.find((organisation) => organisation.id === role.id)
+        return { role, pharmacy }
+      })
+      .filter(({ role, pharmacy }) => pharmacy && pharmacy.companyId === companyId && role.permissionLevel !== 'Group administrator' && role.status !== 'Deactivated')
+
+    if (activePharmacyRolesAtCompany.length === 0) {
+      return res.redirect(`/pharmacies/users/${userId}`)
+    }
+
+    res.render('pharmacies/users/deactivate-from-all-pharmacies', {
+      user,
+      pharmacies: activePharmacyRolesAtCompany.map(({ pharmacy }) => pharmacy)
+    })
+  })
+
+  router.post('/pharmacies/users/:userId/deactivate-from-all-pharmacies-answer', (req, res) => {
+    const data = req.session.data
+    const userId = req.params.userId
+    const companyId = res.locals.currentOrganisation.id
+
+    const user = data.users.find((item) => item.id === userId)
+
+    if (!user) {
+      return res.redirect('/pharmacies/users')
+    }
+
+    const deactivatedPharmacyIds = []
+
+    for (const role of (user.organisations || [])) {
+      const pharmacy = data.organisations.find((organisation) => organisation.id === role.id)
+
+      if (pharmacy && pharmacy.companyId === companyId && role.permissionLevel !== 'Group administrator' && role.status !== 'Deactivated') {
+        role.status = 'Deactivated'
+        deactivatedPharmacyIds.push(pharmacy.id)
+      }
+    }
+
+    res.redirect(`/pharmacies/users?deactivatedFromAllUserId=${userId}&deactivatedFromAllCount=${deactivatedPharmacyIds.length}`)
   })
 
 
@@ -456,17 +657,66 @@ module.exports = router => {
     })
   })
 
+  router.get('/pharmacies/users/:id/add-to-select-pharmacies-check', (req, res) => {
+    const data = req.session.data
+    const userId = req.params.id
+    const user = data.users.find(user => user.id === userId)
+
+    const selectedPharmacyIds = data.addToPharmacyIds
+      ? (Array.isArray(data.addToPharmacyIds) ? data.addToPharmacyIds : [data.addToPharmacyIds])
+      : []
+
+    if (selectedPharmacyIds.length === 0) {
+      return res.redirect(`/pharmacies/users/${userId}/add-to`)
+    }
+
+    if (selectedPharmacyIds.length === 1) {
+      return res.redirect(`/pharmacies/users/${userId}/add-to-permission-level`)
+    }
+
+    const pharmacies = data.organisations.filter((organisation) => selectedPharmacyIds.includes(organisation.id))
+
+    res.render('pharmacies/users/add-to-select-pharmacies-check', {
+      user,
+      pharmacies
+    })
+  })
+
+  router.get('/pharmacies/users/:id/add-to-select-pharmacies-check/remove/:pharmacyId', (req, res) => {
+    const data = req.session.data
+    const userId = req.params.id
+    const pharmacyId = req.params.pharmacyId
+
+    const selectedPharmacyIds = data.addToPharmacyIds
+      ? (Array.isArray(data.addToPharmacyIds) ? data.addToPharmacyIds : [data.addToPharmacyIds])
+      : []
+
+    data.addToPharmacyIds = selectedPharmacyIds.filter((id) => id !== pharmacyId)
+
+    if (data.addToPharmacyIds.length === 0) {
+      return res.redirect(`/pharmacies/users/${userId}/add-to`)
+    }
+
+    res.redirect(`/pharmacies/users/${userId}/add-to-select-pharmacies-check`)
+  })
+
   router.get('/pharmacies/users/:id/add-to-permission-level',(req, res) => {
     const data = req.session.data
     const userId = req.params.id
     const user = data.users.find(user => user.id === userId)
 
-    const pharmacy = data.organisations.find(organisation => organisation.id === data.pharmacyId)
+    const selectedPharmacyIds = data.addToPharmacyIds
+      ? (Array.isArray(data.addToPharmacyIds) ? data.addToPharmacyIds : [data.addToPharmacyIds])
+      : []
+    const pharmacies = data.organisations.filter((organisation) => selectedPharmacyIds.includes(organisation.id))
 
+    if (pharmacies.length === 0) {
+      return res.redirect(`/pharmacies/users/${userId}/add-to`)
+    }
 
     res.render('pharmacies/users/add-to-permission-level', {
       user,
-      pharmacy
+      pharmacies
     })
   })
 
@@ -475,12 +725,18 @@ module.exports = router => {
     const userId = req.params.id
     const user = data.users.find(user => user.id === userId)
 
-    const pharmacy = data.organisations.find(organisation => organisation.id === data.pharmacyId)
+    const selectedPharmacyIds = data.addToPharmacyIds
+      ? (Array.isArray(data.addToPharmacyIds) ? data.addToPharmacyIds : [data.addToPharmacyIds])
+      : []
+    const pharmacies = data.organisations.filter((organisation) => selectedPharmacyIds.includes(organisation.id))
 
+    if (pharmacies.length === 0) {
+      return res.redirect(`/pharmacies/users/${userId}/add-to`)
+    }
 
     res.render('pharmacies/users/add-to-check', {
       user,
-      pharmacy
+      pharmacies
     })
   })
 
@@ -488,21 +744,46 @@ module.exports = router => {
     const data = req.session.data
     const id = req.params.id
     const user = data.users.find(user => user.id === id)
-    const pharmacy = data.organisations.find(organisation => organisation.id === data.pharmacyId)
 
-    user.organisations.push({
-      id: pharmacy.id,
-      status: 'Active',
-      permissionLevel: data.permissionLevel,
-      vaccinator: (data.vaccinator === 'yes')
-    })
+    const selectedPharmacyIds = data.addToPharmacyIds
+      ? (Array.isArray(data.addToPharmacyIds) ? data.addToPharmacyIds : [data.addToPharmacyIds])
+      : []
+    const pharmacies = data.organisations.filter((organisation) => selectedPharmacyIds.includes(organisation.id))
+
+    if (pharmacies.length === 0) {
+      return res.redirect(`/pharmacies/users/${id}/add-to`)
+    }
+
+    const existingOrganisationIds = (user.organisations || []).map(organisation => organisation.id)
+
+    const addedPharmacyIds = []
+
+    for (const pharmacy of pharmacies) {
+      if (!existingOrganisationIds.includes(pharmacy.id)) {
+        user.organisations.push({
+          id: pharmacy.id,
+          status: 'Active',
+          permissionLevel: data.permissionLevel,
+          vaccinator: (data.vaccinator === 'yes')
+        })
+        addedPharmacyIds.push(pharmacy.id)
+      }
+    }
 
     // Reset answers
     data.permissionLevel = ''
     data.vaccinator = ''
-    data.pharmacyId = ''
+    data.addToPharmacyIds = []
 
-    res.redirect(`/pharmacies/users/${id}?addedToPharmacyId=${pharmacy.id}`)
+    if (addedPharmacyIds.length === 0) {
+      return res.redirect(`/pharmacies/users/${id}`)
+    }
+
+    if (addedPharmacyIds.length > 1) {
+      res.redirect(`/pharmacies/users/${id}?addedToPharmacyIds=${addedPharmacyIds.join(',')}`)
+    } else {
+      res.redirect(`/pharmacies/users/${id}?addedToPharmacyId=${addedPharmacyIds[0]}`)
+    }
   })
 
 
@@ -511,10 +792,18 @@ module.exports = router => {
     const id = req.params.id
     const added = req.query.added
     const addedUserId = req.query.addedUserId
+    const deactivated = req.query.deactivated
+    const deactivatedUserId = req.query.deactivatedUserId
+    const deactivatedFromPharmacyId = req.query.deactivatedFromPharmacyId
+    const reactivatedUserId = req.query.reactivatedUserId
+    const reactivatedFromPharmacyId = req.query.reactivatedFromPharmacyId
+    const tab = (req.query.tab || 'active').toLowerCase()
 
 
     const organisation = data.organisations.find((organisation) => organisation.id === id)
     const addedUser = data.users.find((user) => user.id === addedUserId)
+    const deactivatedUser = data.users.find((user) => user.id === deactivatedUserId)
+    const reactivatedUser = data.users.find((user) => user.id === reactivatedUserId)
 
     const userOrganisationPermissions = {}
 
@@ -523,16 +812,43 @@ module.exports = router => {
       .find((orgPermission) => orgPermission.id === organisation.id)
     )
 
+    const usersByStatus = {
+      invited: [],
+      active: [],
+      deactivated: []
+    }
+
     for (const user of users) {
       userOrganisationPermissions[user.id] = user.organisations.find((userOrganisation) => userOrganisation.id === organisation.id)
+
+      const userOrganisationStatus = userOrganisationPermissions[user.id].status
+
+      if (userOrganisationStatus === 'Invited') {
+        usersByStatus.invited.push(user)
+      } else if (userOrganisationStatus === 'Deactivated') {
+        usersByStatus.deactivated.push(user)
+      } else {
+        usersByStatus.active.push(user)
+      }
     }
+
+    const validTabs = ['invited', 'active', 'deactivated']
+    const currentTab = validTabs.includes(tab) ? tab : 'active'
+    const usersForTab = usersByStatus[currentTab]
 
     res.render('pharmacies/pharmacy', {
       organisation,
-      users,
+      users: usersForTab,
+      usersByStatus,
+      currentTab,
       userOrganisationPermissions,
       added,
-      addedUser
+      addedUser,
+      deactivated,
+      deactivatedUser,
+      deactivatedFromPharmacyId,
+      reactivatedUser,
+      reactivatedFromPharmacyId
     })
   })
 
@@ -543,13 +859,25 @@ module.exports = router => {
     const user = data.users.find((user) => user.id === id)
     const companyId = res.locals.currentOrganisation.id
 
-    const addedToPharmacyId = req.query.addedToPharmacyId
-    const deactivatedFromPharmacyId = req.query.deactivatedFromPharmacyId
+    if (!user) {
+      return res.redirect('/pharmacies/users')
+    }
 
-    let addedToPharmacy, deactivatedFromPharmacy
+    const addedToPharmacyId = req.query.addedToPharmacyId
+    const addedToPharmacyIds = req.query.addedToPharmacyIds
+    const deactivatedFromPharmacyId = req.query.deactivatedFromPharmacyId
+    const deactivatedFromAllPharmacies = req.query.deactivatedFromAllPharmacies === 'true'
+    const deactivatedFromAllPharmacyIds = (req.query.deactivatedFromAllPharmacyIds || '').split(',').filter(Boolean)
+    const deactivatedFromAllCount = deactivatedFromAllPharmacyIds.length
+
+    let addedToPharmacy, addedToPharmacies, deactivatedFromPharmacy
 
     if (addedToPharmacyId) {
       addedToPharmacy = data.organisations.find(organisation => organisation.id === addedToPharmacyId)
+    }
+    if (addedToPharmacyIds) {
+      const ids = addedToPharmacyIds.split(',').filter(Boolean)
+      addedToPharmacies = data.organisations.filter((organisation) => ids.includes(organisation.id))
     }
     if (deactivatedFromPharmacyId) {
       deactivatedFromPharmacy = data.organisations.find(organisation => organisation.id === deactivatedFromPharmacyId)
@@ -557,13 +885,27 @@ module.exports = router => {
 
     const totalPharmaciesAtOrganisation = data.organisations.filter(organisation => organisation.companyId === companyId).length
 
-    const pharmacyRoles = (user.organisations || []).filter(role => role.permissionLevel !== "Group administrator")
+    const pharmacyRoles = (user.organisations || [])
+      .filter((role) => role.permissionLevel !== 'Group administrator')
+      .filter((role) => role.status !== 'Deactivated')
+      .map((role) => {
+        const pharmacy = data.organisations.find((organisation) => organisation.id === role.id)
 
-    res.render('pharmacies/users/user', {
+        return {
+          ...role,
+          pharmacy
+        }
+      })
+      .filter((role) => role.pharmacy && role.pharmacy.companyId === companyId)
+
+    res.render('pharmacies/users/manage-ind-user', {
       user,
       pharmacyRoles,
       addedToPharmacy,
+      addedToPharmacies,
       deactivatedFromPharmacy,
+      deactivatedFromAllPharmacies,
+      deactivatedFromAllCount,
       totalPharmaciesAtOrganisation
     })
   })

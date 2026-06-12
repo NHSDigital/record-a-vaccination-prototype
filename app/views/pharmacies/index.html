@@ -4,7 +4,7 @@
 
 {% block content %}
   <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-three-quarters">
+    <div class="nhsuk-grid-column-full">
 
       {% if added %}
         {% set html %}
@@ -22,7 +22,7 @@
 
       <h1 class="nhsuk-heading-l">Pharmacies</h1>
 
-      <p>Add pharmacies or manage users at an existing pharmacy.</p>
+      <p>Add pharmacies or manage an existing pharmacy.</p>
 
       {{ button({
         text: "Add pharmacies",
@@ -51,7 +51,10 @@
               Users
             </th>
             <th role="columnheader" class="" scope="col">
-              Actions
+              Status
+            </th>
+            <th role="columnheader" class="" scope="col">
+              <span class="nhsuk-u-visually-hidden">Actions</span>
             </th>
           </tr>
         </thead>
@@ -75,6 +78,9 @@
                 {{ organisationUserCounts[organisation.id] }}
               </td>
               <td class="nhsuk-table__cell ">
+                {{ organisation.status }}
+              </td>
+              <td class="nhsuk-table__cell ">
                 <a href="/pharmacies/{{ organisation.id }}">Manage</a>
               </td>
             </tr>
@@ -82,6 +88,62 @@
 
         </tbody>
       </table>
+
+      {% if closedOrganisations.length > 0 %}
+        <details class="nhsuk-details">
+          <summary class="nhsuk-details__summary">
+            <span class="nhsuk-details__summary-text">
+              Closed pharmacies ({{ closedOrganisations | length }})
+            </span>
+          </summary>
+          <div class="nhsuk-details__text">
+            <p>The following pharmacies have been closed.</p>
+            <table class="nhsuk-table">
+              <thead role="rowgroup" class="nhsuk-table__head">
+                <tr role="row">
+                  <th role="columnheader" class="" scope="col">
+                    Name
+                  </th>
+                  <th role="columnheader" class="" scope="col">
+                    Vaccines
+                  </th>
+                  <th role="columnheader" class="" scope="col">
+                    Users
+                  </th>
+                  <th role="columnheader" class="" scope="col">
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="nhsuk-table__body">
+                {% for organisation in closedOrganisations %}
+                  <tr role="row" class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">
+                      {{ organisation.name }} ({{ organisation.id}})
+                    </td>
+                    <td class="nhsuk-table__cell ">
+                      {% set vaccinesEnabled = [] %}
+                      {% for vaccine in organisation.vaccines %}
+                        {% if vaccine.status == "enabled" %}
+                          {% set vaccinesEnabled = (vaccinesEnabled.push(vaccine.name), vaccinesEnabled) %}
+                        {% endif %}
+                      {% endfor %}
+
+                      {{ (vaccinesEnabled | sort | join(", ")) | capitaliseFirstLetter }}
+                    </td>
+                    <td class="nhsuk-table__cell ">
+                      {{ organisationUserCounts[organisation.id] }}
+                    </td>
+                    <td class="nhsuk-table__cell ">
+                      {{ organisation.status }}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </details>
+      {% endif %}
     </div>
   </div>
 

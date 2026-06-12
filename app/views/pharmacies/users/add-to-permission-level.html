@@ -1,12 +1,13 @@
 {% extends 'layout.html' %}
 
 {% set currentSection = "pharmacies-users" %}
+{% set selectedPharmacy = (pharmacies | first) if (pharmacies | length) == 1 %}
 
 {% set pageName = "Add pharmacies" %}
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/pharmacies/users/" + user.id + "/add-to"
+    href: "/pharmacies/users/" + user.id + "/add-to-select-pharmacies-check" if (pharmacies | length) > 1 else "/pharmacies/users/" + user.id + "/add-to"
   }) }}
 {% endblock %}
 
@@ -15,7 +16,42 @@
     <div class="nhsuk-grid-column-two-thirds">
       <form action="/pharmacies/users/{{ user.id }}/add-to-check" method="post">
 
-        <h1 class="nhsuk-heading-l">What should {{ user.firstName }} {{ user.lastName}}'s role at {{ pharmacy.name }} be?</h1>
+        <h1 class="nhsuk-heading-l">
+          {% if (pharmacies | length) == 1 and selectedPharmacy %}
+            {{ user.firstName }} {{ user.lastName }}'s role at {{ selectedPharmacy.name }} ({{ selectedPharmacy.id }})
+          {% else %}
+            {{ user.firstName }} {{ user.lastName }}'s role
+          {% endif %}
+        </h1>
+
+        {% if (pharmacies | length) > 1 %}
+          <p>These permissions will apply to the {{ pharmacies | length }} pharmacies.</p>
+        {% endif %}
+
+        {{ radios({
+          name: "vaccinator",
+          fieldset: {
+            legend: {
+              text: "Are they a vaccinator?",
+              size: "s"
+            }
+          },
+          hint: {
+            text: "Vaccination records include the name of the person who gave the vaccination"
+          },
+          value: data.vaccinator,
+          items: [
+            {
+              value: "yes",
+              text: "Yes",
+              id: "vaccinator"
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
 
         {{ radios({
           name: "permissionLevel",
@@ -48,31 +84,6 @@
               hint: {
                 text: "Record vaccinations, create reports, manage vaccines and users"
               }
-            }
-          ]
-        }) }}
-
-        {{ radios({
-          name: "vaccinator",
-          fieldset: {
-            legend: {
-              text: "Are they a vaccinator?",
-              size: "s"
-            }
-          },
-          hint: {
-            text: "Vaccination records include the name of the person who gave the vaccination"
-          },
-          value: data.vaccinator,
-          items: [
-            {
-              value: "yes",
-              text: "Yes",
-              id: "vaccinator"
-            },
-            {
-              value: "no",
-              text: "No"
             }
           ]
         }) }}

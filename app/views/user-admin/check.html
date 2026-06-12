@@ -93,18 +93,10 @@
       }) }}
 
 
-      {% if existingUserWithSameEmail %}
-        <p>{{ data.firstName }} will be re-activated and sent this email:</p>
-      {% else %}
-        <p>{{ data.firstName }} will receive this welcome email with information about activating an account:</p>
-      {% endif %}
+      <p>{{ data.firstName }} will receive this welcome email with information about activating an account:</p>
 
       <div class="app-email-preview">
-        {% if existingUserWithSameEmail %}
-          {% include "user-admin/_reactivation-email.html" %}
-        {% else %}
-          {% include "user-admin/_welcome-email.html" %}
-        {% endif %}
+        {% include "emails/welcome-email.html" %}
       </div>
 
 
