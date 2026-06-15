@@ -87,6 +87,36 @@ module.exports = function () {
     }
   }
 
+  /**
+   * Calculate how long ago a date was
+   *
+   * @param {string|number|Date} date - Date to calculate from
+   * @returns {string} Time ago in readable format (e.g. "2 days ago")
+   */
+  filters.timeAgo = function(date) {
+    if (!date) return '—'
+    
+    const now = new Date()
+    const inputDate = new Date(date)
+    const diffInMs = now - inputDate
+    const diffInSeconds = Math.floor(diffInMs / 1000)
+    const diffInMinutes = Math.floor(diffInSeconds / 60)
+    const diffInHours = Math.floor(diffInMinutes / 60)
+    const diffInDays = Math.floor(diffInHours / 24)
+
+    if (diffInSeconds < 60) {
+      return 'just now'
+    } else if (diffInMinutes < 60) {
+      return `${diffInMinutes} minute${diffInMinutes === 1 ? '' : 's'} ago`
+    } else if (diffInHours < 24) {
+      return `${diffInHours} hour${diffInHours === 1 ? '' : 's'} ago`
+    } else if (diffInDays < 7) {
+      return `${diffInDays} day${diffInDays === 1 ? '' : 's'} ago`
+    } else {
+      return inputDate.toLocaleDateString('en-GB')
+    }
+  }
+
   /* keep the following line to return your filters to the app  */
   return filters
 }

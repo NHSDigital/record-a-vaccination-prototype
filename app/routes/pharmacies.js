@@ -448,7 +448,8 @@ module.exports = router => {
         id: organisation.id,
         status: 'Active',
         vaccinator: (data.vaccinator === 'yes'),
-        permissionLevel: data.permissionLevel
+        permissionLevel: data.permissionLevel,
+        inviteSent: new Date().toISOString()
       })
 
       addedUserId = existingUser.id
@@ -466,7 +467,8 @@ module.exports = router => {
             id: organisation.id,
             status: 'Invited',
             vaccinator: (data.vaccinator === 'yes'),
-            permissionLevel: data.permissionLevel
+            permissionLevel: data.permissionLevel,
+            inviteSent: new Date().toISOString()
           }
         ]
       })

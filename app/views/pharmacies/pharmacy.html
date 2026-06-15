@@ -149,14 +149,29 @@
                 Name
               </th>
               <th role="columnheader" class="" scope="col">
-                Permission level
+                Email
               </th>
-              <th role="columnheader" class="" scope="col">
-                Vaccinator
-              </th>
-              <th role="columnheader" class="" scope="col">
-                Status
-              </th>
+              {% if currentTab == "invited" %}
+                <th role="columnheader" class="" scope="col">
+                  Vaccinator
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Permission
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Invite sent
+                </th>
+              {% else %}
+                <th role="columnheader" class="" scope="col">
+                  Vaccinator
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Permission
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Last log in
+                </th>
+              {% endif %}
               <th role="columnheader" class="" scope="col">
                 <span class="nhsuk-u-visually-hidden">Actions</span>
               </th>
@@ -168,17 +183,27 @@
                 <td class="nhsuk-table__cell">
                   {{ user.firstName }} {{ user.lastName }}
                 </td>
-                <td class="nhsuk-table__cell ">
-                  {{ userOrganisationPermissions[user.id].permissionLevel }}
+                <td class="nhsuk-table__cell">
+                  {{ user.email }}
                 </td>
-                <td class="nhsuk-table__cell " style="min-width: 150px;">
+                <td class="nhsuk-table__cell" style="min-width: 150px;">
                   {{ "Yes" if userOrganisationPermissions[user.id].vaccinator else "No" }}
                 </td>
-                <td class="nhsuk-table__cell ">
-                  {{ userOrganisationPermissions[user.id].status }}
+                <td class="nhsuk-table__cell">
+                  {{ userOrganisationPermissions[user.id].permissionLevel }}
                 </td>
+                {% if currentTab == "invited" %}
+                  <td class="nhsuk-table__cell">
+                    {{ userOrganisationPermissions[user.id].inviteSent | timeAgo }}
+                  </td>
+                {% else %}
+                  <td class="nhsuk-table__cell">
+                    {{ user.lastLogIn or "—" }}
+                  </td>
+                {% endif %}
                 <td class="nhsuk-table__cell" style="white-space: nowrap;">
-                  {% if userOrganisationPermissions[user.id].status == 'Invited' %}
+                  {% if currentTab == "invited" %}
+                    <a href="#">Resend invite<span class="nhsuk-u-visually-hidden"> to {{ user.firstName }} {{ user.lastName }}</span></a>
                   {% elif userOrganisationPermissions[user.id].status == 'Deactivated' %}
                     <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/reactivate">Reactivate<span class="nhsuk-u-visually-hidden"> {{ user.firstName }} {{ user.lastName }}</span></a>
                   {% else %}
