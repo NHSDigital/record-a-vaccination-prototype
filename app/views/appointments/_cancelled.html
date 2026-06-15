@@ -25,7 +25,11 @@
         <div class="nhsuk-u-secondary-text-colour">{{ appointment.patient.dateOfBirth | age }} old</div>
       </td>
       <td class="nhsuk-table__cell">
-        {{ appointment.vaccinations | join(", ") }}
+        {% if appointment.vaccinations and (appointment.vaccinations | length) > 1 %}
+          {{ appointment.vaccinations[0] }} and {{ appointment.vaccinations[1] }}
+        {% else %}
+          {{ appointment.vaccinations[0] }}
+        {% endif %}
       </td>
 
       <td class="nhsuk-table__cell nhsuk-u-text-break-word">
