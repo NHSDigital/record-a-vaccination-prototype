@@ -12,7 +12,15 @@ module.exports = [
         type: "injection"
       },
       {
-        name: "Comirnaty 30 KP.2",
+        name: "Comirnaty 30 LP.8.1",
+        type: "injection"
+      },
+      {
+        name: "Nuvaxovid JN.1",
+        type: "injection"
+      },
+      {
+        name: "Spikevax LP.8.1",
         type: "injection"
       }
     ]
