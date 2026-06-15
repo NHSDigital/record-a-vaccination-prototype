@@ -637,6 +637,13 @@ module.exports = router => {
       data.vaccinationDate.day = String(dayToday)
       data.vaccinationDate.month = String(monthToday)
       data.vaccinationDate.year = String(yearToday)
+
+      // Keep Rosie Smith's appointments-flow example deterministic.
+      if (data.appointmentId && data.nhsNumber === '1234567890') {
+        data.vaccinationDate.day = '11'
+        data.vaccinationDate.month = '05'
+        data.vaccinationDate.year = '2026'
+      }
     }
 
     data.vaccinationsRecorded.push({
@@ -1142,9 +1149,16 @@ module.exports = router => {
     const vaccinator = data.users.find((user) => user.id === data.vaccinatorId)
 
     let careHome
+    let selectedBatch
 
     // Get the details of the vaccine product
     const vaccineProduct = data.vaccines.find((vaccine) => vaccine.name === data.vaccine)?.products.find((vaccineProduct) => vaccineProduct.name === data.vaccineProduct)
+
+    if (data.vaccineBatch && data.vaccineBatch !== 'add-new') {
+      selectedBatch = data.vaccineStock
+        .flatMap((stockItem) => stockItem.batches || [])
+        .find((batch) => batch.id === data.vaccineBatch)
+    }
 
     if (data.locationType === "Care home") {
       careHome = data.allOrganisations.find((organisation) => organisation.id === data.careHomeId)
@@ -1153,7 +1167,8 @@ module.exports = router => {
     res.render('record-vaccinations/check', {
       vaccinator,
       vaccineProduct,
-      careHome
+      careHome,
+      selectedBatch
     })
   })
 

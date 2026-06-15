@@ -35,6 +35,63 @@
   {% set previousPage = "/record-vaccinations" %}
 {% endif %}
 
+{% set hardCodedRows = [
+  [
+    {
+      text: "15 April 2025"
+    },
+    {
+      text: "COVID-19"
+    },
+    {
+      text: "Spikevax JN.1"
+    }
+  ],
+  [
+    {
+      text: "29 October 2024"
+    },
+    {
+      text: "Pneumococcal"
+    },
+    {
+      text: "Pneumovax"
+    }
+  ],
+  [
+    {
+      text: "25 October 2024"
+    },
+    {
+      text: "Flu"
+    },
+    {
+      text: "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)"
+    }
+  ]
+] %}
+
+{% set recordedRows = [] %}
+{% for vaccination in data.vaccinationsRecorded %}
+  {% if vaccination.patient and vaccination.patient.nhsNumber == data.nhsNumber %}
+    {% set recordedRows = ([
+      [
+        {
+          text: (vaccination.date | isoDateFromDateInput | govukDate)
+        },
+        {
+          text: vaccination.vaccine
+        },
+        {
+          text: vaccination.vaccineProduct
+        }
+      ]
+    ]).concat(recordedRows) %}
+  {% endif %}
+{% endfor %}
+
+{% set historyRows = recordedRows.concat(hardCodedRows) %}
+
 {% block beforeContent %}
   {{ backLink({ href: previousPage }) }}
 {% endblock %}
@@ -140,140 +197,9 @@
               text: "Product"
             }
           ],
-          rows: [
-            [
-              {
-                text: "15 April 2025"
-              },
-              {
-                text: "COVID-19"
-              },
-              {
-                text: "Spikevax JN.1"
-              }
-            ],[
-              {
-                text: "9 November 2024"
-              },
-              {
-                text: "MMR"
-              },
-              {
-                text: "Priorix"
-              }
-            ],[
-              {
-                text: "11 November 2024"
-              },
-              {
-                text: "RSV"
-              },
-              {
-                text: "Abrysvo"
-              }
-            ],
-            [
-              {
-                text: "29 October 2024"
-              },
-              {
-                text: "Pneumococcal"
-              },
-              {
-                text: "Pneumovax"
-              }
-            ],
-            [
-              {
-                text: "25 October 2024"
-              },
-              {
-                text: "Flu"
-              },
-              {
-                text: "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)"
-              }
-            ],
-            [
-              {
-                text: "15 October 2023"
-              },
-              {
-                text: "COVID-19"
-              },
-              {
-                text: "Comirnaty 30 Omicron XBB.1.5"
-              }
-            ],
-            [
-              {
-                text: "10 October 2023"
-              },
-              {
-                text: "Flu"
-              },
-              {
-                text: "Not known",
-                classes: "nhsuk-u-secondary-text-color"
-              }
-            ],
-            [
-              {
-                text: "7 October 2023"
-              },
-              {
-                text: "Pertussis"
-              },
-              {
-                text: "Boostrix-IPV suspension"
-              }
-            ],
-            [
-              {
-                text: "11 March 2022"
-              },
-              {
-                text: "COVID-19"
-              },
-              {
-                text: "Moderna mRNA (Spikevax) Original"
-              }
-            ],
-            [
-              {
-                text: "4 December 2023"
-              },
-              {
-                text:
-      "MMR"
-              },
-              {
-                text: "Priorix"
-              }
-            ]
-          ]
+          rows: historyRows
         }) }}
 
-        {{ pagination({
-          next: {
-            href: "#"
-          },
-          items: [
-            {
-              href: "#",
-              number: 1,
-              current: true
-            },
-            {
-              href: "#",
-              number: 2
-            },
-            {
-              href: "#",
-              number: 3
-            }
-          ]
-        }) }}
 
 
       <form action="{{ nextPage }}" method="post" novalidate>

@@ -454,7 +454,7 @@ module.exports = [
   {
     id: "DP001COVID",
     vaccine: "COVID-19",
-    vaccineProduct: "Comirnaty 3 LP.8.1",
+    vaccineProduct: "Spikevax LP.8.1",
     organisationId: "DP001", // Dean's Pharmacy
     siteId: "DP001X", // Dean's Pharmacy
     batches: [

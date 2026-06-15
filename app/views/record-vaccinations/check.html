@@ -39,6 +39,9 @@
   {% if data.vaccineBatch == "add-new" %}
     {{ data.newBatchNumber }}
     <br>Expires {{ (data.newBatchExpiryDate | isoDateFromDateInput | govukDate)  }}
+  {% elseif selectedBatch %}
+    {{ selectedBatch.batchNumber }}
+    <br>Expires {{ (selectedBatch.expiryDate | govukDate) }}
   {% else %}
     {{ data.vaccineBatch }}
     <br>Expires 4 January 2025
