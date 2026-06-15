@@ -22,9 +22,7 @@
       
       <p>The lead administators at (Pharmacy name) will receive this email.</p>
 
-      <div class="app-email-preview">
-        {% include "emails/deactivation-of-pharmacy-email-to-lead-admins.html" %}
-      </div>
+      {% include "emails/deactivation-of-pharmacy-email-to-lead-admins.html" %}
 
       <form action="/pharmacies/{{ pharmacy.id}}/deactivate-answer" method="post" novalidate="true">
         {{ button({
