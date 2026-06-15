@@ -528,10 +528,12 @@ module.exports = router => {
 
     const user = data.users.find(user => user.id === userId)
     const pharmacy = data.organisations.find(organisation => organisation.id === pharmacyId)
+    const currentUser = data.users.find(u => u.id === data.currentUserId)
 
     const role = user.organisations.find(role => role.id === pharmacyId)
 
     role.status = 'Deactivated'
+    role.deactivatedBy = currentUser ? `${currentUser.firstName} ${currentUser.lastName}` : 'Unknown'
 
     if (from === 'user') {
       return res.redirect(`/pharmacies/users/${user.id}?deactivatedFromPharmacyId=${pharmacy.id}`)
@@ -539,7 +541,7 @@ module.exports = router => {
 
     res.redirect(`/pharmacies/${pharmacy.id}?tab=deactivated&deactivatedUserId=${user.id}&deactivatedFromPharmacyId=${pharmacy.id}`)
 
-  })
+  }))
 
   router.get('/pharmacies/:pharmacyId/users/:userId/reactivate', (req, res) => {
     const data = req.session.data
@@ -598,6 +600,7 @@ module.exports = router => {
     const companyId = res.locals.currentOrganisation.id
 
     const user = data.users.find((item) => item.id === userId)
+    const currentUser = data.users.find(u => u.id === data.currentUserId)
 
     if (!user) {
       return res.redirect('/pharmacies/users')
@@ -610,6 +613,7 @@ module.exports = router => {
 
       if (pharmacy && pharmacy.companyId === companyId && role.permissionLevel !== 'Group administrator' && role.status !== 'Deactivated') {
         role.status = 'Deactivated'
+        role.deactivatedBy = currentUser ? `${currentUser.firstName} ${currentUser.lastName}` : 'Unknown'
         deactivatedPharmacyIds.push(pharmacy.id)
       }
     }
