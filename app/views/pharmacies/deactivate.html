@@ -20,7 +20,11 @@
 
       <p>For 90 days they will still be able to edit records and create reports. After 90 days users will no longer have access to the Record a vaccination service for this pharmacy.</p>
       
-      <p>This email will be sent to the lead administators at (Pharmacy name).</p>
+      <p>The lead administators at (Pharmacy name) will receive this email.</p>
+
+      <div class="app-email-preview">
+        {% include "emails/deactivation-of-pharmacy-email-to-lead-admins.html" %}
+      </div>
 
       <form action="/pharmacies/{{ pharmacy.id}}/deactivate-answer" method="post" novalidate="true">
         {{ button({
