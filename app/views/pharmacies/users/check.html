@@ -124,7 +124,9 @@
       <p>{{ data.firstName }} {{ data.lastName }} will receive this email.</p>
 
       <div class="app-email-preview">
-        {% if (pharmacies | length) > 1 %}
+        {% if data.groupAdministrator == "yes" %}
+          {% include "emails/welcome-email-group-admin.html" %}
+        {% elif (pharmacies | length) > 1 %}
           {% include "emails/welcome-email-multiple-pharmacies.html" %}
         {% else %}
           {% include "emails/welcome-email.html" %}
