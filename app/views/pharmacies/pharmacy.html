@@ -161,6 +161,16 @@
                 <th role="columnheader" class="" scope="col">
                   Invite sent
                 </th>
+              {% elif currentTab == "deactivated" %}
+                <th role="columnheader" class="" scope="col">
+                  Vaccinator
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Permission
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Reason deactivated
+                </th>
               {% else %}
                 <th role="columnheader" class="" scope="col">
                   Vaccinator
@@ -180,6 +190,7 @@
           <tbody class="nhsuk-table__body">
             {% for user in users %}
               {% set inviteAgeDays = userOrganisationPermissions[user.id].inviteSent | daysSince %}
+              {% set daysSinceLastLogIn = user.lastLogIn | daysSince %}
               <tr role="row" class="nhsuk-table__row">
                 <td class="nhsuk-table__cell">
                   {{ user.firstName }} {{ user.lastName }}
@@ -199,6 +210,18 @@
                       {{ inviteAgeDays }} {{ "day" if inviteAgeDays == 1 else "days" }}
                     {% else %}
                       —
+                    {% endif %}
+                  </td>
+                {% elif currentTab == "deactivated" %}
+                  <td class="nhsuk-table__cell">
+                    {% if userOrganisationPermissions[user.id].deactivatedReason == "Deactivated by user" %}
+                      By {{ userOrganisationPermissions[user.id].deactivatedBy or ((currentUser.firstName + " " + currentUser.lastName) if currentUser else "User") }}
+                    {% elif userOrganisationPermissions[user.id].deactivatedReason %}
+                      {{ userOrganisationPermissions[user.id].deactivatedReason }}
+                    {% elif daysSinceLastLogIn and daysSinceLastLogIn > 90 %}
+                      Over 90 days since last login
+                    {% else %}
+                      By {{ userOrganisationPermissions[user.id].deactivatedBy or ((currentUser.firstName + " " + currentUser.lastName) if currentUser else "User") }}
                     {% endif %}
                   </td>
                 {% else %}

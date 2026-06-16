@@ -11,6 +11,92 @@ const sortByNameThenPostcode = (getPostcode = (item) => item.postcode) => (a, b)
   return 1
 }
 
+const scenarioCompanyIds = ['P0191N', 'P15951']
+
+const isoDaysAgo = (daysAgo) => {
+  const date = new Date()
+  date.setDate(date.getDate() - daysAgo)
+  return date.toISOString()
+}
+
+const buildDefaultScenarioUsersForPharmacy = (organisation) => {
+  if (!organisation || !scenarioCompanyIds.includes(organisation.companyId)) {
+    return []
+  }
+
+  const defaultDeactivatorName = organisation.companyId === 'P15951'
+    ? 'Amanda White'
+    : 'Paulina Sloan'
+
+  return [
+    {
+      id: `default-${organisation.id}-invited-old`,
+      firstName: 'Ava',
+      lastName: 'Patel',
+      email: 'ava.patel@nhs.net',
+      organisations: [
+        {
+          id: organisation.id,
+          permissionLevel: 'Recorder',
+          status: 'Invited',
+          vaccinator: true,
+          inviteSent: isoDaysAgo(10)
+        }
+      ]
+    },
+    {
+      id: `default-${organisation.id}-invited-recent`,
+      firstName: 'Noah',
+      lastName: 'Carter',
+      email: 'noah.carter@nhs.net',
+      organisations: [
+        {
+          id: organisation.id,
+          permissionLevel: 'Administrator',
+          status: 'Invited',
+          vaccinator: false,
+          inviteSent: isoDaysAgo(4)
+        }
+      ]
+    },
+    {
+      id: `default-${organisation.id}-deactivated-inactive`,
+      firstName: 'Mia',
+      lastName: 'Thompson',
+      email: 'mia.thompson@nhs.net',
+      lastLogIn: isoDaysAgo(91).split('T')[0],
+      organisations: [
+        {
+          id: organisation.id,
+          permissionLevel: 'Recorder',
+          status: 'Deactivated',
+          vaccinator: true,
+          deactivatedDate: isoDaysAgo(1).split('T')[0],
+          deactivatedReason: '90 days since login'
+        }
+      ]
+    },
+    {
+      id: `default-${organisation.id}-deactivated-by-user`,
+      firstName: 'Leo',
+      lastName: 'Nguyen',
+      email: 'leo.nguyen@nhs.net',
+      lastLogIn: isoDaysAgo(12).split('T')[0],
+      organisations: [
+        {
+          id: organisation.id,
+          permissionLevel: 'Administrator',
+          status: 'Deactivated',
+          vaccinator: false,
+          deactivatedDate: isoDaysAgo(2).split('T')[0],
+          deactivatedReason: 'Deactivated by user',
+          deactivatedBy: defaultDeactivatorName
+        }
+      ]
+    }
+  ]
+}
+
 module.exports = router => {
 
   router.get('/pharmacies', (req, res) => {
@@ -527,6 +613,9 @@ module.exports = router => {
     const pharmacyId = req.params.pharmacyId
     const userId = req.params.userId
     const from = req.query.from === 'pharmacy' ? 'pharmacy' : 'user'
+    const deactivatedByName = res.locals.currentUser
+      ? `${res.locals.currentUser.firstName} ${res.locals.currentUser.lastName}`
+      : 'User'
 
     const user = data.users.find(user => user.id === userId)
     const pharmacy = data.organisations.find(organisation => organisation.id === pharmacyId)
@@ -534,6 +623,8 @@ module.exports = router => {
     const role = user.organisations.find(role => role.id === pharmacyId)
 
     role.status = 'Deactivated'
+    role.deactivatedBy = deactivatedByName
+    role.deactivatedDate = new Date().toISOString().split('T')[0]
 
     if (from === 'user') {
       return res.redirect(`/pharmacies/users/${user.id}?deactivatedFromPharmacyId=${pharmacy.id}`)
@@ -598,6 +689,9 @@ module.exports = router => {
     const data = req.session.data
     const userId = req.params.userId
     const companyId = res.locals.currentOrganisation.id
+    const deactivatedByName = res.locals.currentUser
+      ? `${res.locals.currentUser.firstName} ${res.locals.currentUser.lastName}`
+      : 'User'
 
     const user = data.users.find((item) => item.id === userId)
 
@@ -612,6 +706,8 @@ module.exports = router => {
 
       if (pharmacy && pharmacy.companyId === companyId && role.permissionLevel !== 'Group administrator' && role.status !== 'Deactivated') {
         role.status = 'Deactivated'
+        role.deactivatedBy = deactivatedByName
+        role.deactivatedDate = new Date().toISOString().split('T')[0]
         deactivatedPharmacyIds.push(pharmacy.id)
       }
     }
@@ -809,7 +905,9 @@ module.exports = router => {
 
     const userOrganisationPermissions = {}
 
-    const users = data.users
+    const defaultScenarioUsers = buildDefaultScenarioUsersForPharmacy(organisation)
+
+    const users = [...data.users, ...defaultScenarioUsers]
     .filter((user) => (user.organisations || [])
       .find((orgPermission) => orgPermission.id === organisation.id)
     )
