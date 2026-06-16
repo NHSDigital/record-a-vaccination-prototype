@@ -690,11 +690,28 @@ module.exports = router => {
     const pharmacyId = req.params.pharmacyId
     const userId = req.params.userId
 
-    const user = data.users.find((item) => item.id === userId)
     const pharmacy = data.organisations.find((organisation) => organisation.id === pharmacyId)
 
-    if (!user || !pharmacy) {
+    if (!pharmacy) {
       return res.redirect('/pharmacies')
+    }
+
+    let user = data.users.find((item) => item.id === userId)
+
+    // Pre-seeded scenario users are generated at render time; persist them
+    // into session state before reactivation so status changes are retained.
+    if (!user) {
+      const seededUser = buildDefaultScenarioUsersForPharmacy(pharmacy)
+        .find((item) => item.id === userId)
+
+      if (seededUser) {
+        user = JSON.parse(JSON.stringify(seededUser))
+        data.users.push(user)
+      }
+    }
+
+    if (!user) {
+      return res.redirect(`/pharmacies/${pharmacyId}?tab=deactivated`)
     }
 
     const role = (user.organisations || []).find((item) => item.id === pharmacyId)
@@ -704,6 +721,9 @@ module.exports = router => {
     }
 
     role.status = 'Active'
+    if (!user.lastLogIn) {
+      user.lastLogIn = new Date().toISOString().split('T')[0]
+    }
 
     res.redirect(`/pharmacies/${pharmacyId}?tab=active&reactivatedUserId=${userId}&reactivatedFromPharmacyId=${pharmacyId}`)
   })
@@ -958,9 +978,10 @@ module.exports = router => {
     const userOrganisationPermissions = {}
 
     const defaultScenarioUsers = buildDefaultScenarioUsersForPharmacy(organisation)
+    const existingUserIds = new Set((data.users || []).map((user) => user.id))
+    const users = [...data.users, ...defaultScenarioUsers.filter((user) => !existingUserIds.has(user.id))]
 
-    const users = [...data.users, ...defaultScenarioUsers]
-    .filter((user) => (user.organisations || [])
+    const usersForOrganisation = users.filter((user) => (user.organisations || [])
       .find((orgPermission) => orgPermission.id === organisation.id)
     )
 
@@ -970,10 +991,14 @@ module.exports = router => {
       deactivated: []
     }
 
-    for (const user of users) {
+    for (const user of usersForOrganisation) {
       userOrganisationPermissions[user.id] = user.organisations.find((userOrganisation) => userOrganisation.id === organisation.id)
 
       const userOrganisationStatus = userOrganisationPermissions[user.id].status
+
+      if (userOrganisationStatus === 'Active' && !user.lastLogIn) {
+        user.lastLogIn = new Date().toISOString().split('T')[0]
+      }
 
       if (userOrganisationStatus === 'Invited') {
         usersByStatus.invited.push(user)
