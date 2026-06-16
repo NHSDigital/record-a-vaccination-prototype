@@ -565,6 +565,20 @@ module.exports = (router) => {
   })
 
   // ----------------------------------------------------------------
+  // Preset: Pharmacy HQ, no data (Amanda White, P15951)
+  // ----------------------------------------------------------------
+
+  router.get('/prototype-setup/preset/pharmacy-hq-no-data', (req, res) => {
+    resetSession(req)
+    const data = req.session.data
+    data.currentUserId = '6424325235325'
+    data.currentOrganisationId = 'P15951'
+    // Remove all pharmacies belonging to P15951 to start with a clean slate
+    data.organisations = data.organisations.filter(org => org.companyId !== 'P15951' || org.type === 'Pharmacy HQ')
+    res.redirect('/home')
+  })
+
+  // ----------------------------------------------------------------
   // Preset: Recorder, single organisation (Ocean Merritt, FR4V56)
   // ----------------------------------------------------------------
 
