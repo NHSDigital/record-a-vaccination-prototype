@@ -20,6 +20,20 @@
         }) }}
       {% endif %}
 
+      {% if deleted %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            Pharmacy deleted
+          </h3>
+          <p>{{ deletedName }}{% if deletedId %} ({{ deletedId }}){% endif %} has been deleted.</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
       <h1 class="nhsuk-heading-l">Pharmacies</h1>
 
       <p>Add pharmacies or manage an existing pharmacy.</p>
@@ -107,12 +121,6 @@
                   <th role="columnheader" class="" scope="col">
                     Vaccines
                   </th>
-                  <th role="columnheader" class="" scope="col">
-                    Users
-                  </th>
-                  <th role="columnheader" class="" scope="col">
-                    Status
-                  </th>
                 </tr>
               </thead>
               <tbody class="nhsuk-table__body">
@@ -130,12 +138,6 @@
                       {% endfor %}
 
                       {{ (vaccinesEnabled | sort | join(", ")) | capitaliseFirstLetter }}
-                    </td>
-                    <td class="nhsuk-table__cell ">
-                      {{ organisationUserCounts[organisation.id] }}
-                    </td>
-                    <td class="nhsuk-table__cell ">
-                      {{ organisation.status }}
                     </td>
                   </tr>
                 {% endfor %}

@@ -11,6 +11,10 @@ const sortByNameThenPostcode = (getPostcode = (item) => item.postcode) => (a, b)
   return 1
 }
 
+const hasVaccinationRecords = (data, organisationId) => {
+  return (data.vaccinationsRecorded || []).some((record) => record.organisationId === organisationId)
+}
+
 const scenarioCompanyIds = ['P0191N', 'P15951']
 
 const isoDaysAgo = (daysAgo) => {
@@ -102,6 +106,9 @@ module.exports = router => {
   router.get('/pharmacies', (req, res) => {
     const data = req.session.data
     const added = req.query.added
+    const deleted = req.query.deleted === 'true'
+    const deletedName = req.query.deletedName || ''
+    const deletedId = req.query.deletedId || ''
 
     const companyId = res.locals.currentOrganisation.id
 
@@ -125,7 +132,10 @@ module.exports = router => {
       organisations,
       closedOrganisations,
       organisationUserCounts,
-      added
+      added,
+      deleted,
+      deletedName,
+      deletedId
     })
   })
 
@@ -461,9 +471,50 @@ module.exports = router => {
     const id = req.params.id
     const pharmacy = data.organisations.find(organisation => organisation.id === id)
 
+    if (hasVaccinationRecords(data, id) === false) {
+      return res.redirect(`/pharmacies/${id}/delete`)
+    }
+
     res.render('pharmacies/deactivate', {
       pharmacy
     })
+  })
+
+  router.get('/pharmacies/:id/delete', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const pharmacy = data.organisations.find((organisation) => organisation.id === id)
+
+    if (!pharmacy) {
+      return res.redirect('/pharmacies')
+    }
+
+    if (hasVaccinationRecords(data, id)) {
+      return res.redirect(`/pharmacies/${id}`)
+    }
+
+    res.render('pharmacies/delete', {
+      pharmacy
+    })
+  })
+
+  router.post('/pharmacies/:id/delete-answer', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const pharmacy = data.organisations.find((organisation) => organisation.id === id)
+
+    if (!pharmacy) {
+      return res.redirect('/pharmacies')
+    }
+
+    if (hasVaccinationRecords(data, id)) {
+      return res.redirect(`/pharmacies/${id}`)
+    }
+
+    pharmacy.status = 'Closed'
+    pharmacy.dateClosed = new Date().toISOString().split('T')[0]
+
+    return res.redirect(`/pharmacies?deleted=true&deletedName=${encodeURIComponent(pharmacy.name)}&deletedId=${encodeURIComponent(pharmacy.id)}`)
   })
 
   router.post('/pharmacies/:id/deactivate-answer',(req, res) => {
@@ -902,6 +953,7 @@ module.exports = router => {
     const addedUser = data.users.find((user) => user.id === addedUserId)
     const deactivatedUser = data.users.find((user) => user.id === deactivatedUserId)
     const reactivatedUser = data.users.find((user) => user.id === reactivatedUserId)
+    const canDeletePharmacy = !hasVaccinationRecords(data, id)
 
     const userOrganisationPermissions = {}
 
@@ -948,7 +1000,8 @@ module.exports = router => {
       deactivatedUser,
       deactivatedFromPharmacyId,
       reactivatedUser,
-      reactivatedFromPharmacyId
+      reactivatedFromPharmacyId,
+      canDeletePharmacy
     })
   })
 
