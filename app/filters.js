@@ -1,4 +1,5 @@
 const prototypeFilters = require('@x-govuk/govuk-prototype-filters');
+
 const dateFromYearMonthDay = require('./lib/utils/date-from-year-month-day');
 
 
@@ -94,7 +95,7 @@ module.exports = function () {
    * Ensure a value is always returned as an array
    * Useful for form fields with [] notation that may return a string if only one value
    *
-   * @param {*} value - Value to convert to array
+   * @param {string|Array|null|undefined} value - Value to convert to array
    * @returns {Array} Value as an array
    */
   filters.asArray = function(value) {

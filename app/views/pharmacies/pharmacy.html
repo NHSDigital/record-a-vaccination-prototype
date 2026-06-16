@@ -206,8 +206,10 @@
                 </td>
                 {% if currentTab == "invited" %}
                   <td class="nhsuk-table__cell">
-                    {% if inviteAgeDays == 0 or inviteAgeDays %}
-                      {{ inviteAgeDays }} {{ "day" if inviteAgeDays == 1 else "days" }}
+                    {% if inviteAgeDays == 0 %}
+                      Today
+                    {% elif inviteAgeDays %}
+                      {{ inviteAgeDays }} {{ "day" if inviteAgeDays == 1 else "days" }} ago
                     {% else %}
                       —
                     {% endif %}
