@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies" %}
+
+{% set pageName = "Delete " + pharmacy.name + " (" + pharmacy.id + ")" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/" + pharmacy.id
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p>Once you delete this pharmacy, no one at {{ pharmacy.name }} ({{ pharmacy.id }}) will be able to record vaccinations.</p>
+
+      <p>You can add this pharmacy back anytime.</p>
+
+      <form action="/pharmacies/{{ pharmacy.id }}/delete-answer" method="post" novalidate="true">
+        {{ button({
+          "text": "Delete pharmacy",
+          classes: "nhsuk-button--warning"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

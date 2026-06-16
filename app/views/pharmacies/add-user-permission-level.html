@@ -1,7 +1,13 @@
 {% extends 'layout.html' %}
 
 {% set currentSection = "pharmacies" %}
-{% set pageName = "Add a user to " + organisation.name  %}
+{% if existingUser %}
+  {% set pageName = existingUser.firstName + " " + existingUser.lastName + "'s role at " + organisation.name + " (" + organisation.id + ")" %}
+{% elseif data.firstName or data.lastName %}
+  {% set pageName = (data.firstName + " " + data.lastName) + "'s role at " + organisation.name + " (" + organisation.id + ")" %}
+{% else %}
+  {% set pageName = "New user's role at " + organisation.name + " (" + organisation.id + ")" %}
+{% endif %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -13,13 +19,13 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
       <h1 class="nhsuk-heading-l">
-        Add
         {% if existingUser %}
-          {{ existingUser.firstName }} {{ existingUser.lastName }}
+          {{ existingUser.firstName }} {{ existingUser.lastName }}'s role at {{ organisation.name }} ({{ organisation.id }})
+        {% elseif data.firstName or data.lastName %}
+          {{ data.firstName }} {{ data.lastName }}'s role at {{ organisation.name }} ({{ organisation.id }})
         {% else %}
-          a new user
+          Add a new user to {{ organisation.name }} ({{ organisation.id }})
         {% endif %}
-        to {{ organisation.name }} ({{ organisation.id }})
       </h1>
 
       <form action="/pharmacies/{{ organisation.id }}/add-user-check" method="post">

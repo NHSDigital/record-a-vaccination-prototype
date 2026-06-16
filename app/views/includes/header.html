@@ -19,6 +19,12 @@
       active: (currentSection == "pharmacies")
     }), navigationItems) %}
 
+    {% set navigationItems = (navigationItems.push({
+      href: "/pharmacies/users",
+      text: "Users",
+      active: (currentSection == "pharmacies-users")
+    }), navigationItems) %}
+
   {% endif %}
 
   <!-- All users except Pharmacy HQ users -->

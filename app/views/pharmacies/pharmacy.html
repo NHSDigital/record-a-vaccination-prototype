@@ -28,6 +28,48 @@
         }) }}
       {% endif %}
 
+      {% if deactivated == "true" %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            Pharmacy deactivated
+          </h3>
+          <p>{{ organisation.name }} ({{ organisation.id }}) has been successfully deactivated.</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
+      {% if deactivatedUser and deactivatedFromPharmacyId == organisation.id %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            User deactivated
+          </h3>
+          <p>{{ deactivatedUser.firstName }} {{ deactivatedUser.lastName }} has been successfully deactivated from {{ organisation.name }} ({{ organisation.id }}).</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
+      {% if reactivatedUser and reactivatedFromPharmacyId == organisation.id %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            User reactivated
+          </h3>
+          <p>{{ reactivatedUser.firstName }} {{ reactivatedUser.lastName }} has been successfully reactivated for {{ organisation.name }} ({{ organisation.id }}).</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       {{ summaryList({
@@ -63,16 +105,17 @@
         <p>This pharmacy has been deactivated.</p>
 
         <p>It will be closed in <b>90 days</b>. </p>
+      {% elif canDeletePharmacy %}
+        <p>This pharmacy has not yet recorded any vaccinations. You can delete it if you added it by mistake.</p>
+        <p><a href="/pharmacies/{{ organisation.id }}/delete">Delete this pharmacy</a></p>
       {% else %}
+        <p>If a pharmacy is no longer using Record a vaccination, you should deactivate it.</p>
+
         <p><a href="/pharmacies/{{ organisation.id }}/deactivate">Deactivate this pharmacy</a></p>
 
       {% endif %}
 
       <h2 class="nhsuk-heading-m">Users</h2>
-    </div>
-  </div>
-  <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-three-quarters">
 
       {% if organisation.status != 'Deactivated' %}
         {{ button({
@@ -80,6 +123,27 @@
           text: "Add user"
         }) }}
       {% endif %}
+
+      {{ appSecondaryNavigation({
+        visuallyHiddenTitle: "Users by status",
+        items: [{
+          text: "Invited (" + (usersByStatus.invited | length) + ")",
+          href: "/pharmacies/" + organisation.id + "?tab=invited",
+          current: (currentTab == "invited")
+        }, {
+          text: "Active (" + (usersByStatus.active | length) + ")",
+          href: "/pharmacies/" + organisation.id + "?tab=active",
+          current: (currentTab == "active")
+        }, {
+          text: "Deactivated (" + (usersByStatus.deactivated | length) + ")",
+          href: "/pharmacies/" + organisation.id + "?tab=deactivated",
+          current: (currentTab == "deactivated")
+        }]
+      }) }}
+    </div>
+  </div>
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
 
       {% if (users | length) > 0 %}
 
@@ -90,14 +154,39 @@
                 Name
               </th>
               <th role="columnheader" class="" scope="col">
-                Permission level
+                Email
               </th>
-              <th role="columnheader" class="" scope="col">
-                Vaccinator
-              </th>
-              <th role="columnheader" class="" scope="col">
-                Status
-              </th>
+              {% if currentTab == "invited" %}
+                <th role="columnheader" class="" scope="col">
+                  Vaccinator
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Permission
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Invite sent
+                </th>
+              {% elif currentTab == "deactivated" %}
+                <th role="columnheader" class="" scope="col">
+                  Vaccinator
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Permission
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Reason deactivated
+                </th>
+              {% else %}
+                <th role="columnheader" class="" scope="col">
+                  Vaccinator
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Permission
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Last log in
+                </th>
+              {% endif %}
               <th role="columnheader" class="" scope="col">
                 <span class="nhsuk-u-visually-hidden">Actions</span>
               </th>
@@ -105,28 +194,73 @@
           </thead>
           <tbody class="nhsuk-table__body">
             {% for user in users %}
+              {% set inviteAgeDays = userOrganisationPermissions[user.id].inviteSent | daysSince %}
+              {% set daysSinceLastLogIn = user.lastLogIn | daysSince %}
               <tr role="row" class="nhsuk-table__row">
                 <td class="nhsuk-table__cell">
                   {{ user.firstName }} {{ user.lastName }}
                 </td>
-                <td class="nhsuk-table__cell ">
-                  {{ userOrganisationPermissions[user.id].permissionLevel }}
+                <td class="nhsuk-table__cell">
+                  {{ user.email }}
                 </td>
-                <td class="nhsuk-table__cell " style="min-width: 150px;">
+                <td class="nhsuk-table__cell" style="min-width: 150px;">
                   {{ "Yes" if userOrganisationPermissions[user.id].vaccinator else "No" }}
                 </td>
-                <td class="nhsuk-table__cell ">
-                  {{ userOrganisationPermissions[user.id].status }}
-                </td>
                 <td class="nhsuk-table__cell">
-                  <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/change?from=pharmacy">Change<span class="nhsuk-u-visually-hidden">permission level for {{ user.firstName }} {{ user.lastName }}</span></a>
+                  {{ userOrganisationPermissions[user.id].permissionLevel }}
+                </td>
+                {% if currentTab == "invited" %}
+                  <td class="nhsuk-table__cell">
+                    {% if inviteAgeDays == 0 %}
+                      Today
+                    {% elif inviteAgeDays %}
+                      {{ inviteAgeDays }} {{ "day" if inviteAgeDays == 1 else "days" }} ago
+                    {% else %}
+                      —
+                    {% endif %}
+                  </td>
+                {% elif currentTab == "deactivated" %}
+                  <td class="nhsuk-table__cell">
+                    {% if userOrganisationPermissions[user.id].deactivatedReason == "Deactivated by user" %}
+                      By {{ userOrganisationPermissions[user.id].deactivatedBy or ((currentUser.firstName + " " + currentUser.lastName) if currentUser else "User") }}
+                    {% elif userOrganisationPermissions[user.id].deactivatedReason %}
+                      {{ userOrganisationPermissions[user.id].deactivatedReason }}
+                    {% elif daysSinceLastLogIn and daysSinceLastLogIn > 90 %}
+                      Over 90 days since last login
+                    {% else %}
+                      By {{ userOrganisationPermissions[user.id].deactivatedBy or ((currentUser.firstName + " " + currentUser.lastName) if currentUser else "User") }}
+                    {% endif %}
+                  </td>
+                {% else %}
+                  <td class="nhsuk-table__cell">
+                    {{ user.lastLogIn or "—" }}
+                  </td>
+                {% endif %}
+                <td class="nhsuk-table__cell" style="white-space: nowrap;">
+                  {% if currentTab == "invited" %}
+                    {% if inviteAgeDays > 7 %}
+                      <a href="#">Resend invite<span class="nhsuk-u-visually-hidden"> to {{ user.firstName }} {{ user.lastName }}</span></a>
+                    {% endif %}
+                  {% elif userOrganisationPermissions[user.id].status == 'Deactivated' %}
+                    <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/reactivate">Reactivate<span class="nhsuk-u-visually-hidden"> {{ user.firstName }} {{ user.lastName }}</span></a>
+                  {% else %}
+                    <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/change?from=pharmacy">Change<span class="nhsuk-u-visually-hidden"> permission level for {{ user.firstName }} {{ user.lastName }}</span></a>
+                    &nbsp;
+                    <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/deactivate-from-pharmacy?from=pharmacy">Deactivate<span class="nhsuk-u-visually-hidden"> {{ user.firstName }} {{ user.lastName }}</span></a>
+                  {% endif %}
                 </td>
               </tr>
             {% endfor %}
           </tbody>
         </table>
       {% else %}
-        <p>No users added yet.</p>
+        {% if currentTab == "invited" %}
+          <p>No invited users.</p>
+        {% elif currentTab == "deactivated" %}
+          <p>No deactivated users.</p>
+        {% else %}
+          <p>No active users.</p>
+        {% endif %}
       {% endif %}
 
     </div>

@@ -1,5 +1,7 @@
 const prototypeFilters = require('@x-govuk/govuk-prototype-filters');
 
+const dateFromYearMonthDay = require('./lib/utils/date-from-year-month-day');
+
 
 module.exports = function () {
   const filters = prototypeFilters;
@@ -28,6 +30,27 @@ module.exports = function () {
 
   filters.pluck = function(array, attribute) {
     return array.map((item) => item[attribute])
+  }
+
+  filters.vaccinationsForPatient = function(records, nhsNumber) {
+    if (!Array.isArray(records)) return []
+
+    return records
+      .map((record, index) => ({ record, index }))
+      .filter(({ record }) => {
+        return record && record.patient && record.patient.nhsNumber === nhsNumber
+      })
+      .sort((a, b) => {
+        const dateA = dateFromYearMonthDay(a.record.date.year, a.record.date.month, a.record.date.day)
+        const dateB = dateFromYearMonthDay(b.record.date.year, b.record.date.month, b.record.date.day)
+
+        if (dateA && dateB && dateA.getTime() !== dateB.getTime()) {
+          return dateB.getTime() - dateA.getTime()
+        }
+
+        return b.index - a.index
+      })
+      .map(({ record }) => record)
   }
 
   filters.capitaliseFirstLetter = function(string) {
@@ -66,6 +89,37 @@ module.exports = function () {
     } catch (error) {
       return error.message.split(':')[0]
     }
+  }
+
+  /**
+   * Ensure a value is always returned as an array
+   * Useful for form fields with [] notation that may return a string if only one value
+   *
+   * @param {string|Array|null|undefined} value - Value to convert to array
+   * @returns {Array} Value as an array
+   */
+  filters.asArray = function(value) {
+    if (value === undefined || value === null) {
+      return []
+    }
+    if (Array.isArray(value)) {
+      return value
+    }
+    return [value]
+  }
+
+  filters.daysSince = function(dateValue) {
+    if (!dateValue) return null
+
+    const inviteDate = new Date(dateValue)
+    if (Number.isNaN(inviteDate.getTime())) return null
+
+    const now = new Date()
+    const inviteDay = new Date(inviteDate.getFullYear(), inviteDate.getMonth(), inviteDate.getDate())
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+
+    const millisecondsPerDay = 24 * 60 * 60 * 1000
+    return Math.floor((today - inviteDay) / millisecondsPerDay)
   }
 
   /* keep the following line to return your filters to the app  */
