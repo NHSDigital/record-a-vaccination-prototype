@@ -1,4 +1,5 @@
 const prototypeFilters = require('@x-govuk/govuk-prototype-filters');
+const dateFromYearMonthDay = require('./lib/utils/date-from-year-month-day');
 
 
 module.exports = function () {
@@ -30,31 +31,33 @@ module.exports = function () {
     return array.map((item) => item[attribute])
   }
 
+  filters.vaccinationsForPatient = function(records, nhsNumber) {
+    if (!Array.isArray(records)) return []
+
+    return records
+      .map((record, index) => ({ record, index }))
+      .filter(({ record }) => {
+        return record && record.patient && record.patient.nhsNumber === nhsNumber
+      })
+      .sort((a, b) => {
+        const dateA = dateFromYearMonthDay(a.record.date.year, a.record.date.month, a.record.date.day)
+        const dateB = dateFromYearMonthDay(b.record.date.year, b.record.date.month, b.record.date.day)
+
+        if (dateA && dateB && dateA.getTime() !== dateB.getTime()) {
+          return dateB.getTime() - dateA.getTime()
+        }
+
+        return b.index - a.index
+      })
+      .map(({ record }) => record)
+  }
+
   filters.capitaliseFirstLetter = function(string) {
     if (string) {
       return string.charAt(0) .toUpperCase() + string.slice(1)
     } else {
       return null
     }
-  }
-
-  filters.joinWithAnd = function(array) {
-    if (!Array.isArray(array) || array.length === 0) {
-      return ''
-    }
-
-    const items = array.map((item) => String(item))
-    items[0] = filters.capitaliseFirstLetter(items[0])
-
-    if (items.length === 1) {
-      return items[0]
-    }
-
-    if (items.length === 2) {
-      return `${items[0]} and ${items[1]}`
-    }
-
-    return `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`
   }
 
   /**
@@ -88,33 +91,34 @@ module.exports = function () {
   }
 
   /**
-   * Calculate how long ago a date was
+   * Ensure a value is always returned as an array
+   * Useful for form fields with [] notation that may return a string if only one value
    *
-   * @param {string|number|Date} date - Date to calculate from
-   * @returns {string} Time ago in readable format (e.g. "2 days ago")
+   * @param {*} value - Value to convert to array
+   * @returns {Array} Value as an array
    */
-  filters.timeAgo = function(date) {
-    if (!date) return '—'
-    
-    const now = new Date()
-    const inputDate = new Date(date)
-    const diffInMs = now - inputDate
-    const diffInSeconds = Math.floor(diffInMs / 1000)
-    const diffInMinutes = Math.floor(diffInSeconds / 60)
-    const diffInHours = Math.floor(diffInMinutes / 60)
-    const diffInDays = Math.floor(diffInHours / 24)
-
-    if (diffInSeconds < 60) {
-      return 'just now'
-    } else if (diffInMinutes < 60) {
-      return `${diffInMinutes} minute${diffInMinutes === 1 ? '' : 's'} ago`
-    } else if (diffInHours < 24) {
-      return `${diffInHours} hour${diffInHours === 1 ? '' : 's'} ago`
-    } else if (diffInDays < 7) {
-      return `${diffInDays} day${diffInDays === 1 ? '' : 's'} ago`
-    } else {
-      return inputDate.toLocaleDateString('en-GB')
+  filters.asArray = function(value) {
+    if (value === undefined || value === null) {
+      return []
     }
+    if (Array.isArray(value)) {
+      return value
+    }
+    return [value]
+  }
+
+  filters.daysSince = function(dateValue) {
+    if (!dateValue) return null
+
+    const inviteDate = new Date(dateValue)
+    if (Number.isNaN(inviteDate.getTime())) return null
+
+    const now = new Date()
+    const inviteDay = new Date(inviteDate.getFullYear(), inviteDate.getMonth(), inviteDate.getDate())
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+
+    const millisecondsPerDay = 24 * 60 * 60 * 1000
+    return Math.floor((today - inviteDay) / millisecondsPerDay)
   }
 
   /* keep the following line to return your filters to the app  */

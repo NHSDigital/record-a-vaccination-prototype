@@ -179,6 +179,7 @@
           </thead>
           <tbody class="nhsuk-table__body">
             {% for user in users %}
+              {% set inviteAgeDays = userOrganisationPermissions[user.id].inviteSent | daysSince %}
               <tr role="row" class="nhsuk-table__row">
                 <td class="nhsuk-table__cell">
                   {{ user.firstName }} {{ user.lastName }}
@@ -194,7 +195,11 @@
                 </td>
                 {% if currentTab == "invited" %}
                   <td class="nhsuk-table__cell">
-                    {{ userOrganisationPermissions[user.id].inviteSent | timeAgo }}
+                    {% if inviteAgeDays == 0 or inviteAgeDays %}
+                      {{ inviteAgeDays }} {{ "day" if inviteAgeDays == 1 else "days" }}
+                    {% else %}
+                      —
+                    {% endif %}
                   </td>
                 {% else %}
                   <td class="nhsuk-table__cell">
@@ -203,7 +208,9 @@
                 {% endif %}
                 <td class="nhsuk-table__cell" style="white-space: nowrap;">
                   {% if currentTab == "invited" %}
-                    <a href="#">Resend invite<span class="nhsuk-u-visually-hidden"> to {{ user.firstName }} {{ user.lastName }}</span></a>
+                    {% if inviteAgeDays > 7 %}
+                      <a href="#">Resend invite<span class="nhsuk-u-visually-hidden"> to {{ user.firstName }} {{ user.lastName }}</span></a>
+                    {% endif %}
                   {% elif userOrganisationPermissions[user.id].status == 'Deactivated' %}
                     <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/reactivate">Reactivate<span class="nhsuk-u-visually-hidden"> {{ user.firstName }} {{ user.lastName }}</span></a>
                   {% else %}
