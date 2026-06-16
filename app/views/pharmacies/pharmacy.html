@@ -106,8 +106,7 @@
 
         <p>It will be closed in <b>90 days</b>. </p>
       {% elif canDeletePharmacy %}
-        <p>You can delete a pharmacy if you added it by mistake as it has not yet recorded any vaccinations.</p>
-
+        <p>This pharmacy has not yet recorded any vaccinations. You can delete it if you added it by mistake.</p>
         <p><a href="/pharmacies/{{ organisation.id }}/delete">Delete this pharmacy</a></p>
       {% else %}
         <p>If a pharmacy is no longer using Record a vaccination, you should deactivate it.</p>
