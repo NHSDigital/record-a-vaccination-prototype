@@ -36,7 +36,11 @@
 
       <h1 class="nhsuk-heading-l">Pharmacies</h1>
 
-      <p>Add pharmacies or manage an existing pharmacy.</p>
+      {% if (organisations | length) > 0 %}
+        <p>Add pharmacies or manage an existing pharmacy.</p>
+      {% else %}
+        <p>You have not yet added any pharmacies.</p>
+      {% endif %}
 
       {{ button({
         text: "Add pharmacies",

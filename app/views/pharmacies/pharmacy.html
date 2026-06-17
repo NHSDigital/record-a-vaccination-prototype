@@ -233,7 +233,13 @@
                   </td>
                 {% else %}
                   <td class="nhsuk-table__cell">
-                    {{ user.lastLogIn or "—" }}
+                    {% if daysSinceLastLogIn == 0 %}
+                      Today
+                    {% elif daysSinceLastLogIn %}
+                      {{ daysSinceLastLogIn }} {{ "day" if daysSinceLastLogIn == 1 else "days" }} ago
+                    {% else %}
+                      —
+                    {% endif %}
                   </td>
                 {% endif %}
                 <td class="nhsuk-table__cell" style="white-space: nowrap;">
