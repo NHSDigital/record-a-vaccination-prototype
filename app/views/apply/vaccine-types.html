@@ -17,10 +17,10 @@
 
         {% set items = [] %}
 
-        {% for vaccine in data.vaccines | sort(false, true, "name") %}
+        {% for vaccine in data.vaccines | sort(false, false, "name") %}
           {% if vaccine.availableToAllSites %}
             {% set items = (items.push({
-              text: vaccine.name,
+              text: (vaccine.name | capitaliseFirstLetter),
               value: vaccine.name
             }), items) %}
           {% endif %}
