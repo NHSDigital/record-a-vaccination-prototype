@@ -144,26 +144,6 @@ module.exports = [
     editable: true
   },
   {
-    id: "DP001",
-    date: { day: "20", month: "05", year: "2026" },
-    vaccine: "COVID-19",
-    vaccineProduct: "Pfizer-BioNTech",
-    patient: {
-      name: "John Doe",
-      nhsNumber: "1234567890"
-    },
-    batchNumber: "DP001BATCH",
-    batchExpiryDate: "2027-05-20",
-    organisationId: "DP001", // Dean's Pharmacy
-    siteId: "DP001X", // Dean's Pharmacy
-    vaccinatorId: "123456789", // Vaccinator ID
-    eligibility: "Based on age",
-    consent: "patient",
-    injectionSite: "Right arm",
-    notes: "",
-    editable: true
-  },
-  {
     id: "DP002",
     date: { day: "20", month: "05", year: "2026" },
     vaccine: "COVID-19",
