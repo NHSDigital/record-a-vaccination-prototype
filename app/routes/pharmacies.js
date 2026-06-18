@@ -24,7 +24,7 @@ const isoDaysAgo = (daysAgo) => {
 }
 
 const buildDefaultScenarioUsersForPharmacy = (organisation) => {
-  if (!organisation || !scenarioCompanyIds.includes(organisation.companyId)) {
+  if (!organisation || !scenarioCompanyIds.includes(organisation.companyId) || organisation.addedByUser) {
     return []
   }
 
@@ -97,7 +97,41 @@ const buildDefaultScenarioUsersForPharmacy = (organisation) => {
           deactivatedBy: defaultDeactivatorName
         }
       ]
-    }
+    },
+    ...(organisation.id === 'FQ3U12' ? [
+      {
+        id: `default-${organisation.id}-active-1`,
+        firstName: 'Sophie',
+        lastName: 'Clarke',
+        email: 'sophie.clarke@nhs.net',
+        lastLogIn: isoDaysAgo(3).split('T')[0],
+        organisations: [{ id: organisation.id, permissionLevel: 'Recorder', status: 'Active', vaccinator: true }]
+      },
+      {
+        id: `default-${organisation.id}-active-2`,
+        firstName: 'Daniel',
+        lastName: 'Foster',
+        email: 'daniel.foster@nhs.net',
+        lastLogIn: isoDaysAgo(7).split('T')[0],
+        organisations: [{ id: organisation.id, permissionLevel: 'Recorder', status: 'Active', vaccinator: false }]
+      },
+      {
+        id: `default-${organisation.id}-active-3`,
+        firstName: 'Priya',
+        lastName: 'Sharma',
+        email: 'priya.sharma@nhs.net',
+        lastLogIn: isoDaysAgo(1).split('T')[0],
+        organisations: [{ id: organisation.id, permissionLevel: 'Administrator', status: 'Active', vaccinator: true }]
+      },
+      {
+        id: `default-${organisation.id}-active-4`,
+        firstName: 'Marcus',
+        lastName: 'Webb',
+        email: 'marcus.webb@nhs.net',
+        lastLogIn: isoDaysAgo(14).split('T')[0],
+        organisations: [{ id: organisation.id, permissionLevel: 'Recorder', status: 'Active', vaccinator: false }]
+      }
+    ] : [])
   ]
 }
 
@@ -165,17 +199,13 @@ module.exports = router => {
     })
   })
 
-  router.get('/pharmacies/check-selection/remove/:pharmacyId', (req, res) => {
+  router.post('/pharmacies/check-selection/remove', (req, res) => {
     const data = req.session.data
-    const pharmacyId = req.params.pharmacyId
-    const pharmacyIds = Array.isArray(data.pharmacyIds)
-      ? data.pharmacyIds
-      : (data.pharmacyIds ? [data.pharmacyIds] : [])
+    const pharmacyIdToRemove = req.body.pharmacyIdToRemove
 
-    data.pharmacyIds = pharmacyIds.filter((id) => id !== pharmacyId)
-
-    if (data.pharmacyIds.length === 0) {
-      return res.redirect('/pharmacies/select')
+    if (pharmacyIdToRemove) {
+      const ids = Array.isArray(data.pharmacyIds) ? data.pharmacyIds : [data.pharmacyIds].filter(Boolean)
+      data.pharmacyIds = ids.filter((id) => id !== pharmacyIdToRemove)
     }
 
     res.redirect('/pharmacies/check-selection')
@@ -196,44 +226,24 @@ module.exports = router => {
     for (const pharmacy of pharmacies) {
       let fullAddress = pharmacy.address
 
-      try {
-        const organisationWithFullAddress = await getOrganisation(pharmacy.id)
-        if (organisationWithFullAddress && organisationWithFullAddress.address) {
-          fullAddress = organisationWithFullAddress.address
-        }
-      } catch (error) {
-        // Keep the ORD address fallback when the FHIR lookup is unavailable.
-      }
-
-      const existing = data.organisations.find((org) => org.id === pharmacy.id)
-
-      if (existing) {
-        existing.companyId = companyId
-        existing.addedByUser = true
-        existing.address = {
-          ...existing.address,
-          ...fullAddress
-        }
-      } else {
-        data.organisations.push({
-          id: pharmacy.id,
-          name: pharmacy.name,
-          type: 'Community Pharmacy',
-          companyId: companyId,
-          address: fullAddress,
-          status: 'Active',
-          addedByUser: true,
-          vaccines: [
-            {name: 'flu', status: 'enabled'}
-          ],
-          sites: [
-            {
-              id: pharmacy.id,
-              name: pharmacy.name
-            }
-          ]
-        })
-      }
+      data.organisations.push({
+        id: pharmacy.id,
+        name: pharmacy.name,
+        type: 'Community Pharmacy',
+        companyId: companyId,
+        address: pharmacy.address,
+        status: 'Active',
+        addedByUser: true,
+        vaccines: [
+          {name: 'flu', status: 'enabled'}
+        ],
+        sites: [
+          {
+            id: pharmacy.id,
+            name: pharmacy.name
+          }
+        ]
+      })
     }
 
     res.redirect(`/pharmacies?added=${pharmacies.length}`)
@@ -549,10 +559,11 @@ module.exports = router => {
       return res.redirect(`/pharmacies/${id}`)
     }
 
-    pharmacy.status = 'Closed'
-    pharmacy.dateClosed = new Date().toISOString().split('T')[0]
+    const pharmacyName = pharmacy.name
+    const pharmacyId = pharmacy.id
+    data.organisations = data.organisations.filter((organisation) => organisation.id !== id)
 
-    return res.redirect(`/pharmacies?deleted=true&deletedName=${encodeURIComponent(pharmacy.name)}&deletedId=${encodeURIComponent(pharmacy.id)}`)
+    return res.redirect(`/pharmacies?deleted=true&deletedName=${encodeURIComponent(pharmacyName)}&deletedId=${encodeURIComponent(pharmacyId)}`)
   })
 
   router.post('/pharmacies/:id/deactivate-answer',(req, res) => {

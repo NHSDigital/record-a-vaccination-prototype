@@ -31,7 +31,13 @@
                 <td>{{ pharmacy.name }}, {{ pharmacy.address.postcode }} ({{ pharmacy.id }})</td>
                 <td class="nhsuk-u-text-align-right">
                   {% if pharmacies | length > 1 %}
-                    <a href="/pharmacies/check-selection/remove/{{ pharmacy.id }}" class="nhsuk-button nhsuk-button--small nhsuk-button--secondary nhsuk-u-margin-bottom-0">Remove</a>
+                    <form action="/pharmacies/check-selection/remove" method="post">
+                    <input type="hidden" name="pharmacyIdToRemove" value="{{ pharmacy.id }}">
+                    {{ button({
+                      text: "Remove",
+                      classes: "nhsuk-button--small nhsuk-button--secondary nhsuk-u-margin-bottom-0"
+                    }) }}
+                    </form>
                   {% endif %}
                 </td>
               </tr>
