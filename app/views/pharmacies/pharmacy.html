@@ -19,7 +19,7 @@
           <h3 class="nhsuk-notification-banner__heading">
             User added
           </h3>
-          <p>{{ (addedUser.firstName + " " + addedUser.lastName) if addedUser else "User" }} has been added to {{ organisation.name }}</p>
+          <p>{{ (addedUser.firstName + " " + addedUser.lastName) if addedUser else "User" }} has been added to {{ organisation.name }}.</p>
         {% endset %}
 
         {{ notificationBanner({
