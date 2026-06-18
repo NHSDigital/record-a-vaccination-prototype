@@ -245,7 +245,7 @@
                 <td class="nhsuk-table__cell" style="white-space: nowrap;">
                   {% if currentTab == "invited" %}
                     {% if inviteAgeDays > 7 %}
-                      <a href="#">Resend invite<span class="nhsuk-u-visually-hidden"> to {{ user.firstName }} {{ user.lastName }}</span></a>
+                      <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/resend-invite">Resend invite<span class="nhsuk-u-visually-hidden"> to {{ user.firstName }} {{ user.lastName }}</span></a>
                     {% endif %}
                   {% elif userOrganisationPermissions[user.id].status == 'Deactivated' %}
                     <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/reactivate">Reactivate<span class="nhsuk-u-visually-hidden"> {{ user.firstName }} {{ user.lastName }}</span></a>

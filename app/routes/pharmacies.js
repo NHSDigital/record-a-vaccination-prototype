@@ -685,6 +685,63 @@ module.exports = router => {
 
   })
 
+  router.get('/pharmacies/:pharmacyId/users/:userId/resend-invite', (req, res) => {
+    const data = req.session.data
+    const pharmacyId = req.params.pharmacyId
+    const userId = req.params.userId
+
+    const pharmacy = data.organisations.find((organisation) => organisation.id === pharmacyId)
+
+    if (!pharmacy) {
+      return res.redirect('/pharmacies')
+    }
+
+    let user = data.users.find((item) => item.id === userId)
+
+    // Pre-seeded users are generated at render time; look them up if not in session
+    if (!user) {
+      const seededUser = buildDefaultScenarioUsersForPharmacy(pharmacy)
+        .find((item) => item.id === userId)
+
+      if (seededUser) {
+        user = JSON.parse(JSON.stringify(seededUser))
+        data.users.push(user)
+      }
+    }
+
+    if (!user) {
+      return res.redirect(`/pharmacies/${pharmacyId}?tab=invited`)
+    }
+
+    res.render('pharmacies/users/resend-invite', {
+      user,
+      pharmacy
+    })
+  })
+
+  router.post('/pharmacies/:pharmacyId/users/:userId/resend-invite-answer', (req, res) => {
+    const data = req.session.data
+    const pharmacyId = req.params.pharmacyId
+    const userId = req.params.userId
+
+    const user = data.users.find((item) => item.id === userId)
+    const pharmacy = data.organisations.find((organisation) => organisation.id === pharmacyId)
+
+    if (!user || !pharmacy) {
+      return res.redirect('/pharmacies')
+    }
+
+    const role = (user.organisations || []).find((item) => item.id === pharmacyId)
+
+    if (!role) {
+      return res.redirect(`/pharmacies/${pharmacyId}?tab=invited`)
+    }
+
+    role.inviteSent = new Date().toISOString()
+
+    res.redirect(`/pharmacies/${pharmacyId}?tab=invited`)
+  })
+
   router.get('/pharmacies/:pharmacyId/users/:userId/reactivate', (req, res) => {
     const data = req.session.data
     const pharmacyId = req.params.pharmacyId
