@@ -224,7 +224,6 @@ module.exports = router => {
     }).sort(sortByNameThenPostcode())
 
     for (const pharmacy of pharmacies) {
-      let fullAddress = pharmacy.address
 
       data.organisations.push({
         id: pharmacy.id,
@@ -1086,7 +1085,7 @@ module.exports = router => {
             ...organisationWithFullAddress.address
           }
         }
-      } catch (error) {
+      } catch {
         // Keep existing address when the FHIR lookup is unavailable.
       }
     }
