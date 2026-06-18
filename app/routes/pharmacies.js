@@ -1,4 +1,4 @@
-const { getPharmaciesBelongingToOrganisation } = require('../lib/ods');
+const { getPharmaciesBelongingToOrganisation, getOrganisation } = require('../lib/ods');
 const { byName } = require('../lib/utils/by-name');
 
 
@@ -165,6 +165,22 @@ module.exports = router => {
     })
   })
 
+  router.get('/pharmacies/check-selection/remove/:pharmacyId', (req, res) => {
+    const data = req.session.data
+    const pharmacyId = req.params.pharmacyId
+    const pharmacyIds = Array.isArray(data.pharmacyIds)
+      ? data.pharmacyIds
+      : (data.pharmacyIds ? [data.pharmacyIds] : [])
+
+    data.pharmacyIds = pharmacyIds.filter((id) => id !== pharmacyId)
+
+    if (data.pharmacyIds.length === 0) {
+      return res.redirect('/pharmacies/select')
+    }
+
+    res.redirect('/pharmacies/check-selection')
+  })
+
   // Actually add the pharmacies
   router.post('/pharmacies/added', async (req, res) => {
     const data = req.session.data
@@ -178,19 +194,33 @@ module.exports = router => {
     }).sort(sortByNameThenPostcode())
 
     for (const pharmacy of pharmacies) {
+      let fullAddress = pharmacy.address
+
+      try {
+        const organisationWithFullAddress = await getOrganisation(pharmacy.id)
+        if (organisationWithFullAddress && organisationWithFullAddress.address) {
+          fullAddress = organisationWithFullAddress.address
+        }
+      } catch (error) {
+        // Keep the ORD address fallback when the FHIR lookup is unavailable.
+      }
 
       const existing = data.organisations.find((org) => org.id === pharmacy.id)
 
       if (existing) {
         existing.companyId = companyId
         existing.addedByUser = true
+        existing.address = {
+          ...existing.address,
+          ...fullAddress
+        }
       } else {
         data.organisations.push({
           id: pharmacy.id,
           name: pharmacy.name,
           type: 'Community Pharmacy',
           companyId: companyId,
-          address: pharmacy.address,
+          address: fullAddress,
           status: 'Active',
           addedByUser: true,
           vaccines: [
@@ -1021,7 +1051,7 @@ module.exports = router => {
   })
 
 
-  router.get('/pharmacies/:id', (req, res) => {
+  router.get('/pharmacies/:id', async (req, res) => {
     const data = req.session.data
     const id = req.params.id
     const added = req.query.added
@@ -1035,6 +1065,21 @@ module.exports = router => {
 
 
     const organisation = data.organisations.find((organisation) => organisation.id === id)
+
+    if (organisation && (!organisation.address?.line1 || !organisation.address?.town)) {
+      try {
+        const organisationWithFullAddress = await getOrganisation(id)
+        if (organisationWithFullAddress && organisationWithFullAddress.address) {
+          organisation.address = {
+            ...organisation.address,
+            ...organisationWithFullAddress.address
+          }
+        }
+      } catch (error) {
+        // Keep existing address when the FHIR lookup is unavailable.
+      }
+    }
+
     const addedUser = data.users.find((user) => user.id === addedUserId)
     const deactivatedUser = data.users.find((user) => user.id === deactivatedUserId)
     const reactivatedUser = data.users.find((user) => user.id === reactivatedUserId)
@@ -1045,7 +1090,7 @@ module.exports = router => {
     const defaultScenarioUsers = buildDefaultScenarioUsersForPharmacy(organisation)
     const existingUserIds = new Set((data.users || []).map((user) => user.id))
     const users = organisation.addedByUser
-      ? []
+      ? data.users
       : [...data.users, ...defaultScenarioUsers.filter((user) => !existingUserIds.has(user.id))]
 
     const usersForOrganisation = users.filter((user) => (user.organisations || [])

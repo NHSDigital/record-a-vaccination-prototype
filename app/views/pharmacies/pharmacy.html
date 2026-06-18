@@ -72,6 +72,17 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
+      {% set addressParts = [] %}
+      {% if organisation.address.line1 %}
+        {% set addressParts = (addressParts.push(organisation.address.line1), addressParts) %}
+      {% endif %}
+      {% if organisation.address.town %}
+        {% set addressParts = (addressParts.push(organisation.address.town), addressParts) %}
+      {% endif %}
+      {% if organisation.address.postcode %}
+        {% set addressParts = (addressParts.push(organisation.address.postcode), addressParts) %}
+      {% endif %}
+
       {{ summaryList({
         rows: [
           {
@@ -87,7 +98,7 @@
               text: "Address"
             },
             value: {
-              text: organisation.address.line1 + ", " + organisation.address.town + ", " + organisation.address.postcode
+              text: addressParts | join(", ")
             }
           },
           {
