@@ -72,6 +72,17 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
+      {% set addressParts = [] %}
+      {% if organisation.address.line1 %}
+        {% set addressParts = (addressParts.push(organisation.address.line1), addressParts) %}
+      {% endif %}
+      {% if organisation.address.town %}
+        {% set addressParts = (addressParts.push(organisation.address.town), addressParts) %}
+      {% endif %}
+      {% if organisation.address.postcode %}
+        {% set addressParts = (addressParts.push(organisation.address.postcode), addressParts) %}
+      {% endif %}
+
       {{ summaryList({
         rows: [
           {
@@ -87,7 +98,7 @@
               text: "Address"
             },
             value: {
-              text: organisation.address.line1 + ", " + organisation.address.town + ", " + organisation.address.postcode
+              text: addressParts | join(", ")
             }
           },
           {
@@ -123,6 +134,10 @@
           text: "Add user"
         }) }}
       {% endif %}
+
+      {% set totalUsers = (usersByStatus.invited | length) + (usersByStatus.active | length) + (usersByStatus.deactivated | length) %}
+
+      {% if totalUsers > 0 %}
 
       {{ appSecondaryNavigation({
         visuallyHiddenTitle: "Users by status",
@@ -245,7 +260,7 @@
                 <td class="nhsuk-table__cell" style="white-space: nowrap;">
                   {% if currentTab == "invited" %}
                     {% if inviteAgeDays > 7 %}
-                      <a href="#">Resend invite<span class="nhsuk-u-visually-hidden"> to {{ user.firstName }} {{ user.lastName }}</span></a>
+                      <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/resend-invite">Resend invite<span class="nhsuk-u-visually-hidden"> to {{ user.firstName }} {{ user.lastName }}</span></a>
                     {% endif %}
                   {% elif userOrganisationPermissions[user.id].status == 'Deactivated' %}
                     <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/reactivate">Reactivate<span class="nhsuk-u-visually-hidden"> {{ user.firstName }} {{ user.lastName }}</span></a>
@@ -267,6 +282,8 @@
         {% else %}
           <p>No active users.</p>
         {% endif %}
+      {% endif %}
+
       {% endif %}
 
     </div>
