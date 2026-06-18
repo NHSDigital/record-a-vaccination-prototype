@@ -179,23 +179,31 @@ module.exports = router => {
 
     for (const pharmacy of pharmacies) {
 
-      data.organisations.push({
-        id: pharmacy.id,
-        name: pharmacy.name,
-        type: 'Community Pharmacy',
-        companyId: companyId,
-        address: pharmacy.address,
-        status: 'Active',
-        vaccines: [
-          {name: 'flu', status: 'enabled'}
-        ],
-        sites: [
-          {
-            id: pharmacy.id,
-            name: pharmacy.name
-          }
-        ]
-      })
+      const existing = data.organisations.find((org) => org.id === pharmacy.id)
+
+      if (existing) {
+        existing.companyId = companyId
+        existing.addedByUser = true
+      } else {
+        data.organisations.push({
+          id: pharmacy.id,
+          name: pharmacy.name,
+          type: 'Community Pharmacy',
+          companyId: companyId,
+          address: pharmacy.address,
+          status: 'Active',
+          addedByUser: true,
+          vaccines: [
+            {name: 'flu', status: 'enabled'}
+          ],
+          sites: [
+            {
+              id: pharmacy.id,
+              name: pharmacy.name
+            }
+          ]
+        })
+      }
     }
 
     res.redirect(`/pharmacies?added=${pharmacies.length}`)
@@ -622,7 +630,7 @@ module.exports = router => {
     req.session.data.permissionLevel = ''
     req.session.data.vaccinator = ''
 
-    res.redirect(`/pharmacies/${organisation.id}?added=true&addedUserId=${addedUserId}`)
+    res.redirect(`/pharmacies/${organisation.id}?added=true&addedUserId=${addedUserId}&tab=${existingUser ? 'active' : 'invited'}`)
   })
 
 
@@ -1036,7 +1044,9 @@ module.exports = router => {
 
     const defaultScenarioUsers = buildDefaultScenarioUsersForPharmacy(organisation)
     const existingUserIds = new Set((data.users || []).map((user) => user.id))
-    const users = [...data.users, ...defaultScenarioUsers.filter((user) => !existingUserIds.has(user.id))]
+    const users = organisation.addedByUser
+      ? []
+      : [...data.users, ...defaultScenarioUsers.filter((user) => !existingUserIds.has(user.id))]
 
     const usersForOrganisation = users.filter((user) => (user.organisations || [])
       .find((orgPermission) => orgPermission.id === organisation.id)

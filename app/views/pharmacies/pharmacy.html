@@ -124,6 +124,10 @@
         }) }}
       {% endif %}
 
+      {% set totalUsers = (usersByStatus.invited | length) + (usersByStatus.active | length) + (usersByStatus.deactivated | length) %}
+
+      {% if totalUsers > 0 %}
+
       {{ appSecondaryNavigation({
         visuallyHiddenTitle: "Users by status",
         items: [{
@@ -267,6 +271,8 @@
         {% else %}
           <p>No active users.</p>
         {% endif %}
+      {% endif %}
+
       {% endif %}
 
     </div>
