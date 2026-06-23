@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Reports" %}
+
+{% set currentSection = "reports" %}
+
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% include "includes/notification.html" %}
+
+    </div>
+  </div>
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-2">Reports</h1>
+      <p>Create and download reports.</p>
+
+      {% if vaccinationsRecordedCount > 0 %}
+
+        {{ insetText({
+          html: "<p>You need to wait for 3 minutes before you can start creating a report. This is because another report is currently being created for your organisation.</p>"
+        })}}
+
+
+      {% else %}
+        <p>You have not yet recorded any vaccinations.</p>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}
