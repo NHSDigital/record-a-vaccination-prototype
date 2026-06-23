@@ -1,26 +1,17 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Add a list of NHS numbers" %}
-
-{% set currentSection = "lists" %}
+{% set pageName = "Creating report" %}
 
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if (errors | length) > 0 %}
-        {{ errorSummary({
-          titleText: "There is a problem",
-          errorList: errors
-        }) }}
-      {% endif %}
-
-      <form action="/lists/add-numbers" method="post" novalidate>
+      
 
 <h1 class="nhsuk-heading-m">We are creating your report</h1>
 
-<p>This can take up to 2 minutes.</p>
+<p>This can take a few minutes.</p>
 
 
 <div class="loader"></div>
@@ -47,12 +38,6 @@
 
 }
 </style>
-
-<br>
-
-
-<p>Looking up NHS numbers <br> Found 16 out of 104</p>
-
 
 <meta http-equiv=refresh content="5; url=http:/lists/list">
 
