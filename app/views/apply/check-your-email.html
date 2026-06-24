@@ -10,9 +10,19 @@
 
       <p>We've set up an account for you as a lead administrator for Bestway Ltd.</p>
 
+      {% from "inset-text/macro.njk" import insetText %}
+
+{% set insetTextHtml %}
+  <p>To activate your account, you must log in to the service within 7 days. Otherwise we will delete your account and you will you need to sign up again.</p>
+{% endset %}
+
+{{ insetText({
+  html: insetTextHtml
+}) }}
+
       <p>You will now get a welcome email which includes:</p>
         <ul>
-        <li>how to log in</li>
+        <li>how to log in to the service</li>
         <li>how to add more users to your pharmacy
         <li>links to our user guide and drop-in sessions</li>
         </ul>
