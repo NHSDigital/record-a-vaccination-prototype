@@ -3,7 +3,16 @@
 {% set pageName = "Record vaccinations" %}
 <p>Start recording a vaccination.</p>
 
-<h2>Do you have the patient's NHS number?</h2>
+      {% from 'inset-text/macro.njk' import insetText %}
+
+{% set insetTextHtml %}
+  <p>Find out about the latest updates to the service:
+  <br><a href="https://guide.ravs.england.nhs.uk/whats-new/" title="External website">What's new (opens in new tab)</a></p>
+{% endset %}
+
+{{ insetText({
+  html: insetTextHtml
+}) }}
 
 {% set currentSection = "vaccinate" %}
 
