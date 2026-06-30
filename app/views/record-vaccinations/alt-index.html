@@ -1,0 +1,88 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Record vaccinations" %}
+<p>Start recording a vaccination.</p>
+
+<h2>Do you have the patient's NHS number?</h2>
+
+{% set currentSection = "vaccinate" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+    {% include "includes/notification.html" %}
+
+
+      {% if (errorList | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errorList
+        }) }}
+      {% endif %}
+
+      
+
+      <form action="/record-vaccinations/answer-patient-nhs-number-known" method="post" novalidate>
+
+        {% set nhsNumberHtml %}
+
+          {{ input({
+            id: "nhs-number",
+            name: "nhsNumber",
+            classes: "nhsuk-input--width-10",
+            inputmode: "numeric",
+            errorMessage: nhsNumberError,
+            label: {
+              text: "NHS number",
+              classes: "nhsuk-label--s"
+            },
+            value: data.nhsNumber,
+            hint: {
+              text: "For example, 485 777 3456"
+            }
+          }) }}
+        {% endset %}
+
+
+        {{ radios({
+          idPrefix: "nhs-number-known",
+          name: "nhsNumberKnown",
+          fieldset: {
+            legend: {
+              html: "Do you have the patient’s NHS&nbsp;number?",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: "true"
+            }
+          },
+          value: data.nhsNumberKnown,
+          errorMessage: nhsNumberKnownError if nhsNumberKnownError,
+          items: [
+            {
+              value: "yes",
+              text: "Yes",
+              conditional: {
+                html: nhsNumberHtml
+              }
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        {# This is to make sure the right options are shown on the 'Done' page. #}
+        <input type="hidden" name="appointmentId" value="">
+        <input type="hidden" name="from" value="">
+        <input type="hidden" name="vaccinationToday" value="">
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
