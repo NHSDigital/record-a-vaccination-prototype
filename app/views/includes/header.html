@@ -45,7 +45,7 @@
   {% endif %}
 
   <!-- Records (where available) -->
-  {% if currentOrganisation and (not currentOrganisation.type == "Pharmacy HQ") %}
+  {% if currentOrganisation and (currentOrganisation.type != "Pharmacy HQ") %}
     {% set navigationItems = (navigationItems.push({
       href: "/records",
       text: "Records",
