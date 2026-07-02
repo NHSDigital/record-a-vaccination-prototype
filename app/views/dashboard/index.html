@@ -17,7 +17,7 @@
 
 
       {% if currentOrganisation and totalVaccinationsRecorded == 0 %}
-        {% include "home/_no-vaccinations-recorded.html" %}
+        {% include "dashboard/_no-vaccinations-recorded.html" %}
       {% endif %}
 
       {% from 'inset-text/macro.njk' import insetText %}
@@ -41,24 +41,24 @@
     </div>
   </div>
 
-  {% include "home/_vaccination-totals.html" %}
+  {% include "dashboard/_vaccination-totals.html" %}
 
   {% if totalVaccinationsRecorded > 0 %}
 
     {% set byDayHtml %}
-      {% include "home/_by-day.html" %}
+      {% include "dashboard/_by-day.html" %}
     {% endset %}
 
     {% set byVaccinationHtml %}
-      {% include "home/_by-vaccine.html" %}
+      {% include "dashboard/_by-vaccine.html" %}
     {% endset %}
 
     {% set bySiteHtml %}
-      {% include "home/_by-site.html" %}
+      {% include "dashboard/_by-site.html" %}
     {% endset %}
 
     {% set byPharmacyHtml %}
-      {% include "home/_by-pharmacy.html" %}
+      {% include "dashboard/_by-pharmacy.html" %}
     {% endset %}
 
 
