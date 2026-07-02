@@ -5,6 +5,31 @@
   }
 }
 
+.app-pre-footer-banner {
+  border-top: 1px solid #b1b4b6;
+}
+
+.app-pre-footer-banner .govuk-phase-banner__content {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  @include nhsuk-font(16);
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.app-pre-footer-banner .govuk-phase-banner__content__tag {
+  @include nhsuk-font(16);
+  margin-right: 18px;
+  margin-bottom: 0;
+}
+
+.app-pre-footer-banner .govuk-phase-banner__text {
+  @include nhsuk-font(16);
+  display: inline;
+  margin-bottom: 0;
+}
+
 .app-custom-config-progress-card__details {
   .nhsuk-details {
     margin-bottom: 0;
