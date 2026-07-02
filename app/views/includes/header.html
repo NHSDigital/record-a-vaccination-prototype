@@ -4,14 +4,32 @@
 
 {% if currentUser and not (currentOrganisation.type === "Region") %}
 
-  <!-- All users -->
+  <!-- Appointments (where available) -->
+  {% if currentOrganisation and (currentOrganisation.type != "Pharmacy HQ") and (currentOrganisation.appointmentsInterfaceEnabled !== false) %}
+    {% set navigationItems = (navigationItems.push({
+      href: "/appointments",
+      html: "Appointments <span class=\"nhsuk-tag app-tag--header nhsuk-u-margin-left-2\">New</span>",
+      active: (currentSection == "appointments")
+    }), navigationItems) %}
+  {% endif %}
+
+  <!-- Record vaccinations (where available) -->
+  {% if currentOrganisation and (currentOrganisation.type != "Pharmacy HQ") %}
+    {% set navigationItems = (navigationItems.push({
+      href: "/record-vaccinations",
+      text: "Record vaccinations",
+      active: (currentSection == "vaccinate")
+    }), navigationItems) %}
+  {% endif %}
+
+  <!-- Dashboard (all users) -->
   {% set navigationItems = (navigationItems.push({
     href: "/home/",
-    text: "Home",
+    text: "Dashboard",
     active: (currentSection == "home")
   }), navigationItems) %}
 
-  <!-- Pharmacy HQs -->
+  <!-- Pharmacy HQ-specific navigation -->
   {% if currentOrganisation.type === "Pharmacy HQ" %}
     {% set navigationItems = (navigationItems.push({
       href: "/pharmacies",
@@ -24,36 +42,9 @@
       text: "Users",
       active: (currentSection == "pharmacies-users")
     }), navigationItems) %}
-
   {% endif %}
 
-  <!-- All users except Pharmacy HQ users -->
-  {% if currentOrganisation and (currentOrganisation.type != "Pharmacy HQ") and (currentOrganisation.appointmentsInterfaceEnabled !== false) %}
-    {% set navigationItems = (navigationItems.push({
-      href: "/appointments",
-      html: "Appointments <span class=\"nhsuk-tag app-tag--header nhsuk-u-margin-left-2\">New</span>",
-      active: (currentSection == "appointments")
-    }), navigationItems) %}
-  {% endif %}
-
-  {% if currentOrganisation and (currentOrganisation.type != "Pharmacy HQ") %}
-    {% set navigationItems = (navigationItems.push({
-      href: "/record-vaccinations",
-      text: "Record vaccinations",
-      active: (currentSection == "vaccinate")
-    }), navigationItems) %}
-  {% endif %}
-
-  <!-- Admins or lead admins -->
-  {% if (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) %}
-    {% set navigationItems = (navigationItems.push({
-      href: "/vaccines",
-      text: "Vaccines",
-      active: (currentSection == "vaccines")
-    }), navigationItems) %}
-  {% endif %}
-
-  <!-- All users except Pharmacy HQs -->
+  <!-- Records (where available) -->
   {% if currentOrganisation and (not currentOrganisation.type == "Pharmacy HQ") %}
     {% set navigationItems = (navigationItems.push({
       href: "/records",
@@ -62,7 +53,7 @@
     }), navigationItems) %}
   {% endif %}
 
-  <!-- Admins or lead admins or Pharmacy HQs -->
+  <!-- Reports (where available) -->
   {% if (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) or currentOrganisation.type === "Pharmacy HQ" %}
     {% set navigationItems = (navigationItems.push({
       href: "/reports",
@@ -71,7 +62,16 @@
     }), navigationItems) %}
   {% endif %}
 
-  <!-- Lead admins only -->
+  <!-- Vaccines (where available) -->
+  {% if (["Lead administrator", "Administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) %}
+    {% set navigationItems = (navigationItems.push({
+      href: "/vaccines",
+      text: "Vaccines",
+      active: (currentSection == "vaccines")
+    }), navigationItems) %}
+  {% endif %}
+
+  <!-- Manage users (where available) -->
   {% if (["Lead administrator"] | arrayOrStringIncludes(organisationSetting.permissionLevel)) %}
     {% set navigationItems = (navigationItems.push({
       href: '/user-admin',
@@ -103,7 +103,7 @@
 {% if currentUser.admin %}
   {% set navigationItems = (navigationItems.push({
     href: "/support",
-    text: "Home",
+    text: "Dashboard",
     active: (currentSection == "dashboard")
   }), navigationItems) %}
 

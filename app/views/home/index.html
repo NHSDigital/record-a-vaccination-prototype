@@ -1,9 +1,9 @@
 {% extends 'layout.html' %}
 
 {% if currentOrganisation %}
-  {% set pageName = currentOrganisation.name + " - Home" %}
+  {% set pageName = currentOrganisation.name + " - Dashboard" %}
 {% else %}
-  {% set pageName = "Home" %}
+  {% set pageName = "Dashboard" %}
 {% endif %}
 {% set currentSection = "home" %}
 
