@@ -20,17 +20,6 @@
         {% include "dashboard/_no-vaccinations-recorded.html" %}
       {% endif %}
 
-      {% from 'inset-text/macro.njk' import insetText %}
-
-{% set insetTextHtml %}
-  <p>Find out about the latest updates to the service:
-  <br><a href="https://guide.ravs.england.nhs.uk/whats-new/" title="External website">What's new (opens in new tab)</a></p>
-{% endset %}
-
-{{ insetText({
-  html: insetTextHtml
-}) }}
-
       <h2 class="nhsuk-heading-m nhsuk-u-margin-bottom-1">All vaccinations</h2>
       <p class="nhsuk-caption-m nhsuk-u-margin-top-0">Last updated: {{ dashboardLastUpdated }}</p>
       {% if not currentOrganisation %}
