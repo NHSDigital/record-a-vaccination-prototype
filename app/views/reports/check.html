@@ -61,11 +61,7 @@
       {% endset %}
 
       {% set vaccinesToReportText = "" %}
-      {% if data.vaccinesToReport %}
-        {% set vaccinesToReportDisplay = [] %}
-        {% for vaccine in (data.vaccinesToReport | sort(false, false, "name")) %}
-          {% set vaccinesToReportDisplay = (vaccinesToReportDisplay.push(vaccine ), vaccinesToReportDisplay) %}
-        {% endfor %}
+      {% if vaccinesToReportDisplay %}
         {% set vaccinesToReportText = vaccinesToReportDisplay | join(", ") %}
       {% endif %}
 
@@ -110,10 +106,10 @@
           },
           {
             key: {
-              text: ("Vaccines" if (data.vaccinesToReport | length) > 1 else "Vaccine")
+              text: ("Vaccines" if (vaccinesToReportDisplay | length) > 1 else "Vaccine")
             },
             value: {
-              text: vaccinesToReportText if data.vaccines
+              text: vaccinesToReportText
             },
             actions: {
               items: [

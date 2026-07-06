@@ -6,8 +6,16 @@
 
 
 {% block beforeContent %}
+  {% if currentOrganisation.type == "Pharmacy HQ" %}
+    {% set backLinkHref = "/reports/choose-pharmacies" %}
+  {% elif (currentOrganisation.sites | length) == 1 %}
+    {% set backLinkHref = "/reports/choose-vaccines" %}
+  {% else %}
+    {% set backLinkHref = "/reports/choose-site" %}
+  {% endif %}
+
   {{ backLink({
-    href: "/reports/choose-site",
+    href: backLinkHref,
     text: "Back"
   }) }}
 {% endblock %}

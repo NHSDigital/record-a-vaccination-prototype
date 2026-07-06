@@ -46,9 +46,15 @@ module.exports = (router) => {
   })
 
   router.post('/reports/choose-vaccines-answer', (req, res) => {
+    const data = req.session.data
+    const currentOrganisation = res.locals.currentOrganisation
+    const sites = currentOrganisation.sites || []
 
-    if (res.locals.currentOrganisation.type === "Pharmacy HQ") {
+    if (currentOrganisation.type === "Pharmacy HQ") {
       res.redirect('/reports/choose-pharmacies')
+    } else if (sites.length === 1) {
+      data.siteIdsToReport = [sites[0].id]
+      res.redirect('/reports/choose-data')
     } else {
       res.redirect('/reports/choose-site')
     }
@@ -106,9 +112,17 @@ module.exports = (router) => {
   })
 
   router.get('/reports/choose-site', (req, res) => {
+    const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
 
     const sites = currentOrganisation.sites || []
+
+    if (sites.length === 1) {
+      data.siteIdsToReport = [sites[0].id]
+      res.redirect('/reports/choose-data')
+      return
+    }
+
     res.render('reports/choose-site', {
       sites
     })
@@ -186,6 +200,7 @@ module.exports = (router) => {
     const data = req.session.data
     const currentOrganisation = res.locals.currentOrganisation
     const siteIds = data.siteIdsToReport || []
+    const selectedVaccines = data.vaccinesToReport || []
     const today = new Date()
     const days = 86400000 // number of milliseconds in a day
 
@@ -203,6 +218,22 @@ module.exports = (router) => {
     const dateOption = data.date
 
     let from, to
+    let vaccinesToReportDisplay = selectedVaccines.filter((vaccineName) => vaccineName !== 'all')
+
+    if (selectedVaccines.includes('all')) {
+      const organisationVaccines = currentOrganisation.vaccines || []
+      let enabledVaccines = organisationVaccines.filter((vaccine) => vaccine.status === "enabled")
+
+      // Temporary: show all vaccines if none have batches added
+      if (enabledVaccines.length === 0) {
+        enabledVaccines = data.vaccines
+      }
+
+      vaccinesToReportDisplay = enabledVaccines.map((vaccine) => vaccine.name)
+    }
+
+    vaccinesToReportDisplay = [...new Set(vaccinesToReportDisplay)]
+      .sort((a, b) => a.localeCompare(b))
 
     switch (dateOption) {
       case 'custom_date_range':
@@ -229,6 +260,19 @@ module.exports = (router) => {
         from = new Date(today.getTime() - (31 * days)).toISOString().substring(0,10)
         to = today.toISOString().substring(0,10)
         break
+      case 'Last90days':
+        from = new Date(today.getTime() - (90 * days)).toISOString().substring(0,10)
+        to = today.toISOString().substring(0,10)
+        break
+      case 'LastCalendarMonth': {
+        const firstDayOfThisMonth = new Date(today.getFullYear(), today.getMonth(), 1)
+        const firstDayOfLastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1)
+        const lastDayOfLastMonth = new Date(firstDayOfThisMonth.getTime() - days)
+
+        from = firstDayOfLastMonth.toISOString().substring(0,10)
+        to = lastDayOfLastMonth.toISOString().substring(0,10)
+        break
+      }
     }
 
 
@@ -237,7 +281,8 @@ module.exports = (router) => {
       sites,
       pharmacies,
       from,
-      to
+      to,
+      vaccinesToReportDisplay
     })
 
   })
