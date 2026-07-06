@@ -59,11 +59,15 @@
       {% endset %}
 
       {% set sitesHtml %}
-        <ul class="nhsuk-list">
-          {% for site in sites | sort(false, false, "name") %}
-            <li>{{ site.name }} ({{ site.id }})</li>
-          {% endfor %}
-        </ul>
+        {% if (sites | length) > 2 %}
+          {{ sites | length }} sites selected
+        {% else %}
+          <ul class="nhsuk-list">
+            {% for site in sites | sort(false, false, "name") %}
+              <li>{{ site.name }} ({{ site.id }})</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
       {% endset %}
 
       {% set pharmaciesHtml %}
@@ -74,10 +78,13 @@
         </ul>
       {% endset %}
 
-      {% set vaccinesToReportText = "" %}
-      {% if vaccinesToReportDisplay %}
-        {% set vaccinesToReportText = vaccinesToReportDisplay | join(", ") %}
-      {% endif %}
+      {% set vaccinesToReportHtml %}
+        <ul class="nhsuk-list">
+          {% for vaccine in vaccinesToReportDisplay or [] %}
+            <li>{{ vaccine | capitaliseFirstLetter }}</li>
+          {% endfor %}
+        </ul>
+      {% endset %}
 
       {{ summaryList({
         rows: [
@@ -123,7 +130,7 @@
               text: ("Vaccines" if (vaccinesToReportDisplay | length) > 1 else "Vaccine")
             },
             value: {
-              text: vaccinesToReportText
+              html: vaccinesToReportHtml
             },
             actions: {
               items: [
