@@ -297,7 +297,7 @@ module.exports = (router) => {
     data.vaccinesToReport = null
 
 
-    res.redirect('/reports/download')
+    res.redirect('/reports/creating-report')
   })
 
 }

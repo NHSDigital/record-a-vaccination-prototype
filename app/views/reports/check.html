@@ -19,29 +19,43 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      {% set dataFields = [] %}
-
-      {% for field in data.patientDataToReport %}
-        {% set dataFields = (dataFields.push(field), dataFields) %}
-      {% endfor %}
-      {% for field in data.staffDataToReport %}
-        {% set dataFields = (dataFields.push(field), dataFields) %}
-      {% endfor %}
-      {% for field in data.siteDataToReport %}
-        {% set dataFields = (dataFields.push(field), dataFields) %}
-      {% endfor %}
-      {% for field in data.consentAndEligibilityDataToReport %}
-        {% set dataFields = (dataFields.push(field), dataFields) %}
-      {% endfor %}
-      {% for field in data.vaccinationDataToReport %}
-        {% set dataFields = (dataFields.push(field), dataFields) %}
-      {% endfor %}
-      {% for field in data.paymentDataToReport %}
-        {% set dataFields = (dataFields.push(field), dataFields) %}
-      {% endfor %}
+      {% set patientData = data.patientDataToReport or [] %}
+      {% set staffData = data.staffDataToReport or [] %}
+      {% set siteData = data.siteDataToReport or [] %}
+      {% set consentAndEligibilityData = data.consentAndEligibilityDataToReport or [] %}
+      {% set vaccinationData = data.vaccinationDataToReport or [] %}
+      {% set paymentData = data.paymentDataToReport or [] %}
 
       {% set dataValue %}
-        {{ dataFields | join(", ") }}
+        {% if (patientData | length) > 0 %}
+          <h4 class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Patient data</h4>
+          <p class="nhsuk-u-margin-bottom-3">{{ patientData | join(", ") }}</p>
+        {% endif %}
+
+        {% if (staffData | length) > 0 %}
+          <h4 class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Staff data</h4>
+          <p class="nhsuk-u-margin-bottom-3">{{ staffData | join(", ") }}</p>
+        {% endif %}
+
+        {% if (siteData | length) > 0 %}
+          <h4 class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Site data</h4>
+          <p class="nhsuk-u-margin-bottom-3">{{ siteData | join(", ") }}</p>
+        {% endif %}
+
+        {% if (consentAndEligibilityData | length) > 0 %}
+          <h4 class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Consent and eligibility data</h4>
+          <p class="nhsuk-u-margin-bottom-3">{{ consentAndEligibilityData | join(", ") }}</p>
+        {% endif %}
+
+        {% if (vaccinationData | length) > 0 %}
+          <h4 class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Vaccination data</h4>
+          <p class="nhsuk-u-margin-bottom-3">{{ vaccinationData | join(", ") }}</p>
+        {% endif %}
+
+        {% if (paymentData | length) > 0 %}
+          <h4 class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Payment information</h4>
+          <p class="nhsuk-u-margin-bottom-0">{{ paymentData | join(", ") }}</p>
+        {% endif %}
       {% endset %}
 
       {% set sitesHtml %}
@@ -177,7 +191,7 @@
               text: "Data"
             },
             value: {
-              text: dataValue
+              html: dataValue
             },
             actions: {
               items: [
