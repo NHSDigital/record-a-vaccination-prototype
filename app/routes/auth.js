@@ -1,5 +1,27 @@
 module.exports = router => {
 
+  const getDefaultLandingPath = (data, organisationId) => {
+    const organisation = (data.organisations || []).find((item) => item.id === organisationId)
+
+    if (!organisation) {
+      return '/home'
+    }
+
+    if (organisation.type === 'Region') {
+      return '/regions'
+    }
+
+    if (organisation.type !== 'Pharmacy HQ' && organisation.appointmentsInterfaceEnabled !== false) {
+      return '/appointments'
+    }
+
+    if (organisation.type !== 'Pharmacy HQ') {
+      return '/record-vaccinations'
+    }
+
+    return '/home'
+  }
+
   router.post('/auth/sign-in', (req, res) => {
 
     const data = req.session.data
@@ -36,7 +58,7 @@ module.exports = router => {
       req.session.data.currentUserId = user.id;
       req.session.data.currentOrganisationId = userOrganisationIds[0]
 
-      res.redirect('/home')
+      res.redirect(getDefaultLandingPath(data, userOrganisationIds[0]))
 
     } else if (userRegionIds.length === 1) {
 
@@ -90,7 +112,7 @@ module.exports = router => {
       req.session.data.currentUserId = user.id
       req.session.data.currentOrganisationId = selectedOrganisationId;
 
-      res.redirect('/home')
+      res.redirect(getDefaultLandingPath(data, selectedOrganisationId))
     } else {
 
       res.redirect('/auth/select-organisation')

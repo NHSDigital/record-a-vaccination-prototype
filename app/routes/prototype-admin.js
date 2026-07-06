@@ -97,15 +97,6 @@ const SIGN_IN_USERS = [
     orgId: 'FT81513',
     role: 'Lead administrator',
     orgDescription: 'Holborn Pharmacy (FT81513) — MMR and London flu only'
-  },
-  {
-    id: '5500000001',
-    name: 'Riley Carter',
-    email: 'riley.carter@nhs.net',
-    orgId: 'FR4V56',
-    role: 'Recorder',
-    orgDescription: 'pharmacy (FR4V56), no appointments interface',
-    appointmentsInterfaceEnabled: false
   }
 ]
 
@@ -424,6 +415,40 @@ module.exports = (router) => {
     })
   }
 
+  function setAppointmentsInterfaceForUserOrganisations(data, userId, isEnabled) {
+    const user = data.users.find(item => item.id === userId)
+    if (!user || !Array.isArray(user.organisations)) return
+
+    for (const userOrganisation of user.organisations) {
+      const organisation = data.organisations.find(item => item.id === userOrganisation.id)
+      if (!organisation) continue
+
+      organisation.appointmentsInterfaceEnabled = isEnabled
+    }
+  }
+
+  function getDefaultLandingPath(data, organisationId) {
+    const organisation = (data.organisations || []).find(item => item.id === organisationId)
+
+    if (!organisation) {
+      return '/home'
+    }
+
+    if (organisation.type === 'Region') {
+      return '/regions'
+    }
+
+    if (organisation.type !== 'Pharmacy HQ' && organisation.appointmentsInterfaceEnabled !== false) {
+      return '/appointments'
+    }
+
+    if (organisation.type !== 'Pharmacy HQ') {
+      return '/record-vaccinations'
+    }
+
+    return '/home'
+  }
+
   // ----------------------------------------------------------------
   // Reset data
   // ----------------------------------------------------------------
@@ -476,10 +501,11 @@ module.exports = (router) => {
     const data = req.session.data
     data.currentUserId = '2387441662601'
     data.currentOrganisationId = 'RW3'
+    setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, false)
     setupBatchesForOrg(data, 'RW3')
     addRandomUsers(data, 'RW3', 2)
     addRandomVaccinations(data, 'RW3', 2)
-    res.redirect('/home')
+    res.redirect(getDefaultLandingPath(data, data.currentOrganisationId))
   })
 
   // ----------------------------------------------------------------
@@ -491,10 +517,11 @@ module.exports = (router) => {
     const data = req.session.data
     data.currentUserId = '46436346'
     data.currentOrganisationId = 'FA424'
+    setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, false)
     setupBatchesForOrg(data, 'FA424')
     addRandomUsers(data, 'FA424', 10)
     addRandomVaccinations(data, 'FA424', 30)
-    res.redirect('/home')
+    res.redirect(getDefaultLandingPath(data, data.currentOrganisationId))
   })
 
   // ----------------------------------------------------------------
@@ -506,8 +533,9 @@ module.exports = (router) => {
     const data = req.session.data
     data.currentUserId = '9847489647892'
     data.currentOrganisationId = 'P0191N'
+    setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, false)
     setupBatchesForOrg(data, 'P0191N')
-    res.redirect('/home')
+    res.redirect(getDefaultLandingPath(data, data.currentOrganisationId))
   })
 
   // ----------------------------------------------------------------
@@ -519,6 +547,7 @@ module.exports = (router) => {
     const data = req.session.data
     data.currentUserId = '3283602393037'
     data.email = 'graham.wallace@nhs.net'
+    setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, false)
     setupBatchesForOrg(data, 'RWP')
     addRandomVaccinations(data, 'RWP', 20)
     res.redirect('/auth/select-organisation')
@@ -533,7 +562,8 @@ module.exports = (router) => {
     const data = req.session.data
     data.currentUserId = '16346346361'
     data.currentOrganisationId = 'RV3'
-    res.redirect('/home')
+    setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, false)
+    res.redirect(getDefaultLandingPath(data, data.currentOrganisationId))
   })
 
   // ----------------------------------------------------------------
@@ -545,6 +575,7 @@ module.exports = (router) => {
     const data = req.session.data
     data.currentUserId = '2058253531'
     data.email = 'phoebe.black@nhs.net'
+    setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, false)
     setupBatchesForOrg(data, 'RWP')
     addRandomUsers(data, 'RWP', 10)
     addRandomVaccinations(data, 'RWP', 20)
@@ -560,8 +591,9 @@ module.exports = (router) => {
     const data = req.session.data
     data.currentUserId = '6424325235325'
     data.currentOrganisationId = 'P15951'
+    setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, false)
     setupBatchesForOrg(data, 'P15951')
-    res.redirect('/home')
+    res.redirect(getDefaultLandingPath(data, data.currentOrganisationId))
   })
 
   // ----------------------------------------------------------------
@@ -573,9 +605,10 @@ module.exports = (router) => {
     const data = req.session.data
     data.currentUserId = '6424325235325'
     data.currentOrganisationId = 'P15951'
+    setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, false)
     // Remove all pharmacies belonging to P15951 to start with a clean slate
     data.organisations = data.organisations.filter(org => org.companyId !== 'P15951' || org.type === 'Pharmacy HQ')
-    res.redirect('/home')
+    res.redirect(getDefaultLandingPath(data, data.currentOrganisationId))
   })
 
   // ----------------------------------------------------------------
@@ -587,7 +620,8 @@ module.exports = (router) => {
     const data = req.session.data
     data.currentUserId = '1394978032564'
     data.currentOrganisationId = 'FS2847'
-    res.redirect('/home')
+    setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, false)
+    res.redirect(getDefaultLandingPath(data, data.currentOrganisationId))
   })
 
   // ----------------------------------------------------------------
@@ -599,10 +633,11 @@ module.exports = (router) => {
     const data = req.session.data
     data.currentUserId = '5960938237423'
     data.currentOrganisationId = 'RFF'
+    setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, false)
     setupBatchesForOrg(data, 'RFF')
     addRandomUsers(data, 'RFF', 10)
     addRandomVaccinations(data, 'RFF', 30)
-    res.redirect('/home')
+    res.redirect(getDefaultLandingPath(data, data.currentOrganisationId))
   })
 
   // ----------------------------------------------------------------
@@ -638,33 +673,30 @@ module.exports = (router) => {
     const data = req.session.data
     data.currentUserId = '633464144'
     data.currentOrganisationId = 'FT81513'
+    setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, false)
     setupBatchesForOrgVaccines(data, 'FT81513', ['MMR', 'flu (London service)'])
     addRandomVaccinations(data, 'FT81513', 10)
-    res.redirect('/home')
+    res.redirect(getDefaultLandingPath(data, data.currentOrganisationId))
   })
 
   // ----------------------------------------------------------------
-  // Preset: Recorder at pharmacy with no appointments interface
+  // Preset: Recorder at pharmacy with appointments interface enabled
   // ----------------------------------------------------------------
 
-  router.get('/prototype-setup/preset/recorder-pharmacy-no-appointments', (req, res) => {
+  router.get('/prototype-setup/preset/recorder-pharmacy-with-appointments', (req, res) => {
     resetSession(req)
     const data = req.session.data
 
-    const scenarioUser = SIGN_IN_USERS.find(user => user.id === '5500000001')
+    const scenarioUser = SIGN_IN_USERS.find(user => user.id === '1394978032564')
     ensureUserExistsForScenario(data, scenarioUser)
 
-    data.currentUserId = '5500000001'
+    data.currentUserId = '1394978032564'
     data.currentOrganisationId = 'FR4V56'
-
-    const org = data.organisations.find(organisation => organisation.id === 'FR4V56')
-    if (org) {
-      org.appointmentsInterfaceEnabled = false
-    }
+    setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, true)
 
     setupBatchesForOrg(data, 'FR4V56')
     addRandomVaccinations(data, 'FR4V56', 10)
-    res.redirect('/home')
+    res.redirect(getDefaultLandingPath(data, data.currentOrganisationId))
   })
 
   // ----------------------------------------------------------------
@@ -1087,7 +1119,7 @@ module.exports = (router) => {
     }
 
     delete data.customConfig
-    res.redirect('/home')
+    res.redirect(getDefaultLandingPath(data, data.currentOrganisationId))
   })
 
 }
