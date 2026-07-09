@@ -18,6 +18,34 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
+      {% if firstNameError or lastNameError or emailError or permissionLevelError or vaccinatorError %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: firstNameError,
+              href: "#first-name"
+            } if firstNameError,
+            {
+              text: lastNameError,
+              href: "#last-name"
+            } if lastNameError,
+            {
+              text: emailError,
+              href: "#email"
+            } if emailError,
+            {
+              text: vaccinatorError,
+              href: "#vaccinator"
+            } if vaccinatorError,
+            {
+              text: permissionLevelError,
+              href: "#permission-level-1"
+            } if permissionLevelError
+          ]
+        }) }}
+      {% endif %}
+
       <h1 class="nhsuk-heading-l">
         {% if existingUser %}
           {{ existingUser.firstName }} {{ existingUser.lastName }}'s role at {{ organisation.name }} ({{ organisation.id }})
@@ -37,27 +65,39 @@
               label: {
                 text: "First name"
               },
+              id: "first-name",
               name: "firstName",
               classes: "nhsuk-input--width-20",
-              value: data.firstName
+              value: data.firstName,
+              errorMessage: {
+                text: firstNameError
+              } if firstNameError
             }) }}
 
             {{ input({
               label: {
                 text: "Last name"
               },
+              id: "last-name",
               name: "lastName",
               classes: "nhsuk-input--width-20",
-              value: data.lastName
+              value: data.lastName,
+              errorMessage: {
+                text: lastNameError
+              } if lastNameError
             }) }}
 
             {{ input({
               label: {
                 text: "Email address"
               },
+              id: "email",
               name: "email",
               type: "email",
-              value: data.email
+              value: data.email,
+              errorMessage: {
+                text: emailError
+              } if emailError
             }) }}
         {% endif %}
 
@@ -73,6 +113,9 @@
           text: "Vaccination records include the name of the person who gave the vaccination"
         },
         value: data.vaccinator,
+        errorMessage: {
+          text: vaccinatorError
+        } if vaccinatorError,
         "items": [
           {
             "value": "yes",
@@ -96,6 +139,9 @@
           }
         },
         value: data.permissionLevel,
+        errorMessage: {
+          text: permissionLevelError
+        } if permissionLevelError,
         items: [
           {
             value: "Recorder",

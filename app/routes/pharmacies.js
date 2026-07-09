@@ -135,6 +135,28 @@ const buildDefaultScenarioUsersForPharmacy = (organisation) => {
   ]
 }
 
+const isGroupAdminUser = (user) => {
+  return (user?.organisations || []).some((organisation) => {
+    return organisation.permissionLevel === 'Group administrator' && organisation.status !== 'Deactivated'
+  })
+}
+
+const renderAddUserSelectionPage = (res, organisation, users, userIdError) => {
+  res.render('pharmacies/add-user', {
+    users,
+    organisation,
+    userIdError
+  })
+}
+
+const renderAddUserPermissionLevelPage = (res, organisation, existingUser, errors = {}) => {
+  res.render('pharmacies/add-user-permission-level', {
+    organisation,
+    existingUser,
+    ...errors
+  })
+}
+
 module.exports = router => {
 
   router.get('/pharmacies', (req, res) => {
@@ -513,6 +535,25 @@ module.exports = router => {
     res.redirect('/pharmacies/users?added=true')
   })
 
+  router.get('/pharmacies/:id/view-as', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const organisation = data.organisations.find(o => o.id === id)
+
+    if (!organisation || organisation.status === 'Deactivated') {
+      return res.redirect(`/pharmacies/${id}`)
+    }
+
+    req.session.data.previousOrganisationId = req.session.data.currentOrganisationId
+    req.session.data.currentOrganisationId = id
+
+    const landingPath = organisation.appointmentsInterfaceEnabled !== false
+      ? '/appointments'
+      : '/record-vaccinations'
+
+    res.redirect(landingPath)
+  })
+
   router.get('/pharmacies/:id/deactivate',(req, res) => {
     const data = req.session.data
     const id = req.params.id
@@ -581,10 +622,29 @@ module.exports = router => {
     const id = req.params.id
     const organisation = data.organisations.find((organisation) => organisation.id === id)
 
-    res.render('pharmacies/add-user', {
-      users,
-      organisation
-    })
+    renderAddUserSelectionPage(res, organisation, users)
+  })
+
+  router.post('/pharmacies/:id/add-user-permission-level', (req, res) => {
+    const data = req.session.data
+    const users = data.users.slice(10, 30)
+    const id = req.params.id
+    const organisation = data.organisations.find((item) => item.id === id)
+    const selectedUserId = req.body.userId || data.userId
+    const selectedUser = selectedUserId && selectedUserId !== 'add-new'
+      ? data.users.find((user) => user.id === selectedUserId)
+      : null
+
+    if (selectedUser && isGroupAdminUser(selectedUser)) {
+      return renderAddUserSelectionPage(
+        res,
+        organisation,
+        users,
+        'You cannot add a group administrator as an individual pharmacy user'
+      )
+    }
+
+    res.redirect(`/pharmacies/${id}/add-user-permission-level`)
   })
 
   router.get('/pharmacies/:id/add-user-permission-level',(req, res) => {
@@ -597,10 +657,67 @@ module.exports = router => {
       existingUser = data.users.find((user) => user.id === data.userId)
     }
 
-    res.render('pharmacies/add-user-permission-level', {
-      organisation,
-      existingUser
-    })
+    renderAddUserPermissionLevelPage(res, organisation, existingUser)
+  })
+
+  router.post('/pharmacies/:id/add-user-check', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const organisation = data.organisations.find((item) => item.id === id)
+    const selectedUserId = req.body.userId || data.userId
+    const submittedFirstName = req.body.firstName || data.firstName
+    const submittedLastName = req.body.lastName || data.lastName
+    const submittedEmail = (req.body.email || data.email || '').trim()
+    const submittedPermissionLevel = req.body.permissionLevel || data.permissionLevel
+    const submittedVaccinator = req.body.vaccinator || data.vaccinator
+    const existingUser = selectedUserId ? data.users.find((user) => user.id === selectedUserId) : null
+    const existingUserWithSameEmail = submittedEmail
+      ? data.users.find((user) => user.email.toLowerCase() === submittedEmail.toLowerCase())
+      : null
+
+    let firstNameError
+    let lastNameError
+    let emailError
+    let permissionLevelError
+    let vaccinatorError
+
+    if (!existingUser) {
+      if (!submittedFirstName || submittedFirstName === '') {
+        firstNameError = 'Enter a first name'
+      }
+
+      if (!submittedLastName || submittedLastName === '') {
+        lastNameError = 'Enter a last name'
+      }
+
+      if (!submittedEmail || submittedEmail === '') {
+        emailError = 'Enter an email address'
+      } else if (!(submittedEmail.toLowerCase().endsWith('nhs.net') || submittedEmail.toLowerCase().endsWith('.nhs.uk'))) {
+        emailError = 'Enter an allowed email address'
+      } else if (existingUserWithSameEmail && isGroupAdminUser(existingUserWithSameEmail)) {
+        emailError = 'You cannot add a group administrator as an individual pharmacy user'
+      }
+    }
+
+    if (!submittedPermissionLevel || submittedPermissionLevel === '') {
+      permissionLevelError = 'Select a permission level'
+    }
+
+    if (!submittedVaccinator || submittedVaccinator === '') {
+      vaccinatorError = 'Select if they’re a vaccinator'
+    }
+
+    if (firstNameError || lastNameError || emailError || permissionLevelError || vaccinatorError) {
+      return renderAddUserPermissionLevelPage(res, organisation, existingUser, {
+        firstNameError,
+        lastNameError,
+        emailError,
+        permissionLevelError,
+        vaccinatorError
+      })
+    }
+
+    res.redirect(`/pharmacies/${id}/add-user-check`)
   })
 
   router.get('/pharmacies/:id/add-user-check',(req, res) => {
@@ -619,12 +736,23 @@ module.exports = router => {
     })
   })
 
-  router.get('/pharmacies/:id/user-added',(req, res) => {
+  router.post('/pharmacies/:id/user-added',(req, res) => {
     const data = req.session.data
     const id = req.params.id
     const organisation = data.organisations.find((organisation) => organisation.id === id)
-    const existingUser = data.users.find((user) => user.id === data.userId)
+    const selectedUserId = req.body.userId || data.userId
+    const submittedEmail = (req.body.email || data.email || '').trim()
+    const existingUser = selectedUserId ? data.users.find((user) => user.id === selectedUserId) : null
+    const existingUserWithSameEmail = submittedEmail
+      ? data.users.find((user) => user.email.toLowerCase() === submittedEmail.toLowerCase())
+      : null
     let addedUserId
+
+    if ((existingUser && isGroupAdminUser(existingUser)) || (!existingUser && existingUserWithSameEmail && isGroupAdminUser(existingUserWithSameEmail))) {
+      return renderAddUserPermissionLevelPage(res, organisation, existingUser, {
+        emailError: 'You cannot add a group administrator as an individual pharmacy user'
+      })
+    }
 
     if (existingUser) {
 
@@ -1103,9 +1231,14 @@ module.exports = router => {
       ? data.users
       : [...data.users, ...defaultScenarioUsers.filter((user) => !existingUserIds.has(user.id))]
 
-    const usersForOrganisation = users.filter((user) => (user.organisations || [])
-      .find((orgPermission) => orgPermission.id === organisation.id)
-    )
+    const usersForOrganisation = users.filter((user) => {
+      if (data.previousOrganisationId && user.id === data.currentUserId) {
+        return false
+      }
+
+      return (user.organisations || [])
+        .find((orgPermission) => orgPermission.id === organisation.id)
+    })
 
     const usersByStatus = {
       invited: [],
