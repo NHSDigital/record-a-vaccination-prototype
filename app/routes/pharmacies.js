@@ -422,7 +422,7 @@ module.exports = router => {
     } else if (!(email.toLowerCase().endsWith('nhs.net') || email.toLowerCase().endsWith('.nhs.uk'))) {
       emailError = 'Enter an allowed email address'
     } else if (groupAdministrator === 'no' && existingUserWithSameEmail && isGroupAdminUser(existingUserWithSameEmail)) {
-      emailError = 'You cannot add a group administrator as an individual pharmacy user'
+      emailError = 'You cannot add a group administrator to an individual pharmacy'
     }
 
     data.firstName = firstName
