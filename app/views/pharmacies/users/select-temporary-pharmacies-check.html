@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies-users" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/users/" + user.id + "/temporary-access/select-pharmacies"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-three-quarters">
+
+      <h1 class="nhsuk-heading-l">Check pharmacies</h1>
+
+      <p>You are giving {{ user.firstName }} {{ user.lastName }} temporary access to these pharmacies.</p>
+
+      {% set rows = [] %}
+
+      {% for pharmacy in pharmacies %}
+
+        {% set removeHtml %}
+          <a class="nhsuk-button nhsuk-button--secondary nhsuk-button--small nhsuk-u-margin-bottom-0" href="/pharmacies/users/{{ user.id }}/temporary-access/select-pharmacies-check/remove/{{ pharmacy.id }}" role="button" draggable="false">Remove</a>
+        {% endset %}
+
+        {% set rows = (rows.push([
+          { text: pharmacy.name + ", " + pharmacy.address.postcode + " (" + pharmacy.id + ")" },
+          { html: removeHtml }
+        ]), rows) %}
+      {% endfor %}
+
+      {% if (pharmacies | length) > 0 %}
+        {{ table({
+          head: [
+            { text: "Pharmacy" },
+            { text: "" }
+          ],
+          rows: rows
+        }) }}
+      {% else %}
+        <p>No pharmacies selected.</p>
+      {% endif %}
+
+      {% set continueHref = "/pharmacies/users/" + user.id + "/manage" %}
+
+      {% if (pharmacies | length) > 0 %}
+        {% set continueHref = "/pharmacies/users/" + user.id + "/temporary-access/confirm" %}
+      {% endif %}
+
+
+      {{ button({
+        text: "Continue",
+        href: continueHref
+      }) }}
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -27,6 +27,14 @@ module.exports = {
   locationDataOptions: ["Site name", "Site ODS code", "Location type"],
   consentAndEligibilityDataOptions: ["Consent", "Eligibility", "Estimated due date"],
   vaccinationDataOptions: ["Vaccine type", "Product", "Batch", "Batch expiry date", "Dose sequence", "Dose amount", "Vaccination site", "Vaccination date", "Comments"],
+
+  // Amanda White (6424325235325) — default temporary pharmacy access
+  groupAdminTemporaryPharmacyIds: ["FX9141", "FX4825"],
+  groupAdminTemporaryPharmacyAddedDates: {
+    "FX9141": "2026-07-04",
+    "FX4825": "2026-07-07"
+  },
+
   paymentDataOptions: [
     {text: "Deposit ID", hint: "Set before we send the claim to NHSBSA"},
     {text: "Claim ID", hint: "Set when NHSBSA have received the claim"}

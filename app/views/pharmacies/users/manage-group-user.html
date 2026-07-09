@@ -1,0 +1,126 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies-users" %}
+{% set pageName = user.firstName + " " + user.lastName %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/users"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      {% if renewedTemporaryPharmacy %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            Access renewed
+          </h3>
+          <p>{{ user.firstName }} {{ user.lastName }}'s access to {{ renewedTemporaryPharmacy.name }} ({{ renewedTemporaryPharmacy.id }}) has been renewed. It will expire in 7 calendar days.</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
+      {% if deactivatedTemporaryPharmacy %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            Access deactivated
+          </h3>
+          <p>{{ user.firstName }} {{ user.lastName }} has been deactivated from {{ deactivatedTemporaryPharmacy.name }} ({{ deactivatedTemporaryPharmacy.id }}).</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
+      {% if temporaryAccessAdded and (temporaryAccessPharmacies | length) > 0 %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            Temporary access granted to pharmacies
+          </h3>
+          <p>{{ user.firstName }} {{ user.lastName }} has been granted temporary access to {{ (temporaryAccessPharmacies | length) | plural('pharmacy') }}.</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
+      <h1 class="nhsuk-heading-l">{{ user.firstName }} {{ user.lastName }}</h1>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Email"
+            },
+            value: {
+              text: user.email
+            }
+          },
+          {
+            key: {
+              text: "User type"
+            },
+            value: {
+              text: "Group administrator"
+            }
+          }
+        ]
+      }) }}
+    </div>
+  </div>
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+      <h2 class="nhsuk-heading-m">Temporary pharmacy access</h2>
+
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+          <p class="nhsuk-body">You can give this group administrator temporary access to individual pharmacies in this pharmacy group.</p>
+        </div>
+      </div>
+
+      {{ button({
+        text: "Select pharmacies",
+        href: "/pharmacies/users/" + user.id + "/temporary-access/select-pharmacies",
+        classes: "nhsuk-button--secondary"
+      }) }}
+
+      {% if temporaryAccessPharmacies and (temporaryAccessPharmacies | length) > 0 %}
+        {% set rows = [] %}
+
+        {% for pharmacy in temporaryAccessPharmacies %}
+          {% set actionHtml %}
+            <a href="/pharmacies/users/{{ user.id }}/temporary-access/{{ pharmacy.id }}/renew">Renew<span class="nhsuk-u-visually-hidden"> access for {{ pharmacy.name }}</span></a>
+            &nbsp;
+            <a href="/pharmacies/users/{{ user.id }}/temporary-access/{{ pharmacy.id }}/deactivate">Deactivate<span class="nhsuk-u-visually-hidden"> access for {{ pharmacy.name }}</span></a>
+          {% endset %}
+
+          {% set rows = (rows.push([
+            { text: pharmacy.name + ", " + pharmacy.address.postcode + " (" + pharmacy.id + ")" },
+            { text: pharmacy.accessExpires },
+            { html: actionHtml }
+          ]), rows) %}
+        {% endfor %}
+
+        {{ table({
+          head: [
+            { text: "Pharmacy" },
+            { text: "Access expires" },
+            { text: "", classes: "app-table__cell--right-aligned" }
+          ],
+          rows: rows
+        }) }}
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

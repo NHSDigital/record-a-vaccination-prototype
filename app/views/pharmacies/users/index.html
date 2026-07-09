@@ -81,7 +81,7 @@
                 <td class="nhsuk-table__cell">{{ user.email }}</td>
                 {% if (groupAdministrators | length) >= 2 %}
                   <td class="nhsuk-table__cell app-table__cell--right-aligned">
-                    <a href="/pharmacies/{{ currentOrganisation.id }}/users/{{ user.id }}/deactivate-from-group">Deactivate<span class="nhsuk-u-visually-hidden"> {{ user.firstName }} {{ user.lastName }}</span></a>
+                    <a href="/pharmacies/users/{{ user.id }}/manage">Manage<span class="nhsuk-u-visually-hidden"> {{ user.firstName }} {{ user.lastName }}</span></a>
                   </td>
                 {% endif %}
               </tr>

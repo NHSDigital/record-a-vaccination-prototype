@@ -1,0 +1,82 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies-users" %}
+{% set pageName = "Select pharmacies" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/users/" + user.id + "/manage"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-three-quarters">
+      <form action="/pharmacies/users/{{ user.id }}/temporary-access/select-pharmacies" method="post">
+
+      {% set items = [] %}
+
+      {% for pharmacy in pharmacies %}
+        {% set items = (items.push({
+          text: pharmacy.name + ", " + pharmacy.address.postcode + " (" + pharmacy.id + ")",
+          value: pharmacy.id
+        }), items) %}
+      {% endfor %}
+
+      {% call fieldset({
+        legend: {
+          text: "Which pharmacies should " + user.firstName + " " + user.lastName + " have temporary access to?",
+          size: "l"
+        }
+      }) %}
+
+        {% if (pharmacies | length) > 10 %}
+          {{ input({
+            id: "pharmacy-search",
+            name: "pharmacySearch",
+            type: "search",
+            label: {
+              text: "Search"
+            },
+            classes: "nhsuk-input--width-20",
+            attributes: {
+              "data-module": "app-checkbox-filter"
+            },
+            formGroup: {
+              classes: "nhsuk-u-margin-bottom-4"
+            }
+          }) }}
+        {% endif %}
+
+        {% if (pharmacies | length) > 0 %}
+          <div class="app-scrollable-container">
+            {{ checkboxes({
+              id: "group-admin-temporary-pharmacy-ids",
+              name: "groupAdminTemporaryPharmacyIds",
+              values: data.groupAdminTemporaryPharmacyIds,
+              items: items
+            }) }}
+          </div>
+        {% else %}
+          <p>There are no active pharmacies available to add for temporary access.</p>
+        {% endif %}
+
+      {% endcall %}
+
+      {% set insetTextHtml %}
+        <p>This temporary access will last for 7 calendar days and will default to Lead administrator access. Group administrators may only hold access to 40 pharmacies at a time.</p>
+      {% endset %}
+
+      {{ insetText({
+        html: insetTextHtml
+      }) }}
+
+      {{ button({
+        text: "Continue"
+      }) }}
+
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
