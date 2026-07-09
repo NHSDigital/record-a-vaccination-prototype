@@ -31,9 +31,10 @@ module.exports = {
   // Amanda White (6424325235325) — default temporary pharmacy access
   groupAdminTemporaryPharmacyIds: ["FX9141", "FX4825"],
   groupAdminTemporaryPharmacyAddedDates: {
-    "FX9141": "2026-07-04",
+    "FX9141": "2026-06-20",
     "FX4825": "2026-07-07"
   },
+  groupAdminTemporaryPharmacyDeactivatedDates: {},
 
   paymentDataOptions: [
     {text: "Deposit ID", hint: "Set before we send the claim to NHSBSA"},

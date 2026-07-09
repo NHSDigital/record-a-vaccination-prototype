@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Choose how you want to work" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/home"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      {% if error %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [error]
+        }) }}
+      {% endif %}
+
+      <form action="/auth/switch-organisation/work-type" method="post">
+        {{ radios({
+          name: "switchOrganisationWorkType",
+          fieldset: {
+            legend: {
+              text: "What type of work do you want to do?",
+              classes: "nhsuk-fieldset__legend--l nhsuk-u-margin-bottom-5",
+              isPageHeading: true
+            }
+          },
+          value: data.switchOrganisationWorkType,
+          errorMessage: {
+            text: error.text
+          } if error,
+          items: [
+            {
+              value: "group-admin",
+              text: "Operate as group administrator for " + groupOrganisation.name + " (" + groupOrganisation.id + ")"
+            },
+            {
+              value: "individual-pharmacy",
+              text: "Access an individual pharmacy"
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

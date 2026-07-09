@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Choose a pharmacy" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/auth/switch-organisation/work-type"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      {% if error %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [error]
+        }) }}
+      {% endif %}
+
+      <form action="/auth/switch-organisation/select-pharmacy" method="post">
+        {% set items = [] %}
+        {% for pharmacy in pharmacies %}
+          {% set items = (items.push({
+            value: pharmacy.id,
+            text: pharmacy.name + " (" + pharmacy.id + ")",
+            hint: {
+              text: (pharmacy.address.line1 + ", " if pharmacy.address.line1 else "") + (pharmacy.address.town + ", " if pharmacy.address.town else "") + pharmacy.address.postcode
+            }
+          }), items) %}
+        {% endfor %}
+
+        {{ radios({
+          name: "switchOrganisationPharmacyId",
+          fieldset: {
+            legend: {
+              text: "Which pharmacy do you want to access?",
+              classes: "nhsuk-fieldset__legend--l nhsuk-u-margin-bottom-5",
+              isPageHeading: true
+            }
+          },
+          hint: {
+            text: "These are pharmacies where you have temporary access through " + groupOrganisation.name + "."
+          },
+          value: data.switchOrganisationPharmacyId,
+          errorMessage: {
+            text: error.text
+          } if error,
+          items: items
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -42,6 +42,51 @@ const accessExpiryText = (addedOnIsoDate) => {
   }).format(expiryDate)
 }
 
+const isTemporaryAccessExpired = (addedOnIsoDate) => {
+  if (!addedOnIsoDate) {
+    return false
+  }
+
+  const expiryDate = new Date(`${addedOnIsoDate}T12:00:00`)
+  expiryDate.setDate(expiryDate.getDate() + 7)
+
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+
+  return expiryDate < today
+}
+
+const isTemporaryAccessInactive = (addedOnIsoDate, deactivatedOnIsoDate) => {
+  return Boolean(deactivatedOnIsoDate) || isTemporaryAccessExpired(addedOnIsoDate)
+}
+
+const blockedGroupAdminSimulationEmail = 'simulategroupadmin@nhs.net'
+
+const getGroupAdminNameForPharmacy = (data, organisation) => {
+  if (!organisation || !organisation.companyId) {
+    return null
+  }
+
+  const groupAdmins = (data.users || []).filter((user) => {
+    return (user.organisations || []).some((org) => {
+      return org.id === organisation.companyId && org.permissionLevel === 'Group administrator' && org.status === 'Active'
+    })
+  })
+
+  if (groupAdmins.length === 0) {
+    return null
+  }
+
+  const sortedGroupAdmins = [...groupAdmins].sort((a, b) => {
+    const nameA = `${a.firstName || ''} ${a.lastName || ''}`.trim()
+    const nameB = `${b.firstName || ''} ${b.lastName || ''}`.trim()
+    return nameA.localeCompare(nameB)
+  })
+
+  const chosenGroupAdmin = sortedGroupAdmins[0]
+  return `${chosenGroupAdmin.firstName || ''} ${chosenGroupAdmin.lastName || ''}`.trim()
+}
+
 const buildDefaultScenarioUsersForPharmacy = (organisation) => {
   if (!organisation || !scenarioCompanyIds.includes(organisation.companyId) || organisation.addedByUser) {
     return []
@@ -391,9 +436,12 @@ module.exports = router => {
     const data = req.session.data
     const userId = req.params.userId
     const currentOrganisation = res.locals.currentOrganisation
+    const currentTemporaryAccessTab = req.query.tab === 'expired' ? 'expired' : 'active'
     const temporaryAccessAdded = req.query.temporaryAccessAdded === 'true'
+    const temporaryAccessAddedCount = Math.max(0, parseInt(req.query.temporaryAccessAddedCount || '0', 10) || 0)
     const deactivatedTemporaryPharmacyId = req.query.deactivatedTemporaryPharmacyId
     const renewedTemporaryPharmacyId = req.query.renewedTemporaryPharmacyId
+    const renewalLimitExceededPharmacyId = req.query.renewalLimitExceededPharmacyId
 
     const user = data.users.find((item) => item.id === userId)
 
@@ -414,6 +462,7 @@ module.exports = router => {
       : []
 
     const temporaryPharmacyAddedDates = data.groupAdminTemporaryPharmacyAddedDates || {}
+    const temporaryPharmacyDeactivatedDates = data.groupAdminTemporaryPharmacyDeactivatedDates || {}
 
     const temporaryAccessPharmacies = data.organisations
       .filter((organisation) => {
@@ -421,13 +470,21 @@ module.exports = router => {
       })
       .map((organisation) => {
         const addedOn = temporaryPharmacyAddedDates[organisation.id]
+        const deactivatedOn = temporaryPharmacyDeactivatedDates[organisation.id]
 
         return {
           ...organisation,
-          accessExpires: accessExpiryText(addedOn)
+          accessExpires: accessExpiryText(addedOn),
+          accessExpired: isTemporaryAccessInactive(addedOn, deactivatedOn)
         }
       })
       .sort(sortByNameThenPostcode())
+
+    const activeTemporaryAccessPharmacies = temporaryAccessPharmacies.filter((organisation) => !organisation.accessExpired)
+    const expiredTemporaryAccessPharmacies = temporaryAccessPharmacies.filter((organisation) => organisation.accessExpired)
+    const currentTemporaryAccessPharmacies = currentTemporaryAccessTab === 'expired'
+      ? expiredTemporaryAccessPharmacies
+      : activeTemporaryAccessPharmacies
 
     const deactivatedTemporaryPharmacy = deactivatedTemporaryPharmacyId
       ? data.organisations.find((org) => org.id === deactivatedTemporaryPharmacyId)
@@ -437,15 +494,25 @@ module.exports = router => {
       ? data.organisations.find((org) => org.id === renewedTemporaryPharmacyId)
       : undefined
 
+    const renewalLimitExceededPharmacy = renewalLimitExceededPharmacyId
+      ? data.organisations.find((org) => org.id === renewalLimitExceededPharmacyId)
+      : undefined
+
     res.render('pharmacies/users/manage-group-user', {
       user,
       groupRole,
       groupName: currentOrganisation.name,
       groupId: currentOrganisation.id,
       temporaryAccessAdded,
+      temporaryAccessAddedCount,
       temporaryAccessPharmacies,
+      activeTemporaryAccessPharmacies,
+      expiredTemporaryAccessPharmacies,
+      currentTemporaryAccessPharmacies,
+      currentTemporaryAccessTab,
       deactivatedTemporaryPharmacy,
-      renewedTemporaryPharmacy
+      renewedTemporaryPharmacy,
+      renewalLimitExceededPharmacy
     })
   })
 
@@ -472,31 +539,119 @@ module.exports = router => {
       .filter((org) => org.permissionLevel !== 'Group administrator' && org.status !== 'Deactivated')
       .map((org) => org.id)
 
+    const selectedTemporaryPharmacyIds = data.groupAdminTemporaryPharmacyIds
+      ? (Array.isArray(data.groupAdminTemporaryPharmacyIds) ? data.groupAdminTemporaryPharmacyIds : [data.groupAdminTemporaryPharmacyIds])
+      : []
+
+    const temporaryPharmacyAddedDates = data.groupAdminTemporaryPharmacyAddedDates || {}
+    const temporaryPharmacyDeactivatedDates = data.groupAdminTemporaryPharmacyDeactivatedDates || {}
+    const today = isoDateToday()
+
+    const activeTemporaryPharmacyIds = selectedTemporaryPharmacyIds.filter((pharmacyId) => {
+      const addedOn = temporaryPharmacyAddedDates[pharmacyId] || today
+      const deactivatedOn = temporaryPharmacyDeactivatedDates[pharmacyId]
+      return !isTemporaryAccessInactive(addedOn, deactivatedOn)
+    })
+
     const pharmacies = data.organisations
       .filter((organisation) => {
-        return organisation.companyId === currentOrganisation.id && organisation.status === 'Active' && !activeNonGroupPharmacyIds.includes(organisation.id)
+        return organisation.companyId === currentOrganisation.id && organisation.status === 'Active' && !activeNonGroupPharmacyIds.includes(organisation.id) && !activeTemporaryPharmacyIds.includes(organisation.id)
       })
       .sort(sortByNameThenPostcode())
 
     res.render('pharmacies/users/select-temporary-pharmacies', {
       user,
-      pharmacies
+      pharmacies,
+      activeTemporaryPharmacyIds
     })
   })
 
   router.post('/pharmacies/users/:userId/temporary-access/select-pharmacies', (req, res) => {
     const data = req.session.data
     const userId = req.params.userId
+    const currentOrganisation = res.locals.currentOrganisation
 
-    data.groupAdminTemporaryPharmacyIds = data.groupAdminTemporaryPharmacyIds
+    const user = data.users.find((item) => item.id === userId)
+
+    if (!user || !currentOrganisation) {
+      return res.redirect('/pharmacies/users')
+    }
+
+    const groupRole = (user.organisations || []).find((org) => {
+      return org.id === currentOrganisation.id && org.permissionLevel === 'Group administrator' && org.status !== 'Deactivated'
+    })
+
+    if (!groupRole) {
+      return res.redirect('/pharmacies/users')
+    }
+
+    const selectedPharmacyIdsToAdd = data.groupAdminTemporaryPharmacyIds
       ? (Array.isArray(data.groupAdminTemporaryPharmacyIds) ? data.groupAdminTemporaryPharmacyIds : [data.groupAdminTemporaryPharmacyIds])
       : []
 
-    if (data.groupAdminTemporaryPharmacyIds.length > 1) {
+    data.groupAdminTemporaryPharmacyIdsToAdd = [...new Set(selectedPharmacyIdsToAdd)]
+
+    const existingActiveTemporaryPharmacyIds = data.existingActiveTemporaryPharmacyIds
+      ? (Array.isArray(data.existingActiveTemporaryPharmacyIds) ? data.existingActiveTemporaryPharmacyIds : [data.existingActiveTemporaryPharmacyIds])
+      : []
+
+    const existingAddedDates = data.groupAdminTemporaryPharmacyAddedDates || {}
+    const existingDeactivatedDates = data.groupAdminTemporaryPharmacyDeactivatedDates || {}
+    const today = isoDateToday()
+
+    const existingSelectedPharmacyIds = Object.keys(existingAddedDates)
+    const existingActiveTemporaryPharmacyIdsFromStore = existingSelectedPharmacyIds.filter((pharmacyId) => {
+      const addedOn = existingAddedDates[pharmacyId] || today
+      const deactivatedOn = existingDeactivatedDates[pharmacyId]
+      return !isTemporaryAccessInactive(addedOn, deactivatedOn)
+    })
+
+    data.groupAdminTemporaryPharmacyIds = [...new Set([
+      ...existingSelectedPharmacyIds,
+      ...existingActiveTemporaryPharmacyIds,
+      ...data.groupAdminTemporaryPharmacyIdsToAdd
+    ])]
+
+    const selectedPharmacyIdsToAddSet = new Set(data.groupAdminTemporaryPharmacyIdsToAdd)
+
+    const projectedActiveSelectedPharmacyCount = data.groupAdminTemporaryPharmacyIds
+      .filter((pharmacyId) => {
+        if (selectedPharmacyIdsToAddSet.has(pharmacyId)) {
+          return true
+        }
+
+        const addedOn = existingAddedDates[pharmacyId] || today
+        const deactivatedOn = existingDeactivatedDates[pharmacyId]
+        return !isTemporaryAccessInactive(addedOn, deactivatedOn)
+      })
+      .length
+
+    if (projectedActiveSelectedPharmacyCount > 40) {
+      const activeNonGroupPharmacyIds = (user.organisations || [])
+        .filter((org) => org.permissionLevel !== 'Group administrator' && org.status !== 'Deactivated')
+        .map((org) => org.id)
+
+      const pharmacies = data.organisations
+        .filter((organisation) => {
+          return organisation.companyId === currentOrganisation.id && organisation.status === 'Active' && !activeNonGroupPharmacyIds.includes(organisation.id) && !existingActiveTemporaryPharmacyIdsFromStore.includes(organisation.id)
+        })
+        .sort(sortByNameThenPostcode())
+
+      return res.render('pharmacies/users/select-temporary-pharmacies', {
+        user,
+        pharmacies,
+        activeTemporaryPharmacyIds: existingActiveTemporaryPharmacyIdsFromStore,
+        error: {
+          text: 'Group admininstrators cannot have access to more than 40 individual pharmacies.'
+        }
+      })
+    }
+
+    if (data.groupAdminTemporaryPharmacyIdsToAdd.length > 1) {
       return res.redirect(`/pharmacies/users/${userId}/temporary-access/select-pharmacies-check`)
     }
 
-    if (data.groupAdminTemporaryPharmacyIds.length === 1) {
+    if (data.groupAdminTemporaryPharmacyIdsToAdd.length === 1) {
       return res.redirect(`/pharmacies/users/${userId}/temporary-access/confirm`)
     }
 
@@ -507,22 +662,48 @@ module.exports = router => {
     const data = req.session.data
     const userId = req.params.userId
 
-    const selectedPharmacyIds = data.groupAdminTemporaryPharmacyIds
-      ? (Array.isArray(data.groupAdminTemporaryPharmacyIds) ? data.groupAdminTemporaryPharmacyIds : [data.groupAdminTemporaryPharmacyIds])
+    const selectedPharmacyIdsToAdd = data.groupAdminTemporaryPharmacyIdsToAdd
+      ? (Array.isArray(data.groupAdminTemporaryPharmacyIdsToAdd) ? data.groupAdminTemporaryPharmacyIdsToAdd : [data.groupAdminTemporaryPharmacyIdsToAdd])
       : []
 
     const existingAddedDates = data.groupAdminTemporaryPharmacyAddedDates || {}
+    const existingDeactivatedDates = data.groupAdminTemporaryPharmacyDeactivatedDates || {}
     const updatedAddedDates = {}
+    const updatedDeactivatedDates = {}
     const today = isoDateToday()
+    const selectedPharmacyIds = [...new Set([
+      ...Object.keys(existingAddedDates),
+      ...selectedPharmacyIdsToAdd
+    ])]
+    const selectedPharmacyIdsToAddSet = new Set(selectedPharmacyIdsToAdd)
+
+    const newlyAddedPharmacyCount = selectedPharmacyIdsToAdd.filter((pharmacyId) => {
+      if (!existingAddedDates[pharmacyId]) {
+        return true
+      }
+
+      return isTemporaryAccessInactive(existingAddedDates[pharmacyId], existingDeactivatedDates[pharmacyId])
+    }).length
 
     for (const pharmacyId of selectedPharmacyIds) {
-      updatedAddedDates[pharmacyId] = existingAddedDates[pharmacyId] || today
+      const existingAddedOn = existingAddedDates[pharmacyId]
+      const existingDeactivatedOn = existingDeactivatedDates[pharmacyId]
+      const shouldReactivate = selectedPharmacyIdsToAddSet.has(pharmacyId) && (!existingAddedOn || isTemporaryAccessInactive(existingAddedOn, existingDeactivatedOn))
+
+      updatedAddedDates[pharmacyId] = shouldReactivate ? today : existingAddedOn
+
+      if (existingDeactivatedOn && !selectedPharmacyIdsToAddSet.has(pharmacyId)) {
+        updatedDeactivatedDates[pharmacyId] = existingDeactivatedOn
+      }
     }
 
+    data.groupAdminTemporaryPharmacyIds = selectedPharmacyIds
+    data.groupAdminTemporaryPharmacyIdsToAdd = []
     data.groupAdminTemporaryPharmacyAddedDates = updatedAddedDates
+    data.groupAdminTemporaryPharmacyDeactivatedDates = updatedDeactivatedDates
 
-    if (selectedPharmacyIds.length > 0) {
-      return res.redirect(`/pharmacies/users/${userId}/manage?temporaryAccessAdded=true`)
+    if (newlyAddedPharmacyCount > 0) {
+      return res.redirect(`/pharmacies/users/${userId}/manage?temporaryAccessAdded=true&temporaryAccessAddedCount=${newlyAddedPharmacyCount}`)
     }
 
     res.redirect(`/pharmacies/users/${userId}/manage`)
@@ -547,8 +728,8 @@ module.exports = router => {
       return res.redirect('/pharmacies/users')
     }
 
-    const selectedPharmacyIds = data.groupAdminTemporaryPharmacyIds
-      ? (Array.isArray(data.groupAdminTemporaryPharmacyIds) ? data.groupAdminTemporaryPharmacyIds : [data.groupAdminTemporaryPharmacyIds])
+    const selectedPharmacyIds = data.groupAdminTemporaryPharmacyIdsToAdd
+      ? (Array.isArray(data.groupAdminTemporaryPharmacyIdsToAdd) ? data.groupAdminTemporaryPharmacyIdsToAdd : [data.groupAdminTemporaryPharmacyIdsToAdd])
       : []
 
     const pharmacies = data.organisations.filter((organisation) => {
@@ -566,11 +747,17 @@ module.exports = router => {
     const userId = req.params.userId
     const pharmacyId = req.params.pharmacyId
 
-    const selectedPharmacyIds = data.groupAdminTemporaryPharmacyIds
-      ? (Array.isArray(data.groupAdminTemporaryPharmacyIds) ? data.groupAdminTemporaryPharmacyIds : [data.groupAdminTemporaryPharmacyIds])
+    const selectedPharmacyIdsToAdd = data.groupAdminTemporaryPharmacyIdsToAdd
+      ? (Array.isArray(data.groupAdminTemporaryPharmacyIdsToAdd) ? data.groupAdminTemporaryPharmacyIdsToAdd : [data.groupAdminTemporaryPharmacyIdsToAdd])
       : []
 
-    data.groupAdminTemporaryPharmacyIds = selectedPharmacyIds.filter((id) => id !== pharmacyId)
+    data.groupAdminTemporaryPharmacyIdsToAdd = selectedPharmacyIdsToAdd.filter((id) => id !== pharmacyId)
+
+    const existingAddedDates = data.groupAdminTemporaryPharmacyAddedDates || {}
+    data.groupAdminTemporaryPharmacyIds = [...new Set([
+      ...Object.keys(existingAddedDates),
+      ...data.groupAdminTemporaryPharmacyIdsToAdd
+    ])]
 
     res.redirect(`/pharmacies/users/${userId}/temporary-access/select-pharmacies-check`)
   })
@@ -579,43 +766,69 @@ module.exports = router => {
     const data = req.session.data
     const userId = req.params.userId
     const pharmacyId = req.params.pharmacyId
+    const tab = req.query.tab === 'expired' ? 'expired' : 'active'
 
     const selectedPharmacyIds = data.groupAdminTemporaryPharmacyIds
       ? (Array.isArray(data.groupAdminTemporaryPharmacyIds) ? data.groupAdminTemporaryPharmacyIds : [data.groupAdminTemporaryPharmacyIds])
       : []
 
     if (!selectedPharmacyIds.includes(pharmacyId)) {
-      return res.redirect(`/pharmacies/users/${userId}/manage`)
+      return res.redirect(`/pharmacies/users/${userId}/manage?tab=${tab}`)
     }
 
     const existingAddedDates = data.groupAdminTemporaryPharmacyAddedDates || {}
+    const existingDeactivatedDates = data.groupAdminTemporaryPharmacyDeactivatedDates || {}
+    const today = isoDateToday()
+
+    const activeSelectedPharmacyCount = selectedPharmacyIds
+      .filter((id) => {
+        const addedOn = existingAddedDates[id] || today
+        const deactivatedOn = existingDeactivatedDates[id]
+        return !isTemporaryAccessInactive(addedOn, deactivatedOn)
+      })
+      .length
+
+    const renewalAddedOn = existingAddedDates[pharmacyId] || today
+    const renewalDeactivatedOn = existingDeactivatedDates[pharmacyId]
+    const renewalIsInactive = isTemporaryAccessInactive(renewalAddedOn, renewalDeactivatedOn)
+
+    if (renewalIsInactive && activeSelectedPharmacyCount >= 40) {
+      return res.redirect(`/pharmacies/users/${userId}/manage?tab=${tab}&renewalLimitExceededPharmacyId=${pharmacyId}`)
+    }
 
     data.groupAdminTemporaryPharmacyAddedDates = {
       ...existingAddedDates,
       [pharmacyId]: isoDateToday()
     }
 
-    res.redirect(`/pharmacies/users/${userId}/manage?renewedTemporaryPharmacyId=${pharmacyId}`)
+    data.groupAdminTemporaryPharmacyDeactivatedDates = Object.fromEntries(
+      Object.entries(existingDeactivatedDates).filter(([id]) => id !== pharmacyId)
+    )
+
+    res.redirect(`/pharmacies/users/${userId}/manage?tab=${tab}&renewedTemporaryPharmacyId=${pharmacyId}`)
   })
 
   router.get('/pharmacies/users/:userId/temporary-access/:pharmacyId/deactivate', (req, res) => {
     const data = req.session.data
     const userId = req.params.userId
     const pharmacyId = req.params.pharmacyId
+    const tab = req.query.tab === 'expired' ? 'expired' : 'active'
 
     const selectedPharmacyIds = data.groupAdminTemporaryPharmacyIds
       ? (Array.isArray(data.groupAdminTemporaryPharmacyIds) ? data.groupAdminTemporaryPharmacyIds : [data.groupAdminTemporaryPharmacyIds])
       : []
 
-    data.groupAdminTemporaryPharmacyIds = selectedPharmacyIds.filter((id) => id !== pharmacyId)
+    if (!selectedPharmacyIds.includes(pharmacyId)) {
+      return res.redirect(`/pharmacies/users/${userId}/manage?tab=${tab}`)
+    }
 
-    const existingAddedDates = data.groupAdminTemporaryPharmacyAddedDates || {}
-    const remainingAddedDates = Object.fromEntries(
-      Object.entries(existingAddedDates).filter(([id]) => id !== pharmacyId)
-    )
-    data.groupAdminTemporaryPharmacyAddedDates = remainingAddedDates
+    const existingDeactivatedDates = data.groupAdminTemporaryPharmacyDeactivatedDates || {}
+    data.groupAdminTemporaryPharmacyDeactivatedDates = {
+      ...existingDeactivatedDates,
+      [pharmacyId]: isoDateToday()
+    }
 
-    res.redirect(`/pharmacies/users/${userId}/manage?deactivatedTemporaryPharmacyId=${pharmacyId}`)
+    res.redirect(`/pharmacies/users/${userId}/manage?tab=${tab}&deactivatedTemporaryPharmacyId=${pharmacyId}`)
   })
 
   router.get('/pharmacies/users/new',(req, res) => {
@@ -721,6 +934,20 @@ module.exports = router => {
     const data = req.session.data
     const groupAdministrator = data.groupAdministrator
     const pharmacyIds = data.pharmacyIds || []
+    const enteredEmail = (data.email || '').toLowerCase().trim()
+
+    if (enteredEmail === blockedGroupAdminSimulationEmail) {
+      const currentOrganisation = data.organisations.find((organisation) => organisation.id === res.locals.currentOrganisation.id)
+      const groupAdminName = getGroupAdminNameForPharmacy(data, currentOrganisation) || 'group administrator'
+      const pharmacies = data.organisations.filter((organisation) => pharmacyIds.includes(organisation.id))
+
+      return res.render('pharmacies/users/check', {
+        pharmacies,
+        error: {
+          text: `Group administrator cannot be added by the pharmacy. Ask ${groupAdminName} to add themselves via the group admin interface.`
+        }
+      })
+    }
 
     const user = {
       id: Math.floor(Math.random() * 10000000).toString(),
@@ -863,6 +1090,19 @@ module.exports = router => {
       existingUser = data.users.find((user) => user.id === data.userId)
     }
 
+    const enteredEmail = (data.email || '').toLowerCase().trim()
+    if (!existingUser && enteredEmail === blockedGroupAdminSimulationEmail) {
+      const groupAdminName = getGroupAdminNameForPharmacy(data, organisation) || 'group administrator'
+
+      return res.render('pharmacies/add-user-permission-level', {
+        organisation,
+        existingUser,
+        error: {
+          text: `This user is a Group administrator. Group administrators cannot be added by the pharmacy. Ask ${groupAdminName} to add themselves via the group administrator interface.`
+        }
+      })
+    }
+
     res.render('pharmacies/add-user-check', {
       organisation,
       existingUser
@@ -874,6 +1114,20 @@ module.exports = router => {
     const id = req.params.id
     const organisation = data.organisations.find((organisation) => organisation.id === id)
     const existingUser = data.users.find((user) => user.id === data.userId)
+    const enteredEmail = (data.email || '').toLowerCase().trim()
+
+    if (!existingUser && enteredEmail === blockedGroupAdminSimulationEmail) {
+      const groupAdminName = getGroupAdminNameForPharmacy(data, organisation) || 'group administrator'
+
+      return res.render('pharmacies/add-user-permission-level', {
+        organisation,
+        existingUser,
+        error: {
+          text: `This user is a Group administrator. Group administrators cannot be added by the pharmacy. Ask ${groupAdminName} to add themselves via the group administrator interface.`
+        }
+      })
+    }
+
     let addedUserId
 
     if (existingUser) {

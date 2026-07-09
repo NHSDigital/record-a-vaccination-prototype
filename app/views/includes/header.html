@@ -130,10 +130,47 @@
 
 {% endif %}
 
+{% set switchOrganisationHref = "/auth/select-organisation" %}
+{% set canUseGroupAdminTemporaryAccessSwitcher = false %}
+
+{% if currentUser and currentOrganisation %}
+  {% set temporaryPharmacyIds = data.groupAdminTemporaryPharmacyIds | asArray %}
+  {% set temporaryPharmacyAddedDates = data.groupAdminTemporaryPharmacyAddedDates | default({}) %}
+  {% set temporaryPharmacyDeactivatedDates = data.groupAdminTemporaryPharmacyDeactivatedDates | default({}) %}
+  {% set hasActiveGroupAdminHqRole = false %}
+  {% set availableTemporaryPharmacyCount = 0 %}
+
+  {% for userOrganisation in (currentUser.organisations | default([])) %}
+    {% if userOrganisation.permissionLevel === "Group administrator" and userOrganisation.status === "Active" %}
+      {% set groupOrganisation = data.organisations | findById(userOrganisation.id) %}
+
+      {% if groupOrganisation and groupOrganisation.type === "Pharmacy HQ" %}
+        {% set hasActiveGroupAdminHqRole = true %}
+
+        {% for pharmacyId in temporaryPharmacyIds %}
+          {% set temporaryPharmacy = data.organisations | findById(pharmacyId) %}
+          {% set addedOn = temporaryPharmacyAddedDates[pharmacyId] %}
+          {% set deactivatedOn = temporaryPharmacyDeactivatedDates[pharmacyId] %}
+          {% set accessAgeDays = addedOn | daysSince %}
+
+          {% if temporaryPharmacy and temporaryPharmacy.companyId === groupOrganisation.id and temporaryPharmacy.status === "Active" and not deactivatedOn and (not addedOn or (accessAgeDays != false and accessAgeDays <= 7)) %}
+            {% set availableTemporaryPharmacyCount = availableTemporaryPharmacyCount + 1 %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% if hasActiveGroupAdminHqRole and availableTemporaryPharmacyCount > 1 %}
+    {% set canUseGroupAdminTemporaryAccessSwitcher = true %}
+    {% set switchOrganisationHref = "/auth/switch-organisation/work-type" %}
+  {% endif %}
+{% endif %}
+
 {% set organisationHtml %}
   {{ currentOrganisation.name | truncate(30) }}
-  {% if currentUser and currentOrganisation and ((currentUser.organisations | length) > 1) %}
-    <a href="/auth/select-organisation" class="nhsuk-link--reverse">Change<span class="nhsuk-u-visually-hidden"> organisation</span></a>
+  {% if currentUser and currentOrganisation and (((currentUser.organisations | length) > 1) or canUseGroupAdminTemporaryAccessSwitcher) %}
+    <a href="{{ switchOrganisationHref }}" class="nhsuk-link--reverse">Change<span class="nhsuk-u-visually-hidden"> organisation</span></a>
   {% endif %}
 {% endset %}
 

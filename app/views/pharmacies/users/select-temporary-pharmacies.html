@@ -12,7 +12,21 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-three-quarters">
+      {% if error %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [{
+            text: error.text,
+            href: "#group-admin-temporary-pharmacy-ids"
+          }]
+        }) }}
+      {% endif %}
+
       <form action="/pharmacies/users/{{ user.id }}/temporary-access/select-pharmacies" method="post">
+
+      {% for pharmacyId in (activeTemporaryPharmacyIds | default([])) %}
+        <input type="hidden" name="existingActiveTemporaryPharmacyIds" value="{{ pharmacyId }}">
+      {% endfor %}
 
       {% set items = [] %}
 
@@ -53,7 +67,10 @@
             {{ checkboxes({
               id: "group-admin-temporary-pharmacy-ids",
               name: "groupAdminTemporaryPharmacyIds",
-              values: data.groupAdminTemporaryPharmacyIds,
+              values: data.groupAdminTemporaryPharmacyIdsToAdd,
+              errorMessage: {
+                text: error.text
+              } if error,
               items: items
             }) }}
           </div>

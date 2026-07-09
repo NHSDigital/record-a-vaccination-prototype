@@ -40,17 +40,26 @@
         }) }}
       {% endif %}
 
-      {% if temporaryAccessAdded and (temporaryAccessPharmacies | length) > 0 %}
+      {% if temporaryAccessAdded and temporaryAccessAddedCount > 0 %}
         {% set html %}
           <h3 class="nhsuk-notification-banner__heading">
             Temporary access granted to pharmacies
           </h3>
-          <p>{{ user.firstName }} {{ user.lastName }} has been granted temporary access to {{ (temporaryAccessPharmacies | length) | plural('pharmacy') }}.</p>
+          <p>{{ user.firstName }} {{ user.lastName }} has been granted temporary access to {{ temporaryAccessAddedCount | plural('pharmacy') }}.</p>
         {% endset %}
 
         {{ notificationBanner({
           html: html,
           type: "success"
+        }) }}
+      {% endif %}
+
+      {% if renewalLimitExceededPharmacy %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [{
+            text: user.firstName + " " + user.lastName + " cannot have access to more than 40 pharmacies. Access to " + renewalLimitExceededPharmacy.name + " (" + renewalLimitExceededPharmacy.id + ") was not renewed. To renew access, deactivate an active pharmacy and try again."
+          }]
         }) }}
       {% endif %}
 
@@ -85,41 +94,81 @@
 
       <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
-          <p class="nhsuk-body">You can give this group administrator temporary access to individual pharmacies in this pharmacy group.</p>
+          <p class="nhsuk-body">You can give this group administrator temporary access to up to 40 individual pharmacies in this pharmacy group.</p>
         </div>
       </div>
 
-      {{ button({
-        text: "Select pharmacies",
-        href: "/pharmacies/users/" + user.id + "/temporary-access/select-pharmacies",
-        classes: "nhsuk-button--secondary"
-      }) }}
+      {% if (activeTemporaryAccessPharmacies | length) < 40 %}
+        {{ button({
+          text: "Select pharmacies",
+          href: "/pharmacies/users/" + user.id + "/temporary-access/select-pharmacies",
+          classes: "nhsuk-button--secondary"
+        }) }}
+      {% endif %}
 
       {% if temporaryAccessPharmacies and (temporaryAccessPharmacies | length) > 0 %}
+        {{ appSecondaryNavigation({
+          visuallyHiddenTitle: "Temporary pharmacy access by status",
+          items: [{
+            text: "Active (" + (activeTemporaryAccessPharmacies | length) + ")",
+            href: "/pharmacies/users/" + user.id + "/manage?tab=active",
+            current: (currentTemporaryAccessTab == "active")
+          }, {
+            text: "Expired/Deactivated (" + (expiredTemporaryAccessPharmacies | length) + ")",
+            href: "/pharmacies/users/" + user.id + "/manage?tab=expired",
+            current: (currentTemporaryAccessTab == "expired")
+          }]
+        }) }}
+
         {% set rows = [] %}
 
-        {% for pharmacy in temporaryAccessPharmacies %}
+        {% for pharmacy in currentTemporaryAccessPharmacies %}
           {% set actionHtml %}
-            <a href="/pharmacies/users/{{ user.id }}/temporary-access/{{ pharmacy.id }}/renew">Renew<span class="nhsuk-u-visually-hidden"> access for {{ pharmacy.name }}</span></a>
-            &nbsp;
-            <a href="/pharmacies/users/{{ user.id }}/temporary-access/{{ pharmacy.id }}/deactivate">Deactivate<span class="nhsuk-u-visually-hidden"> access for {{ pharmacy.name }}</span></a>
+            <a href="/pharmacies/users/{{ user.id }}/temporary-access/{{ pharmacy.id }}/renew?tab={{ currentTemporaryAccessTab }}">Renew<span class="nhsuk-u-visually-hidden"> access for {{ pharmacy.name }}</span></a>
+            {% if currentTemporaryAccessTab == "active" %}
+              &nbsp;
+              <a href="/pharmacies/users/{{ user.id }}/temporary-access/{{ pharmacy.id }}/deactivate?tab={{ currentTemporaryAccessTab }}">Deactivate<span class="nhsuk-u-visually-hidden"> access for {{ pharmacy.name }}</span></a>
+            {% endif %}
           {% endset %}
 
-          {% set rows = (rows.push([
-            { text: pharmacy.name + ", " + pharmacy.address.postcode + " (" + pharmacy.id + ")" },
-            { text: pharmacy.accessExpires },
-            { html: actionHtml }
-          ]), rows) %}
+          {% if currentTemporaryAccessTab == "expired" %}
+            {% set rows = (rows.push([
+              { text: pharmacy.name + ", " + pharmacy.address.postcode + " (" + pharmacy.id + ")" },
+              { html: actionHtml }
+            ]), rows) %}
+          {% else %}
+            {% set rows = (rows.push([
+              { text: pharmacy.name + ", " + pharmacy.address.postcode + " (" + pharmacy.id + ")" },
+              { text: pharmacy.accessExpires },
+              { html: actionHtml }
+            ]), rows) %}
+          {% endif %}
         {% endfor %}
 
-        {{ table({
-          head: [
-            { text: "Pharmacy" },
-            { text: "Access expires" },
-            { text: "", classes: "app-table__cell--right-aligned" }
-          ],
-          rows: rows
-        }) }}
+        {% if (rows | length) > 0 %}
+          {% if currentTemporaryAccessTab == "expired" %}
+            {{ table({
+              head: [
+                { text: "Pharmacy" },
+                { text: "", classes: "app-table__cell--right-aligned" }
+              ],
+              rows: rows
+            }) }}
+          {% else %}
+            {{ table({
+              head: [
+                { text: "Pharmacy" },
+                { text: "Access expires" },
+                { text: "", classes: "app-table__cell--right-aligned" }
+              ],
+              rows: rows
+            }) }}
+          {% endif %}
+        {% elif currentTemporaryAccessTab == "expired" %}
+          <p class="nhsuk-body">No expired temporary pharmacy access.</p>
+        {% else %}
+          <p class="nhsuk-body">No active temporary pharmacy access.</p>
+        {% endif %}
       {% endif %}
     </div>
   </div>

@@ -1,5 +1,7 @@
 module.exports = (router) => {
 
+  const blockedGroupAdminSimulationEmail = 'simulategroupadmin@nhs.net'
+
   router.get('/user-admin', (req, res) => {
 
     const perPage = 20; // Max number of users to show per page
@@ -176,6 +178,9 @@ module.exports = (router) => {
       emailError = 'Enter an email address'
     } else if (!(email.endsWith('nhs.net') || email.endsWith('.nhs.uk'))) {
       emailError = 'Enter an allowed email address'
+    } else if (email.toLowerCase().trim() === blockedGroupAdminSimulationEmail) {
+      const enteredUserName = `${firstName || ''} ${lastName || ''}`.trim() || 'this user'
+      emailError = `This user is a group administrator and cannot be added by the pharmacy. Ask ${enteredUserName} to add themselves via the group administrator interface.`
     } else if (existingUserWithSameEmail && existingUserWithSameEmail.status !== 'Deactivated') {
       emailError = 'This email address has already been added'
     }
@@ -206,6 +211,15 @@ module.exports = (router) => {
 
     const data = req.session.data
     const email = data.email
+    const emailLower = (email || '').toLowerCase().trim()
+
+    if (emailLower === blockedGroupAdminSimulationEmail) {
+      const enteredUserName = `${data.firstName || ''} ${data.lastName || ''}`.trim() || 'this user'
+
+      return res.render('user-admin/add-user', {
+        emailError: `This user is a group administrator and cannot be added by the pharmacy. Ask ${enteredUserName} to add themselves via the group administrator interface.`
+      })
+    }
 
     const existingUserWithSameEmail = data.users.find((user) => user.email === email)
 
