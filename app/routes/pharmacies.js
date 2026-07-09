@@ -610,8 +610,10 @@ module.exports = router => {
     data.groupAdminTemporaryPharmacyIds = selectedPharmacyIds.filter((id) => id !== pharmacyId)
 
     const existingAddedDates = data.groupAdminTemporaryPharmacyAddedDates || {}
-    delete existingAddedDates[pharmacyId]
-    data.groupAdminTemporaryPharmacyAddedDates = existingAddedDates
+    const remainingAddedDates = Object.fromEntries(
+      Object.entries(existingAddedDates).filter(([id]) => id !== pharmacyId)
+    )
+    data.groupAdminTemporaryPharmacyAddedDates = remainingAddedDates
 
     res.redirect(`/pharmacies/users/${userId}/manage?deactivatedTemporaryPharmacyId=${pharmacyId}`)
   })
