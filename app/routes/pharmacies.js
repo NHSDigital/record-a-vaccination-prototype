@@ -398,6 +398,44 @@ module.exports = router => {
   router.post('/pharmacies/users/new-answer',(req, res) => {
     const data = req.session.data
     const groupAdministrator = data.groupAdministrator
+    const firstName = (data.firstName || '').trim()
+    const lastName = (data.lastName || '').trim()
+    const email = (data.email || '').trim()
+    const existingUserWithSameEmail = email
+      ? data.users.find((user) => user.email.toLowerCase() === email.toLowerCase())
+      : null
+
+    let firstNameError
+    let lastNameError
+    let emailError
+
+    if (!firstName) {
+      firstNameError = 'Enter a first name'
+    }
+
+    if (!lastName) {
+      lastNameError = 'Enter a last name'
+    }
+
+    if (!email) {
+      emailError = 'Enter an email address'
+    } else if (!(email.toLowerCase().endsWith('nhs.net') || email.toLowerCase().endsWith('.nhs.uk'))) {
+      emailError = 'Enter an allowed email address'
+    } else if (groupAdministrator === 'no' && existingUserWithSameEmail && isGroupAdminUser(existingUserWithSameEmail)) {
+      emailError = 'You cannot add a group administrator as an individual pharmacy user'
+    }
+
+    data.firstName = firstName
+    data.lastName = lastName
+    data.email = email
+
+    if (firstNameError || lastNameError || emailError) {
+      return res.render('pharmacies/users/new', {
+        firstNameError,
+        lastNameError,
+        emailError
+      })
+    }
 
     if (groupAdministrator === "yes") {
       res.redirect('/pharmacies/users/check')

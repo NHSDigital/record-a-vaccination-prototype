@@ -36,20 +36,6 @@ module.exports = router => {
     }
 
     if (data.currentUserId) {
-
-      router.get('/auth/restore-organisation', (req, res) => {
-        const data = req.session.data
-        const previousOrganisationId = data.previousOrganisationId
-
-        if (!previousOrganisationId) {
-          return res.redirect('/auth/select-organisation')
-        }
-
-        data.currentOrganisationId = previousOrganisationId
-        delete data.previousOrganisationId
-
-        res.redirect(getDefaultLandingPath(data, previousOrganisationId))
-      })
       return (data.users || []).find((user) => user.id === data.currentUserId) || null
     }
 
@@ -59,6 +45,25 @@ module.exports = router => {
 
     return null
   }
+
+  router.get('/auth/restore-organisation', (req, res) => {
+    const data = req.session.data
+    const previousOrganisationId = data.previousOrganisationId
+    const previousOrganisation = (data.organisations || []).find((organisation) => organisation.id === previousOrganisationId)
+
+    if (!previousOrganisationId) {
+      return res.redirect('/auth/select-organisation')
+    }
+
+    data.currentOrganisationId = previousOrganisationId
+    delete data.previousOrganisationId
+
+    if (previousOrganisation && previousOrganisation.type === 'Pharmacy HQ') {
+      return res.redirect('/pharmacies')
+    }
+
+    res.redirect(getDefaultLandingPath(data, previousOrganisationId))
+  })
 
   const isTemporaryAccessInactive = (addedOnIsoDate, deactivatedOnIsoDate) => {
     if (deactivatedOnIsoDate) {
