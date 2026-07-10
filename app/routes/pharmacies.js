@@ -678,7 +678,7 @@ module.exports = router => {
         res,
         organisation,
         users,
-        'You cannot add a group administrator as an individual pharmacy user'
+        'You cannot add a group administrator to an individual pharmacy'
       )
     }
 
@@ -733,7 +733,7 @@ module.exports = router => {
       } else if (!(submittedEmail.toLowerCase().endsWith('nhs.net') || submittedEmail.toLowerCase().endsWith('.nhs.uk'))) {
         emailError = 'Enter an allowed email address'
       } else if (existingUserWithSameEmail && isGroupAdminUser(existingUserWithSameEmail)) {
-        emailError = 'You cannot add a group administrator as an individual pharmacy user'
+        emailError = 'You cannot add a group administrator to an individual pharmacy'
       }
     }
 
@@ -788,7 +788,7 @@ module.exports = router => {
 
     if ((existingUser && isGroupAdminUser(existingUser)) || (!existingUser && existingUserWithSameEmail && isGroupAdminUser(existingUserWithSameEmail))) {
       return renderAddUserPermissionLevelPage(res, organisation, existingUser, {
-        emailError: 'You cannot add a group administrator as an individual pharmacy user'
+        emailError: 'You cannot add a group administrator to an individual pharmacy'
       })
     }
 
