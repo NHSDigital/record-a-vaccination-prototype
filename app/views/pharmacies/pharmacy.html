@@ -112,6 +112,14 @@
         ]
       }) }}
 
+      {% if organisation.status != 'Deactivated' %}
+        {{ button({
+          href: "/pharmacies/" + organisation.id + "/view-as",
+          text: "Access this pharmacy",
+          classes: "nhsuk-button--secondary"
+        }) }}
+      {% endif %}
+
       {% if organisation.status == 'Deactivated' %}
         <p>This pharmacy has been deactivated.</p>
 

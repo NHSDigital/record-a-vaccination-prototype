@@ -12,6 +12,18 @@ href: "/pharmacies/" + organisation.id
 {% block content %}
 <div class="nhsuk-grid-row">
   <div class="nhsuk-grid-column-two-thirds">
+    {% if userIdError %}
+      {{ errorSummary({
+        titleText: "There is a problem",
+        errorList: [
+          {
+            text: userIdError,
+            href: "#user-id"
+          }
+        ]
+      }) }}
+    {% endif %}
+
     <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
     <p>You can add an existing user to the pharmacy, or invite a new user.</p>
@@ -145,13 +157,18 @@ href: "/pharmacies/" + organisation.id
       {% if (users | length) > 0 %}
       <div class="app-scrollable-container">
         {{ radios({
+        idPrefix: "user-id",
         name: "userId",
         value: data.userId,
+        errorMessage: {
+        text: userIdError
+        } if userIdError,
         items: items
         }) }}
       </div>
 
       {{ radios({
+      idPrefix: "user-id-alternative",
       name: "userId",
       value: data.userId,
       items: [
@@ -170,8 +187,12 @@ href: "/pharmacies/" + organisation.id
       }) }}
       {% else %}
       {{ radios({
+      idPrefix: "user-id",
       name: "userId",
       value: data.userId,
+      errorMessage: {
+      text: userIdError
+      } if userIdError,
       items: [
       {
       text: "Add a new user",
