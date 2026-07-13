@@ -160,6 +160,8 @@ const renderAddUserPermissionLevelPage = (res, organisation, existingUser, error
 module.exports = router => {
 
   router.get('/pharmacies', (req, res) => {
+    const perPage = 50
+    const requestedPage = parseInt(req.query.page, 10) || 1
     const data = req.session.data
     const added = req.query.added
     const deleted = req.query.deleted === 'true'
@@ -171,8 +173,13 @@ module.exports = router => {
     const allOrganisations = data.organisations.filter((organisation) => organisation.companyId === companyId).sort(sortByNameThenPostcode())
     
     // Separate active/deactivated pharmacies from closed ones
-    const organisations = allOrganisations.filter((org) => org.status !== 'Closed')
+    const activeOrganisations = allOrganisations.filter((org) => org.status !== 'Closed')
     const closedOrganisations = allOrganisations.filter((org) => org.status === 'Closed')
+    const totalOrganisations = activeOrganisations.length
+    const totalPages = Math.max(1, Math.ceil(totalOrganisations / perPage))
+    const page = Math.min(Math.max(requestedPage, 1), totalPages)
+    const indexStartFrom = (page - 1) * perPage
+    const organisations = activeOrganisations.slice(indexStartFrom, indexStartFrom + perPage)
 
     let organisationUserCounts = {}
 
@@ -188,6 +195,9 @@ module.exports = router => {
       organisations,
       closedOrganisations,
       organisationUserCounts,
+      page,
+      totalOrganisations,
+      totalPages,
       added,
       deleted,
       deletedName,
