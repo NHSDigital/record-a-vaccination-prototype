@@ -130,9 +130,15 @@
 
 {% endif %}
 
+{% set organisationLabelLimit = 20 if data.previousOrganisationId else 30 %}
+{% set organisationCodeSuffix = " (" + currentOrganisation.id + ")" if currentOrganisation and currentOrganisation.id else "" %}
+{% set organisationNameLimit = organisationLabelLimit - (organisationCodeSuffix | length) %}
+
 {% set organisationHtml %}
-  {{ currentOrganisation.name | truncate(30) }}
-  {% if currentUser and currentOrganisation and ((currentUser.organisations | length) > 1) %}
+  {{ currentOrganisation.name | truncate(organisationNameLimit if organisationNameLimit > 1 else 1) }}{{ organisationCodeSuffix }}
+  {% if currentUser and currentOrganisation and data.previousOrganisationId %}
+    <a href="/auth/restore-organisation" class="nhsuk-link--reverse">Back to Pharmacies</a>
+  {% elif currentUser and currentOrganisation and ((currentUser.organisations | length) > 1) %}
     <a href="/auth/select-organisation" class="nhsuk-link--reverse">Change<span class="nhsuk-u-visually-hidden"> organisation</span></a>
   {% endif %}
 {% endset %}

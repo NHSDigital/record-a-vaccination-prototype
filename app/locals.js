@@ -1,5 +1,18 @@
 module.exports = function(req, res, next) {
 
+    const buildSwitchedPharmacyOrganisationSetting = (sessionData, currentOrganisationId) => {
+      if (!sessionData.previousOrganisationId || !currentOrganisationId) {
+        return null
+      }
+
+      return {
+        id: currentOrganisationId,
+        status: 'Active',
+        permissionLevel: 'Lead administrator',
+        vaccinator: false
+      }
+    }
+
     const monthNames = [
       'January',
       'February',
@@ -25,7 +38,24 @@ module.exports = function(req, res, next) {
 
     // Set currentUser for convenience
     if (req.session.data.currentUserId) {
-      res.locals.currentUser = req.session.data.users.find((user) => user.id === req.session.data.currentUserId)
+      const sessionUser = req.session.data.users.find((user) => user.id === req.session.data.currentUserId)
+      const switchedOrganisationSetting = buildSwitchedPharmacyOrganisationSetting(
+        req.session.data,
+        req.session.data.currentOrganisationId
+      )
+
+      if (sessionUser && switchedOrganisationSetting) {
+        const userOrganisations = (sessionUser.organisations || [])
+          .filter((organisation) => organisation.id !== switchedOrganisationSetting.id)
+          .map((organisation) => ({ ...organisation }))
+
+        res.locals.currentUser = {
+          ...sessionUser,
+          organisations: [...userOrganisations, switchedOrganisationSetting]
+        }
+      } else {
+        res.locals.currentUser = sessionUser
+      }
     } else {
       res.locals.currentUser = null
     }

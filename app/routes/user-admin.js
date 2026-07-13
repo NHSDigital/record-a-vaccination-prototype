@@ -1,3 +1,9 @@
+const isGroupAdminUser = (user) => {
+  return (user?.organisations || []).some((organisation) => {
+    return organisation.permissionLevel === 'Group administrator' && organisation.status !== 'Deactivated'
+  })
+}
+
 module.exports = (router) => {
 
   router.get('/user-admin', (req, res) => {
@@ -176,6 +182,8 @@ module.exports = (router) => {
       emailError = 'Enter an email address'
     } else if (!(email.endsWith('nhs.net') || email.endsWith('.nhs.uk'))) {
       emailError = 'Enter an allowed email address'
+    } else if (existingUserWithSameEmail && isGroupAdminUser(existingUserWithSameEmail)) {
+      emailError = 'Group administrators cannot be added to individual pharmacies'
     } else if (existingUserWithSameEmail && existingUserWithSameEmail.status !== 'Deactivated') {
       emailError = 'This email address has already been added'
     }
