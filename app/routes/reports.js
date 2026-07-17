@@ -184,7 +184,7 @@ module.exports = (router) => {
     } else {
 
       const error = {
-        text: "Select data for report",
+        text: "Select the data you want to include",
         href: "#data-1"
       }
 
