@@ -25,7 +25,7 @@
   "Based on age, or in an at-risk group"
 ] %}
 
-{% set PertussisEligibilityOptions = [
+{% set pertussisEligibilityOptions = [
   "Pregnant",
   "Healthcare worker"
 ] %}
@@ -116,8 +116,8 @@
           {% set eligibilityOptions = londonFluEligibilityOptions %}
         {% elif data.vaccine == "RSV" %}
           {% set eligibilityOptions = RSVEligibilityOptions %}
-        {% elif data.vaccine == "Pertussis" %}
-          {% set eligibilityOptions = PertussisEligibilityOptions %}
+        {% elif data.vaccine == "pertussis" %}
+          {% set eligibilityOptions = pertussisEligibilityOptions %}
         {% elif data.vaccine == "pneumococcal" %}
           {% set eligibilityOptions = pneumococcalEligibilityOptions %}
         {% elif data.vaccine == "Td/IPV" %}
