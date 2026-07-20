@@ -126,6 +126,9 @@
               "isPageHeading": true
             }
           },
+          "hint": {
+            "text": "Timeframes are based on the date a vaccination was administered."
+          },
           value: data.date,
           errorMessage: {
             text: dateError
@@ -140,27 +143,25 @@
               "text": "Yesterday"
             },
             {
-              "value": "Last7days",
-              "text": "Last 7 days (includes today)"
+              "value": "LastCalendarWeek",
+              "text": "Last calendar week",
+              "hint": {
+                "text": lastCalendarWeek
+              }
             },
             {
-                "value": "Last31days",
-                "text": "Last 31 days (includes today)"
-              },
-            {
-                "value": "Last90days",
-                "text": "Last 90 days (includes today)"
-              },
-            {
-                "value": "LastCalendarMonth",
-                "text": "Last calendar month"
+              "value": "LastCalendarMonth",
+              "text": "Last calendar month",
+              "hint": {
+                "text": lastCalendarMonth
+              }
             },
             {
               divider: "or"
             },
             {
               "value": "custom_date_range",
-              "text": "Select custom date range up to 90 days",
+              "text": "Custom date range",
               conditional: {
                 html: custom_date_range
               }

@@ -248,22 +248,16 @@ module.exports = (router) => {
         from = new Date(today.getTime() - (1 * days)).toISOString().substring(0,10)
         to = new Date(today.getTime() - (1 * days)).toISOString().substring(0,10)
         break
-      case 'Last7days':
-        from = new Date(today.getTime() - (7 * days)).toISOString().substring(0,10)
-        to = today.toISOString().substring(0,10)
+      case 'LastCalendarWeek': {
+        const dayOfWeek = today.getDay() // 0 = Sunday, 1 = Monday, ...
+        const daysSinceMonday = (dayOfWeek === 0 ? 7 : dayOfWeek) - 1
+        const lastMonday = new Date(today.getFullYear(), today.getMonth(), today.getDate() - daysSinceMonday - 7)
+        const lastSunday = new Date(lastMonday.getTime() + (6 * days))
+
+        from = lastMonday.toISOString().substring(0,10)
+        to = lastSunday.toISOString().substring(0,10)
         break
-      case 'Last14days':
-        from = new Date(today.getTime() - (14 * days)).toISOString().substring(0,10)
-        to = today.toISOString().substring(0,10)
-        break
-      case 'Last31days':
-        from = new Date(today.getTime() - (31 * days)).toISOString().substring(0,10)
-        to = today.toISOString().substring(0,10)
-        break
-      case 'Last90days':
-        from = new Date(today.getTime() - (90 * days)).toISOString().substring(0,10)
-        to = today.toISOString().substring(0,10)
-        break
+      }
       case 'LastCalendarMonth': {
         const firstDayOfThisMonth = new Date(today.getFullYear(), today.getMonth(), 1)
         const firstDayOfLastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1)
