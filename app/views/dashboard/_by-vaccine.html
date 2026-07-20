@@ -1,46 +1,99 @@
-<table class="nhsuk-table" data-module="nhsuk-table">
-  <caption class="nhsuk-table__caption nhsuk-table__caption--m">By vaccination</caption>
-  <thead role="rowgroup" class="nhsuk-table__head">
-    <tr role="row">
-      <th role="columnheader" class="" scope="col" aria-sort="ascending">
-        Vaccination
-      </th>
-        <th role="columnheader" class=" nhsuk-table__header--numeric" scope="col" aria-sort="none">
-          Today
-        </th>
-        <th role="columnheader" class=" nhsuk-table__header--numeric" scope="col" aria-sort="none">
-          Past 7 days
-        </th>
-        <th role="columnheader" class="nhsuk-table__header--numeric" scope="col" aria-sort="none">
-          {{ (monthToday | monthName) }} to date
-        </th>
-        <th role="columnheader" class=" nhsuk-table__header--numeric" scope="col" aria-sort="none">
-          Total
-        </th>
-    </tr>
-  </thead>
-  <tbody class="nhsuk-table__body">
+<h2 class="nhsuk-heading-m nhsuk-u-margin-bottom-3">By vaccination</h2>
 
-  {% for totalByVaccine in (totalsByVaccine | sort(false, true, "vaccine") ) %}
-    <tr role="row">
-      <th class="nhsuk-table__header nhsuk-u-font-weight-normal" scope="col">
-        {{ (totalByVaccine.vaccine ) | capitaliseFirstLetter }}
-      </th>
-      <td class="nhsuk-table__cell--numeric">
-        {{ totalByVaccine.today }}
-      </td>
-      <td class="nhsuk-table__cell--numeric">
-        {{ totalByVaccine.past7Days }}
-      </td>
-      <td class="nhsuk-table__cell--numeric">
-        {{ totalByVaccine.month }}
-      </td>
-      <td class="nhsuk-table__cell--numeric">
-        {{ totalByVaccine.total }}
-      </td>
-    </tr>
+{% if (sites | length) > 1 %}
+  {% set siteFilterItems = [{
+    text: "All sites",
+    value: "all",
+    selected: (selectedByVaccinationSiteId == "all")
+  }] %}
+
+  {% for site in (sites | sort(false, false, "name")) %}
+    {% set siteFilterItems = (siteFilterItems.push({
+      text: site.name,
+      value: site.id,
+      selected: (selectedByVaccinationSiteId == site.id)
+    }), siteFilterItems) %}
   {% endfor %}
 
+  <form method="get" action="/home" class="nhsuk-u-margin-bottom-4">
+    {{ select({
+      id: "dashboard-by-vaccination-site-filter",
+      name: "siteId",
+      label: {
+        text: "Filter by site",
+        size: "s"
+      },
+      items: siteFilterItems,
+      attributes: {
+        onchange: "this.form.submit()"
+      }
+    }) }}
+  </form>
+{% endif %}
 
-  </tbody>
-</table>
+{% if selectedByVaccinationSiteId != "all" and (totalsByVaccine | length) == 0 %}
+  {% set selectedSite = sites | findById(selectedByVaccinationSiteId) %}
+  <p>{{ selectedSite.name if selectedSite else "This site" }} has not yet recorded any vaccinations.</p>
+{% else %}
+  <table class="nhsuk-table-responsive" role="table" data-module="nhsuk-table">
+    <thead role="rowgroup" class="nhsuk-table__head">
+      <tr role="row">
+        <th role="columnheader" class="nhsuk-table__header" scope="col" aria-sort="ascending">
+          Vaccine
+        </th>
+          <th role="columnheader" class="nhsuk-table__header nhsuk-table__header--numeric" scope="col" aria-sort="none">
+            Today
+          </th>
+          <th role="columnheader" class="nhsuk-table__header nhsuk-table__header--numeric" scope="col" aria-sort="none">
+            Yesterday
+          </th>
+          <th role="columnheader" class="nhsuk-table__header nhsuk-table__header--numeric" scope="col" aria-sort="none">
+            <span style="display:block;">{{ lastCalendarWeekStartLabel }}</span>
+            <span style="display:block;">to {{ lastCalendarWeekEndLabel }}</span>
+          </th>
+          <th role="columnheader" class="nhsuk-table__header nhsuk-table__header--numeric" scope="col" aria-sort="none">
+            {{ (lastCalendarMonth | monthName) }} {{ lastCalendarMonthYear }}
+          </th>
+          <th role="columnheader" class="nhsuk-table__header nhsuk-table__header--numeric" scope="col" aria-sort="none">
+            {{ (monthToday | monthName) }} {{ currentYear }}
+          </th>
+      </tr>
+    </thead>
+    <tbody class="nhsuk-table__body">
+
+    {% for totalByVaccine in (totalsByVaccine | sort(false, true, "vaccine") ) %}
+      <tr role="row" class="nhsuk-table__row">
+        <th class="nhsuk-table__header nhsuk-u-font-weight-normal" scope="row">
+          <span class="nhsuk-table-responsive__heading">Vaccine</span>
+          <span>{{ (totalByVaccine.vaccine ) | capitaliseFirstLetter }}</span>
+        </th>
+        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+          <span class="nhsuk-table-responsive__heading">Today</span>
+          <span>{{ totalByVaccine.today }}</span>
+        </td>
+        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+          <span class="nhsuk-table-responsive__heading">Yesterday</span>
+          <span>{{ totalByVaccine.yesterday }}</span>
+        </td>
+        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+          <span class="nhsuk-table-responsive__heading">
+            <span style="display:block;">{{ lastCalendarWeekStartLabel }}</span>
+            <span style="display:block;">to {{ lastCalendarWeekEndLabel }}</span>
+          </span>
+          <span>{{ totalByVaccine.lastCalendarWeek }}</span>
+        </td>
+        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+          <span class="nhsuk-table-responsive__heading">{{ (lastCalendarMonth | monthName) }} {{ lastCalendarMonthYear }}</span>
+          <span>{{ totalByVaccine.lastCalendarMonth }}</span>
+        </td>
+        <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
+          <span class="nhsuk-table-responsive__heading">{{ (monthToday | monthName) }} {{ currentYear }}</span>
+          <span>{{ totalByVaccine.thisMonth }}</span>
+        </td>
+      </tr>
+    {% endfor %}
+
+
+    </tbody>
+  </table>
+{% endif %}

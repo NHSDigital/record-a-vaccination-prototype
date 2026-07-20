@@ -54,19 +54,20 @@
     {{ tabs({
       items: [
       {
-        label: "By day",
-        id: "past-7-days",
+        label: "By vaccination",
+        id: "by-vaccination",
+        selected: true,
         panel: {
-          html: byDayHtml
+          html: byVaccinationHtml
           }
         },
         {
-          label: "By vaccination",
-          id: "by-vaccination",
+        label: "By day",
+        id: "past-7-days",
           panel: {
-            html: byVaccinationHtml
+            html: byDayHtml
           }
-        } if (totalsByVaccine | length) > 1,
+        },
         {
           label: "By site",
           id: "by-site",
