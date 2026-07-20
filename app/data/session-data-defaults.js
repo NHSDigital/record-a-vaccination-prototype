@@ -26,7 +26,7 @@ module.exports = {
   staffDataOptions: ["Recorder", "Vaccinator"],
   locationDataOptions: ["Site name", "Site ODS code", "Location type"],
   consentAndEligibilityDataOptions: ["Consent", "Eligibility", "Estimated due date"],
-  vaccinationDataOptions: ["Vaccine type", "Product", "Batch", "Batch expiry date", "Dose sequence", "Dose amount", "Vaccination site", "Vaccination date", "Comments"],
+  vaccinationDataOptions: ["Vaccine type", "Product", "Batch", "Batch expiry date", "Dose sequence", "Dose amount", "Vaccination route", "Vaccination date", "Comments"],
   paymentDataOptions: [
     {text: "Deposit ID", hint: "Set before we send the claim to NHSBSA"},
     {text: "Claim ID", hint: "Set when NHSBSA have received the claim"}
