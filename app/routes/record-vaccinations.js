@@ -601,6 +601,10 @@ module.exports = router => {
 
       nextPage = "/record-vaccinations/patient-estimated-due-date"
 
+    } else if (eligibility === "Pregnant" && data.vaccine === "pertussis") {
+
+      nextPage = "/record-vaccinations/patient-estimated-due-date"
+
     } else if (data.vaccine == "flu" && data.eligibility === "Health or social care worker") {
 
       nextPage = "/record-vaccinations/healthcare-worker"
@@ -912,10 +916,8 @@ module.exports = router => {
       redirectPath = "/record-vaccinations/add-batch"
     } else if (!vaccineBatch) {
       redirectPath = "/record-vaccinations/batch?showError=yes"
-    } else if (["COVID-19", "RSV", "MenACWY"].includes(data.vaccine)) {
+    } else if (["COVID-19", "RSV", "pertussis", "MenACWY"].includes(data.vaccine)) {
       redirectPath = "/record-vaccinations/eligibility"
-    } else if (data.vaccine === "pertussis") {
-      redirectPath = "/record-vaccinations/patient-estimated-due-date"
     } else if (["6-in-1", "flu", "flu (London service)", "MenB", "MMRV", "pneumococcal", "HPV", "MMR", "Td/IPV", "shingles"].includes(data.vaccine)) {
       data.showError = "no"
       redirectPath = "/record-vaccinations/dose"
@@ -984,7 +986,7 @@ module.exports = router => {
       nextPage = "/record-vaccinations/add-batch?showErrors=yes"
     } else if (["flu", "flu (London service)", "pneumococcal"].includes(data.vaccine)) {
       nextPage = "/record-vaccinations/dose"
-    } else if (["COVID-19", "flu", "flu (London service)", "RSV", "pneumococcal"].includes(data.vaccine)) {
+    } else if (["COVID-19", "flu", "flu (London service)", "RSV", "pertussis", "pneumococcal"].includes(data.vaccine)) {
       nextPage = "/record-vaccinations/eligibility"
     } else {
       nextPage = "/record-vaccinations/patient"
