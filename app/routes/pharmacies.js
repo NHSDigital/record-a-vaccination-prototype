@@ -1236,6 +1236,60 @@ module.exports = router => {
     }
   })
 
+  router.get('/pharmacies/:id/edit-vaccines', (req, res) => {
+    const data = req.session.data
+    const { id } = req.params
+    const organisation = data.organisations.find((org) => org.id === id)
+
+    if (!organisation) {
+      return res.redirect('/pharmacies')
+    }
+
+    const enabledVaccineNames = (organisation.vaccines || [])
+      .filter((vaccine) => vaccine.status === 'enabled')
+      .map((vaccine) => vaccine.name)
+
+    res.render('pharmacies/edit-vaccines', {
+      organisation,
+      allVaccines: data.vaccines || [],
+      enabledVaccineNames
+    })
+  })
+
+  router.post('/pharmacies/:id/update-vaccines', (req, res) => {
+    const data = req.session.data
+    const { id } = req.params
+    const organisation = data.organisations.find((org) => org.id === id)
+
+    if (!organisation) {
+      return res.redirect('/pharmacies')
+    }
+
+    const selectedVaccinesRaw = req.body.vaccinesEnabled
+    const selectedVaccines = Array.isArray(selectedVaccinesRaw)
+      ? selectedVaccinesRaw
+      : (selectedVaccinesRaw ? [selectedVaccinesRaw] : [])
+
+    organisation.vaccines ||= []
+    const allVaccineNames = (data.vaccines || []).map((vaccine) => vaccine.name)
+
+    for (const vaccineName of allVaccineNames) {
+      const existingVaccine = organisation.vaccines.find((vaccine) => vaccine.name === vaccineName)
+      const isSelected = selectedVaccines.includes(vaccineName)
+
+      if (existingVaccine) {
+        existingVaccine.status = isSelected ? 'enabled' : 'disabled'
+      } else if (isSelected) {
+        organisation.vaccines.push({
+          name: vaccineName,
+          status: 'enabled'
+        })
+      }
+    }
+
+    return res.redirect(`/pharmacies/${id}?vaccinesUpdated=true`)
+  })
+
 
   router.get('/pharmacies/:id', async (req, res) => {
     const data = req.session.data
@@ -1247,6 +1301,7 @@ module.exports = router => {
     const deactivatedFromPharmacyId = req.query.deactivatedFromPharmacyId
     const reactivatedUserId = req.query.reactivatedUserId
     const reactivatedFromPharmacyId = req.query.reactivatedFromPharmacyId
+    const vaccinesUpdated = req.query.vaccinesUpdated
     const tab = (req.query.tab || 'active').toLowerCase()
 
 
@@ -1329,6 +1384,7 @@ module.exports = router => {
       deactivatedFromPharmacyId,
       reactivatedUser,
       reactivatedFromPharmacyId,
+      vaccinesUpdated,
       canDeletePharmacy
     })
   })

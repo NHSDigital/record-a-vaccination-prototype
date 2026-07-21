@@ -2,3 +2,14 @@
   margin-top: nhsuk-spacing(2);
   color: $nhsuk-secondary-text-colour;
 }
+
+@include nhsuk-media-query($from: tablet) {
+  .app-pharmacy-summary-list .nhsuk-summary-list__value {
+    width: 35%;
+  }
+
+  .app-pharmacy-summary-list__actions {
+    width: 35%;
+    white-space: nowrap;
+  }
+}
