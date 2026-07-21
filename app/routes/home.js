@@ -110,7 +110,6 @@ module.exports = router => {
     })
     const lastCalendarWeekStartDay = startOfLastCalendarWeek.getUTCDate()
     const lastCalendarWeekEndDay = endOfLastCalendarWeek.getUTCDate()
-    const lastCalendarWeekStartMonth = monthNameFormatter.format(startOfLastCalendarWeek)
     const lastCalendarWeekEndMonth = monthNameFormatter.format(endOfLastCalendarWeek)
     const lastCalendarWeekStartMonthShort = shortMonthNameFormatter.format(startOfLastCalendarWeek)
     const lastCalendarWeekEndMonthShort = shortMonthNameFormatter.format(endOfLastCalendarWeek)
