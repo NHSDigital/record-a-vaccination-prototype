@@ -211,6 +211,8 @@ module.exports = (router) => {
       .filter((organisation) => organisation.companyId === currentOrganisation.id)
     const allPharmaciesSelected = pharmacyIdsToReport.includes('all')
     const allVaccinesSelected = selectedVaccines.includes('all')
+    const canChangeSites = allSites.length > 1
+    const canChangePharmacies = allPharmacies.length > 1
 
     let sites, pharmacies
 
@@ -286,6 +288,8 @@ module.exports = (router) => {
       allSitesSelected,
       allPharmaciesSelected,
       allVaccinesSelected,
+      canChangeSites,
+      canChangePharmacies,
       from,
       to,
       vaccinesToReportDisplay

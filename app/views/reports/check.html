@@ -164,6 +164,7 @@
               html: sitesHtml
             },
             actions: {
+              classes: "nhsuk-u-visually-hidden" if not canChangeSites,
               items: [
               {
                 href: "/reports/choose-site",
@@ -181,6 +182,7 @@
               html: pharmaciesHtml
             },
             actions: {
+              classes: "nhsuk-u-visually-hidden" if not canChangePharmacies,
               items: [
                 {
                   href: "/reports/choose-pharmacies",
