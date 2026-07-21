@@ -59,8 +59,10 @@
       {% endset %}
 
       {% set sitesHtml %}
-        {% if (sites | length) > 2 %}
-          {{ sites | length }} sites selected
+        {% if allSitesSelected %}
+          All {{ sites | length }} sites
+        {% elif (sites | length) > 10 %}
+          {{ sites | length }} sites
         {% else %}
           <ul class="nhsuk-list">
             {% for site in sites | sort(false, false, "name") %}
@@ -71,19 +73,31 @@
       {% endset %}
 
       {% set pharmaciesHtml %}
-        <ul class="nhsuk-list">
-          {% for pharmacy in pharmacies | sort(false, false, "name") %}
-            <li>{{ pharmacy.name }} ({{ pharmacy.id }})</li>
-          {% endfor %}
-        </ul>
+        {% if allPharmaciesSelected %}
+          All {{ pharmacies | length }} pharmacies
+        {% elif (pharmacies | length) > 10 %}
+          {{ pharmacies | length }} pharmacies
+        {% else %}
+          <ul class="nhsuk-list">
+            {% for pharmacy in pharmacies | sort(false, false, "name") %}
+              <li>{{ pharmacy.name }} ({{ pharmacy.id }})</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
       {% endset %}
 
       {% set vaccinesToReportHtml %}
-        <ul class="nhsuk-list">
-          {% for vaccine in vaccinesToReportDisplay or [] %}
-            <li>{{ vaccine | capitaliseFirstLetter }}</li>
-          {% endfor %}
-        </ul>
+        {% if allVaccinesSelected %}
+          All {{ vaccinesToReportDisplay | length }} vaccines
+        {% elif (vaccinesToReportDisplay | length) > 10 %}
+          {{ vaccinesToReportDisplay | length }} vaccines
+        {% else %}
+          <ul class="nhsuk-list">
+            {% for vaccine in vaccinesToReportDisplay or [] %}
+              <li>{{ vaccine | capitaliseFirstLetter }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
       {% endset %}
 
       {{ summaryList({
@@ -127,7 +141,7 @@
           },
           {
             key: {
-              text: ("Vaccines" if (vaccinesToReportDisplay | length) > 1 else "Vaccine")
+              text: ("Vaccines" if allVaccinesSelected or (vaccinesToReportDisplay | length) > 1 else "Vaccine")
             },
             value: {
               html: vaccinesToReportHtml
@@ -144,7 +158,7 @@
           },
           {
             key: {
-              text: ("Sites" if (data.siteIdsToReport | length) > 1 else "Site")
+              text: ("Sites" if allSitesSelected or (sites | length) > 1 else "Site")
             },
             value: {
               html: sitesHtml
@@ -161,7 +175,7 @@
           } if (sites | length) > 0,
           {
             key: {
-              text: ("Pharmacies" if (data.pharmacyIdsToReport | length) > 1 else "Pharmacy")
+              text: ("Pharmacies" if allPharmaciesSelected or (pharmacies | length) > 1 else "Pharmacy")
             },
             value: {
               html: pharmaciesHtml

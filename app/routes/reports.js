@@ -205,13 +205,22 @@ module.exports = (router) => {
     const days = 86400000 // number of milliseconds in a day
 
     const pharmacyIdsToReport = data.pharmacyIdsToReport || []
+    const allSites = currentOrganisation.sites || []
+    const allSitesSelected = siteIds.includes('all')
+    const allPharmacies = data.organisations
+      .filter((organisation) => organisation.companyId === currentOrganisation.id)
+    const allPharmaciesSelected = pharmacyIdsToReport.includes('all')
+    const allVaccinesSelected = selectedVaccines.includes('all')
 
     let sites, pharmacies
 
-    sites = (currentOrganisation.sites || [])
-        .filter((site) => siteIds.includes(site.id))
+    sites = allSitesSelected
+      ? allSites
+      : allSites.filter((site) => siteIds.includes(site.id))
 
-    pharmacies = data.organisations.filter((pharmacy) => pharmacyIdsToReport.includes(pharmacy.id))
+    pharmacies = allPharmaciesSelected
+      ? allPharmacies
+      : allPharmacies.filter((pharmacy) => pharmacyIdsToReport.includes(pharmacy.id))
 
     const fromInput = data.from
     const toInput = data.to
@@ -220,7 +229,7 @@ module.exports = (router) => {
     let from, to
     let vaccinesToReportDisplay = selectedVaccines.filter((vaccineName) => vaccineName !== 'all')
 
-    if (selectedVaccines.includes('all')) {
+    if (allVaccinesSelected) {
       const organisationVaccines = currentOrganisation.vaccines || []
       let enabledVaccines = organisationVaccines.filter((vaccine) => vaccine.status === "enabled")
 
@@ -274,6 +283,9 @@ module.exports = (router) => {
     res.render('reports/check', {
       sites,
       pharmacies,
+      allSitesSelected,
+      allPharmaciesSelected,
+      allVaccinesSelected,
       from,
       to,
       vaccinesToReportDisplay
