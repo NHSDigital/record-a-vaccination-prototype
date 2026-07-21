@@ -48,8 +48,8 @@
             Yesterday
           </th>
           <th role="columnheader" class="nhsuk-table__header nhsuk-table__header--numeric" scope="col" aria-sort="none">
-            <span style="display:block;">{{ lastCalendarWeekStartLabel }}</span>
-            <span style="display:block;">to {{ lastCalendarWeekEndLabel }}</span>
+            <span style="display:block;">{{ lastCalendarWeekHeaderLineOne }}</span>
+            <span style="display:block;">{{ lastCalendarWeekHeaderLineTwo }}</span>
           </th>
           <th role="columnheader" class="nhsuk-table__header nhsuk-table__header--numeric" scope="col" aria-sort="none">
             {{ (lastCalendarMonth | monthName) }} {{ lastCalendarMonthYear }}
@@ -77,8 +77,8 @@
         </td>
         <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
           <span class="nhsuk-table-responsive__heading">
-            <span style="display:block;">{{ lastCalendarWeekStartLabel }}</span>
-            <span style="display:block;">to {{ lastCalendarWeekEndLabel }}</span>
+            <span style="display:block;">{{ lastCalendarWeekHeaderLineOne }}</span>
+            <span style="display:block;">{{ lastCalendarWeekHeaderLineTwo }}</span>
           </span>
           <span>{{ totalByVaccine.lastCalendarWeek }}</span>
         </td>

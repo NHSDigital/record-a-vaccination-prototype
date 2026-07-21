@@ -67,7 +67,22 @@ module.exports = router => {
 
     const data = req.session.data
     const allVaccinationsRecorded = data.vaccinationsRecorded
-    const dateToday = new Date()
+    const simulatedDateParam = req.query.simulatedDate
+    const simulatedDateMatch = (typeof simulatedDateParam === 'string')
+      ? simulatedDateParam.match(/^(\d{4})-(\d{2})-(\d{2})$/)
+      : null
+
+    const dateToday = simulatedDateMatch
+      ? new Date(Date.UTC(
+        parseInt(simulatedDateMatch[1]),
+        parseInt(simulatedDateMatch[2]) - 1,
+        parseInt(simulatedDateMatch[3]),
+        0,
+        0,
+        0
+      ))
+      : new Date()
+
     const dateYesterday = new Date(dateToday)
     dateYesterday.setDate(dateToday.getDate() - 1)
 
@@ -85,13 +100,36 @@ module.exports = router => {
     endOfLastCalendarWeek.setUTCDate(startOfThisWeek.getUTCDate() - 1)
     endOfLastCalendarWeek.setUTCHours(23, 59, 59, 999)
 
-    const shortDateFormatter = new Intl.DateTimeFormat('en-GB', {
-      day: 'numeric',
+    const monthNameFormatter = new Intl.DateTimeFormat('en-GB', {
+      month: 'long',
+      timeZone: 'UTC'
+    })
+    const shortMonthNameFormatter = new Intl.DateTimeFormat('en-GB', {
       month: 'short',
       timeZone: 'UTC'
     })
-    const lastCalendarWeekStartLabel = shortDateFormatter.format(startOfLastCalendarWeek)
-    const lastCalendarWeekEndLabel = shortDateFormatter.format(endOfLastCalendarWeek)
+    const lastCalendarWeekStartDay = startOfLastCalendarWeek.getUTCDate()
+    const lastCalendarWeekEndDay = endOfLastCalendarWeek.getUTCDate()
+    const lastCalendarWeekStartMonth = monthNameFormatter.format(startOfLastCalendarWeek)
+    const lastCalendarWeekEndMonth = monthNameFormatter.format(endOfLastCalendarWeek)
+    const lastCalendarWeekStartMonthShort = shortMonthNameFormatter.format(startOfLastCalendarWeek)
+    const lastCalendarWeekEndMonthShort = shortMonthNameFormatter.format(endOfLastCalendarWeek)
+    const isLastCalendarWeekInSameMonth = (
+      startOfLastCalendarWeek.getUTCMonth() === endOfLastCalendarWeek.getUTCMonth() &&
+      startOfLastCalendarWeek.getUTCFullYear() === endOfLastCalendarWeek.getUTCFullYear()
+    )
+
+    const lastCalendarWeekRangeLabel = isLastCalendarWeekInSameMonth
+      ? `${lastCalendarWeekStartDay} to ${lastCalendarWeekEndDay} ${lastCalendarWeekEndMonth}`
+      : `${lastCalendarWeekStartDay} ${lastCalendarWeekStartMonthShort} to ${lastCalendarWeekEndDay} ${lastCalendarWeekEndMonthShort}`
+
+    const lastCalendarWeekHeaderLineOne = isLastCalendarWeekInSameMonth
+      ? `${lastCalendarWeekStartDay} to ${lastCalendarWeekEndDay}`
+      : `${lastCalendarWeekStartDay} ${lastCalendarWeekStartMonthShort} to`
+
+    const lastCalendarWeekHeaderLineTwo = isLastCalendarWeekInSameMonth
+      ? lastCalendarWeekEndMonth
+      : `${lastCalendarWeekEndDay} ${lastCalendarWeekEndMonthShort}`
 
     const startOfThisMonth = new Date(Date.UTC(
       dateToday.getUTCFullYear(),
@@ -287,13 +325,36 @@ module.exports = router => {
             date: dateToday,
             siteId: site.id
           }),
-          month:countVaccinations(vaccinationsRecorded, {
-            month: dateToday,
+          yesterday: countVaccinations(vaccinationsRecorded, {
+            date: dateYesterday,
             siteId: site.id
           }),
-          past7Days: countVaccinations(vaccinationsRecorded, {
-            minDate: sevenDaysAgo,
-            maxDate: dateToday,
+          lastCalendarWeek: countVaccinations(vaccinationsRecorded, {
+            minDate: new Date(Date.UTC(
+              startOfLastCalendarWeek.getUTCFullYear(),
+              startOfLastCalendarWeek.getUTCMonth(),
+              startOfLastCalendarWeek.getUTCDate() - 1,
+              0,
+              0,
+              0
+            )),
+            maxDate: endOfLastCalendarWeek,
+            siteId: site.id
+          }),
+          lastCalendarMonth: countVaccinations(vaccinationsRecorded, {
+            minDate: new Date(Date.UTC(
+              startOfLastCalendarMonth.getUTCFullYear(),
+              startOfLastCalendarMonth.getUTCMonth(),
+              startOfLastCalendarMonth.getUTCDate() - 1,
+              0,
+              0,
+              0
+            )),
+            maxDate: endOfLastCalendarMonth,
+            siteId: site.id
+          }),
+          thisMonth: countVaccinations(vaccinationsRecorded, {
+            month: dateToday,
             siteId: site.id
           }),
           total: total
@@ -341,8 +402,9 @@ module.exports = router => {
       totalVaccinationsRecordedPast7Days,
       monthToday,
       currentYear,
-      lastCalendarWeekStartLabel,
-      lastCalendarWeekEndLabel,
+      lastCalendarWeekRangeLabel,
+      lastCalendarWeekHeaderLineOne,
+      lastCalendarWeekHeaderLineTwo,
       lastCalendarMonth,
       lastCalendarMonthYear,
       totalsBySite,

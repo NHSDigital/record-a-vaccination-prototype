@@ -13,14 +13,12 @@
   }), topStats) %}
 
   {% set topStats = (topStats.push({
-    label: "Last calendar week",
-    hint: lastCalendarWeekStartLabel + " to " + lastCalendarWeekEndLabel,
+    label: lastCalendarWeekRangeLabel,
     value: totalVaccinationsRecordedLastCalendarWeek
   }), topStats) %}
 
   {% set topStats = (topStats.push({
-    label: "Month to date",
-    hint: (monthToday | monthName) + " " + currentYear,
+    label: (monthToday | monthName) + " to date",
     value: totalVaccinationsRecordedThisMonth
   }), topStats) %}
 
