@@ -28,6 +28,20 @@ module.exports = function(req, res, next) {
       'December'
     ]
 
+    const now = new Date()
+    const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1)
+    res.locals.lastCalendarMonth = `${monthNames[lastMonthDate.getMonth()]} ${lastMonthDate.getFullYear()}`
+
+    const dayOfWeek = now.getDay() // 0 = Sunday, 1 = Monday
+    const daysSinceMonday = (dayOfWeek === 0 ? 7 : dayOfWeek) - 1
+    const lastMonday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - daysSinceMonday - 7)
+    const lastSunday = new Date(lastMonday.getFullYear(), lastMonday.getMonth(), lastMonday.getDate() + 6)
+    const formatWeekDay = (d) => {
+      const suffix = d.getDate() === lastSunday.getDate() && d.getMonth() === lastSunday.getMonth() ? ` ${monthNames[d.getMonth()]} ${d.getFullYear()}` : (d.getMonth() !== lastSunday.getMonth() ? ` ${monthNames[d.getMonth()]}` : '')
+      return `${d.getDate()}${suffix}`
+    }
+    res.locals.lastCalendarWeek = `${formatWeekDay(lastMonday)} to ${lastSunday.getDate()} ${monthNames[lastSunday.getMonth()]} ${lastSunday.getFullYear()}`
+
     const dashboardUpdatedAt = new Date(Date.now() - (30 * 60 * 1000))
     const hours24 = dashboardUpdatedAt.getHours()
     const hours12 = (hours24 % 12) || 12

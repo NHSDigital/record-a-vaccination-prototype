@@ -1074,7 +1074,7 @@ module.exports = [
       },
       {
         id: "RW382",
-        name: "Ear nose and throad RMCH"
+        name: "Ear nose and throat RMCH"
       },
       {
         id: "RW391",

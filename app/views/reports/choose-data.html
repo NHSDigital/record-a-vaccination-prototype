@@ -1,13 +1,21 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Data details" %}
+{% set pageName = "Which details do you want to include?" %}
 
 {% set currentSection = "reports" %}
 
 
 {% block beforeContent %}
+  {% if currentOrganisation.type == "Pharmacy HQ" %}
+    {% set backLinkHref = "/reports/choose-pharmacies" %}
+  {% elif (currentOrganisation.sites | length) == 1 %}
+    {% set backLinkHref = "/reports/choose-vaccines" %}
+  {% else %}
+    {% set backLinkHref = "/reports/choose-site" %}
+  {% endif %}
+
   {{ backLink({
-    href: "/reports/choose-site",
+    href: backLinkHref,
     text: "Back"
   }) }}
 {% endblock %}
@@ -178,7 +186,7 @@
           } if error,
           fieldset: {
             legend: {
-              text: "Which details would you like to include?",
+              text: "Which details do you want to include?",
               isPageHeading: true,
               classes: "nhsuk-fieldset__legend--l"
             }
@@ -215,7 +223,7 @@
             },
             {
               value: "Vaccination",
-              text: "Vaccination",
+              text: "Vaccinations",
               conditional: {
                 html: vaccinationHtml
               }
