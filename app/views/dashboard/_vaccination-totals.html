@@ -8,8 +8,13 @@
   }), topStats) %}
 
   {% set topStats = (topStats.push({
-    label: "Past 7 days",
-    value: totalVaccinationsRecordedPast7Days
+    label: "Yesterday",
+    value: totalVaccinationsRecordedYesterday
+  }), topStats) %}
+
+  {% set topStats = (topStats.push({
+    label: lastCalendarWeekRangeLabel,
+    value: totalVaccinationsRecordedLastCalendarWeek
   }), topStats) %}
 
   {% set topStats = (topStats.push({
@@ -17,16 +22,15 @@
     value: totalVaccinationsRecordedThisMonth
   }), topStats) %}
 
-  {% set topStats = (topStats.push({
-    label: "Total",
-    value: totalVaccinationsRecorded
-  }), topStats) %}
-
   {% for stat in topStats %}
     <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
       {% set cardHtml %}
         <p class="nhsuk-heading-xl nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1">{{ stat.value }}</p>
         {{ stat.label }}
+        {% if stat.hint %}
+          <br>
+          <span class="nhsuk-hint nhsuk-u-margin-top-1 nhsuk-u-margin-bottom-0">{{ stat.hint }}</span>
+        {% endif %}
       {% endset %}
 
       {{ card({

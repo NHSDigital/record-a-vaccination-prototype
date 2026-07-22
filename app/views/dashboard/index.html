@@ -15,6 +15,10 @@
 
       <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-6">{% if currentOrganisation %}{{ currentOrganisation.name }}{% else %}PCT Healthcare{% endif %}</h1>
 
+      {{ insetText({
+        text: "The data shown here is based on the date the vaccination was given."
+      }) }}
+
 
       {% if currentOrganisation and totalVaccinationsRecorded == 0 %}
         {% include "dashboard/_no-vaccinations-recorded.html" %}
@@ -54,19 +58,20 @@
     {{ tabs({
       items: [
       {
-        label: "By day",
-        id: "past-7-days",
+        label: "By vaccination",
+        id: "by-vaccination",
+        selected: true,
         panel: {
-          html: byDayHtml
+          html: byVaccinationHtml
           }
         },
         {
-          label: "By vaccination",
-          id: "by-vaccination",
+        label: "By day",
+        id: "past-7-days",
           panel: {
-            html: byVaccinationHtml
+            html: byDayHtml
           }
-        } if (totalsByVaccine | length) > 1,
+        },
         {
           label: "By site",
           id: "by-site",
