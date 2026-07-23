@@ -160,7 +160,7 @@ const renderAddUserPermissionLevelPage = (res, organisation, existingUser, error
 module.exports = router => {
 
   router.get('/pharmacies', (req, res) => {
-    const perPage = 50
+    const perPage = 20
     const requestedPage = parseInt(req.query.page, 10) || 1
     const data = req.session.data
     const added = req.query.added
@@ -196,6 +196,7 @@ module.exports = router => {
       closedOrganisations,
       organisationUserCounts,
       page,
+      perPage,
       totalOrganisations,
       totalPages,
       added,
