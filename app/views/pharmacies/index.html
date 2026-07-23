@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% from "nhsuk/components/search-input/macro.njk" import searchInput %}
 
 {% set currentSection = "pharmacies" %}
 
@@ -37,7 +38,7 @@
       <h1 class="nhsuk-heading-l">Pharmacies</h1>
 
       {% if (organisations | length) > 0 %}
-        <p>Add pharmacies or manage an existing pharmacy.</p>
+        <p>Manage pharmacies that have access to Record a vaccination (RAVS).</p>
       {% else %}
         <p>You have not yet added any pharmacies.</p>
       {% endif %}
@@ -47,21 +48,31 @@
         href: "/pharmacies/select"
       }) }}
 
+
+      
       {% if (organisations | length) > 0 %}
-        <table class="nhsuk-table" id="pharmacies-table">
-          <caption class="nhsuk-table__caption nhsuk-table__caption--m">Pharmacies added ({{ totalOrganisations }})</caption>
-        </table>
-        {% if totalOrganisations > 10 %}
-          <div class="nhsuk-form-group nhsuk-u-margin-bottom-4" style="margin-top: -30px;">
-            <label class="nhsuk-label" for="pharmacy-search">Search</label>
-            <input class="nhsuk-input nhsuk-input--width-20" id="pharmacy-search" name="pharmacy-search" type="search" autocomplete="off" placeholder="">
-          </div>
+        {% if totalOrganisations >= 10 %}
+          {{ searchInput({
+            label: {
+              text: "Search by name or ODS code",
+              size: "s"
+            },
+            name: "pharmacy-search-design-system",
+            id: "pharmacy-search-design-system",
+            classes: "nhsuk-input--width-10",
+            formGroup: {
+              classes: "nhsuk-u-margin-top-4 nhsuk-u-margin-bottom-5"
+            }
+          }) }}
         {% endif %}
+        {% set resultsStart = ((page - 1) * perPage) + 1 %}
+        {% set resultsEnd = resultsStart + (organisations | length) - 1 %}
         <table class="nhsuk-table" id="pharmacies-table-data">
+          <caption class="nhsuk-table__caption nhsuk-body nhsuk-u-font-weight-normal app-pharmacies-results-caption" id="pharmacies-results-caption" data-page="{{ page }}" data-total-pages="{{ totalPages }}" data-total-organisations="{{ totalOrganisations }}" data-results-start="{{ resultsStart }}" data-results-end="{{ resultsEnd }}">Showing {{ resultsStart }} to {{ resultsEnd }} of {{ totalOrganisations }} pharmacies</caption>
           <thead role="rowgroup" class="nhsuk-table__head">
             <tr role="row">
               <th role="columnheader" class="" scope="col">
-                Name
+                Name and ODS code
               </th>
               <th role="columnheader" class="" scope="col">
                 Vaccines
