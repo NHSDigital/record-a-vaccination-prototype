@@ -16,6 +16,11 @@ const hasVaccinationRecords = (data, organisationId) => {
 }
 
 const scenarioCompanyIds = ['P0191N', 'P15951']
+const allowedPharmacyVaccineNames = ['flu', 'COVID-19', 'MenB']
+
+const displayPharmacyVaccineName = (vaccineName) => {
+  return vaccineName === 'MenB' ? 'Men-B' : vaccineName
+}
 
 const isoDaysAgo = (daysAgo) => {
   const date = new Date()
@@ -1247,12 +1252,16 @@ module.exports = router => {
 
     const enabledVaccineNames = (organisation.vaccines || [])
       .filter((vaccine) => vaccine.status === 'enabled')
+      .filter((vaccine) => allowedPharmacyVaccineNames.includes(vaccine.name))
       .map((vaccine) => vaccine.name)
+
+    const availableVaccines = (data.vaccines || [])
+      .filter((vaccine) => allowedPharmacyVaccineNames.includes(vaccine.name))
+      .filter((vaccine) => !enabledVaccineNames.includes(vaccine.name))
 
     res.render('pharmacies/edit-vaccines', {
       organisation,
-      allVaccines: data.vaccines || [],
-      enabledVaccineNames
+      allVaccines: availableVaccines
     })
   })
 
@@ -1271,15 +1280,16 @@ module.exports = router => {
       : (selectedVaccinesRaw ? [selectedVaccinesRaw] : [])
 
     organisation.vaccines ||= []
-    const allVaccineNames = (data.vaccines || []).map((vaccine) => vaccine.name)
+    for (const vaccineName of selectedVaccines) {
+      if (!allowedPharmacyVaccineNames.includes(vaccineName)) {
+        continue
+      }
 
-    for (const vaccineName of allVaccineNames) {
       const existingVaccine = organisation.vaccines.find((vaccine) => vaccine.name === vaccineName)
-      const isSelected = selectedVaccines.includes(vaccineName)
 
       if (existingVaccine) {
-        existingVaccine.status = isSelected ? 'enabled' : 'disabled'
-      } else if (isSelected) {
+        existingVaccine.status = 'enabled'
+      } else {
         organisation.vaccines.push({
           name: vaccineName,
           status: 'enabled'
@@ -1287,7 +1297,32 @@ module.exports = router => {
       }
     }
 
-    return res.redirect(`/pharmacies/${id}?vaccinesUpdated=true`)
+    return res.redirect(`/pharmacies/${id}?section=vaccines&vaccinesUpdated=true`)
+  })
+
+  router.get('/pharmacies/:id/remove-vaccine', (req, res) => {
+    const data = req.session.data
+    const { id } = req.params
+    const vaccineName = req.query.vaccineName
+    const organisation = data.organisations.find((org) => org.id === id)
+
+    if (!organisation) {
+      return res.redirect('/pharmacies')
+    }
+
+    if (!allowedPharmacyVaccineNames.includes(vaccineName)) {
+      return res.redirect(`/pharmacies/${id}?section=vaccines`)
+    }
+
+    organisation.vaccines ||= []
+
+    const existingVaccine = organisation.vaccines.find((vaccine) => vaccine.name === vaccineName)
+
+    if (existingVaccine) {
+      existingVaccine.status = 'disabled'
+    }
+
+    return res.redirect(`/pharmacies/${id}?section=vaccines&removedVaccine=${encodeURIComponent(vaccineName)}`)
   })
 
 
@@ -1302,6 +1337,7 @@ module.exports = router => {
     const reactivatedUserId = req.query.reactivatedUserId
     const reactivatedFromPharmacyId = req.query.reactivatedFromPharmacyId
     const vaccinesUpdated = req.query.vaccinesUpdated
+    const removedVaccine = req.query.removedVaccine
     const tab = (req.query.tab || 'active').toLowerCase()
     const section = (req.query.section || 'overview').toLowerCase()
 
@@ -1326,6 +1362,13 @@ module.exports = router => {
     const deactivatedUser = data.users.find((user) => user.id === deactivatedUserId)
     const reactivatedUser = data.users.find((user) => user.id === reactivatedUserId)
     const canDeletePharmacy = !hasVaccinationRecords(data, id)
+    const enabledAllowedVaccineNames = (organisation.vaccines || [])
+      .filter((vaccine) => vaccine.status === 'enabled')
+      .filter((vaccine) => allowedPharmacyVaccineNames.includes(vaccine.name))
+      .map((vaccine) => vaccine.name)
+    const hasAvailableVaccinesToAdd = allowedPharmacyVaccineNames.some((vaccineName) => {
+      return !enabledAllowedVaccineNames.includes(vaccineName)
+    })
 
     const userOrganisationPermissions = {}
 
@@ -1388,8 +1431,11 @@ module.exports = router => {
       reactivatedUser,
       reactivatedFromPharmacyId,
       vaccinesUpdated,
+      removedVaccine,
+      removedVaccineDisplayName: displayPharmacyVaccineName(removedVaccine),
       canDeletePharmacy,
-      currentPageSection
+      currentPageSection,
+      hasAvailableVaccinesToAdd
     })
   })
 

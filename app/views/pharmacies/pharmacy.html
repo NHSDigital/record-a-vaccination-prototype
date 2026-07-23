@@ -87,6 +87,20 @@
         }) }}
       {% endif %}
 
+      {% if removedVaccine %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            Vaccine removed
+          </h3>
+          <p>{{ removedVaccineDisplayName }} has been removed from {{ organisation.name }}.</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
       <h1 class="nhsuk-heading-l app-pharmacy-page-title" id="overview">{{ pageName }} ({{ organisation.id }})</h1>
 
       {% set addressParts = [] %}
@@ -359,10 +373,12 @@
 
           <h2 class="nhsuk-heading-m" id="vaccines">Vaccine programmes</h2>
 
-          {{ button({
-            href: "/pharmacies/" + organisation.id + "/edit-vaccines",
-            text: "Add vaccines"
-          }) }}
+          {% if hasAvailableVaccinesToAdd %}
+            {{ button({
+              href: "/pharmacies/" + organisation.id + "/edit-vaccines",
+              text: "Add vaccines"
+            }) }}
+          {% endif %}
 
           <table class="nhsuk-table">
             <thead role="rowgroup" class="nhsuk-table__head">
@@ -382,7 +398,7 @@
                     {{ vaccineName | capitaliseFirstLetter }}
                   </td>
                   <td class="nhsuk-table__cell" style="white-space: nowrap;">
-                    <a href="/pharmacies/{{ organisation.id }}/edit-vaccines?moveVaccine={{ vaccineName }}">Remove<span class="nhsuk-u-visually-hidden"> {{ vaccineName | capitaliseFirstLetter }}</span></a>
+                    <a href="/pharmacies/{{ organisation.id }}/remove-vaccine?vaccineName={{ vaccineName | urlencode }}">Remove<span class="nhsuk-u-visually-hidden"> {{ vaccineName | capitaliseFirstLetter }}</span></a>
                   </td>
                 </tr>
               {% endfor %}

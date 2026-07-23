@@ -19,7 +19,7 @@
         {% for vaccine in (allVaccines | sort(false, false, "name")) %}
           {% set items = (items.push({
             value: vaccine.name,
-            text: (vaccine.name | capitaliseFirstLetter)
+            text: "Men-B" if vaccine.name == "MenB" else (vaccine.name | capitaliseFirstLetter)
           }), items) %}
         {% endfor %}
 
@@ -27,13 +27,12 @@
           name: "vaccinesEnabled",
           fieldset: {
             legend: {
-              text: "Which vaccines can this pharmacy record?",
+              text: "Which vaccines would you like to add for " + organisation.name + " (" + organisation.id + ")?",
               size: "l",
               isPageHeading: true
             }
           },
-          items: items,
-          values: enabledVaccineNames
+          items: items
         }) }}
 
         {{ button({
