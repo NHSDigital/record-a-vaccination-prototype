@@ -846,7 +846,7 @@ module.exports = router => {
     req.session.data.permissionLevel = ''
     req.session.data.vaccinator = ''
 
-    res.redirect(`/pharmacies/${organisation.id}?added=true&addedUserId=${addedUserId}&tab=${existingUser ? 'active' : 'invited'}`)
+    res.redirect(`/pharmacies/${organisation.id}?section=users&added=true&addedUserId=${addedUserId}&tab=${existingUser ? 'active' : 'invited'}`)
   })
 
 
@@ -905,7 +905,7 @@ module.exports = router => {
       return res.redirect(`/pharmacies/users/${user.id}?deactivatedFromPharmacyId=${pharmacy.id}`)
     }
 
-    res.redirect(`/pharmacies/${pharmacy.id}?tab=deactivated&deactivatedUserId=${user.id}&deactivatedFromPharmacyId=${pharmacy.id}`)
+    res.redirect(`/pharmacies/${pharmacy.id}?section=users&tab=deactivated&deactivatedUserId=${user.id}&deactivatedFromPharmacyId=${pharmacy.id}`)
 
   })
 
@@ -934,7 +934,7 @@ module.exports = router => {
     }
 
     if (!user) {
-      return res.redirect(`/pharmacies/${pharmacyId}?tab=invited`)
+      return res.redirect(`/pharmacies/${pharmacyId}?section=users&tab=invited`)
     }
 
     res.render('pharmacies/users/resend-invite', {
@@ -958,12 +958,12 @@ module.exports = router => {
     const role = (user.organisations || []).find((item) => item.id === pharmacyId)
 
     if (!role) {
-      return res.redirect(`/pharmacies/${pharmacyId}?tab=invited`)
+      return res.redirect(`/pharmacies/${pharmacyId}?section=users&tab=invited`)
     }
 
     role.inviteSent = new Date().toISOString()
 
-    res.redirect(`/pharmacies/${pharmacyId}?tab=invited`)
+    res.redirect(`/pharmacies/${pharmacyId}?section=users&tab=invited`)
   })
 
   router.get('/pharmacies/:pharmacyId/users/:userId/reactivate', (req, res) => {
@@ -992,13 +992,13 @@ module.exports = router => {
     }
 
     if (!user) {
-      return res.redirect(`/pharmacies/${pharmacyId}?tab=deactivated`)
+      return res.redirect(`/pharmacies/${pharmacyId}?section=users&tab=deactivated`)
     }
 
     const role = (user.organisations || []).find((item) => item.id === pharmacyId)
 
     if (!role) {
-      return res.redirect(`/pharmacies/${pharmacyId}?tab=deactivated`)
+      return res.redirect(`/pharmacies/${pharmacyId}?section=users&tab=deactivated`)
     }
 
     role.status = 'Active'
@@ -1006,7 +1006,7 @@ module.exports = router => {
       user.lastLogIn = new Date().toISOString().split('T')[0]
     }
 
-    res.redirect(`/pharmacies/${pharmacyId}?tab=active&reactivatedUserId=${userId}&reactivatedFromPharmacyId=${pharmacyId}`)
+    res.redirect(`/pharmacies/${pharmacyId}?section=users&tab=active&reactivatedUserId=${userId}&reactivatedFromPharmacyId=${pharmacyId}`)
   })
 
   router.get('/pharmacies/users/:userId/deactivate-from-all-pharmacies', (req, res) => {
@@ -1303,6 +1303,7 @@ module.exports = router => {
     const reactivatedFromPharmacyId = req.query.reactivatedFromPharmacyId
     const vaccinesUpdated = req.query.vaccinesUpdated
     const tab = (req.query.tab || 'active').toLowerCase()
+    const section = (req.query.section || 'overview').toLowerCase()
 
 
     const organisation = data.organisations.find((organisation) => organisation.id === id)
@@ -1369,6 +1370,8 @@ module.exports = router => {
 
     const validTabs = ['invited', 'active', 'deactivated']
     const currentTab = validTabs.includes(tab) ? tab : 'active'
+    const validSections = ['overview', 'users', 'vaccines', 'action']
+    const currentPageSection = validSections.includes(section) ? section : 'overview'
     const usersForTab = usersByStatus[currentTab]
 
     res.render('pharmacies/pharmacy', {
@@ -1385,7 +1388,8 @@ module.exports = router => {
       reactivatedUser,
       reactivatedFromPharmacyId,
       vaccinesUpdated,
-      canDeletePharmacy
+      canDeletePharmacy,
+      currentPageSection
     })
   })
 

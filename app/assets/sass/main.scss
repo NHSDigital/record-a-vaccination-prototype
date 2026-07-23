@@ -1,5 +1,6 @@
 // Import NHS.UK frontend library
 @import "nhsuk-frontend/dist/nhsuk";
+@import "../../../node_modules/@x-govuk/govuk-prototype-components/src/x-govuk";
 
 // Local override classes
 @import 'overrides';
@@ -148,4 +149,99 @@ border-radius: 3px;
 
 .nhsuk-checkboxes__item[hidden] {
   display: none;
+}
+
+.x-govuk-sub-navigation__section-item--current {
+  background-color: transparent;
+}
+
+.app-pharmacy-back-link {
+  margin-bottom: 24px;
+}
+
+.app-pharmacy-page-title {
+  margin-bottom: nhsuk-spacing(6);
+}
+
+@include nhsuk-media-query($from: tablet) {
+  .app-pharmacy-back-link {
+    margin-bottom: 48px;
+  }
+}
+
+.app-section-navigation {
+  margin-bottom: nhsuk-spacing(4);
+}
+
+.app-section-navigation__list {
+  @include nhsuk-font(19);
+
+  display: flex;
+  flex-flow: row nowrap;
+  gap: nhsuk-spacing(1) nhsuk-spacing(2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: inset 0 -1px $nhsuk-border-colour;
+  overflow-x: auto;
+}
+
+.app-section-navigation__item {
+  margin: 0;
+}
+
+.app-section-navigation__link {
+  @include nhsuk-link-style-default;
+  @include nhsuk-link-style-no-visited-state;
+
+  display: block;
+  padding: nhsuk-spacing(2) 2px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.app-section-navigation__link[aria-current="page"] {
+  box-shadow: inset 0 -4px $nhsuk-link-colour;
+}
+
+.app-section-navigation__link[aria-current="page"]:focus {
+  box-shadow: inset 0 -4px $nhsuk-text-colour;
+}
+
+.app-section-navigation__current {
+  font-weight: 700;
+}
+
+@include nhsuk-media-query($from: tablet) {
+  .app-section-navigation--vertical {
+    margin-right: -#{nhsuk-spacing(2)};
+    margin-left: -#{nhsuk-spacing(2)};
+  }
+
+  .app-section-navigation--vertical .app-section-navigation__list {
+    flex-flow: column;
+    gap: 0;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  .app-section-navigation--vertical .app-section-navigation__item {
+    border-left: 4px solid transparent;
+  }
+
+  .app-section-navigation--vertical .app-section-navigation__item--current {
+    border-left-color: $nhsuk-link-colour;
+  }
+
+  .app-section-navigation--vertical .app-section-navigation__link {
+    padding: nhsuk-spacing(1) nhsuk-spacing(2) nhsuk-spacing(1) calc(#{nhsuk-spacing(2)} + 4px);
+  }
+
+  .app-section-navigation--vertical .app-section-navigation__link[aria-current="page"] {
+    box-shadow: none;
+  }
+
+  .app-section-navigation--vertical .app-section-navigation__link[aria-current="page"]:focus {
+    box-shadow: inset 0 -4px $nhsuk-text-colour;
+  }
 }
