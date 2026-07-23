@@ -68,7 +68,7 @@
         {% set resultsStart = ((page - 1) * perPage) + 1 %}
         {% set resultsEnd = resultsStart + (organisations | length) - 1 %}
         <table class="nhsuk-table" id="pharmacies-table-data">
-          <caption class="nhsuk-table__caption nhsuk-body nhsuk-u-font-weight-normal app-pharmacies-results-caption" id="pharmacies-results-caption" data-page="{{ page }}" data-total-pages="{{ totalPages }}" data-total-organisations="{{ totalOrganisations }}" data-results-start="{{ resultsStart }}" data-results-end="{{ resultsEnd }}">Showing {{ resultsStart }} - {{ resultsEnd }} of {{ totalOrganisations }} pharmacies</caption>
+          <caption class="nhsuk-table__caption nhsuk-body nhsuk-u-font-weight-normal app-pharmacies-results-caption" id="pharmacies-results-caption" data-page="{{ page }}" data-total-pages="{{ totalPages }}" data-total-organisations="{{ totalOrganisations }}" data-results-start="{{ resultsStart }}" data-results-end="{{ resultsEnd }}">Showing {{ resultsStart }} to {{ resultsEnd }} of {{ totalOrganisations }} pharmacies</caption>
           <thead role="rowgroup" class="nhsuk-table__head">
             <tr role="row">
               <th role="columnheader" class="" scope="col">
