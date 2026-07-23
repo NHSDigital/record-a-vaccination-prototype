@@ -19,7 +19,7 @@
         {% for vaccine in (allVaccines | sort(false, false, "name")) %}
           {% set items = (items.push({
             value: vaccine.name,
-            text: (vaccine.name | capitaliseFirstLetter)
+            text: "MenB" if vaccine.name == "MenB" else (vaccine.name | capitaliseFirstLetter)
           }), items) %}
         {% endfor %}
 
@@ -31,6 +31,9 @@
               size: "l",
               isPageHeading: true
             }
+          },
+          hint: {
+            text: "Checking a vaccine will make it available for this pharmacy. Unchecking a vaccine will remove it from this pharmacy."
           },
           items: items,
           values: enabledVaccineNames

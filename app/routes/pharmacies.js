@@ -16,6 +16,7 @@ const hasVaccinationRecords = (data, organisationId) => {
 }
 
 const scenarioCompanyIds = ['P0191N', 'P15951']
+const allowedPharmacyVaccineNames = ['flu', 'COVID-19', 'MenB']
 
 const isoDaysAgo = (daysAgo) => {
   const date = new Date()
@@ -1247,11 +1248,15 @@ module.exports = router => {
 
     const enabledVaccineNames = (organisation.vaccines || [])
       .filter((vaccine) => vaccine.status === 'enabled')
+      .filter((vaccine) => allowedPharmacyVaccineNames.includes(vaccine.name))
       .map((vaccine) => vaccine.name)
+
+    const availableVaccines = (data.vaccines || [])
+      .filter((vaccine) => allowedPharmacyVaccineNames.includes(vaccine.name))
 
     res.render('pharmacies/edit-vaccines', {
       organisation,
-      allVaccines: data.vaccines || [],
+      allVaccines: availableVaccines,
       enabledVaccineNames
     })
   })
@@ -1271,7 +1276,7 @@ module.exports = router => {
       : (selectedVaccinesRaw ? [selectedVaccinesRaw] : [])
 
     organisation.vaccines ||= []
-    const allVaccineNames = (data.vaccines || []).map((vaccine) => vaccine.name)
+    const allVaccineNames = allowedPharmacyVaccineNames
 
     for (const vaccineName of allVaccineNames) {
       const existingVaccine = organisation.vaccines.find((vaccine) => vaccine.name === vaccineName)
