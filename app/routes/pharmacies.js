@@ -16,6 +16,7 @@ const hasVaccinationRecords = (data, organisationId) => {
 }
 
 const scenarioCompanyIds = ['P0191N', 'P15951']
+const allowedPharmacyVaccineNames = ['flu', 'COVID-19', 'MenB']
 
 const isoDaysAgo = (daysAgo) => {
   const date = new Date()
@@ -1236,6 +1237,64 @@ module.exports = router => {
     }
   })
 
+  router.get('/pharmacies/:id/edit-vaccines', (req, res) => {
+    const data = req.session.data
+    const { id } = req.params
+    const organisation = data.organisations.find((org) => org.id === id)
+
+    if (!organisation) {
+      return res.redirect('/pharmacies')
+    }
+
+    const enabledVaccineNames = (organisation.vaccines || [])
+      .filter((vaccine) => vaccine.status === 'enabled')
+      .filter((vaccine) => allowedPharmacyVaccineNames.includes(vaccine.name))
+      .map((vaccine) => vaccine.name)
+
+    const availableVaccines = (data.vaccines || [])
+      .filter((vaccine) => allowedPharmacyVaccineNames.includes(vaccine.name))
+
+    res.render('pharmacies/edit-vaccines', {
+      organisation,
+      allVaccines: availableVaccines,
+      enabledVaccineNames
+    })
+  })
+
+  router.post('/pharmacies/:id/update-vaccines', (req, res) => {
+    const data = req.session.data
+    const { id } = req.params
+    const organisation = data.organisations.find((org) => org.id === id)
+
+    if (!organisation) {
+      return res.redirect('/pharmacies')
+    }
+
+    const selectedVaccinesRaw = req.body.vaccinesEnabled
+    const selectedVaccines = Array.isArray(selectedVaccinesRaw)
+      ? selectedVaccinesRaw
+      : (selectedVaccinesRaw ? [selectedVaccinesRaw] : [])
+
+    organisation.vaccines ||= []
+    const allVaccineNames = allowedPharmacyVaccineNames
+
+    for (const vaccineName of allVaccineNames) {
+      const existingVaccine = organisation.vaccines.find((vaccine) => vaccine.name === vaccineName)
+      const isSelected = selectedVaccines.includes(vaccineName)
+
+      if (existingVaccine) {
+        existingVaccine.status = isSelected ? 'enabled' : 'disabled'
+      } else if (isSelected) {
+        organisation.vaccines.push({
+          name: vaccineName,
+          status: 'enabled'
+        })
+      }
+    }
+
+    return res.redirect(`/pharmacies/${id}?vaccinesUpdated=true`)
+  })
+
 
   router.get('/pharmacies/:id', async (req, res) => {
     const data = req.session.data
@@ -1247,6 +1306,7 @@ module.exports = router => {
     const deactivatedFromPharmacyId = req.query.deactivatedFromPharmacyId
     const reactivatedUserId = req.query.reactivatedUserId
     const reactivatedFromPharmacyId = req.query.reactivatedFromPharmacyId
+    const vaccinesUpdated = req.query.vaccinesUpdated
     const tab = (req.query.tab || 'active').toLowerCase()
 
 
@@ -1329,6 +1389,7 @@ module.exports = router => {
       deactivatedFromPharmacyId,
       reactivatedUser,
       reactivatedFromPharmacyId,
+      vaccinesUpdated,
       canDeletePharmacy
     })
   })

@@ -70,6 +70,20 @@
         }) }}
       {% endif %}
 
+      {% if vaccinesUpdated == "true" %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            Vaccines changed
+          </h3>
+          <p>The vaccines for {{ organisation.name }} have been updated.</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       {% set addressParts = [] %}
@@ -83,7 +97,25 @@
         {% set addressParts = (addressParts.push(organisation.address.postcode), addressParts) %}
       {% endif %}
 
+      {% set addressHtml = addressParts | join(", ") %}
+      {% if organisation.address.line1 and organisation.address.town %}
+        {% set addressHtml = addressHtml | replace(", ", ",<br>") %}
+      {% endif %}
+
+      {% set vaccinesEnabled = [] %}
+      {% for vaccine in (organisation.vaccines or []) %}
+        {% if vaccine.status == "enabled" %}
+          {% set vaccinesEnabled = (vaccinesEnabled.push(vaccine.name), vaccinesEnabled) %}
+        {% endif %}
+      {% endfor %}
+
+      {% set vaccinesText = "None" %}
+      {% if (vaccinesEnabled | length) > 0 %}
+        {% set vaccinesText = (vaccinesEnabled | sort | join(", ")) | capitaliseFirstLetter %}
+      {% endif %}
+
       {{ summaryList({
+        classes: "app-pharmacy-summary-list",
         rows: [
           {
             key: {
@@ -98,7 +130,7 @@
               text: "Address"
             },
             value: {
-              text: addressParts | join(", ")
+              html: addressHtml
             }
           },
           {
@@ -106,7 +138,17 @@
               text: "Vaccines"
             },
             value: {
-              text: "COVID-19, flu"
+              text: vaccinesText
+            },
+            actions: {
+              classes: "app-pharmacy-summary-list__actions",
+              items: [
+                {
+                  href: "/pharmacies/" + organisation.id + "/edit-vaccines",
+                  text: "Edit vaccines",
+                  visuallyHiddenText: "vaccines for " + organisation.name
+                }
+              ]
             }
           }
         ]
