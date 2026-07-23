@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies" %}
+{% set pageName = "Edit vaccines for " + organisation.name %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/" + organisation.id,
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <form method="post" action="/pharmacies/{{ organisation.id }}/update-vaccines" novalidate>
+        {% set items = [] %}
+
+        {% for vaccine in (allVaccines | sort(false, false, "name")) %}
+          {% set items = (items.push({
+            value: vaccine.name,
+            text: "Men-B" if vaccine.name == "MenB" else (vaccine.name | capitaliseFirstLetter)
+          }), items) %}
+        {% endfor %}
+
+        {{ checkboxes({
+          name: "vaccinesEnabled",
+          fieldset: {
+            legend: {
+              text: "Which vaccines would you like to add for " + organisation.name + " (" + organisation.id + ")?",
+              size: "l",
+              isPageHeading: true
+            }
+          },
+          items: items
+        }) }}
+
+        {{ button({
+          text: "Save changes"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}
