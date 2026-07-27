@@ -18,10 +18,6 @@ const hasVaccinationRecords = (data, organisationId) => {
 const scenarioCompanyIds = ['P0191N', 'P15951']
 const allowedPharmacyVaccineNames = ['flu', 'COVID-19', 'MenB']
 
-const displayPharmacyVaccineName = (vaccineName) => {
-  return vaccineName === 'MenB' ? 'Men-B' : vaccineName
-}
-
 const isoDaysAgo = (daysAgo) => {
   const date = new Date()
   date.setDate(date.getDate() - daysAgo)
