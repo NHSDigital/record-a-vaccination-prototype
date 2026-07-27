@@ -1,0 +1,148 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check and confirm" %}
+
+{% from "warning-callout/macro.njk" import warningCallout %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/injection-site" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      {{ warningCallout({
+        heading: "Vaccine no longer available",
+        html: "<p>The vaccine you are recording has been removed from the system by a regional administrator and is no longer available.</p><p>You cannot record this vaccination at this time. If this vaccination has already been administered, record by hand and contact your regional administrator.</p>"
+      }) }}
+
+      <h2 class="nhsuk-heading-m">Patient</h2>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              text: "Emma Johnson"
+            }
+          },
+          {
+            key: {
+              text: "Date of birth"
+            },
+            value: {
+              html: "14 March 1990<br>(36 years old)"
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: "12 King Street<br>Leeds<br>LS1 4AB"
+            }
+          },
+          {
+            key: {
+              text: "NHS number"
+            },
+            value: {
+              text: "943 476 5919"
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="nhsuk-heading-m">Vaccination</h2>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Date"
+            },
+            value: {
+              text: "Today"
+            }
+          },
+          {
+            key: {
+              text: "Site"
+            },
+            value: {
+              text: "Leeds City Vaccination Site"
+            }
+          },
+          {
+            key: {
+              text: "Vaccinator"
+            },
+            value: {
+              text: "Sam Carter"
+            }
+          },
+          {
+            key: {
+              text: "Vaccine"
+            },
+            value: {
+              html: "Flu<br>aQIV"
+            }
+          },
+          {
+            key: {
+              text: "Batch"
+            },
+            value: {
+              html: "AB1234<br>Expires 31 December 2026"
+            }
+          },
+          {
+            key: {
+              text: "Dose sequence"
+            },
+            value: {
+              text: "1"
+            }
+          },
+          {
+            key: {
+              text: "Eligibility"
+            },
+            value: {
+              text: "Aged 65 years or over"
+            }
+          },
+          {
+            key: {
+              text: "Consent given by"
+            },
+            value: {
+              text: "Patient"
+            }
+          },
+          {
+            key: {
+              text: "Injection site"
+            },
+            value: {
+              text: "Left upper arm"
+            }
+          },
+          {
+            key: {
+              text: "Optional note"
+            },
+            value: {
+              text: "Patient attended with carer."
+            }
+          }
+        ]
+      }) }}
+    </div>
+  </div>
+{% endblock %}
