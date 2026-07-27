@@ -14,6 +14,7 @@
 
         {{ backLink({
           href: "/pharmacies",
+          text: "Back to all pharmacies",
           classes: "app-pharmacy-back-link"
         }) }}
 
@@ -87,20 +88,6 @@
         }) }}
       {% endif %}
 
-      {% if removedVaccine %}
-        {% set html %}
-          <h3 class="nhsuk-notification-banner__heading">
-            Vaccine removed
-          </h3>
-          <p>{{ removedVaccineDisplayName }} has been removed from {{ organisation.name }}.</p>
-        {% endset %}
-
-        {{ notificationBanner({
-          html: html,
-          type: "success"
-        }) }}
-      {% endif %}
-
       <h1 class="nhsuk-heading-l app-pharmacy-page-title" id="overview">{{ pageName }} ({{ organisation.id }})</h1>
 
       {% set addressParts = [] %}
@@ -131,7 +118,7 @@
   </div>
 
   <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-one-quarter">
+    <div class="nhsuk-grid-column-one-quarter app-pharmacy-layout-nav">
           {% set actionNavText = "Overview" %}
           {% if canDeletePharmacy %}
             {% set actionNavText = "Delete pharmacy" %}
@@ -159,7 +146,7 @@
             </ul>
           </nav>
       </div>
-      <div class="nhsuk-grid-column-three-quarters">
+      <div class="nhsuk-grid-column-three-quarters app-pharmacy-layout-content">
         <div class="nhsuk-card">
           <div class="nhsuk-card__content">
 
@@ -238,17 +225,15 @@
 
           {% if (users | length) > 0 %}
 
-        <table class="nhsuk-table">
+        <div class="app-pharmacy-users-table-responsive">
+        <table class="nhsuk-table app-pharmacy-users-table">
           <thead role="rowgroup" class="nhsuk-table__head">
             <tr role="row">
               <th role="columnheader" class="" scope="col">
-                Name
-              </th>
-              <th role="columnheader" class="" scope="col">
-                Email
+                Name and email
               </th>
               {% if currentTab == "invited" %}
-                <th role="columnheader" class="" scope="col">
+                <th role="columnheader" class="app-pharmacy-users-vaccinator" scope="col">
                   Vaccinator
                 </th>
                 <th role="columnheader" class="" scope="col">
@@ -258,7 +243,7 @@
                   Invite sent
                 </th>
               {% elif currentTab == "deactivated" %}
-                <th role="columnheader" class="" scope="col">
+                <th role="columnheader" class="app-pharmacy-users-vaccinator" scope="col">
                   Vaccinator
                 </th>
                 <th role="columnheader" class="" scope="col">
@@ -268,7 +253,7 @@
                   Reason deactivated
                 </th>
               {% else %}
-                <th role="columnheader" class="" scope="col">
+                <th role="columnheader" class="app-pharmacy-users-vaccinator" scope="col">
                   Vaccinator
                 </th>
                 <th role="columnheader" class="" scope="col">
@@ -288,20 +273,18 @@
               {% set inviteAgeDays = userOrganisationPermissions[user.id].inviteSent | daysSince %}
               {% set daysSinceLastLogIn = user.lastLogIn | daysSince %}
               <tr role="row" class="nhsuk-table__row">
-                <td class="nhsuk-table__cell">
+                <td class="nhsuk-table__cell" data-label="Name and email">
                   {{ user.firstName }} {{ user.lastName }}
+                  <div class="nhsuk-u-secondary-text-colour">{{ user.email }}</div>
                 </td>
-                <td class="nhsuk-table__cell">
-                  {{ user.email }}
-                </td>
-                <td class="nhsuk-table__cell" style="min-width: 150px;">
+                <td class="nhsuk-table__cell app-pharmacy-users-vaccinator" data-label="Vaccinator">
                   {{ "Yes" if userOrganisationPermissions[user.id].vaccinator else "No" }}
                 </td>
-                <td class="nhsuk-table__cell">
+                <td class="nhsuk-table__cell" data-label="Permission">
                   {{ userOrganisationPermissions[user.id].permissionLevel }}
                 </td>
                 {% if currentTab == "invited" %}
-                  <td class="nhsuk-table__cell">
+                  <td class="nhsuk-table__cell" data-label="Invite sent">
                     {% if inviteAgeDays == 0 %}
                       Today
                     {% elif inviteAgeDays %}
@@ -311,7 +294,7 @@
                     {% endif %}
                   </td>
                 {% elif currentTab == "deactivated" %}
-                  <td class="nhsuk-table__cell">
+                  <td class="nhsuk-table__cell" data-label="Reason deactivated">
                     {% if userOrganisationPermissions[user.id].deactivatedReason == "Deactivated by user" %}
                       By {{ userOrganisationPermissions[user.id].deactivatedBy or ((currentUser.firstName + " " + currentUser.lastName) if currentUser else "User") }}
                     {% elif userOrganisationPermissions[user.id].deactivatedReason %}
@@ -323,7 +306,7 @@
                     {% endif %}
                   </td>
                 {% else %}
-                  <td class="nhsuk-table__cell">
+                  <td class="nhsuk-table__cell" data-label="Last log in">
                     {% if daysSinceLastLogIn == 0 %}
                       Today
                     {% elif daysSinceLastLogIn %}
@@ -333,7 +316,7 @@
                     {% endif %}
                   </td>
                 {% endif %}
-                <td class="nhsuk-table__cell" style="white-space: nowrap;">
+                <td class="nhsuk-table__cell app-pharmacy-users-actions" data-label="Actions">
                   {% if currentTab == "invited" %}
                     {% if inviteAgeDays > 7 %}
                       <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/resend-invite">Resend invite<span class="nhsuk-u-visually-hidden"> to {{ user.firstName }} {{ user.lastName }}</span></a>
@@ -342,7 +325,6 @@
                     <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/reactivate">Reactivate<span class="nhsuk-u-visually-hidden"> {{ user.firstName }} {{ user.lastName }}</span></a>
                   {% else %}
                     <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/change?from=pharmacy">Change<span class="nhsuk-u-visually-hidden"> permission level for {{ user.firstName }} {{ user.lastName }}</span></a>
-                    &nbsp;
                     <a href="/pharmacies/{{ organisation.id }}/users/{{ user.id }}/deactivate-from-pharmacy?from=pharmacy">Deactivate<span class="nhsuk-u-visually-hidden"> {{ user.firstName }} {{ user.lastName }}</span></a>
                   {% endif %}
                 </td>
@@ -350,6 +332,7 @@
             {% endfor %}
           </tbody>
         </table>
+        </div>
       {% else %}
         {% if currentTab == "invited" %}
           <p>No invited users.</p>
@@ -386,9 +369,6 @@
                 <th role="columnheader" scope="col">
                   Vaccine
                 </th>
-                <th role="columnheader" scope="col">
-                  <span class="nhsuk-u-visually-hidden">Actions</span>
-                </th>
               </tr>
             </thead>
             <tbody class="nhsuk-table__body">
@@ -397,14 +377,11 @@
                   <td class="nhsuk-table__cell">
                     {{ vaccineName | capitaliseFirstLetter }}
                   </td>
-                  <td class="nhsuk-table__cell" style="white-space: nowrap;">
-                    <a href="/pharmacies/{{ organisation.id }}/remove-vaccine?vaccineName={{ vaccineName | urlencode }}">Remove<span class="nhsuk-u-visually-hidden"> {{ vaccineName | capitaliseFirstLetter }}</span></a>
-                  </td>
                 </tr>
               {% endfor %}
               {% if (activeVaccines | length) == 0 %}
                 <tr role="row" class="nhsuk-table__row">
-                  <td class="nhsuk-table__cell" colspan="2">
+                  <td class="nhsuk-table__cell" colspan="1">
                     No active vaccines.
                   </td>
                 </tr>

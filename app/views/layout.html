@@ -30,14 +30,16 @@
 <!-- Footer code examples can be found at https://service-manual.nhs.uk/design-system/components/footer -->
 {% block footer %}
   <div class="govuk-phase-banner app-pre-footer-banner">
-    <p class="govuk-phase-banner__content nhsuk-width-container">
-      <strong class="govuk-phase-banner__content__tag nhsuk-u-font-weight-bold">
-        New features
-      </strong>
-      <span class="govuk-phase-banner__text">
-        We regularly update the service. Find out more in <a class="govuk-link" href="https://guide.ravs.england.nhs.uk/whats-new/" target="_blank" rel="noreferrer noopener">What's new (opens in new tab)</a>
-      </span>
-    </p>
+    <div class="nhsuk-width-container">
+      <p class="govuk-phase-banner__content">
+        <strong class="govuk-phase-banner__content__tag nhsuk-u-font-weight-bold">
+          New features
+        </strong>
+        <span class="govuk-phase-banner__text">
+          We regularly update the service. Find out more in <a class="govuk-link" href="https://guide.ravs.england.nhs.uk/whats-new/" target="_blank" rel="noreferrer noopener">What's new (opens in new tab)</a>
+        </span>
+      </p>
+    </div>
   </div>
 
   {{ footer({

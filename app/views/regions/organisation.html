@@ -11,131 +11,235 @@
 {% endblock %}
 
 {% block content %}
+  {% set addressParts = [] %}
+  {% if organisation.address and organisation.address.line1 %}
+    {% set addressParts = (addressParts.push(organisation.address.line1), addressParts) %}
+  {% endif %}
+  {% if organisation.address and organisation.address.town %}
+    {% set addressParts = (addressParts.push(organisation.address.town), addressParts) %}
+  {% endif %}
+  {% if organisation.address and organisation.address.postcode %}
+    {% set addressParts = (addressParts.push(organisation.address.postcode), addressParts) %}
+  {% endif %}
+
+  {% set addressText = addressParts | join(", ") %}
+  {% set vaccinesText = "None" %}
+  {% if (vaccinesEnabled | length) > 0 %}
+    {% set vaccinesText = (vaccinesEnabled | sort(false, false, "name") | pluck("name") | formatList) %}
+  {% endif %}
+
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-      <h1 class="nhsuk-heading-l">{{ organisation.name }}</h1>
-
-      {% if organisation.status == 'Invited' %}
-        <p>You have invited this organisation to create an NHS Record a vaccination service account.</p>
-
-      {% elseif organisation.status == "Deactivated" %}
-
-        <p>This organisation has been deactivated.<br><br>It will be closed in <b>90 days</b>. </p>
-
-        <p><a href="/regions/organisations/{{ organisation.id }}/reactivate">Reactivate organisation</a></p>
-
-      {% endif %}
-
-
-      <p>They can record
-        {% if (vaccinesEnabled | length) == (data.vaccines | length) %}
-          all
-        {% else %}
-          {{ vaccinesEnabled | sort(false, false, "name") | pluck("name") | formatList }}
-        {% endif %}
-      vaccinations.
-
-        {% if (vaccinesEnabled | length) < (data.vaccines | length) %}
-          <a href="/regions/organisations/{{organisation.id}}/add-vaccines">Add vaccines<span class="nhsuk-u-visually-hidden"></span></a>
-        {% endif %}
-      </p>
-
-      {% if (messages | length) > 0 %}
-        {% set message = (messages | first) %}
-
-        {% set messageHtml %}
-          <p>Access to record {{ message.vaccineRequested }} requested on {{ message.sentOn | govukDate }}. <a href="/regions/messages/{{ message.id }}">View&nbsp;request</a></p>
+      {% if vaccinesAdded == "true" %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            Vaccines added
+          </h3>
+          <p>Vaccines have been added to {{ organisation.name }}.</p>
         {% endset %}
 
-        {{ insetText({
-          html: messageHtml,
-          classes: "nhsuk-u-margin-top-0 nhsuk-u-padding-top-1 nhsuk-u-padding-bottom-1"
+        {{ notificationBanner({
+          html: html,
+          type: "success"
         }) }}
       {% endif %}
 
+      {% if removedVaccine %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            Vaccine removed
+          </h3>
+          <p>{{ removedVaccine }} has been removed from {{ organisation.name }}.</p>
+        {% endset %}
 
-      {% if organisation.status != 'Invited' %}
-        <p><a href="/regions/organisations/{{organisation.id}}/deactivate">Deactivate organisation</a></p>
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
       {% endif %}
+
+      <h1 class="nhsuk-heading-l app-pharmacy-page-title">{{ organisation.name }} ({{ organisation.id }})</h1>
 
     </div>
   </div>
 
-  {% if organisation.status == 'Invited' or organisation.status == 'Active' %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-quarter app-pharmacy-layout-nav">
+      {% set actionNavText = "Deactivate organisation" %}
+      {% if organisation.status == 'Deactivated' %}
+        {% set actionNavText = "Reactivate organisation" %}
+      {% endif %}
 
-    <div class="nhsuk-grid-row">
-      <div class="nhsuk-grid-column-full">
+      <nav class="app-section-navigation app-section-navigation--vertical" data-module="app-section-navigation" aria-label="Section navigation">
+        <ul class="app-section-navigation__list">
+          <li class="app-section-navigation__item{{ " app-section-navigation__item--current" if currentPageSection == "overview" }}">
+            <a class="app-section-navigation__link" href="/regions/organisations/{{ organisation.id }}?section=overview"{{ " aria-current=\"page\"" if currentPageSection == "overview" }}>{% if currentPageSection == "overview" %}<strong class="app-section-navigation__current">Overview</strong>{% else %}Overview{% endif %}</a>
+          </li>
+          <li class="app-section-navigation__item{{ " app-section-navigation__item--current" if currentPageSection == "users" }}">
+            <a class="app-section-navigation__link" href="/regions/organisations/{{ organisation.id }}?section=users&tab={{ currentTab }}"{{ " aria-current=\"page\"" if currentPageSection == "users" }}>{% if currentPageSection == "users" %}<strong class="app-section-navigation__current">Users</strong>{% else %}Users{% endif %}</a>
+          </li>
+          <li class="app-section-navigation__item{{ " app-section-navigation__item--current" if currentPageSection == "vaccines" }}">
+            <a class="app-section-navigation__link" href="/regions/organisations/{{ organisation.id }}?section=vaccines"{{ " aria-current=\"page\"" if currentPageSection == "vaccines" }}>{% if currentPageSection == "vaccines" %}<strong class="app-section-navigation__current">Vaccines</strong>{% else %}Vaccines{% endif %}</a>
+          </li>
+          <li class="app-section-navigation__item{{ " app-section-navigation__item--current" if currentPageSection == "action" }}">
+            <a class="app-section-navigation__link" href="/regions/organisations/{{ organisation.id }}?section=action"{{ " aria-current=\"page\"" if currentPageSection == "action" }}>{% if currentPageSection == "action" %}<strong class="app-section-navigation__current">{{ actionNavText }}</strong>{% else %}{{ actionNavText }}{% endif %}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
 
-        {% if (users | length) > 0 %}
-          <table class="nhsuk-table">
-            <caption class="nhsuk-table__caption">Users</caption>
-            <thead role="rowgroup" class="nhsuk-table__head">
-              <tr role="row">
-                <th role="columnheader" class="" scope="col">
-                  Name
-                </th>
-                <th role="columnheader" class="" scope="col">
-                  Email address
-                </th>
-                <th role="columnheader" class="" scope="col">
-                  Status
-                </th>
-                <th role="columnheader" class="" scope="col">
+    <div class="nhsuk-grid-column-three-quarters app-pharmacy-layout-content">
+      <div class="nhsuk-card">
+        <div class="nhsuk-card__content">
+          {% if currentPageSection == "overview" %}
+            <h2 class="nhsuk-heading-m">Overview</h2>
 
-                </th>
-              </tr>
-            </thead>
-            <tbody class="nhsuk-table__body">
-              {% for leadUser in users %}
+            {% if organisation.status == 'Invited' %}
+              <p>You have invited this organisation to create an NHS Record a vaccination service account.</p>
+            {% endif %}
 
-                {% set userOrganisationSettings = (leadUser.organisations | findById(organisation.id)) %}
+            {{ summaryList({
+              rows: [
+                {
+                  key: { text: "ODS code" },
+                  value: { text: organisation.id }
+                },
+                {
+                  key: { text: "Address" },
+                  value: { text: addressText or "Not provided" }
+                },
+                {
+                  key: { text: "Status" },
+                  value: { text: organisation.status }
+                },
+                {
+                  key: { text: "Vaccines" },
+                  value: { text: vaccinesText }
+                }
+              ]
+            }) }}
 
-                <tr role="row" class="nhsuk-table__row">
-                  <td class="nhsuk-table__cell">
-                    {{ leadUser.firstName }} {{ leadUser.lastName }}
-                  </td>
-                  <td class="nhsuk-table__cell">
-                    {{ leadUser.email }}
-                  </td>
-                  <td class="nhsuk-table__cell ">
-                    {{ userOrganisationSettings.status }}
-                  </td>
-                  <td class="nhsuk-table__cell app-table__cell--right-aligned">
-                    {% if userOrganisationSettings.status == 'Invited' %}
-                      <a href="/regions/organisations/{{ organisation.id }}/users/{{ leadUser.id }}/uninvite">Uninvite</a>
-                    {% endif %}
-                  </td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        {% endif %}
+            {% if (messages | length) > 0 %}
+              {% set message = (messages | first) %}
 
+              {% set messageHtml %}
+                <p>Access to record {{ message.vaccineRequested }} requested on {{ message.sentOn | govukDate }}. <a href="/regions/messages/{{ message.id }}">View&nbsp;request</a></p>
+              {% endset %}
 
-        {% if (users | length) > 3 %}
-          {{ pagination({
-            next: {
-              href: "#"
-            },
-            items: [
-              {
-                number: 1,
-                href: "#",
-                current: true
-              },
-              {
-                number: 2,
-                href: "#"
-              }
-            ]
-          }) }}
-        {% endif %}
+              {{ insetText({
+                html: messageHtml,
+                classes: "nhsuk-u-margin-top-0 nhsuk-u-padding-top-1 nhsuk-u-padding-bottom-1"
+              }) }}
+            {% endif %}
 
-        {% set buttonText = "Add another user" if (organisation.leadUsers | length) > 0  else "Add user" %}
+          {% elif currentPageSection == "users" %}
+            <h2 class="nhsuk-heading-m">Users</h2>
 
-        {{ button({ text: buttonText, href: "/regions/organisations/" + organisation.id + "/add-email"}) }}
+            {% if organisation.status == 'Invited' or organisation.status == 'Active' %}
+              {% set totalUsers = (usersByStatus.invited | length) + (usersByStatus.active | length) + (usersByStatus.deactivated | length) %}
+              {% set buttonText = "Add user" if totalUsers > 0 else "Add user" %}
+              {{ button({ text: buttonText, href: "/regions/organisations/" + organisation.id + "/add-email"}) }}
+
+              {{ appSecondaryNavigation({
+                visuallyHiddenTitle: "Users by status",
+                items: [{
+                  text: "Invited (" + (usersByStatus.invited | length) + ")",
+                  href: "/regions/organisations/" + organisation.id + "?section=users&tab=invited",
+                  current: (currentTab == "invited")
+                }, {
+                  text: "Active (" + (usersByStatus.active | length) + ")",
+                  href: "/regions/organisations/" + organisation.id + "?section=users&tab=active",
+                  current: (currentTab == "active")
+                }, {
+                  text: "Deactivated (" + (usersByStatus.deactivated | length) + ")",
+                  href: "/regions/organisations/" + organisation.id + "?section=users&tab=deactivated",
+                  current: (currentTab == "deactivated")
+                }]
+              }) }}
+
+              {% if (users | length) > 0 %}
+                <div class="app-pharmacy-users-table-responsive">
+                <table class="nhsuk-table app-pharmacy-users-table">
+                  <thead role="rowgroup" class="nhsuk-table__head">
+                    <tr role="row">
+                      <th role="columnheader" scope="col">Name and email</th>
+                      <th role="columnheader" scope="col">Status</th>
+                      <th role="columnheader" scope="col"><span class="nhsuk-u-visually-hidden">Actions</span></th>
+                    </tr>
+                  </thead>
+                  <tbody class="nhsuk-table__body">
+                    {% for leadUser in users %}
+                      {% set userOrganisationSettings = (leadUser.organisations | findById(organisation.id)) %}
+                      <tr role="row" class="nhsuk-table__row">
+                        <td class="nhsuk-table__cell" data-label="Name and email">
+                          {{ leadUser.firstName }} {{ leadUser.lastName }}
+                          <div class="nhsuk-u-secondary-text-colour">{{ leadUser.email }}</div>
+                        </td>
+                        <td class="nhsuk-table__cell" data-label="Status">{{ userOrganisationSettings.status }}</td>
+                        <td class="nhsuk-table__cell app-table__cell--right-aligned app-pharmacy-users-actions" data-label="Actions">
+                          {% if userOrganisationSettings.status == 'Invited' %}
+                            <a href="/regions/organisations/{{ organisation.id }}/users/{{ leadUser.id }}/uninvite">Uninvite</a>
+                          {% endif %}
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                </div>
+              {% else %}
+                <p>No users in this status.</p>
+              {% endif %}
+            {% else %}
+              <p>This organisation is deactivated. Reactivate it to manage users.</p>
+            {% endif %}
+
+          {% elif currentPageSection == "vaccines" %}
+            <h2 class="nhsuk-heading-m">Vaccines</h2>
+
+            {% if canAddVaccines %}
+              {{ button({ text: "Add vaccines", href: "/regions/organisations/" + organisation.id + "/add-vaccines"}) }}
+            {% endif %}
+
+            {% if (vaccinesEnabled | length) > 0 %}
+              <table class="nhsuk-table">
+                <thead role="rowgroup" class="nhsuk-table__head">
+                  <tr role="row">
+                    <th role="columnheader" scope="col">Vaccine</th>
+                    <th role="columnheader" scope="col"><span class="nhsuk-u-visually-hidden">Actions</span></th>
+                  </tr>
+                </thead>
+                <tbody class="nhsuk-table__body">
+                  {% for vaccine in (vaccinesEnabled | sort(false, false, "name")) %}
+                    <tr role="row" class="nhsuk-table__row">
+                      <td class="nhsuk-table__cell">{{ vaccine.name | capitaliseFirstLetter }}</td>
+                      <td class="nhsuk-table__cell app-pharmacy-users-actions" style="white-space: nowrap;">
+                        <a href="/regions/organisations/{{ organisation.id }}/remove-vaccine?vaccineName={{ vaccine.name | urlencode }}">Remove<span class="nhsuk-u-visually-hidden"> {{ vaccine.name | capitaliseFirstLetter }}</span></a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            {% else %}
+              <p>No vaccines enabled yet.</p>
+            {% endif %}
+
+          {% else %}
+            <h2 class="nhsuk-heading-m">Deactivate organisation</h2>
+
+            {% if organisation.status == "Deactivated" %}
+              <p>This organisation has been deactivated.</p>
+              <p>It will be closed in <b>90 days</b>.</p>
+              <p><a href="/regions/organisations/{{ organisation.id }}/reactivate">Reactivate organisation</a></p>
+            {% elseif organisation.status == 'Invited' %}
+              <p>This organisation has been invited and is waiting to set up access.</p>
+            {% else %}
+              <p>If an organisation is no longer using Record a vaccination, you should deactivate it.</p>
+              <p><a href="/regions/organisations/{{ organisation.id }}/deactivate">Deactivate organisation</a></p>
+            {% endif %}
+          {% endif %}
+        </div>
       </div>
     </div>
-  {% endif %}
+  </div>
 
 {% endblock %}

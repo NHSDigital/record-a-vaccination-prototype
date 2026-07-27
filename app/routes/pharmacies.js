@@ -1301,28 +1301,10 @@ module.exports = router => {
   })
 
   router.get('/pharmacies/:id/remove-vaccine', (req, res) => {
-    const data = req.session.data
     const { id } = req.params
-    const vaccineName = req.query.vaccineName
-    const organisation = data.organisations.find((org) => org.id === id)
 
-    if (!organisation) {
-      return res.redirect('/pharmacies')
-    }
-
-    if (!allowedPharmacyVaccineNames.includes(vaccineName)) {
-      return res.redirect(`/pharmacies/${id}?section=vaccines`)
-    }
-
-    organisation.vaccines ||= []
-
-    const existingVaccine = organisation.vaccines.find((vaccine) => vaccine.name === vaccineName)
-
-    if (existingVaccine) {
-      existingVaccine.status = 'disabled'
-    }
-
-    return res.redirect(`/pharmacies/${id}?section=vaccines&removedVaccine=${encodeURIComponent(vaccineName)}`)
+    // Group admins can no longer remove vaccines from pharmacies.
+    return res.redirect(`/pharmacies/${id}?section=vaccines`)
   })
 
 
@@ -1337,7 +1319,6 @@ module.exports = router => {
     const reactivatedUserId = req.query.reactivatedUserId
     const reactivatedFromPharmacyId = req.query.reactivatedFromPharmacyId
     const vaccinesUpdated = req.query.vaccinesUpdated
-    const removedVaccine = req.query.removedVaccine
     const tab = (req.query.tab || 'active').toLowerCase()
     const section = (req.query.section || 'overview').toLowerCase()
 
@@ -1431,8 +1412,6 @@ module.exports = router => {
       reactivatedUser,
       reactivatedFromPharmacyId,
       vaccinesUpdated,
-      removedVaccine,
-      removedVaccineDisplayName: displayPharmacyVaccineName(removedVaccine),
       canDeletePharmacy,
       currentPageSection,
       hasAvailableVaccinesToAdd
