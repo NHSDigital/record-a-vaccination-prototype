@@ -14,8 +14,9 @@
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       {{ warningCallout({
-        heading: "Vaccine no longer available",
-        html: "<p>The vaccine you are recording has been removed from the system by a regional administrator and is no longer available.</p><p>You cannot record this vaccination at this time. If this vaccination has already been administered, record by hand and contact your regional administrator.</p>"
+        heading: "Vaccination no longer available",
+        html: "<p>You cannot record this vaccination because a regional lead has removed flu vaccines for your organisation.</p>
+      <p>If you have already vaccinated the patient, record it on paper and contact your regional lead.</p>"
       }) }}
 
       <h2 class="nhsuk-heading-m">Patient</h2>
@@ -35,7 +36,7 @@
               text: "Date of birth"
             },
             value: {
-              html: "14 March 1990<br>(36 years old)"
+              html: "14 March 1960<br>(66 years old)"
             }
           },
           {
@@ -90,7 +91,7 @@
               text: "Vaccine"
             },
             value: {
-              html: "Flu<br>aQIV"
+              html: "Flu<br>Adjuvanted Trivalent Influenza Vaccine (aTIV)"
             }
           },
           {
