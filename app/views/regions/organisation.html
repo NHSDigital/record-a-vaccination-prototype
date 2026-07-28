@@ -34,8 +34,6 @@
         {% set html %}
           <h3 class="nhsuk-notification-banner__heading">
             Vaccines added
-          </h3>
-          <p>Vaccines have been added to {{ organisation.name }}.</p>
         {% endset %}
 
         {{ notificationBanner({
@@ -47,9 +45,7 @@
       {% if removedVaccine %}
         {% set html %}
           <h3 class="nhsuk-notification-banner__heading">
-            Vaccine removed
-          </h3>
-          <p>{{ removedVaccine }} has been removed from {{ organisation.name }}.</p>
+            {{ removedVaccine }} removed
         {% endset %}
 
         {{ notificationBanner({
