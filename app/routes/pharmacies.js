@@ -1276,6 +1276,8 @@ module.exports = router => {
       : (selectedVaccinesRaw ? [selectedVaccinesRaw] : [])
 
     organisation.vaccines ||= []
+    let vaccinesUpdatedCount = 0
+
     for (const vaccineName of selectedVaccines) {
       if (!allowedPharmacyVaccineNames.includes(vaccineName)) {
         continue
@@ -1284,8 +1286,12 @@ module.exports = router => {
       const existingVaccine = organisation.vaccines.find((vaccine) => vaccine.name === vaccineName)
 
       if (existingVaccine) {
+        if (existingVaccine.status !== 'enabled') {
+          vaccinesUpdatedCount += 1
+        }
         existingVaccine.status = 'enabled'
       } else {
+        vaccinesUpdatedCount += 1
         organisation.vaccines.push({
           name: vaccineName,
           status: 'enabled'
@@ -1293,7 +1299,7 @@ module.exports = router => {
       }
     }
 
-    return res.redirect(`/pharmacies/${id}?section=vaccines&vaccinesUpdated=true`)
+    return res.redirect(`/pharmacies/${id}?section=vaccines&vaccinesUpdated=true&vaccinesUpdatedCount=${vaccinesUpdatedCount}`)
   })
 
   router.get('/pharmacies/:id/remove-vaccine', (req, res) => {
@@ -1315,6 +1321,7 @@ module.exports = router => {
     const reactivatedUserId = req.query.reactivatedUserId
     const reactivatedFromPharmacyId = req.query.reactivatedFromPharmacyId
     const vaccinesUpdated = req.query.vaccinesUpdated
+    const vaccinesUpdatedCount = Number.parseInt(req.query.vaccinesUpdatedCount, 10) || 0
     const tab = (req.query.tab || 'active').toLowerCase()
     const section = (req.query.section || 'overview').toLowerCase()
 
@@ -1408,6 +1415,7 @@ module.exports = router => {
       reactivatedUser,
       reactivatedFromPharmacyId,
       vaccinesUpdated,
+      vaccinesUpdatedCount,
       canDeletePharmacy,
       currentPageSection,
       hasAvailableVaccinesToAdd

@@ -168,6 +168,7 @@ module.exports = router => {
     const tab = (req.query.tab || 'active').toLowerCase()
     const removedVaccine = req.query.removedVaccine
     const vaccinesAdded = req.query.vaccinesAdded
+    const vaccinesAddedCount = Number.parseInt(req.query.vaccinesAddedCount, 10) || 0
     const organisation = data.organisations.find((org) => org.id === id)
     if (!organisation) { res.redirect('/regions/'); return }
 
@@ -213,6 +214,7 @@ module.exports = router => {
       canAddVaccines,
       removedVaccine,
       vaccinesAdded,
+      vaccinesAddedCount,
       messages
     })
   })
@@ -300,14 +302,19 @@ module.exports = router => {
       : (vaccinesToAddRaw ? [vaccinesToAddRaw] : [])
 
     const vaccines = organisation.vaccines || []
+    let vaccinesAddedCount = 0
 
     for (let vaccineToAdd of vaccinesToAdd) {
 
       const existingVaccine = vaccines.find((vaccine) => vaccine.name === vaccineToAdd)
 
       if (existingVaccine) {
+        if (existingVaccine.status !== 'enabled') {
+          vaccinesAddedCount += 1
+        }
         existingVaccine.status = "enabled"
       } else {
+        vaccinesAddedCount += 1
 
         vaccines.push({
           name: vaccineToAdd,
@@ -317,7 +324,7 @@ module.exports = router => {
 
     }
 
-    res.redirect(`/regions/organisations/${id}?section=vaccines&vaccinesAdded=true`)
+    res.redirect(`/regions/organisations/${id}?section=vaccines&vaccinesAdded=true&vaccinesAddedCount=${vaccinesAddedCount}`)
   })
 
 

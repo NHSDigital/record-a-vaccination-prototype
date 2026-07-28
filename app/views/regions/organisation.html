@@ -33,7 +33,8 @@
       {% if vaccinesAdded == "true" %}
         {% set html %}
           <h3 class="nhsuk-notification-banner__heading">
-            Vaccines added
+            {{ "Vaccine" if vaccinesAddedCount == 1 else "Vaccines" }} added
+          </h3>
         {% endset %}
 
         {{ notificationBanner({
