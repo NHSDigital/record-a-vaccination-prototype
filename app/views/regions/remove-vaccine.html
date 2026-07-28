@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Remove " + vaccineName + " from " + organisation.name %}
+{% set pageName = "Remove " + vaccineName %}
 {% set currentSection = "organisations" %}
 
 {% block beforeContent %}
@@ -15,18 +15,16 @@
     <div class="nhsuk-grid-column-two-thirds">
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>Removing this vaccine means users in this organisation can no longer record new {{ vaccineName }} vaccinations, including those in the past, edit existing records or add additional batches.</p>
-
-      <p>Existing vaccination records for {{ vaccineName }} will still be available to view and report on.</p>
-
-      <p>You can add {{ vaccineName }} again later if needed.</p>
+      <p>Once you remove this vaccine, users at {{ organisation.name }} will not be able to record any {{ vaccineName }} vaccinations or edit {{ vaccineName }} vaccination records.
+   
+      <p>You can add this vaccine back at any time.</p>
 
       <form action="/regions/organisations/{{ organisation.id }}/remove-vaccine" method="post" novalidate="true">
         <input type="hidden" name="vaccineName" value="{{ vaccineName }}">
 
         <div class="nhsuk-button-group nhsuk-u-margin-bottom-0">
           {{ button({
-            text: "Yes, remove vaccine",
+            text: "Remove vaccine",
             classes: "nhsuk-button--warning"
           }) }}
 
