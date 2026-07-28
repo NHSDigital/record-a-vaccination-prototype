@@ -15,7 +15,7 @@
 
 .app-pre-footer-banner .govuk-phase-banner__content {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: baseline;
   @include nhsuk-font(16);
   margin-top: 24px;

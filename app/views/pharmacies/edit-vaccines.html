@@ -23,11 +23,13 @@
           }), items) %}
         {% endfor %}
 
+        <div class="nhsuk-caption-l">{{ organisation.name }} ({{ organisation.id }})</div>
+
         {{ checkboxes({
           name: "vaccinesEnabled",
           fieldset: {
             legend: {
-              text: "Which vaccines would you like to add for " + organisation.name + " (" + organisation.id + ")?",
+              text: "Which vaccines do you want to add?",
               size: "l",
               isPageHeading: true
             }
@@ -36,7 +38,7 @@
         }) }}
 
         {{ button({
-          text: "Save changes"
+          text: "Confirm"
         }) }}
       </form>
     </div>
