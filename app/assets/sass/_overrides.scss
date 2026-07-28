@@ -59,3 +59,14 @@
     padding-left: 1rem;
   }
 }
+
+#pharmacies-results-caption {
+  @include nhsuk-font(19);
+  font-weight: 400;
+}
+
+.app-pharmacies-results-caption {
+  border-bottom: 1px solid $nhsuk-border-colour;
+  margin-bottom: nhsuk-spacing(4);
+  padding-bottom: nhsuk-spacing(3);
+}
