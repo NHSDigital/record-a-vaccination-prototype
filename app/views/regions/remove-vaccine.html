@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Remove " + vaccineName %}
+{% set currentSection = "organisations" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/regions/organisations/" + organisation.id + "?section=vaccines",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p>Once you remove this vaccine, users at {{ organisation.name }} will not be able to record any {{ vaccineName }} vaccinations or edit {{ vaccineName }} vaccination records.
+   
+      <p>You can add this vaccine back at any time.</p>
+
+      <form action="/regions/organisations/{{ organisation.id }}/remove-vaccine" method="post" novalidate="true">
+        <input type="hidden" name="vaccineName" value="{{ vaccineName }}">
+
+        <div class="nhsuk-button-group nhsuk-u-margin-bottom-0">
+          {{ button({
+            text: "Remove vaccine",
+            classes: "nhsuk-button--warning"
+          }) }}
+
+          <a href="/regions/organisations/{{ organisation.id }}?section=vaccines" class="nhsuk-link nhsuk-link--no-visited-state">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
