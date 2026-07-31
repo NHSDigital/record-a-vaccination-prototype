@@ -43,6 +43,14 @@
 
       <h1 class="nhsuk-heading-l">Check {{ data.firstName }} {{ data.lastName }}’s details and vaccination history</h1>
 
+      {% set insetTextHtml %}
+        <p>This patient is not registered with your surgery.</p>
+      {% endset %}
+
+      {{ insetText({
+        html: insetTextHtml
+      }) }}
+
       {{ summaryList({
         rows: [
           {
