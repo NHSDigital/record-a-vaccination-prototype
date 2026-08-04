@@ -16,6 +16,34 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+      {% if deactivated %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            Batch deactivated
+          </h3>
+          <p>{{ ("Batch " + updatedBatchNumber + " has been deactivated.") if updatedBatchNumber else "Batch has been deactivated." }}</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
+      {% if reactivated %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            Batch reactivated
+          </h3>
+          <p>{{ ("Batch " + updatedBatchNumber + " has been reactivated.") if updatedBatchNumber else "Batch has been reactivated." }}</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
       <h1 class="nhsuk-heading-l">{{ vaccine.vaccineProduct }}</h1>
 
       {{ summaryList({
@@ -60,9 +88,37 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
+      <h2 class="nhsuk-heading-m nhsuk-u-margin-top-7 nhsuk-u-margin-bottom-4">Batches</h2>
 
-      <table class="nhsuk-table nhsuk-u-margin-top-7">
-        <caption class="nhsuk-table__caption nhsuk-u-font-size-32">Batches</caption>
+      {% set activeCount = activeBatchesCount | default(0) %}
+      {% set inactiveCount = inactiveBatchesCount | default(0) %}
+
+      {{ appSecondaryNavigation({
+        visuallyHiddenTitle: "Batches by status",
+        items: [{
+          text: "Active (" + activeCount + ")",
+          href: "/vaccines/" + vaccine.id + "?tab=active",
+          current: (currentTab == "active")
+        }, {
+          text: "Inactive (" + inactiveCount + ")",
+          href: "/vaccines/" + vaccine.id + "?tab=inactive",
+          current: (currentTab == "inactive")
+        }]
+      }) }}
+
+      {% set columns = 2 %}
+      {% if currentTab == "inactive" %}
+        {% set columns = columns + 2 %}
+      {% endif %}
+      {% if vaccine.vaccineProduct == "Spikevax JN.1" %}
+        {% set columns = columns + 1 %}
+      {% endif %}
+      {% if site.status != "closed" %}
+        {% set columns = columns + 1 %}
+      {% endif %}
+
+
+      <table class="nhsuk-table">
         <thead role="rowgroup" class="nhsuk-table__head">
           <tr role="row">
             <th role="columnheader" scope="col">
@@ -76,15 +132,14 @@
             <th role="columnheader" scope="col">
               Expiry date
             </th>
-            <th role="columnheader" scope="col">
-              Status
-            </th>
-            <th role="columnheader" scope="col">
-              Depleted date
-            </th>
-            <th role="columnheader" scope="col">
-            </th>
-            </th>
+            {% if currentTab == "inactive" %}
+              <th role="columnheader" scope="col">
+                Date deactivated
+              </th>
+              <th role="columnheader" scope="col">
+                Reason deactivated
+              </th>
+            {% endif %}
             {% if site.status != "closed" %}
               <th role="columnheader" scope="col">
               </th>
@@ -93,48 +148,62 @@
           </tr>
         </thead>
         <tbody class="nhsuk-table__body">
-          {% for batch in batches %}
+          {% if (batches | length) == 0 %}
             <tr class="nhsuk-table__row">
-              <td class="nhsuk-table__cell">
-                {{ batch.batchNumber }}
+              <td class="nhsuk-table__cell" colspan="{{ columns }}">
+                No {{ currentTab }} batches found.
               </td>
-              {% if vaccine.vaccineProduct == "Spikevax JN.1" %}
-                <td class="nhsuk-table__cell">
-                  {{ batch.packType }}
-                </td>
-              {% endif %}
-              <td class="nhsuk-table__cell">
-                {{ batch.expiryDate | govukDate }}
-              </td>
-              <td class="nhsuk-table__cell">
-                {% if batch.depletedDate %}
-                  {{ tag({text: "Depleted", classes: "nhsuk-tag--grey" }) }}
-                {% elif (batch.expiryDate | daysAgo) > 0 %}
-                  {{ tag({text: "Expired", classes: "nhsuk-tag--grey" }) }}
-                {% else %}
-                  {{ tag({text: "Active" }) }}
-                {% endif %}
-              </td>
-              <td class="nhsuk-table__cell">
-                {% if batch.depletedDate %}
-                  {{ batch.depletedDate | govukDate }}
-                {% endif %}
-              </td>
-              {% if site.status != "closed" %}
-                <td class="nhsuk-table__cell">{% if (batch.expiryDate | daysAgo) > 0 %}  {% else %}
-                  <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}">Edit<span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
-                  &nbsp;
-                  {% if batch.depletedDate %}
-                    <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/reactivate">Reactivate<span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
-                  {% else %}
-                    <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/deplete">Deplete<span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
-                  {% endif %}
-                  {% endif %}
-                </td>
-              {% endif %}
-
             </tr>
-          {% endfor %}
+          {% else %}
+            {% for batch in batches %}
+              <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                  {{ batch.batchNumber }}
+                </td>
+                {% if vaccine.vaccineProduct == "Spikevax JN.1" %}
+                  <td class="nhsuk-table__cell">
+                    {{ batch.packType }}
+                  </td>
+                {% endif %}
+                <td class="nhsuk-table__cell">
+                  {{ batch.expiryDate | govukDate }}
+                </td>
+                {% if currentTab == "inactive" %}
+                  <td class="nhsuk-table__cell">
+                    {% if batch.deactivatedDate %}
+                      {{ batch.deactivatedDate | govukDate }}
+                    {% else %}
+                      {{ batch.expiryDate | govukDate }}
+                    {% endif %}
+                  </td>
+                  <td class="nhsuk-table__cell">
+                    {% if batch.deactivatedDate %}
+                      Deactivated by user
+                    {% elif (batch.expiryDate | daysAgo) > 0 %}
+                      Expired
+                    {% endif %}
+                  </td>
+                {% endif %}
+                {% if site.status != "closed" %}
+                  <td class="nhsuk-table__cell">
+                    {% if currentTab == "inactive" %}
+                      {% if batch.deactivatedDate %}
+                        <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/reactivate">Reactivate<span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
+                      {% endif %}
+                    {% else %}
+                      {% if (batch.expiryDate | daysAgo) > 0 %}
+                      {% else %}
+                        <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}">Edit<span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
+                        &nbsp;
+                        <a href="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/deactivate">Deactivate<span class="nhsuk-u-visually-hidden">{{ batch.batchNumber }}</span></a>
+                      {% endif %}
+                    {% endif %}
+                  </td>
+                {% endif %}
+
+              </tr>
+            {% endfor %}
+          {% endif %}
         </tbody>
       </table>
 
@@ -143,7 +212,7 @@
       {% for i in range(1, totalPages + 1) -%}
          {% set items = (items.push({
           number: i,
-          href: "/vaccines/" + vaccine.id + "?page=" + i,
+          href: "/vaccines/" + vaccine.id + "?tab=" + currentTab + "&page=" + i,
           current: (i === page)
         }), items) %}
       {%- endfor %}
@@ -152,10 +221,10 @@
       {% if totalPages > 0 %}
         {{ pagination({
           previous: {
-            href: "/vaccines/" + vaccine.id + "?page=" + (page - 1) if page != 1
+            href: "/vaccines/" + vaccine.id + "?tab=" + currentTab + "&page=" + (page - 1) if page != 1
           },
           next: {
-            href: "/vaccines/" + vaccine.id + "?page=" + (page + 1)  if page != totalPages
+            href: "/vaccines/" + vaccine.id + "?tab=" + currentTab + "&page=" + (page + 1)  if page != totalPages
           },
           items: items
         }) }}

@@ -846,7 +846,7 @@ module.exports = router => {
 
         return (expiryDate > dateToday)
       })
-      .filter((batch) => !batch.depletedDate)
+      .filter((batch) => !batch.deactivatedDate)
 
     if (req.query.showError === 'yes') {
 

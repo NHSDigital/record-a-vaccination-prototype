@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Reactivate batch " + batch.batchNumber %}
+{% set pageName = "Reactivate batch" %}
 
 {% set currentSection = "vaccines" %}
 
@@ -14,12 +14,33 @@
 
       <h1 class="nhsuks-heading-l">{{ pageName }}</h1>
 
-      <p>This batch will become ‘active’ immediately.</p>
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Batch number"
+            },
+            value: {
+              text: batch.batchNumber
+            }
+          },
+          {
+            key: {
+              text: "Expiry date"
+            },
+            value: {
+              text: batch.expiryDate | govukDate
+            }
+          }
+          ]
+        }) }}
+
+      <p>Reactivated batches will become available immediately.</p>
 
       <form action="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/reactivated" method="post" novalidate="true">
 
         {{ button({
-          text: "Reactivate"
+          text: "Confirm reactivate batch"
         })}}
 
       </form>
