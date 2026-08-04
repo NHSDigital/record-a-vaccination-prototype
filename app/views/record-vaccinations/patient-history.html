@@ -4,7 +4,6 @@
 
 {% set currentSection = "vaccinate" %}
 
-
 {% set dateOfBirthHtml %}
   {% if data.dateOfBirth.day %}
     {{ (data.dateOfBirth | isoDateFromDateInput | govukDate) }}
@@ -44,14 +43,19 @@
       <h1 class="nhsuk-heading-l">Check {{ data.firstName }} {{ data.lastName }}’s details and vaccination history</h1>
 
       {% set insetTextHtml %}
-      {# <p>This patient is registered with your PCN.</p> #}
+      <p>This patient is registered with your PCN.</p>
 
       <p>This patient is not registered with your surgery or PCN.</p>
 
       {% endset %}
 
-      {{ insetText({
+      {# {{ insetText({
         html: insetTextHtml
+      }) }} #}
+
+      {{ warningCallout({
+        heading: "Important",
+        text: "This patient is not registered with your surgery or PCN."
       }) }}
 
       {{ summaryList({
@@ -98,6 +102,10 @@
           }
         ]
       }) }}
+{# 
+      {{ insetText({
+        html: insetTextHtml
+      }) }} #}
 
       {% if data.vaccine == "COVID-19" %}
 
