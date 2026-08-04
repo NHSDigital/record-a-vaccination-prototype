@@ -186,9 +186,9 @@ module.exports = [
   },
   {
     id: "RVL",
-    name: "Barnet and chase farm Hospitals NHS Trust",
+    name: "Barnet and Chase Farm Hospitals NHS Trust",
     address: {
-      line1: "Barnet General hospital",
+      line1: "Barnet General Hospital",
       town: "Barnet",
       postcode: "EN5 3DJ"
     },
@@ -222,7 +222,7 @@ module.exports = [
   },
   {
     id: "RRP",
-    name: "Barnet, enfield and haringey mental Health NHS Trust",
+    name: "Barnet, Enfield and Haringey Mental Health NHS Trust",
     address: {
       line1: "Trust headquarters block b2",
       town: "London",
@@ -240,7 +240,7 @@ module.exports = [
   },
   {
     id: "RCN",
-    name: "Barnsley Community and priority services NHS Trust",
+    name: "Barnsley Community and Priority Services NHS Trust",
     address: {
       line1: "Kendray hospital",
       town: "Barnsley",
@@ -7694,7 +7694,7 @@ module.exports = [
     id: "RDC",
     name: "Wellhouse NHS Trust",
     address: {
-      line1: "Barnet hospital",
+      line1: "Barnet Hospital",
       town: "Barnet",
       postcode: "EN5 3DJ"
     },

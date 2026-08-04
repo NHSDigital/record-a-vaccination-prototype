@@ -2,12 +2,13 @@
 
 {% set currentSection = "pharmacies" %}
 {% if existingUser %}
-  {% set pageName = existingUser.firstName + " " + existingUser.lastName + "'s role at " + organisation.name + " (" + organisation.id + ")" %}
+  {% set roleHeading = existingUser.firstName + " " + existingUser.lastName + "'s role" %}
 {% elseif data.firstName or data.lastName %}
-  {% set pageName = (data.firstName + " " + data.lastName) + "'s role at " + organisation.name + " (" + organisation.id + ")" %}
+  {% set roleHeading = (data.firstName + " " + data.lastName) + "'s role" %}
 {% else %}
-  {% set pageName = "New user's role at " + organisation.name + " (" + organisation.id + ")" %}
+  {% set roleHeading = "New user's role" %}
 {% endif %}
+{% set pageName = roleHeading %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -46,15 +47,9 @@
         }) }}
       {% endif %}
 
-      <h1 class="nhsuk-heading-l">
-        {% if existingUser %}
-          {{ existingUser.firstName }} {{ existingUser.lastName }}'s role at {{ organisation.name }} ({{ organisation.id }})
-        {% elseif data.firstName or data.lastName %}
-          {{ data.firstName }} {{ data.lastName }}'s role at {{ organisation.name }} ({{ organisation.id }})
-        {% else %}
-          Add a new user to {{ organisation.name }} ({{ organisation.id }})
-        {% endif %}
-      </h1>
+      <div class="nhsuk-caption-l">{{ organisation.name }} ({{ organisation.id }})</div>
+
+      <h1 class="nhsuk-heading-l">{{ roleHeading }}</h1>
 
       <form action="/pharmacies/{{ organisation.id }}/add-user-check" method="post">
 

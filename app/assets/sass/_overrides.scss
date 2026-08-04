@@ -5,13 +5,17 @@
   }
 }
 
+.nhsuk-width-container {
+  max-width: 1100px;
+}
+
 .app-pre-footer-banner {
   border-top: 1px solid #b1b4b6;
 }
 
 .app-pre-footer-banner .govuk-phase-banner__content {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: baseline;
   @include nhsuk-font(16);
   margin-top: 24px;

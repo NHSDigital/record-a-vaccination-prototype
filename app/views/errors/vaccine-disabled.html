@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "There is a problem saving this vaccination" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p>You cannot save this vaccination because a regional lead has removed your access to [vaccine name] vaccines.</p>
+
+      <p>If you have already vaccinated the patient, record it on paper and contact your regional lead.</p>
+
+      <p><a href="">Go back to the Check and confirm page</a> to see details of the vaccination.</p>
+      <p><a href="https://guide.ravs.england.nhs.uk/service-unavailable/">Download our paper form (opens in new tab)</a></p>
+
+
+    </div>
+  </div>
+
+
+{% endblock %}

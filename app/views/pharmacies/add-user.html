@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% set currentSection = "pharmacies" %}
-{% set pageName = "Add a user to " + organisation.name + " (" + organisation.id + ")" %}
+{% set pageName = "Which user would you like to add?" %}
 
 {% block beforeContent %}
 {{ backLink({
@@ -24,7 +24,9 @@ href: "/pharmacies/" + organisation.id
       }) }}
     {% endif %}
 
-    <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+    <div class="nhsuk-caption-l">{{ organisation.name }} ({{ organisation.id }})</div>
+
+    <h1 class="nhsuk-heading-l">Which user would you like to add?</h1>
 
     <p>You can add an existing user to the pharmacy, or invite a new user.</p>
 
