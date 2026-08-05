@@ -218,7 +218,7 @@
       {%- endfor %}
 
 
-      {% if totalPages > 0 %}
+      {% if totalBatches > 20 %}
         {{ pagination({
           previous: {
             href: "/vaccines/" + vaccine.id + "?tab=" + currentTab + "&page=" + (page - 1) if page != 1

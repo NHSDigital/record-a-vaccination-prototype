@@ -18,6 +18,18 @@
 
       <h1 class="nhsuk-heading-l">Check and confirm</h1>
 
+      {% if matchingDeactivatedBatch %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">Batch already exists</h3>
+          <p>Batch {{ matchingDeactivatedBatch.batchNumber }} with expiry date {{ matchingDeactivatedBatch.expiryDate | govukDate }} already exists and is deactivated.</p>
+          <p>You can reactivate this batch instead of adding it again.</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html
+        }) }}
+      {% endif %}
+
 
       {{ summaryList({
         classes: "nhsuk-u-margin-bottom-2",
@@ -101,15 +113,26 @@
         ]
       }) }}
 
-      <p class="nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-8"><a class="nhsuk-link nhsuk-link--no-visited-state" href="/vaccines/{{ vaccine.id }}/add">Edit batch</a></p>
+      {% if not matchingDeactivatedBatch %}
+        <p class="nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-8"><a class="nhsuk-link nhsuk-link--no-visited-state" href="/vaccines/{{ vaccine.id }}/add">Edit batch</a></p>
+      {% endif %}
 
 
 
-      <form action="/vaccines/{{ vaccine.id }}/added" method="post">
-        {{ button({
-          "text": "Confirm"
-        }) }}
-      </form>
+      {% if matchingDeactivatedBatch %}
+        <form action="/vaccines/{{ vaccine.id }}/{{ matchingDeactivatedBatch.batchNumber }}/reactivated" method="post" novalidate="true">
+          {{ button({
+            text: "Reactivate batch",
+            classes: "nhsuk-u-margin-top-6"
+          }) }}
+        </form>
+      {% else %}
+        <form action="/vaccines/{{ vaccine.id }}/added" method="post">
+          {{ button({
+            "text": "Confirm"
+          }) }}
+        </form>
+      {% endif %}
 
 
     </div>

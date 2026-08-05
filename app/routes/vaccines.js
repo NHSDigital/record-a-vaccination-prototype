@@ -140,7 +140,6 @@ module.exports = (router) => {
 
   // Viewing check answers page
   router.get('/vaccines/check', (req, res) => {
-
     const data = req.session.data
     const siteId = data.siteId
 
@@ -163,6 +162,15 @@ module.exports = (router) => {
     const generatedId = Math.floor(Math.random() * 10000000).toString()
 
     const expiryDate = new Date(data.batchExpiryDate.year, (parseInt(data.batchExpiryDate.month) - 1), data.batchExpiryDate.day, 12).toISOString().substring(0,10)
+
+    const matchingDeactivatedBatch = vaccine.batches.find((batch) => {
+      return batch.batchNumber === data.batchNumber && batch.expiryDate === expiryDate && batch.deactivatedDate
+    })
+
+    if (matchingDeactivatedBatch) {
+      res.redirect(`/vaccines/${vaccine.id}/add-batch-check`)
+      return
+    }
 
     vaccine.batches.push({
       id: generatedId,
@@ -273,9 +281,21 @@ module.exports = (router) => {
 
     const site = currentOrganisationSites.find((site) => site.id == vaccine.siteId)
 
+    let matchingDeactivatedBatch
+    const { day, month, year } = data.batchExpiryDate || {}
+
+    if (data.batchNumber && day && month && year) {
+      const expiryDate = new Date(year, (parseInt(month) - 1), day, 12).toISOString().substring(0,10)
+
+      matchingDeactivatedBatch = vaccine.batches.find((batch) => {
+        return batch.batchNumber === data.batchNumber && batch.expiryDate === expiryDate && batch.deactivatedDate
+      })
+    }
+
     res.render('vaccines/add-batch-to-site-check', {
       vaccine,
       site,
+      matchingDeactivatedBatch,
     })
   })
 
