@@ -3,6 +3,12 @@ module.exports = (router) => {
   router.get('/vaccines', (req, res) => {
     const currentOrganisation = res.locals.currentOrganisation
     const data = req.session.data
+    const deactivatedSite = req.query.deactivatedSite === 'true'
+    const reactivatedSite = req.query.reactivatedSite === 'true'
+    const siteName = req.query.siteName
+    const siteTab = (req.query.siteTab || 'active').toLowerCase()
+    const validSiteTabs = ['active', 'deactivated']
+    const currentSiteTab = validSiteTabs.includes(siteTab) ? siteTab : 'active'
 
     const organisationVaccines = res.locals.currentOrganisation.vaccines || []
 
@@ -18,10 +24,20 @@ module.exports = (router) => {
       .map((vaccine) => vaccine.name)
 
     const vaccineStock = data.vaccineStock.filter((vaccine) => vaccine.organisationId === currentOrganisation.id)
+    const siteIdsInUse = [...new Set(vaccineStock.map((vaccine) => vaccine.siteId))]
+    const sitesInUse = (currentOrganisation.sites || []).filter((site) => siteIdsInUse.includes(site.id))
+    const activeSitesCount = sitesInUse.filter((site) => site.status !== 'closed').length
+    const deactivatedSitesCount = sitesInUse.filter((site) => site.status === 'closed').length
 
     res.render('vaccines/index', {
       vaccineStock,
-      vaccinesThatCanBeRequested
+      vaccinesThatCanBeRequested,
+      deactivatedSite,
+      reactivatedSite,
+      siteName,
+      currentSiteTab,
+      activeSitesCount,
+      deactivatedSitesCount
     })
   })
 
@@ -150,6 +166,50 @@ module.exports = (router) => {
     res.render('vaccines/check', {
       site
     })
+  })
+
+  // View page to deactivate a site
+  router.get('/vaccines/sites/:siteId/deactivate', (req, res) => {
+    const currentOrganisationSites = res.locals.currentOrganisation.sites || []
+    const site = currentOrganisationSites.find((item) => item.id === req.params.siteId)
+    if (!site) { res.redirect('/vaccines'); return }
+
+    res.render('vaccines/deactivate-site', {
+      site
+    })
+  })
+
+  // Mark site as closed
+  router.post('/vaccines/sites/:siteId/deactivated', (req, res) => {
+    const currentOrganisationSites = res.locals.currentOrganisation.sites || []
+    const site = currentOrganisationSites.find((item) => item.id === req.params.siteId)
+    if (!site) { res.redirect('/vaccines'); return }
+
+    site.status = 'closed'
+
+    res.redirect(`/vaccines?siteTab=deactivated&deactivatedSite=true&siteName=${encodeURIComponent(site.name)}`)
+  })
+
+  // View page to reactivate a site
+  router.get('/vaccines/sites/:siteId/reactivate', (req, res) => {
+    const currentOrganisationSites = res.locals.currentOrganisation.sites || []
+    const site = currentOrganisationSites.find((item) => item.id === req.params.siteId)
+    if (!site) { res.redirect('/vaccines'); return }
+
+    res.render('vaccines/reactivate-site', {
+      site
+    })
+  })
+
+  // Mark site as active
+  router.post('/vaccines/sites/:siteId/reactivated', (req, res) => {
+    const currentOrganisationSites = res.locals.currentOrganisation.sites || []
+    const site = currentOrganisationSites.find((item) => item.id === req.params.siteId)
+    if (!site) { res.redirect('/vaccines'); return }
+
+    delete site.status
+
+    res.redirect(`/vaccines?siteTab=active&reactivatedSite=true&siteName=${encodeURIComponent(site.name)}`)
   })
 
 
