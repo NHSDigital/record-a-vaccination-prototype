@@ -27,6 +27,14 @@
 
       <h1 class="nhsuk-heading-l">Check Jodie Brown’s details and vaccination history</h1>
 
+      {{ warningCallout({
+        heading: "Important",
+        html: "
+        <p class='nhsuk-body'>This patient does not have a registered GP surgery.</p>
+        <p class='nhsuk-body'>We could not get any vaccination history for this patient.</p>
+         "
+      }) }}
+
       {{ summaryList({
         classes: 'xnhsuk-summary-list--no-border',
         rows: [
@@ -59,10 +67,10 @@
 
       {% from "warning-callout/macro.njk" import warningCallout %}
 
-{{ warningCallout({
+{# {{ warningCallout({
   heading: "Important",
   text: "We could not get any vaccination history for this patient."
-}) }}
+}) }} #}
           
 
       <form action="{{ nextPage }}" method="post" novalidate>
