@@ -43,10 +43,7 @@
       <h1 class="nhsuk-heading-l">Check {{ data.firstName }} {{ data.lastName }}’s details and vaccination history</h1>
 
       {% set insetTextHtml %}
-      <p>This patient is registered with your PCN.</p>
-
-      <p>This patient is not registered with your surgery or PCN.</p>
-
+      <p>This patient's GP surgery is in your PCN.</p>
       {% endset %}
 
       {# {{ insetText({
@@ -54,8 +51,8 @@
       }) }} #}
 
       {{ warningCallout({
-        heading: "Important",
-        text: "This patient is not registered with your surgery or PCN."
+        heading: "Not in PCN",
+        text: "This patient's GP surgery is not in your PCN."
       }) }}
 
       {{ summaryList({
