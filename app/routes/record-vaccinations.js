@@ -92,6 +92,7 @@ module.exports = router => {
     const vaccinationDate = data.vaccinationDate || {}
     const vaccinationDateAsDate = dateFromYearMonthDay(vaccinationDate.year, vaccinationDate.month, vaccinationDate.day)
     let vaccinationDateError
+    const dateOfDeath = new Date(2024, 3, 20, 12) // 20 April 2024
 
     if (req.query.showError === 'yes') {
       if (!vaccinationDateAsDate) {
@@ -100,9 +101,12 @@ module.exports = router => {
         const today = new Date()
         today.setHours(0, 0, 0, 0)
         vaccinationDateAsDate.setHours(0, 0, 0, 0)
+        dateOfDeath.setHours(0, 0, 0, 0)
 
         if (vaccinationDateAsDate >= today) {
           vaccinationDateError = 'Enter a date in the past'
+        } else if (vaccinationDateAsDate > dateOfDeath) {
+          vaccinationDateError = 'Enter a date on or before the date the patient died (20 April 2024)'
         }
       }
     }
@@ -116,6 +120,7 @@ module.exports = router => {
     const data = req.session.data
     const vaccinationDate = data.vaccinationDate || {}
     const vaccinationDateAsDate = dateFromYearMonthDay(vaccinationDate.year, vaccinationDate.month, vaccinationDate.day)
+    const dateOfDeath = new Date(2024, 3, 20, 12) // 20 April 2024
 
     if (!vaccinationDateAsDate) {
       return res.redirect('/record-vaccinations/vaccination-date-deceased?showError=yes')
@@ -124,8 +129,13 @@ module.exports = router => {
     const today = new Date()
     today.setHours(0, 0, 0, 0)
     vaccinationDateAsDate.setHours(0, 0, 0, 0)
+    dateOfDeath.setHours(0, 0, 0, 0)
 
     if (vaccinationDateAsDate >= today) {
+      return res.redirect('/record-vaccinations/vaccination-date-deceased?showError=yes')
+    }
+
+    if (vaccinationDateAsDate > dateOfDeath) {
       return res.redirect('/record-vaccinations/vaccination-date-deceased?showError=yes')
     }
 
