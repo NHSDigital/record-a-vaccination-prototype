@@ -34,13 +34,13 @@
           }
           ]
         }) }}
-      <p>Deactivated batches will be made unavailable immediately. Batches can be reactivated if needed.</p>
+      <p>Once you deactivate this batch, it will not be available when you record or edit a vaccination. You can reactivate it anytime.</p>
 
       <form action="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/deactivated" method="post" novalidate="true">
 
 
         {{ button({
-          "text": "Confirm deactivate batch"
+          "text": "Deactivate"
         }) }}
 
       </form>
