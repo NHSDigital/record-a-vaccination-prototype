@@ -87,6 +87,15 @@ module.exports = router => {
     res.redirect('/record-vaccinations/delivery-team')
   })
 
+  router.get('/record-vaccinations/patient-history-deceased', (req, res) => {
+    const data = req.session.data
+    data.firstName = 'Jodie'
+    data.lastName = 'Brown'
+    data.dateOfBirth = { day: '15', month: '3', year: '1984' }
+    data.nhsNumber = '9123456789'
+    res.render('record-vaccinations/patient-history-deceased')
+  })
+
   router.get('/record-vaccinations/vaccination-date-deceased', (req, res) => {
     const data = req.session.data
     const vaccinationDate = data.vaccinationDate || {}
@@ -140,6 +149,7 @@ module.exports = router => {
     }
 
     data.vaccinationToday = 'no'
+    data.patientIsDeceased = true
     res.redirect('/record-vaccinations/delivery-team')
   })
 
