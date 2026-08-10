@@ -35,12 +35,12 @@
           ]
         }) }}
 
-      <p>Reactivated batches will become available immediately.</p>
+      <p>Once you reactivate this batch it will be available when you record or edit a vaccination.</p>
 
       <form action="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/reactivated" method="post" novalidate="true">
 
         {{ button({
-          text: "Confirm reactivate batch"
+          text: "Reactivate"
         })}}
 
       </form>
