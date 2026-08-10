@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "What was the vaccination date?" %}
+{% set pageName = "When was the patient vaccinated?" %}
 
 {% set currentSection = "vaccinate" %}
 
@@ -36,7 +36,7 @@
             }
           },
           hint: {
-            text: "Enter a date in the past, for example, 15 3 2024"
+            text: "Enter a date before the patient died"
           },
           errorMessage: {
             text: vaccinationDateError
