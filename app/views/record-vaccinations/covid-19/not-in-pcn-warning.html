@@ -27,7 +27,7 @@
       {% endif %}
 
       {% set panelHtml %}
-        <p>This patient's GP surgery is not part of your PCN.</p>
+        {# <p>This patient's GP surgery is not part of your PCN.</p> #}
         <p>Your organisation may not be paid for this vaccination.</p>
 
         {{ button({
@@ -38,7 +38,7 @@
       {% endset %}
 
       {{ panel({
-        titleText: displayName + " is not in your PCN",
+        titleText: displayName + "'s GP surgery is not in your PCN",
         html: panelHtml,
         classes: "nhsuk-panel--interruption"
       }) }}

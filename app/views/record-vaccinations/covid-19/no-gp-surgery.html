@@ -26,7 +26,7 @@
       {% endif %}
 
       {% set panelHtml %}
-        <p>This patient does not have a registered GP surgery.</p>
+        {# <p>This patient does not have a registered GP surgery.</p> #}
         <p>Your organisation may not be paid for this vaccination.</p>
 
         {{ button({
@@ -37,7 +37,7 @@
       {% endset %}
 
       {{ panel({
-        titleText: displayName + " has no GP surgery",
+        titleText: displayName + " is not registered with a GP surgery",
         html: panelHtml,
         classes: "nhsuk-panel--interruption"
       }) }}
