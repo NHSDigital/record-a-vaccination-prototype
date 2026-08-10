@@ -93,11 +93,11 @@
     {{ appSecondaryNavigation({
       visuallyHiddenTitle: "Sites by status",
       items: [{
-        text: "Active (" + activeSitesCount + ")",
+        text: "Active sites (" + activeSitesCount + ")",
         href: "/vaccines?siteTab=active",
         current: (currentSiteTab == "active")
       }, {
-        text: "Deactivated (" + deactivatedSitesCount + ")",
+        text: "Deactivated sites (" + deactivatedSitesCount + ")",
         href: "/vaccines?siteTab=deactivated",
         current: (currentSiteTab == "deactivated")
       }]
@@ -140,11 +140,7 @@
         {% set site =  currentOrganisation.sites | findById(siteId) %}
 
         <table class="nhsuk-table nhsuk-u-margin-bottom-2">
-          <caption class="nhsuk-table__caption nhsuk-table__caption--m nhsuk-u-margin-bottom-2">{{ site.name }}
-            {% if site.status == "closed" %}
-              (closed)
-            {% endif %}
-          </caption>
+          <caption class="nhsuk-table__caption nhsuk-table__caption--m nhsuk-u-margin-bottom-2">{{ site.name }}</caption>
           <thead role="rowgroup" class="nhsuk-table__head">
             <tr role="row">
               <th role="columnheader" class="" scope="col">
@@ -198,7 +194,7 @@
                         {% set thisVaccine = vaccine %}
                       {% endif %}
                     {% endfor %}
-                    {{ thisVaccine.batches | length }}
+                    {{ thisVaccine.activeBatchesCount | default(0) }}
                   </td>
                   <td class="nhsuk-table__cell ">
                     <div class="nhsuk-u-margin-bottom-1"><a href="/vaccines/{{ thisVaccine.id }}" class="nhsuk-link">View</a></div>

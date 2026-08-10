@@ -23,7 +23,20 @@ module.exports = (router) => {
       .filter((vaccine) => !vaccinesEnabledNames.includes(vaccine.name))
       .map((vaccine) => vaccine.name)
 
-    const vaccineStock = data.vaccineStock.filter((vaccine) => vaccine.organisationId === currentOrganisation.id)
+    const today = new Date().toISOString().substring(0,10)
+    const vaccineStock = data.vaccineStock
+      .filter((vaccine) => vaccine.organisationId === currentOrganisation.id)
+      .map((vaccine) => {
+        const batches = Array.isArray(vaccine.batches) ? vaccine.batches : []
+        const activeBatchesCount = batches.filter((batch) => {
+          return !batch.deactivatedDate && batch.expiryDate >= today
+        }).length
+
+        return {
+          ...vaccine,
+          activeBatchesCount
+        }
+      })
     const siteIdsInUse = [...new Set(vaccineStock.map((vaccine) => vaccine.siteId))]
     const sitesInUse = (currentOrganisation.sites || []).filter((site) => siteIdsInUse.includes(site.id))
     const activeSitesCount = sitesInUse.filter((site) => site.status !== 'closed').length
