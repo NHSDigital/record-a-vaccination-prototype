@@ -115,7 +115,7 @@ module.exports = router => {
         if (vaccinationDateAsDate >= today) {
           vaccinationDateError = 'Enter a date in the past'
         } else if (vaccinationDateAsDate > dateOfDeath) {
-          vaccinationDateError = 'Enter a date on or before the date the patient died (20 April 2024)'
+          vaccinationDateError = 'The date of vaccination must be the same as or before the date the patient died (20 April 2024)'
         }
       }
     }
