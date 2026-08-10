@@ -1,31 +1,42 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Check the patient details" %}
+{% set pageName = "Check the patient's details" %}
 
 {% set currentSection = "vaccinate" %}
 
-{% if ((data.vaccine == "RSV") and (data.eligibility | arrayOrStringIncludes("Pregnant"))) or (data.vaccine == "Pertussis") %}
-  {% set nextPage = "/record-vaccinations/patient-estimated-due-date" %}
+
+{% set patientFirstName = "Jodie" %}
+{% set patientLastName = "Brown" %}
+{% set patientFullName = patientFirstName + " " + patientLastName %}
+
+{% set nextPage = "/record-vaccinations/vaccination-date-deceased" %}
+
+{% if data.from == "appointments" %}
+  {% set previousPage = "/appointments" %}
+{% elseif data.repeatVaccination === "yes" %}
+  {% set previousPage = "/record-vaccinations/patient" %}
+{% elseif data.repeatPatient === "yes" %}
+  {% set previousPage = "/record-vaccinations/done" %}
 {% else %}
-  {% set nextPage = "/record-vaccinations/consent" %}
+  {% set previousPage = "/record-vaccinations" %}
 {% endif %}
 
-{% set dateOfBirthHtml %}
-  {% if data.dateOfBirth %}
-    {{ (data.dateOfBirth | isoDateFromDateInput | govukDate) }}
-    <br>(75 years old)
-  {% endif %}
-{% endset %}
-
 {% block beforeContent %}
-  {{ backLink({ href: "/record-vaccinations/patient" }) }}
+  {{ backLink({ href: previousPage }) }}
 {% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Check {{ data.firstName }} {{ data.lastName }}’s details and vaccination history</h1>
+      <h1 class="nhsuk-heading-l">Check {{ patientFullName }}’s details and vaccination history</h1>
+
+      {% from "warning-callout/macro.njk" import warningCallout %}
+
+      {{ warningCallout({
+        heading: "Important",
+        text: "This patient is recorded as deceased. Only retrospective vaccinations can be recorded."
+      }) }}
 
       {{ summaryList({
         rows: [
@@ -34,7 +45,7 @@
               text: "Name"
             },
             value: {
-              text: (data.firstName + " " + data.lastName)
+              text: patientFullName
             }
           },
           {
@@ -42,15 +53,15 @@
               text: "Date of birth"
             },
             value: {
-                html: "15 January 1954"
-              }
+              html: "15 March 1984"
+            }
           },
           {
             key: {
               text: "Date of death"
             },
             value: {
-              html: "20 March 2024<br>(70 years old)"
+              html: "20 April 2024<br><div class=\"nhsuk-u-secondary-text-colour\">40 years old</div>"
             }
           },
           {
@@ -66,7 +77,15 @@
               text: "NHS number"
             },
             value: {
-              text: data.nhsNumber
+              text: "9123456789"
+            }
+          },
+          {
+            key: {
+              text: "GP surgery"
+            },
+            value: {
+              html: "Beech House surgery <br>1 Ash Tree Road<br>Knaresborough<br>HG5 0UB"
             }
           }
         ]
@@ -91,9 +110,17 @@
 
       <h2 class="nhsuk-heading-m">Vaccination history</h2>
 
-      <p>This shows NHS vaccinations given in England. Currently it includes COVID-19, flu, pertussis and RSV.</p>
 
-      <p>However, pertussis vaccinations given at a GP surgery are not shown.</p>
+{% set insetTextHtml %}
+  <p>This shows NHS vaccinations given in England. It includes all vaccinations recorded in RAVS but only some recorded in other systems.</p>
+
+{% endset %}
+
+{{ insetText({
+  html: insetTextHtml,
+  classes: "nhsuk-u-padding-top-2 nhsuk-u-padding-bottom-2 nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-4"
+}) }}
+
     </div>
   </div>
   <div class="nhsuk-grid-row">
@@ -117,13 +144,23 @@
           rows: [
             [
               {
-                text: "1 December 2024"
+                text: "15 April 2025"
               },
               {
                 text: "COVID-19"
               },
               {
                 text: "Spikevax JN.1"
+              }
+            ],[
+              {
+                text: "9 November 2024"
+              },
+              {
+                text: "MMR (2nd dose)"
+              },
+              {
+                text: "Priorix"
               }
             ],[
               {
@@ -138,10 +175,21 @@
             ],
             [
               {
+                text: "29 October 2024"
+              },
+              {
+                text: "Pneumococcal"
+              },
+              {
+                text: "Pneumovax"
+              }
+            ],
+            [
+              {
                 text: "25 October 2024"
               },
               {
-                text: "Flu"
+                text: "Flu (1st dose)"
               },
               {
                 text: "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)"
@@ -166,7 +214,19 @@
                 text: "Flu"
               },
               {
-                text: "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)"
+                text: "Not known",
+                classes: "nhsuk-u-secondary-text-color"
+              }
+            ],
+            [
+              {
+                text: "7 October 2023"
+              },
+              {
+                text: "Pertussis"
+              },
+              {
+                text: "Boostrix-IPV suspension"
               }
             ],
             [
@@ -179,10 +239,48 @@
               {
                 text: "Moderna mRNA (Spikevax) Original"
               }
+            ],
+            [
+              {
+                text: "4 December 2023"
+              },
+              {
+                text: "MMR"
+              },
+              {
+                text: "Priorix"
+              }
             ]
           ]
         }) }}
 
+        {{ pagination({
+          next: {
+            href: "#"
+          },
+          items: [
+            {
+              href: "#",
+              number: 1,
+              current: true
+            },
+            {
+              href: "#",
+              number: 2
+            },
+            {
+              href: "#",
+              number: 3
+            }
+          ]
+        }) }}
+
+
+      <form action="{{ nextPage }}" method="post" novalidate>
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
 
     </div>
   </div>

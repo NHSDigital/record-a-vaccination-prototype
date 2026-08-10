@@ -87,6 +87,52 @@ module.exports = router => {
     res.redirect('/record-vaccinations/delivery-team')
   })
 
+  router.get('/record-vaccinations/vaccination-date-deceased', (req, res) => {
+    const data = req.session.data
+    const vaccinationDate = data.vaccinationDate || {}
+    const vaccinationDateAsDate = dateFromYearMonthDay(vaccinationDate.year, vaccinationDate.month, vaccinationDate.day)
+    let vaccinationDateError
+
+    if (req.query.showError === 'yes') {
+      if (!vaccinationDateAsDate) {
+        vaccinationDateError = 'Enter the vaccination date'
+      } else {
+        const today = new Date()
+        today.setHours(0, 0, 0, 0)
+        vaccinationDateAsDate.setHours(0, 0, 0, 0)
+
+        if (vaccinationDateAsDate >= today) {
+          vaccinationDateError = 'Enter a date in the past'
+        }
+      }
+    }
+
+    res.render('record-vaccinations/vaccination-date-deceased', {
+      vaccinationDateError
+    })
+  })
+
+  router.post('/record-vaccinations/answer-date-deceased', (req, res) => {
+    const data = req.session.data
+    const vaccinationDate = data.vaccinationDate || {}
+    const vaccinationDateAsDate = dateFromYearMonthDay(vaccinationDate.year, vaccinationDate.month, vaccinationDate.day)
+
+    if (!vaccinationDateAsDate) {
+      return res.redirect('/record-vaccinations/vaccination-date-deceased?showError=yes')
+    }
+
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    vaccinationDateAsDate.setHours(0, 0, 0, 0)
+
+    if (vaccinationDateAsDate >= today) {
+      return res.redirect('/record-vaccinations/vaccination-date-deceased?showError=yes')
+    }
+
+    data.vaccinationToday = 'no'
+    res.redirect('/record-vaccinations/delivery-team')
+  })
+
   router.get('/record-vaccinations/delivery-team', (req, res) => {
     let errors = []
     const data = req.session.data

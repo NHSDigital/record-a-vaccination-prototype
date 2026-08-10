@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "What was the vaccination date?" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/patient-history-deceased" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if vaccinationDateError %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: vaccinationDateError,
+              href: "#vaccinationDate-day"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <form action="/record-vaccinations/answer-date-deceased" method="post" novalidate>
+        {{ dateInput({
+          id: "vaccinationDate",
+          namePrefix: "vaccinationDate",
+          fieldset: {
+            legend: {
+              text: "What was the vaccination date?",
+              classes: "nhsuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          hint: {
+            text: "Enter a date in the past, for example, 15 3 2024"
+          },
+          errorMessage: {
+            text: vaccinationDateError
+          } if vaccinationDateError,
+          items: [
+            {
+              name: "day",
+              classes: "nhsuk-input--width-2" + (" nhsuk-input--error" if vaccinationDateError else ""),
+              value: data.vaccinationDate.day
+            },
+            {
+              name: "month",
+              classes: "nhsuk-input--width-2" + (" nhsuk-input--error" if vaccinationDateError else ""),
+              value: data.vaccinationDate.month
+            },
+            {
+              name: "year",
+              classes: "nhsuk-input--width-4" + (" nhsuk-input--error" if vaccinationDateError else ""),
+              value: data.vaccinationDate.year
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
