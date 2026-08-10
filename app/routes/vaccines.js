@@ -241,7 +241,15 @@ module.exports = (router) => {
     })
 
     if (matchingDeactivatedBatch) {
-      res.redirect(`/vaccines/${vaccine.id}/add-batch-check`)
+      matchingDeactivatedBatch.deactivatedDate = null
+
+      // Reset data
+      req.session.data.batchNumber = ''
+      req.session.data.batchExpiryDate.day = ''
+      req.session.data.batchExpiryDate.month = ''
+      req.session.data.batchExpiryDate.year = ''
+
+      res.redirect(`/vaccines/${vaccine.id}?tab=active&reactivated=true&batchNumber=${encodeURIComponent(matchingDeactivatedBatch.batchNumber)}`)
       return
     }
 
@@ -354,21 +362,9 @@ module.exports = (router) => {
 
     const site = currentOrganisationSites.find((site) => site.id == vaccine.siteId)
 
-    let matchingDeactivatedBatch
-    const { day, month, year } = data.batchExpiryDate || {}
-
-    if (data.batchNumber && day && month && year) {
-      const expiryDate = new Date(year, (parseInt(month) - 1), day, 12).toISOString().substring(0,10)
-
-      matchingDeactivatedBatch = vaccine.batches.find((batch) => {
-        return batch.batchNumber === data.batchNumber && batch.expiryDate === expiryDate && batch.deactivatedDate
-      })
-    }
-
     res.render('vaccines/add-batch-to-site-check', {
       vaccine,
-      site,
-      matchingDeactivatedBatch,
+      site
     })
   })
 
