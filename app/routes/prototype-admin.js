@@ -730,7 +730,7 @@ module.exports = (router) => {
       res.render('prototype-setup/custom-config-user', {
         radioItems,
         currentStep: 1,
-        userSelectionError: 'Select a user'
+        userSelectionError: 'required'
         ,
         ...buildCustomConfigViewModel(customConfig)
       })
@@ -861,7 +861,7 @@ module.exports = (router) => {
 
       res.render('prototype-setup/custom-config-batches', {
         currentStep: 3,
-        batchCountError: 'Enter a whole number of 0 or more',
+        batchCountError: 'invalid-number',
         ...buildCustomConfigViewModel(customConfig)
       })
       return
@@ -941,7 +941,7 @@ module.exports = (router) => {
     for (const field of fields) {
       if (!/^\d+$/.test(field.value)) {
         additionalUserCountErrors.push({
-          text: 'Enter a whole number of 0 or more',
+          code: 'invalid-number',
           href: field.href
         })
       }
@@ -973,8 +973,9 @@ module.exports = (router) => {
       const vaccinatorCount = parseInt(permissionEntry.vaccinators, 10)
       if (!Number.isNaN(userCount) && !Number.isNaN(vaccinatorCount) && vaccinatorCount > userCount) {
         additionalUserCountErrors.push({
-          text: permissionEntry.label + ' cannot be higher than the total users for that permission level',
-          href: permissionEntry.vaccinatorFieldHref
+          code: 'exceeds-total',
+          href: permissionEntry.vaccinatorFieldHref,
+          fieldKey: permissionEntry.vaccinatorFieldHref.replace('#', '')
         })
       }
     }
@@ -983,23 +984,23 @@ module.exports = (router) => {
       res.render('prototype-setup/custom-config-data-users', {
         currentStep: 4,
         additionalUserCountErrors,
-        additionalUsersLeadAdministratorError: !/^\d+$/.test(customConfig.additionalUsersLeadAdministrator) ? 'Enter a whole number of 0 or more' : null,
-        additionalUsersAdministratorError: !/^\d+$/.test(customConfig.additionalUsersAdministrator) ? 'Enter a whole number of 0 or more' : null,
-        additionalUsersRecorderError: !/^\d+$/.test(customConfig.additionalUsersRecorder) ? 'Enter a whole number of 0 or more' : null,
+        additionalUsersLeadAdministratorError: !/^\d+$/.test(customConfig.additionalUsersLeadAdministrator) ? 'invalid-number' : null,
+        additionalUsersAdministratorError: !/^\d+$/.test(customConfig.additionalUsersAdministrator) ? 'invalid-number' : null,
+        additionalUsersRecorderError: !/^\d+$/.test(customConfig.additionalUsersRecorder) ? 'invalid-number' : null,
         additionalVaccinatorsLeadAdministratorError: !/^\d+$/.test(customConfig.additionalVaccinatorsLeadAdministrator)
-          ? 'Enter a whole number of 0 or more'
+          ? 'invalid-number'
           : (parseInt(customConfig.additionalVaccinatorsLeadAdministrator, 10) > parseInt(customConfig.additionalUsersLeadAdministrator, 10)
-            ? 'Cannot be higher than Lead administrator users'
+            ? 'exceeds-total'
             : null),
         additionalVaccinatorsAdministratorError: !/^\d+$/.test(customConfig.additionalVaccinatorsAdministrator)
-          ? 'Enter a whole number of 0 or more'
+          ? 'invalid-number'
           : (parseInt(customConfig.additionalVaccinatorsAdministrator, 10) > parseInt(customConfig.additionalUsersAdministrator, 10)
-            ? 'Cannot be higher than Administrator users'
+            ? 'exceeds-total'
             : null),
         additionalVaccinatorsRecorderError: !/^\d+$/.test(customConfig.additionalVaccinatorsRecorder)
-          ? 'Enter a whole number of 0 or more'
+          ? 'invalid-number'
           : (parseInt(customConfig.additionalVaccinatorsRecorder, 10) > parseInt(customConfig.additionalUsersRecorder, 10)
-            ? 'Cannot be higher than Recorder users'
+            ? 'exceeds-total'
             : null),
         ...buildCustomConfigViewModel(customConfig)
       })

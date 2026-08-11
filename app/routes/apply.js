@@ -21,12 +21,12 @@ module.exports = router => {
 
     if (req.query.error === 'no-pharmacy') {
       errors.push({
-        text: 'Select a pharmacy',
+        code: 'required',
         href: '#organisation-code'
       })
     } else if (req.query.error === 'existing-account') {
       errors.push({
-        text: 'This pharmacy already has an account',
+        code: 'existing-account',
         href: '#organisation-code'
       })
     }

@@ -36,10 +36,53 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if additionalUserCountErrors and (additionalUserCountErrors | length) > 0 %}
+      {% set invalidNumberMessage = 'Enter a whole number of 0 or more' %}
+
+      {% if additionalUsersLeadAdministratorError == 'invalid-number' %}
+        {% set additionalUsersLeadAdministratorErrorMessage = invalidNumberMessage %}
+      {% endif %}
+      {% if additionalUsersAdministratorError == 'invalid-number' %}
+        {% set additionalUsersAdministratorErrorMessage = invalidNumberMessage %}
+      {% endif %}
+      {% if additionalUsersRecorderError == 'invalid-number' %}
+        {% set additionalUsersRecorderErrorMessage = invalidNumberMessage %}
+      {% endif %}
+
+      {% if additionalVaccinatorsLeadAdministratorError == 'invalid-number' %}
+        {% set additionalVaccinatorsLeadAdministratorErrorMessage = invalidNumberMessage %}
+      {% elseif additionalVaccinatorsLeadAdministratorError == 'exceeds-total' %}
+        {% set additionalVaccinatorsLeadAdministratorErrorMessage = 'Cannot be higher than Lead administrator users' %}
+      {% endif %}
+
+      {% if additionalVaccinatorsAdministratorError == 'invalid-number' %}
+        {% set additionalVaccinatorsAdministratorErrorMessage = invalidNumberMessage %}
+      {% elseif additionalVaccinatorsAdministratorError == 'exceeds-total' %}
+        {% set additionalVaccinatorsAdministratorErrorMessage = 'Cannot be higher than Administrator users' %}
+      {% endif %}
+
+      {% if additionalVaccinatorsRecorderError == 'invalid-number' %}
+        {% set additionalVaccinatorsRecorderErrorMessage = invalidNumberMessage %}
+      {% elseif additionalVaccinatorsRecorderError == 'exceeds-total' %}
+        {% set additionalVaccinatorsRecorderErrorMessage = 'Cannot be higher than Recorder users' %}
+      {% endif %}
+
+      {% set resolvedAdditionalUserCountErrors = [] %}
+      {% for error in additionalUserCountErrors %}
+        {% if error.code == 'invalid-number' %}
+          {% set resolvedAdditionalUserCountErrors = (resolvedAdditionalUserCountErrors.push({ text: invalidNumberMessage, href: error.href }), resolvedAdditionalUserCountErrors) %}
+        {% elseif error.code == 'exceeds-total' and error.fieldKey == 'additionalVaccinatorsLeadAdministrator' %}
+          {% set resolvedAdditionalUserCountErrors = (resolvedAdditionalUserCountErrors.push({ text: 'Lead administrator vaccinators cannot be higher than the total users for that permission level', href: error.href }), resolvedAdditionalUserCountErrors) %}
+        {% elseif error.code == 'exceeds-total' and error.fieldKey == 'additionalVaccinatorsAdministrator' %}
+          {% set resolvedAdditionalUserCountErrors = (resolvedAdditionalUserCountErrors.push({ text: 'Administrator vaccinators cannot be higher than the total users for that permission level', href: error.href }), resolvedAdditionalUserCountErrors) %}
+        {% elseif error.code == 'exceeds-total' and error.fieldKey == 'additionalVaccinatorsRecorder' %}
+          {% set resolvedAdditionalUserCountErrors = (resolvedAdditionalUserCountErrors.push({ text: 'Recorder vaccinators cannot be higher than the total users for that permission level', href: error.href }), resolvedAdditionalUserCountErrors) %}
+        {% endif %}
+      {% endfor %}
+
+      {% if resolvedAdditionalUserCountErrors and (resolvedAdditionalUserCountErrors | length) > 0 %}
         {{ errorSummary({
           titleText: "There is a problem",
-          errorList: additionalUserCountErrors
+          errorList: resolvedAdditionalUserCountErrors
         }) }}
       {% endif %}
 
@@ -64,7 +107,7 @@
                 text: "Total users"
               },
               value: (customConfig.additionalUsersLeadAdministrator if customConfig.additionalUsersLeadAdministrator else "0"),
-              errorMessage: ({ text: additionalUsersLeadAdministratorError } if additionalUsersLeadAdministratorError else false),
+              errorMessage: ({ text: additionalUsersLeadAdministratorErrorMessage } if additionalUsersLeadAdministratorErrorMessage else false),
               attributes: {
                 min: "0",
                 step: "1"
@@ -82,7 +125,7 @@
                 text: "Vaccinators"
               },
               value: (customConfig.additionalVaccinatorsLeadAdministrator if customConfig.additionalVaccinatorsLeadAdministrator else "0"),
-              errorMessage: ({ text: additionalVaccinatorsLeadAdministratorError } if additionalVaccinatorsLeadAdministratorError else false),
+              errorMessage: ({ text: additionalVaccinatorsLeadAdministratorErrorMessage } if additionalVaccinatorsLeadAdministratorErrorMessage else false),
               attributes: {
                 min: "0",
                 step: "1"
@@ -104,7 +147,7 @@
                 text: "Total users"
               },
               value: (customConfig.additionalUsersAdministrator if customConfig.additionalUsersAdministrator else "0"),
-              errorMessage: ({ text: additionalUsersAdministratorError } if additionalUsersAdministratorError else false),
+              errorMessage: ({ text: additionalUsersAdministratorErrorMessage } if additionalUsersAdministratorErrorMessage else false),
               attributes: {
                 min: "0",
                 step: "1"
@@ -122,7 +165,7 @@
                 text: "Vaccinators"
               },
               value: (customConfig.additionalVaccinatorsAdministrator if customConfig.additionalVaccinatorsAdministrator else "0"),
-              errorMessage: ({ text: additionalVaccinatorsAdministratorError } if additionalVaccinatorsAdministratorError else false),
+              errorMessage: ({ text: additionalVaccinatorsAdministratorErrorMessage } if additionalVaccinatorsAdministratorErrorMessage else false),
               attributes: {
                 min: "0",
                 step: "1"
@@ -144,7 +187,7 @@
                 text: "Total users"
               },
               value: (customConfig.additionalUsersRecorder if customConfig.additionalUsersRecorder else "0"),
-              errorMessage: ({ text: additionalUsersRecorderError } if additionalUsersRecorderError else false),
+              errorMessage: ({ text: additionalUsersRecorderErrorMessage } if additionalUsersRecorderErrorMessage else false),
               attributes: {
                 min: "0",
                 step: "1"
@@ -162,7 +205,7 @@
                 text: "Vaccinators"
               },
               value: (customConfig.additionalVaccinatorsRecorder if customConfig.additionalVaccinatorsRecorder else "0"),
-              errorMessage: ({ text: additionalVaccinatorsRecorderError } if additionalVaccinatorsRecorderError else false),
+              errorMessage: ({ text: additionalVaccinatorsRecorderErrorMessage } if additionalVaccinatorsRecorderErrorMessage else false),
               attributes: {
                 min: "0",
                 step: "1"

@@ -12,10 +12,20 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if (errors | length) > 0 %}
+      {% set errorList = [] %}
+      {% for error in errors %}
+        {% if error.code == "required" %}
+          {% set errorList = (errorList.push({
+            text: "Select where the vaccination is taking place",
+            href: error.href
+          }), errorList) %}
+        {% endif %}
+      {% endfor %}
+
+      {% if (errorList | length) > 0 %}
         {{ errorSummary({
           titleText: "There is a problem",
-          errorList: errors
+          errorList: errorList
         }) }}
       {% endif %}
 
@@ -63,6 +73,9 @@
           hint: {
             text: "This is needed for payment and reporting."
           },
+          errorMessage: {
+            text: (errorList | first).text
+          } if (errorList | length) > 0,
           value: data.locationType,
           items: [
             {

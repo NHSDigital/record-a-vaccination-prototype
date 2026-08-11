@@ -14,30 +14,53 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-      {% if (firstNameError or lastNameError or emailError or roleError or vaccinatorError) %}
+
+      {% if firstNameError == "required" %}
+        {% set firstNameErrorMessage = "Enter a first name" %}
+      {% endif %}
+      {% if lastNameError == "required" %}
+        {% set lastNameErrorMessage = "Enter a last name" %}
+      {% endif %}
+      {% if emailError == "required" %}
+        {% set emailErrorMessage = "Enter an email address" %}
+      {% elseif emailError == "invalid-domain" %}
+        {% set emailErrorMessage = "Enter an allowed email address" %}
+      {% elseif emailError == "group-admin-not-allowed" %}
+        {% set emailErrorMessage = "Group administrators cannot be added to individual pharmacies" %}
+      {% elseif emailError == "already-added" %}
+        {% set emailErrorMessage = "This email address has already been added" %}
+      {% endif %}
+      {% if vaccinatorError == "required" %}
+        {% set vaccinatorErrorMessage = "Select if they’re a vaccinator" %}
+      {% endif %}
+      {% if permissionLevelError == "required" %}
+        {% set permissionLevelErrorMessage = "Select a permission level" %}
+      {% endif %}
+
+      {% if (firstNameErrorMessage or lastNameErrorMessage or emailErrorMessage or permissionLevelErrorMessage or vaccinatorErrorMessage) %}
         {{ errorSummary({
           "titleText": "There is a problem",
           "errorList": [
             {
-              "text": firstNameError,
+              "text": firstNameErrorMessage,
               "href": "#first-name"
-            } if firstNameError,
+            } if firstNameErrorMessage,
             {
-              "text": lastNameError,
+              "text": lastNameErrorMessage,
               "href": "#last-name"
-            } if lastNameError,
+            } if lastNameErrorMessage,
             {
-              "text": emailError,
+              "text": emailErrorMessage,
               "href": "#email"
-            } if emailError,
+            } if emailErrorMessage,
             {
-              "text": vaccinatorError,
+              "text": vaccinatorErrorMessage,
               "href": "#vaccinator"
-            } if vaccinatorError,
+            } if vaccinatorErrorMessage,
             {
-              "text": permissionLevelError,
+              "text": permissionLevelErrorMessage,
               "href": "#permission-level-1"
-            } if permissionLevelError
+            } if permissionLevelErrorMessage
           ]
         }) }}
       {% endif %}
@@ -58,8 +81,8 @@
           classes: "nhsuk-input--width-20",
           value: data.firstName,
           "errorMessage": {
-            "text": firstNameError
-          } if firstNameError
+            "text": firstNameErrorMessage
+          } if firstNameErrorMessage
         }) }}
 
         {{ input({
@@ -71,8 +94,8 @@
           classes: "nhsuk-input--width-20",
           value: data.lastName,
           "errorMessage": {
-            "text": lastNameError
-          } if lastNameError
+            "text": lastNameErrorMessage
+          } if lastNameErrorMessage
         }) }}
 
         {{ input({
@@ -84,8 +107,8 @@
           type: "email",
           value: data.email,
           "errorMessage": {
-            "text": emailError
-          } if emailError
+            "text": emailErrorMessage
+          } if emailErrorMessage
         }) }}
 
         {{ radios({
@@ -111,8 +134,8 @@
             }
           ],
           "errorMessage": {
-            "text": vaccinatorError
-          } if vaccinatorError
+            "text": vaccinatorErrorMessage
+          } if vaccinatorErrorMessage
         }) }}
 
 
@@ -149,8 +172,8 @@
             }
           ],
           "errorMessage": {
-            "text": permissionLevelError
-          } if permissionLevelError
+            "text": permissionLevelErrorMessage
+          } if permissionLevelErrorMessage
         }) }}
 
 

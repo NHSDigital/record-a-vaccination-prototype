@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Which pharmacy do you want to access?" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/auth/switch-organisation/work-type",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if error and error.code == 'required' %}
+        {% set pharmacyAccessErrorMessage = 'Select a pharmacy to access' %}
+      {% endif %}
+
+      {% if pharmacyAccessErrorMessage %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: pharmacyAccessErrorMessage,
+              href: "#switch-organisation-pharmacy-id-1"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <div class="nhsuk-caption-l">{{ groupOrganisation.name }} ({{ groupOrganisation.id }})</div>
+      <h1 class="nhsuk-heading-l">Which pharmacy do you want to access?</h1>
+
+      <form action="/auth/switch-organisation/select-pharmacy" method="post" novalidate>
+
+        {% set items = [] %}
+        {% for pharmacy in pharmacies %}
+          {% set items = (items.push({
+            value: pharmacy.id,
+            text: pharmacy.name + " (" + pharmacy.id + ")",
+            hint: {
+              text: (pharmacy.address.line1 + ", " if pharmacy.address.line1 else "") + (pharmacy.address.town + ", " if pharmacy.address.town else "") + pharmacy.address.postcode
+            }
+          }), items) %}
+        {% endfor %}
+
+        {{ radios({
+          idPrefix: "switch-organisation-pharmacy-id",
+          name: "switchOrganisationPharmacyId",
+          errorMessage: {
+            text: pharmacyAccessErrorMessage
+          } if pharmacyAccessErrorMessage,
+          items: items
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}
