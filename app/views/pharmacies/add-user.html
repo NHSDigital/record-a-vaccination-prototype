@@ -12,12 +12,17 @@ href: "/pharmacies/" + organisation.id
 {% block content %}
 <div class="nhsuk-grid-row">
   <div class="nhsuk-grid-column-two-thirds">
-    {% if userIdError %}
+
+    {% if userIdError == "group-admin-not-allowed" %}
+      {% set userIdErrorMessage = "You cannot add a group administrator to an individual pharmacy" %}
+    {% endif %}
+
+    {% if userIdErrorMessage %}
       {{ errorSummary({
         titleText: "There is a problem",
         errorList: [
           {
-            text: userIdError,
+            text: userIdErrorMessage,
             href: "#user-id"
           }
         ]
@@ -163,8 +168,8 @@ href: "/pharmacies/" + organisation.id
         name: "userId",
         value: data.userId,
         errorMessage: {
-        text: userIdError
-        } if userIdError,
+        text: userIdErrorMessage
+        } if userIdErrorMessage,
         items: items
         }) }}
       </div>
@@ -193,8 +198,8 @@ href: "/pharmacies/" + organisation.id
       name: "userId",
       value: data.userId,
       errorMessage: {
-      text: userIdError
-      } if userIdError,
+      text: userIdErrorMessage
+      } if userIdErrorMessage,
       items: [
       {
       text: "Add a new user",

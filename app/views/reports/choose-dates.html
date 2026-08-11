@@ -15,27 +15,41 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if dateError %}
+      {% if dateError == "required" %}
+        {% set dateErrorMessage = "Select date" %}
+      {% endif %}
+
+      {% if dateFromError == "required" %}
+        {% set dateFromErrorMessage = "Enter from date" %}
+      {% endif %}
+
+      {% if dateToError == "required" %}
+        {% set dateToErrorMessage = "Enter to date" %}
+      {% elseif dateToError == "more-than-2-weeks" %}
+        {% set dateToErrorMessage = "Date range must be within 2 weeks" %}
+      {% endif %}
+
+      {% if dateErrorMessage %}
         {{ errorSummary({
           titleText: "There is a problem",
           errorList: [{
-            text: dateError,
+            text: dateErrorMessage,
             href: "#date-1"
           }]
         }) }}
       {% endif %}
 
-      {% if dateFromError or dateToError %}
+      {% if dateFromErrorMessage or dateToErrorMessage %}
         {{ errorSummary({
           titleText: "There is a problem",
           errorList: [{
-            text: dateFromError,
+            text: dateFromErrorMessage,
             href: "#from-from[day]"
-          } if dateFromError,
+          } if dateFromErrorMessage,
           {
-            text: dateToError,
+            text: dateToErrorMessage,
             href: "#to-to[day]"
-          } if dateToError]
+          } if dateToErrorMessage]
         }) }}
       {% endif %}
 
@@ -54,8 +68,8 @@
               text: "For example, 1 7 2024"
             },
             errorMessage: {
-              text: dateFromError
-            } if dateFromError,
+              text: dateFromErrorMessage
+            } if dateFromErrorMessage,
             items: [
               {
                 label: "Day",
@@ -90,8 +104,8 @@
                 text: "For example, 31 7 2024"
               },
               errorMessage: {
-                text: dateToError
-              } if dateToError,
+                text: dateToErrorMessage
+              } if dateToErrorMessage,
               items: [
                 {
                   label: "Day",
@@ -131,8 +145,8 @@
           },
           value: data.date,
           errorMessage: {
-            text: dateError
-          } if dateError,
+            text: dateErrorMessage
+          } if dateErrorMessage,
           "items": [
             {
               "value": "Today",

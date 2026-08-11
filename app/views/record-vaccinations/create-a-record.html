@@ -12,10 +12,41 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if errors and ((errors | length) > 0) %}
+      {% if firstNameError == "required" %}
+        {% set firstNameErrorMessage = "Enter a first name" %}
+      {% endif %}
+      {% if lastNameError == "required" %}
+        {% set lastNameErrorMessage = "Enter a last name" %}
+      {% endif %}
+      {% if dateOfBirthError == "required" %}
+        {% set dateOfBirthErrorMessage = "Enter a date of birth" %}
+      {% endif %}
+      {% if postcodeError == "required" %}
+        {% set postcodeErrorMessage = "Enter a postcode" %}
+      {% endif %}
+      {% if genderError == "required" %}
+        {% set genderErrorMessage = "Select an option" %}
+      {% endif %}
+
+      {% set errorList = [] %}
+      {% for error in errors %}
+        {% if error.href == "#firstName" and firstNameErrorMessage %}
+          {% set errorList = (errorList.push({ text: firstNameErrorMessage, href: error.href }), errorList) %}
+        {% elseif error.href == "#lastName" and lastNameErrorMessage %}
+          {% set errorList = (errorList.push({ text: lastNameErrorMessage, href: error.href }), errorList) %}
+        {% elseif error.href == "#dateOfBirth" and dateOfBirthErrorMessage %}
+          {% set errorList = (errorList.push({ text: dateOfBirthErrorMessage, href: error.href }), errorList) %}
+        {% elseif error.href == "#postcode" and postcodeErrorMessage %}
+          {% set errorList = (errorList.push({ text: postcodeErrorMessage, href: error.href }), errorList) %}
+        {% elseif error.href == "#gender" and genderErrorMessage %}
+          {% set errorList = (errorList.push({ text: genderErrorMessage, href: error.href }), errorList) %}
+        {% endif %}
+      {% endfor %}
+
+      {% if errorList and ((errorList | length) > 0) %}
         {{ errorSummary({
           titleText: "There is a problem",
-          errorList: errors
+          errorList: errorList
         }) }}
       {% endif %}
 
@@ -33,8 +64,8 @@
             value: data.firstName,
             classes: "nhsuk-input--width-20",
             errorMessage: {
-              text: firstNameError
-            } if firstNameError
+              text: firstNameErrorMessage
+            } if firstNameErrorMessage
         }) }}
 
             {{ input({
@@ -46,8 +77,8 @@
             value: data.lastName,
             classes: "nhsuk-input--width-20",
             errorMessage: {
-                text: lastNameError
-            } if lastNameError
+              text: lastNameErrorMessage
+            } if lastNameErrorMessage
             }) }}
 
             {{ dateInput({
@@ -63,22 +94,22 @@
                 text: "For example, 15 3 1984"
             },
             errorMessage: {
-                text: dateOfBirthError
-            } if dateOfBirthError,
+              text: dateOfBirthErrorMessage
+            } if dateOfBirthErrorMessage,
             items: [
                 {
                 name: "day",
-                classes: "nhsuk-input--width-2 " + ("nhsuk-input--error" if dateOfBirthError else ""),
+              classes: "nhsuk-input--width-2 " + ("nhsuk-input--error" if dateOfBirthErrorMessage else ""),
                 value: data.dateOfBirth.day
                 },
                 {
                 name: "month",
-                classes: "nhsuk-input--width-2 " + ("nhsuk-input--error" if dateOfBirthError else ""),
+              classes: "nhsuk-input--width-2 " + ("nhsuk-input--error" if dateOfBirthErrorMessage else ""),
                 value: data.dateOfBirth.month
                 },
                 {
                 name: "year",
-                classes: "nhsuk-input--width-4 " + ("nhsuk-input--error" if dateOfBirthError else ""),
+              classes: "nhsuk-input--width-4 " + ("nhsuk-input--error" if dateOfBirthErrorMessage else ""),
                 value: data.dateOfBirth.year
                 }
             ]
@@ -93,8 +124,8 @@
             value: data.postcode,
             classes: "nhsuk-input--width-10",
             errorMessage: {
-                text: postcodeError
-            } if postcodeError
+              text: postcodeErrorMessage
+            } if postcodeErrorMessage
             }) }}
 
             {{ details({
@@ -115,8 +146,8 @@
                   }
                 },
                 errorMessage: {
-                  text: genderError
-                } if genderError,
+                  text: genderErrorMessage
+                } if genderErrorMessage,
                 value: data.gender,
                 items: [
                 {

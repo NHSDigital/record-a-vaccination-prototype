@@ -171,29 +171,29 @@ module.exports = (router) => {
     let firstNameError, lastNameError, emailError, permissionLevelError, vaccinatorError
 
     if (!firstName || firstName === '') {
-      firstNameError = 'Enter a first name'
+      firstNameError = 'required'
     }
 
     if (!lastName || lastName === '') {
-      lastNameError = 'Enter a last name'
+      lastNameError = 'required'
     }
 
     if (!email || email === '') {
-      emailError = 'Enter an email address'
+      emailError = 'required'
     } else if (!(email.endsWith('nhs.net') || email.endsWith('.nhs.uk'))) {
-      emailError = 'Enter an allowed email address'
+      emailError = 'invalid-domain'
     } else if (existingUserWithSameEmail && isGroupAdminUser(existingUserWithSameEmail)) {
-      emailError = 'Group administrators cannot be added to individual pharmacies'
+      emailError = 'group-admin-not-allowed'
     } else if (existingUserWithSameEmail && existingUserWithSameEmail.status !== 'Deactivated') {
-      emailError = 'This email address has already been added'
+      emailError = 'already-added'
     }
 
     if (!permissionLevel || permissionLevel === '') {
-      permissionLevelError = 'Select a permission level'
+      permissionLevelError = 'required'
     }
 
     if (!vaccinator || vaccinator === '') {
-      vaccinatorError = 'Select if they’re a vaccinator'
+      vaccinatorError = 'required'
     }
 
     if (firstNameError || lastNameError || emailError || permissionLevelError || vaccinatorError) {

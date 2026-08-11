@@ -244,7 +244,7 @@ module.exports = router => {
       res.render('prototype-setup/remove-selected-users', {
         checkboxItems,
         error: {
-          text: 'Select at least 1 user to remove'
+          code: 'required'
         }
       })
       return
@@ -314,7 +314,7 @@ module.exports = router => {
         signInUsersCount: signInScenarioUsers.length,
         otherUsersCount: otherUsers.length,
         error: {
-          text: 'Select at least 1 user to add'
+          code: 'required'
         }
       })
       return

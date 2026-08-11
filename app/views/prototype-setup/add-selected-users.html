@@ -13,6 +13,10 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+      {% if error and error.code == 'required' %}
+        {% set addUsersErrorMessage = 'Select at least 1 user to add' %}
+      {% endif %}
+
       <h1 class="nhsuk-heading-l">Add selected users back</h1>
 
       {% if availableUsersCount > 0 %}
@@ -42,7 +46,7 @@
               fieldset: {
                 classes: "nhsuk-fieldset--no-legend"
               },
-              errorMessage: error if (signInUsersCount === 0) else false
+              errorMessage: ({ text: addUsersErrorMessage } if (signInUsersCount === 0 and addUsersErrorMessage) else false)
             }) }}
           </div>
           {% endif %}

@@ -24,10 +24,17 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if error %}
+      {% if error and error.code == "required" %}
+        {% set dataSelectionErrorMessage = "Select the data you want to include" %}
+      {% endif %}
+
+      {% if dataSelectionErrorMessage %}
         {{ errorSummary({
           titleText: "There is a problem",
-          errorList: [error]
+          errorList: [{
+            text: dataSelectionErrorMessage,
+            href: error.href
+          }]
         }) }}
       {% endif %}
 
@@ -182,8 +189,8 @@
             id: "data-fields"
           },
           errorMessage: {
-            text: error.text
-          } if error,
+            text: dataSelectionErrorMessage
+          } if dataSelectionErrorMessage,
           fieldset: {
             legend: {
               text: "Which details do you want to include?",

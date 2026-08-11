@@ -17,11 +17,18 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-    {% if error %}
+    {% if error and error.code == "required" %}
+      {% set batchErrorMessage = "Select a batch or add a batch" %}
+    {% endif %}
+
+    {% if batchErrorMessage %}
       {{ errorSummary({
         titleText: "There is a problem",
         errorList: [
-          error
+          {
+            text: batchErrorMessage,
+            href: error.href
+          }
         ]
       }) }}
     {% endif %}
@@ -64,8 +71,8 @@
           },
           value: data.vaccineBatch,
           errorMessage: {
-            text: error.text
-          } if error,
+            text: batchErrorMessage
+          } if batchErrorMessage,
           "items": items
         }) }}
 
