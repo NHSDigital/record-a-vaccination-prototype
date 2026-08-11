@@ -1,6 +1,7 @@
 When using components from the NHS.UK Frontend library, prefer the Nunjucks version over HTML.
 
 When adding or changing validation errors:
+
 - Keep validation logic, branching, and error codes in route files.
 - Do not add user-facing validation copy in route `.js` files unless there is no template surface to own it.
 - In templates, map route-provided error codes to the final user-facing error text.
