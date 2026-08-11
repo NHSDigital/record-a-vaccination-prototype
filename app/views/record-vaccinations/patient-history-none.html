@@ -30,6 +30,7 @@
       {% if data.gpit === "noGP" %}
       {{ warningCallout({
         heading: "Important",
+        headingLevel: 2,
         text: "This patient is not registered with a GP surgery, and we could not get any vaccination history for them."
       }) }}
       {% else %}
@@ -72,6 +73,7 @@
 
       {{ warningCallout({
         heading: "Important",
+        headingLevel: 2,
         text: "We could not get any vaccination history for this patient."
       }) }}
       {% endif %}
