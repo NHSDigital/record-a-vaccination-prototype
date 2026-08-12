@@ -13,10 +13,56 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if (errors | length) > 0 %}
+      {% if consentError and consentError.code == "required" %}
+        {% set consentErrorMessage = "Select who is giving consent" %}
+      {% endif %}
+      {% if consentClinicianError and consentClinicianError.code == "required" %}
+        {% set consentClinicianErrorMessage = "Enter a name" %}
+      {% endif %}
+      {% if consentAttorneyError and consentAttorneyError.code == "required" %}
+        {% set consentAttorneyErrorMessage = "Enter a name" %}
+      {% endif %}
+      {% if consentParentError and consentParentError.code == "required" %}
+        {% set consentParentErrorMessage = "Enter a name" %}
+      {% endif %}
+      {% if consentAdvocateError and consentAdvocateError.code == "required" %}
+        {% set consentAdvocateErrorMessage = "Enter a name" %}
+      {% endif %}
+      {% if consentDeputyError and consentDeputyError.code == "required" %}
+        {% set consentDeputyErrorMessage = "Enter a name" %}
+      {% endif %}
+      {% if consentAttorneyRelationshipError and consentAttorneyRelationshipError.code == "required" %}
+        {% set consentAttorneyRelationshipErrorMessage = "Enter the relationship to the patient" %}
+      {% endif %}
+      {% if consentDeputyRelationshipError and consentDeputyRelationshipError.code == "required" %}
+        {% set consentDeputyRelationshipErrorMessage = "Enter the relationship to the patient" %}
+      {% endif %}
+
+      {% set errorList = [] %}
+      {% for error in errors %}
+        {% if error.href == "#consent-1" and consentErrorMessage %}
+          {% set errorList = (errorList.push({ text: consentErrorMessage, href: error.href }), errorList) %}
+        {% elseif error.href == "#consent-clinician-name" and consentClinicianErrorMessage %}
+          {% set errorList = (errorList.push({ text: consentClinicianErrorMessage, href: error.href }), errorList) %}
+        {% elseif error.href == "#consent-attorney-name" and consentAttorneyErrorMessage %}
+          {% set errorList = (errorList.push({ text: consentAttorneyErrorMessage, href: error.href }), errorList) %}
+        {% elseif error.href == "#consent-attorney-relationship" and consentAttorneyRelationshipErrorMessage %}
+          {% set errorList = (errorList.push({ text: consentAttorneyRelationshipErrorMessage, href: error.href }), errorList) %}
+        {% elseif error.href == "#consent-parent-name" and consentParentErrorMessage %}
+          {% set errorList = (errorList.push({ text: consentParentErrorMessage, href: error.href }), errorList) %}
+        {% elseif error.href == "#consent-advocate-name" and consentAdvocateErrorMessage %}
+          {% set errorList = (errorList.push({ text: consentAdvocateErrorMessage, href: error.href }), errorList) %}
+        {% elseif error.href == "#consent-deputy-name" and consentDeputyErrorMessage %}
+          {% set errorList = (errorList.push({ text: consentDeputyErrorMessage, href: error.href }), errorList) %}
+        {% elseif error.href == "#consent-deputy-relationship" and consentDeputyRelationshipErrorMessage %}
+          {% set errorList = (errorList.push({ text: consentDeputyRelationshipErrorMessage, href: error.href }), errorList) %}
+        {% endif %}
+      {% endfor %}
+
+      {% if (errorList | length) > 0 %}
         {{ errorSummary({
           titleText: "There is a problem",
-          errorList: errors
+          errorList: errorList
         }) }}
       {% endif %}
 
@@ -29,8 +75,8 @@
               text: "Name"
             },
             errorMessage: {
-              text: consentClinicianError.text
-            } if consentClinicianError,
+              text: consentClinicianErrorMessage
+            } if consentClinicianErrorMessage,
             id: "consent-clinician-name",
             name: "consentClinicianName",
             value: data.consentClinicianName
@@ -43,8 +89,8 @@
               text: "Name"
             },
             errorMessage: {
-              text: consentAttorneyError.text
-            } if consentAttorneyError,
+              text: consentAttorneyErrorMessage
+            } if consentAttorneyErrorMessage,
             id: "consent-attorney-name",
             name: "consentAttorneyName",
             value: data.consentAttorneyName
@@ -55,8 +101,8 @@
               text: "Relationship to the patient"
             },
             errorMessage: {
-              text: consentAttorneyRelationshipError.text
-            } if consentAttorneyRelationshipError,
+              text: consentAttorneyRelationshipErrorMessage
+            } if consentAttorneyRelationshipErrorMessage,
             id: "consent-attorney-relationship",
             name: "consentAttorneyRelationship",
             value: data.consentAttorneyRelationship
@@ -69,8 +115,8 @@
               text: "Name"
             },
             errorMessage: {
-              text: consentParentError.text
-            } if consentParentError,
+              text: consentParentErrorMessage
+            } if consentParentErrorMessage,
             id: "consent-parent-name",
             name: "consentParentName",
             value: data.consentParentName
@@ -83,8 +129,8 @@
               text: "Name"
             },
             errorMessage: {
-              text: consentAdvocateError.text
-            } if consentAdvocateError,
+              text: consentAdvocateErrorMessage
+            } if consentAdvocateErrorMessage,
             id: "consent-advocate-name",
             name: "consentAdvocateName",
             value: data.consentAdvocateName
@@ -97,8 +143,8 @@
               text: "Name"
             },
             errorMessage: {
-              text: consentDeputyError.text
-            } if consentDeputyError,
+              text: consentDeputyErrorMessage
+            } if consentDeputyErrorMessage,
             id: "consent-deputy-name",
             name: "consentDeputyName",
             value: data.consentDeputyName
@@ -109,8 +155,8 @@
               text: "Relationship to the patient"
             },
             errorMessage: {
-              text: consentDeputyRelationshipError.text
-            } if consentDeputyRelationshipError,
+              text: consentDeputyRelationshipErrorMessage
+            } if consentDeputyRelationshipErrorMessage,
             id: "consent-deputy-relationship",
             name: "consentDeputyRelationship",
             value: data.consentDeputyRelationship
@@ -128,8 +174,8 @@
             }
           },
           errorMessage: {
-            text: consentError.text
-          } if consentError,
+            text: consentErrorMessage
+          } if consentErrorMessage,
           value: data.consent,
           items: [
             {

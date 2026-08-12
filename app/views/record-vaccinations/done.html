@@ -8,10 +8,17 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if (errors | length) > 0 %}
+      {% if error and error.code == "required" %}
+        {% set nextStepErrorMessage = "Select the next vaccination" %}
+      {% endif %}
+
+      {% if nextStepErrorMessage %}
         {{ errorSummary({
           titleText: "There is a problem",
-          errorList: errors
+          errorList: [{
+            text: nextStepErrorMessage,
+            href: error.href
+          }]
         }) }}
       {% endif %}
 
@@ -77,8 +84,8 @@
             }
           },
           errorMessage: {
-            text: error.text
-          } if error,
+            text: nextStepErrorMessage
+          } if nextStepErrorMessage,
           items: items
         }) }}
 

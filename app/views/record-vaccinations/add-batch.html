@@ -15,10 +15,33 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-    {% if (errors | length) > 0 %}
+    {% if batchNumberError and batchNumberError.code == "required" %}
+      {% set batchNumberErrorMessage = "Enter the batch number" %}
+    {% endif %}
+
+    {% if expiryDateError and expiryDateError.code == "required" %}
+      {% set expiryDateErrorMessage = "Enter the expiry date" %}
+    {% endif %}
+
+    {% set errorList = [] %}
+    {% for error in errors %}
+      {% if error.href == "#batch-number" and batchNumberErrorMessage %}
+        {% set errorList = (errorList.push({
+          text: batchNumberErrorMessage,
+          href: error.href
+        }), errorList) %}
+      {% elseif error.href == "#batch-expiry-date-day" and expiryDateErrorMessage %}
+        {% set errorList = (errorList.push({
+          text: expiryDateErrorMessage,
+          href: error.href
+        }), errorList) %}
+      {% endif %}
+    {% endfor %}
+
+    {% if (errorList | length) > 0 %}
       {{ errorSummary({
         titleText: "There is a problem",
-        errorList: errors
+        errorList: errorList
       }) }}
     {% endif %}
 
@@ -35,8 +58,8 @@
             text: "For example, XX123456"
           },
           errorMessage: {
-            text: batchNumberError.text
-          } if batchNumberError,
+            text: batchNumberErrorMessage
+          } if batchNumberErrorMessage,
           "id": "batch-number",
           "name": "newBatchNumber",
           classes: "nhsuk-input--width-20",
@@ -48,8 +71,8 @@
           "id": "batch-expiry-date",
           "namePrefix": "newBatchExpiryDate",
           errorMessage: {
-            text: expiryDateError.text
-          } if expiryDateError,
+            text: expiryDateErrorMessage
+          } if expiryDateErrorMessage,
           "fieldset": {
             "legend": {
               "text": "Expiry date",

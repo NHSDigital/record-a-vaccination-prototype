@@ -422,19 +422,19 @@ module.exports = router => {
     let emailError
 
     if (!firstName) {
-      firstNameError = 'Enter a first name'
+      firstNameError = 'required'
     }
 
     if (!lastName) {
-      lastNameError = 'Enter a last name'
+      lastNameError = 'required'
     }
 
     if (!email) {
-      emailError = 'Enter an email address'
+      emailError = 'required'
     } else if (!(email.toLowerCase().endsWith('nhs.net') || email.toLowerCase().endsWith('.nhs.uk'))) {
-      emailError = 'Enter an allowed email address'
+      emailError = 'invalid-domain'
     } else if (groupAdministrator === 'no' && existingUserWithSameEmail && isGroupAdminUser(existingUserWithSameEmail)) {
-      emailError = 'You cannot add a group administrator to an individual pharmacy'
+      emailError = 'group-admin-not-allowed'
     }
 
     data.firstName = firstName
@@ -690,7 +690,7 @@ module.exports = router => {
         res,
         organisation,
         users,
-        'You cannot add a group administrator to an individual pharmacy'
+        'group-admin-not-allowed'
       )
     }
 
@@ -733,28 +733,28 @@ module.exports = router => {
 
     if (!existingUser) {
       if (!submittedFirstName || submittedFirstName === '') {
-        firstNameError = 'Enter a first name'
+        firstNameError = 'required'
       }
 
       if (!submittedLastName || submittedLastName === '') {
-        lastNameError = 'Enter a last name'
+        lastNameError = 'required'
       }
 
       if (!submittedEmail || submittedEmail === '') {
-        emailError = 'Enter an email address'
+        emailError = 'required'
       } else if (!(submittedEmail.toLowerCase().endsWith('nhs.net') || submittedEmail.toLowerCase().endsWith('.nhs.uk'))) {
-        emailError = 'Enter an allowed email address'
+        emailError = 'invalid-domain'
       } else if (existingUserWithSameEmail && isGroupAdminUser(existingUserWithSameEmail)) {
-        emailError = 'You cannot add a group administrator to an individual pharmacy'
+        emailError = 'group-admin-not-allowed'
       }
     }
 
     if (!submittedPermissionLevel || submittedPermissionLevel === '') {
-      permissionLevelError = 'Select a permission level'
+      permissionLevelError = 'required'
     }
 
     if (!submittedVaccinator || submittedVaccinator === '') {
-      vaccinatorError = 'Select if they’re a vaccinator'
+      vaccinatorError = 'required'
     }
 
     if (firstNameError || lastNameError || emailError || permissionLevelError || vaccinatorError) {
@@ -800,7 +800,7 @@ module.exports = router => {
 
     if ((existingUser && isGroupAdminUser(existingUser)) || (!existingUser && existingUserWithSameEmail && isGroupAdminUser(existingUserWithSameEmail))) {
       return renderAddUserPermissionLevelPage(res, organisation, existingUser, {
-        emailError: 'You cannot add a group administrator to an individual pharmacy'
+        emailError: 'group-admin-not-allowed'
       })
     }
 

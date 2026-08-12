@@ -263,7 +263,7 @@ module.exports = router => {
       return res.render('auth/switch-work-type', {
         groupOrganisation: context.groupOrganisation,
         error: {
-          text: 'Select the type of work you want to do'
+          code: 'required'
         }
       })
     }
@@ -280,7 +280,7 @@ module.exports = router => {
     res.render('auth/switch-work-type', {
       groupOrganisation: context.groupOrganisation,
       error: {
-        text: 'Select the type of work you want to do'
+        code: 'required'
       }
     })
   })
@@ -317,7 +317,7 @@ module.exports = router => {
         groupOrganisation: context.groupOrganisation,
         pharmacies: context.temporaryPharmacies,
         error: {
-          text: 'Select a pharmacy to access'
+          code: 'required'
         }
       })
     }

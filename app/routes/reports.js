@@ -83,21 +83,21 @@ module.exports = (router) => {
     if (req.query.showErrors === "true") {
 
       if (!data.date) {
-        dateError = "Select date"
+        dateError = "required"
       }
 
       if (data.date == "custom_date_range") {
 
         if (!data.from.day || !data.from.month || !data.from.year) {
-          dateFromError = "Enter from date"
+          dateFromError = "required"
         }
 
         if (!data.to.day || !data.to.month || !data.to.year) {
-          dateToError = "Enter to date"
+          dateToError = "required"
         }
 
         if (daysApart > 14) {
-          dateToError = "Date range must be within 2 weeks"
+          dateToError = "more-than-2-weeks"
         }
 
       }
@@ -184,7 +184,7 @@ module.exports = (router) => {
     } else {
 
       const error = {
-        text: "Select the data you want to include",
+        code: "required",
         href: "#data-1"
       }
 
