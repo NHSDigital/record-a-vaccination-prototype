@@ -7,7 +7,7 @@
 {% if ((data.vaccine == "RSV") and (data.eligibility | arrayOrStringIncludes("Pregnant"))) or (data.vaccine == "Pertussis") %}
   {% set nextPage = "/record-vaccinations/patient-estimated-due-date" %}
 {% else %}
-  {% set nextPage = "/record-vaccinations/consent" %}
+  {% set nextPage = "/record-vaccinations/vaccination-date" %}
 {% endif %}
 
 {% set dateOfBirthHtml %}
@@ -22,10 +22,29 @@
 {% endblock %}
 
 {% block content %}
+
+{% if data.firstName and data.lastName %}
+  {% set displayName = data.firstName ~ ' ' ~ data.lastName %}
+{% else %}
+  {% set displayName = 'Patient Name' %}
+{% endif %}
+
+{% if data.dateOfBirth %}
+  {% set dateOfBirth = data.dateOfBirth | formatDate %}
+{% else %}
+  {% set dateOfBirth = '15 August 1949' %}
+{% endif %}
+
+{% if data.postcode %}
+  {% set postcode = data.postcode %}
+{% else %}
+  {% set postcode = 'N7 0EA' %}
+{% endif %}
+
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Check Jodie Brown’s details and vaccination history</h1>
+      <h1 class="nhsuk-heading-l">Check {{ displayName }}’s details and vaccination history</h1>
 
       {% if data.gpit === "noGP" %}
       {{ warningCallout({
@@ -44,7 +63,7 @@
               text: "Name"
             },
             value: {
-              text: "Jodie Brown"
+              text: (displayName)
             }
           },
           {
@@ -52,7 +71,7 @@
               text: "Date of birth"
             },
             value: {
-              html: "15 August 1949<br>(75 years old)"
+              text: (dateOfBirth)
             }
           },
           {
@@ -60,7 +79,7 @@
               text: "Postcode"
             },
             value: {
-              text: "N7 0EA"
+              text: (postcode)
             }
           }
         ]
