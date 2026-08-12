@@ -12,11 +12,19 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if dateErrorMessage %}
+      {% if dateErrorMessage == "required" %}
+        {% set resolvedDateErrorMessage = "Enter an estimated due date" %}
+      {% elseif dateErrorMessage == "too-far-in-future" %}
+        {% set resolvedDateErrorMessage = "Estimated due date is too far in the future. Patient must be at least 21 days pregnant." %}
+      {% elseif dateErrorMessage == "more-than-44-weeks" %}
+        {% set resolvedDateErrorMessage = "Patient cannot be more than 44 weeks pregnant" %}
+      {% endif %}
+
+      {% if resolvedDateErrorMessage %}
         {{ errorSummary({
           titleText: "There is a problem",
           errorList: [{
-            text: dateErrorMessage,
+            text: resolvedDateErrorMessage,
             href: "#pregnancyDueDate-day"
           }]
         }) }}
@@ -38,8 +46,8 @@
             }
           },
           errorMessage: {
-            text: dateErrorMessage
-          } if dateErrorMessage,
+            text: resolvedDateErrorMessage
+          } if resolvedDateErrorMessage,
           values: data.pregnancyDueDate,
           hint: {
             text: "For example, 15 6 2025"
@@ -47,15 +55,15 @@
           items: [
             {
               name: "day",
-              classes: "nhsuk-input--width-2 " + ("nhsuk-input--error" if dateErrorMessage else "")
+              classes: "nhsuk-input--width-2 " + ("nhsuk-input--error" if resolvedDateErrorMessage else "")
             },
             {
               name: "month",
-              classes: "nhsuk-input--width-2 " + ("nhsuk-input--error" if dateErrorMessage else "")
+              classes: "nhsuk-input--width-2 " + ("nhsuk-input--error" if resolvedDateErrorMessage else "")
             },
             {
               name: "year",
-              classes: "nhsuk-input--width-4 " + ("nhsuk-input--error" if dateErrorMessage else "")
+              classes: "nhsuk-input--width-4 " + ("nhsuk-input--error" if resolvedDateErrorMessage else "")
             }
           ]
         }) }}

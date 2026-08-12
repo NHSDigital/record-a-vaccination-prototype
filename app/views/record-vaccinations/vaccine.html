@@ -19,9 +19,17 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if vaccineError %}
-        {% set error = {text: vaccineError, href: "#vaccine-1"} %}
-      {% elseif vaccineProductError %}
+      {% if vaccineError == "required" %}
+        {% set vaccineErrorMessage = "Select the vaccine" %}
+      {% endif %}
+
+      {% if vaccineProductError == "required" %}
+        {% set vaccineProductErrorMessage = "Select the vaccine product" %}
+      {% endif %}
+
+      {% if vaccineErrorMessage %}
+        {% set error = {text: vaccineErrorMessage, href: "#vaccine-1"} %}
+      {% elseif vaccineProductErrorMessage %}
         {% if data.vaccine == "RSV" %}
           {% set errorHref = "#vaccineProductRsv-1" %}
         {% elseif data.vaccine == "COVID-19" %}
@@ -32,7 +40,7 @@
           {% set errorHref = "#vaccineProductFlu-1" %}
         {% endif %}
 
-        {% set error = {text: vaccineProductError, href: errorHref} %}
+        {% set error = {text: vaccineProductErrorMessage, href: errorHref} %}
       {% endif %}
 
       {% if error %}
@@ -103,8 +111,8 @@
         },
         value: data.vaccine,
         errorMessage: {
-          text: vaccineError
-        } if vaccineError,
+          text: vaccineErrorMessage
+        } if vaccineErrorMessage,
         "items": items
       }) }}
 

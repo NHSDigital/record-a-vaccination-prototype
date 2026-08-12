@@ -12,10 +12,33 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if (errorList | length) > 0 %}
+      {% if nhsNumberKnownError and nhsNumberKnownError.code == "required" %}
+        {% set nhsNumberKnownErrorMessage = "Select yes if you have the patient’s NHS number" %}
+      {% endif %}
+
+      {% if nhsNumberError %}
+        {% if nhsNumberError.code == "required" %}
+          {% set nhsNumberErrorMessage = "Enter an NHS number" %}
+        {% elseif nhsNumberError.code == "invalid-format" or nhsNumberError.code == "invalid-length" %}
+          {% set nhsNumberErrorMessage = "Enter a 10-digit number" %}
+        {% elseif nhsNumberError.code == "invalid-prefix" %}
+          {% set nhsNumberErrorMessage = "Enter a valid NHS number" %}
+        {% endif %}
+      {% endif %}
+
+      {% set resolvedErrorList = [] %}
+      {% for error in errorList %}
+        {% if error.href == "#nhs-number-known-1" and nhsNumberKnownErrorMessage %}
+          {% set resolvedErrorList = (resolvedErrorList.push({ text: nhsNumberKnownErrorMessage, href: error.href }), resolvedErrorList) %}
+        {% elseif error.href == "#nhs-number" and nhsNumberErrorMessage %}
+          {% set resolvedErrorList = (resolvedErrorList.push({ text: nhsNumberErrorMessage, href: error.href }), resolvedErrorList) %}
+        {% endif %}
+      {% endfor %}
+
+      {% if (resolvedErrorList | length) > 0 %}
         {{ errorSummary({
           titleText: "There is a problem",
-          errorList: errorList
+          errorList: resolvedErrorList
         }) }}
       {% endif %}
 
@@ -28,7 +51,9 @@
             name: "nhsNumber",
             classes: "nhsuk-input--width-10 nhsuk-input--code",
             inputmode: "numeric",
-            errorMessage: nhsNumberError,
+            errorMessage: {
+              text: nhsNumberErrorMessage
+            } if nhsNumberErrorMessage,
             label: {
               text: "NHS number",
               size: "s"
@@ -52,7 +77,9 @@
             }
           },
           value: data.nhsNumberKnown,
-          errorMessage: nhsNumberKnownError if nhsNumberKnownError,
+          errorMessage: {
+            text: nhsNumberKnownErrorMessage
+          } if nhsNumberKnownErrorMessage,
           items: [
             {
               value: "yes",

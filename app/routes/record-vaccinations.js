@@ -46,26 +46,17 @@ module.exports = router => {
 
     const vaccinesAddedCount = data.vaccineStock.filter((vaccine) => vaccine.organisationId === currentOrganisation.id).length
 
-    let vaccinationTodayError
-
     if (vaccinesAddedCount == 0) {
       return res.render('record-vaccinations/no-vaccines-added')
     }
 
-    if (req.query.showErrors === 'yes') {
-      if (!req.session.data.vaccinationToday) {
-        vaccinationTodayError = 'Select if the vaccination is today'
-      }
-    }
-
-    res.render('record-vaccinations/index', {
-      vaccinationTodayError
-    })
+    res.redirect('/record-vaccinations/patient')
   })
 
   router.get('/record-vaccinations/vaccination-date', (req, res) => {
 
     const data = req.session.data
+    let vaccinationTodayError
 
     if (isFromTodaysAppointment(data)) {
       // Set vaccination date to today and skip question
@@ -73,14 +64,22 @@ module.exports = router => {
       return res.redirect('/record-vaccinations/delivery-team')
     }
 
-    res.render('record-vaccinations/vaccination-date')
+    if (req.query.showErrors === 'yes') {
+      if (!req.session.data.vaccinationToday) {
+        vaccinationTodayError = 'required'
+      }
+    }
+
+    res.render('record-vaccinations/vaccination-date', {
+      vaccinationTodayError
+    })
   })
 
   router.post('/record-vaccinations/answer-date', (req, res) => {
     const data = req.session.data
 
     if (!data.vaccinationToday) {
-      return res.redirect('/record-vaccinations/?showErrors=yes')
+      return res.redirect('/record-vaccinations/vaccination-date?showErrors=yes')
     }
 
 
@@ -107,7 +106,7 @@ module.exports = router => {
     if (req.query.showErrors === "yes") {
       if (!req.session.data.siteId) {
         errors.push({
-          text: "Select a site",
+          code: "required",
           href: "#site-id"
         })
       }
@@ -154,7 +153,7 @@ module.exports = router => {
 
     if (req.query.showErrors === 'yes') {
       if (!req.session.data.vaccinatorId) {
-        vaccinatorError = 'Select the vaccinator'
+        vaccinatorError = 'required'
       }
     }
 
@@ -198,11 +197,11 @@ module.exports = router => {
 
     if (req.query.showErrors === 'yes') {
       if (!data.vaccine) {
-        vaccineError = 'Select the vaccine'
+        vaccineError = 'required'
       }
 
       if (data.vaccine && !req.session.data.vaccineProduct) {
-        vaccineProductError = 'Select the vaccine product'
+        vaccineProductError = 'required'
       }
     }
 
@@ -257,7 +256,7 @@ module.exports = router => {
 
       if (!nhsNumberKnown) {
         nhsNumberKnownError = {
-          text: "Select yes if you have the patient’s NHS number",
+          code: "required",
           href: "#nhs-number-known-1"
         }
         errorList.push(nhsNumberKnownError)
@@ -267,26 +266,26 @@ module.exports = router => {
 
         if (nhsNumber == '') {
           nhsNumberError = {
-            text: "Enter an NHS number",
+            code: "required",
             href: "#nhs-number"
           }
           errorList.push(nhsNumberError)
         } else if (nhsNumber.match(/[^\d]/)) {
           nhsNumberError = {
-            text: "Enter a 10-digit number",
+            code: "invalid-format",
             href: "#nhs-number"
           }
           errorList.push(nhsNumberError)
         } else if (nhsNumber.length != 10) {
           nhsNumberError = {
-            text: "Enter a 10-digit number",
+            code: "invalid-length",
             href: "#nhs-number"
           }
           errorList.push(nhsNumberError)
         } else if (!nhsNumber.startsWith('9')) {
 
           nhsNumberError = {
-            text: "Enter a valid NHS number",
+            code: "invalid-prefix",
             href: "#nhs-number"
           }
           errorList.push(nhsNumberError)
@@ -314,25 +313,25 @@ module.exports = router => {
     let firstNameError, lastNameError, dateOfBirthError, postcodeError
 
     if (firstName === "") {
-      firstNameError = "Enter a first name"
+      firstNameError = "required"
       errors.push({
-        text: firstNameError,
+        code: firstNameError,
         href: "#firstName"
       })
     }
 
     if (lastName === "") {
-      lastNameError = "Enter a last name"
+      lastNameError = "required"
       errors.push({
-        text: lastNameError,
+        code: lastNameError,
         href: "#lastName"
       })
     }
 
     if (dateOfBirth.day === "" || dateOfBirth.month  === "" || dateOfBirth.year === "") {
-      dateOfBirthError = "Enter a date of birth"
+      dateOfBirthError = "required"
       errors.push({
-        text: dateOfBirthError,
+        code: dateOfBirthError,
         href: "#dateOfBirth"
       })
     }
@@ -379,41 +378,41 @@ module.exports = router => {
 
   if (req.query.showErrors == 'yes') {
     if (firstName === "") {
-      firstNameError = "Enter a first name"
+      firstNameError = "required"
       errors.push({
-        text: firstNameError,
+        code: firstNameError,
         href: "#firstName"
       })
     }
 
     if (lastName === "") {
-      lastNameError = "Enter a last name"
+      lastNameError = "required"
       errors.push({
-        text: lastNameError,
+        code: lastNameError,
         href: "#lastName"
       })
     }
 
     if (dateOfBirth.day === "" || dateOfBirth.month  === "" || dateOfBirth.year === "") {
-      dateOfBirthError = "Enter a date of birth"
+      dateOfBirthError = "required"
       errors.push({
-        text: dateOfBirthError,
+        code: dateOfBirthError,
         href: "#dateOfBirth"
       })
     }
 
     if (postcode === "") {
-      postcodeError = "Enter a postcode"
+      postcodeError = "required"
       errors.push({
-        text: postcodeError,
+        code: postcodeError,
         href: "#postcode"
       })
     }
 
     if (!gender) {
-      genderError = "Select an option"
+      genderError = "required"
       errors.push({
-        text: genderError,
+        code: genderError,
         href: "#gender"
       })
     }
@@ -458,7 +457,7 @@ module.exports = router => {
     if (showError === 'yes') {
 
       if (!pregnancyDueDate) {
-        dateErrorMessage = "Enter an estimated due date"
+        dateErrorMessage = "required"
       } else if (data.vaccinationToday === "yes") {
 
         const vaccinationDate = new Date()
@@ -467,9 +466,9 @@ module.exports = router => {
         const numberOfDaysPregnant = 280 - daysBetweenDates(vaccinationDate, pregnancyDueDate)
 
         if (numberOfDaysPregnant < 21) {
-          dateErrorMessage = "Estimated due date is too far in the future. Patient must be at least 21 days pregnant."
+          dateErrorMessage = "too-far-in-future"
         } else if (numberOfDaysPregnant > 308) {
-          dateErrorMessage = "Patient cannot be more than 44 weeks pregnant"
+          dateErrorMessage = "more-than-44-weeks"
         }
 
       }
@@ -574,7 +573,7 @@ module.exports = router => {
     if (req.query.showErrors === "yes") {
       if (!eligibility || eligibility === "" || eligibility == []) {
         errors.push({
-          text: "Select why you are giving them the vaccine",
+          code: "required",
           href: "#eligibility-1"
         })
       }
@@ -695,7 +694,7 @@ module.exports = router => {
     if (req.query.showErrors === 'yes') {
       if (!data.nextStep) {
         error = {
-          text: "Select the next vaccination",
+          code: "required",
           href: "#next-step-1"
         }
         errors.push(error)
@@ -719,7 +718,7 @@ module.exports = router => {
     if (req.query.showErrors === 'yes') {
       if (!healthcareWorker || healthcareWorker === '') {
         healthcareWorkerRoleError = {
-          text: "Select a role",
+          code: "required",
           href: "#healthcare-worker-1"
         }
         errors.push(healthcareWorkerRoleError)
@@ -852,7 +851,7 @@ module.exports = router => {
 
       if (!data.batchNumber) {
         error = {
-          text: "Select a batch or add a batch",
+          code: "required",
           href: "#batch-number-1"
         }
       }
@@ -873,7 +872,7 @@ module.exports = router => {
     if (req.query.showErrors === "yes") {
       if (!locationType) {
         errors.push({
-          text: "Select where the vaccination is taking place",
+          code: "required",
           href: "#location-type-1"
         })
       }
@@ -957,14 +956,14 @@ module.exports = router => {
 
       if (data.newBatchNumber === '') {
         batchNumberError = {
-          text: "Enter the batch number",
+          code: "required",
           href: "#batch-number"
         }
         errors.push(batchNumberError)
       }
       if (data.newBatchExpiryDate?.day === '' || data.newBatchExpiryDate?.month === '' || data.newBatchExpiryDate?.year === '') {
         expiryDateError = {
-          text: "Enter the expiry date",
+          code: "required",
           href: "#batch-expiry-date-day"
         }
         errors.push(expiryDateError)
@@ -1011,14 +1010,14 @@ module.exports = router => {
     if (req.query.showErrors === 'yes') {
       if (!consent) {
         consentError = {
-          text: "Select who is giving consent",
+          code: "required",
           href: "#consent-1"
         }
         errors.push(consentError)
       } else if (consent === "Clinician acting in the patient’s best interests" && consentClinicianName === '') {
 
         consentClinicianError = {
-          text: "Enter a name",
+          code: "required",
           href: "#consent-clinician-name"
         }
         errors.push(consentClinicianError)
@@ -1026,7 +1025,7 @@ module.exports = router => {
 
         if (consentAttorneyName === '') {
           consentAttorneyError = {
-            text: "Enter a name",
+            code: "required",
             href: "#consent-attorney-name"
           }
           errors.push(consentAttorneyError)
@@ -1034,7 +1033,7 @@ module.exports = router => {
 
         if (consentAttorneyRelationship === '') {
           consentAttorneyRelationshipError = {
-            text: "Enter the relationship to the patient",
+            code: "required",
             href: "#consent-attorney-relationship"
           }
           errors.push(consentAttorneyRelationshipError)
@@ -1043,14 +1042,14 @@ module.exports = router => {
       } else if (consent === "Parent or guardian" && consentParentName === '') {
 
         consentParentError = {
-          text: "Enter a name",
+          code: "required",
           href: "#consent-parent-name"
         }
         errors.push(consentParentError)
       } else if (consent === "Mental capacity advocate" && consentAdvocateName === '') {
 
         consentAdvocateError = {
-          text: "Enter a name",
+          code: "required",
           href: "#consent-advocate-name"
         }
         errors.push(consentAdvocateError)
@@ -1058,7 +1057,7 @@ module.exports = router => {
 
         if (consentDeputyName === '') {
           consentDeputyError = {
-            text: "Enter a name",
+            code: "required",
             href: "#consent-deputy-name"
           }
           errors.push(consentDeputyError)
@@ -1066,7 +1065,7 @@ module.exports = router => {
 
         if (consentDeputyRelationship === '') {
           consentDeputyRelationshipError = {
-            text: "Enter the relationship to the patient",
+            code: "required",
             href: "#consent-deputy-relationship"
           }
           errors.push(consentDeputyRelationshipError)
@@ -1126,13 +1125,13 @@ module.exports = router => {
 
       if (!injectionSite) {
         injectionSiteError = {
-          text: "Select where you gave the injection",
+          code: "required",
           href: "#injection-site-1"
         }
         errors.push(injectionSiteError)
       } else if (injectionSite === "other" && !otherInjectionSite) {
         otherInjectionSiteError = {
-          text: "Select where you gave the injection",
+          code: "required",
           href: "#other-injection-site-1"
         }
         errors.push(otherInjectionSiteError)
@@ -1202,7 +1201,7 @@ module.exports = router => {
 
       if (!doseAmount || doseAmount === "") {
         doseAmountError = {
-          text: "Select yes if you gave a full dose",
+          code: "required",
           href: "#dose-amount"
         }
         errors.push(doseAmountError)

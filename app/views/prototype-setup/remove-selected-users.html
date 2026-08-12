@@ -13,6 +13,10 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+      {% if error and error.code == 'required' %}
+        {% set removeUsersErrorMessage = 'Select at least 1 user to remove' %}
+      {% endif %}
+
       <h1 class="nhsuk-heading-l">Remove selected users</h1>
 
       <p>Select the users you want to remove from this prototype session.</p>
@@ -30,7 +34,7 @@
               isPageHeading: false
             }
           },
-          errorMessage: error,
+          errorMessage: { text: removeUsersErrorMessage } if removeUsersErrorMessage,
           items: checkboxItems
         }) }}
 
