@@ -484,6 +484,11 @@ module.exports = (router) => {
     } else if (scenario === 'support') {
       data.currentUserId = '66435353634'
       data.currentOrganisationId = null
+    } else if (scenario === 'gp') {
+      data.currentUserId = '12345678'
+      data.currentOrganisationId = 'FA425' 
+      setupBatchesForOrg(data, 'FA425')
+      addRandomVaccinations(data, 'FA425', 30)
     } else {
       res.redirect('/')
       return
