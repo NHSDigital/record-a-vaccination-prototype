@@ -13955,7 +13955,7 @@ module.exports = [
       }
     ]
   },
-  // Test GP user
+  // Add an example GP user linked to GP org
   {
     "id": "12345678",
     "email": "lydia.harris@nhs.net",
