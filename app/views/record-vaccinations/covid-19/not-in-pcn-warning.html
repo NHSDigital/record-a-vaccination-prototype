@@ -20,14 +20,7 @@
         {% set displayName = 'Patient Name' %}
       {% endif %}
 
-      {% if data.locationType %}
-        {% set locationType = data.locationType %}
-      {% else %}
-        {% set locationType = '[Location Type]' %}
-      {% endif %}
-
       {% set panelHtml %}
-        {# <p>This patient's GP surgery is not part of your PCN.</p> #}
         <p>Your organisation may not be paid for this vaccination.</p>
 
         {{ button({
