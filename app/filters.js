@@ -122,6 +122,8 @@ module.exports = function () {
     return Math.floor((today - inviteDay) / millisecondsPerDay)
   }
 
+  filters.ucFirst = (str) => str ? str.charAt(0).toUpperCase() + str.slice(1) : str
+
   /* keep the following line to return your filters to the app  */
   return filters
 }
