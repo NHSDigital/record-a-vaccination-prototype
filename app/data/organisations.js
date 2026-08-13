@@ -8284,6 +8284,31 @@ module.exports = [
     region: "Y62"
   },
   {
+    id: 'FA425',
+    name: 'Simpsons Surgery',
+    companyId: "P0191N",
+    sites: [
+      {
+        id: "FA425X",
+        name: "Simpsons Surgery"
+      }
+    ],
+    address: {
+      line1: '8 Spencer Court',
+      town: 'Corby',
+      postcode: 'NN17 1NU'
+    },
+    type: 'GP Surgery',
+    vaccines: [
+      {name: "RSV", status: "enabled"},
+      {name: "COVID-19", status: "enabled"},
+      {name: "pertussis", status: "disabled"},
+      {name: "flu", status: "enabled"}
+    ],
+    status: 'Active',
+    region: "Y62"
+  },
+  {
     id: 'FA02S',
     name: 'Addlestone Pharmacy',
     companyId: "P0191N",

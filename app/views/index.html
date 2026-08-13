@@ -105,6 +105,17 @@
         <li><a href="/prototype-setup/quick-access/pharmacy?next=/user-profile">Profile page</a></li>
       </ul>
 
+      <h2>GP scenarios</h2>
+      <ul>
+        <li><a href="/prototype-setup/quick-access/gp?next=/record-vaccinations?gpit=inPCN">Record vaccinations (in PCN)</a></li>
+        <li><a href="/prototype-setup/quick-access/gp?next=/record-vaccinations?gpit=notInPCN">Record vaccinations (not in PCN)</a></li>
+        <li><a href="/prototype-setup/quick-access/gp?next=/record-vaccinations?gpit=noGP">Record vaccinations (no GP surgery)</a>
+          <ul>  
+            <li><a href="/record-vaccinations/patient-history-none?gpit=noGP">Patient details - no NHS number and no GP surgery</a></li>
+            </ul>
+        </li>
+      </ul>
+
       <h2>Regions interface</h2>
 
       <ul>
@@ -150,6 +161,8 @@
       <ul>
         <li><a href="/record-vaccinations/covid-19/interval-warning">Had a COVID-19 vaccine less than 3 months ago</a></li>
         <li><a href="/record-vaccinations/covid-19/too-young-warning">Too young for product</a></li>
+        <li><a href="/record-vaccinations/covid-19/no-gp-surgery-warning">No GP surgery and not outreach</a></li>
+        <li><a href="/record-vaccinations/covid-19/not-in-PCN-warning">Not in PCN and not outreach</a></li>
       </ul>
 
       <h3>flu</h3>
