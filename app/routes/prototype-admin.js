@@ -705,6 +705,26 @@ module.exports = (router) => {
   })
 
   // ----------------------------------------------------------------
+  // Preset: Basic GP user
+  // ----------------------------------------------------------------
+
+  router.get('/prototype-setup/preset/gp-surgery', (req, res) => {
+    resetSession(req)
+    const data = req.session.data
+
+    const scenarioUser = SIGN_IN_USERS.find(user => user.id === '12345678')
+    ensureUserExistsForScenario(data, scenarioUser)
+
+    data.currentUserId = '12345678'
+    data.currentOrganisationId = 'FA425'
+    setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, false)
+
+    setupBatchesForOrg(data, 'FA425')
+    addRandomVaccinations(data, 'FA425', 10)
+    res.redirect(getDefaultLandingPath(data, data.currentOrganisationId))
+  })
+
+  // ----------------------------------------------------------------
   // Custom configuration — Step 1: Choose user
   // ----------------------------------------------------------------
 
