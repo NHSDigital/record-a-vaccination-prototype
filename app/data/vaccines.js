@@ -46,10 +46,6 @@ module.exports = [
         type: "nasal spray"
       },
       {
-        name: "Influvac (TIVe)",
-        type: "injection"
-      },
-      {
         name: "Supemtek (TIVr)",
         type: "injection"
       },
@@ -77,10 +73,6 @@ module.exports = [
       {
         name: "Fluenz (LAIV)",
         type: "nasal spray"
-      },
-      {
-        name: "Influvac (TIVe)",
-        type: "injection"
       },
       {
         name: "Supemtek (TIVr)",
