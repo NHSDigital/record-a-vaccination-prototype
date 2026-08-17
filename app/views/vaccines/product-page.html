@@ -16,6 +16,26 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+      {% if added %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            {{ "Vaccine added" if addedType == "vaccine" else "Batch added" }}
+          </h3>
+          <p>
+            {% if addedType == "vaccine" %}
+              {{ ("Vaccine with batch " + updatedBatchNumber + " has been added.") if updatedBatchNumber else "Vaccine has been added." }}
+            {% else %}
+              {{ ("Batch " + updatedBatchNumber + " has been added.") if updatedBatchNumber else "Batch has been added." }}
+            {% endif %}
+          </p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
       {% if deactivated %}
         {% set html %}
           <h3 class="nhsuk-notification-banner__heading">
@@ -90,20 +110,35 @@
 
       <h2 class="nhsuk-heading-m nhsuk-u-margin-top-7 nhsuk-u-margin-bottom-4">Batches</h2>
 
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+          {{ details({
+            summaryText: "Batch statuses",
+            html: "Only active batches are available to select when you record a vaccination. When a batch expires, the system will automatically deactivate it. If a batch runs out, you can deactivate it."
+          }) }}
+        </div>
+      </div>
+
       {% set activeCount = activeBatchesCount | default(0) %}
       {% set inactiveCount = inactiveBatchesCount | default(0) %}
 
-      {{ appSecondaryNavigation({
-        visuallyHiddenTitle: "Batches by status",
-        items: [{
-          text: "Active (" + activeCount + ")",
-          href: "/vaccines/" + vaccine.id + "?tab=active",
-          current: (currentTab == "active")
-        }, {
+      {% set secondaryNavItems = [{
+        text: "Active (" + activeCount + ")",
+        href: "/vaccines/" + vaccine.id + "?tab=active",
+        current: (currentTab == "active")
+      }] %}
+
+      {% if inactiveCount > 0 %}
+        {% set secondaryNavItems = (secondaryNavItems.push({
           text: "Deactivated (" + inactiveCount + ")",
           href: "/vaccines/" + vaccine.id + "?tab=inactive",
           current: (currentTab == "inactive")
-        }]
+        }), secondaryNavItems) %}
+      {% endif %}
+
+      {{ appSecondaryNavigation({
+        visuallyHiddenTitle: "Batches by status",
+        items: secondaryNavItems
       }) }}
 
       {% set columns = 2 %}
