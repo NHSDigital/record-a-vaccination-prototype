@@ -11,11 +11,53 @@
   {% endif %}
 {% endfor %}
 
+{% set filteredSites = [] %}
+{% for siteId in sites %}
+  {% set thisSite = currentOrganisation.sites | findById(siteId) %}
+  {% if currentSiteTab == "deactivated" %}
+    {% if thisSite.status == "closed" %}
+      {% set filteredSites = (filteredSites.push(siteId), filteredSites) %}
+    {% endif %}
+  {% else %}
+    {% if thisSite.status != "closed" %}
+      {% set filteredSites = (filteredSites.push(siteId), filteredSites) %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds nhsuk-u-margin-bottom-5">
 
       {% include "includes/notification.html" %}
+
+      {% if deactivatedSite %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            Site deactivated
+          </h3>
+          <p>{{ (siteName + " has been deactivated.") if siteName else "Site has been deactivated." }}</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
+      {% if reactivatedSite %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            Site reactivated
+          </h3>
+          <p>{{ (siteName + " has been reactivated.") if siteName else "Site has been reactivated." }}</p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
 
 
       <h1 class="nhsuk-heading-l">Vaccines</h1>
@@ -47,14 +89,29 @@
 
   {% from 'select/macro.njk' import select %}
 
-  {% if (sites | length) > 4 %}
+  <div class="nhsuk-u-margin-bottom-4">
+    {{ appSecondaryNavigation({
+      visuallyHiddenTitle: "Sites by status",
+      items: [{
+        text: "Active sites (" + activeSitesCount + ")",
+        href: "/vaccines?siteTab=active",
+        current: (currentSiteTab == "active")
+      }, {
+        text: "Deactivated sites (" + deactivatedSitesCount + ")",
+        href: "/vaccines?siteTab=deactivated",
+        current: (currentSiteTab == "deactivated")
+      }]
+    }) }}
+  </div>
+
+  {% if (filteredSites | length) > 4 %}
     {% set filterItems = [{
       text: "All sites",
       value: "",
       selected: true
     }] %}
 
-    {% for site in sites %}
+    {% for site in filteredSites %}
       {% set filterItems = (filterItems.push({text: currentOrganisation.sites[site].name, value: site}), filterItems) %}
     {% endfor %}
 
@@ -74,16 +131,16 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      {% for siteId in sites %}
+      {% if (filteredSites | length) == 0 %}
+        <p class="nhsuk-body">No {{ currentSiteTab }} sites found.</p>
+      {% endif %}
+
+      {% for siteId in filteredSites %}
 
         {% set site =  currentOrganisation.sites | findById(siteId) %}
 
-        <table class="nhsuk-table">
-          <caption class="nhsuk-table__caption nhsuk-table__caption--m nhsuk-u-margin-bottom-2">{{ site.name }}
-            {% if site.status == "closed" %}
-              (closed)
-            {% endif %}
-          </caption>
+        <table class="nhsuk-table nhsuk-u-margin-bottom-2">
+          <caption class="nhsuk-table__caption nhsuk-table__caption--m nhsuk-u-margin-bottom-2">{{ site.name }}</caption>
           <thead role="rowgroup" class="nhsuk-table__head">
             <tr role="row">
               <th role="columnheader" class="" scope="col">
@@ -137,7 +194,7 @@
                         {% set thisVaccine = vaccine %}
                       {% endif %}
                     {% endfor %}
-                    {{ thisVaccine.batches | length }}
+                    {{ thisVaccine.activeBatchesCount | default(0) }}
                   </td>
                   <td class="nhsuk-table__cell ">
                     <div class="nhsuk-u-margin-bottom-1"><a href="/vaccines/{{ thisVaccine.id }}" class="nhsuk-link">View</a></div>
@@ -152,6 +209,14 @@
             {% endfor %}
           </tbody>
         </table>
+
+        {% if site.status != "closed" %}
+          <div style="height: 8px;"></div>
+          <p class="nhsuk-body-s nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-7">No longer using this site? <a href="/vaccines/sites/{{ site.id }}/deactivate" class="nhsuk-link">Deactivate {{ site.name }}</a></p>
+          {% else %}
+            <div style="height: 8px;"></div>
+            <p class="nhsuk-body-s nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-7">Using this site again? <a href="/vaccines/sites/{{ site.id }}/reactivate" class="nhsuk-link">Reactivate {{ site.name }}</a></p>
+        {% endif %}
       {% endfor %}
 
 
