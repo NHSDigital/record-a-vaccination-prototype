@@ -19,55 +19,86 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      {% set dataFields = [] %}
-
-      {% for field in data.patientDataToReport %}
-        {% set dataFields = (dataFields.push(field), dataFields) %}
-      {% endfor %}
-      {% for field in data.staffDataToReport %}
-        {% set dataFields = (dataFields.push(field), dataFields) %}
-      {% endfor %}
-      {% for field in data.siteDataToReport %}
-        {% set dataFields = (dataFields.push(field), dataFields) %}
-      {% endfor %}
-      {% for field in data.consentAndEligibilityDataToReport %}
-        {% set dataFields = (dataFields.push(field), dataFields) %}
-      {% endfor %}
-      {% for field in data.vaccinationDataToReport %}
-        {% set dataFields = (dataFields.push(field), dataFields) %}
-      {% endfor %}
-      {% for field in data.paymentDataToReport %}
-        {% set dataFields = (dataFields.push(field), dataFields) %}
-      {% endfor %}
+      {% set patientData = data.patientDataToReport or [] %}
+      {% set staffData = data.staffDataToReport or [] %}
+      {% set siteData = data.siteDataToReport or [] %}
+      {% set consentAndEligibilityData = data.consentAndEligibilityDataToReport or [] %}
+      {% set vaccinationData = data.vaccinationDataToReport or [] %}
+      {% set paymentData = data.paymentDataToReport or [] %}
 
       {% set dataValue %}
-        {{ dataFields | join(", ") }}
+        {% if (patientData | length) > 0 %}
+          <h4 class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Patient data</h4>
+          <p class="nhsuk-u-margin-bottom-3">{{ patientData | join(", ") }}</p>
+        {% endif %}
+
+        {% if (staffData | length) > 0 %}
+          <h4 class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Staff data</h4>
+          <p class="nhsuk-u-margin-bottom-3">{{ staffData | join(", ") }}</p>
+        {% endif %}
+
+        {% if (siteData | length) > 0 %}
+          <h4 class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Site data</h4>
+          <p class="nhsuk-u-margin-bottom-3">{{ siteData | join(", ") }}</p>
+        {% endif %}
+
+        {% if (consentAndEligibilityData | length) > 0 %}
+          <h4 class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Consent and eligibility data</h4>
+          <p class="nhsuk-u-margin-bottom-3">{{ consentAndEligibilityData | join(", ") }}</p>
+        {% endif %}
+
+        {% if (vaccinationData | length) > 0 %}
+          <h4 class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Vaccination data</h4>
+          <p class="nhsuk-u-margin-bottom-3">{{ vaccinationData | join(", ") }}</p>
+        {% endif %}
+
+        {% if (paymentData | length) > 0 %}
+          <h4 class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Payment information</h4>
+          <p class="nhsuk-u-margin-bottom-0">{{ paymentData | join(", ") }}</p>
+        {% endif %}
       {% endset %}
 
       {% set sitesHtml %}
-        <ul class="nhsuk-list">
-          {% for site in sites | sort(false, false, "name") %}
-            <li>{{ site.name }} ({{ site.id }})</li>
-          {% endfor %}
-        </ul>
+        {% if allSitesSelected %}
+          All {{ sites | length }} sites
+        {% elif (sites | length) > 10 %}
+          {{ sites | length }} sites
+        {% else %}
+          <ul class="nhsuk-list">
+            {% for site in sites | sort(false, false, "name") %}
+              <li>{{ site.name }} ({{ site.id }})</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
       {% endset %}
 
       {% set pharmaciesHtml %}
-        <ul class="nhsuk-list">
-          {% for pharmacy in pharmacies | sort(false, false, "name") %}
-            <li>{{ pharmacy.name }} ({{ pharmacy.id }})</li>
-          {% endfor %}
-        </ul>
+        {% if allPharmaciesSelected %}
+          All {{ pharmacies | length }} pharmacies
+        {% elif (pharmacies | length) > 10 %}
+          {{ pharmacies | length }} pharmacies
+        {% else %}
+          <ul class="nhsuk-list">
+            {% for pharmacy in pharmacies | sort(false, false, "name") %}
+              <li>{{ pharmacy.name }} ({{ pharmacy.id }})</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
       {% endset %}
 
-      {% set vaccinesToReportText = "" %}
-      {% if data.vaccinesToReport %}
-        {% set vaccinesToReportDisplay = [] %}
-        {% for vaccine in (data.vaccinesToReport | sort(false, false, "name")) %}
-          {% set vaccinesToReportDisplay = (vaccinesToReportDisplay.push(vaccine ), vaccinesToReportDisplay) %}
-        {% endfor %}
-        {% set vaccinesToReportText = vaccinesToReportDisplay | join(", ") %}
-      {% endif %}
+      {% set vaccinesToReportHtml %}
+        {% if allVaccinesSelected %}
+          All {{ vaccinesToReportDisplay | length }} vaccines
+        {% elif (vaccinesToReportDisplay | length) > 10 %}
+          {{ vaccinesToReportDisplay | length }} vaccines
+        {% else %}
+          <ul class="nhsuk-list">
+            {% for vaccine in vaccinesToReportDisplay or [] %}
+              <li>{{ vaccine | capitaliseFirstLetter }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endset %}
 
       {{ summaryList({
         rows: [
@@ -110,10 +141,10 @@
           },
           {
             key: {
-              text: ("Vaccines" if (data.vaccinesToReport | length) > 1 else "Vaccine")
+              text: ("Vaccines" if allVaccinesSelected or (vaccinesToReportDisplay | length) > 1 else "Vaccine")
             },
             value: {
-              text: vaccinesToReportText if data.vaccines
+              html: vaccinesToReportHtml
             },
             actions: {
               items: [
@@ -127,12 +158,13 @@
           },
           {
             key: {
-              text: ("Sites" if (data.siteIdsToReport | length) > 1 else "Site")
+              text: ("Sites" if allSitesSelected or (sites | length) > 1 else "Site")
             },
             value: {
               html: sitesHtml
             },
             actions: {
+              classes: "nhsuk-u-visually-hidden" if not canChangeSites,
               items: [
               {
                 href: "/reports/choose-site",
@@ -144,12 +176,13 @@
           } if (sites | length) > 0,
           {
             key: {
-              text: ("Pharmacies" if (data.pharmacyIdsToReport | length) > 1 else "Pharmacy")
+              text: ("Pharmacies" if allPharmaciesSelected or (pharmacies | length) > 1 else "Pharmacy")
             },
             value: {
               html: pharmaciesHtml
             },
             actions: {
+              classes: "nhsuk-u-visually-hidden" if not canChangePharmacies,
               items: [
                 {
                   href: "/reports/choose-pharmacies",
@@ -181,7 +214,7 @@
               text: "Data"
             },
             value: {
-              text: dataValue
+              html: dataValue
             },
             actions: {
               items: [

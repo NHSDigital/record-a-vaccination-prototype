@@ -3,6 +3,12 @@ module.exports = (router) => {
   router.get('/vaccines', (req, res) => {
     const currentOrganisation = res.locals.currentOrganisation
     const data = req.session.data
+    const deactivatedSite = req.query.deactivatedSite === 'true'
+    const reactivatedSite = req.query.reactivatedSite === 'true'
+    const siteName = req.query.siteName
+    const siteTab = (req.query.siteTab || 'active').toLowerCase()
+    const validSiteTabs = ['active', 'deactivated']
+    const currentSiteTab = validSiteTabs.includes(siteTab) ? siteTab : 'active'
 
     const organisationVaccines = res.locals.currentOrganisation.vaccines || []
 
@@ -17,11 +23,34 @@ module.exports = (router) => {
       .filter((vaccine) => !vaccinesEnabledNames.includes(vaccine.name))
       .map((vaccine) => vaccine.name)
 
-    const vaccineStock = data.vaccineStock.filter((vaccine) => vaccine.organisationId === currentOrganisation.id)
+    const today = new Date().toISOString().substring(0,10)
+    const vaccineStock = data.vaccineStock
+      .filter((vaccine) => vaccine.organisationId === currentOrganisation.id)
+      .map((vaccine) => {
+        const batches = Array.isArray(vaccine.batches) ? vaccine.batches : []
+        const activeBatchesCount = batches.filter((batch) => {
+          return !batch.deactivatedDate && batch.expiryDate >= today
+        }).length
+
+        return {
+          ...vaccine,
+          activeBatchesCount
+        }
+      })
+    const siteIdsInUse = [...new Set(vaccineStock.map((vaccine) => vaccine.siteId))]
+    const sitesInUse = (currentOrganisation.sites || []).filter((site) => siteIdsInUse.includes(site.id))
+    const activeSitesCount = sitesInUse.filter((site) => site.status !== 'closed').length
+    const deactivatedSitesCount = sitesInUse.filter((site) => site.status === 'closed').length
 
     res.render('vaccines/index', {
       vaccineStock,
-      vaccinesThatCanBeRequested
+      vaccinesThatCanBeRequested,
+      deactivatedSite,
+      reactivatedSite,
+      siteName,
+      currentSiteTab,
+      activeSitesCount,
+      deactivatedSitesCount
     })
   })
 
@@ -29,10 +58,39 @@ module.exports = (router) => {
   router.post('/vaccines/add', (req, res) => {
     const currentOrganisation = res.locals.currentOrganisation
     const data = req.session.data
-
-    const generatedId = Math.floor(Math.random() * 10000000).toString()
+    const addedBatchNumber = data.batchNumber
 
     const expiryDate = new Date(data.batchExpiryDate.year, (parseInt(data.batchExpiryDate.month) - 1), data.batchExpiryDate.day, 12).toISOString().substring(0,10)
+
+    const matchingVaccineStock = data.vaccineStock.find((vaccineStockItem) => {
+      return vaccineStockItem.organisationId === currentOrganisation.id &&
+        vaccineStockItem.siteId === data.siteId &&
+        vaccineStockItem.vaccine === data.vaccine &&
+        vaccineStockItem.vaccineProduct === data.vaccineProduct
+    })
+
+    const matchingDeactivatedBatch = matchingVaccineStock?.batches.find((batch) => {
+      return batch.batchNumber === data.batchNumber && batch.expiryDate === expiryDate && batch.deactivatedDate
+    })
+
+    if (matchingDeactivatedBatch) {
+      matchingDeactivatedBatch.deactivatedDate = null
+
+      // Reset data
+      req.session.data.vaccine = ''
+      req.session.data.vaccineProduct = ''
+      req.session.data.packType = ''
+      req.session.data.siteId = ''
+      req.session.data.batchNumber = ''
+      req.session.data.batchExpiryDate.day = ''
+      req.session.data.batchExpiryDate.month = ''
+      req.session.data.batchExpiryDate.year = ''
+
+      res.redirect(`/vaccines/${matchingVaccineStock.id}?tab=active&reactivated=true&batchNumber=${encodeURIComponent(matchingDeactivatedBatch.batchNumber)}`)
+      return
+    }
+
+    const generatedId = Math.floor(Math.random() * 10000000).toString()
 
     data.vaccineStock.push({
       id: generatedId,
@@ -60,7 +118,7 @@ module.exports = (router) => {
     req.session.data.batchExpiryDate.month = ''
     req.session.data.batchExpiryDate.year = ''
 
-    res.redirect('/vaccines/' + generatedId)
+    res.redirect(`/vaccines/${generatedId}?tab=active&added=true&addedType=vaccine&batchNumber=${encodeURIComponent(addedBatchNumber)}`)
   })
 
   // Viewing select site page
@@ -140,7 +198,6 @@ module.exports = (router) => {
 
   // Viewing check answers page
   router.get('/vaccines/check', (req, res) => {
-
     const data = req.session.data
     const siteId = data.siteId
 
@@ -153,16 +210,78 @@ module.exports = (router) => {
     })
   })
 
+  // View page to deactivate a site
+  router.get('/vaccines/sites/:siteId/deactivate', (req, res) => {
+    const currentOrganisationSites = res.locals.currentOrganisation.sites || []
+    const site = currentOrganisationSites.find((item) => item.id === req.params.siteId)
+    if (!site) { res.redirect('/vaccines'); return }
+
+    res.render('vaccines/deactivate-site', {
+      site
+    })
+  })
+
+  // Mark site as closed
+  router.post('/vaccines/sites/:siteId/deactivated', (req, res) => {
+    const currentOrganisationSites = res.locals.currentOrganisation.sites || []
+    const site = currentOrganisationSites.find((item) => item.id === req.params.siteId)
+    if (!site) { res.redirect('/vaccines'); return }
+
+    site.status = 'closed'
+
+    res.redirect(`/vaccines?siteTab=deactivated&deactivatedSite=true&siteName=${encodeURIComponent(site.name)}`)
+  })
+
+  // View page to reactivate a site
+  router.get('/vaccines/sites/:siteId/reactivate', (req, res) => {
+    const currentOrganisationSites = res.locals.currentOrganisation.sites || []
+    const site = currentOrganisationSites.find((item) => item.id === req.params.siteId)
+    if (!site) { res.redirect('/vaccines'); return }
+
+    res.render('vaccines/reactivate-site', {
+      site
+    })
+  })
+
+  // Mark site as active
+  router.post('/vaccines/sites/:siteId/reactivated', (req, res) => {
+    const currentOrganisationSites = res.locals.currentOrganisation.sites || []
+    const site = currentOrganisationSites.find((item) => item.id === req.params.siteId)
+    if (!site) { res.redirect('/vaccines'); return }
+
+    delete site.status
+
+    res.redirect(`/vaccines?siteTab=active&reactivatedSite=true&siteName=${encodeURIComponent(site.name)}`)
+  })
+
 
   // Adding a batch to an existing vaccine at a site
   router.post('/vaccines/:id/added', (req, res) => {
     const data = req.session.data
     const vaccine = data.vaccineStock.find((vaccine) => vaccine.id === req.params.id)
     if (!vaccine) { res.redirect('/vaccines'); return }
+    const addedBatchNumber = data.batchNumber
 
     const generatedId = Math.floor(Math.random() * 10000000).toString()
 
     const expiryDate = new Date(data.batchExpiryDate.year, (parseInt(data.batchExpiryDate.month) - 1), data.batchExpiryDate.day, 12).toISOString().substring(0,10)
+
+    const matchingDeactivatedBatch = vaccine.batches.find((batch) => {
+      return batch.batchNumber === data.batchNumber && batch.expiryDate === expiryDate && batch.deactivatedDate
+    })
+
+    if (matchingDeactivatedBatch) {
+      matchingDeactivatedBatch.deactivatedDate = null
+
+      // Reset data
+      req.session.data.batchNumber = ''
+      req.session.data.batchExpiryDate.day = ''
+      req.session.data.batchExpiryDate.month = ''
+      req.session.data.batchExpiryDate.year = ''
+
+      res.redirect(`/vaccines/${vaccine.id}?tab=active&reactivated=true&batchNumber=${encodeURIComponent(matchingDeactivatedBatch.batchNumber)}`)
+      return
+    }
 
     vaccine.batches.push({
       id: generatedId,
@@ -177,14 +296,20 @@ module.exports = (router) => {
     req.session.data.batchExpiryDate.month = ''
     req.session.data.batchExpiryDate.year = ''
 
-    res.redirect('/vaccines/' + vaccine.id)
+    res.redirect(`/vaccines/${vaccine.id}?tab=active&added=true&addedType=batch&batchNumber=${encodeURIComponent(addedBatchNumber)}`)
   })
 
   // Viewing a vaccine product at a site
   router.get('/vaccines/:id', (req, res) => {
     const data = req.session.data
     const perPage = 20; // Max number of users to show per page
-    const page = parseInt(req.query.page) || 1  ;  // Current page, default to 1
+    const queryPage = parseInt(req.query.page) || 1  ;  // Current page, default to 1
+    const tab = (req.query.tab || 'active').toLowerCase()
+    const added = req.query.added === 'true'
+    const addedType = req.query.addedType
+    const deactivated = req.query.deactivated === 'true'
+    const reactivated = req.query.reactivated === 'true'
+    const updatedBatchNumber = req.query.batchNumber
 
     const vaccine = data.vaccineStock.find((vaccine) => vaccine.id === req.params.id)
     if (!vaccine) { res.redirect('/vaccines'); return }
@@ -194,6 +319,8 @@ module.exports = (router) => {
     const site = currentOrganisation.sites.find((site) => site.id === vaccine.siteId)
 
     const today = new Date().toISOString().substring(0,10)
+    const validTabs = ['active', 'inactive']
+    const requestedTab = validTabs.includes(tab) ? tab : 'active'
 
     const allBatches = vaccine.batches.sort((a, b) => {
         const expiryA = a.expiryDate
@@ -207,11 +334,25 @@ module.exports = (router) => {
         return 0;
       })
 
-    const totalBatches = allBatches.length
-    const indexStartFrom = (page - 1) * perPage
-    const totalPages = Math.ceil(totalBatches / perPage)
+    const isActiveBatch = (batch) => {
+      return !batch.deactivatedDate && batch.expiryDate >= today
+    }
 
-    const batches = allBatches.slice(indexStartFrom, indexStartFrom + perPage)
+    const batchesByStatus = {
+      active: allBatches.filter((batch) => isActiveBatch(batch)),
+      inactive: allBatches.filter((batch) => !isActiveBatch(batch))
+    }
+
+    const currentTab = requestedTab === 'inactive' && batchesByStatus.inactive.length === 0
+      ? 'active'
+      : requestedTab
+
+    const filteredBatches = batchesByStatus[currentTab]
+    const totalBatches = filteredBatches.length
+    const totalPages = Math.ceil(totalBatches / perPage)
+    const page = totalPages > 0 ? Math.min(queryPage, totalPages) : 1
+    const indexStartFrom = (page - 1) * perPage
+    const batches = filteredBatches.slice(indexStartFrom, indexStartFrom + perPage)
 
 
     res.render('vaccines/product-page', {
@@ -221,7 +362,15 @@ module.exports = (router) => {
       today,
       totalPages,
       totalBatches,
-      page
+      page,
+      currentTab,
+      activeBatchesCount: batchesByStatus.active.length,
+      inactiveBatchesCount: batchesByStatus.inactive.length,
+      added,
+      addedType,
+      deactivated,
+      reactivated,
+      updatedBatchNumber
     })
   })
 
@@ -247,13 +396,30 @@ module.exports = (router) => {
     const vaccine = data.vaccineStock.find((vaccine) => vaccine.id === req.params.id)
     if (!vaccine) { res.redirect('/vaccines'); return }
 
+    const currentOrganisation = res.locals.currentOrganisation
     const currentOrganisationSites = res.locals.currentOrganisation.sites || []
 
     const site = currentOrganisationSites.find((site) => site.id == vaccine.siteId)
 
+    const siteName = site?.name || site?.town || ''
+
+    const siteAddressFromSite = typeof site?.address === 'string'
+      ? site.address
+      : [site?.address?.line1, site?.address?.town, site?.address?.postcode].filter(Boolean).join(', ')
+
+    const siteAddressFromOrganisation = [
+      currentOrganisation?.address?.line1,
+      currentOrganisation?.address?.town,
+      currentOrganisation?.address?.postcode
+    ].filter(Boolean).join(', ')
+
+    const siteAddress = siteAddressFromSite || siteAddressFromOrganisation
+
     res.render('vaccines/add-batch-to-site-check', {
       vaccine,
       site,
+      siteName,
+      siteAddress
     })
   })
 
@@ -301,8 +467,8 @@ module.exports = (router) => {
     res.redirect('/vaccines/' + vaccine.id)
   })
 
-  // View page to deplete a batch
-  router.get('/vaccines/:vaccineId/:batchNumber/deplete', (req, res) => {
+  // View page to deactivate a batch
+  router.get('/vaccines/:vaccineId/:batchNumber/deactivate', (req, res) => {
     const data = req.session.data
     const vaccine = data.vaccineStock.find((vaccine) => vaccine.id === req.params.vaccineId)
     if (!vaccine) { res.redirect('/vaccines'); return }
@@ -313,25 +479,25 @@ module.exports = (router) => {
     const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
     if (!batch) { res.redirect(`/vaccines/${vaccine.id}`); return }
 
-    res.render('vaccines/deplete-batch', {
+    res.render('vaccines/deactivate-batch', {
       vaccine,
       site,
       batch
     })
   })
 
-  // Mark batch as depleted
-  router.post('/vaccines/:vaccineId/:batchNumber/depleted', (req, res) => {
+  // Mark batch as deactivated
+  router.post('/vaccines/:vaccineId/:batchNumber/deactivated', (req, res) => {
     const data = req.session.data
     const vaccine = data.vaccineStock.find((vaccine) => vaccine.id === req.params.vaccineId)
     if (!vaccine) { res.redirect('/vaccines'); return }
     const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
 
-    let depletedDate = new Date()
+    let deactivatedDate = new Date()
 
-    batch.depletedDate = depletedDate.toISOString().substring(0,10)
+    batch.deactivatedDate = deactivatedDate.toISOString().substring(0,10)
 
-    res.redirect('/vaccines/' + vaccine.id)
+    res.redirect(`/vaccines/${vaccine.id}?tab=inactive&deactivated=true&batchNumber=${encodeURIComponent(batch.batchNumber)}`)
   })
 
 
@@ -362,8 +528,8 @@ module.exports = (router) => {
     if (!vaccine) { res.redirect('/vaccines'); return }
     const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
 
-    batch.depletedDate = null
+    batch.deactivatedDate = null
 
-    res.redirect('/vaccines/' + vaccine.id)
+    res.redirect(`/vaccines/${vaccine.id}?tab=active&reactivated=true&batchNumber=${encodeURIComponent(batch.batchNumber)}`)
   })
 }

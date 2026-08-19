@@ -12,12 +12,16 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if vaccinationTodayError %}
+      {% if vaccinationTodayError == 'required' %}
+        {% set vaccinationTodayErrorMessage = 'Select if the vaccination is today' %}
+      {% endif %}
+
+      {% if vaccinationTodayErrorMessage %}
         {{ errorSummary({
           titleText: "There is a problem",
           errorList: [
             {
-              text: vaccinationTodayError,
+              text: vaccinationTodayErrorMessage,
               href: "#vaccinationToday-1"
             }
           ]
@@ -69,8 +73,8 @@
           },
           value: data.vaccinationToday,
           errorMessage: {
-            text: vaccinationTodayError
-          } if vaccinationTodayError,
+            text: vaccinationTodayErrorMessage
+          } if vaccinationTodayErrorMessage,
           items: [
             {
               value: "yes",

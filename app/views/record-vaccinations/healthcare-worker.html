@@ -12,10 +12,24 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if (errors | length) > 0 %}
+      {% if healthcareWorkerRoleError and healthcareWorkerRoleError.code == "required" %}
+        {% set healthcareWorkerRoleErrorMessage = "Select a role" %}
+      {% endif %}
+
+      {% set errorList = [] %}
+      {% for error in errors %}
+        {% if error.code == "required" %}
+          {% set errorList = (errorList.push({
+            text: healthcareWorkerRoleErrorMessage,
+            href: error.href
+          }), errorList) %}
+        {% endif %}
+      {% endfor %}
+
+      {% if (errorList | length) > 0 %}
         {{ errorSummary({
           titleText: "There is a problem",
-          errorList: errors
+          errorList: errorList
         }) }}
       {% endif %}
 
@@ -33,6 +47,9 @@
             }
           },
           value: data.healthcareWorker,
+          errorMessage: {
+            text: healthcareWorkerRoleErrorMessage
+          } if healthcareWorkerRoleErrorMessage,
           items: [
             {
               value: "Doctor",

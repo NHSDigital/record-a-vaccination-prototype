@@ -25,14 +25,21 @@
   "Based on age, or in an at-risk group"
 ] %}
 
+{% set pertussisEligibilityOptions = [
+  "Pregnant",
+  "Healthcare worker"
+] %}
+
 {% set NationalFluEligibilityOptions = [
   "Based on age",
-  "Health or social care worker",
+  "Healthcare worker",
   "Pregnant",
   "In a clinical risk group",
   "Resident in a care home",
   "Carer",
-  "Household contact of someone immunosuppressed"
+  "Household contact of someone immunosuppressed",
+  "Social care worker",
+  "Homeless"
 ] %}
 
 {% set londonFluEligibilityOptions = [
@@ -94,10 +101,20 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if (errors | length) > 0 %}
+      {% set errorList = [] %}
+      {% for error in errors %}
+        {% if error.code == "required" %}
+          {% set errorList = (errorList.push({
+            text: "Select why you are giving them the vaccine",
+            href: error.href
+          }), errorList) %}
+        {% endif %}
+      {% endfor %}
+
+      {% if (errorList | length) > 0 %}
         {{ errorSummary({
           titleText: "There is a problem",
-          errorList: errors
+          errorList: errorList
         }) }}
       {% endif %}
 
@@ -111,6 +128,8 @@
           {% set eligibilityOptions = londonFluEligibilityOptions %}
         {% elif data.vaccine == "RSV" %}
           {% set eligibilityOptions = RSVEligibilityOptions %}
+        {% elif data.vaccine == "pertussis" %}
+          {% set eligibilityOptions = pertussisEligibilityOptions %}
         {% elif data.vaccine == "pneumococcal" %}
           {% set eligibilityOptions = pneumococcalEligibilityOptions %}
         {% elif data.vaccine == "Td/IPV" %}
@@ -151,6 +170,9 @@
             idPrefix: "eligibility",
             name: "eligibility",
             value: data.eligibility,
+            errorMessage: {
+              text: (errorList | first).text
+            } if (errorList | length) > 0,
             items: items
           }) }}
           

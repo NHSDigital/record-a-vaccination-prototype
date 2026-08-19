@@ -12,10 +12,33 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if (errors | length) > 0 %}
+      {% if injectionSiteError and injectionSiteError.code == "required" %}
+        {% set injectionSiteErrorMessage = "Select where you gave the injection" %}
+      {% endif %}
+
+      {% if otherInjectionSiteError and otherInjectionSiteError.code == "required" %}
+        {% set otherInjectionSiteErrorMessage = "Select where you gave the injection" %}
+      {% endif %}
+
+      {% set errorList = [] %}
+      {% for error in errors %}
+        {% if error.href == "#injection-site-1" and injectionSiteErrorMessage %}
+          {% set errorList = (errorList.push({
+            text: injectionSiteErrorMessage,
+            href: error.href
+          }), errorList) %}
+        {% elseif error.href == "#other-injection-site-1" and otherInjectionSiteErrorMessage %}
+          {% set errorList = (errorList.push({
+            text: otherInjectionSiteErrorMessage,
+            href: error.href
+          }), errorList) %}
+        {% endif %}
+      {% endfor %}
+
+      {% if (errorList | length) > 0 %}
         {{ errorSummary({
           titleText: "There is a problem",
-          errorList: errors
+          errorList: errorList
         }) }}
       {% endif %}
 
@@ -33,8 +56,8 @@
             }
           },
           errorMessage: {
-            text: otherInjectionSiteError.text
-          } if otherInjectionSiteError,
+            text: otherInjectionSiteErrorMessage
+          } if otherInjectionSiteErrorMessage,
           value: data.otherInjectionSite,
           items: [
             {
@@ -70,8 +93,8 @@
           },
           value: data.injectionSite,
           errorMessage: {
-            text: injectionSiteError.text
-          } if injectionSiteError,
+            text: injectionSiteErrorMessage
+          } if injectionSiteErrorMessage,
           items: [
             {
               value: "Left arm",

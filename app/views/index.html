@@ -96,13 +96,19 @@
       <p>Quick access links below apply the Pharmacy lead admin preset first, so you can open these pages without manually signing in.</p>
 
       <ul>
-        <li><a href="/prototype-setup/quick-access/pharmacy?next=/home">Home</a></li>
+        <li><a href="/prototype-setup/quick-access/pharmacy?next=/home">Dashboard</a></li>
         <li><a href="/prototype-setup/quick-access/pharmacy?next=/record-vaccinations">Record vaccinations</a></li>
         <li><a href="/prototype-setup/quick-access/pharmacy?next=/vaccines">Vaccines</a></li>
         <li><a href="/prototype-setup/quick-access/pharmacy?next=/records">Records</a></li>
         <li><a href="/prototype-setup/quick-access/pharmacy?next=/reports">Reports</a></li>
         <li><a href="/prototype-setup/quick-access/pharmacy?next=/user-admin">Manage users</a></li>
         <li><a href="/prototype-setup/quick-access/pharmacy?next=/user-profile">Profile page</a></li>
+      </ul>
+
+      <h2>Special circumstances</h2>
+
+      <ul>
+        <li><a href="/prototype-setup/quick-access/pharmacy?next=/record-vaccinations/patient-history-deceased">Deceased patient history</a></li>
       </ul>
 
       <h2>Regions interface</h2>
@@ -123,6 +129,7 @@
         <li><a href="/errors/500">Sorry, there is a problem with the service (500 error)</a></li>
         <li><a href="/errors/503">Sorry, the service is unavailable (503 error)</a></li>
         <li><a href="/errors/rate-limit">Rate limited (429 error)</a></li>
+        <li><a href="/errors/vaccine-disabled">Problem saving the vaccination (Regional admin has removed vaccines mid-recording)</a></li>
         <li><a href="/errors/deactivated-user">Sorry there is a problem with your account (user deactivated)</a></li>
         <li><a href="/auth/user-not-recognised">We cannot find a user with this email (after a successful 3rd party login)</a></li>
         <li><a href="/auth/keycloak-existing-account-new-login">You previously logged in a different way (Keycloak error)</a></li>
@@ -149,12 +156,16 @@
       <ul>
         <li><a href="/record-vaccinations/covid-19/interval-warning">Had a COVID-19 vaccine less than 3 months ago</a></li>
         <li><a href="/record-vaccinations/covid-19/too-young-warning">Too young for product</a></li>
+        <li><a href="/record-vaccinations/covid-19/too-old-warning">Too old for product</a></li>
+        <li><a href="/record-vaccinations/covid-19/no-gp-surgery-warning">No GP surgery and not outreach</a></li>
+        <li><a href="/record-vaccinations/covid-19/not-in-pcn-warning">Not in PCN and not outreach</a></li>
       </ul>
 
       <h3>flu</h3>
 
       <ul>
         <li><a href="/record-vaccinations/flu/too-young-warning">Too young for product</a></li>
+         <li><a href="/record-vaccinations/flu/too-old-warning">Too old for product</a></li>
       </ul>
 
       <h3>RSV</h3>

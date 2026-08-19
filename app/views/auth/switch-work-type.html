@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "What do you want to do?" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/auth/select-organisation",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if error and error.code == 'required' %}
+        {% set workTypeErrorMessage = 'Select the type of work you want to do' %}
+      {% endif %}
+
+      {% if workTypeErrorMessage %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: workTypeErrorMessage,
+              href: "#switch-organisation-work-type-1"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <div class="nhsuk-caption-l">{{ groupOrganisation.name }} ({{ groupOrganisation.id }})</div>
+      <h1 class="nhsuk-heading-l">What do you want to do?</h1>
+
+      <form action="/auth/switch-organisation/work-type" method="post" novalidate>
+
+        {{ radios({
+          idPrefix: "switch-organisation-work-type",
+          name: "switchOrganisationWorkType",
+          errorMessage: {
+            text: workTypeErrorMessage
+          } if workTypeErrorMessage,
+          items: [
+            {
+              value: "group-admin",
+              text: "Access the group account"
+            },
+            {
+              value: "individual-pharmacy",
+              text: "Access an individual pharmacy"
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

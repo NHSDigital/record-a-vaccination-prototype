@@ -97,7 +97,7 @@
           ]
         }) }}
 
-      {% if organisationSettings and organisationSettings.permissionLevel != 'Lead administrator' %}
+      {% if organisationSettings and organisationSettings.permissionLevel != 'Lead administrator' and organisationSettings.permissionLevel != 'Group administrator' %}
 
         <p>Only lead administrators can change permission levels. The lead administrators for Southampton NHS Trust are:</p>
 

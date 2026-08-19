@@ -1,13 +1,21 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Data details" %}
+{% set pageName = "Which details do you want to include?" %}
 
 {% set currentSection = "reports" %}
 
 
 {% block beforeContent %}
+  {% if currentOrganisation.type == "Pharmacy HQ" %}
+    {% set backLinkHref = "/reports/choose-pharmacies" %}
+  {% elif (currentOrganisation.sites | length) == 1 %}
+    {% set backLinkHref = "/reports/choose-vaccines" %}
+  {% else %}
+    {% set backLinkHref = "/reports/choose-site" %}
+  {% endif %}
+
   {{ backLink({
-    href: "/reports/choose-site",
+    href: backLinkHref,
     text: "Back"
   }) }}
 {% endblock %}
@@ -16,10 +24,17 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if error %}
+      {% if error and error.code == "required" %}
+        {% set dataSelectionErrorMessage = "Select the data you want to include" %}
+      {% endif %}
+
+      {% if dataSelectionErrorMessage %}
         {{ errorSummary({
           titleText: "There is a problem",
-          errorList: [error]
+          errorList: [{
+            text: dataSelectionErrorMessage,
+            href: error.href
+          }]
         }) }}
       {% endif %}
 
@@ -174,11 +189,11 @@
             id: "data-fields"
           },
           errorMessage: {
-            text: error.text
-          } if error,
+            text: dataSelectionErrorMessage
+          } if dataSelectionErrorMessage,
           fieldset: {
             legend: {
-              text: "Which details would you like to include?",
+              text: "Which details do you want to include?",
               isPageHeading: true,
               classes: "nhsuk-fieldset__legend--l"
             }
@@ -215,7 +230,7 @@
             },
             {
               value: "Vaccination",
-              text: "Vaccination",
+              text: "Vaccinations",
               conditional: {
                 html: vaccinationHtml
               }

@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Reports" %}
+
+{% set currentSection = "reports" %}
+
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% include "includes/notification.html" %}
+
+    </div>
+  </div>
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-2">Reports</h1>
+      <p>Create and download reports.</p>
+
+      {% from "inset-text/macro.njk" import insetText %}
+
+{% set insetTextHtml %}
+  <p>You need to wait before you can start creating a report. This is because another report is already in progress for your organisation.</p>
+{% endset %}
+
+{{ insetText({
+  html: insetTextHtml
+}) }}
+
+
+    </div>
+  </div>
+
+{% endblock %}

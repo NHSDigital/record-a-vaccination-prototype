@@ -111,9 +111,11 @@ module.exports = router => {
     const data = req.session.data
     const organisationId = data.organisationId
     const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
+    const isFirstUser = !data.users.some(user => user.organisations && user.organisations.some(org => org.id === organisationId))
 
     res.render('regions/add-email', {
-      organisation
+      organisation,
+      isFirstUser
     })
   })
 
@@ -164,22 +166,109 @@ module.exports = router => {
   router.get('/regions/organisations/:id', (req, res) => {
     const data = req.session.data
     const id = req.params.id
+    const section = (req.query.section || 'overview').toLowerCase()
+    const tab = (req.query.tab || 'active').toLowerCase()
+    const removedVaccine = req.query.removedVaccine
+    const vaccinesAdded = req.query.vaccinesAdded
+    const vaccinesAddedCount = Number.parseInt(req.query.vaccinesAddedCount, 10) || 0
     const organisation = data.organisations.find((org) => org.id === id)
     if (!organisation) { res.redirect('/regions/'); return }
 
     const users = data.users.filter((user) => (user.organisations || []).find((organisation) => organisation.id === id))
+    const usersByStatus = {
+      invited: [],
+      active: [],
+      deactivated: []
+    }
+
+    for (const user of users) {
+      const userOrganisationSettings = (user.organisations || []).find((userOrganisation) => userOrganisation.id === id)
+      const status = (userOrganisationSettings && userOrganisationSettings.status || 'Active').toLowerCase()
+
+      if (status === 'invited') {
+        usersByStatus.invited.push(user)
+      } else if (status === 'deactivated') {
+        usersByStatus.deactivated.push(user)
+      } else {
+        usersByStatus.active.push(user)
+      }
+    }
+
+    const validTabs = ['invited', 'active', 'deactivated']
+    const currentTab = validTabs.includes(tab) ? tab : 'active'
+    const validSections = ['overview', 'users', 'vaccines', 'action']
+    const currentPageSection = validSections.includes(section) ? section : 'overview'
+    const usersForTab = usersByStatus[currentTab]
 
     const vaccines = organisation.vaccines || []
     const vaccinesEnabled = vaccines.filter((vaccine) => vaccine.status === "enabled")
+    const canAddVaccines = vaccinesEnabled.length < (data.vaccines || []).length
 
     const messages = (res.locals.currentOrganisation.inbox || []).filter((message) => message.fromOrganisationId === id)
 
     res.render('regions/organisation', {
       organisation,
-      users,
+      users: usersForTab,
+      usersByStatus,
+      currentTab,
+      currentPageSection,
       vaccinesEnabled,
+      canAddVaccines,
+      removedVaccine,
+      vaccinesAdded,
+      vaccinesAddedCount,
       messages
     })
+  })
+
+  router.get('/regions/organisations/:id/remove-vaccine', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const vaccineName = req.query.vaccineName
+    const organisation = data.organisations.find((org) => org.id === id)
+    if (!organisation) { res.redirect('/regions/'); return }
+
+    if (!vaccineName) {
+      res.redirect(`/regions/organisations/${id}?section=vaccines`)
+      return
+    }
+
+    const existingEnabledVaccine = (organisation.vaccines || []).find((vaccine) => vaccine.name === vaccineName && vaccine.status === 'enabled')
+
+    if (!existingEnabledVaccine) {
+      res.redirect(`/regions/organisations/${id}?section=vaccines`)
+      return
+    }
+
+    res.render('regions/remove-vaccine', {
+      organisation,
+      vaccineName
+    })
+  })
+
+  router.post('/regions/organisations/:id/remove-vaccine', (req, res) => {
+    const data = req.session.data
+    const id = req.params.id
+    const vaccineName = req.body.vaccineName
+    const organisation = data.organisations.find((org) => org.id === id)
+    if (!organisation) { res.redirect('/regions/'); return }
+
+    if (!vaccineName) {
+      res.redirect(`/regions/organisations/${id}?section=vaccines`)
+      return
+    }
+
+    organisation.vaccines ||= []
+
+    const existingVaccine = organisation.vaccines.find((vaccine) => vaccine.name === vaccineName && vaccine.status === 'enabled')
+
+    if (existingVaccine) {
+      existingVaccine.status = 'disabled'
+      res.redirect(`/regions/organisations/${id}?section=vaccines&removedVaccine=${encodeURIComponent(vaccineName)}`)
+      return
+    }
+
+    res.redirect(`/regions/organisations/${id}?section=vaccines`)
   })
 
   // Viewing the page to set vaccines per organisation
@@ -209,17 +298,25 @@ module.exports = router => {
     const organisation = data.organisations.find((org) => org.id === id)
     if (!organisation) { res.redirect('/regions/'); return }
 
-    const vaccinesToAdd = data.vaccinesToAdd
+    const vaccinesToAddRaw = data.vaccinesToAdd
+    const vaccinesToAdd = Array.isArray(vaccinesToAddRaw)
+      ? vaccinesToAddRaw
+      : (vaccinesToAddRaw ? [vaccinesToAddRaw] : [])
 
     const vaccines = organisation.vaccines || []
+    let vaccinesAddedCount = 0
 
     for (let vaccineToAdd of vaccinesToAdd) {
 
       const existingVaccine = vaccines.find((vaccine) => vaccine.name === vaccineToAdd)
 
       if (existingVaccine) {
+        if (existingVaccine.status !== 'enabled') {
+          vaccinesAddedCount += 1
+        }
         existingVaccine.status = "enabled"
       } else {
+        vaccinesAddedCount += 1
 
         vaccines.push({
           name: vaccineToAdd,
@@ -229,7 +326,7 @@ module.exports = router => {
 
     }
 
-    res.redirect(`/regions/organisations/${id}`)
+    res.redirect(`/regions/organisations/${id}?section=vaccines&vaccinesAdded=true&vaccinesAddedCount=${vaccinesAddedCount}`)
   })
 
 

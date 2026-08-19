@@ -2,12 +2,13 @@
 
 {% set currentSection = "pharmacies" %}
 {% if existingUser %}
-  {% set pageName = existingUser.firstName + " " + existingUser.lastName + "'s role at " + organisation.name + " (" + organisation.id + ")" %}
+  {% set roleHeading = existingUser.firstName + " " + existingUser.lastName + "'s role" %}
 {% elseif data.firstName or data.lastName %}
-  {% set pageName = (data.firstName + " " + data.lastName) + "'s role at " + organisation.name + " (" + organisation.id + ")" %}
+  {% set roleHeading = (data.firstName + " " + data.lastName) + "'s role" %}
 {% else %}
-  {% set pageName = "New user's role at " + organisation.name + " (" + organisation.id + ")" %}
+  {% set roleHeading = "New user's role" %}
 {% endif %}
+{% set pageName = roleHeading %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -18,46 +19,103 @@
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-      <h1 class="nhsuk-heading-l">
-        {% if existingUser %}
-          {{ existingUser.firstName }} {{ existingUser.lastName }}'s role at {{ organisation.name }} ({{ organisation.id }})
-        {% elseif data.firstName or data.lastName %}
-          {{ data.firstName }} {{ data.lastName }}'s role at {{ organisation.name }} ({{ organisation.id }})
-        {% else %}
-          Add a new user to {{ organisation.name }} ({{ organisation.id }})
-        {% endif %}
-      </h1>
+
+      {% if firstNameError == "required" %}
+        {% set firstNameErrorMessage = "Enter a first name" %}
+      {% endif %}
+      {% if lastNameError == "required" %}
+        {% set lastNameErrorMessage = "Enter a last name" %}
+      {% endif %}
+      {% if emailError == "required" %}
+        {% set emailErrorMessage = "Enter an email address" %}
+      {% elseif emailError == "invalid-domain" %}
+        {% set emailErrorMessage = "Enter an allowed email address" %}
+      {% elseif emailError == "group-admin-not-allowed" %}
+        {% set emailErrorMessage = "You cannot add a group administrator to an individual pharmacy" %}
+      {% endif %}
+      {% if vaccinatorError == "required" %}
+        {% set vaccinatorErrorMessage = "Select if they’re a vaccinator" %}
+      {% endif %}
+      {% if permissionLevelError == "required" %}
+        {% set permissionLevelErrorMessage = "Select a permission level" %}
+      {% endif %}
+
+      {% if firstNameErrorMessage or lastNameErrorMessage or emailErrorMessage or permissionLevelErrorMessage or vaccinatorErrorMessage %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: firstNameErrorMessage,
+              href: "#first-name"
+            } if firstNameErrorMessage,
+            {
+              text: lastNameErrorMessage,
+              href: "#last-name"
+            } if lastNameErrorMessage,
+            {
+              text: emailErrorMessage,
+              href: "#email"
+            } if emailErrorMessage,
+            {
+              text: vaccinatorErrorMessage,
+              href: "#vaccinator"
+            } if vaccinatorErrorMessage,
+            {
+              text: permissionLevelErrorMessage,
+              href: "#permission-level-1"
+            } if permissionLevelErrorMessage
+          ]
+        }) }}
+      {% endif %}
+
+      <div class="nhsuk-caption-l">{{ organisation.name }} ({{ organisation.id }})</div>
+
+      <h1 class="nhsuk-heading-l">{{ roleHeading }}</h1>
 
       <form action="/pharmacies/{{ organisation.id }}/add-user-check" method="post">
 
         {% if not existingUser %}
-            <p class="nhsuk-body">Users must have an NHS-approved email address. See the <a href="https://digital.nhs.uk/services/care-identity-service/applications-and-services/apply-for-care-id/care-identity-email-domain-allow-list" target="_blank" class="nhsuk-link">list of approved email domains (opens in new tab)</a>.</p>
+            <p>Users must have an nhs.net email or another allowed email address. See <a href="https://digital.nhs.uk/services/care-identity-service/applications-and-services/apply-for-care-id/care-identity-email-domain-allow-list" target="_blank">examples of allowed email addresses (opens in new tab)</a>.</p>
+
+      <p>If the email address is not allowed, use a different email or <a href="/contact-us" target="_blank">contact us</a>.</p>
 
             {{ input({
               label: {
                 text: "First name"
               },
+              id: "first-name",
               name: "firstName",
               classes: "nhsuk-input--width-20",
-              value: data.firstName
+              value: data.firstName,
+              errorMessage: {
+                text: firstNameErrorMessage
+              } if firstNameErrorMessage
             }) }}
 
             {{ input({
               label: {
                 text: "Last name"
               },
+              id: "last-name",
               name: "lastName",
               classes: "nhsuk-input--width-20",
-              value: data.lastName
+              value: data.lastName,
+              errorMessage: {
+                text: lastNameErrorMessage
+              } if lastNameErrorMessage
             }) }}
 
             {{ input({
               label: {
                 text: "Email address"
               },
+              id: "email",
               name: "email",
               type: "email",
-              value: data.email
+              value: data.email,
+              errorMessage: {
+                text: emailErrorMessage
+              } if emailErrorMessage
             }) }}
         {% endif %}
 
@@ -73,6 +131,9 @@
           text: "Vaccination records include the name of the person who gave the vaccination"
         },
         value: data.vaccinator,
+        errorMessage: {
+          text: vaccinatorErrorMessage
+        } if vaccinatorErrorMessage,
         "items": [
           {
             "value": "yes",
@@ -96,6 +157,9 @@
           }
         },
         value: data.permissionLevel,
+        errorMessage: {
+          text: permissionLevelErrorMessage
+        } if permissionLevelErrorMessage,
         items: [
           {
             value: "Recorder",

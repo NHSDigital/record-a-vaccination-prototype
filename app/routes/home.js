@@ -217,7 +217,7 @@ module.exports = router => {
       }
     }
 
-    res.render('home/index', {
+    res.render('dashboard/index', {
       sites,
       pharmacies,
       totalVaccinationsRecorded,

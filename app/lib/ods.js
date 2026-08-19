@@ -6,6 +6,17 @@ const { capitaliseFromOds } = require('./utils/capitalise-from-ods.js')
 const BASE_ORD_URL = 'https://directory.spineservices.nhs.uk/ORD/2-0-0';
 const BASE_FHIR_URL = 'https://sandbox.api.service.nhs.uk/organisation-data-terminology-api/fhir'
 
+const getFirstPresentValue = (obj, keys) => {
+  for (const key of keys) {
+    const value = obj[key]
+    if (typeof value === 'string' && value.trim() !== '') {
+      return value
+    }
+  }
+
+  return undefined
+}
+
 /**
  * Helper function to fetch paginated organisations from the ODS API
  * @param {string} queryParams - Query parameters (without Limit/Offset)
@@ -32,10 +43,15 @@ async function fetchPaginatedOrganisations(queryParams) {
     const data = await response.json();
 
     const results = (data.Organisations || []).map(function(org) {
+      const addressLine1 = getFirstPresentValue(org, ['AddrLn1', 'Address1', 'AddressLine1'])
+      const town = getFirstPresentValue(org, ['PostTown', 'Town', 'City'])
+
       return {
         id: org.OrgId,
         name: capitaliseFromOds(org.Name),
         address: {
+          line1: addressLine1 ? capitaliseFromOds(addressLine1) : undefined,
+          town: town ? capitaliseFromOds(town) : undefined,
           postcode: org.PostCode
         }
       }

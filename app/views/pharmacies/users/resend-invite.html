@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "pharmacies" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/pharmacies/" + pharmacy.id,
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Resend invite to {{ user.firstName }} {{ user.lastName }}</h1>
+
+
+      <form action="/pharmacies/{{ pharmacy.id }}/users/{{ user.id }}/resend-invite-answer" method="post">
+
+        {{ button({
+          text: "Confirm"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
