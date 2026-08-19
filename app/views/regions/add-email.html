@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Add another user" %}
+{% set pageName = "Add a user" if isFirstUser else "Add another user" %}
 {% set currentSection = "organisations" %}
 
 {% block beforeContent %}
@@ -16,7 +16,7 @@
 
   <div class="nhsuk-caption-l">{{ organisation.name }} ({{ organisation.id }})</div>
 
-  <h1 class="nhsuk-heading-l">Add another user</h1>
+  <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       <p>Choose a user at {{ organisation.name }}.</p>
 

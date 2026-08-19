@@ -12,7 +12,7 @@
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       {% if organisationSetting.permissionLevel == "Recorder" %}
-        <p>An admin user needs to add a vaccine before you can record a vaccination.</p>
+        <p>An administrator needs to add vaccines before you can record a vaccination.</p>
       {% else %}
         <p>You need to <a href="/vaccines/">add a vaccine</a> before you can record a vaccination.</p>
       {% endif %}

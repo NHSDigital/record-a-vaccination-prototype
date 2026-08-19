@@ -13,12 +13,16 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      {% if batchCountError %}
+      {% if batchCountError == 'invalid-number' %}
+        {% set batchCountErrorMessage = 'Enter a whole number of 0 or more' %}
+      {% endif %}
+
+      {% if batchCountErrorMessage %}
         {{ errorSummary({
           titleText: "There is a problem",
           errorList: [
             {
-              text: batchCountError,
+              text: batchCountErrorMessage,
               href: "#customBatchesPerProduct"
             }
           ]
@@ -41,7 +45,7 @@
             text: "Enter a whole number of 0 or more"
           },
           value: (customConfig.batchesPerProduct if isCustomBatchCount else ""),
-          errorMessage: ({ text: batchCountError } if batchCountError else false),
+          errorMessage: ({ text: batchCountErrorMessage } if batchCountErrorMessage else false),
           attributes: {
             min: "0",
             step: "1"

@@ -111,9 +111,11 @@ module.exports = router => {
     const data = req.session.data
     const organisationId = data.organisationId
     const organisation = data.allOrganisations.find((organisation) => organisation.id === organisationId)
+    const isFirstUser = !data.users.some(user => user.organisations && user.organisations.some(org => org.id === organisationId))
 
     res.render('regions/add-email', {
-      organisation
+      organisation,
+      isFirstUser
     })
   })
 
