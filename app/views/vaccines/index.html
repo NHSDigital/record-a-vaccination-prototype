@@ -212,10 +212,10 @@
 
         {% if site.status != "closed" %}
           <div style="height: 8px;"></div>
-          <p class="nhsuk-body-s nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-7">No longer using this site? <a href="/vaccines/sites/{{ site.id }}/deactivate" class="nhsuk-link">Deactivate {{ site.name }}</a></p>
+          <p class="nhsuk-body nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-7">No longer using this site? <a href="/vaccines/sites/{{ site.id }}/deactivate" class="nhsuk-link">Deactivate {{ site.name }}</a></p>
           {% else %}
             <div style="height: 8px;"></div>
-            <p class="nhsuk-body-s nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-7">Using this site again? <a href="/vaccines/sites/{{ site.id }}/reactivate" class="nhsuk-link">Reactivate {{ site.name }}</a></p>
+            <p class="nhsuk-body nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-7">Using this site again? <a href="/vaccines/sites/{{ site.id }}/reactivate" class="nhsuk-link">Reactivate {{ site.name }}</a></p>
         {% endif %}
       {% endfor %}
 
