@@ -82,6 +82,35 @@
           values: data.newBatchExpiryDate
         }) }}
 
+        {% if data.vaccineProduct == "Comirnaty 3 LP.8.1" %}
+
+          {{ radios({
+            "idPrefix": "pack-type",
+            "name": "packType",
+            "fieldset": {
+              "legend": {
+                "text": "Pack size",
+                classes: "nhsuk-fieldset__legend--s"
+              }
+            },
+            hint: {
+              text: "Select the pack size for this batch."
+            },
+            value: data.packType,
+            "items": [
+              {
+                "value": "Single item",
+                "text": "Single item"
+              },
+              {
+                "value": "10 items",
+                "text": "10 items"
+              }
+            ]
+          }) }}
+
+        {% endif %}
+
           {{ button({
             "text": "Continue"
           }) }}

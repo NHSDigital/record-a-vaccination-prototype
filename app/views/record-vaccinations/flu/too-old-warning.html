@@ -13,7 +13,6 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-
       {% if data.firstName and data.lastName %}
         {% set displayName = data.firstName ~ ' ' ~ data.lastName %}
       {% else %}
@@ -21,7 +20,7 @@
       {% endif %}
 
       {% set panelHtml %}
-        <p>Comirnaty 30 LP.8.1 is usually recommended for people aged 12 and over. {{ displayName }} is 11 years old.</p>
+        <p>Fluenz (LAIV) is usually recommended for people aged 2 years to 17 years. {{ displayName }} is 18 years old.</p>
         <p>Check before going ahead or refer to a prescriber for a patient specific direction (PSD).</p>
 
         {{ button({
@@ -32,12 +31,13 @@
       {% endset %}
 
       {{ panel({
-        titleText: displayName + " may be too young for this vaccine product",
+        titleText: displayName + " may be too old for this vaccine product",
         html: panelHtml,
         classes: "nhsuk-panel--interruption"
       }) }}
 
     </div>
   </div>
+
 {% endblock %}
 

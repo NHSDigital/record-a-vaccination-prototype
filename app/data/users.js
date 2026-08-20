@@ -13954,5 +13954,20 @@ module.exports = [
         "vaccinator": true
       }
     ]
-  }
+  },
+  // Add an example GP user linked to GP org
+  {
+    "id": "12345678",
+    "email": "lydia.harris@nhs.net",
+    "organisations": [
+      {
+        "id": "FA425",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Lydia",
+    "lastName": "Harris"
+  },
 ]
