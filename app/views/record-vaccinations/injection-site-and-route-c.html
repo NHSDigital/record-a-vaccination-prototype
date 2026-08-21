@@ -1,0 +1,154 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Where did you give the injection?" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/consent" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if injectionSiteError and injectionSiteError.code == "required" %}
+        {% set injectionSiteErrorMessage = "Select where you gave the injection" %}
+      {% endif %}
+
+      {% if otherInjectionSiteError and otherInjectionSiteError.code == "required" %}
+        {% set otherInjectionSiteErrorMessage = "Select where you gave the injection" %}
+      {% endif %}
+
+      {% set errorList = [] %}
+      {% for error in errors %}
+        {% if error.href == "#injection-site-1" and injectionSiteErrorMessage %}
+          {% set errorList = (errorList.push({
+            text: injectionSiteErrorMessage,
+            href: error.href
+          }), errorList) %}
+        {% elseif error.href == "#other-injection-site-1" and otherInjectionSiteErrorMessage %}
+          {% set errorList = (errorList.push({
+            text: otherInjectionSiteErrorMessage,
+            href: error.href
+          }), errorList) %}
+        {% endif %}
+      {% endfor %}
+
+      {% if (errorList | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errorList
+        }) }}
+      {% endif %}
+
+      <form action="/record-vaccinations/injection-site-and-route-c-somewhere-else" method="post" novalidate>
+
+      {% set injectionRouteHtml %}
+
+        {{ radios({
+          idPrefix: "other-injection-route",
+          name: "otherinjectionRoute",
+          fieldset: {
+            legend: {
+              text: "Injection route",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          errorMessage: {
+            text: otherinjectionRouteErrorMessage
+          } if otherinjectionRouteErrorMessage,
+          value: data.otherinjectionRoute,
+          items: [
+            {
+              value: "Intramuscular",
+              text: "Intramuscular"
+            },
+            {
+              value: "Subcutaneous",
+              text: "Subcutaneous"
+            }
+          ]
+        }) }}
+        {% endset %}
+
+        {% set somewhereElseHtml %}
+
+        {{ radios({
+          idPrefix: "other-injection-site",
+          name: "otherInjectionSite",
+          fieldset: {
+            legend: {
+              text: "Injection site",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          value: data.otherInjectionSite,
+          items: [
+            {
+              value: "Left buttock",
+              text: "Left buttock"
+            },
+            {
+              value: "Right buttock",
+              text: "Right buttock"
+            },
+            {
+              value: "Left thigh",
+              text: "Left thigh"
+            },
+            {
+              value: "Right thigh",
+              text: "Right thigh"
+            }
+          ]
+        }) }}
+        {% endset %}
+
+
+        {{ radios({
+          idPrefix: "injection-site",
+          name: "injectionSite",
+          fieldset: {
+            legend: {
+              text: ("Where did you give the injection?" if data.vaccinationToday == 'yes' else "Where was the injection given?"),
+              size: "l",
+              isPageHeading: true
+            }
+          },
+          value: data.injectionSite,
+          items: [
+            {
+              value: "Left arm",
+              text: "Left arm",
+              conditional: {
+                html: injectionRouteHtml
+              }
+            },
+            {
+              value: "Right arm",
+              text: "Right arm",
+              conditional: {
+                html: injectionRouteHtml
+              }
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "other",
+              text: "Somewhere else"
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

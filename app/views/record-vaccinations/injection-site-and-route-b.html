@@ -1,0 +1,153 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Where did you give the injection?" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/consent" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if injectionRouteError and injectionRouteError.code == "required" %}
+        {% set injectionRouteErrorMessage = "Select where you gave the injection" %}
+      {% endif %}
+
+      {% if otherinjectionRouteError and otherinjectionRouteError.code == "required" %}
+        {% set otherinjectionRouteErrorMessage = "Select where you gave the injection" %}
+      {% endif %}
+
+      {% set errorList = [] %}
+      {% for error in errors %}
+        {% if error.href == "#injection-route-1" and injectionRouteErrorMessage %}
+          {% set errorList = (errorList.push({
+            text: injectionRouteErrorMessage,
+            href: error.href
+          }), errorList) %}
+        {% elseif error.href == "#other-injection-route-1" and otherinjectionRouteErrorMessage %}
+          {% set errorList = (errorList.push({
+            text: otherinjectionRouteErrorMessage,
+            href: error.href
+          }), errorList) %}
+        {% endif %}
+      {% endfor %}
+
+      {% if (errorList | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errorList
+        }) }}
+      {% endif %}
+
+      <form action="/record-vaccinations/answer-injection-route" method="post" novalidate>
+
+        {% set somewhereElseHtml %}
+
+        {{ radios({
+          idPrefix: "other-injection-site",
+          name: "otherInjectionSite",
+          fieldset: {
+            legend: {
+              text: "Injection site and route",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          errorMessage: {
+            text: otherInjectionSiteErrorMessage
+          } if otherInjectionSiteErrorMessage,
+          value: data.otherInjectionSite,
+          items: [
+            {
+              value: "Left buttock - intramuscular",
+              text: "Left buttock - intramuscular"
+            },
+            {
+              value: "Left buttock - subcutaneous",
+              text: "Left buttock - subcutaneous"
+            },
+            {
+              value: "Right buttock - intramuscular",
+              text: "Right buttock - intramuscular"
+            },
+            {
+              value: "Right buttock - subcutaneous",
+              text: "Right buttock - subcutaneous"
+            },
+            {
+              value: "Left thigh - intramuscular",
+              text: "Left thigh - intramuscular"
+            },
+            {
+              value: "Left thigh - subcutaneous",
+              text: "Left thigh - subcutaneous"
+            },
+            {
+              value: "Right thigh - intramuscular",
+              text: "Right thigh - intramuscular"
+            },
+            {
+              value: "Right thigh - subcutaneous",
+              text: "Right thigh - subcutaneous"
+            }
+          ]
+        }) }}
+        {% endset %}
+
+
+        {{ radios({
+          idPrefix: "injection-route",
+          name: "injectionRoute",
+          fieldset: {
+            legend: {
+              text: ("Where did you give the injection?" if data.vaccinationToday == 'yes' else "Where was the injection given?"),
+              size: "l",
+              isPageHeading: true
+            }
+          },
+          value: data.injectionRoute,
+          errorMessage: {
+            text: injectionRouteErrorMessage
+          } if injectionRouteErrorMessage,
+          items: [
+            {
+              value: "Left arm - intramuscular",
+              text: "Left arm - intramuscular"
+            },
+            {
+              value: "Left arm - subcutaneous",
+              text: "Left arm - subcutaneous"
+            },
+            {
+              value: "Right arm - intramuscular",
+              text: "Right arm - intramuscular"
+            },
+            {
+              value: "Right arm - subcutaneous",
+              text: "Right arm - subcutaneous"
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "other",
+              text: "Somewhere else",
+              conditional: {
+                html: somewhereElseHtml
+              }
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
