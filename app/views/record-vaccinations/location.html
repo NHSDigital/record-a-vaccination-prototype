@@ -71,7 +71,7 @@
             }
           },
           hint: {
-            text: "This is needed for payment and reporting."
+            text: "This is needed for payment and reporting. You can use the note section later to record more details about the location, if you need."
           },
           errorMessage: {
             text: (errorList | first).text
@@ -80,7 +80,10 @@
           items: [
             {
               text: "On site",
-              value: "On site"
+              value: "On site",
+              hint: {
+                text: "Includes: hospital hubs, vaccination centres, Primary Care Networks (PCNs), pharmacies, GP surgeries and detained settings"
+              }
             },
             {
               value: "Care home",
