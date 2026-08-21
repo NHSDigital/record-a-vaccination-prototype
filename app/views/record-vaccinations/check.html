@@ -60,6 +60,14 @@
 
       <h1 class="nhsuk-heading-l">Check and confirm</h1>
 
+      {% if data.patientIsDeceased %}
+        {% from "warning-callout/macro.njk" import warningCallout %}
+        {{ warningCallout({
+          heading: "Important",
+          text: "This patient has died according to the Personal Demographics Service."
+        }) }}
+      {% endif %}
+
       <h2 class="nhsuk-heading-m">Patient</h2>
 
       {{ summaryList({
@@ -86,7 +94,7 @@
               text: "Date of birth"
             },
             value: {
-              html: (data.dateOfBirth | formatDate) + "<br>(76 years old)"
+              html: (data.dateOfBirth | formatDate) + ("" if data.patientIsDeceased else "<br>(76 years old)")
             },
             actions: {
               items: [
@@ -98,6 +106,14 @@
               ]
             }
           },
+          {
+            key: {
+              text: "Date of death"
+            },
+            value: {
+              html: "20 April 2024<br><div class=\"nhsuk-u-secondary-text-colour\">40 years old</div>"
+            }
+          } if data.patientIsDeceased,
           {
             key: {
               text: "Address"

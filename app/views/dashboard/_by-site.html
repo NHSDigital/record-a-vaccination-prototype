@@ -9,13 +9,17 @@
         Today
       </th>
       <th role="columnheader" class="nhsuk-table__header--numeric" scope="col" aria-sort="none">
-        Past 7 days
+        Yesterday
       </th>
       <th role="columnheader" class="nhsuk-table__header--numeric" scope="col" aria-sort="none">
-        {{ (monthToday | monthName) }} to date
+        <span style="display:block;">{{ lastCalendarWeekHeaderLineOne }}</span>
+        <span style="display:block;">{{ lastCalendarWeekHeaderLineTwo }}</span>
       </th>
       <th role="columnheader" class="nhsuk-table__header--numeric" scope="col" aria-sort="none">
-        Total
+        {{ (lastCalendarMonth | monthName) }} {{ lastCalendarMonthYear }}
+      </th>
+      <th role="columnheader" class="nhsuk-table__header--numeric" scope="col" aria-sort="none">
+        {{ (monthToday | monthName) }} {{ currentYear }}
       </th>
     </tr>
   </thead>
@@ -30,13 +34,16 @@
           {{ totalBySite.today }}
         </td>
         <td class="nhsuk-table__cell--numeric">
-          {{ totalBySite.past7Days }}
+          {{ totalBySite.yesterday }}
         </td>
         <td class="nhsuk-table__cell nhsuk-table__cell--numeric">
-          {{ totalBySite.month }}
+          {{ totalBySite.lastCalendarWeek }}
         </td>
         <td class="nhsuk-table__cell--numeric">
-          {{ totalBySite.total }}
+          {{ totalBySite.lastCalendarMonth }}
+        </td>
+        <td class="nhsuk-table__cell--numeric">
+          {{ totalBySite.thisMonth }}
         </td>
       </tr>
     {% endfor %}

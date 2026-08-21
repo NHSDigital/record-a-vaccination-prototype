@@ -1,7 +1,7 @@
 
 {% extends 'layout.html' %}
 
-{% set pageName = "Vaccine product age warning" %}
+{% set pageName = "Patient not in PCN" %}
 
 {% set currentSection = "vaccinate" %}
 
@@ -21,8 +21,7 @@
       {% endif %}
 
       {% set panelHtml %}
-        <p>Comirnaty 30 LP.8.1 is usually recommended for people aged 12 and over. {{ displayName }} is 11 years old.</p>
-        <p>Check before going ahead or refer to a prescriber for a patient specific direction (PSD).</p>
+        <p>Your organisation may not be paid for this vaccination.</p>
 
         {{ button({
           "text": "Continue anyway",
@@ -32,7 +31,7 @@
       {% endset %}
 
       {{ panel({
-        titleText: displayName + " may be too young for this vaccine product",
+        titleText: displayName + "'s GP surgery is not in your PCN",
         html: panelHtml,
         classes: "nhsuk-panel--interruption"
       }) }}

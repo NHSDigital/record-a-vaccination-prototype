@@ -86,6 +86,72 @@ module.exports = router => {
     res.redirect('/record-vaccinations/delivery-team')
   })
 
+  router.get('/record-vaccinations/patient-history-deceased', (req, res) => {
+    const data = req.session.data
+    data.firstName = 'Jodie'
+    data.lastName = 'Brown'
+    data.dateOfBirth = { day: '15', month: '3', year: '1984' }
+    data.nhsNumber = '9123456789'
+    res.render('record-vaccinations/patient-history-deceased')
+  })
+
+  router.get('/record-vaccinations/vaccination-date-deceased', (req, res) => {
+    const data = req.session.data
+    const vaccinationDate = data.vaccinationDate || {}
+    const vaccinationDateAsDate = dateFromYearMonthDay(vaccinationDate.year, vaccinationDate.month, vaccinationDate.day)
+    let vaccinationDateError
+    const dateOfDeath = new Date(2024, 3, 20, 12) // 20 April 2024
+
+    if (req.query.showError === 'yes') {
+      if (!vaccinationDateAsDate) {
+        vaccinationDateError = 'Enter the vaccination date'
+      } else {
+        const today = new Date()
+        today.setHours(0, 0, 0, 0)
+        vaccinationDateAsDate.setHours(0, 0, 0, 0)
+        dateOfDeath.setHours(0, 0, 0, 0)
+
+        if (vaccinationDateAsDate >= today) {
+          vaccinationDateError = 'Enter a date in the past'
+        } else if (vaccinationDateAsDate > dateOfDeath) {
+          vaccinationDateError = 'The date of vaccination must be the same as or before the date the patient died (20 April 2024)'
+        }
+      }
+    }
+
+    res.render('record-vaccinations/vaccination-date-deceased', {
+      vaccinationDateError
+    })
+  })
+
+  router.post('/record-vaccinations/answer-date-deceased', (req, res) => {
+    const data = req.session.data
+    const vaccinationDate = data.vaccinationDate || {}
+    const vaccinationDateAsDate = dateFromYearMonthDay(vaccinationDate.year, vaccinationDate.month, vaccinationDate.day)
+    const dateOfDeath = new Date(2024, 3, 20, 12) // 20 April 2024
+
+    if (!vaccinationDateAsDate) {
+      return res.redirect('/record-vaccinations/vaccination-date-deceased?showError=yes')
+    }
+
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    vaccinationDateAsDate.setHours(0, 0, 0, 0)
+    dateOfDeath.setHours(0, 0, 0, 0)
+
+    if (vaccinationDateAsDate >= today) {
+      return res.redirect('/record-vaccinations/vaccination-date-deceased?showError=yes')
+    }
+
+    if (vaccinationDateAsDate > dateOfDeath) {
+      return res.redirect('/record-vaccinations/vaccination-date-deceased?showError=yes')
+    }
+
+    data.vaccinationToday = 'no'
+    data.patientIsDeceased = true
+    res.redirect('/record-vaccinations/delivery-team')
+  })
+
   router.get('/record-vaccinations/delivery-team', (req, res) => {
     let errors = []
     const data = req.session.data
@@ -227,8 +293,17 @@ module.exports = router => {
     const nhsNumberKnown = req.session.data.nhsNumberKnown;
     req.session.data.nhsNumber = req.session.data.nhsNumber.trim()
     const nhsNumber = req.session.data.nhsNumber.replaceAll(' ', '')
+    const data = req.session.data
 
-    if (nhsNumberKnown === "yes" && nhsNumber.match(/^\d{10}$/) &&  nhsNumber.startsWith('9')) {
+    if (nhsNumberKnown === "yes" && nhsNumber.match(/^\d{10}$/) &&  nhsNumber.startsWith('9') && data.gpit === "noGP") {
+
+      req.session.data.firstName = "Jodie"
+      req.session.data.lastName = "Brown"
+      req.session.data.dateOfBirth = {day: "15", month: "8", year: "1949"}
+      req.session.data.postcode = "GD3 I83"
+
+      res.redirect('/record-vaccinations/patient-history-no-gp')
+    } else if (nhsNumberKnown === "yes" && nhsNumber.match(/^\d{10}$/) &&  nhsNumber.startsWith('9')) {
 
       req.session.data.firstName = "Jodie"
       req.session.data.lastName = "Brown"
@@ -439,7 +514,7 @@ module.exports = router => {
 
     if (firstName != '' && lastName != '' && dateOfBirth.day != '' && dateOfBirth.month != '' && dateOfBirth.year != '' && postcode != '' && gender != '') {
 
-      res.redirect('/record-vaccinations/consent')
+      res.redirect('/record-vaccinations/patient-history-none')
     } else {
       res.redirect('/record-vaccinations/create-a-record?showErrors=yes')
     }
@@ -845,7 +920,7 @@ module.exports = router => {
 
         return (expiryDate > dateToday)
       })
-      .filter((batch) => !batch.depletedDate)
+      .filter((batch) => !batch.deactivatedDate)
 
     if (req.query.showError === 'yes') {
 
@@ -891,6 +966,10 @@ module.exports = router => {
 
     if (!data.locationType) {
       redirectPath = "/record-vaccinations/location?showErrors=yes"
+    } else if (data.gpit === "notInPCN" && data.locationType !== "Outreach event"){
+      redirectPath = "/record-vaccinations/covid-19/not-in-pcn-warning"
+    } else if (data.gpit === "noGP" && data.locationType !== "Outreach event"){
+      redirectPath = "/record-vaccinations/covid-19/no-gp-surgery-warning"
     } else {
       redirectPath = "/record-vaccinations/consent"
     }
