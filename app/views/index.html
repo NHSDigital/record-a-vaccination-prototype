@@ -42,9 +42,9 @@
 
     {% set customConfigHtml %}
     <ul class="nhsuk-list">
-      <li><a href="/prototype-setup/custom-config">Set up a custom scenario</a> — choose user, vaccines and data volume
+      <li><a href='/prototype-setup/custom-config">Set up a custom scenario</a> — choose user, vaccines and data volume
         step by step</li>
-      <li><a href="/prototype-setup">Manage prototype data</a> — add or remove users, batches and vaccination records
+      <li><a href='/prototype-setup">Manage prototype data</a> — add or remove users, batches and vaccination records
         individually</li>
     </ul>
     {% endset %}
@@ -83,7 +83,7 @@
     <h2>Signed-out interface</h2>
 
     <ul class="nhsuk-grid-row nhsuk-card-group">
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
         {{ card({
         heading: {
         text: "Product page",
@@ -95,7 +95,7 @@
         variant: "primary"
         }) }}
       </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
         {{ card({
         heading: {
         text: "Email invite",
@@ -113,11 +113,15 @@
 
     <h2>Main interface</h2>
 
-    <p>Quick access links below apply the Pharmacy lead admin preset first, so you can open these pages without manually
-      signing in.</p>
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-two-thirds">
+        <p>Quick access links below apply the Pharmacy lead admin preset first, so you can open these pages without manually
+          signing in.</p>
+      </div>
+    </div>
 
     <ul class="nhsuk-grid-row nhsuk-card-group">
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
         {{ card({
         heading: {
         text: "Record vaccinations",
@@ -129,7 +133,7 @@
         variant: "primary"
         }) }}
       </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
         {{ card({
         heading: {
         text: "Dashboard",
@@ -344,162 +348,159 @@
     <h2>Error pages</h2>
 
     {% set generalErrorsTabHtml %}
-    <ul class="nhsuk-grid-row nhsuk-card-group">
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Sorry, there is a problem with the service (500 error)",
-        size: "s"
-        },
-        description: "Use this page for unexpected internal server errors.",
-        href: "/errors/500",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Sorry, the service is unavailable (503 error)",
-        size: "s"
-        },
-        description: "Use this page when the service is temporarily unavailable.",
-        href: "/errors/503",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Rate limited (429 error)",
-        size: "s"
-        },
-        description: "Use this page when too many requests are made in a short time.",
-        href: "/errors/rate-limit",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Problem saving the vaccination (Regional admin has removed vaccines mid-recording)",
-        size: "s"
-        },
-        description: "Use this page when a vaccine becomes unavailable during the recording flow.",
-        href: "/errors/vaccine-disabled",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-    </ul>
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Error message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/errors/500'>Sorry, there is a problem with the service (500 error)</a>"
+    },
+    {
+    text: "Use this page for unexpected internal server errors."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/503'>Sorry, the service is unavailable (503 error)</a>"
+    },
+    {
+    text: "Use this page when the service is temporarily unavailable."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/rate-limit'>Rate limited (429 error)</a>"
+    },
+    {
+    text: "Use this page when too many requests are made in a short time."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/vaccine-disabled'>Problem saving the vaccination (Regional admin has removed vaccines mid-recording)</a>"
+    },
+    {
+    text: "Use this page when a vaccine becomes unavailable during the recording flow."
+    }
+    ]
+    ]
+    }) }}
     {% endset %}
 
     {% set authErrorsTabHtml %}
-    <ul class="nhsuk-grid-row nhsuk-card-group">
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "You previously logged in a different way (Keycloak error)",
-        size: "s"
-        },
-        description: "Use this page when a user signs in with a different identity provider than before.",
-        href: "/auth/keycloak-existing-account-new-login",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Sorry there is a problem with your account (user deactivated)",
-        size: "s"
-        },
-        description: "Use this page when a signed-in user account has been deactivated.",
-        href: "/errors/deactivated-user",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "We cannot find a user with this email (after a successful 3rd party login)",
-        size: "s"
-        },
-        description: "Use this page when authentication succeeds but no matching prototype user is found.",
-        href: "/auth/user-not-recognised",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Sorry, there is a problem (Keycloak generic error)",
-        size: "s"
-        },
-        description: "Use this page for generic identity provider or sign-in timeout errors.",
-        href: "/errors/keycloak-timeout",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-    </ul>
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Error message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/auth/keycloak-existing-account-new-login'>You previously logged in a different way (Keycloak error)</a>"
+    },
+    {
+    text: "Use this page when a user signs in with a different identity provider than before."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/deactivated-user'>Sorry there is a problem with your account (user deactivated)</a>"
+    },
+    {
+    text: "Use this page when a signed-in user account has been deactivated."
+    }
+    ],
+    [
+    {
+    html: "<a href='/auth/user-not-recognised'>We cannot find a user with this email (after a successful 3rd party login)</a>"
+    },
+    {
+    text: "Use this page when authentication succeeds but no matching prototype user is found."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/keycloak-timeout'>Sorry, there is a problem (Keycloak generic error)</a>"
+    },
+    {
+    text: "Use this page for generic identity provider or sign-in timeout errors."
+    }
+    ]
+    ]
+    }) }}
     {% endset %}
 
     {% set apiErrorsTabHtml %}
-    <ul class="nhsuk-grid-row nhsuk-card-group">
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "There is a temporary problem getting [patient name]'s vaccination history (history API issue)",
-        size: "s"
-        },
-        description: "Use this page when vaccination history cannot be retrieved from the history API.",
-        href: "/errors/no-vaccination-history",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "There is a temporary problem accessing appointments (MYA is down/API issue)",
-        size: "s"
-        },
-        description: "Use this page when the appointments dependency is unavailable.",
-        href: "/errors/mya-downtime",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "There is a temporary problem getting the patient's details (PDS API issue)",
-        size: "s"
-        },
-        description: "Use this page when patient details cannot be fetched from PDS.",
-        href: "/errors/no-patient-details",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "There is still a problem getting the patient's details (ongoing PDS API issue)",
-        size: "s"
-        },
-        description: "Use this page for ongoing patient detail lookup failures after retry.",
-        href: "/errors/still-no-patient-details",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-    </ul>
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Error message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/errors/no-vaccination-history'>There is a temporary problem getting [patient name]'s vaccination history (history API issue)</a>"
+    },
+    {
+    text: "Use this page when vaccination history cannot be retrieved from the history API."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/mya-downtime'>There is a temporary problem accessing appointments (MYA is down/API issue)</a>"
+    },
+    {
+    text: "Use this page when the appointments dependency is unavailable."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/no-patient-details'>There is a temporary problem getting the patient's details (PDS API issue)</a>"
+    },
+    {
+    text: "Use this page when patient details cannot be fetched from PDS."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/still-no-patient-details'>There is still a problem getting the patient's details (ongoing PDS API issue)</a>"
+    },
+    {
+    text: "Use this page for ongoing patient detail lookup failures after retry."
+    }
+    ]
+    ]
+    }) }}
     {% endset %}
 
     {{ tabs({
@@ -535,201 +536,235 @@
     <h2>Warning messages</h2>
 
     {% set covid19WarningsTabHtml %}
-    <ul class="nhsuk-grid-row nhsuk-card-group">
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Had a COVID-19 vaccine less than 3 months ago",
-        size: "s"
-        },
-        description: "Use this warning when a recent COVID-19 vaccination falls within the interval rule.",
-        href: "/record-vaccinations/covid-19/interval-warning",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Too young for product",
-        size: "s"
-        },
-        description: "Use this warning when the patient is below the age range for the selected COVID-19 product.",
-        href: "/record-vaccinations/covid-19/too-young-warning",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Too old for product",
-        size: "s"
-        },
-        description: "Use this warning when the patient is above the supported age range for the selected COVID-19 product.",
-        href: "/record-vaccinations/covid-19/too-old-warning",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "No GP surgery and not outreach",
-        size: "s"
-        },
-        description: "Use this warning when there is no GP surgery on record and the vaccination is not marked as outreach.",
-        href: "/record-vaccinations/covid-19/no-gp-surgery-warning",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Not in PCN and not outreach",
-        size: "s"
-        },
-        description: "Use this warning when the patient is outside the PCN and the vaccination is not outreach.",
-        href: "/record-vaccinations/covid-19/not-in-pcn-warning",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-    </ul>
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Warning message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/record-vaccinations/covid-19/interval-warning'>Had a COVID-19 vaccine less than 3 months ago</a>"
+    },
+    {
+    text: "Use this warning when a recent COVID-19 vaccination falls within the interval rule."
+    }
+    ],
+    [
+    {
+    html: "<a href='/record-vaccinations/covid-19/too-young-warning'>Too young for product</a>"
+    },
+    {
+    text: "Use this warning when the patient is below the age range for the selected COVID-19 product."
+    }
+    ],
+    [
+    {
+    html: "<a href='/record-vaccinations/covid-19/too-old-warning'>Too old for product</a>"
+    },
+    {
+    text: "Use this warning when the patient is above the supported age range for the selected COVID-19 product."
+    }
+    ],
+    [
+    {
+    html: "<a href='/record-vaccinations/covid-19/no-gp-surgery-warning'>No GP surgery and not outreach</a>"
+    },
+    {
+    text: "Use this warning when there is no GP surgery on record and the vaccination is not marked as outreach."
+    }
+    ],
+    [
+    {
+    html: "<a href='/record-vaccinations/covid-19/not-in-pcn-warning'>Not in PCN and not outreach</a>"
+    },
+    {
+    text: "Use this warning when the patient is outside the PCN and the vaccination is not outreach."
+    }
+    ]
+    ]
+    }) }}
     {% endset %}
 
     {% set fluWarningsTabHtml %}
-    <ul class="nhsuk-grid-row nhsuk-card-group">
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Too young for product",
-        size: "s"
-        },
-        description: "Use this warning when the patient is below the age range for the selected flu product.",
-        href: "/record-vaccinations/flu/too-young-warning",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Too old for product",
-        size: "s"
-        },
-        description: "Use this warning when the patient is above the age range for the selected flu product.",
-        href: "/record-vaccinations/flu/too-old-warning",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-    </ul>
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Warning message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/record-vaccinations/flu/too-young-warning'>Too young for product</a>"
+    },
+    {
+    text: "Use this warning when the patient is below the age range for the selected flu product."
+    }
+    ],
+    [
+    {
+    html: "<a href='/record-vaccinations/flu/too-old-warning'>Too old for product</a>"
+    },
+    {
+    text: "Use this warning when the patient is above the age range for the selected flu product."
+    }
+    ]
+    ]
+    }) }}
     {% endset %}
 
     {% set rsvWarningsTabHtml %}
-    <ul class="nhsuk-grid-row nhsuk-card-group">
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Not yet 28 weeks pregnant",
-        size: "s"
-        },
-        description: "Use this warning when RSV vaccination is attempted before 28 weeks of pregnancy.",
-        href: "/record-vaccinations/rsv/not-yet-28-weeks-pregnant-warning",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-    </ul>
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Warning message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/record-vaccinations/rsv/not-yet-28-weeks-pregnant-warning'>Not yet 28 weeks pregnant</a>"
+    },
+    {
+    text: "Use this warning when RSV vaccination is attempted before 28 weeks of pregnancy."
+    }
+    ]
+    ]
+    }) }}
     {% endset %}
 
     {% set pertussisWarningsTabHtml %}
-    <ul class="nhsuk-grid-row nhsuk-card-group">
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Not yet 16 weeks pregnant",
-        size: "s"
-        },
-        description: "Use this warning when pertussis vaccination is attempted before 16 weeks of pregnancy.",
-        href: "/record-vaccinations/pertussis/not-yet-16-weeks-pregnant-warning",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-    </ul>
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Warning message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/record-vaccinations/pertussis/not-yet-16-weeks-pregnant-warning'>Not yet 16 weeks pregnant</a>"
+    },
+    {
+    text: "Use this warning when pertussis vaccination is attempted before 16 weeks of pregnancy."
+    }
+    ]
+    ]
+    }) }}
     {% endset %}
 
     {% set mmrWarningsTabHtml %}
-    <ul class="nhsuk-grid-row nhsuk-card-group">
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Had an MMR vaccine less than 4 weeks ago",
-        size: "s"
-        },
-        description: "Use this warning when another MMR dose was recorded too recently.",
-        href: "/record-vaccinations/mmr/interval-warning",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Already had 2 doses",
-        size: "s"
-        },
-        description: "Use this warning when the patient already has two recorded MMR doses.",
-        href: "/record-vaccinations/mmr/already-had-2-doses-warning",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Too young for the London MMR service",
-        size: "s"
-        },
-        description: "Use this warning when the patient is below the eligible age for the London MMR service.",
-        href: "/record-vaccinations/mmr/too-young-warning",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Too old for the London MMR service",
-        size: "s"
-        },
-        description: "Use this warning when the patient is above the eligible age for the London MMR service.",
-        href: "/record-vaccinations/mmr/too-old-warning",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-    </ul>
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Warning message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/record-vaccinations/mmr/interval-warning'>Had an MMR vaccine less than 4 weeks ago</a>"
+    },
+    {
+    text: "Use this warning when another MMR dose was recorded too recently."
+    }
+    ],
+    [
+    {
+    html: "<a href='/record-vaccinations/mmr/already-had-2-doses-warning'>Already had 2 doses</a>"
+    },
+    {
+    text: "Use this warning when the patient already has two recorded MMR doses."
+    }
+    ],
+    [
+    {
+    html: "<a href='/record-vaccinations/mmr/too-young-warning'>Too young for the London MMR service</a>"
+    },
+    {
+    text: "Use this warning when the patient is below the eligible age for the London MMR service."
+    }
+    ],
+    [
+    {
+    html: "<a href='/record-vaccinations/mmr/too-old-warning'>Too old for the London MMR service</a>"
+    },
+    {
+    text: "Use this warning when the patient is above the eligible age for the London MMR service."
+    }
+    ]
+    ]
+    }) }}
     {% endset %}
 
     {% set menbWarningsTabHtml %}
-    <ul class="nhsuk-grid-row nhsuk-card-group">
-      <li class="nhsuk-grid-column-full nhsuk-card-group__item">
-        {{ card({
-        heading: {
-        text: "Had a MenB vaccine less than 4 weeks ago",
-        size: "s"
-        },
-        description: "Use this warning when a prior MenB dose was given within the restricted interval.",
-        href: "/record-vaccinations/menb/interval-warning",
-        clickable: true,
-        variant: "secondary"
-        }) }}
-      </li>
-    </ul>
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Warning message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/record-vaccinations/menb/interval-warning'>Had a MenB vaccine less than 4 weeks ago</a>"
+    },
+    {
+    text: "Use this warning when a prior MenB dose was given within the restricted interval."
+    }
+    ]
+    ]
+    }) }}
     {% endset %}
 
     {{ tabs({
