@@ -1,0 +1,70 @@
+{% set patientFullName = ((data.firstName or "") + " " + (data.lastName or "")) | trim %}
+
+{% if data.dateOfBirth and data.dateOfBirth.day %}
+  {% set patientDateOfBirth = data.dateOfBirth | isoDateFromDateInput | govukDate %}
+  {% set patientAge = data.dateOfBirth | isoDateFromDateInput | age %}
+{% elseif data.dateOfBirth %}
+  {% set patientDateOfBirth = data.dateOfBirth | govukDate %}
+  {% set patientAge = data.dateOfBirth | age %}
+{% else %}
+  {% set patientDateOfBirth = "Not provided" %}
+  {% set patientAge = "Not provided" %}
+{% endif %}
+
+{% if data.vaccinationDate and data.vaccinationDate.day %}
+  {% set vaccinationDateDisplay = data.vaccinationDate | isoDateFromDateInput | govukDate %}
+{% elseif data.vaccinationToday == "yes" %}
+  {% set vaccinationDateDisplay = "Today" %}
+{% else %}
+  {% set vaccinationDateDisplay = "Not provided" %}
+{% endif %}
+
+{% if currentOrganisation and currentOrganisation.sites and data.siteId %}
+  {% set selectedSite = currentOrganisation.sites | findById(data.siteId) %}
+{% else %}
+  {% set selectedSite = null %}
+{% endif %}
+
+{% if data.users and data.vaccinatorId %}
+  {% set selectedVaccinator = data.users | findById(data.vaccinatorId) %}
+{% elseif currentUser and data.vaccinatorId and data.currentUserId == data.vaccinatorId %}
+  {% set selectedVaccinator = currentUser %}
+{% else %}
+  {% set selectedVaccinator = null %}
+{% endif %}
+
+<div class="nhsuk-card nhsuk-card--feature">
+  <div class="nhsuk-card__content">
+    <h3 class="nhsuk-card__heading">
+      Patient information
+    </h3>
+    <ul class="nhsuk-list" role="list">
+      <li>
+        <p class="nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-1">Patient name and NHS number</p>
+        <p class="nhsuk-u-margin-bottom-1">{{ patientFullName if patientFullName else "Not provided" }}</p>
+        <p class="nhsuk-u-secondary-text-colour">{{ data.nhsNumber if data.nhsNumber else "Not provided" }}</p>
+      </li>
+      <li>
+        <p class="nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-1">Date of birth</p>
+        <p class="nhsuk-u-margin-bottom-1">{{ patientDateOfBirth }}</p>
+        <p class="nhsuk-u-secondary-text-colour">{{ patientAge }}{% if patientAge != "Not provided" %} old{% endif %}</p>
+      </li>
+      <li>
+        <p class="nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-1">Vaccination date</p>
+        <p>{{ vaccinationDateDisplay }}</p>
+      </li>
+      <li>
+        <p class="nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-1">Site</p>
+        <p>{{ selectedSite.name if selectedSite else "Not provided" }}</p>
+      </li>
+      <li>
+        <p class="nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-1">Vaccinator</p>
+        <p>{{ (selectedVaccinator.firstName + " " + selectedVaccinator.lastName) if selectedVaccinator else "Not provided" }}</p>
+      </li>
+      <li>
+        <p class="nhsuk-u-font-weight-bold nhsuk-u-margin-bottom-1">Vaccine</p>
+        <p>{{ (data.vaccine | capitaliseFirstLetter) if data.vaccine else "Not provided" }}</p>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -5,98 +5,101 @@
 {% set currentSection = "vaccinate" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/record-vaccinations/patient-history" }) }}
+{{ backLink({ href: "/record-vaccinations/patient-history" }) }}
 {% endblock %}
 
 {% block content %}
-  <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-two-thirds">
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-two-thirds">
 
-      {% if vaccinationTodayError == 'required' %}
-        {% set vaccinationTodayErrorMessage = 'Select if the vaccination is today' %}
-      {% endif %}
+    {% if vaccinationTodayError == 'required' %}
+    {% set vaccinationTodayErrorMessage = 'Select if the vaccination is today' %}
+    {% endif %}
 
-      {% if vaccinationTodayErrorMessage %}
-        {{ errorSummary({
-          titleText: "There is a problem",
-          errorList: [
-            {
-              text: vaccinationTodayErrorMessage,
-              href: "#vaccinationToday-1"
-            }
-          ]
-        }) }}
-      {% endif %}
+    {% if vaccinationTodayErrorMessage %}
+    {{ errorSummary({
+    titleText: "There is a problem",
+    errorList: [
+    {
+    text: vaccinationTodayErrorMessage,
+    href: "#vaccinationToday-1"
+    }
+    ]
+    }) }}
+    {% endif %}
 
 
-      <form action="/record-vaccinations/answer-date" method="post" novalidate>
-        {% set previousDateHtml %}
+    <form action="/record-vaccinations/answer-date" method="post" novalidate>
+      {% set previousDateHtml %}
 
-          {{ dateInput({
-            id: "vaccinationDate",
-            namePrefix: "vaccinationDate",
-            fieldset: {
-              legend: {
-                text: "Vaccination date",
-                classes: "nhsuk-label--s"
-              }
-            },
-            hint: {
-              text: "For example, 15 3 2024"
-            },
-            items: [
-              {
-                name: "day",
-                classes: "nhsuk-input--width-2"
-              },
-              {
-                name: "month",
-                classes: "nhsuk-input--width-2"
-              },
-              {
-                name: "year",
-                classes: "nhsuk-input--width-4"
-              }
-            ]
-          }) }}
-        {% endset -%}
+      {{ dateInput({
+      id: "vaccinationDate",
+      namePrefix: "vaccinationDate",
+      fieldset: {
+      legend: {
+      text: "Vaccination date",
+      classes: "nhsuk-label--s"
+      }
+      },
+      hint: {
+      text: "For example, 15 3 2024"
+      },
+      items: [
+      {
+      name: "day",
+      classes: "nhsuk-input--width-2"
+      },
+      {
+      name: "month",
+      classes: "nhsuk-input--width-2"
+      },
+      {
+      name: "year",
+      classes: "nhsuk-input--width-4"
+      }
+      ]
+      }) }}
+      {% endset -%}
 
-        {{ radios({
-          idPrefix: "vaccinationToday",
-          name: "vaccinationToday",
-          fieldset: {
-            legend: {
-              text: "Is the vaccination today?",
-              classes: "nhsuk-fieldset__legend--l",
-              isPageHeading: "true"
-            }
-          },
-          value: data.vaccinationToday,
-          errorMessage: {
-            text: vaccinationTodayErrorMessage
-          } if vaccinationTodayErrorMessage,
-          items: [
-            {
-              value: "yes",
-              text: "Yes"
-            },
-            {
-              value: "no",
-              text: "No, it was on a previous date",
-              conditional: {
-                html: previousDateHtml
-              }
-            }
-          ]
-        }) }}
+      {{ radios({
+      idPrefix: "vaccinationToday",
+      name: "vaccinationToday",
+      fieldset: {
+      legend: {
+      text: "Is the vaccination today?",
+      classes: "nhsuk-fieldset__legend--l",
+      isPageHeading: "true"
+      }
+      },
+      value: data.vaccinationToday,
+      errorMessage: {
+      text: vaccinationTodayErrorMessage
+      } if vaccinationTodayErrorMessage,
+      items: [
+      {
+      value: "yes",
+      text: "Yes"
+      },
+      {
+      value: "no",
+      text: "No, it was on a previous date",
+      conditional: {
+      html: previousDateHtml
+      }
+      }
+      ]
+      }) }}
 
-        {{ button({
-          text: "Continue"
-        })}}
-      </form>
+      {{ button({
+      text: "Continue"
+      })}}
+    </form>
 
-    </div>
   </div>
 
-{% endblock %}
+  <div class="nhsuk-grid-column-one-third">
+    {% include "includes/_record-vaccinations-patient-information-card.html" %}
+  </div>
+</div>
 
+{% endblock %}
