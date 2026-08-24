@@ -658,18 +658,6 @@ module.exports = (router) => {
   })
 
   // ----------------------------------------------------------------
-  // Preset: Support admin (Sally Green)
-  // ----------------------------------------------------------------
-
-  router.get('/prototype-setup/preset/support-admin', (req, res) => {
-    resetSession(req)
-    const data = req.session.data
-    data.currentUserId = '66435353634'
-    data.currentOrganisationId = null
-    res.redirect('/support/regions')
-  })
-
-  // ----------------------------------------------------------------
   // Preset: Limited-vaccine pharmacy (Jeremy Blue Holborn, FT81513)
   // ----------------------------------------------------------------
 
