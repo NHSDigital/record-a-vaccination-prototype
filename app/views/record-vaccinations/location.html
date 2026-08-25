@@ -39,7 +39,7 @@
           <div class="nhsuk-hint" id="care-home-hint">
             Search by name or ODS code
           </div>
-          <select class="nhsuk-select" id="careHomeId" name="careHomeId"
+          <select class="nhsuk-select" id="care-home" name="careHomeId"
             aria-describedby="care-home-hint" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
             <option {% if not data.caeHome %}selected{% endif %} value=""></option>
 
@@ -71,7 +71,7 @@
             }
           },
           hint: {
-            text: "This is needed for payment and reporting. You can use the note section later to record more details about the location, if you need."
+            text: "This is needed for payment and reporting."
           },
           errorMessage: {
             text: (errorList | first).text
@@ -80,10 +80,7 @@
           items: [
             {
               text: "On site",
-              value: "On site",
-              hint: {
-                text: "Includes: hospital hubs, vaccination centres, Primary Care Networks (PCNs), pharmacies, GP surgeries and detained settings"
-              }
+              value: "On site"
             },
             {
               value: "Care home",
@@ -117,4 +114,3 @@
   </div>
 
 {% endblock %}
-
