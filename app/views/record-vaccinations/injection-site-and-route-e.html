@@ -1,0 +1,260 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Where did you give the injection?" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/consent" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if injectionRouteError and injectionRouteError.code == "required" %}
+        {% set injectionRouteErrorMessage = "Select where you gave the injection" %}
+      {% endif %}
+
+      {% if otherinjectionRouteError and otherinjectionRouteError.code == "required" %}
+        {% set otherinjectionRouteErrorMessage = "Select where you gave the injection" %}
+      {% endif %}
+
+      {% set errorList = [] %}
+      {% for error in errors %}
+        {% if error.href == "#injection-route-1" and injectionRouteErrorMessage %}
+          {% set errorList = (errorList.push({
+            text: injectionRouteErrorMessage,
+            href: error.href
+          }), errorList) %}
+        {% elseif error.href == "#other-injection-route-1" and otherinjectionRouteErrorMessage %}
+          {% set errorList = (errorList.push({
+            text: otherinjectionRouteErrorMessage,
+            href: error.href
+          }), errorList) %}
+        {% endif %}
+      {% endfor %}
+
+      {% if (errorList | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errorList
+        }) }}
+      {% endif %}
+
+      <form action="/record-vaccinations/answer-injection-route" method="post" novalidate>
+
+        {% set injectionRouteLeftArmHtml %}
+
+        {{ radios({
+          idPrefix: "other-injection-route-left-arm",
+          name: "otherinjectionRouteLeftArm",
+          fieldset: {
+            legend: {
+              text: "Injection route",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "IntramuscularLeftArm",
+              text: "Intramuscular"
+            },
+            {
+              value: "SubcutaneousLeftArm",
+              text: "Subcutaneous"
+            }
+          ]
+        }) }}
+        {% endset %}
+
+        {% set injectionRouteRightArmHtml %}
+
+        {{ radios({
+          idPrefix: "other-injection-route-right-arm",
+          name: "otherinjectionRouteRightArm",
+          fieldset: {
+            legend: {
+              text: "Injection route",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "IntramuscularRightArm",
+              text: "Intramuscular"
+            },
+            {
+              value: "SubcutaneousRightArm",
+              text: "Subcutaneous"
+            }
+          ]
+        }) }}
+        {% endset %}
+
+        {% set injectionRouteLeftButtockHtml %}
+
+        {{ radios({
+          idPrefix: "other-injection-route-left-buttock",
+          name: "otherinjectionRouteLeftButtock",
+          fieldset: {
+            legend: {
+              text: "Injection route",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "IntramuscularLeftButtock",
+              text: "Intramuscular"
+            },
+            {
+              value: "SubcutaneousLeftButtock",
+              text: "Subcutaneous"
+            }
+          ]
+        }) }}
+        {% endset %}
+
+        {% set injectionRouteRightButtockHtml %}
+
+        {{ radios({
+          idPrefix: "other-injection-route-right-buttock",
+          name: "otherinjectionRouteRightButtock",
+          fieldset: {
+            legend: {
+              text: "Injection route",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "IntramuscularRightButtock",
+              text: "Intramuscular"
+            },
+            {
+              value: "SubcutaneousRightButtock",
+              text: "Subcutaneous"
+            }
+          ]
+        }) }}
+        {% endset %}
+
+        {% set injectionRouteLeftThighHtml %}
+
+        {{ radios({
+          idPrefix: "other-injection-route-left-thigh",
+          name: "otherinjectionRouteLeftThigh",
+          fieldset: {
+            legend: {
+              text: "Injection route",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "IntramuscularLeftThigh",
+              text: "Intramuscular"
+            },
+            {
+              value: "SubcutaneousLeftThigh",
+              text: "Subcutaneous"
+            }
+          ]
+        }) }}
+        {% endset %}
+
+        {% set injectionRouteRightThighHtml %}
+
+        {{ radios({
+          idPrefix: "other-injection-route-right-thigh",
+          name: "otherinjectionRouteRightThigh",
+          fieldset: {
+            legend: {
+              text: "Injection route",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "IntramuscularRightThigh",
+              text: "Intramuscular"
+            },
+            {
+              value: "SubcutaneousRightThigh",
+              text: "Subcutaneous"
+            }
+          ]
+        }) }}
+        {% endset %}
+
+        {{ radios({
+          idPrefix: "injection-route",
+          name: "injectionRoute",
+          fieldset: {
+            legend: {
+              text: ("Where did you give the injection?" if data.vaccinationToday == 'yes' else "Where was the injection given?"),
+              size: "l",
+              isPageHeading: true
+            }
+          },
+          value: data.injectionRoute,
+          errorMessage: {
+            text: injectionRouteErrorMessage
+          } if injectionRouteErrorMessage,
+          items: [
+            {
+              value: "Left arm",
+              text: "Left arm",
+              conditional: {
+                html: injectionRouteLeftArmHtml
+              }
+            },
+            {
+              value: "Right arm",
+              text: "Right arm",
+              conditional: {
+                html: injectionRouteRightArmHtml
+              }
+            },
+            {
+              value: "Left buttock",
+              text: "Left buttock",
+              conditional: {
+                html: injectionRouteLeftButtockHtml
+              }
+            },
+            {
+              value: "Right buttock",
+              text: "Right buttock",
+              conditional: {
+                html: injectionRouteRightButtockHtml
+              }
+            },
+            {
+              value: "Left thigh",
+              text: "Left thigh",
+              conditional: {
+                html: injectionRouteLeftThighHtml
+              }
+            },
+            {
+              value: "Right thigh",
+              text: "Right thigh",
+              conditional: {
+                html: injectionRouteRightThighHtml
+              }
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
