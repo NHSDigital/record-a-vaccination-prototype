@@ -44,34 +44,155 @@
 
       <form action="/record-vaccinations/answer-injection-route" method="post" novalidate>
 
-        {% set injectionRouteHtml %}
+        {% set injectionRouteLeftArmHtml %}
 
         {{ radios({
-          idPrefix: "other-injection-route",
-          name: "otherinjectionRoute",
+          idPrefix: "other-injection-route-left-arm",
+          name: "otherinjectionRouteLeftArm",
           fieldset: {
             legend: {
               text: "Injection route",
               classes: "nhsuk-fieldset__legend--s"
             }
           },
-          errorMessage: {
-            text: otherinjectionRouteErrorMessage
-          } if otherinjectionRouteErrorMessage,
-          value: data.otherinjectionRoute,
           items: [
             {
-              value: "Intramuscular",
-              text: "Intramuscular"
+              value: "IntramuscularLeftArm",
+              text: "Intramuscular",
+              checked: true
             },
             {
-              value: "Subcutaneous",
+              value: "SubcutaneousLeftArm",
               text: "Subcutaneous"
             }
           ]
         }) }}
         {% endset %}
 
+        {% set injectionRouteRightArmHtml %}
+
+        {{ radios({
+          idPrefix: "other-injection-route-right-arm",
+          name: "otherinjectionRouteRightArm",
+          fieldset: {
+            legend: {
+              text: "Injection route",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "IntramuscularRightArm",
+              text: "Intramuscular",
+              checked: true
+            },
+            {
+              value: "SubcutaneousRightArm",
+              text: "Subcutaneous"
+            }
+          ]
+        }) }}
+        {% endset %}
+
+        {% set injectionRouteLeftButtockHtml %}
+
+        {{ radios({
+          idPrefix: "other-injection-route-left-buttock",
+          name: "otherinjectionRouteLeftButtock",
+          fieldset: {
+            legend: {
+              text: "Injection route",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "IntramuscularLeftButtock",
+              text: "Intramuscular",
+              checked: true
+            },
+            {
+              value: "SubcutaneousLeftButtock",
+              text: "Subcutaneous"
+            }
+          ]
+        }) }}
+        {% endset %}
+
+        {% set injectionRouteRightButtockHtml %}
+
+        {{ radios({
+          idPrefix: "other-injection-route-right-buttock",
+          name: "otherinjectionRouteRightButtock",
+          fieldset: {
+            legend: {
+              text: "Injection route",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "IntramuscularRightButtock",
+              text: "Intramuscular",
+              checked: true
+            },
+            {
+              value: "SubcutaneousRightButtock",
+              text: "Subcutaneous"
+            }
+          ]
+        }) }}
+        {% endset %}
+
+        {% set injectionRouteLeftThighHtml %}
+
+        {{ radios({
+          idPrefix: "other-injection-route-left-thigh",
+          name: "otherinjectionRouteLeftThigh",
+          fieldset: {
+            legend: {
+              text: "Injection route",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "IntramuscularLeftThigh",
+              text: "Intramuscular",
+              checked: true
+            },
+            {
+              value: "SubcutaneousLeftThigh",
+              text: "Subcutaneous"
+            }
+          ]
+        }) }}
+        {% endset %}
+
+        {% set injectionRouteRightThighHtml %}
+
+        {{ radios({
+          idPrefix: "other-injection-route-right-thigh",
+          name: "otherinjectionRouteRightThigh",
+          fieldset: {
+            legend: {
+              text: "Injection route",
+              classes: "nhsuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "IntramuscularRightThigh",
+              text: "Intramuscular",
+              checked: true
+            },
+            {
+              value: "SubcutaneousRightThigh",
+              text: "Subcutaneous"
+            }
+          ]
+        }) }}
+        {% endset %}
 
         {{ radios({
           idPrefix: "injection-route",
@@ -92,42 +213,42 @@
               value: "Left arm",
               text: "Left arm",
               conditional: {
-                html: injectionRouteHtml
+                html: injectionRouteLeftArmHtml
               }
             },
             {
               value: "Right arm",
               text: "Right arm",
               conditional: {
-                html: injectionRouteHtml
+                html: injectionRouteRightArmHtml
               }
             },
             {
               value: "Left buttock",
               text: "Left buttock",
               conditional: {
-                html: injectionRouteHtml
+                html: injectionRouteLeftButtockHtml
               }
             },
             {
               value: "Right buttock",
               text: "Right buttock",
               conditional: {
-                html: injectionRouteHtml
+                html: injectionRouteRightButtockHtml
               }
             },
             {
               value: "Left thigh",
               text: "Left thigh",
               conditional: {
-                html: injectionRouteHtml
+                html: injectionRouteLeftThighHtml
               }
             },
             {
               value: "Right thigh",
               text: "Right thigh",
               conditional: {
-                html: injectionRouteHtml
+                html: injectionRouteRightThighHtml
               }
             }
           ]
