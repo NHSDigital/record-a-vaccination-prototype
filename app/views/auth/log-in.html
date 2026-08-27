@@ -6,11 +6,11 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-6">Log in</h1>
+      <h1 class="nhsuk-heading-l">Log in</h1>
+      <p>All users can log in with Okta. Pharmacy users can also log in with their pharmacy IT system if it is listed here. See our <a href="https://guide.ravs.england.nhs.uk/logging-in/" target="_blank">logging in guidance (opens in new tab)</a>.</p>
 
       {{ button({
         text: "Log in with Okta",
-        classes: "app-button--min-width-2",
         href: "/auth/okta-sign-in"
       }) }}
 
@@ -19,7 +19,7 @@
       <div>
         {{ button({
           text: "Log in with MediCare",
-          classes: "nhsuk-button--secondary app-button--min-width-2",
+          classes: "nhsuk-button--secondary",
           href: "/auth/medicare-sign-in"
         }) }}
       </div>
@@ -27,25 +27,23 @@
       <div>
         {{ button({
           text: "Log in with PharmaPMR",
-          classes: "nhsuk-button--secondary app-button--min-width-2"
+          classes: "nhsuk-button--secondary"
         }) }}
       </div>
 
       <div>
         {{ button({
           text: "Log in with PharmacyPlus+",
-          classes: "nhsuk-button--secondary app-button--min-width-2"
+          classes: "nhsuk-button--secondary"
         }) }}
       </div>
 
       <div>
         {{ button({
           text: "Log in with Phoenix",
-          classes: "nhsuk-button--secondary app-button--min-width-2"
+          classes: "nhsuk-button--secondary"
         }) }}
       </div>
-
-
 
     </div>
   </div>
