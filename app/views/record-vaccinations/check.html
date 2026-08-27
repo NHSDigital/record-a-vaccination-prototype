@@ -367,17 +367,17 @@
           },
           {
             key: {
-              text: "Injection site"
+              text: "Injection site and route"
             },
             value: {
-              html: (data.otherInjectionSite if data.injectionSite == "other" else data.injectionSite)
+              html: (data.otherInjectionSite if data.injectionSite == "other" else data.injectionSite) ~ "<br> Intramuscular"
             },
             actions: {
               items: [
                 {
                   href: "/record-vaccinations/injection-site",
                   text: "Change",
-                  visuallyHiddenText: "Injection site"
+                  visuallyHiddenText: "Injection site and route"
                 }
               ]
             }
