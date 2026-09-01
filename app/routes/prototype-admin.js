@@ -392,12 +392,32 @@ module.exports = (router) => {
   function ensureUserExistsForScenario(data, scenarioUser) {
     if (!scenarioUser) return
 
-    const existing = data.users.find(user => user.id === scenarioUser.id)
-    if (existing) return
-
     const permissionLevel = scenarioUser.role === 'Recorder'
       ? 'Recorder'
       : (scenarioUser.role === 'Group administrator' ? 'Group administrator' : 'Lead administrator')
+
+    const existing = data.users.find(user => user.id === scenarioUser.id)
+
+    if (existing) {
+      // Existing users may not already have an organisation entry for this scenario's org
+      if (scenarioUser.orgId) {
+        existing.organisations = existing.organisations || []
+        const existingOrgSetting = existing.organisations.find(org => org.id === scenarioUser.orgId)
+
+        if (existingOrgSetting) {
+          existingOrgSetting.vaccinator = true
+          existingOrgSetting.status = 'Active'
+        } else {
+          existing.organisations.push({
+            id: scenarioUser.orgId,
+            permissionLevel,
+            status: 'Active',
+            vaccinator: true
+          })
+        }
+      }
+      return
+    }
 
     data.users.push({
       id: scenarioUser.id,
@@ -686,6 +706,10 @@ module.exports = (router) => {
     data.currentUserId = '1394978032564'
     data.currentOrganisationId = 'FR4V56'
     setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, true)
+
+    // Ocean Merritt needs colleagues to select as vaccinators when setting up today’s appointments
+    createRandomUser(data, 'FR4V56', 'Recorder', true)
+    createRandomUser(data, 'FR4V56', 'Recorder', true)
 
     setupBatchesForOrg(data, 'FR4V56')
     addRandomVaccinations(data, 'FR4V56', 10)
