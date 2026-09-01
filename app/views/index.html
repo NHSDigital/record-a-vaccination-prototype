@@ -510,10 +510,10 @@
     rows: [
     [
     {
-    html: "<a href='/record-vaccinations/covid-19/interval-warning'>Had a COVID-19 vaccine less than 3 months ago</a>"
+    html: "<a href='/record-vaccinations/covid-19/interval-warning'>Had a COVID-19 vaccine less than 91 days ago</a>"
     },
     {
-    text: "Use this warning when a recent COVID-19 vaccination falls within the interval rule."
+    text: "If the patient had a COVID-19 vaccine within the last 91 days."
     }
     ],
     [
@@ -521,7 +521,7 @@
     html: "<a href='/record-vaccinations/covid-19/too-young-warning'>Too young for product</a>"
     },
     {
-    text: "Use this warning when the patient is below the age range for the selected COVID-19 product."
+    text: "If the patient is below the age range for the selected COVID-19 product."
     }
     ],
     [
@@ -529,7 +529,7 @@
     html: "<a href='/record-vaccinations/covid-19/too-old-warning'>Too old for product</a>"
     },
     {
-    text: "Use this warning when the patient is above the supported age range for the selected COVID-19 product."
+    text: "If the patient is above the age range for the selected COVID-19 product."
     }
     ],
     [
@@ -573,7 +573,7 @@
     html: "<a href='/record-vaccinations/flu/too-young-warning'>Too young for product</a>"
     },
     {
-    text: "Use this warning when the patient is below the age range for the selected flu product."
+    text: "If the patient is below the age range for the selected flu product."
     }
     ],
     [
@@ -581,7 +581,7 @@
     html: "<a href='/record-vaccinations/flu/too-old-warning'>Too old for product</a>"
     },
     {
-    text: "Use this warning when the patient is above the age range for the selected flu product."
+    text: "If the patient is above the age range for the selected flu product."
     }
     ]
     ]
@@ -609,7 +609,7 @@
     html: "<a href='/record-vaccinations/rsv/not-yet-28-weeks-pregnant-warning'>Not yet 28 weeks pregnant</a>"
     },
     {
-    text: "Use this warning when RSV vaccination is attempted before 28 weeks of pregnancy."
+    text: "If the patient is not yet 28 weeks pregnant."
     }
     ]
     ]
@@ -637,7 +637,7 @@
     html: "<a href='/record-vaccinations/pertussis/not-yet-16-weeks-pregnant-warning'>Not yet 16 weeks pregnant</a>"
     },
     {
-    text: "Use this warning when pertussis vaccination is attempted before 16 weeks of pregnancy."
+    text: "If the patient is not yet 16 weeks pregnant."
     }
     ]
     ]
@@ -665,33 +665,9 @@
     html: "<a href='/record-vaccinations/mmr/interval-warning'>Had an MMR vaccine less than 4 weeks ago</a>"
     },
     {
-    text: "Use this warning when another MMR dose was recorded too recently."
+    text: "If the patient had an MMR vaccine within the last 4 weeks."
     }
     ],
-    [
-    {
-    html: "<a href='/record-vaccinations/mmr/already-had-2-doses-warning'>Already had 2 doses</a>"
-    },
-    {
-    text: "Use this warning when the patient already has two recorded MMR doses."
-    }
-    ],
-    [
-    {
-    html: "<a href='/record-vaccinations/mmr/too-young-warning'>Too young for the London MMR service</a>"
-    },
-    {
-    text: "Use this warning when the patient is below the eligible age for the London MMR service."
-    }
-    ],
-    [
-    {
-    html: "<a href='/record-vaccinations/mmr/too-old-warning'>Too old for the London MMR service</a>"
-    },
-    {
-    text: "Use this warning when the patient is above the eligible age for the London MMR service."
-    }
-    ]
     ]
     }) }}
     {% endset %}
@@ -717,7 +693,7 @@
     html: "<a href='/record-vaccinations/menb/interval-warning'>Had a MenB vaccine less than 4 weeks ago</a>"
     },
     {
-    text: "Use this warning when a prior MenB dose was given within the restricted interval."
+    text: "If the patient had a MenB vaccine within the last 4 weeks."
     }
     ]
     ]
