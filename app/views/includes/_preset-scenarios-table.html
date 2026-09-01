@@ -1,6 +1,7 @@
 {% set presetGroups = [
   {
     groupTitle: "RAVS in pharmacies",
+    groupDescription: "Single pharmacy scenarios for lead admins and recorders.",
     scenarios: [
       {
         presetLabel: "Lead admin, single pharmacy",
@@ -30,6 +31,7 @@
   },
   {
     groupTitle: "CP admin interface",
+    groupDescription: "Group admin scenarios for managing multiple pharmacies in a chain. Includes management of users, vaccinations, etc.",
     scenarios: [
       {
         presetLabel: "Group admin, small pharmacy chain",
@@ -59,6 +61,7 @@
   },
   {
     groupTitle: "Regional interface",
+    groupDescription: "Includes the regional lead interface where Regional leads can manage users, vaccinations, etc. across a region's organisations.",
     scenarios: [
       {
         presetLabel: "Regional lead",
@@ -72,6 +75,7 @@
   },
   {
     groupTitle: "RAVS in trusts",
+    groupDescription: "NHS trust scenarios covering single and multi-site setups.",
     scenarios: [
       {
         presetLabel: "Lead admin, NHS Trust (multiple sites)",
@@ -117,6 +121,7 @@
   },
   {
     groupTitle: "London pharmacy",
+    groupDescription: "Pharmacy configured for the London local vaccination programme.",
     scenarios: [
       {
         presetLabel: "Lead admin, London pharmacy (local vaccination programme only)",
@@ -130,6 +135,7 @@
   },
   {
     groupTitle: "RAVS in GPs",
+    groupDescription: "Basic GP surgery scenario.",
     scenarios: [
       {
         presetLabel: "GP surgery",
@@ -145,6 +151,7 @@
 
 {% for presetGroup in presetGroups %}
   <h3 class="nhsuk-heading-s">{{ presetGroup.groupTitle }}</h3>
+  <p>{{ presetGroup.groupDescription }}</p>
 
   {% set rows = [] %}
   {% for scenario in presetGroup.scenarios %}
