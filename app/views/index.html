@@ -325,7 +325,7 @@
     html: "<a href='/errors/500'>Sorry, there is a problem with the service (500 error)</a>"
     },
     {
-    text: "Use this page for unexpected internal server errors."
+    text: "For unexpected internal server errors."
     }
     ],
     [
@@ -333,7 +333,7 @@
     html: "<a href='/errors/503'>Sorry, the service is unavailable (503 error)</a>"
     },
     {
-    text: "Use this page when the service is temporarily unavailable."
+    text: "When the service is temporarily unavailable."
     }
     ],
     [
@@ -341,7 +341,7 @@
     html: "<a href='/errors/rate-limit'>Rate limited (429 error)</a>"
     },
     {
-    text: "Use this page when too many requests are made in a short time."
+    text: "When too many requests are made in a short time."
     }
     ],
     [
@@ -349,7 +349,7 @@
     html: "<a href='/errors/vaccine-disabled'>Problem saving the vaccination (Regional admin has removed vaccines mid-recording)</a>"
     },
     {
-    text: "Use this page when a vaccine becomes unavailable during the recording flow."
+    text: "When a vaccination programme becomes unavailable during the recording flow."
     }
     ]
     ]
@@ -377,7 +377,7 @@
     html: "<a href='/auth/keycloak-existing-account-new-login'>You previously logged in a different way (Keycloak error)</a>"
     },
     {
-    text: "Use this page when a user signs in with a different identity provider than before."
+    text: "When a user signs in with a different identity provider than before."
     }
     ],
     [
@@ -385,7 +385,7 @@
     html: "<a href='/errors/deactivated-user'>Sorry there is a problem with your account (user deactivated)</a>"
     },
     {
-    text: "Use this page when a signed-in user account has been deactivated."
+    text: "When a user tries to sign in when their RAVS account has been deactivated."
     }
     ],
     [
@@ -393,7 +393,7 @@
     html: "<a href='/auth/user-not-recognised'>We cannot find a user with this email (after a successful 3rd party login)</a>"
     },
     {
-    text: "Use this page when authentication succeeds but no matching prototype user is found."
+    text: "When authentication succeeds but no matching RAVS account is found."
     }
     ],
     [
@@ -401,7 +401,7 @@
     html: "<a href='/errors/keycloak-timeout'>Sorry, there is a problem (Keycloak generic error)</a>"
     },
     {
-    text: "Use this page for generic identity provider or sign-in timeout errors."
+    text: "For generic identity provider or sign-in timeout errors."
     }
     ]
     ]
@@ -429,7 +429,7 @@
     html: "<a href='/errors/no-vaccination-history'>There is a temporary problem getting [patient name]'s vaccination history (history API issue)</a>"
     },
     {
-    text: "Use this page when vaccination history cannot be retrieved from the history API."
+    text: "When no vaccination history can be retrieved from the history APIs or RAVS database."
     }
     ],
     [
@@ -437,7 +437,7 @@
     html: "<a href='/errors/mya-downtime'>There is a temporary problem accessing appointments (MYA is down/API issue)</a>"
     },
     {
-    text: "Use this page when the appointments dependency is unavailable."
+    text: "When the appointments dependency is unavailable."
     }
     ],
     [
@@ -445,7 +445,7 @@
     html: "<a href='/errors/no-patient-details'>There is a temporary problem getting the patient's details (PDS API issue)</a>"
     },
     {
-    text: "Use this page when patient details cannot be fetched from PDS."
+    text: "When patient details cannot be fetched from PDS but we allow the user to 'try again'."
     }
     ],
     [
@@ -453,9 +453,18 @@
     html: "<a href='/errors/still-no-patient-details'>There is still a problem getting the patient's details (ongoing PDS API issue)</a>"
     },
     {
-    text: "Use this page for ongoing patient detail lookup failures after retry."
+    text: "When there's an ongoing problem fetching patient details from PDS ut we allow the user to 'try one more time'."
     }
-    ]
+    ],
+    [
+    {
+    html: "<a href='/errors/pds-error-continue-anyway'>There is still a problem getting the patient's details (ongoing PDS API issue)</a>"
+    },
+    {
+    text: "When we cannot fetch patient details from PDS so allow the user to continue recording without the NHS number match."
+    }
+    ],
+    
     ]
     }) }}
     {% endset %}
