@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Which " + data.vaccine + " product are you giving?" %}
+
+{% set currentSection = "vaccinate" %}
+{% set organisationSetting = currentUser.organisations | findById(data.currentOrganisationId) %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/record-vaccinations/review-previous" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {% if vaccineProductError == "required" %}
+        {% set vaccineProductErrorMessage = "Select the vaccine product" %}
+      {% endif %}
+
+      {% if vaccineProductErrorMessage %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: vaccineProductErrorMessage,
+              href: "#vaccineProduct-1"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <form action="/record-vaccinations/answer-vaccine-product" method="post" novalidate>
+
+        {% set items = [] %}
+
+        {% for vaccineProduct in vaccineProductsAvailable %}
+          {% set items = (items.push({
+            value: vaccineProduct.name,
+            text: (vaccineProduct.name | capitaliseFirstLetter)
+          }), items) %}
+        {% endfor %}
+
+        {{ radios({
+          "idPrefix": "vaccineProduct",
+          "name": "vaccineProduct",
+          "fieldset": {
+            "legend": {
+              "text": pageName,
+              "size": "l",
+              "isPageHeading": true
+            }
+          },
+          value: data.vaccineProduct,
+          errorMessage: {
+            text: vaccineProductErrorMessage
+          } if vaccineProductErrorMessage,
+          "items": items
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        })}}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

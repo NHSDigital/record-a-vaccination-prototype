@@ -287,6 +287,35 @@ module.exports = router => {
     res.redirect('/record-vaccinations/batch')
   })
 
+  router.get('/record-vaccinations/vaccine-product', (req, res) => {
+    let vaccineProductError
+    const data = req.session.data
+
+    const vaccineStock = data.vaccineStock.filter((vaccine) => vaccine.siteId === data.siteId && vaccine.vaccine === data.vaccine)
+    const vaccineProductsAdded = [...new Set(vaccineStock.map((vaccineAdded) => vaccineAdded.vaccineProduct))]
+
+    const vaccineAvailable = JSON.parse(JSON.stringify(data.vaccines)).find((vaccine) => vaccine.name === data.vaccine)
+    const vaccineProductsAvailable = (vaccineAvailable.products || []).filter((vaccineProduct) => vaccineProductsAdded.includes(vaccineProduct.name))
+
+    if (req.query.showErrors === 'yes' && !data.vaccineProduct) {
+      vaccineProductError = 'required'
+    }
+
+    res.render('record-vaccinations/vaccine-product', {
+      vaccineProductError,
+      vaccineProductsAvailable
+    })
+  })
+
+  router.post('/record-vaccinations/answer-vaccine-product', (req, res) => {
+    const data = req.session.data
+
+    if (!data.vaccineProduct) {
+      return res.redirect('/record-vaccinations/vaccine-product?showErrors=yes')
+    }
+    res.redirect('/record-vaccinations/review-previous')
+  })
+
 
   router.post('/record-vaccinations/answer-patient-nhs-number-known', (req, res) => {
 
