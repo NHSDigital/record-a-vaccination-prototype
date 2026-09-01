@@ -254,7 +254,13 @@ module.exports = router => {
     const vaccinesAdded = [...new Set(vaccineStock.map((vaccineAdded) => vaccineAdded.vaccine))]
     const vaccineProductsAdded = [...new Set(vaccineStock.map((vaccineAdded) => vaccineAdded.vaccineProduct))]
 
-    let vaccinesAvailable = JSON.parse(JSON.stringify(data.vaccines)).filter((vaccine) => vaccinesAdded.includes(vaccine.name))
+let vaccinesAvailable = JSON.parse(JSON.stringify(data.vaccines)).filter((vaccine) => vaccinesAdded.includes(vaccine.name))
+
+    // When recording the same vaccine for a different patient, only the
+    // vaccine already chosen (and its products) should be selectable
+    if (data.repeatVaccination === "yes" && data.vaccine) {
+      vaccinesAvailable = vaccinesAvailable.filter((vaccine) => vaccine.name === data.vaccine)
+    }
 
     // Filter all vaccine products to only show ones with batches added
     for (let vaccineAvailable of vaccinesAvailable) {
