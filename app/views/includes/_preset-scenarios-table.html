@@ -151,7 +151,7 @@
 
 {% for presetGroup in presetGroups %}
   <h3 class="nhsuk-heading-s">{{ presetGroup.groupTitle }}</h3>
-  <p>{{ presetGroup.groupDescription }}</p>
+  <p class="nhsuk-u-width-two-thirds">{{ presetGroup.groupDescription }}</p>
 
   {% set rows = [] %}
   {% for scenario in presetGroup.scenarios %}
