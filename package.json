@@ -8,7 +8,7 @@
     "lint:fix": "npm run lint:js:fix && npm run lint:prettier:fix",
     "lint:prettier": "prettier --cache --cache-location .cache/prettier --cache-strategy content --check .",
     "lint:prettier:fix": "prettier --write .",
-    "lint:js": "eslint --cache --cache-location .cache/eslint --cache-strategy content --color --ignore-path .gitignore \"**/*.js\"",
+    "lint:js": "eslint --cache --cache-location .cache/eslint --cache-strategy content --color --ignore-pattern .gitignore \"**/*.js\"",
     "lint:js:fix": "npm run lint:js -- --fix"
   },
   "author": "NHS England",
