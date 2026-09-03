@@ -6,14 +6,15 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">We cannot find a user with this email</h1>
+      <h1 class="nhsuk-heading-l">We cannot find an active user with this email</h1>
 
-      <p>There is no Record a vaccination (RAVS) account for <b>james.blue@nhs.net</b>.</p>
-
-      <p>If you’ve previously used RAVS, <a href="/auth/log-in">try logging in with the email address you used last time</a>.</p>
-
-      <p>If you've never used RAVS before, you'll need to be invited by a colleague to use the service.</p>
-
+      <p>There is no active Record a vaccination (RAVS) account for <b>james.blue@nhs.net</b>.</p>
+       <ul class="nhsuk-list nhsuk-list--bullet">
+        <li>If your RAVS account is deactivated, ask a lead administrator to reactivate it.</li>
+        <li>If you've previously used RAVS with a different email, <a href="/auth/log-in">try logging in with Okta and that email</a>.</li>
+        <li>If you do not have a RAVS account, ask a colleague to invite you to RAVS.</li>
+      </ul>
+    
     </div>
   </div>
 {% endblock %}
