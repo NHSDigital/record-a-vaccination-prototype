@@ -71,9 +71,6 @@
               isPageHeading: true
             }
           },
-          hint: {
-            text: "This is needed for payment and reporting."
-          },
           errorMessage: {
             text: (errorList | first).text
           } if (errorList | length) > 0,
@@ -83,7 +80,7 @@
               text: "On site",
               value: "On site",
               hint: {
-                text: "Includes: hospital hubs, vaccination centres, Primary Care Networks (PCNs), pharmacies, GP surgeries and detained settings"
+                text: "Includes hospitals, vaccination centres, primary care networks (PCNs), pharmacies, GP surgeries and detained settings"
               }
             },
             {
@@ -98,8 +95,8 @@
               value: "Housebound patient’s home"
             },
             {
-              text: "Outreach event",
-              value: "Outreach event"
+              text: "Off-site outreach event",
+              value: "Off-site outreach event"
             }
           ]
 
