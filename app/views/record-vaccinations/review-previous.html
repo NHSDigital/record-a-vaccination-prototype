@@ -72,6 +72,31 @@
                 text: "Vaccine"
               },
               value: {
+                text: data.vaccine
+              }
+            } if (data.repeatVaccination == "yes"),
+            {
+              key: {
+                text: "Vaccine product"
+              },
+              value: {
+                text: data.vaccineProduct
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/record-vaccinations/vaccine-product",
+                    text: "Change",
+                    visuallyHiddenText: "vaccine product"
+                  }
+                ]
+              }
+            } if (data.repeatVaccination == "yes"),
+            {
+              key: {
+                text: "Vaccine"
+              },
+              value: {
                 html: (data.vaccine ) + "<br>" + data.vaccineProduct
               },
               actions: {
@@ -83,7 +108,7 @@
                   }
                 ]
               }
-            },
+            } if (data.repeatVaccination != "yes"),
             {
               key: {
                 text: "Batch"
