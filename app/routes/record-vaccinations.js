@@ -295,15 +295,7 @@ module.exports = router => {
     const nhsNumber = req.session.data.nhsNumber.replaceAll(' ', '')
     const data = req.session.data
 
-    if (nhsNumberKnown === "yes" && nhsNumber.match(/^\d{10}$/) &&  nhsNumber.startsWith('9') && data.gpit === "noGP") {
-
-      req.session.data.firstName = "Jodie"
-      req.session.data.lastName = "Brown"
-      req.session.data.dateOfBirth = {day: "15", month: "8", year: "1949"}
-      req.session.data.postcode = "GD3 I83"
-
-      res.redirect('/record-vaccinations/patient-history-no-gp')
-    } else if (nhsNumberKnown === "yes" && nhsNumber.match(/^\d{10}$/) &&  nhsNumber.startsWith('9')) {
+    if (nhsNumberKnown === "yes" && nhsNumber.match(/^\d{10}$/) &&  nhsNumber.startsWith('9')) {
 
       req.session.data.firstName = "Jodie"
       req.session.data.lastName = "Brown"
@@ -966,10 +958,6 @@ module.exports = router => {
 
     if (!data.locationType) {
       redirectPath = "/record-vaccinations/location?showErrors=yes"
-    } else if (data.gpit === "notInPCN" && data.locationType !== "Outreach event"){
-      redirectPath = "/record-vaccinations/covid-19/not-in-pcn-warning"
-    } else if (data.gpit === "noGP" && data.locationType !== "Outreach event"){
-      redirectPath = "/record-vaccinations/covid-19/no-gp-surgery-warning"
     } else {
       redirectPath = "/record-vaccinations/consent"
     }
