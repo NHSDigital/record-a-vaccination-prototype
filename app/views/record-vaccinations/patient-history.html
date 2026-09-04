@@ -42,22 +42,6 @@
 
       <h1 class="nhsuk-heading-l">Check {{ data.firstName }} {{ data.lastName }}’s details and vaccination history</h1>
 
-      {% if data.gpit === "inPCN" %}
-
-      {% set insetTextHtml %}
-      <p>This patient's GP surgery is in your PCN.</p>
-      {% endset %}
-      {{ insetText({
-        html: insetTextHtml
-      }) }}
-      {% elif data.gpit === "notInPCN" %}
-      {{ warningCallout({
-        heading: "Important",
-        headingLevel: 2,
-        text: "This patient's GP surgery is not in your PCN."
-      }) }}
-      {% endif %}
-
       {{ summaryList({
         rows: [
           {
@@ -102,10 +86,6 @@
           }
         ]
       }) }}
-{# 
-      {{ insetText({
-        html: insetTextHtml
-      }) }} #}
 
       <h2 class="nhsuk-heading-m">Vaccination history</h2>
 
