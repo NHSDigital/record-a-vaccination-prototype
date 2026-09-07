@@ -17,7 +17,7 @@
     "@x-govuk/govuk-prototype-components": "^6.0.0",
     "@x-govuk/govuk-prototype-filters": "^2.2.0",
     "accessible-autocomplete": "^3.0.1",
-    "nhsuk-frontend": "^10.6.0",
+    "nhsuk-frontend": "^10.6.1",
     "nhsuk-prototype-kit": "^8.4.0"
   },
   "devDependencies": {
