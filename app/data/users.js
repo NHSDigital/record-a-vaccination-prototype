@@ -280,6 +280,22 @@ module.exports = [
     "firstName": "Ocean",
     "lastName": "Merritt"
   },
+  // Priya Nolan is a recorder at MediCare Pharmacy (FR4V56),
+  // which has the appointments interface enabled
+  {
+    "id": "8215736940128",
+    "email": "priya.nolan@nhs.net",
+    "organisations": [
+      {
+        "id": "FR4V56",
+        "permissionLevel": "Recorder",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Priya",
+    "lastName": "Nolan"
+  },
   // Kaisley Wells is a Lead administrator at
   // Barnsley Hospital NHS Foundation Trust (RFF) with
   // all vaccine types enabled

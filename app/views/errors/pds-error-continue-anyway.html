@@ -1,13 +1,11 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "There is still a problem getting the patient's details" %}
+{% set pageName = "We could not get the patient's details" %}
 
 
 {% block beforeContent %}
   {{ backLink({ href: "/record-vaccinations/patient" }) }}
 {% endblock %}
-
-{% set currentSection = "vaccinate" %}
 
 
 {% block content %}
@@ -15,13 +13,14 @@
     <div class="nhsuk-grid-column-two-thirds">
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
+      
 {% from "button/macro.njk" import button %}
 
 {{ button({
-  text: "Try again"
+  text: "Continue anyway"
 }) }}
 
-   </div>
+    </div>
   </div>
 
 
