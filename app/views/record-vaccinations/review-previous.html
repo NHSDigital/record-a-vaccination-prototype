@@ -4,15 +4,13 @@
 
 {% set currentSection = "vaccinate" %}
 
-{% block beforeContent %}
-  {{ backLink({ href: "/record-vaccinations/done" }) }}
-{% endblock %}
-
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+      {% set patientAge = data.dateOfBirth | isoDateFromDateInput | age if data.dateOfBirth.day else data.dateOfBirth | age %}
+
+      <h1 class="nhsuk-heading-l"><span class="nhsuk-caption-l">{{ data.firstName }} {{ data.lastName }}, {{ patientAge }} old, {{ data.vaccine }}</span>{{ pageName }}</h1>
 
       {{ summaryList({
           rows: [
@@ -72,7 +70,32 @@
                 text: "Vaccine"
               },
               value: {
-                html: (data.vaccine ) + "<br>" + data.vaccineProduct
+                text: (data.vaccine | capitaliseFirstLetter)
+              }
+            } if (data.repeatVaccination == "yes"),
+            {
+              key: {
+                text: "Vaccine product"
+              },
+              value: {
+                text: data.vaccineProduct
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/record-vaccinations/vaccine-product",
+                    text: "Change",
+                    visuallyHiddenText: "vaccine product"
+                  }
+                ]
+              }
+            } if (data.repeatVaccination == "yes"),
+            {
+              key: {
+                text: "Vaccine"
+              },
+              value: {
+                html: (data.vaccine | capitaliseFirstLetter) + "<br>" + data.vaccineProduct
               },
               actions: {
                 items: [
@@ -83,7 +106,7 @@
                   }
                 ]
               }
-            },
+            } if (data.repeatVaccination != "yes"),
             {
               key: {
                 text: "Batch"
