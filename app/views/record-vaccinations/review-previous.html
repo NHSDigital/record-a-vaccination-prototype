@@ -4,10 +4,6 @@
 
 {% set currentSection = "vaccinate" %}
 
-{% block beforeContent %}
-  {{ backLink({ href: "/record-vaccinations/done" }) }}
-{% endblock %}
-
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
@@ -72,7 +68,7 @@
                 text: "Vaccine"
               },
               value: {
-                text: data.vaccine
+                text: (data.vaccine | capitaliseFirstLetter)
               }
             } if (data.repeatVaccination == "yes"),
             {
@@ -97,7 +93,7 @@
                 text: "Vaccine"
               },
               value: {
-                html: (data.vaccine ) + "<br>" + data.vaccineProduct
+                html: (data.vaccine | capitaliseFirstLetter) + "<br>" + data.vaccineProduct
               },
               actions: {
                 items: [
