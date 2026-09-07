@@ -51,6 +51,14 @@ const SIGN_IN_USERS = [
     orgDescription: 'MediCare Health chain (P15951)'
   },
   {
+    id: '6015872204914',
+    name: 'Farah Iqbal',
+    email: 'farah.iqbal@nhs.net',
+    orgId: 'P15951',
+    role: 'Group administrator',
+    orgDescription: 'MediCare Health chain (P15951), no pre-loaded data'
+  },
+  {
     id: '46436346',
     name: 'Jeremy Blue',
     email: 'jeremy.blue@nhs.net',
@@ -62,9 +70,17 @@ const SIGN_IN_USERS = [
     id: '1394978032564',
     name: 'Ocean Merritt',
     email: 'ocean.merritt@nhs.net',
+    orgId: 'FS2847',
+    role: 'Recorder',
+    orgDescription: 'pharmacy (FS2847)'
+  },
+  {
+    id: '8215736940128',
+    name: 'Priya Nolan',
+    email: 'priya.nolan@nhs.net',
     orgId: 'FR4V56',
     role: 'Recorder',
-    orgDescription: 'pharmacy (FR4V56)'
+    orgDescription: 'pharmacy with appointments interface (FR4V56)'
   },
   {
     id: '5960938237423',
@@ -392,12 +408,32 @@ module.exports = (router) => {
   function ensureUserExistsForScenario(data, scenarioUser) {
     if (!scenarioUser) return
 
-    const existing = data.users.find(user => user.id === scenarioUser.id)
-    if (existing) return
-
     const permissionLevel = scenarioUser.role === 'Recorder'
       ? 'Recorder'
       : (scenarioUser.role === 'Group administrator' ? 'Group administrator' : 'Lead administrator')
+
+    const existing = data.users.find(user => user.id === scenarioUser.id)
+
+    if (existing) {
+      // Existing users may not already have an organisation entry for this scenario's org
+      if (scenarioUser.orgId) {
+        existing.organisations = existing.organisations || []
+        const existingOrgSetting = existing.organisations.find(org => org.id === scenarioUser.orgId)
+
+        if (existingOrgSetting) {
+          existingOrgSetting.vaccinator = true
+          existingOrgSetting.status = 'Active'
+        } else {
+          existing.organisations.push({
+            id: scenarioUser.orgId,
+            permissionLevel,
+            status: 'Active',
+            vaccinator: true
+          })
+        }
+      }
+      return
+    }
 
     data.users.push({
       id: scenarioUser.id,
@@ -602,13 +638,13 @@ module.exports = (router) => {
   })
 
   // ----------------------------------------------------------------
-  // Preset: Pharmacy HQ, no data (Amanda White, P15951)
+  // Preset: Pharmacy HQ, no data (Farah Iqbal, P15951)
   // ----------------------------------------------------------------
 
   router.get('/prototype-setup/preset/pharmacy-hq-no-data', (req, res) => {
     resetSession(req)
     const data = req.session.data
-    data.currentUserId = '6424325235325'
+    data.currentUserId = '6015872204914'
     data.currentOrganisationId = 'P15951'
     setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, false)
     // Remove all pharmacies belonging to P15951 to start with a clean slate
@@ -617,7 +653,7 @@ module.exports = (router) => {
   })
 
   // ----------------------------------------------------------------
-  // Preset: Recorder, single organisation (Ocean Merritt, FR4V56)
+  // Preset: Recorder, single organisation (Ocean Merritt, FS2847)
   // ----------------------------------------------------------------
 
   router.get('/prototype-setup/preset/recorder-single', (req, res) => {
@@ -658,18 +694,6 @@ module.exports = (router) => {
   })
 
   // ----------------------------------------------------------------
-  // Preset: Support admin (Sally Green)
-  // ----------------------------------------------------------------
-
-  router.get('/prototype-setup/preset/support-admin', (req, res) => {
-    resetSession(req)
-    const data = req.session.data
-    data.currentUserId = '66435353634'
-    data.currentOrganisationId = null
-    res.redirect('/support/regions')
-  })
-
-  // ----------------------------------------------------------------
   // Preset: Limited-vaccine pharmacy (Jeremy Blue Holborn, FT81513)
   // ----------------------------------------------------------------
 
@@ -692,12 +716,13 @@ module.exports = (router) => {
     resetSession(req)
     const data = req.session.data
 
-    const scenarioUser = SIGN_IN_USERS.find(user => user.id === '1394978032564')
-    ensureUserExistsForScenario(data, scenarioUser)
-
-    data.currentUserId = '1394978032564'
+    data.currentUserId = '8215736940128'
     data.currentOrganisationId = 'FR4V56'
     setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, true)
+
+    // Priya Nolan needs colleagues to select as vaccinators when setting up today’s appointments
+    createRandomUser(data, 'FR4V56', 'Recorder', true)
+    createRandomUser(data, 'FR4V56', 'Recorder', true)
 
     setupBatchesForOrg(data, 'FR4V56')
     addRandomVaccinations(data, 'FR4V56', 10)

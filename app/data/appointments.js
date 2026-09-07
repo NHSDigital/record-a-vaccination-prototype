@@ -44,8 +44,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "COVID-19",
-      "flu"
+      "COVID-19 and flu"
     ]
   },
   {
@@ -62,7 +61,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "COVID-19", "RSV"
+      "RSV"
     ]
   },
   {
@@ -82,7 +81,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu"
+      "Flu"
     ]
   },
   {
@@ -152,7 +151,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "COVID-19", "RSV"
+      "RSV"
     ]
   },
   {
@@ -192,7 +191,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu"
+      "Flu"
     ]
   },
   {
@@ -209,7 +208,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu"
+      "Flu"
     ]
   },
   {
@@ -226,7 +225,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu"
+      "Flu"
     ],
     vaccinationIds: ["464743636"]
   },
@@ -238,13 +237,13 @@ module.exports = [
       nhsNumber: "9017474141",
       firstName: "Mohammed",
       lastName: "Khan",
-      dateOfBirth: "1993-01-23",
+      dateOfBirth: "2002-03-19",
       contactDetails: {
         email: "mk25325@gmail.com"
       }
     },
     vaccinations: [
-      "flu"
+      "16-24 catch-up"
     ]
   },
   {
@@ -295,7 +294,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu"
+      "Flu"
     ]
   },
   {
@@ -312,8 +311,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "COVID-19",
-      "flu"
+      "COVID-19 and flu"
     ]
   },
   {
@@ -347,7 +345,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu"
+      "Flu"
     ]
   },
   {
@@ -398,8 +396,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu",
-      "COVID-19"
+      "COVID-19 and flu"
     ]
   },
   {
@@ -416,7 +413,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu"
+      "Flu"
     ]
   },
   {
@@ -450,7 +447,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu"
+      "Flu"
     ]
   },
   {
@@ -484,8 +481,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu",
-      "COVID-19"
+      "COVID-19 and flu"
     ]
   },
   {
@@ -519,7 +515,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu"
+      "Flu"
     ]
   },
   {
@@ -570,8 +566,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu",
-      "COVID-19"
+      "COVID-19 and flu"
     ]
   },
   {
@@ -588,7 +583,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu"
+      "Flu"
     ]
   },
   {
@@ -622,7 +617,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu"
+      "Flu"
     ]
   },
   {
@@ -656,8 +651,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu",
-      "COVID-19"
+      "COVID-19 and flu"
     ]
   },
   {
@@ -691,7 +685,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu"
+      "Flu"
     ]
   },
   {
@@ -742,8 +736,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu",
-      "COVID-19"
+      "COVID-19 and flu"
     ]
   },
   {
@@ -760,7 +753,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu"
+      "Flu"
     ]
   },
   {
@@ -794,7 +787,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu"
+      "Flu"
     ]
   },
   {
@@ -828,8 +821,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "flu",
-      "COVID-19"
+      "COVID-19 and flu"
     ]
   },
   {
@@ -847,6 +839,23 @@ module.exports = [
     },
     vaccinations: [
       "COVID-19"
+    ]
+  },
+  {
+    id: "74639185921",
+    date: "today",
+    time: "15:20",
+    patient: {
+      nhsNumber: "9111000031",
+      firstName: "Alex",
+      lastName: "Morgan",
+      dateOfBirth: "2005-06-15",
+      contactDetails: {
+        mobile: "07700123456"
+      }
+    },
+    vaccinations: [
+      "16-24 catch-up"
     ]
   }
 ]

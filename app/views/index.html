@@ -23,196 +23,667 @@
 <!-- For adding page content -->
 <!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
 {% block content %}
-  <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-full">
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-full">
 
-      <h1>
-        Prototype
-      </h1>
+    <h1>
+      Prototype
+    </h1>
 
-      <h2>Prototype setup</h2>
+    <h2>Prototype setup</h2>
 
-      <p>Use a preset to quickly start with a specific scenario, or set up a custom configuration. Presets reset all session data before applying.</p>
+    <p>Use a preset to quickly start with a specific scenario, or set up a custom configuration. Presets reset all
+      session data before applying.</p>
 
-      {% set presetsTableHtml %}
-      {% set enableEmailPrefill = false %}
-      {% include "includes/_preset-scenarios-table.html" %}
-      {% endset %}
+    {% set presetsTableHtml %}
+    {% set enableEmailPrefill = false %}
+    {% include "includes/_preset-scenarios-table.html" %}
+    {% endset %}
 
-      {% set customConfigHtml %}
-      <ul class="nhsuk-list">
-        <li><a href="/prototype-setup/custom-config">Set up a custom scenario</a> — choose user, vaccines and data volume step by step</li>
-        <li><a href="/prototype-setup">Manage prototype data</a> — add or remove users, batches and vaccination records individually</li>
-      </ul>
-      {% endset %}
+    {% set customConfigHtml %}
+    <ul class="nhsuk-list">
+      <li><a href="/prototype-setup/custom-config">Set up a custom scenario</a> — choose user, vaccines and data volume
+        step by step</li>
+      <li><a href="/prototype-setup">Manage prototype data</a> — add or remove users, batches and vaccination records
+        individually</li>
+    </ul>
+    {% endset %}
 
-      {% set presetsTabHtml %}
-        <p class="nhsuk-u-margin-bottom-4">Start with one of the predefined test setups.</p>
-        {{ presetsTableHtml | safe }}
-      {% endset %}
+    {% set presetsTabHtml %}
+    <p class="nhsuk-u-margin-bottom-4">Start with one of the predefined test setups.</p>
+    {{ presetsTableHtml | safe }}
+    {% endset %}
 
-      {% set customTabHtml %}
-        <p class="nhsuk-u-margin-bottom-4">Build your own scenario with specific settings.</p>
-        {{ customConfigHtml | safe }}
-      {% endset %}
+    {% set customTabHtml %}
+    <p class="nhsuk-u-margin-bottom-4">Build your own scenario with specific settings.</p>
+    {{ customConfigHtml | safe }}
+    {% endset %}
 
-      {{ tabs({
-        items: [
-          {
-            label: "Preset scenarios",
-            id: "preset-scenarios",
-            panel: {
-              html: presetsTabHtml
-            }
-          },
-          {
-            label: "Custom configuration",
-            id: "custom-configuration",
-            panel: {
-              html: customTabHtml
-            }
-          }
-        ]
-      }) }}
+    {{ tabs({
+    items: [
+    {
+    label: "Preset scenarios",
+    id: "preset-scenarios",
+    panel: {
+    html: presetsTabHtml
+    }
+    },
+    {
+    label: "Custom configuration",
+    id: "custom-configuration",
+    panel: {
+    html: customTabHtml
+    }
+    }
+    ]
+    }) }}
 
-      <h2>Feature explorations</h2>
+    <hr class="nhsuk-section-break nhsuk-section-break--m nhsuk-section-break--visible">
 
-      <p>Use this area for alternative journeys and early explorations without changing the current prototype flows.</p>
+    <h2>Signed-out interface</h2>
 
-      <ul class="nhsuk-list">
-        <li><a href="/explorations">Feature explorations</a> — isolated pages for new ideas and archived variants</li>
-      </ul>
+    <ul class="nhsuk-grid-row nhsuk-card-group">
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+        {{ card({
+        heading: {
+        text: "Product page",
+        size: "m"
+        },
+        description: "This is the page that users land on when navigate to RAVS while not signed in.",
+        href: "/product-page",
+        clickable: true,
+        variant: "primary"
+        }) }}
+      </li>
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+        {{ card({
+        heading: {
+        text: "Email invite",
+        size: "m"
+        },
+        description: "This is an example email template.",
+        href: "/email-invite",
+        clickable: true,
+        variant: "primary"
+        }) }}
+      </li>
+    </ul>
 
-      <hr class="nhsuk-section-break nhsuk-section-break--m nhsuk-section-break--visible">
+    <hr class="nhsuk-section-break nhsuk-section-break--m nhsuk-section-break--visible">
 
-      <h2>Signed-out interface</h2>
+    <h2>Main interface</h2>
 
-      <p><a href="/product-page">Product page</a></li></p>
-
-      <p><a href="/email-invite">Email invite</a></p>
-
-      <h2>Main interface</h2>
-
-      <p>Quick access links below apply the Pharmacy lead admin preset first, so you can open these pages without manually signing in.</p>
-
-      <ul>
-        <li><a href="/prototype-setup/quick-access/pharmacy?next=/home">Dashboard</a></li>
-        <li><a href="/prototype-setup/quick-access/pharmacy?next=/record-vaccinations">Record vaccinations</a></li>
-        <li><a href="/prototype-setup/quick-access/pharmacy?next=/vaccines">Vaccines</a></li>
-        <li><a href="/prototype-setup/quick-access/pharmacy?next=/records">Records</a></li>
-        <li><a href="/prototype-setup/quick-access/pharmacy?next=/reports">Reports</a></li>
-        <li><a href="/prototype-setup/quick-access/pharmacy?next=/user-admin">Manage users</a></li>
-        <li><a href="/prototype-setup/quick-access/pharmacy?next=/user-profile">Profile page</a></li>
-      </ul>
-
-      <h2>Special circumstances</h2>
-
-      <ul>
-        <li><a href="/prototype-setup/quick-access/pharmacy?next=/record-vaccinations/patient-history-deceased">Deceased patient history</a></li>
-      </ul>
-
-      <h2>GP scenarios</h2>
-      <ul>
-        <li><a href="/prototype-setup/quick-access/gp?next=/record-vaccinations?gpit=inPCN">Record vaccinations (in PCN)</a></li>
-        <li><a href="/prototype-setup/quick-access/gp?next=/record-vaccinations?gpit=notInPCN">Record vaccinations (not in PCN)</a></li>
-        <li><a href="/prototype-setup/quick-access/gp?next=/record-vaccinations?gpit=noGP">Record vaccinations (no GP surgery)</a>
-          <ul>  
-            <li><a href="/record-vaccinations/patient-history-none?gpit=noGP">Patient details - no NHS number and no GP surgery</a></li>
-            </ul>
-        </li>
-      </ul>
-
-      <h2>Regions interface</h2>
-
-      <ul>
-        <li><a href="/prototype-setup/quick-access/regions?next=/regions">Regions interface</a></li>
-      </ul>
-
-      <h2>Support interface</h2>
-
-      <ul>
-        <li><a href="/prototype-setup/quick-access/support?next=/support/regions">Support interface</a></li>
-      </ul>
-
-      <h2>Error pages</h2>
-
-      <ul>
-        <li><a href="/errors/500">Sorry, there is a problem with the service (500 error)</a></li>
-        <li><a href="/errors/503">Sorry, the service is unavailable (503 error)</a></li>
-        <li><a href="/errors/rate-limit">Rate limited (429 error)</a></li>
-        <li><a href="/errors/vaccine-disabled">Problem saving the vaccination (Regional admin has removed vaccines mid-recording)</a></li>
-        <li><a href="/errors/deactivated-user">Sorry there is a problem with your account (user deactivated)</a></li>
-        <li><a href="/auth/user-not-recognised">We cannot find a user with this email (after a successful 3rd party login)</a></li>
-        <li><a href="/auth/keycloak-existing-account-new-login">You previously logged in a different way (Keycloak error)</a></li>
-        <li><a href="/errors/keycloak-timeout">Sorry, there is a problem (Keycloak generic error)</a></li>
-        <li><a href="/errors/no-patient-details">There is a temporary problem getting the patient's details (PDS API issue)</a></li>
-        <li><a href="/errors/still-no-patient-details">There is still a problem getting the patient's details (ongoing PDS API issue)</a></li>
-        <li><a href="/errors/no-vaccination-history">There is a temporary problem getting [patient name]'s vaccination history (history API issue)</a></li>
-        <li><a href="/errors/mya-downtime">There is a temporary problem accessing appointments (MYA is down/API issue)</a></li>
-      </ul>
-
-      <h2>Messaging</h2>
-
-    <ul>
-        <li><a href="/reports/notification">Notification (Reports)</a></li>
-        <li><a href="/alerts/notification">Notification (Vaccines)</a></li>
-        <li><a href="/record-vaccinations/done">Feedback</a></li>
-      </ul>
-
-
-      <h2>Warning messages</h2>
-
-      <h3>COVID-19</h3>
-
-      <ul>
-        <li><a href="/record-vaccinations/covid-19/interval-warning">Had a COVID-19 vaccine less than 3 months ago</a></li>
-        <li><a href="/record-vaccinations/covid-19/too-young-warning">Too young for product</a></li>
-        <li><a href="/record-vaccinations/covid-19/too-old-warning">Too old for product</a></li>
-        <li><a href="/record-vaccinations/covid-19/no-gp-surgery-warning">No GP surgery and not outreach</a></li>
-        <li><a href="/record-vaccinations/covid-19/not-in-pcn-warning">Not in PCN and not outreach</a></li>
-      </ul>
-
-      <h3>flu</h3>
-
-      <ul>
-        <li><a href="/record-vaccinations/flu/too-young-warning">Too young for product</a></li>
-         <li><a href="/record-vaccinations/flu/too-old-warning">Too old for product</a></li>
-      </ul>
-
-      <h3>RSV</h3>
-
-      <ul>
-        <li><a href="/record-vaccinations/rsv/not-yet-28-weeks-pregnant-warning">Not yet 28 weeks pregnant</a></li>
-      </ul>
-
-      <h3>Pertussis</h3>
-
-      <ul>
-        <li><a href="/record-vaccinations/pertussis/not-yet-16-weeks-pregnant-warning">Not yet 16 weeks pregnant</a></li>
-      </ul>
-
-      <h3>Pneumococcal London service</h3>
-
-      <ul>
-        <li><a href="/record-vaccinations/ppv/already-had-it-warning">Already had vaccine</a></li>
-        <li><a href="/record-vaccinations/ppv/too-young-warning">Too young for the London pneumococcal service</a></li>
-      </ul>
-
-      <h3>MMR London service</h3>
-
-      <ul>
-        <li><a href="/record-vaccinations/mmr/interval-warning">Had an MMR vaccine less than 4 weeks ago</a></li>
-        <li><a href="/record-vaccinations/mmr/already-had-2-doses-warning">Already had 2 doses</a></li>
-        <li><a href="/record-vaccinations/mmr/too-young-warning">Too young for the London MMR service</a></li>
-        <li><a href="/record-vaccinations/mmr/too-old-warning">Too old for the London MMR service</a></li>
-      </ul>
-
-      <h3>MenB</h3>
-
-      <ul>
-        <li><a href="/record-vaccinations/menb/interval-warning">Had a MenB vaccine less than 4 weeks ago</a></li>
-      </ul>
-
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-two-thirds">
+        <p>Quick access links below apply the Pharmacy lead admin preset first, so you can open these pages without manually
+          signing in.</p>
+      </div>
     </div>
+
+    <ul class="nhsuk-grid-row nhsuk-card-group">
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+        {{ card({
+        heading: {
+        text: "Record vaccinations",
+        size: "m"
+        },
+        description: "This is the page that users land on when they navigate to RAVS to record vaccinations. When a user logs in, this is the page they are taken to.",
+        href: "/prototype-setup/quick-access/pharmacy?next=/record-vaccinations",
+        clickable: true,
+        variant: "primary"
+        }) }}
+      </li>
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+        {{ card({
+        heading: {
+        text: "Dashboard",
+        size: "m"
+        },
+        description: "This the dashboard page. It shows information about the vaccinations an organisation has given.",
+        href: "/prototype-setup/quick-access/pharmacy?next=/home",
+        clickable: true,
+        variant: "primary"
+        }) }}
+      </li>
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+        {{ card({
+        heading: {
+        text: "Records",
+        size: "m"
+        },
+        description: "This is the records page. It allows users to find individual records of past vaccinations.",
+        href: "/prototype-setup/quick-access/pharmacy?next=/records",
+        clickable: true,
+        variant: "primary"
+        }) }}
+      </li>
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+        {{ card({
+        heading: {
+        text: "Reports",
+        size: "m"
+        },
+        description: "This is the reports page. It allows users to generate and view reports of past vaccinations.",
+        href: "/prototype-setup/quick-access/pharmacy?next=/reports",
+        clickable: true,
+        variant: "primary"
+        }) }}
+      </li>
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+        {{ card({
+        heading: {
+        text: "Vaccines",
+        size: "m"
+        },
+        description: "This is the vaccines page. It allows users to view and manage vaccines.",
+        href: "/prototype-setup/quick-access/pharmacy?next=/vaccines",
+        clickable: true,
+        variant: "primary"
+        }) }}
+      </li>
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+        {{ card({
+        heading: {
+        text: "Manage users",
+        size: "m"
+        },
+        description: "This is the manage users page. It allows users to manage user accounts.",
+        href: "/prototype-setup/quick-access/pharmacy?next=/user-admin",
+        clickable: true,
+        variant: "primary"
+        }) }}
+      </li>
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+        {{ card({
+        heading: {
+        text: "Profile page",
+        size: "m"
+        },
+        description: "This is the profile page. It allows users to view and manage their profile.",
+        href: "/prototype-setup/quick-access/pharmacy?next=/user-profile",
+        clickable: true,
+        variant: "primary"
+        }) }}
+      </li>
+    </ul>
+
+    <hr class="nhsuk-section-break nhsuk-section-break--m nhsuk-section-break--visible">
+
+    <h2>Special circumstances</h2>
+
+    <ul class="nhsuk-grid-row nhsuk-card-group">
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+        {{ card({
+        heading: {
+        text: "Deceased patient history",
+        size: "m"
+        },
+        description: "This shows what users will see if they access a patient history for a patient who is recorded as deceased",
+        href: "/prototype-setup/quick-access/pharmacy?next=/record-vaccinations/patient-history-deceased",
+        clickable: true,
+        variant: "primary"
+        }) }}
+      </li>
+    </ul>
+
+    <hr class="nhsuk-section-break nhsuk-section-break--m nhsuk-section-break--visible">
+ 
+    <h2>Regions interface</h2>
+
+    <ul class="nhsuk-grid-row nhsuk-card-group">
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+        {{ card({
+        heading: {
+        text: "Regions interface",
+        size: "m"
+        },
+        description: "This interface is used by regional administrators to manage vaccines, users and organisations.",
+        href: "/prototype-setup/quick-access/regions?next=/regions",
+        clickable: true,
+        variant: "primary"
+        }) }}
+      </li>
+    </ul>
+
+    <hr class="nhsuk-section-break nhsuk-section-break--m nhsuk-section-break--visible">
+
+    <h2>Error pages</h2>
+
+    {% set generalErrorsTabHtml %}
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Error message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/errors/500'>Sorry, there is a problem with the service (500 error)</a>"
+    },
+    {
+    text: "For unexpected internal server errors."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/503'>Sorry, the service is unavailable (503 error)</a>"
+    },
+    {
+    text: "When the service is temporarily unavailable."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/rate-limit'>Rate limited (429 error)</a>"
+    },
+    {
+    text: "When too many requests are made in a short time."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/vaccine-disabled'>Problem saving the vaccination (Regional admin has removed vaccines mid-recording)</a>"
+    },
+    {
+    text: "When a vaccination programme becomes unavailable during the recording flow."
+    }
+    ]
+    ]
+    }) }}
+    {% endset %}
+
+    {% set authErrorsTabHtml %}
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Error message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/auth/keycloak-existing-account-new-login'>You previously logged in a different way (Keycloak error)</a>"
+    },
+    {
+    text: "When a user signs in with a different identity provider than before."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/deactivated-user'>Sorry there is a problem with your account (user deactivated)</a>"
+    },
+    {
+    text: "When a user tries to sign in when their RAVS account has been deactivated."
+    }
+    ],
+    [
+    {
+    html: "<a href='/auth/user-not-recognised'>We cannot find a user with this email (after a successful 3rd party login)</a>"
+    },
+    {
+    text: "When authentication succeeds but no matching RAVS account is found."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/keycloak-timeout'>Sorry, there is a problem (Keycloak generic error)</a>"
+    },
+    {
+    text: "For generic identity provider or sign-in timeout errors."
+    }
+    ]
+    ]
+    }) }}
+    {% endset %}
+
+    {% set apiErrorsTabHtml %}
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Error message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/errors/no-vaccination-history'>There is a temporary problem getting [patient name]'s vaccination history (history API issue)</a>"
+    },
+    {
+    text: "When no vaccination history can be retrieved from the history APIs or RAVS database."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/mya-downtime'>There is a temporary problem accessing appointments (MYA is down/API issue)</a>"
+    },
+    {
+    text: "When appointments from MYA are not available in RAVS."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/no-patient-details'>There is a temporary problem getting the patient's details (PDS API issue)</a>"
+    },
+    {
+    text: "When there's a problem fetching patient details from PDS but we allow the user to 'try again'."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/still-no-patient-details'>There is still a problem getting the patient's details (ongoing PDS API issue)</a>"
+    },
+    {
+    text: "When there's an ongoing problem fetching patient details from PDS but we allow the user to 'try one more time'."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/pds-error-continue-anyway'>We could not get the patient's details</a>"
+    },
+    {
+    text: "When we cannot fetch patient details from PDS and allow the user to continue recording without the NHS number match."
+    }
+    ]
+    ]
+    }) }}
+    {% endset %}
+
+    {{ tabs({
+    items: [
+    {
+    label: "General errors",
+    id: "general-errors",
+    panel: {
+    html: generalErrorsTabHtml
+    }
+    },
+    {
+    label: "Login and access",
+    id: "login-access-errors",
+    panel: {
+    html: authErrorsTabHtml
+    }
+    },
+    {
+    label: "API and service dependencies",
+    id: "api-service-errors",
+    panel: {
+    html: apiErrorsTabHtml
+    }
+    }
+    ]
+    }) }}
+
+    
+    <hr class="nhsuk-section-break nhsuk-section-break--m nhsuk-section-break--visible">
+
+
+    <h2>Warning messages</h2>
+
+    {% set covid19WarningsTabHtml %}
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Warning message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/record-vaccinations/covid-19/interval-warning'>Had a COVID-19 vaccine less than 91 days ago</a>"
+    },
+    {
+    text: "If the patient had a COVID-19 vaccine within the last 91 days."
+    }
+    ],
+    [
+    {
+    html: "<a href='/record-vaccinations/covid-19/too-young-warning'>Too young for product</a>"
+    },
+    {
+    text: "If the patient is below the age range for the selected COVID-19 product."
+    }
+    ],
+    [
+    {
+    html: "<a href='/record-vaccinations/covid-19/too-old-warning'>Too old for product</a>"
+    },
+    {
+    text: "If the patient is above the age range for the selected COVID-19 product."
+    }
+    ]
+    ]
+    }) }}
+    {% endset %}
+
+    {% set fluWarningsTabHtml %}
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Warning message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/record-vaccinations/flu/too-young-warning'>Too young for product</a>"
+    },
+    {
+    text: "If the patient is below the age range for the selected flu product."
+    }
+    ],
+    [
+    {
+    html: "<a href='/record-vaccinations/flu/too-old-warning'>Too old for product</a>"
+    },
+    {
+    text: "If the patient is above the age range for the selected flu product."
+    }
+    ]
+    ]
+    }) }}
+    {% endset %}
+
+    {% set rsvWarningsTabHtml %}
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Warning message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/record-vaccinations/rsv/not-yet-28-weeks-pregnant-warning'>Not yet 28 weeks pregnant</a>"
+    },
+    {
+    text: "If the patient is not yet 28 weeks pregnant."
+    }
+    ]
+    ]
+    }) }}
+    {% endset %}
+
+    {% set pertussisWarningsTabHtml %}
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Warning message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/record-vaccinations/pertussis/not-yet-16-weeks-pregnant-warning'>Not yet 16 weeks pregnant</a>"
+    },
+    {
+    text: "If the patient is not yet 16 weeks pregnant."
+    }
+    ]
+    ]
+    }) }}
+    {% endset %}
+
+    {% set mmrWarningsTabHtml %}
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Warning message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/record-vaccinations/mmr/interval-warning'>Had an MMR vaccine less than 4 weeks ago</a>"
+    },
+    {
+    text: "If the patient had an MMR vaccine within the last 4 weeks."
+    }
+    ]
+    ]
+    }) }}
+    {% endset %}
+    
+    {% set menbWarningsTabHtml %}
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Warning message",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/record-vaccinations/menb/interval-warning'>Had a MenB vaccine less than 4 weeks ago</a>"
+    },
+    {
+    text: "If the patient had a MenB vaccine within the last 4 weeks."
+    }
+    ]
+    ]
+    }) }}
+    {% endset %}
+
+    {{ tabs({
+    items: [
+    {
+    label: "COVID-19",
+    id: "warning-covid-19",
+    panel: {
+    html: covid19WarningsTabHtml
+    }
+    },
+    {
+    label: "Flu",
+    id: "warning-flu",
+    panel: {
+    html: fluWarningsTabHtml
+    }
+    },
+    {
+    label: "RSV",
+    id: "warning-rsv",
+    panel: {
+    html: rsvWarningsTabHtml
+    }
+    },
+    {
+    label: "Pertussis",
+    id: "warning-pertussis",
+    panel: {
+    html: pertussisWarningsTabHtml
+    }
+    },
+    {
+    label: "MMR London service",
+    id: "warning-mmr-london-service",
+    panel: {
+    html: mmrWarningsTabHtml
+    }
+    },
+    {
+    label: "MenB",
+    id: "warning-menb",
+    panel: {
+    html: menbWarningsTabHtml
+    }
+    }
+    ]
+    }) }}
+
   </div>
+</div>
 {% endblock %}
