@@ -81,12 +81,15 @@
         {% endset %}
 
 
+        {% set patientAge = data.dateOfBirth | isoDateFromDateInput | age if data.dateOfBirth.day else data.dateOfBirth | age %}
+        {% set captionHtml %}<span class="nhsuk-caption-l">{{ data.firstName }} {{ data.lastName }}, {{ patientAge }} old, {{ data.vaccine }}</span>{% endset %}
+
         {{ radios({
           idPrefix: "injection-site",
           name: "injectionSite",
           fieldset: {
             legend: {
-              text: ("Where did you give the injection?" if data.vaccinationToday == 'yes' else "Where was the injection given?"),
+              html: captionHtml + ("Where did you give the injection?" if data.vaccinationToday == 'yes' else "Where was the injection given?"),
               size: "l",
               isPageHeading: true
             }
