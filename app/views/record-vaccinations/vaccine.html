@@ -94,7 +94,7 @@
           value: vaccine.name,
           text: (vaccine.name | capitaliseFirstLetter),
           hint: {
-            text: "Only select this if you are giving the vaccine as part of the locally commissioned London flu service that targets specific groups"
+            text: "Only select this for the London flu service that targets additional groups not covered by the national flu vaccination programme"
           } if vaccine.name == "flu (London service)",
           conditional: {
             html: conditionalHtml
