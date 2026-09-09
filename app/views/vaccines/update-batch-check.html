@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Update existing records for this batch?" %}
+{% set pageName = "Check and confirm batch changes" %}
 
 {% set currentSection = "vaccines" %}
 
@@ -14,13 +14,80 @@
 
       <h1 class="nhsuks-heading-l">{{ pageName }}</h1>
 
-      {% if affectedRecordsCount > 0 %}
+      {% set summaryRows = [] %}
+      {% set newExpiryDate = data.batchExpiryDate | isoDateFromDateInput %}
 
-        <p class="nhsuk-body-m">
-          <strong>{{ affectedRecordsCount }} existing vaccination record{{ "s" if affectedRecordsCount != 1 }}</strong>
-          {{ "uses" if affectedRecordsCount == 1 else "use" }} batch {{ batch.batchNumber }}.
-        </p>
-        
+      {% if data.batchNumber == batch.batchNumber %}
+        {% set summaryRows = (summaryRows.push({
+          key: {
+            text: "Batch number"
+          },
+          value: {
+            html: batch.batchNumber
+          }
+        }), summaryRows) %}
+      {% else %}
+        {% set summaryRows = (summaryRows.push({
+          key: {
+            text: "Previous batch number"
+          },
+          value: {
+            html: batch.batchNumber
+          }
+        }), summaryRows) %}
+        {% set summaryRows = (summaryRows.push({
+          key: {
+            text: "New batch number"
+          },
+          value: {
+            html: data.batchNumber
+          }
+        }), summaryRows) %}
+      {% endif %}
+
+      {% if newExpiryDate == batch.expiryDate %}
+        {% set summaryRows = (summaryRows.push({
+          key: {
+            text: "Expiry date"
+          },
+          value: {
+            html: (batch.expiryDate | govukDate)
+          }
+        }), summaryRows) %}
+      {% else %}
+        {% set summaryRows = (summaryRows.push({
+          key: {
+            text: "Previous expiry date"
+          },
+          value: {
+            html: (batch.expiryDate | govukDate)
+          }
+        }), summaryRows) %}
+        {% set summaryRows = (summaryRows.push({
+          key: {
+            text: "New expiry date"
+          },
+          value: {
+            html: (newExpiryDate | govukDate)
+          }
+        }), summaryRows) %}
+      {% endif %}
+
+      {% set summaryRows = (summaryRows.push({
+        key: {
+          text: "Number of records affected"
+        },
+        value: {
+          html: affectedRecordsCount
+        }
+      }), summaryRows) %}
+
+      {{ summaryList({
+        classes: "nhsuk-u-margin-bottom-6",
+        rows: summaryRows
+      }) }}
+
+      {% if affectedRecordsCount > 0 %}
 
         <form action="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/update" method="post" novalidate="true">
 

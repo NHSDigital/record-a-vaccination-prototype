@@ -472,6 +472,7 @@ module.exports = (router) => {
     }).length
 
     res.render('vaccines/update-batch-check', {
+      data,
       vaccine,
       batch,
       affectedRecordsCount
