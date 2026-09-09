@@ -20,6 +20,7 @@
           <strong>{{ affectedRecordsCount }} existing vaccination record{{ "s" if affectedRecordsCount != 1 }}</strong>
           {{ "uses" if affectedRecordsCount == 1 else "use" }} batch {{ batch.batchNumber }}.
         </p>
+        
 
         <form action="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/update" method="post" novalidate="true">
 
@@ -51,9 +52,14 @@
           }) }}
 
           {{ button({
-            "text": "Continue"
+            "text": "Confirm update"
           }) }}
         </form>
+
+        {{ details({
+          summaryText: "Where will these updates show?",
+          html: "<p>Updating this batch will also update the batch number and expiry date on any existing vaccination records that use it. It will update in the PDS and in the patient's GP record.</p>"
+        }) }}
 
       {% else %}
 
