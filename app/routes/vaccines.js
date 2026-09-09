@@ -309,6 +309,8 @@ module.exports = (router) => {
     const addedType = req.query.addedType
     const deactivated = req.query.deactivated === 'true'
     const reactivated = req.query.reactivated === 'true'
+    const updated = req.query.updated === 'true'
+    const updatedRecordsCount = parseInt(req.query.updatedRecordsCount) || 0
     const updatedBatchNumber = req.query.batchNumber
 
     const vaccine = data.vaccineStock.find((vaccine) => vaccine.id === req.params.id)
@@ -370,6 +372,8 @@ module.exports = (router) => {
       addedType,
       deactivated,
       reactivated,
+      updated,
+      updatedRecordsCount,
       updatedBatchNumber
     })
   })
@@ -450,6 +454,31 @@ module.exports = (router) => {
     })
   })
 
+  // Checking how many records will be affected by an update to a batch
+  router.post('/vaccines/:vaccineId/:batchNumber/update-check', (req, res) => {
+
+    const data = req.session.data
+    const vaccine = data.vaccineStock.find((vaccine) => vaccine.id === req.params.vaccineId)
+    if (!vaccine) { res.redirect('/vaccines'); return }
+    const batch = vaccine.batches.find((batch) => batch.batchNumber === req.params.batchNumber)
+    if (!batch) { res.redirect(`/vaccines/${vaccine.id}`); return }
+
+    const affectedRecordsCount = (data.vaccinationsRecorded || []).filter((record) => {
+      return record.organisationId === vaccine.organisationId &&
+        record.siteId === vaccine.siteId &&
+        record.vaccine === vaccine.vaccine &&
+        record.vaccineProduct === vaccine.vaccineProduct &&
+        record.batchNumber === batch.id
+    }).length
+
+    res.render('vaccines/update-batch-check', {
+      data,
+      vaccine,
+      batch,
+      affectedRecordsCount
+    })
+  })
+
   // Updating a batch
   router.post('/vaccines/:vaccineId/:batchNumber/update', (req, res) => {
 
@@ -461,10 +490,29 @@ module.exports = (router) => {
 
     const expiryDate = new Date(data.batchExpiryDate.year, (parseInt(data.batchExpiryDate.month) - 1), data.batchExpiryDate.day, 12).toISOString().substring(0,10)
 
+    let updatedRecordsCount = 0
+
+    if (data.updateExistingRecords === 'yes') {
+      for (const record of (data.vaccinationsRecorded || [])) {
+        if (record.organisationId === vaccine.organisationId &&
+          record.siteId === vaccine.siteId &&
+          record.vaccine === vaccine.vaccine &&
+          record.vaccineProduct === vaccine.vaccineProduct &&
+          record.batchNumber === batch.id) {
+          record.batchExpiryDate = expiryDate
+          updatedRecordsCount++
+        }
+      }
+    }
+
+    const updatedBatchNumber = data.batchNumber
+
     batch.batchNumber = data.batchNumber;
     batch.expiryDate = expiryDate;
 
-    res.redirect('/vaccines/' + vaccine.id)
+    req.session.data.updateExistingRecords = ''
+
+    res.redirect(`/vaccines/${vaccine.id}?updated=true&batchNumber=${encodeURIComponent(updatedBatchNumber)}&updatedRecordsCount=${updatedRecordsCount}`)
   })
 
   // View page to deactivate a batch
