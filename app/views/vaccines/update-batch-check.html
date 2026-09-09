@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Update existing records for this batch?" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccines/" + vaccine.id + "/" + batch.batchNumber, text: "Back" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuks-heading-l">{{ pageName }}</h1>
+
+      {% if affectedRecordsCount > 0 %}
+
+        <p class="nhsuk-body-m">
+          <strong>{{ affectedRecordsCount }} existing vaccination record{{ "s" if affectedRecordsCount != 1 }}</strong>
+          {{ "uses" if affectedRecordsCount == 1 else "use" }} batch {{ batch.batchNumber }}.
+        </p>
+
+        <form action="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/update" method="post" novalidate="true">
+
+          {{ radios({
+            "idPrefix": "update-existing-records",
+            "name": "updateExistingRecords",
+            "fieldset": {
+              "legend": {
+                "text": pageName,
+                classes: "nhsuk-u-visually-hidden"
+              }
+            },
+            "items": [
+              {
+                "value": "yes",
+                "text": "Update " + affectedRecordsCount + " record" + ("s" if affectedRecordsCount != 1) + " to use " + data.batchNumber,
+                hint: {
+                  text: "This will change the batch number and expiry date shown on each existing record."
+                }
+              },
+              {
+                "value": "no",
+                "text": "Leave " + affectedRecordsCount + " record" + ("s" if affectedRecordsCount != 1) + " using batch " + batch.batchNumber,
+                hint: {
+                  text: "The existing records will keep showing the old batch number and expiry date. You can update the records individually through the records tab."
+                }
+              }
+            ]
+          }) }}
+
+          {{ button({
+            "text": "Continue"
+          }) }}
+        </form>
+
+      {% else %}
+
+        <p class="nhsuk-body-m">No vaccination records have been saved using batch {{ batch.batchNumber }}.</p>
+
+        <form action="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/update" method="post" novalidate="true">
+          {{ button({
+            "text": "Continue"
+          }) }}
+        </form>
+
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}
