@@ -6,7 +6,7 @@ module.exports = [
   {
     id: "436436436",
     vaccine: "COVID-19",
-    vaccineProduct: "Comirnaty 3 LP.8.1",
+    vaccineProduct: "Spikevax LP.8.1",
     organisationId: "RW3", // Central Manchester Trust
     siteId: "RW3NM", // North Manchester General Hospital
     batches: [
@@ -34,7 +34,7 @@ module.exports = [
   {
     id: "25463625",
     vaccine: "COVID-19",
-    vaccineProduct: "Comirnaty 3 LP.8.1",
+    vaccineProduct: "Spikevax LP.8.1",
     organisationId: "RW3", // Central Manchester Trust
     siteId: "RW3HT", // Heaton Moor Health Centre"
     batches: [
@@ -90,7 +90,7 @@ module.exports = [
   {
     id: "36346181471414",
     vaccine: "COVID-19",
-    vaccineProduct: "Comirnaty 3 LP.8.1",
+    vaccineProduct: "Spikevax LP.8.1",
     organisationId: "RW3", // Central Manchester Trust
     siteId: "RW07E", // "Central Manchester Medical Centre
     batches: [
@@ -104,7 +104,7 @@ module.exports = [
   {
     id: "RFF125345468",
     vaccine: "COVID-19",
-    vaccineProduct: "Comirnaty 3 LP.8.1",
+    vaccineProduct: "Spikevax LP.8.1",
     organisationId: "RFF", // Barnsley Hospital NHS Foundation Trust
     siteId: "RFFPK", // Barnsley General Hospital
     batches: [
@@ -342,7 +342,7 @@ module.exports = [
   {
     id: "6346144",
     vaccine: "COVID-19",
-    vaccineProduct: "Comirnaty 3 LP.8.1",
+    vaccineProduct: "Spikevax LP.8.1",
     organisationId: "RCY", // Central Manchester Trust
     siteId: "RCY72", // Ashford Hospital
     batches: [
@@ -356,7 +356,7 @@ module.exports = [
   {
     id: "12346353",
     vaccine: "COVID-19",
-    vaccineProduct: "Comirnaty 3 LP.8.1",
+    vaccineProduct: "Spikevax LP.8.1",
     organisationId: "RAP", // North Middlesex University Hospital NHS Trust
     siteId: "RAP24", // Labour Ward
     batches: [
@@ -370,7 +370,7 @@ module.exports = [
   {
     id: "46422414",
     vaccine: "COVID-19",
-    vaccineProduct: "Comirnaty 3 LP.8.1",
+    vaccineProduct: "Spikevax LP.8.1",
     organisationId: "RXX", // Surrey and Borders Partnership
     siteId: "RXX23", // The Meadows
     batches: [
@@ -384,7 +384,7 @@ module.exports = [
   {
     id: "46422414",
     vaccine: "COVID-19",
-    vaccineProduct: "Comirnaty 3 LP.8.1",
+    vaccineProduct: "Spikevax LP.8.1",
     organisationId: "RWP", // Worcester Acute Hospitals
     siteId: "RWP01", // Alexandra Hospital
     batches: [
@@ -426,7 +426,7 @@ module.exports = [
   {
     id: "9235235325",
     vaccine: "COVID-19",
-    vaccineProduct: "Comirnaty 3 LP.8.1",
+    vaccineProduct: "Spikevax LP.8.1",
     organisationId: "FA424", // Pickfords Pharmacy
     siteId: "FA424X", // Pickfords Pharmacy
     batches: [
