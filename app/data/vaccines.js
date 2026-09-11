@@ -4,23 +4,23 @@ module.exports = [
     availableToAllSites: true,
     products: [
       {
-        name: "Comirnaty 3 LP.8.1",
+        name: "Bimervax LP.8.1",
         type: "injection"
       },
       {
-        name: "Comirnaty 10 LP.8.1",
+        name: "Comirnaty 10 XFG",
         type: "injection"
       },
       {
-        name: "Comirnaty 30 LP.8.1",
-        type: "injection"
-      },
-      {
-        name: "Nuvaxovid JN.1",
+        name: "Comirnaty 30 XFG",
         type: "injection"
       },
       {
         name: "Spikevax LP.8.1",
+        type: "injection"
+      },
+      {
+        name: "Spikevax XFG",
         type: "injection"
       }
     ]
