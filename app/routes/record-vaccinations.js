@@ -721,7 +721,7 @@ module.exports = router => {
 
       nextPage = "/record-vaccinations/patient-estimated-due-date"
 
-    } else if (data.vaccine == "flu" && data.eligibility === "Health or social care worker") {
+    } else if (data.vaccine == "flu" && data.eligibility === "Healthcare worker") {
 
       nextPage = "/record-vaccinations/healthcare-worker"
 
