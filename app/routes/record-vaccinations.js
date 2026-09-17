@@ -335,7 +335,6 @@ module.exports = router => {
     const nhsNumberKnown = req.session.data.nhsNumberKnown;
     req.session.data.nhsNumber = req.session.data.nhsNumber.trim()
     const nhsNumber = req.session.data.nhsNumber.replaceAll(' ', '')
-    const data = req.session.data
 
     if (nhsNumberKnown === "yes" && nhsNumber.match(/^\d{10}$/) &&  nhsNumber.startsWith('9')) {
 
