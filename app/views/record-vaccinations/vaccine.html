@@ -99,12 +99,15 @@
         }), items) %}
       {% endfor %}
 
+      {% set patientAge = data.dateOfBirth | isoDateFromDateInput | age if data.dateOfBirth.day else data.dateOfBirth | age %}
+      {% set captionHtml %}<span class="nhsuk-caption-l">{{ data.firstName }} {{ data.lastName }}, {{ patientAge }} old</span>{% endset %}
+
       {{ radios({
         "idPrefix": "vaccine",
         "name": "vaccine",
         "fieldset": {
           "legend": {
-            "text": question,
+            "html": captionHtml + question,
             "size": "l",
             "isPageHeading": true
           }
@@ -121,20 +124,11 @@
           text: "Continue"
         })}}
 
-        {% if organisationSetting.permissionLevel == "Recorder" %}
           {{ details({
             summaryText: "If the vaccine is not listed",
-            html: "You'll need to ask an administrator to add it."
+            html: "An administrator needs to add it."
           }) }}
-        {% else %}
-          {{ details({
-            summaryText: "If the vaccine is not listed",
-            html: "Go to <a href=\"/vaccines\">Vaccines</a> to add it."
-          }) }}
-        {% endif %}
-
-
-
+        
       </form>
 
     </div>

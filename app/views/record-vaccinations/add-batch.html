@@ -45,7 +45,7 @@
       }) }}
     {% endif %}
 
-      <h1 class="nhsuks-heading-l">{{ pageName }}</h1>
+      <h1 class="nhsuks-heading-l"><span class="nhsuk-caption-l">{{ data.firstName }} {{ data.lastName }}, {{ data.dateOfBirth | isoDateFromDateInput | age if data.dateOfBirth.day else data.dateOfBirth | age }} old, {{ data.vaccine }}</span>{{ pageName }}</h1>
 
       <form action="/record-vaccinations/answer-add-batch" method="post" novalidate>
 
@@ -82,7 +82,7 @@
           values: data.newBatchExpiryDate
         }) }}
 
-        {% if data.vaccineProduct == "Comirnaty 3 LP.8.1" %}
+        {% if data.vaccineProduct == "Spikevax LP.8.1" %}
 
           {{ radios({
             "idPrefix": "pack-type",
