@@ -16,10 +16,6 @@ module.exports = [
         type: "injection"
       },
       {
-        name: "Spikevax LP.8.1",
-        type: "injection"
-      },
-      {
         name: "Spikevax XFG",
         type: "injection"
       }
