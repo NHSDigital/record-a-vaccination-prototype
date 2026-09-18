@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Presets" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds nhsuk-u-margin-bottom-5">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+      
+      <p class="nhsuk-body-l">Create reusable templates to save vaccinators and recorders time.</p>
+
+
+      {{ button({
+        text: "Create preset",
+        href: "/presets/name"
+      }) }}
+
+    </div>
+  </div>
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds nhsuk-u-margin-bottom-5">
+
+      {{ table({
+        caption: {
+          text: "Existing preset templates",
+          classes: "nhsuk-u-visually-hidden"
+        },
+        head: [
+          {
+            text: "Preset name"
+          },
+          {
+            text: "Actions"
+          }
+        ],
+        rows: [
+          [
+            {
+              text: "Walk-in flu clinic"
+            },
+            {
+              html: "<a href='#' class='nhsuk-link nhsuk-u-margin-right-3'>View</a> <a href='#' class='nhsuk-link'>Apply</a>"
+            }
+          ],
+          [
+            {
+              text: "Care home COVID and flu co-admin"
+            },
+            {
+              html: "<a href='#' class='nhsuk-link nhsuk-u-margin-right-3'>View</a> <a href='#' class='nhsuk-link'>Apply</a>"
+            }
+          ],
+          [
+            {
+              text: "Example preset template name"
+            },
+            {
+              html: "<a href='#' class='nhsuk-link nhsuk-u-margin-right-3'>View</a> <a href='#' class='nhsuk-link'>Apply</a>"
+            }
+          ]
+        ]
+      }) }}
+
+    </div>
+  </div>
+
+{% endblock %}

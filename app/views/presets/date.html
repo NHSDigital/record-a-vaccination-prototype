@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Set a default date?" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds nhsuk-u-margin-bottom-5">
+
+      {{ radios({
+        fieldset: {
+          legend: {
+            text: pageName,
+            size: "l",
+            isPageHeading: true
+          }
+        },
+        idPrefix: "date",
+        name: "date",
+        items: [
+          {
+            value: "default",
+            text: "Day of recording"
+          },
+          {
+            value: "specific",
+            text: "Specific date"
+          },
+          {
+            value: "skip",
+            text: "Skip",
+            hint: "Let the recorder choose"
+          }
+        ]
+      }) }}
+
+      {{ button({
+        text: "Continue",
+        href: "vaccinator"
+      }) }}
+
+    </div>
+  </div>
+
+{% endblock %}

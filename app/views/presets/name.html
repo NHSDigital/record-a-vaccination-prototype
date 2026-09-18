@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Preset name" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds nhsuk-u-margin-bottom-5">
+
+      {{ input({
+        label: {
+          text: pageName,
+          size: "l",
+          isPageHeading: true
+        },
+        id: "preset-name",
+        name: "presetName",
+        width: 20
+      }) }}
+
+      {{ button({
+        text: "Continue",
+        href: "/presets/date"
+      }) }}
+
+    </div>
+  </div>
+
+{% endblock %}

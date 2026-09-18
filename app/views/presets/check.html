@@ -1,0 +1,133 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check presets" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds nhsuk-u-margin-bottom-5">
+      
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <h2 class="nhsuk-heading-m">
+        Presets
+      </h2>
+
+      <p class="nhsuk-body">These questions will be preset, but recorders can still review and change any answers if they need to.</p>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Preset name"
+            },
+            value: {
+              text: "Walk-in flu clinic"
+            },
+            actions: {
+              items: [
+                {
+                  href: "name",
+                  text: "Change",
+                  visuallyHiddenText: "preset name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Date"
+            },
+            value: {
+              text: "Day of recording"
+            },
+            actions: {
+              items: [
+                {
+                  href: "date",
+                  text: "Change",
+                  visuallyHiddenText: "date"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Vaccinator"
+            },
+            value: {
+              html: "Default to recorder"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "vaccinator"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Vaccine"
+            },
+            value: {
+              html: "Flu"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "vaccine"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="nhsuk-heading-m">
+        Ask everytime
+      </h2>
+
+      <p class="nhsuk-body">Recorders will be asked these questions everytime</p>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Batch"
+            },
+            value: {
+              html: "Skipped"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "batch"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      {{ button({
+        text: "Create preset",
+        href: "#"
+      }) }}
+
+    </div>
+  </div>
+
+{% endblock %}
