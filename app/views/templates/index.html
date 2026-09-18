@@ -1,19 +1,29 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Presets" %}
+{% set currentSection = "vaccinate" %}
+
+{% set pageName = "Templates" %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds nhsuk-u-margin-bottom-5">
 
+      {# Show a success banner if user has created a new preset template #}
+      {% if data.banner === "success" %}
+      {{ notificationBanner({
+        heading: "Template saved",
+        element: p,
+        variant: "success"
+      }) }}
+      {% endif %}
+
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
       
       <p class="nhsuk-body-l">Create reusable templates to save vaccinators and recorders time.</p>
 
-
       {{ button({
-        text: "Create preset",
-        href: "/presets/name"
+        text: "Create template",
+        href: "/templates/name"
       }) }}
 
     </div>
@@ -24,12 +34,12 @@
 
       {{ table({
         caption: {
-          text: "Existing preset templates",
+          text: "Existing templates",
           classes: "nhsuk-u-visually-hidden"
         },
         head: [
           {
-            text: "Preset name"
+            text: "Template name"
           },
           {
             text: "Actions"

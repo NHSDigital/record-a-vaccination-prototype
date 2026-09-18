@@ -1,6 +1,8 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Check presets" %}
+{% set currentSection = "vaccinate" %}
+
+{% set pageName = "Check and confirm" %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -15,20 +17,14 @@
       
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <h2 class="nhsuk-heading-m">
-        Presets
-      </h2>
-
-      <p class="nhsuk-body">These questions will be preset, but recorders can still review and change any answers if they need to.</p>
-
       {{ summaryList({
         rows: [
           {
             key: {
-              text: "Preset name"
+              text: "Template name"
             },
             value: {
-              text: "Walk-in flu clinic"
+              text: "Care home flu clinic"
             },
             actions: {
               items: [
@@ -90,18 +86,7 @@
                 }
               ]
             }
-          }
-        ]
-      }) }}
-
-      <h2 class="nhsuk-heading-m">
-        Ask everytime
-      </h2>
-
-      <p class="nhsuk-body">Recorders will be asked these questions everytime</p>
-
-      {{ summaryList({
-        rows: [
+          },
           {
             key: {
               text: "Batch"
@@ -118,13 +103,30 @@
                 }
               ]
             }
+          },
+          {
+            key: {
+              text: "Eligibility"
+            },
+            value: {
+              html: "Resident in a care home"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "eligibility"
+                }
+              ]
+            }
           }
         ]
       }) }}
 
       {{ button({
-        text: "Create preset",
-        href: "#"
+        text: "Create template",
+        href: "/templates/?banner=success"
       }) }}
 
     </div>

@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "vaccinate" %}
+
+{% set pageName = "Record vaccinations" %}
+
+{% set currentSection = "vaccinate" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds nhsuk-u-margin-bottom-5">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <ul class="nhsuk-grid-row nhsuk-card-group">
+        <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+          {{ card({
+            heading: {
+              text: "Record a vaccination",
+              size: "m"
+            },
+            href: "#",
+            clickable: true,
+            variant: "primary"
+          }) }}
+        </li>
+        <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+          {{ card({
+            heading: {
+              text: "Use a template",
+              size: "m"
+            },
+            href: "/templates/?banner",
+            clickable: true,
+            variant: "primary"
+          }) }}
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+{% endblock %}

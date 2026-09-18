@@ -1,6 +1,8 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Set a batch?" %}
+{% set currentSection = "vaccinate" %}
+
+{% set pageName = "Set a vaccinator?" %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -21,24 +23,30 @@
             isPageHeading: true
           }
         },
-        idPrefix: "vaccine",
-        name: "vaccine",
+        idPrefix: "vaccinator",
+        name: "vaccinator",
         items: [
           {
             value: "default",
-            text: "Choose a default batch"
+            text: "Default to recorder"
           },
           {
-            value: "skip",
-            text: "Skip",
-            hint: "Let the recorder choose"
+            value: "specific",
+            text: "Specific user"
+          },
+          {
+            divider: "or"
+          },
+          {
+            value: "No",
+            text: "No, let the recorder choose"
           }
         ]
       }) }}
 
       {{ button({
         text: "Continue",
-        href: "check"
+        href: "vaccine"
       }) }}
 
     </div>

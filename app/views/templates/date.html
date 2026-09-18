@@ -1,6 +1,8 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Set a default date?" %}
+{% set currentSection = "vaccinate" %}
+
+{% set pageName = "Set a date?" %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -33,9 +35,11 @@
             text: "Specific date"
           },
           {
-            value: "skip",
-            text: "Skip",
-            hint: "Let the recorder choose"
+            divider: "or"
+          },
+          {
+            value: "No",
+            text: "No, let the recorder choose"
           }
         ]
       }) }}

@@ -1,6 +1,8 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Preset name" %}
+{% set currentSection = "vaccinate" %}
+
+{% set pageName = "Template name" %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -21,12 +23,13 @@
         },
         id: "preset-name",
         name: "presetName",
-        width: 20
+        width: 20,
+        value: "Care home flu clinic"
       }) }}
 
       {{ button({
         text: "Continue",
-        href: "/presets/date"
+        href: "/templates/date"
       }) }}
 
     </div>

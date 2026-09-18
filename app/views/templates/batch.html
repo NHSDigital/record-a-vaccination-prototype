@@ -1,6 +1,8 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Set a vaccine?" %}
+{% set currentSection = "vaccinate" %}
+
+{% set pageName = "Set a batch?" %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -25,20 +27,27 @@
         name: "vaccine",
         items: [
           {
-            value: "default",
-            text: "Specific vaccine"
+            value: "914-151",
+            text: "914-151",
+            hint: "Expires 19 February 2028"
           },
           {
-            value: "skip",
-            text: "Skip",
-            hint: "Let the recorder choose"
+            value: "Add a batch",
+            text: "Add a batch"
+          },
+          {
+            divider: "or"
+          },
+          {
+            value: "No",
+            text: "No, let the recorder choose"
           }
         ]
       }) }}
 
       {{ button({
         text: "Continue",
-        href: "batch"
+        href: "eligibility"
       }) }}
 
     </div>
