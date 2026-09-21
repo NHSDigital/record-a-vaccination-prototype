@@ -287,23 +287,56 @@ module.exports = router => {
     res.redirect('/record-vaccinations/batch')
   })
 
+  router.get('/record-vaccinations/vaccine-product', (req, res) => {
+    let vaccineProductError
+    const data = req.session.data
+
+    // Used to detect whether the user actually changes their answer
+    data.vaccineProductBeforeChange = data.vaccineProduct
+
+    const vaccineStock = data.vaccineStock.filter((vaccine) => vaccine.siteId === data.siteId && vaccine.vaccine === data.vaccine)
+    const vaccineProductsAdded = [...new Set(vaccineStock.map((vaccineAdded) => vaccineAdded.vaccineProduct))]
+
+    const vaccineAvailable = JSON.parse(JSON.stringify(data.vaccines)).find((vaccine) => vaccine.name === data.vaccine)
+    const vaccineProductsAvailable = (vaccineAvailable.products || []).filter((vaccineProduct) => vaccineProductsAdded.includes(vaccineProduct.name))
+
+    if (req.query.showErrors === 'yes' && !data.vaccineProduct) {
+      vaccineProductError = 'required'
+    }
+
+    res.render('record-vaccinations/vaccine-product', {
+      vaccineProductError,
+      vaccineProductsAvailable
+    })
+  })
+
+  router.post('/record-vaccinations/answer-vaccine-product', (req, res) => {
+    const data = req.session.data
+
+    if (!data.vaccineProduct) {
+      return res.redirect('/record-vaccinations/vaccine-product?showErrors=yes')
+    }
+
+    const vaccineProductChanged = data.vaccineProduct !== data.vaccineProductBeforeChange
+    delete data.vaccineProductBeforeChange
+
+    if (data.repeatVaccination === 'yes' && vaccineProductChanged) {
+      // Batch is tied to the vaccine product, so it must be re-selected
+      data.vaccineBatch = ''
+      return res.redirect('/record-vaccinations/batch')
+    }
+
+    res.redirect('/record-vaccinations/review-previous')
+  })
+
 
   router.post('/record-vaccinations/answer-patient-nhs-number-known', (req, res) => {
 
     const nhsNumberKnown = req.session.data.nhsNumberKnown;
     req.session.data.nhsNumber = req.session.data.nhsNumber.trim()
     const nhsNumber = req.session.data.nhsNumber.replaceAll(' ', '')
-    const data = req.session.data
 
-    if (nhsNumberKnown === "yes" && nhsNumber.match(/^\d{10}$/) &&  nhsNumber.startsWith('9') && data.gpit === "noGP") {
-
-      req.session.data.firstName = "Jodie"
-      req.session.data.lastName = "Brown"
-      req.session.data.dateOfBirth = {day: "15", month: "8", year: "1949"}
-      req.session.data.postcode = "GD3 I83"
-
-      res.redirect('/record-vaccinations/patient-history-no-gp')
-    } else if (nhsNumberKnown === "yes" && nhsNumber.match(/^\d{10}$/) &&  nhsNumber.startsWith('9')) {
+    if (nhsNumberKnown === "yes" && nhsNumber.match(/^\d{10}$/) &&  nhsNumber.startsWith('9')) {
 
       req.session.data.firstName = "Jodie"
       req.session.data.lastName = "Brown"
@@ -679,7 +712,7 @@ module.exports = router => {
 
       nextPage = "/record-vaccinations/patient-estimated-due-date"
 
-    } else if (data.vaccine == "flu" && data.eligibility === "Health or social care worker") {
+    } else if (data.vaccine == "flu" && data.eligibility === "Healthcare worker") {
 
       nextPage = "/record-vaccinations/healthcare-worker"
 
@@ -966,10 +999,6 @@ module.exports = router => {
 
     if (!data.locationType) {
       redirectPath = "/record-vaccinations/location?showErrors=yes"
-    } else if (data.gpit === "notInPCN" && data.locationType !== "Outreach event"){
-      redirectPath = "/record-vaccinations/covid-19/not-in-pcn-warning"
-    } else if (data.gpit === "noGP" && data.locationType !== "Outreach event"){
-      redirectPath = "/record-vaccinations/covid-19/no-gp-surgery-warning"
     } else {
       redirectPath = "/record-vaccinations/consent"
     }
@@ -999,6 +1028,8 @@ module.exports = router => {
     } else if (["6-in-1", "flu", "flu (London service)", "MenB", "MMRV", "pneumococcal", "HPV", "MMR", "Td/IPV", "shingles"].includes(data.vaccine)) {
       data.showError = "no"
       redirectPath = "/record-vaccinations/dose"
+    } else if (data.repeatVaccination === "yes") {
+      redirectPath = "/record-vaccinations/review-previous"
     } else {
       redirectPath = "/record-vaccinations/consent"
     }
@@ -1018,6 +1049,8 @@ module.exports = router => {
       redirectPath = "/record-vaccinations/dose?showError=yes"
     } else if (["flu", "flu (London service)", "pneumococcal"].includes(data.vaccine)) {
       redirectPath = "/record-vaccinations/eligibility"
+    } else if (data.repeatVaccination === "yes") {
+      redirectPath = "/record-vaccinations/review-previous"
     } else {
       redirectPath = "/record-vaccinations/consent"
     }

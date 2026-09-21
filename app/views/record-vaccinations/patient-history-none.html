@@ -46,15 +46,6 @@
 
       <h1 class="nhsuk-heading-l">Check {{ displayName }}’s details and vaccination history</h1>
 
-      {% if data.gpit === "noGP" %}
-      {{ warningCallout({
-        heading: "Important",
-        headingLevel: 2,
-        text: "This patient is not registered with a GP surgery, and we could not get any vaccination history for them."
-      }) }}
-      {% else %}
-      {% endif %}
-
       {{ summaryList({
         classes: 'xnhsuk-summary-list--no-border',
         rows: [
@@ -85,9 +76,6 @@
         ]
       }) }}
 
-      {% if data.gpit === "noGP" %}
-      {% else %}
-
       {% from "warning-callout/macro.njk" import warningCallout %}
 
       {{ warningCallout({
@@ -95,9 +83,7 @@
         headingLevel: 2,
         text: "We could not get any vaccination history for this patient."
       }) }}
-      {% endif %}
           
-
       <form action="{{ nextPage }}" method="post" novalidate>
         {{ button({
           text: "Continue"
