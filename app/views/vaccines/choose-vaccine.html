@@ -42,14 +42,18 @@
             {% endset %}
           {% endif %}
 
-          {% set items = (items.push({
-            value: vaccine.name,
-            text: (vaccine.name | capitaliseFirstLetter),
-            conditional: {
-              html: conditionalHtml
-            } if vaccine.products
-          }), items) %}
-        {% endfor %}
+    
+        {% set items = (items.push({
+          value: vaccine.name,
+          text: (vaccine.name | capitaliseFirstLetter),
+          hint: {
+            text: "Only select this for the London flu service that targets additional groups not covered by the national flu vaccination programme"
+          } if vaccine.name == "flu (London service)",
+          conditional: {
+            html: conditionalHtml
+          } if vaccine.products
+        }), items) %}
+      {% endfor %}
 
         {{ radios({
           "idPrefix": "vaccine",
