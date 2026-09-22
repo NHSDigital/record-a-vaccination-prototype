@@ -4,9 +4,16 @@
 
 {% set currentSection = "vaccines" %}
 
-{% set organisation = {name: data.nhsTrusts[data.organisationCode]} %}
-
 {% block content %}
+
+{% set siteHtml %}
+{% if site.name %}
+{{ site.name }} ({{ site.id }})
+{% else %}
+{{ currentOrganisation.name }} ({{ currentOrganisation.id }})
+{% endif %}
+{% endset %}
+
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
@@ -19,7 +26,7 @@
               text: "Site"
             },
             value: {
-              html: site.name + " (" + data.siteId + ")<br>100 High Street, Manchester, M4 1LP"
+              html: siteHtml + "<br>" + currentOrganisation.address.line1 + ", " + currentOrganisation.address.postcode
             },
             actions: {
               items: [
@@ -29,7 +36,7 @@
                   visuallyHiddenText: "site"
                 }
               ]
-            }
+            } if site.name
           },
           {
             key: {

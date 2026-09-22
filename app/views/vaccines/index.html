@@ -79,10 +79,29 @@
 
       {% endif %}
 
+      {# Only show 'choose site' screen for the following users: 
+      Jane Smith, Henry Blue, Phoebe Black, Kaisley Wells #}
+      
+      {% if 
+      (data.currentUserId === "2387441662601") or
+      (data.currentUserId === "16346346361") or
+      (data.currentUserId === "2058253531") or
+      (data.currentUserId === "5960938237423")
+      %}
+
       {{ button({
         "text": "Add vaccine",
         "href": "/vaccines/choose-site"
       }) }}
+
+      {% else %}
+
+      {{ button({
+      "text": "Add vaccine",
+      "href": "/vaccines/choose-vaccine"
+      }) }}
+
+      {% endif %}
 
     </div>
   </div>

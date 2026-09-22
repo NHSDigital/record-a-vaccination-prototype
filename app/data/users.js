@@ -15,7 +15,7 @@ module.exports = [
     "firstName": "Jane",
     "lastName": "Smith"
   },
-  // Henry is a lead admin for an NHS trust
+  // Henry Blue is a lead admin for an NHS trust
   // that has only just been added (no vaccines,
   // users or vaccinations)
   {
