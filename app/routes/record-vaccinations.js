@@ -336,7 +336,16 @@ module.exports = router => {
     req.session.data.nhsNumber = req.session.data.nhsNumber.trim()
     const nhsNumber = req.session.data.nhsNumber.replaceAll(' ', '')
 
-    if (nhsNumberKnown === "yes" && nhsNumber.match(/^\d{10}$/) &&  nhsNumber.startsWith('9')) {
+    if (nhsNumber === "9999999999") {
+
+      req.session.data.firstName = "Bob"
+      req.session.data.lastName = "Brown"
+      req.session.data.dateOfBirth = {day: "15", month: "8", year: "2019"}
+      req.session.data.postcode = "GD3 I83"
+      res.redirect('/record-vaccinations/patient-history')
+    }
+
+    else if (nhsNumberKnown === "yes" && nhsNumber.match(/^\d{10}$/) &&  nhsNumber.startsWith('9')) {
 
       req.session.data.firstName = "Jodie"
       req.session.data.lastName = "Brown"
@@ -1023,11 +1032,13 @@ module.exports = router => {
       redirectPath = "/record-vaccinations/add-batch"
     } else if (!vaccineBatch) {
       redirectPath = "/record-vaccinations/batch?showError=yes"
-    } else if (["COVID-19", "RSV", "pertussis", "MenACWY"].includes(data.vaccine)) {
-      redirectPath = "/record-vaccinations/eligibility"
-    } else if (["6-in-1", "flu", "flu (London service)", "MenB", "MMRV", "pneumococcal", "HPV", "MMR", "Td/IPV", "shingles"].includes(data.vaccine)) {
-      data.showError = "no"
+    } else if (data.vaccine === "flu" && data.dateOfBirth.year > 2017) {
       redirectPath = "/record-vaccinations/dose"
+    } else if (["COVID-19", "RSV", "pertussis", "MenACWY", "flu"].includes(data.vaccine)) {
+      redirectPath = "/record-vaccinations/eligibility"
+    } else if (["6-in-1", "flu (London service)", "MenB", "MMRV", "pneumococcal", "HPV", "MMR", "Td/IPV", "shingles"].includes(data.vaccine)) {
+      data.showError = "no"
+      redirectPath = "/record-vaccinations/eligibility"
     } else if (data.repeatVaccination === "yes") {
       redirectPath = "/record-vaccinations/review-previous"
     } else {
