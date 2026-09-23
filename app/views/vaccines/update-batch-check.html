@@ -1,0 +1,146 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check and confirm batch changes" %}
+
+{% set currentSection = "vaccines" %}
+
+{% block beforeContent %}
+  {{ backLink({ href: "/vaccines/" + vaccine.id + "/" + batch.batchNumber, text: "Back" }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuks-heading-l">{{ pageName }}</h1>
+
+      {% set summaryRows = [] %}
+      {% set newExpiryDate = data.batchExpiryDate | isoDateFromDateInput %}
+
+      {% if data.batchNumber == batch.batchNumber %}
+        {% set summaryRows = (summaryRows.push({
+          key: {
+            text: "Batch number"
+          },
+          value: {
+            html: batch.batchNumber
+          }
+        }), summaryRows) %}
+      {% else %}
+        {% set summaryRows = (summaryRows.push({
+          key: {
+            text: "Previous batch number"
+          },
+          value: {
+            html: batch.batchNumber
+          }
+        }), summaryRows) %}
+        {% set summaryRows = (summaryRows.push({
+          key: {
+            text: "New batch number"
+          },
+          value: {
+            html: data.batchNumber
+          }
+        }), summaryRows) %}
+      {% endif %}
+
+      {% if newExpiryDate == batch.expiryDate %}
+        {% set summaryRows = (summaryRows.push({
+          key: {
+            text: "Expiry date"
+          },
+          value: {
+            html: (batch.expiryDate | govukDate)
+          }
+        }), summaryRows) %}
+      {% else %}
+        {% set summaryRows = (summaryRows.push({
+          key: {
+            text: "Previous expiry date"
+          },
+          value: {
+            html: (batch.expiryDate | govukDate)
+          }
+        }), summaryRows) %}
+        {% set summaryRows = (summaryRows.push({
+          key: {
+            text: "New expiry date"
+          },
+          value: {
+            html: (newExpiryDate | govukDate)
+          }
+        }), summaryRows) %}
+      {% endif %}
+
+      {% set summaryRows = (summaryRows.push({
+        key: {
+          text: "Number of records affected"
+        },
+        value: {
+          html: affectedRecordsCount
+        }
+      }), summaryRows) %}
+
+      {{ summaryList({
+        classes: "nhsuk-u-margin-bottom-6",
+        rows: summaryRows
+      }) }}
+
+      {% if affectedRecordsCount > 0 %}
+
+        <form action="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/update" method="post" novalidate="true">
+
+          {{ radios({
+            "idPrefix": "update-existing-records",
+            "name": "updateExistingRecords",
+            "fieldset": {
+              "legend": {
+                "text": pageName,
+                classes: "nhsuk-u-visually-hidden"
+              }
+            },
+            "items": [
+              {
+                "value": "yes",
+                "text": "Update " + affectedRecordsCount + " record" + ("s" if affectedRecordsCount != 1) + " to use " + data.batchNumber,
+                hint: {
+                  text: "This will change the batch number and expiry date shown on each existing record."
+                }
+              },
+              {
+                "value": "no",
+                "text": "Leave " + affectedRecordsCount + " record" + ("s" if affectedRecordsCount != 1) + " using batch " + batch.batchNumber,
+                hint: {
+                  text: "The existing records will keep showing the old batch number and expiry date. You can update the records individually through the records tab."
+                }
+              }
+            ]
+          }) }}
+
+          {{ button({
+            "text": "Confirm update"
+          }) }}
+        </form>
+
+        {{ details({
+          summaryText: "Where will these updates show?",
+          html: "<p>Updating this batch will also update the batch number and expiry date on any existing vaccination records that use it. It will update in the PDS and in the patient's GP record.</p>"
+        }) }}
+
+      {% else %}
+
+        <p class="nhsuk-body-m">No vaccination records have been saved using batch {{ batch.batchNumber }}.</p>
+
+        <form action="/vaccines/{{ vaccine.id }}/{{ batch.batchNumber }}/update" method="post" novalidate="true">
+          {{ button({
+            "text": "Continue"
+          }) }}
+        </form>
+
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}
