@@ -163,6 +163,7 @@
 
         {% set site =  currentOrganisation.sites | findById(siteId) %}
 
+        <div data-vaccine-site="{{ siteId }}">
         <table class="nhsuk-table nhsuk-u-margin-bottom-2">
           <caption class="nhsuk-table__caption nhsuk-table__caption--m nhsuk-u-margin-bottom-2">{{ site.name }}</caption>
           <thead role="rowgroup" class="nhsuk-table__head">
@@ -243,6 +244,7 @@
           <div style="height: 8px;"></div>
           <p class="nhsuk-body nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-7">Using this site again? <a href="/vaccines/sites/{{ site.id }}/reactivate" class="nhsuk-link">Reactivate {{ site.name }}</a></p>
         {% endif %}
+        </div>
       {% endfor %}
 
 
