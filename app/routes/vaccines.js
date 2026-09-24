@@ -370,7 +370,9 @@ module.exports = (router) => {
 
     const currentTab = requestedTab === 'inactive' && batchesByStatus.inactive.length === 0
       ? 'active'
-      : requestedTab
+      : requestedTab === 'active' && batchesByStatus.active.length === 0 && batchesByStatus.inactive.length > 0
+        ? 'inactive'
+        : requestedTab
 
     const filteredBatches = batchesByStatus[currentTab]
     const totalBatches = filteredBatches.length
