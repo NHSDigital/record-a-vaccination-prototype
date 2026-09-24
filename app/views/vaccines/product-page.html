@@ -216,7 +216,9 @@
                     {% endif %}
                   </td>
                   <td class="nhsuk-table__cell">
-                    {% if batch.deactivatedDate %}
+                    {% if batch.deactivationReason == "site" %}
+                      Site deactivated
+                    {% elif batch.deactivatedDate %}
                       Deactivated by user
                     {% elif (batch.expiryDate | daysAgo) > 0 %}
                       Expired
