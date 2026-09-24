@@ -224,10 +224,23 @@ module.exports = (router) => {
   // Mark site as closed
   router.post('/vaccines/sites/:siteId/deactivated', (req, res) => {
     const currentOrganisationSites = res.locals.currentOrganisation.sites || []
+    const data = req.session.data
     const site = currentOrganisationSites.find((item) => item.id === req.params.siteId)
     if (!site) { res.redirect('/vaccines'); return }
 
     site.status = 'closed'
+
+    const today = new Date().toISOString().substring(0, 10)
+    data.vaccineStock
+      .filter((vaccine) => vaccine.organisationId === res.locals.currentOrganisation.id && vaccine.siteId === site.id)
+      .forEach((vaccine) => {
+        vaccine.batches.forEach((batch) => {
+          if (!batch.deactivatedDate && batch.expiryDate >= today) {
+            batch.deactivatedDate = today
+            batch.deactivationReason = 'site'
+          }
+        })
+      })
 
     res.redirect(`/vaccines?siteTab=deactivated&deactivatedSite=true&siteName=${encodeURIComponent(site.name)}`)
   })
@@ -246,10 +259,22 @@ module.exports = (router) => {
   // Mark site as active
   router.post('/vaccines/sites/:siteId/reactivated', (req, res) => {
     const currentOrganisationSites = res.locals.currentOrganisation.sites || []
+    const data = req.session.data
     const site = currentOrganisationSites.find((item) => item.id === req.params.siteId)
     if (!site) { res.redirect('/vaccines'); return }
 
     delete site.status
+
+    data.vaccineStock
+      .filter((vaccine) => vaccine.organisationId === res.locals.currentOrganisation.id && vaccine.siteId === site.id)
+      .forEach((vaccine) => {
+        vaccine.batches.forEach((batch) => {
+          if (batch.deactivationReason === 'site') {
+            batch.deactivatedDate = null
+            delete batch.deactivationReason
+          }
+        })
+      })
 
     res.redirect(`/vaccines?siteTab=active&reactivatedSite=true&siteName=${encodeURIComponent(site.name)}`)
   })
@@ -496,6 +521,7 @@ module.exports = (router) => {
     let deactivatedDate = new Date()
 
     batch.deactivatedDate = deactivatedDate.toISOString().substring(0,10)
+    batch.deactivationReason = 'manual'
 
     res.redirect(`/vaccines/${vaccine.id}?tab=inactive&deactivated=true&batchNumber=${encodeURIComponent(batch.batchNumber)}`)
   })
