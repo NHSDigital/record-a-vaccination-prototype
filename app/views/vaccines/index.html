@@ -130,8 +130,9 @@
       selected: true
     }] %}
 
-    {% for site in filteredSites %}
-      {% set filterItems = (filterItems.push({text: currentOrganisation.sites[site].name, value: site}), filterItems) %}
+    {% for siteId in filteredSites %}
+      {% set site = currentOrganisation.sites | findById(siteId) %}
+      {% set filterItems = (filterItems.push({text: site.name, value: siteId}), filterItems) %}
     {% endfor %}
 
 
