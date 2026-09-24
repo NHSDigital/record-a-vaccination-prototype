@@ -283,7 +283,7 @@
     ],
     [
     {
-    html: "<a href='/errors/rate-limit'>Rate limited (429 error)</a>"
+    html: "<a href='/errors/rate-limit'>Sorry, there is a problem with the service (rate limited, 429 error)</a>"
     },
     {
     text: "When too many requests are made in a short time."
@@ -291,10 +291,33 @@
     ],
     [
     {
-    html: "<a href='/errors/vaccine-disabled'>Problem saving the vaccination (Regional admin has removed vaccines mid-recording)</a>"
+    html: "<a href='/errors/vaccine-disabled'>There is a problem saving this vaccination</a>"
     },
     {
-    text: "When a vaccination programme becomes unavailable during the recording flow."
+    text: "When a regional user has removed access to a vaccine type mid-recording)"
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/site-deactivated'>There is a problem saving this vaccination</a>"
+    },
+    {
+    text: "When a site is deactivated during the recording flow."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/problem-deactivating-site'>There is a problem deactivating this site</a>"
+    },
+    {
+    text: "When there is a generic problem deactivating a site ('Try again' takes user back to the 'Confirm site deactivation' page)."
+    }
+    ],[
+    {
+    html: "<a href='/errors/problem-deactivating-site-2-users-trying'>There is a problem deactivating this site</a>"
+    },
+    {
+    text: "When there is a problem deactivating a site because 2 users are trying to do this at the same time."
     }
     ]
     ]
