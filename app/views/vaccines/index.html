@@ -111,15 +111,19 @@
   <div class="nhsuk-u-margin-bottom-4">
     {{ appSecondaryNavigation({
       visuallyHiddenTitle: "Sites by status",
-      items: [{
+      items: [
+      {
         text: "Active sites (" + activeSitesCount + ")",
         href: "/vaccines?siteTab=active",
         current: (currentSiteTab == "active")
-      }, {
+      } if activeSitesCount != "0"
+      ,
+      {
         text: "Deactivated sites (" + deactivatedSitesCount + ")",
         href: "/vaccines?siteTab=deactivated",
         current: (currentSiteTab == "deactivated")
-      }]
+      } if deactivatedSitesCount != "0"
+      ]
     }) }}
   </div>
 
