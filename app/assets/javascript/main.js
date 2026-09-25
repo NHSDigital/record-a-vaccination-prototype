@@ -9,6 +9,7 @@ import { CheckboxFilter } from './checkbox-filter.js'
 import { CheckboxSelectAll } from './checkbox-select-all.js'
 import { CheckboxSelectedCount } from './checkbox-selected-count.js'
 import { RadiosFilter } from './radios-filter.js'
+import './vaccine-site-filter.js'
 
 // Initiate NHS.UK frontend components on page load
 document.addEventListener('DOMContentLoaded', () => {

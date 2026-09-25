@@ -111,15 +111,19 @@
   <div class="nhsuk-u-margin-bottom-4">
     {{ appSecondaryNavigation({
       visuallyHiddenTitle: "Sites by status",
-      items: [{
+      items: [
+      {
         text: "Active sites (" + activeSitesCount + ")",
         href: "/vaccines?siteTab=active",
         current: (currentSiteTab == "active")
-      }, {
+      } if activeSitesCount != "0"
+      ,
+      {
         text: "Deactivated sites (" + deactivatedSitesCount + ")",
         href: "/vaccines?siteTab=deactivated",
         current: (currentSiteTab == "deactivated")
-      }]
+      } if deactivatedSitesCount != "0"
+      ]
     }) }}
   </div>
 
@@ -130,8 +134,9 @@
       selected: true
     }] %}
 
-    {% for site in filteredSites %}
-      {% set filterItems = (filterItems.push({text: currentOrganisation.sites[site].name, value: site}), filterItems) %}
+    {% for siteId in filteredSites %}
+      {% set site = currentOrganisation.sites | findById(siteId) %}
+      {% set filterItems = (filterItems.push({text: site.name, value: siteId}), filterItems) %}
     {% endfor %}
 
 
@@ -158,6 +163,7 @@
 
         {% set site =  currentOrganisation.sites | findById(siteId) %}
 
+        <div data-vaccine-site="{{ siteId }}">
         <table class="nhsuk-table nhsuk-u-margin-bottom-2">
           <caption class="nhsuk-table__caption nhsuk-table__caption--m nhsuk-u-margin-bottom-2">{{ site.name }}</caption>
           <thead role="rowgroup" class="nhsuk-table__head">
@@ -229,13 +235,16 @@
           </tbody>
         </table>
 
-        {% if site.status != "closed" %}
+        {% if site.status != "closed" and (filteredSites | length) <= 1 %}
+        {# Don't show anything, because we don't want users to close the last site #}
+        {% elif site.status != "closed" %}
           <div style="height: 8px;"></div>
           <p class="nhsuk-body nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-7">No longer using this site? <a href="/vaccines/sites/{{ site.id }}/deactivate" class="nhsuk-link">Deactivate {{ site.name }}</a></p>
-          {% else %}
-            <div style="height: 8px;"></div>
-            <p class="nhsuk-body nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-7">Using this site again? <a href="/vaccines/sites/{{ site.id }}/reactivate" class="nhsuk-link">Reactivate {{ site.name }}</a></p>
+        {% else %}
+          <div style="height: 8px;"></div>
+          <p class="nhsuk-body nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-7">Using this site again? <a href="/vaccines/sites/{{ site.id }}/reactivate" class="nhsuk-link">Reactivate {{ site.name }}</a></p>
         {% endif %}
+        </div>
       {% endfor %}
 
 
