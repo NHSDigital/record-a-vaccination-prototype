@@ -1,0 +1,332 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Autumn vaccination clinic" %}
+
+{% set currentSection = "sessions" %}
+
+{% block beforeContent %}
+
+    {{ backLink({
+    href: "/sessions",
+    text: "Back"
+    }) }}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+            {{ summaryList({
+                rows: [
+                    {
+                    key: {
+                        text: "Date"
+                    },
+                    value: {
+                        text: today | formatDate
+                    }
+                    },
+                    {
+                    key: {
+                        text: "Location"
+                    },
+                    value: {
+                        text: "Hillside Care Home"
+                    }
+                    },
+                    {
+                    key: {
+                        text: "Status"
+                    },
+                    value: {
+                        html: tag({
+                            text: "Preparing",
+                            colour: "yellow"
+                            })
+                    } 
+                    } if data.status=="preparing",
+                    {
+                    key: {
+                        text: "Status"
+                    },
+                    value: {
+                        html: tag({
+                            text: "In session",
+                            colour: "white"
+                            })
+                    } 
+                    } if data.status=="insession",
+                    {
+                    key: {
+                        text: "Status"
+                    },
+                    value: {
+                        html: tag({
+                            text: "Complete",
+                            colour: "green"
+                            })
+                    } 
+                    } if data.status=="complete"
+                    
+                ]
+                }) }}
+
+        </div>
+    </div>
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+
+            <div class="nhsuk-button-group">
+
+                {% if data.status == "insession" %}
+
+                    {{ button({
+                        text: "Record a walk-in",
+                        variant: "secondary"
+                    }) }}
+
+                {% elif data.status == "complete" %}
+
+                {% else %}
+
+                    {{ button({
+                        text: "Start session",
+                        href: "?status=insession"
+                    }) }}
+
+                {% endif %}
+
+                {% if data.status == "complete" %}
+
+                {% else %}
+
+                    {{ button({
+                        text: "Add patients",
+                        variant: "secondary"
+                    }) }}
+
+                    {# {{ button({
+                        text: "Pre-fill all with template",
+                        variant: "secondary"
+                    }) }} #}
+
+                {% endif %}
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+
+            {% if data.status == "complete" %}
+
+                <ul class="nhsuk-grid-row nhsuk-card-group">
+
+                    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+                        {% call card({
+                    heading: {
+                        text: "33",
+                        visuallyHiddenText: "vaccinations",
+                        classes: "nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1"
+                    }
+                    }) %}
+                    Vaccinations
+                    {% endcall %}
+                    </li>
+                    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+                        {% call card({
+                    heading: {
+                        text: "16",
+                        visuallyHiddenText: "vaccinations",
+                        classes: "nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1"
+                    }
+                    }) %}
+                    DNAs
+                    {% endcall %}
+                    </li>
+                </ul>
+
+            {% endif %}
+
+            {% set patientActionsContent %}
+
+            {% if data.status == "complete" %}
+
+                <a href='#'>View record</a>
+
+            {% elif data.status == "preparing" %}
+
+                <a href='#'>Pre-fill</a>
+
+            {% else %}
+
+                <div class="nhsuk-button-group">
+
+                    <a href='#'>Pre-fill</a>
+
+                    <a href='#'>Record</a>
+
+                    {# {{ button({
+                        text: "Mark as ready",
+                        small: true,
+                        variant: "secondary"
+                    }) }} #}
+
+                    {{ button({
+                        text: "DNA",
+                        small: true,
+                        variant: "secondary"
+                    }) }}
+
+                </div>
+
+            {% endif %}
+
+            {% endset -%}
+
+            {% set patientStatusContent %}
+
+            {% if data.status == "complete" %}
+
+                {{ tag({
+                    text: "Vaccinated",
+                    colour: "green"
+                }) }}
+
+            {% elif data.status == "insession" %}
+
+                {{ tag({
+                    text: "In session",
+                    colour: "white"
+                }) }}
+
+            {% else %}
+
+                {{ tag({
+                    text: "New",
+                    colour: "yellow"
+                }) }}
+
+            {% endif %}
+
+            {% endset -%}
+
+            {% set allPatientContent %}
+            {{ table({
+            caption: {
+                text: "Patients",
+                classes: "nhsuk-u-visually-hidden"
+                },
+                head: [
+                    {
+                    text: "Name and NHS number"
+                    },
+                    {
+                    text: "Date of birth"
+                    },
+                    {
+                    text: "Status"
+                    },
+                    {
+                    text: "Actions"
+                    }
+                ],
+                rows: [
+                    [
+                    {
+                        html: "Alan Teapot <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
+                    },
+                    {
+                        html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
+                    },
+                    {
+                        html: patientStatusContent
+                    },
+                    {
+                        html: patientActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "Margaret Green <div class='nhsuk-u-secondary-text-colour'>943 876 2109</div>"
+                    },
+                    {
+                        html: "2 September 1943 <div class='nhsuk-u-secondary-text-colour'>83 years old</div>"
+                    },
+                    {
+                        html: patientStatusContent
+                    },
+                    {
+                        html: patientActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "George Wilson <div class='nhsuk-u-secondary-text-colour'>978 654 3210</div>"
+                    },
+                    {
+                        html: "19 November 1946 <div class='nhsuk-u-secondary-text-colour'>79 years old</div>"
+                    },
+                    {
+                        html: patientStatusContent
+                    },
+                    {
+                        html: patientActionsContent
+                    }
+                    ]
+                ]
+            }) }}
+            {% endset -%}
+
+            {{ tabs({
+                items: [
+                {
+                    label: "All patients (49)",
+                    id: "patients",
+                    panel: {
+                    html: allPatientContent
+                    }
+                }
+                ,
+                {
+                    label: "Pre-filled (8)",
+                    id: "prefilled"
+                } if data.status=="preparing" or data.status=="insession"
+                ,
+                {
+                    label: "Vaccinated (33)",
+                    id: "vaccinated"
+                } if data.status=="insession" or data.status=="complete"
+                ,
+                {
+                    label: "DNAs (16)",
+                    id: "dnas"
+                } if data.status=="insession" or data.status=="complete"
+                ]
+            }) }}
+
+            {% if data.status == "insession" %}
+
+                {{ button({
+                    text: "Complete session",
+                    href: "?status=complete",
+                    variant: "warning"
+                }) }}
+
+            {% endif %}
+
+            <p>
+                <a href="#" class="nhsuk-link">Print patient list</a>
+            </p>
+
+        </div>
+    </div>
+
+{% endblock %}

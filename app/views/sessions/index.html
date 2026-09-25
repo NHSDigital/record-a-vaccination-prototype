@@ -1,0 +1,119 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Sessions" %}
+
+{% set currentSection = "sessions" %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+
+            <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+            {{ button({
+                text: "Create session"
+            }) }}
+
+            {% set upcomingContent %}
+                {{ table({
+            caption: {
+                text: "Existing clinics",
+                classes: "nhsuk-u-visually-hidden"
+                },
+                head: [
+                    {
+                    text: "Name"
+                    },
+                    {
+                    text: "Date"
+                    },
+                    {
+                    text: "Location"
+                    },
+                    {
+                    text: "Patients"
+                    },
+                    {
+                    text: "Action"
+                    }
+                ],
+                rows: [
+                    [
+                    {
+                        text: "Autumn vaccination clinic"
+                    },
+                    {
+                        text: today | formatDate
+                    },
+                    {
+                        text: "Hillside Care Home"
+                    },
+                    {
+                        text: "49"
+                    },
+                    {
+                        html: "<a href='/sessions/session?status=preparing'>View</a>"
+                    }
+                    ],
+                    [
+                    {
+                        text: "Winter booster clinic"
+                    },
+                    {
+                        text: "22 October 2026"
+                    },
+                    {
+                        text: "Oaklands Residential Home"
+                    },
+                    {
+                        text: "36"
+                    },
+                    {
+                        html: "<a href='/sessions/session?status=preparing'>View</a>"
+                    }
+                    ],
+                    [
+                    {
+                        text: "Flu vaccination visit"
+                    },
+                    {
+                        text: "5 November 2026"
+                    },
+                    {
+                        text: "Meadowbrook Care Centre"
+                    },
+                    {
+                        text: "58"
+                    },
+                    {
+                        html: "<a href='/sessions/session?status=preparing'>View</a>"
+                    }
+                    ]
+                ]
+            }) }}
+            {% endset -%}
+
+            {{ tabs({
+                items: [
+                {
+                    label: "Upcoming (3)",
+                    id: "upcoming",
+                    panel: {
+                    html: upcomingContent
+                    }
+                    },
+                    {
+                    label: "Completed (2)",
+                    id: "completed",
+                    panel: {
+                        html: completedContent
+                    }
+                    }
+                ]
+            }) }}
+
+        </div>
+    </div>
+
+{% endblock %}

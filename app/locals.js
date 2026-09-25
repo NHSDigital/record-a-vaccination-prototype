@@ -29,6 +29,7 @@ module.exports = function(req, res, next) {
     ]
 
     const now = new Date()
+    res.locals.today = now.toISOString().substring(0, 10)
     const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1)
     res.locals.lastCalendarMonth = `${monthNames[lastMonthDate.getMonth()]} ${lastMonthDate.getFullYear()}`
 

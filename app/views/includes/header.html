@@ -16,6 +16,13 @@
     }), navigationItems) %}
   {% endif %}
 
+    <!-- Sessions (all users) -->
+  {% set navigationItems = (navigationItems.push({
+    href: "/sessions/",
+    text: "Sessions",
+    active: (currentSection == "sessions")
+  }), navigationItems) %}
+
   <!-- Record vaccinations (where available) -->
   {% if canShowRecordVaccinations %}
     {% set navigationItems = (navigationItems.push({
