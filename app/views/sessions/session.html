@@ -1,6 +1,20 @@
 {% extends 'layout.html' %}
 
+{% if data.scenario == "appts" and data.status == "complete" %}
+{% set pageName = "Yesterday’s appointments" %}
+{% elif data.scenario == "appts" and data.status == "preparing" %}
+{% set pageName = "Tomorrow’s appointments" %}
+{% elif data.scenario == "appts" %}
+{% set pageName = "Today’s appointments" %}
+{% else %}
 {% set pageName = "Autumn vaccination clinic" %}
+{% endif %}
+
+{% if data.scenario == "appts" %}
+{% set sessionLocation = "On site (Pickfords Pharmacy)" %}
+{% else %}
+{% set sessionLocation = "Hillside Care Home" %}
+{% endif %}
 
 {% set currentSection = "sessions" %}
 
@@ -27,15 +41,25 @@
                         text: "Date"
                     },
                     value: {
+                        text: tomorrow | formatDate
+                    }
+                    } if data.scenario == "appts" 
+                    ,
+                    {
+                    key: {
+                        text: "Date"
+                    },
+                    value: {
                         text: today | formatDate
                     }
-                    },
+                    } if data.scenario != "appts" 
+                    ,
                     {
                     key: {
                         text: "Location"
                     },
                     value: {
-                        text: "Hillside Care Home"
+                        text: sessionLocation
                     }
                     },
                     {
@@ -86,13 +110,13 @@
                 {% if data.status == "insession" %}
 
                     {{ button({
-                        text: "Record a walk-in",
+                        text: "Add a walk-in",
                         variant: "secondary"
                     }) }}
 
                 {% elif data.status == "complete" %}
 
-                {% else %}
+                {% elif data.scenario != "appts" %}
 
                     {{ button({
                         text: "Start session",
@@ -103,17 +127,19 @@
 
                 {% if data.status == "complete" %}
 
-                {% else %}
+                {% elif data.scenario!="appts" %}
 
                     {{ button({
                         text: "Add patients",
                         variant: "secondary"
                     }) }}
 
-                    {# {{ button({
-                        text: "Pre-fill all with template",
+                    {% else %}
+
+                    {{ button({
+                        text: "Pre-fill all",
                         variant: "secondary"
-                    }) }} #}
+                    }) }}
 
                 {% endif %}
 
@@ -142,13 +168,24 @@
                     </li>
                     <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
                         {% call card({
-                    heading: {
-                        text: "16",
+                        heading: {
+                        text: "2",
                         visuallyHiddenText: "vaccinations",
                         classes: "nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1"
                     }
                     }) %}
-                    DNAs
+                    Cancelled
+                    {% endcall %}
+                    </li>
+                    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+                        {% call card({
+                        heading: {
+                        text: "4",
+                        visuallyHiddenText: "vaccinations",
+                        classes: "nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1"
+                    }
+                    }) %}
+                    Not eligible
                     {% endcall %}
                     </li>
                 </ul>
@@ -173,17 +210,7 @@
 
                     <a href='#'>Record</a>
 
-                    {# {{ button({
-                        text: "Mark as ready",
-                        small: true,
-                        variant: "secondary"
-                    }) }} #}
-
-                    {{ button({
-                        text: "DNA",
-                        small: true,
-                        variant: "secondary"
-                    }) }}
+                    <a href='#'>Cancel</a>
 
                 </div>
 
@@ -226,6 +253,9 @@
                 },
                 head: [
                     {
+                    text: "Time"
+                    },
+                    {
                     text: "Name and NHS number"
                     },
                     {
@@ -233,13 +263,17 @@
                     },
                     {
                     text: "Status"
-                    },
+                    } if data.scenario!="appts"
+                    ,
                     {
                     text: "Actions"
                     }
                 ],
                 rows: [
                     [
+                    {
+                        html: "10:00am"
+                    },
                     {
                         html: "Alan Teapot <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
                     },
@@ -248,12 +282,16 @@
                     },
                     {
                         html: patientStatusContent
-                    },
+                    } if data.scenario!="appts"
+                    ,
                     {
                         html: patientActionsContent
                     }
                     ],
                     [
+                    {
+                        html: "10:30am"
+                    },
                     {
                         html: "Margaret Green <div class='nhsuk-u-secondary-text-colour'>943 876 2109</div>"
                     },
@@ -262,12 +300,16 @@
                     },
                     {
                         html: patientStatusContent
-                    },
+                    } if data.scenario!="appts"
+                    ,
                     {
                         html: patientActionsContent
                     }
                     ],
                     [
+                    {
+                        html: "N/A  <div class='nhsuk-u-secondary-text-colour'>Walk-in</div>"
+                    },
                     {
                         html: "George Wilson <div class='nhsuk-u-secondary-text-colour'>978 654 3210</div>"
                     },
@@ -276,11 +318,12 @@
                     },
                     {
                         html: patientStatusContent
-                    },
+                    } if data.scenario!="appts"
+                    ,
                     {
                         html: patientActionsContent
                     }
-                    ]
+                    ] if data.status!="preparing"
                 ]
             }) }}
             {% endset -%}
@@ -288,7 +331,7 @@
             {{ tabs({
                 items: [
                 {
-                    label: "All patients (49)",
+                    label: "All (49)",
                     id: "patients",
                     panel: {
                     html: allPatientContent
@@ -301,13 +344,18 @@
                 } if data.status=="preparing" or data.status=="insession"
                 ,
                 {
-                    label: "Vaccinated (33)",
+                    label: "Completed (33)",
                     id: "vaccinated"
                 } if data.status=="insession" or data.status=="complete"
                 ,
                 {
-                    label: "DNAs (16)",
+                    label: "Cancelled (2)",
                     id: "dnas"
+                }
+                ,
+                {
+                    label: "Not eligible (4)",
+                    id: "noteligible"
                 } if data.status=="insession" or data.status=="complete"
                 ]
             }) }}

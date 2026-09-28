@@ -41,6 +41,23 @@
                 rows: [
                     [
                     {
+                        text: "Tomorrow’s appointments"
+                    },
+                    {
+                        text: tomorrow | formatDate
+                    },
+                    {
+                        text: "On site (Pickfords Pharmacy)"
+                    },
+                    {
+                        text: "49"
+                    },
+                    {
+                        html: "<a href='/sessions/session?status=preparing'>View session</a>"
+                    }
+                    ],
+                    [
+                    {
                         text: "Autumn vaccination clinic"
                     },
                     {
@@ -53,9 +70,10 @@
                         text: "49"
                     },
                     {
-                        html: "<a href='/sessions/session?status=preparing'>View</a>"
+                        html: "<a href='/sessions/session?status=preparing'>View session</a>"
                     }
-                    ],
+                    ] if data.scenario != "appts"
+                    ,
                     [
                     {
                         text: "Winter booster clinic"
@@ -70,9 +88,10 @@
                         text: "36"
                     },
                     {
-                        html: "<a href='/sessions/session?status=preparing'>View</a>"
+                        html: "<a href='/sessions/session?status=preparing'>View session</a>"
                     }
-                    ],
+                    ] if data.scenario != "appts"
+                    ,
                     [
                     {
                         text: "Flu vaccination visit"
@@ -87,9 +106,9 @@
                         text: "58"
                     },
                     {
-                        html: "<a href='/sessions/session?status=preparing'>View</a>"
+                        html: "<a href='/sessions/session?status=preparing'>View session</a>"
                     }
-                    ]
+                    ] if data.scenario != "appts"
                 ]
             }) }}
             {% endset -%}
@@ -97,14 +116,16 @@
             {{ tabs({
                 items: [
                 {
-                    label: "Upcoming (3)",
+                    label: "Upcoming (3)" if data.scenario != "appts",
+                    label: "Upcoming (1)" if data.scenario == "appts",
                     id: "upcoming",
                     panel: {
                     html: upcomingContent
                     }
-                    },
+                    }
+                    ,
                     {
-                    label: "Completed (2)",
+                    label: "Completed",
                     id: "completed",
                     panel: {
                         html: completedContent
