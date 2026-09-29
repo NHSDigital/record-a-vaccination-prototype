@@ -74,3 +74,132 @@
   margin-bottom: nhsuk-spacing(4);
   padding-bottom: nhsuk-spacing(3);
 }
+
+// Timeline
+
+.nhsapp-timeline {
+  margin-bottom: 24px;
+}
+@media (min-width: 40.0625em) {
+  .nhsapp-timeline {
+    margin-bottom: 32px;
+  }
+}
+.nhsapp-timeline {
+  padding-top: 8px;
+}
+@media (min-width: 40.0625em) {
+  .nhsapp-timeline {
+    padding-top: 8px;
+  }
+}
+.nhsapp-timeline {
+  list-style: none;
+  padding: 0;
+}
+.nhsapp-timeline__item {
+  padding-bottom: 24px;
+}
+@media (min-width: 40.0625em) {
+  .nhsapp-timeline__item {
+    padding-bottom: 32px;
+  }
+}
+.nhsapp-timeline__item {
+  display: flex;
+  margin-bottom: 0;
+  margin-left: 12px;
+  margin-top: -6px;
+  position: relative;
+}
+.nhsapp-timeline__item:last-child {
+  padding: 0;
+}
+.nhsapp-timeline__item:last-child:before {
+  border: none;
+}
+.nhsapp-timeline__item:before {
+  border-left: 2px solid #aeb7bd;
+  bottom: 0;
+  content: "";
+  display: block;
+  left: -2px;
+  position: absolute;
+  top: 8px;
+  width: 2px;
+}
+.nhsapp-timeline__item--past:before {
+  border-color: #005eb8;
+}
+.nhsapp-timeline__badge {
+  flex-shrink: 0;
+  z-index: 1;
+  height: 16px;
+  width: 16px;
+  margin-left: -9px;
+  margin-top: 4px;
+  margin-right: 24px;
+}
+@media (min-width: 40.0625em) {
+  .nhsapp-timeline__badge {
+    height: 20px;
+    margin-left: -11px;
+    margin-top: 3px;
+    width: 20px;
+  }
+}
+.nhsapp-timeline__badge--small {
+  height: 12px;
+  width: 12px;
+  margin-left: -7px;
+  margin-top: 6px;
+  margin-right: 26px;
+}
+@media (min-width: 40.0625em) {
+  .nhsapp-timeline__badge--small {
+    height: 16px;
+    margin-left: -9px;
+    margin-top: 5px;
+    width: 16px;
+  }
+}
+.nhsapp-timeline__header {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+@media (min-width: 40.0625em) {
+  .nhsapp-timeline__header {
+    font-size: 1.1875rem;
+    line-height: 1.4736842105;
+  }
+}
+@media print {
+  .nhsapp-timeline__header {
+    font-size: 13pt;
+    line-height: 1.25;
+  }
+}
+.nhsapp-timeline__header {
+  font-weight: normal;
+  margin-bottom: 0;
+}
+.nhsapp-timeline__description {
+  font-size: 0.875rem;
+  line-height: 1.7142857143;
+}
+@media (min-width: 40.0625em) {
+  .nhsapp-timeline__description {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+@media print {
+  .nhsapp-timeline__description {
+    font-size: 12pt;
+    line-height: 1.3;
+  }
+}
+.nhsapp-timeline__description {
+  margin-bottom: 0;
+  padding-top: 0;
+}
