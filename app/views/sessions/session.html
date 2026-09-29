@@ -7,7 +7,7 @@
 {% elif data.scenario == "appts" %}
 {% set pageName = "Today’s appointments" %}
 {% else %}
-{% set pageName = "Autumn vaccination clinic" %}
+{% set pageName = "Hillside Care home - Flu over 75s" %}
 {% endif %}
 
 {% if data.scenario == "appts" %}
@@ -109,11 +109,6 @@
 
                 {% if data.status == "insession" %}
 
-                    {{ button({
-                        text: "Add a walk-in",
-                        variant: "secondary"
-                    }) }}
-
                 {% elif data.status == "complete" %}
 
                 {% elif data.scenario != "appts" %}
@@ -177,17 +172,6 @@
                     Cancelled
                     {% endcall %}
                     </li>
-                    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
-                        {% call card({
-                        heading: {
-                        text: "4",
-                        visuallyHiddenText: "vaccinations",
-                        classes: "nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1"
-                    }
-                    }) %}
-                    Not eligible
-                    {% endcall %}
-                    </li>
                 </ul>
 
             {% endif %}
@@ -198,15 +182,9 @@
 
                 <a href='#'>View record</a>
 
-            {% elif data.status == "preparing" %}
-
-                <a href='#'>Pre-fill</a>
-
             {% else %}
 
                 <div class="nhsuk-button-group">
-
-                    <a href='#'>Pre-fill</a>
 
                     <a href='#'>Record</a>
 
@@ -253,17 +231,11 @@
                 },
                 head: [
                     {
-                    text: "Time"
-                    },
-                    {
                     text: "Name and NHS number"
                     },
                     {
                     text: "Date of birth"
-                    },
-                    {
-                    text: "Status"
-                    } if data.scenario!="appts"
+                    }
                     ,
                     {
                     text: "Actions"
@@ -272,26 +244,16 @@
                 rows: [
                     [
                     {
-                        html: "10:00am"
-                    },
-                    {
                         html: "Alan Teapot <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
                     },
                     {
                         html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
                     },
                     {
-                        html: patientStatusContent
-                    } if data.scenario!="appts"
-                    ,
-                    {
                         html: patientActionsContent
                     }
                     ],
                     [
-                    {
-                        html: "10:30am"
-                    },
                     {
                         html: "Margaret Green <div class='nhsuk-u-secondary-text-colour'>943 876 2109</div>"
                     },
@@ -299,17 +261,10 @@
                         html: "2 September 1943 <div class='nhsuk-u-secondary-text-colour'>83 years old</div>"
                     },
                     {
-                        html: patientStatusContent
-                    } if data.scenario!="appts"
-                    ,
-                    {
                         html: patientActionsContent
                     }
                     ],
                     [
-                    {
-                        html: "N/A  <div class='nhsuk-u-secondary-text-colour'>Walk-in</div>"
-                    },
                     {
                         html: "George Wilson <div class='nhsuk-u-secondary-text-colour'>978 654 3210</div>"
                     },
@@ -317,13 +272,9 @@
                         html: "19 November 1946 <div class='nhsuk-u-secondary-text-colour'>79 years old</div>"
                     },
                     {
-                        html: patientStatusContent
-                    } if data.scenario!="appts"
-                    ,
-                    {
                         html: patientActionsContent
                     }
-                    ] if data.status!="preparing"
+                    ] if data.status!="appts"
                 ]
             }) }}
             {% endset -%}
@@ -339,11 +290,6 @@
                 }
                 ,
                 {
-                    label: "Pre-filled (8)",
-                    id: "prefilled"
-                } if data.status=="preparing" or data.status=="insession"
-                ,
-                {
                     label: "Completed (33)",
                     id: "vaccinated"
                 } if data.status=="insession" or data.status=="complete"
@@ -352,11 +298,6 @@
                     label: "Cancelled (2)",
                     id: "dnas"
                 }
-                ,
-                {
-                    label: "Not eligible (4)",
-                    id: "noteligible"
-                } if data.status=="insession" or data.status=="complete"
                 ]
             }) }}
 

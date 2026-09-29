@@ -1,8 +1,8 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Sessions" %}
+{% set pageName = "Clinics" %}
 
-{% set currentSection = "sessions" %}
+{% set currentSection = "clinics" %}
 
 {% block content %}
 
@@ -12,11 +12,11 @@
             <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
             {{ button({
-                text: "Create session"
+                text: "Create clinic"
             }) }}
 
             {% set upcomingContent %}
-                {{ table({
+            {{ table({
             caption: {
                 text: "Existing clinics",
                 classes: "nhsuk-u-visually-hidden"
@@ -53,12 +53,13 @@
                         text: "49"
                     },
                     {
-                        html: "<a href='/sessions/session?status=preparing'>View session</a>"
+                        html: "<a href='/sessions/session?status=preparing'>View</a>"
                     }
-                    ],
+                    ] if data.scenario
+                    ,
                     [
                     {
-                        text: "Autumn vaccination clinic"
+                        text: "Hillside Care home - Flu over 75s"
                     },
                     {
                         text: today | formatDate
@@ -70,13 +71,13 @@
                         text: "49"
                     },
                     {
-                        html: "<a href='/sessions/session?status=preparing'>View session</a>"
+                        html: "<a href='/sessions/session?status=preparing'>View</a>"
                     }
                     ] if data.scenario != "appts"
                     ,
                     [
                     {
-                        text: "Winter booster clinic"
+                        text: "Oaklands care home - Covid"
                     },
                     {
                         text: "22 October 2026"
@@ -88,13 +89,13 @@
                         text: "36"
                     },
                     {
-                        html: "<a href='/sessions/session?status=preparing'>View session</a>"
+                        html: "<a href='/sessions/session?status=preparing'>View</a>"
                     }
                     ] if data.scenario != "appts"
                     ,
                     [
                     {
-                        text: "Flu vaccination visit"
+                        text: "Housebound patients Meadowbrook list"
                     },
                     {
                         text: "5 November 2026"
@@ -106,7 +107,7 @@
                         text: "58"
                     },
                     {
-                        html: "<a href='/sessions/session?status=preparing'>View session</a>"
+                        html: "<a href='/sessions/session?status=preparing'>View</a>"
                     }
                     ] if data.scenario != "appts"
                 ]
@@ -116,12 +117,11 @@
             {{ tabs({
                 items: [
                 {
-                    label: "Upcoming (3)" if data.scenario != "appts",
-                    label: "Upcoming (1)" if data.scenario == "appts",
+                    label: "Upcoming (3)",
                     id: "upcoming",
                     panel: {
-                    html: upcomingContent
-                    }
+                        html: upcomingContent
+                        }
                     }
                     ,
                     {
