@@ -1,0 +1,101 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Create clinic" %}
+
+{% set currentSection = "clinics" %}
+
+{% block beforeContent %}
+
+    {{ backLink({
+    href: "#",
+    text: "Back"
+    }) }}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+
+            <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+            {{ input({
+                label: {
+                    text: "Name"
+                },
+                id: "example-with-hint-text",
+                name: "exampleWithHintText",
+                width: 20
+            }) }}
+
+
+            {# {{ dateInput({
+            fieldset: {
+                legend: {
+                text: "Date"
+                }
+            },
+            id: "appointment-date",
+            namePrefix: "appointmentDate",
+            day: {
+                width: 2
+            },
+            month: {
+                width: 2
+            },
+            year: {
+                width: 4
+            }
+            }) }}
+
+            {{ input({
+                label: {
+                    text: "Location"
+                },
+                id: "example-with-hint-text",
+                name: "exampleWithHintText",
+                width: 10
+            }) }} #}
+
+            {{ checkboxes({
+            fieldset: {
+                legend: {
+                text: "Set defaults"
+                }
+            },
+            idPrefix: "example",
+            name: "example",
+            items: [
+                {
+                value: "Date",
+                text: "Date"
+                },
+                {
+                value: "Location",
+                text: "Location"
+                },
+                {
+                value: "Vaccinator",
+                text: "Vaccinator"
+                },
+                {
+                value: "Vaccine",
+                text: "Vaccine"
+                },
+                {
+                value: "Eligibility",
+                text: "Eligibility"
+                }
+            ]
+            }) }}
+
+            {{ button({
+                text: "Continue",
+                href: "/clinics/add-patients"
+            }) }}
+
+        </div>
+    </div>
+
+{% endblock %}

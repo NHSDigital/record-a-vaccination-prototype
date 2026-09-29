@@ -12,7 +12,8 @@
             <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
             {{ button({
-                text: "Create clinic"
+                text: "Create clinic",
+                href: "create"
             }) }}
 
             {% set upcomingContent %}
@@ -53,7 +54,7 @@
                         text: "49"
                     },
                     {
-                        html: "<a href='/sessions/session?status=preparing'>View</a>"
+                        html: "<a href='/clinics/session?status=preparing'>View</a>"
                     }
                     ] if data.scenario
                     ,
@@ -71,7 +72,7 @@
                         text: "49"
                     },
                     {
-                        html: "<a href='/sessions/session?status=preparing'>View</a>"
+                        html: "<a href='/clinics/session?status=preparing'>View</a>"
                     }
                     ] if data.scenario != "appts"
                     ,
@@ -89,7 +90,7 @@
                         text: "36"
                     },
                     {
-                        html: "<a href='/sessions/session?status=preparing'>View</a>"
+                        html: "<a href='/clinics/session?status=preparing'>View</a>"
                     }
                     ] if data.scenario != "appts"
                     ,
@@ -107,7 +108,7 @@
                         text: "58"
                     },
                     {
-                        html: "<a href='/sessions/session?status=preparing'>View</a>"
+                        html: "<a href='/clinics/session?status=preparing'>View</a>"
                     }
                     ] if data.scenario != "appts"
                 ]

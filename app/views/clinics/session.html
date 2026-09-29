@@ -16,12 +16,12 @@
 {% set sessionLocation = "Hillside Care Home" %}
 {% endif %}
 
-{% set currentSection = "sessions" %}
+{% set currentSection = "clinics" %}
 
 {% block beforeContent %}
 
     {{ backLink({
-    href: "/sessions",
+    href: "/clinics/",
     text: "Back"
     }) }}
 
@@ -60,6 +60,30 @@
                     },
                     value: {
                         text: sessionLocation
+                    }
+                    },
+                    {
+                    key: {
+                        text: "Vaccinator"
+                    },
+                    value: {
+                        text: currentUser.firstName + " " + currentUser.lastName
+                    }
+                    },
+                    {
+                    key: {
+                        text: "Vaccine"
+                    },
+                    value: {
+                        text: "Flu - Adjuvanted Trivalent Influenza Vaccine (aTIV)"
+                    }
+                    },
+                    {
+                    key: {
+                        text: "Reason"
+                    },
+                    value: {
+                        text: "Resident in a care home"
                     }
                     },
                     {
@@ -116,6 +140,11 @@
                     {{ button({
                         text: "Start session",
                         href: "?status=insession"
+                    }) }}
+
+                    {{ button({
+                        text: "Edit defaults",
+                        variant: "secondary"
                     }) }}
 
                 {% endif %}
@@ -304,7 +333,7 @@
             {% if data.status == "insession" %}
 
                 {{ button({
-                    text: "Complete session",
+                    text: "Complete clinic",
                     href: "?status=complete",
                     variant: "warning"
                 }) }}
