@@ -1,0 +1,227 @@
+{# This page has been desiged to match the QA envirnment #}
+{# Elsewhere in the prototype, the 'records' section has a different design which has not been built into QA yet #}
+{% extends 'layout.html' %}
+
+{% set pageName = "Patient's vaccination records – Records" %}
+
+{% set currentSection = "records" %}
+
+{% set patientFirstName = "Jodie" %}
+{% set patientLastName = "Brown" %}
+{% set patientFullName = patientFirstName + " " + patientLastName %}
+
+{% block beforeContent %}
+    {{ backLink({
+        href: "#",
+        text: "Back"
+    }) }}
+{% endblock %}
+
+{% block content %}
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            <h1 class="nhsuk-heading-l">{{ patientFullName }}’s vaccination records</h1>
+
+            {% from "warning-callout/macro.njk" import warningCallout %}
+
+            {{ warningCallout({
+                heading: "Important",
+                headingLevel: 2,
+                text: "This patient has died according to the Personal Demographics Service."
+            }) }}
+
+            {{ summaryList({
+                rows: [
+                {
+                    key: {
+                    text: "Name"
+                    },
+                    value: {
+                    text: patientFullName
+                    }
+                },
+                {
+                    key: {
+                    text: "Date of birth"
+                    },
+                    value: {
+                    html: "15 March 1984"
+                    }
+                },
+                {
+                    key: {
+                    text: "Date of death"
+                    },
+                    value: {
+                    html: "20 April 2024<br>(40 years old)"
+                    }
+                },
+                {
+                    key: {
+                    text: "Address"
+                    },
+                    value: {
+                    html: "73 Roman Rd<br>Leeds<br> LS2 5ZN"
+                    }
+                },
+                {
+                    key: {
+                    text: "NHS number"
+                    },
+                    value: {
+                    text: "9123456789"
+                    }
+                },
+                {
+                    key: {
+                    text: "Registered GP"
+                    },
+                    value: {
+                    html: "Beech House surgery <br>1 Ash Tree Road<br>Knaresborough<br>HG5 0UB"
+                    }
+                }
+                ]
+            }) }}
+
+            <h2 class="nhsuk-heading-m">Vaccination history</h2>
+
+            <p>You can only view, edit or delete records your organisation has created.</p>
+
+        </div>
+    </div>
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+
+            {{ table({
+                panel: false,
+                caption: "",
+                firstCellIsHeader: false,
+                head: [
+                    {
+                    text: "Date"
+                    },
+                    {
+                    text: "Vaccine"
+                    },
+                    {
+                    text: "Product"
+                    }
+                ],
+                rows: [
+                    [
+                    {
+                        text: "15 April 2025"
+                    },
+                    {
+                        text: "COVID-19"
+                    },
+                    {
+                        text: "Spikevax JN.1"
+                    }
+                    ],[
+                    {
+                        text: "9 November 2024"
+                    },
+                    {
+                        text: "MMR (2nd dose)"
+                    },
+                    {
+                        text: "Priorix"
+                    }
+                    ],[
+                    {
+                        text: "11 November 2024"
+                    },
+                    {
+                        text: "RSV"
+                    },
+                    {
+                        text: "Abrysvo"
+                    }
+                    ],
+                    [
+                    {
+                        text: "29 October 2024"
+                    },
+                    {
+                        text: "Pneumococcal"
+                    },
+                    {
+                        text: "Pneumovax"
+                    }
+                    ],
+                    [
+                    {
+                        text: "25 October 2024"
+                    },
+                    {
+                        text: "Flu (1st dose)"
+                    },
+                    {
+                        text: "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)"
+                    }
+                    ],
+                    [
+                    {
+                        text: "15 October 2023"
+                    },
+                    {
+                        text: "COVID-19"
+                    },
+                    {
+                        text: "Comirnaty 30 Omicron XBB.1.5"
+                    }
+                    ],
+                    [
+                    {
+                        text: "10 October 2023"
+                    },
+                    {
+                        text: "Flu"
+                    },
+                    {
+                        text: "Not known",
+                        classes: "nhsuk-u-secondary-text-color"
+                    }
+                    ],
+                    [
+                    {
+                        text: "7 October 2023"
+                    },
+                    {
+                        text: "Pertussis"
+                    },
+                    {
+                        text: "Boostrix-IPV suspension"
+                    }
+                    ],
+                    [
+                    {
+                        text: "11 March 2022"
+                    },
+                    {
+                        text: "COVID-19"
+                    },
+                    {
+                        text: "Moderna mRNA (Spikevax) Original"
+                    }
+                    ],
+                    [
+                    {
+                        text: "4 December 2023"
+                    },
+                    {
+                        text: "MMR"
+                    },
+                    {
+                        text: "Priorix"
+                    }
+                    ]
+                ]
+                }) }}
+
+        </div>
+    </div>
+
+{% endblock %}
