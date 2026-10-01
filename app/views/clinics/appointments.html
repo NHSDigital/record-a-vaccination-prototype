@@ -1,0 +1,339 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Today’s appointments" %}
+
+{% set currentSection = "appointments" %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+            {{ summaryList({
+                rows: [
+                    {
+                        key: {
+                            text: "Date"
+                        },
+                        value: {
+                            html: today | formatDate 
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Vaccinator"
+                        },
+                        value: {
+                            html: "<a href='#'>Set today's vaccinator</a>"
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Vaccine"
+                        },
+                        value: {
+                            html: "<a href='#'>Set today's vaccine</a>"
+                        }
+                    }
+                ]
+                }) }}
+
+            <div class="nhsuk-button-group">
+
+                {% if data.status != "complete" %}
+
+                    {{ button({
+                    text: "Add walk-in patient",
+                    variant: "secondary"
+                    }) }}
+
+                {% else %}
+                {% endif %}
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+
+            {{ pagination({
+            previous: {
+                label: "Yesterday",
+                href: "#"
+            },
+            next: {
+                label: "Tomorrow",
+                href: "#"
+            }
+            }) }}
+
+            {% if data.status == "complete" %}
+
+                <ul class="nhsuk-grid-row nhsuk-card-group">
+
+                    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+                        {% call card({
+                    heading: {
+                        text: "33",
+                        visuallyHiddenText: "vaccinations",
+                        classes: "nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1"
+                    }
+                    }) %}
+                    Vaccinations
+                    {% endcall %}
+                    </li>
+                    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+                        {% call card({
+                        heading: {
+                        text: "2",
+                        visuallyHiddenText: "vaccinations",
+                        classes: "nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1"
+                    }
+                    }) %}
+                    Cancelled
+                    {% endcall %}
+                    </li>
+                    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+                        {% call card({
+                        heading: {
+                        text: "29",
+                        visuallyHiddenText: "vaccinations",
+                        classes: "nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1"
+                    }
+                    }) %}
+                    Appointments
+                    {% endcall %}
+                    </li>
+                    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+                        {% call card({
+                        heading: {
+                        text: "4",
+                        visuallyHiddenText: "vaccinations",
+                        classes: "nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1"
+                    }
+                    }) %}
+                    Walk-ins
+                    {% endcall %}
+                    </li>
+                </ul>
+
+            {% endif %}
+
+            {% set patientActionsContent %}
+
+            {% if data.status == "complete" %}
+
+                <a href='#'>View record</a>
+
+            {% else %}
+
+                {{ button({
+                    text: "Check-in",
+                    small: true,
+                    variant: "secondary"
+                }) }}
+
+                    <div class="nhsuk-u-padding-bottom-4"><a href='#'>Start recording</a></div>
+
+                    <a href='#'>Cancel</a>
+
+
+            {% endif %}
+
+            {% endset -%}
+
+            {% set patientActionsCheckedInContent %}
+
+            {% if data.status == "complete" %}
+
+                <a href='#'>View record</a>
+
+            {% else %}
+
+                <p>{{ tag({ text: "Checked in" }) }}</p>
+                
+                <div class="nhsuk-u-padding-bottom-4"><a href='#'>Start recording</a></div>
+
+                <a href='#'>Cancel</a>
+
+            {% endif %}
+
+            {% endset -%}
+
+            {% set patientActionsContinueRecordingContent %}
+
+            {% if data.status == "complete" %}
+
+                <a href='#'>View record</a>
+
+            {% else %}
+
+                <p>{{ tag({ text: "Checked in" }) }}</p>
+
+                <div class="nhsuk-u-padding-bottom-4"><a href='#'>Continue&nbsp;recording</a></div>
+
+                <a href='#'>Cancel</a>
+
+            {% endif %}
+
+            {% endset -%}
+
+            {% set allPatientContent %}
+            {{ table({
+            caption: {
+                text: "Patients",
+                classes: "nhsuk-u-visually-hidden"
+                },
+                compact: false,
+                head: [
+                    {
+                    text: "Time"
+                    },
+                    {
+                    text: "Details"
+                    },
+                    {
+                    text: "Date of birth"
+                    }
+                    ,
+                    {
+                    text: "Vaccines"
+                    }
+                    ,
+                    {
+                    text: "Contact details"
+                    }
+                    ,
+                    {
+                    text: "Actions"
+                    }
+                ],
+                rows: [
+                    [
+                    {
+                        html: "10:00am"
+                    },
+                    {
+                        html: "Alan Teapot <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
+                    },
+                    {
+                        html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
+                    },
+                    {
+                        html: "COVID-19"
+                    },
+                    {
+                        html: "07588547704<br>alan.teapot@btinternet.com",
+                        classes: "nhsuk-u-text-break-word"
+                    },
+                    {
+                        html: patientActionsContinueRecordingContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "Walk-in"
+                    },
+                    {
+                        html: "Alan Teapot <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
+                    },
+                    {
+                        html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
+                    },
+                    {
+                        html: "COVID-19"
+                    },
+                    {
+                        html: "077345813941",
+                        classes: "nhsuk-u-text-break-word"
+                    },
+                    {
+                        html: patientActionsCheckedInContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "10:30am"
+                    },
+                    {
+                        html: "Margaret Green <div class='nhsuk-u-secondary-text-colour'>943 876 2109</div>"
+                    },
+                    {
+                        html: "2 September 1943 <div class='nhsuk-u-secondary-text-colour'>83 years old</div>"
+                    },
+                    {
+                        html: "COVID-19 and flu"
+                    },
+                    {
+                        html: "07623842424",
+                        classes: "nhsuk-u-text-break-word"
+                    },
+                    {
+                        html: patientActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "10:40am"
+                    },
+                    {
+                        html: "George Wilson <div class='nhsuk-u-secondary-text-colour'>978 654 3210</div>"
+                    },
+                    {
+                        html: "19 November 1946 <div class='nhsuk-u-secondary-text-colour'>79 years old</div>"
+                    },
+                    {
+                        html: "RSV"
+                    },
+                    {
+                        html: "07623913141",
+                        classes: "nhsuk-u-text-break-word"
+                    },
+                    {
+                        html: patientActionsContent
+                    }
+                    ]
+                ]
+            }) }}
+            {% endset -%}
+
+            {{ tabs({
+                items: [
+                {
+                    label: "Scheduled (49)",
+                    id: "patients",
+                    panel: {
+                    html: allPatientContent
+                    }
+                }
+                ,
+                {
+                    label: "Completed (33)",
+                    id: "vaccinated",
+                    panel: {
+                    html: allPatientContent
+                    }
+                } if data.status=="insession" or data.status=="complete"
+                ,
+                {
+                    label: "Cancelled (2)",
+                    id: "dnas"
+                }
+                ]
+            }) }}
+
+            <p>Imported from <a href="#">Manage your appointments (opens in new tab)</a>
+            </p>
+
+            <p>
+                <a href="#" class="nhsuk-link">Print patient list</a>
+            </p>
+
+        </div>
+    </div>
+
+{% endblock %}

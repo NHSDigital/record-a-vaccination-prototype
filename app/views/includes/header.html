@@ -16,13 +16,6 @@
     }), navigationItems) %}
   {% endif %}
 
-    <!-- Clinic sessions (all users) -->
-  {% set navigationItems = (navigationItems.push({
-    href: "/clinics/",
-    text: "Clinics",
-    active: (currentSection == "clinics")
-  }), navigationItems) %}
-
   <!-- Record vaccinations (where available) -->
   {% if canShowRecordVaccinations %}
     {% set navigationItems = (navigationItems.push({
@@ -31,6 +24,13 @@
       active: (currentSection == "vaccinate") or ((not currentSection) and (defaultMainSection == "vaccinate"))
     }), navigationItems) %}
   {% endif %}
+
+      <!-- Clinic sessions (all users) -->
+  {% set navigationItems = (navigationItems.push({
+    href: "/clinics/",
+    text: "Clinics",
+    active: (currentSection == "clinics")
+  }), navigationItems) %}
 
   <!-- Dashboard (all users) -->
   {% set navigationItems = (navigationItems.push({

@@ -11,10 +11,21 @@
 
             <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
+            <div class="nhsuk-u-reading-width">
+                <p class="nhsuk-body-l">To save time when you record vaccinations, you can set up a clinic with default answers for a group of patients.</p>
+            </div>
+
             {{ button({
                 text: "Create clinic",
                 href: "create"
             }) }}
+
+            {% set actionsContent %}
+
+                <div class="nhsuk-u-padding-bottom-4"><a href="/clinics/session?status=insession">View</a></div>
+                <div><a href="#">Edit</a></div>
+
+            {% endset -%}
 
             {% set upcomingContent %}
             {{ table({
@@ -36,34 +47,16 @@
                     text: "Patients"
                     },
                     {
-                    text: "Action"
+                    text: "Actions"
                     }
                 ],
                 rows: [
                     [
                     {
-                        text: "Tomorrow’s appointments"
-                    },
-                    {
-                        text: tomorrow | formatDate
-                    },
-                    {
-                        text: "On site (Pickfords Pharmacy)"
-                    },
-                    {
-                        text: "49"
-                    },
-                    {
-                        html: "<a href='/clinics/session?status=preparing'>View</a>"
-                    }
-                    ] if data.scenario
-                    ,
-                    [
-                    {
                         text: "Hillside Care home - Flu over 75s"
                     },
                     {
-                        text: today | formatDate
+                        text: "30 October 2026"
                     },
                     {
                         text: "Hillside Care Home"
@@ -72,16 +65,16 @@
                         text: "49"
                     },
                     {
-                        html: "<a href='/clinics/session?status=preparing'>View</a>"
+                        html: actionsContent
                     }
-                    ] if data.scenario != "appts"
+                    ]
                     ,
                     [
                     {
                         text: "Oaklands care home - Covid"
                     },
                     {
-                        text: "22 October 2026"
+                        text: "22 Novemeber 2026"
                     },
                     {
                         text: "Oaklands Residential Home"
@@ -90,16 +83,16 @@
                         text: "36"
                     },
                     {
-                        html: "<a href='/clinics/session?status=preparing'>View</a>"
+                        html: actionsContent
                     }
-                    ] if data.scenario != "appts"
+                    ]
                     ,
                     [
                     {
                         text: "Housebound patients Meadowbrook list"
                     },
                     {
-                        text: "5 November 2026"
+                        text: "5 December 2026 to 6 December 2026"
                     },
                     {
                         text: "Meadowbrook Care Centre"
@@ -108,9 +101,9 @@
                         text: "58"
                     },
                     {
-                        html: "<a href='/clinics/session?status=preparing'>View</a>"
+                        html: actionsContent
                     }
-                    ] if data.scenario != "appts"
+                    ]
                 ]
             }) }}
             {% endset -%}
@@ -118,7 +111,7 @@
             {{ tabs({
                 items: [
                 {
-                    label: "Upcoming (3)",
+                    label: "Scheduled (3)",
                     id: "upcoming",
                     panel: {
                         html: upcomingContent

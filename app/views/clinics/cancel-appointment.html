@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Cancel" %}
+
+{% set currentSection = "appointments" %}
+
+{% block beforeContent %}
+
+    {{ backLink({
+    href: "/clinics/appointments",
+    text: "Back"
+    }) }}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+
+            {{ radios({
+            fieldset: {
+                legend: {
+                text: pageName,
+                size: "l",
+                isPageHeading: true
+                }
+            },
+            idPrefix: "example-hints",
+            name: "exampleHints",
+            items: [
+                {
+                value: "Consent not given",
+                text: "Consent not given"
+                },
+                {
+                value: "Patient declined vaccination",
+                text: "Patient declined vaccination"
+                },
+                {
+                value: "Patient unwell",
+                text: "Patient unwell"
+                },
+                {
+                value: "Vaccination not suitable",
+                text: "Vaccination not suitable",
+                hint: "Medically contra-indindicated, for example patient has allergy or previous reaction"
+                },
+                {
+                value: "Not eligible",
+                text: "Not eligible"
+                },
+                {
+                value: "Already vaccinated",
+                text: "Already vaccinated"
+                }
+            ]
+            }) }}
+
+            {{ button({
+                text: "Cancel",
+                variant: "warning",
+                href: "/clinics/appointments#cancelled"
+            }) }}
+
+        </div>
+    </div>
+
+{% endblock %}

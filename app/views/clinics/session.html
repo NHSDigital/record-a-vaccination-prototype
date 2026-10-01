@@ -1,19 +1,19 @@
 {% extends 'layout.html' %}
 
 {% if data.scenario == "appts" and data.status == "complete" %}
-{% set pageName = "Yesterday’s appointments" %}
+    {% set pageName = "Yesterday’s appointments" %}
 {% elif data.scenario == "appts" and data.status == "preparing" %}
-{% set pageName = "Tomorrow’s appointments" %}
+    {% set pageName = "Tomorrow’s appointments" %}
 {% elif data.scenario == "appts" %}
-{% set pageName = "Today’s appointments" %}
+    {% set pageName = "Today’s appointments" %}
 {% else %}
-{% set pageName = "Hillside Care home - Flu over 75s" %}
+    {% set pageName = "Hillside Care home - Flu over 75s" %}
 {% endif %}
 
 {% if data.scenario == "appts" %}
-{% set sessionLocation = "On site (Pickfords Pharmacy)" %}
+    {% set sessionLocation = "On site (Pickfords Pharmacy)" %}
 {% else %}
-{% set sessionLocation = "Hillside Care Home" %}
+    {% set sessionLocation = "Hillside Care Home" %}
 {% endif %}
 
 {% set currentSection = "clinics" %}
@@ -41,18 +41,9 @@
                         text: "Date"
                     },
                     value: {
-                        text: tomorrow | formatDate
+                        text: "30 October 2026"
                     }
-                    } if data.scenario == "appts" 
-                    ,
-                    {
-                    key: {
-                        text: "Date"
-                    },
-                    value: {
-                        text: today | formatDate
                     }
-                    } if data.scenario != "appts" 
                     ,
                     {
                     key: {
@@ -80,45 +71,12 @@
                     },
                     {
                     key: {
-                        text: "Reason"
+                        text: "Eligibility"
                     },
                     value: {
                         text: "Resident in a care home"
                     }
-                    },
-                    {
-                    key: {
-                        text: "Status"
-                    },
-                    value: {
-                        html: tag({
-                            text: "Preparing",
-                            colour: "yellow"
-                            })
-                    } 
-                    } if data.status=="preparing",
-                    {
-                    key: {
-                        text: "Status"
-                    },
-                    value: {
-                        html: tag({
-                            text: "In session",
-                            colour: "white"
-                            })
-                    } 
-                    } if data.status=="insession",
-                    {
-                    key: {
-                        text: "Status"
-                    },
-                    value: {
-                        html: tag({
-                            text: "Complete",
-                            colour: "green"
-                            })
-                    } 
-                    } if data.status=="complete"
+                    }
                     
                 ]
                 }) }}
@@ -131,37 +89,17 @@
 
             <div class="nhsuk-button-group">
 
-                {% if data.status == "insession" %}
-
-                {% elif data.status == "complete" %}
-
-                {% elif data.scenario != "appts" %}
-
-                    {{ button({
-                        text: "Start session",
-                        href: "?status=insession"
-                    }) }}
-
-                    {{ button({
-                        text: "Edit defaults",
-                        variant: "secondary"
-                    }) }}
-
-                {% endif %}
-
                 {% if data.status == "complete" %}
 
-                {% elif data.scenario!="appts" %}
+                {% else %}
+
+                    {{ button({
+                        text: "Edit clinic",
+                        variant: "secondary"
+                    }) }}
 
                     {{ button({
                         text: "Add patients",
-                        variant: "secondary"
-                    }) }}
-
-                    {% else %}
-
-                    {{ button({
-                        text: "Pre-fill all",
                         variant: "secondary"
                     }) }}
 
@@ -175,7 +113,7 @@
     <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-full">
 
-            {% if data.status == "complete" %}
+            {# {% if data.status == "complete" %}
 
                 <ul class="nhsuk-grid-row nhsuk-card-group">
 
@@ -203,7 +141,7 @@
                     </li>
                 </ul>
 
-            {% endif %}
+            {% endif %} #}
 
             {% set patientActionsContent %}
 
@@ -303,7 +241,29 @@
                     {
                         html: patientActionsContent
                     }
-                    ] if data.status!="appts"
+                    ],
+                    [
+                    {
+                        html: "Evelyn Carter <div class='nhsuk-u-secondary-text-colour'>621 874 3056</div>"
+                    },
+                    {
+                        html: "7 June 1938 <div class='nhsuk-u-secondary-text-colour'>88 years old</div>"
+                    },
+                    {
+                        html: patientActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "Arthur Bennett <div class='nhsuk-u-secondary-text-colour'>584 207 9163</div>"
+                    },
+                    {
+                        html: "23 January 1945 <div class='nhsuk-u-secondary-text-colour'>81 years old</div>"
+                    },
+                    {
+                        html: patientActionsContent
+                    }
+                    ]
                 ]
             }) }}
             {% endset -%}
@@ -311,16 +271,19 @@
             {{ tabs({
                 items: [
                 {
-                    label: "All (49)",
+                    label: "Scheduled (49)",
                     id: "patients",
                     panel: {
                     html: allPatientContent
                     }
-                }
+                } if data.status!="complete"
                 ,
                 {
                     label: "Completed (33)",
-                    id: "vaccinated"
+                    id: "vaccinated",
+                    panel: {
+                    html: allPatientContent
+                    }
                 } if data.status=="insession" or data.status=="complete"
                 ,
                 {
@@ -333,7 +296,7 @@
             {% if data.status == "insession" %}
 
                 {{ button({
-                    text: "Complete clinic",
+                    text: "End clinic",
                     href: "?status=complete",
                     variant: "warning"
                 }) }}
