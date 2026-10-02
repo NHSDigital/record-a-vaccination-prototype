@@ -26,7 +26,7 @@
                             text: "Vaccinator"
                         },
                         value: {
-                            html: "<a href='vaccinator'>Set today's vaccinator</a>"
+                            html: data.vaccinator or "<a href='vaccinator-today'>Set today's vaccinator</a>"
                         }
                     },
                     {
@@ -34,7 +34,7 @@
                             text: "Vaccine"
                         },
                         value: {
-                            html: "<a href='#'>Set today's vaccine</a>"
+                            html: data.vaccine or "<a href='vaccine-today'>Set today's vaccine</a>"
                         }
                     }
                 ]
@@ -145,7 +145,7 @@
                 <p hidden data-check-in-status role="status">{{ tag({ text: "Checked in" }) }}</p>
                 </div>
 
-                    <div class="nhsuk-u-padding-bottom-4"><a href='patient-history'>Start recording</a></div>
+                    <div class="nhsuk-u-padding-bottom-4"><a href='patient-history?recording=start'>Start recording</a></div>
 
                     <a href='/clinics/cancel-appointment'>Cancel</a>
 
@@ -235,7 +235,7 @@
                         html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
                     },
                     {
-                        html: "COVID-19"
+                        html: "Flu"
                     },
                     {
                         html: "077345813941",
@@ -256,7 +256,7 @@
                         html: "2 September 1943 <div class='nhsuk-u-secondary-text-colour'>83 years old</div>"
                     },
                     {
-                        html: "COVID-19 and flu"
+                        html: "Flu"
                     },
                     {
                         html: "07623842424",
@@ -277,7 +277,7 @@
                         html: "19 November 1946 <div class='nhsuk-u-secondary-text-colour'>79 years old</div>"
                     },
                     {
-                        html: "RSV"
+                        html: "Flu"
                     },
                     {
                         html: "07623913141",

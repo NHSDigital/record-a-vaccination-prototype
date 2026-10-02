@@ -1,9 +1,6 @@
 {% extends 'layout.html' %}
 
-
-{# {% set pageName = "Set today’s vaccinator" %} #}
-
-{% set pageName = "Who is the vaccinator?" %}
+{% set pageName = "Set today’s vaccinator" %}
 
 {% set currentSection = "appointments" %}
 
@@ -19,6 +16,8 @@ text: "Back"
     <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
 
+            <form action="appointments" method="post">
+
             {{ radios({
                 fieldset: {
                     legend: {
@@ -27,11 +26,11 @@ text: "Back"
                     isPageHeading: true
                     }
                 },
-                idPrefix: "example-hints",
-                name: "exampleHints",
+                idPrefix: "vaccinator",
+                name: "vaccinator",
                 items: [
                     {
-                    value: "Me" + currentUser.firstName + " " + currentUser.lastName,
+                    value: currentUser.firstName + " " + currentUser.lastName,
                     text: "Me (" + currentUser.firstName + " " + currentUser.lastName + ")"
                     },
                     {
@@ -46,9 +45,10 @@ text: "Back"
                 }) }}
 
             {{ button({
-                text: "Continue",
-                href: "vaccine"
+                text: "Continue"
             }) }}
+
+            </form>
 
         </div>
     </div>

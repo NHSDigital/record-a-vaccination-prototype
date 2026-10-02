@@ -10,6 +10,18 @@
 {% set nextPage = "/clinics/vaccine" %}
 {% endif %}
 
+{% if data.vaccine %}
+{% set nextPage = "/clinics/check-walk-in" %}
+{% endif %}
+
+{% if data.recording == "start" and data.vaccinator and data.vaccine %}
+{% set nextPage = "/clinics/eligibility" %}
+{% elif data.recording == "start" and data.vaccinator %}
+{% set nextPage = "/clinics/vaccine" %}
+{% elif data.recording == "start" %}
+{% set nextPage = "/clinics/vaccinator" %}
+{% endif %}
+
 {% block beforeContent %}
 {{ backLink({
 href: "javascript:window.history.back()",

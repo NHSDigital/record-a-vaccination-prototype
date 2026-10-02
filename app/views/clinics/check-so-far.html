@@ -1,16 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Check and confirm" %}
-
-{% if data.scenario == "clinics" %}
-{% set currentSection = "clinics" %}
-{% set location = "Hillside Care Home" %}
-{% set eligiblity = "Resident in a care home" %}
-{% elif data.scenario == "appts" %}
-{% set location = "MediCare Pharmacy" %}
-{% set currentSection = "appointments" %}
-{% set eligiblity = "Based on age" %}
-{% endif %}
+{% set pageName = "Check recording so far" %}
 
 {% block beforeContent %}
 {{ backLink({
@@ -39,11 +29,7 @@ text: "Back"
                         },
                         actions: {
                             items: [
-                                {
-                                    href: "#",
-                                    text: "Change",
-                                    visuallyHiddenText: "name"
-                                }
+
                             ]
                         }
                     },
@@ -56,11 +42,7 @@ text: "Back"
                         },
                         actions: {
                             items: [
-                                {
-                                    href: "#",
-                                    text: "Change",
-                                    visuallyHiddenText: "date of birth"
-                                }
+    
                             ]
                         }
                     },
@@ -106,7 +88,7 @@ text: "Back"
                             text: "Site"
                         },
                         value: {
-                            text: location
+                            text: "MediCare Pharmacy"
                         }
                     },
                     {
@@ -131,7 +113,7 @@ text: "Back"
                             text: "Vaccine"
                         },
                         value: {
-                            html: "Flu<br>Adjuvanted Trivalent Influenza Vaccine (aTIV)"
+                            html: "Flu"
                         },
                         actions: {
                             items: [
@@ -145,27 +127,10 @@ text: "Back"
                     },
                     {
                         key: {
-                            text: "Batch"
-                        },
-                        value: {
-                            html: "914-151<br>Expires 19 February 2028"
-                        },
-                        actions: {
-                            items: [
-                                {
-                                    href: "#",
-                                    text: "Change",
-                                    visuallyHiddenText: "vaccine batch"
-                                }
-                            ]
-                        }
-                    },
-                    {
-                        key: {
                             text: "Eligibility"
                         },
                         value: {
-                            text: eligiblity
+                            text: "Based on age"
                         },
                         actions: {
                             items: [
@@ -176,60 +141,13 @@ text: "Back"
                                 }
                             ]
                         }
-                    },
-                    {
-                        key: {
-                            text: "Consent given by"
-                        },
-                        value: {
-                            text: "Patient"
-                        },
-                        actions: {
-                            items: [
-                                {
-                                    href: "#",
-                                    text: "Change",
-                                    visuallyHiddenText: "consent"
-                                }
-                            ]
-                        }
-                    },
-                    {
-                        key: {
-                            text: "Injection site"
-                        },
-                        value: {
-                            text: "Left arm"
-                        },
-                        actions: {
-                            items: [
-                                {
-                                    href: "#",
-                                    text: "Change",
-                                    visuallyHiddenText: "injection site"
-                                }
-                            ]
-                        }
                     }
                 ]
             }) }}
 
-            <form action="confirmation" method="post" novalidate>
-                {{ textarea({
-                    name: "notes",
-                    id: "notes",
-                    label: {
-                        text: "Optional note"
-                    },
-                    hint: {
-                        text: "This will not be sent to the patient's GP. Only your organisation will see it."
-                    },
-                    rows: 3,
-                    classes: "nhsuk-u-margin-bottom-7"
-                }) }}
-
+            <form action="vaccine-product" method="post" novalidate>
                 {{ button({
-                    text: "Confirm and save"
+                    text: "Continue"
                 }) }}
             </form>
 
