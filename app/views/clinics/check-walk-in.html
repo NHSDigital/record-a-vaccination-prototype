@@ -46,7 +46,7 @@
                             text: "Date of birth"
                         },
                         value: {
-                            html: "15 March 1950 <br>(76 years old)"
+                            html: "14 April 1940 <br>(86 years old)"
                         }
                     },
                     {
@@ -65,7 +65,7 @@
                             text: "NHS number"
                         },
                         value: {
-                            text: "912 345 6789"
+                            text: "912 312 3123"
                         },
                         actions: {
                             items: []
@@ -91,7 +91,7 @@
                             text: "Site"
                         },
                         value: {
-                            text: "Leeds City Centre Clinic"
+                            text: "Pickfords Pharmacy"
                         }
                     },
                     {
@@ -99,7 +99,7 @@
                             text: "Vaccinator"
                         },
                         value: {
-                            text: "Alex Smith"
+                            text: currentUser.firstName + " " + currentUser.lastName
                         },
                         actions: {
                             items: [
@@ -116,7 +116,7 @@
                             text: "Vaccine"
                         },
                         value: {
-                            html: "Flu<br>Influenza vaccine"
+                            html: "Flu"
                         },
                         actions: {
                             items: [
@@ -131,7 +131,7 @@
                 ]
             }) }}
 
-            <form action="#" method="post" novalidate>
+            <form action="/clinics/appointments" method="post" novalidate>
 
                 {{ button({
                     text: "Add walk-in"

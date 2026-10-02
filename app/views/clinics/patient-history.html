@@ -4,8 +4,10 @@
 
 {% if data.scenario == "clinics" %}
 {% set currentSection = "clinics" %}
+{% set nextPage = "/clinics/consent" %}
 {% elif data.scenario == "appts" %}
 {% set currentSection = "appointments" %}
+{% set nextPage = "/clinics/vaccine" %}
 {% endif %}
 
 {% block beforeContent %}
@@ -235,7 +237,7 @@ text: "Back"
         ]
       }) }}
 
-      <form action="/clinics/consent" method="post" novalidate>
+      <form action="{{ nextPage }}" method="post" novalidate>
         {{ button({
           text: "Continue"
         }) }}

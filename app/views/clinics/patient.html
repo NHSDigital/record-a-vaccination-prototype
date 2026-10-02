@@ -5,14 +5,17 @@
 {% set currentSection = "appointments" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/clinics/add-patients" }) }}
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
 {% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="#" method="post" novalidate>
+      <form action="/clinics/answer-patient-nhs-number-known" method="post" novalidate>
         {% set nhsNumberHtml %}
           {{ input({
             id: "nhs-number",

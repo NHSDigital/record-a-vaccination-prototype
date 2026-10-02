@@ -132,15 +132,22 @@
 
             {% else %}
 
+                <div data-check-in-control>
                 {{ button({
                     text: "Check-in",
                     small: true,
-                    variant: "secondary"
+                    variant: "secondary",
+                    attributes: {
+                        "data-check-in": "true"
+                    }
                 }) }}
 
-                    <div class="nhsuk-u-padding-bottom-4"><a href='#'>Start recording</a></div>
+                <p hidden data-check-in-status role="status">{{ tag({ text: "Checked in" }) }}</p>
+                </div>
 
-                    <a href='#'>Cancel</a>
+                    <div class="nhsuk-u-padding-bottom-4"><a href='patient-history'>Start recording</a></div>
+
+                    <a href='/clinics/cancel-appointment'>Cancel</a>
 
 
             {% endif %}
@@ -159,25 +166,7 @@
                 
                 <div class="nhsuk-u-padding-bottom-4"><a href='#'>Start recording</a></div>
 
-                <a href='#'>Cancel</a>
-
-            {% endif %}
-
-            {% endset -%}
-
-            {% set patientActionsContinueRecordingContent %}
-
-            {% if data.status == "complete" %}
-
-                <a href='#'>View record</a>
-
-            {% else %}
-
-                <p>{{ tag({ text: "Checked in" }) }}</p>
-
-                <div class="nhsuk-u-padding-bottom-4"><a href='#'>Continue&nbsp;recording</a></div>
-
-                <a href='#'>Cancel</a>
+                <a href='/clinics/cancel-appointment'>Cancel</a>
 
             {% endif %}
 
@@ -219,20 +208,20 @@
                         html: "10:00am"
                     },
                     {
-                        html: "Alan Teapot <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
+                        html: "Jodie Brown <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
                     },
                     {
                         html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
                     },
                     {
-                        html: "COVID-19"
+                        html: "Flu"
                     },
                     {
-                        html: "07588547704<br>alan.teapot@btinternet.com",
+                        html: "07588547704",
                         classes: "nhsuk-u-text-break-word"
                     },
                     {
-                        html: patientActionsContinueRecordingContent
+                        html: patientActionsContent
                     }
                     ],
                     [
@@ -302,10 +291,44 @@
             }) }}
             {% endset -%}
 
+            {% set cancelledPatientContent %}
+            {{ table({
+            caption: {
+                text: "Patients",
+                classes: "nhsuk-u-visually-hidden"
+                },
+                head: [
+                    {
+                    text: "Name and NHS number"
+                    },
+                    {
+                    text: "Date of birth"
+                    }
+                    ,
+                    {
+                    text: "Cancellation reason"
+                    }
+                ],
+                rows: [
+                    [
+                    {
+                        html: "Jodie Brown <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
+                    },
+                    {
+                        html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
+                    },
+                    {
+                        html: data.cancelReason or "Consent not given"
+                    }
+                    ]
+                ]
+            }) }}
+            {% endset -%}
+
             {{ tabs({
                 items: [
                 {
-                    label: "Scheduled (49)",
+                    label: "Scheduled (15)",
                     id: "patients",
                     panel: {
                     html: allPatientContent
@@ -321,8 +344,32 @@
                 } if data.status=="insession" or data.status=="complete"
                 ,
                 {
-                    label: "Cancelled (2)",
-                    id: "dnas"
+                    label: "Cancelled (1)",
+                    id: "cancelled",
+                    panel: {
+                        html: cancelledPatientContent
+                    }
+                }
+                ]
+            }) }}
+
+            {{ pagination({
+                next: {
+                href: "#"
+                },
+                items: [
+                {
+                    href: "#",
+                    number: 1,
+                    current: true
+                },
+                {
+                    href: "#",
+                    number: 2
+                },
+                {
+                    href: "#",
+                    number: 3
                 }
                 ]
             }) }}
@@ -337,4 +384,19 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block bodyEnd %}
+    {{ super() }}
+    <script>
+        document.querySelectorAll('[data-check-in]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                const checkInControl = button.closest('[data-check-in-control]')
+                const checkedInStatus = checkInControl.querySelector('[data-check-in-status]')
+
+                button.remove()
+                checkedInStatus.hidden = false
+            })
+        })
+    </script>
 {% endblock %}

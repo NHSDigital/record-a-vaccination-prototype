@@ -5,7 +5,10 @@
 {% set currentSection = "appointments" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/clinics/patient" }) }}
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
 {% endblock %}
 
 {% block content %}
@@ -16,7 +19,7 @@
 
       <p class="nhsuk-body">Make sure the details you enter match those registered with the patient’s GP.</p>
 
-      <form action="#" method="post">
+      <form action="patient-history" method="post">
         {{ input({
           label: {
             text: "First name"

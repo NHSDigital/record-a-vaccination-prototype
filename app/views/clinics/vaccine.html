@@ -15,7 +15,7 @@ text: "Back"
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="#" method="post">
+      <form action="check-walk-in" method="post">
         {{ radios({
           idPrefix: "vaccine",
           name: "vaccine",
@@ -42,9 +42,20 @@ text: "Back"
           ]
         }) }}
 
+        <div class="nhsuk-button-group">
+
         {{ button({
           text: "Continue"
         }) }}
+
+        {{ button({
+          text: "Save for later",
+          variant: "secondary",
+          href:"#"
+        }) }}
+
+        </div>
+
       </form>
 
     </div>
