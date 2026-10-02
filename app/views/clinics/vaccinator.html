@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 
+
 {# {% set pageName = "Set today’s vaccinator" %} #}
 
 {% set pageName = "Who is the vaccinator?" %}
@@ -7,12 +8,10 @@
 {% set currentSection = "appointments" %}
 
 {% block beforeContent %}
-
-    {{ backLink({
-    href: "#",
-    text: "Back"
-    }) }}
-
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
 {% endblock %}
 
 {% block content %}
@@ -32,8 +31,8 @@
                 name: "exampleHints",
                 items: [
                     {
-                    value: "Me (Jeremy Blue)",
-                    text: "Me (Jeremy Blue)"
+                    value: "Me" + currentUser.firstName + " " + currentUser.lastName,
+                    text: "Me (" + currentUser.firstName + " " + currentUser.lastName + ")"
                     },
                     {
                     value: "Grady Campos (grady.campos@nhs.net)",
