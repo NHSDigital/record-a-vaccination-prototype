@@ -105,12 +105,6 @@ text: "Back"
 
             {% set patientActionsContent %}
 
-            {% if data.status == "complete" %}
-
-                <a href='#'>View record</a>
-
-            {% else %}
-
                 <div class="nhsuk-button-group">
 
                     <a href='/clinics/patient-history'>Record</a>
@@ -119,27 +113,11 @@ text: "Back"
 
                 </div>
 
-            {% endif %}
-
             {% endset -%}
 
-            {% set patientStatusContent %}
+            {% set completedActionsContent %}
 
-            {% if data.status == "complete" %}
-
-                {{ tag({
-                    text: "Vaccinated",
-                    colour: "green"
-                }) }}
-
-            {% else %}
-
-                {{ tag({
-                    text: "In session",
-                    colour: "white"
-                }) }}
-
-            {% endif %}
+                    <a href='#'>View record</a>
 
             {% endset -%}
 
@@ -221,6 +199,84 @@ text: "Back"
             }) }}
             {% endset -%}
 
+            {% set completedPatientContent %}
+            {{ table({
+            caption: {
+                text: "Completed patients",
+                classes: "nhsuk-u-visually-hidden"
+                },
+                head: [
+                    {
+                    text: "Name and NHS number"
+                    },
+                    {
+                    text: "Date of birth"
+                    }
+                    ,
+                    {
+                    text: "Action"
+                    }
+                ],
+                rows: [
+                    [
+                    {
+                        html: "Claire Thompson <div class='nhsuk-u-secondary-text-colour'>482 194 8651</div>"
+                    },
+                    {
+                        html: "12 January 1939 <div class='nhsuk-u-secondary-text-colour'>87 years old</div>"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "Donald Walsh <div class='nhsuk-u-secondary-text-colour'>764 953 1185</div>"
+                    },
+                    {
+                        html: "28 May 1942 <div class='nhsuk-u-secondary-text-colour'>84 years old</div>"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "Maureen Patel <div class='nhsuk-u-secondary-text-colour'>318 642 9076</div>"
+                    },
+                    {
+                        html: "4 July 1941 <div class='nhsuk-u-secondary-text-colour'>85 years old</div>"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "Thomas Hughes <div class='nhsuk-u-secondary-text-colour'>852 317 6649</div>"
+                    },
+                    {
+                        html: "17 October 1937 <div class='nhsuk-u-secondary-text-colour'>89 years old</div>"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "Sylvia Adams <div class='nhsuk-u-secondary-text-colour'>475 603 2248</div>"
+                    },
+                    {
+                        html: "3 February 1944 <div class='nhsuk-u-secondary-text-colour'>82 years old</div>"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ]
+                ]
+            }) }}
+            {% endset -%}
+
             {% set cancelledPatientContent %}
             {{ table({
             caption: {
@@ -258,7 +314,7 @@ text: "Back"
             {{ tabs({
                 items: [
                 {
-                    label: "Scheduled (49)",
+                    label: "Scheduled (15)",
                     id: "patients",
                     panel: {
                     html: allPatientContent
@@ -269,12 +325,12 @@ text: "Back"
                     label: "Completed (33)",
                     id: "vaccinated",
                     panel: {
-                    html: allPatientContent
+                    html: completedPatientContent
                     }
                 }
                 ,
                 {
-                    label: "Cancelled (2)",
+                    label: "Cancelled (1)",
                     id: "cancelled",
                     panel: {
                     html: cancelledPatientContent
@@ -282,6 +338,27 @@ text: "Back"
                 }
                 ]
             }) }}
+
+            {{ pagination({
+        next: {
+          href: "#"
+        },
+        items: [
+          {
+            href: "#",
+            number: 1,
+            current: true
+          },
+          {
+            href: "#",
+            number: 2
+          },
+          {
+            href: "#",
+            number: 3
+          }
+        ]
+      }) }}
 
             {% if data.status == "insession" %}
 
