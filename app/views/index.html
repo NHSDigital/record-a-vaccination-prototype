@@ -218,8 +218,20 @@
         text: "Deceased patient history",
         size: "m"
         },
-        description: "This shows what users will see if they access a patient history for a patient who is recorded as deceased",
+        description: "This shows what users will see if they access a patient history for a patient who is recorded as deceased.",
         href: "/prototype-setup/quick-access/pharmacy?next=/record-vaccinations/patient-history-deceased",
+        clickable: true,
+        variant: "primary"
+        }) }}
+      </li>
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+        {{ card({
+        heading: {
+        text: "Deceased patient record",
+        size: "m"
+        },
+        description: "This shows what users will see if they access a record for a patient who is deceased.",
+        href: "/prototype-setup/quick-access/pharmacy?next=/records/patient-record-deceased",
         clickable: true,
         variant: "primary"
         }) }}
@@ -303,6 +315,14 @@
     },
     {
     text: "When a site is deactivated during the recording flow."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/site-deactivated-extra-scenario'>There is a problem using this option</a>"
+    },
+    {
+    text: "When a user has chosen the co-admin or same vax for a different patient option, and the site has just been deactivated."
     }
     ],
     [
