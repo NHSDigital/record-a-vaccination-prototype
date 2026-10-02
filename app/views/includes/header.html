@@ -25,12 +25,14 @@
     }), navigationItems) %}
   {% endif %}
 
-      <!-- Clinic sessions (all users) -->
-  {% set navigationItems = (navigationItems.push({
-    href: "/clinics/",
-    text: "Clinics",
-    active: (currentSection == "clinics")
-  }), navigationItems) %}
+  <!-- Clinic sessions (all users) if the condition below is met -->
+  {% if data.clinics == "true" %}
+    {% set navigationItems = (navigationItems.push({
+      href: "/clinics/",
+      text: "Clinics",
+      active: (currentSection == "clinics")
+    }), navigationItems) %}
+  {% endif %}
 
   <!-- Dashboard (all users) -->
   {% set navigationItems = (navigationItems.push({
