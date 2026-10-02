@@ -1,0 +1,251 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check and confirm" %}
+
+{% set currentSection = "clinics" %}
+
+{% block beforeContent %}
+
+    {{ backLink({
+    href: "#",
+    text: "Back"
+    }) }}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+            <h2 class="nhsuk-heading-m">Patient</h2>
+
+            {{ summaryList({
+                rows: [
+                    {
+                        key: {
+                            text: "Name"
+                        },
+                        value: {
+                            text: "Jodie Brown"
+                        },
+                        actions: {
+                            items: [
+                                {
+                                    href: "#",
+                                    text: "Change",
+                                    visuallyHiddenText: "name"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Date of birth"
+                        },
+                        value: {
+                            html: "15 March 1950 <br>(76 years old)"
+                        },
+                        actions: {
+                            items: [
+                                {
+                                    href: "#",
+                                    text: "Change",
+                                    visuallyHiddenText: "date of birth"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Address"
+                        },
+                        value: {
+                            html: "73 Roman Road<br>Leeds<br>LS2 5ZN"
+                        },
+                        actions: {
+                            items: []
+                        }
+                    },
+                    {
+                        key: {
+                            text: "NHS number"
+                        },
+                        value: {
+                            text: "912 345 6789"
+                        },
+                        actions: {
+                            items: []
+                        }
+                    }
+                ]
+            }) }}
+
+            <h2 class="nhsuk-heading-m">Vaccination</h2>
+
+            {{ summaryList({
+                rows: [
+                    {
+                        key: {
+                            text: "Date"
+                        },
+                        value: {
+                            text: "Today"
+                        },
+                        actions: {
+                            items: [
+                                {
+                                    href: "#",
+                                    text: "Change",
+                                    visuallyHiddenText: "vaccination date"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Site"
+                        },
+                        value: {
+                            text: "Leeds City Centre Clinic"
+                        },
+                        actions: {
+                            items: [
+                                {
+                                    href: "#",
+                                    text: "Change",
+                                    visuallyHiddenText: "site"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Vaccinator"
+                        },
+                        value: {
+                            text: "Alex Smith"
+                        },
+                        actions: {
+                            items: [
+                                {
+                                    href: "#",
+                                    text: "Change",
+                                    visuallyHiddenText: "vaccinator"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Vaccine"
+                        },
+                        value: {
+                            html: "Flu<br>Influenza vaccine"
+                        },
+                        actions: {
+                            items: [
+                                {
+                                    href: "#",
+                                    text: "Change",
+                                    visuallyHiddenText: "vaccine"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Batch"
+                        },
+                        value: {
+                            html: "AB123<br>Expires 4 January 2027"
+                        },
+                        actions: {
+                            items: [
+                                {
+                                    href: "#",
+                                    text: "Change",
+                                    visuallyHiddenText: "vaccine batch"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Eligibility"
+                        },
+                        value: {
+                            text: "Aged 65 years or over"
+                        },
+                        actions: {
+                            items: [
+                                {
+                                    href: "#",
+                                    text: "Change",
+                                    visuallyHiddenText: "eligibility"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Consent given by"
+                        },
+                        value: {
+                            text: "Patient"
+                        },
+                        actions: {
+                            items: [
+                                {
+                                    href: "#",
+                                    text: "Change",
+                                    visuallyHiddenText: "consent"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Injection site"
+                        },
+                        value: {
+                            text: "Left arm"
+                        },
+                        actions: {
+                            items: [
+                                {
+                                    href: "#",
+                                    text: "Change",
+                                    visuallyHiddenText: "injection site"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }) }}
+
+            <form action="#" method="post" novalidate>
+                {{ textarea({
+                    name: "notes",
+                    id: "notes",
+                    label: {
+                        text: "Optional note"
+                    },
+                    hint: {
+                        text: "This will not be sent to the patient's GP. Only your organisation will see it."
+                    },
+                    rows: 3,
+                    classes: "nhsuk-u-margin-bottom-7"
+                }) }}
+
+                {{ button({
+                    text: "Confirm and save"
+                }) }}
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Where was the injection given?" %}
+
+{% set currentSection = "clinics" %}
+
+{% block beforeContent %}
+
+    {{ backLink({
+    href: "#",
+    text: "Back"
+    }) }}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+
+            {{ radios({
+            fieldset: {
+                legend: {
+                text: pageName,
+                size: "l",
+                isPageHeading: true
+                }
+            },
+            idPrefix: "example-hints",
+            name: "exampleHints",
+            items: [
+                {
+                value: "Left arm",
+                text: "Left arm"
+                },
+                {
+                value: "Right arm",
+                text: "Right arm"
+                },
+                {
+                divider: "or"
+                },
+                {
+                value: "Somewhere else",
+                text: "Somewhere else"
+                }
+            ]
+            }) }}
+
+            {{ button({
+                text: "Continue"
+            }) }}
+
+        </div>
+    </div>
+
+{% endblock %}

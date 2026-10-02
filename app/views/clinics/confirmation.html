@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Vaccination saved" %}
+
+{% set currentSection = "clinics" %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            {{ panel({
+                titleText: pageName,
+                text: "Jodie Brown’s flu record will be sent to their GP."
+            }) }}
+
+            {{ radios({
+            fieldset: {
+                legend: {
+                text: "What would you like to record now?",
+                size: "m"
+                }
+            },
+            idPrefix: "example-hints",
+            name: "exampleHints",
+            items: [
+                {
+                value: "Jodie Brown’s next vaccination",
+                text: "Jodie Brown’s next vaccination"
+                },
+                {
+                value: "A flu vaccination for another patient",
+                text: "A flu vaccination for another patient"
+                },
+                {
+                value: "A different vaccination for another patient",
+                text: "A different vaccination for another patient"
+                }
+            ]
+            }) }}
+
+            {{ button({
+                text: "Continue"
+            }) }}
+
+        </div>
+    </div>
+
+{% endblock %}
