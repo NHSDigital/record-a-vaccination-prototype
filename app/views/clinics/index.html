@@ -27,6 +27,10 @@
 
             {% endset -%}
 
+            {% set completedActionsContent %}
+                <div><a href="/clinics/session?status=complete">View</a></div>
+            {% endset -%}
+
             {% set upcomingContent %}
             {{ table({
             caption: {
@@ -74,7 +78,7 @@
                         text: "Oaklands care home - Covid"
                     },
                     {
-                        text: "22 Novemeber 2026"
+                        text: "22 November 2026"
                     },
                     {
                         text: "Oaklands Residential Home"
@@ -108,6 +112,68 @@
             }) }}
             {% endset -%}
 
+            {% set completedContent %}
+            {{ table({
+            caption: {
+                text: "Completed clinics",
+                classes: "nhsuk-u-visually-hidden"
+                },
+                head: [
+                    {
+                    text: "Name"
+                    },
+                    {
+                    text: "Date"
+                    },
+                    {
+                    text: "Location"
+                    },
+                    {
+                    text: "Patients"
+                    },
+                    {
+                    text: "Action"
+                    }
+                ],
+                rows: [
+                    [
+                    {
+                        text: "Willowbrook GP Flu clinic"
+                    },
+                    {
+                        text: "18 September 2026"
+                    },
+                    {
+                        text: "Willowbrook Medical Centre"
+                    },
+                    {
+                        text: "72"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        text: "Ashfield Care Home Covid vaccination"
+                    },
+                    {
+                        text: "9 August 2026"
+                    },
+                    {
+                        text: "Ashfield Residential Home"
+                    },
+                    {
+                        text: "41"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ]
+                ]
+            }) }}
+            {% endset -%}
+
             {{ tabs({
                 items: [
                 {
@@ -119,7 +185,7 @@
                     }
                     ,
                     {
-                    label: "Completed",
+                    label: "Completed (2)",
                     id: "completed",
                     panel: {
                         html: completedContent
