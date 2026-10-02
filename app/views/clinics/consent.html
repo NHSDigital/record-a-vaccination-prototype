@@ -2,15 +2,17 @@
 
 {% set pageName = "Who is giving consent?" %}
 
+{% if data.scenario == "clinics" %}
+{% set currentSection = "clinics" %}
+{% elif data.scenario == "appts" %}
 {% set currentSection = "appointments" %}
+{% endif %}
 
 {% block beforeContent %}
-
-    {{ backLink({
-    href: "#",
-    text: "Back"
-    }) }}
-
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
 {% endblock %}
 
 {% block content %}
@@ -59,7 +61,8 @@
             }) }}
 
             {{ button({
-                text: "Continue"
+                text: "Continue",
+                href: "injection-site"
             }) }}
 
         </div>

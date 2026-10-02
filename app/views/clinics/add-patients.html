@@ -6,10 +6,10 @@
 
 {% block beforeContent %}
 
-    {{ backLink({
-    href: "#",
-    text: "Back"
-    }) }}
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
 
 {% endblock %}
 
@@ -34,7 +34,7 @@
 
             {{ button({
                 text: "Continue",
-                href: "/clinics/session?scenario&status=preparing"
+                href: "/clinics/session"
             }) }}
 
         </div>

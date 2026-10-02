@@ -2,15 +2,17 @@
 
 {% set pageName = "Check and confirm" %}
 
+{% if data.scenario == "clinics" %}
+{% set currentSection = "clinics" %}
+{% elif data.scenario == "appts" %}
 {% set currentSection = "appointments" %}
+{% endif %}
 
 {% block beforeContent %}
-
-    {{ backLink({
-    href: "#",
-    text: "Back"
-    }) }}
-
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
 {% endblock %}
 
 {% block content %}
@@ -46,7 +48,7 @@
                             text: "Date of birth"
                         },
                         value: {
-                            html: "15 March 1950 <br>(76 years old)"
+                            html: "14 April 1940 <br>(86 years old)"
                         },
                         actions: {
                             items: [
@@ -74,7 +76,7 @@
                             text: "NHS number"
                         },
                         value: {
-                            text: "912 345 6789"
+                            text: "912 312 3123"
                         },
                         actions: {
                             items: []
@@ -100,7 +102,7 @@
                             text: "Site"
                         },
                         value: {
-                            text: "Leeds City Centre Clinic"
+                            text: "Hillside Care Home"
                         }
                     },
                     {
@@ -108,7 +110,7 @@
                             text: "Vaccinator"
                         },
                         value: {
-                            text: "Alex Smith"
+                            text: currentUser.firstName + " " + currentUser.lastName
                         },
                         actions: {
                             items: [
@@ -125,7 +127,7 @@
                             text: "Vaccine"
                         },
                         value: {
-                            html: "Flu<br>Influenza vaccine"
+                            html: "Flu<br>Adjuvanted Trivalent Influenza Vaccine (aTIV)"
                         },
                         actions: {
                             items: [
@@ -142,7 +144,7 @@
                             text: "Batch"
                         },
                         value: {
-                            html: "AB123<br>Expires 4 January 2027"
+                            html: "914-151<br>Expires 19 February 2028"
                         },
                         actions: {
                             items: [
@@ -159,7 +161,7 @@
                             text: "Eligibility"
                         },
                         value: {
-                            text: "Aged 65 years or over"
+                            text: "Resident in a care home"
                         },
                         actions: {
                             items: [
@@ -208,7 +210,7 @@
                 ]
             }) }}
 
-            <form action="#" method="post" novalidate>
+            <form action="confirmation" method="post" novalidate>
                 {{ textarea({
                     name: "notes",
                     id: "notes",

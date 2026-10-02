@@ -1,29 +1,17 @@
 {% extends 'layout.html' %}
 
-{% if data.scenario == "appts" and data.status == "complete" %}
-    {% set pageName = "Yesterday’s appointments" %}
-{% elif data.scenario == "appts" and data.status == "preparing" %}
-    {% set pageName = "Tomorrow’s appointments" %}
-{% elif data.scenario == "appts" %}
-    {% set pageName = "Today’s appointments" %}
-{% else %}
-    {% set pageName = "Hillside Care home - Flu over 75s" %}
-{% endif %}
+{% set pageName = "Hillside Care home - Flu over 75s" %}
 
-{% if data.scenario == "appts" %}
-    {% set sessionLocation = "On site (Pickfords Pharmacy)" %}
-{% else %}
-    {% set sessionLocation = "Hillside Care Home" %}
-{% endif %}
+{% set sessionLocation = "Hillside Care Home" %}
 
 {% set currentSection = "clinics" %}
 
 {% block beforeContent %}
 
-    {{ backLink({
-    href: "/clinics/",
-    text: "Back"
-    }) }}
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
 
 {% endblock %}
 
@@ -95,12 +83,14 @@
 
                     {{ button({
                         text: "Edit clinic",
-                        variant: "secondary"
+                        variant: "secondary",
+                        href: "/clinics/create"
                     }) }}
 
                     {{ button({
                         text: "Add patients",
-                        variant: "secondary"
+                        variant: "secondary",
+                        href: "/clinics/add-patients"
                     }) }}
 
                 {% endif %}
@@ -113,36 +103,6 @@
     <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-full">
 
-            {# {% if data.status == "complete" %}
-
-                <ul class="nhsuk-grid-row nhsuk-card-group">
-
-                    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
-                        {% call card({
-                    heading: {
-                        text: "33",
-                        visuallyHiddenText: "vaccinations",
-                        classes: "nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1"
-                    }
-                    }) %}
-                    Vaccinations
-                    {% endcall %}
-                    </li>
-                    <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
-                        {% call card({
-                        heading: {
-                        text: "2",
-                        visuallyHiddenText: "vaccinations",
-                        classes: "nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1"
-                    }
-                    }) %}
-                    Cancelled
-                    {% endcall %}
-                    </li>
-                </ul>
-
-            {% endif %} #}
-
             {% set patientActionsContent %}
 
             {% if data.status == "complete" %}
@@ -153,9 +113,9 @@
 
                 <div class="nhsuk-button-group">
 
-                    <a href='#'>Record</a>
+                    <a href='/clinics/patient-history'>Record</a>
 
-                    <a href='#'>Cancel</a>
+                    <a href='/clinics/cancel'>Cancel</a>
 
                 </div>
 
@@ -172,18 +132,11 @@
                     colour: "green"
                 }) }}
 
-            {% elif data.status == "insession" %}
+            {% else %}
 
                 {{ tag({
                     text: "In session",
                     colour: "white"
-                }) }}
-
-            {% else %}
-
-                {{ tag({
-                    text: "New",
-                    colour: "yellow"
                 }) }}
 
             {% endif %}
@@ -211,7 +164,7 @@
                 rows: [
                     [
                     {
-                        html: "Alan Teapot <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
+                        html: "Jodie Brown <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
                     },
                     {
                         html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
@@ -268,6 +221,40 @@
             }) }}
             {% endset -%}
 
+            {% set cancelledPatientContent %}
+            {{ table({
+            caption: {
+                text: "Patients",
+                classes: "nhsuk-u-visually-hidden"
+                },
+                head: [
+                    {
+                    text: "Name and NHS number"
+                    },
+                    {
+                    text: "Date of birth"
+                    }
+                    ,
+                    {
+                    text: "Cancellation reason"
+                    }
+                ],
+                rows: [
+                    [
+                    {
+                        html: "Jodie Brown <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
+                    },
+                    {
+                        html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
+                    },
+                    {
+                        html: data.cancelReason or "Consent not given"
+                    }
+                    ]
+                ]
+            }) }}
+            {% endset -%}
+
             {{ tabs({
                 items: [
                 {
@@ -284,11 +271,14 @@
                     panel: {
                     html: allPatientContent
                     }
-                } if data.status=="insession" or data.status=="complete"
+                }
                 ,
                 {
                     label: "Cancelled (2)",
-                    id: "dnas"
+                    id: "cancelled",
+                    panel: {
+                    html: cancelledPatientContent
+                    }
                 }
                 ]
             }) }}

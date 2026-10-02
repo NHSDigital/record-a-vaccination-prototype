@@ -5,66 +5,15 @@
 {% set currentSection = "appointments" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "/clinics/patient-search" }) }}
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
 {% endblock %}
 
 {% block content %}
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
-
-      {% set covidProductHtml %}
-        {{ radios({
-          idPrefix: "vaccineProductCovid",
-          name: "vaccineProduct",
-          fieldset: {
-            legend: {
-              text: "Vaccine product"
-            }
-          },
-          items: [
-            {
-              value: "Spikevax XFG",
-              text: "Spikevax XFG"
-            }
-          ]
-        }) }}
-      {% endset %}
-
-      {% set fluProductHtml %}
-        {{ radios({
-          idPrefix: "vaccineProductFlu",
-          name: "vaccineProduct",
-          fieldset: {
-            legend: {
-              text: "Vaccine product"
-            }
-          },
-          items: [
-            {
-              value: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
-              text: "Adjuvanted Trivalent Influenza Vaccine (aTIV)"
-            }
-          ]
-        }) }}
-      {% endset %}
-
-      {% set rsvProductHtml %}
-        {{ radios({
-          idPrefix: "vaccineProductRsv",
-          name: "vaccineProduct",
-          fieldset: {
-            legend: {
-              text: "Vaccine product"
-            }
-          },
-          items: [
-            {
-              value: "Abrysvo",
-              text: "Abrysvo"
-            }
-          ]
-        }) }}
-      {% endset %}
 
       <form action="#" method="post">
         {{ radios({
@@ -80,24 +29,15 @@
           items: [
             {
               value: "COVID-19",
-              text: "COVID-19",
-              conditional: {
-                html: covidProductHtml
-              }
+              text: "COVID-19"
             },
             {
               value: "Flu",
-              text: "Flu",
-              conditional: {
-                html: fluProductHtml
-              }
+              text: "Flu"
             },
             {
               value: "RSV",
-              text: "RSV",
-              conditional: {
-                html: rsvProductHtml
-              }
+              text: "RSV"
             }
           ]
         }) }}

@@ -26,7 +26,7 @@
   {% endif %}
 
   <!-- Clinic sessions (all users) if the condition below is met -->
-  {% if data.clinics == "true" %}
+  {% if data.scenario == "clinics" %}
     {% set navigationItems = (navigationItems.push({
       href: "/clinics/",
       text: "Clinics",

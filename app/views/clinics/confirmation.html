@@ -2,7 +2,11 @@
 
 {% set pageName = "Vaccination saved" %}
 
+{% if data.scenario == "clinics" %}
+{% set currentSection = "clinics" %}
+{% elif data.scenario == "appts" %}
 {% set currentSection = "appointments" %}
+{% endif %}
 
 {% block content %}
 
@@ -29,18 +33,18 @@
                 text: "Jodie Brown’s next vaccination"
                 },
                 {
-                value: "A flu vaccination for another patient",
-                text: "A flu vaccination for another patient"
+                    divider: "or"
                 },
                 {
-                value: "A different vaccination for another patient",
-                text: "A different vaccination for another patient"
-                }
+                value: "Go to appointments list",
+                text: "Go to clinic list"
+                } if data.scenario == "clinics"
             ]
             }) }}
 
             {{ button({
-                text: "Continue"
+                text: "Continue",
+                href: "/clinics/session"
             }) }}
 
         </div>

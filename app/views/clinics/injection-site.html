@@ -2,15 +2,17 @@
 
 {% set pageName = "Where was the injection given?" %}
 
+{% if data.scenario == "clinics" %}
+{% set currentSection = "clinics" %}
+{% elif data.scenario == "appts" %}
 {% set currentSection = "appointments" %}
+{% endif %}
 
 {% block beforeContent %}
-
-    {{ backLink({
-    href: "#",
-    text: "Back"
-    }) }}
-
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
 {% endblock %}
 
 {% block content %}
@@ -48,7 +50,8 @@
             }) }}
 
             {{ button({
-                text: "Continue"
+                text: "Continue",
+                href: "check"
             }) }}
 
         </div>
