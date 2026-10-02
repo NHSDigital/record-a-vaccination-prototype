@@ -154,24 +154,6 @@
 
             {% endset -%}
 
-            {% set patientActionsCheckedInContent %}
-
-            {% if data.status == "complete" %}
-
-                <a href='#'>View record</a>
-
-            {% else %}
-
-                <p>{{ tag({ text: "Checked in" }) }}</p>
-                
-                <div class="nhsuk-u-padding-bottom-4"><a href='#'>Start recording</a></div>
-
-                <a href='/clinics/cancel-appointment'>Cancel</a>
-
-            {% endif %}
-
-            {% endset -%}
-
             {% set allPatientContent %}
             {{ table({
             caption: {
@@ -223,28 +205,8 @@
                     {
                         html: patientActionsContent
                     }
-                    ],
-                    [
-                    {
-                        html: "Walk-in"
-                    },
-                    {
-                        html: "Alan Teapot <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
-                    },
-                    {
-                        html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
-                    },
-                    {
-                        html: "Flu"
-                    },
-                    {
-                        html: "077345813941",
-                        classes: "nhsuk-u-text-break-word"
-                    },
-                    {
-                        html: patientActionsCheckedInContent
-                    }
-                    ],
+                    ]
+                    ,
                     [
                     {
                         html: "10:30am"
@@ -286,7 +248,28 @@
                     {
                         html: patientActionsContent
                     }
-                    ]
+                    ],
+                    [
+                    {
+                        html: "Walk-in"
+                    },
+                    {
+                        html: "Alan Teapot <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
+                    },
+                    {
+                        html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
+                    },
+                    {
+                        html: "Flu"
+                    },
+                    {
+                        html: "077345813941",
+                        classes: "nhsuk-u-text-break-word"
+                    },
+                    {
+                        html: patientActionsContent
+                    }
+                    ] if data.walkin == "true"
                 ]
             }) }}
             {% endset -%}
