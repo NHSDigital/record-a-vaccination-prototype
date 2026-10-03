@@ -1,0 +1,200 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Clinics" %}
+
+{% set currentSection = "clinics" %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+
+            <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+            <div class="nhsuk-u-reading-width">
+                <p class="nhsuk-body-l">To save time when you record vaccinations, you can set up a clinic with default answers for a group of patients.</p>
+            </div>
+
+            {{ button({
+                text: "Create clinic",
+                href: "/clinics/create"
+            }) }}
+
+            {% set actionsContent %}
+
+                <div class="nhsuk-u-padding-bottom-4"><a href="/clinics/session?status=insession">View</a></div>
+                <div><a href="#">Edit</a></div>
+
+            {% endset -%}
+
+            {% set completedActionsContent %}
+                <div><a href="/clinics/session?status=complete">View</a></div>
+            {% endset -%}
+
+            {% set upcomingContent %}
+            {{ table({
+            caption: {
+                text: "Existing clinics",
+                classes: "nhsuk-u-visually-hidden"
+                },
+                head: [
+                    {
+                    text: "Name"
+                    },
+                    {
+                    text: "Date"
+                    },
+                    {
+                    text: "Location"
+                    },
+                    {
+                    text: "Patients"
+                    },
+                    {
+                    text: "Actions"
+                    }
+                ],
+                rows: [
+                    [
+                    {
+                        text: "Hillside Care home - Flu over 75s"
+                    },
+                    {
+                        text: "30 October 2026"
+                    },
+                    {
+                        text: "Hillside Care Home"
+                    },
+                    {
+                        text: "49"
+                    },
+                    {
+                        html: actionsContent
+                    }
+                    ]
+                    ,
+                    [
+                    {
+                        text: "Oaklands care home - Covid"
+                    },
+                    {
+                        text: "22 November 2026"
+                    },
+                    {
+                        text: "Oaklands Residential Home"
+                    },
+                    {
+                        text: "36"
+                    },
+                    {
+                        html: actionsContent
+                    }
+                    ]
+                    ,
+                    [
+                    {
+                        text: "Housebound patients Meadowbrook list"
+                    },
+                    {
+                        text: "5 December 2026 to 6 December 2026"
+                    },
+                    {
+                        text: "Meadowbrook Care Centre"
+                    },
+                    {
+                        text: "58"
+                    },
+                    {
+                        html: actionsContent
+                    }
+                    ]
+                ]
+            }) }}
+            {% endset -%}
+
+            {% set completedContent %}
+            {{ table({
+            caption: {
+                text: "Completed clinics",
+                classes: "nhsuk-u-visually-hidden"
+                },
+                head: [
+                    {
+                    text: "Name"
+                    },
+                    {
+                    text: "Date"
+                    },
+                    {
+                    text: "Location"
+                    },
+                    {
+                    text: "Patients"
+                    },
+                    {
+                    text: "Action"
+                    }
+                ],
+                rows: [
+                    [
+                    {
+                        text: "Willowbrook GP Flu clinic"
+                    },
+                    {
+                        text: "18 September 2026"
+                    },
+                    {
+                        text: "Willowbrook Medical Centre"
+                    },
+                    {
+                        text: "72"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        text: "Ashfield Care Home Covid vaccination"
+                    },
+                    {
+                        text: "9 August 2026"
+                    },
+                    {
+                        text: "Ashfield Residential Home"
+                    },
+                    {
+                        text: "41"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ]
+                ]
+            }) }}
+            {% endset -%}
+
+            {{ tabs({
+                items: [
+                {
+                    label: "Scheduled (3)",
+                    id: "upcoming",
+                    panel: {
+                        html: upcomingContent
+                        }
+                    }
+                    ,
+                    {
+                    label: "Completed (2)",
+                    id: "completed",
+                    panel: {
+                        html: completedContent
+                    }
+                    }
+                ]
+            }) }}
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Saved for later" %}
+
+{% if data.scenario == "clinics" %}
+{% set currentSection = "clinics" %}
+{% elif data.scenario == "appts" %}
+{% set currentSection = "appointments" %}
+{% endif %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            {{ panel({
+                titleText: pageName,
+                text: "The vaccinator can complete this record later"
+            }) }}
+
+            <p><a href="/clinics/appointments">Return to appointments list</a></p>
+
+        </div>
+    </div>
+
+{% endblock %}

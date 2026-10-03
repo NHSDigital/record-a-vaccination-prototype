@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Vaccination saved" %}
+
+{% if data.scenario == "clinics" %}
+{% set currentSection = "clinics" %}
+{% set nextPage = "/clinics/session?patient=complete" %}
+{% elif data.scenario == "appts" %}
+{% set currentSection = "appointments" %}
+{% set nextPage = "/clinics/appointments?patient=complete" %}
+{% endif %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            {{ panel({
+                titleText: pageName,
+                text: "Jodie Brown’s flu record will be sent to their GP."
+            }) }}
+
+            {{ radios({
+            fieldset: {
+                legend: {
+                text: "What would you like to record now?",
+                size: "m"
+                }
+            },
+            idPrefix: "example-hints",
+            name: "exampleHints",
+            items: [
+                {
+                value: "Jodie Brown’s next vaccination",
+                text: "Jodie Brown’s next vaccination"
+                },
+                {
+                    divider: "or"
+                },
+                {
+                value: "Go to clinic list",
+                text: "Go to clinic list"
+                } if data.scenario == "clinics"
+                ,
+                {
+                value: "Go to appointments list",
+                text: "Go to appointments list"
+                } if data.scenario == "appts"
+            ]
+            }) }}
+
+            {{ button({
+                text: "Continue",
+                href: nextPage
+            }) }}
+
+        </div>
+    </div>
+
+{% endblock %}

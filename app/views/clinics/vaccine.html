@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Which vaccine?" %}
+
+{% set currentSection = "appointments" %}
+
+{% if data.recording == "walkin" %}
+{% set nextPage = "check-walk-in" %}
+{% else %}
+{% set nextPage = "eligibility" %}
+{% endif %}
+
+{% block beforeContent %}
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="{{ nextPage }}" method="post">
+        {{ radios({
+          idPrefix: "vaccine",
+          name: "vaccine",
+          fieldset: {
+            legend: {
+              text: pageName,
+              size: "l",
+              isPageHeading: true
+            }
+          },
+          items: [
+            {
+              value: "COVID-19",
+              text: "COVID-19"
+            },
+            {
+              value: "Flu",
+              text: "Flu"
+            },
+            {
+              value: "RSV",
+              text: "RSV"
+            }
+          ]
+        }) }}
+
+        <div class="nhsuk-button-group">
+
+        {{ button({
+          text: "Continue"
+        }) }}
+
+        {# {{ button({
+          text: "Save for later",
+          variant: "secondary",
+          href:"#"
+        }) }} #}
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

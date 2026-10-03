@@ -8,7 +8,13 @@
 {% if currentUser and not (currentOrganisation.type === "Region") %}
 
   <!-- Appointments (where available) -->
-  {% if canShowAppointments %}
+  {% if canShowAppointments and data.scenario == "appts" %}
+    {% set navigationItems = (navigationItems.push({
+      href: "/clinics/appointments",
+      html: "Appointments <span class=\"nhsuk-tag app-tag--header nhsuk-u-margin-left-2\">New</span>",
+      active: (currentSection == "appointments") or ((not currentSection) and (defaultMainSection == "appointments"))
+    }), navigationItems) %}
+  {% elif canShowAppointments and data.scenario != "clinics" %}
     {% set navigationItems = (navigationItems.push({
       href: "/appointments",
       html: "Appointments <span class=\"nhsuk-tag app-tag--header nhsuk-u-margin-left-2\">New</span>",
@@ -22,6 +28,15 @@
       href: "/record-vaccinations",
       text: "Record vaccinations",
       active: (currentSection == "vaccinate") or ((not currentSection) and (defaultMainSection == "vaccinate"))
+    }), navigationItems) %}
+  {% endif %}
+
+  <!-- Clinic sessions (all users) if the condition below is met -->
+  {% if data.scenario == "clinics" %}
+    {% set navigationItems = (navigationItems.push({
+      href: "/clinics/",
+      text: "Clinics",
+      active: (currentSection == "clinics")
     }), navigationItems) %}
   {% endif %}
 
