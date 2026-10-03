@@ -4,6 +4,12 @@
 
 {% set currentSection = "appointments" %}
 
+{% if data.status == "complete" %}
+{% set completedNumber = "33" %}
+{% else %}
+{% set completedNumber = "4" %}
+{% endif %}
+
 {% block content %}
 
     <div class="nhsuk-grid-row">
@@ -507,7 +513,7 @@
                 } if data.status != "complete"
                 ,
                 {
-                    label: "Completed (4)",
+                    label: "Completed (" + completedNumber +")",
                     id: "vaccinated",
                     panel: {
                     html: completedPatientContent
