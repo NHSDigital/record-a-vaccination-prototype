@@ -22,6 +22,12 @@
 {% set nextPage = "/clinics/vaccinator" %}
 {% endif %}
 
+{% if data.recording == "walkin" %}
+{% set patientName = "Alan Teapot" %}
+{% else %}
+{% set patientName = "Jodie Brown" %}
+{% endif %}
+
 {% block beforeContent %}
 {{ backLink({
 href: "javascript:window.history.back()",
@@ -33,7 +39,7 @@ text: "Back"
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l">Check Jodie Brown’s details and vaccination history</h1>
+      <h1 class="nhsuk-heading-l">Check {{ patientName }}’s details and vaccination history</h1>
 
       {{ summaryList({
         rows: [
@@ -42,7 +48,7 @@ text: "Back"
               text: "Name"
             },
             value: {
-              text: "Jodie Brown"
+              text: patientName
             }
           },
           {
