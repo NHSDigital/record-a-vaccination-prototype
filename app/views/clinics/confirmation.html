@@ -4,8 +4,10 @@
 
 {% if data.scenario == "clinics" %}
 {% set currentSection = "clinics" %}
+{% set nextPage = "/clinics/session" %}
 {% elif data.scenario == "appts" %}
 {% set currentSection = "appointments" %}
+{% set nextPage = "/clinics/appointments" %}
 {% endif %}
 
 {% block content %}
@@ -36,15 +38,20 @@
                     divider: "or"
                 },
                 {
-                value: "Go to appointments list",
+                value: "Go to clinic list",
                 text: "Go to clinic list"
                 } if data.scenario == "clinics"
+                ,
+                {
+                value: "Go to appointments list",
+                text: "Go to appointments list"
+                } if data.scenario == "appts"
             ]
             }) }}
 
             {{ button({
                 text: "Continue",
-                href: "/clinics/session"
+                href: nextPage
             }) }}
 
         </div>
