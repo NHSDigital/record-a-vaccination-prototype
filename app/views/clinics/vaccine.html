@@ -6,6 +6,8 @@
 
 {% if data.recording == "walkin" %}
 {% set nextPage = "check-walk-in" %}
+{% else %}
+{% set nextPage = "eligibility" %}
 {% endif %}
 
 {% block beforeContent %}

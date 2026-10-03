@@ -4,10 +4,10 @@
 
 {% if data.scenario == "clinics" %}
 {% set currentSection = "clinics" %}
-{% set nextPage = "/clinics/session" %}
+{% set nextPage = "/clinics/session?patient=complete" %}
 {% elif data.scenario == "appts" %}
 {% set currentSection = "appointments" %}
-{% set nextPage = "/clinics/appointments" %}
+{% set nextPage = "/clinics/appointments?patient=complete" %}
 {% endif %}
 
 {% block content %}

@@ -10,6 +10,8 @@
         <div class="nhsuk-grid-column-two-thirds">
 
             <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+            {# <p>Imported from <a href="#">Manage your appointments (opens in new tab)</a>
+            </p> #}
 
             {{ summaryList({
                 rows: [
@@ -47,7 +49,7 @@
                     {{ button({
                     text: "Add walk-in patient",
                     variant: "secondary",
-                    href: "/clinics/patient"
+                    href: "/clinics/patient?recording=walkin"
                     }) }}
 
                 {% else %}
@@ -90,7 +92,7 @@
                     <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
                         {% call card({
                         heading: {
-                        text: "2",
+                        text: "1",
                         visuallyHiddenText: "vaccinations",
                         classes: "nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1"
                     }
@@ -124,31 +126,73 @@
 
             {% endif %}
 
-            {% set patientActionsContent %}
+            {% set patientActionsContent01 %}
 
             {% if data.status == "complete" %}
-
                 <a href='#'>View record</a>
-
             {% else %}
 
                 <div data-check-in-control>
-                {{ button({
-                    text: "Check-in",
-                    small: true,
-                    variant: "secondary",
-                    attributes: {
-                        "data-check-in": "true"
-                    }
-                }) }}
 
-                <p hidden data-check-in-status role="status">{{ tag({ text: "Checked in" }) }}</p>
+                    {{ button({
+                        text: "Check-in",
+                        small: true,
+                        variant: "secondary",
+                        attributes: {
+                            "data-check-in": "true"
+                        }
+                    }) }}
+
+                    <p hidden data-check-in-status role="status" class="nhsuk-body-s">
+                        {{ tag({ text: "Checked in" }) }}
+                        <a href="#" data-check-in-undo>Undo</a>
+                    </p>
+
                 </div>
 
-                    <div class="nhsuk-u-padding-bottom-4"><a href='patient-history?recording=start'>Start recording</a></div>
+                <div class="nhsuk-u-padding-bottom-4">
+                    {% if data.eligibility %}
+                        <a href='check-so-far'>Continue recording</a>
+                    {% else %}
+                        <a href='patient-history?recording=start'>Start recording</a>
+                    {% endif %}
+                </div>
 
-                    <a href='/clinics/cancel-appointment'>Cancel</a>
+                <a href='/clinics/cancel-appointment'>Cancel</a>
 
+            {% endif %}
+
+            {% endset -%}
+
+            {% set patientActionsContent %}
+
+            {% if data.status == "complete" %}
+                <a href='#'>View record</a>
+            {% else %}
+
+                <div data-check-in-control>
+
+                    {{ button({
+                        text: "Check-in",
+                        small: true,
+                        variant: "secondary",
+                        attributes: {
+                            "data-check-in": "true"
+                        }
+                    }) }}
+
+                    <p hidden data-check-in-status role="status" class="nhsuk-body-s">
+                        {{ tag({ text: "Checked in" }) }}
+                        <a href="#" data-check-in-undo>Undo</a>
+                    </p>
+
+                </div>
+
+                <div class="nhsuk-u-padding-bottom-4">
+                    <a href='patient-history?recording=start'>Start recording</a>
+                </div>
+
+                <a href='/clinics/cancel-appointment'>Cancel</a>
 
             {% endif %}
 
@@ -203,9 +247,9 @@
                         classes: "nhsuk-u-text-break-word"
                     },
                     {
-                        html: patientActionsContent
+                        html: patientActionsContent01
                     }
-                    ]
+                    ] if data.patient != "complete"
                     ,
                     [
                     {
@@ -274,6 +318,150 @@
             }) }}
             {% endset -%}
 
+            {% set completedActionsContent %}
+            <a href='#'>View record</a>
+            {% endset -%}
+
+            {% set completedPatientContent %}
+            {{ table({
+            caption: {
+                text: "Patients",
+                classes: "nhsuk-u-visually-hidden"
+                },
+                compact: false,
+                head: [
+                    {
+                    text: "Time"
+                    },
+                    {
+                    text: "Details"
+                    },
+                    {
+                    text: "Date of birth"
+                    }
+                    ,
+                    {
+                    text: "Vaccines"
+                    }
+                    ,
+                    {
+                    text: "Contact details"
+                    }
+                    ,
+                    {
+                    text: "Action"
+                    }
+                ],
+                rows: [
+                    [
+                    {
+                        html: "08:30am"
+                    },
+                    {
+                        html: "Miriam Davies <div class='nhsuk-u-secondary-text-colour'>486 318 9214</div>"
+                    },
+                    {
+                        html: "22 March 1941 <div class='nhsuk-u-secondary-text-colour'>85 years old</div>"
+                    },
+                    {
+                        html: "Flu"
+                    },
+                    {
+                        html: "07755611802",
+                        classes: "nhsuk-u-text-break-word"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "08:45am"
+                    },
+                    {
+                        html: "John Harris <div class='nhsuk-u-secondary-text-colour'>164 702 5538</div>"
+                    },
+                    {
+                        html: "8 January 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
+                    },
+                    {
+                        html: "Flu"
+                    },
+                    {
+                        html: "07956241392",
+                        classes: "nhsuk-u-text-break-word"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "09:00am"
+                    },
+                    {
+                        html: "Patricia Moore <div class='nhsuk-u-secondary-text-colour'>245 691 7740</div>"
+                    },
+                    {
+                        html: "16 July 1943 <div class='nhsuk-u-secondary-text-colour'>83 years old</div>"
+                    },
+                    {
+                        html: "Flu"
+                    },
+                    {
+                        html: "07214168855",
+                        classes: "nhsuk-u-text-break-word"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "09:15am"
+                    },
+                    {
+                        html: "Christopher Evans <div class='nhsuk-u-secondary-text-colour'>367 245 9921</div>"
+                    },
+                    {
+                        html: "27 October 1942 <div class='nhsuk-u-secondary-text-colour'>84 years old</div>"
+                    },
+                    {
+                        html: "Flu"
+                    },
+                    {
+                        html: "07666548801",
+                        classes: "nhsuk-u-text-break-word"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "10:00am"
+                    },
+                    {
+                        html: "Jodie Brown <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
+                    },
+                    {
+                        html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
+                    },
+                    {
+                        html: "Flu"
+                    },
+                    {
+                        html: "07588547704",
+                        classes: "nhsuk-u-text-break-word"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ] if data.patient == "complete"
+                ]
+            }) }}
+            {% endset -%}
+
             {% set cancelledPatientContent %}
             {{ table({
             caption: {
@@ -295,10 +483,10 @@
                 rows: [
                     [
                     {
-                        html: "Jodie Brown <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
+                        html: "Harriet Wright <div class='nhsuk-u-secondary-text-colour'>245 916 3341</div>"
                     },
                     {
-                        html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
+                        html: "12 January 1960 <div class='nhsuk-u-secondary-text-colour'>66 years old</div>"
                     },
                     {
                         html: data.cancelReason or "Consent not given"
@@ -316,15 +504,15 @@
                     panel: {
                     html: allPatientContent
                     }
-                }
+                } if data.status != "complete"
                 ,
                 {
-                    label: "Completed (33)",
+                    label: "Completed (4)",
                     id: "vaccinated",
                     panel: {
-                    html: allPatientContent
+                    html: completedPatientContent
                     }
-                } if data.status=="insession" or data.status=="complete"
+                }
                 ,
                 {
                     label: "Cancelled (1)",
@@ -357,8 +545,15 @@
                 ]
             }) }}
 
-            <p>Imported from <a href="#">Manage your appointments (opens in new tab)</a>
-            </p>
+            {% if data.status != "complete" %}
+
+                {{ button({
+                    text: "End clinic",
+                    href: "?status=complete",
+                    variant: "warning"
+                }) }}
+
+            {% endif %}
 
             <p>
                 <a href="#" class="nhsuk-link">Print patient list</a>
@@ -372,14 +567,97 @@
 {% block bodyEnd %}
     {{ super() }}
     <script>
-        document.querySelectorAll('[data-check-in]').forEach(function (button) {
-            button.addEventListener('click', function () {
-                const checkInControl = button.closest('[data-check-in-control]')
-                const checkedInStatus = checkInControl.querySelector('[data-check-in-status]')
+        const checkInControls = Array.from(document.querySelectorAll('[data-check-in-control]'))
 
-                button.remove()
-                checkedInStatus.hidden = false
+        const getAppointmentId = (control) => {
+            const cells = control.closest('tr').querySelectorAll('td')
+            const time = cells[0].textContent.trim().toLowerCase().replace(/[^a-z0-9-]/g, '')
+            const nhsNumber = cells[1].textContent.replace(/\D/g, '')
+            const appointmentId = `${time}:${nhsNumber}`
+
+            return /^[a-z0-9-]{1,20}:\d{10}$/.test(appointmentId) ? appointmentId : null
+        }
+
+        const renderCheckInState = (control, checkedIn) => {
+            control.querySelector('[data-check-in]').hidden = checkedIn
+            control.querySelector('[data-check-in-status]').hidden = !checkedIn
+        }
+
+        const saveCheckInState = async (appointmentId, checkedIn) => {
+            const response = await fetch('/clinics/check-in-status', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                },
+                body: new URLSearchParams({
+                    appointmentId,
+                    checkedIn: String(checkedIn)
+                })
+            })
+
+            if (!response.ok) {
+                throw new Error(`Unable to save check-in status (${response.status})`)
+            }
+        }
+
+        checkInControls.forEach((control) => {
+            const appointmentId = getAppointmentId(control)
+            const button = control.querySelector('[data-check-in]')
+            const undo = control.querySelector('[data-check-in-undo]')
+
+            button.disabled = true
+
+            if (!appointmentId) {
+                console.error('Could not identify the patient for a check-in control')
+                button.disabled = false
+                return
+            }
+
+            button.addEventListener('click', async () => {
+                try {
+                    await saveCheckInState(appointmentId, true)
+                    renderCheckInState(control, true)
+                } catch (error) {
+                    console.error('Unable to save check-in status', error)
+                }
+            })
+
+            undo.addEventListener('click', async (event) => {
+                event.preventDefault()
+
+                try {
+                    await saveCheckInState(appointmentId, false)
+                    renderCheckInState(control, false)
+                } catch (error) {
+                    console.error('Unable to undo check-in status', error)
+                }
             })
         })
+
+        fetch('/clinics/check-in-status')
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Unable to load check-in status (${response.status})`)
+                }
+
+                return response.json()
+            })
+            .then(({ checkedInAppointments }) => {
+                checkInControls.forEach((control) => {
+                    const appointmentId = getAppointmentId(control)
+
+                    if (appointmentId) {
+                        renderCheckInState(control, checkedInAppointments.includes(appointmentId))
+                    }
+
+                    control.querySelector('[data-check-in]').disabled = false
+                })
+            })
+            .catch((error) => {
+                console.error('Unable to load check-in status', error)
+                checkInControls.forEach((control) => {
+                    control.querySelector('[data-check-in]').disabled = false
+                })
+            })
     </script>
 {% endblock %}

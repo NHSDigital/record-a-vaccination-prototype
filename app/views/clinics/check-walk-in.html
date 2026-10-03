@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Check and confirm walk-in details" %}
-
-{% set currentSection = "clinics" %}
+{% set pageName = "Check walk-in vaccination" %}
 
 {% block beforeContent %}
 {{ backLink({
@@ -18,7 +16,7 @@ text: "Back"
 
             <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-            <h2 class="nhsuk-heading-m">Patient</h2>
+            {# <h2 class="nhsuk-heading-m">Patient</h2>
 
             {{ summaryList({
                 rows: [
@@ -70,7 +68,7 @@ text: "Back"
                         }
                     }
                 ]
-            }) }}
+            }) }} #}
 
             <h2 class="nhsuk-heading-m">Vaccination</h2>
 

@@ -6,6 +6,12 @@
 
 {% set currentSection = "clinics" %}
 
+{% if data.status == "complete" %}
+{% set completedNumber = "48" %}
+{% else %}
+{% set completedNumber = "33" %}
+{% endif %}
+
 {% block beforeContent %}
 
 {{ backLink({
@@ -54,7 +60,7 @@ text: "Back"
                         text: "Vaccine"
                     },
                     value: {
-                        text: "Flu - Adjuvanted Trivalent Influenza Vaccine (aTIV)"
+                        html: "Flu<br>Adjuvanted Trivalent Influenza Vaccine (aTIV)<br>914-151"
                     }
                     },
                     {
@@ -150,7 +156,8 @@ text: "Back"
                     {
                         html: patientActionsContent
                     }
-                    ],
+                    ] if data.patient != "complete"
+                    ,
                     [
                     {
                         html: "Margaret Green <div class='nhsuk-u-secondary-text-colour'>943 876 2109</div>"
@@ -218,6 +225,18 @@ text: "Back"
                     }
                 ],
                 rows: [
+                    [
+                    {
+                        html: "Jodie Brown <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
+                    },
+                    {
+                        html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ] if data.patient == "complete"
+                    ,
                     [
                     {
                         html: "Claire Thompson <div class='nhsuk-u-secondary-text-colour'>482 194 8651</div>"
@@ -298,10 +317,10 @@ text: "Back"
                 rows: [
                     [
                     {
-                        html: "Jodie Brown <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
+                        html: "Harriet Wright <div class='nhsuk-u-secondary-text-colour'>245 916 3341</div>"
                     },
                     {
-                        html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
+                        html: "12 January 1960 <div class='nhsuk-u-secondary-text-colour'>66 years old</div>"
                     },
                     {
                         html: data.cancelReason or "Consent not given"
@@ -322,7 +341,7 @@ text: "Back"
                 } if data.status!="complete"
                 ,
                 {
-                    label: "Completed (33)",
+                    label: "Completed (" + completedNumber +")",
                     id: "vaccinated",
                     panel: {
                     html: completedPatientContent
