@@ -88,7 +88,7 @@ text: "Back"
                             text: "Site"
                         },
                         value: {
-                            text: "MediCare Pharmacy"
+                            text: currentOrganisation.name
                         }
                     },
                     {
@@ -96,7 +96,7 @@ text: "Back"
                             text: "Vaccinator"
                         },
                         value: {
-                            text: currentUser.firstName + " " + currentUser.lastName
+                            text: data.vaccinator or currentUser.firstName + " " + currentUser.lastName
                         },
                         actions: {
                             items: [
