@@ -7,7 +7,7 @@
 {% set location = "Hillside Care Home" %}
 {% set eligiblity = "Resident in a care home" %}
 {% elif data.scenario == "appts" %}
-{% set location = "MediCare Pharmacy" %}
+{% set location = currentOrganisation.name %}
 {% set currentSection = "appointments" %}
 {% set eligiblity = "Based on age" %}
 {% endif %}
@@ -114,7 +114,7 @@ text: "Back"
                             text: "Vaccinator"
                         },
                         value: {
-                            text: currentUser.firstName + " " + currentUser.lastName
+                            text: data.vaccinator or currentUser.firstName + " " + currentUser.lastName
                         },
                         actions: {
                             items: [
