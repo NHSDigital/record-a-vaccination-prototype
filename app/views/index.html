@@ -257,6 +257,33 @@
       </li>
     </ul>
 
+    <h2>Clinics</h2>
+
+    <ul class="nhsuk-grid-row nhsuk-card-group">
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+        {{ card({
+        heading: {
+        text: "Care home clinic",
+        size: "m"
+        },
+        href: "/prototype-setup/quick-access/clinics?next=/clinics/",
+        clickable: true,
+        variant: "primary"
+        }) }}
+      </li>
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+        {{ card({
+        heading: {
+        text: "Pharmacy appointments",
+        size: "m"
+        },
+        href: "/prototype-setup/quick-access/pharmacy?next=/clinics/appointments?scenario=appts&status=insession",
+        clickable: true,
+        variant: "primary"
+        }) }}
+      </li>
+    </ul>
+
     <hr class="nhsuk-section-break nhsuk-section-break--m nhsuk-section-break--visible">
 
     <h2>Error pages</h2>
