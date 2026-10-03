@@ -565,99 +565,23 @@
 {% endblock %}
 
 {% block bodyEnd %}
-    {{ super() }}
     <script>
-        const checkInControls = Array.from(document.querySelectorAll('[data-check-in-control]'))
-
-        const getAppointmentId = (control) => {
-            const cells = control.closest('tr').querySelectorAll('td')
-            const time = cells[0].textContent.trim().toLowerCase().replace(/[^a-z0-9-]/g, '')
-            const nhsNumber = cells[1].textContent.replace(/\D/g, '')
-            const appointmentId = `${time}:${nhsNumber}`
-
-            return /^[a-z0-9-]{1,20}:\d{10}$/.test(appointmentId) ? appointmentId : null
-        }
-
-        const renderCheckInState = (control, checkedIn) => {
-            control.querySelector('[data-check-in]').hidden = checkedIn
-            control.querySelector('[data-check-in-status]').hidden = !checkedIn
-        }
-
-        const saveCheckInState = async (appointmentId, checkedIn) => {
-            const response = await fetch('/clinics/check-in-status', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-                },
-                body: new URLSearchParams({
-                    appointmentId,
-                    checkedIn: String(checkedIn)
-                })
-            })
-
-            if (!response.ok) {
-                throw new Error(`Unable to save check-in status (${response.status})`)
-            }
-        }
-
-        checkInControls.forEach((control) => {
-            const appointmentId = getAppointmentId(control)
+        document.querySelectorAll('[data-check-in-control]').forEach((control) => {
             const button = control.querySelector('[data-check-in]')
+            const status = control.querySelector('[data-check-in-status]')
             const undo = control.querySelector('[data-check-in-undo]')
 
-            button.disabled = true
-
-            if (!appointmentId) {
-                console.error('Could not identify the patient for a check-in control')
-                button.disabled = false
-                return
-            }
-
-            button.addEventListener('click', async () => {
-                try {
-                    await saveCheckInState(appointmentId, true)
-                    renderCheckInState(control, true)
-                } catch (error) {
-                    console.error('Unable to save check-in status', error)
-                }
+            button.addEventListener('click', () => {
+                button.hidden = true
+                status.hidden = false
             })
 
-            undo.addEventListener('click', async (event) => {
+            undo.addEventListener('click', (event) => {
                 event.preventDefault()
-
-                try {
-                    await saveCheckInState(appointmentId, false)
-                    renderCheckInState(control, false)
-                } catch (error) {
-                    console.error('Unable to undo check-in status', error)
-                }
+                status.hidden = true
+                button.hidden = false
             })
         })
-
-        fetch('/clinics/check-in-status')
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`Unable to load check-in status (${response.status})`)
-                }
-
-                return response.json()
-            })
-            .then(({ checkedInAppointments }) => {
-                checkInControls.forEach((control) => {
-                    const appointmentId = getAppointmentId(control)
-
-                    if (appointmentId) {
-                        renderCheckInState(control, checkedInAppointments.includes(appointmentId))
-                    }
-
-                    control.querySelector('[data-check-in]').disabled = false
-                })
-            })
-            .catch((error) => {
-                console.error('Unable to load check-in status', error)
-                checkInControls.forEach((control) => {
-                    control.querySelector('[data-check-in]').disabled = false
-                })
-            })
     </script>
+    {{ super() }}
 {% endblock %}
