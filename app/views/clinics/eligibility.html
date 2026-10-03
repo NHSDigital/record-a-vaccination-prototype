@@ -5,7 +5,10 @@
 {% set currentSection = "appointments" %}
 
 {% block beforeContent %}
-  {{ backLink({ href: "#" }) }}
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
 {% endblock %}
 
 {% block content %}
@@ -14,8 +17,8 @@
 
       <form action="confirmation-saved-for-later" method="post">
         {{ radios({
-          idPrefix: "vaccine",
-          name: "vaccine",
+          idPrefix: "eligibility",
+          name: "eligibility",
           fieldset: {
             legend: {
               text: pageName,
