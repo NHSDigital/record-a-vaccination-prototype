@@ -5,12 +5,10 @@
 {% set currentSection = "clinics" %}
 
 {% block beforeContent %}
-
-    {{ backLink({
-    href: "#",
-    text: "Back"
-    }) }}
-
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
 {% endblock %}
 
 {% block content %}
@@ -29,7 +27,7 @@
                             text: "Name"
                         },
                         value: {
-                            text: "Jodie Brown"
+                            text: "Alan Teapot"
                         },
                         actions: {
                             items: [
@@ -91,7 +89,7 @@
                             text: "Site"
                         },
                         value: {
-                            text: "MediCare Pharmacy"
+                            text: currentOrganisation.name
                         }
                     },
                     {
@@ -99,7 +97,7 @@
                             text: "Vaccinator"
                         },
                         value: {
-                            text: currentUser.firstName + " " + currentUser.lastName
+                            text: data.vaccinator or currentUser.firstName + " " + currentUser.lastName
                         },
                         actions: {
                             items: [
