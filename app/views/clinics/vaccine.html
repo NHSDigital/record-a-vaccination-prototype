@@ -4,6 +4,10 @@
 
 {% set currentSection = "appointments" %}
 
+{% if data.recording == "walkin" %}
+{% set nextPage = "check-walk-in" %}
+{% endif %}
+
 {% block beforeContent %}
 {{ backLink({
 href: "javascript:window.history.back()",
@@ -15,7 +19,7 @@ text: "Back"
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="check-walk-in" method="post">
+      <form action="{{ nextPage }}" method="post">
         {{ radios({
           idPrefix: "vaccine",
           name: "vaccine",
