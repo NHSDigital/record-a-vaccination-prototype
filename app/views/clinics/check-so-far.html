@@ -1,0 +1,157 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check recording so far" %}
+
+{% block beforeContent %}
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+            <h2 class="nhsuk-heading-m">Patient</h2>
+
+            {{ summaryList({
+                rows: [
+                    {
+                        key: {
+                            text: "Name"
+                        },
+                        value: {
+                            text: "Jodie Brown"
+                        },
+                        actions: {
+                            items: [
+
+                            ]
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Date of birth"
+                        },
+                        value: {
+                            html: "14 April 1940 <br>(86 years old)"
+                        },
+                        actions: {
+                            items: [
+    
+                            ]
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Address"
+                        },
+                        value: {
+                            html: "73 Roman Road<br>Leeds<br>LS2 5ZN"
+                        },
+                        actions: {
+                            items: []
+                        }
+                    },
+                    {
+                        key: {
+                            text: "NHS number"
+                        },
+                        value: {
+                            text: "912 312 3123"
+                        },
+                        actions: {
+                            items: []
+                        }
+                    }
+                ]
+            }) }}
+
+            <h2 class="nhsuk-heading-m">Vaccination</h2>
+
+            {{ summaryList({
+                rows: [
+                    {
+                        key: {
+                            text: "Date"
+                        },
+                        value: {
+                            text: "Today"
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Site"
+                        },
+                        value: {
+                            text: currentOrganisation.name
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Vaccinator"
+                        },
+                        value: {
+                            text: data.vaccinator or currentUser.firstName + " " + currentUser.lastName
+                        },
+                        actions: {
+                            items: [
+                                {
+                                    href: "#",
+                                    text: "Change",
+                                    visuallyHiddenText: "vaccinator"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Vaccine"
+                        },
+                        value: {
+                            html: "Flu"
+                        },
+                        actions: {
+                            items: [
+                                {
+                                    href: "#",
+                                    text: "Change",
+                                    visuallyHiddenText: "vaccine"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Eligibility"
+                        },
+                        value: {
+                            text: "Based on age"
+                        },
+                        actions: {
+                            items: [
+                                {
+                                    href: "#",
+                                    text: "Change",
+                                    visuallyHiddenText: "eligibility"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }) }}
+
+            <form action="vaccine-product" method="post" novalidate>
+                {{ button({
+                    text: "Continue"
+                }) }}
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -14,7 +14,7 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>Are you sure you want to deactivate this site?</p>
+      <p>Are you sure you want to deactivate this site? Once deactivated, the site will have no active batches and you will not be able to record any vaccinations there. You can reactivate it at anytime.</p>
 
       <form action="/vaccines/sites/{{ site.id }}/deactivated" method="post" novalidate="true">
         {{ button({

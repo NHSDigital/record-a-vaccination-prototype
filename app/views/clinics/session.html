@@ -1,0 +1,399 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Hillside Care home - Flu over 75s" %}
+
+{% set sessionLocation = "Hillside Care Home" %}
+
+{% set currentSection = "clinics" %}
+
+{% if data.status == "complete" %}
+{% set completedNumber = "48" %}
+{% else %}
+{% set completedNumber = "33" %}
+{% endif %}
+
+{% block beforeContent %}
+
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+            {{ summaryList({
+                rows: [
+                    {
+                    key: {
+                        text: "Date"
+                    },
+                    value: {
+                        text: "30 October 2026"
+                    }
+                    }
+                    ,
+                    {
+                    key: {
+                        text: "Location"
+                    },
+                    value: {
+                        text: sessionLocation
+                    }
+                    },
+                    {
+                    key: {
+                        text: "Vaccinator"
+                    },
+                    value: {
+                        text: currentUser.firstName + " " + currentUser.lastName
+                    }
+                    },
+                    {
+                    key: {
+                        text: "Vaccine"
+                    },
+                    value: {
+                        html: "Flu<br>Adjuvanted Trivalent Influenza Vaccine (aTIV)<br>914-151"
+                    }
+                    },
+                    {
+                    key: {
+                        text: "Eligibility"
+                    },
+                    value: {
+                        text: "Resident in a care home"
+                    }
+                    }
+                    
+                ]
+                }) }}
+
+        </div>
+    </div>
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+
+            <div class="nhsuk-button-group">
+
+                {% if data.status == "complete" %}
+
+                {% else %}
+
+                    {{ button({
+                        text: "Edit clinic",
+                        variant: "secondary",
+                        href: "/clinics/create"
+                    }) }}
+
+                    {{ button({
+                        text: "Add patients",
+                        variant: "secondary",
+                        href: "/clinics/add-patients"
+                    }) }}
+
+                {% endif %}
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+
+            {% set patientActionsContent %}
+
+                <div class="nhsuk-button-group">
+
+                    <a href='/clinics/patient-history'>Record</a>
+
+                    <a href='/clinics/cancel'>Cancel</a>
+
+                </div>
+
+            {% endset -%}
+
+            {% set completedActionsContent %}
+
+                    <a href='#'>View record</a>
+
+            {% endset -%}
+
+            {% set allPatientContent %}
+            {{ table({
+            caption: {
+                text: "Patients",
+                classes: "nhsuk-u-visually-hidden"
+                },
+                head: [
+                    {
+                    text: "Name and NHS number"
+                    },
+                    {
+                    text: "Date of birth"
+                    }
+                    ,
+                    {
+                    text: "Actions"
+                    }
+                ],
+                rows: [
+                    [
+                    {
+                        html: "Jodie Brown <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
+                    },
+                    {
+                        html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
+                    },
+                    {
+                        html: patientActionsContent
+                    }
+                    ] if data.patient != "complete"
+                    ,
+                    [
+                    {
+                        html: "Margaret Green <div class='nhsuk-u-secondary-text-colour'>943 876 2109</div>"
+                    },
+                    {
+                        html: "2 September 1943 <div class='nhsuk-u-secondary-text-colour'>83 years old</div>"
+                    },
+                    {
+                        html: patientActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "George Wilson <div class='nhsuk-u-secondary-text-colour'>978 654 3210</div>"
+                    },
+                    {
+                        html: "19 November 1946 <div class='nhsuk-u-secondary-text-colour'>79 years old</div>"
+                    },
+                    {
+                        html: patientActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "Evelyn Carter <div class='nhsuk-u-secondary-text-colour'>621 874 3056</div>"
+                    },
+                    {
+                        html: "7 June 1938 <div class='nhsuk-u-secondary-text-colour'>88 years old</div>"
+                    },
+                    {
+                        html: patientActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "Arthur Bennett <div class='nhsuk-u-secondary-text-colour'>584 207 9163</div>"
+                    },
+                    {
+                        html: "23 January 1945 <div class='nhsuk-u-secondary-text-colour'>81 years old</div>"
+                    },
+                    {
+                        html: patientActionsContent
+                    }
+                    ]
+                ]
+            }) }}
+            {% endset -%}
+
+            {% set completedPatientContent %}
+            {{ table({
+            caption: {
+                text: "Completed patients",
+                classes: "nhsuk-u-visually-hidden"
+                },
+                head: [
+                    {
+                    text: "Name and NHS number"
+                    },
+                    {
+                    text: "Date of birth"
+                    }
+                    ,
+                    {
+                    text: "Action"
+                    }
+                ],
+                rows: [
+                    [
+                    {
+                        html: "Jodie Brown <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
+                    },
+                    {
+                        html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ] if data.patient == "complete"
+                    ,
+                    [
+                    {
+                        html: "Claire Thompson <div class='nhsuk-u-secondary-text-colour'>482 194 8651</div>"
+                    },
+                    {
+                        html: "12 January 1939 <div class='nhsuk-u-secondary-text-colour'>87 years old</div>"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "Donald Walsh <div class='nhsuk-u-secondary-text-colour'>764 953 1185</div>"
+                    },
+                    {
+                        html: "28 May 1942 <div class='nhsuk-u-secondary-text-colour'>84 years old</div>"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "Maureen Patel <div class='nhsuk-u-secondary-text-colour'>318 642 9076</div>"
+                    },
+                    {
+                        html: "4 July 1941 <div class='nhsuk-u-secondary-text-colour'>85 years old</div>"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "Thomas Hughes <div class='nhsuk-u-secondary-text-colour'>852 317 6649</div>"
+                    },
+                    {
+                        html: "17 October 1937 <div class='nhsuk-u-secondary-text-colour'>89 years old</div>"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ],
+                    [
+                    {
+                        html: "Sylvia Adams <div class='nhsuk-u-secondary-text-colour'>475 603 2248</div>"
+                    },
+                    {
+                        html: "3 February 1944 <div class='nhsuk-u-secondary-text-colour'>82 years old</div>"
+                    },
+                    {
+                        html: completedActionsContent
+                    }
+                    ]
+                ]
+            }) }}
+            {% endset -%}
+
+            {% set cancelledPatientContent %}
+            {{ table({
+            caption: {
+                text: "Patients",
+                classes: "nhsuk-u-visually-hidden"
+                },
+                head: [
+                    {
+                    text: "Name and NHS number"
+                    },
+                    {
+                    text: "Date of birth"
+                    }
+                    ,
+                    {
+                    text: "Cancellation reason"
+                    }
+                ],
+                rows: [
+                    [
+                    {
+                        html: "Harriet Wright <div class='nhsuk-u-secondary-text-colour'>245 916 3341</div>"
+                    },
+                    {
+                        html: "12 January 1960 <div class='nhsuk-u-secondary-text-colour'>66 years old</div>"
+                    },
+                    {
+                        html: data.cancelReason or "Consent not given"
+                    }
+                    ]
+                ]
+            }) }}
+            {% endset -%}
+
+            {{ tabs({
+                items: [
+                {
+                    label: "Scheduled (15)",
+                    id: "patients",
+                    panel: {
+                    html: allPatientContent
+                    }
+                } if data.status!="complete"
+                ,
+                {
+                    label: "Completed (" + completedNumber +")",
+                    id: "vaccinated",
+                    panel: {
+                    html: completedPatientContent
+                    }
+                }
+                ,
+                {
+                    label: "Cancelled (1)",
+                    id: "cancelled",
+                    panel: {
+                    html: cancelledPatientContent
+                    }
+                }
+                ]
+            }) }}
+
+            {{ pagination({
+                next: {
+                href: "#"
+                },
+                items: [
+                {
+                    href: "#",
+                    number: 1,
+                    current: true
+                },
+                {
+                    href: "#",
+                    number: 2
+                },
+                {
+                    href: "#",
+                    number: 3
+                }
+                ]
+            }) }}
+
+            {% if data.status == "insession" %}
+
+                {{ button({
+                    text: "End clinic",
+                    href: "?status=complete",
+                    variant: "warning"
+                }) }}
+
+            {% endif %}
+
+            <p>
+                <a href="#" class="nhsuk-link">Print patient list</a>
+            </p>
+
+        </div>
+    </div>
+
+{% endblock %}

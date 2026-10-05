@@ -1,0 +1,266 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Check the patient's details" %}
+
+{% if data.scenario == "clinics" %}
+{% set currentSection = "clinics" %}
+{% set nextPage = "/clinics/consent" %}
+{% elif data.scenario == "appts" %}
+{% set currentSection = "appointments" %}
+{% set nextPage = "/clinics/vaccine" %}
+{% endif %}
+
+{% if data.vaccine %}
+{% set nextPage = "/clinics/check-walk-in" %}
+{% endif %}
+
+{% if data.recording == "start" and data.vaccinator and data.vaccine %}
+{% set nextPage = "/clinics/eligibility" %}
+{% elif data.recording == "start" and data.vaccinator %}
+{% set nextPage = "/clinics/vaccine" %}
+{% elif data.recording == "start" %}
+{% set nextPage = "/clinics/vaccinator" %}
+{% endif %}
+
+{% if data.recording == "walkin" %}
+{% set patientName = "Alan Teapot" %}
+{% else %}
+{% set patientName = "Jodie Brown" %}
+{% endif %}
+
+{% block beforeContent %}
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Check {{ patientName }}’s details and vaccination history</h1>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              text: patientName
+            }
+          },
+          {
+            key: {
+              text: "Date of birth"
+            },
+            value: {
+              html: "14 April 1940<br><div class=\"nhsuk-u-secondary-text-colour\">86 years old</div>"
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: "73 Roman Road<br>Leeds<br>LS2 5ZN"
+            }
+          },
+          {
+            key: {
+              text: "NHS number"
+            },
+            value: {
+              text: "912 312 3123"
+            }
+          }
+          ,
+          {
+            key: {
+              text: "GP surgery"
+            },
+            value: {
+              html: "Beech House surgery <br>1 Ash Tree Road<br>Knaresborough<br>HG5 0UB"
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="nhsuk-heading-m">Vaccination history</h2>
+
+      {% set insetTextHtml %}
+        <p>This shows NHS vaccinations given in England. It includes all vaccinations recorded in RAVS but only some recorded in other systems.</p>
+      {% endset %}
+
+      {{ insetText({
+        html: insetTextHtml,
+        classes: "nhsuk-u-padding-top-2 nhsuk-u-padding-bottom-2 nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-4"
+      }) }}
+
+    </div>
+  </div>
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      {{ table({
+        panel: false,
+        caption: "",
+        firstCellIsHeader: false,
+        head: [
+          {
+            text: "Date"
+          },
+          {
+            text: "Vaccine"
+          },
+          {
+            text: "Product"
+          }
+        ],
+        rows: [
+          [
+            {
+              text: "15 April 2025"
+            },
+            {
+              text: "COVID-19"
+            },
+            {
+              text: "Spikevax JN.1"
+            }
+          ],
+          [
+            {
+              text: "11 November 2024"
+            },
+            {
+              text: "RSV"
+            },
+            {
+              text: "Abrysvo"
+            }
+          ],
+          [
+            {
+              text: "9 November 2024"
+            },
+            {
+              text: "MMR (2nd dose)"
+            },
+            {
+              text: "Priorix"
+            }
+          ],
+          [
+            {
+              text: "29 October 2024"
+            },
+            {
+              text: "Pneumococcal"
+            },
+            {
+              text: "Pneumovax"
+            }
+          ],
+          [
+            {
+              text: "25 October 2024"
+            },
+            {
+              text: "Flu (1st dose)"
+            },
+            {
+              text: "Adjuvanted Quadrivalent Influenza Vaccine (aQIV)"
+            }
+          ],
+          [
+            {
+              text: "15 October 2023"
+            },
+            {
+              text: "COVID-19"
+            },
+            {
+              text: "Comirnaty 30 Omicron XBB.1.5"
+            }
+          ],
+          [
+            {
+              text: "10 October 2023"
+            },
+            {
+              text: "Flu"
+            },
+            {
+              text: "Not known",
+              classes: "nhsuk-u-secondary-text-color"
+            }
+          ],
+          [
+            {
+              text: "7 October 2023"
+            },
+            {
+              text: "Pertussis"
+            },
+            {
+              text: "Boostrix-IPV suspension"
+            }
+          ],
+          [
+            {
+              text: "11 March 2022"
+            },
+            {
+              text: "COVID-19"
+            },
+            {
+              text: "Moderna mRNA (Spikevax) Original"
+            }
+          ],
+          [
+            {
+              text: "4 December 2023"
+            },
+            {
+              text: "MMR"
+            },
+            {
+              text: "Priorix"
+            }
+          ]
+        ]
+      }) }}
+
+      {{ pagination({
+        next: {
+          href: "#"
+        },
+        items: [
+          {
+            href: "#",
+            number: 1,
+            current: true
+          },
+          {
+            href: "#",
+            number: 2
+          },
+          {
+            href: "#",
+            number: 3
+          }
+        ]
+      }) }}
+
+      <form action="{{ nextPage }}" method="post" novalidate>
+        {{ button({
+          text: "Continue"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

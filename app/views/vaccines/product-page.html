@@ -122,11 +122,15 @@
       {% set activeCount = activeBatchesCount | default(0) %}
       {% set inactiveCount = inactiveBatchesCount | default(0) %}
 
-      {% set secondaryNavItems = [{
-        text: "Active (" + activeCount + ")",
-        href: "/vaccines/" + vaccine.id + "?tab=active",
-        current: (currentTab == "active")
-      }] %}
+      {% set secondaryNavItems = [] %}
+
+      {% if activeCount > 0 %}
+        {% set secondaryNavItems = (secondaryNavItems.push({
+          text: "Active (" + activeCount + ")",
+          href: "/vaccines/" + vaccine.id + "?tab=active",
+          current: (currentTab == "active")
+        }), secondaryNavItems) %}
+      {% endif %}
 
       {% if inactiveCount > 0 %}
         {% set secondaryNavItems = (secondaryNavItems.push({
@@ -212,7 +216,9 @@
                     {% endif %}
                   </td>
                   <td class="nhsuk-table__cell">
-                    {% if batch.deactivatedDate %}
+                    {% if batch.deactivationReason == "site" %}
+                      Site deactivated
+                    {% elif batch.deactivatedDate %}
                       Deactivated by user
                     {% elif (batch.expiryDate | daysAgo) > 0 %}
                       Expired

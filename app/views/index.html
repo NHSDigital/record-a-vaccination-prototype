@@ -218,8 +218,20 @@
         text: "Deceased patient history",
         size: "m"
         },
-        description: "This shows what users will see if they access a patient history for a patient who is recorded as deceased",
+        description: "This shows what users will see if they access a patient history for a patient who is recorded as deceased.",
         href: "/prototype-setup/quick-access/pharmacy?next=/record-vaccinations/patient-history-deceased",
+        clickable: true,
+        variant: "primary"
+        }) }}
+      </li>
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+        {{ card({
+        heading: {
+        text: "Deceased patient record",
+        size: "m"
+        },
+        description: "This shows what users will see if they access a record for a patient who is deceased.",
+        href: "/prototype-setup/quick-access/pharmacy?next=/records/patient-record-deceased",
         clickable: true,
         variant: "primary"
         }) }}
@@ -239,6 +251,33 @@
         },
         description: "This interface is used by regional administrators to manage vaccines, users and organisations.",
         href: "/prototype-setup/quick-access/regions?next=/regions",
+        clickable: true,
+        variant: "primary"
+        }) }}
+      </li>
+    </ul>
+
+    <h2>Clinics</h2>
+
+    <ul class="nhsuk-grid-row nhsuk-card-group">
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+        {{ card({
+        heading: {
+        text: "Care home clinic",
+        size: "m"
+        },
+        href: "/prototype-setup/quick-access/clinics?next=/clinics/",
+        clickable: true,
+        variant: "primary"
+        }) }}
+      </li>
+      <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+        {{ card({
+        heading: {
+        text: "Pharmacy appointments",
+        size: "m"
+        },
+        href: "/prototype-setup/quick-access/pharmacy?next=/clinics/appointments?scenario=appts&status=insession",
         clickable: true,
         variant: "primary"
         }) }}
@@ -283,7 +322,7 @@
     ],
     [
     {
-    html: "<a href='/errors/rate-limit'>Rate limited (429 error)</a>"
+    html: "<a href='/errors/rate-limit'>Sorry, there is a problem with the service (rate limited, 429 error)</a>"
     },
     {
     text: "When too many requests are made in a short time."
@@ -291,10 +330,34 @@
     ],
     [
     {
-    html: "<a href='/errors/vaccine-disabled'>Problem saving the vaccination (Regional admin has removed vaccines mid-recording)</a>"
+    html: "<a href='/errors/vaccine-disabled'>There is a problem saving this vaccination</a>"
     },
     {
-    text: "When a vaccination programme becomes unavailable during the recording flow."
+    text: "When a regional user has removed access to a vaccine type mid-recording."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/site-deactivated'>There is a problem saving this vaccination</a>"
+    },
+    {
+    text: "When a site is deactivated during the recording flow."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/site-deactivated-extra-scenario'>There is a problem using this option</a>"
+    },
+    {
+    text: "When a user has chosen the co-admin or same vax for a different patient option, and the site has just been deactivated."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/problem-deactivating-site-2-users-trying'>There is a problem deactivating this site</a>"
+    },
+    {
+    text: "When there is a problem deactivating a site because 2 users are trying to do this at the same time or because of another issue such as API failure."
     }
     ]
     ]
