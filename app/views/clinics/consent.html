@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Who is giving consent?" %}
+
+{% if data.scenario == "clinics" %}
+{% set currentSection = "clinics" %}
+{% elif data.scenario == "appts" %}
+{% set currentSection = "appointments" %}
+{% endif %}
+
+{% block beforeContent %}
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+
+            {{ radios({
+            fieldset: {
+                legend: {
+                text: pageName,
+                size: "l",
+                isPageHeading: true
+                }
+            },
+            idPrefix: "example-hints",
+            name: "exampleHints",
+            items: [
+                {
+                value: "Jodie Brown",
+                text: "Jodie Brown"
+                },
+                {
+                divider: "or"
+                },
+                {
+                value: "Clinician acting in the patient’s best interests",
+                text: "Clinician acting in the patient’s best interests"
+                },
+                {
+                value: "Person with lasting power of attorney for health and welfare",
+                text: "Person with lasting power of attorney for health and welfare"
+                },
+                {
+                value: "Parent or guardian",
+                text: "Parent or guardian"
+                },
+                {
+                value: "Independent mental capacity advocate",
+                text: "Independent mental capacity advocate"                },
+                {
+                value: "Court appointed deputy",
+                text: "Court appointed deputy"
+                }
+            ]
+            }) }}
+
+            {{ button({
+                text: "Continue",
+                href: "injection-site"
+            }) }}
+
+        </div>
+    </div>
+
+{% endblock %}

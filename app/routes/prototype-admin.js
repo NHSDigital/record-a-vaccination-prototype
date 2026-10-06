@@ -525,6 +525,13 @@ module.exports = (router) => {
       data.currentOrganisationId = 'FA425' 
       setupBatchesForOrg(data, 'FA425')
       addRandomVaccinations(data, 'FA425', 30)
+      } else if (scenario === 'clinics') {
+      data.currentUserId = '12345678'
+      data.currentOrganisationId = 'FA425'
+      data.status = 'insession'
+      data.scenario = 'clinics'
+      setupBatchesForOrg(data, 'FA425')
+      addRandomVaccinations(data, 'FA425', 30)
     } else {
       res.redirect('/')
       return

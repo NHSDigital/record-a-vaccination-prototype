@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Set today’s vaccinator" %}
+
+{% set currentSection = "appointments" %}
+
+{% block beforeContent %}
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            <form action="appointments" method="post">
+
+            {{ radios({
+                fieldset: {
+                    legend: {
+                    text: pageName,
+                    size: "l",
+                    isPageHeading: true
+                    }
+                },
+                idPrefix: "vaccinator",
+                name: "vaccinator",
+                items: [
+                    {
+                    value: currentUser.firstName + " " + currentUser.lastName,
+                    text: "Me (" + currentUser.firstName + " " + currentUser.lastName + ")"
+                    },
+                    {
+                    value: "Grady Campos (grady.campos@nhs.net)",
+                    text: "Grady Campos (grady.campos@nhs.net)"
+                    },
+                    {
+                    value: "Nina Hunt (nina.hunt@nhs.net)",
+                    text: "Nina Hunt (nina.hunt@nhs.net)"
+                    }
+                ]
+                }) }}
+
+            {{ button({
+                text: "Continue"
+            }) }}
+
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}

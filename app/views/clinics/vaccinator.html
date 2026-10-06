@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+
+{# {% set pageName = "Set today’s vaccinator" %} #}
+
+{% set pageName = "Who is the vaccinator?" %}
+
+{% set currentSection = "appointments" %}
+
+{% block beforeContent %}
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            {{ radios({
+                fieldset: {
+                    legend: {
+                    text: pageName,
+                    size: "l",
+                    isPageHeading: true
+                    }
+                },
+                idPrefix: "example-hints",
+                name: "exampleHints",
+                items: [
+                    {
+                    value: "Me" + currentUser.firstName + " " + currentUser.lastName,
+                    text: "Me (" + currentUser.firstName + " " + currentUser.lastName + ")"
+                    },
+                    {
+                    value: "Grady Campos (grady.campos@nhs.net)",
+                    text: "Grady Campos (grady.campos@nhs.net)"
+                    },
+                    {
+                    value: "Nina Hunt (nina.hunt@nhs.net)",
+                    text: "Nina Hunt (nina.hunt@nhs.net)"
+                    }
+                ]
+                }) }}
+
+            {{ button({
+                text: "Continue",
+                href: "vaccine"
+            }) }}
+
+        </div>
+    </div>
+
+{% endblock %}

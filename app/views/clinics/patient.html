@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Do you have the patient’s NHS number?" %}
+
+{% set currentSection = "appointments" %}
+
+{% block beforeContent %}
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/clinics/answer-patient-nhs-number-known" method="post" novalidate>
+        {% set nhsNumberHtml %}
+          {{ input({
+            id: "nhs-number",
+            name: "nhsNumber",
+            classes: "nhsuk-input--width-10 nhsuk-input--code",
+            inputmode: "numeric",
+            label: {
+              text: "NHS number",
+              size: "s"
+            },
+            hint: {
+              text: "For example, 999 123 4567"
+            }
+          }) }}
+        {% endset %}
+
+        {{ radios({
+          idPrefix: "nhs-number-known",
+          name: "nhsNumberKnown",
+          fieldset: {
+            legend: {
+              text: "Do you have the patient’s NHS number?",
+              size: "l",
+              isPageHeading: true
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes",
+              checked: true,
+              conditional: {
+                html: nhsNumberHtml
+              }
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

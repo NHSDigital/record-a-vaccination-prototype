@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Which vaccine product?" %}
+
+{% set currentSection = "appointments" %}
+
+{% block beforeContent %}
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="batch" method="post">
+        {{ radios({
+          idPrefix: "vaccine-product",
+          name: "vaccine-product",
+          fieldset: {
+            legend: {
+              text: pageName,
+              size: "l",
+              isPageHeading: true
+            }
+          },
+          items: [
+            {
+              value: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
+              text: "Adjuvanted Trivalent Influenza Vaccine (aTIV)"
+            }
+          ]
+        }) }}
+
+        {{ button({
+          text: "Continue"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}
