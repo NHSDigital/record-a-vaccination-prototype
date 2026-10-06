@@ -940,14 +940,17 @@ module.exports = router => {
     let error
     const data = req.session.data
 
-    const vaccine = data.vaccineStock.find(function(batch) {
-      return (batch.vaccineProduct === data.vaccineProduct) &&
-        (batch.vaccine === data.vaccine)
-    }) || {}
+    // Adding a batch can create a separate stock record, so include batches from every matching record.
+    const vaccineStock = data.vaccineStock.filter(function(vaccine) {
+      return (vaccine.vaccineProduct === data.vaccineProduct) &&
+        (vaccine.vaccine === data.vaccine) &&
+        (vaccine.organisationId === res.locals.currentOrganisation.id) &&
+        (vaccine.siteId === data.siteId)
+    })
 
     const dateToday = new Date()
 
-    const batches = (vaccine.batches || [])
+    const batches = vaccineStock.flatMap((vaccine) => vaccine.batches || [])
       .filter(function(batch) {
         const expiryDate = new Date(Date.parse(batch.expiryDate))
 
@@ -1011,9 +1014,11 @@ module.exports = router => {
     const data = req.session.data
     const vaccineBatch = data.vaccineBatch
 
-    const vaccineOptions = data.vaccineStock.find(function(batch) {
-      return (batch.vaccineProduct === data.vaccineProduct) &&
-        (batch.vaccine === data.vaccine)
+    const vaccineOptions = data.vaccineStock.find(function(vaccine) {
+      return (vaccine.vaccineProduct === data.vaccineProduct) &&
+        (vaccine.vaccine === data.vaccine) &&
+        (vaccine.organisationId === res.locals.currentOrganisation.id) &&
+        (vaccine.siteId === data.siteId)
     })
     if (!vaccineOptions) { res.redirect('/record-vaccinations'); return }
 
