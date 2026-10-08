@@ -74,3 +74,24 @@
   margin-bottom: nhsuk-spacing(4);
   padding-bottom: nhsuk-spacing(3);
 }
+
+// Product page
+
+.ravs-u-blue-background {
+  background-color: #005eb8;
+  color: white;
+}
+
+.ravs-u-align-vertical-center {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ravs-u-text-wrap-balance {
+  text-wrap: balance;
+}
+
+.ravs-u-max-width {
+  max-width: 378px;
+}
