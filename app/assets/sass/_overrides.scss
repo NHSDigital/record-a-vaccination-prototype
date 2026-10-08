@@ -95,3 +95,13 @@
 .ravs-u-max-width {
   max-width: 378px;
 }
+
+.test-label:after {
+    content: '\A';
+    white-space: pre;
+}
+
+.test-label:before {
+    content: '\A';
+    white-space: pre;
+}
