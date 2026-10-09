@@ -1,4 +1,3 @@
-
 .app-u-hide-on-mobile {
   @include nhsuk-media-query($until: tablet) {
     display: none;
@@ -48,7 +47,7 @@
     border-width: .3rem 0 .3rem .52rem;
   }
 
-  .nhsuk-details[open] > .nhsuk-details__summary::before {
+  .nhsuk-details[open]>.nhsuk-details__summary::before {
     border-width: .52rem .3rem 0 .3rem;
   }
 
@@ -96,12 +95,19 @@
   max-width: 378px;
 }
 
-.test-label:after {
-    content: '\A';
-    white-space: pre;
+.ravs-quote-image {
+  width: 100px;
+  height: 100px;
+  background-image: url('/assets/images/user.png');
+  background-size: cover;
+  border-radius: 50px;
+  float: left;
 }
 
-.test-label:before {
-    content: '\A';
-    white-space: pre;
+.ravs-quote-image-pharmacist {
+  background-image: url('/assets/images/pharmacist.jpg');
+}
+
+.ravs-quote-text {
+  margin-left: 130px;
 }
