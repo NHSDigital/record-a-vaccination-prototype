@@ -1,4 +1,3 @@
-
 .app-u-hide-on-mobile {
   @include nhsuk-media-query($until: tablet) {
     display: none;
@@ -48,7 +47,7 @@
     border-width: .3rem 0 .3rem .52rem;
   }
 
-  .nhsuk-details[open] > .nhsuk-details__summary::before {
+  .nhsuk-details[open]>.nhsuk-details__summary::before {
     border-width: .52rem .3rem 0 .3rem;
   }
 
@@ -73,4 +72,42 @@
   border-bottom: 1px solid $nhsuk-border-colour;
   margin-bottom: nhsuk-spacing(4);
   padding-bottom: nhsuk-spacing(3);
+}
+
+// Product page
+
+.ravs-u-blue-background {
+  background-color: #005eb8;
+  color: white;
+}
+
+.ravs-u-align-vertical-center {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ravs-u-text-wrap-balance {
+  text-wrap: balance;
+}
+
+.ravs-u-max-width {
+  max-width: 378px;
+}
+
+.ravs-quote-image {
+  width: 100px;
+  height: 100px;
+  background-image: url('/assets/images/user.png');
+  background-size: cover;
+  border-radius: 50px;
+  float: left;
+}
+
+.ravs-quote-image-pharmacist {
+  background-image: url('/assets/images/pharmacist.jpg');
+}
+
+.ravs-quote-text {
+  margin-left: 130px;
 }
