@@ -26,7 +26,7 @@
           </div>
 
           <div class="nhsuk-grid-column-one-half nhsuk-u-one-half-tablet nhsuk-u-padding-top-6 app-u-hide-on-mobile">
-            <img class="nhsuk-image__img" src="/assets/images/homepage-illustration.png" alt="A vaccine vial and leaflet next to a laptop, with a dotted line connecting the laptop to a mobile phone.">
+            <img class="nhsuk-image__img" src="/assets/images/homepage-illustration.png" alt="Vaccine vial and leaflet next to a laptop, with dotted line connecting the laptop to a mobile phone.">
           </div>
 
         </div>
@@ -67,14 +67,14 @@
           <div class="nhsuk-grid-column-one-half">
 
             <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">GPs</h3>
-            <p>GPs can use the service for NHS vaccinations, including COVID-19, flu, RSV and pneumococcal. If you want to sign up <a href="mailto:england.vdscentralonboardingsupportteam@nhs.net">email our onboarding team</a>.</p>
+            <p>GPs can use the service for NHS vaccinations, including COVID-19, flu, RSV and pneumococcal. If you want to sign up or have questions, <a href="mailto:england.vdscentralonboardingsupportteam@nhs.net">email our onboarding team</a>.</p>
 
           </div>
 
           <div class="nhsuk-grid-column-one-half">
 
             <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Pharmacies</h3>
-            <p>Pharmacies can use the service for all NHS vaccinations offered as part of advanced services. <a href="/apply/start">Sign up for your pharmacy</a>.</p>
+            <p>Pharmacies must use the service for all NHS vaccinations. <a href="/apply/start">Sign up for your pharmacy</a>.</p>
 
           </div>
         </div>
@@ -82,160 +82,65 @@
       </div>
     </div>
 
-    {% if data.variation == "b" %}
-      <div class="app-section--white">
-        <div class="nhsuk-width-container">
-          <div class="nhsuk-main-wrapper">
-
-            <h2 class="nhuk-heading-l nhsuk-u-margin-bottom-1 nhsuk-u-margin-top-4">How it works</h2>
-
-            <div class="nhsuk-grid-row ravs-u-align-vertical-center ravs-u-text-wrap-balance">
-              <div class="nhsuk-grid-column-one-half">
-                <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Record vaccinations easily and efficiently</h3>
-                <p>The recording journey includes shortcuts for co-administration and multiple vaccinations.</p>
-              </div>
-              <div class="nhsuk-grid-column-one-half">
-                <img class="nhsuk-image__img ravs-u-max-width" src="/assets/images/record-vaccinations.png" alt="A laptop with a vaccine vial next to it.">
-              </div>
-            </div>
-
-            <hr class="nhsuk-section-break nhsuk-section-break--xl nhsuk-section-break--visible">
-
-            <div class="nhsuk-grid-row ravs-u-align-vertical-center ravs-u-text-wrap-balance">
-              <div class="nhsuk-grid-column-one-half">
-                <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Track performance</h3>
-                <p>You can see how many vaccines you have given and download the data you need for reporting.</p>
-              </div>
-              <div class="nhsuk-grid-column-one-half">
-                <img class="nhsuk-image__img ravs-u-max-width" src="/assets/images/track-performance.png" alt="A screen showing vaccination data for today, past 7 days and month so far, plus a link to create a report.">
-              </div>
-            </div>
-
-            <hr class="nhsuk-section-break nhsuk-section-break--xl nhsuk-section-break--visible">
-
-            <div class="nhsuk-grid-row ravs-u-align-vertical-center ravs-u-text-wrap-balance">
-              <div class="nhsuk-grid-column-one-half">
-                <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Get paid</h3>
-                <p>Claims for flu and COVID-19 vaccinations are sent automatically to NHSBSA and GP systems.</p>
-              </div>
-              <div class="nhsuk-grid-column-one-half">
-                <img class="nhsuk-image__img ravs-u-max-width" src="/assets/images/get-paid.png" alt="A flow diagram to illustrate payments, It shows that Record a vaccination links to Manage your service, which links to a pound sign. ">
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-    {% elif data.variation == "c" %}
-
-      <div class="app-section--white">
-        <div class="nhsuk-width-container">
-          <div class="nhsuk-main-wrapper nhsuk-u-padding-bottom-6">
-
-            <h2 class="nhuk-heading-l nhsuk-u-margin-bottom-3">How it works</h2>
-
-            <div class="nhsuk-grid-row ravs-u-align-vertical-center">
-
-              <div class="nhsuk-grid-column-one-half">
-                <div>
-                  <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Record vaccinations easily</h3>
-                  <p>The recording journey includes shortcuts for co-administration and multiple vaccinations.</p>
-                </div>
-              </div>
-
-              <div class="nhsuk-grid-column-one-half">
-                <img class="nhsuk-image__img ravs-u-max-width" src="/assets/images/record-vaccinations.png" alt="A laptop with a vaccine vial next to it.">
-              </div>
-
-            </div>
-
-            <hr class="nhsuk-section-break nhsuk-section-break--xl nhsuk-section-break--visible">
-
-            <div class="nhsuk-grid-row">
-
-              <div class="nhsuk-grid-column-one-half ravs-u-text-wrap-balance nhsuk-u-margin-bottom-9">
-                <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Track performance</h3>
-                <p class="">You can see how many vaccines you have given and download the data you need for reporting.</p>
-                <img class="nhsuk-image__img nhsuk-u-padding-top-3 ravs-u-max-width" src="/assets/images/track-performance.png" alt="A screen showing vaccination data for today, past 7 days and month so far, plus a link to create a report.">
-              </div>
-
-              <div class="nhsuk-grid-column-one-half">
-                <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Get paid</h3>
-                <p class="">Claims for flu and COVID-19 vaccinations are sent automatically to NHSBSA and GP systems.</p>
-                <img class="nhsuk-image__img nhsuk-u-padding-top-3 ravs-u-max-width" src="/assets/images/get-paid.png" alt="A flow diagram to illustrate payments, It shows that Record a vaccination links to Manage your service, which links to a pound sign. ">
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-    {% else %}
-      {# Variation A #}
-
-      <div class="app-section--white">
-        <div class="nhsuk-width-container">
-          <div class="nhsuk-main-wrapper nhsuk-u-padding-top-6 nhsuk-u-padding-bottom-1">
-
-            <h2 class="nhuk-heading-l nhsuk-u-margin-bottom-6">How it works</h2>
-
-            <div class="nhsuk-grid-row">
-
-              <div class="nhsuk-grid-column-one-third nhsuk-u-margin-bottom-7">
-                <img class="nhsuk-image__img ravs-u-max-width nhsuk-u-padding-bottom-4 nhsuk-u-padding-right-8" src="/assets/images/record-vaccinations.png" alt="A laptop with a vaccine vial next to it.">
-                <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Record vaccinations easily</h3>
-                <p class="nhsuk-body ravs-u-text-wrap-balance">The recording journey includes shortcuts for co-administration and multiple vaccinations.</p>
-              </div>
-
-              <div class="nhsuk-grid-column-one-third nhsuk-u-margin-bottom-7">
-                <img class="nhsuk-image__img ravs-u-max-width nhsuk-u-padding-bottom-4 nhsuk-u-padding-right-8" src="/assets/images/track-performance.png" alt="A screen showing vaccination data for today, past 7 days and month so far, plus a link to create a report.">
-                <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Track performance</h3>
-                <p class="nhsuk-body ravs-u-text-wrap-balance">You can see how many vaccines you have given and download the data you need for reporting.</p>
-              </div>
-
-              <div class="nhsuk-grid-column-one-third nhsuk-u-margin-bottom-7">
-                <img class="nhsuk-image__img ravs-u-max-width nhsuk-u-padding-bottom-4 nhsuk-u-padding-right-8" src="/assets/images/get-paid.png" alt="A flow diagram to illustrate payments, It shows that Record a vaccination links to Manage your service, which links to a pound sign. ">
-                <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Get paid</h3>
-                <p class="nhsuk-body ravs-u-text-wrap-balance">Claims for flu and COVID-19 vaccinations are sent automatically to NHSBSA and GP systems.</p>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-    {% endif %}
-
-    <div class="ravs-u-blue-background">
+    <div class="app-section--white">
       <div class="nhsuk-width-container">
-        <div class="nhsuk-main-wrapper nhsuk-u-padding-top-8 nhsuk-u-padding-bottom-0">
+        <div class="nhsuk-main-wrapper nhsuk-u-padding-top-6 nhsuk-u-padding-bottom-1">
+
+          <h2 class="nhuk-heading-l nhsuk-u-margin-bottom-6">How it works</h2>
 
           <div class="nhsuk-grid-row">
 
-            <div class="nhsuk-grid-column-one-half nhsuk-u-padding-bottom-6">
-              <img class="nhsuk-image__img ravs-quote-image" src="/assets/images/pharmacist.jpg" alt="Photo of pharmacist.">
-              <div class="ravs-quote-text nhsuk-body nhsuk-u-font-size-22 nhsuk-u-margin-top-0 nhsuk-u-margin-top-0">
-                <blockquote class="nhsuk-u-padding-0 nhsuk-u-margin-0 nhsuk-u-margin-bottom-1 nhsuk-u-padding-top-2">
-                  “Our pharmacists prefer using RAVS. It’s straightforward and easy to use.”
-                </blockquote>
-                <div class="nhsuk-body nhsuk-u-font-size-19">– Operations Lead, GM Graham Pharmacies</div>
-              </div>
+            <div class="nhsuk-grid-column-one-third nhsuk-u-margin-bottom-7">
+              <img class="nhsuk-image__img ravs-u-max-width nhsuk-u-padding-bottom-4 nhsuk-u-padding-right-8" src="/assets/images/record-vaccinations.png" alt="A laptop with a vaccine vial next to it.">
+              <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Record vaccinations easily</h3>
+              <p class="nhsuk-body ravs-u-text-wrap-balance">The recording journey includes shortcuts for co-administration and multiple vaccinations.</p>
             </div>
 
-            <div class="nhsuk-grid-column-one-half nhsuk-u-padding-bottom-6">
-              <img class="nhsuk-image__img ravs-quote-image" src="/assets/images/user.png" alt="Generic user icon">
-              <div class="ravs-quote-text nhsuk-body nhsuk-u-font-size-22 nhsuk-u-margin-top-0 nhsuk-u-margin-top-0">
-                <blockquote class="nhsuk-u-padding-0 nhsuk-u-margin-0 nhsuk-u-margin-bottom-1 nhsuk-u-padding-top-2 ravs-u-text-wrap-balance">
-                  “Absolutely fantastic system, it sped up our whole process”
-                </blockquote>
-                <div class="nhsuk-body nhsuk-u-font-size-19">– Director, GP Practice</div>
-              </div>
+            <div class="nhsuk-grid-column-one-third nhsuk-u-margin-bottom-7">
+              <img class="nhsuk-image__img ravs-u-max-width nhsuk-u-padding-bottom-4 nhsuk-u-padding-right-8" src="/assets/images/track-performance.png" alt="Screen showing vaccination data for today, past 7 days and month so far, plus create a report link.">
+              <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Track performance</h3>
+              <p class="nhsuk-body ravs-u-text-wrap-balance">You can see how many vaccines you have given and download the data you need for reporting.</p>
+            </div>
+
+            <div class="nhsuk-grid-column-one-third nhsuk-u-margin-bottom-7">
+              <img class="nhsuk-image__img ravs-u-max-width nhsuk-u-padding-bottom-4 nhsuk-u-padding-right-8" src="/assets/images/get-paid.png" alt="Diagram showing that Record a vaccination links to Manage your service, which links to a pound sign.">
+              <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Get paid</h3>
+              <p class="nhsuk-body ravs-u-text-wrap-balance">Claims for flu and COVID-19 vaccinations are sent automatically to NHSBSA and GP systems.</p>
             </div>
 
           </div>
 
+        </div>
+      </div>
+    </div>
+
+    <div class="nhsuk-width-container">
+      <div class="nhsuk-main-wrapper nhsuk-u-padding-top-7">
+        <div class="nhsuk-grid-row">
+          <div class="nhsuk-grid-column-two-thirds ravs-u-text-wrap-balance">
+
+            <h2 class="nhsuk-heading-l nhsuk-u-margin-bottom-5">Coming soon</h2>
+
+            <ul class="nhsuk-list">
+              <li class="nhsuk-u-margin-bottom-6">
+                <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">More NHS vaccinations</h3>
+                <p class="">Record a vaccination is expanding to support all routine NHS vaccinations.</p>
+              </li>
+              <li class="nhsuk-u-margin-bottom-6">
+                <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Appointments integration</h3>
+                <p class="">Vaccination bookings from the NHS Manage your appointments service will be shown in Record a vaccination.</p>
+              </li>
+              <li class="nhsuk-u-margin-bottom-6">
+                <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Better maternity data</h3>
+                <p class="">Enriched patient data will give users in maternity settings a clearer view of who needs vacccinating when.</p>
+              </li>
+              <li class="nhsuk-u-margin-bottom-0">
+                <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Enhanced reporting</h3>
+                <p class="">More options to view and report on your data.</p>
+              </li>
+            </ul>
+
+          </div>
         </div>
       </div>
     </div>
@@ -274,33 +179,34 @@
       </div>
     </div>
 
-    <div class="nhsuk-width-container">
-      <div class="nhsuk-main-wrapper nhsuk-u-padding-top-7">
-        <div class="nhsuk-grid-row">
-          <div class="nhsuk-grid-column-two-thirds ravs-u-text-wrap-balance">
+    <div class="ravs-u-blue-background">
+      <div class="nhsuk-width-container">
+        <div class="nhsuk-main-wrapper nhsuk-u-padding-top-8 nhsuk-u-padding-bottom-0">
 
-            <h2 class="nhsuk-heading-l nhsuk-u-margin-bottom-5">Coming soon</h2>
+          <div class="nhsuk-grid-row">
 
-            <ul class="nhsuk-list">
-              <li class="nhsuk-u-margin-bottom-6">
-                <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">More NHS vaccinations</h3>
-                <p class="">Record a vaccination is expanding to support all routine NHS vaccinations.</p>
-              </li>
-              <li class="nhsuk-u-margin-bottom-6">
-                <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Appointments integration</h3>
-                <p class="">Vaccination bookings from the NHS Manage your appointments service will be shown in Record a vaccination.</p>
-              </li>
-              <li class="nhsuk-u-margin-bottom-6">
-                <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Better maternity data</h3>
-                <p class="">Enriched patient data will give users in maternity settings a clearer view of who needs vacccinating when.</p>
-              </li>
-              <li class="nhsuk-u-margin-bottom-0">
-                <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Enhanced reporting</h3>
-                <p class="">More options to view and report on your data.</p>
-              </li>
-            </ul>
+            <div class="nhsuk-grid-column-one-half nhsuk-u-padding-bottom-6">
+              <img class="nhsuk-image__img ravs-quote-image" src="/assets/images/pharmacist.jpg" alt="Photo of pharmacist.">
+              <div class="ravs-quote-text nhsuk-body nhsuk-u-font-size-22 nhsuk-u-margin-top-0 nhsuk-u-margin-top-0">
+                <blockquote class="nhsuk-u-padding-0 nhsuk-u-margin-0 nhsuk-u-margin-bottom-1 nhsuk-u-padding-top-2">
+                  “Our pharmacists prefer using RAVS. It’s straightforward and easy to use.”
+                </blockquote>
+                <div class="nhsuk-body nhsuk-u-font-size-19">– Operations Lead, GM Graham Pharmacies</div>
+              </div>
+            </div>
+
+            <div class="nhsuk-grid-column-one-half nhsuk-u-padding-bottom-6">
+              <img class="nhsuk-image__img ravs-quote-image" src="/assets/images/user.png" alt="Generic user icon">
+              <div class="ravs-quote-text nhsuk-body nhsuk-u-font-size-22 nhsuk-u-margin-top-0 nhsuk-u-margin-top-0">
+                <blockquote class="nhsuk-u-padding-0 nhsuk-u-margin-0 nhsuk-u-margin-bottom-1 nhsuk-u-padding-top-2 ravs-u-text-wrap-balance">
+                  “Absolutely fantastic system, it sped up our whole process”
+                </blockquote>
+                <div class="nhsuk-body nhsuk-u-font-size-19">– Director, GP Practice</div>
+              </div>
+            </div>
 
           </div>
+
         </div>
       </div>
     </div>
@@ -312,7 +218,7 @@
 
             <div class="nhsuk-grid-column-one-third">
               <h3 class="nhsuk-heading-s nhsuk-u-margin-bottom-2">Training</h3>
-              <p class="nhsuk-u-margin-bottom-2">Regular drop-in sessions available, plus a user guide with short videos.</p>
+              <p class="nhsuk-u-margin-bottom-2">Includes videos, a user guide and drop-in sessions.</p>
               <p>
                 <a href="https://guide.ravs.england.nhs.uk/">User guide and training</a>
               </p>
