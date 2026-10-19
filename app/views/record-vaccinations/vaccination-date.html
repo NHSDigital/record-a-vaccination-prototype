@@ -62,6 +62,7 @@
         {% endset -%}
 
         {% set patientAge = data.dateOfBirth | isoDateFromDateInput | age if data.dateOfBirth.day else data.dateOfBirth | age %}
+        
         {% set legendHtml %}<span class="nhsuk-caption-l">{{ data.firstName }} {{ data.lastName }}, {{ patientAge }} old</span>Is the vaccination today?{% endset %}
 
         {{ radios({
