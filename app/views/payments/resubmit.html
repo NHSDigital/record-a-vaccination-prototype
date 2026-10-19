@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Resubmit" %}
+
+{% set currentSection = "home" %}
+
+{% block beforeContent %}
+
+{{ backLink({
+href: "javascript:window.history.back()",
+text: "Back"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p>Are you sure you want to resubmit?</p>
+
+      <div class="nhsuk-button-group">
+
+        {{ button({
+          "text": "Resubmit 10 records",
+          "href": "/payments/#resubmitted"
+        }) }}
+
+        <a href="view-issue" class="nhsuk-link">Cancel</a>
+
+      </div>
+
+    </div>
+  </div>
+{% endblock %}

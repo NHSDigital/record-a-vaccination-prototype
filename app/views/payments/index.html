@@ -11,63 +11,105 @@
 
       <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-6">{{ pageName }}</h1>
 
-      {% set pastDayContent %}
+      {% set paymentIssuesContent %}
 
-            {{ table({
-              caption: "Payment issues",
-              head: [
-                {
-                  text: "Error"
-                },
-                {
-                  text: "Actions"
-                }
-              ],
-              rows: [
-                [
-                  {
-                    text: "Pharmacy not registered"
-                  },
-                  {
-                    html: "<a href='#'>Resubmit</a>"
-                  }
-                ]
-              ]
-            }) }}
+        {{ table({
+          caption: {
+            text: "Payment issues",
+            classes: "nhsuk-u-visually-hidden"
+            },
+          head: [
+            {
+              text: "Issue"
+            },
+            {
+              text: "Number of records"
+            },
+            {
+              text: "Actions"
+            }
+          ],
+          rows: [
+            [
+              {
+                text: "Not registered for adult flu vaccination service"
+              },
+              {
+                text: "10"
+              },
+              {
+                html: "<a href='view-issue' class='nhsuk-u-margin-right-3'>View</a> <a href='resubmit'>Resubmit</a>"
+              }
+            ],
+            [
+              {
+                text: "Another error"
+              },
+              {
+                text: "1"
+              },
+              {
+                html: "<a href='view-issue' class='nhsuk-u-margin-right-3'>View</a> <a href='resubmit'>Resubmit</a>"
+              }
+            ]
+          ]
+        }) }}
+
+      {% endset -%}
+
+      {% set resubmittedContent %}
+
+        {{ table({
+          caption: {
+            text: "Payment issues",
+            classes: "nhsuk-u-visually-hidden"
+            },
+          head: [
+            {
+              text: "Issue"
+            },
+            {
+              text: "Number of records"
+            },
+            {
+              text: "Status"
+            }
+          ],
+          rows: [
+            [
+              {
+                text: "Not registered for adult flu vaccination service"
+              },
+              {
+                text: "10"
+              },
+              {
+                html: "Queued for resubmission"
+              }
+            ]
+          ]
+        }) }}
+        
       {% endset -%}
 
           {{ tabs({
-      items: [
-      {
-        label: "Payment issues (5)",
-        id: "past-day",
-        panel: {
-          html: pastDayContent
-          }
-        },
-        {
-          label: "Past week",
-          id: "past-week",
-          panel: {
-            html: pastWeekContent
-          }
-        },
-        {
-          label: "Past month",
-          id: "past-month",
-          panel: {
-            html: pastMonthContent
-          }
-        },
-        {
-          label: "Past year",
-          id: "past-year",
-          panel: {
-            html: pastYearContent
-          }
-        }
-      ]
-    }) }}
+            items: [
+            {
+              label: "Payment issues",
+              id: "payment-issues",
+              panel: {
+                html: paymentIssuesContent
+                }
+              },
+              {
+                label: "Resubmitted",
+                id: "resubmitted",
+                panel: {
+                  html: resubmittedContent
+                }
+              }
+            ]
+          }) }}
 
     </div>
   </div>
