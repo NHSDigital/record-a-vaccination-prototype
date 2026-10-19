@@ -437,7 +437,15 @@
     html: "<a href='/errors/no-vaccination-history'>There is a temporary problem getting [patient name]'s vaccination history (history API issue)</a>"
     },
     {
-    text: "When no vaccination history can be retrieved from the history APIs or RAVS database."
+    text: "When no vaccination history can be retrieved from the history APIs or RAVS database but we allow the user to try again."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/vaccination-history-error-continue-anyway'>We could not get the patient's vaccination history</a>"
+    },
+    {
+    text: "When we cannot fetch any history from the APIs or RAVS database and we allow the user to continue with no history."
     }
     ],
     [
