@@ -158,12 +158,17 @@
             }), items) %}
         {% endfor %}
 
-        {% set patientAge = data.dateOfBirth | isoDateFromDateInput | age if data.dateOfBirth.day else data.dateOfBirth | age %}
-        {% set captionHtml %}<span class="nhsuk-caption-l">{{ data.firstName or "Jodie" }} {{ data.lastName or "Brown" }}, {{ data.patientAge or "77 years" }} old, {{ data.vaccine or "flu" }}</span>{% endset %}
+        {% if data.dateOfBirth %}
+          {% set patientAge = data.dateOfBirth | isoDateFromDateInput | age if data.dateOfBirth.day else data.dateOfBirth | age %}
+        {% else %}
+          {% set patientAge = "77 years" %}
+        {% endif %}
+
+        <span class="nhsuk-caption-l">{{ data.firstName or "Jodie" }} {{ data.lastName or "Brown" }}, {{ patientAge }} old, {{ data.vaccine or "flu" }}</span>
 
         {% call fieldset({
           legend: {
-            html: captionHtml + ("Why are you giving them the " + data.vaccine + " vaccine?" if data.vaccinationToday == 'yes' else "Why was the patient eligible for the " + data.vaccine + " vaccine?"),
+            html: "Why are you giving them the " + data.vaccine + " vaccine?" if data.vaccinationToday == 'yes' else "Why was the patient eligible for the " + data.vaccine + " vaccine?",
             size: "l",
             isPageHeading: true
           }
