@@ -13,7 +13,7 @@
 
       {% set paymentIssuesContent %}
 
-        {{ table({
+      {{ table({
           caption: {
             text: "Payment issues",
             classes: "nhsuk-u-visually-hidden"
@@ -59,7 +59,9 @@
 
       {% set resubmittedContent %}
 
-        {{ table({
+      <p>Successful resubmission does not guarantee payment.</p>
+
+      {{ table({
           caption: {
             text: "Payment issues",
             classes: "nhsuk-u-visually-hidden"
@@ -84,15 +86,32 @@
                 text: "10"
               },
               {
-                html: "Queued for resubmission"
+                html: tag({
+                  text: "Resubmitting",
+                  colour: "yellow"
+                })
+              }
+            ],
+            [
+              {
+                text: "Another error"
+              },
+              {
+                text: "5"
+              },
+              {
+                html: tag({
+                  text: "Accepted by BSA",
+                  colour: "green"
+                })
               }
             ]
           ]
         }) }}
-        
+
       {% endset -%}
 
-          {{ tabs({
+      {{ tabs({
             items: [
             {
               label: "Payment issues",
