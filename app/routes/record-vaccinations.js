@@ -697,6 +697,25 @@ module.exports = router => {
     const data = req.session.data
     const eligibility = data.eligibility
 
+    let rsvWarning = false
+    if (eligibility === "Pregnant" && data.vaccine === "RSV" && data.vaccinationToday === "yes" && data.pregnancyDueDate?.day) {
+      const pregnancyDueDate = dateFromYearMonthDay(data.pregnancyDueDate.year, data.pregnancyDueDate.month, data.pregnancyDueDate.day)
+      if (pregnancyDueDate) {
+        const vaccinationDate = new Date()
+        const numberOfDaysPregnant = 280 - daysBetweenDates(vaccinationDate, pregnancyDueDate)
+        rsvWarning = numberOfDaysPregnant < 196
+      }
+    }
+
+    let pertussisWarning = false
+    if (eligibility === "Pregnant" && data.vaccine === "pertussis" && data.vaccinationToday === "yes" && data.pregnancyDueDate?.day) {
+      const pregnancyDueDate = dateFromYearMonthDay(data.pregnancyDueDate.year, data.pregnancyDueDate.month, data.pregnancyDueDate.day)
+      if (pregnancyDueDate) {
+        const vaccinationDate = new Date()
+        const numberOfDaysPregnant = 280 - daysBetweenDates(vaccinationDate, pregnancyDueDate)
+        pertussisWarning = numberOfDaysPregnant < 112
+      }
+    }
 
     let nextPage;
 
@@ -704,13 +723,21 @@ module.exports = router => {
 
       nextPage = "/record-vaccinations/eligibility?showErrors=yes"
 
-    } else if (eligibility === "Pregnant" && data.vaccine === "RSV") {
+    } else if (eligibility === "Pregnant" && data.vaccine === "RSV" && !data.pregnancyDueDate?.day) {
 
       nextPage = "/record-vaccinations/patient-estimated-due-date"
 
-    } else if (eligibility === "Pregnant" && data.vaccine === "pertussis") {
+    } else if (rsvWarning) {
+
+      nextPage = "/record-vaccinations/rsv/not-yet-28-weeks-pregnant-warning"
+
+    } else if (eligibility === "Pregnant" && data.vaccine === "pertussis" && !data.pregnancyDueDate?.day) {
 
       nextPage = "/record-vaccinations/patient-estimated-due-date"
+
+    } else if (pertussisWarning) {
+
+      nextPage = "/record-vaccinations/pertussis/not-yet-16-weeks-pregnant-warning"
 
     } else if (data.vaccine == "flu" && data.eligibility === "Healthcare worker") {
 
