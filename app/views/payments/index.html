@@ -1,15 +1,19 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Payments dashboard" %}
+{% set pageName = "Payments" %}
 
-{% set currentSection = "home" %}
+{% set canShowPayments = true %}
+
+{% set currentSection = "payments" %}
 
 {% block content %}
 
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
-      <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-6">{{ pageName }}</h1>
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p class="nhsuk-u-margin-bottom-6">The data shown here is for the current seasonal campaign.</p>
 
       {% set paymentIssuesContent %}
 
@@ -32,7 +36,7 @@
           rows: [
             [
               {
-                text: "Not registered for adult flu vaccination service"
+                text: "Not registered for adult flu vaccinations"
               },
               {
                 text: "10"
@@ -43,13 +47,46 @@
             ],
             [
               {
-                text: "Another error"
+                text: "Not registered for childhood flu vaccinations"
               },
               {
-                text: "1"
+                text: "4"
               },
               {
                 html: "<a href='view-issue' class='nhsuk-u-margin-right-3'>View</a> <a href='resubmit'>Resubmit</a>"
+              }
+            ],
+            [
+              {
+                text: "Not registered for COVID-19 vaccinations"
+              },
+              {
+                text: "21"
+              },
+              {
+                html: "<a href='view-issue' class='nhsuk-u-margin-right-3'>View</a> <a href='resubmit'>Resubmit</a>"
+              }
+            ],
+            [
+              {
+                text: "Flu vaccination given out of season"
+              },
+              {
+                text: "8"
+              },
+              {
+                html: "<a href='view-issue' class='nhsuk-u-margin-right-3'>View</a>"
+              }
+            ],
+            [
+              {
+                text: "Invalid patient postcode"
+              },
+              {
+                text: "2"
+              },
+              {
+                html: "<a href='view-issue' class='nhsuk-u-margin-right-3'>View</a>"
               }
             ]
           ]
