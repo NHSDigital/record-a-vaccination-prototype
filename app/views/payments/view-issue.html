@@ -5,8 +5,10 @@
   {% set pageName = "Invalid patient postcode" %}
 {% elif data.paymentIssue == "childhoodFlu" %}
   {% set pageName = "Not registered for childhood flu vaccinations" %}
+  {% set mysService = "childhood flu vaccinations" %}
 {% else %}
   {% set pageName = "Not registered for adult flu vaccinations" %}
+  {% set mysService = "adult flu vaccinations" %}
 {% endif %}
 
 {% set canShowPayments = true %}
@@ -26,28 +28,28 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-9">{{ pageName }}</h1>
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      {# Hide help text abd buttons if status is resubmitting #}
-      {% if data.status == "resubmitting" %}
+      {# Hide help text and buttons if status is resubmitting #}
+      {% if data.status == "resubmitting" or data.status == "resubmitted" %}
       {% else %}
         {# Change content depending on issue #}
         {% if data.paymentIssue == "postcode" %}
-          <h2 class="nhsuk-heading-m">What this means</h2>
+          <h2 class="nhsuk-heading-m nhsuk-u-margin-top-9">What this means</h2>
           <p>According to NHSBSA, the patient's postcode is invalid. They therefore cannot accept the claim.</p>
         {% else %}
-          <h2 class="nhsuk-heading-m">How to fix this issue</h2>
-          <p>According to NHSBSA, this pharmacy is not registered for the Adult Flu vaccination service on the MYS portal.</p>
+          <h2 class="nhsuk-heading-m nhsuk-u-margin-top-9">How to fix this issue</h2>
+          <p>According to NHSBSA, this pharmacy is not registered for the {{ mysService }} service on the MYS portal.</p>
           <p>You need to register on MYS as soon as possible and then return to the payments dashboard to resubmit your claims.</p>
         {% endif %}
 
         {# Hide button for some issue types #}
         {% if data.paymentIssue == "postcode" %}
         {% else %}
-          <div class="nhsuk-button-group nhsuk-u-margin-bottom-9">
+          <div class="nhsuk-button-group">
             {{ button({
-              "text": "Register on MYS (Opens in new tab)",
-              "href": "#"
+              text: "Register on MYS (Opens in new tab)",
+              href: "#"
             }) }}
             {{ button({
               text: "Resubmit",
@@ -59,9 +61,17 @@
 
       {% endif %}
 
+    </div>
+  </div>
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
       {# Show different error tables depending on issue #}
       {% if data.paymentIssue == "postcode" %}
         {% include "payments/_rejected-claims-table-postcode.html" %}
+      {% elif data.paymentIssue == "childhoodFlu"%}
+        {% include "payments/_rejected-claims-table-childhood-flu.html" %}
       {% else %}
         {% include "payments/_rejected-claims-table-adult-flu.html" %}
       {% endif %}
