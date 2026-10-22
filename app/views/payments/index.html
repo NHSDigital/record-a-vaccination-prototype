@@ -30,7 +30,7 @@
               text: "Number of records"
             },
             {
-              text: "Actions"
+              text: "Action"
             }
           ],
           rows: [
@@ -42,7 +42,7 @@
                 text: "10"
               },
               {
-                html: "<a href='view-issue?paymentIssue' class='nhsuk-u-margin-right-3'>View</a> <a href='resubmit'>Resubmit</a>"
+                html: "<a href='view-issue?paymentIssue&status=rejected' class='nhsuk-u-margin-right-3'>View</a>"
               }
             ],
             [
@@ -53,7 +53,7 @@
                 text: "4"
               },
               {
-                html: "<a href='#' class='nhsuk-u-margin-right-3'>View</a> <a href='resubmit'>Resubmit</a>"
+                html: "<a href='#' class='nhsuk-u-margin-right-3'>View</a>"
               }
             ],
             [
@@ -64,7 +64,7 @@
                 text: "21"
               },
               {
-                html: "<a href='#' class='nhsuk-u-margin-right-3'>View</a> <a href='resubmit'>Resubmit</a>"
+                html: "<a href='#' class='nhsuk-u-margin-right-3'>View</a>"
               }
             ],
             [
@@ -86,7 +86,7 @@
                 text: "2"
               },
               {
-                html: "<a href='view-issue?paymentIssue=postcode' class='nhsuk-u-margin-right-3'>View</a>"
+                html: "<a href='view-issue?paymentIssue=postcode&status=rejected' class='nhsuk-u-margin-right-3'>View</a>"
               }
             ]
           ]
@@ -112,6 +112,9 @@
             },
             {
               text: "Status"
+            },
+            {
+              text: "Action"
             }
           ],
           rows: [
@@ -127,20 +130,26 @@
                   text: "Resubmitting",
                   colour: "yellow"
                 })
+              },
+              {
+                html: "<a href='view-issue?paymentIssue&status=resubmitting' class='nhsuk-u-margin-right-3'>View</a>"
               }
             ],
             [
               {
-                text: "Another error"
+                text: "Not registered for childhood flu vaccinations"
               },
               {
-                text: "5"
+                text: "4"
               },
               {
                 html: tag({
-                  text: "Accepted by BSA",
+                  text: "Resubmitted",
                   colour: "green"
                 })
+              },
+              {
+                html: "<a href='#' class='nhsuk-u-margin-right-3'>View</a>"
               }
             ]
           ]

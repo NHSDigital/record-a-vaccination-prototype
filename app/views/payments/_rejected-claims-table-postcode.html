@@ -1,6 +1,6 @@
 {{ table({
         caption:  {
-            text: "Rejected claims (1)",
+            text: "Claims (2)",
             size: "m"
           },
         classes: "nhsuk-u-margin-top-9",
@@ -16,6 +16,9 @@
           },
           {
             text: "Claim ID"
+          },
+          {
+            text: "Status"
           }
         ],
         rows: [
@@ -30,11 +33,29 @@
               text: "RAV-A7m2K9pQ1x"
             },
             {
-              html: tag({
-                  text: "Missing",
-                  colour: "red"
-                })
+              html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else "4637586"
+            },
+            {
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else tag({text: "Resubmitted", colour: "green"})     
+            } 
+          ],
+          [
+            {
+              text: "9128473650"
+            },
+            {
+              text: "20 Oct 2026"
+            },
+            {
+              html: "RAV-4B8cD2eF6g"
+            },
+            {
+              html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else "9465674"  
             }
+            ,
+            {
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else tag({text: "Resubmitted", colour: "green"})   
+            } 
           ]
         ]
       }) }}
