@@ -1,6 +1,11 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Not registered for adult flu vaccinations" %}
+{# Change h1 depending on issue #}
+{% if data.paymentIssue == "postcode" %}
+  {% set pageName = "Invalid patient postcode" %}
+{% else %}
+  {% set pageName = "Not registered for adult flu vaccinations" %}
+{% endif %}
 
 {% set canShowPayments = true %}
 
@@ -8,10 +13,10 @@
 
 {% block beforeContent %}
 
-{{ backLink({
-href: "javascript:window.history.back()",
-text: "Back"
-}) }}
+  {{ backLink({
+    href: "javascript:window.history.back()",
+    text: "Back"
+  }) }}
 
 {% endblock %}
 
@@ -21,241 +26,38 @@ text: "Back"
 
       <h1 class="nhsuk-heading-l nhsuk-u-margin-bottom-9">{{ pageName }}</h1>
 
+      {# Change content depending on issue #}
+      {% if data.paymentIssue == "postcode" %}
+        <h2 class="nhsuk-heading-m">What this means</h2>
+        <p>According to NHSBSA, the patient's postcode is invalid. They therefore cannot accept the claim.</p>
+      {% else %}
+        <h2 class="nhsuk-heading-m">How to fix this issue</h2>
+        <p>According to NHSBSA, this pharmacy is not registered for the Adult Flu vaccination service on the MYS portal.</p>
+        <p>You need to register on MYS as soon as possible and then return to the payments dashboard to resubmit your claims.</p>
+      {% endif %}
 
-      {# {{ summaryList({
-        rows: [
-          {
-            key: {
-              text: "Number of records"
-            },
-            value: {
-              text: "10"
-            }
-          },
-          {
-            key: {
-              text: "Issue last found"
-            },
-            value: {
-              text: "19 October 2026"
-            }
-          }
-        ]
-      }) }} #}
+      {# Hide button for some issue types #}
+      {% if data.paymentIssue == "postcode" %}
+      {% else %}
+        <div class="nhsuk-button-group nhsuk-u-margin-bottom-9">
+          {{ button({
+              "text": "Register on MYS (Opens in new tab)",
+              "href": "#"
+            }) }}
+          {{ button({
+              text: "Resubmit",
+              href: "resubmit",
+              variant: "secondary"
+            }) }}
+        </div>
+      {% endif %}
 
-      <h2 class="nhsuk-heading-m">How to fix this issue</h2>
-
-      <p>According to NHSBSA, this pharmacy is not registered for the Adult Flu vaccination service on the MYS portal. </p>
-
-      <p>You need to register on MYS as soon as possible and then return to the payments dashboard to resubmit your claims. </p>
-
-      <div class="nhsuk-button-group nhsuk-u-margin-bottom-9">
-
-        {{ button({
-          "text": "Register on MYS (Opens in new tab)",
-          "href": "#"
-        }) }}
-
-        {{ button({
-          text: "Resubmit",
-          href: "resubmit",
-          variant: "secondary"
-        }) }}
-
-      </div>
-
-      {{ table({
-        caption:  {
-            text: "Rejected claims (10)",
-            size: "m"
-          },
-        head: [
-          {
-            text: "Patient"
-          },
-          {
-            text: "Date"
-          },
-          {
-            text: "Deposit ID"
-          },
-          {
-            text: "Claim ID"
-          }
-        ],
-        rows: [
-          [
-            {
-              text: "9951742954"
-            },
-            {
-              text: "21 Oct 2026"
-            },
-            {
-              text: "RAV-A7m2K9pQ1x"
-            },
-            {
-              html: tag({
-                  text: "Missing",
-                  colour: "red"
-                })
-            }
-          ],
-          [
-            {
-              text: "9128473650"
-            },
-            {
-              text: "20 Oct 2026"
-            },
-            {
-              text: "RAV-4B8cD2eF6g"
-            },
-            {
-              html: tag({
-                  text: "Missing",
-                  colour: "red"
-                })
-            }
-          ],
-          [
-            {
-              text: "9347162085"
-            },
-            {
-              text: "19 Oct 2026"
-            },
-            {
-              text: "RAV-H3j5K7m9N2"
-            },
-            {
-              html: tag({
-                  text: "Missing",
-                  colour: "red"
-                })
-            }
-          ],
-          [
-            {
-              text: "9682037415"
-            },
-            {
-              text: "18 Oct 2026"
-            },
-            {
-              text: "RAV-pQ4rS6tU8v"
-            },
-            {
-              html: tag({
-                  text: "Missing",
-                  colour: "red"
-                })
-            }
-          ],
-          [
-            {
-              text: "9235801647"
-            },
-            {
-              text: "17 Oct 2026"
-            },
-            {
-              text: "RAV-W1x3Y5z7A9"
-            },
-            {
-              html: tag({
-                  text: "Missing",
-                  colour: "red"
-                })
-            }
-          ],
-          [
-            {
-              text: "9516248037"
-            },
-            {
-              text: "16 Oct 2026"
-            },
-            {
-              text: "RAV-bC2dE4fG6h"
-            },
-            {
-              html: tag({
-                  text: "Missing",
-                  colour: "red"
-                })
-            }
-          ],
-          [
-            {
-              text: "9873150426"
-            },
-            {
-              text: "15 Oct 2026"
-            },
-            {
-              text: "RAV-J8k0L2mN4p"
-            },
-            {
-              html: tag({
-                  text: "Missing",
-                  colour: "red"
-                })
-            }
-          ],
-          [
-            {
-              text: "9064821735"
-            },
-            {
-              text: "14 Oct 2026"
-            },
-            {
-              text: "RAV-qR5sT7uV9w"
-            },
-            {
-              html: tag({
-                  text: "Missing",
-                  colour: "red"
-                })
-            }
-          ],
-          [
-            {
-              text: "9450718263"
-            },
-            {
-              text: "13 Oct 2026"
-            },
-            {
-              text: "RAV-X3y5Z7aB9c"
-            },
-            {
-              html: tag({
-                  text: "Missing",
-                  colour: "red"
-                })
-            }
-          ],
-          [
-            {
-              text: "9726413508"
-            },
-            {
-              text: "12 Oct 2026"
-            },
-            {
-              text: "RAV-dE1fG3hJ5k"
-            },
-            {
-              html: tag({
-                  text: "Missing",
-                  colour: "red"
-                })
-            }
-          ]
-        ]
-      }) }}
+      {# Show different error tables depending on issue #}
+      {% if data.paymentIssue == "postcode" %}
+        {% include "payments/_rejected-claims-table-postcode.html" %}
+      {% else %}
+        {% include "payments/_rejected-claims-table-adult-flu.html" %}
+      {% endif %}
 
     </div>
   </div>

@@ -1,0 +1,40 @@
+{{ table({
+        caption:  {
+            text: "Rejected claims (1)",
+            size: "m"
+          },
+        classes: "nhsuk-u-margin-top-9",
+        head: [
+          {
+            text: "Patient"
+          },
+          {
+            text: "Date"
+          },
+          {
+            text: "Deposit ID"
+          },
+          {
+            text: "Claim ID"
+          }
+        ],
+        rows: [
+          [
+            {
+              text: "9951742954"
+            },
+            {
+              text: "21 Oct 2026"
+            },
+            {
+              text: "RAV-A7m2K9pQ1x"
+            },
+            {
+              html: tag({
+                  text: "Missing",
+                  colour: "red"
+                })
+            }
+          ]
+        ]
+      }) }}
