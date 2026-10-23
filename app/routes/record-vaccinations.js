@@ -619,18 +619,18 @@ module.exports = router => {
 
     // RSV is recommended from 28+ weeks (196 days)
     if (data.vaccinationToday == 'yes' && data.vaccine === "RSV" && numberOfDaysPregnant < 196) {
-      res.redirect('/record-vaccinations/patient-estimated-due-date-rsv-warning')
+      res.redirect('/record-vaccinations/rsv/not-yet-28-weeks-pregnant-warning')
 
     // Pertussis is recommended between 16 weeks (112 days) and 32 weeks
     } else if (data.vaccinationToday == 'yes' && data.vaccine === "pertussis" && numberOfDaysPregnant < 112) {
-      res.redirect('/record-vaccinations/patient-estimated-due-date-pertussis-warning')
+      res.redirect('/record-vaccinations/pertussis/not-yet-16-weeks-pregnant-warning')
     } else {
       res.redirect('/record-vaccinations/consent')
     }
 
   });
 
-  router.get('/record-vaccinations/patient-estimated-due-date-rsv-warning', (req, res) => {
+  router.get('/record-vaccinations/rsv/not-yet-28-weeks-pregnant-warning', (req, res) => {
 
     const data = req.session.data
     const pregnancyDueDate = dateFromYearMonthDay(data.pregnancyDueDate?.year, data.pregnancyDueDate?.month, data.pregnancyDueDate?.day)
@@ -644,14 +644,14 @@ module.exports = router => {
     const fullWeeksPregnant = Math.floor(numberOfDaysPregnant / 7)
     const remainderDaysPregnant = (numberOfDaysPregnant % 7)
 
-    res.render('record-vaccinations/patient-estimated-due-date-rsv-warning', {
+    res.render('record-vaccinations/rsv/not-yet-28-weeks-pregnant-warning', {
       fullWeeksPregnant,
       remainderDaysPregnant
     })
 
   })
 
-  router.get('/record-vaccinations/patient-estimated-due-date-pertussis-warning', (req, res) => {
+  router.get('/record-vaccinations/pertussis/not-yet-16-weeks-pregnant-warning', (req, res) => {
 
     const data = req.session.data
     const pregnancyDueDate = dateFromYearMonthDay(data.pregnancyDueDate?.year, data.pregnancyDueDate?.month, data.pregnancyDueDate?.day)
@@ -665,7 +665,7 @@ module.exports = router => {
     const fullWeeksPregnant = Math.floor(numberOfDaysPregnant / 7)
     const remainderDaysPregnant = (numberOfDaysPregnant % 7)
 
-    res.render('record-vaccinations/patient-estimated-due-date-pertussis-warning', {
+    res.render('record-vaccinations/pertussis/not-yet-16-weeks-pregnant-warning', {
       fullWeeksPregnant,
       remainderDaysPregnant
     })
@@ -697,6 +697,25 @@ module.exports = router => {
     const data = req.session.data
     const eligibility = data.eligibility
 
+    let rsvWarning = false
+    if (eligibility === "Pregnant" && data.vaccine === "RSV" && data.vaccinationToday === "yes" && data.pregnancyDueDate?.day) {
+      const pregnancyDueDate = dateFromYearMonthDay(data.pregnancyDueDate.year, data.pregnancyDueDate.month, data.pregnancyDueDate.day)
+      if (pregnancyDueDate) {
+        const vaccinationDate = new Date()
+        const numberOfDaysPregnant = 280 - daysBetweenDates(vaccinationDate, pregnancyDueDate)
+        rsvWarning = numberOfDaysPregnant < 196
+      }
+    }
+
+    let pertussisWarning = false
+    if (eligibility === "Pregnant" && data.vaccine === "pertussis" && data.vaccinationToday === "yes" && data.pregnancyDueDate?.day) {
+      const pregnancyDueDate = dateFromYearMonthDay(data.pregnancyDueDate.year, data.pregnancyDueDate.month, data.pregnancyDueDate.day)
+      if (pregnancyDueDate) {
+        const vaccinationDate = new Date()
+        const numberOfDaysPregnant = 280 - daysBetweenDates(vaccinationDate, pregnancyDueDate)
+        pertussisWarning = numberOfDaysPregnant < 112
+      }
+    }
 
     let nextPage;
 
@@ -704,13 +723,21 @@ module.exports = router => {
 
       nextPage = "/record-vaccinations/eligibility?showErrors=yes"
 
-    } else if (eligibility === "Pregnant" && data.vaccine === "RSV") {
+    } else if (eligibility === "Pregnant" && data.vaccine === "RSV" && !data.pregnancyDueDate?.day) {
 
       nextPage = "/record-vaccinations/patient-estimated-due-date"
 
-    } else if (eligibility === "Pregnant" && data.vaccine === "pertussis") {
+    } else if (rsvWarning) {
+
+      nextPage = "/record-vaccinations/rsv/not-yet-28-weeks-pregnant-warning"
+
+    } else if (eligibility === "Pregnant" && data.vaccine === "pertussis" && !data.pregnancyDueDate?.day) {
 
       nextPage = "/record-vaccinations/patient-estimated-due-date"
+
+    } else if (pertussisWarning) {
+
+      nextPage = "/record-vaccinations/pertussis/not-yet-16-weeks-pregnant-warning"
 
     } else if (data.vaccine == "flu" && data.eligibility === "Healthcare worker") {
 
