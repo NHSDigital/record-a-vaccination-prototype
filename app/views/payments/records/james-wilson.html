@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "James Wilson’s flu vaccination record" %}
+{% set currentSection = "payments" %}
+{% set canShowPayments = true %}
+{% set patientName = "James Wilson" %}
+{% set nhsNumber = "9235801647" %}
+{% set vaccinationDate = "17 October 2026" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% include "payments/records/_record-content.html" %}
+{% endblock %}
