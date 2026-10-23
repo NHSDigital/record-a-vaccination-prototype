@@ -13,18 +13,18 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p class="nhsuk-u-margin-bottom-6">The data shown here is for the current seasonal campaign.</p>
+      <p class="nhsuk-u-margin-bottom-6">This shows claims that NHSBSA is rejecting. It only includes data for the current seasonal campaign.</p>
 
       {% set paymentIssuesContent %}
 
       {{ table({
           caption: {
-            text: "Payment issues",
+            text: "Rejected claims",
             classes: "nhsuk-u-visually-hidden"
             },
           head: [
             {
-              text: "Issue"
+              text: "Reason for rejection"
             },
             {
               text: "Number of records (45)"
@@ -100,12 +100,12 @@
 
       {{ table({
           caption: {
-            text: "Payment issues",
+            text: "Claims",
             classes: "nhsuk-u-visually-hidden"
             },
           head: [
             {
-              text: "Issue"
+              text: "Reason for rejection"
             },
             {
               text: "Number of records (14)"
@@ -160,8 +160,8 @@
       {{ tabs({
             items: [
             {
-              label: "Payment issues",
-              id: "payment-issues",
+              label: "Rejected claims",
+              id: "rejected-claims",
               panel: {
                 html: paymentIssuesContent
                 }
