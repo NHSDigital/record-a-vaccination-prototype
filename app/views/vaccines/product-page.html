@@ -64,6 +64,25 @@
         }) }}
       {% endif %}
 
+      {% if updated %}
+        {% set html %}
+          <h3 class="nhsuk-notification-banner__heading">
+            Batch edited
+          </h3>
+          <p>
+            {{ ("Batch " + updatedBatchNumber + " has been edited.") if updatedBatchNumber else "Batch has been edited." }}
+            {% if updatedRecordsCount > 0 %}
+              {{ updatedRecordsCount }} vaccination record{{ "s" if updatedRecordsCount != 1 }} {{ "was" if updatedRecordsCount == 1 else "were" }} also updated to use the new batch details.
+            {% endif %}
+          </p>
+        {% endset %}
+
+        {{ notificationBanner({
+          html: html,
+          type: "success"
+        }) }}
+      {% endif %}
+
       <h1 class="nhsuk-heading-l">{{ vaccine.vaccineProduct }}</h1>
 
       {{ summaryList({
