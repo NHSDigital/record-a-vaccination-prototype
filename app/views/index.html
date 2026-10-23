@@ -437,7 +437,15 @@
     html: "<a href='/errors/no-vaccination-history'>There is a temporary problem getting [patient name]'s vaccination history (history API issue)</a>"
     },
     {
-    text: "When no vaccination history can be retrieved from the history APIs or RAVS database."
+    text: "When no vaccination history can be retrieved from the history APIs so we allow the user to try again."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/history-error-continue-anyway'>We could not any vaccination history for [patient name]</a>"
+    },
+    {
+    text: "When the user has tried again and we still cannot fetch any history from the APIs so we allow the user to continue with no history."
     }
     ],
     [
@@ -466,7 +474,7 @@
     ],
     [
     {
-    html: "<a href='/errors/pds-error-continue-anyway'>We could not get the patient's details</a>"
+    html: "<a href='/errors/pds-error-continue-anyway'>We cannot get the patient's details</a>"
     },
     {
     text: "When we cannot fetch patient details from PDS and allow the user to continue recording without the NHS number match."
