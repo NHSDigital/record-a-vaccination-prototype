@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Lewis Morgan’s flu vaccination record" %}
+{% set currentSection = "payments" %}
+{% set canShowPayments = true %}
+{% set patientName = "Lewis Morgan" %}
+{% set nhsNumber = "9450718263" %}
+{% set vaccinationDate = "13 October 2026" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% include "payments/records/_record-content.html" %}
+{% endblock %}

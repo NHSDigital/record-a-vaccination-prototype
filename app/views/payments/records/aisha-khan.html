@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Aisha Khan’s flu vaccination record" %}
+{% set currentSection = "payments" %}
+{% set canShowPayments = true %}
+{% set patientName = "Aisha Khan" %}
+{% set nhsNumber = "9128473650" %}
+{% set vaccinationDate = "20 October 2026" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% include "payments/records/_record-content.html" %}
+{% endblock %}
