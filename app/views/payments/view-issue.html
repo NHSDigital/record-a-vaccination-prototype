@@ -37,8 +37,9 @@
         {% if data.paymentIssue == "postcode" %}
           <h2 class="nhsuk-heading-m nhsuk-u-margin-top-9">What this means</h2>
           <p>According to NHSBSA, the patient's postcode is invalid. They therefore cannot accept the claim.</p>
+          <p><a href="#">Contact NHSBSA - MYS (opens in new tab)</a></p>
         {% else %}
-          <h2 class="nhsuk-heading-m nhsuk-u-margin-top-9">How to fix this issue</h2>
+          <h2 class="nhsuk-heading-m nhsuk-u-margin-top-9">How to fix this</h2>
           <p>According to NHSBSA, this pharmacy is not registered for the {{ mysService }} service on the MYS portal.</p>
           <p>You need to register on MYS as soon as possible and then return to the payments dashboard to resubmit your claims.</p>
         {% endif %}
