@@ -1,6 +1,6 @@
 {{ table({
         caption:  {
-            text: "Resubmitted (3)",
+            text: "Claims (3)",
             size: "m"
           },
         classes: "nhsuk-u-margin-top-9",
@@ -78,7 +78,7 @@
 
       {{ table({
         caption:  {
-            text: "Rejected due to invalid patient postcode (1)",
+            text: "Rejected for another reason (1)",
             size: "m"
           },
         classes: "nhsuk-u-margin-top-9",
@@ -97,6 +97,9 @@
           },
           {
             text: "Status"
+          },
+          {
+            text: "Action"
           }
         ],
         rows: [
@@ -115,9 +118,10 @@
             },
             {
               html: tag({ text: "Rejected", colour: "red"})
+            },
+            {
+              html: "<a href='view-issue?paymentIssue=postcode&status=rejected'>View</a>"
             }
           ]
         ]
       }) }}
-
-      <p><a href="view-issue?paymentIssue=postcode&status=rejected">View all invalid patient postcode issues</a></p>
