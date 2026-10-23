@@ -42,15 +42,20 @@
           {% endif %}
         {% endfor %}
 
-        {% set patientAge = data.dateOfBirth | isoDateFromDateInput | age if data.dateOfBirth.day else data.dateOfBirth | age %}
-        {% set captionHtml %}<span class="nhsuk-caption-l">{{ data.firstName }} {{ data.lastName }}, {{ patientAge }} old</span>{% endset %}
+        {% if data.dateOfBirth %}
+          {% set patientAge = data.dateOfBirth | isoDateFromDateInput | age if data.dateOfBirth.day else data.dateOfBirth | age %}
+        {% else %}
+          {% set patientAge = "77 years" %}
+        {% endif %}
+
+        <span class="nhsuk-caption-l">{{ data.firstName or "Jodie" }} {{ data.lastName or "Brown" }}, {{ patientAge }} old, {{ data.vaccine or "flu" }}</span>
 
         {{ radios({
           idPrefix: "site-id",
           name: "siteId",
           fieldset: {
             legend: {
-              html: captionHtml + ("Which site is it?" if data.vaccinationToday == 'yes' else "Which site was it?"),
+              html: "Which site is it?" if data.vaccinationToday == 'yes' else "Which site was it?",
               size: "l",
               isPageHeading: true
             }
