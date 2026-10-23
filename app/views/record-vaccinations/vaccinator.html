@@ -47,15 +47,19 @@
           }), items) %}
         {% endfor %}
 
-        {% set patientAge = data.dateOfBirth | isoDateFromDateInput | age if data.dateOfBirth.day else data.dateOfBirth | age %}
-        {% set captionHtml %}<span class="nhsuk-caption-l">{{ data.firstName }} {{ data.lastName }}, {{ patientAge }} old</span>{% endset %}
+        {% if data.dateOfBirth %}
+          {% set patientAge = data.dateOfBirth | isoDateFromDateInput | age if data.dateOfBirth.day else data.dateOfBirth | age %}
+        {% else %}
+          {% set patientAge = "77 years" %}
+        {% endif %}
+        <span class="nhsuk-caption-l">{{ data.firstName or "Jodie" }} {{ data.lastName or "Brown" }}, {{ patientAge }} old</span>
 
         {{ radios({
           idPrefix: "vaccinator",
           name: "vaccinatorId",
           fieldset: {
             legend: {
-              html: captionHtml + ("Who is the vaccinator?" if data.vaccinationToday == 'yes' else "Who was the vaccinator?"),
+              html: "Who is the vaccinator?" if data.vaccinationToday == 'yes' else "Who was the vaccinator?",
               size: "l",
               isPageHeading: "true"
             }
@@ -85,4 +89,3 @@
   </div>
 
 {% endblock %}
-
