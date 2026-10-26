@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% set canShowPayments = true %}
+{% set currentSection = "payments" %}
+{% set pageName = "Resubmit" %}
+
+{# Update these for each page #}
+{% set claimCount = 21 %}
+{% set previousPage = "/payments/claims/covid-19" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% include "payments/resubmit/_resubmit-template.html" %}
+{% endblock %}
