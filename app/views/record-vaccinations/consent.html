@@ -163,15 +163,20 @@
           }) }}
         {% endset %}
 
-        {% set patientAge = data.dateOfBirth | isoDateFromDateInput | age if data.dateOfBirth.day else data.dateOfBirth | age %}
-        {% set captionHtml %}<span class="nhsuk-caption-l">{{ data.firstName }} {{ data.lastName }}, {{ patientAge }} old, {{ data.vaccine }}</span>{% endset %}
+        {% if data.dateOfBirth %}
+          {% set patientAge = data.dateOfBirth | isoDateFromDateInput | age if data.dateOfBirth.day else data.dateOfBirth | age %}
+        {% else %}
+          {% set patientAge = "77 years" %}
+        {% endif %}
+
+        <span class="nhsuk-caption-l">{{ data.firstName or "Jodie" }} {{ data.lastName or "Brown" }}, {{ patientAge }} old, {{ data.vaccine or "flu" }}</span>
 
         {{ radios({
           idPrefix: "consent",
           name: "consent",
           fieldset: {
             legend: {
-              html: captionHtml + ("Who is giving consent?" if data.vaccinationToday == 'yes' else "Who gave consent?"),
+              html: "Who is giving consent?" if data.vaccinationToday == 'yes' else "Who gave consent?",
               size: "l",
               isPageHeading: "true"
             }
