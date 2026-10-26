@@ -10,7 +10,7 @@
 <h2 class="nhsuk-heading-m nhsuk-u-margin-top-9">What this means</h2>
 <p>NHSBSA does not accept claims for flu vaccinations given outside the dates of the seasonal vaccination programme.</p>
 <p>If a mistake was made when recording the date the vaccination was given, you can delete the record and create a new record.</p>
-<p><a href="#">Contact NHSBSA - MYS (opens in new tab)</a></p>
+<p><a href="/payments/manage-your-service" rel="noreferrer noopener" target="_blank">Contact NHSBSA - MYS (opens in new tab)</a></p>
 {% endset %}
 
 {% block beforeContent %}
@@ -22,5 +22,5 @@
 
 {% block content %}
   {% include "payments/claims/_claim-template.html" %}
-  {% include "payments/_rejected-claims-table-out-of-season-flu.html" %}
+  {% include "payments/tables/_rejected-claims-table-out-of-season-flu.html" %}
 {% endblock %}
