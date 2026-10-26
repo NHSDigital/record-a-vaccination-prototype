@@ -127,6 +127,20 @@ module.exports = [
     "lastName": "Blue"
   },
   {
+    "id": "7863542190631",
+    "email": "tara.mills@nhs.net",
+    "organisations": [
+      {
+        "id": "FA424",
+        "permissionLevel": "Lead administrator",
+        "status": "Active",
+        "vaccinator": true
+      }
+    ],
+    "firstName": "Tara",
+    "lastName": "Mills"
+  },
+  {
     "id": "64746353",
     "email": "joseph.blue@nhs.net",
     "organisations": [

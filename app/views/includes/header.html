@@ -48,7 +48,7 @@
   }), navigationItems) %}
 
   <!-- Payments -->
-   {% if canShowPayments %}
+   {% if canShowPayments or data.showPaymentsLink %}
   {% set navigationItems = (navigationItems.push({
     href: "/payments/",
     text: "Payments",

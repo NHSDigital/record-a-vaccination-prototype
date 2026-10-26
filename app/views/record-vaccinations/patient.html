@@ -4,8 +4,6 @@
 
 {% set currentSection = "vaccinate" %}
 
-{% set canShowPayments = true %}
-
 {% block beforeContent %}
   {{ backLink({ href: "/record-vaccinations/review-previous" }) }}
 {% endblock %}
@@ -24,12 +22,14 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+      {% if data.showPaymentsLink %}
       {{ notificationBanner({
         heading: {
           html: html,
           element: "p"
         }
       }) }}
+      {% endif %}
 
       {% if nhsNumberKnownError and nhsNumberKnownError.code == "required" %}
         {% set nhsNumberKnownErrorMessage = "Select yes if you have the patient’s NHS number" %}
