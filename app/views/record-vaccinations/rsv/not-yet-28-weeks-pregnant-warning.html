@@ -19,13 +19,12 @@
       {% endif %}
 
       {% set panelHtml %}
-        {% set randomWeeks = (range(1, 27) | random) %}
         <p>
           {{ displayName }} is 
           {% if fullWeeksPregnant is defined and fullWeeksPregnant is not none %}
             {{ fullWeeksPregnant | plural("week") }}
           {% else %}
-            {{ randomWeeks }} week{{ 's' if randomWeeks > 1 }}
+            13 weeks
           {% endif %}
           {% if remainderDaysPregnant is defined and remainderDaysPregnant > 0 %} and {{ remainderDaysPregnant | plural("day") }}{% endif %} pregnant.
         </p>
@@ -50,4 +49,3 @@
     </div>
   </div>
 {% endblock %}
-

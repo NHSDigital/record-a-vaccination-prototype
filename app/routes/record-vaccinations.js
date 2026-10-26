@@ -635,6 +635,10 @@ module.exports = router => {
     const data = req.session.data
     const pregnancyDueDate = dateFromYearMonthDay(data.pregnancyDueDate?.year, data.pregnancyDueDate?.month, data.pregnancyDueDate?.day)
 
+    if (!pregnancyDueDate) {
+      return res.render('record-vaccinations/rsv/not-yet-28-weeks-pregnant-warning')
+    }
+
     // Vaccination date is today
     const vaccinationDate = new Date()
 
@@ -655,6 +659,10 @@ module.exports = router => {
 
     const data = req.session.data
     const pregnancyDueDate = dateFromYearMonthDay(data.pregnancyDueDate?.year, data.pregnancyDueDate?.month, data.pregnancyDueDate?.day)
+
+    if (!pregnancyDueDate) {
+      return res.render('record-vaccinations/pertussis/not-yet-16-weeks-pregnant-warning')
+    }
 
     // Vaccination date is today
     const vaccinationDate = new Date()
