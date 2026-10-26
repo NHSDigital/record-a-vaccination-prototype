@@ -1,11 +1,13 @@
 {% extends 'layout.html' %}
 
 {% set pageName = "Amira Ahmed’s flu vaccination record" %}
-{% set currentSection = "payments" %}
+{% set currentSection = "records" %}
 {% set canShowPayments = true %}
 {% set patientName = "Amira Ahmed" %}
 {% set nhsNumber = "9064821735" %}
 {% set vaccinationDate = "14 October 2026" %}
+{% set fluProduct = "Efluelda (TIV-HD)" %}
+
 
 {% block beforeContent %}
   {{ backLink({

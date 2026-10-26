@@ -3,13 +3,16 @@
 
     <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
+    {# Hide help content if the issue has been resubmitted #}
+    {% if data.status == "rejected" %}
     {{ helpContent | safe }}
+    {% endif %}
 
     {# Hide buttons if issue can not be actioned #}
-    {% if mysService %}
+    {% if mysService and data.status == "rejected" %}
       <div class="nhsuk-button-group">
         {{ button({
-              text: "Register on MYS (Opens in new tab)",
+              text: "Register on MYS (opens in new tab)",
               href: "/payments/manage-your-service",
               attributes: {
                 rel: "noreferrer noopener",

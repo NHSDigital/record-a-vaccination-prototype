@@ -36,7 +36,7 @@
               html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else ( "<span class='nhsuk-hint'>No data</span>" if data.status == "resubmitting" else "1092782")
             },
             {
-              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Resubmitted", colour: "green"}))
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
             }
           ],
           [
@@ -53,7 +53,7 @@
               html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else ( "<span class='nhsuk-hint'>No data</span>" if data.status == "resubmitting" else "1092564")
             },
             {
-              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Resubmitted", colour: "green"}))
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
             }
           ],
           [
@@ -70,11 +70,30 @@
               html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else ( "<span class='nhsuk-hint'>No data</span>" if data.status == "resubmitting" else "9872365")
             },
             {
-              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Resubmitted", colour: "green"}))
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
             }
-          ]
+          ],
+          [
+            {
+              html: "<a href='/payments/records/priya-patel'>Priya Patel</a><br><span class='nhsuk-hint'>9682037415</span>"
+            },
+            {
+              text: "18 Oct 2026"
+            },
+            {
+              text: "RAV-pQ4rS6tU8v"
+            },
+            {
+              html: "<span class='nhsuk-hint'>No data</span>"
+            },
+            {
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
+            }
+          ] if data.childhoodFluResubmitted != "true"
         ]
       }) }}
+
+      {% if data.childhoodFluResubmitted == "true"%}
 
       {{ table({
         caption:  {
@@ -97,9 +116,6 @@
           },
           {
             text: "Status"
-          },
-          {
-            text: "Action"
           }
         ],
         rows: [
@@ -118,10 +134,8 @@
             },
             {
               html: tag({ text: "Rejected", colour: "red"})
-            },
-            {
-              html: "<a href='view-issue?paymentIssue=postcode&status=rejected'>View</a>"
             }
           ]
         ]
       }) }}
+    {% endif %}

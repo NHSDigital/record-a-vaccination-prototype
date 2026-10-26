@@ -27,7 +27,7 @@
               text: "Reason for rejection"
             },
             {
-              text: "Number of records (46)"
+              text: "Number of records"
             },
             {
               text: "Action"
@@ -44,7 +44,8 @@
               {
                 html: "<a href='claims/adult-flu?status=rejected' class='nhsuk-u-margin-right-3'>View</a>"
               }
-            ],
+            ] if data.adultFluResubmitted != "true"
+            ,
             [
               {
                 text: "Not registered for childhood flu vaccinations"
@@ -55,7 +56,8 @@
               {
                 html: "<a href='claims/childhood-flu?status=rejected' class='nhsuk-u-margin-right-3'>View</a>"
               }
-            ],
+            ] if data.childhoodFluResubmitted != "true"
+            ,
             [
               {
                 text: "Not registered for COVID-19 vaccinations"
@@ -66,7 +68,8 @@
               {
                 html: "<a href='claims/covid-19?status=rejected' class='nhsuk-u-margin-right-3'>View</a>"
               }
-            ],
+            ] if data.covid19Resubmitted != "true"
+            ,
             [
               {
                 text: "Flu vaccination given out of season"
@@ -77,7 +80,8 @@
               {
                 html: "<a href='claims/out-of-season-flu?status=rejected' class='nhsuk-u-margin-right-3'>View</a>"
               }
-            ],
+            ]
+            ,
             [
               {
                 text: "Invalid patient postcode"
@@ -87,6 +91,18 @@
               },
               {
                 html: "<a href='claims/invalid-postcode?status=rejected' class='nhsuk-u-margin-right-3'>View</a>"
+              }
+            ]
+            ,
+            [
+              {
+                text: "Patient is not within the age range for product"
+              },
+              {
+                text: "1"
+              },
+              {
+                html: "<a href='claims/patient-outside-age-range?status=rejected' class='nhsuk-u-margin-right-3'>View</a>"
               }
             ]
           ]
@@ -108,10 +124,7 @@
               text: "Reason for rejection"
             },
             {
-              text: "Number of records (14)"
-            },
-            {
-              text: "Status"
+              text: "Number of records"
             },
             {
               text: "Action"
@@ -126,15 +139,10 @@
                 text: "10"
               },
               {
-                html: tag({
-                  text: "Resubmitting",
-                  colour: "yellow"
-                })
-              },
-              {
-                html: "<a href='view-issue?paymentIssue&status=resubmitting' class='nhsuk-u-margin-right-3'>View</a>"
+                html: "<a href='claims/adult-flu?status=resubmitting' class='nhsuk-u-margin-right-3'>View</a>"
               }
-            ],
+            ] if data.adultFluResubmitted == "true"
+            ,
             [
               {
                 text: "Not registered for childhood flu vaccinations"
@@ -143,15 +151,21 @@
                 text: "4"
               },
               {
-                html: tag({
-                  text: "Resubmitted",
-                  colour: "green"
-                })
+                html: "<a href='claims/childhood-flu?status=resubmitted' class='nhsuk-u-margin-right-3'>View</a>"
+              }
+            ] if data.childhoodFluResubmitted == "true"
+            ,
+            [
+              {
+                text: "Not registered for COVID-19 vaccinations"
               },
               {
-                html: "<a href='view-issue?paymentIssue=childhoodFlu&status=resubmitted' class='nhsuk-u-margin-right-3'>View</a>"
+                text: "21"
+              },
+              {
+                html: "<a href='claims/covid-19?status=resubmitted' class='nhsuk-u-margin-right-3'>View</a>"
               }
-            ]
+            ] if data.covid19Resubmitted == "true"
           ]
         }) }}
 
@@ -175,6 +189,8 @@
               }
             ]
           }) }}
+
+          <p>There may be other reasons a claim gets rejected by NHSBSA. Only the most common reasons are listed here.</p>
 
     </div>
   </div>

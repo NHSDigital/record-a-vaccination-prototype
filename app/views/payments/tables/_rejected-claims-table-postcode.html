@@ -36,7 +36,7 @@
               html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else "4637586"
             },
             {
-              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else tag({text: "Resubmitted", colour: "green"})     
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else tag({text: "Accepted", colour: "green"})     
             } 
           ],
           [
@@ -54,7 +54,7 @@
             }
             ,
             {
-              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else tag({text: "Resubmitted", colour: "green"})   
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else tag({text: "Accepted", colour: "green"})   
             } 
           ],
           [
