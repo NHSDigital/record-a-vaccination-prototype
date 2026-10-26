@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% set canShowPayments = true %}
+{% set currentSection = "payments" %}
+
+{# Update these for each page #}
+{# {% set mysService = "N/A" %} #}
+{% set pageName = "Flu vaccination given out of season" %}
+{# {% set resubmitPage = "N/A" %} #}
+{% set helpContent %}
+<h2 class="nhsuk-heading-m nhsuk-u-margin-top-9">What this means</h2>
+<p>NHSBSA does not accept claims for flu vaccinations given outside the dates of the seasonal vaccination programme.</p>
+<p>If a mistake was made when recording the date the vaccination was given, you can delete the record and create a new record.</p>
+<p><a href="#">Contact NHSBSA - MYS (opens in new tab)</a></p>
+{% endset %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% include "payments/claims/_claim-template.html" %}
+  {% include "payments/_rejected-claims-table-adult-flu.html" %}
+{% endblock %}
