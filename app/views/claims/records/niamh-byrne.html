@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Niamh Byrne’s flu vaccination record" %}
+{% set currentSection = "records" %}
+
+{% set patientName = "Niamh Byrne" %}
+{% set nhsNumber = "9873150426" %}
+{% set vaccinationDate = "15 August 2026" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% include "claims/records/_record-template.html" %}
+{% endblock %}

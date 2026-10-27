@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Kian Mahmood’s flu vaccination record" %}
+{% set currentSection = "records" %}
+
+{% set patientName = "Kian Mahmood" %}
+{% set nhsNumber = "9064821735" %}
+{% set vaccinationDate = "14 August 2026" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% include "claims/records/_record-template.html" %}
+{% endblock %}

@@ -1,0 +1,78 @@
+{{ table({
+        caption:  {
+            text: "Claims (3)",
+            size: "m"
+          },
+        classes: "nhsuk-u-margin-top-9",
+        head: [
+          {
+            text: "Name and NHS number"
+          },
+          {
+            text: "Date"
+          },
+          {
+            text: "Deposit ID"
+          },
+          {
+            text: "Claim ID"
+          },
+          {
+            text: "Status"
+          }
+        ],
+        rows: [
+          [
+            {
+              html: "<a href='/claims/records/adele-purple'>Adele Purple</a><br><span class='nhsuk-hint'>9951742954</span>"
+            },
+            {
+              text: "21 Oct 2026"
+            },
+            {
+              text: "RAV-A7m2K9pQ1x"
+            },
+            {
+              html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else "4637586"
+            },
+            {
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else tag({text: "Accepted", colour: "green"})     
+            } 
+          ],
+          [
+            {
+              html: "<a href='/claims/records/aisha-khan'>Aisha Khan</a><br><span class='nhsuk-hint'>9128473650</span>"
+            },
+            {
+              text: "20 Oct 2026"
+            },
+            {
+              html: "RAV-4B8cD2eF6g"
+            },
+            {
+              html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else "9465674"  
+            }
+            ,
+            {
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else tag({text: "Accepted", colour: "green"})   
+            } 
+          ],
+          [
+            {
+              html: "<a href='/claims/records/priya-patel'>Priya Patel</a><br><span class='nhsuk-hint'>9682037415</span>"
+            },
+            {
+              text: "18 Oct 2026"
+            },
+            {
+              text: "RAV-pQ4rS6tU8v"
+            },
+            {
+              html: "<span class='nhsuk-hint'>No data</span>"
+            },
+            {
+              html: tag({ text: "Rejected", colour: "red"})
+            }
+          ]
+        ]
+      }) }}

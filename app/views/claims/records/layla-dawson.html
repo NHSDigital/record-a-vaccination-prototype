@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Layla Dawson’s flu vaccination record" %}
+{% set currentSection = "records" %}
+
+{% set patientName = "Layla Dawson" %}
+{% set nhsNumber = "" %}
+{% set vaccinationDate = "17 August 2026" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% include "claims/records/_record-template.html" %}
+{% endblock %}

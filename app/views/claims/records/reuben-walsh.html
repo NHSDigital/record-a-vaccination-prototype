@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Reuben Walsh’s flu vaccination record" %}
+{% set currentSection = "records" %}
+
+{% set patientName = "Reuben Walsh" %}
+{% set nhsNumber = "9682037415" %}
+{% set vaccinationDate = "18 August 2026" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% include "claims/records/_record-template.html" %}
+{% endblock %}
