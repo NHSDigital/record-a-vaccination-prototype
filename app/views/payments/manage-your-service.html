@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Manage Your Service" %}
+
+{% block header %}
+  {{ header({
+    service: {
+      text: "Manage Your Service"
+    }
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-width-container">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-two-thirds">
+        <h1 class="nhsuk-heading-xl">Manage Your Service</h1>
+
+        <p>I understand that NHSBSA may use and share information I provide in relation to all claims made via this portal with the Department of Health and Social Care (DHSC), NHS England (NHSE) and the NHS Counter Fraud Authority (NHSCFA) for the purposes of the prevention, detection, loss measurement, investigation and prosecution of fraud or any other unlawful activity affecting the NHS.</p>
+
+        <p>
+          <strong>By logging into MYS using your NHS Mail address and password you accept the above statement</strong>
+        </p>
+
+        {{ button({
+            text: "Sign in",
+            type: "button"
+          }) }}
+
+        {% set helpHtml %}
+        <p>Contact the helpdesk on 0300 330 1368 or email<br>
+          <a href="#">mys@nhsbsa.nhs.uk</a>
+        </p>
+        {% endset %}
+
+        {{ details({
+              summaryText: "Need help with signing in?",
+              html: helpHtml
+            }) }}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block footer %}
+  {% set moreInformationHtml %}
+  <p>Find more information about <a href="#">NHS Business Services Authority</a></p>
+  {% endset %}
+
+  {{ footer({
+    columns: 1,
+    meta: {
+      items: [
+        {
+          href: "#",
+          text: "Privacy Policies"
+        },
+        {
+          href: "#",
+          text: "Cookies"
+        },
+        {
+          href: "#",
+          text: "Accessibility"
+        },
+        {
+          href: "#",
+          text: "Email the MYS support team"
+        },
+        {
+          href: "#",
+          text: "call us 0300 330 1368"
+        }
+      ],
+      html: moreInformationHtml
+    },
+    copyright: {
+      text: "Copyright NHS Business Services Authority 2017."
+    }
+  }) }}
+{% endblock %}

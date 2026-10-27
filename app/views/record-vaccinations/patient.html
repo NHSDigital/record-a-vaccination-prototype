@@ -9,8 +9,27 @@
 {% endblock %}
 
 {% block content %}
+
+  {% set html %}
+  <p class="nhsuk-notification-banner__heading">
+    NHSBSA is rejecting claims for vaccinations recorded at Pickfords Pharmacy (FA424).
+  </p>
+  <p class="nhsuk-notification-banner__heading">
+    <a class="nhsuk-notification-banner__link" href="/payments/">Check your payments dashboard</a>
+  </p>
+  {% endset %}
+
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
+
+      {% if data.showPaymentsLink %}
+      {{ notificationBanner({
+        heading: {
+          html: html,
+          element: "p"
+        }
+      }) }}
+      {% endif %}
 
       {% if nhsNumberKnownError and nhsNumberKnownError.code == "required" %}
         {% set nhsNumberKnownErrorMessage = "Select yes if you have the patient’s NHS number" %}
@@ -29,9 +48,9 @@
       {% set resolvedErrorList = [] %}
       {% for error in errorList %}
         {% if error.href == "#nhs-number-known-1" and nhsNumberKnownErrorMessage %}
-          {% set resolvedErrorList = (resolvedErrorList.push({ text: nhsNumberKnownErrorMessage, href: error.href }), resolvedErrorList) %}
+          {% set resolvedErrorList = (resolvedErrorList.push({text: nhsNumberKnownErrorMessage, href: error.href}), resolvedErrorList) %}
         {% elseif error.href == "#nhs-number" and nhsNumberErrorMessage %}
-          {% set resolvedErrorList = (resolvedErrorList.push({ text: nhsNumberErrorMessage, href: error.href }), resolvedErrorList) %}
+          {% set resolvedErrorList = (resolvedErrorList.push({text: nhsNumberErrorMessage, href: error.href}), resolvedErrorList) %}
         {% endif %}
       {% endfor %}
 
@@ -46,7 +65,7 @@
 
         {% set nhsNumberHtml %}
 
-          {{ input({
+        {{ input({
             id: "nhs-number",
             name: "nhsNumber",
             classes: "nhsuk-input--width-10 nhsuk-input--code",
@@ -64,7 +83,6 @@
             }
           }) }}
         {% endset %}
-
 
         {{ radios({
           idPrefix: "nhs-number-known",
@@ -104,4 +122,3 @@
   </div>
 
 {% endblock %}
-

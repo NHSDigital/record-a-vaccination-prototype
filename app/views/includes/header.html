@@ -47,6 +47,15 @@
     active: (currentSection == "home")
   }), navigationItems) %}
 
+  <!-- Payments -->
+   {% if canShowPayments or data.showPaymentsLink %}
+  {% set navigationItems = (navigationItems.push({
+    href: "/payments/",
+    text: "Payments",
+    active: (currentSection == "payments")
+  }), navigationItems) %}
+  {% endif %}
+
   <!-- Pharmacy HQ-specific navigation -->
   {% if currentOrganisation.type === "Pharmacy HQ" %}
     {% set navigationItems = (navigationItems.push({

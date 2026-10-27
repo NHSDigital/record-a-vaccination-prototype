@@ -67,6 +67,14 @@ const SIGN_IN_USERS = [
     orgDescription: 'Pickfords Pharmacy (FA424)'
   },
   {
+    id: '7863542190631',
+    name: 'Tara Mills',
+    email: 'tara.mills@nhs.net',
+    orgId: 'FA424',
+    role: 'Lead administrator',
+    orgDescription: 'Pickfords Pharmacy (FA424)'
+  },
+  {
     id: '1394978032564',
     name: 'Ocean Merritt',
     email: 'ocean.merritt@nhs.net',
@@ -566,6 +574,23 @@ module.exports = (router) => {
     data.currentUserId = '46436346'
     data.currentOrganisationId = 'FA424'
     setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, false)
+    setupBatchesForOrg(data, 'FA424')
+    addRandomUsers(data, 'FA424', 10)
+    addRandomVaccinations(data, 'FA424', 30)
+    res.redirect(getDefaultLandingPath(data, data.currentOrganisationId))
+  })
+
+  // ----------------------------------------------------------------
+  // Preset: Pharmacy Lead Admin with Payments and appointments (Tara Mills, FA424)
+  // ----------------------------------------------------------------
+
+  router.get('/prototype-setup/preset/pharmacy-lead-admin-payments', (req, res) => {
+    resetSession(req)
+    const data = req.session.data
+    data.currentUserId = '7863542190631'
+    data.currentOrganisationId = 'FA424'
+    data.showPaymentsLink = true
+    setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, true)
     setupBatchesForOrg(data, 'FA424')
     addRandomUsers(data, 'FA424', 10)
     addRandomVaccinations(data, 'FA424', 30)

@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% set canShowPayments = true %}
+{% set currentSection = "payments" %}
+
+{# Update these for each page #}
+{% set mysService = "COVID-19 vaccinations" %}
+{% set pageName = "Not registered for " + mysService %}
+{% set resubmitPage = "/payments/resubmit/covid-19" %}
+{% set helpContent %}
+<h2 class="nhsuk-heading-m nhsuk-u-margin-top-9">How to fix this</h2>
+<p>According to NHSBSA, this pharmacy is not registered for the {{ mysService }} service on the MYS portal.</p>
+<p>You need to register on MYS as soon as possible and then return to the payments dashboard to resubmit your claims.</p>
+{% endset %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% include "payments/claims/_claim-template.html" %}
+  {% include "payments/tables/_rejected-claims-table-covid-19.html" %}
+{% endblock %}

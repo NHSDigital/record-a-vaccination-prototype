@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% set canShowPayments = true %}
+{% set currentSection = "payments" %}
+
+{# Update these for each page #}
+{# {% set mysService = "N/A" %} #}
+{% set pageName = "Invalid patient postcode" %}
+{# {% set resubmitPage = "N/A" %} #}
+{% set helpContent %}
+<h2 class="nhsuk-heading-m nhsuk-u-margin-top-9">What this means</h2>
+<p>According to NHSBSA, the patient's postcode is invalid. They therefore cannot accept the claim.</p>
+<p>For more information, <a href="/payments/manage-your-service" rel="noreferrer noopener" target="_blank">contact NHSBSA - MYS (opens in new tab)</a>.</p>
+{% endset %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% include "payments/claims/_claim-template.html" %}
+  {% include "payments/tables/_rejected-claims-table-postcode.html" %}
+{% endblock %}
