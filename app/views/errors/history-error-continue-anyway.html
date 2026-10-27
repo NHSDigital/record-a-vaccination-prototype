@@ -2,29 +2,24 @@
 
 {% set pageName = "We could not get any vaccination history for Jodie Brown" %}
 
-
 {% block beforeContent %}
   {{ backLink({ href: "/record-vaccinations/patient" }) }}
 {% endblock %}
 
 {% set currentSection = "vaccinate" %}
 
-
 {% block content %}
+
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
+      
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-  
-{% from "button/macro.njk" import button %}
-
-{{ button({
-  text: "Continue anyway"
-}) }}
-
+      {{ button({
+        text: "Continue anyway"
+      }) }}
 
     </div>
   </div>
-
 
 {% endblock %}
