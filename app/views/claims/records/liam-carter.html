@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Liam Carter’s flu vaccination record" %}
+{% set currentSection = "records" %}
+
+{% set patientName = "Liam Carter" %}
+{% set nhsNumber = "9374051286" %}
+{% set vaccinationDate = "8 October 2026" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% include "claims/records/_record-template.html" %}
+{% endblock %}

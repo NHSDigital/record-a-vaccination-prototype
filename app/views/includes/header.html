@@ -47,12 +47,12 @@
     active: (currentSection == "home")
   }), navigationItems) %}
 
-  <!-- Payments -->
-   {% if canShowPayments or data.showPaymentsLink %}
+  <!-- Claims -->
+   {% if data.showClaimsLink %}
   {% set navigationItems = (navigationItems.push({
-    href: "/payments/",
-    text: "Payments",
-    active: (currentSection == "payments")
+    href: "/claims/",
+    text: "Claims",
+    active: (currentSection == "claims")
   }), navigationItems) %}
   {% endif %}
 

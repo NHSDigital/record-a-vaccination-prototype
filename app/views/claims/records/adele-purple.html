@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Adele Purple’s flu vaccination record" %}
+{% set currentSection = "records" %}
+
+{% set patientName = "Adele Purple" %}
+{% set nhsNumber = "9951742954" %}
+{% set vaccinationDate = "21 October 2026" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% include "claims/records/_record-template.html" %}
+{% endblock %}

@@ -1,0 +1,162 @@
+{{ table({
+        caption:  {
+            text: "Claims (8)",
+            size: "m"
+          },
+        classes: "nhsuk-u-margin-top-9",
+        head: [
+          {
+            text: "Name and NHS number"
+          },
+          {
+            text: "Date"
+          },
+          {
+            text: "Deposit ID"
+          },
+          {
+            text: "Claim ID"
+          },
+          {
+            text: "Status"
+          }
+        ],
+        rows: [
+          [
+            {
+              html: "<a href='/claims/records/elodie-shaw'>Elodie Shaw</a><br><span class='nhsuk-hint'>9951742954</span>"
+            },
+            {
+              text: "21 Aug 2026"
+            },
+            {
+              text: "RAV-A7m2K9pQ1x"
+            },
+            {
+              html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else ( "<span class='nhsuk-hint'>No data</span>" if data.status == "resubmitting" else "1092782")
+            },
+            {
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
+            }
+          ],
+          [
+            {
+              html: "<a href='/claims/records/idris-ali'>Idris Ali</a><br><span class='nhsuk-hint'>9128473650</span>"
+            },
+            {
+              text: "20 Aug 2026"
+            },
+            {
+              text: "RAV-4B8cD2eF6g"
+            },
+            {
+              html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else ( "<span class='nhsuk-hint'>No data</span>" if data.status == "resubmitting" else "1092564")
+            },
+            {
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
+            }
+          ],
+          [
+            {
+              html: "<a href='/claims/records/poppy-jenkins'>Poppy Jenkins</a><br><span class='nhsuk-hint'>9347162085</span>"
+            },
+            {
+              text: "19 Aug 2026"
+            },
+            {
+              text: "RAV-H3j5K7m9N2"
+            },
+            {
+              html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else ( "<span class='nhsuk-hint'>No data</span>" if data.status == "resubmitting" else "9872365")
+            },
+            {
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
+            }
+          ],
+          [
+            {
+              html: "<a href='/claims/records/reuben-walsh'>Reuben Walsh</a><br><span class='nhsuk-hint'>9682037415</span>"
+            },
+            {
+              text: "18 Aug 2026"
+            },
+            {
+              text: "RAV-pQ4rS6tU8v"
+            },
+            {
+              html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else ( "<span class='nhsuk-hint'>No data</span>" if data.status == "resubmitting" else "9098256")
+            },
+            {
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
+            }
+          ],
+          [
+            {
+              html: "<a href='/claims/records/layla-dawson'>Layla Dawson</a><br><span class='nhsuk-hint'></span>"
+            },
+            {
+              text: "17 Aug 2026"
+            },
+            {
+              text: "RAV-W1x3Y5z7A9"
+            },
+            {
+              html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else ( "<span class='nhsuk-hint'>No data</span>" if data.status == "resubmitting" else "1647834")
+            },
+            {
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
+            }
+          ],
+          [
+            {
+              html: "<a href='/claims/records/toby-fraser'>Toby Fraser</a><br><span class='nhsuk-hint'>9516248037</span>"
+            },
+            {
+              text: "16 Aug 2026"
+            },
+            {
+              text: "RAV-bC2dE4fG6h"
+            },
+            {
+              html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else ( "<span class='nhsuk-hint'>No data</span>" if data.status == "resubmitting" else "9465674")
+            },
+            {
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
+            }
+          ],
+          [
+            {
+              html: "<a href='/claims/records/niamh-byrne'>Niamh Byrne</a><br><span class='nhsuk-hint'>9873150426</span>"
+            },
+            {
+              text: "15 Aug 2026"
+            },
+            {
+              text: "RAV-J8k0L2mN4p"
+            },
+            {
+              html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else ( "<span class='nhsuk-hint'>No data</span>" if data.status == "resubmitting" else "8294657")
+            },
+            {
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
+            }
+          ],
+          [
+            {
+              html: "<a href='/claims/records/kian-mahmood'>Kian Mahmood</a><br><span class='nhsuk-hint'>9064821735</span>"
+            },
+            {
+              text: "14 Aug 2026"
+            },
+            {
+              text: "RAV-qR5sT7uV9w"
+            },
+            {
+              html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else ( "2938932" if data.status == "resubmitting" else "2938932")
+            },
+            {
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Accepted", colour: "green"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
+            }
+          ]
+        ]
+      }) }}

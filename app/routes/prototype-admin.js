@@ -581,15 +581,15 @@ module.exports = (router) => {
   })
 
   // ----------------------------------------------------------------
-  // Preset: Pharmacy Lead Admin with Payments and appointments (Tara Mills, FA424)
+  // Preset: Pharmacy Lead Admin with claims and appointments (Tara Mills, FA424)
   // ----------------------------------------------------------------
 
-  router.get('/prototype-setup/preset/pharmacy-lead-admin-payments', (req, res) => {
+  router.get('/prototype-setup/preset/pharmacy-lead-admin-claims', (req, res) => {
     resetSession(req)
     const data = req.session.data
     data.currentUserId = '7863542190631'
     data.currentOrganisationId = 'FA424'
-    data.showPaymentsLink = true
+    data.showClaimsLink = true
     setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, true)
     setupBatchesForOrg(data, 'FA424')
     addRandomUsers(data, 'FA424', 10)

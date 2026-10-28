@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Priya Patel’s flu vaccination record" %}
+{% set currentSection = "records" %}
+
+{% set patientName = "Priya Patel" %}
+{% set nhsNumber = "9682037415" %}
+{% set vaccinationDate = "18 October 2026" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% include "claims/records/_record-template.html" %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Grace Nguyen’s flu vaccination record" %}
+{% set currentSection = "records" %}
+
+{% set patientName = "Grace Nguyen" %}
+{% set nhsNumber = "9658240137" %}
+{% set vaccinationDate = "7 October 2026" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% include "claims/records/_record-template.html" %}
+{% endblock %}

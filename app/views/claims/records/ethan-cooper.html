@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Ethan Cooper’s flu vaccination record" %}
+{% set currentSection = "records" %}
+
+{% set patientName = "Ethan Cooper" %}
+{% set nhsNumber = "9456021378" %}
+{% set vaccinationDate = "2 October 2026" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "javascript:window.history.back()",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% include "claims/records/_record-template.html" %}
+{% endblock %}
