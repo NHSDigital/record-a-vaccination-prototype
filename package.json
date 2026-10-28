@@ -18,7 +18,7 @@
     "@x-govuk/govuk-prototype-filters": "^2.2.0",
     "accessible-autocomplete": "^3.0.2",
     "nhsuk-frontend": "^10.6.1",
-    "nhsuk-prototype-kit": "^8.5.1"
+    "nhsuk-prototype-kit": "^8.5.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.71.0",
