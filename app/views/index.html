@@ -448,10 +448,34 @@
     ],
     [
     {
-    html: "<a href='/errors/mya-downtime'>There is a temporary problem accessing appointments (MYA is down/API issue)</a>"
+    html: "<a href='/errors/mya-downtime'>There is a temporary problem accessing appointments (catch-all error - to be replaced)</a>"
     },
     {
     text: "When appointments from MYA are not available in RAVS."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/no-appointments-from-mya'>There is a temporary problem fetching appointments</a>"
+    },
+    {
+    text: "When appointments from MYA are not available in RAVS but the user can try again."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/still-no-appointments-from-mya'>There is still a problem fetching appointments</a>"
+    },
+    {
+    text: "When the user has tried again and we still cannot fetch appointments so we direct the user to either record a vaccination or go to Manage your appointments."
+    }
+    ],
+    [
+    {
+    html: "<a href='/errors/appointments-not-available-at-all'>There is an ongoing problem showing appointments</a>"
+    },
+    {
+    text: "When the MYA API is down so we don't show the Appointments page at all when the user logs in."
     }
     ],
     [
