@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "There is still a problem fetching appointments" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p>Go to.</p>
+       <ul class="nhsuk-list nhsuk-list--bullet">
+        <li><a href="/auth/log-in">Record vaccinations</a> to start recording a vaccination</li>
+        <li><a href="/auth/log-in">Manage your appointments (opens in new tab)</a> to view your appointments</li>
+      </ul>
+    
+    </div>
+  </div>
+{% endblock %}
