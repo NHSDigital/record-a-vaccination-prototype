@@ -68,7 +68,7 @@
         {% set insetTextHtml %}
         {# <p>{{ tag({ text: "New", classes: "nhsuk-tag--blue"}) }}</p> #}
         {# <p>You can now use Record a vaccination for MenB vaccinations.</p> #}
-        <p>You can also use Record a vaccination for COVID-19, flu, HPV, MenACWY, MenB, MMR and Td/IPV.</p>
+        <p>You can also use Record a vaccination for {{ vaccinesThatCanBeRequested | sort | formatList }}.</p>
         {% endset %}
 
         {{ insetText({
