@@ -78,7 +78,11 @@
         }) }}
       </form>
 
-      {% if (vaccinesThatCanBeRequested | length) > 0 %}
+      {# Show other 'Advance Service' vaccines that can be added #}
+      {# Only show it Jeremy Blue and Jeremy Blue (Holborn) #}
+      {% if (vaccinesThatCanBeRequested | length) > 0
+        and ((data.currentUserId == "46436346")
+          or (data.currentUserId == "633464144")) %}
 
         {% set detailsHtml %}
           {% set requestableItems = [] %}
