@@ -6,7 +6,7 @@
 
 {% set sites = [] %}
 {% for vaccine in (vaccineStock) %}
-  {% if not (sites | arrayOrStringIncludes(vaccine.siteId)) %}
+  {% if not(sites | arrayOrStringIncludes(vaccine.siteId)) %}
     {% set sites = (sites.push(vaccine.siteId), sites) %}
   {% endif %}
 {% endfor %}
@@ -33,10 +33,10 @@
 
       {% if deactivatedSite %}
         {% set html %}
-          <h3 class="nhsuk-notification-banner__heading">
+        <h3 class="nhsuk-notification-banner__heading">
             Site deactivated
           </h3>
-          <p>{{ (siteName + " has been deactivated.") if siteName else "Site has been deactivated." }}</p>
+        <p>{{ (siteName + " has been deactivated.") if siteName else "Site has been deactivated." }}</p>
         {% endset %}
 
         {{ notificationBanner({
@@ -47,10 +47,10 @@
 
       {% if reactivatedSite %}
         {% set html %}
-          <h3 class="nhsuk-notification-banner__heading">
+        <h3 class="nhsuk-notification-banner__heading">
             Site reactivated
           </h3>
-          <p>{{ (siteName + " has been reactivated.") if siteName else "Site has been reactivated." }}</p>
+        <p>{{ (siteName + " has been reactivated.") if siteName else "Site has been reactivated." }}</p>
         {% endset %}
 
         {{ notificationBanner({
@@ -59,47 +59,46 @@
         }) }}
       {% endif %}
 
-
       <h1 class="nhsuk-heading-l">Vaccines</h1>
 
       <p class="nhsuk-body-l">Add and edit vaccines for your organisation.</p>
 
-      {% if (vaccinesThatCanBeRequested | length) > 0 %}
+      {# Show a message to CPs listing 'Advanced Service' vaccines that they can add #}
+      {# Only show it Jeremy Blue and Jeremy Blue (Holborn) #}
+      {% if (vaccinesThatCanBeRequested | length) > 0
+        and ((data.currentUserId == "46436346")
+          or (data.currentUserId == "633464144")) %}
 
-      {% set insetTextHtml %}
-        <p>{{ tag({ text: "New", classes: "nhsuk-tag--blue"}) }}</p>
-        <p>You can now use Record a vaccination for MenB vaccinations.</p>
+        {% set insetTextHtml %}
+        <p>You can also use Record a vaccination for {{ vaccinesThatCanBeRequested | sort | formatList }} vaccinations.</p>
+        {% endset %}
 
-      {% endset %}
-
-      {{ insetText({
-        html: insetTextHtml,
-        classes: "nhsuk-u-padding-top-1 nhsuk-u-padding-bottom-1 nhsuk-u-margin-top-1 nhsuk-u-margin-bottom-6"
-      }) }}
+        {{ insetText({
+          html: insetTextHtml,
+          classes: "nhsuk-u-padding-top-1 nhsuk-u-padding-bottom-1 nhsuk-u-margin-top-1 nhsuk-u-margin-bottom-6"
+        }) }}
 
       {% endif %}
 
       {# Only show 'choose site' screen for the following users: 
       Jane Smith, Henry Blue, Phoebe Black, Kaisley Wells #}
-      
-      {% if 
-      (data.currentUserId === "2387441662601") or
-      (data.currentUserId === "16346346361") or
-      (data.currentUserId === "2058253531") or
-      (data.currentUserId === "5960938237423")
-      %}
 
-      {{ button({
-        "text": "Add vaccine",
-        "href": "/vaccines/choose-site"
-      }) }}
+      {% if (data.currentUserId === "2387441662601") 
+        or(data.currentUserId === "16346346361")
+      or(data.currentUserId === "2058253531")
+      or(data.currentUserId === "5960938237423") %}
+
+        {{ button({
+          "text": "Add vaccine",
+          "href": "/vaccines/choose-site"
+        }) }}
 
       {% else %}
 
-      {{ button({
-      "text": "Add vaccine",
-      "href": "/vaccines/choose-vaccine"
-      }) }}
+        {{ button({
+          "text": "Add vaccine",
+          "href": "/vaccines/choose-vaccine"
+        }) }}
 
       {% endif %}
 
@@ -128,19 +127,20 @@
   </div>
 
   {% if (filteredSites | length) > 4 %}
-    {% set filterItems = [{
-      text: "All sites",
-      value: "",
-      selected: true
-    }] %}
+    {% set filterItems = [
+      {
+        text: "All sites",
+        value: "",
+        selected: true
+      }
+    ] %}
 
     {% for siteId in filteredSites %}
       {% set site = currentOrganisation.sites | findById(siteId) %}
       {% set filterItems = (filterItems.push({text: site.name, value: siteId}), filterItems) %}
     {% endfor %}
 
-
-      {{ select({
+    {{ select({
         label: {
           text: "Show"
         },
@@ -151,7 +151,6 @@
       }) }}
   {% endif %}
 
-
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
@@ -161,95 +160,95 @@
 
       {% for siteId in filteredSites %}
 
-        {% set site =  currentOrganisation.sites | findById(siteId) %}
+        {% set site = currentOrganisation.sites | findById(siteId) %}
 
         <div data-vaccine-site="{{ siteId }}">
-        <table class="nhsuk-table nhsuk-u-margin-bottom-2">
-          <caption class="nhsuk-table__caption nhsuk-table__caption--m nhsuk-u-margin-bottom-2">{{ site.name }}</caption>
-          <thead role="rowgroup" class="nhsuk-table__head">
-            <tr role="row">
-              <th role="columnheader" class="" scope="col">
+          <table class="nhsuk-table nhsuk-u-margin-bottom-2">
+            <caption class="nhsuk-table__caption nhsuk-table__caption--m nhsuk-u-margin-bottom-2">{{ site.name }}</caption>
+            <thead role="rowgroup" class="nhsuk-table__head">
+              <tr role="row">
+                <th role="columnheader" class="" scope="col">
                 Vaccine
               </th>
-              <th role="columnheader" class="" scope="col">
+                <th role="columnheader" class="" scope="col">
                 Product
               </th>
-              <th role="columnheader" class="" scope="col">
+                <th role="columnheader" class="" scope="col">
                 Active batches
               </th>
-              <th role="columnheader" class="" scope="col">
-              <th role="columnheader" class="" scope="col">
+                <th role="columnheader" class="" scope="col">
+                  <th role="columnheader" class="" scope="col"></th>
+                </tr>
+              </thead>
+              <tbody class="nhsuk-table__body">
 
-              </th>
-            </tr>
-          </thead>
-          <tbody class="nhsuk-table__body">
+                {% set vaccinesAtSite = [] %}
+                {% for vaccine in (vaccineStock) %}
+                  {% if vaccine.siteId == siteId and not(vaccinesAtSite | arrayOrStringIncludes(vaccine.vaccine)) %}
+                    {% set vaccinesAtSite = (vaccinesAtSite.push(vaccine.vaccine), vaccinesAtSite) %}
+                  {% endif %}
+                {% endfor %}
 
-        {% set vaccinesAtSite = [] %}
-        {% for vaccine in (vaccineStock) %}
-          {% if vaccine.siteId == siteId and not (vaccinesAtSite | arrayOrStringIncludes(vaccine.vaccine)) %}
-            {% set vaccinesAtSite = (vaccinesAtSite.push(vaccine.vaccine), vaccinesAtSite) %}
-          {% endif %}
+                {% for vaccineAtSite in vaccinesAtSite %}
+
+                  {% set vaccineProductsAtSite = [] %}
+                  {% for vaccine in (vaccineStock) %}
+                    {% if vaccine.vaccine == vaccineAtSite and vaccine.siteId == siteId and not(vaccineProductsAtSite | arrayOrStringIncludes(vaccine.vaccineProduct)) %}
+                      {% set vaccineProductsAtSite = (vaccineProductsAtSite.push(vaccine.vaccineProduct), vaccineProductsAtSite) %}
+                    {% endif %}
+                  {% endfor %}
+
+                  {% for vaccineProduct in vaccineProductsAtSite %}
+                    <tr class="nhsuk-table__row">
+                      <td class="nhsuk-table__cell">
+                        {{ (vaccineAtSite ) | capitaliseFirstLetter }}
+                      </td>
+                      <td class="nhsuk-table__cell">
+                        {{ vaccineProduct }}
+                      </td>
+                      <td class="nhsuk-table__cell ">
+                        {% set count = 0 %}
+                        {% set thisVaccine = {} %}
+                        {% for vaccine in vaccineStock %}
+                          {% if (vaccine.siteId == siteId) and (vaccine.vaccine == vaccineAtSite) and (vaccine.vaccineProduct == vaccineProduct) %}
+                            {% set thisVaccine = vaccine %}
+                          {% endif %}
+                        {% endfor %}
+                        {{ thisVaccine.activeBatchesCount | default(0) }}
+                      </td>
+                      <td class="nhsuk-table__cell ">
+                        <div class="nhsuk-u-margin-bottom-1">
+                          <a href="/vaccines/{{ thisVaccine.id }}" class="nhsuk-link">View</a>
+                        </div>
+                      </td>
+                      <td class="nhsuk-table__cell ">
+                        {% if site.status != "closed" %}
+                          <div>
+                            <a href="/vaccines/{{ thisVaccine.id }}/add" class="nhsuk-link">Add&nbsp;batch</a>
+                          </div>
+                        {% endif %}
+                      </td>
+                    </tr>
+                  {% endfor %}
+                {% endfor %}
+              </tbody>
+            </table>
+
+            {% if site.status != "closed" and(filteredSites | length) <= 1 %}
+              {# Don't show anything, because we don't want users to close the last site #}
+            {% elif site.status != "closed" %}
+              <div style="height: 8px;"></div>
+              <p class="nhsuk-body nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-7">No longer using this site? <a href="/vaccines/sites/{{ site.id }}/deactivate" class="nhsuk-link">Deactivate {{ site.name }}</a>
+              </p>
+            {% else %}
+              <div style="height: 8px;"></div>
+              <p class="nhsuk-body nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-7">Using this site again? <a href="/vaccines/sites/{{ site.id }}/reactivate" class="nhsuk-link">Reactivate {{ site.name }}</a>
+              </p>
+            {% endif %}
+          </div>
         {% endfor %}
 
-        {% for vaccineAtSite in vaccinesAtSite %}
-
-          {% set vaccineProductsAtSite = [] %}
-            {% for vaccine in (vaccineStock) %}
-              {% if vaccine.vaccine == vaccineAtSite and vaccine.siteId == siteId and not (vaccineProductsAtSite | arrayOrStringIncludes(vaccine.vaccineProduct)) %}
-                {% set vaccineProductsAtSite = (vaccineProductsAtSite.push(vaccine.vaccineProduct), vaccineProductsAtSite) %}
-              {% endif %}
-            {% endfor %}
-
-
-
-              {% for vaccineProduct in vaccineProductsAtSite %}
-                <tr class="nhsuk-table__row">
-                  <td class="nhsuk-table__cell">
-                    {{ (vaccineAtSite ) | capitaliseFirstLetter }}
-                  </td>
-                  <td class="nhsuk-table__cell">
-                    {{ vaccineProduct }}
-                  </td>
-                  <td class="nhsuk-table__cell ">
-                    {% set count = 0 %}
-                    {% set thisVaccine = {} %}
-                    {% for vaccine in vaccineStock %}
-                      {% if (vaccine.siteId == siteId) and (vaccine.vaccine == vaccineAtSite) and (vaccine.vaccineProduct == vaccineProduct) %}
-                        {% set thisVaccine = vaccine %}
-                      {% endif %}
-                    {% endfor %}
-                    {{ thisVaccine.activeBatchesCount | default(0) }}
-                  </td>
-                  <td class="nhsuk-table__cell ">
-                    <div class="nhsuk-u-margin-bottom-1"><a href="/vaccines/{{ thisVaccine.id }}" class="nhsuk-link">View</a></div>
-                  </td>
-                  <td class="nhsuk-table__cell ">
-                    {% if site.status != "closed" %}
-                      <div><a href="/vaccines/{{ thisVaccine.id }}/add" class="nhsuk-link">Add&nbsp;batch</a></div>
-                    {% endif %}
-                  </td>
-                </tr>
-              {% endfor %}
-            {% endfor %}
-          </tbody>
-        </table>
-
-        {% if site.status != "closed" and (filteredSites | length) <= 1 %}
-        {# Don't show anything, because we don't want users to close the last site #}
-        {% elif site.status != "closed" %}
-          <div style="height: 8px;"></div>
-          <p class="nhsuk-body nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-7">No longer using this site? <a href="/vaccines/sites/{{ site.id }}/deactivate" class="nhsuk-link">Deactivate {{ site.name }}</a></p>
-        {% else %}
-          <div style="height: 8px;"></div>
-          <p class="nhsuk-body nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-7">Using this site again? <a href="/vaccines/sites/{{ site.id }}/reactivate" class="nhsuk-link">Reactivate {{ site.name }}</a></p>
-        {% endif %}
-        </div>
-      {% endfor %}
-
-
+      </div>
     </div>
-  </div>
 
-{% endblock %}
-
+  {% endblock %}
