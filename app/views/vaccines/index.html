@@ -63,18 +63,20 @@
 
       <p class="nhsuk-body-l">Add and edit vaccines for your organisation.</p>
 
-      {% if (vaccinesThatCanBeRequested | length) > 0 %}
+      {# Show a message to CPs listing 'Advance Service' vaccines that they can add #}
+      {# Only show it Jeremy Blue and Jeremy Blue (Holborn) #}
+      {% if (vaccinesThatCanBeRequested | length) > 0
+        and ((data.currentUserId == "46436346")
+          or (data.currentUserId == "633464144")) %}
 
         {% set insetTextHtml %}
-        {# <p>{{ tag({ text: "New", classes: "nhsuk-tag--blue"}) }}</p> #}
-        {# <p>You can now use Record a vaccination for MenB vaccinations.</p> #}
         <p>You can also use Record a vaccination for {{ vaccinesThatCanBeRequested | sort | formatList }}.</p>
         {% endset %}
 
         {{ insetText({
-        html: insetTextHtml,
-        classes: "nhsuk-u-padding-top-1 nhsuk-u-padding-bottom-1 nhsuk-u-margin-top-1 nhsuk-u-margin-bottom-6"
-      }) }}
+          html: insetTextHtml,
+          classes: "nhsuk-u-padding-top-1 nhsuk-u-padding-bottom-1 nhsuk-u-margin-top-1 nhsuk-u-margin-bottom-6"
+        }) }}
 
       {% endif %}
 
