@@ -574,7 +574,7 @@ module.exports = (router) => {
     data.currentUserId = '46436346'
     data.currentOrganisationId = 'FA424'
     setAppointmentsInterfaceForUserOrganisations(data, data.currentUserId, false)
-    setupBatchesForOrg(data, 'FA424')
+    setupBatchesForOrgVaccines(data, 'FA424', ['RSV', 'COVID-19', 'flu'])
     addRandomUsers(data, 'FA424', 10)
     addRandomVaccinations(data, 'FA424', 30)
     res.redirect(getDefaultLandingPath(data, data.currentOrganisationId))
