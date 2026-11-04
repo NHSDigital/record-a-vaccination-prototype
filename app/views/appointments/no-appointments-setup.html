@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Appointments" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+    </div>
+  </div>
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      {% set insetTextHtml %}
+      <p>{{ currentOrganisation.name }} does not have any vaccination appointments. To set up appointments, <a href="https://mya-prototype-11c9c1433d21.herokuapp.com/" target="_blank" rel="noopener noreferrer">sign in to Manage your appointments (opens in new tab)</a>.</p>
+      <p>You can still <a href="/record-vaccinations/patient">record vaccinations</a> today.</p>
+      {% endset %}
+
+      {{ insetText({
+        html: insetTextHtml
+      }) }}
+
+    </div>
+  </div>
+{% endblock %}
