@@ -506,6 +506,58 @@
     }) }}
     {% endset %}
 
+    {% set emptyStatesTabHtml %}
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Scenario",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='appointments/no-appointments-no-mya-account'>No MYA account</a>"
+    },
+    {
+    text: "Appointments page for a non-MYA pharmacy."
+    }
+    ],
+    [
+    {
+    html: "<a href='appointments/no-appointments-setup'>No appointments setup</a>"
+    },
+    {
+    text: "Appointments page for a MYA user who has not set up any appointments."
+    }
+    ],
+    [
+    {
+    html: "<a href='appointments/no-appointments-today'>No appointments today</a>"
+    },
+    {
+    text: "Appointments page for a MYA user who has no appointments today."
+    }
+    ],
+    [
+    {
+    html: "<a href='appointments/no-appointments-yesterday'>No appointments yesterday</a>"
+    },
+    {
+    text: "Previous day appointments page for a MYA user who had no appointments on the previous day."
+    }
+    ]
+    ]
+    }) }}
+    {% endset %}
+
     {{ tabs({
     items: [
     {
@@ -527,6 +579,13 @@
     id: "api-service-errors",
     panel: {
     html: apiErrorsTabHtml
+    }
+    },
+    {
+    label: "Empty states",
+    id: "empty-states",
+    panel: {
+    html: emptyStatesTabHtml
     }
     }
     ]
