@@ -78,7 +78,11 @@
         }) }}
       </form>
 
-      {% if (vaccinesThatCanBeRequested | length) > 0 %}
+      {# Show other 'Advanced Service' vaccines that can be added #}
+      {# Only show it Jeremy Blue and Jeremy Blue (Holborn) #}
+      {% if (vaccinesThatCanBeRequested | length) > 0
+        and ((data.currentUserId == "46436346")
+          or (data.currentUserId == "633464144")) %}
 
         {% set detailsHtml %}
           {% set requestableItems = [] %}
@@ -92,9 +96,7 @@
 
           <form action="/vaccines/enable" method="post">
 
-          <p>You can use Record a vaccination for national COVID-19, flu and MenB vaccinations.</p>
-
-          <p>You'll be paid automatically for national COVID-19 and flu vaccinations by the NHS Business Services Authority (NHSBSA), through Manage Your Service (MYS).</p>
+          <p>You can use Record a vaccination for all vaccination advanced services.</p>
 
             {{ checkboxes({
               name: "vaccinesAdded",

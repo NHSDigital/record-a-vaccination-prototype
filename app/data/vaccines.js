@@ -99,6 +99,7 @@ module.exports = [
   },
   {
     name: "MMR",
+    availableToAllSites: true,
     products: [
       {
         name: "MMRVaXPro",
@@ -160,6 +161,7 @@ module.exports = [
   },
   {
     name: "HPV",
+    availableToAllSites: true,
     products: [
       {
         name: "Gardasil 9",
@@ -230,6 +232,7 @@ module.exports = [
   },
   {
     name: "Td/IPV",
+    availableToAllSites: true,
     products: [
       {
         name: "Revaxis",
@@ -239,6 +242,7 @@ module.exports = [
   },
   {
     name: "MenACWY",
+    availableToAllSites: true,
     products: [
       {
         name: "MenQuadfi",
