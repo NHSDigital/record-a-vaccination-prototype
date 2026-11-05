@@ -1,0 +1,144 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Choose your organisation" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "#"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="#" method="post">
+
+        <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+        {% call fieldset({
+          legend: {
+            text: "Organisations",
+            size: "m",
+            classes: "nhsuk-u-visually-hidden"
+          }
+        }) %}
+
+        {{ input({
+          id: "pharmacy-search",
+          name: "pharmacySearch",
+          type: "search",
+          label: {
+            text: "Search"
+          },
+          classes: "nhsuk-input--width-20",
+          attributes: {
+            "data-module": "app-radios-filter"
+          },
+          formGroup: {
+            classes: "nhsuk-u-margin-bottom-4"
+          }
+        }) }}
+
+        <div class="app-scrollable-container">
+          {{ radios({
+          id: "pharmacy-ids",
+          name: "pharmacyIds",
+          values: data.pharmacyIds,
+          items: [
+            {
+              value: "AA0001",
+              html: "MediCare Pharmacy (AA0001)<br><span class='nhsuk-hint'>28 High Street, N5 1PL</span>"
+            },
+            {
+              value: "AA0002",
+              html: "MediCare Pharmacy (AA0002)<br><span class='nhsuk-hint'>104 Bow Street, London, N12 8PL</span>"
+            },
+            {
+              value: "AA0003",
+              html: "MediCare Pharmacy (AA0003)<br><span class='nhsuk-hint'>99 Flowers Road, London, E12 8PL</span>"
+            },
+            {
+              value: "AA0004",
+              html: "MediCare Pharmacy (AA0004)<br><span class='nhsuk-hint'>12 Church Road, London, W9 1PL</span>"
+            },
+            {
+              value: "AA0005",
+              html: "MediCare Pharmacy (AA0005)<br><span class='nhsuk-hint'>36 Market Street, London, E3 4PL</span>"
+            },
+            {
+              value: "AA0006",
+              html: "MediCare Pharmacy (AA0006)<br><span class='nhsuk-hint'>81 Station Road, London, SE25 6PL</span>"
+            },
+            {
+              value: "AA0007",
+              html: "MediCare Pharmacy (AA0007)<br><span class='nhsuk-hint'>14 Green Lane, London, N16 5PL</span>"
+            },
+            {
+              value: "AA0008",
+              html: "MediCare Pharmacy (AA0008)<br><span class='nhsuk-hint'>52 Oak Street, London, SW2 3PL</span>"
+            },
+            {
+              value: "AA0009",
+              html: "MediCare Pharmacy (AA0009)<br><span class='nhsuk-hint'>7 Victoria Road, London, NW6 2PL</span>"
+            },
+            {
+              value: "AA0010",
+              html: "MediCare Pharmacy (AA0010)<br><span class='nhsuk-hint'>119 High Road, London, N22 8PL</span>"
+            },
+            {
+              value: "AA0011",
+              html: "MediCare Pharmacy (AA0011)<br><span class='nhsuk-hint'>45 Queen Street, London, E17 9PL</span>"
+            },
+            {
+              value: "AA0012",
+              html: "MediCare Pharmacy (AA0012)<br><span class='nhsuk-hint'>63 Park Avenue, London, W4 3PL</span>"
+            },
+            {
+              value: "AA0013",
+              html: "MediCare Pharmacy (AA0013)<br><span class='nhsuk-hint'>22 Bridge Road, London, E6 6PL</span>"
+            },
+            {
+              value: "AA0014",
+              html: "MediCare Pharmacy (AA0014)<br><span class='nhsuk-hint'>88 Grove Road, London, SE9 4PL</span>"
+            },
+            {
+              value: "AA0015",
+              html: "MediCare Pharmacy (AA0015)<br><span class='nhsuk-hint'>31 Elm Street, London, NW10 7PL</span>"
+            },
+            {
+              value: "AA0016",
+              html: "MediCare Pharmacy (AA0016)<br><span class='nhsuk-hint'>76 Kings Road, London, SW11 5PL</span>"
+            },
+            {
+              value: "AA0017",
+              html: "MediCare Pharmacy (AA0017)<br><span class='nhsuk-hint'>18 Station Parade, London, N3 2PL</span>"
+            },
+            {
+              value: "AA0018",
+              html: "MediCare Pharmacy (AA0018)<br><span class='nhsuk-hint'>105 Manor Road, London, E10 6PL</span>"
+            },
+            {
+              value: "AA0019",
+              html: "MediCare Pharmacy (AA0019)<br><span class='nhsuk-hint'>58 Baker Street, London, NW1 6PL</span>"
+            },
+            {
+              value: "AA0020",
+              html: "MediCare Pharmacy (AA0020)<br><span class='nhsuk-hint'>27 Richmond Road, London, W12 8PL</span>"
+            }
+          ]
+        }) }}
+        </div>
+
+        {% endcall %}
+
+        {{ button({
+        text: "Continue"
+      }) }}
+
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
