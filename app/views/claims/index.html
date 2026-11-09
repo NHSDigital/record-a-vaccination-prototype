@@ -14,7 +14,7 @@
       <p class="nhsuk-u-reading-width nhsuk-u-margin-bottom-5">
         This shows claims that NHSBSA has rejected in the past 6 months. It includes rejected claims for all vaccinations, except MenB.
       </p>
-      
+
       {% set paymentIssuesContent %}
 
       {{ table({
@@ -22,6 +22,7 @@
             text: "Rejected claims",
             classes: "nhsuk-u-visually-hidden"
             },
+            responsive: true,
           head: [
             {
               text: "Reason for rejection"
@@ -119,6 +120,7 @@
             text: "Claims",
             classes: "nhsuk-u-visually-hidden"
             },
+            responsive: true,
           head: [
             {
               text: "Reason for rejection"
