@@ -10,25 +10,11 @@
 
 {% block content %}
 
-  {% set html %}
-  <p class="nhsuk-notification-banner__heading">
-    NHSBSA is rejecting claims for vaccinations recorded at Pickfords Pharmacy (FA424).
-  </p>
-  <p class="nhsuk-notification-banner__heading">
-    <a class="nhsuk-notification-banner__link" href="/claims/">Check your claims dashboard </a>
-  </p>
-  {% endset %}
-
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
       {% if data.showClaimsLink %}
-      {{ notificationBanner({
-        heading: {
-          html: html,
-          element: "p"
-        }
-      }) }}
+        {% include "claims/notifications/_3-services.html" %}
       {% endif %}
 
       {% if nhsNumberKnownError and nhsNumberKnownError.code == "required" %}
