@@ -1,7 +1,7 @@
 {{ table({
         caption:  {
-            text: "Claims (4)",
-            size: "m"
+          html: "Claims " + "<strong class='nhsuk-badge'>3</strong>" if data.childhoodFluResubmitted == "true" else "Claims " + "<strong class='nhsuk-badge'>4</strong>",
+          size: "m"
           },
         classes: "nhsuk-u-margin-top-9",
         responsive: true,
@@ -109,11 +109,11 @@
         ]
       }) }}
 
-      {% if data.childhoodFluResubmitted == "true"%}
+{% if data.childhoodFluResubmitted == "true"%}
 
-      {{ table({
+  {{ table({
         caption:  {
-            text: "Rejected for another reason (1)",
+            html: "Claims " + "<strong class='nhsuk-badge'>1</strong>",
             size: "m"
           },
         classes: "nhsuk-u-margin-top-9",
@@ -160,4 +160,4 @@
           ]
         ]
       }) }}
-    {% endif %}
+{% endif %}
