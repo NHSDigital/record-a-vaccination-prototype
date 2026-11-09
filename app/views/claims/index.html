@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Claims for payment" %}
-
-
+{% set pageName = "Rejected claims" %}
 
 {% set currentSection = "claims" %}
 
@@ -13,8 +11,10 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p class="nhsuk-u-margin-bottom-6 nhsuk-u-reading-width">This page shows claims for national flu and COVID-19 vaccinations that NHSBSA is rejecting. It includes data for the past 6 months.</p>
-
+      <p class="nhsuk-u-reading-width nhsuk-u-margin-bottom-5">
+        This shows claims that NHSBSA has rejected in the past 6 months. It includes rejected claims for all vaccinations, except MenB.
+      </p>
+      
       {% set paymentIssuesContent %}
 
       {{ table({
@@ -190,7 +190,7 @@
             ]
           }) }}
 
-          <p class="nhsuk-u-reading-width">There may be other reasons a claim gets rejected by NHSBSA. Only the most common reasons are listed here.</p>
+      <p class="nhsuk-u-reading-width">There may be other reasons a claim gets rejected by NHSBSA. Only the most common reasons are listed here.</p>
 
     </div>
   </div>
