@@ -106,12 +106,36 @@
                 html: "<a href='issues/patient-outside-age-range?status=rejected' class='nhsuk-u-margin-right-3'>View</a>"
               }
             ]
+            ,
+            [
+              {
+                text: "Rejected for multiple reasons"
+              },
+              {
+                text: "1"
+              },
+              {
+                html: "<a href='#' class='nhsuk-u-margin-right-3'>View</a>"
+              }
+            ]
+            ,
+            [
+              {
+                text: "Reason unknown"
+              },
+              {
+                text: "1"
+              },
+              {
+                html: "<a href='#' class='nhsuk-u-margin-right-3'>View</a>"
+              }
+            ]
           ]
         }) }}
 
       {% endset -%}
 
-      {% set resubmittedContent %}
+      {# {% set resubmittedContent %}
 
       <p>Successful resubmission does not guarantee payment.</p>
 
@@ -171,9 +195,11 @@
           ]
         }) }}
 
-      {% endset -%}
+      {% endset -%} #}
 
-      {{ tabs({
+      {{ paymentIssuesContent | safe }}
+
+      {# {{ tabs({
             items: [
             {
               label: "Rejected claims",
@@ -190,9 +216,9 @@
                 }
               }
             ]
-          }) }}
+          }) }} #}
 
-      <p class="nhsuk-u-reading-width">There may be other reasons a claim gets rejected by NHSBSA. Only the most common reasons are listed here.</p>
+      {# <p class="nhsuk-u-reading-width">There may be other reasons a claim gets rejected by NHSBSA. Only the most common reasons are listed here.</p> #}
 
     </div>
   </div>
