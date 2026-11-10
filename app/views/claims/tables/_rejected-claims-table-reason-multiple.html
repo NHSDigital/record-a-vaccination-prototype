@@ -1,0 +1,50 @@
+{{ table({
+        caption:  {
+            html: "Claims " + "<strong class='nhsuk-badge'>1</strong>",
+            size: "m"
+          },
+        classes: "nhsuk-u-margin-top-9",
+        responsive: true,
+        head: [
+          {
+            text: "Name and NHS number"
+          },
+          {
+            text: "Date of vaccination"
+          },
+          {
+            text: "Vaccinator"
+          },
+          {
+            text: "Rejection reasons"
+          },
+          {
+            text: "Deposit ID"
+          },
+          {
+            text: "Status"
+          }
+        ],
+        rows: [
+          [
+            {
+              html: "<a href='/claims/records/amira-ahmed'>Amira Ahmed</a><br><span class='nhsuk-hint'>9064821735</span>"
+            },
+            {
+              text: "14 Oct 2026"
+            },
+            {
+              text: "Nina Hunt"
+            },
+            {
+              html: "<ul><li>Pharmacy not registered on MYS for adult flu vaccinations</li><li>Invalid patient postcode</li></ul>"
+            },
+            {
+              text: "RAV-qR5sT7uV9w"
+            },
+            {
+              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Accepted", colour: "green"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
+            }
+          ]
+        ]
+      }) }}
