@@ -6,6 +6,18 @@
 
 {% block content %}
 
+  {% set html %}
+  <ul>
+    <li>Pharmacy not registered on MYS for adult flu vaccinations</li>
+  </ul>
+  {% endset %}
+
+  {{ notificationBanner({
+    heading: "Resubmissions accepted by NHSBSA",
+    html: html,
+    variant: "success"
+  }) }}
+
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-full">
 
