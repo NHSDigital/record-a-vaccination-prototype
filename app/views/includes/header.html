@@ -51,9 +51,9 @@
    {% if data.showClaimsLink %}
   {% set navigationItems = (navigationItems.push({
     href: "/claims/",
-    html: "Claims" + "<strong class='nhsuk-badge nhsuk-badge--reverse nhsuk-badge--small nhsuk-u-margin-left-2'>
-            <span class='nhsuk-u-visually-hidden'>,: </span>47
-          </strong>",
+    html: "Claims" + "<strong class='nhsuk-badge nhsuk-badge--reverse nhsuk-badge--indicator nhsuk-badge--small nhsuk-u-margin-left-2'>
+  <span class='nhsuk-u-visually-hidden'>New rejected claim</span>
+</strong>",
     active: (currentSection == "claims")
   }), navigationItems) %}
   {% endif %}
