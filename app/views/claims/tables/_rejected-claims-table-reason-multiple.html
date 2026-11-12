@@ -20,9 +20,6 @@
           },
           {
             text: "Deposit ID"
-          },
-          {
-            text: "Status"
           }
         ],
         rows: [
@@ -37,13 +34,10 @@
               text: "Nina Hunt"
             },
             {
-              html: "<ul><li>Pharmacy not registered on MYS for adult flu vaccinations</li><li>Invalid patient postcode</li></ul>"
+              html: "<ul class='nhsuk-list'><li>Pharmacy not registered on MYS for adult flu vaccinations</li><li>Invalid patient postcode</li></ul>"
             },
             {
               text: "RAV-qR5sT7uV9w"
-            },
-            {
-              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Accepted", colour: "green"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
             }
           ]
         ]
