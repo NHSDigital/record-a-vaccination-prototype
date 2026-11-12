@@ -27,7 +27,7 @@
       }) }}
 
       {% set insetTextHtml %}
-      <p>{{ currentOrganisation.name }} did not have any appointments on {{ previousDay | formatDate }}.</p>
+      <p>{{ currentOrganisation.name }} ({{ currentOrganisation.id }}) did not have any appointments on {{ previousDay | formatDate }}.</p>
       {% endset %}
 
       {{ insetText({
