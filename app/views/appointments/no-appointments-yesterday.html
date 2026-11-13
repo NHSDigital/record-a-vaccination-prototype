@@ -3,6 +3,7 @@
 {% set pageName = "Yesterday’s appointments" %}
 
 {% block content %}
+
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
@@ -10,8 +11,7 @@
       <span class="nhsuk-caption-m">{{ previousDay | dayName('long') }}</span>
       <h2 class="nhsuk-heading-m">{{ previousDay | formatDate }}</h2>
 
-      <p class="app-appointments-imported-from">Imported from <a href="https://mya-prototype-11c9c1433d21.herokuapp.com/" target="_blank" rel="noopener noreferrer">Manage your appointments (opens in new tab)</a>
-      </p>
+      <p class="app-appointments-imported-from">Imported from <a href="https://mya-prototype-11c9c1433d21.herokuapp.com/" target="_blank" rel="noopener noreferrer">Manage your appointments (opens in new tab)</a></p>
 
     </div>
   </div>
@@ -36,4 +36,5 @@
 
     </div>
   </div>
+  
 {% endblock %}
