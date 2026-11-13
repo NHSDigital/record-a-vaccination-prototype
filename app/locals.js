@@ -30,8 +30,14 @@ module.exports = function(req, res, next) {
 
     const now = new Date()
     res.locals.today = now.toISOString().substring(0,10)
+    // Display current day
+    // E.g. {{ currentDay | dayName('long') }}
+    // E.g. {{ currentDay | formatDate }}
     res.locals.currentDay = req.query.date || res.locals.today
     const dayInMilliseconds = 86400000
+    // Display previous day
+    // E.g. {{ previousDay | dayName('long') }}
+    // E.g. {{ previousDay | formatDate }}
     res.locals.previousDay = new Date(now.getTime() - dayInMilliseconds).toISOString().substring(0,10)
     const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1)
     res.locals.lastCalendarMonth = `${monthNames[lastMonthDate.getMonth()]} ${lastMonthDate.getFullYear()}`
