@@ -448,7 +448,7 @@
     ],
     [
     {
-    html: "<a href='/errors/mya-downtime'>There is a temporary problem accessing appointments (MYA is down/API issue)</a>"
+    html: "<a href='/errors/mya-downtime'>There is a problem getting appointments</a>"
     },
     {
     text: "When appointments from MYA are not available in RAVS."
@@ -482,6 +482,58 @@
     }) }}
     {% endset %}
 
+    {% set emptyStatesTabHtml %}
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Scenario",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='appointments/no-appointments-no-mya-account'>Pharmacy does not have a MYA account</a>"
+    },
+    {
+    text: "When we display the Appointments page for a pharmacy that does not have a Manage your appointments (MYA) account."
+    }
+    ],
+    [
+    {
+    html: "<a href='appointments/no-appointments-setup'>Pharmacy does not have any appointments set up</a>"
+    },
+    {
+    text: "When we display the Appointments page for a pharmacy that has a Manage your appointments (MYA) account but has not set up any appointments."
+    }
+    ],
+    [
+    {
+    html: "<a href='appointments/no-appointments-today'>Pharmacy has no appointments today</a>"
+    },
+    {
+    text: "When we display the Appointments page for a pharmacy that has no appointments today."
+    }
+    ],
+    [
+    {
+    html: "<a href='appointments/no-appointments-yesterday'>Pharmacy had no appointments yesterday</a>"
+    },
+    {
+    text: "When we display the previous day's Appointments page for a pharmacy that had no appointments on the previous day."
+    }
+    ]
+    ]
+    }) }}
+    {% endset %}
+
     {{ tabs({
     items: [
     {
@@ -503,6 +555,13 @@
     id: "api-service-errors",
     panel: {
     html: apiErrorsTabHtml
+    }
+    },
+    {
+    label: "Empty states",
+    id: "empty-states",
+    panel: {
+    html: emptyStatesTabHtml
     }
     }
     ]
