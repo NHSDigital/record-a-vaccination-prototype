@@ -11,12 +11,24 @@
 
       {% if data.successBanner == "true" %}
 
-      {{ notificationBanner({
-        heading: "Resubmissions sent to NHSBSA",
-        variant: "success"
-      }) }}
+        {% set successBannerHtml %}
+        <ul class="nhsuk-list nhsuk-list--bullet">
+          <li>10 were sent to NHSBSA</li>
+          <li>1 was rejected again and moved to <a href="/claims/issues/invalid-postcode">invalid patient postcode</a>
+          </li>
+        </ul>
+        {% endset %}
 
-    {% endif %}
+        {{ notificationBanner({
+          title: {
+            text: "Resubmission complete"
+          },
+          heading: "11 records were processed",
+          html: successBannerHtml,
+          variant: "success"
+        }) }}
+
+      {% endif %}
 
     </div>
   </div>
@@ -30,17 +42,15 @@
         This shows claims that NHSBSA has rejected in the past 6 months. It includes rejected claims for all vaccinations, except MenB.
       </p>
 
-      {% set paymentIssuesContent %}
-
       {{ table({
           caption: {
-            text: "Rejected claims",
+            text: "Claims",
             classes: "nhsuk-u-visually-hidden"
             },
             responsive: true,
           head: [
             {
-              text: "Reason for rejection"
+              text: "Rejection reason"
             },
             {
               text: "Number of records"
@@ -58,9 +68,9 @@
                 text: "10"
               },
               {
-                html: "<a href='issues/adult-flu?status=rejected' class='nhsuk-u-margin-right-3'>View</a>"
+                html: "<a href='issues/adult-flu?status=rejected' class='nhsuk-u-margin-right-3'>View</a>" if data.adultFluResubmitted != "true" else "Resubmitting"
               }
-            ] if data.adultFluResubmitted != "true"
+            ] if data.successBanner != "true"
             ,
             [
               {
@@ -136,7 +146,7 @@
             ,
             [
               {
-                text: "Reason for rejection unknown"
+                text: "Reason unknown"
               },
               {
                 text: "1"
@@ -147,93 +157,6 @@
             ]
           ]
         }) }}
-
-      {% endset -%}
-
-      {# {% set resubmittedContent %}
-
-      <p>Successful resubmission does not guarantee payment.</p>
-
-      {{ table({
-          caption: {
-            text: "Claims",
-            classes: "nhsuk-u-visually-hidden"
-            },
-            responsive: true,
-          head: [
-            {
-              text: "Reason for rejection"
-            },
-            {
-              text: "Number of records"
-            },
-            {
-              text: "Action"
-            }
-          ],
-          rows: [
-            [
-              {
-                text: "Pharmacy not registered on MYS for adult flu vaccination service"
-              },
-              {
-                text: "10"
-              },
-              {
-                html: "<a href='issues/adult-flu?status=resubmitting' class='nhsuk-u-margin-right-3'>View</a>"
-              }
-            ] if data.adultFluResubmitted == "true"
-            ,
-            [
-              {
-                text: "Pharmacy not registered on MYS for childhood flu vaccinations"
-              },
-              {
-                text: "4"
-              },
-              {
-                html: "<a href='issues/childhood-flu?status=resubmitted' class='nhsuk-u-margin-right-3'>View</a>"
-              }
-            ] if data.childhoodFluResubmitted == "true"
-            ,
-            [
-              {
-                text: "Pharmacy not registered on MYS for COVID-19 vaccinations"
-              },
-              {
-                text: "21"
-              },
-              {
-                html: "<a href='issues/covid-19?status=resubmitted' class='nhsuk-u-margin-right-3'>View</a>"
-              }
-            ] if data.covid19Resubmitted == "true"
-          ]
-        }) }}
-
-      {% endset -%} #}
-
-      {{ paymentIssuesContent | safe }}
-
-      {# {{ tabs({
-            items: [
-            {
-              label: "Rejected claims",
-              id: "rejected-claims",
-              panel: {
-                html: paymentIssuesContent
-                }
-              },
-              {
-                label: "Resubmitted",
-                id: "resubmitted",
-                panel: {
-                  html: resubmittedContent
-                }
-              }
-            ]
-          }) }} #}
-
-      {# <p class="nhsuk-u-reading-width">There may be other reasons a claim gets rejected by NHSBSA. Only the most common reasons are listed here.</p> #}
 
     </div>
   </div>
