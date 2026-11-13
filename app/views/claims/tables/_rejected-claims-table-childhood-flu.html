@@ -17,12 +17,6 @@
           },
           {
             text: "Deposit ID"
-          },
-          {
-            text: "Claim ID"
-          },
-          {
-            text: "Status"
           }
         ],
         rows: [
@@ -38,12 +32,6 @@
             },
             {
               text: "RAV-A7m2K9pQ1x"
-            },
-            {
-              html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else ( "<span class='nhsuk-hint'>No data</span>" if data.status == "resubmitting" else "1092782")
-            },
-            {
-              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
             }
           ],
           [
@@ -58,12 +46,6 @@
             },
             {
               text: "RAV-4B8cD2eF6g"
-            },
-            {
-              html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else ( "<span class='nhsuk-hint'>No data</span>" if data.status == "resubmitting" else "1092564")
-            },
-            {
-              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
             }
           ],
           [
@@ -78,12 +60,6 @@
             },
             {
               text: "RAV-H3j5K7m9N2"
-            },
-            {
-              html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else ( "<span class='nhsuk-hint'>No data</span>" if data.status == "resubmitting" else "9872365")
-            },
-            {
-              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
             }
           ],
           [
@@ -98,12 +74,6 @@
             },
             {
               text: "RAV-pQ4rS6tU8v"
-            },
-            {
-              html: "<span class='nhsuk-hint'>No data</span>"
-            },
-            {
-              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else ( tag({text: "Resubmitting", colour: "yellow"}) if data.status == "resubmitting" else tag({text: "Accepted", colour: "green"}))
             }
           ] if data.childhoodFluResubmitted != "true"
         ]
@@ -129,12 +99,6 @@
           },
           {
             text: "Deposit ID"
-          },
-          {
-            text: "Claim ID"
-          },
-          {
-            text: "Status"
           }
         ],
         rows: [
@@ -150,12 +114,6 @@
             },
             {
               text: "RAV-pQ4rS6tU8v"
-            },
-            {
-              html: "<span class='nhsuk-hint'>No data</span>"
-            },
-            {
-              html: tag({ text: "Rejected", colour: "red"})
             }
           ]
         ]

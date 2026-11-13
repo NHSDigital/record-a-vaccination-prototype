@@ -17,12 +17,6 @@
           },
           {
             text: "Deposit ID"
-          },
-          {
-            text: "Claim ID"
-          },
-          {
-            text: "Status"
           }
         ],
         rows: [
@@ -38,12 +32,6 @@
             },
             {
               text: "RAV-A7m2K9pQ1x"
-            },
-            {
-              html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else "4637586"
-            },
-            {
-              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else tag({text: "Accepted", colour: "green"})     
             } 
           ],
           [
@@ -58,13 +46,6 @@
             },
             {
               html: "RAV-4B8cD2eF6g"
-            },
-            {
-              html: "<span class='nhsuk-hint'>No data</span>" if data.status == "rejected" else "9465674"  
-            }
-            ,
-            {
-              html: tag({ text: "Rejected", colour: "red"}) if data.status == "rejected" else tag({text: "Accepted", colour: "green"})   
             } 
           ],
           [
@@ -79,12 +60,6 @@
             },
             {
               text: "RAV-pQ4rS6tU8v"
-            },
-            {
-              html: "<span class='nhsuk-hint'>No data</span>"
-            },
-            {
-              html: tag({ text: "Rejected", colour: "red"})
             }
           ]
         ]
