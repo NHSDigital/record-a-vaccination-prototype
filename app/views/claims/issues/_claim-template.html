@@ -5,7 +5,7 @@
 
     {# Hide help content if the issue has been resubmitted #}
     {% if data.status == "rejected" %}
-    {{ helpContent | safe }}
+      {{ helpContent | safe }}
     {% endif %}
 
     {# Hide buttons if issue can not be actioned #}
@@ -27,6 +27,15 @@
       </div>
     {% else %}
     {% endif %}
+
+    {# {% call details({summary: "What are deposit and claim IDs?"}) %}
+    <p>A deposit ID is set before RAVS sends the claim to NHSBSA.</p>
+    <p>A claim ID is set when NHSBSA has accepted the claim.</p>
+    {% endcall %} #}
+
+    {% call details({summary: "What is a deposit ID?"}) %}
+    <p>A deposit ID is set before RAVS sends the claim to NHSBSA.</p>
+    {% endcall %}
 
   </div>
 </div>

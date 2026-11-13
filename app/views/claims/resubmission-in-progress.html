@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Your claims are being resubmitted" %}
+
+{% set currentSection = "claims" %}
+
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+      <p class="nhsuk-u-reading-width nhsuk-u-margin-bottom-5">
+        This can take up to a few minutes.
+      </p>
+
+      <p>
+        <a href="/claims/" class="nhsuk-link">Return to claims</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}

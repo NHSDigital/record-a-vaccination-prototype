@@ -1,0 +1,15 @@
+{% set claimsNotificationHtml %}
+<p class="nhsuk-notification-banner__heading">
+    NHSBSA is rejecting claims from {{ currentOrganisation.name }} ({{ currentOrganisation.id }}) because it is not registered on MYS for adult flu vaccinations, childhood flu vaccinations and COVID-19 vaccinations.
+</p>
+<p class="nhsuk-notification-banner__heading">
+    <a class="nhsuk-notification-banner__link" href="/claims/">Check your rejected claims</a>
+</p>
+{% endset %}
+
+{{ notificationBanner({
+    heading: {
+        html: claimsNotificationHtml,
+        element: "p"
+    }
+}) }}

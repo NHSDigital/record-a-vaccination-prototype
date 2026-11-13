@@ -28,8 +28,8 @@ module.exports = {
   consentAndEligibilityDataOptions: ["Consent", "Eligibility", "Estimated due date"],
   vaccinationDataOptions: ["Vaccine type", "Product", "Batch", "Batch expiry date", "Dose sequence", "Dose amount", "Vaccination route", "Vaccination date", "Comments"],
   paymentDataOptions: [
-    {text: "Deposit ID", hint: "Set before we send the claim to NHSBSA"},
-    {text: "Claim ID", hint: "Set when NHSBSA have received the claim"}
+    {text: "Deposit ID", hint: "Set before RAVS sends the claim to NHSBSA"},
+    {text: "Claim ID", hint: "Set when NHSBSA has accepted the claim"}
   ]
 
 }
