@@ -11,20 +11,8 @@
 
       {% if data.successBanner == "true" %}
 
-        {% set successBannerHtml %}
-        <ul class="nhsuk-list nhsuk-list--bullet">
-          <li>10 were sent to NHSBSA</li>
-          <li>1 was rejected again and moved to <a href="/claims/issues/invalid-postcode">invalid patient postcode</a>
-          </li>
-        </ul>
-        {% endset %}
-
         {{ notificationBanner({
-          title: {
-            text: "Resubmission complete"
-          },
-          heading: "11 records were processed",
-          html: successBannerHtml,
+          heading: "Resubmissions sent to NHSBSA",
           variant: "success"
         }) }}
 
@@ -113,7 +101,7 @@
                 text: "Invalid patient postcode"
               },
               {
-                text: "3"
+                text: "3" if data.successBanner != "true" else "4"
               },
               {
                 html: "<a href='issues/invalid-postcode?status=rejected' class='nhsuk-u-margin-right-3'>View</a>"
@@ -142,7 +130,7 @@
               {
                 html: "<a href='issues/reason-multiple?status=rejected' class='nhsuk-u-margin-right-3'>View</a>"
               }
-            ]
+            ] if data.successBanner != "true"
             ,
             [
               {
