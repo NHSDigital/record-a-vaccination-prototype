@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Yesterday’s appointments" %}
+
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+      <span class="nhsuk-caption-m">{{ previousDay | dayName('long') }}</span>
+      <h2 class="nhsuk-heading-m">{{ previousDay | formatDate }}</h2>
+
+      <p class="app-appointments-imported-from">Imported from <a href="https://mya-prototype-11c9c1433d21.herokuapp.com/" target="_blank" rel="noopener noreferrer">Manage your appointments (opens in new tab)</a></p>
+
+    </div>
+  </div>
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      {{ pagination({
+        next: {
+          labelText: "Today",
+          href: "#"
+        }
+      }) }}
+
+      {% set insetTextHtml %}
+      <p>{{ currentOrganisation.name }} ({{ currentOrganisation.id }}) did not have any appointments on {{ previousDay | formatDate }}.</p>
+      {% endset %}
+
+      {{ insetText({
+        html: insetTextHtml
+      }) }}
+
+    </div>
+  </div>
+  
+{% endblock %}
