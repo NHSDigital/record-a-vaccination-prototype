@@ -1,5 +1,38 @@
 module.exports = router => {
 
+  router.get('/clinics/cancel', (req, res) => {
+    const patient = req.session.data.clinicPatients.find(
+      patient => patient.nhsNumber === req.query.nhsNumber
+    )
+
+    if (!patient) {
+      return res.status(404).send('Patient not found')
+    }
+
+    return res.render('clinics/cancel', {
+      patientName: patient.name,
+      nhsNumber: patient.nhsNumber
+    })
+  })
+
+  router.post('/clinics/cancel', (req, res) => {
+    const patient = req.session.data.clinicPatients.find(
+      patient => patient.nhsNumber === req.body.nhsNumber
+    )
+
+    if (!patient) {
+      return res.status(404).send('Patient not found')
+    }
+
+    if (!req.body.cancelReason) {
+      return res.status(400).send('Cancellation reason is required')
+    }
+
+    patient.cancellationReason = req.body.cancelReason
+
+    return res.redirect('/clinics/session#cancelled')
+  })
+
   router.post('/clinics/answer-patient-nhs-number-known', (req, res) => {
     const nhsNumberKnown = req.session.data.nhsNumberKnown
 
