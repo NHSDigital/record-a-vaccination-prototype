@@ -1,0 +1,182 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Set defaults" %}
+
+{% set currentSection = "clinics" %}
+
+{% block beforeContent %}
+
+    {{ backLink({
+        href: "javascript:window.history.back()",
+        text: "Back"
+    }) }}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+            <p>Choose if you want to set a date, location, vaccinator or other defaults that apply to all vaccinations given during this clinic.</p>
+
+            {{ summaryList({
+                rows: [
+                    {
+                    key: {
+                        text: "Clinic name"
+                    },
+                    value: {
+                        html: data.clinicName or "Example clinic name"
+                    },
+                    actions: {
+                        items: [
+                        {
+                            href: "create",
+                            text: "Change",
+                            visuallyHiddenText: "clinic name"
+                        }
+                        ]
+                    }
+                    },
+                    {
+                    key: {
+                        text: "Date"
+                    },
+                    value: {
+                        html: currentDay | formatDate
+                    },
+                    actions: {
+                        items: [
+                        {
+                            href: "#",
+                            text: "Change",
+                            visuallyHiddenText: "clinic date"
+                        }
+                        ]
+                    }
+                    },
+                    {
+                    key: {
+                        text: "Vaccinator"
+                    },
+                    value: {
+                        html: data.vaccinator if data.vaccinator else "<a href='set-vaccinator'>Set vaccinator</a>"
+                    },
+                    actions: {
+                        items: [
+                        {
+                            href: "set-vaccinator",
+                            text: "Change",
+                            visuallyHiddenText: "vaccinator"
+                        },
+                        {
+                            href: "set-defaults?vaccinator",
+                            text: "Clear",
+                            visuallyHiddenText: "vaccinator"
+                        }
+                        ]
+                    } if data.vaccinator
+                    },
+                    {
+                    key: {
+                        text: "Vaccine"
+                    },
+                    value: {
+                        html: data.vaccine if data.vaccine else "<a href='set-vaccine'>Set vaccine</a>"
+                    },
+                    actions: {
+                        items: [
+                        {
+                            href: "set-vaccine",
+                            text: "Change",
+                            visuallyHiddenText: "vaccine"
+                        },
+                        {
+                            href: "set-defaults?vaccine&eligibility&batch&location",
+                            text: "Clear",
+                            visuallyHiddenText: "vaccine"
+                        }
+                        ]
+                    } if data.vaccine
+                    },
+                    {
+                    key: {
+                        text: "Batch"
+                    },
+                    value: {
+                        html: data.batch if data.batch else ("<a href='set-batch'>Set batch</a>" if data.vaccine else "<span class='nhsuk-hint'>Cannot set yet</span>")
+                    },
+                    actions: {
+                        items: [
+                        {
+                            href: "set-batch",
+                            text: "Change",
+                            visuallyHiddenText: "batch"
+                        },
+                        {
+                            href: "set-defaults?batch",
+                            text: "Clear",
+                            visuallyHiddenText: "batch"
+                        }
+                        ]
+                    } if data.batch
+                    },
+                    {
+                    key: {
+                        text: "Eligibility"
+                    },
+                    value: {
+                        html: data.eligibility if data.eligibility else ("<a href='set-eligibility'>Set eligibility</a>" if data.vaccine else "<span class='nhsuk-hint'>Cannot set yet</span>")
+                    },
+                    actions: {
+                        items: [
+                        {
+                            href: "set-eligibility",
+                            text: "Change",
+                            visuallyHiddenText: "eligibility"
+                        },
+                        {
+                            href: "set-defaults?eligibility",
+                            text: "Clear",
+                            visuallyHiddenText: "eligibility"
+                        }
+                        ]
+                    } if data.eligibility
+                    },
+                    {
+                    key: {
+                        text: "Location"
+                    },
+                    value: {
+                        html: data.location if data.location else "<a href='set-location'>Set location</a>"
+                    },
+                    actions: {
+                        items: [
+                        {
+                            href: "set-location",
+                            text: "Change",
+                            visuallyHiddenText: "location"
+                        },
+                        {
+                            href: "set-defaults?location",
+                            text: "Clear",
+                            visuallyHiddenText: "location"
+                        }
+                        ]
+                    } if data.location
+                    } if data.vaccine == "COVID-19"
+                ]
+                }) }}
+
+            {{ button({
+                text: "Continue",
+                href: "/clinics/add-patients"
+            }) }}
+
+        </div>
+    </div>
+
+{% endblock %}
