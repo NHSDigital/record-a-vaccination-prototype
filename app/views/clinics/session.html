@@ -1,23 +1,25 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Hillside Care home - Flu over 75s" %}
+{% set pageName = data.clinicName or "Example clinic name" %}
 
 {% set sessionLocation = "Hillside Care Home" %}
 
 {% set currentSection = "clinics" %}
 
-{% if data.status == "complete" %}
-{% set completedNumber = "48" %}
-{% else %}
-{% set completedNumber = "33" %}
-{% endif %}
+{% set notGivenCount = data.clinicPatients | selectattr("cancellationReason") | list | length %}
+{% set notGivenCount = 12 %}
+
+{% set scheduledCount = (data.clinicPatients | list | length) - notGivenCount %}
+{% set scheduledCount =  0 %}
+
+{% set completedCount = 99 %}
 
 {% block beforeContent %}
 
-{{ backLink({
-href: "javascript:window.history.back()",
-text: "Back"
-}) }}
+    {{ backLink({
+        href: "javascript:window.history.back()",
+        text: "Back"
+    }) }}
 
 {% endblock %}
 
@@ -25,6 +27,21 @@ text: "Back"
 
     <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
+
+            {% set html %}
+
+            <p>5 patients were successfully added</p>
+
+            <p>1 patient was not added, <a href="#issues">view issues</a>
+            </p>
+
+            {% endset %}
+
+            {# {{ notificationBanner({
+                heading: "Patients added",
+                html: html,
+                variant: "success"
+            }) }} #}
 
             <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
@@ -35,42 +52,54 @@ text: "Back"
                         text: "Date"
                     },
                     value: {
-                        text: "30 October 2026"
+                        html: currentDay | formatDate
                     }
                     }
+                    ,
+                    {
+                    key: {
+                        text: "Vaccinator"
+                    },
+                    value: {
+                        html: data.vaccinator
+                    }
+                    } if data.vaccinator
+                    ,
+                    {
+                    key: {
+                        text: "Vaccine"
+                    },
+                    value: {
+                        html: data.vaccine
+                    }
+                    } if data.vaccine   
+                    ,
+                    {
+                    key: {
+                        text: "Batch"
+                    },
+                    value: {
+                        html: data.batch
+                    }
+                    } if data.batch  
+                    ,
+                    {
+                    key: {
+                        text: "Eligibility"
+                    },
+                    value: {
+                        html: data.eligibility
+                    }
+                    } if data.eligibility
                     ,
                     {
                     key: {
                         text: "Location"
                     },
                     value: {
-                        text: sessionLocation
+                        html: data.location
                     }
-                    },
-                    {
-                    key: {
-                        text: "Vaccinator"
-                    },
-                    value: {
-                        text: currentUser.firstName + " " + currentUser.lastName
-                    }
-                    },
-                    {
-                    key: {
-                        text: "Vaccine"
-                    },
-                    value: {
-                        html: "Flu<br>Adjuvanted Trivalent Influenza Vaccine (aTIV)<br>914-151"
-                    }
-                    },
-                    {
-                    key: {
-                        text: "Eligibility"
-                    },
-                    value: {
-                        text: "Resident in a care home"
-                    }
-                    }
+                    } if data.location 
                     
                 ]
                 }) }}
@@ -78,132 +107,99 @@ text: "Back"
         </div>
     </div>
 
-    <div class="nhsuk-grid-row">
+    <ul class="nhsuk-grid-row nhsuk-card-group">
+        <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+            {% call card({
+            heading: {
+                text: completedCount,
+                visuallyHiddenText: "Vaccinations not given",
+                classes: "nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1"
+            }
+            }) %}
+            <a href="#" class="nhsuk-card__link">Completed</a>
+            {% endcall %}
+        </li>
+        <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
+            {% call card({
+            heading: {
+                text: notGivenCount,
+                visuallyHiddenText: "Vaccinations not given",
+                classes: "nhsuk-u-font-size-64 nhsuk-u-margin-bottom-1"
+            }
+            }) %}
+            <a href="#" class="nhsuk-card__link">Not given</a>
+            {% endcall %}
+        </li>
+    </ul>
+
+    {# <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-full">
 
             <div class="nhsuk-button-group">
 
-                {% if data.status == "complete" %}
+                {{ button({
+                    text: "Edit defaults",
+                    variant: "secondary",
+                    href: "set-defaults"
+                }) }}
 
-                {% else %}
+                {{ button({
+                    text: "Add more patients",
+                    variant: "secondary",
+                    href: "/clinics/add-patients"
+                }) }}
 
-                    {{ button({
-                        text: "Edit clinic",
-                        variant: "secondary",
-                        href: "/clinics/create"
-                    }) }}
-
-                    {{ button({
-                        text: "Add patients",
-                        variant: "secondary",
-                        href: "/clinics/add-patients"
-                    }) }}
-
-                {% endif %}
+                {{ button({
+                    text: "Record unlisted patient",
+                    variant: "secondary",
+                    href: "#"
+                }) }}
 
             </div>
 
         </div>
-    </div>
+    </div> #}
 
     <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-full">
 
-            {% set patientActionsContent %}
-
-                <div class="nhsuk-button-group">
-
-                    <a href='/clinics/patient-history'>Record</a>
-
-                    <a href='/clinics/cancel'>Cancel</a>
-
-                </div>
-
-            {% endset -%}
-
             {% set completedActionsContent %}
 
-                    <a href='#'>View record</a>
+            <a href='#'>View record</a>
 
             {% endset -%}
 
             {% set allPatientContent %}
-            {{ table({
-            caption: {
-                text: "Patients",
-                classes: "nhsuk-u-visually-hidden"
-                },
-                head: [
-                    {
-                    text: "Name and NHS number"
-                    },
-                    {
-                    text: "Date of birth"
-                    }
-                    ,
-                    {
-                    text: "Actions"
-                    }
-                ],
-                rows: [
-                    [
-                    {
-                        html: "Jodie Brown <div class='nhsuk-u-secondary-text-colour'>912 312 3123</div>"
-                    },
-                    {
-                        html: "14 April 1940 <div class='nhsuk-u-secondary-text-colour'>86 years old</div>"
-                    },
-                    {
-                        html: patientActionsContent
-                    }
-                    ] if data.patient != "complete"
-                    ,
-                    [
-                    {
-                        html: "Margaret Green <div class='nhsuk-u-secondary-text-colour'>943 876 2109</div>"
-                    },
-                    {
-                        html: "2 September 1943 <div class='nhsuk-u-secondary-text-colour'>83 years old</div>"
-                    },
-                    {
-                        html: patientActionsContent
-                    }
-                    ],
-                    [
-                    {
-                        html: "George Wilson <div class='nhsuk-u-secondary-text-colour'>978 654 3210</div>"
-                    },
-                    {
-                        html: "19 November 1946 <div class='nhsuk-u-secondary-text-colour'>79 years old</div>"
-                    },
-                    {
-                        html: patientActionsContent
-                    }
-                    ],
-                    [
-                    {
-                        html: "Evelyn Carter <div class='nhsuk-u-secondary-text-colour'>621 874 3056</div>"
-                    },
-                    {
-                        html: "7 June 1938 <div class='nhsuk-u-secondary-text-colour'>88 years old</div>"
-                    },
-                    {
-                        html: patientActionsContent
-                    }
-                    ],
-                    [
-                    {
-                        html: "Arthur Bennett <div class='nhsuk-u-secondary-text-colour'>584 207 9163</div>"
-                    },
-                    {
-                        html: "23 January 1945 <div class='nhsuk-u-secondary-text-colour'>81 years old</div>"
-                    },
-                    {
-                        html: patientActionsContent
-                    }
-                    ]
-                ]
-            }) }}
+            <table class="nhsuk-table">
+                <caption class="nhsuk-table__caption nhsuk-u-visually-hidden">Patients</caption>
+                <thead class="nhsuk-table__head">
+                    <tr class="nhsuk-table__row">
+                        <th class="nhsuk-table__header" scope="col">Name and NHS number</th>
+                        <th class="nhsuk-table__header" scope="col">Date of birth</th>
+                        <th class="nhsuk-table__header" scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="nhsuk-table__body">
+                    {% for patient in data.clinicPatients %}
+                        {% if not patient.cancellationReason %}
+                            <tr class="nhsuk-table__row">
+                                <td class="nhsuk-table__cell">{{ patient.name }}
+                                    <div class="nhsuk-u-secondary-text-colour">{{ patient.nhsNumber }}</div>
+                                </td>
+                                <td class="nhsuk-table__cell">{{ patient.dateOfBirth | formatDate }}
+                                    <div class="nhsuk-u-secondary-text-colour">{{ patient.age }} years old</div>
+                                </td>
+                                <td class="nhsuk-table__cell">
+                                    <div class="nhsuk-button-group">
+                                        <a href='/clinics/patient-history'>Record</a>
+                                        <a href='/clinics/cancel?nhsNumber={{ patient.nhsNumber }}'>Not given</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
             {% endset -%}
 
             {% set completedPatientContent %}
@@ -297,68 +293,94 @@ text: "Back"
             {% endset -%}
 
             {% set cancelledPatientContent %}
-            {{ table({
-            caption: {
-                text: "Patients",
-                classes: "nhsuk-u-visually-hidden"
-                },
-                head: [
-                    {
-                    text: "Name and NHS number"
-                    },
-                    {
-                    text: "Date of birth"
-                    }
-                    ,
-                    {
-                    text: "Cancellation reason"
-                    }
-                ],
-                rows: [
-                    [
-                    {
-                        html: "Harriet Wright <div class='nhsuk-u-secondary-text-colour'>245 916 3341</div>"
-                    },
-                    {
-                        html: "12 January 1960 <div class='nhsuk-u-secondary-text-colour'>66 years old</div>"
-                    },
-                    {
-                        html: data.cancelReason or "Consent not given"
-                    }
-                    ]
-                ]
-            }) }}
+
+            <table class="nhsuk-table">
+                <caption class="nhsuk-table__caption nhsuk-u-visually-hidden">Patients</caption>
+                <thead class="nhsuk-table__head">
+                    <tr class="nhsuk-table__row">
+                        <th class="nhsuk-table__header" scope="col">Name and NHS number</th>
+                        <th class="nhsuk-table__header" scope="col">Date of birth</th>
+                        <th class="nhsuk-table__header" scope="col">Vaccination not given reason</th>
+                    </tr>
+                </thead>
+                <tbody class="nhsuk-table__body">
+                    {% for patient in data.clinicPatients %}
+                        {% if patient.cancellationReason %}
+                            <tr class="nhsuk-table__row">
+                                <td class="nhsuk-table__cell">{{ patient.name }}
+                                    <div class="nhsuk-u-secondary-text-colour">{{ patient.nhsNumber }}</div>
+                                </td>
+                                <td class="nhsuk-table__cell">{{ patient.dateOfBirth | formatDate }}
+                                    <div class="nhsuk-u-secondary-text-colour">{{ patient.age }} years old</div>
+                                </td>
+                                <td class="nhsuk-table__cell">
+                                    {{ patient.cancellationReason }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% endset -%}
+
+            {% set patientIssuesContent %}
+
+            <table class="nhsuk-table">
+                <caption class="nhsuk-table__caption nhsuk-u-visually-hidden">Patient issues</caption>
+                <thead class="nhsuk-table__head">
+                    <tr class="nhsuk-table__row">
+                        <th class="nhsuk-table__header" scope="col">NHS number</th>
+                        <th class="nhsuk-table__header" scope="col">Error</th>
+                    </tr>
+                </thead>
+                <tbody class="nhsuk-table__body">
+                    <tr class="nhsuk-table__row">
+                        <td class="nhsuk-table__cell">926283293</td>
+                        <td class="nhsuk-table__cell">NHS number does not contain 10 digits</td>
+                    </tr>
+                </tbody>
+            </table>
+
             {% endset -%}
 
             {{ tabs({
                 items: [
                 {
-                    label: "Scheduled (15)",
+                    label: "Scheduled (" + scheduledCount + ")",
                     id: "patients",
                     panel: {
                     html: allPatientContent
                     }
-                } if data.status!="complete"
+                } if scheduledCount >= 1
                 ,
                 {
-                    label: "Completed (" + completedNumber +")",
+                    label: "Completed (" + completedCount + ")",
                     id: "vaccinated",
                     panel: {
                     html: completedPatientContent
                     }
-                }
+                } if completedCount >= 1
                 ,
                 {
-                    label: "Cancelled (1)",
+                    label: "Not given (" + notGivenCount + ")",
                     id: "cancelled",
                     panel: {
                     html: cancelledPatientContent
+                    }
+                } if notGivenCount >= 1
+                ,
+                {
+                    label: "Issues (1)",
+                    id: "issues",
+                    panel: {
+                    html: patientIssuesContent
                     }
                 }
                 ]
             }) }}
 
-            {{ pagination({
+            {# {{ pagination({
                 next: {
                 href: "#"
                 },
@@ -377,21 +399,14 @@ text: "Back"
                     number: 3
                 }
                 ]
-            }) }}
+            }) }} #}
 
-            {% if data.status == "insession" %}
-
-                {{ button({
-                    text: "End clinic",
-                    href: "?status=complete",
-                    variant: "warning"
-                }) }}
-
-            {% endif %}
-
-            <p>
-                <a href="#" class="nhsuk-link">Print patient list</a>
-            </p>
+            {# 
+            {{ button({
+                text: "End clinic",
+                href: "?status=complete",
+                variant: "warning"
+            }) }} #}
 
         </div>
     </div>
