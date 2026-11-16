@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Where will the vaccination be taking place?" %}
+
+{% set currentSection = "clinics" %}
+
+{% block beforeContent %}
+
+    {{ backLink({
+        href: "javascript:window.history.back()",
+        text: "Back"
+    }) }}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            <form action="set-defaults" method="post" novalidate>
+
+            {{ radios({
+                fieldset: {
+                    legend: {
+                    heading: pageName,
+                    size: "l"
+                    }
+                },
+                idPrefix: "location",
+                name: "location",
+                value: data.location,
+                items: [
+                    {
+                    value: "On site",
+                    text: "On site",
+                    hint: "Includes hospitals, vaccination centres, primary care networks (PCNs), pharmacies, GP surgeries and detained settings"
+                    },
+                    {
+                    value: "Care home",
+                    text: "Care home"
+                    },
+                    {
+                    value: "Housebound patient’s home",
+                    text: "Housebound patient’s home"
+                    },
+                    {
+                    value: "Off-site outreach event",
+                    text: "Off-site outreach event"
+                    }
+                ]
+            }) }}
+
+            {{ button({
+                text: "Continue"
+            }) }}
+
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}
