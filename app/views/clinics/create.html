@@ -6,10 +6,10 @@
 
 {% block beforeContent %}
 
-{{ backLink({
-href: "javascript:window.history.back()",
-text: "Back"
-}) }}
+    {{ backLink({
+        href: "javascript:window.history.back()",
+        text: "Back"
+    }) }}
 
 {% endblock %}
 
@@ -20,20 +20,20 @@ text: "Back"
 
             <form action="set-defaults" method="post" novalidate>
 
-            {{ input({
-                label: {
-                    heading: pageName,
-                    size: "l"
-                },
-                id: "clinicName",
-                name: "clinicName",
-                width: 20,
-                value: data.clinicName
-            }) }}
+                {{ input({
+                    label: {
+                        heading: pageName,
+                        size: "l"
+                    },
+                    id: "clinicName",
+                    name: "clinicName",
+                    width: 20,
+                    value: data.clinicName
+                }) }}
 
-            {{ button({
-                text: "Continue"
-            }) }}
+                {{ button({
+                    text: "Continue"
+                }) }}
 
             </form>
 
