@@ -1,5 +1,6 @@
 const allOrganisations = require('./all-organisations')
 const appointments = require('./appointments')
+const clinicPatients = require('./clinic-patients')
 const featureFlags = require('./feature-flags')
 const organisations = require('./organisations')
 const users = require('./users')
@@ -15,6 +16,7 @@ module.exports = {
   vaccines: vaccines,
   vaccineStock: vaccineStock,
   appointments: appointments,
+  clinicPatients: clinicPatients,
   lists: [],
   nhsNumberKnown: "yes",
   currentUserId: "46436346", // Jeremy Blue
