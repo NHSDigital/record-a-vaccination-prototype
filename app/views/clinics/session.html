@@ -7,12 +7,12 @@
 {% set currentSection = "clinics" %}
 
 {% set notGivenCount = data.clinicPatients | selectattr("cancellationReason") | list | length %}
-{% set notGivenCount = 12 %}
+{# {% set notGivenCount = 12 %} #}
 
 {% set scheduledCount = (data.clinicPatients | list | length) - notGivenCount %}
-{% set scheduledCount =  0 %}
+{# {% set scheduledCount =  0 %} #}
 
-{% set completedCount = 99 %}
+{% set completedCount = 0 %}
 
 {% block beforeContent %}
 
@@ -107,7 +107,7 @@
         </div>
     </div>
 
-    <ul class="nhsuk-grid-row nhsuk-card-group">
+    {# <ul class="nhsuk-grid-row nhsuk-card-group">
         <li class="nhsuk-grid-column-one-quarter nhsuk-card-group__item">
             {% call card({
             heading: {
@@ -130,9 +130,9 @@
             <a href="#" class="nhsuk-card__link">Not given</a>
             {% endcall %}
         </li>
-    </ul>
+    </ul> #}
 
-    {# <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-full">
 
             <div class="nhsuk-button-group">
@@ -158,7 +158,7 @@
             </div>
 
         </div>
-    </div> #}
+    </div>
 
     <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-full">
