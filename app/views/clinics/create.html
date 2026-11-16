@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Create clinic" %}
+{% set pageName = "Clinic name" %}
 
 {% set currentSection = "clinics" %}
 
@@ -18,67 +18,24 @@ text: "Back"
     <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
 
-            <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
-
-            <p>Choose if you want to set a date, location, vaccinator or other defaults that apply to all vaccinations given during this clinic.</p>
+            <form action="set-defaults" method="post" novalidate>
 
             {{ input({
                 label: {
-                    text: "Clinic name"
+                    heading: pageName,
+                    size: "l"
                 },
-                id: "example-with-hint-text",
-                name: "exampleWithHintText",
-                width: 20
-            }) }}
-
-            {{ checkboxes({
-            fieldset: {
-                legend: {
-                text: "Set defaults"
-                }
-            },
-            idPrefix: "example",
-            name: "example",
-            items: [
-                {
-                value: "Date",
-                text: "Date"
-                },
-                {
-                value: "Location",
-                text: "Location"
-                },
-                {
-                value: "Vaccinator",
-                text: "Vaccinator"
-                },
-                {
-                value: "Vaccine",
-                text: "Vaccine"
-                },
-                {
-                value: "Vaccine product",
-                text: "Vaccine product"
-                },
-                {
-                value: "Batch",
-                text: "Batch"
-                },
-                {
-                value: "Eligibility",
-                text: "Eligibility"
-                },
-                {
-                value: "Consent",
-                text: "Consent"
-                }
-            ]
+                id: "clinicName",
+                name: "clinicName",
+                width: 20,
+                value: data.clinicName
             }) }}
 
             {{ button({
-                text: "Continue",
-                href: "/clinics/add-patients"
+                text: "Continue"
             }) }}
+
+            </form>
 
         </div>
     </div>
