@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Cancel" %}
+{% set pageName = "Vaccination not given" %}
 
 {% set currentSection = "clinics" %}
 
@@ -16,7 +16,9 @@ text: "Back"
     <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-full">
 
-            <form action="/clinics/session#cancelled" method="get">
+            <form action="/clinics/cancel" method="post">
+            <input type="hidden" name="nhsNumber" value="{{ nhsNumber }}">
+
             {{ radios({
             fieldset: {
                 legend: {
@@ -24,6 +26,9 @@ text: "Back"
                 size: "l",
                 isPageHeading: true
                 }
+            },
+            hint: {
+                text: "Record why " + patientName + " wasn't vaccinated"
             },
             idPrefix: "cancel-reason",
             name: "cancelReason",
@@ -60,10 +65,16 @@ text: "Back"
             ]
             }) }}
 
-            {{ button({
-                text: "Cancel",
-                variant: "warning"
-            }) }}
+            <div class="nhsuk-button-group">
+
+                {{ button({
+                    text: "Confirm reason"
+                }) }}
+
+                <a href="session" class="nhsuk-link">Cancel</a>
+
+            </div>
+
             </form>
 
         </div>
