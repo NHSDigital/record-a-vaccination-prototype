@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Vaccination not given" %}
+{% set pageName = "Record why " + patientName + " was not vaccinated" %}
 
 {% set currentSection = "clinics" %}
 
@@ -27,19 +27,12 @@ text: "Back"
                 isPageHeading: true
                 }
             },
-            hint: {
-                text: "Record why " + patientName + " wasn't vaccinated"
-            },
             idPrefix: "cancel-reason",
             name: "cancelReason",
             items: [
                 {
-                value: "Consent not given",
-                text: "Consent not given"
-                },
-                {
-                value: "Patient declined vaccination",
-                text: "Patient declined vaccination"
+                value: "Patient did not consent",
+                text: "Patient did not consent"
                 },
                 {
                 value: "Patient unwell",
@@ -70,8 +63,6 @@ text: "Back"
                 {{ button({
                     text: "Confirm reason"
                 }) }}
-
-                <a href="session" class="nhsuk-link">Cancel</a>
 
             </div>
 
