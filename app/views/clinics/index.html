@@ -27,10 +27,12 @@
             {% endset -%}
 
             {% set scheduledClinics = [] %}
-            {% for clinic in data.clinics %}
+            {% for clinic in clinics %}
                 {% if clinic.status == "Scheduled" %}
                     {% set row = [
                         { text: clinic.name },
+                        { text: clinic.date },
+                        { html: clinic.careHome.name + "<br>" + clinic.careHome.address if clinic.careHome else clinic.location },
                         { text: clinic.patientCount },
                         { html: "
                             <a href='/clinics/session' class='nhsuk-u-margin-right-3'>View</a>
@@ -43,10 +45,12 @@
             {% set scheduledClinicsCount = scheduledClinics | length %}
 
             {% set completedClinics = [] %}
-            {% for clinic in data.clinics %}
+            {% for clinic in clinics %}
                 {% if clinic.status == "Completed" %}
                     {% set row = [
                         { text: clinic.name },
+                        { text: clinic.date },
+                        { html: clinic.careHome.name + "<br>" + clinic.careHome.address if clinic.careHome else clinic.location },
                         { text: clinic.patientCount },
                         { html: "
                             <a href='/clinics/session' class='nhsuk-u-margin-right-3'>View</a>
@@ -67,6 +71,12 @@
                 head: [
                     {
                     text: "Name"
+                    },
+                    {
+                    text: "Date"
+                    },
+                    {
+                    text: "Location"
                     },
                     {
                     text: "Patients"
@@ -93,10 +103,16 @@
                     text: "Name"
                     },
                     {
+                    text: "Date"
+                    },
+                    {
+                    text: "Location"
+                    },
+                    {
                     text: "Patients"
                     },
                     {
-                    text: "Action"
+                    text: "Actions"
                     }
                 ],
                 rows: completedClinics

@@ -1,6 +1,16 @@
 module.exports = router => {
 
-  const findCareHome = (data) => data.allOrganisations.find((organisation) => organisation.id === data.careHomeId)
+  const findCareHome = (data, careHomeId = data.careHomeId) => data.allOrganisations.find((organisation) => organisation.id === careHomeId)
+
+  router.get('/clinics', (req, res) => {
+    const data = req.session.data
+    const clinics = data.clinics.map((clinic) => ({
+      ...clinic,
+      careHome: clinic.location === "Care home" ? findCareHome(data, clinic.careHomeId) : undefined
+    }))
+
+    res.render('clinics/index', { clinics })
+  })
 
   router.get('/clinics/set-defaults', (req, res) => {
     const data = req.session.data
