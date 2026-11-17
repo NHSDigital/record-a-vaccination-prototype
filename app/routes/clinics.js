@@ -15,6 +15,22 @@ module.exports = router => {
     })
   })
 
+  router.get('/clinics/patient-history', (req, res, next) => {
+    if (!req.query.nhsNumber) {
+      return next()
+    }
+
+    const patient = req.session.data.clinicPatients.find(
+      patient => patient.nhsNumber === req.query.nhsNumber
+    )
+
+    if (!patient) {
+      return res.status(404).send('Patient not found')
+    }
+
+    return res.render('clinics/patient-history', { patientName: patient.name })
+  })
+
   router.post('/clinics/cancel', (req, res) => {
     const patient = req.session.data.clinicPatients.find(
       patient => patient.nhsNumber === req.body.nhsNumber
