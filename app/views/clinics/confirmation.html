@@ -17,10 +17,10 @@
 
             {{ panel({
                 titleText: pageName,
-                text: "Jodie Brown’s flu record will be sent to their GP."
+                text: patientName + "’s record will be sent to their GP."
             }) }}
 
-            {{ radios({
+            {# {{ radios({
             fieldset: {
                 legend: {
                 text: "What would you like to record now?",
@@ -47,11 +47,11 @@
                 text: "Go to appointments list"
                 } if data.scenario == "appts"
             ]
-            }) }}
+            }) }} #}
 
             {{ button({
-                text: "Continue",
-                href: nextPage
+                text: "Back to clinic list",
+                href: "/clinics/session?#vaccinated"
             }) }}
 
         </div>
