@@ -1,5 +1,14 @@
 module.exports = router => {
 
+  router.get('/clinics/set-defaults', (req, res) => {
+    const data = req.session.data
+    const careHome = data.allOrganisations.find((organisation) => organisation.id === data.careHomeId)
+
+    res.render('clinics/set-defaults', {
+      careHome
+    })
+  })
+
   router.get('/clinics/set-location', (req, res) => {
     const careHomes = req.session.data.allOrganisations.filter((organisation) => organisation.type === "Care home")
 
