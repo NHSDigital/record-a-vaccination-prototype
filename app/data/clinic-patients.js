@@ -6,7 +6,7 @@ module.exports = [
     age: 84,
     status: "Scheduled",
     cancellationReason: "",
-    completed: false
+    completed: true
   },
   {
     name: "Noah Patel",
@@ -15,7 +15,7 @@ module.exports = [
     age: 91,
     status: "Scheduled",
     cancellationReason: "",
-    completed: false
+    completed: true
   },
   {
     name: "Grace Bennett",
