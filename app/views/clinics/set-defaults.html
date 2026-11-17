@@ -116,7 +116,7 @@
                         text: "Batch"
                     },
                     value: {
-                        html: data.batch if data.batch else ("<a href='set-batch'>Set batch</a>" if data.vaccine else "<span class='nhsuk-hint'>Cannot set yet</span>")
+                        html: data.batch if data.batch else ("<a href='set-batch'>Set batch</a>" if data.vaccine else "<span class='nhsuk-hint'>Select a vaccine first</span>")
                     },
                     actions: {
                         items: [
@@ -138,7 +138,7 @@
                         text: "Eligibility"
                     },
                     value: {
-                        html: data.eligibility if data.eligibility else ("<a href='set-eligibility'>Set eligibility</a>" if data.vaccine else "<span class='nhsuk-hint'>Cannot set yet</span>")
+                        html: data.eligibility if data.eligibility else ("<a href='set-eligibility'>Set eligibility</a>" if data.vaccine else "<span class='nhsuk-hint'>Select a vaccine first</span>")
                     },
                     actions: {
                         items: [
