@@ -31,6 +31,41 @@
                     value: data.clinicName
                 }) }}
 
+                {% set existingClinicsHtml %}
+                    {% set clinicItems = [] %}
+                    {% for clinic in data.clinics %}
+                        {% set clinicItems = (clinicItems.push({
+                            value: clinic.id,
+                            text: clinic.name
+                        }), clinicItems) %}
+                    {% endfor %}
+
+                    {{ radios({
+                        idPrefix: "clinic-to-copy",
+                        name: "clinicToCopy",
+                        fieldset: {
+                            legend: {
+                                text: "Select a clinic to copy"
+                            }
+                        },
+                        items: clinicItems
+                    }) }}
+                {% endset %}
+
+                {{ checkboxes({
+                    idPrefix: "copy-existing-clinic",
+                    name: "copyExistingClinic",
+                    items: [
+                        {
+                            value: "yes",
+                            text: "Copy an existing clinic",
+                            conditional: {
+                                html: existingClinicsHtml
+                            }
+                        }
+                    ]
+                }) }}
+
                 {{ button({
                     text: "Continue"
                 }) }}
