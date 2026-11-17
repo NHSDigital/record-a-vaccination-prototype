@@ -15,6 +15,15 @@
 
 {% block content %}
 
+    {% set locationHtml %}
+    {% if data.location == "Care home" and careHome %}
+        {{ careHome.name }}<br>
+        {{ careHome.address }}
+    {% else %}
+        {{ data.location }}
+    {% endif %}
+    {% endset %}
+
     <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
 
@@ -151,7 +160,7 @@
                         text: "Location"
                     },
                     value: {
-                        html: data.location if data.location else "<a href='set-location'>Set location</a>"
+                        html: locationHtml if data.location else "<a href='set-location'>Set location</a>"
                     },
                     actions: {
                         items: [
