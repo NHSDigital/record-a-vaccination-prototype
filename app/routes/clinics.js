@@ -64,7 +64,109 @@ module.exports = router => {
       return res.status(404).send('Patient not found')
     }
 
-    return res.render('clinics/patient-history', { patientName: patient.name })
+    return res.render('clinics/patient-history', {
+      patientName: patient.name,
+      nhsNumber: patient.nhsNumber
+    })
+  })
+
+  router.get('/clinics/consent', (req, res, next) => {
+    if (!req.query.nhsNumber) {
+      return next()
+    }
+
+    const patient = req.session.data.clinicPatients.find(
+      patient => patient.nhsNumber === req.query.nhsNumber
+    )
+
+    if (!patient) {
+      return res.status(404).send('Patient not found')
+    }
+
+    return res.render('clinics/consent', {
+      patientName: patient.name,
+      nhsNumber: patient.nhsNumber
+    })
+  })
+
+  router.post('/clinics/consent', (req, res, next) => {
+    const nhsNumber = req.query.nhsNumber || req.body.nhsNumber
+
+    if (!nhsNumber) {
+      return next()
+    }
+
+    const patient = req.session.data.clinicPatients.find(
+      patient => patient.nhsNumber === nhsNumber
+    )
+
+    if (!patient) {
+      return res.status(404).send('Patient not found')
+    }
+
+    return res.render('clinics/consent', {
+      patientName: patient.name,
+      nhsNumber: patient.nhsNumber
+    })
+  })
+
+  router.get('/clinics/injection-site', (req, res, next) => {
+    if (!req.query.nhsNumber) {
+      return next()
+    }
+
+    const patient = req.session.data.clinicPatients.find(
+      patient => patient.nhsNumber === req.query.nhsNumber
+    )
+
+    if (!patient) {
+      return res.status(404).send('Patient not found')
+    }
+
+    return res.render('clinics/injection-site', {
+      patientName: patient.name,
+      nhsNumber: patient.nhsNumber
+    })
+  })
+
+  router.get('/clinics/check', (req, res, next) => {
+    if (!req.query.nhsNumber) {
+      return next()
+    }
+
+    const patient = req.session.data.clinicPatients.find(
+      patient => patient.nhsNumber === req.query.nhsNumber
+    )
+
+    if (!patient) {
+      return res.status(404).send('Patient not found')
+    }
+
+    return res.render('clinics/check', {
+      patientName: patient.name,
+      nhsNumber: patient.nhsNumber
+    })
+  })
+
+  router.post('/clinics/confirmation', (req, res, next) => {
+    if (!req.body.nhsNumber) {
+      return next()
+    }
+
+    const patient = req.session.data.clinicPatients.find(
+      patient => patient.nhsNumber === req.body.nhsNumber
+    )
+
+    if (!patient) {
+      return res.status(404).send('Patient not found')
+    }
+
+    patient.completed = true
+
+    return res.render('clinics/confirmation', {
+      patientName: patient.name,
+      nhsNumber: patient.nhsNumber
+    })
   })
 
   router.post('/clinics/cancel', (req, res) => {
