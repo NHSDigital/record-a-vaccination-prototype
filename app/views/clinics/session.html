@@ -46,15 +46,18 @@
 
             {% endset %}
 
+            {% if data.successBanner == "true" %}
             {{ notificationBanner({
                 heading: "Patients added",
                 html: html,
                 variant: "success"
             }) }}
+            {% endif %}
 
             <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
             {{ summaryList({
+                classes: "nhsuk-u-margin-bottom-4",
                 rows: [
                     {
                     key: {
@@ -109,37 +112,19 @@
                         html: locationHtml
                     }
                     } if data.location 
+                    ,
+                    {
+                    key: {
+                        text: "Patients"
+                    },
+                    value: {
+                        html: (data.clinicPatients | list | length) + " patients" + "<a class='nhsuk-u-margin-left-3' href='add-patients'>Add more</a> <a class='nhsuk-u-margin-left-3' href='add-patients'>Record&nbsp;single&nbsp;patient</a>"
+                    }
+                    }
                     
                 ]
                 }) }}
-
-        </div>
-    </div>
-
-    <div class="nhsuk-grid-row">
-        <div class="nhsuk-grid-column-full">
-
-            <div class="nhsuk-button-group">
-
-                {{ button({
-                    text: "Edit defaults",
-                    variant: "secondary",
-                    href: "set-defaults"
-                }) }}
-
-                {{ button({
-                    text: "Add patients",
-                    variant: "secondary",
-                    href: "/clinics/add-patients"
-                }) }}
-
-                {{ button({
-                    text: "Record unlisted patient",
-                    variant: "secondary",
-                    href: "#"
-                }) }}
-
-            </div>
+                <p class="nhsuk-u-margin-bottom-5"><a href="set-defaults">Edit clinic defaults</a></p>
 
         </div>
     </div>
