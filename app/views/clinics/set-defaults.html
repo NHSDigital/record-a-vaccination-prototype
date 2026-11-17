@@ -55,14 +55,19 @@
                         text: "Date"
                     },
                     value: {
-                        html: currentDay | formatDate
+                        html: (data.clinicDate | isoDateFromDateInput | govukDate) if data.clinicDate else "<a href='set-date'>Set date</a>"
                     },
                     actions: {
                         items: [
                         {
-                            href: "#",
+                            href: "set-date",
                             text: "Change",
                             visuallyHiddenText: "clinic date"
+                        },
+                        {
+                            href: "set-defaults?clinicDate",
+                            text: "Remove",
+                            visuallyHiddenText: "date"
                         }
                         ]
                     }
