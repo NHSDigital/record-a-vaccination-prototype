@@ -10,8 +10,8 @@
 {% set nextPage = "/clinics/vaccine" %}
 {% endif %}
 
-{% if data.vaccine %}
-{% set nextPage = "/clinics/check-walk-in" %}
+{% if data.clinicDate and data.vaccinator and data.vaccine and data.batch and data.eligibility and data.location %}
+{% set nextPage = "/clinics/consent" %}
 {% endif %}
 
 {% if data.recording == "start" and data.vaccinator and data.vaccine %}
@@ -255,7 +255,10 @@ text: "Back"
         ]
       }) }}
 
-      <form action="{{ nextPage }}" method="post" novalidate>
+      <form action="{{ nextPage }}{% if nhsNumber %}?nhsNumber={{ nhsNumber }}{% endif %}" method="post" novalidate>
+        {% if nhsNumber %}
+          <input type="hidden" name="nhsNumber" value="{{ nhsNumber }}">
+        {% endif %}
         {{ button({
           text: "Continue"
         }) }}
