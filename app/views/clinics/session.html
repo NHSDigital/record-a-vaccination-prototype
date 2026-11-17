@@ -39,7 +39,7 @@
 
             {% set html %}
 
-            <p>5 patients were successfully added</p>
+            <p>20 patients were successfully added</p>
 
             <p>1 patient was not added, <a href="#issues">view issues</a>
             </p>
@@ -153,7 +153,7 @@
                 }) }}
 
                 {{ button({
-                    text: "Add more patients",
+                    text: "Add patients",
                     variant: "secondary",
                     href: "/clinics/add-patients"
                 }) }}
@@ -179,36 +179,39 @@
             {% endset -%}
 
             {% set allPatientContent %}
-            <table class="nhsuk-table">
-                <caption class="nhsuk-table__caption nhsuk-u-visually-hidden">Patients</caption>
-                <thead class="nhsuk-table__head">
-                    <tr class="nhsuk-table__row">
-                        <th class="nhsuk-table__header" scope="col">Name and NHS number</th>
-                        <th class="nhsuk-table__header" scope="col">Date of birth</th>
-                        <th class="nhsuk-table__header" scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="nhsuk-table__body">
-                    {% for patient in data.clinicPatients %}
-                        {% if not patient.cancellationReason %}
-                            <tr class="nhsuk-table__row">
-                                <td class="nhsuk-table__cell">{{ patient.name }}
-                                    <div class="nhsuk-u-secondary-text-colour">{{ patient.nhsNumber }}</div>
-                                </td>
-                                <td class="nhsuk-table__cell">{{ patient.dateOfBirth | formatDate }}
-                                    <div class="nhsuk-u-secondary-text-colour">{{ patient.age }} years old</div>
-                                </td>
-                                <td class="nhsuk-table__cell">
-                                    <div class="nhsuk-button-group">
-                                        <a href='/clinics/patient-history?nhsNumber={{ patient.nhsNumber }}'>Record</a>
-                                        <a href='/clinics/cancel?nhsNumber={{ patient.nhsNumber }}'>Not given</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
-                </tbody>
-            </table>
+            {% if data.patientsAdded == "false" %}
+            {% else %}
+                <table class="nhsuk-table">
+                    <caption class="nhsuk-table__caption nhsuk-u-visually-hidden">Patients</caption>
+                    <thead class="nhsuk-table__head">
+                        <tr class="nhsuk-table__row">
+                            <th class="nhsuk-table__header" scope="col">Name and NHS number</th>
+                            <th class="nhsuk-table__header" scope="col">Date of birth</th>
+                            <th class="nhsuk-table__header" scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="nhsuk-table__body">
+                        {% for patient in data.clinicPatients %}
+                            {% if not patient.cancellationReason %}
+                                <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">{{ patient.name }}
+                                        <div class="nhsuk-u-secondary-text-colour">{{ patient.nhsNumber }}</div>
+                                    </td>
+                                    <td class="nhsuk-table__cell">{{ patient.dateOfBirth | formatDate }}
+                                        <div class="nhsuk-u-secondary-text-colour">{{ patient.age }} years old</div>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                        <div class="nhsuk-button-group">
+                                            <a href='/clinics/patient-history?nhsNumber={{ patient.nhsNumber }}'>Record</a>
+                                            <a href='/clinics/cancel?nhsNumber={{ patient.nhsNumber }}'>Not given</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
             {% endset -%}
 
             {% set completedPatientContent %}
