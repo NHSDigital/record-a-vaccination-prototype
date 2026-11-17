@@ -85,7 +85,7 @@
                         text: "Vaccine"
                     },
                     value: {
-                        html: data.vaccine if data.vaccine else "<a href='set-vaccine'>Set vaccine</a>"
+                        html: data.vaccine + "<br>" + data.vaccineProduct if data.vaccine else "<a href='set-vaccine'>Set vaccine</a>"
                     },
                     actions: {
                         items: [
