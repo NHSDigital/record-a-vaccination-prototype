@@ -39,18 +39,18 @@
 
             {% set html %}
 
-            <p>20 patients were successfully added</p>
+            <p>{{ scheduledCount }} patients were successfully added</p>
 
             <p>1 patient was not added, <a href="#issues">view issues</a>
             </p>
 
             {% endset %}
 
-            {# {{ notificationBanner({
+            {{ notificationBanner({
                 heading: "Patients added",
                 html: html,
                 variant: "success"
-            }) }} #}
+            }) }}
 
             <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
@@ -364,7 +364,7 @@
                     panel: {
                     html: allPatientContent
                     }
-                } if scheduledCount >= 1
+                } if scheduledCount >= 1 and data.patientsAdded != "false"
                 ,
                 {
                     label: "Completed (" + completedCount + ")",
@@ -388,7 +388,7 @@
                     panel: {
                     html: patientIssuesContent
                     }
-                }
+                } if data.patientsAdded != "false"
                 ]
             }) }}
 
