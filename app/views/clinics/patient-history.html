@@ -22,11 +22,11 @@
 {% set nextPage = "/clinics/vaccinator" %}
 {% endif %}
 
-{% if data.recording == "walkin" %}
+{# {% if data.recording == "walkin" %}
 {% set patientName = "Alan Teapot" %}
 {% else %}
 {% set patientName = "Jodie Brown" %}
-{% endif %}
+{% endif %} #}
 
 {% block beforeContent %}
 {{ backLink({
@@ -90,7 +90,7 @@ text: "Back"
       <h2 class="nhsuk-heading-m">Vaccination history</h2>
 
       {% set insetTextHtml %}
-        <p>This shows NHS vaccinations given in England. It includes all vaccinations recorded in RAVS but only some recorded in other systems.</p>
+      <p>This shows NHS vaccinations given in England. It includes all vaccinations recorded in RAVS but only some recorded in other systems.</p>
       {% endset %}
 
       {{ insetText({
