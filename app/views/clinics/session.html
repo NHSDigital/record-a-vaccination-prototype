@@ -151,8 +151,8 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                         <div class="nhsuk-button-group">
-                                            <a href='/clinics/patient-history?nhsNumber={{ patient.nhsNumber }}'>Record</a>
-                                            <a href='/clinics/cancel?nhsNumber={{ patient.nhsNumber }}'>Not given</a>
+                                            <a href='/clinics/patient-history?nhsNumber={{ patient.nhsNumber }}&successBanner'>Record</a>
+                                            <a href='/clinics/cancel?nhsNumber={{ patient.nhsNumber }}&successBanner'>Not given</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -296,7 +296,7 @@
         {{ button({
             text: "End clinic",
             variant: "warning",
-            href: "session?status=complete#vaccinated"
+            href: "session?status=complete&successBanner#vaccinated"
         }) }}
     {% endif %}
 
