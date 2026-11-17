@@ -25,6 +25,15 @@
 
 {% block content %}
 
+    {% set locationHtml %}
+    {% if data.location == "Care home" and careHome %}
+        {{ careHome.name }}<br>
+        {{ careHome.address }}
+    {% else %}
+        {{ data.location }}
+    {% endif %}
+    {% endset %}
+
     <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
 
@@ -70,7 +79,7 @@
                         text: "Vaccine"
                     },
                     value: {
-                        html: data.vaccine
+                        html: data.vaccine + "<br>" + data.vaccineProduct
                     }
                     } if data.vaccine   
                     ,
@@ -97,7 +106,7 @@
                         text: "Location"
                     },
                     value: {
-                        html: data.location
+                        html: locationHtml
                     }
                     } if data.location 
                     
