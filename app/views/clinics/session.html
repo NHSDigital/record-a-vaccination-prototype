@@ -110,19 +110,21 @@
                         text: "Patients"
                     },
                     value: {
-                        html: (data.clinicPatients | list | length) + " patients" + "<a class='nhsuk-u-margin-left-3' href='add-patients'>Add more</a> <a class='nhsuk-u-margin-left-3' href='add-patients'>Record&nbsp;single&nbsp;patient</a>"
+                        html: (data.clinicPatients | list | length) + " patients" + "<a class='nhsuk-u-margin-left-3' href='add-patients'>Add more</a> <a class='nhsuk-u-margin-left-3' href='add-patients'>Record&nbsp;single&nbsp;patient</a>" if data.status != "complete" else (data.clinicPatients | list | length) + " patients"
                     }
-                    }
+                    } 
                     
                 ]
                 }) }}
 
-                <p class="nhsuk-u-margin-bottom-5"><a href="set-defaults">Edit clinic defaults</a></p>
-
+                {% if data.status == "complete" %}
+                {% else %}
+                <p><a href="set-defaults">Edit clinic defaults</a></p>
+                {% endif %}
         </div>
     </div>
 
-    <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-row nhsuk-u-margin-top-5">
         <div class="nhsuk-grid-column-full">
 
             {% set scheduledPatientsContent %}
@@ -288,5 +290,14 @@
 
         </div>
     </div>
+
+    {% if data.status == "complete" %}
+    {% else %}
+        {{ button({
+            text: "End clinic",
+            variant: "warning",
+            href: "session?status=complete#vaccinated"
+        }) }}
+    {% endif %}
 
 {% endblock %}
