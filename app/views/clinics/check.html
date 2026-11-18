@@ -4,12 +4,9 @@
 
 {% if data.scenario == "clinics" %}
 {% set currentSection = "clinics" %}
-{% set location = "Hillside Care Home" %}
-{% set eligiblity = "Resident in a care home" %}
 {% elif data.scenario == "appts" %}
 {% set location = currentOrganisation.name %}
 {% set currentSection = "appointments" %}
-{% set eligiblity = "Based on age" %}
 {% endif %}
 
 {% block beforeContent %}
@@ -20,6 +17,19 @@ text: "Back"
 {% endblock %}
 
 {% block content %}
+
+    {% set patientDateOfBirthHtml %}
+        {{ dateOfBirth | govukDate }}<br><div class="nhsuk-u-secondary-text-colour">{{ age }} years old</div>
+    {% endset %}
+
+    {% set locationHtml %}
+    {% if data.location == "Care home" and careHome %}
+        {{ careHome.name }}<br>
+        {{ careHome.address }}
+    {% else %}
+        {{ data.location }}
+    {% endif %}
+    {% endset %}
 
     <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
@@ -52,7 +62,7 @@ text: "Back"
                             text: "Date of birth"
                         },
                         value: {
-                            html: "14 April 1940 <br>(86 years old)"
+                            html: patientDateOfBirthHtml
                         },
                         actions: {
                             items: [
@@ -98,7 +108,7 @@ text: "Back"
                             text: "Date"
                         },
                         value: {
-                            text: "Today"
+                            text: (data.clinicDate | isoDateFromDateInput | govukDate)
                         }
                     },
                     {
@@ -106,7 +116,7 @@ text: "Back"
                             text: "Site"
                         },
                         value: {
-                            text: location
+                            html: locationHtml
                         }
                     },
                     {
@@ -131,7 +141,7 @@ text: "Back"
                             text: "Vaccine"
                         },
                         value: {
-                            html: "Flu<br>Adjuvanted Trivalent Influenza Vaccine (aTIV)"
+                            html: data.vaccine + "<br>" + data.vaccineProduct
                         },
                         actions: {
                             items: [
@@ -148,7 +158,7 @@ text: "Back"
                             text: "Batch"
                         },
                         value: {
-                            html: "914-151<br>Expires 19 February 2028"
+                            html: data.batch
                         },
                         actions: {
                             items: [
@@ -165,7 +175,7 @@ text: "Back"
                             text: "Eligibility"
                         },
                         value: {
-                            text: eligiblity
+                            text: data.eligibility
                         },
                         actions: {
                             items: [

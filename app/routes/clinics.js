@@ -146,7 +146,10 @@ module.exports = router => {
 
     return res.render('clinics/check', {
       patientName: patient.name,
-      nhsNumber: patient.nhsNumber
+      nhsNumber: patient.nhsNumber,
+      dateOfBirth: patient.dateOfBirth,
+      age: patient.age,
+      careHome: findCareHome(req.session.data)
     })
   })
 

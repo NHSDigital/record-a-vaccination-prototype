@@ -76,7 +76,7 @@ text: "Back"
               text: "NHS number"
             },
             value: {
-              text: nhsNumber
+              text: nhsNumber | formatNhsNumber if nhsNumber else "912 312 3123"
             }
           }
           ,
