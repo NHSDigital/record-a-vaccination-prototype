@@ -20,7 +20,7 @@
                 text: patientName + "’s record will be sent to their GP." if patientName else "Jodie Brown’s record will be sent to their GP."
             }) }}
 
-            {# {{ radios({
+            {{ radios({
             fieldset: {
                 legend: {
                 text: "What would you like to record now?",
@@ -40,17 +40,12 @@
                 {
                 value: "Go to clinic list",
                 text: "Go to clinic list"
-                } if data.scenario == "clinics"
-                ,
-                {
-                value: "Go to appointments list",
-                text: "Go to appointments list"
-                } if data.scenario == "appts"
+                }
             ]
-            }) }} #}
+            }) }}
 
             {{ button({
-                text: "Back to clinic list",
+                text: "Continue",
                 href: "/clinics/session?#vaccinated"
             }) }}
 
