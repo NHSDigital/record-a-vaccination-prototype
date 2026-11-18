@@ -189,14 +189,14 @@
 
                 {{ button({
                     text: "Continue",
-                    href: "/clinics/session?successBanner"
+                    href: "/clinics/session?successBanner&status"
                 }) }}
 
             {% else %}
 
                 {{ button({
                     text: "Continue",
-                    href: "/clinics/add-patients"
+                    href: "/clinics/add-patients?status"
                 }) }}
 
             {% endif %}

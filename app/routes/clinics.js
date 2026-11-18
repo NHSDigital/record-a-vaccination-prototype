@@ -28,6 +28,39 @@ module.exports = router => {
     })
   })
 
+  router.get('/clinics/session/:clinicId', (req, res) => {
+    const data = req.session.data
+    const clinic = data.clinics.find((item) => item.id === req.params.clinicId)
+
+    if (!clinic) {
+      return res.status(404).send('Clinic not found')
+    }
+
+    const completed = clinic.status === 'Completed'
+    const clinicPatients = data.clinicPatients.map((patient) => ({
+      ...patient,
+      completed: completed || patient.completed
+    }))
+    const clinicDate = new Date(clinic.date)
+
+    return res.render('clinics/session', {
+      data: {
+        ...data,
+        clinicName: clinic.name,
+        clinicDate: {
+          day: clinicDate.getDate(),
+          month: clinicDate.getMonth() + 1,
+          year: clinicDate.getFullYear()
+        },
+        clinicPatientCount: clinic.patientCount,
+        clinicPatients,
+        location: clinic.location,
+        status: completed ? 'complete' : undefined
+      },
+      careHome: findCareHome(data, clinic.careHomeId)
+    })
+  })
+
   router.get('/clinics/set-location', (req, res) => {
     const careHomes = req.session.data.allOrganisations.filter((organisation) => organisation.type === "Care home")
 

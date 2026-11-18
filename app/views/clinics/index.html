@@ -35,8 +35,8 @@
                         { html: clinic.careHome.name + "<br>" + clinic.careHome.address if clinic.careHome else clinic.location },
                         { text: clinic.patientCount },
                         { html: "
-                            <a href='/clinics/session' class='nhsuk-u-margin-right-3'>View</a>
-                            <a href='#'>Edit</a>
+                            <a href='/clinics/session/" + clinic.id + "' class='nhsuk-u-margin-right-3'>View</a>
+                            <a href='/clinics/session/" + clinic.id + "'>Edit</a>
                             " }
                     ] %}
                     {% set _ = scheduledClinics.push(row) %}
@@ -53,7 +53,7 @@
                         { html: clinic.careHome.name + "<br>" + clinic.careHome.address if clinic.careHome else clinic.location },
                         { text: clinic.patientCount },
                         { html: "
-                            <a href='/clinics/session' class='nhsuk-u-margin-right-3'>View</a>
+                            <a href='/clinics/session/" + clinic.id + "' class='nhsuk-u-margin-right-3'>View</a>
                             " }
                     ] %}
                     {% set _ = completedClinics.push(row) %}
