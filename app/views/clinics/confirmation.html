@@ -31,8 +31,8 @@
             name: "exampleHints",
             items: [
                 {
-                value: "Jodie Brown’s next vaccination",
-                text: "Jodie Brown’s next vaccination"
+                value: patientName + "’s next vaccination" if patientName else "Jodie Brown’s next vaccination",
+                text: patientName + "’s next vaccination" if patientName else "Jodie Brown’s next vaccination"
                 },
                 {
                     divider: "or"
