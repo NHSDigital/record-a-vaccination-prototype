@@ -36,6 +36,10 @@ text: "Back"
 {% endblock %}
 
 {% block content %}
+  {% set patientDateOfBirthHtml %}
+    {{ dateOfBirth | govukDate }}<br><div class="nhsuk-u-secondary-text-colour">{{ age }} years old</div>
+  {% endset %}
+
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
@@ -56,7 +60,7 @@ text: "Back"
               text: "Date of birth"
             },
             value: {
-              html: "14 April 1940<br><div class=\"nhsuk-u-secondary-text-colour\">86 years old</div>"
+              html: patientDateOfBirthHtml
             }
           },
           {
@@ -72,7 +76,7 @@ text: "Back"
               text: "NHS number"
             },
             value: {
-              text: "912 312 3123"
+              text: nhsNumber
             }
           }
           ,

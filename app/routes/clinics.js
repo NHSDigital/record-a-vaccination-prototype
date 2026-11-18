@@ -66,7 +66,9 @@ module.exports = router => {
 
     return res.render('clinics/patient-history', {
       patientName: patient.name,
-      nhsNumber: patient.nhsNumber
+      nhsNumber: patient.nhsNumber,
+      dateOfBirth: patient.dateOfBirth,
+      age: patient.age
     })
   })
 
