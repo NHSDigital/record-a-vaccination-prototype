@@ -31,11 +31,20 @@ text: "Back"
             name: "example"
             }) }}
 
+            <div class="nhsuk-button-group">
 
-            {{ button({
-                text: "Continue",
-                href: "/clinics/session"
-            }) }}
+                {{ button({
+                    text: "Add patients",
+                    href: "/clinics/add-patients-loading"
+                }) }}
+
+                {{ button({
+                    text: "Skip",
+                    variant: "secondary",
+                    href: "session?successBanner=false&patientsAdded=false"
+                }) }}
+
+            </div>
 
         </div>
     </div>

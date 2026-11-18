@@ -1,15 +1,15 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Create clinic" %}
+{% set pageName = "Clinic name" %}
 
 {% set currentSection = "clinics" %}
 
 {% block beforeContent %}
 
-{{ backLink({
-href: "javascript:window.history.back()",
-text: "Back"
-}) }}
+    {{ backLink({
+        href: "javascript:window.history.back()",
+        text: "Back"
+    }) }}
 
 {% endblock %}
 
@@ -18,67 +18,59 @@ text: "Back"
     <div class="nhsuk-grid-row">
         <div class="nhsuk-grid-column-two-thirds">
 
-            <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+            <form action="set-defaults" method="post" novalidate>
 
-            <p>Choose if you want to set a date, location, vaccinator or other defaults that apply to all vaccinations given during this clinic.</p>
+                {{ input({
+                    label: {
+                        heading: pageName,
+                        size: "l"
+                    },
+                    id: "clinicName",
+                    name: "clinicName",
+                    width: 20,
+                    value: data.clinicName
+                }) }}
 
-            {{ input({
-                label: {
-                    text: "Clinic name"
-                },
-                id: "example-with-hint-text",
-                name: "exampleWithHintText",
-                width: 20
-            }) }}
+                {% set existingClinicsHtml %}
+                    {% set clinicItems = [] %}
+                    {% for clinic in data.clinics %}
+                        {% set clinicItems = (clinicItems.push({
+                            value: clinic.id,
+                            text: clinic.name
+                        }), clinicItems) %}
+                    {% endfor %}
 
-            {{ checkboxes({
-            fieldset: {
-                legend: {
-                text: "Set defaults"
-                }
-            },
-            idPrefix: "example",
-            name: "example",
-            items: [
-                {
-                value: "Date",
-                text: "Date"
-                },
-                {
-                value: "Location",
-                text: "Location"
-                },
-                {
-                value: "Vaccinator",
-                text: "Vaccinator"
-                },
-                {
-                value: "Vaccine",
-                text: "Vaccine"
-                },
-                {
-                value: "Vaccine product",
-                text: "Vaccine product"
-                },
-                {
-                value: "Batch",
-                text: "Batch"
-                },
-                {
-                value: "Eligibility",
-                text: "Eligibility"
-                },
-                {
-                value: "Consent",
-                text: "Consent"
-                }
-            ]
-            }) }}
+                    {{ radios({
+                        idPrefix: "clinic-to-copy",
+                        name: "clinicToCopy",
+                        fieldset: {
+                            legend: {
+                                text: "Select a clinic to copy"
+                            }
+                        },
+                        items: clinicItems
+                    }) }}
+                {% endset %}
 
-            {{ button({
-                text: "Continue",
-                href: "/clinics/add-patients"
-            }) }}
+                {{ checkboxes({
+                    idPrefix: "copy-existing-clinic",
+                    name: "copyExistingClinic",
+                    items: [
+                        {
+                            value: "yes",
+                            text: "Copy an existing clinic",
+                            conditional: {
+                                html: existingClinicsHtml
+                            }
+                        }
+                    ]
+                }) }}
+
+                {{ button({
+                    text: "Continue"
+                }) }}
+
+            </form>
 
         </div>
     </div>

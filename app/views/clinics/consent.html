@@ -32,8 +32,8 @@ text: "Back"
             name: "exampleHints",
             items: [
                 {
-                value: "Jodie Brown",
-                text: "Jodie Brown"
+                value: patientName or "Jodie Brown",
+                text: patientName or "Jodie Brown"
                 },
                 {
                 divider: "or"
@@ -62,7 +62,7 @@ text: "Back"
 
             {{ button({
                 text: "Continue",
-                href: "injection-site"
+                href: "injection-site?nhsNumber=" + nhsNumber if nhsNumber else "injection-site"
             }) }}
 
         </div>

@@ -51,7 +51,7 @@ text: "Back"
 
             {{ button({
                 text: "Continue",
-                href: "check"
+                href: "check?nhsNumber=" + nhsNumber if nhsNumber else "check"
             }) }}
 
         </div>

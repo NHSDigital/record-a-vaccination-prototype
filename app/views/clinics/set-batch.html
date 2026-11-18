@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Which batch will you be using?" %}
+
+{% set currentSection = "clinics" %}
+
+{% block beforeContent %}
+
+    {{ backLink({
+        href: "javascript:window.history.back()",
+        text: "Back"
+    }) }}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            <form action="set-defaults" method="post" novalidate>
+
+            {{ radios({
+                fieldset: {
+                    legend: {
+                    heading: pageName,
+                    size: "l"
+                    }
+                },
+                idPrefix: "batch",
+                name: "batch",
+                value: data.batch,
+                items: [
+                    {
+                    value: "AB2514",
+                    text: "AB2514",
+                    hint: "Expires 6 March 2027"
+                    }
+                ]
+            }) }}
+
+            {{ button({
+                text: "Continue"
+            }) }}
+
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}

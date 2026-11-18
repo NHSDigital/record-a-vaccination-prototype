@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Where will the vaccination be taking place?" %}
+
+{% set currentSection = "clinics" %}
+
+{% block beforeContent %}
+
+    {{ backLink({
+        href: "javascript:window.history.back()",
+        text: "Back"
+    }) }}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            <form action="set-defaults" method="post" novalidate>
+
+                {% set careHtml %}
+
+        <div class="nhsuk-form-group">
+          <label class="nhsuk-label nhsuk-label--s" for="careHomeId">
+            Care home details
+          </label>
+          <div class="nhsuk-hint" id="care-home-hint">
+            Search by name or ODS code
+          </div>
+          <select class="nhsuk-select" id="care-home" name="careHomeId"
+            aria-describedby="care-home-hint" data-autoselect="" data-display-menu="" data-min-length="" data-show-all-values="" data-show-no-options-found="">
+            <option {% if not data.careHomeId %}selected{% endif %} value=""></option>
+
+          {% set options = [] %}
+
+          {% for careHome in careHomes %}
+            {% set options = (options.push({
+              label: careHome.name + ", " + careHome.address + " (" + careHome.id + ")",
+              value: careHome.id
+            }), options) %}
+          {% endfor %}
+
+          {% for option in (options | sort(false, true, "label")) %}
+            <option value="{{ option.value }}" {% if data.careHomeId == option.value %}selected{%endif %}>{{ option.label }}</option>
+          {% endfor %}
+
+          </select>
+        </div>
+      {% endset -%}
+
+            {{ radios({
+                fieldset: {
+                    legend: {
+                    heading: pageName,
+                    size: "l"
+                    }
+                },
+                idPrefix: "location",
+                name: "location",
+                value: data.location,
+                items: [
+                    {
+                    value: "On site",
+                    text: "On site",
+                    hint: "Includes hospitals, vaccination centres, primary care networks (PCNs), pharmacies, GP surgeries and detained settings"
+                    },
+                    {
+                    value: "Care home",
+                    text: "Care home",
+                        conditional: {
+                            html: careHtml
+                        }
+                    },
+                    {
+                    value: "Housebound patient’s home",
+                    text: "Housebound patient’s home"
+                    },
+                    {
+                    value: "Off-site outreach event",
+                    text: "Off-site outreach event"
+                    }
+                ]
+            }) }}
+
+            {{ button({
+                text: "Continue"
+            }) }}
+
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -17,7 +17,7 @@
 
             {{ panel({
                 titleText: pageName,
-                text: "Jodie Brown’s flu record will be sent to their GP."
+                text: patientName + "’s record will be sent to their GP." if patientName else "Jodie Brown’s record will be sent to their GP."
             }) }}
 
             {{ radios({
@@ -31,8 +31,8 @@
             name: "exampleHints",
             items: [
                 {
-                value: "Jodie Brown’s next vaccination",
-                text: "Jodie Brown’s next vaccination"
+                value: patientName + "’s next vaccination" if patientName else "Jodie Brown’s next vaccination",
+                text: patientName + "’s next vaccination" if patientName else "Jodie Brown’s next vaccination"
                 },
                 {
                     divider: "or"
@@ -40,18 +40,13 @@
                 {
                 value: "Go to clinic list",
                 text: "Go to clinic list"
-                } if data.scenario == "clinics"
-                ,
-                {
-                value: "Go to appointments list",
-                text: "Go to appointments list"
-                } if data.scenario == "appts"
+                }
             ]
             }) }}
 
             {{ button({
                 text: "Continue",
-                href: nextPage
+                href: "/clinics/session?#vaccinated"
             }) }}
 
         </div>
