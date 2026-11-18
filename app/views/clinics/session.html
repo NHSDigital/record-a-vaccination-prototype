@@ -35,7 +35,7 @@
 
             {% set html %}
             <p>{{ scheduledCount }} patients were successfully added</p>
-            <p>1 patient was not added, <a href="#issues">view issues</a></p>
+            {# <p>1 patient was not added, <a href="#issues">view issues</a></p> #}
             {% endset %}
 
             {% if data.successBanner == "true" %}
@@ -277,14 +277,6 @@
                     html: cancelledPatientContent
                     }
                 } if notGivenCount >= 1
-                ,
-                {
-                    label: "Issues (1)",
-                    id: "issues",
-                    panel: {
-                    html: patientIssuesContent
-                    }
-                } if data.patientsAdded != "false"
                 ]
             }) }}
 
