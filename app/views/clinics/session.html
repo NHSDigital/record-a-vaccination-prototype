@@ -110,7 +110,7 @@
                         text: "Patients"
                     },
                     value: {
-                        html: (data.clinicPatients | list | length) + " patients" + "<a class='nhsuk-u-margin-left-3' href='add-patients'>Add more</a> <a class='nhsuk-u-margin-left-3' href='add-patients'>Record&nbsp;single&nbsp;patient</a>" if data.status != "complete" else (data.clinicPatients | list | length) + " patients"
+                        html: (data.clinicPatients | list | length) + " patients" + "<a class='nhsuk-u-margin-left-3' href='add-patients'>Add more</a> <a class='nhsuk-u-margin-left-3' href='patient'>Record&nbsp;single&nbsp;patient</a>" if data.status != "complete" else (data.clinicPatients | list | length) + " patients"
                     }
                     } 
                     

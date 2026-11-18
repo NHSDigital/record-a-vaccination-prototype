@@ -3,14 +3,14 @@
 {% set pageName = "Check and confirm" %}
 
 {% if data.scenario == "clinics" %}
-{% set currentSection = "clinics" %}
+    {% set currentSection = "clinics" %}
 {% elif data.scenario == "appts" %}
-{% set location = currentOrganisation.name %}
-{% set currentSection = "appointments" %}
+    {% set location = currentOrganisation.name %}
+    {% set currentSection = "appointments" %}
 {% endif %}
 
 {% block beforeContent %}
-{{ backLink({
+    {{ backLink({
 href: "javascript:window.history.back()",
 text: "Back"
 }) }}
@@ -19,7 +19,12 @@ text: "Back"
 {% block content %}
 
     {% set patientDateOfBirthHtml %}
-        {{ dateOfBirth | govukDate }}<br><div class="nhsuk-u-secondary-text-colour">{{ age }} years old</div>
+    {% if dateOfBirth %}
+        {{ dateOfBirth | govukDate }}<br>
+        <div class="nhsuk-u-secondary-text-colour">{{ age }} years old</div>
+    {% else %}
+      20 November 1934<br>91 years old
+    {% endif %}
     {% endset %}
 
     {% set locationHtml %}

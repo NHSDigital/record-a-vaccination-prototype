@@ -17,7 +17,7 @@
 
             {{ panel({
                 titleText: pageName,
-                text: patientName + "’s record will be sent to their GP."
+                text: patientName + "’s record will be sent to their GP." if patientName else "Jodie Brown’s record will be sent to their GP."
             }) }}
 
             {# {{ radios({
