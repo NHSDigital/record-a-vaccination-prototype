@@ -185,10 +185,21 @@
                 ]
                 }) }}
 
-            {{ button({
-                text: "Continue",
-                href: "/clinics/add-patients"
-            }) }}
+            {% if data.patientsAdded == "true" %}
+
+                {{ button({
+                    text: "Continue",
+                    href: "/clinics/session?successBanner"
+                }) }}
+
+            {% else %}
+
+                {{ button({
+                    text: "Continue",
+                    href: "/clinics/add-patients"
+                }) }}
+
+            {% endif %}
 
         </div>
     </div>
