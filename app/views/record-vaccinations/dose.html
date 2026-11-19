@@ -62,8 +62,8 @@
             "1st dose",
             "2nd dose",
             "3rd dose",
-            "Pre-school booster",
-            "Teenage booster" 
+            "1st booster",
+            "2nd booster" 
           ] %}
         {% elif data.vaccine == "MMRV" %}
           {% set doseOptions = [
@@ -114,7 +114,7 @@
         {% elif data.vaccine == "HPV" %}
           {% set radiosHint = "Most people aged 24 and under only need a 1st dose of the HPV vaccine" %}
         {% elif data.vaccine == "Td/IPV" %}
-          {% set radiosHint = "Most people aged 24 and under only need the teenage booster dose of the Td/IPV vaccine" %}
+          {% set radiosHint = "Most people aged 24 and under only need the 2nd booster dose of the Td/IPV vaccine" %}
         {% elif data.vaccine == "pneumococcal" %}
           {% set radiosHint = "Most people aged 65 and over only need a 1st dose of the pneumococcal vaccine" %}
         {% elif data.vaccine == "MMRV" %}
