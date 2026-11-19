@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Notification variations" %}
+{% set pageName = "Claims notification variations" %}
 
 {% set currentSection = "claims" %}
 
@@ -11,19 +11,19 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <h2 class="nhsuk-heading-m">Not registered for 1 service</h2>
+      <h2 class="nhsuk-heading-m">Issue with 1 service, lead admin</h2>
 
       {% include "claims/notifications/_1-service.html" %}
 
-      <h2 class="nhsuk-heading-m">Not registered for 2 services</h2>
+      <h2 class="nhsuk-heading-m">Issue with 2 services, lead admin</h2>
 
       {% include "claims/notifications/_2-services.html" %}
 
-      <h2 class="nhsuk-heading-m">Not registered for 3 services</h2>
+      <h2 class="nhsuk-heading-m">Issue with 3 services, lead admin</h2>
 
       {% include "claims/notifications/_3-services.html" %}
 
-      <h2 class="nhsuk-heading-m">Shown to admins and recorders</h2>
+      <h2 class="nhsuk-heading-m">Issue with 3 services, admins and recorders</h2>
 
       {% include "claims/notifications/_for-users-without-claims-access.html" %}
       
