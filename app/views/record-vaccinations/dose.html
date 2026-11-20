@@ -93,15 +93,14 @@
 
         {% for option in doseOptions %}
 
-          {% set hintText = "" %}
-
+          {# Don't think the following is being used, commenting out for now #}
+          {# {% set hintText = "" %}
           {% if data.vaccine == "flu" and option == "2nd dose this season" %}
             {% set hintText = "Only given to some children in an at-risk group" %}
           {% endif %}
-
           {% if data.vaccine == "MenB" and option == "Booster" %}
             {% set hintText = "Only given as part of the routine infant schedule" %}
-          {% endif %}
+          {% endif %} #}
         
           {% set items = (items.push({
             text: option,
