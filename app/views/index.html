@@ -255,6 +255,8 @@
       </li>
     </ul>
 
+    <hr class="nhsuk-section-break nhsuk-section-break--m nhsuk-section-break--visible">
+
     <h2>Clinics</h2>
 
     <ul class="nhsuk-grid-row nhsuk-card-group">
@@ -567,9 +569,7 @@
     ]
     }) }}
 
-    
     <hr class="nhsuk-section-break nhsuk-section-break--m nhsuk-section-break--visible">
-
 
     <h2>Warning messages</h2>
 
@@ -807,6 +807,50 @@
     id: "warning-menb",
     panel: {
     html: menbWarningsTabHtml
+    }
+    }
+    ]
+    }) }}
+
+    <hr class="nhsuk-section-break nhsuk-section-break--m nhsuk-section-break--visible">
+
+    <h2>Notification banners</h2>
+
+    {% set claimsNotificationBannersHtml %}
+    {{ table({
+    responsive: true,
+    panel: false,
+    firstCellIsHeader: false,
+    head: [
+    {
+    text: "Scenario",
+    classes: "nhsuk-u-width-one-half"
+    },
+    {
+    text: "When to use",
+    classes: "nhsuk-u-width-one-half"
+    }
+    ],
+    rows: [
+    [
+    {
+    html: "<a href='/claims/notifications'>NHSBSA has rejected claims</a>"
+    },
+    {
+    text: "Show at the start of the record a vaccination journey if there is an issue with MYS registration."
+    }
+    ]
+    ]
+    }) }}
+    {% endset %}
+
+    {{ tabs({
+    items: [
+    {
+    label: "Claims",
+    id: "notification-banner-claims",
+    panel: {
+    html: claimsNotificationBannersHtml
     }
     }
     ]

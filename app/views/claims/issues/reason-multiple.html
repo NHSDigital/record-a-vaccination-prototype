@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% set currentSection = "claims" %}
+
+{# Update these for each page #}
+{# {% set mysService = "N/A" %} #}
+{% set pageName = "Claims rejected for multiple reasons" %}
+{# {% set resubmitPage = "N/A" %} #}
+{% set helpContent %}
+<h2 class="nhsuk-heading-m nhsuk-u-margin-top-9">What this means</h2>
+<p>NHSBSA has rejected these claims for more than 1 reason.</p>
+<p>For more information, <a href="https://www.nhsbsa.nhs.uk/contact-nhs-prescription-services" rel="noreferrer noopener" target="_blank">contact NHSBSA - MYS (opens in new tab)</a>.</p>
+{% endset %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "/claims/?successBanner",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {% include "claims/issues/_claim-template.html" %}
+  {% include "claims/tables/_rejected-claims-table-reason-multiple.html" %}
+{% endblock %}

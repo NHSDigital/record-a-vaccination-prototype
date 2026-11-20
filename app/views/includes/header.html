@@ -50,7 +50,7 @@
   <!-- Claims -->
    {% if data.showClaimsLink %}
   {% set navigationItems = (navigationItems.push({
-    href: "/claims/",
+    href: "/claims/?successBanner",
     text: "Claims",
     active: (currentSection == "claims")
   }), navigationItems) %}
