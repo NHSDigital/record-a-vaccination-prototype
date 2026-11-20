@@ -56,9 +56,9 @@
                 text: "10"
               },
               {
-                html: "<a href='issues/adult-flu?status=rejected' class='nhsuk-u-margin-right-3'>View</a>" if data.adultFluResubmitted != "true" else "Resubmitting"
+                html: "<a href='issues/adult-flu?status=rejected' class='nhsuk-u-margin-right-3'>View</a>" if data.adultFluResubmitting != "true" else "Resubmitting"
               }
-            ] if data.successBanner != "true"
+            ] if data.adultFluResubmitted != "true"
             ,
             [
               {
