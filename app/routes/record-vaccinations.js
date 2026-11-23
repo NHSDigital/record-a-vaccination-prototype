@@ -418,7 +418,7 @@ module.exports = router => {
     const dateOfBirth = req.session.data.dateOfBirth;
     const postcode = req.session.data.postcode;
     let errors = []
-    let firstNameError, lastNameError, dateOfBirthError, postcodeError
+    let firstNameError, lastNameError, dateOfBirthError
 
     if (firstName === "") {
       firstNameError = "required"
@@ -467,8 +467,7 @@ module.exports = router => {
         errors,
         firstNameError,
         lastNameError,
-        dateOfBirthError,
-        postcodeError
+        dateOfBirthError
       })
     }
   })
