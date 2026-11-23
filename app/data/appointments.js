@@ -109,13 +109,13 @@ module.exports = [
       nhsNumber: "9847471413",
       firstName: "Moira",
       lastName: "Packet",
-      dateOfBirth: "1950-04-14",
+      dateOfBirth: "2008-04-14",
       contactDetails: {
         mobile: "07623842424"
       }
     },
     vaccinations: [
-      "COVID-19"
+      "HPV"
     ]
   },
   {
@@ -126,13 +126,13 @@ module.exports = [
       nhsNumber: "9841411411",
       firstName: "Cliff",
       lastName: "Sugarbowl",
-      dateOfBirth: "1957-01-23",
+      dateOfBirth: "2007-01-23",
       contactDetails: {
         mobile: "07623913141"
       }
     },
     vaccinations: [
-      "COVID-19"
+      "Td/IPV"
     ]
   },
   {
@@ -143,14 +143,14 @@ module.exports = [
       nhsNumber: "9841411411",
       firstName: "James",
       lastName: "Brown",
-      dateOfBirth: "1952-04-19",
+      dateOfBirth: "2008-04-19",
       contactDetails: {
         mobile: "0723456123",
         email: "james.brown@hotmail.com"
       }
     },
     vaccinations: [
-      "COVID-19"
+      "MenACWY"
     ]
   },
   {
@@ -872,7 +872,7 @@ module.exports = [
       }
     },
     vaccinations: [
-      "16-24 catch-up"
+      "MMR"
     ]
   }
 ]
