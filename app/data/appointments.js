@@ -44,7 +44,8 @@ module.exports = [
       }
     },
     vaccinations: [
-      "COVID-19 and flu"
+      "COVID-19",
+      "Flu"
     ]
   },
   {
@@ -78,7 +79,8 @@ module.exports = [
       }
     },
     vaccinations: [
-      "COVID-19 and RSV"
+      "COVID-19",
+      "RSV"
     ]
   },
   {
@@ -328,7 +330,8 @@ module.exports = [
       }
     },
     vaccinations: [
-      "COVID-19 and flu"
+      "COVID-19",
+      "Flu"
     ]
   },
   {
@@ -413,7 +416,8 @@ module.exports = [
       }
     },
     vaccinations: [
-      "COVID-19 and flu"
+      "COVID-19",
+      "Flu"
     ]
   },
   {
@@ -498,7 +502,8 @@ module.exports = [
       }
     },
     vaccinations: [
-      "COVID-19 and flu"
+      "COVID-19",
+      "Flu"
     ]
   },
   {
@@ -583,7 +588,8 @@ module.exports = [
       }
     },
     vaccinations: [
-      "COVID-19 and flu"
+      "COVID-19",
+      "Flu"
     ]
   },
   {
@@ -668,7 +674,8 @@ module.exports = [
       }
     },
     vaccinations: [
-      "COVID-19 and flu"
+      "COVID-19",
+      "Flu"
     ]
   },
   {
@@ -753,7 +760,8 @@ module.exports = [
       }
     },
     vaccinations: [
-      "COVID-19 and flu"
+      "COVID-19",
+      "Flu"
     ]
   },
   {
@@ -838,7 +846,8 @@ module.exports = [
       }
     },
     vaccinations: [
-      "COVID-19 and flu"
+      "COVID-19",
+      "Flu"
     ]
   },
   {
