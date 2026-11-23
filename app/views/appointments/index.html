@@ -11,8 +11,9 @@
 {% endif %}
 {% set currentSection = "appointments" %}
 
-
 {% block content %}
+
+  {# Copy of the header for print view only #}
   <div class="app-print-masthead" role="presentation" aria-hidden="true">
     <span class="app-print-masthead__logo">
       <svg class="nhsuk-header__logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" height="40" width="100" focusable="false" role="img" aria-label="NHS">
@@ -29,8 +30,6 @@
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
       <span class="nhsuk-caption-m">{{ currentDay | dayName('long') }}</span>
       <h2 class="nhsuk-heading-m">{{ currentDay | formatDate }}</h2>
-      
-      
 
       <p class="app-appointments-imported-from">Imported from <a href="https://mya-prototype-11c9c1433d21.herokuapp.com/" target="_blank" rel="noopener noreferrer">Manage your appointments (opens in new tab)</a></p>
 
@@ -57,17 +56,16 @@
       }) }}
 
       {% set todayHtml %}
-        {% include "appointments/_scheduled.html" %}
+      {% include "appointments/_scheduled.html" %}
       {% endset %}
 
       {% set cancelledHtml %}
-        {% include "appointments/_cancelled.html" %}
+      {% include "appointments/_cancelled.html" %}
       {% endset %}
 
       {% set vaccinationsGivenHtml %}
-        {% include "appointments/_completed.html" %}
+      {% include "appointments/_completed.html" %}
       {% endset %}
-
 
       {{ tabs({
         items: [
@@ -95,9 +93,7 @@
         ]
       }) }}
 
-
     </div>
   </div>
-
 
 {% endblock %}
