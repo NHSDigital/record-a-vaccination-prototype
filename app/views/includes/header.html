@@ -3,11 +3,20 @@
 {% set navigationItems = [] %}
 {% set canShowAppointments = currentOrganisation and (currentOrganisation.type != "Pharmacy HQ") and (currentOrganisation.appointmentsInterfaceEnabled !== false) %}
 {% set canShowRecordVaccinations = currentOrganisation and (currentOrganisation.type != "Pharmacy HQ") %}
-{% set defaultMainSection = "appointments" if canShowAppointments else ("vaccinate" if canShowRecordVaccinations else "") %}
+{% set defaultMainSection = "vaccinate" if canShowRecordVaccinations else "" %}
 
 {% if currentUser and not (currentOrganisation.type === "Region") %}
 
-  <!-- Appointments (where available) -->
+  <!-- Record vaccinations (where available) -->
+  {% if canShowRecordVaccinations %}
+    {% set navigationItems = (navigationItems.push({
+      href: "/record-vaccinations",
+      text: "Record vaccinations",
+      active: (currentSection == "vaccinate") or ((not currentSection) and (defaultMainSection == "vaccinate"))
+    }), navigationItems) %}
+  {% endif %}
+
+    <!-- Appointments (where available) -->
   {% if canShowAppointments and data.scenario == "appts" %}
     {% set navigationItems = (navigationItems.push({
       href: "/clinics/appointments",
@@ -19,15 +28,6 @@
       href: "/appointments",
       html: "Appointments <span class=\"nhsuk-tag app-tag--header nhsuk-u-margin-left-2\">New</span>",
       active: (currentSection == "appointments") or ((not currentSection) and (defaultMainSection == "appointments"))
-    }), navigationItems) %}
-  {% endif %}
-
-  <!-- Record vaccinations (where available) -->
-  {% if canShowRecordVaccinations %}
-    {% set navigationItems = (navigationItems.push({
-      href: "/record-vaccinations",
-      text: "Record vaccinations",
-      active: (currentSection == "vaccinate") or ((not currentSection) and (defaultMainSection == "vaccinate"))
     }), navigationItems) %}
   {% endif %}
 
