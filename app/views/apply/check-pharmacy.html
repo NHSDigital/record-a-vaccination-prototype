@@ -38,7 +38,16 @@
               text: "ODS code"
             },
             value: {
-              text: "P0MG"
+              text: organisation.id
+            }
+          }
+          ,
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: organisation.address + ("<br>" + organisation.town if organisation.town) + "<br>" + organisation.postcode | upper
             }
           }
         ]
