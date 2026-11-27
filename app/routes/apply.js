@@ -52,7 +52,7 @@ module.exports = router => {
     }
   })
 
-  router.post('/apply/answer-pharmacy', (req, res) => {
+  router.post('/apply/answer-organisation', (req, res) => {
     const data = req.session.data
 
     const organisationId = data.organisationCode || data.organisationId
@@ -64,19 +64,19 @@ module.exports = router => {
     } else if (organisation.id === "FA424") {
       res.redirect('/apply/start?error=existing-account');
     } else {
-      res.redirect('/apply/check-pharmacy')
+      res.redirect('/apply/check-organisation')
     }
 
   })
 
   // Show organisation check page
-  router.get('/apply/check-pharmacy', (req, res) => {
+  router.get('/apply/check-organisation', (req, res) => {
     const data = req.session.data
     const organisationId = data.organisationId
     const organisation = findOrganisationById(data, organisationId)
     if (!organisation) { res.redirect('/apply/start'); return }
 
-    res.render('apply/check-pharmacy', {
+    res.render('apply/check-organisation', {
       organisation
     })
   })
