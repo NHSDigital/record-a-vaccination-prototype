@@ -31,7 +31,7 @@ module.exports = router => {
       })
     }
 
-    const pharmacies = data.allOrganisations.sort(sortByNameThenPostcode()).filter((organisation) => organisation.type === "Community pharmacy")
+    const pharmacies = data.allOrganisations.sort(sortByNameThenPostcode()).filter((organisation) => organisation.type === "Community pharmacy" || organisation.type === "GP practice")
 
 
     res.render('apply/start', {
@@ -107,11 +107,10 @@ module.exports = router => {
     })
   })
 
-
   // Routing after the final check answers page
   router.post('/apply/answer-check', (req, res) => {
 
-    res.redirect('/apply/check-your-email')
+    res.redirect('/apply/confirmation')
   })
 
   // Welcome email mockup
