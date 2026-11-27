@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Sign up for your pharmacy" %}
+{% set pageName = "Apply for a Record a vaccination (RAVS) account" %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -14,15 +14,16 @@
     <div class="nhsuk-grid-column-two-thirds">
 
       {% set errorList = [] %}
+      
       {% for error in errors %}
         {% if error.code == 'required' %}
           {% set errorList = (errorList.push({
-            text: 'Select a pharmacy',
+            text: 'Select an organisation',
             href: error.href
           }), errorList) %}
         {% elseif error.code == 'existing-account' %}
           {% set errorList = (errorList.push({
-            text: 'This pharmacy already has an account',
+            text: 'This organisation already has an account',
             href: error.href
           }), errorList) %}
         {% endif %}
@@ -37,13 +38,15 @@
 
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
-      <p>From 1 September 2026, community pharmacies must use Record a vaccination for all NHS vaccinations.</p>
+      {# <p>From 1 September 2026, community pharmacies must use Record a vaccination for all NHS vaccinations.</p> #}
 
-      <p>If you need to sign up for more than 1 pharmacy, you can use this form multiple times.</p>
+      {# <p>If you need to sign up for more than 1 pharmacy, you can use this form multiple times.</p> #}
 
-      <p>For chains with 50 or more branches, there is a separate bulk onboarding option. <a href="mailto:england.vdscentralonboardingsupportteam@nhs.net">Email our onboarding team</a> for more details.</p>
+      <p>You can apply for access to RAVS if you are a pharmacy or GP practice offering NHS vaccinations.</p>
 
-      <form action="/apply/answer-pharmacy" method="post">
+      <p>If you have any questions or need help with your application, <a href="mailto:england.vdscentralonboardingsupportteam@nhs.net">Email our onboarding team</a>.</p>
+
+      <form action="/apply/answer-organisation" method="post">
 
         {% set items = [{ text: "", value: ""}] %}
 
@@ -59,7 +62,7 @@
           name: "organisationCode",
           value: data.organisationCode,
           label: {
-            text: "Find your pharmacy",
+            text: "Find your organisation",
             classes: "nhsuk-label--m nhsuk-u-margin-bottom-1"
           },
           hint: {
@@ -78,8 +81,6 @@
           "text": "Continue"
         }) }}
       </form>
-
-
 
     </div>
   </div>
