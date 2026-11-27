@@ -1099,6 +1099,14 @@ module.exports = [
     type: "NHS Trust"
   },
   {
+    id: "K84016",
+    name: "19 Beaumont Street Surgery",
+    address: "19-20 Beaumont Street, Oxford",
+    town: "Oxfordshire",
+    postcode: "OX1 2NA",
+    type: "GP practice"
+  },
+  {
     id: "FA002",
     name: "Rowlands Pharmacy",
     address: "61 Arundel Avenue,Hazel Grove",
