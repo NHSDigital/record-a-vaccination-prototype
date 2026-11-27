@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Application sent" %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      {{ panel({
+        titleText: "Thank you for applying for a RAVS account"
+      }) }}
+
+      <p>The RAVS onboarding team will check your application and create an account for your organisation.</p>
+
+      <p>Within 10 working days, you should get a welcome email from RAVS which includes:</p>
+
+      <ul class="nhsuk-list nhsuk-list--bullet">
+        <li>how to log in to RAVS</li>
+        <li>how to add more users</li>
+        <li>links to our training video, user guide and drop-in sessions</li>
+      </ul>
+
+      <p>If you have any questions or need help, <a href="mailto:england.vdscentralonboardingsupportteam@nhs.net">email the RAVS onboarding team</a></p>
+
+    </div>
+  </div>
+{% endblock %}
