@@ -19,7 +19,7 @@ module.exports = router => {
     const data = req.session.data
     let errors = []
 
-    if (req.query.error === 'no-pharmacy') {
+    if (req.query.error === 'no-organisation') {
       errors.push({
         code: 'required',
         href: '#organisation-code'
@@ -60,7 +60,7 @@ module.exports = router => {
     const organisation = findOrganisationById(data, organisationId)
 
     if (!organisation) {
-      res.redirect('/apply/start?error=no-pharmacy');
+      res.redirect('/apply/start?error=no-organisation');
     } else if (organisation.id === "FA424") {
       res.redirect('/apply/start?error=existing-account');
     } else {
