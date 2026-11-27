@@ -68,6 +68,34 @@ module.exports = router => {
 
   })
 
+  // Show vaccine types page
+  router.get('/apply/vaccine-types', (req, res) => {
+    const errors = []
+
+    if (req.query.error === 'required') {
+      errors.push({
+        code: 'required',
+        href: '#vaccine-types'
+      })
+    }
+
+    res.render('apply/vaccine-types', {
+      errors
+    })
+  })
+
+  // Check submitted vaccine types
+  router.post('/apply/answer-vaccine-types', (req, res) => {
+    const data = req.session.data
+
+    if (!data.vaccineTypes?.length) {
+      delete data.vaccineTypes
+      res.redirect('/apply/vaccine-types?error=required')
+    } else {
+      res.redirect('/apply/contact-details')
+    }
+  })
+
   // Show organisation check page
   router.get('/apply/check-organisation', (req, res) => {
     const data = req.session.data
@@ -79,7 +107,6 @@ module.exports = router => {
       organisation
     })
   })
-
 
   // Check your answers page
   router.get('/apply/check', (req, res) => {
