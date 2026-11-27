@@ -21,7 +21,7 @@
         rows: [
           {
             key: {
-              text: "Pharmacy"
+              text: "Pharmacy" if organisation.type == "Community pharmacy" else "GP practice"
             },
             value: {
               html: organisation.name
@@ -92,7 +92,7 @@
 
       <form action="/apply/answer-check" method="post">
         {{ button({
-          text: "Confirm"
+          text: "Confirm and send"
         }) }}
       </form>
 
