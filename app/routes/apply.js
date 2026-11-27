@@ -33,7 +33,6 @@ module.exports = router => {
 
     const pharmacies = data.allOrganisations.sort(sortByNameThenPostcode()).filter((organisation) => organisation.type === "Community pharmacy" || organisation.type === "GP practice")
 
-
     res.render('apply/start', {
       pharmacies,
       errors
