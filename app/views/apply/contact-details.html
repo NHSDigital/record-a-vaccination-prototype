@@ -13,12 +13,52 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+      {% set errorList = [] %}
+      {% set firstNameErrors = [] %}
+      {% set lastNameErrors = [] %}
+      {% set emailErrors = [] %}
+
+      {% for error in errors %}
+        {% if error.code == 'required' %}
+          {% if error.href == '#first-name' %}
+            {% set firstNameError = {
+              text: 'Enter a first name',
+              href: error.href
+            } %}
+            {% set errorList = (errorList.push(firstNameError), errorList) %}
+            {% set firstNameErrors = (firstNameErrors.push(firstNameError), firstNameErrors) %}
+          {% elseif error.href == '#last-name' %}
+            {% set lastNameError = {
+              text: 'Enter a last name',
+              href: error.href
+            } %}
+            {% set errorList = (errorList.push(lastNameError), errorList) %}
+            {% set lastNameErrors = (lastNameErrors.push(lastNameError), lastNameErrors) %}
+          {% elseif error.href == '#email' %}
+            {% set emailError = {
+              text: 'Enter email address',
+              href: error.href
+            } %}
+            {% set errorList = (errorList.push(emailError), errorList) %}
+            {% set emailErrors = (emailErrors.push(emailError), emailErrors) %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+      {% if (errorList | length) > 0 %}
+        {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errorList
+        }) }}
+      {% endif %}
+
       <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
 
       <p>Use your personal nhs.net email, not a shared inbox.</p>
 
       <form action="/apply/check" method="post" novalidate="true">
 
+      {% set firstNameError = firstNameErrors | first %}
         {{ input({
           "label": {
             "text": "First name"
@@ -28,10 +68,11 @@
           classes: "nhsuk-input--width-20",
           value: data.firstName,
           "errorMessage": {
-            "text": firstNameError
+            "text": firstNameError.text
           } if firstNameError
         }) }}
 
+        {% set lastNameError = lastNameErrors | first %}
         {{ input({
           "label": {
             "text": "Last name"
@@ -41,10 +82,11 @@
           classes: "nhsuk-input--width-20",
           value: data.lastName,
           "errorMessage": {
-            "text": lastNameError
+            "text": lastNameError.text
           } if lastNameError
         }) }}
 
+        {% set emailError = emailErrors | first %}
         {{ input({
           "label": {
             "text": "Email address"
@@ -57,7 +99,7 @@
           type: "email",
           value: data.email,
           "errorMessage": {
-            "text": emailError
+            "text": emailError.text
           } if emailError
         }) }}
 

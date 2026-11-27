@@ -96,6 +96,48 @@ module.exports = router => {
     }
   })
 
+  // Show contact details page
+  router.get('/apply/contact-details', (req, res) => {
+    const fieldIds = {
+      'first-name': '#first-name',
+      'last-name': '#last-name',
+      email: '#email'
+    }
+    const errorFields = (req.query.error || '').toString().split(',')
+    const errors = errorFields
+      .filter(field => fieldIds[field])
+      .map(field => ({
+        code: 'required',
+        href: fieldIds[field]
+      }))
+
+    res.render('apply/contact-details', {
+      errors
+    })
+  })
+
+  // Check contact details
+  router.post('/apply/check', (req, res) => {
+    const data = req.session.data
+    const errors = []
+
+    if (typeof data.firstName !== 'string' || !data.firstName.trim()) {
+      errors.push('first-name')
+    }
+    if (typeof data.lastName !== 'string' || !data.lastName.trim()) {
+      errors.push('last-name')
+    }
+    if (typeof data.email !== 'string' || !data.email.trim()) {
+      errors.push('email')
+    }
+
+    if (errors.length) {
+      res.redirect(`/apply/contact-details?error=${errors.join(',')}`)
+    } else {
+      res.redirect('/apply/check')
+    }
+  })
+
   // Show organisation check page
   router.get('/apply/check-organisation', (req, res) => {
     const data = req.session.data
