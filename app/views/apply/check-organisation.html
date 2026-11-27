@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% set pageName = "Check this is your pharmacy" %}
+{% set pageName = "Check this is your organisation" %}
 
 {% block beforeContent %}
   {{ backLink({
@@ -38,7 +38,16 @@
               text: "ODS code"
             },
             value: {
-              text: "P0MG"
+              text: organisation.id
+            }
+          }
+          ,
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: organisation.address + ("<br>" + organisation.town if organisation.town) + "<br>" + organisation.postcode | upper
             }
           }
         ]

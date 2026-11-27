@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    href: "/apply/check-pharmacy",
+    href: "/apply/check-organisation",
     text: "Back"
   }) }}
 {% endblock %}
@@ -13,7 +13,22 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <form action="/apply/contact-details" method="post">
+      <form action="/apply/answer-vaccine-types" method="post">
+
+        {% set errorList = [] %}
+
+        {% for error in errors %}
+          {% if error.code == 'required' %}
+            {% set errorList = (errorList.push({text: 'Select vaccinations you want to record', href: error.href}), errorList) %}
+          {% endif %}
+        {% endfor %}
+
+        {% if (errorList | length) > 0 %}
+          {{ errorSummary({
+          titleText: "There is a problem",
+          errorList: errorList
+        }) }}
+        {% endif %}
 
         {% set items = [] %}
 
@@ -37,17 +52,19 @@
             }
           },
           hint: {
-            text: "Select all options that are relevant to you."
+            text: "Select all the vaccinations you will be recording in RAVS"
           },
           items: items,
-          values: data.vaccineTypes
+          values: data.vaccineTypes,
+          errorMessage: {
+            text: (errorList | first).text
+          } if (errorList | length)
         }) }}
 
         {{ button({
           text: "Continue"
         }) }}
       </form>
-
 
     </div>
   </div>

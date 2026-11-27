@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Email inbox" %}
+
+{% block header %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+
+      <h1 class="nhsuk-heading-l">Email inbox</h1>
+
+      <div class="app-email-preview nhsuk-u-padding-bottom-0">
+      <p>Subject: You've applied for a RAVS account</p>
+      </div>
+
+      <div class="app-email-preview">
+
+      <p>Dear ((FirstName)) ((LastName)),</p>
+
+      <p>Your application for a Record a vaccination (RAVS) account for ((OrganisationName)) has been sent to the RAVS onboarding team.</p>
+
+      <p>Within 10 working days, you should get a welcome email from RAVS which includes:</p>
+
+      <ul class="nhsuk-list nhsuk-list--bullet">
+        <li>how to log in to RAVS</li>
+        <li>how to add more users </li>
+        <li>links to our training video, user guide and drop-in sessions</li>
+      </ul>
+
+      <p>If you do not receive the welcome email within 10 days or have questions about your application, <a href="mailto:england.vdscentralonboardingsupportteam@nhs.net">email the RAVS onboarding team</a>.</p>
+
+      <p>Kind regards,</p>
+      <p>NHS Record a vaccination</p>
+
+      <h2 class="nhsuk-heading-s">Helpdesk</h2>
+      <p>Email: <a href="mailto:ravs.support@england.nhs.uk">ravs.support@england.nhs.uk</a>
+      <br>Phone: 0333 038 4268 (select option 3)
+      <br>Monday to Friday: 8am to 6pm</p>
+    </div>
+  </div>
+
+{% endblock %}
