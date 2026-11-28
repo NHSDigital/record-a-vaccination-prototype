@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Who will the vaccinator be?" %}
+
+{% set currentSection = "clinics" %}
+
+{% block beforeContent %}
+
+    {{ backLink({
+        href: "javascript:window.history.back()",
+        text: "Back"
+    }) }}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            <form action="set-defaults" method="post" novalidate>
+
+            {{ radios({
+                fieldset: {
+                    legend: {
+                    heading: pageName,
+                    size: "l"
+                    }
+                },
+                idPrefix: "vaccinator",
+                name: "vaccinator",
+                value: data.vaccinator,
+                items: [
+                    {
+                    value: "Me (Lydia Harris)",
+                    text: "Me (Lydia Harris)"
+                    },
+                    {
+                    value: "Tara Mills",
+                    text: "Tara Mills"
+                    },
+                    {
+                    value: "Priya Nolan",
+                    text: "Priya Nolan"
+                    }
+                ]
+            }) }}
+
+            {{ button({
+                text: "Continue"
+            }) }}
+
+            </form>
+
+            {{ details({
+                summaryText: "If the vaccinator is not listed",
+                html: "A lead administrator needs to make sure the user has been added as a vaccinator."
+            }) }}
+
+        </div>
+    </div>
+
+{% endblock %}

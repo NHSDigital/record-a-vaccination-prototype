@@ -1,0 +1,207 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Set defaults" %}
+
+{% set currentSection = "clinics" %}
+
+{% block beforeContent %}
+
+    {{ backLink({
+        href: "javascript:window.history.back()",
+        text: "Back"
+    }) }}
+
+{% endblock %}
+
+{% block content %}
+
+    {% set locationHtml %}
+    {% if data.location == "Care home" and careHome %}
+        {{ careHome.name }}<br>
+        {{ careHome.address }}
+    {% else %}
+        {{ data.location }}
+    {% endif %}
+    {% endset %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            <h1 class="nhsuk-heading-l">{{ pageName }}</h1>
+
+            <p>Choose if you want to set a date, location, vaccinator or other defaults that apply to all vaccinations given during this clinic.</p>
+
+            {{ summaryList({
+                rows: [
+                    {
+                    key: {
+                        text: "Clinic name"
+                    },
+                    value: {
+                        html: data.clinicName or "Example clinic name"
+                    },
+                    actions: {
+                        items: [
+                        {
+                            href: "create",
+                            text: "Change",
+                            visuallyHiddenText: "clinic name"
+                        }
+                        ]
+                    }
+                    },
+                    {
+                    key: {
+                        text: "Date"
+                    },
+                    value: {
+                        html: (data.clinicDate | isoDateFromDateInput | govukDate) if data.clinicDate else "<a href='set-date'>Set date</a>"
+                    },
+                    actions: {
+                        items: [
+                        {
+                            href: "set-date",
+                            text: "Change",
+                            visuallyHiddenText: "clinic date"
+                        },
+                        {
+                            href: "set-defaults?clinicDate",
+                            text: "Remove",
+                            visuallyHiddenText: "date"
+                        }
+                        ]
+                    } if data.clinicDate
+                    },
+                    {
+                    key: {
+                        text: "Vaccinator"
+                    },
+                    value: {
+                        html: data.vaccinator if data.vaccinator else "<a href='set-vaccinator'>Set vaccinator</a>"
+                    },
+                    actions: {
+                        items: [
+                        {
+                            href: "set-vaccinator",
+                            text: "Change",
+                            visuallyHiddenText: "vaccinator"
+                        },
+                        {
+                            href: "set-defaults?vaccinator",
+                            text: "Remove",
+                            visuallyHiddenText: "vaccinator"
+                        }
+                        ]
+                    } if data.vaccinator
+                    },
+                    {
+                    key: {
+                        text: "Vaccine"
+                    },
+                    value: {
+                        html: data.vaccine + "<br>" + data.vaccineProduct if data.vaccine else "<a href='set-vaccine'>Set vaccine</a>"
+                    },
+                    actions: {
+                        items: [
+                        {
+                            href: "set-vaccine",
+                            text: "Change",
+                            visuallyHiddenText: "vaccine"
+                        },
+                        {
+                            href: "set-defaults?vaccine&eligibility&batch&location",
+                            text: "Remove",
+                            visuallyHiddenText: "vaccine"
+                        }
+                        ]
+                    } if data.vaccine
+                    },
+                    {
+                    key: {
+                        text: "Batch"
+                    },
+                    value: {
+                        html: data.batch if data.batch else ("<a href='set-batch'>Set batch</a>" if data.vaccine else "<span class='nhsuk-hint'>Select a vaccine first</span>")
+                    },
+                    actions: {
+                        items: [
+                        {
+                            href: "set-batch",
+                            text: "Change",
+                            visuallyHiddenText: "batch"
+                        },
+                        {
+                            href: "set-defaults?batch",
+                            text: "Remove",
+                            visuallyHiddenText: "batch"
+                        }
+                        ]
+                    } if data.batch
+                    },
+                    {
+                    key: {
+                        text: "Eligibility"
+                    },
+                    value: {
+                        html: data.eligibility if data.eligibility else ("<a href='set-eligibility'>Set eligibility</a>" if data.vaccine else "<span class='nhsuk-hint'>Select a vaccine first</span>")
+                    },
+                    actions: {
+                        items: [
+                        {
+                            href: "set-eligibility",
+                            text: "Change",
+                            visuallyHiddenText: "eligibility"
+                        },
+                        {
+                            href: "set-defaults?eligibility",
+                            text: "Remove",
+                            visuallyHiddenText: "eligibility"
+                        }
+                        ]
+                    } if data.eligibility
+                    },
+                    {
+                    key: {
+                        text: "Location"
+                    },
+                    value: {
+                        html: locationHtml if data.location else "<a href='set-location'>Set location</a>"
+                    },
+                    actions: {
+                        items: [
+                        {
+                            href: "set-location",
+                            text: "Change",
+                            visuallyHiddenText: "location"
+                        },
+                        {
+                            href: "set-defaults?location",
+                            text: "Remove",
+                            visuallyHiddenText: "location"
+                        }
+                        ]
+                    } if data.location
+                    } if data.vaccine == "COVID-19"
+                ]
+                }) }}
+
+            {% if data.patientsAdded == "true" %}
+
+                {{ button({
+                    text: "Continue",
+                    href: "/clinics/session?successBanner&status"
+                }) }}
+
+            {% else %}
+
+                {{ button({
+                    text: "Continue",
+                    href: "/clinics/add-patients?status"
+                }) }}
+
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Which vaccine will you be giving?" %}
+
+{% set currentSection = "clinics" %}
+
+{% block beforeContent %}
+
+    {{ backLink({
+        href: "javascript:window.history.back()",
+        text: "Back"
+    }) }}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            <form action="set-defaults" method="post" novalidate>
+
+                {% set covidProductHtml %}
+                {{ radios({
+                    fieldset: {
+                        legend: {
+                        text: "Vaccine product"
+                        }
+                    },
+                    idPrefix: "vaccineProduct",
+                    name: "vaccineProduct",
+                    value: data.vaccineProduct,
+                    items: [
+                        {
+                        value: "Bimervax LP.8.1",
+                        text: "Bimervax LP.8.1"
+                        }
+                    ]
+                }) }}
+                {% endset -%}
+
+                {% set fluProductHtml %}
+                {{ radios({
+                    fieldset: {
+                        legend: {
+                        text: "Vaccine product"
+                        }
+                    },
+                    idPrefix: "vaccineProduct",
+                    name: "vaccineProduct",
+                    value: data.vaccineProduct,
+                    items: [
+                        {
+                        value: "Adjuvanted Trivalent Influenza Vaccine (aTIV)",
+                        text: "Adjuvanted Trivalent Influenza Vaccine (aTIV)"
+                        }
+                    ]
+                }) }}
+                {% endset -%}
+
+                {% set rsvProductHtml %}
+                {{ radios({
+                    fieldset: {
+                        legend: {
+                        text: "Vaccine product"
+                        }
+                    },
+                    idPrefix: "vaccineProduct",
+                    name: "vaccineProduct",
+                    value: data.vaccineProduct,
+                    items: [
+                        {
+                        value: "Abrysvo",
+                        text: "Abrysvo"
+                        }
+                    ]
+                }) }}
+                {% endset -%}
+
+                {{ radios({
+                fieldset: {
+                    legend: {
+                    heading: pageName,
+                    size: "l"
+                    }
+                },
+                idPrefix: "vaccine",
+                name: "vaccine",
+                value: data.vaccine,
+                items: [
+                    {
+                    value: "COVID-19",
+                    text: "COVID-19",
+                    conditional: {
+                        html: covidProductHtml
+                    }
+                    },
+                    {
+                    value: "Flu",
+                    text: "Flu",
+                    conditional: {
+                        html: fluProductHtml
+                    }
+                    },
+                    {
+                    value: "RSV",
+                    text: "RSV",
+                    conditional: {
+                        html: rsvProductHtml
+                    }
+                    }
+                ]
+            }) }}
+
+                {{ button({
+                text: "Continue"
+            }) }}
+
+            </form>
+
+            {{ details({
+                summaryText: "If the vaccine is not listed",
+                html: "An administrator needs to add it."
+            }) }}
+
+        </div>
+    </div>
+
+{% endblock %}

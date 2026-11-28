@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% set pageName = "Why will you be giving them the " + data.vaccine + " vaccine?" %}
+
+{% set currentSection = "clinics" %}
+
+{% block beforeContent %}
+
+    {{ backLink({
+        href: "javascript:window.history.back()",
+        text: "Back"
+    }) }}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+            <form action="set-defaults" method="post" novalidate>
+
+            {{ radios({
+                fieldset: {
+                    legend: {
+                    heading: pageName,
+                    size: "l"
+                    }
+                },
+                idPrefix: "eligibility",
+                name: "eligibility",
+                value: data.eligibility,
+                items: [
+                    {
+                    value: "Resident in a care home",
+                    text: "Resident in a care home"
+                    },
+                    {
+                    value: "Aged 75 and over, and not in a care home",
+                    text: "Aged 75 and over, and not in a care home"
+                    },
+                    {
+                    value: "Immunosuppressed",
+                    text: "Immunosuppressed"
+                    }
+                ]
+            }) }}
+
+            {{ button({
+                text: "Continue"
+            }) }}
+
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}
